@@ -1,0 +1,12 @@
+.dashboard-container {
+  margin: 2em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.app-card {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}

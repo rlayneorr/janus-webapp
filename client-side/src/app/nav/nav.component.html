@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <img routerLink="/dashboard" class="rev-logo" src="assets/rev-logo.png" alt="revature">
+  <button class="navbar-toggler" (click)="toggleCollapse()" aria-label="Toggle navigation">
+    {{currentApp}} <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+    <ul class="navbar-nav mr-auto module-select">
+      <li ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>{{currentApp}}</a>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1"  (click)="toggleCollapse()">
+          <button *ngFor="let app of apps" class="dropdown-item" [routerLink]="app.homeUrl"> {{ app.name }} </button>
+        </div>
+      </li>
+    </ul>
+    <div  (click)="toggleCollapse()">
+      <app-caliber-nav *ngIf="currentApp==='Caliber'"></app-caliber-nav>
+      <app-bam-nav *ngIf="currentApp==='Bam'"></app-bam-nav>
+    </div>
+  </div>
+</nav>
