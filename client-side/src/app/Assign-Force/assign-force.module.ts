@@ -4,8 +4,8 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { routes } from './bam.routes';
-import { BamComponent } from './bam.component';
+import { routes } from './assign-force.routes';
+import { AssignForceComponent } from './assign-force.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from '../nav/nav.component';
 import { NavModule } from '../nav/nav.module';
@@ -23,10 +23,10 @@ import { CalendarComponent } from './calendar/calendar.component';
     RouterModule.forChild(routes),
   ],
   declarations: [
-    BamComponent,
+    AssignForceComponent,
     HomeComponent,
     CalendarComponent,
   ],
   providers: []
 })
-export class BamModule { }
+export class AssignForceModule { }

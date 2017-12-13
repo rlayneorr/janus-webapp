@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { BamComponent } from './bam.component';
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { AssignForceComponent } from './assign-force.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: BamComponent,
+    component: AssignForceComponent,
     children: [
       {
         path: 'home',
@@ -19,7 +19,7 @@ export const routes: Routes = [
       {
         path: '**',
         pathMatch: 'full',
-        redirectTo: '/Bam/home'
+        redirectTo: '/TrackForce/home'
       }
     ]
   }

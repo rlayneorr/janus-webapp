@@ -7,9 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
-import { CaliberModule } from './Caliber/caliber.module';
 import { Routes } from '@angular/router';
-import { BamModule } from './Bam/bam.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './janus/janus.component';
@@ -25,7 +23,8 @@ const routes: Routes = [
     children: [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'Caliber', loadChildren: './Caliber/caliber.module#CaliberModule'},
-      {path: 'Bam', loadChildren: './Bam/bam.module#BamModule'},
+      {path: 'AssignForce', loadChildren: './Assign-Force/assign-force.module#AssignForceModule'},
+      {path: 'TrackForce', loadChildren: './Track-Force/track-force.module#TrackForceModule'},
       {path: '**', pathMatch: 'full', redirectTo: '/dashboard'}
     ]
   },
