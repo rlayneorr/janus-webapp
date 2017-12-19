@@ -6,6 +6,8 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
+import { LocationsComponent } from './settings/locations/locations.component';
+import { TrainersComponent } from './settings/trainers/trainers.component';
 
 export const routes: Routes = [
   {
@@ -38,7 +40,7 @@ export const routes: Routes = [
           },
           {
             path: 'locations',
-            component: LocationComponent
+            component: LocationsComponent
           },
           {
             path: 'trainers',
