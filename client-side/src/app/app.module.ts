@@ -46,7 +46,6 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     JanusComponent,
-    Trainer,
   ],
   providers: [
     ChuckNorrisService,
