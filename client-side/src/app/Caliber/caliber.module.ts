@@ -14,6 +14,7 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { CommonModule } from '@angular/common';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
+import { ViewcategoriesComponent } from './viewcategories/viewcategories.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
+    ViewcategoriesComponent,
   ],
   providers: []
 })
