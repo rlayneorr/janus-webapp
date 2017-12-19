@@ -15,6 +15,9 @@ import { ReportsComponent } from './reports/reports.component';
 import { CommonModule } from '@angular/common';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { SettingsComponent } from './settings/settings.component';
+import { CategoriesComponent } from './settings/categories/categories.component';
+import { TrainersComponent } from './settings/trainers/trainers.component';
+import { LocationsComponent } from './settings/locations/locations.component';
 
 @NgModule({
   imports: [
@@ -31,7 +34,10 @@ import { SettingsComponent } from './settings/settings.component';
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
-    SettingsComponent
+    SettingsComponent,
+    CategoriesComponent,
+    TrainersComponent,
+    LocationsComponent
   ],
   providers: []
 })

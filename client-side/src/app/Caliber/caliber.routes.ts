@@ -5,6 +5,7 @@ import { AssessComponent } from './assess/assess.component';
 import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
+import { CategoriesComponent } from './settings/categories/categories.component';
 
 export const routes: Routes = [
   {
@@ -29,7 +30,21 @@ export const routes: Routes = [
       },
       {
         path: 'settings',
-        component: SettingsComponent
+        component: SettingsComponent,
+        children: [
+          {
+            path: 'categories',
+            component: CategoriesComponent
+          },
+          {
+            path: 'locations',
+            component: LocationComponent
+          },
+          {
+            path: 'trainers',
+            component: TrainersComponent
+          }
+        ]
       },
       {
         path: '**',
