@@ -7,4 +7,6 @@ export const environment = {
   production: false,
   context: 'http://localhost:8080/',
   bootContext: 'http://localhost/',
+
+  addNewCategory: 'http://localhost:8080/vp/category',
 };
