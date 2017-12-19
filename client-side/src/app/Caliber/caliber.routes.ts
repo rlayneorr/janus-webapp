@@ -31,6 +31,18 @@ export const routes: Routes = [
         component: ReportsComponent
       },
       {
+        path: 'categories',
+        component: CategoriesComponent
+      },
+      {
+        path: 'locations',
+        component: LocationsComponent
+      },
+      {
+        path: 'trainers',
+        component: TrainersComponent
+      },
+      {
         path: 'settings',
         component: SettingsComponent,
         children: [
