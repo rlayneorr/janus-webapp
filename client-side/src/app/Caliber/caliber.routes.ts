@@ -5,6 +5,10 @@ import { AssessComponent } from './assess/assess.component';
 import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { TrainersComponent } from './home/trainers/trainers/trainers.component';
+import { SettingsComponent } from './settings/settings.component';
+import { CategoriesComponent } from './settings/categories/categories.component';
+import { LocationsComponent } from './settings/locations/locations.component';
+import { TrainersComponent } from './settings/trainers/trainers.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +30,24 @@ export const routes: Routes = [
       {
         path: 'reports',
         component: ReportsComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        children: [
+          {
+            path: 'categories',
+            component: CategoriesComponent
+          },
+          {
+            path: 'locations',
+            component: LocationsComponent
+          },
+          {
+            path: 'trainers',
+            component: TrainersComponent
+          }
+        ]
       },
       {
         path: '**',
