@@ -13,6 +13,8 @@ import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
 import { CategoriesService } from './Caliber/services/categories.service';
+import { Trainer } from './entities/Trainer';
+
 
 
 // loading routes from child modules this way will lazy load them
