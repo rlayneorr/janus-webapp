@@ -1,6 +1,5 @@
 
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { forEach } from '@uirouter/angular';
 
 @Component({
     selector: 'app-table',

@@ -1,15 +1,14 @@
 
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { forEach } from '@uirouter/angular';
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html'
 })
 export class GraphComponent implements OnInit, OnChanges {
-  @Input() data: any;
-  @Input() legend: boolean;
-  @Input() type: string;
+  @Input() public data: any;
+  @Input() public legend: boolean;
+  @Input() public type: string;
 
 
   public chartMaps: any = null;
@@ -91,7 +90,7 @@ export class GraphComponent implements OnInit, OnChanges {
           _chartData[1].type = 'line';
           const benchmarkData: number[] = [];
           const benchmark = _chartData[1].data[0];
-          forEach(_chartData[0].data, function () {
+          _chartData[0].data.forEach(function () {
             benchmarkData.push(benchmark);
           });
           _chartData[1].data = benchmarkData;
@@ -109,7 +108,7 @@ export class GraphComponent implements OnInit, OnChanges {
         // doughnut colors are weird for some reason
         const _chartColors: any[] = [{ backgroundColor: [] }];
         let doughnutColor = '114, 164, 194';
-        forEach(_chartLabels, function (doughnutLabel) {
+        _chartLabels.forEach( function (doughnutLabel) {
           if (doughnutLabel === 'Superstar') {
             doughnutColor = '57, 63, 239';
           } else if (doughnutLabel === 'Good') {
