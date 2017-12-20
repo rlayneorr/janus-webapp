@@ -5,12 +5,15 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 
+// services
 import { Batch } from '../entities/Batch';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BatchService {
     private http: HttpClient;
+
+    private sendCredentials: boolean;
 
     private listSubject: BehaviorSubject<Batch[]>;
     private savedSubject: Subject<Batch>;
@@ -19,13 +22,15 @@ export class BatchService {
     constructor(httpClient: HttpClient) {
       this.http = httpClient;
 
+      this.sendCredentials = true;
+
       this.listSubject = new BehaviorSubject([]);
       this.savedSubject = new Subject();
       this.deletedSubject = new Subject();
     }
 
     /**
-     * returns a behavior observable of the current 
+     * returns a behavior observable of the current
      * batch list
      *
      * @return Observable<Batch[]>
@@ -89,7 +94,7 @@ export class BatchService {
       const url = '/all/batch/create';
       const data = JSON.stringify(batch);
 
-      this.http.post<Batch>(url, data, { withCredentials: true })
+      this.http.post<Batch>(url, data, { withCredentials: this.sendCredentials })
         .subscribe((savedBatch) => {
           this.savedSubject.next(savedBatch);
         });
@@ -105,7 +110,7 @@ export class BatchService {
     public delete(batch: Batch): void {
       const url = `/all/batch/delete/${ batch.batchId }`;
 
-      this.http.delete<Batch>(url, { withCredentials: true })
+      this.http.delete<Batch>(url, { withCredentials: this.sendCredentials })
         .subscribe( (deletedBatch) => {
           this.deletedSubject.next(deletedBatch);
         });
@@ -126,7 +131,7 @@ export class BatchService {
      */
     private fetch(url: string) {
 
-      this.http.get<Batch[]>(url, { withCredentials: true })
+      this.http.get<Batch[]>(url, { withCredentials: this.sendCredentials })
         .subscribe((batches) => {
           this.listSubject.next(batches);
         }, (error) => {
