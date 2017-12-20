@@ -42,7 +42,6 @@ export class CategoriesComponent implements OnInit {
           }
         );
   }
-
   open(content) {
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
