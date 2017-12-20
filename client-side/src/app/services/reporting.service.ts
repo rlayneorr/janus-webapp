@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Http } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { CacheData } from '../entities/CacheData.entity';
 
 @Injectable()
 export class ReportingService {
 
-  constructor() { }
+  // Subjects used to store data from the server.
+  private batchOverallRadarSubject = new BehaviorSubject<CacheData>(null);
+
+  // Observables that are visible to subscribers to this service.
+  batchOverallRadarChart = this.batchOverallRadarSubject.asObservable();
+
+  constructor(private http: Http) { }
 
   /*  Reports Charts */
-
-
   refresh() {
     // Clear all data stored in subjects
+    this.batchOverallRadarSubject.next(null);
   }
 
   /*
@@ -29,11 +37,6 @@ export class ReportingService {
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
     const endpoint = environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`;
 
-    // Check if cache is fresh
-    // if fresh
-        // return
-    // If not fresh, get data from backend
-        // Push new data into subject
   }
 
 
@@ -158,9 +161,27 @@ export class ReportingService {
 
   fetchBatchOverallRadarChart(batchId: Number) {
     const endpoint = environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`;
+    // Place the parameters into this object. Their names should match all the parameters given by the
+    // method signature.
+    const params = {
+      batchId: batchId
+    };
 
     // TODO: Implement API call and subject push logic
+    if (!this.batchOverallRadarSubject.getValue() || this.batchOverallRadarSubject.getValue().params !== params) {
 
+      // Obviously this will change based on which request is being made.
+      // Replace the url and the subject being sent the result of the request.
+      console.log(`Sending request to ${endpoint}`);
+      this.http.get(endpoint).subscribe((success) => {
+        console.log(`result: ${success.text()}`);
+        const newData = {
+            params: params,
+            data: success.json()
+        };
+        this.batchOverallRadarSubject.next(newData);
+      });
+    }
   }
 
   fetchBatchAllTraineesRadarChart(batchId: Number) {

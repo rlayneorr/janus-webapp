@@ -1,3 +1,5 @@
+import { ChartsModule } from 'ng2-charts';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -15,6 +17,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { CommonModule } from '@angular/common';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 
+import { RadarComponent } from './radar-test/radar-test.component';
 
 @NgModule({
   imports: [
@@ -23,6 +26,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
     FormsModule,
+    ChartsModule,
   ],
   declarations: [
     CaliberComponent,
@@ -31,6 +35,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
+    RadarComponent,
   ],
   providers: []
 })
