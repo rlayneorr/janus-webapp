@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
+import { BatchService } from '../services/batch.service';
 
 @Component({
   selector: 'app-assess',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssessComponent implements OnInit {
 
-  constructor() { }
+  constructor(public http: Http, public batchService: BatchService) {}
 
   ngOnInit() {
+
   }
 
 }
