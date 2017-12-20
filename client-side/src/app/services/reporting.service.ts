@@ -8,6 +8,17 @@ export class ReportingService {
 
   /*  Reports Charts */
 
+
+  refresh() {
+    // Clear all data stored in subjects
+  }
+
+  /*
+  =================================
+          API CALLS
+  =================================
+  */
+
   /**
    * Fetch the batch comparison average script
    * @param skill - Skill to compare
@@ -25,15 +36,6 @@ export class ReportingService {
         // Push new data into subject
   }
 
-  refresh() {
-    // Clear all data stored in subjects
-  }
-
-  /*
-  =================================
-          API CALLS
-  =================================
-  */
 
   /* Doughnut / Pie charts */
 
