@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ReportingService {
 
+  /* Subjects & Paired Observables */
+  private traineeOverallTech = new BehaviorSubject(null);
+  public traineeOverallTech$ = this.traineeOverallTech.asObservable();
+
+
   constructor() { }
+
 
   /*  Reports Charts */
 
@@ -149,10 +157,12 @@ export class ReportingService {
 
   }
 
+
+
   fetchTraineeOverallRadarChart(traineeId: Number) {
     const endpoint = environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`;
 
-    // TODO: Implement API call and subject push logic
+
 
   }
 

@@ -15,6 +15,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { CommonModule } from '@angular/common';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/traine
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
     FormsModule,
+    ChartsModule
   ],
   declarations: [
     CaliberComponent,
@@ -33,6 +35,9 @@ import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/traine
     ReportsComponent,
     WeeklyLineChartComponent,
     TraineeTechSkillsComponent,
+  ],
+  exports: [
+    TraineeTechSkillsComponent
   ],
   providers: []
 })
