@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, OnInit, NgModule} from '@angular/core';
+import { Http, HttpModule } from '@angular/http';
 import { BatchService } from '../services/batch.service';
+import { HttpClientModule  } from '@angular/common/http';
+
+
+
 
 @Component({
   selector: 'app-assess',
