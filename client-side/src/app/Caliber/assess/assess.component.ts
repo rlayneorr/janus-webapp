@@ -12,7 +12,9 @@ export class AssessComponent implements OnInit {
   constructor(public http: Http, public batchService: BatchService) {}
 
   ngOnInit() {
-
+    // console.log('init');
+    // this.batchService.fetchAll();
+    // console.log(this.batchService.getList());
   }
 
 }
