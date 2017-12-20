@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -22,12 +23,14 @@ import { NavComponent } from '../nav/nav.component';
 import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
+import { TestComponent } from './components/test/test.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
     FormsModule,
@@ -39,6 +42,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
+    TestComponent,
   ],
   providers: [
     BatchService,

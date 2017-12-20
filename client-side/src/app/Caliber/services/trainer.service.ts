@@ -54,10 +54,25 @@ export class TrainerService {
     return this.deletedSubject.asObservable();
   }
 
-    /*
-      =====================
-      BEGIN: API calls
-      =====================
-    */
+  /*
+    =====================
+    BEGIN: API calls
+    =====================
+  */
+
+   /**
+     * retrieves all trainersand pushes them on the
+     * list subject
+     */
+  public fetchAll(): void {
+    const url = '/all/trainer/all';
+
+    this.http.get<Trainer[]>(url, { withCredentials: true })
+      .subscribe( (trainers) => {
+        this.listSubject.next(trainers);
+      }, (error) => {
+        this.listSubject.next([]);
+      });
+  }
 
 }
