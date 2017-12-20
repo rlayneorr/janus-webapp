@@ -15,6 +15,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { CommonModule } from '@angular/common';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { ViewcategoriesComponent } from './viewcategories/viewcategories.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ViewcategoriesComponent } from './viewcategories/viewcategories.compone
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
     FormsModule,
+    AngularFontAwesomeModule
   ],
   declarations: [
     CaliberComponent,
