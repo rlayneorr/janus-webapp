@@ -1,0 +1,28 @@
+<div class="table-responsive">
+    <table *ngIf="!lineGraphCheck()" class="table" style="border-collapse: collapse;">
+        <tr class="col-sm-6 col-md-6 col-lg-6">
+            <th class="pull-left"></th>
+            <th *ngFor="let set of tableData" class="pull-right">{{set.label}}</th>
+        </tr>
+        <tr class="col-sm-6 col-md-6 col-lg-6" *ngFor="let label of tableLabels;let i = index">
+            <th class="pull-left">{{tableLabels[i]}}</th>
+            <td *ngFor="let set of tableData" class="pull-right">{{set.data[i]}}</td>
+        </tr>
+
+    </table>
+    <span *ngIf="lineGraphCheck()">
+        <!-- <span *ngFor="let i of dataIndexes"> -->
+        <table class="table" style="border-collapse: collapse;">
+            <tr >
+                <th class="pull-left"></th>
+                <th *ngFor="let i of dataIndexes" class="pull-left">{{tableLabels[i]}}</th>
+            </tr>
+            <tr *ngFor="let set of tableData; let j = index">
+                <th>{{i}} {{set.label}}</th>
+                <td *ngFor="let i of dataIndexes" class="pull-right">{{set.data[i]}}</td>
+            </tr>
+
+        </table>
+        <!-- </span> -->
+    </span>
+</div>

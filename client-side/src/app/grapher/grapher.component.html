@@ -1,0 +1,64 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <app-graph [data]="lineBatchWeeklyAverage" [legend]=false [type]='types[0]'></app-graph>
+            <app-table [data]="lineBatchWeeklyAverage" [type]='types[0]'></app-table>
+        </div>
+        </div>
+    <div class="row">
+        <div class="col-6">
+            <app-graph [data]="radarBatchOverall" [legend]=true [type]='types[1]'></app-graph>
+            <app-table [data]="radarBatchOverall" [type]='types[1]'></app-table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-graph [data]="barBatchWeekSorted" [legend]=true [type]='types[2]'></app-graph>
+            <app-table [data]="barBatchWeekSorted" [type]='types[2]'></app-table>
+        </div>
+
+        <!-- </div>
+    <div class="row"> -->
+        <div class="col-6">
+            <app-graph [data]="qcDonutData " [legend]=true [type]='types[3]'></app-graph>
+            <app-table [data]="qcDonutData" [type]='types[3]'></app-table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-graph [data]="radarBatchOverallwithTrainees " [legend]=true [type]='types[1]'></app-graph>
+            <app-table [data]="radarBatchOverallwithTrainees" [type]='types[1]'></app-table>
+        </div>
+        <!-- </div>
+    <div class="row"> -->
+        <div class="col-6">
+            <app-graph [data]="barAssignAver" [legend]=false [type]='types[2]'></app-graph>
+            <app-table [data]="barAssignAver" [type]='types[2]'></app-table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-graph [data]="barAssignAverToTrainee " [legend]=false [type]='types[2]'></app-graph>
+            <app-table [data]="barAssignAverToTrainee" [type]='types[2]'></app-table>
+        </div>
+        <!-- </div>
+    <div class="row"> -->
+        <div class="col-6">
+            <app-graph [data]="lineBatchWeeklyAverageToTrainer " [legend]=false [type]='types[0]'></app-graph>
+            <app-table [data]="lineBatchWeeklyAverageToTrainer" [type]='types[0]'></app-table>
+        </div>
+    </div>
+</div>
+<!-- <div class="col-md-6" style="margin-bottom: 10px">
+    <button (click)="randomize()">CLICK</button>
+    <table class="table table-responsive table-condensed">
+        <tr>
+            <th *ngFor="let label of tableLabels">{{label}}</th>
+        </tr>
+        <tr *ngFor="let d of chartData">{{d.label}}
+            <td *ngFor="let label of tableLabels; let j=index">{{d && d.data[j]}}</td>
+        </tr>
+    </table>
+
+</div> -->

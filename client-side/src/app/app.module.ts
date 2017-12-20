@@ -10,9 +10,11 @@ import { NavComponent } from './nav/nav.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
-import { JanusComponent } from './janus/janus.component';
+import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
-
+import {GrapherComponent} from './grapher/grapher.component';
+import {GraphComponent} from './grapher/graph/graph.component';
+import {TableComponent} from './grapher/table/table.component';
 
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
@@ -45,6 +47,9 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     JanusComponent,
+    GrapherComponent,
+    GraphComponent,
+    TableComponent,
   ],
   providers: [
     ChuckNorrisService,
