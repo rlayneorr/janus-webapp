@@ -39,7 +39,7 @@ export class GraphComponent implements OnInit, OnChanges {
 
     // set up local array to be filled
     const _chartData: any[] = [];
-    const _chartLabels: string[] = [];
+    let _chartLabels: string[] = [];
 
     // Only need labels once so am using a flag
     let label = true;
@@ -69,17 +69,21 @@ export class GraphComponent implements OnInit, OnChanges {
         this.chartOptions = this.chartOption(this.chartType);
         break;
       case 'bar':
-        if (_chartData[1] === undefined || (_chartData[1] !== undefined && _chartData[1].data.length !== 1)) {
+        if (_chartData[0].data.length !== 1) {
           this.chartColors = [
             this.color('114, 164, 194'),
             this.color('252, 180, 20')
           ];
           this.chartOptions = this.chartOption(this.chartType);
         } else {
-          // TODO: make average line in front of bar graph
+          const benchmarkData: number[] = [];
+          const benchmark = _chartData[0].data[0];
+          _chartData[1].data.forEach(function () {
+            benchmarkData.push(benchmark);
+          });
+          _chartData[0].data = benchmarkData;
+
           this.chartColors = [
-            this.color('114, 164, 194'),
-            // this.color('252, 180, 20')
             {
               pointRadius: 0,
               pointHoverRadius: 0,
@@ -92,16 +96,16 @@ export class GraphComponent implements OnInit, OnChanges {
               fill: false,
               label: 'Benchmark',
               pointBorderColor: '#fff'
-            }
+            }, this.color('114, 164, 194')
           ];
-          _chartData[0].label = 'Batch Scores';
-          _chartData[1].type = 'line';
-          const benchmarkData: number[] = [];
-          const benchmark = _chartData[1].data[0];
-          _chartData[0].data.forEach(function () {
-            benchmarkData.push(benchmark);
+          _chartLabels = [];
+          this.chartMaps[1].data.forEach((value: number, key: string) => {
+            _chartLabels.push(key);
           });
-          _chartData[1].data = benchmarkData;
+          _chartData[1].label = 'Batch Scores';
+          _chartData[0].type = 'line';
+
+
           this.chartOptions = this.chartOption('barAverageCompare');
         }
         break;
@@ -116,7 +120,7 @@ export class GraphComponent implements OnInit, OnChanges {
         // doughnut colors are weird for some reason
         const _chartColors: any[] = [{ backgroundColor: [] }];
         let doughnutColor = '114, 164, 194';
-        _chartLabels.forEach( function (doughnutLabel) {
+        _chartLabels.forEach(function (doughnutLabel) {
           if (doughnutLabel === 'Superstar') {
             doughnutColor = '57, 63, 239';
           } else if (doughnutLabel === 'Good') {
@@ -133,6 +137,7 @@ export class GraphComponent implements OnInit, OnChanges {
     }
     this.chartData = _chartData;
     this.chartLabels = _chartLabels;
+
   }
   ngOnChanges(changes) {
     if (changes['data']) {
@@ -210,18 +215,8 @@ export class GraphComponent implements OnInit, OnChanges {
     } else if (_chartType === 'barAverageCompare') {
       return {
         responsive: true,
-        legend: {
-          reverse: true
-        },
         tooltips: {
-          callbacks: {
-            title: function (tooltipItem, data) {
-              return data['labels'][tooltipItem[0]['index']];
-            },
-            label: function (tooltipItem, data) {
-              return [data['datasets'][0]['data'][tooltipItem['index']], data['datasets'][1]['data'][tooltipItem['index']]];
-            }
-          }
+          mode: 'label'
         },
         scales: {
           yAxes: [{

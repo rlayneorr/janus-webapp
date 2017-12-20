@@ -12,17 +12,17 @@ export class GrapherComponent implements OnInit {
   public barBatchWeekSorted: any = [{
     data:
       new Map([
+        ['Average', 78.164],
+      ]), label: 'Average'
+  }, {
+    data:
+      new Map([
         ['person a1', 94.4],
         ['person b12', 85.1],
         ['person c123', 76.1],
         ['person d112', 75.1],
         ['person e12', 60.12]
       ]), label: 'batch'
-  }, {
-    data:
-      new Map([
-        ['Average', 78.164],
-      ]), label: 'Average'
   }];
   public radarBatchOverall: any = [{
     data: new Map([
