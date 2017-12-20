@@ -35,11 +35,11 @@ export class CategoriesService {
 
   // adds a new category to the database
   addNewCategory() {
-      this.http.post(environment.addNewCategory, this.newCategory)
+    console.log(this.newCategory);
+      this.http.post(environment.addNewCategory, this.newCategory, {withCredentials: true})
         .subscribe(
           resp => {
             console.log(resp.json());
-            this.newCategory = resp.json();
           },
           err => {
             console.log(err);

@@ -16,8 +16,6 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal) { }
 
-
-
   ngOnInit() {
   }
 

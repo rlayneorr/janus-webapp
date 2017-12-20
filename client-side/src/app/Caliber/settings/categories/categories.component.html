@@ -1,6 +1,4 @@
-categories works!
-
-<ng-template #content let-c="close" let-d="dismiss">
+<ng-template #addCategory let-c="close" let-d="dismiss">
     <form #myForm = "ngForm" class="form-control">
     <div class="modal-header">
         <h4 class="modal-title">Add Category</h4>
@@ -19,9 +17,9 @@ categories works!
     </div>
     <div class="modal-footer">
         <button type="submit" ng-value="Save" class="btn btn-primary"
-            data-dismiss="modal" (click) = "addCategory()"></button>
+            data-dismiss="modal" (click) = "addCategory()">Submit</button>
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
     </div>
     </form>
 </ng-template>  
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(addCategory)">Add Category</button>
