@@ -16,6 +16,7 @@ export class CategoriesComponent implements OnInit {
     model = new Category();
     newCategory: Category = new Category();
     categories: Category[];
+    currentCategory: Category;
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
 
