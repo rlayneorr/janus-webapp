@@ -14,6 +14,7 @@ import { environment } from '../../../../environments/environment';
 export class CategoriesComponent implements OnInit {
 
     model = new Category();
+    newCategory: Category = new Category();
     categories: Category[];
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
@@ -27,13 +28,20 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  addCategory() {
-      this.categoriesService.newCategory.skillCategory = this.model.skillCategory;
-      console.log(this.categoriesService.newCategory.skillCategory);
-      this.categoriesService.newCategory.active = true;
-      this.categoriesService.addNewCategory();
+  addNewCategory() {
+      this.newCategory.skillCategory = this.model.skillCategory;
+      this.newCategory.active = true;
+      this.http.post(environment.addNewCategory, this.newCategory, {withCredentials: true})
+        .subscribe(
+          resp => {
+            console.log(resp.json());
+            this.categories.push(resp.json());
+          },
+          err => {
+            console.log(err);
+          }
+        );
   }
-
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
