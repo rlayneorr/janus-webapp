@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="col-6">
     <div class="row">
         <div class="col-12">
             <app-graph [data]="lineBatchWeeklyAverage" [legend]=false [type]='types[0]'></app-graph>
@@ -12,13 +12,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <app-graph [data]="barBatchWeekSorted" [legend]=true [type]='types[2]'></app-graph>
             <app-table [data]="barBatchWeekSorted" [type]='types[2]'></app-table>
         </div>
 
-        <!-- </div>
-    <div class="row"> -->
+        </div>
+    <div class="row">
         <div class="col-6">
             <app-graph [data]="qcDonutData " [legend]=true [type]='types[3]'></app-graph>
             <app-table [data]="qcDonutData" [type]='types[3]'></app-table>

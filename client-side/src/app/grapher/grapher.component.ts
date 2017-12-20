@@ -12,11 +12,11 @@ export class GrapherComponent implements OnInit {
   public barBatchWeekSorted: any = [{
     data:
       new Map([
-        ['person a', 94.4],
-        ['person b', 85.1],
-        ['person c', 76.1],
-        ['person d', 75.1],
-        ['person e', 60.12]
+        ['person a1', 94.4],
+        ['person b12', 85.1],
+        ['person c123', 76.1],
+        ['person d112', 75.1],
+        ['person e12', 60.12]
       ]), label: 'batch'
   }, {
     data:
@@ -78,7 +78,7 @@ export class GrapherComponent implements OnInit {
       [1, 90.1],
       [2, 34.12],
       [3, 92.1],
-      [4, 66.4]
+      [10, 66.42]
     ]), label: 'batch'
   }];
   public barAssignAver: any = [{

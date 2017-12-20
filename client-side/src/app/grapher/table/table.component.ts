@@ -1,5 +1,5 @@
 // TODO: more/better commenting
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, sequence } from '@angular/core';
 
 @Component({
     selector: 'app-table',
@@ -14,7 +14,6 @@ export class TableComponent implements OnInit, OnChanges {
     public tableData: any[] = null;
     public tableLabels: any[] = null;
     public tableType: string = null;
-    public dataIndexes: number[] = [];
     ngOnInit() {
         this.tableMaps = this.data;
         this.tableType = this.type;
@@ -45,14 +44,37 @@ export class TableComponent implements OnInit, OnChanges {
         this.tableLabels = _tableLabels;
 
         // creates a sequence of numbers for iterating in ngFor
-        for (let i = 0; i < this.tableLabels.length; i++) {
-            this.dataIndexes.push(i);
-        }
+
     }
     ngOnChanges() {
 
     }
-    lineGraphCheck() {
-        return (this.tableType === 'line' && this.tableData.length > 1);
+    typeCheck() {
+        if (this.tableType === 'bar') {
+            if (this.tableData[1] !== undefined && this.tableData[1].data.length === 1) {
+                return 3;
+            }
+        }
+        if (this.tableType === 'line') {
+            if (this.tableData.length > 1) {
+                return 2;
+            }
+            return 1;
+        }
+        return 0;
+    }
+    indexSequence(step: number) {
+        const indexSequence = [];
+        for (let i = 0; i < this.tableLabels.length; i += step) {
+            indexSequence.push(i);
+        }
+        return indexSequence;
+    }
+    numberSequence(n: number) {
+        const iSequence = [];
+        for (let i = 0; i < n; i++) {
+            iSequence.push(i);
+        }
+        return iSequence;
     }
 }
