@@ -16,6 +16,8 @@ import { CommonModule } from '@angular/common';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TrainerService } from './services/trainer.service';
 import { ViewcategoriesComponent } from './viewcategories/viewcategories.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
@@ -28,6 +30,7 @@ import { LocationsComponent } from './settings/locations/locations.component';
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
     FormsModule,
+    AngularFontAwesomeModule
   ],
   declarations: [
     CaliberComponent,
