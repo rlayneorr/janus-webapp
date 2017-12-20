@@ -17,6 +17,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
 import { TrainerService } from './services/trainer.service';
 import { ViewcategoriesComponent } from './viewcategories/viewcategories.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { CategoriesService } from './services/categories.service';
 
 import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
@@ -44,6 +45,9 @@ import { LocationsComponent } from './settings/locations/locations.component';
     TrainersComponent,
     LocationsComponent
   ],
-  providers: [TrainerService]
+  providers: [
+    TrainerService,
+    CategoriesService,
+  ]
 })
 export class CaliberModule { }

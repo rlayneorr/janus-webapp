@@ -38,6 +38,13 @@ a {
     font-size: 15px;
 	width: 1000px;
 } 
+#addButton {
+    transition: background-color 1s ease;
+    transition-property: background-color;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+    transition-delay: initial;
+}
 
 /**********************
 	Chart Containers

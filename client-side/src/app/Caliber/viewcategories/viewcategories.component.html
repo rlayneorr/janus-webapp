@@ -5,7 +5,7 @@
       <div class="col-md-12 col-lg-12">
         <ul class="nav nav-tabs">
           <li role="button" class="pull-right" data-toggle="modal" data-target="#addCategoryModal" ng-click="">
-            <a>Create Category
+            <a href="#">Create Category
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
           </li>
@@ -14,9 +14,9 @@
     </div>
   </div>
 </div>
-
+<br>
 <!-- Display all assessment categories -->
-<div class="container" id="trainer-assess-table" ng-if="categories[0]">
+<div class="container" id="trainer-assess-table" ng-if="categories[0]" style="padding-top:10px">
   <div class="row">
     <div class="col-md-3 col-lg-3 top5">
       <!-- Accordian table -->
@@ -76,13 +76,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let category of categories; let i=index">
-              <td *ngIf="(i > ((categories.length / 3) * 2))">
+              <td *ngIf="(((i > categories.length / 3) && (i < ((categories.length / 3) * 2))))">
                 {{category.skillCategory}}
               </td>
-              <td *ngIf="category.active === false">
+              <td *ngIf="category.active === false && (((i > categories.length / 3) && (i < ((categories.length / 3) * 2))))">
                 <span style="color: #ff7575" class="fa fa-times fa-2x" aria-hidden="true"></span>
               </td>
-              <td *ngIf="category.active === true">
+              <td *ngIf="category.active === true && (((i > categories.length / 3) && (i < ((categories.length / 3) * 2))))">
                 <span style="color: #81f575" class="fa fa-check fa-2x" aria-hidden="true"></span>
               </td>
           </tr>
