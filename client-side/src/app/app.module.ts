@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
@@ -38,7 +38,6 @@ const routes: Routes = [
     HttpModule,
     NgbModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule,
     NavModule,
     RouterModule.forRoot(routes, { useHash: true }),
   ],
