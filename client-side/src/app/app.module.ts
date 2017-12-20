@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
+import { ReportingService } from './services/reporting.service';
 
 
 // loading routes from child modules this way will lazy load them
@@ -48,6 +49,7 @@ const routes: Routes = [
   ],
   providers: [
     ChuckNorrisService,
+    ReportingService,
   ],
   bootstrap: [AppComponent]
 })
