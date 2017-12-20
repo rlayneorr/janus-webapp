@@ -1,3 +1,5 @@
+import { ChartsModule } from 'ng2-charts';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -17,6 +19,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
+import { RadarComponent } from './radar-test/radar-test.component';
 
 @NgModule({
   imports: [
@@ -25,7 +28,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
     FormsModule,
+<<<<<<< HEAD
     ChartsModule
+=======
+    ChartsModule,
+>>>>>>> 9e71bd6a32bd18297b79d4f005f6d889c12d3979
   ],
   declarations: [
     CaliberComponent,
@@ -34,10 +41,14 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
+<<<<<<< HEAD
     TraineeTechSkillsComponent,
   ],
   exports: [
     TraineeTechSkillsComponent
+=======
+    RadarComponent,
+>>>>>>> 9e71bd6a32bd18297b79d4f005f6d889c12d3979
   ],
   providers: []
 })
