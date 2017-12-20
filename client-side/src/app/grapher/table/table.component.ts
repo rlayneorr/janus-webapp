@@ -19,7 +19,7 @@ export class TableComponent implements OnInit, OnChanges {
         this.tableType = this.type;
 
         const _tableData: any[] = [];
-        const _tableLabels: string[] = [];
+        let _tableLabels: string[] = [];
         let label = true;
         // gets data from input
         for (const tableMap of this.tableMaps) {
@@ -40,6 +40,12 @@ export class TableComponent implements OnInit, OnChanges {
                 _tableLabels[i] = 'Week ' + _tableLabels[i];
             }
         }
+        if (_tableData[0].data.length === 1 && _tableData[1] !== undefined) {
+            _tableLabels = [];
+            this.tableMaps[1].data.forEach((value: number, key: string) => {
+                _tableLabels.push(key);
+            });
+        }
         this.tableData = _tableData;
         this.tableLabels = _tableLabels;
 
@@ -51,7 +57,7 @@ export class TableComponent implements OnInit, OnChanges {
     }
     typeCheck() {
         if (this.tableType === 'bar') {
-            if (this.tableData[1] !== undefined && this.tableData[1].data.length === 1) {
+            if (this.tableData[0].data.length === 1 && this.tableData[1] !== undefined) {
                 return 3;
             }
         }
