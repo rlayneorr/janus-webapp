@@ -1,4 +1,4 @@
-
+// TODO: more/better commenting
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
@@ -34,6 +34,8 @@ export class TableComponent implements OnInit, OnChanges {
             label = false;
             _tableData.push({ data: _tableDataRow, label: tableMap.label });
         }
+
+        // Labels weeks since the label would just be numbers otherwise
         if (this.tableType === 'line') {
             for (let i = 0; i < _tableLabels.length; i++) {
                 _tableLabels[i] = 'Week ' + _tableLabels[i];
@@ -41,6 +43,8 @@ export class TableComponent implements OnInit, OnChanges {
         }
         this.tableData = _tableData;
         this.tableLabels = _tableLabels;
+
+        // creates a sequence of numbers for iterating in ngFor
         for (let i = 0; i < this.tableLabels.length; i++) {
             this.dataIndexes.push(i);
         }

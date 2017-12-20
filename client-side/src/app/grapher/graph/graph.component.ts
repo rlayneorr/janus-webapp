@@ -1,4 +1,4 @@
-
+// TODO: more/better commenting
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
@@ -6,19 +6,22 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
   templateUrl: './graph.component.html'
 })
 export class GraphComponent implements OnInit, OnChanges {
+  // input variables from parent
   @Input() public data: any;
   @Input() public legend: boolean;
   @Input() public type: string;
 
-
+  // class variables
+  // raw data from input
   public chartMaps: any = null;
+  // data sets to graph
   public chartData: any[] = null;
+  // labels for graph
   public chartLabels: any[] = null;
   public chartLegend = false;
   public chartType: string = null;
-  public chartOptions: any = {
-    responsive: true
-  };
+  public chartOptions: any = null;
+
   public chartColors: Array<any> = [];
 
   // events
@@ -34,12 +37,16 @@ export class GraphComponent implements OnInit, OnChanges {
     this.chartType = this.type;
     this.chartLegend = this.legend;
 
+    // set up local array to be filled
     const _chartData: any[] = [];
     const _chartLabels: string[] = [];
+
+    // Only need labels once so am using a flag
     let label = true;
     // gets data from input
     for (const chartMap of this.chartMaps) {
       const _chartDataRow: number[] = [];
+      // breaks data and labels out from key/value pairs
       chartMap.data.forEach((value: number, key: string) => {
         _chartDataRow.push(value);
         if (label) {
@@ -50,7 +57,7 @@ export class GraphComponent implements OnInit, OnChanges {
       _chartData.push({ data: _chartDataRow, label: chartMap.label });
     }
 
-
+    // control look of chart based on type
     switch (this.chartType) {
       case 'radar':
         this.chartColors = [
@@ -69,6 +76,7 @@ export class GraphComponent implements OnInit, OnChanges {
           ];
           this.chartOptions = this.chartOption(this.chartType);
         } else {
+          // TODO: make average line in front of bar graph
           this.chartColors = [
             this.color('114, 164, 194'),
             // this.color('252, 180, 20')
@@ -123,9 +131,6 @@ export class GraphComponent implements OnInit, OnChanges {
         this.chartColors = _chartColors;
         break;
     }
-
-
-
     this.chartData = _chartData;
     this.chartLabels = _chartLabels;
   }
