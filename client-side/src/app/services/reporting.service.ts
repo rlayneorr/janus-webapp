@@ -9,8 +9,7 @@ import { CacheData } from '../entities/CacheData.entity';
 export class ReportingService {
 
   /* Subjects & Paired Observables */
-  private traineeOverallTech = new BehaviorSubject<CacheData>(null);
-  public traineeOverallTech$ = this.traineeOverallTech.asObservable();
+
 
   /*  Reports Charts */
   // Subjects used to store data from the server.
@@ -19,9 +18,12 @@ export class ReportingService {
   // Observables that are visible to subscribers to this service.
   batchOverallRadarChart = this.batchOverallRadarSubject.asObservable();
 
+
+  private traineeOverallTech = new BehaviorSubject<CacheData>(null);
+  public traineeOverallTech$ = this.traineeOverallTech.asObservable();
+
   constructor(private http: Http) { }
 
-  /*  Reports Charts */
   refresh() {
     // Clear all data stored in subjects
     this.batchOverallRadarSubject.next(null);
