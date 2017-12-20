@@ -1,0 +1,25 @@
+<ng-template #addCategory let-c="close" let-d="dismiss">
+    <form #myForm = "ngForm" class="form-control">
+    <div class="modal-header">
+        <h4 class="modal-title">Add Category</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6 col-sm-6">
+                <label for="categoryName">Category:</label> 
+                <input  [(ngModel)] = "model.skillCategory" name = "category" type="text" class="form-control" 
+                    id="categoryName" placeholder="Category" required>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" ng-value="Save" class="btn btn-primary"
+            data-dismiss="modal" (click) = "addCategory()">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    </div>
+    </form>
+</ng-template>  
+<button class="btn btn-lg btn-outline-primary" (click)="open(addCategory)">Add Category</button>
