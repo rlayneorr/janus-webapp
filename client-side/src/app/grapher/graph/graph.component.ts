@@ -130,7 +130,7 @@ export class GraphComponent implements OnInit, OnChanges {
           } else if (doughnutLabel === 'Poor') {
             doughnutColor = '234, 40, 37';
           }
-          _chartColors[0].backgroundColor.push('rgba(' + doughnutColor + ', .5)');
+          _chartColors[0].backgroundColor.push('rgba(' + doughnutColor + ', .7)');
         });
         this.chartColors = _chartColors;
         break;
@@ -151,6 +151,7 @@ export class GraphComponent implements OnInit, OnChanges {
       backgroundColor: 'rgba(' + input + ', .5)',
       pointBackgroundColor: 'rgba(' + input + ', .5)',
       borderColor: 'rgba(' + input + ', 1)',
+      borderWidth: 2,
       pointHoverBackgroundColor: 'rgba(' + input + ', .3)',
       pointHoverBorderColor: 'rgba(' + input + ', .3)',
       pointBorderColor: '#fff'

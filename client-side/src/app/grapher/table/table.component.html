@@ -8,7 +8,6 @@
             <th class="pull-left">{{tableLabels[i]}}</th>
             <td *ngFor="let set of tableData" class="pull-right">{{set.data[i]}}</td>
         </tr>
-
     </table>
     <div *ngIf="typeCheck() === 1">
         <table class="table" style="border-collapse: collapse;">
@@ -25,7 +24,6 @@
         </table>
     </div>
     <span *ngIf="typeCheck() === 2">
-        <!-- <span *ngFor="let i of dataIndexes"> -->
         <table class="table" style="border-collapse: collapse;">
             <tr>
                 <th class="pull-left"></th>
@@ -35,22 +33,20 @@
                 <th>{{i}} {{set.label}}</th>
                 <td *ngFor="let i of indexSequence(1)" class="pull-right">{{set.data[i]}}</td>
             </tr>
-
         </table>
-        <!-- </span> -->
     </span>
 </div>
 <div *ngIf="typeCheck() === 3">
-        <table class="table" style="border-collapse: collapse;">
-            <tr *ngFor="let i of indexSequence(3);">
-                <td class="col-4" *ngFor="let j of  numberSequence(3);">
-                    <span class="row justify-content-between">
-                        <span class="col">
-                            <b>{{tableLabels[i+j]}}</b>
-                        </span>
-                        <span class="col">{{tableData[1].data[i+j] | number : '1.2-2'}}</span>
+    <table class="table" style="border-collapse: collapse;">
+        <tr *ngFor="let i of indexSequence(3);">
+            <td class="col-4" *ngFor="let j of  numberSequence(3);">
+                <span class="row justify-content-between">
+                    <span class="col">
+                        <b>{{tableLabels[i+j]}}</b>
                     </span>
-                </td>
-            </tr>
-        </table>
-    </div>
+                    <span class="col">{{tableData[1].data[i+j] | number : '1.2-2'}}</span>
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
