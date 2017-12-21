@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
-import { Category } from '../beans/Category';
+import { Category } from '../entities/Category';
 
 @Injectable()
 export class CategoriesService {

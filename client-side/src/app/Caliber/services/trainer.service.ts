@@ -2,7 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
-import { Trainer } from '../../entities/Trainer';
+import { Trainer } from '../beans/Trainer';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class TrainerService {
@@ -24,8 +25,8 @@ export class TrainerService {
 
   // Get All Trainers
   getAll(): void {
-    this.http.get('http://localhost:8080/all/trainer/all', { withCredentials: true })
-      .map(
+    this.http.get(environment.context + '/all/trainer/all', {withCredentials: true})
+    .map(
       resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
       // err => // can have the error mapped for all subscribers if you want also
     )
@@ -86,4 +87,17 @@ export class TrainerService {
       );
   }
 
+  deleteTrainer(trainer: Trainer) {
+    this.http.delete(environment.context + '/vp/trainer/delete',
+    {withCredentials: true, body: trainer}).map(
+        resp => resp.json(),
+    )
+    .subscribe(
+        resp => {
+          },
+          err => {
+            // handle the error however you want
+          }
+    );
+  }
 }

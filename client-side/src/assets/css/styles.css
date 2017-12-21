@@ -1,4 +1,39 @@
 /************************
+	Revature Fonts
+************************/
+@font-face {
+	font-family: 'Futura-Std-Medium';
+	src: url('/assets/fonts/Futura-Std-Medium.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Futura-Std-Book';
+	src: url('/assets/fonts/Futura-Std-Book.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Futura-Std-Heavy';
+	src: url('/assets/fonts/Futura-Std-Heavy.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Futura-Std-Bold';
+	src: url('/assets/fonts/Futura-Std-Bold.otf') format('opentype');
+}
+
+body {
+	font-family: 'Futura-Std-Book';
+}
+
+th {
+	font-family: 'Futura-Std-Bold';
+}
+
+li {
+	font-family: 'Futura-Std-Heavy';
+}
+
+/************************
 	Revature Colors
 ************************/
 :root {
@@ -32,25 +67,12 @@ a {
 	color: #F26925;
 }
 
-#addButton {
-	padding-bottom: 5px;
-}
-
-.btn-change:hover{
-    -webkit-transform: scale(1);
-    background-color: #31708f;
-}
-
 .sticky-header {
     padding: 10px;
     padding-right: 55px;
     font-size: 15px;
 	width: 1000px;
 } 
-
-.categoryInput {
-	width: 400px;
-}
 
 /**********************
 	Chart Containers

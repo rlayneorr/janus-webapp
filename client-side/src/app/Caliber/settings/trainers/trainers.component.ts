@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms/src/directives/ng_form';
   styleUrls: ['./trainers.component.css',
     '../../../../../node_modules/font-awesome/css/font-awesome.css']
 })
+
 export class TrainersComponent implements OnInit, OnDestroy {
   private trainerSubscription: Subscription;
   trainers: Trainer[];
@@ -43,8 +44,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
   // getAllTitles() {
   //   this.trainerService.getTitles();
   // }
-
-
 
   //Open modal and get Trainer that belong to this modal
   editTrainer(content, modalTrainer: Trainer) {
@@ -80,23 +79,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // clean up subscriptions
   ngOnDestroy() {
     this.trainerSubscription.unsubscribe();
   }
 }
-
