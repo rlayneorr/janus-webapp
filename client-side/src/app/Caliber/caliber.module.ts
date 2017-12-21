@@ -33,8 +33,6 @@ import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { LocationService } from './services/location.service';
 
-
-
 @NgModule({
   imports: [
     CommonModule,

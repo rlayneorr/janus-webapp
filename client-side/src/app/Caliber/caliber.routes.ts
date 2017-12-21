@@ -42,7 +42,7 @@ export const routes: Routes = [
           },
           {
             path: 'trainers',
-            component: ViewAllTrainersComponent
+            component: TrainersComponent
           }
         ]
       },
