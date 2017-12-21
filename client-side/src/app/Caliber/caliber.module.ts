@@ -23,12 +23,11 @@ import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.serv
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
 import { ColorService } from './services/colors/color.service';
 import { TrainerService } from './services/trainer.service';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CategoriesService } from './services/categories.service';
 import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
-import { TrainersComponent } from './settings/trainers/trainers.component';
 import { LocationsComponent } from './settings/locations/locations.component';
+import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { LocationService } from './services/location.service';
 
@@ -41,7 +40,6 @@ import { LocationService } from './services/location.service';
     FormsModule,
     ChartsModule,
     AngularFontAwesomeModule
-
   ],
   declarations: [
     CaliberComponent,
