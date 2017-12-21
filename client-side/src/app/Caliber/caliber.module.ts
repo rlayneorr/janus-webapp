@@ -23,6 +23,7 @@ import { TrainersComponent } from './settings/trainers/trainers.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/view-all-trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
+import { LocationService } from './services/location.service';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { DeactivateTrainerComponent } from './settings/trainers/deactivatetraine
   ],
   providers: [
     TrainerService,
+    LocationService,
     CategoriesService,
   ]
 })
