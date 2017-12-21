@@ -16,7 +16,7 @@ export class CategoriesComponent implements OnInit {
     model = new Category();
     newCategory: Category = new Category();
     categories: Category[];
-    currentCategory: Category;
+    currentCategory: Number;
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
 
@@ -44,6 +44,13 @@ export class CategoriesComponent implements OnInit {
         );
   }
   open(content) {
+    this.modalService.open(content).result.then((result) => {
+    }, (reason) => {
+    });
+  }
+
+  editopen(content, index) {
+    this.currentCategory = index;
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
     });
