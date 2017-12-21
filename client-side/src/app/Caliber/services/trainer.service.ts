@@ -32,4 +32,8 @@ export class TrainerService {
     );
   }
 
+  getTier() {
+    this.http.get('http://localhost:8080/vp/trainer/titles/')
+  }
+
 }

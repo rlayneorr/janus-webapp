@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let trainer of trainers">
+      <tr *ngFor="let trainer of trainers ; let i = index">
         <td>
           {{trainer.name}}
         </td>
@@ -23,7 +23,7 @@
           {{trainer.tier}}
         </td>
         <td>
-          <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="open(content)"></i>
+          <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, i)"></i>
         </td>
         <td>
           <i class="fa fa-times" aria-hidden="true"></i>
@@ -36,7 +36,7 @@
 
 
 
-
+<i class="fa fa-pencil" style="color:#ff8e4d;" (click)="open(content)"></i>
 
 
 
@@ -51,23 +51,27 @@
   <div class="modal-body">
     <form (ngSubmit)="updateTrainer(updateTrainer)" #updateTrainer="ngForm">
       <div class="form-group">
-        <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" placeholder="Trainer Name" />
+        <div class="row">
+          <div class="col-md-6">
+            <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="trainers[currEditTrainerIndex].name" placeholder="Trainer Name" />
+          </div>
+          <div class="col-sm-6">
+            <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
+            <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].email" id="email" name="email" placeholder="Email" />
+          </div>
         </div>
-        <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" ngModel id="email" name="email" placeholder="Email" />
-        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
 
-      </div>
-      <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" ngModel id="title" name="title" placeholder="Title" />
-      </div>
-      <label class="col-sm-2 control-label text-nowrap" for="title">Tier</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" ngModel id="tier" name="tier" placeholder="Title" />
+          <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].title" id="title" name="title" placeholder="Title" />
+        </div>
+        <div class="col-sm-6">
+          <label class="col-sm-2 control-label text-nowrap" for="title">Tier</label>
+          <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].tier" id="tier" name="tier" placeholder="Title" />
+        </div>
       </div>
     </form>
   </div>

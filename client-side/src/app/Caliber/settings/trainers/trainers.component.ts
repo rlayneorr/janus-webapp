@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../services/trainer.service';
+import { Trainer } from '../../../entities/Trainer';
 
 @Component({
   selector: 'app-trainers',
@@ -11,11 +12,9 @@ import { TrainerService } from '../../services/trainer.service';
 })
 export class TrainersComponent implements OnInit, OnDestroy {
   private trainerSubscription: Subscription;
-  trainers;
-
-  name: String = 'Randy';
+  trainers: Trainer[];
+  currEditTrainerIndex: number;
   
-  closeResult: string;
 
   constructor(private trainerService: TrainerService,
     private modalService: NgbModal) { }
@@ -32,14 +31,18 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
 
 
+  //Open modal and get Trainer that belong to this modal
+  editTrainer(content, index: number) {
+    this.currEditTrainerIndex = index;
+    this.modalService.open(content);
 
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    // .result.then((result) => {
+    //   this.closeResult = `Closed with: ${result}`;
+    // }, (reason) => {
+    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    // });
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
