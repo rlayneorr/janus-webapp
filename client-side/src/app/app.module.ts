@@ -13,7 +13,10 @@ import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
 import { ReportingService } from './services/reporting.service';
-
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { CaliberModule } from './Caliber/caliber.module';
+import { TraineeTechSkillsComponent } from './Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
+import { HttpClientModule } from '@angular/common/http';
 
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
@@ -40,6 +43,8 @@ const routes: Routes = [
     FormsModule,
     NavModule,
     RouterModule.forRoot(routes, { useHash: true }),
+    ChartsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
