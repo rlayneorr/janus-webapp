@@ -8,6 +8,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
+import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/view-all-trainers.component';
 import { DeactivateTrainerComponent } from './trainers/deactivatetrainer/deactivatetrainer.component';
 import { DummyComponent } from './trainers/deactivatetrainer/dummy.component';
 
@@ -18,7 +19,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: DummyComponent,
+        component: HomeComponent,
       },
       {
         path: 'manage',
@@ -42,7 +43,7 @@ export const routes: Routes = [
           },
           {
             path: 'trainers',
-            component: TrainersComponent
+            component: ViewAllTrainersComponent
           }
         ]
       },
