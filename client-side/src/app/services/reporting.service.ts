@@ -4,7 +4,18 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
 import { CacheData } from '../entities/CacheData.entity';
+import { HttpClient } from '@angular/common/http';
 
+
+
+/**
+ * Service handles API calls and tracks fetched data for caching.
+ * Fetched data is exposed by observables which get data from private
+ * BehaviorSubjects.
+ *
+ * @author Mitch Goshorn
+ * @author Micah West
+ */
 @Injectable()
 export class ReportingService {
 
@@ -22,11 +33,15 @@ export class ReportingService {
   private traineeOverallTech = new BehaviorSubject<CacheData>(null);
   public traineeOverallTech$ = this.traineeOverallTech.asObservable();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private httpClient: HttpClient) { }
 
   refresh() {
     // Clear all data stored in subjects
     this.batchOverallRadarSubject.next(null);
+  }
+
+  private needsRefresh(sub: BehaviorSubject<CacheData>, params: any): boolean {
+    return !sub.getValue() || sub.getValue().params !== params;
   }
 
   /*
@@ -161,12 +176,24 @@ export class ReportingService {
   }
 
 
-
+  /**
+   * Updates Trainee overall tech skills data if necessary
+   * Data can be subscribed to @ traineeOverallTech$
+   * @param traineeId - trainee whose skill data should be fetched
+   */
   fetchTraineeOverallRadarChart(traineeId: Number) {
     const endpoint = environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`;
 
+    // Params object for refresh check
+    const params = {
+      traineeId: traineeId
+    };
 
-
+    // call backend API if data is not fresh
+    if (this.needsRefresh(this.traineeOverallTech, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.traineeOverallTech.next({params: params, data: success}));
+    }
   }
 
   fetchBatchOverallRadarChart(batchId: Number) {

@@ -17,6 +17,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { RadarComponent } from './radar-test/radar-test.component';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -34,12 +35,15 @@ import { RadarComponent } from './radar-test/radar-test.component';
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
+    RadarComponent,
     TraineeTechSkillsComponent,
   ],
   exports: [
     TraineeTechSkillsComponent,
     RadarComponent,
   ],
-  providers: []
+  providers: [
+    HttpClient
+  ]
 })
 export class CaliberModule { }

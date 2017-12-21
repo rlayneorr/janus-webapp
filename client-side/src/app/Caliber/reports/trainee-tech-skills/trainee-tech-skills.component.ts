@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { ReportingService } from '../../../services/reporting.service';
 
 @Component({
   selector: 'app-trainee-tech-skills',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TraineeTechSkillsComponent implements OnInit {
 
-  constructor() { }
+  private data: any;
+  private dataSubscription: Subscription;
+
+
+  constructor(private reportsService: ReportingService) { }
+
+
 
   // Chart labels
   public radarChartLabels: string[] = ['AWS', 'Hibernate', 'JSP', 'Java', 'JavaScript', 'REST', 'SOAP', 'SQL', 'Spring'];
@@ -25,6 +33,18 @@ export class TraineeTechSkillsComponent implements OnInit {
   public radarChartType = 'radar';
 
   ngOnInit() {
+    this.dataSubscription = this.reportsService.traineeOverallTech$.subscribe( (result) => {
+      if (!result) {
+        console.log('data not received');
+        this.data = null;
+      } else {
+        console.log('data received');
+        console.log(result);
+        this.data = result.data;
+      }
+    });
+    this.reportsService.fetchTraineeOverallRadarChart(5455);
+    console.log('fetching');
   }
 
 }
