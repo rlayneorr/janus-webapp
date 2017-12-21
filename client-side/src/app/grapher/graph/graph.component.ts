@@ -26,13 +26,11 @@ export class GraphComponent implements OnInit, OnChanges {
 
   // events
   public chartClicked(e: any): void {
-    // console.log(e);
   }
 
   public chartHovered(e: any): void {
-    // console.log(e);
   }
-  ngOnInit() {
+  public ngOnInit() {
     this.chartMaps = this.data;
     this.chartType = this.type;
     this.chartLegend = this.legend;
@@ -76,6 +74,7 @@ export class GraphComponent implements OnInit, OnChanges {
           ];
           this.chartOptions = this.chartOption(this.chartType);
         } else {
+          // make benchmark date array length match other data array
           const benchmarkData: number[] = [];
           const benchmark = _chartData[0].data[0];
           _chartData[1].data.forEach(function () {
@@ -83,20 +82,10 @@ export class GraphComponent implements OnInit, OnChanges {
           });
           _chartData[0].data = benchmarkData;
 
+          // color the bars
           this.chartColors = [
-            {
-              pointRadius: 0,
-              pointHoverRadius: 0,
-              borderWidth: 3,
-              borderColor: 'rgba(252,180,20,1)',
-              backgroundColor: 'rgba(252,180,20, .5) ',
-              pointBackgroundColor: 'rgba(252,180,20,1)',
-              pointHoverBackgroundColor: 'rgba(252,180,20,1)',
-              pointHoverBorderColor: 'rgba(252,180,200, 0.5)',
-              fill: false,
-              label: 'Benchmark',
-              pointBorderColor: '#fff'
-            }, this.color('114, 164, 194')
+            this.benchMarkColor()
+            , this.color('114, 164, 194')
           ];
           _chartLabels = [];
           this.chartMaps[1].data.forEach((value: number, key: string) => {
@@ -139,7 +128,7 @@ export class GraphComponent implements OnInit, OnChanges {
     this.chartLabels = _chartLabels;
 
   }
-  ngOnChanges(changes) {
+  public ngOnChanges(changes) {
     if (changes['data']) {
       this.ngOnInit();
     }
@@ -157,7 +146,23 @@ export class GraphComponent implements OnInit, OnChanges {
       pointBorderColor: '#fff'
     };
   }
-  // returns an object for chart options
+  benchMarkColor() {
+    return {
+      pointRadius: 0,
+      pointHoverRadius: 0,
+      borderWidth: 3,
+      borderColor: 'rgba(252,180,20,1)',
+      backgroundColor: 'rgba(252,180,20, .5) ',
+      pointBackgroundColor: 'rgba(252,180,20,1)',
+      pointHoverBackgroundColor: 'rgba(252,180,20,1)',
+      pointHoverBorderColor: 'rgba(252,180,200, 0.5)',
+      fill: false,
+      label: 'Benchmark',
+      pointBorderColor: '#fff'
+    };
+  }
+  // returns an object for chart options\
+  // May try to reduce the lengh of this later but right now it works as needed
   chartOption(_chartType: string) {
     if (_chartType === 'radar') {
       return {
