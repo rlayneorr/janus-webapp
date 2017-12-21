@@ -97,7 +97,7 @@ export class BatchService {
     }
 
     /**
-    * transmists a batch to be saved in persistent
+    * transmits a batch to be saved in persistent
     * storage on the server and pushes the saved
     * object on the saved subject
     *
@@ -143,7 +143,7 @@ export class BatchService {
      * @param batch
      */
     public delete(batch: Batch): void {
-      const url = this.envService.buildUrl('all/batch/delete', [ batch.batchId ]);
+      const url = this.envService.buildUrl(`all/batch/delete/${batch.batchId}`);
 
       this.http.delete(url, { withCredentials: this.sendCredentials })
         .subscribe( () => {
@@ -166,11 +166,11 @@ export class BatchService {
      */
     private fetch(url: string) {
 
+      this.listSubject.next([]);
+
       this.http.get<Batch[]>(url, { withCredentials: this.sendCredentials })
         .subscribe((batches) => {
           this.listSubject.next(batches);
-        }, (error) => {
-          this.listSubject.next([]);
         });
 
     }
