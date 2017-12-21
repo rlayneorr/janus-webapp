@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { BatchService } from '../../services/batch.service';
 import { TrainerService } from '../../services/trainer.service';
 import { TraineeService } from '../../services/trainee.service';
+import { AssessmentService } from '../../services/assessment.service';
 
 
 @Component({
@@ -12,10 +13,10 @@ import { TraineeService } from '../../services/trainee.service';
 })
 export class TestComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private service: TraineeService;
+  private service: AssessmentService;
 
 
-  constructor(trainerService: TraineeService) {
+  constructor(trainerService: AssessmentService) {
     this.service = trainerService;
   }
 
@@ -29,7 +30,8 @@ export class TestComponent implements OnInit, OnDestroy {
     });
 
     // this.service.fetchAll();
-    this.service.fetchAllByBatch(3002);
+    // this.service.fetchAllByBatch(3002);
+    this.service.fetchByBatchIdByWeek(3002, 1);
   }
 
   ngOnDestroy() {

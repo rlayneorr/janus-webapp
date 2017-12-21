@@ -48,7 +48,7 @@ export class TraineeService {
      * returns a publication observable of the last
      * trainee saved
      *
-     * @return Observable<Trainer[]>
+     * @return Observable<Trainer>
      */
    public getSaved(): Observable<Trainee> {
      return this.savedSubject.asObservable();
@@ -58,7 +58,7 @@ export class TraineeService {
      * returns a publication observable of the last
      * trainee deleted
      *
-     * @return Observable<Trainer[]>
+     * @return Observable<Trainer>
      */
    public getDeleted(): Observable<Trainee> {
      return this.deletedSubject.asObservable();
@@ -73,6 +73,8 @@ export class TraineeService {
     /**
      * retrieves all trainees by batch ID and pushes them on the
      * list subject
+     *
+     * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
      */
    public fetchAllByBatch(batchId: number): void {
      const url = this.envService.buildUrl('all/trainee', { batch: batchId });
