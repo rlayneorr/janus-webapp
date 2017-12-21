@@ -48,6 +48,10 @@ a {
 	width: 1000px;
 } 
 
+.categoryInput {
+	width: 400px;
+}
+
 /**********************
 	Chart Containers
 **********************/
