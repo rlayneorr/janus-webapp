@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../../entities/Trainer';
+import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 @Component({
   selector: 'app-trainers',
@@ -13,8 +14,12 @@ import { Trainer } from '../../../entities/Trainer';
 export class TrainersComponent implements OnInit, OnDestroy {
   private trainerSubscription: Subscription;
   trainers: Trainer[];
-  currEditTrainerIndex: number;
-  
+  titles: Array<any>;
+  tiers: Array<any>;
+
+  currEditTrainer: Trainer;
+  newTier: String;
+
 
   constructor(private trainerService: TrainerService,
     private modalService: NgbModal) { }
@@ -23,17 +28,27 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.trainerSubscription = this.trainerService.trainers$.subscribe((resp) => {
       this.trainers = resp;
     });
+    this.trainerSubscription = this.trainerService.titles$.subscribe((resp) => {
+      this.titles = resp;
+    });
+    this.trainerSubscription = this.trainerService.tiers$.subscribe((resp) => {
+      this.tiers = resp;
+    });
   }
 
-  getAllTrainers() {
-    this.trainerService.getAll();
-  }
+  // getAllTrainers() {
+  //   this.trainerService.getAll();
+  // }
+
+  // getAllTitles() {
+  //   this.trainerService.getTitles();
+  // }
 
 
 
   //Open modal and get Trainer that belong to this modal
-  editTrainer(content, index: number) {
-    this.currEditTrainerIndex = index;
+  editTrainer(content, modalTrainer: Trainer) {
+    this.currEditTrainer = modalTrainer;
     this.modalService.open(content);
 
     // .result.then((result) => {
@@ -41,6 +56,17 @@ export class TrainersComponent implements OnInit, OnDestroy {
     // }, (reason) => {
     //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     // });
+  }
+
+  tierChange(newTier)
+  {
+    this.newTier = newTier;
+  }
+
+  updateTrainer() {
+    console.log('called update Trainer')
+    this.currEditTrainer.tier = this.newTier;
+    this.trainerService.updateTrainer(this.currEditTrainer);
   }
 
 

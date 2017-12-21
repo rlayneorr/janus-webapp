@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let trainer of trainers ; let i = index">
+      <tr *ngFor="let trainer of trainers">
         <td>
           {{trainer.name}}
         </td>
@@ -23,7 +23,7 @@
           {{trainer.tier}}
         </td>
         <td>
-          <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, i)"></i>
+          <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, trainer)"></i>
         </td>
         <td>
           <i class="fa fa-times" aria-hidden="true"></i>
@@ -36,8 +36,6 @@
 
 
 
-<i class="fa fa-pencil" style="color:#ff8e4d;" (click)="open(content)"></i>
-
 
 
 <!--Model for updating trainer-->
@@ -49,16 +47,17 @@
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="updateTrainer(updateTrainer)" #updateTrainer="ngForm">
+    <form>
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
             <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
-            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="trainers[currEditTrainerIndex].name" placeholder="Trainer Name" />
+            <input type="text" class="form-control" id="name" name="name" [ngModel]="currEditTrainer.name" placeholder="Trainer Name"
+            />
           </div>
           <div class="col-sm-6">
             <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
-            <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].email" id="email" name="email" placeholder="Email" />
+            <input type="text" class="form-control" [ngModel]="currEditTrainer.email" id="email" name="email" placeholder="Email" />
           </div>
         </div>
       </div>
@@ -66,17 +65,34 @@
         <div class="col-md-6">
           <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
 
-          <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].title" id="title" name="title" placeholder="Title" />
+          <!-- <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].title" id="title" name="title" placeholder="Title" /> -->
+          <select class="form-control">
+            <option selected>Open this select menu</option>
+            <option *ngFor="let title of titles; let i = index" value="i">{{title}}</option>
+          </select>
+
         </div>
         <div class="col-sm-6">
-          <label class="col-sm-2 control-label text-nowrap" for="title">Tier</label>
-          <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].tier" id="tier" name="tier" placeholder="Title" />
+          <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label><br>
+          <!-- <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].tier" id="tier" name="tier" placeholder="Title" /> -->
+
+          <select class="form-control" [ngModel]="currEditTrainer.tier" (ngModelChange)="tierChange($event)" name="tier">
+            <option [value]="tier" *ngFor="let tier of tiers">{{tier}}</option>
+          </select>
+
+          <!-- <select class="custom-select">
+              <option selected>{{currEditTrainer.tier}}</option>
+              <option  *ngFor="let tier of tiers; let i = index" value="i">{{tier}}</option>
+            </select> -->
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-update">Update</button>
+    
+    <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer()">Update</button>
+    <!-- <button type="submit"  (click)="addUser()" class="btn btn-primary"> Add User </button> -->
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>
+{{currEditTrainer | json}} {{titles | json}} {{tiers | json}}
