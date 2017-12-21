@@ -9,6 +9,8 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/view-all-trainers.component';
+import { DeactivateTrainerComponent } from './trainers/deactivatetrainer/deactivatetrainer.component';
+import { DummyComponent } from './trainers/deactivatetrainer/dummy.component';
 
 export const routes: Routes = [
   {
