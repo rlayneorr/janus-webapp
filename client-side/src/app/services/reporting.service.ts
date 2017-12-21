@@ -1,16 +1,47 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { Http } from '@angular/http';
+import { CacheData } from '../entities/CacheData.entity';
+import { HttpClient } from '@angular/common/http';
 
+
+
+/**
+ * Service handles API calls and tracks fetched data for caching.
+ * Fetched data is exposed by observables which get data from private
+ * BehaviorSubjects.
+ *
+ * @author Mitch Goshorn
+ * @author Micah West
+ */
 @Injectable()
 export class ReportingService {
 
-  constructor() { }
+  /* Subjects & Paired Observables */
+
 
   /*  Reports Charts */
+  // Subjects used to store data from the server.
+  private batchOverallRadarSubject = new BehaviorSubject<CacheData>(null);
 
+  // Observables that are visible to subscribers to this service.
+  batchOverallRadarChart = this.batchOverallRadarSubject.asObservable();
+
+
+  private traineeOverallTech = new BehaviorSubject<CacheData>(null);
+  public traineeOverallTech$ = this.traineeOverallTech.asObservable();
+
+  constructor(private http: Http, private httpClient: HttpClient) { }
 
   refresh() {
     // Clear all data stored in subjects
+    this.batchOverallRadarSubject.next(null);
+  }
+
+  private needsRefresh(sub: BehaviorSubject<CacheData>, params: any): boolean {
+    return !sub.getValue() || sub.getValue().params !== params;
   }
 
   /*
@@ -29,11 +60,6 @@ export class ReportingService {
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
     const endpoint = environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`;
 
-    // Check if cache is fresh
-    // if fresh
-        // return
-    // If not fresh, get data from backend
-        // Push new data into subject
   }
 
 
@@ -149,18 +175,50 @@ export class ReportingService {
 
   }
 
+
+  /**
+   * Updates Trainee overall tech skills data if necessary
+   * Data can be subscribed to @ traineeOverallTech$
+   * @param traineeId - trainee whose skill data should be fetched
+   */
   fetchTraineeOverallRadarChart(traineeId: Number) {
     const endpoint = environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`;
 
-    // TODO: Implement API call and subject push logic
+    // Params object for refresh check
+    const params = {
+      traineeId: traineeId
+    };
 
+    // call backend API if data is not fresh
+    if (this.needsRefresh(this.traineeOverallTech, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.traineeOverallTech.next({params: params, data: success}));
+    }
   }
 
   fetchBatchOverallRadarChart(batchId: Number) {
     const endpoint = environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`;
+    // Place the parameters into this object. Their names should match all the parameters given by the
+    // method signature.
+    const params = {
+      batchId: batchId
+    };
 
     // TODO: Implement API call and subject push logic
+    if (!this.batchOverallRadarSubject.getValue() || this.batchOverallRadarSubject.getValue().params !== params) {
 
+      // Obviously this will change based on which request is being made.
+      // Replace the url and the subject being sent the result of the request.
+      console.log(`Sending request to ${endpoint}`);
+      this.http.get(endpoint).subscribe((success) => {
+        console.log(`result: ${success.text()}`);
+        const newData = {
+            params: params,
+            data: success.json()
+        };
+        this.batchOverallRadarSubject.next(newData);
+      });
+    }
   }
 
   fetchBatchAllTraineesRadarChart(batchId: Number) {
