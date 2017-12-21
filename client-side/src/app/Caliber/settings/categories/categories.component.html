@@ -4,10 +4,10 @@
         <div class="col-md-12 col-lg-12 tab-panes">
             <br>
             <ul class="nav nav-tabs justify-content-end">
-                <li class="nav-item tab-pane fade show" role="button" (click)="open(addCategory)" style="color:#F26925">
-                    <a id="addButton">Create Category
+                <li class="nav-item tab-pane fade show" id="addButton" role="button" (click)="open(addCategory)" style="color:#F26925">
+                    <button type="button" class="btn btn-primary btn-change" style="color:#F26925">Create Category
                         <span class="fa fa-plus" aria-hidden="true"></span>
-                    </a>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -110,7 +110,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button (click) = "addNewCategory()" type="button" class="btn btn-primary"
+        <button (click) = "addNewCategory(); c('Close click')" type="button" class="btn btn-primary"
             data-dismiss="modal">Submit</button>
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
     </div>
