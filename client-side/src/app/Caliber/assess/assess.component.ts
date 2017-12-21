@@ -2,9 +2,7 @@ import { Component, OnInit, NgModule} from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
 import { BatchService } from '../services/batch.service';
 import { HttpClientModule  } from '@angular/common/http';
-
-
-
+import { Batch } from '../entities/Batch';
 
 @Component({
   selector: 'app-assess',
@@ -13,12 +11,19 @@ import { HttpClientModule  } from '@angular/common/http';
 })
 export class AssessComponent implements OnInit {
 
-  constructor(public http: Http, public batchService: BatchService) {}
+  batches: Batch[] = [];
+
+  constructor(private batchService: BatchService) {
+
+  }
 
   ngOnInit() {
-    console.log('init');
-    this.batchService.fetchAllByTrainer();
-    console.log(this.batchService.getList());
+    this.batchService.fetchAll();
+
+
+    this.batchService.getList().subscribe(batch => this.batches = batch);
+
+    console.log(this.batches);
   }
 
 }
