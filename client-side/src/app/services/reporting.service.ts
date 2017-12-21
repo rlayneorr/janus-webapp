@@ -199,8 +199,6 @@ export class ReportingService {
   fetchBatchOverallRadarChart(batchId: Number) {
 
     const endpoint = environment.apiBatchOverallRadarChart(batchId);
-
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`;
     // Place the parameters into this object. Their names should match all the parameters given by the
     // method signature.
     const params = {
