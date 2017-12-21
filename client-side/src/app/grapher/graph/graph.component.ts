@@ -1,5 +1,8 @@
-// TODO: more/better commenting
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+
+/**
+* @author John Hudson
+*/
 
 @Component({
   selector: 'app-graph',
@@ -34,7 +37,7 @@ export class GraphComponent implements OnInit, OnChanges {
     this.chartMaps = this.data;
     this.chartType = this.type;
     this.chartLegend = this.legend;
-
+    console.log(this.chartMaps);
     // set up local array to be filled
     const _chartData: any[] = [];
     let _chartLabels: string[] = [];
@@ -163,6 +166,7 @@ export class GraphComponent implements OnInit, OnChanges {
   }
   // returns an object for chart options
   chartOption(_chartType: string) {
+    // default is radar options
     const _chartOptions: any = {
       responsive: true,
       scale: {
@@ -177,6 +181,7 @@ export class GraphComponent implements OnInit, OnChanges {
     if (_chartType === 'radar') {
       return _chartOptions;
     }
+    // remove scale field replace it with scales
     delete _chartOptions.scale;
     _chartOptions.scales = {
       yAxes: [{
@@ -192,9 +197,11 @@ export class GraphComponent implements OnInit, OnChanges {
         }
       }]
     };
+    // is now normal bar chart options
     if (_chartType === 'bar') {
       return _chartOptions;
     } else if (_chartType === 'line') {
+      // line charts need a label
       _chartOptions.scales.xAxes = [{
         scaleLabel: {
           display: true,
@@ -203,6 +210,7 @@ export class GraphComponent implements OnInit, OnChanges {
       }];
       return _chartOptions;
     } else if (_chartType === 'barAverageCompare') {
+      // this one needs to change how the tooltip displays
       _chartOptions.tooltips = {
         mode: 'label'
       };
