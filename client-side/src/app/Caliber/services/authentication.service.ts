@@ -35,9 +35,10 @@ export class AuthenticationService {
    }
 
    /*
+    =====================
     BEGIN: API calls
-    */
-
+    =====================
+  */
     /**
      * retrieves the currently authenticated user from the
      * service and pushes it on the userSubject
