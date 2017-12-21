@@ -29,11 +29,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { LocationsComponent } from './settings/locations/locations.component';
-import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/view-all-trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { LocationService } from './services/location.service';
-
-
 
 @NgModule({
   imports: [
@@ -60,7 +57,6 @@ import { LocationService } from './services/location.service';
     CategoriesComponent,
     TrainersComponent,
     LocationsComponent,
-    ViewAllTrainersComponent,
     DeactivateTrainerComponent,
   ],
   providers: [

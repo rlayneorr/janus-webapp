@@ -8,7 +8,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
-import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/view-all-trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 
 export const routes: Routes = [
@@ -42,7 +41,7 @@ export const routes: Routes = [
           },
           {
             path: 'trainers',
-            component: ViewAllTrainersComponent
+            component: TrainersComponent
           }
         ]
       },
