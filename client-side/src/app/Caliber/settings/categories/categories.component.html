@@ -141,11 +141,13 @@
             <div class="form-group col-sm-1 col-md-1">
                 <label for="categoryName">Active:</label>
                 <br />
-                <input type="checkbox" style="text-align: left" ng-model="thisCategoryForm.active" />
+                <input type="checkbox" style="text-align: left" *ngIf="this.categories[currentCategory].active===true"
+                [checked]="true"/>
+                <input type="checkbox" style="text-align: left" *ngIf="this.categories[currentCategory].active===false" />
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="addNewCategory()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button (click)="editCurrentCategory()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
             <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         </div>
     </form>

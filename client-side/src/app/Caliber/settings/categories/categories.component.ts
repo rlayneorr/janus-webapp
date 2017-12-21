@@ -13,35 +13,39 @@ import { environment } from '../../../../environments/environment';
 })
 export class CategoriesComponent implements OnInit {
 
-    model = new Category();
-    newCategory: Category = new Category();
-    categories: Category[];
-    currentCategory: Number;
+  model = new Category();
+  newCategory: Category = new Category();
+  categories: Category[];
+  currentCategory: Number;
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
 
   ngOnInit() {
 
     this.http.get(environment.getAllCategories, { withCredentials: true })
-    .subscribe((succResp) => {
-      this.categories = succResp.json();
-      console.log(this.categories);
-    });
+      .subscribe((succResp) => {
+        this.categories = succResp.json();
+        console.log(this.categories);
+      });
   }
 
   addNewCategory() {
-      this.newCategory.skillCategory = this.model.skillCategory;
-      this.newCategory.active = true;
-      this.http.post(environment.addNewCategory, this.newCategory, {withCredentials: true})
-        .subscribe(
-          resp => {
-            console.log(resp.json());
-            this.categories.push(resp.json());
-          },
-          err => {
-            console.log(err);
-          }
-        );
+    this.newCategory.skillCategory = this.model.skillCategory;
+    this.newCategory.active = true;
+    this.http.post(environment.addNewCategory, this.newCategory, { withCredentials: true })
+      .subscribe(
+      resp => {
+        console.log(resp.json());
+        this.categories.push(resp.json());
+      },
+      err => {
+        console.log(err);
+      }
+      );
+  }
+
+  editCurrentCategory() {
+
   }
   open(content) {
     this.modalService.open(content).result.then((result) => {
