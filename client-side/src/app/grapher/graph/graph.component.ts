@@ -161,84 +161,52 @@ export class GraphComponent implements OnInit, OnChanges {
       pointBorderColor: '#fff'
     };
   }
-  // returns an object for chart options\
-  // May try to reduce the lengh of this later but right now it works as needed
+  // returns an object for chart options
   chartOption(_chartType: string) {
+    const _chartOptions: any = {
+      responsive: true,
+      scale: {
+        ticks: {
+          beginAtZero: false,
+          fixedStepSize: 10,
+          max: 100,
+          suggestedMin: 40
+        }
+      }
+    };
     if (_chartType === 'radar') {
-      return {
-        responsive: true,
-        scale: {
-          ticks: {
-            beginAtZero: false,
-            fixedStepSize: 10,
-            max: 100,
-            suggestedMin: 40
-          }
-        }
-      };
-    } else if (_chartType === 'bar') {
-      return {
-        responsive: true,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false,
-              fixedStepSize: 10,
-              max: 100,
-              suggestedMin: 40
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'Average'
-            }
-          }]
-        }
-      };
-    } else if (_chartType === 'line') {
-      return {
-        responsive: true,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false,
-              fixedStepSize: 10,
-              max: 100,
-              suggestedMin: 40
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'Average'
-            }
-          }],
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Week'
-            }
-          }]
-        }
-      };
-    } else if (_chartType === 'barAverageCompare') {
-      return {
-        responsive: true,
-        tooltips: {
-          mode: 'label'
+      return _chartOptions;
+    }
+    delete _chartOptions.scale;
+    _chartOptions.scales = {
+      yAxes: [{
+        ticks: {
+          beginAtZero: false,
+          fixedStepSize: 10,
+          max: 100,
+          suggestedMin: 40
         },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false,
-              fixedStepSize: 10,
-              max: 100,
-              suggestedMin: 40
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'Average'
-            }
-          }]
+        scaleLabel: {
+          display: true,
+          labelString: 'Average'
         }
+      }]
+    };
+    if (_chartType === 'bar') {
+      return _chartOptions;
+    } else if (_chartType === 'line') {
+      _chartOptions.scales.xAxes = [{
+        scaleLabel: {
+          display: true,
+          labelString: 'Week'
+        }
+      }];
+      return _chartOptions;
+    } else if (_chartType === 'barAverageCompare') {
+      _chartOptions.tooltips = {
+        mode: 'label'
       };
+      return _chartOptions;
     }
   }
 }
