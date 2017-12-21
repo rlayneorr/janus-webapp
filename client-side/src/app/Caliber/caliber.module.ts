@@ -15,12 +15,11 @@ import { ReportsComponent } from './reports/reports.component';
 import { CommonModule } from '@angular/common';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TrainerService } from './services/trainer.service';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CategoriesService } from './services/categories.service';
 import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
-import { TrainersComponent } from './settings/trainers/trainers.component';
 import { LocationsComponent } from './settings/locations/locations.component';
+import { TrainersComponent } from './settings/trainers/trainers.component';
 
 @NgModule({
   imports: [
@@ -28,8 +27,7 @@ import { LocationsComponent } from './settings/locations/locations.component';
     HttpModule,
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
-    FormsModule,
-    AngularFontAwesomeModule
+    FormsModule
   ],
   declarations: [
     CaliberComponent,
