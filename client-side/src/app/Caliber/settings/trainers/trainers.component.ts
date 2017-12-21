@@ -17,6 +17,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
   trainers: Trainer[];
   titles: Array<any>;
   tiers: Array<any>;
+  model = new Trainer();
 
   currEditTrainer: Trainer;
   newTier: String;
@@ -36,6 +37,27 @@ export class TrainersComponent implements OnInit, OnDestroy {
       this.tiers = resp;
     });
   }
+
+  getAllTrainers() {
+    this.trainerService.getAll();
+  }
+
+  addTrainer(form) {
+    console.log(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
+    alert(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
+    // this.trainerService.createTrainer(name, title, email, tier);
+  }
+
+
+  open(content) {
+    this.modalService.open(content);
+    /*.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });*/
+  }
+
 
   // getAllTrainers() {
   //   this.trainerService.getAll();
@@ -79,7 +101,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   // clean up subscriptions
-  ngOnDestroy() {
-    this.trainerSubscription.unsubscribe();
+ ngOnDestroy() {
+  this.trainerSubscription.unsubscribe();
   }
+
 }

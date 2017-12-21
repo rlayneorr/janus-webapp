@@ -87,6 +87,26 @@ export class TrainerService {
       );
   }
 
+  createTrainer(name, title, email, tier) {
+    const json = {
+        'name': name,
+        'title': title,
+        'email': email,
+        'tier': tier
+    };
+
+    this.http.post(environment.addNewTrainer, json, {withCredentials: true})
+    .subscribe(
+      resp => {
+        console.log('created a new trainer');
+        this.getAll();
+      },
+      err => {
+        console.log('err');
+      }
+    );
+  }
+
   deleteTrainer(trainer: Trainer) {
     this.http.delete(environment.context + '/vp/trainer/delete',
     {withCredentials: true, body: trainer}).map(
