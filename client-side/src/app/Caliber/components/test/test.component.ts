@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { BatchService } from '../../services/batch.service';
+import { TrainerService } from '../../services/trainer.service';
+import { TraineeService } from '../../services/trainee.service';
 
 
 @Component({
@@ -10,12 +12,11 @@ import { BatchService } from '../../services/batch.service';
 })
 export class TestComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private service: BatchService;
+  private service: TraineeService;
 
 
-  constructor(batchService: BatchService) {
-    this.service = batchService;
-    this.service.fetchAll();
+  constructor(trainerService: TraineeService) {
+    this.service = trainerService;
   }
 
   private log(object: any): void {
@@ -26,6 +27,9 @@ export class TestComponent implements OnInit, OnDestroy {
     this.subscription = this.service.getList().subscribe( (batches) => {
       this.log(batches);
     });
+
+    // this.service.fetchAll();
+    this.service.fetchAllByBatch(3002);
   }
 
   ngOnDestroy() {
