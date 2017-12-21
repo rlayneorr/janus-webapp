@@ -12,7 +12,7 @@ import { ColorService } from '../../services/colors/color.service';
 @Component({
   selector: 'app-vp-line-graph',
   templateUrl: './vp-line-graph.component.html',
-  styleUrls: ['./vp-line-graph.component.css', '../../../../assets/css/styles.css']
+  styleUrls: ['./vp-line-graph.component.css']
 })
 export class VpLineGraphComponent implements OnInit {
   public results: Array<WeeklyProgress>;
