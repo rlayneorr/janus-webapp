@@ -15,6 +15,7 @@ export class CategoriesComponent implements OnInit {
 
   model = new Category();
   newCategory: Category = new Category();
+  editCategory: Category;
   categories: Category[];
   currentCategory: Number;
 
@@ -45,6 +46,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   editCurrentCategory() {
+    
 
   }
   open(content) {
@@ -52,7 +54,6 @@ export class CategoriesComponent implements OnInit {
     }, (reason) => {
     });
   }
-
   editopen(content, index) {
     this.currentCategory = index;
     this.modalService.open(content).result.then((result) => {

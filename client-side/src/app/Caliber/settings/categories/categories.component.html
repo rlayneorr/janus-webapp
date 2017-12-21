@@ -109,7 +109,7 @@
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
                     <label for="categoryName">Category:</label>
-                    <input [(ngModel)]="currentCategory" name="category" type="text" class="form-control" id="categoryName" placeholder="Category"
+                    <input [(ngModel)]='model.skillCategory' name="category" type="text" class="form-control" id="categoryName" placeholder="Category"
                         required>
                 </div>
             </div>
@@ -134,7 +134,7 @@
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
                     <label for="categoryName">Category:</label>
-                    <input [(ngModel)]="this.categories[currentCategory].skillCategory" name="category" type="text" class="form-control" id="categoryName"
+                    <input [ngModel]="this.categories[currentCategory].skillCategory" name="category" type="text" class="form-control" id="categoryName"
                         placeholder="Category" required>
                 </div>
             </div>
