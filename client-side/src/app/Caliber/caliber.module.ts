@@ -14,6 +14,8 @@ import { routes } from './caliber.routes';
 
 // services
 import { BatchService } from './services/batch.service';
+import { TrainerService } from './services/trainer.service';
+import { TraineeService } from './services/trainee.service';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -48,6 +50,8 @@ import { EnvironmentService } from './services/environment.service';
   providers: [
     BatchService,
     EnvironmentService,
+    TrainerService,
+    TraineeService,
   ],
 })
 export class CaliberModule { }

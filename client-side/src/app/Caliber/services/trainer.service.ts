@@ -30,6 +30,8 @@ export class TrainerService {
     this.deletedSubject = new Subject();
 
     this.sendCredentials = true;
+
+    this.fetchAll();
   }
 
     /**
@@ -79,23 +81,43 @@ export class TrainerService {
    * @return Observable<Trainer>
    */
   public fetchByEmail(email: string): Observable<Trainer> {
-    const url = this.envService.buildUrl('training/trainer/byemail', [ email ]);
+    const url = this.envService.buildUrl(`training/trainer/byemail/${email}`);
 
     return this.http.get<Trainer>(url, {withCredentials: this.sendCredentials });
   }
 
    /**
-     * retrieves all trainersand pushes them on the
+     * retrieves all trainers and pushes them on the
      * list subject
+     *
+     * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
      */
   public fetchAll(): void {
     const url = this.envService.buildUrl('all/trainer/all');
 
+    this.listSubject.next([]);
+
     this.http.get<Trainer[]>(url, { withCredentials: this.sendCredentials } )
       .subscribe( (trainers) => {
         this.listSubject.next(trainers);
-      }, (error) => {
-        this.listSubject.next([]);
+      });
+  }
+
+   /**
+   * creates a trainer and pushes the created trainer on the
+   * savedSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param trainer
+   */
+  public create(trainer: Trainer): void {
+    const url = this.envService.buildUrl('vp/trainer/create');
+    const data = JSON.stringify(trainer);
+
+    this.http.post<Trainer>(url, data, { withCredentials: this.sendCredentials })
+      .subscribe( (savedTrainer) => {
+        this.savedSubject.next(savedTrainer);
       });
   }
 
@@ -117,21 +139,4 @@ export class TrainerService {
       });
   }
 
-  /**
-   * deletes a trainer and pushes the deleted trainer on the 
-   * deletedSubject
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
-   *
-   * @param trainer
-   */
-  public delete(trainer: Trainer): void {
-    const url = this.envService.buildUrl('all/trainee/delete', [ trainer.trainderId ] );
-
-    this.http.delete(url, { withCredentials: this.sendCredentials })
-      .subscribe( () => {
-        this.deletedSubject.next(trainer);
-      });
-  }
-
-}
+ }
