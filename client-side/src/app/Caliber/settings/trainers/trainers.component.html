@@ -26,7 +26,7 @@
           <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, trainer)"></i>
         </td>
         <td>
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <app-deactivatetrainer [trainer] = "trainer"></app-deactivatetrainer>
         </td>
       </tr>
     </tbody>
