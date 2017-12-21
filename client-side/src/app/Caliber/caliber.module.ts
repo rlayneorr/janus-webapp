@@ -39,7 +39,6 @@ import { LocationService } from './services/location.service';
     RouterModule.forChild(routes),
     FormsModule,
     ChartsModule,
-    AngularFontAwesomeModule
   ],
   declarations: [
     CaliberComponent,

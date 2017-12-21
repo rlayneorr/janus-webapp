@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../services/trainer.service';
-import { Trainer } from '../../../entities/Trainer';
+import { Trainer } from '../../entities/Trainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 @Component({
@@ -45,7 +45,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
   //   this.trainerService.getTitles();
   // }
 
-  //Open modal and get Trainer that belong to this modal
+  // Open modal and get Trainer that belong to this modal
   editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
     this.modalService.open(content);
@@ -57,13 +57,12 @@ export class TrainersComponent implements OnInit, OnDestroy {
     // });
   }
 
-  tierChange(newTier)
-  {
+  tierChange(newTier) {
     this.newTier = newTier;
   }
 
   updateTrainer() {
-    console.log('called update Trainer')
+    console.log('called update Trainer');
     this.currEditTrainer.tier = this.newTier;
     this.trainerService.updateTrainer(this.currEditTrainer);
   }
