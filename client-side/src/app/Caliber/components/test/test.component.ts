@@ -15,6 +15,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
   constructor(batchService: BatchService) {
     this.service = batchService;
+    this.service.fetchAll();
   }
 
   private log(object: any): void {

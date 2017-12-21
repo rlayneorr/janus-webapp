@@ -24,6 +24,7 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TestComponent } from './components/test/test.component';
+import { EnvironmentService } from './services/environment.service';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { TestComponent } from './components/test/test.component';
   ],
   providers: [
     BatchService,
+    EnvironmentService,
   ],
 })
 export class CaliberModule { }
