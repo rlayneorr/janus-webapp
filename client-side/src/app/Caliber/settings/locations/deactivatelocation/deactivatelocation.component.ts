@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Input } from '@angular/core/';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { Trainer } from '../../../beans/Trainer';
+import { Trainer } from '../../../entities/Trainer';
 import { TrainerService } from '../../../services/trainer.service';
 
 @Component({

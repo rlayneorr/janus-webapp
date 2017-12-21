@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
-import { Trainer } from '../beans/Trainer';
+import { Trainer } from '../entities/Trainer';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
