@@ -8,10 +8,17 @@ import { Subject } from 'rxjs/Subject';
 // services
 import { Batch } from '../entities/Batch';
 import { Observable } from 'rxjs/Observable';
+import { EnvironmentService } from './environment.service';
+import { enableProdMode } from '@angular/core/src/application_ref';
 
+/**
+ * this service manages calls to the web service
+ * for Batch objects
+ */
 @Injectable()
 export class BatchService {
     private http: HttpClient;
+    private envService: EnvironmentService;
 
     private sendCredentials: boolean;
 
@@ -19,8 +26,9 @@ export class BatchService {
     private savedSubject: Subject<Batch>;
     private deletedSubject: Subject<Batch>;
 
-    constructor(httpClient: HttpClient) {
+    constructor(httpClient: HttpClient, envService: EnvironmentService) {
       this.http = httpClient;
+      this.envService = envService;
 
       this.sendCredentials = true;
 
@@ -69,9 +77,13 @@ export class BatchService {
      * retrieves the batches that belong to the currently
      * authenticated trainer and pushes them on the
      * list subject
+     *
+     * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
      */
     public fetchAllByTrainer(): void {
-      this.fetch('/trainer/batch/all');
+      const url = this.envService.buildUrl('trainer/batch/all');
+
+      this.fetch(url);
     }
 
     /**
@@ -80,7 +92,9 @@ export class BatchService {
      *
      */
     public fetchAll(): void {
-      this.fetch('/vp/batch/all');
+      const url = this.envService.buildUrl('vp/batch/all');
+
+      this.fetch(url);
     }
 
     /**
@@ -88,10 +102,12 @@ export class BatchService {
     * storage on the server and pushes the saved
     * object on the saved subject
     *
+    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
+    *
     * @param batch: Batch
     */
     public create(batch: Batch): void {
-      const url = '/all/batch/create';
+      const url = this.envService.buildUrl('all/batch/create');
       const data = JSON.stringify(batch);
 
       this.http.post<Batch>(url, data, { withCredentials: this.sendCredentials })
@@ -101,18 +117,38 @@ export class BatchService {
     }
 
     /**
+     * transmits a Batch object to be updated and
+     * pushes the updated object on th savedSubject
+     *
+     * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
+     *
+     * @param batch
+     */
+    public update(batch: Batch): void {
+      const url = this.envService.buildUrl('all/batch/update');
+      const data = JSON.stringify(batch);
+
+      this.http.put<Batch>(url, data, { withCredentials: this.sendCredentials })
+        .subscribe( (updatedBatch) => {
+          this.savedSubject.next(updatedBatch);
+        });
+    }
+
+    /**
      * transmits a batch object to be deleted and
      * pushes the deleted object on the deleted
      * subject
      *
+     * spring-security: @PreAuthorize("hasAnyRole('VP')")
+     *
      * @param batch
      */
     public delete(batch: Batch): void {
-      const url = `/all/batch/delete/${ batch.batchId }`;
+      const url = this.envService.buildUrl('all/batch/delete', [ batch.batchId ]);
 
-      this.http.delete<Batch>(url, { withCredentials: this.sendCredentials })
-        .subscribe( (deletedBatch) => {
-          this.deletedSubject.next(deletedBatch);
+      this.http.delete(url, { withCredentials: this.sendCredentials })
+        .subscribe( () => {
+          this.deletedSubject.next(batch);
         });
     }
 
