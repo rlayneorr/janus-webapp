@@ -12,7 +12,10 @@ import { EnvironmentService } from './environment.service';
 // entities
 import { Trainee } from '../entities/Trainee';
 
-
+/**
+ * this service manages calls to the web service
+ * for Trainee objects
+ */
 @Injectable()
 export class TraineeService {
   private envService: EnvironmentService;

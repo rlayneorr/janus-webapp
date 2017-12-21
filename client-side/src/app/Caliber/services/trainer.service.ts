@@ -4,12 +4,18 @@ import { HttpClient } from '@angular/common/http';
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 // services
-import { Trainer } from '../entities/Trainer';
-import { Observable } from 'rxjs/Observable';
 import { EnvironmentService } from './environment.service';
 
+// entities
+import { Trainer } from '../entities/Trainer';
+
+/**
+ * this service manages calls to the web service
+ * for Trainer objects
+ */
 @Injectable()
 export class TrainerService {
   private http: HttpClient;
