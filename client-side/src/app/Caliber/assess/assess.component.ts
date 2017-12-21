@@ -19,10 +19,10 @@ export class AssessComponent implements OnInit {
 
   ngOnInit() {
     this.batchService.fetchAll();
-
+    console.log('fetched');
 
     this.batchService.getList().subscribe(batch => this.batches = batch);
-
+    console.log('subbed');
     console.log(this.batches);
   }
 
