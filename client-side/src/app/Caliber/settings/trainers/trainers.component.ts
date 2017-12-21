@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../services/trainer.service';
-import { Trainer } from '../../../entities/Trainer';
+import { Trainer } from '../../entities/Trainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 @Component({
