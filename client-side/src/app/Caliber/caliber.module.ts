@@ -18,6 +18,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { LocationsComponent } from './settings/locations/locations.component';
+import { DeactivateTrainerComponent } from './trainers/deactivatetrainer/deactivatetrainer.component';
+import { TrainerService } from '../services/trainer.service';
+import { DummyComponent } from './trainers/deactivatetrainer/dummy.component';
 
 @NgModule({
   imports: [
@@ -37,8 +40,12 @@ import { LocationsComponent } from './settings/locations/locations.component';
     SettingsComponent,
     CategoriesComponent,
     TrainersComponent,
-    LocationsComponent
+    LocationsComponent,
+    DeactivateTrainerComponent,
+    DummyComponent,
   ],
-  providers: []
+  providers: [
+    TrainerService
+  ]
 })
 export class CaliberModule { }

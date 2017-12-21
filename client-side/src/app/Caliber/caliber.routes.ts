@@ -8,6 +8,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
+import { DeactivateTrainerComponent } from './trainers/deactivatetrainer/deactivatetrainer.component';
+import { DummyComponent } from './trainers/deactivatetrainer/dummy.component';
 
 export const routes: Routes = [
   {
@@ -16,7 +18,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: HomeComponent,
+        component: DummyComponent,
       },
       {
         path: 'assess',
