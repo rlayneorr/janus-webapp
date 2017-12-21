@@ -27,7 +27,7 @@ export class ReportingService {
    * @returns Number - batch average for comparison
    */
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
-    const endpoint = environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`;
+    const endpoint = environment.apiBatchComparisonAvgEndpoint(skill, training, startDate);
 
     // Check if cache is fresh
     // if fresh
@@ -45,7 +45,7 @@ export class ReportingService {
    * @param weekId weekId filter value
    */
   fetchBatchWeekPieChart(batchId: Number, weekId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${weekId}/pie`;
+    const endpoint = environment.apifetchBatchWeekPieChart(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
 
@@ -53,7 +53,7 @@ export class ReportingService {
 
 
   fetchPieChartCurrentWeekQCStatus(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/{batchId}/chart`;
+    const endpoint = environment.apiPieChartCurrentWeekQCStatus(batchId);
 
     // TODO: Implement API call and subject push logic
 
@@ -62,7 +62,7 @@ export class ReportingService {
   /* Stacked Bar Charts */
 
   fetchAllBatchesCurrentWeekQCStackedBarChart(batchId: Number, week: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`;
+    const endpoint = environment.apiAllBatchesCurrentWeekQCStackedBarChart(batchId, week);
 
     // TODO: Implement API call and subject push logic
 
@@ -70,35 +70,35 @@ export class ReportingService {
 
   /* Bar Charts */
   fetchBatchWeekAvgBarChart(batchId: Number, week: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`;
+    const endpoint = environment.apiBatchWeekAvgBarChart(batchId, week);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchWeekSortedBarChart(batchId: Number, week: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-weekly-sorted`;
+    const endpoint = environment.apiBatchWeekSortedBarChart(batchId, week);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchOverallTraineeBarChart(batchId: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/bar-batch-overall-trainee`;
+    const endpoint = environment.apiBatchOverallTraineeBarChart(batchId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchOverallBarChart(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/bar-batch-overall`;
+    const endpoint = environment.apiBatchOverallBarChart(batchId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchWeekTraineeBarChart(batchId: Number, weekId: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/bar-batch-week-trainee`;
+    const endpoint = environment.apiBatchWeekTraineeBarChart(batchId, weekId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
@@ -106,35 +106,35 @@ export class ReportingService {
 
   /* Line Charts */
   fetchTraineeUpToWeekLineChart(batchId: Number, weekId: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/line-trainee-up-to-week`;
+    const endpoint = environment.apiTraineeUpToWeekLineChart(batchId, weekId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchTraineeOverallLineChart(batchId: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/line-trainee-overall`;
+    const endpoint = environment.apiTraineeOverallLineChart(batchId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchOverallLineChart(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/line-batch-overall`;
+    const endpoint = environment.apiBatchOverallLineChart(batchId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchCurrentBatchesLineChart() {
-    const endpoint = environment.context + `all/reports/dashboard`;
+    const endpoint = environment.apiCurrentBatchesLineChart;
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchCurrentPanelsLineChart() {
-    const endpoint = environment.context = `all/reports/biweeklyPanelResults`;
+    const endpoint = environment.apiCurrentPanelsLineChart;
 
     // TODO: Implement API call and subject push logic
 
@@ -143,28 +143,28 @@ export class ReportingService {
   /* Radar Charts */
 
   fetchTraineeUpToWeekRadarChart(week: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/week/${week}/trainee/${traineeId}/radar-trainee-up-to-week`;
+    const endpoint = environment.apiTraineeUpToWeekRadarChart(week, traineeId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchTraineeOverallRadarChart(traineeId: Number) {
-    const endpoint = environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`;
+    const endpoint = environment.apiTraineeOverallRadarChart(traineeId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchOverallRadarChart(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`;
+    const endpoint = environment.apiBatchOverallRadarChart(batchId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchAllTraineesRadarChart(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/radar-batch-all-trainees`;
+    const endpoint = environment.apiBatchAllTraineesRadarChart(batchId);
 
     // TODO: Implement API call and subject push logic
 
@@ -173,14 +173,14 @@ export class ReportingService {
   /* Misc. */
 
   fetchBatchWeekAverageValue(batchId: Number, weekId: Number) {
-    const endpoint = environment.context + `all/assessments/average/${batchId}/${weekId}`;
+    const endpoint = environment.apiBatchWeekAverageValue(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchTechnologiesForTheWeek(batchId: Number, weekId: Number) {
-    const endpoint = environment.context + `all/assessments/categories/batch/${batchId}/${weekId}`;
+    const endpoint = environment.apiTechnologiesForTheWeek(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
 
