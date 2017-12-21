@@ -1,4 +1,40 @@
-<i class="fa fa-pencil" style="color:#ff8e4d;" (click)="open(content)"></i>
+<div id="trainers-table">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Email</th>
+        <th>Tier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trainer of trainers">
+        <td>
+          {{trainer.name}}
+        </td>
+        <td>
+          {{trainer.title}}
+        </td>
+        <td>
+          {{trainer.email}}
+        </td>
+        <td>
+          {{trainer.tier}}
+        </td>
+        <td>
+          <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="open(content)"></i>
+        </td>
+        <td>
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
 
 
 
