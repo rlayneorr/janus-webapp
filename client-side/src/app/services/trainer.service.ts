@@ -29,7 +29,7 @@ export class TrainerService {
     );
   }
 
-  public deleteTrainer(trainer: Trainer) {
+  deleteTrainer(trainer: Trainer) {
     this.http.delete(environment.context + '/vp/trainer/delete',
     {withCredentials: true, body: trainer}).map(
         resp => resp.json(),

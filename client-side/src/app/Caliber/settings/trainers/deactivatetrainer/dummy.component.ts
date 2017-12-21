@@ -3,7 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Input } from '@angular/core/';
 import { Http } from '@angular/http';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { Trainer } from '../../../entities/Trainer';
+import { Trainer } from '../../../beans/Trainer';
 import { TrainerService } from '../../../services/trainer.service';
 import { Subscription } from 'rxjs/Subscription';
 
