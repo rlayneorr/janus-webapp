@@ -3,6 +3,8 @@ import { Http, HttpModule } from '@angular/http';
 import { BatchService } from '../services/batch.service';
 import { HttpClientModule  } from '@angular/common/http';
 import { Batch } from '../entities/Batch';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Assessment } from '../entities/Assessment';
 
 @Component({
   selector: 'app-assess',
@@ -11,19 +13,31 @@ import { Batch } from '../entities/Batch';
 })
 export class AssessComponent implements OnInit {
 
+  closeResult: string;
+  register= {
+    first_name: '',
+    last_name: '',
+    username: '',
+    password: '',
+    email: '',
+  };
+
+  assessment: Assessment;
+  loading = false;
+
   batches: Batch[] = [];
 
-  constructor(private batchService: BatchService) {
+  constructor(private modalService: NgbModal, private batchService: BatchService) {
 
   }
 
   ngOnInit() {
     this.batchService.fetchAll();
-    console.log('fetched');
-
     this.batchService.getList().subscribe(batch => this.batches = batch);
-    console.log('subbed');
-    console.log(this.batches);
+  }
+
+  open(content) {
+    this.modalService.open(content);
   }
 
 }

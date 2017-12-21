@@ -93,7 +93,6 @@ export class BatchService {
      */
     public fetchAll(): void {
       const url = this.envService.buildUrl('vp/batch/all');
-
       this.fetch(url);
     }
 
