@@ -21,10 +21,6 @@ export const routes: Routes = [
         component: DummyComponent,
       },
       {
-        path: 'assess',
-        component: AssessComponent
-      },
-      {
         path: 'manage',
         component: ManageComponent
       },
