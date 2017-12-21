@@ -6,6 +6,7 @@ import { Batch } from '../entities/Batch';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Assessment } from '../entities/Assessment';
 
+
 @Component({
   selector: 'app-assess',
   templateUrl: './assess.component.html',
@@ -26,6 +27,7 @@ export class AssessComponent implements OnInit {
   loading = false;
 
   batches: Batch[] = [];
+  selectedBatch: Batch = new Batch();
 
   constructor(private modalService: NgbModal, private batchService: BatchService) {
 
@@ -38,6 +40,11 @@ export class AssessComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content);
+    this.selectedBatch = this.batches[0];
+  }
+
+  counter(i: number) {
+    return new Array(i);
   }
 
 }
