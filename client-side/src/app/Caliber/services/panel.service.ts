@@ -15,7 +15,7 @@ import { Panel } from '../entities/Panel';
 
 
 @Injectable()
-export class TraineeService {
+export class PanelService {
   private envService: EnvironmentService;
   private http: HttpClient;
 

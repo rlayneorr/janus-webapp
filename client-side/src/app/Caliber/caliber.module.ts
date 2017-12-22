@@ -19,6 +19,7 @@ import { TraineeService } from './services/trainee.service';
 import { EnvironmentService } from './services/environment.service';
 import { AssessmentService } from './services/assessment.service';
 import { RouteService } from './services/route.service';
+import { PanelService } from './services/panel.service';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -55,6 +56,8 @@ import { TestComponent } from './components/test/test.component';
     TrainerService,
     TraineeService,
     AssessmentService,
+    RouteService,
+    PanelService,
     RouteService,
   ],
 })
