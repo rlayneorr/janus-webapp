@@ -19,7 +19,6 @@ export class ViewAllTrainersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.trainerSubscription = this.trainerService.trainers$.subscribe( (resp) => {
       this.trainers = resp;
-      console.log(this.trainers);
     });
   }
 
