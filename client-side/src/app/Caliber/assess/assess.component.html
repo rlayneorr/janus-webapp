@@ -1,18 +1,27 @@
-<div class = "main-container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" *ngFor="let in of counter(this.selectedBatch.weeks) ;let i = index">
-        <a class="nav-link" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" 
-        aria-selected="true" (click)="this.getAssessments(i+1)">Week {{i+1}}</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link active" id="+" data-toggle="tab" href="#+" role="tab" aria-controls="+" aria-selected="true">+</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"></div>
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"></div>
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
+<button class="btn btn-lg btn-outline-primary pointer" (click)="open(content)">Add Assessment</button>
+
+<div class="dropdown show">
+
+    <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Batches
+    </a>
+  
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" *ngFor="let batch of this.batches">{{batch.trainer}} {{batch.startDate}}</a>
     </div>
+  </div>
+
+
+
+<div class = "main-container">
+    <ngb-tabset>
+      <div (click)="this.getAssessments(i+1)">
+        <ngb-tab title="Week {{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index" >
+          <ng-template ngbTabContent>
+          </ng-template>
+        </ngb-tab>
+      </div>
+      </ngb-tabset>
 
     <table class="table table-responsive" style="border-collapse: collapse;">
       <thead>
@@ -53,7 +62,6 @@
     </div>
     <div class="modal-body">
         <div class="col-md-6 col-md-offset-3">
-            <h2>Register</h2>
             <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
                     <label for="firstName">First Name</label>
@@ -95,4 +103,4 @@
     </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary pointer" (click)="open(content)">Add Assessment</button>
+
