@@ -85,10 +85,9 @@ export class TrainersComponent implements OnInit, OnDestroy {
   // when title was changed
   titleChange(newTitle) {
     // Empty title, changed back to original
-    if (newTitle == '') {
+    if (newTitle === '') {
       this.newTitle = this.currEditTrainer.title;
-    }
-    else {
+    } else {
       // New title was changed
       this.newTitle = newTitle;
     }
@@ -107,7 +106,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
     // replacing the trainer's fields with the new ones
     this.currEditTrainer.tier = this.newTier;
     this.currEditTrainer.title = this.newTitle;
-    
     // call trainerService to update
     this.trainerService.updateTrainer(this.currEditTrainer);
   }
