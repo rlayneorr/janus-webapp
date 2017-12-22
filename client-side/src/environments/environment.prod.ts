@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  context: 'http://localhost:8080/', // change for what the production environment would actually be
+  context: 'http://localhost:8080/test-app/', // change for what the production environment would actually be
 
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint: (skill: string, training: string, startDate) =>
