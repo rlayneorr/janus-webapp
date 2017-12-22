@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +11,7 @@ import { NavModule } from '../nav/nav.module';
 
 // routing
 import { routes } from './caliber.routes';
+import { SpringInterceptor } from './interceptors/spring.interceptor';
 
 // services
 import { BatchService } from './services/batch.service';
@@ -20,6 +21,7 @@ import { EnvironmentService } from './services/environment.service';
 import { AssessmentService } from './services/assessment.service';
 import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
+import { GradeService } from './services/grade.service';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -51,6 +53,7 @@ import { TestComponent } from './components/test/test.component';
     TestComponent,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
     BatchService,
     EnvironmentService,
     TrainerService,
@@ -59,6 +62,8 @@ import { TestComponent } from './components/test/test.component';
     RouteService,
     PanelService,
     RouteService,
+    GradeService,
+
   ],
 })
 export class CaliberModule { }
