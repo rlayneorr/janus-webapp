@@ -3,6 +3,11 @@
     color: white;
 }
 
+.btn-add {
+    background-color: #ff8e4d;
+    color: white;
+}
+
 .fa-pencil {
     cursor: pointer;
 }

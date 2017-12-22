@@ -44,8 +44,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   addTrainer(form) {
     console.log(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    alert(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    // this.trainerService.createTrainer(name, title, email, tier);
+    // alert(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
+    this.trainerService.createTrainer(this.model.name, this.model.title, this.model.email, this.model.tier);
   }
 
 
@@ -81,6 +81,14 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   tierChange(newTier) {
     this.newTier = newTier;
+  }
+
+  newTierChange(newTier) {
+    this.model.tier = newTier;
+  }
+
+  newTitleChange(newTitle) {
+    this.model.title = newTitle;
   }
 
   updateTrainer() {
