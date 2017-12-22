@@ -44,9 +44,9 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   addTrainer(form) {
-    console.log(this.model.name + ' ' + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    alert(this.model.name + ' ' + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    // this.trainerService.createTrainer(name, title, email, tier);
+    console.log(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
+    // alert(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
+    this.trainerService.createTrainer(this.model.name, this.model.title, this.model.email, this.model.tier);
   }
 
 
@@ -95,6 +95,14 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   // Update button was clicked, try to update to database
+  newTierChange(newTier) {
+    this.model.tier = newTier;
+  }
+
+  newTitleChange(newTitle) {
+    this.model.title = newTitle;
+  }
+
   updateTrainer() {
     // replacing the trainer's fields with the new ones
     this.currEditTrainer.tier = this.newTier;

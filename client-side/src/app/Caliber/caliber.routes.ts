@@ -24,6 +24,10 @@ export const routes: Routes = [
         component: ManageComponent
       },
       {
+        path: 'assess',
+        component: AssessComponent
+      },
+      {
         path: 'reports',
         component: ReportsComponent
       },
