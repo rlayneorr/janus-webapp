@@ -31,6 +31,7 @@
       </tr>
     </tbody>
   </table>
+
 </div>
 
 <!--Model for updating trainer-->
@@ -46,11 +47,13 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
+            <!-- Field for Trainer name -->
             <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
             <input type="text" class="form-control" id="name" name="name" [ngModel]="currEditTrainer.name" placeholder="Trainer Name"
             />
           </div>
           <div class="col-md-6">
+            <!-- Field for email -->
             <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
             <input type="text" class="form-control" [ngModel]="currEditTrainer.email" id="email" name="email" placeholder="Email" />
           </div>
@@ -58,47 +61,29 @@
       </div>
       <div class="row">
         <div class="col-md-6">
+          <!-- dropdown/filter for Trainer Title -->
+          <!-- Datalist to display titles -->
           <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
-
-          <!-- <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].title" id="title" name="title" placeholder="Title" /> -->
-          <select class="form-control" [ngModel]="currEditTrainer.title" (ngModelChange)="titleChange($event)" name="title">
-            <option [value]="title" *ngFor="let title of titles">{{title}}</option>
-          </select>
-
+          <input class="form-control" [ngModel]="currEditTrainer.title" (ngModelChange)="titleChange($event)" list="browsers" name="browser">
+          <datalist id="browsers">
+            <option [value]="title" *ngFor="let title of titles">
+          </datalist>
         </div>
         <div class="col-md-6">
+          <!-- Dropdown for Trainer tier/role -->
           <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label>
-          <br>
-          <!-- <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].tier" id="tier" name="tier" placeholder="Title" /> -->
-
           <select class="form-control" [ngModel]="currEditTrainer.tier" (ngModelChange)="tierChange($event)" name="tier">
             <option [value]="tier" *ngFor="let tier of tiers">{{tier}}</option>
           </select>
 
-          <!-- <select class="custom-select">
-              <option selected>{{currEditTrainer.tier}}</option>
-              <option  *ngFor="let tier of tiers; let i = index" value="i">{{tier}}</option>
-            </select> -->
         </div>
-        <!-- <div class="input-group">
-          <input type="text" class="form-control" aria-label="...">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </div>
-        </div> -->
+
       </div>
     </form>
   </div>
   <div class="modal-footer">
     <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer()">Update</button>
-    <!-- <button type="submit"  (click)="addUser()" class="btn btn-primary"> Add User </button> -->
+
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>
