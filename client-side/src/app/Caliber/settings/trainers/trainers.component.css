@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+#addTrainerButton {
+    padding: 10px;
+}
+
 /* #tier { 
     width:100%; 
 } 
