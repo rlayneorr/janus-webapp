@@ -4,12 +4,14 @@ import { HttpClient } from '@angular/common/http';
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 // services
-import { Batch } from '../entities/Batch';
-import { Observable } from 'rxjs/Observable';
 import { EnvironmentService } from './environment.service';
-import { enableProdMode } from '@angular/core/src/application_ref';
+
+// batches
+import { Batch } from '../entities/Batch';
+
 
 /**
  * this service manages calls to the web service

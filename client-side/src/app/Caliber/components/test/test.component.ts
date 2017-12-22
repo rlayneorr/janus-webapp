@@ -1,5 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
+// rxjs
 import { Subscription } from 'rxjs/Subscription';
+
+// services
 import { BatchService } from '../../services/batch.service';
 import { TrainerService } from '../../services/trainer.service';
 import { TraineeService } from '../../services/trainee.service';

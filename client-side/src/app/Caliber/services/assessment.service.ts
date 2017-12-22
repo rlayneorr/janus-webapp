@@ -11,9 +11,12 @@ import { EnvironmentService } from './environment.service';
 
 // entities
 import { Assessment } from '../entities/Assessment';
-import { AssertionError } from 'assert';
-import { assertPlatform } from '@angular/core/src/application_ref';
 
+
+/**
+ * this service manages calls to the web service
+ * for Assessment objects
+ */
 @Injectable()
 export class AssessmentService {
 
