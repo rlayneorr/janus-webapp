@@ -68,9 +68,24 @@ export class PanelService {
    =====================
  */
 
+ /**
+  * retrievs all panels and pushed them on the listSubject
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
+  */
+  public fetchAll(): void {
+    const url = this.envService.buildUrl('panel/all');
+
+    this.http.get<Panel[]>(url).subscribe( (panels) => {
+      this.listSubject.next(panels);
+    });
+  }
+
   /**
    * retrieves all panels by trainee ID and pushes them on the
    * list subject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
    *
    * @param trainee: Trainee
    */
@@ -122,7 +137,7 @@ export class PanelService {
   * deletes a panel and pushes the deleted panel on the
   * deletedSubject
   *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
+  * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'PANEL')")
   *
   * @param panel: Panel
   */

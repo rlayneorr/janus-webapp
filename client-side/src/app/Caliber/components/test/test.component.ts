@@ -13,12 +13,12 @@ import { TraineeService } from '../../services/trainee.service';
 import { AssessmentService } from '../../services/assessment.service';
 import { GradeService } from '../../services/grade.service';
 
-
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
+
 export class TestComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private service: GradeService;
