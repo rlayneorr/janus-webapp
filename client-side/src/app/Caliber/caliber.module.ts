@@ -23,6 +23,7 @@ import { TrainersComponent } from './settings/trainers/trainers.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/view-all-trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
+import { TierPipe } from './pipes/tier-pipe';
 
 
 @NgModule({
@@ -47,10 +48,14 @@ import { DeactivateTrainerComponent } from './settings/trainers/deactivatetraine
     LocationsComponent,
     ViewAllTrainersComponent,
     DeactivateTrainerComponent,
+    TierPipe
   ],
   providers: [
     TrainerService,
     CategoriesService,
+  ],
+  bootstrap: [
+    ViewAllTrainersComponent
   ]
 })
 export class CaliberModule { }
