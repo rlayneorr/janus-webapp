@@ -18,6 +18,7 @@ import { TrainerService } from './services/trainer.service';
 import { TraineeService } from './services/trainee.service';
 import { EnvironmentService } from './services/environment.service';
 import { AssessmentService } from './services/assessment.service';
+import { RouteService } from './services/route.service';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -28,6 +29,7 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TestComponent } from './components/test/test.component';
+
 
 @NgModule({
   imports: [
@@ -53,6 +55,7 @@ import { TestComponent } from './components/test/test.component';
     TrainerService,
     TraineeService,
     AssessmentService,
+    RouteService,
   ],
 })
 export class CaliberModule { }
