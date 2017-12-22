@@ -28,6 +28,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.trainerService.ngOnInit();
     this.trainerSubscription = this.trainerService.trainers$.subscribe((resp) => {
       this.trainers = resp;
     });

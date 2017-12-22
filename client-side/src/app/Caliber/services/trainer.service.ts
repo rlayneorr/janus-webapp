@@ -4,9 +4,10 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { Trainer } from '../entities/Trainer';
 import { environment } from '../../../environments/environment';
+import { OnInit } from '@angular/core';
 
 @Injectable()
-export class TrainerService {
+export class TrainerService implements OnInit{
 
   private dataSubject = new BehaviorSubject([]);
   private titlesSubject = new BehaviorSubject([]);
@@ -17,11 +18,14 @@ export class TrainerService {
   tiers$: Observable<any> = this.tiersSubject.asObservable();
 
   constructor( @Inject(Http) public http: Http) {
-    this.getAll();
-    this.getTitles();
-    this.getTiers();
+
   }
 
+ngOnInit (){
+  this.getAll();
+  this.getTitles();
+  this.getTiers();
+}
 
   // Get All Trainers
   getAll(): void {
