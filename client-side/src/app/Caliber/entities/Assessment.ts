@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import { Batch } from '././Batch';
-import { Category } from './Category';
-
-export class Assessment {
-    title: String;
-    batch: Batch;
-    rawScore: Number;
-    type: String;
-    week: Number;
-    category: Category;
-}
-
-
-=======
 import { Batch } from './Batch';
 import { Category } from './Category';
 
@@ -25,4 +10,3 @@ export class Assessment {
     week: number;
     category: Category;
 }
->>>>>>> revaturions

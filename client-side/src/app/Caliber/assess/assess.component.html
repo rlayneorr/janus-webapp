@@ -1,7 +1,8 @@
 <div class = "main-container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" *ngFor='let in of counter(this.selectedBatch.weeks) ;let i = index'>
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Week {{i}}</a>
+      <li class="nav-item" *ngFor="let in of counter(this.selectedBatch.weeks) ;let i = index">
+        <a class="nav-link" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" 
+        aria-selected="true" (click)="this.getAssessments(i+1)">Week {{i+1}}</a>
       </li>
       <li class="nav-item">
           <a class="nav-link active" id="+" data-toggle="tab" href="#+" role="tab" aria-controls="+" aria-selected="true">+</a>
@@ -13,16 +14,14 @@
       <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
     </div>
 
-
-
     <table class="table table-responsive" style="border-collapse: collapse;">
       <thead>
         <tr>
           <th>
             Trainee
           </th>
-          <th>
-            Assessment X
+          <th *ngFor="let assessment of this.assessments">
+            <div class = "assessment-header">{{assessment.title}}</div>
           </th>
           <th>
             Notes
@@ -33,15 +32,15 @@
         <td>
           {{trainee.name}}
         </td>
-        <td>
-          data
+        <td *ngFor="let assessment of this.assessments">
+            <input class="form-control assessment-area" type="text" value="100" >
         </td>
         <td>
-            <textarea class="form-control note-mw ng-pristine ng-valid ng-not-empty ng-touched" name="note" cols="20" rows="2" ng-model="trainees[trainee.traineeId].note.content" ng-blur="saveOrUpdateTraineeNote(trainee.traineeId)">	</textarea>
+            <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
         </td>
       </tr>
     </table>
-    </div>
+</div>
 
 
 
