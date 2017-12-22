@@ -21,6 +21,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   currEditTrainer: Trainer;
   newTier: String;
+  newTitle: String;
 
 
   constructor(private trainerService: TrainerService,
@@ -43,8 +44,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   addTrainer(form) {
-    console.log(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    alert(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
+    console.log(this.model.name + ' ' + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
+    alert(this.model.name + ' ' + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
     // this.trainerService.createTrainer(name, title, email, tier);
   }
 
@@ -83,9 +84,14 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.newTier = newTier;
   }
 
+  titleChange(newTitle) {
+    this.newTitle = newTitle;
+  }
+
   updateTrainer() {
-    console.log('called update Trainer');
+
     this.currEditTrainer.tier = this.newTier;
+    this.currEditTrainer.title = this.newTitle;
     this.trainerService.updateTrainer(this.currEditTrainer);
   }
 
@@ -101,8 +107,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   // clean up subscriptions
- ngOnDestroy() {
-  this.trainerSubscription.unsubscribe();
+  ngOnDestroy() {
+    this.trainerSubscription.unsubscribe();
   }
 
 }

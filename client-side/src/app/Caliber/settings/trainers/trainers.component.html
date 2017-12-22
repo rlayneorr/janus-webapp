@@ -50,7 +50,7 @@
             <input type="text" class="form-control" id="name" name="name" [ngModel]="currEditTrainer.name" placeholder="Trainer Name"
             />
           </div>
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
             <input type="text" class="form-control" [ngModel]="currEditTrainer.email" id="email" name="email" placeholder="Email" />
           </div>
@@ -61,14 +61,14 @@
           <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
 
           <!-- <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].title" id="title" name="title" placeholder="Title" /> -->
-          <select class="form-control">
-            <option selected>Open this select menu</option>
-            <option *ngFor="let title of titles; let i = index" value="i">{{title}}</option>
+          <select class="form-control" [ngModel]="currEditTrainer.title" (ngModelChange)="titleChange($event)" name="title">
+            <option [value]="title" *ngFor="let title of titles">{{title}}</option>
           </select>
 
         </div>
-        <div class="col-sm-6">
-          <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label><br>
+        <div class="col-md-6">
+          <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label>
+          <br>
           <!-- <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].tier" id="tier" name="tier" placeholder="Title" /> -->
 
           <select class="form-control" [ngModel]="currEditTrainer.tier" (ngModelChange)="tierChange($event)" name="tier">
@@ -80,15 +80,28 @@
               <option  *ngFor="let tier of tiers; let i = index" value="i">{{tier}}</option>
             </select> -->
         </div>
+        <!-- <div class="input-group">
+          <input type="text" class="form-control" aria-label="...">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+        </div> -->
       </div>
     </form>
   </div>
   <div class="modal-footer">
-      <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer()">Update</button>
-      <!-- <button type="submit"  (click)="addUser()" class="btn btn-primary"> Add User </button> -->
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-    </div>
-  </ng-template>
+    <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer()">Update</button>
+    <!-- <button type="submit"  (click)="addUser()" class="btn btn-primary"> Add User </button> -->
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
 
 <ng-template #addTrainerContent let-c="close" let-d="dismiss">
   <div class="modal-header">
@@ -97,52 +110,52 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  
+
   <form (ngSubmit)="addTrainer(addTrainerForm)" #addTrainerForm="ngForm">
     <div class="modal-body">
       <div class="form-group">
-        
+
         <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="model.name" type="text" class="form-control" id="name" name="name"  placeholder="Trainer Name" />
+          <input [(ngModel)]="model.name" type="text" class="form-control" id="name" name="name" placeholder="Trainer Name" />
         </div>
-        
-        <label class="col-sm-2 control-label text-nowrap" for="email" >Email:</label>
+
+        <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
         <div class="col-sm-10">
           <input [(ngModel)]="model.email" type="text" class="form-control" id="email" name="email" placeholder="Email" />
         </div>
-      
+
         <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
         <div class="col-sm-10">
           <input [(ngModel)]="model.title" type="text" class="form-control" id="title" name="title" placeholder="Title" />
         </div>
-      
+
         <label class="col-sm-2 control-label text-nowrap" for="title">Tier</label>
-        
+
         <div class="col-sm-10">
-            <div ngbDropdown class="d-inline-block">
-              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="dropdown-item">VP</button>
-                <button class="dropdown-item">PANEL</button>
-                <button class="dropdown-item">QC</button>
-                <button class="dropdown-item">TRAINER</button>
-                <button class="dropdown-item">STAGING</button>
-              </div>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button class="dropdown-item">VP</button>
+              <button class="dropdown-item">PANEL</button>
+              <button class="dropdown-item">QC</button>
+              <button class="dropdown-item">TRAINER</button>
+              <button class="dropdown-item">STAGING</button>
             </div>
           </div>
-        
+        </div>
+
         <div class="col-sm-10">
           <input [(ngModel)]="model.tier" type="text" class="form-control" id="tier" name="tier" placeholder="Tier" />
         </div>
 
       </div>
     </div>
-  
+
     <div class="modal-footer">
-      <button type="submit" class="btn btn-outline-dark" >Add</button>
+      <button type="submit" class="btn btn-outline-dark">Add</button>
       <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-   </div>
+    </div>
   </form>
 
 </ng-template>
