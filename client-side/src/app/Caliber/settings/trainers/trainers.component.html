@@ -45,6 +45,7 @@
       </tr>
     </tbody>
   </table>
+
 </div>
 
 <!--Model for updating trainer-->
@@ -60,11 +61,13 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
+            <!-- Field for Trainer name -->
             <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
             <input type="text" class="form-control" id="name" name="name" [ngModel]="currEditTrainer.name" placeholder="Trainer Name"
             />
           </div>
-          <div class="col-sm-6">
+          <div class="col-md-6">
+            <!-- Field for email -->
             <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
             <input type="text" class="form-control" [ngModel]="currEditTrainer.email" id="email" name="email" placeholder="Email" />
           </div>
@@ -72,37 +75,32 @@
       </div>
       <div class="row">
         <div class="col-md-6">
+          <!-- dropdown/filter for Trainer Title -->
+          <!-- Datalist to display titles -->
           <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
-
-          <!-- <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].title" id="title" name="title" placeholder="Title" /> -->
-          <select class="form-control">
-            <option selected>Open this select menu</option>
-            <option *ngFor="let title of titles; let i = index" value="i">{{title}}</option>
-          </select>
-
+          <input class="form-control" [ngModel]="currEditTrainer.title" (ngModelChange)="titleChange($event)" list="browsers" name="browser">
+          <datalist id="browsers">
+            <option [value]="title" *ngFor="let title of titles">
+          </datalist>
         </div>
-        <div class="col-sm-6">
-          <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label><br>
-          <!-- <input type="text" class="form-control" [(ngModel)]="trainers[currEditTrainerIndex].tier" id="tier" name="tier" placeholder="Title" /> -->
-
+        <div class="col-md-6">
+          <!-- Dropdown for Trainer tier/role -->
+          <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label>
           <select class="form-control" [ngModel]="currEditTrainer.tier" (ngModelChange)="tierChange($event)" name="tier">
             <option [value]="tier" *ngFor="let tier of tiers">{{tier}}</option>
           </select>
 
-          <!-- <select class="custom-select">
-              <option selected>{{currEditTrainer.tier}}</option>
-              <option  *ngFor="let tier of tiers; let i = index" value="i">{{tier}}</option>
-            </select> -->
         </div>
+
       </div>
     </form>
   </div>
   <div class="modal-footer">
-      <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer()">Update</button>
-      <!-- <button type="submit"  (click)="addUser()" class="btn btn-primary"> Add User </button> -->
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-    </div>
-  </ng-template>
+    <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer()">Update</button>
+
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
 
 <ng-template #addTrainerContent let-c="close" let-d="dismiss">
   <div class="modal-header">
@@ -111,10 +109,9 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  
+
   <form (ngSubmit)="addTrainer(addTrainerForm)" #addTrainerForm="ngForm">
     <div class="modal-body">
-      
       <div class="form-group">
           <div class="row">
             <div class="col-md-6">
@@ -132,7 +129,7 @@
             </div>
           </div>
       </div>
-
+      
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
@@ -161,7 +158,7 @@
     <div class="modal-footer">
       <button type="submit" class="btn btn-add">Save</button>
       <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-   </div>
+    </div>
   </form>
 
 </ng-template>

@@ -21,6 +21,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   currEditTrainer: Trainer;
   newTier: String;
+  newTitle: String;
 
 
   constructor(private trainerService: TrainerService,
@@ -68,21 +69,32 @@ export class TrainersComponent implements OnInit, OnDestroy {
   // }
 
   // Open modal and get Trainer that belong to this modal
+  // Backup these fields before the edit
   editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
+    this.newTier = modalTrainer.tier;
+    this.newTitle = modalTrainer.title;
     this.modalService.open(content);
-
-    // .result.then((result) => {
-    //   this.closeResult = `Closed with: ${result}`;
-    // }, (reason) => {
-    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    // });
   }
 
+  // When tier was changed
   tierChange(newTier) {
     this.newTier = newTier;
   }
 
+  // when title was changed
+  titleChange(newTitle) {
+    // Empty title, changed back to original
+    if (newTitle == '') {
+      this.newTitle = this.currEditTrainer.title;
+    }
+    else {
+      // New title was changed
+      this.newTitle = newTitle;
+    }
+  }
+
+  // Update button was clicked, try to update to database
   newTierChange(newTier) {
     this.model.tier = newTier;
   }
@@ -92,8 +104,11 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   updateTrainer() {
-    console.log('called update Trainer');
+    // replacing the trainer's fields with the new ones
     this.currEditTrainer.tier = this.newTier;
+    this.currEditTrainer.title = this.newTitle;
+    
+    // call trainerService to update
     this.trainerService.updateTrainer(this.currEditTrainer);
   }
 
@@ -109,8 +124,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   // clean up subscriptions
- ngOnDestroy() {
-  this.trainerSubscription.unsubscribe();
+  ngOnDestroy() {
+    this.trainerSubscription.unsubscribe();
   }
 
 }
