@@ -10,5 +10,6 @@ export const environment = {
 
   addNewCategory: 'http://localhost:8080/vp/category',
   getAllCategories: 'http://localhost:8080/vp/category',
-  addNewTrainer: 'http://localhost:8080/vp/trainer/create'
+  addNewTrainer: 'http://localhost:8080/vp/trainer/create',
+  editCurrentCategory: 'http://localhost:8080/vp/category/update'
 };
