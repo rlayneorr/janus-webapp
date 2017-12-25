@@ -1,1 +1,98 @@
-locations works!
+<div id="locations-table">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Active Status</th>
+                <th>Company</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let location of locations">
+                <td *ngIf="location.active == true;then activated else deactivated">
+                </td>
+                <td>
+                    {{location.company}}
+                </td>
+                <td>
+                    {{location.street}} {{location.city}}, {{location.state}} {{location.zipcode}}
+                </td>
+                <td>
+                    <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, trainer)"></i>
+                </td>
+                <td>
+                    <app-deactivatelocation [location]="location"></app-deactivatelocation>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!-- Green check for activated locations -->
+<ng-template #activated>
+    <td>
+        <i class="fa fa-check fa-2x" style="color:#81f575;"></i>
+    </td>
+</ng-template>
+
+<!-- Red cross for deativated locations -->
+<ng-template #deactivated>
+    <td>
+        <i class="fa fa-times fa-2x" style="color:#ff0000;"></i>
+    </td>
+</ng-template>
+
+<!--Model for updating trainer-->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Trainer</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Field for Trainer name -->
+                        <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" [ngModel]="currEditTrainer.name" placeholder="Trainer Name"
+                        />
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Field for email -->
+                        <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
+                        <input type="text" class="form-control" [ngModel]="currEditTrainer.email" id="email" name="email" placeholder="Email" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- dropdown/filter for Trainer Title -->
+                    <!-- Datalist to display titles -->
+                    <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
+                    <input class="form-control" [ngModel]="currEditTrainer.title" (ngModelChange)="titleChange($event)" list="browsers" name="browser">
+                    <datalist id="browsers">
+                        <option [value]="title" *ngFor="let title of titles">
+                    </datalist>
+                </div>
+                <div class="col-md-6">
+                    <!-- Dropdown for Trainer tier/role -->
+                    <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label>
+                    <select class="form-control" [ngModel]="currEditTrainer.tier" (ngModelChange)="tierChange($event)" name="tier">
+                        <option [value]="tier" *ngFor="let tier of tiers">{{tier | slice:5}}</option>
+                    </select>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer()">Update</button>
+
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    </div>
+</ng-template>
