@@ -38,6 +38,7 @@ export class VpLineGraphComponent implements OnInit {
       (resp) => {
         this.results = resp.json();
         console.log(this.results);
+        this.results.sort();
         this.lineChartData = this.vhlgs.fillLineChartDate(this.results, this.lineChartData, '', '');
         this.addresses = this.vhss.populateAddresses(this.results);
         this.states = this.vhss.populateStates(this.addresses);
