@@ -3,7 +3,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Subscription } from 'rxjs/Subscription';
 import { Title } from '@angular/platform-browser';
-import { App } from '../entities/app';
+import { App } from '../entities/App';
 import { environment } from '../../environments/environment';
 import { janusGlobal } from '../../environments/janusGlobal';
 
