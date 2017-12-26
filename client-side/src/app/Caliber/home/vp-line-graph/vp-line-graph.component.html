@@ -3,7 +3,7 @@
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default">
 
-      <div class="panel-heading">Weekly Progress
+      <div class="panel-heading"> Weekly Progress
 
         <select class="pull-right" [(ngModel)]="selectedLineCity" *ngIf="selectedState" (ngModelChange) = "hasCity($event)">
           <option value="">All Cities</option>
@@ -26,11 +26,11 @@
           <table class="table table-responsive" style="border-collapse: collapse;">
             <tbody>
               <tr>
-                <th class="col-sm-1 col-md-1 col-lg-1"></th>
-                <th class="col-sm-1 col-md-1 col-lg-1" *ngFor="let label of lineChartData.labels">{{label}}</th>
+                <th class="col-sm-1 col-md-1 col-lg-1" scope = "col"></th>
+                <th class="col-sm-1 col-md-1 col-lg-1" *ngFor="let label of lineChartData.labels" scope = "col">{{label}}</th>
               </tr>
               <tr *ngFor="let data of lineChartData.data;  let j = index">
-                <th class="col-sm-1 col-md-1 col-lg-1">{{data.label}}</th>
+                <th class="col-sm-1 col-md-1 col-lg-1" scope = "row">{{data.label}}</th>
                 <td class="col-sm-1 col-md-1 col-lg-1" *ngFor="let dataPoint of data.data">{{dataPoint}}</td>
               </tr>
             </tbody>

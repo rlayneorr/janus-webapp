@@ -46,4 +46,16 @@ export class CategoriesService {
           }
         );
   }
+
+  editCurrentCategory(currentCategory: Category) {
+    this.http.put(environment.editCurrentCategory, currentCategory, {withCredentials: true})
+    .subscribe(
+      resp => {
+        console.log(resp.json());
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }
