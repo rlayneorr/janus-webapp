@@ -37,7 +37,7 @@ a {
 }
 
 .btn-change:hover{
-    -webkit-transform: scale(1.1);
+    -webkit-transform: scale(1);
     background-color: #31708f;
 }
 
@@ -47,6 +47,10 @@ a {
     font-size: 15px;
 	width: 1000px;
 } 
+
+.categoryInput {
+	width: 400px;
+}
 
 /**********************
 	Chart Containers
