@@ -178,7 +178,7 @@ export class ReportingService {
    * @param traineeId - trainee whose skill data should be fetched
    */
   fetchTraineeOverallRadarChart(traineeId: Number) {
-    const endpoint = `http://localhost:8070/all/reports/trainee/${traineeId}/radar-trainee-overall`;
+    const endpoint = environment.apiTraineeOverallRadarChart(traineeId);
 
     // Params object for refresh check
     const params = {
