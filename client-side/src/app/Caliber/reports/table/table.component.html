@@ -6,7 +6,7 @@
         </tr>
         <tr class="col-sm-6 col-md-6 col-lg-6 " *ngFor="let label of tableLabels;let i = index">
             <th class="pull-left">{{tableLabels[i]}}</th>
-            <td *ngFor="let set of tableData" class="pull-right">{{set.data[i]}}</td>
+            <td *ngFor="let set of tableData" class="pull-right">{{set.data[i]  | number : '1.2-2'}}</td>
         </tr>
     </table>
     <div *ngIf="typeCheck() === 1">
@@ -31,7 +31,7 @@
             </tr>
             <tr *ngFor="let set of tableData; let j = index">
                 <th>{{i}} {{set.label}}</th>
-                <td *ngFor="let i of indexSequence(1)" class="pull-right">{{set.data[i]}}</td>
+                <td *ngFor="let i of indexSequence(1)" class="pull-right">{{set.data[i]  | number : '1.2-2'}}</td>
             </tr>
         </table>
     </span>

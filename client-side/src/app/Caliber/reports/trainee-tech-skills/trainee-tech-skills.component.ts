@@ -29,24 +29,15 @@ export class TraineeTechSkillsComponent implements OnInit {
   ngOnInit() {
     this.dataSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
 
-      console.log(result);
-
       if (!result) {
         console.log('data not received');
         this.chartData = null;
         this.reportsService.fetchBatchOverallRadarChart(2201);
-        // this.reportsService.fetchTraineeOverallRadarChart(5455);
       } else {
         console.log('data received');
         console.log(result);
-        // this.chartData = [this.dataSet(result.data, 'Skills')];
         this.chartData = [result.data];
-        // this.rawDatatoMap(result.data);
       }
     });
   }
-  /**
-   * create object for charts.
-  */
-  
 }

@@ -34,12 +34,10 @@ export class GraphComponent implements OnInit, OnChanges {
   public chartHovered(e: any): void {
   }
   public ngOnInit() {
-
     this.chartMaps = this.data;
     this.chartType = this.type;
     this.chartLegend = this.legend;
     if (this.data !== null) {
-      console.log('Drawing Graph');
       // set up local array to be filled
       const _chartData: any[] = [];
       let _chartLabels: string[] = [];
@@ -131,8 +129,6 @@ export class GraphComponent implements OnInit, OnChanges {
       }
       this.chartData = _chartData;
       this.chartLabels = _chartLabels;
-
-      console.log(this.chartData);
     }
   }
   public ngOnChanges(changes) {
