@@ -23,6 +23,9 @@ import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 
+// pipes
+import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
+
 // components
 import { CaliberComponent } from './caliber.component';
 import { HomeComponent } from './home/home.component';
@@ -32,6 +35,7 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TestComponent } from './components/test/test.component';
+import { PanelComponent} from './panel/panel.component';
 
 
 @NgModule({
@@ -44,6 +48,7 @@ import { TestComponent } from './components/test/test.component';
     FormsModule,
   ],
   declarations: [
+    // components
     CaliberComponent,
     HomeComponent,
     AssessComponent,
@@ -51,6 +56,10 @@ import { TestComponent } from './components/test/test.component';
     ReportsComponent,
     WeeklyLineChartComponent,
     TestComponent,
+    PanelComponent,
+
+    //pipes
+    TraineeSearchPipePipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
