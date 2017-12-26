@@ -38,7 +38,7 @@ export class RadarComponent implements OnInit, OnDestroy {
   constructor(private reports: ReportingService) { }
 
   ngOnInit() {
-    this.reportSubscription = this.reports.batchOverallRadarChart.subscribe( (result) => {
+    this.reportSubscription = this.reports.batchOverallRadar$.subscribe( (result) => {
 
       if (!result) {
         this.reports.fetchBatchOverallRadarChart(2201);
