@@ -30,6 +30,8 @@ import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { LocationService } from './services/location.service';
+import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
+import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 
 @NgModule({
   imports: [
@@ -55,6 +57,8 @@ import { LocationService } from './services/location.service';
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
+    DeactivateLocationComponent,
+    EditlocationComponent,
   ],
   providers: [
     VpHomeLineGraphService,

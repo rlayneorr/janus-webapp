@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LocationService } from '../../services/location.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Location } from '../../entities/Location';
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-locations',
   templateUrl: './locations.component.html',
   styleUrls: ['./locations.component.css']
 })
-export class LocationsComponent implements OnInit {
+export class LocationsComponent implements OnInit, OnDestroy {
   private locationSubscription: Subscription;
   locations: Array<Location>;
+  currEditLocation: Location;
 
-  constructor(private locationService: LocationService) { }
+
+  constructor(private locationService: LocationService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.locationService.getAll();
@@ -23,5 +26,10 @@ export class LocationsComponent implements OnInit {
   }
 
 
+
+  // clean up subscriptions
+  ngOnDestroy() {
+    this.locationSubscription.unsubscribe();
+  }
 
 }
