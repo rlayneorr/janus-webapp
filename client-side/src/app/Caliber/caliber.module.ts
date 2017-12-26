@@ -32,7 +32,8 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TestComponent } from './components/test/test.component';
-
+import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
+import { TempJohnComponent } from './tempjohn/tempjohn.component';
 
 @NgModule({
   imports: [
@@ -51,6 +52,8 @@ import { TestComponent } from './components/test/test.component';
     ReportsComponent,
     WeeklyLineChartComponent,
     TestComponent,
+    TrainerProfileComponent,
+    TempJohnComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
