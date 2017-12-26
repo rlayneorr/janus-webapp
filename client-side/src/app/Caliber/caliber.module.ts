@@ -30,6 +30,7 @@ import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { LocationService } from './services/location.service';
+import { TierPipe } from './pipes/tier-pipe';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { LocationService } from './services/location.service';
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
+    TierPipe
   ],
   providers: [
     VpHomeLineGraphService,
@@ -63,6 +65,9 @@ import { LocationService } from './services/location.service';
     TrainerService,
     LocationService,
     CategoriesService,
+  ],
+  bootstrap: [
+    TrainersComponent
   ]
 })
 export class CaliberModule { }
