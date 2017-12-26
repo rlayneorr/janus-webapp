@@ -23,6 +23,9 @@ import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 
+// pipes
+import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
+
 // components
 import { CaliberComponent } from './caliber.component';
 import { HomeComponent } from './home/home.component';
@@ -36,6 +39,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { RadarComponent } from './radar-test/radar-test.component';
 import { HttpClient } from '@angular/common/http';
 import { TestComponent } from './components/test/test.component';
+import { PanelComponent} from './panel/panel.component';
 
 
 @NgModule({
@@ -49,6 +53,7 @@ import { TestComponent } from './components/test/test.component';
     ChartsModule,
   ],
   declarations: [
+    // components
     CaliberComponent,
     HomeComponent,
     AssessComponent,
@@ -58,6 +63,10 @@ import { TestComponent } from './components/test/test.component';
     RadarComponent,
     TraineeTechSkillsComponent,
     TestComponent,
+    PanelComponent,
+
+    //pipes
+    TraineeSearchPipePipe,
   ],
   exports: [
     TraineeTechSkillsComponent,
