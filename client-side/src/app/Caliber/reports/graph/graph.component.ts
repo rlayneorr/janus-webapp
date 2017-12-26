@@ -182,6 +182,9 @@ export class GraphComponent implements OnInit, OnChanges {
     // default is radar options
     const _chartOptions: any = {
       responsive: true,
+      tooltips: {
+        mode: 'label'
+      },
       scale: {
         ticks: {
           beginAtZero: false,
