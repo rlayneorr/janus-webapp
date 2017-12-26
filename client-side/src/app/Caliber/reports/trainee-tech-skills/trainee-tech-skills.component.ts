@@ -33,7 +33,7 @@ export class TraineeTechSkillsComponent implements OnInit {
   public radarChartType = 'radar';
 
   ngOnInit() {
-    this.dataSubscription = this.reportsService.traineeOverallTech$.subscribe( (result) => {
+    this.dataSubscription = this.reportsService.traineeOverallRadar$.subscribe( (result) => {
       if (!result) {
         console.log('data not received');
         this.data = null;
