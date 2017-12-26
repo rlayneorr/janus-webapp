@@ -14,7 +14,7 @@
       </li>
     </ul>
     <div (click)="toggleCollapse()">
-      <app-caliber-nav *ngIf="currentApp==='Caliber'"></app-caliber-nav>
+      <app-caliber-nav [collapsed]="collapsed" (collapse) = "toggleClose($event)" *ngIf="currentApp==='Caliber'"></app-caliber-nav>
       <app-assign-force-nav *ngIf="currentApp==='Assign Force'"></app-assign-force-nav>
       <app-track-force-nav *ngIf="currentApp==='Track Force'"></app-track-force-nav>
     </div>

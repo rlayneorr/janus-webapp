@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-caliber-nav',
@@ -6,14 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./caliber-nav.component.css']
 })
 export class CaliberNavComponent implements OnInit {
+  @Input()
+  collapsed = false;
 
-  settingsCollapsed = true;
+  @Output()
+  collapse: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleSettings() {
-    this.settingsCollapsed = !this.settingsCollapsed;
+  toggleCollapse() {
+    this.collapsed = !this.collapsed;
+    this.collapse.emit(this.collapsed);
   }
 }
