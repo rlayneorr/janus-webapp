@@ -10,6 +10,7 @@ export class WeeklyLineChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

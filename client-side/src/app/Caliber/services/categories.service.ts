@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
-import { Category } from '../beans/Category';
+import { Category } from '../entities/Category';
 
 @Injectable()
 export class CategoriesService {
@@ -45,5 +45,17 @@ export class CategoriesService {
             console.log(err);
           }
         );
+  }
+
+  editCurrentCategory(currentCategory: Category) {
+    this.http.put(environment.editCurrentCategory, currentCategory, {withCredentials: true})
+    .subscribe(
+      resp => {
+        console.log(resp.json());
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../../services/categories.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { Category } from '../../beans/Category';
+import { Category } from '../../entities/Category';
 import { Http } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 
@@ -13,39 +13,54 @@ import { environment } from '../../../../environments/environment';
 })
 export class CategoriesComponent implements OnInit {
 
-    model = new Category();
-    newCategory: Category = new Category();
-    categories: Category[];
+  model = new Category();
+  newCategory: Category = new Category();
+  categories: Category[];
+  currentCategory: Category;
+  isActive: boolean;
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
 
   ngOnInit() {
 
     this.http.get(environment.getAllCategories, { withCredentials: true })
-    .subscribe((succResp) => {
-      this.categories = succResp.json();
-      console.log(this.categories);
-    });
+      .subscribe((succResp) => {
+        this.categories = succResp.json();
+        console.log(this.categories);
+      });
   }
 
   addNewCategory() {
-      this.newCategory.skillCategory = this.model.skillCategory;
-      this.newCategory.active = true;
-      this.http.post(environment.addNewCategory, this.newCategory, {withCredentials: true})
-        .subscribe(
-          resp => {
-            console.log(resp.json());
-            this.categories.push(resp.json());
-          },
-          err => {
-            console.log(err);
-          }
-        );
+    this.newCategory.skillCategory = this.model.skillCategory;
+    this.newCategory.active = true;
+    this.http.post(environment.addNewCategory, this.newCategory, { withCredentials: true })
+      .subscribe(
+      resp => {
+        console.log(resp.json());
+        this.categories.push(resp.json());
+      },
+      err => {
+        console.log(err);
+      }
+      );
   }
 
+  activeChange(activeValue) {
+    console.log(activeValue);
+    this.isActive = activeValue;
+  }
+  editCurrentCategory() {
+    this.currentCategory.active = this.isActive;
+    this.categoriesService.editCurrentCategory(this.currentCategory);
+
+  }
   open(content) {
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
     });
+  }
+  editopen(content, index: Category) {
+    this.currentCategory = index;
+    this.modalService.open(content);
   }
 }

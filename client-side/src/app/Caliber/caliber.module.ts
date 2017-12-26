@@ -14,17 +14,25 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { CommonModule } from '@angular/common';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
+
+import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
+import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
+import { VpPanelGraphComponent } from './home/vp-panel-graph/vp-panel-graph.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.service';
+import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
+import { ColorService } from './services/colors/color.service';
 import { TrainerService } from './services/trainer.service';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CategoriesService } from './services/categories.service';
 import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
-import { TrainersComponent } from './settings/trainers/trainers.component';
 import { LocationsComponent } from './settings/locations/locations.component';
-import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/view-all-trainers.component';
+import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
+import { LocationService } from './services/location.service';
+import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
+import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { TierPipe } from './pipes/tier-pipe';
-
 
 @NgModule({
   imports: [
@@ -33,7 +41,7 @@ import { TierPipe } from './pipes/tier-pipe';
     NgbModule.forRoot(),
     RouterModule.forChild(routes),
     FormsModule,
-    AngularFontAwesomeModule
+    ChartsModule,
   ],
   declarations: [
     CaliberComponent,
@@ -42,20 +50,28 @@ import { TierPipe } from './pipes/tier-pipe';
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
+    VpBarGraphComponent,
+    VpLineGraphComponent,
+    VpPanelGraphComponent,
     SettingsComponent,
     CategoriesComponent,
     TrainersComponent,
     LocationsComponent,
-    ViewAllTrainersComponent,
     DeactivateTrainerComponent,
+    DeactivateLocationComponent,
+    EditlocationComponent,
     TierPipe
   ],
   providers: [
+    VpHomeLineGraphService,
+    VpHomeSelectorService,
+    ColorService,
     TrainerService,
+    LocationService,
     CategoriesService,
   ],
   bootstrap: [
-    ViewAllTrainersComponent
+    TrainersComponent
   ]
 })
 export class CaliberModule { }
