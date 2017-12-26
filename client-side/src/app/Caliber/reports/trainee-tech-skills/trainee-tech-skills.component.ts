@@ -9,8 +9,9 @@ import { ReportingService } from '../../../services/reporting.service';
 })
 export class TraineeTechSkillsComponent implements OnInit {
 
-  public chartData: any = [];
-  private dataSubscription: Subscription;
+
+  private batchOverallSubscription: Subscription;
+  private traineeOverallRadar: Subscription;
 
 
   constructor(private reportsService: ReportingService) { }
@@ -18,23 +19,49 @@ export class TraineeTechSkillsComponent implements OnInit {
 
 
   // Chart labels - for other charts the labels would have to be dynamic
-  public dataSetLabels: string[] = ['Skills'];
- 
+  public dataSetLabels: string[] = ['batch', 'trainee'];
+
   // Dataset for chart
+  public chartData: any[];
+  
   // Chart type assignment
   public chartType = 'radar';
 
   ngOnInit() {
-    this.dataSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
+
+    // this.chartData = [0];
+    this.batchOverallSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
 
       if (!result) {
         console.log('data not received');
         this.chartData = null;
+        // this.reportsService.fetchTraineeOverallRadarChart(5536);
         this.reportsService.fetchBatchOverallRadarChart(2201);
       } else {
         console.log('data received');
         console.log(result);
-        this.chartData = [result.data];
+        if (this.chartData === null) {
+          this.chartData = [result.data];
+        } else {
+          this.chartData = [result.data, this.chartData[0]];
+        }
+      }
+    });
+    this.batchOverallSubscription = this.reportsService.traineeOverallRadar$.subscribe((result) => {
+
+      if (!result) {
+        console.log('data not received');
+        this.chartData = null;
+        this.reportsService.fetchTraineeOverallRadarChart(5536);
+        // this.reportsService.fetchBatchOverallRadarChart(2201);
+      } else {
+        console.log('data received');
+        console.log(result);
+        if (this.chartData === null) {
+          this.chartData = [result.data];
+        } else {
+          this.chartData = [this.chartData[0], result.data];
+        }
       }
     });
   }

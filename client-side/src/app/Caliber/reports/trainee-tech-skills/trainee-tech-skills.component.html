@@ -4,8 +4,8 @@
       Technical Skills
     </div>
     <div class="panel-body">
-      <app-graph *ngIf="chartData" [data]="(chartData | graphData:dataSetLabels)" [legend]=true [type]="chartType"></app-graph>
-      <app-table *ngIf="chartData" [data]="(chartData | graphData:dataSetLabels)" [type]="chartType"></app-table>
+      <app-graph *ngIf="chartData && chartData.length === 2" [data]="(chartData | graphData:dataSetLabels)" [legend]=true [type]="chartType"></app-graph>
+      <app-table *ngIf="chartData && chartData.length === 2" [data]="(chartData | graphData:dataSetLabels)" [type]="chartType"></app-table>
     </div>
   </div>
 </div>
