@@ -26,7 +26,7 @@ export class CategoriesComponent implements OnInit {
     this.http.get(environment.getAllCategories, { withCredentials: true })
       .subscribe((succResp) => {
         this.categories = succResp.json();
-        console.log(this.categories);
+        // console.log(this.categories);
       });
   }
 
@@ -36,7 +36,6 @@ export class CategoriesComponent implements OnInit {
     this.http.post(environment.addNewCategory, this.newCategory, { withCredentials: true })
       .subscribe(
       resp => {
-        console.log(resp.json());
         this.categories.push(resp.json());
       },
       err => {
@@ -50,14 +49,15 @@ export class CategoriesComponent implements OnInit {
     this.isActive = activeValue;
   }
   editCurrentCategory() {
-    this.currentCategory.active = this.isActive;
-    this.categoriesService.editCurrentCategory(this.currentCategory);
+    if (this.currentCategory.active !== this.isActive) {
+      this.currentCategory.active = this.isActive;
+      this.categoriesService.editCurrentCategory(this.currentCategory);
+    }
 
   }
   open(content) {
     this.modalService.open(content).result.then((result) => {
-    }, (reason) => {
-    });
+    }, (reason) => { });
   }
   editopen(content, index: Category) {
     this.currentCategory = index;
