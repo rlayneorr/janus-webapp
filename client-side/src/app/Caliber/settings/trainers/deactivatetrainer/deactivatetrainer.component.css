@@ -1,7 +1,7 @@
 
 @font-face {
     font-family: 'Futura-Std-Book';
-	src: url('./fonts/Futura-Std-Book.otf') format('opentype');
+	src: url('../../../../../assets/fonts/Futura-Std-Book.otf') format('opentype');
 }
 
 .close {
@@ -37,7 +37,7 @@ div {
     position: relative;
     padding: 15px;
 }
-
+/*
 .h1, .h2, .h3, h1, h2, h3 {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -57,7 +57,7 @@ div {
 .h4, h4 {
     font-size: 18px;
 }
-
+*/
 h4 {
     display: block;
     -webkit-margin-before: 1.33em;
@@ -75,7 +75,7 @@ h3 {
 }
 
 body {
-    /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  */
+   /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  */
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
