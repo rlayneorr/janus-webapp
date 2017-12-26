@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http';
 import { CacheData } from '../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
 
@@ -23,21 +22,18 @@ export class ReportingService {
 
 
   /*  Reports Charts */
-  // Subjects used to store data from the server.
-  private batchOverallRadarSubject = new BehaviorSubject<CacheData>(null);
+  private traineeOverallRadar = new BehaviorSubject<CacheData>(null);
+  public traineeOverallRadar$ = this.traineeOverallRadar.asObservable();
 
-  // Observables that are visible to subscribers to this service.
-  batchOverallRadarChart = this.batchOverallRadarSubject.asObservable();
+  private batchOverallRadar = new BehaviorSubject<CacheData>(null);
+  public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
-
-  private traineeOverallTech = new BehaviorSubject<CacheData>(null);
-  public traineeOverallTech$ = this.traineeOverallTech.asObservable();
-
-  constructor(private http: Http, private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   refresh() {
     // Clear all data stored in subjects
-    this.batchOverallRadarSubject.next(null);
+    this.traineeOverallRadar.next(null);
+    this.batchOverallRadar.next(null);
   }
 
   private needsRefresh(sub: BehaviorSubject<CacheData>, params: any): boolean {
@@ -58,7 +54,7 @@ export class ReportingService {
    * @returns Number - batch average for comparison
    */
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
-    const endpoint = environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`;
+    const endpoint = environment.apiBatchComparisonAvgEndpoint(skill, training, startDate);
 
   }
 
@@ -71,7 +67,7 @@ export class ReportingService {
    * @param weekId weekId filter value
    */
   fetchBatchWeekPieChart(batchId: Number, weekId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${weekId}/pie`;
+    const endpoint = environment.apifetchBatchWeekPieChart(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
 
@@ -79,7 +75,7 @@ export class ReportingService {
 
 
   fetchPieChartCurrentWeekQCStatus(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/{batchId}/chart`;
+    const endpoint = environment.apiPieChartCurrentWeekQCStatus(batchId);
 
     // TODO: Implement API call and subject push logic
 
@@ -88,7 +84,7 @@ export class ReportingService {
   /* Stacked Bar Charts */
 
   fetchAllBatchesCurrentWeekQCStackedBarChart(batchId: Number, week: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`;
+    const endpoint = environment.apiAllBatchesCurrentWeekQCStackedBarChart(batchId, week);
 
     // TODO: Implement API call and subject push logic
 
@@ -96,35 +92,35 @@ export class ReportingService {
 
   /* Bar Charts */
   fetchBatchWeekAvgBarChart(batchId: Number, week: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`;
+    const endpoint = environment.apiBatchWeekAvgBarChart(batchId, week);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchWeekSortedBarChart(batchId: Number, week: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-weekly-sorted`;
+    const endpoint = environment.apiBatchWeekSortedBarChart(batchId, week);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchOverallTraineeBarChart(batchId: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/bar-batch-overall-trainee`;
+    const endpoint = environment.apiBatchOverallTraineeBarChart(batchId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchOverallBarChart(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/bar-batch-overall`;
+    const endpoint = environment.apiBatchOverallBarChart(batchId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchWeekTraineeBarChart(batchId: Number, weekId: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/bar-batch-week-trainee`;
+    const endpoint = environment.apiBatchWeekTraineeBarChart(batchId, weekId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
@@ -132,35 +128,35 @@ export class ReportingService {
 
   /* Line Charts */
   fetchTraineeUpToWeekLineChart(batchId: Number, weekId: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/line-trainee-up-to-week`;
+    const endpoint = environment.apiTraineeUpToWeekLineChart(batchId, weekId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchTraineeOverallLineChart(batchId: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/line-trainee-overall`;
+    const endpoint = environment.apiTraineeOverallLineChart(batchId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchBatchOverallLineChart(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/line-batch-overall`;
+    const endpoint = environment.apiBatchOverallLineChart(batchId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchCurrentBatchesLineChart() {
-    const endpoint = environment.context + `all/reports/dashboard`;
+    const endpoint = environment.apiCurrentBatchesLineChart;
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchCurrentPanelsLineChart() {
-    const endpoint = environment.context = `all/reports/biweeklyPanelResults`;
+    const endpoint = environment.apiCurrentPanelsLineChart;
 
     // TODO: Implement API call and subject push logic
 
@@ -169,7 +165,7 @@ export class ReportingService {
   /* Radar Charts */
 
   fetchTraineeUpToWeekRadarChart(week: Number, traineeId: Number) {
-    const endpoint = environment.context + `all/reports/week/${week}/trainee/${traineeId}/radar-trainee-up-to-week`;
+    const endpoint = environment.apiTraineeUpToWeekRadarChart(week, traineeId);
 
     // TODO: Implement API call and subject push logic
 
@@ -178,11 +174,11 @@ export class ReportingService {
 
   /**
    * Updates Trainee overall tech skills data if necessary
-   * Data can be subscribed to @ traineeOverallTech$
+   * Data can be subscribed to @ traineeOverallRadar$
    * @param traineeId - trainee whose skill data should be fetched
    */
   fetchTraineeOverallRadarChart(traineeId: Number) {
-    const endpoint = environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`;
+    const endpoint = environment.apiTraineeOverallRadarChart(traineeId);
 
     // Params object for refresh check
     const params = {
@@ -190,39 +186,35 @@ export class ReportingService {
     };
 
     // call backend API if data is not fresh
-    if (this.needsRefresh(this.traineeOverallTech, params)) {
+    if (this.needsRefresh(this.traineeOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.traineeOverallTech.next({params: params, data: success}));
+        success => this.traineeOverallRadar.next({params: params, data: success}));
     }
   }
 
+  /**
+   * Updates Batch overall tech skills data if necessary
+   * Data can be subscribed to @ batchOverallRadar$
+   * @param batchId - batch whose skill data should be fetched
+   */
   fetchBatchOverallRadarChart(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`;
-    // Place the parameters into this object. Their names should match all the parameters given by the
-    // method signature.
+
+    const endpoint = environment.apiBatchOverallRadarChart(batchId);
+
+    // Params object for refresh check
     const params = {
       batchId: batchId
     };
 
-    // TODO: Implement API call and subject push logic
-    if (!this.batchOverallRadarSubject.getValue() || this.batchOverallRadarSubject.getValue().params !== params) {
-
-      // Obviously this will change based on which request is being made.
-      // Replace the url and the subject being sent the result of the request.
-      console.log(`Sending request to ${endpoint}`);
-      this.http.get(endpoint).subscribe((success) => {
-        console.log(`result: ${success.text()}`);
-        const newData = {
-            params: params,
-            data: success.json()
-        };
-        this.batchOverallRadarSubject.next(newData);
-      });
+    // call backend API if data is not fresh
+    if (this.needsRefresh(this.batchOverallRadar, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.batchOverallRadar.next({params: params, data: success}));
     }
   }
 
   fetchBatchAllTraineesRadarChart(batchId: Number) {
-    const endpoint = environment.context + `all/reports/batch/${batchId}/radar-batch-all-trainees`;
+    const endpoint = environment.apiBatchAllTraineesRadarChart(batchId);
 
     // TODO: Implement API call and subject push logic
 
@@ -231,14 +223,14 @@ export class ReportingService {
   /* Misc. */
 
   fetchBatchWeekAverageValue(batchId: Number, weekId: Number) {
-    const endpoint = environment.context + `all/assessments/average/${batchId}/${weekId}`;
+    const endpoint = environment.apiBatchWeekAverageValue(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
 
   }
 
   fetchTechnologiesForTheWeek(batchId: Number, weekId: Number) {
-    const endpoint = environment.context + `all/assessments/categories/batch/${batchId}/${weekId}`;
+    const endpoint = environment.apiTechnologiesForTheWeek(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
 

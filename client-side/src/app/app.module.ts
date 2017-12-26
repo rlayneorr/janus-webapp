@@ -11,9 +11,10 @@ import { NavComponent } from './nav/nav.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
-import { JanusComponent } from './janus/janus.component';
+import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
 import { ReportingService } from './services/reporting.service';
+import { PDFService } from './services/pdf.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { CaliberModule } from './Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
@@ -56,6 +57,7 @@ const routes: Routes = [
   providers: [
     ChuckNorrisService,
     ReportingService,
+    PDFService,
   ],
   bootstrap: [AppComponent]
 })
