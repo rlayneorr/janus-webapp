@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CaliberNavComponent implements OnInit {
 
-  collapsed = true;
+  settingsCollapsed = true;
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleCollapse() {
-    this.collapsed = !this.collapsed;
+  toggleSettings() {
+    this.settingsCollapsed = !this.settingsCollapsed;
   }
 }
