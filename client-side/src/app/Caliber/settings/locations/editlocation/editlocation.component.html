@@ -9,7 +9,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form #editForm="ngForm">
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
@@ -21,7 +21,7 @@
           <div class="col-md-6">
             <!-- Field for street -->
             <label class="col-sm-2 control-label text-nowrap" for="email">Street Address:</label>
-            <input type="text" class="form-control" [ngModel]="currEditLocation.street" id="street" name="stret" placeholder="Enter Street Address"
+            <input type="text" class="form-control" [ngModel]="currEditLocation.street" id="street" name="street" placeholder="Enter Street Address"
               required/>
           </div>
         </div>
@@ -51,7 +51,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateLocation()">Update</button>
+    <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateLocation(editForm.value)">Update</button>
 
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
   </div>

@@ -31,8 +31,9 @@ export class LocationService {
       );
   }
 
+
   updateLocation(trainer: Location) {
-    this.http.put(environment.context + 'vp/location/update', trainer, { withCredentials: true })
+    this.http.put('http://localhost:8080/vp/location/update', trainer, { withCredentials: true })
       .map(
       resp => resp.json(),
     )
