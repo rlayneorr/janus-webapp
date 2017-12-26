@@ -1,6 +1,8 @@
 // TODO: more/better commenting
 import { Component, OnInit, Input, OnChanges, sequence } from '@angular/core';
-
+/**
+ * @author John Hudson
+ */
 @Component({
     selector: 'app-table',
     templateUrl: './table.component.html'

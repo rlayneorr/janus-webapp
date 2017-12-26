@@ -34,102 +34,106 @@ export class GraphComponent implements OnInit, OnChanges {
   public chartHovered(e: any): void {
   }
   public ngOnInit() {
+
     this.chartMaps = this.data;
     this.chartType = this.type;
     this.chartLegend = this.legend;
-    console.log(this.chartMaps);
-    // set up local array to be filled
-    const _chartData: any[] = [];
-    let _chartLabels: string[] = [];
+    if (this.data !== null) {
+      console.log('Drawing Graph');
+      // set up local array to be filled
+      const _chartData: any[] = [];
+      let _chartLabels: string[] = [];
 
-    // Only need labels once so am using a flag
-    let label = true;
-    // gets data from input
-    for (const chartMap of this.chartMaps) {
-      const _chartDataRow: number[] = [];
-      // breaks data and labels out from key/value pairs
-      chartMap.data.forEach((value: number, key: string) => {
-        _chartDataRow.push(value);
-        if (label) {
-          _chartLabels.push(key);
-        }
-      });
-      label = false;
-      _chartData.push({ data: _chartDataRow, label: chartMap.label });
-    }
+      // Only need labels once so am using a flag
+      let label = true;
+      // gets data from input
+      for (const chartMap of this.chartMaps) {
+        const _chartDataRow: number[] = [];
+        // breaks data and labels out from key/value pairs
+        chartMap.data.forEach((value: number, key: string) => {
+          _chartDataRow.push(value);
+          if (label) {
+            _chartLabels.push(key);
+          }
+        });
+        label = false;
+        _chartData.push({ data: _chartDataRow, label: chartMap.label });
+      }
 
-    // control look of chart based on type
-    switch (this.chartType) {
-      case 'radar':
-        this.chartColors = [
-          this.color('114, 164, 194'),
-          this.color('242, 105, 37'),
-          this.color('71, 76, 85'),
-          this.color('252, 180, 20'),
-          this.color('0, 160, 0')];
-        this.chartOptions = this.chartOption(this.chartType);
-        break;
-      case 'bar':
-        if (_chartData[0].data.length !== 1) {
+      // control look of chart based on type
+      switch (this.chartType) {
+        case 'radar':
+          this.chartColors = [
+            this.color('114, 164, 194'),
+            this.color('242, 105, 37'),
+            this.color('71, 76, 85'),
+            this.color('252, 180, 20'),
+            this.color('0, 160, 0')];
+          this.chartOptions = this.chartOption(this.chartType);
+          break;
+        case 'bar':
+          if (_chartData[0].data.length !== 1) {
+            this.chartColors = [
+              this.color('114, 164, 194'),
+              this.color('252, 180, 20')
+            ];
+            this.chartOptions = this.chartOption(this.chartType);
+          } else {
+            // make benchmark date array length match other data array
+            const benchmarkData: number[] = [];
+            const benchmark = _chartData[0].data[0];
+            _chartData[1].data.forEach(function () {
+              benchmarkData.push(benchmark);
+            });
+            _chartData[0].data = benchmarkData;
+
+            // color the bars
+            this.chartColors = [
+              this.benchMarkColor()
+              , this.color('114, 164, 194')
+            ];
+            _chartLabels = [];
+            this.chartMaps[1].data.forEach((value: number, key: string) => {
+              _chartLabels.push(key);
+            });
+            _chartData[1].label = 'Batch Scores';
+            _chartData[0].type = 'line';
+
+
+            this.chartOptions = this.chartOption('barAverageCompare');
+          }
+          break;
+        case 'line':
           this.chartColors = [
             this.color('114, 164, 194'),
             this.color('252, 180, 20')
           ];
           this.chartOptions = this.chartOption(this.chartType);
-        } else {
-          // make benchmark date array length match other data array
-          const benchmarkData: number[] = [];
-          const benchmark = _chartData[0].data[0];
-          _chartData[1].data.forEach(function () {
-            benchmarkData.push(benchmark);
+          break;
+        case 'doughnut':
+          // doughnut colors are weird for some reason
+          const _chartColors: any[] = [{ backgroundColor: [] }];
+          let doughnutColor = '114, 164, 194';
+          _chartLabels.forEach(function (doughnutLabel) {
+            if (doughnutLabel === 'Superstar') {
+              doughnutColor = '57, 63, 239';
+            } else if (doughnutLabel === 'Good') {
+              doughnutColor = '24, 173, 24';
+            } else if (doughnutLabel === 'Average') {
+              doughnutColor = '249, 233, 0';
+            } else if (doughnutLabel === 'Poor') {
+              doughnutColor = '234, 40, 37';
+            }
+            _chartColors[0].backgroundColor.push('rgba(' + doughnutColor + ', .7)');
           });
-          _chartData[0].data = benchmarkData;
+          this.chartColors = _chartColors;
+          break;
+      }
+      this.chartData = _chartData;
+      this.chartLabels = _chartLabels;
 
-          // color the bars
-          this.chartColors = [
-            this.benchMarkColor()
-            , this.color('114, 164, 194')
-          ];
-          _chartLabels = [];
-          this.chartMaps[1].data.forEach((value: number, key: string) => {
-            _chartLabels.push(key);
-          });
-          _chartData[1].label = 'Batch Scores';
-          _chartData[0].type = 'line';
-
-
-          this.chartOptions = this.chartOption('barAverageCompare');
-        }
-        break;
-      case 'line':
-        this.chartColors = [
-          this.color('114, 164, 194'),
-          this.color('252, 180, 20')
-        ];
-        this.chartOptions = this.chartOption(this.chartType);
-        break;
-      case 'doughnut':
-        // doughnut colors are weird for some reason
-        const _chartColors: any[] = [{ backgroundColor: [] }];
-        let doughnutColor = '114, 164, 194';
-        _chartLabels.forEach(function (doughnutLabel) {
-          if (doughnutLabel === 'Superstar') {
-            doughnutColor = '57, 63, 239';
-          } else if (doughnutLabel === 'Good') {
-            doughnutColor = '24, 173, 24';
-          } else if (doughnutLabel === 'Average') {
-            doughnutColor = '249, 233, 0';
-          } else if (doughnutLabel === 'Poor') {
-            doughnutColor = '234, 40, 37';
-          }
-          _chartColors[0].backgroundColor.push('rgba(' + doughnutColor + ', .7)');
-        });
-        this.chartColors = _chartColors;
-        break;
+      console.log(this.chartData);
     }
-    this.chartData = _chartData;
-    this.chartLabels = _chartLabels;
-
   }
   public ngOnChanges(changes) {
     if (changes['data']) {

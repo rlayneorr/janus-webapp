@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
-import { ChartsModule } from 'ng2-charts';
-
+// import { ChartsModule } from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -16,9 +16,15 @@ import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
 
-import { GrapherComponent } from './grapher/grapher.component';
-import { GraphComponent } from './grapher/graph/graph.component';
-import { TableComponent } from './grapher/table/table.component';
+// import { GrapherComponent } from './graphs-demo/grapher.component';
+// import { GraphComponent } from './Caliber/reports/graph/graph.component';
+// import { TableComponent } from './Caliber/reports/table/table.component';
+
+import { ReportingService } from './services/reporting.service';
+import { CaliberModule } from './Caliber/caliber.module';
+import { TraineeTechSkillsComponent } from './Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
@@ -46,18 +52,18 @@ const routes: Routes = [
     NavModule,
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
     JanusComponent,
-    GrapherComponent,
-    GraphComponent,
-    TableComponent,
+    
   ],
   providers: [
     ChuckNorrisService,
+    ReportingService,
   ],
   bootstrap: [AppComponent]
 })

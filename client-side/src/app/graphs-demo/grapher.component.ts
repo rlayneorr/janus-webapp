@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-
+/**
+ * @author John Hudson
+ */
 
 @Component({
   selector: 'app-grapher',
