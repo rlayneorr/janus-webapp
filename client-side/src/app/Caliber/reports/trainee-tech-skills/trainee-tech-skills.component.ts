@@ -9,8 +9,7 @@ import { ReportingService } from '../../../services/reporting.service';
 })
 export class TraineeTechSkillsComponent implements OnInit {
 
-  private chartData: any = [new Map([['test', 1]]
-  )];
+  public chartData: any = [];
   private dataSubscription: Subscription;
 
 
@@ -18,8 +17,7 @@ export class TraineeTechSkillsComponent implements OnInit {
 
 
 
-  // Chart labels
-  public radarChartLabels: string[] = ['AWS', 'Hibernate', 'JSP', 'Java', 'JavaScript', 'REST', 'SOAP', 'SQL', 'Spring'];
+  // Chart labels - for other charts the labels would have to be dynamic
   public dataSetLabels: string[] = ['Skills'];
  
   // Dataset for chart
