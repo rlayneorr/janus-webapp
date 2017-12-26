@@ -1,5 +1,5 @@
 To use this component insert this html element:
-<app-graph  *ngIf="chartData" [data]="(chartData | graphData:dataSetLabels)" [legend]=true [type]="chartType">test</app-graph>
+<app-graph  *ngIf="chartData" [data]="(chartData | graphData:dataSetLabels)" [legend]=true [type]="chartType"></app-graph>
 
 chartData is an array of datasets. [dataset 1,dataset 2 . . .]
 each dataset is the raw return from the service
