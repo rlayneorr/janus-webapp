@@ -16,10 +16,6 @@ import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
 
-// import { GrapherComponent } from './graphs-demo/grapher.component';
-// import { GraphComponent } from './Caliber/reports/graph/graph.component';
-// import { TableComponent } from './Caliber/reports/table/table.component';
-
 import { ReportingService } from './services/reporting.service';
 import { CaliberModule } from './Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
@@ -59,7 +55,6 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     JanusComponent,
-    
   ],
   providers: [
     ChuckNorrisService,

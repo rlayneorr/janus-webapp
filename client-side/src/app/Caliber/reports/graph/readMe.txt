@@ -1,6 +1,8 @@
 To use this component insert this html element:
-<app-graph [data]="chartData | whatever the pipe will be named" [legend]=true [type]="chartType">test</app-graph>
-*note the chartData will get piped later for formating so this will change.
+<app-graph  *ngIf="chartData" [data]="(chartData | graphData)" [legend]=true [type]="chartType">test</app-graph>
 
-Within the ts chartData is the varible that stores the rawdata from the service
+chartData is an array of datasets. [dataset 1,dataset 2 . . .]
+each dataset is the raw return from the service
+the pipe 'graphData' in the example takes the raw data from the service and formats it.
+
 chartType is the type of chart to display must string one of these strings {'line', 'radar', 'bar', 'doughnut'}

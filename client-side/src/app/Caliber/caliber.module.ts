@@ -18,6 +18,8 @@ import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/traine
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
 
+import { GraphDataPipe } from './pipes/graph-data.pipe';
+
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 
@@ -41,6 +43,8 @@ import { TableComponent } from './reports/table/table.component';
     TraineeTechSkillsComponent,
     GraphComponent,
     TableComponent,
+
+    GraphDataPipe,
   ],
   exports: [
     TraineeTechSkillsComponent,

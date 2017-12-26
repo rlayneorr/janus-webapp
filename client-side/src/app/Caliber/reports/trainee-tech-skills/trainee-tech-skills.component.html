@@ -7,5 +7,5 @@
   (chartHover)="chartHovered($event)"
   (chartClick)="chartClicked($event)"></canvas>
 </div> -->
-<app-graph [data]="chartData" [legend]=true [type]="chartType">test</app-graph>
+<app-graph  *ngIf="chartData" [data]="(chartData | graphData)" [legend]=true [type]="chartType">test</app-graph>
 <!-- <app-grapher></app-grapher> -->
