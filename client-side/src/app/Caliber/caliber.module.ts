@@ -23,6 +23,9 @@ import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 
+// pipes
+import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
+
 // components
 import { CaliberComponent } from './caliber.component';
 import { HomeComponent } from './home/home.component';
@@ -32,8 +35,13 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TestComponent } from './components/test/test.component';
+<<<<<<< HEAD
 import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
 import { TempJohnComponent } from './tempjohn/tempjohn.component';
+=======
+import { PanelComponent} from './panel/panel.component';
+
+>>>>>>> b71adc0a8d2c35c2683f1858007609d4a6430eae
 
 @NgModule({
   imports: [
@@ -45,6 +53,7 @@ import { TempJohnComponent } from './tempjohn/tempjohn.component';
     FormsModule,
   ],
   declarations: [
+    // components
     CaliberComponent,
     HomeComponent,
     AssessComponent,
@@ -52,8 +61,15 @@ import { TempJohnComponent } from './tempjohn/tempjohn.component';
     ReportsComponent,
     WeeklyLineChartComponent,
     TestComponent,
+<<<<<<< HEAD
     TrainerProfileComponent,
     TempJohnComponent,
+=======
+    PanelComponent,
+
+    //pipes
+    TraineeSearchPipePipe,
+>>>>>>> b71adc0a8d2c35c2683f1858007609d4a6430eae
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
