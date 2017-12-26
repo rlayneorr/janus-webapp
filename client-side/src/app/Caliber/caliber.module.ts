@@ -30,6 +30,8 @@ import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { LocationService } from './services/location.service';
+import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
+import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { TierPipe } from './pipes/tier-pipe';
 
 @NgModule({
@@ -56,6 +58,8 @@ import { TierPipe } from './pipes/tier-pipe';
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
+    DeactivateLocationComponent,
+    EditlocationComponent,
     TierPipe
   ],
   providers: [
