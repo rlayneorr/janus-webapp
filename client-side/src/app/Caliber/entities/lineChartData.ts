@@ -54,7 +54,6 @@ export class LineChartData {
                     }
                 }]
             },
-            responsive: true,
             datasetFill: false,
             tooltips: {
                 mode: 'x',
