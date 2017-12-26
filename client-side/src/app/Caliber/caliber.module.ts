@@ -18,6 +18,7 @@ import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/traine
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { RadarComponent } from './radar-test/radar-test.component';
 import { HttpClient } from '@angular/common/http';
+import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 
 @NgModule({
   imports: [
@@ -37,10 +38,11 @@ import { HttpClient } from '@angular/common/http';
     WeeklyLineChartComponent,
     RadarComponent,
     TraineeTechSkillsComponent,
+    ToolbarComponent
   ],
   exports: [
     TraineeTechSkillsComponent,
-    RadarComponent,
+    RadarComponent
   ],
   providers: [
     HttpClient
