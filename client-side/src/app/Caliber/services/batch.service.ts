@@ -4,12 +4,14 @@ import { HttpClient } from '@angular/common/http';
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 // services
-import { Batch } from '../entities/Batch';
-import { Observable } from 'rxjs/Observable';
 import { EnvironmentService } from './environment.service';
-import { enableProdMode } from '@angular/core/src/application_ref';
+
+// batches
+import { Batch } from '../entities/Batch';
+
 
 /**
  * this service manages calls to the web service
@@ -20,8 +22,6 @@ export class BatchService {
     private http: HttpClient;
     private envService: EnvironmentService;
 
-    private sendCredentials: boolean;
-
     private listSubject: BehaviorSubject<Batch[]>;
     private savedSubject: Subject<Batch>;
     private deletedSubject: Subject<Batch>;
@@ -29,8 +29,6 @@ export class BatchService {
     constructor(httpClient: HttpClient, envService: EnvironmentService) {
       this.http = httpClient;
       this.envService = envService;
-
-      this.sendCredentials = true;
 
       this.listSubject = new BehaviorSubject([]);
       this.savedSubject = new Subject();
@@ -90,6 +88,7 @@ export class BatchService {
      * retrieves all training batches regardless of the trainer
      * and pushes them on the list subject
      *
+     * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
      */
     public fetchAll(): void {
       const url = this.envService.buildUrl('vp/batch/all');
@@ -110,8 +109,7 @@ export class BatchService {
       const url = this.envService.buildUrl('all/batch/create');
       const data = JSON.stringify(batch);
 
-      this.http.post<Batch>(url, data, { withCredentials: this.sendCredentials })
-        .subscribe((savedBatch) => {
+      this.http.post<Batch>(url, data).subscribe((savedBatch) => {
           this.savedSubject.next(savedBatch);
         });
     }
@@ -122,14 +120,13 @@ export class BatchService {
      *
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
      *
-     * @param batch
+     * @param batch: Batch
      */
     public update(batch: Batch): void {
       const url = this.envService.buildUrl('all/batch/update');
       const data = JSON.stringify(batch);
 
-      this.http.put<Batch>(url, data, { withCredentials: this.sendCredentials })
-        .subscribe( (updatedBatch) => {
+      this.http.put<Batch>(url, data ).subscribe( (updatedBatch) => {
           this.savedSubject.next(updatedBatch);
         });
     }
@@ -141,13 +138,12 @@ export class BatchService {
      *
      * spring-security: @PreAuthorize("hasAnyRole('VP')")
      *
-     * @param batch
+     * @param batch: Batch
      */
     public delete(batch: Batch): void {
       const url = this.envService.buildUrl(`all/batch/delete/${batch.batchId}`);
 
-      this.http.delete(url, { withCredentials: this.sendCredentials })
-        .subscribe( () => {
+      this.http.delete(url).subscribe( () => {
           this.deletedSubject.next(batch);
         });
     }
@@ -169,8 +165,7 @@ export class BatchService {
 
       this.listSubject.next([]);
 
-      this.http.get<Batch[]>(url, { withCredentials: this.sendCredentials })
-        .subscribe((batches) => {
+      this.http.get<Batch[]>(url).subscribe((batches) => {
           this.listSubject.next(batches);
         });
 

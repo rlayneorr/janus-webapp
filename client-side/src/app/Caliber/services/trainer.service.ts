@@ -4,12 +4,18 @@ import { HttpClient } from '@angular/common/http';
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 
 // services
-import { Trainer } from '../entities/Trainer';
-import { Observable } from 'rxjs/Observable';
 import { EnvironmentService } from './environment.service';
 
+// entities
+import { Trainer } from '../entities/Trainer';
+
+/**
+ * this service manages calls to the web service
+ * for Trainer objects
+ */
 @Injectable()
 export class TrainerService {
   private http: HttpClient;
@@ -75,15 +81,15 @@ export class TrainerService {
    * email
    *
    * sprint-security: @PreAuthorize("permitAll")
+   * @param email: string
    *
-   * @param email: stirng
    *
    * @return Observable<Trainer>
    */
   public fetchByEmail(email: string): Observable<Trainer> {
     const url = this.envService.buildUrl(`training/trainer/byemail/${email}`);
 
-    return this.http.get<Trainer>(url, {withCredentials: this.sendCredentials });
+    return this.http.get<Trainer>(url);
   }
 
    /**
@@ -97,8 +103,7 @@ export class TrainerService {
 
     this.listSubject.next([]);
 
-    this.http.get<Trainer[]>(url, { withCredentials: this.sendCredentials } )
-      .subscribe( (trainers) => {
+    this.http.get<Trainer[]>(url).subscribe( (trainers) => {
         this.listSubject.next(trainers);
       });
   }
@@ -109,14 +114,13 @@ export class TrainerService {
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP')")
    *
-   * @param trainer
+   * @param trainer: Trainer
    */
   public create(trainer: Trainer): void {
     const url = this.envService.buildUrl('vp/trainer/create');
     const data = JSON.stringify(trainer);
 
-    this.http.post<Trainer>(url, data, { withCredentials: this.sendCredentials })
-      .subscribe( (savedTrainer) => {
+    this.http.post<Trainer>(url, data).subscribe( (savedTrainer) => {
         this.savedSubject.next(savedTrainer);
       });
   }
@@ -127,14 +131,13 @@ export class TrainerService {
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP')")
    *
-   * @param trainer
+   * @param trainer: Trainer
    */
   public update(trainer: Trainer): void {
     const url = this.envService.buildUrl('vp/trainer/update');
     const data = JSON.stringify(trainer);
 
-    this.http.post<Trainer>(url, data, { withCredentials: this.sendCredentials })
-      .subscribe((updatedTrainer) => {
+    this.http.post<Trainer>(url, data).subscribe((updatedTrainer) => {
         this.savedSubject.next(updatedTrainer);
       });
   }

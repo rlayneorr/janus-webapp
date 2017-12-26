@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -11,11 +11,20 @@ import { NavModule } from '../nav/nav.module';
 
 // routing
 import { routes } from './caliber.routes';
+import { SpringInterceptor } from './interceptors/spring.interceptor';
 
 // services
 import { BatchService } from './services/batch.service';
 import { TrainerService } from './services/trainer.service';
 import { TraineeService } from './services/trainee.service';
+import { EnvironmentService } from './services/environment.service';
+import { AssessmentService } from './services/assessment.service';
+import { RouteService } from './services/route.service';
+import { PanelService } from './services/panel.service';
+import { GradeService } from './services/grade.service';
+
+// pipes
+import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -26,7 +35,7 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TestComponent } from './components/test/test.component';
-import { EnvironmentService } from './services/environment.service';
+import { PanelComponent} from './panel/panel.component';
 
 
 @NgModule({
@@ -39,6 +48,7 @@ import { EnvironmentService } from './services/environment.service';
     FormsModule,
   ],
   declarations: [
+    // components
     CaliberComponent,
     HomeComponent,
     AssessComponent,
@@ -46,12 +56,23 @@ import { EnvironmentService } from './services/environment.service';
     ReportsComponent,
     WeeklyLineChartComponent,
     TestComponent,
+    PanelComponent,
+
+    //pipes
+    TraineeSearchPipePipe,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
     BatchService,
     EnvironmentService,
     TrainerService,
     TraineeService,
+    AssessmentService,
+    RouteService,
+    PanelService,
+    RouteService,
+    GradeService,
+
   ],
 })
 export class CaliberModule { }
