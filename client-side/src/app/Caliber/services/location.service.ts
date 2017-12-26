@@ -39,11 +39,11 @@ export class LocationService {
     )
       .subscribe(
       resp => {
-        console.log('updated Trainer successfully');
+        console.log('updated location successfully');
         this.getAll();
       },
       err => {
-        console.log('err getting tiers ' + err);
+        console.log('err updating location ' + err);
       }
       );
   }
