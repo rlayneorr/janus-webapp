@@ -9,3 +9,5 @@ dataSetLabels is an array that is the label for each dataset
 chartType is the type of chart to display must string one of these strings {'line', 'radar', 'bar', 'doughnut'}
 
 Tables follow the same format.
+
+trainee-tech-skills is an example of both grpah and table in use.
