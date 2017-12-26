@@ -56,10 +56,6 @@ export const routes: Routes = [
         component: TrainerProfileComponent,
       },
       {
-        path: 'tempjohn',
-        component: TempJohnComponent,
-      },
-      {
         path: '**',
         pathMatch: 'full',
         redirectTo: '/Caliber/home'
