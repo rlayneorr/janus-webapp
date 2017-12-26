@@ -27,7 +27,7 @@ export class TrainerService {
 
   // Get All Trainers
   getAll(): void {
-    this.http.get(environment.context + '/all/trainer/all', { withCredentials: true })
+    this.http.get(environment.getAllTrainers, { withCredentials: true })
       .map(
       resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
       // err => // can have the error mapped for all subscribers if you want also
@@ -43,7 +43,7 @@ export class TrainerService {
   }
 
   getTitles() {
-    this.http.get('http://localhost:8080/vp/trainer/titles/', { withCredentials: true })
+    this.http.get(environment.getAllTitles, { withCredentials: true })
       .map(
       resp => resp.json(),
     )
@@ -58,7 +58,7 @@ export class TrainerService {
   }
 
   getTiers() {
-    this.http.get('http://localhost:8080/types/trainer/role/all', { withCredentials: true })
+    this.http.get(environment.getAllTiers, { withCredentials: true })
       .map(
       resp => resp.json(),
     )
@@ -74,17 +74,17 @@ export class TrainerService {
 
 
   updateTrainer(trainer: Trainer) {
-    this.http.put('http://localhost:8080/vp/trainer/update', trainer, { withCredentials: true })
+    this.http.put(environment.editTrainer, trainer, { withCredentials: true })
       .map(
       resp => resp.json(),
     )
       .subscribe(
       resp => {
-        console.log('updated Trainer successfully');
+        console.log('updated trainer successfully');
         this.getAll();
       },
       err => {
-        console.log('err getting tiers ' + err);
+        console.log('err updating trainer ' + err);
       }
       );
   }

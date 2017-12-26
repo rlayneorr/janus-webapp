@@ -27,6 +27,7 @@ export class EditlocationComponent implements OnInit {
 
 
   editLocation(content) {
+    this.newState = this.currEditLocation.state;
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -35,8 +36,14 @@ export class EditlocationComponent implements OnInit {
     this.newState = newState;
   }
 
-  updateLocation() {
+  updateLocation(modal) {
+    console.log(modal)
     this.currEditLocation.state = this.newState;
+    this.currEditLocation.company = modal.company;
+    this.currEditLocation.city = modal.city;
+    this.currEditLocation.street = modal.street;
+    this.currEditLocation.zipcode = modal.zipcode;
+    console.log(this.currEditLocation);
     this.locationService.updateLocation(this.currEditLocation);
   }
 
