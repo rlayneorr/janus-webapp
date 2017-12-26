@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '../../../../entities/Location';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { LocationService } from '../../../services/location.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-editlocation',
@@ -18,12 +19,22 @@ export class EditlocationComponent implements OnInit {
   newZip: String;
   newState: String;
 
+  rForm: FormGroup;
 
   constructor(private modalService: NgbModal,
-    private locationService: LocationService) { }
+    private locationService: LocationService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.rForm = this.fb.group({
+      'company': [this.currEditLocation.company, Validators.required],
+      'street': [this.currEditLocation.street, Validators.required],
+      'city': [this.currEditLocation.city, Validators.required],
+      'zipcode': [this.currEditLocation.zipcode, Validators.required],
+    });
   }
+
+
 
 
   editLocation(content) {
@@ -37,13 +48,11 @@ export class EditlocationComponent implements OnInit {
   }
 
   updateLocation(modal) {
-    console.log(modal)
     this.currEditLocation.state = this.newState;
     this.currEditLocation.company = modal.company;
     this.currEditLocation.city = modal.city;
     this.currEditLocation.street = modal.street;
     this.currEditLocation.zipcode = modal.zipcode;
-    console.log(this.currEditLocation);
     this.locationService.updateLocation(this.currEditLocation);
   }
 
