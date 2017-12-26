@@ -96,9 +96,9 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer()">Update</button>
+      <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateTrainer(); c()">Update</button>
 
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-outline-dark" (click)="c()">Close</button>
     </div>
   </ng-template>
 
