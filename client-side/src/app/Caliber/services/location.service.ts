@@ -16,7 +16,7 @@ export class LocationService {
   }
 
   getAll() {
-    this.http.get(environment.context + 'all/location/all/', { withCredentials: true })
+    this.http.get(environment.getAllLocations, { withCredentials: true })
     .map(
       resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
       // err => // can have the error mapped for all subscribers if you want also
@@ -32,8 +32,8 @@ export class LocationService {
   }
 
 
-  updateLocation(trainer: Location) {
-    this.http.put('http://localhost:8080/vp/location/update', trainer, { withCredentials: true })
+  updateLocation(location: Location) {
+    this.http.put(environment.editLocation, location, { withCredentials: true })
       .map(
       resp => resp.json(),
     )

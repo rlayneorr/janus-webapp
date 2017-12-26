@@ -51,7 +51,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateLocation(editForm.value)">Update</button>
+    <button type="submit" data-dismiss="modal" class="btn btn-update" (click)="updateLocation(editForm.value); c('Close click')">Update</button>
 
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
   </div>
