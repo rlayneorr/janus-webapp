@@ -8,7 +8,6 @@ import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { TestComponent } from './components/test/test.component';
 import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
-import { TempJohnComponent } from './tempjohn/tempjohn.component';
 
 export const routes: Routes = [
   {
