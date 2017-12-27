@@ -240,6 +240,12 @@ export class ReportingService {
 
   }
 
+  /**
+   * Fetches data for displaying panel results.
+   *
+   * Note: While the endpoint suggests this is a reporting endpoint
+   * the handler is located in the PanelController.
+   */
   fetchPanelBatchAllTrainees(batchId: Number) {
     const endpoint = environment.apiPanelBatchAllTrainees(batchId);
     console.log(endpoint);
