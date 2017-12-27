@@ -73,19 +73,17 @@ export class GraphComponent implements OnInit, OnChanges {
       // control look of chart based on type
       switch (this.chartType) {
         case 'radar':
-          this.chartColors = [
-            this.color('114, 164, 194'),
-            this.color('242, 105, 37'),
-            this.color('71, 76, 85'),
-            this.color('252, 180, 20'),
-            this.color('0, 160, 0')];
+          this.chartColors = [this.fillColor('114, 164, 194')];
+          for (let i = 1; i < _chartData.length; i++) {
+            this.chartColors.push(this.emptyColor(this.randColString()));
+          }
           this.chartOptions = this.chartOption(this.chartType);
           break;
         case 'bar':
           if (_chartData[0].data.length !== 1) {
             this.chartColors = [
-              this.color('114, 164, 194'),
-              this.color('252, 180, 20')
+              this.fillColor('114, 164, 194'),
+              this.fillColor('252, 180, 20')
             ];
             this.chartOptions = this.chartOption(this.chartType);
           } else {
@@ -100,7 +98,7 @@ export class GraphComponent implements OnInit, OnChanges {
             // color the bars
             this.chartColors = [
               this.benchMarkColor()
-              , this.color('114, 164, 194')
+              , this.fillColor('114, 164, 194')
             ];
             _chartLabels = [];
             this.chartMaps[1].data.forEach((value: number, key: string) => {
@@ -115,8 +113,8 @@ export class GraphComponent implements OnInit, OnChanges {
           break;
         case 'line':
           this.chartColors = [
-            this.color('114, 164, 194'),
-            this.color('252, 180, 20')
+            this.fillColor('114, 164, 194'),
+            this.fillColor('252, 180, 20')
           ];
           this.chartOptions = this.chartOption(this.chartType);
           break;
@@ -150,7 +148,10 @@ export class GraphComponent implements OnInit, OnChanges {
   }
 
   // returns an object for chart color info
-  color(input: string) {
+  fillColor(input: string) {
+    if (input.charAt(0) === '#') {
+      input = this.convertHex(input);
+    }
     return {
       backgroundColor: 'rgba(' + input + ', .5)',
       pointBackgroundColor: 'rgba(' + input + ', .5)',
@@ -158,8 +159,34 @@ export class GraphComponent implements OnInit, OnChanges {
       borderWidth: 2,
       pointHoverBackgroundColor: 'rgba(' + input + ', .3)',
       pointHoverBorderColor: 'rgba(' + input + ', .3)',
-      pointBorderColor: '#fff'
+      pointBorderColor: '#fff',
+      fill: true
     };
+  }
+  emptyColor(input: string) {
+    if (input.charAt(0) === '#') {
+      input = this.convertHex(input);
+    }
+    const output = this.fillColor(input);
+    output.fill = false;
+    return output;
+  }
+  randColString(): string {
+    const letters = '0123456789ABCDEF'.split('');
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return this.convertHex(color);
+  }
+  convertHex(hex) {
+    hex = hex.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+
+    const result = r + ',' + g + ',' + b;
+    return result;
   }
   benchMarkColor() {
     return {

@@ -1,11 +1,12 @@
-<div class="col-sm-5 col-md-5 col-lg-5">
+<div class="col-sm-12 col-md-12 col-lg-12">
   <div class="panel panel-default">
     <div class="panel-heading">
       Technical Skills
     </div>
     <div class="panel-body">
-      <app-graph *ngIf="chartData && chartData.length === 2" [data]="(chartData | graphData:dataSetLabels)" [legend]=true [type]="chartType"></app-graph>
-      <app-table *ngIf="chartData && chartData.length === 2" [data]="(chartData | graphData:dataSetLabels)" [type]="chartType"></app-table>
+      <app-graph *ngIf="chartData && chartData.length === trainees.length + 1" [data]="(chartData | graphData:dataSetLabels)" [legend]=true
+        [type]="chartType"></app-graph>
+      <app-table *ngIf="chartData && chartData.length === trainees.length + 1" [data]="(chartData | graphData:dataSetLabels)" [type]="chartType"></app-table>
     </div>
   </div>
 </div>
