@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
+import { PanelReview } from '../Caliber/entities/PanelReview';
 
 
 
@@ -27,6 +28,9 @@ export class ReportingService {
 
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
+
+  private panelBatchAllTrainees = new BehaviorSubject<CacheData>(null);
+  public panelBatchAllTrainees$ = this.panelBatchAllTrainees.asObservable();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -234,5 +238,21 @@ export class ReportingService {
 
     // TODO: Implement API call and subject push logic
 
+  }
+
+  fetchPanelBatchAllTrainees(batchId: Number) {
+    const endpoint = environment.apiPanelBatchAllTrainees(batchId);
+    console.log(endpoint);
+    const params = {
+      batchId: batchId
+    };
+
+    if (this.needsRefresh(this.panelBatchAllTrainees, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => {
+          console.log(success);
+          this.panelBatchAllTrainees.next({params: params, data: success});
+        });
+    }
   }
 }

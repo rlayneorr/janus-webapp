@@ -45,6 +45,7 @@ import { GraphDataPipe } from './pipes/graph-data.pipe';
 
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
+import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 
 @NgModule({
   imports: [
@@ -76,6 +77,7 @@ import { TableComponent } from './reports/table/table.component';
     //pipes
     TraineeSearchPipePipe,
     GraphDataPipe,
+    PanelBatchAllTraineesComponent,
   ],
   exports: [
     TraineeTechSkillsComponent,
