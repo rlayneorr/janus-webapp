@@ -7,6 +7,7 @@ import { AssessComponent } from './assess/assess.component';
 import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
 import { TestComponent } from './components/test/test.component';
+import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
       {
         path: 'test',
         component: TestComponent,
+      },
+      {
+        path: 'trainer-profile',
+        component: TrainerProfileComponent,
       },
       {
         path: '**',
