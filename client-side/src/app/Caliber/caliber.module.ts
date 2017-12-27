@@ -41,6 +41,8 @@ import { HttpClient } from '@angular/common/http';
 import { TestComponent } from './components/test/test.component';
 import { PanelComponent} from './panel/panel.component';
 
+import { OverallFeedbackComponent } from './components/overall-feedback/overall-feedback.component';
+
 
 @NgModule({
   imports: [
@@ -64,6 +66,7 @@ import { PanelComponent} from './panel/panel.component';
     TraineeTechSkillsComponent,
     TestComponent,
     PanelComponent,
+    OverallFeedbackComponent,
 
     //pipes
     TraineeSearchPipePipe,

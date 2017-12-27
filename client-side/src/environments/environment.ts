@@ -8,6 +8,13 @@ export const environment = {
   context: 'http://localhost:8080/',
   bootContext: 'http://localhost/',
 
+  /* Evaluation Service API endpoints */
+  apiAllQCTraineeOverallNotes: (traineeId: Number) =>
+    environment.context + `qc/note/trainee/${traineeId}`,
+
+  apiAllTraineeNotes: (traineeId: Number) =>
+    environment.context + `all/notes/trainee/${traineeId}`,
+
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint: (skill: string, training: string, startDate) =>
     environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`,
