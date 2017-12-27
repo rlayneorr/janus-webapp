@@ -100,26 +100,25 @@ export class TrainerService {
     this.http.post(environment.addNewTrainer, json, { withCredentials: true })
       .subscribe(
       resp => {
-        console.log('created a new trainer');
         this.getAll();
+        console.log('created a new trainer');
       },
       err => {
-        console.log('err');
+        console.log(err);
       }
       );
   }
 
   deleteTrainer(trainer: Trainer) {
     this.http.delete(environment.context + '/vp/trainer/delete',
-      { withCredentials: true, body: trainer }).map(
-      resp => resp.json(),
-    )
-      .subscribe(
+      { withCredentials: true, body: trainer })
+    .subscribe(
       resp => {
+        this.getAll();
       },
       err => {
-        // handle the error however you want
+      // handle the error however you want
       }
-      );
+    );
   }
 }
