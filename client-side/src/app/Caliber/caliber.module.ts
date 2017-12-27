@@ -37,6 +37,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
+import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
 import { PanelComponent } from './panel/panel.component';
 
@@ -65,23 +66,21 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
-
     TraineeTechSkillsComponent,
+    ToolbarComponent,
     GraphComponent,
     TableComponent,
-
-
     TestComponent,
     PanelComponent,
 
-    //pipes
+    // pipes
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
   ],
   exports: [
     TraineeTechSkillsComponent,
-
+    RadarComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
