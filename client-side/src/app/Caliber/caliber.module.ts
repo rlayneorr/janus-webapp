@@ -34,6 +34,8 @@ import { DeactivateLocationComponent } from './settings/locations/deactivateloca
 import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { TierPipe } from './pipes/tier-pipe';
 import { CreatelocationComponent } from './settings/locations/createlocation/createlocation.component';
+import { PanelComponent } from './panel/panel.component';
+import { QualityComponent } from './quality/quality.component';
 
 @NgModule({
   imports: [
@@ -63,6 +65,8 @@ import { CreatelocationComponent } from './settings/locations/createlocation/cre
     DeactivateLocationComponent,
     EditlocationComponent,
     CreatelocationComponent,
+    PanelComponent,
+    QualityComponent,
     TierPipe
   ],
   providers: [
