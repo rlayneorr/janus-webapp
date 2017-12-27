@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-
 export class Category {
+    categoryId: number;
     skillCategory: string;
     active: boolean;
 }
