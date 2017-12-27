@@ -23,6 +23,7 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class TrainerService {
   private http: HttpClient;
+  private httpK: Http;
 
   private listSubject: BehaviorSubject<Trainer[]>;
   private savedSubject: Subject<Trainer>;
@@ -39,8 +40,9 @@ export class TrainerService {
   titles$: Observable<any> = this.titlesSubject.asObservable();
   tiers$: Observable<any> = this.tiersSubject.asObservable();
 
-  constructor(httpClient: HttpClient, envService: EnvironmentService) {
+  constructor(httpClient: HttpClient, envService: EnvironmentService, http: Http) {
     this.http = httpClient;
+    this.httpK = http;
     this.envService = envService;
 
     this.listSubject = new BehaviorSubject([]);
@@ -51,13 +53,13 @@ export class TrainerService {
 
     this.fetchAll();
   }
-/*
+
   populateOnStart() {
     this.getAll();
     this.getTitles();
     this.getTiers();
   }
-  */
+
 
     /**
      * returns a behavior observable of the current
@@ -160,15 +162,15 @@ export class TrainerService {
         this.savedSubject.next(updatedTrainer);
       });
   }
-/*
+
   // Get All Trainers
   getAll(): void {
-    this.http.get(environment.getAllTrainers, { withCredentials: true })
+    this.httpK.get(environment.getAllTrainers, { withCredentials: true })
       .map(
       resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
-      // err => // can have the error mapped for all subscribers if you want also
+      err => console.log(err)// can have the error mapped for all subscribers if you want also
     )
-      .subscribe(
+    .subscribe(
       resp => {
         this.dataSubject.next(resp);
       },
@@ -179,7 +181,7 @@ export class TrainerService {
   }
 
   getTitles() {
-    this.http.get(environment.getAllTitles, { withCredentials: true })
+    this.httpK.get(environment.getAllTitles, { withCredentials: true })
       .map(
       resp => resp.json(),
     )
@@ -194,7 +196,7 @@ export class TrainerService {
   }
 
   getTiers() {
-    this.http.get(environment.getAllTiers, { withCredentials: true })
+    this.httpK.get(environment.getAllTiers, { withCredentials: true })
       .map(
       resp => resp.json(),
     )
@@ -210,7 +212,7 @@ export class TrainerService {
 
 
   updateTrainer(trainer: Trainer) {
-    this.http.put(environment.editTrainer, trainer, { withCredentials: true })
+    this.httpK.put(environment.editTrainer, trainer, { withCredentials: true })
       .map(
       resp => resp.json(),
     )
@@ -247,7 +249,7 @@ export class TrainerService {
 
   deleteTrainer(trainer: Trainer) {
     this.http.delete(environment.deleteTrainer,
-      { withCredentials: true, body: trainer })
+      { withCredentials: true })
     .subscribe(
       resp => {
         this.getAll();
@@ -257,5 +259,4 @@ export class TrainerService {
       }
     );
   }
-  */
  }
