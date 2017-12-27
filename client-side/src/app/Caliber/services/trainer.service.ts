@@ -81,8 +81,8 @@ export class TrainerService {
    * email
    *
    * sprint-security: @PreAuthorize("permitAll")
-   *
    * @param email: string
+   *
    *
    * @return Observable<Trainer>
    */
