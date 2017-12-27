@@ -3,11 +3,8 @@
     <div class="col-md-12 col-lg-12 tab-panes">
       <br>
       <ul class="nav nav-tabs justify-content-end">
-        <li class="nav-item tab-pane fade show" id="addTrainerButton" role="button" (click)="open(addTrainerContent)" style="color:#F26925">
-          <button type="button" class="btn btn-change" style="background-color:#F26925; color:white">Create Trainer
-            <span class="fa fa-plus" aria-hidden="true"></span>
-          </button>
-          <button type="button" class="btn btn-secondary" (click)="open(addTrainercontent)">
+        <li class="nav-item tab-pane fade show" (click)="open(addTrainerContent)">
+          <button type="button" class="btn btn-secondary">
             <strong>Create Trainer
               <i class="fa fa-plus" aria-hidden="true"></i>
             </strong>
@@ -163,7 +160,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" (click)="addTrainer(addTrainerForm); c()" class="btn btn-add">Save</button>
+        <button type="button" (click)="addTrainer(addTrainerForm); c()" class="btn btn-add">Save</button>
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
       </div>
     </form>
