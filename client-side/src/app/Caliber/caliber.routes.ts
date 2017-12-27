@@ -8,8 +8,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { CategoriesComponent } from './settings/categories/categories.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
-import { ViewAllTrainersComponent } from './settings/trainers/view-all-trainers/view-all-trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
+import { QualityComponent } from './quality/quality.component';
+import { PanelComponent } from './panel/panel.component';
 
 export const routes: Routes = [
   {
@@ -25,8 +26,20 @@ export const routes: Routes = [
         component: ManageComponent
       },
       {
+        path: 'assess',
+        component: AssessComponent
+      },
+      {
+        path: 'quality',
+        component: QualityComponent
+      },
+      {
         path: 'reports',
         component: ReportsComponent
+      },
+      {
+        path: 'panel',
+        component: PanelComponent
       },
       {
         path: 'settings',
@@ -42,7 +55,7 @@ export const routes: Routes = [
           },
           {
             path: 'trainers',
-            component: ViewAllTrainersComponent
+            component: TrainersComponent
           }
         ]
       },

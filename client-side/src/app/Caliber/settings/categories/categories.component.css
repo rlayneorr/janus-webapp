@@ -32,18 +32,24 @@ a {
 	color: #F26925;
 }
 
+#addButton {
+	padding-bottom: 5px;
+}
+
+.btn-change:hover{
+    -webkit-transform: scale(1);
+    background-color: #31708f;
+}
+
 .sticky-header {
     padding: 10px;
     padding-right: 55px;
     font-size: 15px;
 	width: 1000px;
 } 
-#addButton {
-    transition: background-color 1s ease;
-    transition-property: background-color;
-    transition-duration: 1s;
-    transition-timing-function: ease;
-    transition-delay: initial;
+
+.categoryInput {
+	width: 400px;
 }
 
 /**********************

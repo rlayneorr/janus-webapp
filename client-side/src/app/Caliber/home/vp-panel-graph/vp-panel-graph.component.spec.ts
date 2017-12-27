@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewAllTrainersComponent } from './view-all-trainers.component';
+import { VpPanelGraphComponent } from './vp-panel-graph.component';
 
-describe('ViewAllTrainersComponent', () => {
-  let component: ViewAllTrainersComponent;
-  let fixture: ComponentFixture<ViewAllTrainersComponent>;
+describe('VpPanelGraphComponent', () => {
+  let component: VpPanelGraphComponent;
+  let fixture: ComponentFixture<VpPanelGraphComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewAllTrainersComponent ]
+      declarations: [ VpPanelGraphComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewAllTrainersComponent);
+    fixture = TestBed.createComponent(VpPanelGraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

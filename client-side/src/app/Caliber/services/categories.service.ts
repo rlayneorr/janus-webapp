@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
-import { Category } from '../beans/Category';
+import { Category } from '../entities/Category';
 
 @Injectable()
 export class CategoriesService {
@@ -11,14 +11,14 @@ export class CategoriesService {
   private dataSubject = new BehaviorSubject([]);
   public newCategory: Category = new Category();
 
-  joke$: Observable<any> = this.dataSubject.asObservable(); // this is how components should access the data if you want to cache it
+  categories$: Observable<any> = this.dataSubject.asObservable(); // this is how components should access the data if you want to cache it
 
   constructor(@Inject(Http) public http: Http) {
-    this.fetch();
+    this.getAll();
   }
 
-  fetch(): void {
-    this.http.get(environment.getAllCategories)
+  getAll(): void {
+    this.http.get(environment.getAllCategories, {withCredentials: true})
     .map(
       resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
       // err => // can have the error mapped for all subscribers if you want also
@@ -34,16 +34,27 @@ export class CategoriesService {
   }
 
   // adds a new category to the database
-  addNewCategory() {
-    console.log(this.newCategory);
-      this.http.post(environment.addNewCategory, this.newCategory, {withCredentials: true})
-        .subscribe(
-          resp => {
-            console.log(resp.json());
-          },
-          err => {
-            console.log(err);
-          }
-        );
+  addNewCategory(newCategory) {
+    this.http.post(environment.addNewCategory, newCategory, {withCredentials: true})
+    .subscribe(
+      resp => {
+        this.getAll();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  editCurrentCategory(currentCategory: Category) {
+    this.http.put(environment.editCurrentCategory, currentCategory, {withCredentials: true})
+    .subscribe(
+      resp => {
+        console.log(resp.json());
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }
