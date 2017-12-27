@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routes } from './caliber.routes';
 import { CaliberComponent } from './caliber.component';
 import { HomeComponent } from './home/home.component';
@@ -33,6 +33,9 @@ import { LocationService } from './services/location.service';
 import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
 import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { TierPipe } from './pipes/tier-pipe';
+import { CreatelocationComponent } from './settings/locations/createlocation/createlocation.component';
+import { PanelComponent } from './panel/panel.component';
+import { QualityComponent } from './quality/quality.component';
 
 @NgModule({
   imports: [
@@ -42,6 +45,7 @@ import { TierPipe } from './pipes/tier-pipe';
     RouterModule.forChild(routes),
     FormsModule,
     ChartsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     CaliberComponent,
@@ -60,6 +64,9 @@ import { TierPipe } from './pipes/tier-pipe';
     DeactivateTrainerComponent,
     DeactivateLocationComponent,
     EditlocationComponent,
+    CreatelocationComponent,
+    PanelComponent,
+    QualityComponent,
     TierPipe
   ],
   providers: [

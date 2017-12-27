@@ -16,7 +16,7 @@ export class LocationService {
   }
 
   getAll() {
-    this.http.get(environment.context + 'all/location/all/', { withCredentials: true })
+    this.http.get(environment.getAllLocations, { withCredentials: true })
     .map(
       resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
       // err => // can have the error mapped for all subscribers if you want also
@@ -31,29 +31,42 @@ export class LocationService {
       );
   }
 
-  updateLocation(trainer: Location) {
-    this.http.put(environment.context + 'vp/location/update', trainer, { withCredentials: true })
+  addLocation(location: Location) {
+    this.http.post(environment.addLocation, location, { withCredentials: true })
       .map(
       resp => resp.json(),
     )
       .subscribe(
       resp => {
-        console.log('updated Trainer successfully');
+        console.log('added location successfully');
         this.getAll();
       },
       err => {
-        console.log('err getting tiers ' + err);
+        console.log('err adding location ' + err);
+      }
+      );
+  }
+
+
+  updateLocation(location: Location) {
+    this.http.put(environment.editLocation, location, { withCredentials: true })
+      .map(
+      resp => resp.json(),
+    )
+      .subscribe(
+      resp => {
+        console.log('updated location successfully');
+        this.getAll();
+      },
+      err => {
+        console.log('err updating location ' + err);
       }
       );
   }
 
   deleteLocation(location: Location) {
     location.active = false;
-
-    this.http.delete(environment.context + '/vp/location/delete',
-      { withCredentials: true, body: location }).map(
-      resp => resp.json(),
-    )
+    this.http.delete(environment.deleteLocation, { withCredentials: true, body: location })
       .subscribe(
       resp => {
       },

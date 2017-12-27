@@ -115,8 +115,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="addNewCategory()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
-            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            <button (click)="addNewCategory(); c();" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button type="button" class="btn btn-outline-dark" (click)="c()">Close</button>
         </div>
     </form>
 </ng-template>
@@ -149,7 +149,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="editCurrentCategory()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button (click)="editCurrentCategory(); c()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
             <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         </div>
     </form>
