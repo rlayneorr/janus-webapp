@@ -22,6 +22,7 @@ import { AssessmentService } from './services/assessment.service';
 import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
+import { NoteService } from './services/note.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -39,8 +40,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
+import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
 import { PanelComponent } from './panel/panel.component';
-
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 
@@ -71,6 +72,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     GraphComponent,
     TableComponent,
     TestComponent,
+    TrainerProfileComponent,
     PanelComponent,
 
     // pipes
@@ -93,6 +95,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     RouteService,
     GradeService,
     HttpClient,
-  ]
+    NoteService,
+  ],
 })
 export class CaliberModule { }
