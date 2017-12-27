@@ -31,6 +31,22 @@ export class LocationService {
       );
   }
 
+  addLocation(location: Location) {
+    this.http.post(environment.addLocation, location, { withCredentials: true })
+      .map(
+      resp => resp.json(),
+    )
+      .subscribe(
+      resp => {
+        console.log('added location successfully');
+        this.getAll();
+      },
+      err => {
+        console.log('err adding location ' + err);
+      }
+      );
+  }
+
 
   updateLocation(location: Location) {
     this.http.put(environment.editLocation, location, { withCredentials: true })
