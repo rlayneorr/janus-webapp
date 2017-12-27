@@ -36,13 +36,19 @@ import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { RadarComponent } from './radar-test/radar-test.component';
 import { HttpClient } from '@angular/common/http';
+import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
-import { PanelComponent} from './panel/panel.component';
+import { PanelComponent } from './panel/panel.component';
 
 import { OverallFeedbackComponent } from './components/overall-feedback/overall-feedback.component';
 
+
+import { GraphDataPipe } from './pipes/graph-data.pipe';
+
+import { GraphComponent } from './reports/graph/graph.component';
+import { TableComponent } from './reports/table/table.component';
+import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 
 @NgModule({
   imports: [
@@ -62,18 +68,21 @@ import { OverallFeedbackComponent } from './components/overall-feedback/overall-
     ManageComponent,
     ReportsComponent,
     WeeklyLineChartComponent,
-    RadarComponent,
     TraineeTechSkillsComponent,
+    ToolbarComponent,
+    GraphComponent,
+    TableComponent,
     TestComponent,
     PanelComponent,
     OverallFeedbackComponent,
 
-    //pipes
+    // pipes
     TraineeSearchPipePipe,
+    GraphDataPipe,
+    PanelBatchAllTraineesComponent,
   ],
   exports: [
     TraineeTechSkillsComponent,
-    RadarComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
