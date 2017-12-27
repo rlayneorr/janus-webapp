@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  context: 'http://localhost:8070/',
+  context: 'http://localhost:8080/',
   bootContext: 'http://localhost/',
 
   /* Reporting service API endpoints */
@@ -66,4 +66,6 @@ export const environment = {
   apiTechnologiesForTheWeek: (batchId: Number, weekId: Number) =>
     environment.context + `all/assessments/categories/batch/${batchId}/${weekId}`,
 
+  apiPanelBatchAllTrainees: (batchId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
 };
