@@ -29,7 +29,7 @@ export class ReportingService {
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
-  private panelBatchAllTrainees = new BehaviorSubject<Array<PanelReview>>(null);
+  private panelBatchAllTrainees = new BehaviorSubject<CacheData>(null);
   public panelBatchAllTrainees$ = this.panelBatchAllTrainees.asObservable();
 
   constructor(private httpClient: HttpClient) { }
@@ -242,7 +242,17 @@ export class ReportingService {
 
   fetchPanelBatchAllTrainees(batchId: Number) {
     const endpoint = environment.apiPanelBatchAllTrainees(batchId);
+    console.log(endpoint);
+    const params = {
+      batchId: batchId
+    };
 
-
+    if (this.needsRefresh(this.panelBatchAllTrainees, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => {
+          console.log(success);
+          this.panelBatchAllTrainees.next({params: params, data: success});
+        });
+    }
   }
 }
