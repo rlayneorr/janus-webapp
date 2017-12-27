@@ -7,6 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Assessment } from '../entities/Assessment';
 import { AssessmentService } from '../services/assessment.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GradeService } from '../services/grade.service';
+import { Grade } from '../entities/Grade';
 
 
 @Component({
@@ -31,15 +33,17 @@ export class AssessComponent implements OnInit {
   batches: Batch[] = [];
   assessments: Assessment[] = [];
   selectedBatch: Batch = new Batch();
+  grades: Grade[] = [];
 
-  constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService) {
+  constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
+  private gradeService: GradeService) {
 
   }
 
   ngOnInit() {
     this.batchService.fetchAll();
     this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
-    this.batchService.getList().subscribe(batch => this.batches = batch);
+    this.gradeService.getList().subscribe(grade => this.grades = grade);
 
   }
 
@@ -47,6 +51,7 @@ export class AssessComponent implements OnInit {
     this.modalService.open(content);
     this.selectedBatch = this.batches[0];
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+    this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
   }
 
   getAssessments(week: number) {
