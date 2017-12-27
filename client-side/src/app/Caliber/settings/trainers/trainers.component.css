@@ -30,6 +30,7 @@
     background-color: white;
     color: #fa7427;
     border-bottom: 1px solid #ebe8e8;
+    border-color: white;
 }
 .btn-secondary:hover {
     background-color: #f1f1f1;
