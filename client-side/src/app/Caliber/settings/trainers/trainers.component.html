@@ -7,6 +7,11 @@
           <button type="button" class="btn btn-change" style="background-color:#F26925; color:white">Create Trainer
             <span class="fa fa-plus" aria-hidden="true"></span>
           </button>
+          <button type="button" class="btn btn-secondary" (click)="open(addTrainercontent)">
+            <strong>Create Trainer
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </strong>
+          </button>
         </li>
       </ul>
     </div>
@@ -158,7 +163,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="addTrainer(addTrainerForm); c()" class="btn btn-add">Save</button>
+        <button type="submit" (click)="addTrainer(addTrainerForm); c()" class="btn btn-add">Save</button>
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
       </div>
     </form>
