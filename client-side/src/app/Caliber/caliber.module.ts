@@ -22,6 +22,7 @@ import { AssessmentService } from './services/assessment.service';
 import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
+import { NoteService } from './services/note.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -36,6 +37,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
 import { TestComponent } from './components/test/test.component';
 import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
   imports: [
@@ -56,6 +58,10 @@ import { TrainerProfileComponent } from './trainer-profile/trainer-profile.compo
     WeeklyLineChartComponent,
     TestComponent,
     TrainerProfileComponent,
+    PanelComponent,
+
+    // pipes
+    TraineeSearchPipePipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -68,7 +74,7 @@ import { TrainerProfileComponent } from './trainer-profile/trainer-profile.compo
     PanelService,
     RouteService,
     GradeService,
-
+    NoteService,
   ],
 })
 export class CaliberModule { }
