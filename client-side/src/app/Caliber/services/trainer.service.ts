@@ -110,7 +110,7 @@ export class TrainerService {
   }
 
   deleteTrainer(trainer: Trainer) {
-    this.http.delete(environment.context + '/vp/trainer/delete',
+    this.http.delete(environment.deleteTrainer,
       { withCredentials: true, body: trainer })
     .subscribe(
       resp => {

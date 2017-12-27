@@ -18,7 +18,7 @@ export class CategoriesService {
   }
 
   getAll(): void {
-    this.http.get(environment.getAllCategories)
+    this.http.get(environment.getAllCategories, {withCredentials: true})
     .map(
       resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
       // err => // can have the error mapped for all subscribers if you want also
