@@ -66,11 +66,7 @@ export class LocationService {
 
   deleteLocation(location: Location) {
     location.active = false;
-
-    this.http.delete(environment.context + '/vp/location/delete',
-      { withCredentials: true, body: location }).map(
-      resp => resp.json(),
-    )
+    this.http.delete(environment.deleteLocation, { withCredentials: true, body: location })
       .subscribe(
       resp => {
       },
