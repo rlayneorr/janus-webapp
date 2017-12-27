@@ -80,7 +80,6 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
   ],
   exports: [
     TraineeTechSkillsComponent,
-    RadarComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
