@@ -1,27 +1,75 @@
-<button class="btn btn-lg btn-outline-primary pointer" (click)="open(content)">Add Assessment</button>
+<button class="btn btn-lg btn-outline-primary pointer" (click)="debug()">Debug</button>
+<button class="btn btn-lg btn-outline-primary pointer" (click)="open(addAssessmentContent)">Add Assessment</button>
 
-<div class="dropdown show">
 
-    <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Batches
-    </a>
-  
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" *ngFor="let batch of this.batches">{{batch.trainer}} {{batch.startDate}}</a>
+<!-- START ADD WEEK MODAL-->
+  <ng-template #addWeekContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Add Week</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-  </div>
+    <div class="modal-body">
+      <p>Are you sure you wish to create a new week? (This cannot be undone.)</p>
+      <button (click)="this.addWeek(); c('Close click')">Confirm</button>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    </div>
+  </ng-template>
+<!-- END ADD WEEK MODAL -->
+
+<!-- START ADD ASSESSMENT MODAL-->
+<ng-template #addAssessmentContent let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Assessment</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <div class="form-group">
+                        <label>Assessment Category:</label>
+                        <select class="form-control" id="categorySelect">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                </div>
+                <div>
+                    <label>Max Points:</label>
+                    <input type="number" class ="form-control" value ="100">
+                </div>
+                <div>
+                        <label>Assessment Type:</label>
+                        <select class="form-control" id="typeSelect">
+                          <option>Exam</option>
+                          <option>Verbal</option>
+                          <option>Project</option>
+                          <option>Other</option>
+                        </select>
+                </div>
+          <button (click)="this.addWeek(); c('Close click')">Confirm</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        </div>
+      </ng-template>
+<!-- END ADD ASSESSMENT MODAL -->
 
 
-
+<!-- TABS START -->
 <div class = "main-container">
-    <ngb-tabset>
-      <div (click)="this.getAssessments(i+1)">
-        <ngb-tab title="Week {{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index" >
+    <ngb-tabset (tabChange)="fetchNews($event)">
+        <ngb-tab title="Week {{i+1}}" id = "{{i+1}}"*ngFor="let in of counter(this.selectedBatch.weeks); let i = index" >
           <ng-template ngbTabContent>
           </ng-template>
         </ngb-tab>
-      </div>
       </ngb-tabset>
+      <button  (click)="open(addWeekContent)">+</button>
+<!-- TABS END -->
 
     <table class="table table-responsive" style="border-collapse: collapse;">
       <thead>
@@ -42,7 +90,7 @@
           {{trainee.name}}
         </td>
         <td *ngFor="let assessment of this.assessments">
-            <input class="form-control assessment-area" type="text" value="100" >
+            <input class="form-control assessment-area" type="text" [value]="this.getGrade(trainee.traineeId, assessment.assessmentId)">
         </td>
         <td>
             <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>

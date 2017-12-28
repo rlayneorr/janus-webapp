@@ -9,6 +9,7 @@ import { AssessmentService } from '../services/assessment.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GradeService } from '../services/grade.service';
 import { Grade } from '../entities/Grade';
+import { Trainee } from '../entities/Trainee';
 
 
 @Component({
@@ -18,14 +19,7 @@ import { Grade } from '../entities/Grade';
 })
 export class AssessComponent implements OnInit {
 
-  closeResult: string;
-  register= {
-    first_name: '',
-    last_name: '',
-    username: '',
-    password: '',
-    email: '',
-  };
+
 
   assessment: Assessment;
   loading = false;
@@ -40,15 +34,28 @@ export class AssessComponent implements OnInit {
 
   }
 
+  fetchNews(evt: any) {
+    const id = evt.nextId;
+
+    if (id === '+') {
+      return;
+    } else {
+      this.getAssessments(id);
+    }
+  }
+
   ngOnInit() {
     this.batchService.fetchAll();
+    this.batchService.getList().subscribe(batch => this.batches = batch);
     this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
     this.gradeService.getList().subscribe(grade => this.grades = grade);
-
   }
 
   open(content) {
     this.modalService.open(content);
+  }
+
+  debug() {
     this.selectedBatch = this.batches[0];
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
     this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
@@ -57,6 +64,24 @@ export class AssessComponent implements OnInit {
   getAssessments(week: number) {
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
   }
+
+  addWeek() {
+    this.selectedBatch.weeks += 1;
+    this.batchService.update(this.selectedBatch);
+  }
+
+  getGrade(traineeId, assessmentId) {
+    this.grades.forEach(grade => {
+      if (grade.trainee.traineeId === traineeId && grade.assessment.assessmentId === assessmentId) {
+
+        return grade.score;
+      }
+    });
+
+
+  }
+
+
 
   counter(i: number) {
     return new Array(i);
