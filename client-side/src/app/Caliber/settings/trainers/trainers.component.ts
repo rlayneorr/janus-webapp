@@ -33,13 +33,13 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.trainerService.populateOnStart();
-    this.trainerSubscription = this.trainerService.trainers$.subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getList().subscribe((resp) => {
       this.trainers = resp;
     });
-    this.trainerSubscription = this.trainerService.titles$.subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getTitlesList().subscribe((resp) => {
       this.titles = resp;
     });
-    this.trainerSubscription = this.trainerService.tiers$.subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getTierList().subscribe((resp) => {
       this.tiers = resp;
     });
     this.initFormControl();
@@ -54,9 +54,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
     });
   }
 
-  getAllTrainers() {
-    this.trainerService.getAll();
-  }
 
   addTrainer(modal: Trainer) {
     this.newTrainer = modal;
@@ -75,27 +72,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });*/
   }
-
-
-  // getAllTrainers() {
-  //   this.trainerService.getAll();
-  // }
-
-  // getAllTitles() {
-  //   this.trainerService.getTitles();
-  // }
-
-  /*createTrainer(content) {
-    console.log('opening form');
-    this.addForm = this.fb.group({
-      'name': ['null', Validators.required],
-      'email': ['null', Validators.required],
-      'title': ['null'],
-      'tier': ['null'],
-    });
-    console.log(this.addForm);
-    this.modalService.open(content, { size: 'lg' });
-  }*/
 
   // Open modal and get Trainer that belong to this modal
   // Backup these fields before the edit
@@ -144,7 +120,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.currEditTrainer.name = modal.name;
     this.currEditTrainer.email = modal.email;
     // call trainerService to update
-    this.trainerService.updateTrainer(this.currEditTrainer);
+    this.trainerService.update(this.currEditTrainer);
   }
 
 
