@@ -66,4 +66,6 @@ export const environment = {
   apiTechnologiesForTheWeek: (batchId: Number, weekId: Number) =>
     environment.context + `all/assessments/categories/batch/${batchId}/${weekId}`,
 
+  apiPanelBatchAllTrainees: (batchId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
 };

@@ -1,7 +1,11 @@
-<div class="chartHead">Batch Technical Skills</div>
-<div class="chartContainer">
-  <canvas baseChart
-  [datasets]="radarChartData"
-  [labels]="radarChartLabels"
-  [chartType]="radarChartType"></canvas>
+<div class="col-sm-5 col-md-5 col-lg-5">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Technical Skills
+    </div>
+    <div class="panel-body">
+      <app-graph *ngIf="chartData" [data]="(chartData | graphData:dataSetLabels)" [legend]=true [type]="chartType"></app-graph>
+      <app-table *ngIf="chartData" [data]="(chartData | graphData:dataSetLabels)" [type]="chartType"></app-table>
+    </div>
+  </div>
 </div>
