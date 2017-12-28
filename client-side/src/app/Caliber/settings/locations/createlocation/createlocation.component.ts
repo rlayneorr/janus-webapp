@@ -28,6 +28,9 @@ export class CreatelocationComponent implements OnInit {
 
   }
 
+  /**
+   * Create a form control with null fields
+   */
   initFormControl() {
     this.rForm = this.fb.group({
       'company': [null, Validators.required],
@@ -39,7 +42,10 @@ export class CreatelocationComponent implements OnInit {
     this.currNewLocation.state = 'holder';
   }
 
-
+  /**
+   * open the modal
+   * @param content: the modal that needed to be opened
+   */
   newLocation(content) {
     this.modalRef = this.modalService.open(content, { size: 'lg' });
     this.modalRef.result.then((result) => {
@@ -49,12 +55,20 @@ export class CreatelocationComponent implements OnInit {
     });
   }
 
-  // When state was changed, set form validator to true
+   /**
+   * triggers whenever state field was changed
+   * @param newState: state was changed
+   */
   stateChange(newState) {
     this.rForm.get('state').setValue(true);
     this.newState = newState;
   }
 
+    /**
+   * save all new fields into the location objet
+   * send the post request to create new location
+   * @param modal: fields from the modal 
+   */
   addLocation(modal) {
     this.currNewLocation.state = this.newState;
     this.currNewLocation.company = modal.company;
@@ -65,7 +79,10 @@ export class CreatelocationComponent implements OnInit {
     this.locationService.addLocation(this.currNewLocation);
   }
 
-
+/**
+ * close the modal and reset input fields
+ * @param content: modal to close
+ */
   close(content) {
     this.initFormControl();
     this.modalRef.close();
