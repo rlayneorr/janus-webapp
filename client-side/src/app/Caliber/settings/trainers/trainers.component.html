@@ -3,9 +3,11 @@
     <div class="col-md-12 col-lg-12 tab-panes">
       <br>
       <ul class="nav nav-tabs justify-content-end">
-        <li class="nav-item tab-pane fade show" id="addTrainerButton" role="button" (click)="open(addTrainerContent)" style="color:#F26925">
-          <button type="button" class="btn btn-change" style="background-color:#F26925; color:white">Create Trainer
-            <span class="fa fa-plus" aria-hidden="true"></span>
+        <li (click)="open(addTrainerContent)">
+          <button type="button" class="btn btn-secondary">
+            <strong>Create Trainer
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </strong>
           </button>
         </li>
       </ul>
