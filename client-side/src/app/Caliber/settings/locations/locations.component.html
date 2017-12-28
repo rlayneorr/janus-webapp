@@ -39,7 +39,9 @@
                                 <span *ngIf="location.active == true">
                                     <app-deactivatelocation [location]="location"></app-deactivatelocation>
                                 </span>
-                                <span *ngIf="location.active != true;then activateButton"></span>
+                                <span *ngIf="location.active != true">
+                                    <app-reactivatelocation [location]="location"></app-reactivatelocation>
+                                </span>
                             </div>
                         </div>
                     </td>
