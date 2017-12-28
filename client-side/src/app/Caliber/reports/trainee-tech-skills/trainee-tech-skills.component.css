@@ -34,3 +34,7 @@ h2 {
 .panel-body {
     border: 1px rgb(221, 221, 221) solid;
 }
+.modal-body-row{
+    border-bottom: 1px solid LightGrey;
+    margin-bottom   : 5px;
+}

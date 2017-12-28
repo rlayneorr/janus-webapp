@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, transition } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
+import { PDFService } from '../../../services/pdf.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-trainee-tech-skills',
@@ -12,13 +14,16 @@ export class TraineeTechSkillsComponent implements OnInit {
 
   private batchOverallSubscription: Subscription;
   private traineeOverallRadar: Subscription[];
+  private closeResult: string;
+
+  constructor(private reportsService: ReportingService, private pdfService: PDFService, private modalService: NgbModal) { }
 
 
-  constructor(private reportsService: ReportingService) { }
-
-
-  public trainees: number[];
-
+  public trainees: number[] = [];
+  // this is temp until api call.
+  public traineesList = [5528, 5535, 5526, 5530, 5536, 5529, 5534, 5533, 5524, 5532, 5538, 5537, 5525, 5539, 5527];
+  public traineesData: any[] = [];
+  public traineesNames: string[] = [];
   // Chart labels - this will be dynamic later
   public dataSetLabels: string[];
 
@@ -32,8 +37,7 @@ export class TraineeTechSkillsComponent implements OnInit {
 
     this.traineeOverallRadar = [];
     this.chartData = [];
-    this.trainees = [5536, 5534, 5531, 5535, 5537, 5538, 5539];
-    // this.trainees = [5536];
+
     this.dataSetLabels = ['batch'];
     this.batchOverallSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
 
@@ -51,25 +55,60 @@ export class TraineeTechSkillsComponent implements OnInit {
       }
     });
 
-    for (let i = 0; i < this.trainees.length; i++) {
+    for (let i = 0; i < this.traineesList.length; i++) {
       this.traineeOverallRadar.push(this.reportsService.traineeOverallRadar$.subscribe((result) => {
         if (!result) {
           // console.log('data not received');
-          this.reportsService.fetchTraineeOverallRadarChart(this.trainees[i]);
+          this.reportsService.fetchTraineeOverallRadarChart(this.traineesList[i]);
         } else {
           // console.log('data received');
           // console.log(result);
-          if (this.trainees[i] === result.params.traineeId) {
-            if (this.chartData === null) {
-              this.chartData = [result.data];
-              this.dataSetLabels.push(this.trainees[i].toString());
+          if (this.traineesList[i] === result.params.traineeId) {
+            if (this.traineesData === null) {
+              this.traineesData = [result.data];
+              this.traineesNames.push(this.traineesList[i].toString());
             } else {
-              this.chartData.push(result.data);
-              this.dataSetLabels.push(this.trainees[i].toString());
+              this.traineesData.push(result.data);
+              this.traineesNames.push(this.traineesList[i].toString());
             }
           }
         }
       }));
     }
   }
+  downloadPDF() {
+    this.pdfService.downloadPDF('trainee-tech-skills');
+  }
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  traineeChecked(index: number) {
+    if (this.trainees.includes(this.traineesList[index])) {
+      this.trainees = this.remove(this.trainees, this.traineesList[index]);
+      this.chartData = this.remove(this.chartData, this.traineesData[index]);
+      this.dataSetLabels = this.remove(this.dataSetLabels, this.traineesNames[index]);
+    } else {
+      this.trainees.push(this.traineesList[index]);
+      this.dataSetLabels = this.dataSetLabels.concat([this.traineesNames[index]]);
+      this.chartData = this.chartData.concat([this.traineesData[index]]);
+    }
+  }
+  remove(array: any[], element: any) {
+    return array.filter(e => e !== element);
+  }
 }
+

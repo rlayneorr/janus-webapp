@@ -14,7 +14,6 @@ export class GraphDataPipe implements PipeTransform {
         for (let i = 0; i < rawData.length; i++) {
             output.push(this.dataSet(rawData[i], dataSetLabels[i]));
         }
-        console.log(output);
         return output;
     }
     /**

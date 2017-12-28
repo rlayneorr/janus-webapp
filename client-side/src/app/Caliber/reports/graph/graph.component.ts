@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-
+import { Component, ViewChild, OnInit, Input, OnChanges } from '@angular/core';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 /**
  * To use this component insert this html element:
  *<app-graph  *ngIf="chartData" [data]="(chartData | graphData:dataSetLabels)" [legend]=true [type]="chartType"></app-graph>
@@ -27,6 +27,8 @@ export class GraphComponent implements OnInit, OnChanges {
   @Input() public legend: boolean;
   @Input() public type: string;
 
+  @ViewChild('baseChart') chart: BaseChartDirective;
+
   // class variables
   // raw data from input
   public chartMaps: any = null;
@@ -43,6 +45,7 @@ export class GraphComponent implements OnInit, OnChanges {
 
   private golden_ratio_conjugate = 0.618033988749895;
   private h: number;
+
 
   // events
   public chartClicked(e: any): void {
@@ -149,8 +152,20 @@ export class GraphComponent implements OnInit, OnChanges {
   public ngOnChanges(changes) {
     if (changes['data']) {
       this.ngOnInit();
+
+      if (this.chart.chart !== undefined) {
+        // give the charts labels
+        this.chart.chart.config.data.labels = this.chartLabels;
+        // add the datasets to the chart
+        this.chart.chart.config.data.datasets = this.chartData;
+        // now those datasets need colors
+        for (let i = 0; i < this.chart.chart.config.data.datasets.length; i++) {
+          this.chart.chart.config.data.datasets[i] = Object.assign(this.chart.chart.config.data.datasets[i], this.chartColors[i]);
+        }
+      }
     }
   }
+
 
   /** returns an object for chart color info
     * @param input is a string either 'r,g,b' where r , g, and b are rgb values or a hex value.
