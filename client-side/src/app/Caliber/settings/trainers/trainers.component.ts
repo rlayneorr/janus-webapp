@@ -21,10 +21,12 @@ export class TrainersComponent implements OnInit, OnDestroy {
   model = new Trainer();
 
   currEditTrainer: Trainer;
+  newTrainer: Trainer;
   newTier: String;
   newTitle: String;
 
   rForm: FormGroup;
+  addForm: FormGroup;
 
   constructor(private trainerService: TrainerService,
     private modalService: NgbModal, private fb: FormBuilder) { }
@@ -40,16 +42,28 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.trainerSubscription = this.trainerService.tiers$.subscribe((resp) => {
       this.tiers = resp;
     });
+    this.initFormControl();
+  }
+
+  initFormControl() {
+    this.addForm = this.fb.group({
+      'name': ['', Validators.required],
+      'email': ['', Validators.required],
+      'title': [''],
+      'tier': [''],
+    });
   }
 
   getAllTrainers() {
     this.trainerService.getAll();
   }
 
-  addTrainer(form) {
-    // console.log(this.model.name + ' ' + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    // alert(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    this.trainerService.createTrainer(this.model.name, this.model.title, this.model.email, this.model.tier);
+  addTrainer(modal: Trainer) {
+    this.newTrainer = modal;
+    console.log(modal);
+    console.log(modal.name);
+    this.trainerService.create(this.newTrainer);
+    this.trainers.push(this.newTrainer);
   }
 
 
@@ -70,6 +84,18 @@ export class TrainersComponent implements OnInit, OnDestroy {
   // getAllTitles() {
   //   this.trainerService.getTitles();
   // }
+
+  /*createTrainer(content) {
+    console.log('opening form');
+    this.addForm = this.fb.group({
+      'name': ['null', Validators.required],
+      'email': ['null', Validators.required],
+      'title': ['null'],
+      'tier': ['null'],
+    });
+    console.log(this.addForm);
+    this.modalService.open(content, { size: 'lg' });
+  }*/
 
   // Open modal and get Trainer that belong to this modal
   // Backup these fields before the edit
