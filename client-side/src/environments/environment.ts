@@ -8,6 +8,12 @@ export const environment = {
   context: 'http://localhost:8080/',
   bootContext: 'http://localhost/',
 
+  /* Evaluation Service API endpoints */
+  apiAllQCTraineeOverallNotes: (traineeId: Number) =>
+    environment.context + `qc/note/trainee/${traineeId}`,
+
+  apiAllTraineeNotes: (traineeId: Number) =>
+    environment.context + `all/notes/trainee/${traineeId}`,
   // API calls for the VP functionality group
   addNewCategory: 'http://localhost:8080/vp/category',
   getAllCategories: 'http://localhost:8080/vp/category',
@@ -79,7 +85,7 @@ export const environment = {
     environment.context + `all/assessments/average/${batchId}/${weekId}`,
 
   apiTechnologiesForTheWeek: (batchId: Number, weekId: Number) =>
-    environment.context + `all/assessments/categories/batch/${batchId}/${weekId}`,
+    environment.context + `all/assessments/categories/batch/${batchId}/week/${weekId}`,
 
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,

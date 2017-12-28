@@ -23,6 +23,7 @@ import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
+import { GranularityService } from './reports/services/granularity.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -42,6 +43,7 @@ import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
 import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
 import { PanelComponent } from './panel/panel.component';
+import { OverallFeedbackComponent } from './reports/overall-feedback/overall-feedback.component';
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 
@@ -109,6 +111,7 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
     TestComponent,
     TrainerProfileComponent,
     PanelComponent,
+    OverallFeedbackComponent,
 
     // pipes
     TraineeSearchPipePipe,
@@ -136,6 +139,7 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
     TrainerService,
     LocationService,
     CategoriesService,
+    GranularityService,
   ],
   bootstrap: [
     TrainersComponent
