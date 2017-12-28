@@ -234,8 +234,6 @@ export class TrainerService {
   }
 
   deleteTrainer(trainer) {
-    const json = JSON.stringify(trainer);
-
     this.http.request('delete', environment.deleteTrainer,
       { withCredentials: true,
         body: trainer
