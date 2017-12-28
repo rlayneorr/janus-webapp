@@ -17,9 +17,11 @@ export class GranularityService {
   /* Subjects & Paired Observables */
   private currentBatch = new BehaviorSubject<Batch>(null);
   private currentTrainee = new BehaviorSubject<Trainee>(null);
+  private currentWeek = new BehaviorSubject<Number>(null);
 
   public currentBatch$ = this.currentBatch.asObservable();
   public currentTrainee$ = this.currentTrainee.asObservable();
+  public currentWeek$ = this.currentWeek.asObservable();
 
   constructor() { }
 
@@ -43,5 +45,13 @@ export class GranularityService {
    */
   pushBatch(batch: Batch) {
     this.currentBatch.next(batch);
+  }
+
+  /**
+   * Pushes the specified week number to the currentWeek subject.
+   * @param week - Week number to push to the subject.
+   */
+  pushWeek(week: Number) {
+    this.currentWeek.next(week);
   }
 }
