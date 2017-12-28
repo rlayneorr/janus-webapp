@@ -1,29 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from '../../services/categories.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { Category } from '../../entities/Category';
-import { Http } from '@angular/http';
-import { environment } from '../../../../environments/environment';
+
+// rxjs
 import { Subscription } from 'rxjs/Subscription';
+
+// services
+import { CategoriesService } from '../../services/categories.service';
+import { environment } from '../../../../environments/environment';
+
+// entities
+import { Category } from '../../entities/Category';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
+
 export class CategoriesComponent implements OnInit {
 
+  private categorySubscription: Subscription;
+
+  categories: Category[];
   model = new Category();
   newCategory: Category = new Category();
-  private categorySubscription: Subscription;
-  categories: Category[];
   currentCategory: Category;
   isActive: boolean;
 
-  constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
+  constructor(private categoriesService: CategoriesService, private modalService: NgbModal) { }
 
+  // Loads all categories
   ngOnInit() {
+    this.categoriesService.fetchAll();
     this.categorySubscription = this.categoriesService.categories$.subscribe((resp) => {
       this.categories = resp;
     });
@@ -35,16 +44,20 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.addNewCategory(this.newCategory);
   }
 
+  // Change status of active
   activeChange(activeValue) {
     console.log(activeValue);
     this.isActive = activeValue;
   }
 
+  // Send call to update active status
   editCurrentCategory() {
     this.currentCategory.active = this.isActive;
     this.categoriesService.editCurrentCategory(this.currentCategory);
   }
 
+
+  // Modal open functions
   open(content) {
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
