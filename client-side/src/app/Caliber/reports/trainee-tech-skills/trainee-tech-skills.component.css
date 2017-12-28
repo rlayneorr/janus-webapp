@@ -1,16 +1,15 @@
-/* .data-box {
+.data-box {
     font-size: 80%;
     text-align: center;
     width: 10%;
 }
 .panel-heading {
-    background: #be5108;
-    box-shadow: 0 1 1 1 lightgray;
+    background: rgb(242, 105, 37);
     color: white;
     padding: 1vmin;
-    border: 1px solid lightgrey;
+    border-top-left-radius: 2vmin;
+    border-top-right-radius: 2vmin;
 }
-
 .chartContainer {
     padding: 0.5vmin;
     border: 1px solid lightgrey;
@@ -28,4 +27,10 @@
 }
 h2 {
     text-align: center;
-}*/
+}
+.container {
+    margin: 2vmin;
+}
+.panel-body {
+    border: 1px rgb(221, 221, 221) solid;
+}

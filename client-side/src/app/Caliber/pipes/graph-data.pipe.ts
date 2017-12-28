@@ -10,9 +10,11 @@ export class GraphDataPipe implements PipeTransform {
      */
     transform(rawData: any[], dataSetLabels: string[]): any {
         const output: any[] = [];
+
         for (let i = 0; i < rawData.length; i++) {
             output.push(this.dataSet(rawData[i], dataSetLabels[i]));
         }
+        console.log(output);
         return output;
     }
     /**

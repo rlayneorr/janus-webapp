@@ -41,3 +41,7 @@ tr {
 .trainee-name {
     text-align: left;
 }
+
+.container {
+    margin: 2vmin;
+}
