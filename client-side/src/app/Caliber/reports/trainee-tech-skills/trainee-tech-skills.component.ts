@@ -21,6 +21,7 @@ export class TraineeTechSkillsComponent implements OnInit {
 
   public trainees: number[] = [];
   // this is temp until api call.
+  public batchId = 2201;
   public traineesList = [5528, 5535, 5526, 5530, 5536, 5529, 5534, 5533, 5524, 5532, 5538, 5537, 5525, 5539, 5527];
   public traineesData: any[] = [];
   public traineesNames: string[] = [];
@@ -43,14 +44,16 @@ export class TraineeTechSkillsComponent implements OnInit {
 
       if (!result) {
         // console.log('data not received');
-        this.reportsService.fetchBatchOverallRadarChart(2201);
+        this.reportsService.fetchBatchOverallRadarChart(this.batchId);
       } else {
         // console.log('data received');
         // console.log(result);
         if (this.chartData === null) {
           this.chartData = [result.data];
         } else {
-          this.chartData.unshift(result.data);
+          if (this.batchId === result.params.batchId) {
+            this.chartData.unshift(result.data);
+          }
         }
       }
     });

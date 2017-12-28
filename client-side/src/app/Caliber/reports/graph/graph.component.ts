@@ -121,13 +121,13 @@ export class GraphComponent implements OnInit, OnChanges {
           break;
         case 'line':
           this.chartColors = [
-            this.fillColor('114, 164, 194'),
-            this.fillColor('252, 180, 20')
+            this.emptyColor('114, 164, 194'),
+            this.emptyColor('252, 180, 20')
           ];
           this.chartOptions = this.chartOption(this.chartType);
           break;
         case 'doughnut':
-          // doughnut colors are weird for some reason
+          // doughnut colors are set weirdly compared to the other charts
           const _chartColors: any[] = [{ backgroundColor: [] }];
           let doughnutColor = '114, 164, 194';
           _chartLabels.forEach(function (doughnutLabel) {
@@ -151,10 +151,12 @@ export class GraphComponent implements OnInit, OnChanges {
   }
   public ngOnChanges(changes) {
     if (changes['data']) {
+      // ngOnInit has a lot pretty much all that is needed to redraw the chart
       this.ngOnInit();
 
+      // just have to add the actual stuff to the chart
       if (this.chart.chart !== undefined) {
-        // give the charts labels
+        // give the chart labels
         this.chart.chart.config.data.labels = this.chartLabels;
         // add the datasets to the chart
         this.chart.chart.config.data.datasets = this.chartData;
@@ -168,7 +170,7 @@ export class GraphComponent implements OnInit, OnChanges {
 
 
   /** returns an object for chart color info
-    * @param input is a string either 'r,g,b' where r , g, and b are rgb values or a hex value.
+    * @param input is a string either 'r,g,b' where r , g, and b are rgb values or a hex value (#ffffff).
   */
   fillColor(input: string) {
     if (input.charAt(0) === '#') {
@@ -191,7 +193,7 @@ export class GraphComponent implements OnInit, OnChanges {
     return output;
   }
   /**
-   * generates nice looking p-random colors.
+   * generates nice looking pseudo-random colors.
   */
   randColString(): string {
     this.h += this.golden_ratio_conjugate;
@@ -342,7 +344,7 @@ export class GraphComponent implements OnInit, OnChanges {
       yAxes: [{
         ticks: {
           beginAtZero: false,
-          fixedStepSize: 10,
+          fixedStepSize: 20,
           max: 100,
           suggestedMin: 40
         },
