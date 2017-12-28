@@ -27,7 +27,7 @@ export class DeactivateLocationComponent implements OnInit {
         this.modalService.open(content);
     }
 
-    deactivateTrainer() {
-        this.ls.deleteLocation(this.location);
+    deactivateLocation() {
+
     }
 }

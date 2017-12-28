@@ -3,7 +3,7 @@
     font-family: 'Futura-Std-Book';
 	src: url('../../../../../assets/fonts/Futura-Std-Book.otf') format('opentype');
 }
-
+*/
 .close {
     color: rgb(242, 105, 37);
 }
@@ -37,12 +37,13 @@ div {
     position: relative;
     padding: 15px;
 }
-/*
+
 .h1, .h2, .h3, h1, h2, h3 {
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
+/*
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     font-family: inherit;
     font-weight: 500;
@@ -57,6 +58,7 @@ div {
 .h4, h4 {
     font-size: 18px;
 }
+*/
 
 h4 {
     display: block;
@@ -73,7 +75,7 @@ h3 {
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
 }
-
+/*
 body {
    /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  
     font-size: 14px;
@@ -85,9 +87,9 @@ body {
 body {
     font-family: 'Futura-Std-Book';
 }
-
+*/
 .glyphicon-remove {
-    color: rgb(255, 117, 117);
+    color: #ff7575;
     width: 100%;
 }
 
@@ -165,4 +167,3 @@ input[type=submit] {
 .btn-default:hover {
     background-image: linear-gradient(to bottom,rgb(240, 239, 239) 0,#cccbcb 100%);
 }
-*/
