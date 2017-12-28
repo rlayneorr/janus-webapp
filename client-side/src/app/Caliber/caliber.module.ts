@@ -23,6 +23,7 @@ import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
+import { GranularityService } from './reports/services/granularity.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -134,6 +135,7 @@ import { BatchOverallLineChartComponent } from './reports/batch-overall-line-cha
     TrainerService,
     LocationService,
     CategoriesService,
+    GranularityService,
   ],
   bootstrap: [
     TrainersComponent
