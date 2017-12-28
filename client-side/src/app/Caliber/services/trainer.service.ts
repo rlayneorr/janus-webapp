@@ -179,7 +179,6 @@ export class TrainerService {
     });
   }
 
-
   /**
     * retrieves all titles and pushes them on the
     * titles subject
@@ -214,24 +213,6 @@ export class TrainerService {
       });
   }
 
-  // Get All Trainers
-  getAll(): void {
-    this.httpK.get(environment.getAllTrainers, { withCredentials: true })
-      .map(
-      resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
-      err => console.log(err)// can have the error mapped for all subscribers if you want also
-      )
-      .subscribe(
-      resp => {
-        this.dataSubject.next(resp);
-      },
-      err => {
-        // handle the error however you want
-      }
-      );
-  }
-
-
   createTrainer(name, title, email, tier) {
     const json = {
       'name': name,
@@ -243,7 +224,7 @@ export class TrainerService {
     this.http.post(environment.addNewTrainer, json, { withCredentials: true })
       .subscribe(
       resp => {
-        this.getAll();
+        this.fetchAll();
         console.log('created a new trainer');
       },
       err => {
@@ -257,7 +238,7 @@ export class TrainerService {
       { withCredentials: true })
       .subscribe(
       resp => {
-        this.getAll();
+        this.fetchAll();
       },
       err => {
         // handle the error however you want
