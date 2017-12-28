@@ -38,7 +38,7 @@ export class TraineeTechSkillsComponent implements OnInit {
 
     this.traineeOverallRadar = [];
     this.chartData = [];
-
+    // this is until I can get batch data from the api
     this.dataSetLabels = ['batch'];
     this.batchOverallSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
 

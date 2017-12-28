@@ -155,7 +155,7 @@ export class GraphComponent implements OnInit, OnChanges {
       this.ngOnInit();
 
       // just have to add the actual stuff to the chart
-      if (this.chart.chart !== undefined) {
+      if (this.chart !== undefined && this.chart.chart !== undefined) {
         // give the chart labels
         this.chart.chart.config.data.labels = this.chartLabels;
         // add the datasets to the chart
