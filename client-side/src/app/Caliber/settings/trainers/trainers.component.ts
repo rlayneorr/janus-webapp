@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-trainers',
@@ -21,12 +22,15 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   currEditTrainer: Trainer;
   newTier: String;
+  newTitle: String;
 
+  rForm: FormGroup;
 
   constructor(private trainerService: TrainerService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.trainerService.populateOnStart();
     this.trainerSubscription = this.trainerService.trainers$.subscribe((resp) => {
       this.trainers = resp;
     });
@@ -43,7 +47,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   addTrainer(form) {
-    console.log(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
+    // console.log(this.model.name + ' ' + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
     // alert(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
     this.trainerService.createTrainer(this.model.name, this.model.title, this.model.email, this.model.tier);
   }
@@ -68,21 +72,37 @@ export class TrainersComponent implements OnInit, OnDestroy {
   // }
 
   // Open modal and get Trainer that belong to this modal
+  // Backup these fields before the edit
   editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
-    this.modalService.open(content);
-
-    // .result.then((result) => {
-    //   this.closeResult = `Closed with: ${result}`;
-    // }, (reason) => {
-    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    // });
+    this.newTier = modalTrainer.tier;
+    this.newTitle = modalTrainer.title;
+    this.rForm = this.fb.group({
+      'name': [this.currEditTrainer.name, Validators.required],
+      'email': [this.currEditTrainer.email, Validators.required],
+      'title': [this.newTitle],
+      'tier': [this.newTier],
+    });
+    this.modalService.open(content, { size: 'lg' });
   }
 
+  // When tier was changed
   tierChange(newTier) {
     this.newTier = newTier;
   }
 
+  // when title was changed
+  titleChange(newTitle) {
+    // Empty title, changed back to original
+    if (newTitle === '') {
+      this.newTitle = this.currEditTrainer.title;
+    } else {
+      // New title was changed
+      this.newTitle = newTitle;
+    }
+  }
+
+  // Update button was clicked, try to update to database
   newTierChange(newTier) {
     this.model.tier = newTier;
   }
@@ -91,9 +111,13 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.model.title = newTitle;
   }
 
-  updateTrainer() {
-    console.log('called update Trainer');
+  updateTrainer(modal) {
+    // replacing the trainer's fields with the new ones
     this.currEditTrainer.tier = this.newTier;
+    this.currEditTrainer.title = this.newTitle;
+    this.currEditTrainer.name = modal.name;
+    this.currEditTrainer.email = modal.email;
+    // call trainerService to update
     this.trainerService.updateTrainer(this.currEditTrainer);
   }
 
@@ -109,8 +133,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   // clean up subscriptions
- ngOnDestroy() {
-  this.trainerSubscription.unsubscribe();
+  ngOnDestroy() {
+    this.trainerSubscription.unsubscribe();
   }
 
 }

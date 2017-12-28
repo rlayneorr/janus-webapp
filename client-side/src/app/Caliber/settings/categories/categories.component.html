@@ -4,9 +4,11 @@
         <div class="col-md-12 col-lg-12 tab-panes">
             <br>
             <ul class="nav nav-tabs justify-content-end">
-                <li class="nav-item tab-pane fade show" id="addButton" role="button" (click)="open(addCategory)" style="color:#F26925">
-                    <button type="button" class="btn btn-primary btn-change" style="color:#F26925">Create Category
-                        <span class="fa fa-plus" aria-hidden="true"></span>
+                <li id="addButton" role="button" (click)="open(addCategory)">
+                    <button type="button" class="btn btn-secondary">
+                        <strong>Create Category
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </strong>
                     </button>
                 </li>
             </ul>
@@ -30,7 +32,7 @@
                 <tbody>
                     <!-- Load all categories -->
                     <tr *ngFor="let category of categories; let i=index">
-                        <td *ngIf='(i < categories.length / 3)' (click)='editopen(editCategory,i)'>
+                        <td *ngIf='(i < categories.length / 3)' (click)='editopen(editCategory,category)'>
                             {{category.skillCategory}}
                         </td>
                         <!-- Check for active condition -->
@@ -55,7 +57,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let category of categories; let i=index'>
-                        <td *ngIf='(i > categories.length / 3) && (i < ((categories.length / 3) * 2))' (click)="editopen(editCategory,i)">
+                        <td *ngIf='(i > categories.length / 3) && (i < ((categories.length / 3) * 2))' (click)="editopen(editCategory,category)">
                             {{category.skillCategory}}
                         </td>
                         <td *ngIf='category.active === false && ((i > categories.length / 3) && (i < ((categories.length / 3) * 2)))'>
@@ -79,7 +81,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let category of categories; let i=index">
-                        <td *ngIf='(i > ((categories.length / 3) * 2))' (click)="editopen(editCategory,i)">
+                        <td *ngIf='(i > ((categories.length / 3) * 2))' (click)="editopen(editCategory,category)">
                             {{category.skillCategory}}
                         </td>
                         <td *ngIf='category.active === false && (i > ((categories.length / 3) * 2))'>
@@ -115,8 +117,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="addNewCategory()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
-            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            <button (click)="addNewCategory(); c();" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button type="button" class="btn btn-outline-dark" (click)="c()">Close</button>
         </div>
     </form>
 </ng-template>
@@ -134,20 +136,22 @@
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
                     <label for="categoryName">Category:</label>
-                    <input [ngModel]="this.categories[currentCategory].skillCategory" name="category" type="text" class="form-control" id="categoryName"
+                    <input  name="skillCategory" type="text" class="form-control" [ngModel]="currentCategory.skillCategory" id="editCategory"
                         placeholder="Category" required>
                 </div>
             </div>
             <div class="form-group col-sm-1 col-md-1">
                 <label for="categoryName">Active:</label>
                 <br />
-                <input type="checkbox" style="text-align: left" *ngIf="this.categories[currentCategory].active===true"
+                <input type="checkbox" name='active' style="text-align: left" [ngModel]="currentCategory.active" 
+                (ngModelChange)="activeChange($event)" *ngIf="currentCategory.active===true"
                 [checked]="true"/>
-                <input type="checkbox" style="text-align: left" *ngIf="this.categories[currentCategory].active===false" />
+                <input type="checkbox" name='active' style="text-align: left" [ngModel]="currentCategory.active"
+                (ngModelChange)="activeChange($event)" *ngIf="currentCategory.active===false"/>
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="editCurrentCategory()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button (click)="editCurrentCategory(); c()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
             <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         </div>
     </form>
