@@ -233,10 +233,12 @@ export class TrainerService {
       );
   }
 
-  deleteTrainer(trainer: Trainer) {
-    this.http.delete(environment.deleteTrainer,
-      { withCredentials: true })
-      .subscribe(
+  deleteTrainer(trainer) {
+    this.http.request('delete', environment.deleteTrainer,
+      { withCredentials: true,
+        body: trainer
+      })
+    .subscribe(
       resp => {
         this.fetchAll();
       },
