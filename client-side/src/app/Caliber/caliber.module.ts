@@ -64,6 +64,7 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 
 @NgModule({
   imports: [
@@ -105,6 +106,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     TestComponent,
     TrainerProfileComponent,
     PanelComponent,
+    ReactivateLocationComponent,
 
     // pipes
     TraineeSearchPipePipe,

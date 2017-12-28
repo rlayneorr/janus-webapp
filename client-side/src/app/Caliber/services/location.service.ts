@@ -87,4 +87,19 @@ export class LocationService {
       }
       );
   }
+
+  reactivateLocation(location: Location) {
+    location.active = true;
+    this.http.request('put', environment.reactivateLocation,
+      { withCredentials: true,
+        body: location
+      })
+      .subscribe(
+      resp => {
+      },
+      err => {
+        // handle the error however you want
+      }
+      );
+  }
 }
