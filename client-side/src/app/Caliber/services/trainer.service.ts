@@ -26,6 +26,8 @@ export class TrainerService {
   private httpK: Http;
 
   private listSubject: BehaviorSubject<Trainer[]>;
+  private titlesSubject: BehaviorSubject<any[]>;
+  private tiersSubject: BehaviorSubject<any[]>;
   private savedSubject: Subject<Trainer>;
   private deletedSubject: Subject<Trainer>;
   private envService: EnvironmentService;
@@ -33,12 +35,6 @@ export class TrainerService {
   private sendCredentials: boolean;
 
   private dataSubject = new BehaviorSubject([]);
-  private titlesSubject = new BehaviorSubject([]);
-  private tiersSubject = new BehaviorSubject([]);
-
-  trainers$: Observable<any> = this.dataSubject.asObservable(); // this is how components should access the data if you want to cache it
-  titles$: Observable<any> = this.titlesSubject.asObservable();
-  tiers$: Observable<any> = this.tiersSubject.asObservable();
 
   constructor(private httpClient: HttpClient, envService: EnvironmentService, http: Http) {
     this.http = httpClient;
@@ -46,6 +42,8 @@ export class TrainerService {
     this.envService = envService;
 
     this.listSubject = new BehaviorSubject([]);
+    this.titlesSubject = new BehaviorSubject([]);
+    this.tiersSubject = new BehaviorSubject([]);
     this.savedSubject = new Subject();
     this.deletedSubject = new Subject();
 
@@ -55,28 +53,45 @@ export class TrainerService {
   }
 
   populateOnStart() {
-    this.getAll();
     this.getTitles();
     this.getTiers();
   }
 
 
-    /**
-     * returns a behavior observable of the current
-     * trainer list
-     *
-     * @return Observable<Trainer[]>
-     */
+  /**
+   * returns a behavior observable of the current
+   * trainer list
+   *
+   * @return Observable<Trainer[]>
+   */
   public getList(): Observable<Trainer[]> {
     return this.listSubject.asObservable();
   }
 
-    /**
-     * returns a publication observable of the last
-     * saved trainer object
-     *
-     * @return Observable<Trainer>
-     */
+  /**
+ * returns a behavior observable of the current
+ * title list
+ *
+ * @return Observable<any[]>
+ */
+  public getTitlesList(): Observable<Trainer[]> {
+    return this.titlesSubject.asObservable();
+  }
+  /**
+  * returns a behavior observable of the current
+  * tier list
+  *
+  * @return Observable<any[]>
+  */
+  public getTierList(): Observable<Trainer[]> {
+    return this.tiersSubject.asObservable();
+  }
+  /**
+   * returns a publication observable of the last
+   * saved trainer object
+   *
+   * @return Observable<Trainer>
+   */
   public getSaved(): Observable<Trainer> {
     return this.savedSubject.asObservable();
   }
@@ -113,38 +128,38 @@ export class TrainerService {
     return this.http.get<Trainer>(url);
   }
 
-   /**
-     * retrieves all trainers and pushes them on the
-     * list subject
-     *
-     * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
-     */
+  /**
+    * retrieves all trainers and pushes them on the
+    * list subject
+    *
+    * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
+    */
   public fetchAll(): void {
     const url = this.envService.buildUrl('all/trainer/all');
 
     console.log('fetching all trainers in fetchall()');
     this.listSubject.next([]);
 
-    this.http.get<Trainer[]>(url).subscribe( (trainers) => {
-        this.listSubject.next(trainers);
-      });
+    this.http.get<Trainer[]>(url).subscribe((trainers) => {
+      this.listSubject.next(trainers);
+    });
   }
 
-   /**
-   * creates a trainer and pushes the created trainer on the
-   * savedSubject
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP')")
-   *
-   * @param trainer: Trainer
-   */
+  /**
+  * creates a trainer and pushes the created trainer on the
+  * savedSubject
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP')")
+  *
+  * @param trainer: Trainer
+  */
   public create(trainer: Trainer): void {
     const url = this.envService.buildUrl('vp/trainer/create');
     const data = JSON.stringify(trainer);
 
-    this.http.post<Trainer>(url, data).subscribe( (savedTrainer) => {
-        this.savedSubject.next(savedTrainer);
-      });
+    this.http.post<Trainer>(url, data).subscribe((savedTrainer) => {
+      this.savedSubject.next(savedTrainer);
+    });
   }
 
   /**
@@ -159,73 +174,43 @@ export class TrainerService {
     const url = this.envService.buildUrl('vp/trainer/update');
     const data = JSON.stringify(trainer);
 
-    this.http.post<Trainer>(url, data).subscribe((updatedTrainer) => {
-        this.savedSubject.next(updatedTrainer);
+    this.http.put<Trainer>(url, data).subscribe((updatedTrainer) => {
+      this.savedSubject.next(updatedTrainer);
+    });
+  }
+
+  /**
+    * retrieves all titles and pushes them on the
+    * titles subject
+    *
+    * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
+    */
+  public getTitles(): void {
+
+    this.http.get<any[]>(environment.getAllTitles).subscribe((titles) => {
+      console.log('got all titles');
+      this.titlesSubject.next(titles);
+    },
+      (err) => {
+        console.log('error getting titles');
       });
   }
 
-  // Get All Trainers
-  getAll(): void {
-    this.httpK.get(environment.getAllTrainers, { withCredentials: true })
-      .map(
-      resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
-      err => console.log(err)// can have the error mapped for all subscribers if you want also
-    )
-    .subscribe(
-      resp => {
-        this.dataSubject.next(resp);
-      },
-      err => {
-        // handle the error however you want
-      }
-      );
-  }
+  /**
+  * retrieves all tiers and pushes them on the
+  * tiers subject
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
+  */
+  public getTiers(): void {
 
-  getTitles() {
-    this.httpK.get(environment.getAllTitles, { withCredentials: true })
-      .map(
-      resp => resp.json(),
-    )
-      .subscribe(
-      resp => {
-        this.titlesSubject.next(resp);
-      },
-      err => {
-        console.log('err getting titles ' + err);
-      }
-      );
-  }
-
-  getTiers() {
-    this.httpK.get(environment.getAllTiers, { withCredentials: true })
-      .map(
-      resp => resp.json(),
-    )
-      .subscribe(
-      resp => {
-        this.tiersSubject.next(resp);
-      },
-      err => {
-        console.log('err getting tiers ' + err);
-      }
-      );
-  }
-
-
-  updateTrainer(trainer: Trainer) {
-    this.httpK.put(environment.editTrainer, trainer, { withCredentials: true })
-      .map(
-      resp => resp.json(),
-    )
-      .subscribe(
-      resp => {
-        console.log('updated trainer successfully');
-        this.getAll();
-      },
-      err => {
-        console.log('err updating trainer ' + err);
-      }
-      );
+    this.http.get<any[]>(environment.getAllTiers).subscribe((tiers) => {
+      console.log('got all tiers');
+      this.tiersSubject.next(tiers);
+    },
+      (err) => {
+        console.log('error getting tiers');
+      });
   }
 
   createTrainer(name, title, email, tier) {
@@ -239,7 +224,7 @@ export class TrainerService {
     this.http.post(environment.addNewTrainer, json, { withCredentials: true })
       .subscribe(
       resp => {
-        this.getAll();
+        this.fetchAll();
         console.log('created a new trainer');
       },
       err => {
@@ -257,11 +242,11 @@ export class TrainerService {
       })
     .subscribe(
       resp => {
-        this.getAll();
+        this.fetchAll();
       },
       err => {
-      // handle the error however you want
+        // handle the error however you want
       }
-    );
+      );
   }
- }
+}
