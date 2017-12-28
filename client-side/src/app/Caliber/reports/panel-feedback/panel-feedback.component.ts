@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Panel } from '../../entities/Panel';
 
+import { GranularityService } from '../services/granularity.service';
 import { PanelService } from '../../services/panel.service';
+
+import { Subscription } from 'rxjs/Subscription';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Trainee } from '../../entities/Trainee';
 
 @Component({
   selector: 'app-panel-feedback',
@@ -13,18 +18,35 @@ export class PanelFeedbackComponent implements OnInit {
   private panelList: Array<Panel> = null;
   private panelSubscription: Subscription;
   private granularitySubscription: Subscription;
+  private traineeSubscription: Subscription;
 
   constructor(private granularityService: GranularityService, private panelService: PanelService) { }
 
   ngOnInit() {
 
-    this.panelService.getList().subscribe((panels) => {
-      if(panel) {
-        this.panelList = panels;
-      } else {
-        this.panelService.fetchAllByTrainee
-      }
+    this.granularityService.pushTrainee({
+      'traineeId': 5532,
+      'resourceId': null,
+      'name': 'Ahmed, Sadat',
+      'email': 'sadat.t.ahmed@gmail.com',
+      'trainingStatus': 'Employed',
+      'phoneNumber': '646-407-7707',
+      'skypeId': 'sadat.t.ahmed',
+      'profileUrl': 'https://app.revature.com/profile/SadatAhmed/9b198abd1d0d88022d593375b61ed041',
+      'recruiterName': null,
+      'college': null,
+      'degree': null,
+      'major': null,
+      'techScreenerName': null,
+      'projectCompletion': null
+    });
+
+    this.traineeSubscription = this.granularityService.currentTrainee$.subscribe((trainee) => {
+      this.panelService.fetchAllByTrainee(trainee);
+    });
+
+    this.panelSubscription = this.panelService.getList().subscribe((panels) => {
+      this.panelList = panels;
     });
   }
-
 }

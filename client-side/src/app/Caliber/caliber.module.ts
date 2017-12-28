@@ -69,7 +69,7 @@ import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { BatchOverallLineChartComponent } from './reports/batch-overall-line-chart/batch-overall-line-chart.component';
-import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback/panel-feedback.component';
+import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.component';
 
 @NgModule({
   imports: [
