@@ -21,6 +21,17 @@ export class BatchOverallLineChartComponent implements OnInit {
   public lineChartLegend = false;
   public lineChartType = 'line';
 
+  public options = {
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: 'Average'
+        }
+      }]
+    }
+  };
+
   public lineChartColors: Array<any>= [
     {
       backgroundColor: 'rgba(0,0,0,0)',
@@ -58,7 +69,9 @@ export class BatchOverallLineChartComponent implements OnInit {
 
         for (const key in result.data) {
           if (result.data.hasOwnProperty(key)) {
-              newData.push(result.data[key]);
+
+              // Fixing decimal length for charts
+              newData.push(result.data[key].toFixed(2));
               newLabels.push(key);
           }
         }
