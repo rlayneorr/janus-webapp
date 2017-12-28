@@ -43,6 +43,7 @@ import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
 import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
 import { PanelComponent } from './panel/panel.component';
+import { OverallFeedbackComponent } from './reports/overall-feedback/overall-feedback.component';
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 
@@ -110,6 +111,7 @@ import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback/
     TestComponent,
     TrainerProfileComponent,
     PanelComponent,
+    OverallFeedbackComponent,
 
     // pipes
     TraineeSearchPipePipe,
