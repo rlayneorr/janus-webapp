@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { BatchService } from '../../../Caliber/services/batch.service';
 import { Batch } from '../../entities/Batch';
@@ -13,13 +13,17 @@ import { timeout } from 'rxjs/operator/timeout';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnDestroy {
 
   private batchService: BatchService;
   private trainerService: TrainerService;
 
   batchList: Array<Batch>;
   trainerList: Array<Trainer>;
+  batchSelect = document.getElementById('trainer');
+  weekSelect = document.getElementById('week');
+  yearSelect = document.getElementById('startDate');
+  traineeSelect = document.getElementById('trainee');
   private batchSubscription: Subscription;
   private trainerSubscription: Subscription;
 
@@ -32,18 +36,36 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.batchService.fetchAll();
-    this.trainerService.fetchAll();
     this.batchSubscription = this.batchService.getList().subscribe((batchList) => {
       this.batchList = batchList;
     });
     this.trainerSubscription = this.trainerService.getList().subscribe((trainerList) => {
       this.trainerList = trainerList;
     });
+
+    this.batchService.fetchAll();
     }
 
     public debug(): void {
+      console.log(this.trainerList);
       console.log(this.batchList);
+    }
+
+    public retrieveAllBatches() {
+      this.batchService.fetchAll();
+    }
+
+    public retrieveBatchesByTrainer() {
+      this.batchService.fetchAllByTrainer();
+    }
+
+    public retrieveAllTrainers() {
+      this.trainerService.fetchAll();
+    }
+
+    ngOnDestroy() {
+      this.batchSubscription.unsubscribe();
+      this.trainerSubscription.unsubscribe();
     }
 }
 
