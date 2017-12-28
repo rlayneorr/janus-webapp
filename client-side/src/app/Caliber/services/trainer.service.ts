@@ -40,7 +40,7 @@ export class TrainerService {
   titles$: Observable<any> = this.titlesSubject.asObservable();
   tiers$: Observable<any> = this.tiersSubject.asObservable();
 
-  constructor(httpClient: HttpClient, envService: EnvironmentService, http: Http) {
+  constructor(private httpClient: HttpClient, envService: EnvironmentService, http: Http) {
     this.http = httpClient;
     this.httpK = http;
     this.envService = envService;
@@ -122,6 +122,7 @@ export class TrainerService {
   public fetchAll(): void {
     const url = this.envService.buildUrl('all/trainer/all');
 
+    console.log('fetching all trainers in fetchall()');
     this.listSubject.next([]);
 
     this.http.get<Trainer[]>(url).subscribe( (trainers) => {
