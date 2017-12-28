@@ -32,6 +32,7 @@ export class CategoriesComponent implements OnInit {
 
   // Loads all categories
   ngOnInit() {
+    this.categoriesService.fetchAll();
     this.categorySubscription = this.categoriesService.categories$.subscribe((resp) => {
       this.categories = resp;
     });
