@@ -4,11 +4,25 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { LocationService } from '../../../services/location.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-createlocation',
   templateUrl: './createlocation.component.html',
-  styleUrls: ['./createlocation.component.css']
+  styleUrls: ['./createlocation.component.css'],
+  animations:[
+    trigger('show', [
+        transition(':enter', [
+            style({ opacity: 0 }),
+            animate(200, style({ opacity: 1 }))
+        ]),
+        transition(':leave', [
+            style({ opacity: 1 }),
+            animate(300, style({ opacity: 0 }))
+        ]),
+        transition('enter => leave', animate('1000ms ease-in')),
+    ])
+  ]
 })
 export class CreatelocationComponent implements OnInit {
 

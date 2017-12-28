@@ -1,5 +1,6 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -66,6 +67,8 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+import { AlertsComponent } from './alerts/alerts.component';
+
 
 @NgModule({
   imports: [
@@ -112,6 +115,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
+    AlertsComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
