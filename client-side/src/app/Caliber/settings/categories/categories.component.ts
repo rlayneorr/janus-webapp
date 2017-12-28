@@ -20,6 +20,8 @@ export class CategoriesComponent implements OnInit {
   categories: Category[];
   currentCategory: Category;
   isActive: boolean;
+  tableLogic: string[] = ['(i < categories.length / 3)', '(i > categories.length / 3) && (i < ((categories.length / 3) * 2))',
+  '(i > ((categories.length / 3) * 2))'];
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
 
