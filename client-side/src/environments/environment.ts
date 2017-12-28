@@ -71,7 +71,7 @@ export const environment = {
     environment.context + `all/assessments/average/${batchId}/${weekId}`,
 
   apiTechnologiesForTheWeek: (batchId: Number, weekId: Number) =>
-    environment.context + `all/assessments/categories/batch/${batchId}/${weekId}`,
+    environment.context + `all/assessments/categories/batch/${batchId}/week/${weekId}`,
 
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,

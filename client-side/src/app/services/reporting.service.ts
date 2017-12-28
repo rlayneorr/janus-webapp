@@ -29,6 +29,9 @@ export class ReportingService {
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
+  private technologiesUpToWeek = new BehaviorSubject<CacheData>(null);
+  public technologiesUpToWeek$ = this.technologiesUpToWeek.asObservable();
+
   private panelBatchAllTrainees = new BehaviorSubject<CacheData>(null);
   public panelBatchAllTrainees$ = this.panelBatchAllTrainees.asObservable();
 
@@ -38,6 +41,7 @@ export class ReportingService {
     // Clear all data stored in subjects
     this.traineeOverallRadar.next(null);
     this.batchOverallRadar.next(null);
+    this.technologiesUpToWeek.next(null);
   }
 
   private needsRefresh(sub: BehaviorSubject<CacheData>, params: any): boolean {
@@ -237,7 +241,35 @@ export class ReportingService {
     const endpoint = environment.apiTechnologiesForTheWeek(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
+  }
 
+  /**
+   * Updates the multiple weeks subject to contain all the topics
+   * covered up to the given week within the given batch.
+   * @param batchId - Batch whose week topics we're fetching.
+   * @param week - How many weeks we're requesting.
+   */
+  fetchTechnologiesUpToWeek(batchId: Number, week: Number) {
+
+    const params = {batchId: batchId};
+
+    if (this.needsRefresh(this.technologiesUpToWeek, params)) {
+      const result = Array<any>(week);
+      let currentSub = 0;
+
+      for (let i = 0; i < week; i++) {
+        const endpoint = environment.apiTechnologiesForTheWeek(batchId, i + 1);
+
+        this.httpClient.get(endpoint).subscribe((success) => {
+          result[i] = success;
+          currentSub++;
+
+          if (currentSub === week) {
+            this.technologiesUpToWeek.next({params: params, data: result});
+          }
+        });
+      }
+    }
   }
 
   /**

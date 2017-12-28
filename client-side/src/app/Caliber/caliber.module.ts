@@ -41,7 +41,7 @@ import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
 import { PanelComponent } from './panel/panel.component';
 
-import { OverallFeedbackComponent } from './components/overall-feedback/overall-feedback.component';
+import { OverallFeedbackComponent } from './reports/overall-feedback/overall-feedback.component';
 
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
