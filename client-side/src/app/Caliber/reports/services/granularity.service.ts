@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Trainee } from '../../entities/Trainee';
 import { Batch } from '../../entities/Batch';
 
@@ -11,13 +11,14 @@ import { Batch } from '../../entities/Batch';
  *
  * @author Micah West
  */
+
 @Injectable()
 export class GranularityService {
 
   /* Subjects & Paired Observables */
-  private currentBatch = new BehaviorSubject<Batch>(null);
-  private currentTrainee = new BehaviorSubject<Trainee>(null);
-  private currentWeek = new BehaviorSubject<Number>(null);
+  private currentBatch = new ReplaySubject<Batch>(1);
+  private currentTrainee = new ReplaySubject<Trainee>(1);
+  private currentWeek = new ReplaySubject<Number>(1);
 
   public currentBatch$ = this.currentBatch.asObservable();
   public currentTrainee$ = this.currentTrainee.asObservable();
