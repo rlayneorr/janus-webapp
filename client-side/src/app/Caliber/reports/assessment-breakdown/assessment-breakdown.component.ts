@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReportingService } from '../../../services/reporting.service';
 import { GradeService } from '../../services/grade.service';
 import { Subscription } from 'rxjs/Subscription';
+import { GranularityService } from '../services/granularity.service';
 
 /**
  * Component will display a bar graph comparing the specific trainees
@@ -15,6 +16,14 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class AssessmentBreakdownComponent implements OnInit {
 
+  private batchId: Number;
+  private week: Number;
+  private TraineeId: Number;
+
+  private batchIdSub: Subscription;
+  private weekSub: Subscription;
+  private traineeIdSub: Subscription;
+
   private data: Array<any>;
   private labels: Array<string>;
   private dataSubscription: Subscription;
@@ -22,7 +31,7 @@ export class AssessmentBreakdownComponent implements OnInit {
   private chartType = 'bar';
   private barChartLegend = true;
 
-  constructor(private reportService: ReportingService) { }
+  constructor(private reportService: ReportingService, private granularityService: GranularityService) { }
 
   public options = {
     scales: {
@@ -63,7 +72,22 @@ export class AssessmentBreakdownComponent implements OnInit {
         }
       });
 
-    this.reportService.fetchBatchWeekTraineeBarChart(2201, 1, 5532);
+      this.batchIdSub = this.granularityService.currentBatch$.subscribe(
+          data => { this.batchId = data.batchId; this.tryFetch(); });
+
+      this.weekSub = this.granularityService.currentWeek$.subscribe(
+          data => { this.week = data; this.tryFetch(); });
+
+      this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
+          data => { this.TraineeId = data.traineeId; this.tryFetch(); });
+
+    // this.reportService.fetchBatchWeekTraineeBarChart(2201, 1, 5532);
+  }
+
+  tryFetch() {
+    if (this.batchIdSub && this.weekSub && this.traineeIdSub) {
+      this.reportService.fetchBatchWeekTraineeBarChart(this.batchId, this.week, this.TraineeId);
+    }
   }
 
 }
