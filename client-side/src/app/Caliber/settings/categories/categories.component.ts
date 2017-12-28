@@ -20,11 +20,10 @@ export class CategoriesComponent implements OnInit {
   categories: Category[];
   currentCategory: Category;
   isActive: boolean;
-  tableLogic: string[] = ['(i < categories.length / 3)', '(i > categories.length / 3) && (i < ((categories.length / 3) * 2))',
-  '(i > ((categories.length / 3) * 2))'];
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
 
+  // Loads all categories
   ngOnInit() {
     this.categorySubscription = this.categoriesService.categories$.subscribe((resp) => {
       this.categories = resp;
@@ -37,16 +36,20 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.addNewCategory(this.newCategory);
   }
 
+  // Change status of active
   activeChange(activeValue) {
     console.log(activeValue);
     this.isActive = activeValue;
   }
 
+  // Send call to update active status
   editCurrentCategory() {
     this.currentCategory.active = this.isActive;
     this.categoriesService.editCurrentCategory(this.currentCategory);
   }
 
+
+  // Modal open functions
   open(content) {
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
