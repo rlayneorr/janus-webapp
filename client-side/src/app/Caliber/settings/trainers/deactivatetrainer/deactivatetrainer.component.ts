@@ -29,5 +29,6 @@ export class DeactivateTrainerComponent implements OnInit {
 
     deactivateTrainer() {
         this.ts.deleteTrainer(this.trainer);
+        this.trainer.tier = 'ROLE_INACTIVE';
     }
 }
