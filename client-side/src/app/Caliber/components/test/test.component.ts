@@ -14,6 +14,8 @@ import { AssessmentService } from '../../services/assessment.service';
 import { GradeService } from '../../services/grade.service';
 import { NoteService } from '../../services/note.service';
 import { CategoryService } from '../../services/category.service';
+import { Trainee } from '../../entities/Trainee';
+import { Assessment } from '../../entities/Assessment';
 
 @Component({
   selector: 'app-test',
@@ -28,6 +30,41 @@ export class TestComponent implements OnInit, OnDestroy {
 
   constructor(private service: GradeService) {
     this.service = service;
+  }
+
+  public getTestTrainee(): Trainee {
+    return {
+      traineeId: 5524,
+      resourceId: null,
+      name: 'Cartagena, Michael',
+      email: 'mcartagenaez8@gmail.com',
+      trainingStatus: 'Employed',
+      phoneNumber: '347-782-4731',
+      skypeId: 'mcart5566',
+      profileUrl: 'https://app.revature.com/profile/MichaelC/55b6b9a398dacdb90093a3088822d35c',
+      recruiterName: null,
+      college: null,
+      degree: null,
+      major: null,
+      techScreenerName: null,
+      projectCompletion: null
+    };
+  }
+
+  public getTestAssessment(): Assessment {
+    return {
+      assessmentId: 3061,
+        title: 'Java Other',
+        rawScore: 20,
+        type: 'Other',
+        batch: null,
+        week: 1,
+        category: {
+          categoryId: 1,
+          skillCategory: 'Java',
+          active: true
+        }
+    };
   }
 
   private log(object: any): void {
