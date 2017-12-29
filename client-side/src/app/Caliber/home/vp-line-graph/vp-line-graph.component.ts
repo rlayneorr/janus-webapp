@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { WeeklyProgress } from '../../entities/weeklyProgress';
-import { LineChartData } from '../../entities/lineChartData';
-import { ChartData } from '../../entities/chartData';
 import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
 import { VpHomeLineGraphService } from '../../services/graph/vp-home-line-graph.service';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ColorService } from '../../services/colors/color.service';
+import { ChartDataEntity } from '../../entities/ChartDataEntity';
 
 @Component({
   selector: 'app-vp-line-graph',
@@ -17,7 +16,7 @@ import { ColorService } from '../../services/colors/color.service';
 export class VpLineGraphComponent implements OnInit {
   public results: Array<WeeklyProgress>;
   public addresses = [];
-  public lineChartData: LineChartData;
+  public lineChartData: ChartDataEntity;
   public hasData = false;
   public selectedLineState = '';
   public selectedLineCity = '';
