@@ -38,7 +38,7 @@ export class BatchOverallLineChartComponent implements OnInit {
       borderColor: 'rgba(76, 111, 163, 1)',
       pointBackgroundColor: 'rgba(76, 111, 163, 1)',
       pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: 'rgba(76, 111, 163, 1)',
       pointHoverBorderColor: 'rgba(76, 111, 163, 1)'
     },
     {
@@ -46,7 +46,7 @@ export class BatchOverallLineChartComponent implements OnInit {
       borderColor: 'rgba(190, 71, 71, 1)',
       pointBackgroundColor: 'rgba(190, 71, 71, 1)',
       pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: 'rgba(190, 71, 71, 1)',
       pointHoverBorderColor: 'rgba(190, 71, 71, 1)'
     },
     {
@@ -54,7 +54,7 @@ export class BatchOverallLineChartComponent implements OnInit {
       borderColor: 'rgba(164, 180, 20, 1)',
       pointBackgroundColor: 'rgba(164, 180, 20, 1)',
       pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: 'rgba(164, 180, 20, 1)',
       pointHoverBorderColor: 'rgba(164, 180, 20, 1)'
     }
   ];
