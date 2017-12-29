@@ -53,23 +53,36 @@ export class CategoriesComponent implements OnInit {
     console.log(column);
     switch (column) {
       case 0:
+        if (index < this.categories.length / 3) {
           return true;
+        }
+        break;
+      case 1:
+        if ((index > this.categories.length / 3) && (index < ((this.categories.length / 3) * 2))) {
+          return true;
+        }
+        break;
+      case 2:
+        if (index > ((this.categories.length / 3) * 2)) {
+          return true;
+        }
+        break;
       default:
         break;
     }
   }
 
 
-// Modal open functions
-open(content) {
-  this.modalService.open(content).result.then((result) => {
-  }, (reason) => {
-  });
-}
+  // Modal open functions
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+    }, (reason) => {
+    });
+  }
 
-editopen(content, index: Category) {
-  this.currentCategory = index;
-  this.isActive = index.active;
-  this.modalService.open(content);
-}
+  editopen(content, index: Category) {
+    this.currentCategory = index;
+    this.isActive = index.active;
+    this.modalService.open(content);
+  }
 }
