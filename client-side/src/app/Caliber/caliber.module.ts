@@ -46,6 +46,7 @@ import { PanelComponent } from './panel/panel.component';
 import { OverallFeedbackComponent } from './reports/overall-feedback/overall-feedback.component';
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
+import { ToolbarFilterPipe } from './pipes/toolbar-filter.pipe';
 
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
@@ -117,8 +118,15 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
+<<<<<<< HEAD
     BatchOverallLineChartComponent,
     AssessmentBreakdownComponent,
+=======
+    ToolbarFilterPipe,
+  ],
+  exports: [
+    TraineeTechSkillsComponent,
+>>>>>>> cda31d68c56e0901702175308437cd8c34eed4d2
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
