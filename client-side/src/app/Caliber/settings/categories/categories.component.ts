@@ -20,6 +20,7 @@ export class CategoriesComponent implements OnInit {
   categories: Category[];
   currentCategory: Category;
   isActive: boolean;
+  tableLogic: any = [];
 
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
 
@@ -48,17 +49,27 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.editCurrentCategory(this.currentCategory);
   }
 
-
-  // Modal open functions
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
-    }, (reason) => {
-    });
+  nextColumn(column, index) {
+    console.log(column);
+    switch (column) {
+      case 0:
+          return true;
+      default:
+        break;
+    }
   }
 
-  editopen(content, index: Category) {
-    this.currentCategory = index;
-    this.isActive = index.active;
-    this.modalService.open(content);
-  }
+
+// Modal open functions
+open(content) {
+  this.modalService.open(content).result.then((result) => {
+  }, (reason) => {
+  });
+}
+
+editopen(content, index: Category) {
+  this.currentCategory = index;
+  this.isActive = index.active;
+  this.modalService.open(content);
+}
 }
