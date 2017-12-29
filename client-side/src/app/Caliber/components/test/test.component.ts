@@ -13,6 +13,7 @@ import { TraineeService } from '../../services/trainee.service';
 import { AssessmentService } from '../../services/assessment.service';
 import { GradeService } from '../../services/grade.service';
 import { NoteService } from '../../services/note.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-test',
@@ -22,11 +23,11 @@ import { NoteService } from '../../services/note.service';
 
 export class TestComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private service: NoteService;
+  private service: CategoryService;
   private data: any[];
 
 
-  constructor(service: NoteService) {
+  constructor(service: CategoryService) {
     this.service = service;
   }
 
@@ -34,13 +35,13 @@ export class TestComponent implements OnInit, OnDestroy {
     console.log(object);
   }
 
-  private testCreate(): void {
-    const test = Object.assign({}, this.data[0]);
+  // private testCreate(): void {
+  //   const test = Object.assign({}, this.data[0]);
 
-    console.log(test);
+  //   console.log(test);
 
-    this.service.create(test);
-  }
+  //   this.service.create(test);
+  // }
 
   ngOnInit() {
     this.subscription = this.service.getList().subscribe( (data) => {
@@ -52,9 +53,9 @@ export class TestComponent implements OnInit, OnDestroy {
       // }
     });
 
-    // this.service.fetchAll();
+    this.service.fetchAll();
     // this.service.fetchAllByBatch(3002);
-    this.service.fetchByBatchIdByWeek(3002, 1);
+    // this.service.fetchByBatchIdByWeek(3002, 1);
   }
 
   ngOnDestroy() {

@@ -79,7 +79,7 @@ export class GradeService {
  *
  * @param batchId: number
  * @param week: number
- * 
+ *
  */
   public fetchByBatchIdByWeek(batchId: number, week: number): void {
     const url = this.envService.buildUrl(`all/grades/batch/${batchId}/week/${week}`);
