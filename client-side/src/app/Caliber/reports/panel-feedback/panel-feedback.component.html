@@ -6,113 +6,119 @@
       <span class="pull-right">Round {{panel.panelRound}}</span>
     </header>
 
-    <div class="table-responsive panel-body">
-      <table class="table table-responsive">
-        <tbody>
-          <tr>
-            <th>Associate Name</th>
-            <td>{{panel.trainee.name}}</td>
-            <th>Interview Date</th>
-            <td>{{panel.interviewDate}}</td>
-          </tr>
-          <tr>
-            <th>Panelist Name</th>
-            <td>{{panel.panelist.name}}</td>
-            <th>Interview Duration</th>
-            <td>{{panel.duration}}</td>
-          </tr>
-          <tr>
-            <th>Panel Round</th>
-            <td>{{panel.panelRound}}</td>
-            <th>Interview Format</th>
-            <td>{{panel.format}}</td>
-          </tr>
-          <tr>
-            <th>Recording Consent</th>
-            <td>{{panel.recordingConsent}}</td>
-            <th>Overall Feedback</th>
-            <td>{{panel.overall}}</td>
-          </tr>
-          <tr>
-            <th>Recording Link</th>
-            <td><a href="{{panel.recordingLink}}">{{panel.recordingLink}}</a></td>
-            <th>Internet Connectivity</th>
-            <td>{{panel.internet}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="panel-body">
 
-    <div class="container">
-      <header class="feedback-heading">
-        Technical Feedback
-      </header>
-      <div class="table-responsive">
-        <table class="table table-responsive">
-          <thead>
-            <tr>
-              <td>Technology</td>
-              <td>Result</td>
-              <td>Status</td>
-              <td>Comment</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let feed of (panel.feedback | orderBy:'technology.categoryId')">
-              <td>{{feed.technology.skillCategory}}</td>
-              <td>{{feed.result}}</td>
-              <td>
-                <span *ngIf="feed.status === 'Pass'" class="panel-status-pass fa fa-check panel-glyph"></span>
-                <span *ngIf="feed.status === 'Repanel'" class="panel-status-failed fa fa-times panel-glyph"></span>
-              </td>
-              <td>{{feed.comment}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="container">
+        <div class="row">
+          <div class="col"><strong>Associate Name</strong></div>
+          <div class="col">{{panel.trainee.name}}</div>
+          <div class="col"><strong>Interview Date</strong></div>
+          <div class="col">{{panel.interviewDate}}</div>
+        </div>
+        <div class="row">
+          <div class="col"><strong>Panelist Name</strong></div>
+          <div class="col">{{panel.panelist.name}}</div>
+          <div class="col"><strong>Interview Duration</strong></div>
+          <div class="col">{{panel.duration}}</div>
+        </div>
+        <div class="row">
+          <div class="col"><strong>Panel Round</strong></div>
+          <div class="col">{{panel.panelRound}}</div>
+          <div class="col"><strong>Interview Format</strong></div>
+          <div class="col">{{panel.format}}</div>
+        </div>
+        <div class="row">
+          <div class="col"><strong>Recording Consent</strong></div>
+          <div class="col">{{panel.recordingConsent}}</div>
+          <div class="col"><strong>Overall Feedback</strong></div>
+          <div class="col">{{panel.overall}}</div>
+        </div>
+        <div class="row">
+          <div class="col"><strong>Recording Link</strong></div>
+          <div class="col"><a href="{{panel.recordingLink}}">{{panel.recordingLink}}</a></div>
+          <div class="col"><strong>Internet Connectivity</strong></div>
+          <div class="col">{{panel.internet}}</div>
+        </div>
       </div>
-    </div> <!-- Tech Feedback Container -->
-
-    <div class="container">
+      <!-- End Panel Information Container -->
+      
+      <!-- Start Technical Feedback Container -->
+      <div class="container">
         <header class="feedback-heading">
-          Overall Feedback
+          Technical Feedback
         </header>
+
         <div class="table-responsive">
-          <table class="table table-responsive">
+          <table class="table table-sm table-responsive">
             <thead>
-              <tr>
-                <th>Criteria</th>
-                <td>Comment</td>
+              <tr class="table-default">
+                <th class="left">Technology</th>
+                <th>Result</th>
+                <th>Status</th>
+                <th>Comment</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="overall-feedback-title">Associate Introduction</td>
-                <td>{{panel.associateIntro}}</td>
-              </tr>
-              <tr>
-                <td class="overall-feedback-title">Project 1 Explanation</td>
-                <td>{{panel.projectOneDescription}}</td>
-              </tr>
-              <tr>
-                <td class="overall-feedback-title">Project 2 Explanation</td>
-                <td>{{panel.projectTwoDescription}}</td>
-              </tr>
-              <tr>
-                <td class="overall-feedback-title">Project 3 Explanation</td>
-                <td>{{panel.projectThreeDescription}}</td>
-              </tr>
-              <tr>
-                <td class="overall-feedback-title">Communication Skills</td>
-                <td>{{panel.communicationSkills}}</td>
-              </tr>
-              <tr>
-                <td class="overall-feedback-title">Overall</td>
-                <td>{{panel.overall}}</td>
+              <tr *ngFor="let feed of (panel.feedback | orderBy:'technology.categoryId')">
+                <td class="left">{{feed.technology.skillCategory}}</td>
+                <td>{{feed.result}}</td>
+                <td>
+                  <span *ngIf="feed.status === 'Pass'" class="panel-status-pass fa fa-check panel-glyph"></span>
+                  <span *ngIf="feed.status === 'Repanel'" class="panel-status-failed fa fa-times panel-glyph"></span>
+                </td>
+                <td>{{feed.comment}}</td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div> <!-- Tech Feedback Container -->
+      </div>
+      <!-- End Technical Feedback Container -->
 
-  </div> <!-- Overarching Panel Container -->
+      <!-- Start Overall Feedback Container -->
+      <div class="container">
+          <header class="feedback-heading">
+            Overall Feedback
+          </header>
+          <div class="table-responsive">
+            <table class="table table-sm table-responsive">
+              <thead>
+                <tr class="table-default">
+                  <th class="left">Criteria</th>
+                  <th>Comment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="overall-feedback-title">Associate Introduction</td>
+                  <td>{{panel.associateIntro}}</td>
+                </tr>
+                <tr>
+                  <td class="overall-feedback-title">Project 1 Explanation</td>
+                  <td>{{panel.projectOneDescription}}</td>
+                </tr>
+                <tr>
+                  <td class="overall-feedback-title">Project 2 Explanation</td>
+                  <td>{{panel.projectTwoDescription}}</td>
+                </tr>
+                <tr>
+                  <td class="overall-feedback-title">Project 3 Explanation</td>
+                  <td>{{panel.projectThreeDescription}}</td>
+                </tr>
+                <tr>
+                  <td class="overall-feedback-title">Communication Skills</td>
+                  <td>{{panel.communicationSkills}}</td>
+                </tr>
+                <tr>
+                  <td class="overall-feedback-title">Overall</td>
+                  <td>{{panel.overall}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- End Overall Feedback Container -->
+        
+    </div>
+  </div>
+  <!-- End Overarching Panel Feedback Container -->
 </div> <!-- Component itself -->
