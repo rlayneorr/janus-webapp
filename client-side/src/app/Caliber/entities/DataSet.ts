@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-export class ChartData {
+export class DataSet {
     data: any[];
     label: any;
     fill: boolean;

@@ -6,13 +6,13 @@ import { LocationService } from '../../../services/location.service';
 import { Location } from '../../../../entities/Location';
 
 @Component({
-    selector: 'app-deactivatelocation',
-    templateUrl: './deactivatelocation.component.html',
-    styleUrls: ['./deactivatelocation.component.css'],
+    selector: 'app-reactivatelocation',
+    templateUrl: './reactivatelocation.component.html',
+    styleUrls: ['./reactivatelocation.component.css'],
     providers: [LocationService],
     encapsulation: ViewEncapsulation.None,
   })
-export class DeactivateLocationComponent implements OnInit {
+export class ReactivateLocationComponent implements OnInit {
     @Input()
     location: Location;
 
@@ -27,8 +27,8 @@ export class DeactivateLocationComponent implements OnInit {
         this.modalService.open(content);
     }
 
-    deactivateLocation() {
-        this.location.active = false;
-        this.ls.deleteLocation(this.location);
+    reactivateLocation() {
+        this.location.active = true;
+        this.ls.reactivateLocation(this.location);
     }
 }
