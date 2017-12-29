@@ -2,7 +2,7 @@
 
   <div class="card app-card text-center" style="width: 20rem; border-color:white" *ngFor="let app of apps" [routerLink]="app.homeUrl">
     <div class="card-block">
-        <h4 class="card-title" style="padding-top:10px">{{app.name}}</h4>
+        <h1 class="card-title">{{app.name}}</h1>
       </div>
     <img class="card-img-bottom" src="{{app.imgUrl}}" alt="Card image cap">
   </div>
