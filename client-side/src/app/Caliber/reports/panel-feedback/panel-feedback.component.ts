@@ -8,6 +8,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Trainee } from '../../entities/Trainee';
 
+/**
+ * Component for individual trainee's panel feedback.
+ * @author Micah West
+ */
+
 @Component({
   selector: 'app-panel-feedback',
   templateUrl: './panel-feedback.component.html',
@@ -15,7 +20,7 @@ import { Trainee } from '../../entities/Trainee';
 })
 export class PanelFeedbackComponent implements OnInit {
 
-  private panelList: Array<Panel> = null;
+  panelList: Array<Panel> = null;
   private panelSubscription: Subscription;
   private granularitySubscription: Subscription;
   private traineeSubscription: Subscription;

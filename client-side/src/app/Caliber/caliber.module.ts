@@ -46,6 +46,7 @@ import { PanelComponent } from './panel/panel.component';
 import { OverallFeedbackComponent } from './reports/overall-feedback/overall-feedback.component';
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
@@ -116,6 +117,7 @@ import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.
     // pipes
     TraineeSearchPipePipe,
     GraphDataPipe,
+    OrderByPipe,
     PanelBatchAllTraineesComponent,
     BatchOverallLineChartComponent,
     PanelFeedbackComponent,

@@ -7,8 +7,8 @@ export class Panel {
     panelist: Trainer;
     interviewDate: Date;
     duration: string;
-    interviewFormat: string;
-    internetConnectivity: string;
+    format: string;
+    internet: string;
     panelRound: number;
     recordingConsent: boolean;
     recordingLink: string;
@@ -19,4 +19,6 @@ export class Panel {
     projectThreeDescription: string;
     communicationSkills: string;
     overall: string;
+    // REPORTS GROUP: REMOVE ON MERGE
+    feedback: Array<any>;
 }
