@@ -41,8 +41,8 @@ import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
 import { PanelComponent } from './panel/panel.component';
 
-
 import { GraphDataPipe } from './pipes/graph-data.pipe';
+import { ToolbarFilterPipe } from './pipes/toolbar-filter.pipe';
 
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
@@ -77,10 +77,10 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
+    ToolbarFilterPipe,
   ],
   exports: [
     TraineeTechSkillsComponent,
-    RadarComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 
 import { BatchService } from '../../../Caliber/services/batch.service';
 import { Batch } from '../../entities/Batch';
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
-import { timeout } from 'rxjs/operator/timeout';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-toolbar',
@@ -20,10 +20,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   batchList: Array<Batch>;
   trainerList: Array<Trainer>;
-  batchSelect = document.getElementById('trainer');
-  weekSelect = document.getElementById('week');
-  yearSelect = document.getElementById('startDate');
-  traineeSelect = document.getElementById('trainee');
+  batchSelect: Object = {};
+  weekSelect: Object = {};
+  yearSelect: Object = {};
+  traineeSelect: Object = {};
   private batchSubscription: Subscription;
   private trainerSubscription: Subscription;
 
@@ -39,28 +39,20 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.batchSubscription = this.batchService.getList().subscribe((batchList) => {
       this.batchList = batchList;
     });
-    this.trainerSubscription = this.trainerService.getList().subscribe((trainerList) => {
-      this.trainerList = trainerList;
-    });
 
     this.batchService.fetchAll();
     }
 
     public debug(): void {
-      console.log(this.trainerList);
-      console.log(this.batchList);
+      console.log(this.batchList[0].startDate.toString().substr(0, 4));
     }
 
-    public retrieveAllBatches() {
-      this.batchService.fetchAll();
-    }
-
-    public retrieveBatchesByTrainer() {
-      this.batchService.fetchAllByTrainer();
-    }
-
-    public retrieveAllTrainers() {
-      this.trainerService.fetchAll();
+    public cleanBatchList(): void {
+      for (let i = 0; i < this.batchList.length; i++) {
+        if (this.batchList[i].startDate.toString().substr(0, 4) === this.batchList[i + 1].startDate.toString().substr(0, 4)) {
+          this.batchList.splice(i + 1, 1);
+        }
+      }
     }
 
     ngOnDestroy() {

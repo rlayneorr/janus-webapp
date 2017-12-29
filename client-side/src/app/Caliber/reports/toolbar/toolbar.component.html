@@ -3,27 +3,27 @@
     <div class="col">
       <select class="button" id="startDate" *ngIf="batchList">
         <ng-container class="container" *ngFor="let batch of batchList">
-          <option [value]="batch.value">{{ batch.startDate | date: 'yyyy'}}</option>
+          <option [ngValue]="batch">{{ batch.startDate | date: 'yyyy'}}</option>
         </ng-container>
       </select>
       <select class="button" id="trainer" *ngIf="batchList">
         <ng-container class="container" *ngFor="let batch of batchList">
-          <option [value]="batch.value">{{ batch.trainer.name }} - {{ batch.startDate }}</option>
+          <option [ngValue]="batch">{{ batch.trainer.name }} - {{ batch.startDate }}</option>
         </ng-container>
       </select>
       <select class="button" id="week" *ngIf="batchList">
         <ng-container class="container" *ngFor="let batch of batchList">
-          <option [value]="batch.value">Week {{ batch.weeks }}</option>
+          <option [ngValue]="batch">Week {{ batch.weeks }}</option>
         </ng-container>
       </select>
       <select class="button" id="trainee" *ngIf="batchList">
         <ng-container class="container" *ngFor="let batch of batchList">
           <ng-container class="container" *ngFor="let trainee of batch.trainees">
-            <option [value]="batch.value">{{ trainee.name }}</option>
+            <option [ngValue]="batch">{{ trainee.name }}</option>
           </ng-container>
         </ng-container>
       </select>
-      <button (click)="debug()">Debug</button>
+      <button (click)="cleanBatchList()">Debug</button>
     </div>
   </div>
   <hr>
