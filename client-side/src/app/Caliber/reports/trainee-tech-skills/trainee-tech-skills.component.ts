@@ -3,7 +3,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
 import { PDFService } from '../../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
+/**
+ * @author John Hudson
+*/
 @Component({
   selector: 'app-trainee-tech-skills',
   templateUrl: './trainee-tech-skills.component.html',
@@ -18,18 +20,20 @@ export class TraineeTechSkillsComponent implements OnInit {
 
   constructor(private reportsService: ReportingService, private pdfService: PDFService, private modalService: NgbModal) { }
 
-
-  public trainees: number[] = [];
-  // this is temp until api call.
-  @Input() public batchId: number;//
-  @Input() public traineesList: number[]; //[5528, 5535, 5526, 5530, 5536, 5529, 5534, 5533, 5524, 5532, 5538, 5537, 5525, 5539, 5527];
+  // batch id of batch being viewed
+  @Input() public batchId: number;
+  // list of trainees (id) that could be displayed
+  @Input() public traineesList: number[];
+  // this is where trainee radar data is stored until it needs to be displayed
   public traineesData: any[] = [];
+  // List of trainee names; will be label of a dataset if it needs to be displayed
   public traineesNames: string[] = [];
-  // Chart labels - this will be dynamic later
-  public dataSetLabels: string[];
-
-  // Dataset for chart
+  // List of trainees (by id) to be displayed
+  public trainees: number[] = [];
+  // Datasets for chart to display - moves dataset in and out of array to control what is displayed
   public chartData: any[];
+  // same but for the labels provided to the graph-data pipe
+  public dataSetLabels: string[];
 
   // Chart type assignment
   public chartType = 'radar';
@@ -38,7 +42,7 @@ export class TraineeTechSkillsComponent implements OnInit {
 
     this.traineeOverallRadar = [];
     this.chartData = [];
-    // this is until I can get batch data from the api
+    // TODO: this is until I can get batch data from the api probably will be an input.
     this.dataSetLabels = ['batch'];
     this.batchOverallSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
 
@@ -58,19 +62,22 @@ export class TraineeTechSkillsComponent implements OnInit {
       }
     });
 
+    // create requests for radar data for each trainee in traineeList
     for (let i = 0; i < this.traineesList.length; i++) {
       this.traineeOverallRadar.push(this.reportsService.traineeOverallRadar$.subscribe((result) => {
         if (!result) {
           // console.log('data not received');
           this.reportsService.fetchTraineeOverallRadarChart(this.traineesList[i]);
         } else {
-          // console.log('data received');
-          // console.log(result);
           if (this.traineesList[i] === result.params.traineeId) {
+            // make sure the result belongs to me.
+
             if (this.traineesData === null) {
+              // if array is null make a new one with this dataset
               this.traineesData = [result.data];
               this.traineesNames.push(this.traineesList[i].toString());
             } else {
+              // add this dataset to array of datasets
               this.traineesData.push(result.data);
               this.traineesNames.push(this.traineesList[i].toString());
             }
@@ -79,9 +86,16 @@ export class TraineeTechSkillsComponent implements OnInit {
       }));
     }
   }
+  /**
+   * downloads pdf via pdf service
+  */
   downloadPDF() {
     this.pdfService.downloadPDF('trainee-tech-skills');
   }
+  /**
+   * Opens the trainee selector modal
+   * @param content
+   */
   open(content) {
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -89,7 +103,9 @@ export class TraineeTechSkillsComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-
+  /**
+   * closes the trainee selector modal
+  */
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -99,6 +115,9 @@ export class TraineeTechSkillsComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  /**
+   * Adds/removes trainee from chart based on modal checks
+  */
   traineeChecked(index: number) {
     if (this.trainees.includes(this.traineesList[index])) {
       this.trainees = this.remove(this.trainees, this.traineesList[index]);
