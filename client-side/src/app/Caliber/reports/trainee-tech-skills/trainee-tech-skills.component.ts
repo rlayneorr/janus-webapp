@@ -1,4 +1,4 @@
-import { Component, OnInit, transition } from '@angular/core';
+import { Component, OnInit, transition, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
 import { PDFService } from '../../../services/pdf.service';
@@ -21,8 +21,8 @@ export class TraineeTechSkillsComponent implements OnInit {
 
   public trainees: number[] = [];
   // this is temp until api call.
-  public batchId = 2201;
-  public traineesList = [5528, 5535, 5526, 5530, 5536, 5529, 5534, 5533, 5524, 5532, 5538, 5537, 5525, 5539, 5527];
+  @Input() public batchId: number;//
+  @Input() public traineesList: number[]; //[5528, 5535, 5526, 5530, 5536, 5529, 5534, 5533, 5524, 5532, 5538, 5537, 5525, 5539, 5527];
   public traineesData: any[] = [];
   public traineesNames: string[] = [];
   // Chart labels - this will be dynamic later
