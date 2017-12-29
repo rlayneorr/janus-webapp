@@ -14,11 +14,17 @@
     /* For mobile phones: */
     .container {
         width: 100%;
-        margin: 0;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
         padding: 0;
     }
 
     .panel-body {
         border: none;
+    }
+
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 }
