@@ -4,6 +4,8 @@ import { ReportingService } from '../../services/reporting.service';
 import { environment } from '../../../environments/environment';
 import { PDFService } from '../../services/pdf.service';
 import { Subscription } from 'rxjs/Subscription';
+import { CacheData } from '../../entities/CacheData.entity';
+import { forEach } from '@angular/router/src/utils/collection';
 
 /**
  * This component display the weekly line chart. It also has a download
@@ -18,39 +20,19 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class WeeklyLineChartComponent implements OnInit {
 
-  // public chartData: any = [];
+  public chartData: any = [];
+  public scoresAverage = 0;
 
-  
-  public chartData: any = [{
-    data: new Map([
-      [1, 90.1]
-    ]), label: 'batch'
-  },
-  {
-    data: new Map([
-      [1, 90.1],
-      [2, 65],
-      [3, 92.1],
-      [5, 67.7],
-      [6, 86.46],
-      [7, 67.68],
-      [8, 78],
-      [9, 87.16],
-      [10, 93],
-      [11, 76],
-      [12, 63.25],
-      [13, 75],
-      [14, 81],
-      [15, 79]
-    ]), label: 'batch'
-  }];
+  // batch[i][0] = trainee name
+  // batch[i][1] = trainee overall score
+  public batch: Array<any> = [];
 
   private dataSubscription: Subscription;
 
   constructor(private reportsService: ReportingService, private pdfService: PDFService) { }
 
   // Chart labels - for other charts the labels would have to be dynamic
-  public dataSetLabels: string[] = ['Skills'];
+  public dataSetLabels: string[] = ['Batch Scores', 'Benchmark'];
 
   // Dataset for chart
   // Chart type assignment
@@ -58,16 +40,64 @@ export class WeeklyLineChartComponent implements OnInit {
 
   ngOnInit() {
     this.dataSubscription = this.reportsService.batchOverallBar$.subscribe((result) => {
-
       if (!result) {
         console.log('data not received');
-        // this.chartData = null;
+        this.chartData = null;
         this.reportsService.fetchBatchOverallBarChart(2201);
       } else {
         console.log('data received');
-        console.log(result);
-        this.chartData = [result.data];
+
+        // Adds batch information (trainee and overallScore) to the batch array
+        for (const trainee of Object.entries(result.data)) {
+          this.batch.push(trainee);
+        }
+
+        // First sort array by highest scores, then create chart with sorted array
+        this.createChartData(result.data);
+        console.log(this.sortByHighestScore(result.data));
       }
+    });
+
+  }
+
+    /**
+   * Creates chart with Benchmark and Batch Scores.
+   * @param data
+   */
+  public createChartData(data): void {
+    this.chartData =
+    [
+      data,
+      this.calculateScoreAverage(),
+    ];
+  }
+
+  /**
+   * Calculates returns the average score of based on all trainees.
+   * @returns - average score of all trainees
+   */
+  private calculateScoreAverage(): number {
+    let result = 0;
+
+    for (const score of this.batch) {
+      result += score[1];
+    }
+
+    result = result / this.batch.length;
+
+    return result;
+  }
+
+  /**
+   * Sorts the batch array by highest scores and
+   * returns the new ordered batch array.
+   * Based on Mozilla example of Array.prototype.sort():
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+   * @param array
+   */
+  sortByHighestScore(array) {
+    return this.batch.sort(function (a, b) {
+      return b[1] - a[1];
     });
   }
 

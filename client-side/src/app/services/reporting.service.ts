@@ -26,7 +26,7 @@ export class ReportingService {
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
-  // Bar Chart
+  // Bar chart used for the Cumulative Scores Graph
   private batchOverallBar = new BehaviorSubject<CacheData>(null);
   public batchOverallBar$ = this.batchOverallBar.asObservable();
 
@@ -54,11 +54,8 @@ export class ReportingService {
     // Clear all data stored in subjects
     this.traineeOverallRadar.next(null);
     this.batchOverallRadar.next(null);
-<<<<<<< HEAD
     this.batchOverallBar.next(null);
-=======
     this.technologiesUpToWeek.next(null);
->>>>>>> dd6727d8e11fd2d07b81ee57382d3a640130521f
   }
 
   /**
