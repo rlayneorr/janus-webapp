@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
@@ -14,8 +15,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
+import { CategoriesService } from './Caliber/services/categories.service';
+import { Trainer } from './entities/Trainer';
+
 
 import { ReportingService } from './services/reporting.service';
+import { EvaluationService } from './services/evaluation.service';
 import { PDFService } from './services/pdf.service';
 import { CaliberModule } from './Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
@@ -60,6 +65,7 @@ const routes: Routes = [
     ChuckNorrisService,
     ReportingService,
     PDFService,
+    EvaluationService,
   ],
   bootstrap: [AppComponent]
 })

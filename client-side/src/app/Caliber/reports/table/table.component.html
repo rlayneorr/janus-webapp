@@ -2,7 +2,7 @@
     <table *ngIf="typeCheck() === 0" class="table" style="border-collapse: collapse;">
         <tr class="col-sm-6 col-md-6 col-lg-6">
             <th class="pull-left"></th>
-            <th *ngFor="let set of tableData" class="pull-left">{{set.label}}</th>
+            <th *ngFor="let set of tableData" class="pull-right">{{set.label}}</th>
         </tr>
         <tr class="col-sm-6 col-md-6 col-lg-6 " *ngFor="let label of tableLabels;let i = index">
             <th class="pull-left">{{tableLabels[i]}}</th>

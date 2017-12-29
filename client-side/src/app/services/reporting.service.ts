@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
+import { PanelReview } from '../Caliber/entities/PanelReview';
 
 
 
@@ -32,6 +33,15 @@ export class ReportingService {
   private batchOverallBar = new BehaviorSubject<CacheData>(null);
   public batchOverallBar$ = this.batchOverallBar.asObservable();
 
+  private technologiesUpToWeek = new BehaviorSubject<CacheData>(null);
+  public technologiesUpToWeek$ = this.technologiesUpToWeek.asObservable();
+
+  private panelBatchAllTrainees = new BehaviorSubject<CacheData>(null);
+  public panelBatchAllTrainees$ = this.panelBatchAllTrainees.asObservable();
+
+  private batchOverallLineChart = new BehaviorSubject<CacheData>(null);
+  public batchOverallLineChart$ = this.batchOverallLineChart.asObservable();
+
   constructor(private httpClient: HttpClient) { }
 
   /**
@@ -41,7 +51,11 @@ export class ReportingService {
     // Clear all data stored in subjects
     this.traineeOverallRadar.next(null);
     this.batchOverallRadar.next(null);
+<<<<<<< HEAD
     this.batchOverallBar.next(null);
+=======
+    this.technologiesUpToWeek.next(null);
+>>>>>>> dd6727d8e11fd2d07b81ee57382d3a640130521f
   }
 
   /**
@@ -171,8 +185,14 @@ export class ReportingService {
   fetchBatchOverallLineChart(batchId: Number) {
     const endpoint = environment.apiBatchOverallLineChart(batchId);
 
-    // TODO: Implement API call and subject push logic
+    const params = {
+      batchId: batchId
+    };
 
+    if (this.needsRefresh(this.batchOverallLineChart, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.batchOverallLineChart.next({params: params, data: success}));
+    }
   }
 
   fetchCurrentBatchesLineChart() {
@@ -260,6 +280,56 @@ export class ReportingService {
     const endpoint = environment.apiTechnologiesForTheWeek(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
+  }
 
+  /**
+   * Updates the multiple weeks subject to contain all the topics
+   * covered up to the given week within the given batch.
+   * @param batchId - Batch whose week topics we're fetching.
+   * @param week - How many weeks we're requesting.
+   */
+  fetchTechnologiesUpToWeek(batchId: Number, week: Number) {
+
+    const params = {batchId: batchId};
+
+    if (this.needsRefresh(this.technologiesUpToWeek, params)) {
+      const result = Array<any>(week);
+      let currentSub = 0;
+
+      for (let i = 0; i < week; i++) {
+        const endpoint = environment.apiTechnologiesForTheWeek(batchId, i + 1);
+
+        this.httpClient.get(endpoint).subscribe((success) => {
+          result[i] = success;
+          currentSub++;
+
+          if (currentSub === week) {
+            this.technologiesUpToWeek.next({params: params, data: result});
+          }
+        });
+      }
+    }
+  }
+
+  /**
+   * Fetches data for displaying panel results.
+   *
+   * Note: While the endpoint suggests this is a reporting endpoint
+   * the handler is located in the PanelController.
+   */
+  fetchPanelBatchAllTrainees(batchId: Number) {
+    const endpoint = environment.apiPanelBatchAllTrainees(batchId);
+    console.log(endpoint);
+    const params = {
+      batchId: batchId
+    };
+
+    if (this.needsRefresh(this.panelBatchAllTrainees, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => {
+          console.log(success);
+          this.panelBatchAllTrainees.next({params: params, data: success});
+        });
+    }
   }
 }

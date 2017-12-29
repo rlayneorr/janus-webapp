@@ -54,7 +54,7 @@ export class WeeklyLineChartComponent implements OnInit {
 
   // Dataset for chart
   // Chart type assignment
-  public chartType = 'radar';
+  public chartType = 'bar';
 
   ngOnInit() {
     this.dataSubscription = this.reportsService.batchOverallBar$.subscribe((result) => {

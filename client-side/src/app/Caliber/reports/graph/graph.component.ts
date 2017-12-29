@@ -54,7 +54,6 @@ export class GraphComponent implements OnInit, OnChanges {
       // set up local array to be filled
       const _chartData: any[] = [];
       let _chartLabels: string[] = [];
-
       // Only need labels once so am using a flag
       let label = true;
       // gets data from input
