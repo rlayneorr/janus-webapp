@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-// npm i jspdf --save
-// npm install --save @types/jquery
-import * as jsPDF from 'jspdf';
-
 import { ReportingService } from '../../services/reporting.service';
 import { environment } from '../../../environments/environment';
-import { Http } from '@angular/http';
 import { PDFService } from '../../services/pdf.service';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * This component display the weekly line chart. It also has a download
@@ -22,24 +18,57 @@ import { PDFService } from '../../services/pdf.service';
 })
 export class WeeklyLineChartComponent implements OnInit {
 
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType = 'bar';
-  public barChartLegend = true;
-  public data;
+  // public chartData: any = [];
 
-  public barChartData: any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
+  
+  public chartData: any = [{
+    data: new Map([
+      [1, 90.1]
+    ]), label: 'batch'
+  },
+  {
+    data: new Map([
+      [1, 90.1],
+      [2, 65],
+      [3, 92.1],
+      [5, 67.7],
+      [6, 86.46],
+      [7, 67.68],
+      [8, 78],
+      [9, 87.16],
+      [10, 93],
+      [11, 76],
+      [12, 63.25],
+      [13, 75],
+      [14, 81],
+      [15, 79]
+    ]), label: 'batch'
+  }];
 
-  constructor(private reportingService: ReportingService, private pdfService: PDFService, private http: Http) { }
+  private dataSubscription: Subscription;
+
+  constructor(private reportsService: ReportingService, private pdfService: PDFService) { }
+
+  // Chart labels - for other charts the labels would have to be dynamic
+  public dataSetLabels: string[] = ['Skills'];
+
+  // Dataset for chart
+  // Chart type assignment
+  public chartType = 'radar';
 
   ngOnInit() {
-    // this.http.get()
+    this.dataSubscription = this.reportsService.batchOverallBar$.subscribe((result) => {
+
+      if (!result) {
+        console.log('data not received');
+        // this.chartData = null;
+        this.reportsService.fetchBatchOverallBarChart(2201);
+      } else {
+        console.log('data received');
+        console.log(result);
+        this.chartData = [result.data];
+      }
+    });
   }
 
   // events
@@ -53,7 +82,6 @@ export class WeeklyLineChartComponent implements OnInit {
 
   /**
    * Downloads weekly chart as a PDF file.
-   * http://jsfiddle.net/xzZ7n/4861/
    */
   public downloadPDF(): void {
     this.pdfService.downloadPDF('chart');

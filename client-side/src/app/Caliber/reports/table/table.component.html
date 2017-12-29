@@ -6,7 +6,7 @@
         </tr>
         <tr class="col-sm-6 col-md-6 col-lg-6 " *ngFor="let label of tableLabels;let i = index">
             <th class="pull-left">{{tableLabels[i]}}</th>
-            <td *ngFor="let set of tableData" class="pull-right">{{set.data[i]  | number : '1.2-2'}}</td>
+            <td *ngFor="let set of tableData" class="pull-right">{{set.data[i] }}</td>
         </tr>
     </table>
     <div *ngIf="typeCheck() === 1">

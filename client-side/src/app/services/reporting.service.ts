@@ -28,14 +28,27 @@ export class ReportingService {
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
+  // Bar Chart
+  private batchOverallBar = new BehaviorSubject<CacheData>(null);
+  public batchOverallBar$ = this.batchOverallBar.asObservable();
+
   constructor(private httpClient: HttpClient) { }
 
+  /**
+   * Clear all data stored in subjects.
+   */
   refresh() {
     // Clear all data stored in subjects
     this.traineeOverallRadar.next(null);
     this.batchOverallRadar.next(null);
+    this.batchOverallBar.next(null);
   }
 
+  /**
+   * Returns true or false if BehaviorSubject needs to be refreshed.
+   * @param sub
+   * @param params
+   */
   private needsRefresh(sub: BehaviorSubject<CacheData>, params: any): boolean {
     return !sub.getValue() || sub.getValue().params !== params;
   }
@@ -112,10 +125,24 @@ export class ReportingService {
 
   }
 
+  /**
+   * Fetches overall batch for Cumulative Scores bar chart.
+   * @param batchId - batch whose cumulative score data should be fetched
+   * @author Edel Benavides
+   */
   fetchBatchOverallBarChart(batchId: Number) {
     const endpoint = environment.apiBatchOverallBarChart(batchId);
 
-    // TODO: Implement API call and subject push logic
+    // Params object for refresh check
+    const params = {
+      batchId: batchId
+    };
+
+    // call backend API if data is not fresh
+    if (this.needsRefresh(this.batchOverallBar, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.batchOverallBar.next({params: params, data: success}));
+    }
 
   }
 

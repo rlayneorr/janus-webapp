@@ -58,7 +58,7 @@
                 </option>
         </datalist>
 
-        <div class="dropdown pull-right" ngbDropdown>
+        <div class="dropdown pull-right" ngbDropdown placement="bottom-right">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" ngbDropdownToggle>
                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             </button>
@@ -73,69 +73,16 @@
 </div>
 <hr>
 
-<div id="chart" class="container">
+
+<div class="container">
+  <div class="panel panel-default">
     <div class="panel-heading">
-        Cumulative Scores
-        <i (click)="downloadPDF()" class="fa fa-download cursorPointer"></i>
+      Cumulative Scores
+      <i (click)="downloadPDF()" class="fa fa-download cursorPointer"></i>
     </div>
-  <div>
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-
-
-            <div id="customers">
-                <h2></h2>
-                <span>Span element 1</span>
-                <span>Span element 2</span>
-                <div>Div element</div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Country</th>
-                            <th>Population</th>
-                            <th>Date</th>
-                            <th>Age</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Chinna</td>
-                            <td>1,363,480,000</td>
-                            <td>March 24, 2014</td>
-                            <td>19.1</td>
-                        </tr>
-                        <tr>
-                            <td>India</td>
-                            <td>1,241,900,000</td>
-                            <td>March 24, 2014</td>
-                            <td>17.4</td>
-                        </tr>
-                        <tr>
-                            <td>United States</td>
-                            <td>317,746,000</td>
-                            <td>March 24, 2014</td>
-                            <td>4.44</td>
-                        </tr>
-                        <tr>
-                            <td>Indonesia</td>
-                            <td>249,866,000</td>
-                            <td>July 1, 2013</td>
-                            <td>3.49</td>
-                        </tr>
-                        <tr>
-                            <td>Brazil</td>
-                            <td>201,032,714</td>
-                            <td>July 1, 2013</td>
-                            <td>2.81</td>
-                        </tr>
-                    </tbody>
-                </table>
-              </div>
+    <div id="chart" class="panel-body">
+      <app-graph *ngIf="chartData" [data]="(chartData) | graphData:dataSetLabels" [legend]=true [type]="chartType"></app-graph>
+      <app-table *ngIf="chartData" [data]="(chartData) | graphData:dataSetLabels" [type]="chartType"></app-table>
+    </div>
   </div>
 </div>
