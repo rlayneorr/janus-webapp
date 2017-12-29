@@ -8,13 +8,10 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 import { EnvironmentService } from './environment.service';
+import { environment } from '../../../environments/environment';
 
 // entities
 import { Trainer } from '../entities/Trainer';
-
-import { Inject } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { environment } from '../../../environments/environment';
 
 /**
  * this service manages calls to the web service
@@ -23,7 +20,6 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class TrainerService {
   private http: HttpClient;
-  private httpK: Http;
 
   private listSubject: BehaviorSubject<Trainer[]>;
   private titlesSubject: BehaviorSubject<any[]>;
@@ -34,11 +30,8 @@ export class TrainerService {
 
   private sendCredentials: boolean;
 
-  private dataSubject = new BehaviorSubject([]);
-
-  constructor(private httpClient: HttpClient, envService: EnvironmentService, http: Http) {
+  constructor(private httpClient: HttpClient, envService: EnvironmentService) {
     this.http = httpClient;
-    this.httpK = http;
     this.envService = envService;
 
     this.listSubject = new BehaviorSubject([]);
@@ -56,7 +49,6 @@ export class TrainerService {
     this.getTitles();
     this.getTiers();
   }
-
 
   /**
    * returns a behavior observable of the current
@@ -213,36 +205,19 @@ export class TrainerService {
       });
   }
 
-  createTrainer(name, title, email, tier) {
-    const json = {
-      'name': name,
-      'title': title,
-      'email': email,
-      'tier': tier
-    };
+  /**
+   * grabs a given trainer and sets their tier to
+   * inactive and disables them in the system
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param trainer
+   */
+  public deleteTrainer(trainer): void {
 
-    this.http.post(environment.addNewTrainer, json, { withCredentials: true })
-      .subscribe(
-      resp => {
-        this.fetchAll();
-        console.log('created a new trainer');
-      },
-      err => {
-        console.log(err);
-      }
-      );
-  }
-
-  deleteTrainer(trainer: Trainer) {
-    this.http.delete(environment.deleteTrainer,
-      { withCredentials: true })
-      .subscribe(
-      resp => {
-        this.fetchAll();
-      },
-      err => {
-        // handle the error however you want
-      }
-      );
+    this.http.request('delete', environment.deleteTrainer, {body: trainer})
+    .subscribe( (resp) => {
+      this.fetchAll();
+    });
   }
 }
