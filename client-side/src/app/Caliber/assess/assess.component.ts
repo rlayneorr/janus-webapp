@@ -47,24 +47,21 @@ export class AssessComponent implements OnInit {
 
   ngOnInit() {
     this.batchService.fetchAll();
+    this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
+    this.gradeService.getList().subscribe(grade => this.grades = grade);
     this.batchService.getList().subscribe(batch => {
       this.batches = batch;
-      if(this.batches.length !== 0) {
+      if (this.batches.length !== 0) {
         this.selectedBatch = this.batches[0];
         this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
         this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
       }
     });
-    this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
-    this.gradeService.getList().subscribe(grade => this.grades = grade);
+
   }
 
   open(content) {
     this.modalService.open(content);
-  }
-
-  debug() {
-    
   }
 
   getAssessments(week: number) {
@@ -87,7 +84,6 @@ export class AssessComponent implements OnInit {
   }
 
   getGrade(traineeId, assessmentId) {
-    console.log(this.grades);
     this.grades.forEach(grade => {
       if (grade.trainee.traineeId === traineeId && grade.assessment.assessmentId === assessmentId) {
         return grade.score;
