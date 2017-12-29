@@ -355,7 +355,12 @@ export class GraphComponent implements OnInit, OnChanges {
           display: true,
           labelString: 'Average'
         }
-      }]
+      }],
+      xAxes: [{
+        ticks: {
+            autoSkip: false
+        }
+    }]
     };
     // is now normal bar chart options
     if (_chartType === 'bar') {

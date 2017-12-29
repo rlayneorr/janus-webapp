@@ -35,15 +35,15 @@
         </tr>
     </table>
 </div>
-<div *ngIf="typeCheck() === 3">
+<div *ngIf="typeCheck() === 3" style="overflow-x: auto;">
     <table class="table" style="border-collapse: collapse;">
         <tr *ngFor="let i of indexSequence(3);">
             <td *ngFor="let j of  numberSequence(3);">
                 <span class="row justify-content-between">
-                    <span class="col-8">
+                    <span class="col">
                         <b>{{tableLabels[i+j]}}</b>
                     </span>
-                    <span class="col-3">{{tableData[1].data[i+j] | number : '1.2-2'}}</span>
+                    <span class="col">{{tableData[1].data[i+j] | number : '1.2-2'}}</span>
                 </span>
             </td>
         </tr>
