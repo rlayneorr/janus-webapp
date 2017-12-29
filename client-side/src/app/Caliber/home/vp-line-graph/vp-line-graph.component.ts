@@ -42,6 +42,7 @@ export class VpLineGraphComponent implements OnInit {
         this.addresses = this.vhss.populateAddresses(this.results);
         this.states = this.vhss.populateStates(this.addresses);
         this.hasData = true;
+        console.log(this.lineChartData);
       });
   }
   // after a state is selected, find the cities that are part of that state

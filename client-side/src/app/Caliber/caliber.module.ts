@@ -30,6 +30,7 @@ import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { LocationService } from './services/location.service';
+import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { LocationService } from './services/location.service';
     TrainerService,
     LocationService,
     CategoriesService,
+    VpHomeBarGraphService,
   ]
 })
 export class CaliberModule { }
