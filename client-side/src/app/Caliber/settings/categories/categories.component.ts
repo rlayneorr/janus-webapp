@@ -25,14 +25,12 @@ export class CategoriesComponent implements OnInit {
   private categorySubscription: Subscription;
 
   categories: Category[];
-  model = new Category();
-  newCategory: Category = new Category();
   currentCategory: Category;
   isActive: boolean;
   tableLogic: any = [];
   columns;
   numColumns: number;
-  constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
+  constructor(private categoriesService: CategoriesService, private modalService: NgbModal) { }
   // Loads all categories
   ngOnInit() {
     // console.log(this.columns);

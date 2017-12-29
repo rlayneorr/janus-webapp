@@ -23,7 +23,9 @@ export class CategoriesService {
 
   categories$: Observable<any> = this.dataSubject.asObservable(); // this is how components should access the data if you want to cache it
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.fetchAll();
+   }
 
   /**
    * retrieves a list of all categories and pushes them to the
