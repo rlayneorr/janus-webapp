@@ -67,8 +67,10 @@ export class WeeklyLineChartComponent implements OnInit {
   public createChartData(data): void {
     this.chartData =
     [
-      data,
-      this.calculateScoreAverage(),
+     {
+        k: this.calculateScoreAverage()
+     },
+       data
     ];
   }
 
