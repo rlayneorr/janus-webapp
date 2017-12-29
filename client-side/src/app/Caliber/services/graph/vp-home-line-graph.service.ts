@@ -1,22 +1,59 @@
 import { Injectable } from '@angular/core';
-import { LineChartData } from '../../entities/lineChartData';
+import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { WeeklyProgress } from '../../entities/weeklyProgress';
-import { ChartData } from '../../entities/chartData';
+import { DataSet } from '../../entities/DataSet';
 import { ColorService } from '../colors/color.service';
 
 @Injectable()
 export class VpHomeLineGraphService {
-  public lineChartData = new LineChartData();
+  public lineChartData = new ChartDataEntity();
   constructor(private cs: ColorService) {
     this.cs.setVPHomeLineColors([this.lineChartData.mainColor, this.lineChartData.secondaryColor]);
   }
 
   public getLineChartData() {
-    return new LineChartData();
+    const lcd = new ChartDataEntity();
+    lcd.colors = [lcd.mainColor, lcd.secondaryColor];
+    lcd.options = {
+        legend: {
+            display: true,
+            labels: {
+                boxWidth: 10
+            }
+        },
+        scales: {
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Week'
+                }
+
+            }],
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Score'
+                },
+
+                ticks: {
+                    suggestedMin: 40,
+                    suggestedMax: 100,
+                    stepSize: 20
+                }
+            }]
+        },
+        datasetFill: false,
+        tooltips: {
+            mode: 'x',
+        },
+    };
+    lcd.data = [];
+    lcd.type = 'line';
+    return lcd;
 
   }
 
-  public fillLineChartDate(results: Array<WeeklyProgress>, lcd: LineChartData, state: string, city: string) {
+  public fillLineChartDate(results: Array<WeeklyProgress>, lcd: ChartDataEntity, state: string, city: string) {
     let holder;
     lcd = this.clearLineChartData(lcd);
     if (state !== '') {
@@ -30,7 +67,7 @@ export class VpHomeLineGraphService {
     let highestWeek = 0;
     for (const item of holder) {
       let currentWeek = 1;
-      const dataHolder = new ChartData();
+      const dataHolder = new DataSet();
       dataHolder.label = item.label;
       let iterator = 0;
       const keys = Object.keys(item.grades);
@@ -56,7 +93,7 @@ export class VpHomeLineGraphService {
     return lcd;
   }
 
-  private clearLineChartData(lcd: LineChartData) {
+  private clearLineChartData(lcd: ChartDataEntity) {
     lcd.data.length = 0;
     lcd.labels.length = 0;
     lcd.colors.length = 0;
