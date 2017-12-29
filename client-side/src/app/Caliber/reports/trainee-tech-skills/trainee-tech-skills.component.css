@@ -3,13 +3,6 @@
     text-align: center;
     width: 10%;
 }
-.panel-heading {
-    background: rgb(242, 105, 37);
-    color: white;
-    padding: 1vmin;
-    border-top-left-radius: 2vmin;
-    border-top-right-radius: 2vmin;
-}
 .chartContainer {
     padding: 0.5vmin;
     border: 1px solid lightgrey;
