@@ -27,6 +27,7 @@ export class AssessComponent implements OnInit {
   assessments: Assessment[] = [];
   selectedBatch: Batch = new Batch();
   grades: Grade[] = [];
+  selectedWeek: 1;
 
   constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
   private gradeService: GradeService) {
@@ -40,12 +41,20 @@ export class AssessComponent implements OnInit {
       return;
     } else {
       this.getAssessments(id);
+      this.selectedWeek = id;
     }
   }
 
   ngOnInit() {
     this.batchService.fetchAll();
-    this.batchService.getList().subscribe(batch => this.batches = batch);
+    this.batchService.getList().subscribe(batch => {
+      this.batches = batch;
+      if(this.batches.length !== 0) {
+        this.selectedBatch = this.batches[0];
+        this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+        this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+      }
+    });
     this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
     this.gradeService.getList().subscribe(grade => this.grades = grade);
   }
@@ -55,9 +64,7 @@ export class AssessComponent implements OnInit {
   }
 
   debug() {
-    this.selectedBatch = this.batches[0];
-    this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
-    this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+    
   }
 
   getAssessments(week: number) {
@@ -74,9 +81,13 @@ export class AssessComponent implements OnInit {
     newAssess.category = category;
     newAssess.type = type;
     newAssess.rawScore = score;
+    newAssess.week = this.selectedWeek;
+
+    this.assessmentService.create(newAssess);
   }
 
   getGrade(traineeId, assessmentId) {
+    console.log(this.grades);
     this.grades.forEach(grade => {
       if (grade.trainee.traineeId === traineeId && grade.assessment.assessmentId === assessmentId) {
         return grade.score;

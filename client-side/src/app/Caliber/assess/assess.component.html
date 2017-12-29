@@ -63,10 +63,11 @@
 <!-- TABS START -->
 <div class = "main-container">
     <ngb-tabset (tabChange)="fetchNews($event)">
-        <ngb-tab title="Week {{i+1}}" id = "{{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index" >
-          <ng-template ngbTabContent>
-          </ng-template>
-        </ngb-tab>
+        <ngb-tab id="{{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index">
+                <ng-template ngbTabTitle>
+                    <div class="revature-orange"><b>Week {{i+1}}</b></div> </ng-template>
+                <ng-template ngbTabContent></ng-template>
+              </ngb-tab>
       </ngb-tabset>
       <button  (click)="open(addWeekContent)">+</button>
 <!-- TABS END -->
@@ -77,7 +78,7 @@
           <th>
             Trainee
           </th>
-          <th *ngFor="let assessment of this.assessments">
+          <th *ngFor="let assesesmnt of this.assessments">
             <div class = "assessment-header">{{assessment.title}}</div>
           </th>
           <th>
