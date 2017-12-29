@@ -35,7 +35,7 @@ import { AssessComponent } from './assess/assess.component';
 import { NavComponent } from '../nav/nav.component';
 import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
-import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
+import { WeeklyLineChartComponent } from './reports/weekly-line-chart/weekly-line-chart.component';
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';

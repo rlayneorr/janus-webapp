@@ -59,7 +59,7 @@ export class GraphComponent implements OnInit, OnChanges {
     this.chartLegend = this.legend;
     this.h = Math.random();
     if (this.data !== null) {
-      
+
       // set up local array to be filled
       const _chartData: any[] = [];
       let _chartLabels: string[] = [];
@@ -75,11 +75,11 @@ export class GraphComponent implements OnInit, OnChanges {
             _chartLabels.push(key);
           }
         });
-        
+
         label = false;
         _chartData.push({ data: _chartDataRow, label: chartMap.label });
       }
-      
+
       // control look of chart based on type
       switch (this.chartType) {
         case 'radar':
@@ -114,7 +114,6 @@ export class GraphComponent implements OnInit, OnChanges {
             this.chartMaps[1].data.forEach((value: number, key: string) => {
               _chartLabels.push(key);
             });
-            console.log(_chartLabels);
             _chartData[1].label = 'Batch Scores';
             _chartData[0].type = 'line';
 
@@ -358,9 +357,9 @@ export class GraphComponent implements OnInit, OnChanges {
       }],
       xAxes: [{
         ticks: {
-            autoSkip: false
+          autoSkip: false
         }
-    }]
+      }]
     };
     // is now normal bar chart options
     if (_chartType === 'bar') {
