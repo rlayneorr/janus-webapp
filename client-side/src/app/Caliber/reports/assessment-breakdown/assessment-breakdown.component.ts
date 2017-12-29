@@ -80,17 +80,18 @@ export class AssessmentBreakdownComponent implements OnInit {
         }
       });
 
-      // this.batchIdSub = this.granularityService.currentBatch$.subscribe(
-      //     data => { this.batchId = data.batchId; this.tryFetch(); });
+      this.batchIdSub = this.granularityService.currentBatch$.subscribe(
+          data => { this.batchId = data.batchId; this.tryFetch(); });
 
-      // this.weekSub = this.granularityService.currentWeek$.subscribe(
-      //     data => { this.week = data; this.tryFetch(); });
+      this.weekSub = this.granularityService.currentWeek$.subscribe(
+          data => { this.week = data; this.tryFetch(); });
 
-      // this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
-      //     data => { this.traineeId = data.traineeId; this.tryFetch(); });
+      this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
+          data => { this.traineeId = data.traineeId; this.tryFetch(); });
 
+    // Used in testing without granularity support
     // this.reportsService.fetchBatchWeekTraineeBarChart(2201, 1, 5532);
-    this.reportsService.fetchBatchOverallTraineeBarChart(2201, 5532);
+    // this.reportsService.fetchBatchOverallTraineeBarChart(2201, 5532);
   }
 
   tryFetch() {
