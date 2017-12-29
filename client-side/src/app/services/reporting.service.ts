@@ -39,8 +39,9 @@ export class ReportingService {
   private batchOverallLineChart = new BehaviorSubject<CacheData>(null);
   public batchOverallLineChart$ = this.batchOverallLineChart.asObservable();
 
-  private batchWeekTraineeBarChart = new BehaviorSubject<CacheData>(null);
-  public batchWeekTraineeBarChart$ = this.batchWeekTraineeBarChart.asObservable();
+  // Used for a variety of API calls related to getting assessment breakdown info
+  private assessmentBreakdownBarChart = new BehaviorSubject<CacheData>(null);
+  public assessmentBreakdownBarChart$ = this.assessmentBreakdownBarChart.asObservable();
 
   /*  Reports Charts */
 
@@ -135,7 +136,15 @@ export class ReportingService {
   fetchBatchOverallTraineeBarChart(batchId: Number, traineeId: Number) {
     const endpoint = environment.apiBatchOverallTraineeBarChart(batchId, traineeId);
 
-    // TODO: Implement API call and subject push logic
+    const params = {
+      batchId: batchId,
+      traineeId: traineeId
+    };
+
+    if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
+    }
 
   }
 
@@ -176,9 +185,9 @@ export class ReportingService {
       traineeId: traineeId
     };
 
-    if (this.needsRefresh(this.batchWeekTraineeBarChart, params)) {
+    if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchWeekTraineeBarChart.next({params: params, data: success}));
+        success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
     }
   }
 

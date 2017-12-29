@@ -18,7 +18,7 @@ export class AssessmentBreakdownComponent implements OnInit {
 
   private batchId: Number;
   private week: Number;
-  private TraineeId: Number;
+  private traineeId: Number;
 
   private batchIdSub: Subscription;
   private weekSub: Subscription;
@@ -31,7 +31,7 @@ export class AssessmentBreakdownComponent implements OnInit {
   private chartType = 'bar';
   private barChartLegend = true;
 
-  constructor(private reportService: ReportingService, private granularityService: GranularityService) { }
+  constructor(private reportsService: ReportingService, private granularityService: GranularityService) { }
 
   public options = {
     scales: {
@@ -44,9 +44,17 @@ export class AssessmentBreakdownComponent implements OnInit {
     }
   };
 
+  public chartColors: Array<any> = [
+    { // Trainee - Complimentary
+      backgroundColor: 'rgb(37,242,227)',
+    },
+    { // Revature Orange
+      backgroundColor: 'rgb(242, 105, 37)',
+    }];
+
   ngOnInit() {
 
-    this.dataSubscription = this.reportService.batchWeekTraineeBarChart$.subscribe(
+    this.dataSubscription = this.reportsService.assessmentBreakdownBarChart$.subscribe(
       (result) => {
         if (result) {
 
@@ -79,14 +87,23 @@ export class AssessmentBreakdownComponent implements OnInit {
           data => { this.week = data; this.tryFetch(); });
 
       this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
-          data => { this.TraineeId = data.traineeId; this.tryFetch(); });
+          data => { this.traineeId = data.traineeId; this.tryFetch(); });
 
-    // this.reportService.fetchBatchWeekTraineeBarChart(2201, 1, 5532);
+    // Used in testing without granularity support
+    // this.reportsService.fetchBatchWeekTraineeBarChart(2201, 1, 5532);
+    // this.reportsService.fetchBatchOverallTraineeBarChart(2201, 5532);
   }
 
   tryFetch() {
-    if (this.batchIdSub && this.weekSub && this.traineeIdSub) {
-      this.reportService.fetchBatchWeekTraineeBarChart(this.batchId, this.week, this.TraineeId);
+    // Check that all objects are present
+    if (this.batchId && this.week && this.traineeId) {
+      if (this.week === 0) {
+        // If week is 0, fetch data for all weeks
+        this.reportsService.fetchBatchOverallTraineeBarChart(this.batchId, this.traineeId);
+      } else {
+        // Else fetch data for the specific week
+        this.reportsService.fetchBatchWeekTraineeBarChart(this.batchId, this.week, this.traineeId);
+      }
     }
   }
 
