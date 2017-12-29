@@ -96,7 +96,7 @@ export class AssessmentBreakdownComponent implements OnInit {
 
   tryFetch() {
     // Check that all objects are present
-    if (this.batchId && this.week && this.traineeId) {
+    if (this.batchId && this.week !== null && this.traineeId) {
       if (this.week === 0) {
         // If week is 0, fetch data for all weeks
         this.reportsService.fetchBatchOverallTraineeBarChart(this.batchId, this.traineeId);
