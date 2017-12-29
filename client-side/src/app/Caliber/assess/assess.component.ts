@@ -84,12 +84,6 @@ export class AssessComponent implements OnInit {
   }
 
   getGrade(traineeId, assessmentId) {
-    this.grades.forEach(grade => {
-      if (grade.trainee.traineeId === traineeId && grade.assessment.assessmentId === assessmentId) {
-        return grade.score;
-      }
-    });
-
 
   }
 
