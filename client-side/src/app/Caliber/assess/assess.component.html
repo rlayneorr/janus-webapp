@@ -63,7 +63,7 @@
 <!-- TABS START -->
 <div class = "main-container">
     <ngb-tabset (tabChange)="fetchNews($event)">
-        <ngb-tab  title="Week {{i+1}}" id = "{{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index" >
+        <ngb-tab title="Week {{i+1}}" id = "{{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index" >
           <ng-template ngbTabContent>
           </ng-template>
         </ngb-tab>
