@@ -19,8 +19,8 @@
 <!-- Display all assessment categories -->
 <div class="container centered" id="trainer-assess-table" *ngIf="categories[0]">
     <div class="row">
-        <!-- Col 1 -->
-        <div class="col top5" *ngFor='let column of [0,1,2]; let t=index;'>
+        <!-- Col Start -->
+        <div class="col top5" *ngFor='let column of columns;let c=index;'>
             <!-- Accordian table -->
             <table class="table table-responsive" style="border-collapse: collapse;">
                 <thead>
@@ -32,14 +32,14 @@
                 <tbody>
                     <!-- Load all categories -->
                     <tr *ngFor="let category of categories; let i=index;">
-                        <td *ngIf='nextColumn(t,i)' (click)='editopen(editCategory,category);'>
+                        <td *ngIf='nextColumn(c,i)' (click)='editopen(editCategory,category);'>
                             {{category.skillCategory}}
                         </td>
                         <!-- Check for active condition -->
-                        <td class='text-right' *ngIf='!category.active && nextColumn(t,i)'>
+                        <td class='text-right' *ngIf='!category.active && nextColumn(c,i)'>
                             <span style="color: #ff7575" class="fa fa-times fa-2x" aria-hidden="true"></span>
                         </td>
-                        <td class='text-right' *ngIf='category.active && nextColumn(t,i)'>
+                        <td class='text-right' *ngIf='category.active && nextColumn(c,i)'>
                             <span style="color: #81f575" class="fa fa-check fa-2x" aria-hidden="true"></span>
                         </td>
                     </tr>
