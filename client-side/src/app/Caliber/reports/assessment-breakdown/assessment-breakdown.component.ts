@@ -24,8 +24,8 @@ export class AssessmentBreakdownComponent implements OnInit {
   private weekSub: Subscription;
   private traineeIdSub: Subscription;
 
-  private data: Array<any>;
-  private labels: Array<string>;
+  public data: Array<any>;
+  public labels: Array<string>;
   private dataSubscription: Subscription;
 
   private chartType = 'bar';
