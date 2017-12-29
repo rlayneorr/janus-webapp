@@ -135,4 +135,5 @@ export class NoteService {
       this.savedSubject.next(saved);
     });
   }
+
 }

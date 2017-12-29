@@ -27,6 +27,7 @@ import { CategoryService } from './services/category.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
+import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -67,6 +68,7 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+
 
 
 @NgModule({
@@ -114,6 +116,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
+    GradeByTraineeByAssessmentPipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
