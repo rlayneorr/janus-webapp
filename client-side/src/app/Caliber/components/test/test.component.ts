@@ -23,11 +23,10 @@ import { CategoryService } from '../../services/category.service';
 
 export class TestComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private service: CategoryService;
   private data: any[];
 
 
-  constructor(service: CategoryService) {
+  constructor(private service: GradeService) {
     this.service = service;
   }
 
@@ -53,9 +52,9 @@ export class TestComponent implements OnInit, OnDestroy {
       // }
     });
 
-    this.service.fetchAll();
+    // this.service.fetchAll();
     // this.service.fetchAllByBatch(3002);
-    // this.service.fetchByBatchIdByWeek(3002, 1);
+    this.service.fetchByBatchIdByWeek(2201, 1);
   }
 
   ngOnDestroy() {

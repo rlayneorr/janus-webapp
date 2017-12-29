@@ -86,7 +86,7 @@ export class GradeService {
 
     this.listSubject.next([]);
 
-    this.http.get<Grade[]>(url).subscribe( (grades) => {
+    this.http.get<any>(url).subscribe( (grades) => {
         const extractedGrades: Grade[] = [];
 
         /*
@@ -94,14 +94,21 @@ export class GradeService {
         *
         * {
         *   ${traineeId}: [
-        *     Grade,
+        *     Grade1,
+              Grade2,
         *   ],
+            ${traineeId}: [
+              Grade1,
+              Grade2,
+            ],
         *   ...
         * }
         */
-        for ( const grade in grades ) {
-          if ( grades.hasOwnProperty(grade) ) {
-            extractedGrades.push(grades[grade][0]);
+        for ( const traineeId in grades ) {
+          if ( grades.hasOwnProperty(traineeId) ) {
+            for ( const grade of grades[traineeId] ) {
+              extractedGrades.push(grade);
+            }
           }
         }
 
