@@ -1,12 +1,3 @@
-
-.feedback-heading {
-    background: rgb(242, 105, 37);
-    color: white;
-    padding: 1vmin;
-    border-top-left-radius: 2vmin;
-    border-top-right-radius: 2vmin;
-}
-
 .feedback-repeat-topics-passed {
     color: rgb(252,221,115);
 }

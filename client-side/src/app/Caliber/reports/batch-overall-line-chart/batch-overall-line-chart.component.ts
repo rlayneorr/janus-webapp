@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
+import { GranularityService } from '../services/granularity.service';
 
 /**
  * Component utilizes service API calls to fetch and display an overall
@@ -16,8 +17,11 @@ import { ReportingService } from '../../../services/reporting.service';
 export class BatchOverallLineChartComponent implements OnInit {
 
   public data: any = null;
-  public labels: Array<String> = null;
   private dataSubscription: Subscription;
+  private batchId: Number;
+  private granularitySubscription: Subscription;
+
+  public labels: Array<String> = null;
   public lineChartLegend = false;
   public lineChartType = 'line';
 
@@ -38,7 +42,7 @@ export class BatchOverallLineChartComponent implements OnInit {
       borderColor: 'rgba(76, 111, 163, 1)',
       pointBackgroundColor: 'rgba(76, 111, 163, 1)',
       pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: 'rgba(76, 111, 163, 1)',
       pointHoverBorderColor: 'rgba(76, 111, 163, 1)'
     },
     {
@@ -46,7 +50,7 @@ export class BatchOverallLineChartComponent implements OnInit {
       borderColor: 'rgba(190, 71, 71, 1)',
       pointBackgroundColor: 'rgba(190, 71, 71, 1)',
       pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: 'rgba(190, 71, 71, 1)',
       pointHoverBorderColor: 'rgba(190, 71, 71, 1)'
     },
     {
@@ -54,12 +58,12 @@ export class BatchOverallLineChartComponent implements OnInit {
       borderColor: 'rgba(164, 180, 20, 1)',
       pointBackgroundColor: 'rgba(164, 180, 20, 1)',
       pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: 'rgba(164, 180, 20, 1)',
       pointHoverBorderColor: 'rgba(164, 180, 20, 1)'
     }
   ];
 
-  constructor(private reportsService: ReportingService) {}
+  constructor(private reportsService: ReportingService, private granularityService: GranularityService) {}
 
   ngOnInit() {
     this.dataSubscription = this.reportsService.batchOverallLineChart$.subscribe((result) => {
@@ -82,6 +86,17 @@ export class BatchOverallLineChartComponent implements OnInit {
         console.log('line chart data failed to load');
       }
     });
-    this.reportsService.fetchBatchOverallLineChart(2200);
+
+    this.granularitySubscription = this.granularityService.currentBatch$.subscribe(
+      (result) => {
+        if (result.batchId !== this.batchId) {
+          this.batchId = result.batchId;
+          this.fetch();
+        }
+      });
+  }
+
+  private fetch() {
+    this.reportsService.fetchBatchOverallLineChart(this.batchId);
   }
 }
