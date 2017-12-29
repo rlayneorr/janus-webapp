@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  context: 'http://localhost:8070/',
+  context: 'http://localhost:8080/',
   bootContext: 'http://localhost/',
 
   /* Evaluation Service API endpoints */
