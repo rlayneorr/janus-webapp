@@ -20,9 +20,6 @@ import { PanelReview } from '../Caliber/entities/PanelReview';
 export class ReportingService {
 
   /* Subjects & Paired Observables */
-
-
-  /*  Reports Charts */
   private traineeOverallRadar = new BehaviorSubject<CacheData>(null);
   public traineeOverallRadar$ = this.traineeOverallRadar.asObservable();
 
@@ -37,6 +34,12 @@ export class ReportingService {
 
   private batchOverallLineChart = new BehaviorSubject<CacheData>(null);
   public batchOverallLineChart$ = this.batchOverallLineChart.asObservable();
+
+  private batchWeekTraineeBarChart = new BehaviorSubject<CacheData>(null);
+  public batchWeekTraineeBarChart$ = this.batchWeekTraineeBarChart.asObservable();
+
+  /*  Reports Charts */
+
 
   constructor(private httpClient: HttpClient) { }
 
@@ -130,14 +133,30 @@ export class ReportingService {
 
   }
 
+  /**
+   * Fetches topical assessment data on a given week for a given user along with the
+   * average assessment of a given batch
+   * @param batchId
+   * @param weekId
+   * @param traineeId
+   */
   fetchBatchWeekTraineeBarChart(batchId: Number, weekId: Number, traineeId: Number) {
     const endpoint = environment.apiBatchWeekTraineeBarChart(batchId, weekId, traineeId);
 
-    // TODO: Implement API call and subject push logic
+    const params = {
+      batchId: batchId,
+      weekId: weekId,
+      traineeId: traineeId
+    };
 
+    if (this.needsRefresh(this.batchWeekTraineeBarChart, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.batchWeekTraineeBarChart.next({params: params, data: success}));
+    }
   }
 
   /* Line Charts */
+
   fetchTraineeUpToWeekLineChart(batchId: Number, weekId: Number, traineeId: Number) {
     const endpoint = environment.apiTraineeUpToWeekLineChart(batchId, weekId, traineeId);
 

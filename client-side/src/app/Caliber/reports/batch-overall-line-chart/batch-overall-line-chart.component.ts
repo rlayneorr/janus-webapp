@@ -78,9 +78,6 @@ export class BatchOverallLineChartComponent implements OnInit {
 
         this.labels = newLabels;
         this.data = [{data: newData, label: 'label'}];
-        console.log('Line chart data received');
-        console.log(this.data);
-        console.log(this.labels);
       } else {
         console.log('line chart data failed to load');
       }
