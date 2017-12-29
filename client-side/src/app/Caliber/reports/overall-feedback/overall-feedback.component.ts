@@ -30,11 +30,8 @@ import { Observable } from 'rxjs/Observable';
 
 export class OverallFeedbackComponent implements OnInit, OnDestroy {
 
-  // This array of subscriptions is structured to define a "dependency" of sorts
-  // This way we can specify which type of subscriptions we need to get rid of
-  // when reinitializing subscribers of a certain type.
-  private qcNotes: Array<Note> = null;
-  private allNotes: Array<Note> = null;
+  qcNotes: Array<Note> = null;
+  allNotes: Array<Note> = null;
   private qcNoteSubscription: Subscription;
   private allNoteSubscription: Subscription;
 

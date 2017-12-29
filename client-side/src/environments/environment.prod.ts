@@ -2,6 +2,13 @@ export const environment = {
   production: true,
   context: 'http://localhost:8080/', // change for what the production environment would actually be
 
+  /* Evaluation Service API endpoints */
+  apiAllQCTraineeOverallNotes: (traineeId: Number) =>
+    environment.context + `qc/note/trainee/${traineeId}`,
+
+  apiAllTraineeNotes: (traineeId: Number) =>
+    environment.context + `all/notes/trainee/${traineeId}`,
+
   // API calls for the VP functionality group
   addNewCategory: 'http://localhost:8080/vp/category',
   getAllCategories: 'http://localhost:8080/vp/category',
