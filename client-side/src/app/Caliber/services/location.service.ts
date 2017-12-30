@@ -73,15 +73,33 @@ export class LocationService {
       });
   }
 
-  // deleteLocation(location: Location) {
-  //   location.active = false;
-  //   this.http.delete(environment.deleteLocation, { withCredentials: true, body: location })
-  //     .subscribe(
-  //     resp => {
-  //     },
-  //     err => {
-  //       // handle the error however you want
-  //     }
-  //     );
-  // }
+  deleteLocation(location: Location) {
+    location.active = false;
+    this.http.request('delete', environment.deleteLocation,
+      { withCredentials: true,
+        body: location
+      })
+      .subscribe(
+      resp => {
+      },
+      err => {
+        // handle the error however you want
+      }
+      );
+  }
+
+  reactivateLocation(location: Location) {
+    location.active = true;
+    this.http.request('put', environment.reactivateLocation,
+      { withCredentials: true,
+        body: location
+      })
+      .subscribe(
+      resp => {
+      },
+      err => {
+        // handle the error however you want
+      }
+      );
+  }
 }
