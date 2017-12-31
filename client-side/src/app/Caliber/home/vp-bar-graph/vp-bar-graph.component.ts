@@ -5,6 +5,7 @@ import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.se
 import { Http } from '@angular/http';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-vp-bar-graph',
@@ -21,6 +22,10 @@ export class VpBarGraphComponent implements OnInit {
   public selectedBarCity = '';
   public selectedBarState = '';
   public selectedState: boolean;
+  public overallBatchStatusArray = [];
+  @Input()
+  public allbatches: any;
+
 
   constructor(private vhbgs: VpHomeBarGraphService,
      private http: Http,
@@ -43,8 +48,21 @@ export class VpBarGraphComponent implements OnInit {
         this.hasBarChartData = true;
         console.log(this.barChartData);
         console.log(this.states);
+        this.populateBatchStatuses();
       });
   }
+
+  populateBatchStatuses() {
+    for (const result of this.results) {
+      console.log('result', result);
+      const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
+      console.log(batch);
+      this.http.get('http://localhost:8080/qc/note/batch/' + batch.batchId + '/' + batch.weeks + '/')
+      .subscribe( (resp) => this.overallBatchStatusArray.push(resp.json().qcStatus));
+    }
+    console.log(this.overallBatchStatusArray);
+  }
+
   findCities(state) {
     this.hasBarChartData = false;
     this.selectedBarCity = '';
