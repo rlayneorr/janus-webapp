@@ -1,78 +1,191 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { BehaviorSubject } from 'rxjs/Rx';
+import { Injectable} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+// rxjs
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
+
+// services
+import { AbstractApiService } from './abstract-api.service';
+import { EnvironmentService } from './environment.service';
+
+// entities
 import { Location } from '../../entities/Location';
 
+/**
+* this service manages calls to the web services
+* for Location objects
+*/
 @Injectable()
-export class LocationService {
+export class LocationService extends AbstractApiService<Location> {
 
-  private dataSubject = new BehaviorSubject([]);
+  /*
+  * @deprecated
+  *
+  * initial way used for components to access the returned
+  * list BehaviorSubject as an obsevable
+  *
+  * -> retained for backwards compatibility
+  *
+  * you can also use the getList() method directly going forward
+  */
+  locations$: Observable<any> = super.getList();
 
-  locations$: Observable<any> = this.dataSubject.asObservable(); // this is how components should access the data if you want to cache it
+  constructor( envService: EnvironmentService, httpClient: HttpClient ) {
+    super(envService, httpClient);
 
-  constructor( @Inject(Http) public http: Http) {
+    this.initializeSubscriptions();
   }
 
-  getAll() {
-    this.http.get(environment.getAllLocations, { withCredentials: true })
-    .map(
-      resp => resp.json(), // map the resp so all subscribers just get the body of the request as a js object
-      // err => // can have the error mapped for all subscribers if you want also
-    )
-      .subscribe(
-      resp => {
-        this.dataSubject.next(resp);
-      },
-      err => {
-        // handle the error however you want
+  /**
+  * bootstrap any subscriptions
+  */
+  private initializeSubscriptions(): void {
+    /*
+    * adds any locations updated to not being active
+    * to the deletedSubject
+    *
+    * @see this.delete();
+    */
+    this.getSaved().subscribe( (saved) => {
+      if ( saved.active === false ) {
+        this.deletedSubject.next(saved);
       }
-      );
-  }
-
-  addLocation(location: Location) {
-    this.http.post(environment.addLocation, location, { withCredentials: true })
-      .map(
-      resp => resp.json(),
-    )
-      .subscribe(
-      resp => {
-        console.log('added location successfully');
-        this.getAll();
-      },
-      err => {
-        console.log('err adding location ' + err);
-      }
-      );
+    });
   }
 
 
-  updateLocation(location: Location) {
-    this.http.put(environment.editLocation, location, { withCredentials: true })
-      .map(
-      resp => resp.json(),
-    )
-      .subscribe(
-      resp => {
-        console.log('updated location successfully');
-        this.getAll();
-      },
-      err => {
-        console.log('err updating location ' + err);
-      }
-      );
+  /*
+   =====================
+   BEGIN: API calls
+   =====================
+ */
+
+  /**
+  * retrieves all Locations from the API
+  * and pushed them on the listSubject
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
+  */
+  public fetchAll(): void {
+    const url = 'all/location/all/';
+
+    super.doGetList(url);
   }
 
-  deleteLocation(location: Location) {
+  /**
+  * transmits a Location to be saved to
+  * the API and pushes the saved Location
+  * on the savedSubject
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP')")
+  *
+  * @param location: Location
+  */
+  public save(location: Location): void {
+    const url = 'vp/location/create';
+
+    super.doPost(location, url);
+  }
+
+  /**
+  * transmits a Location to be updated to
+  * the API and pushes the updated Location
+  * on the savedSubject
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP')")
+  *
+  * @param location: Location
+  */
+  public update(location: Location): void {
+    const url = 'vp/location/update';
+
+    super.doPut(location, url);
+  }
+
+  /**
+  * transmits a Location to be deactivated
+  * to the API and pushes the deactivated
+  * location on the deletedSubject
+  *
+  * NOTE: there is no literal DELETE on the API
+  *       it simply updates the object requiring the
+  *       client to know to set the active flag to false
+  *       in advance
+  *
+  *       this approach does the same thing while consuming
+  *       the currently implemented methods
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP')")
+  *
+  * @param location: Location
+  */
+  public delete(location: Location): void {
     location.active = false;
-    this.http.delete(environment.deleteLocation, { withCredentials: true, body: location })
-      .subscribe(
-      resp => {
-      },
-      err => {
-        // handle the error however you want
-      }
-      );
+
+    this.update(location);
+
+    // @see savedSubscription in constructor for deletedSubject implementation
   }
+
+  /*
+  * ============================================
+  * BEGIN: deprecated functions
+  *
+  * -> retained for backwards compatibility
+  * ============================================
+  */
+
+  /**
+  * @deprecated
+  *
+  * convience function for the fetchAll() method
+  * retained to honor the initial design pattern
+  * for components that may be dependent on it
+  *
+  * NOTE: not against "get" vs "fetch", same difference ultimately,
+  * just keeping it consistent with access to the subjects
+  * using the "get" convention and API calls using the "fetch"
+  * convention for now
+  */
+  public getAll(): void {
+    this.fetchAll();
+  }
+
+  /**
+  * @deprecated
+  *
+  * @see save();
+  *
+  * convience function for the save() method
+  * retained to honor the initial design path
+  */
+  public addLocation(location: Location): void {
+    this.save(location);
+  }
+
+  /**
+  * @deprecated
+  *
+  * @see update()
+  *
+  * convience function for the update() method
+  * retained to honor the initial design path
+  */
+  public updateLocation(location: Location): void {
+    this.update(location);
+  }
+
+  /**
+  * @deprecated
+  *
+  * @see delete()
+  *
+  * convience function for the delete() method
+  * retained to honor the initial design path
+  */
+  public deleteLocation(location: Location) {
+    this.delete(location);
+  }
+
 }

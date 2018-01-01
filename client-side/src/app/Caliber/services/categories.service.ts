@@ -5,6 +5,14 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { Category } from '../entities/Category';
 
+/**
+* @deprecated
+*
+* @see CategoryService
+*
+* this service manages calls to the web services
+* for Category objects
+*/
 @Injectable()
 export class CategoriesService {
 

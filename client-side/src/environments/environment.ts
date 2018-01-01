@@ -13,12 +13,7 @@ export const environment = {
   getAllCategories: 'http://localhost:8080/vp/category',
   addNewTrainer: 'http://localhost:8080/vp/trainer/create',
   editCurrentCategory: 'http://localhost:8080/vp/category/update',
-  editLocation: 'http://localhost:8080/vp/location/update',
-  deleteLocation: 'http://localhost:8080/vp/location/delete',
-  addLocation: 'http://localhost:8080/vp/location/create',
   deleteTrainer: 'http://localhost:8080/vp/trainer/delete',
-  getAllLocations: 'http://localhost:8080/all/location/all/',
-  getAllTrainers: 'http://localhost:8080/all/trainer/all',
   getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
   getAllTiers: 'http://localhost:8080/types/trainer/role/all',
   editTrainer: 'http://localhost:8080/vp/trainer/update',
@@ -83,4 +78,16 @@ export const environment = {
 
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
+
+  /**
+  * @deprecated
+  */
+  getAllLocations: 'http://localhost:8080/all/location/all/',
+  editLocation: 'http://localhost:8080/vp/location/update',
+  deleteLocation: 'http://localhost:8080/vp/location/delete',
+  addLocation: 'http://localhost:8080/vp/location/create',
+
+  getAllTrainers: 'http://localhost:8080/all/trainer/all',
+
+
 };
