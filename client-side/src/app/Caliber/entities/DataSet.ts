@@ -5,6 +5,7 @@ export class DataSet {
     label: any;
     fill: boolean;
     stack: string;
+    id: any;
     constructor() {
         this.data = [];
     }
