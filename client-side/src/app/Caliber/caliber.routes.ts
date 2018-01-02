@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+
+// components
 import { CaliberComponent } from './caliber.component';
 import { HomeComponent } from './home/home.component';
 import { AssessComponent } from './assess/assess.component';
@@ -9,6 +11,10 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
+import { QualityComponent } from './quality/quality.component';
+import { PanelComponent } from './panel/panel.component';
+import { TestComponent } from './components/test/test.component';
+import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
 
 export const routes: Routes = [
   {
@@ -25,11 +31,27 @@ export const routes: Routes = [
       },
       {
         path: 'assess',
-        component: AssessComponent
+        component: AssessComponent,
+      },
+      {
+        path: 'quality',
+        component: QualityComponent
       },
       {
         path: 'reports',
-        component: ReportsComponent
+        component: ReportsComponent,
+      },
+      {
+        path: 'test',
+        component: TestComponent,
+      },
+      {
+        path: 'trainer-profile',
+        component: TrainerProfileComponent,
+      },
+      {
+        path: 'panel',
+        component: PanelComponent
       },
       {
         path: 'settings',

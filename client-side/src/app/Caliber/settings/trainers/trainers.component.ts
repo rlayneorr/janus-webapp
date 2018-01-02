@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-trainers',
@@ -20,81 +21,93 @@ export class TrainersComponent implements OnInit, OnDestroy {
   model = new Trainer();
 
   currEditTrainer: Trainer;
+  newTrainer: Trainer;
   newTier: String;
   newTitle: String;
 
+  rForm: FormGroup;
+  addForm: FormGroup;
 
   constructor(private trainerService: TrainerService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.trainerService.populateOnStart();
-    this.trainerSubscription = this.trainerService.trainers$.subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getList().subscribe((resp) => {
       this.trainers = resp;
     });
-    this.trainerSubscription = this.trainerService.titles$.subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getTitlesList().subscribe((resp) => {
       this.titles = resp;
     });
-    this.trainerSubscription = this.trainerService.tiers$.subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getTierList().subscribe((resp) => {
       this.tiers = resp;
+    });
+    this.initFormControl();
+  }
+
+  initFormControl() {
+    this.addForm = this.fb.group({
+      'name': ['', Validators.required],
+      'email': ['', Validators.required],
+      'title': [''],
+      'tier': [''],
     });
   }
 
-  getAllTrainers() {
-    this.trainerService.getAll();
-  }
 
-  addTrainer(form) {
-    console.log(this.model.name + ' ' + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    // alert(this.model.name + ' '  + this.model.email + ' ' + this.model.title + ' ' + this.model.tier);
-    this.trainerService.createTrainer(this.model.name, this.model.title, this.model.email, this.model.tier);
+  addTrainer(modal: Trainer) {
+    this.newTrainer = modal;
+    console.log(modal);
+    console.log(modal.name);
+    this.trainerService.create(this.newTrainer);
+    this.trainers.push(this.newTrainer);
   }
 
 
   open(content) {
     this.modalService.open(content);
-    /*.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });*/
   }
 
-
-  // getAllTrainers() {
-  //   this.trainerService.getAll();
-  // }
-
-  // getAllTitles() {
-  //   this.trainerService.getTitles();
-  // }
-
-  // Open modal and get Trainer that belong to this modal
-  // Backup these fields before the edit
+  /**
+   * backup original fields, and open modal for editing
+   * @param content: modal form 
+   * @param modalTrainer: trainer belong to this modal 
+   */
   editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
     this.newTier = modalTrainer.tier;
     this.newTitle = modalTrainer.title;
+    this.rForm = this.fb.group({
+      'name': [this.currEditTrainer.name, Validators.required],
+      'email': [this.currEditTrainer.email, Validators.required],
+      'title': [this.newTitle],
+      'tier': [this.newTier],
+    });
     this.modalService.open(content, { size: 'lg' });
   }
 
-  // When tier was changed
+/**
+ * Tier was changed, update with new value
+ * @param newTier: tier string
+ */
   tierChange(newTier) {
     this.newTier = newTier;
   }
 
-  // when title was changed
+  /**
+   * If title is empty, change back to original title
+   * else update with new title
+   * @param newTitle: title string
+   */
   titleChange(newTitle) {
-    // Empty title, changed back to original
     if (newTitle === '') {
       this.newTitle = this.currEditTrainer.title;
     } else {
-      // New title was changed
       this.newTitle = newTitle;
     }
   }
 
-  // Update button was clicked, try to update to database
+
   newTierChange(newTier) {
     this.model.tier = newTier;
   }
@@ -103,12 +116,19 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.model.title = newTitle;
   }
 
-  updateTrainer() {
+  /**
+   * update the fields in currently edited trainer
+   * and send update request
+   * @param modal: modal value with all the fields
+   */
+  updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
     this.currEditTrainer.tier = this.newTier;
     this.currEditTrainer.title = this.newTitle;
+    this.currEditTrainer.name = modal.name;
+    this.currEditTrainer.email = modal.email;
     // call trainerService to update
-    this.trainerService.updateTrainer(this.currEditTrainer);
+    this.trainerService.update(this.currEditTrainer);
   }
 
 

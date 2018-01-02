@@ -1,63 +1,103 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from '../../services/categories.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { Category } from '../../entities/Category';
-import { Http } from '@angular/http';
+
+// rxjs
+import { Subscription } from 'rxjs/Subscription';
+
+// services
+import { CategoriesService } from '../../services/categories.service';
 import { environment } from '../../../../environments/environment';
+
+// entities
+import { Category } from '../../entities/Category';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
-export class CategoriesComponent implements OnInit {
 
+export class CategoriesComponent implements OnInit {
   model = new Category();
   newCategory: Category = new Category();
-  editCategory: Category;
+
+  private categorySubscription: Subscription;
+
   categories: Category[];
-  currentCategory: Number;
-
-  constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
-
+  currentCategory: Category;
+  isActive: boolean;
+  tableLogic: any = [];
+  columns;
+  numColumns: number;
+  constructor(private categoriesService: CategoriesService, private modalService: NgbModal) { }
+  // Loads all categories
   ngOnInit() {
-
-    this.http.get(environment.getAllCategories, { withCredentials: true })
-      .subscribe((succResp) => {
-        this.categories = succResp.json();
-        console.log(this.categories);
-      });
+    // console.log(this.columns);
+    this.categorySubscription = this.categoriesService.categories$.subscribe((resp) => {
+      this.categories = resp;
+      this.numColumns = this.categories.length / 8 + 1;
+      if (this.numColumns > 3) {
+        this.numColumns = 3;
+      }
+      this.columns = Array.apply(null, { length: this.numColumns }).map(Number.call, Number);
+    });
   }
-
   addNewCategory() {
     this.newCategory.skillCategory = this.model.skillCategory;
     this.newCategory.active = true;
-    this.http.post(environment.addNewCategory, this.newCategory, { withCredentials: true })
-      .subscribe(
-      resp => {
-        console.log(resp.json());
-        this.categories.push(resp.json());
-      },
-      err => {
-        console.log(err);
-      }
-      );
+    this.categoriesService.addNewCategory(this.newCategory);
   }
-
+  // Change status of active
+  activeChange(activeValue) {
+    console.log(activeValue);
+    this.isActive = activeValue;
+  }
+  // Send call to update active status
   editCurrentCategory() {
-    
-
+    this.currentCategory.active = this.isActive;
+    this.categoriesService.editCurrentCategory(this.currentCategory);
   }
+  nextColumn(column, index) {
+    // Logic for populating columns
+    switch (column) {
+      case 0:
+        if (index < this.categories.length / this.numColumns) {
+          return true;
+        }
+        break;
+      case 1:
+        if (index > this.categories.length / this.numColumns) {
+          // If the numbers of categories is ever less than 3 then this condition will activate
+          if (this.numColumns === 3) {
+            if (index < ((this.categories.length / this.numColumns) * 2)) {
+              return true;
+            } else {
+              return false;
+            }
+          } else {
+            return true;
+          }
+        }
+        break;
+      case 2:
+        if (index > ((this.categories.length / this.numColumns) * 2)) {
+          return true;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  // Modal open functions
   open(content) {
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
     });
   }
-  editopen(content, index) {
+  editopen(content, index: Category) {
     this.currentCategory = index;
-    this.modalService.open(content).result.then((result) => {
-    }, (reason) => {
-    });
+    this.isActive = index.active;
+    this.modalService.open(content);
   }
 }
