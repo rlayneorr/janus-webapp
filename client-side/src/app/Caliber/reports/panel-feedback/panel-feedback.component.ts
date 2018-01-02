@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Panel } from '../../entities/Panel';
 
 import { GranularityService } from '../services/granularity.service';
@@ -18,7 +18,7 @@ import { Trainee } from '../../entities/Trainee';
   templateUrl: './panel-feedback.component.html',
   styleUrls: ['./panel-feedback.component.css']
 })
-export class PanelFeedbackComponent implements OnInit {
+export class PanelFeedbackComponent implements OnInit, OnDestroy {
 
   panelList: Array<Panel> = null;
   private panelSubscription: Subscription;
@@ -28,24 +28,6 @@ export class PanelFeedbackComponent implements OnInit {
   constructor(private granularityService: GranularityService, private panelService: PanelService) { }
 
   ngOnInit() {
-
-    this.granularityService.pushTrainee({
-      'traineeId': 5532,
-      'resourceId': null,
-      'name': 'Ahmed, Sadat',
-      'email': 'sadat.t.ahmed@gmail.com',
-      'trainingStatus': 'Employed',
-      'phoneNumber': '646-407-7707',
-      'skypeId': 'sadat.t.ahmed',
-      'profileUrl': 'https://app.revature.com/profile/SadatAhmed/9b198abd1d0d88022d593375b61ed041',
-      'recruiterName': null,
-      'college': null,
-      'degree': null,
-      'major': null,
-      'techScreenerName': null,
-      'projectCompletion': null
-    });
-
     this.traineeSubscription = this.granularityService.currentTrainee$.subscribe((trainee) => {
       this.panelService.fetchAllByTrainee(trainee);
     });
@@ -53,5 +35,10 @@ export class PanelFeedbackComponent implements OnInit {
     this.panelSubscription = this.panelService.getList().subscribe((panels) => {
       this.panelList = panels;
     });
+  }
+
+  ngOnDestroy() {
+    this.traineeSubscription.unsubscribe();
+    this.panelSubscription.unsubscribe();
   }
 }

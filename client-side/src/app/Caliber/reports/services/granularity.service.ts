@@ -27,13 +27,14 @@ export class GranularityService {
   constructor() {
     /*   Default values used for testing   */
 
-    // const testBatch: Batch = new Batch();
-    // testBatch.batchId = 2201;
-    // this.currentBatch.next(testBatch);
+    const testBatch: Batch = new Batch();
+    testBatch.batchId = 2201;
+    testBatch.gradedWeeks = 7;
+    this.currentBatch.next(testBatch);
 
-    // const testTrainee: Trainee = new Trainee();
-    // testTrainee.traineeId = 5532;
-    // this.currentTrainee.next(testTrainee);
+    const testTrainee: Trainee = new Trainee();
+    testTrainee.traineeId = 5532;
+    this.currentTrainee.next(testTrainee);
 
     // const week = 0;
     // this.currentWeek.next(week);
