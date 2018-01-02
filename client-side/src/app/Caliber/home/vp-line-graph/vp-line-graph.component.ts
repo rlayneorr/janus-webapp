@@ -7,6 +7,7 @@ import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ColorService } from '../../services/colors/color.service';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-vp-line-graph',
@@ -31,7 +32,7 @@ export class VpLineGraphComponent implements OnInit {
 
   ngOnInit() {
     this.lineChartData = this.vhlgs.getLineChartData();
-    this.http.get('http://localhost:8080/all/reports/dashboard', { withCredentials: true })
+    this.http.get(environment.getVpHomeLineChart, { withCredentials: true })
       .subscribe(
       (resp) => {
         this.results = resp.json();

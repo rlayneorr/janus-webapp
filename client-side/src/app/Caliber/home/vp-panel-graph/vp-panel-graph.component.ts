@@ -3,6 +3,7 @@ import { Http } from '@angular/http/';
 import { VpHomePanelGraphService } from '../../services/graph/vp-home-panel-graph.service';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-vp-panel-graph',
@@ -16,7 +17,7 @@ export class VpPanelGraphComponent implements OnInit {
 
   ngOnInit() {
     this.panelChartData = this.vhpgs.getPanelChartData();
-    this.http.get('http://localhost:8080/all/reports/biweeklyPanelResults', {withCredentials: true})
+    this.http.get(environment.getVpHomePanelChart, {withCredentials: true})
     .subscribe(
       (resp) => {
         this.panelChartData = this.vhpgs.fillPanelChartData(resp.json(), this.panelChartData);

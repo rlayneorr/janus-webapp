@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Input } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-vp-bar-graph',
@@ -39,7 +40,7 @@ export class VpBarGraphComponent implements OnInit {
     this.hasBarChartData = false;
     this.selectedState = false;
     this.barChartData = this.vhbgs.getBarChartData();
-    this.http.get('http://localhost:8080/all/reports/batch/week/stacked-bar-current-week', { withCredentials: true })
+    this.http.get(environment.getVpHomeBarChart, { withCredentials: true })
       .subscribe(
       (resp) => {
         this.results = resp.json();
@@ -61,7 +62,7 @@ export class VpBarGraphComponent implements OnInit {
       } else {
         this.modalInfoArray.push({ 'id': <number>batch.batchId, 'week': <number>batch.weeks });
       }
-      this.http.get('http://localhost:8080/qc/note/batch/' + batch.batchId + '/' + batch.weeks + '/')
+      this.http.get(environment.apiQCNotesForBatchIdAndWeek(batch.batchId, batch.weeks))
         .subscribe((resp) => { console.log(resp.json()); this.overallBatchStatusArray.push(resp.json().qcStatus); });
     }
   }

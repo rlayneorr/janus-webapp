@@ -17,6 +17,12 @@ export const environment = {
   getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
   getAllTiers: 'http://localhost:8080/types/trainer/role/all',
   editTrainer: 'http://localhost:8080/vp/trainer/update',
+  getVpHomeBarChart: 'http://localhost:8080/all/reports/batch/week/stacked-bar-current-week',
+  getVpHomeLineChart: 'http://localhost:8080/all/reports/dashboard',
+  getVpHomePanelChart: 'http://localhost:8080/all/reports/biweeklyPanelResults',
+  apiGetAllBatches: 'http://localhost:8080/qc/batch/all',
+  apiQCNotesForBatchIdAndWeek: (batchId: number, week: number) =>
+    environment.context + `qc/note/batch/${batchId}/${week}/`,
 
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint: (skill: string, training: string, startDate) =>

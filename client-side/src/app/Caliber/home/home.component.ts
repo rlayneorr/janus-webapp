@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ChuckNorrisService } from '../../services/chuck-norris.service';
 import { Http } from '@angular/http/';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('home component request');
-    this.http.get('http://localhost:8080/qc/batch/all').subscribe(
+    this.http.get(environment.apiGetAllBatches).subscribe(
        (resp) => {
           this.batches = resp.json();
       });
