@@ -14,12 +14,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let week of weekList">
-            <td>{{week}}</td>
-            <td *ngIf="weekTopics">{{weekTopics[week-1]}}</td>
-            <td>{{qcWeek(week).qcStatus}}</td>
-            <td>{{qcWeek(week).content}}</td>
-            <td>{{allWeek(week).content}}</td>
+          <tr *ngFor="let topic of weekTopics; let week = index">
+            <td>{{week+1}}</td>
+            <td>{{topic}}</td>
+            <td>{{qcWeek(week+1).qcStatus}}</td>
+            <td>{{qcWeek(week+1).content}}</td>
+            <td>{{allWeek(week+1).content}}</td>
           </tr>
         </tbody>
       </table>

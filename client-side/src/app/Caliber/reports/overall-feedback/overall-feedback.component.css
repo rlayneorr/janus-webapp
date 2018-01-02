@@ -1,34 +1,29 @@
-.feedback-repeat-topics-passed {
-    color: rgb(252,221,115);
+/* Tags */
+
+td {
+    text-align: center;
 }
 
-.feedback-status-failed {
-    color: red;
-}
-
-.feedback-status-pass {
-    color: green;
+thead {
+    font-weight: 800;
 }
 
 table {
     border: 1px rgb(221, 221, 221) solid;
+    border-top: 0px;
 }
 
-td {
-    border: none;
+/* Classes */
+
+.feedback-heading {
+    background: rgb(242, 105, 37);
+    color: white;
+    padding: 1vmin;
+    border-top-left-radius: 2vmin;
+    border-top-right-radius: 2vmin;
 }
 
-thead {
-    font-weight: bold;
-    text-align: center;
-}
-
-tr {
-    border: 1px rgb(221, 221, 221) solid;
-    border-bottom: none;
-    text-align: center;
-}
-
-.trainee-name {
-    text-align: left;
+.feedback-body {
+    border: 1px solid rgb(221, 221, 221);
+    border-top: 0px;
 }
