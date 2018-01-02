@@ -31,10 +31,7 @@
                 <div class="form-group">
                         <label>Assessment Category:</label>
                         <select class="form-control" id="categorySelect">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
+                          <option *ngFor="let category of this.categories">{{category.skillCategory}}</option>
                         </select>
                 </div>
                 <div>
@@ -90,7 +87,7 @@
           {{trainee.name}}
         </td>
         <td *ngFor="let assessment of this.assessments">
-            <input class="form-control assessment-area" type="text" [value]="1">
+            <input class="form-control assessment-area" type="text" [value]="this.getGrade(this.grades | gradeByTraineeByAssessment: trainee: assessment)">
         </td>
         <td>
             <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
