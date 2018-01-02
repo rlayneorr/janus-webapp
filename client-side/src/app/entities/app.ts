@@ -20,6 +20,8 @@ export class App {
 
   /**
    * The url for the image file used for Caliber
+   * For example:
+   *  '../../assets/caliber.png'
    */
   imgUrl: string;
 }
