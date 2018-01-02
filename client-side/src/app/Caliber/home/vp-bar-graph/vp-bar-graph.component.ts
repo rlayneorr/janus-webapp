@@ -23,6 +23,10 @@ export class VpBarGraphComponent implements OnInit {
   public selectedBarState = '';
   public selectedState: boolean;
   public overallBatchStatusArray = [];
+  public modalInfoArray: [{
+    id: number;
+    week: number;
+  }];
   @Input()
   public allbatches: any;
 
@@ -55,10 +59,16 @@ export class VpBarGraphComponent implements OnInit {
     for (const result of this.results) {
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
       // console.log(batch);
+      if(this.modalInfoArray === undefined) {
+        this.modalInfoArray = [{'id': <number>batch.batchId, 'week': <number>batch.weeks}];
+      } else {
+        this.modalInfoArray.push({'id': <number>batch.batchId, 'week': <number>batch.weeks});
+      }
       this.http.get('http://localhost:8080/qc/note/batch/' + batch.batchId + '/' + batch.weeks + '/')
       .subscribe( (resp) => this.overallBatchStatusArray.push(resp.json().qcStatus));
     }
     console.log(this.overallBatchStatusArray);
+    console.log(this.modalInfoArray);
   }
 
   findCities(state) {

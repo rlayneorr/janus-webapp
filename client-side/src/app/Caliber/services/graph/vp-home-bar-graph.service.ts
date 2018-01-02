@@ -44,6 +44,7 @@ export class VpHomeBarGraphService {
     barChartData = this.clearBarChartData(barChartData);
     let chartnum = 1;
     for (const result of results) {
+      console.log('result');
       console.log(result);
       barChartData.labels.push(result.label);
       // barChartData.id.push(result.id);
@@ -66,6 +67,7 @@ export class VpHomeBarGraphService {
           const dataset = new DataSet();
           dataset.data.push(result.qcStatus[key]);
           dataset.label = key;
+          dataset.id = result.id;
           dataset.stack = '' + chartnum;
           barChartData.data[i] = dataset;
         }
