@@ -35,34 +35,31 @@ export class VpLineGraphComponent implements OnInit {
       .subscribe(
       (resp) => {
         this.results = resp.json();
-        // console.log(this.results);
         this.results.sort();
-        this.lineChartData = this.vhlgs.fillLineChartDate(this.results, this.lineChartData, '', '');
+        this.lineChartData = this.vhlgs.fillChartData(this.results, this.lineChartData, '', '');
         this.addresses = this.vhss.populateAddresses(this.results);
         this.states = this.vhss.populateStates(this.addresses);
         this.hasData = true;
-        // console.log(this.lineChartData);
       });
   }
-  // after a state is selected, find the cities that are part of that state
+  // called when a state is selected to get cities for the cities drop down
+  // as well as re-populate the chartData
   findCities(state) {
     this.hasData = false;
     this.selectedLineCity = '';
     if (state === '') {
       this.selectedState = false;
-      this.lineChartData = this.vhlgs.fillLineChartDate(this.results, this.lineChartData, '', '');
     } else {
       this.selectedState = true;
       this.cities = this.vhss.populateCities(this.selectedLineState, this.addresses);
     }
-    this.lineChartData = this.vhlgs.fillLineChartDate(this.results, this.lineChartData, this.selectedLineState, '');
+    this.lineChartData = this.vhlgs.fillChartData(this.results, this.lineChartData, this.selectedLineState, '');
     this.hasData = true;
-    // console.log(this.lineChartData);
   }
   // after a city is selected, update the graph to reflect the selected city
   hasCity(city) {
     if (this.cities.size > 1) {
-      this.lineChartData = this.vhlgs.fillLineChartDate(this.results, this.lineChartData, this.selectedLineState, this.selectedLineCity);
+      this.lineChartData = this.vhlgs.fillChartData(this.results, this.lineChartData, this.selectedLineState, this.selectedLineCity);
       this.hasData = true;
     }
   }

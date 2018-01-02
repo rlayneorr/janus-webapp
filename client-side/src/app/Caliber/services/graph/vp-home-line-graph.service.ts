@@ -53,7 +53,7 @@ export class VpHomeLineGraphService {
 
   }
 
-  public fillLineChartDate(results: Array<WeeklyProgress>, lcd: ChartDataEntity, state: string, city: string) {
+  public fillChartData(results: Array<WeeklyProgress>, lcd: ChartDataEntity, state: string, city: string) {
     let holder;
     lcd = this.clearLineChartData(lcd);
     if (state !== '') {

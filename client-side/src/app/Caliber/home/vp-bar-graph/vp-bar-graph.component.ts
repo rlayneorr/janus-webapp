@@ -32,11 +32,10 @@ export class VpBarGraphComponent implements OnInit {
 
 
   constructor(private vhbgs: VpHomeBarGraphService,
-     private http: Http,
-     private vhss: VpHomeSelectorService) { }
+    private http: Http,
+    private vhss: VpHomeSelectorService) { }
 
   ngOnInit() {
-    console.log(this.allbatches);
     this.hasBarChartData = false;
     this.selectedState = false;
     this.barChartData = this.vhbgs.getBarChartData();
@@ -44,53 +43,51 @@ export class VpBarGraphComponent implements OnInit {
       .subscribe(
       (resp) => {
         this.results = resp.json();
-        // console.log(this.results);
         this.results.sort();
-        this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, '', '');
+        this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, '', '');
         this.addresses = this.vhss.populateAddresses(this.results);
         this.states = this.vhss.populateStates(this.addresses);
         this.hasBarChartData = true;
-        // console.log(this.barChartData);
         this.populateBatchStatuses();
       });
   }
-
+  // gets the statuses of the batches as well as stores the batch id and week
+  // into a seperate array used for the modal
   populateBatchStatuses() {
     for (const result of this.results) {
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
-      // console.log(batch);
-      if(this.modalInfoArray === undefined) {
-        this.modalInfoArray = [{'id': <number>batch.batchId, 'week': <number>batch.weeks}];
+      if (this.modalInfoArray === undefined) {
+        this.modalInfoArray = [{ 'id': <number>batch.batchId, 'week': <number>batch.weeks }];
       } else {
-        this.modalInfoArray.push({'id': <number>batch.batchId, 'week': <number>batch.weeks});
+        this.modalInfoArray.push({ 'id': <number>batch.batchId, 'week': <number>batch.weeks });
       }
       this.http.get('http://localhost:8080/qc/note/batch/' + batch.batchId + '/' + batch.weeks + '/')
-      .subscribe( (resp) => this.overallBatchStatusArray.push(resp.json().qcStatus));
+        .subscribe((resp) => { console.log(resp.json()); this.overallBatchStatusArray.push(resp.json().qcStatus); });
     }
-    console.log(this.overallBatchStatusArray);
-    console.log(this.modalInfoArray);
   }
-
+  // called when a state is selected to get cities for the cities drop down
+  // as well as re-populate the chartData
   findCities(state) {
     this.hasBarChartData = false;
     this.selectedBarCity = '';
     if (state === '') {
       this.selectedState = false;
-      this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, '', '');
     } else {
       this.selectedState = true;
       this.cities = this.vhss.populateCities(this.selectedBarState, this.addresses);
     }
-    this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, this.selectedBarState, '');
+    this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
-    // console.log(this.barChartData);
   }
+  // after a city is selected, update the graph to reflect the selected city
   hasCity(city) {
     if (this.cities.size > 1) {
-      this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, this.selectedBarState, this.selectedBarCity);
+      this.hasBarChartData = false;
+      this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, this.selectedBarState, this.selectedBarCity);
       this.hasBarChartData = true;
     }
   }
+  // used to call the modal
   onClick(event) {
     console.log(event);
   }
