@@ -137,6 +137,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     TrainerService,
     LocationService,
     CategoryService,
+    CategoriesService,
   ],
   bootstrap: [
     TrainersComponent
