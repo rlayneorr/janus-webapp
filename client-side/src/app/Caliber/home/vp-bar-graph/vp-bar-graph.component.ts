@@ -32,31 +32,29 @@ export class VpBarGraphComponent implements OnInit {
      private vhss: VpHomeSelectorService) { }
 
   ngOnInit() {
+    console.log(this.allbatches);
     this.hasBarChartData = false;
     this.selectedState = false;
     this.barChartData = this.vhbgs.getBarChartData();
-    console.log('grabbing batches');
     this.http.get('http://localhost:8080/all/reports/batch/week/stacked-bar-current-week', { withCredentials: true })
       .subscribe(
       (resp) => {
         this.results = resp.json();
-        console.log(this.results);
+        // console.log(this.results);
         this.results.sort();
         this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, '', '');
         this.addresses = this.vhss.populateAddresses(this.results);
         this.states = this.vhss.populateStates(this.addresses);
         this.hasBarChartData = true;
-        console.log(this.barChartData);
-        console.log(this.states);
+        // console.log(this.barChartData);
         this.populateBatchStatuses();
       });
   }
 
   populateBatchStatuses() {
     for (const result of this.results) {
-      console.log('result', result);
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
-      console.log(batch);
+      // console.log(batch);
       this.http.get('http://localhost:8080/qc/note/batch/' + batch.batchId + '/' + batch.weeks + '/')
       .subscribe( (resp) => this.overallBatchStatusArray.push(resp.json().qcStatus));
     }
@@ -75,7 +73,7 @@ export class VpBarGraphComponent implements OnInit {
     }
     this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
-    console.log(this.barChartData);
+    // console.log(this.barChartData);
   }
   hasCity(city) {
     if (this.cities.size > 1) {

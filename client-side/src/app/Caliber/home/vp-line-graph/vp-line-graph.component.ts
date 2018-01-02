@@ -31,18 +31,17 @@ export class VpLineGraphComponent implements OnInit {
 
   ngOnInit() {
     this.lineChartData = this.vhlgs.getLineChartData();
-    console.log('grabbing batches');
     this.http.get('http://localhost:8080/all/reports/dashboard', { withCredentials: true })
       .subscribe(
       (resp) => {
         this.results = resp.json();
-        console.log(this.results);
+        // console.log(this.results);
         this.results.sort();
         this.lineChartData = this.vhlgs.fillLineChartDate(this.results, this.lineChartData, '', '');
         this.addresses = this.vhss.populateAddresses(this.results);
         this.states = this.vhss.populateStates(this.addresses);
         this.hasData = true;
-        console.log(this.lineChartData);
+        // console.log(this.lineChartData);
       });
   }
   // after a state is selected, find the cities that are part of that state
@@ -58,7 +57,7 @@ export class VpLineGraphComponent implements OnInit {
     }
     this.lineChartData = this.vhlgs.fillLineChartDate(this.results, this.lineChartData, this.selectedLineState, '');
     this.hasData = true;
-    console.log(this.lineChartData);
+    // console.log(this.lineChartData);
   }
   // after a city is selected, update the graph to reflect the selected city
   hasCity(city) {
