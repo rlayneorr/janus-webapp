@@ -67,6 +67,7 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
+import { AlertsService } from './services/alerts.service';
 
 @NgModule({
   imports: [
@@ -136,6 +137,7 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     TrainerService,
     LocationService,
     CategoriesService,
+    AlertsService,
   ],
   bootstrap: [
     TrainersComponent

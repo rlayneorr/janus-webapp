@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
+import { AlertsService } from '../services/alerts.service';
 
 @Component({
+  moduleId: module.id.toString(),
   selector: 'app-alerts',
   templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.css'],
@@ -22,9 +24,20 @@ import { animate, state, transition, trigger, style, keyframes } from '@angular/
 })
 export class AlertsComponent implements OnInit {
 
-  constructor() { }
+  message: any;
+  show = false;
+
+  constructor(private alertService: AlertsService) { }
 
   ngOnInit() {
+    this.alertService.getMessage().subscribe(message => {
+      this.message = message;
+      this.show = true;
+      const timeoutId = setTimeout(() => {
+        this.show = false;
+      }, 2000);
+    });
+    console.log(this.message);
   }
 
 }

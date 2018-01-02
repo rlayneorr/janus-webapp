@@ -48,10 +48,6 @@ export class CreatelocationComponent implements OnInit {
    * @param content: the modal that needed to be opened
    */
   newLocation(content) {
-    this.show = true;
-    setTimeout(() => {
-      this.show = false;
-    }, 2000);
     this.modalRef = this.modalService.open(content, { size: 'lg' });
     this.modalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
