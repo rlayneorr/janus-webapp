@@ -16,6 +16,8 @@ import { NoteService } from '../../services/note.service';
 import { CategoryService } from '../../services/category.service';
 import { Trainee } from '../../entities/Trainee';
 import { Assessment } from '../../entities/Assessment';
+import { LocationService } from '../../services/location.service';
+import { PanelService } from '../../services/panel.service';
 
 @Component({
   selector: 'app-test',
@@ -28,7 +30,7 @@ export class TestComponent implements OnInit, OnDestroy {
   private data: any[];
 
 
-  constructor(private service: GradeService) {
+  constructor(private service: TrainerService ) {
     this.service = service;
   }
 
@@ -91,7 +93,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
     // this.service.fetchAll();
     // this.service.fetchAllByBatch(3002);
-    this.service.fetchByBatchIdByWeek(2201, 1);
+    // this.service.fetchByBatchIdByWeek(2201, 1);
   }
 
   ngOnDestroy() {
