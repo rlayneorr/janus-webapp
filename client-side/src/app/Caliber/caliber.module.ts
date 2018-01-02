@@ -137,13 +137,13 @@ import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.servic
     TrainerService,
     LocationService,
     CategoriesService,
+    VpHomeBarGraphService,
   ],
   bootstrap: [
     TrainersComponent
   ],
   exports: [
     TraineeTechSkillsComponent,
-    VpHomeBarGraphService,
   ]
 })
 export class CaliberModule { }
