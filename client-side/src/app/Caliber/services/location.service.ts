@@ -139,6 +139,8 @@ export class LocationService extends AbstractApiService<Location> {
   /**
   * @deprecated
   *
+  * @see fetchAll()
+  *
   * convience function for the fetchAll() method
   * retained to honor the initial design pattern
   * for components that may be dependent on it

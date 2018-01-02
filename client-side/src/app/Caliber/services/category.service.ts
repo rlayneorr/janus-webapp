@@ -77,7 +77,7 @@ export class CategoryService extends AbstractApiService<Category> {
   *
   * @param category: Category
   */
-  public create(category: Category): void {
+  public save(category: Category): void {
     const url = 'vp/category';
 
     super.doPost(category, url);
