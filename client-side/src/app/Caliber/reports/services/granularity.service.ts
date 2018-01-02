@@ -18,7 +18,7 @@ export class GranularityService {
   /* Subjects & Paired Observables */
   private currentBatch = new ReplaySubject<Batch>(1);
   private currentTrainee = new ReplaySubject<Trainee>(1);
-  private currentWeek = new ReplaySubject<Number>(1);
+  private currentWeek = new ReplaySubject<number>(1);
 
   public currentBatch$ = this.currentBatch.asObservable();
   public currentTrainee$ = this.currentTrainee.asObservable();
