@@ -58,7 +58,6 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
-<<<<<<< HEAD
 import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
 import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { CreatelocationComponent } from './settings/locations/createlocation/createlocation.component';
@@ -68,10 +67,7 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
-=======
-import { LocationService } from './services/location.service';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
->>>>>>> 5388e0de33e154bad762893a1348706e0ea96a1e
 
 @NgModule({
   imports: [
@@ -141,16 +137,13 @@ import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.servic
     TrainerService,
     LocationService,
     CategoriesService,
-<<<<<<< HEAD
   ],
   bootstrap: [
     TrainersComponent
   ],
   exports: [
     TraineeTechSkillsComponent,
-=======
     VpHomeBarGraphService,
->>>>>>> 5388e0de33e154bad762893a1348706e0ea96a1e
   ]
 })
 export class CaliberModule { }
