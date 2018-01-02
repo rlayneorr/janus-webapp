@@ -7,11 +7,11 @@ export class Batch {
     resourceId: number;
     trainingName: string;
     trainer: Trainer;
-    conTrainer: Trainer;
+    coTrainer: Trainer;
     skillType: string;
     trainingType: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
     location: string;
     address: Address;
     goodGradeThreshold: number;

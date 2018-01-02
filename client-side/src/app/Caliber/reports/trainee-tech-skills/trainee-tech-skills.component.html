@@ -25,15 +25,12 @@
     </button>
   </div>
   <div class="modal-body row">
-    <div class="col-4 modal-body-row" *ngFor="let t of traineesList; let i = index">
+    <div class="col-4 modal-body-row" *ngFor="let t of traineesNames; let i = index">
       <span>
         <b>{{t}}</b>
         <input class="pull-right" type="checkbox" [checked]="this.trainees.includes(this.traineesList[i])" (change)="traineeChecked(i)"
         />
       </span>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>
