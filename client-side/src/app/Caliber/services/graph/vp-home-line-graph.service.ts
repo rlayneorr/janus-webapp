@@ -12,9 +12,9 @@ export class VpHomeLineGraphService {
   }
 
   public getLineChartData() {
-    const lcd = new ChartDataEntity();
-    lcd.colors = [lcd.mainColor, lcd.secondaryColor];
-    lcd.options = {
+    const lineChartData = new ChartDataEntity();
+    lineChartData.colors = [lineChartData.mainColor, lineChartData.secondaryColor];
+    lineChartData.options = {
         legend: {
             display: true,
             labels: {
@@ -47,15 +47,15 @@ export class VpHomeLineGraphService {
             mode: 'x',
         },
     };
-    lcd.data = [];
-    lcd.type = 'line';
-    return lcd;
+    lineChartData.data = [];
+    lineChartData.type = 'line';
+    return lineChartData;
 
   }
 
-  public fillChartData(results: Array<WeeklyProgress>, lcd: ChartDataEntity, state: string, city: string) {
+  public fillChartData(results: Array<WeeklyProgress>, lineChartData: ChartDataEntity, state: string, city: string) {
     let holder;
-    lcd = this.clearLineChartData(lcd);
+    lineChartData = this.clearLineChartData(lineChartData);
     if (state !== '') {
       holder = results.filter(i => i.address.state === state);
       if (city !== '') {
@@ -84,20 +84,20 @@ export class VpHomeLineGraphService {
         }
         iterator++;
       }
-      lcd.data.push(dataHolder);
+      lineChartData.data.push(dataHolder);
     }
     for (let i = 1; i < highestWeek; i++) {
-      lcd.labels.push('Week ' + i);
+      lineChartData.labels.push('Week ' + i);
     }
-    lcd.colors = this.cs.getLineColors(lcd.data.length);
-    console.log(lcd);
-    return lcd;
+    lineChartData.colors = this.cs.getLineColors(lineChartData.data.length);
+    console.log(lineChartData);
+    return lineChartData;
   }
 
-  private clearLineChartData(lcd: ChartDataEntity) {
-    lcd.data.length = 0;
-    lcd.labels.length = 0;
-    lcd.colors.length = 0;
-    return lcd;
+  private clearLineChartData(lineChartData: ChartDataEntity) {
+    lineChartData.data.length = 0;
+    lineChartData.labels.length = 0;
+    lineChartData.colors.length = 0;
+    return lineChartData;
   }
 }

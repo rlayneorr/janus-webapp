@@ -4,6 +4,7 @@ import { VpHomePanelGraphService } from '../../services/graph/vp-home-panel-grap
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { environment } from '../../../../environments/environment.prod';
+import { EnvironmentService } from '../../services/environment.service';
 
 @Component({
   selector: 'app-vp-panel-graph',
@@ -13,19 +14,20 @@ import { environment } from '../../../../environments/environment.prod';
 export class VpPanelGraphComponent implements OnInit {
   public panelChartData: ChartDataEntity;
   public hasPanelGraphData = false;
-  constructor(private http: Http, private vhpgs: VpHomePanelGraphService) { }
+  constructor(private http: Http, private vpHomePanelGraphService: VpHomePanelGraphService,
+    private environmentService: EnvironmentService) { }
 
   ngOnInit() {
-    this.panelChartData = this.vhpgs.getPanelChartData();
-    this.http.get(environment.getVpHomePanelChart, {withCredentials: true})
-    .subscribe(
+    this.panelChartData = this.vpHomePanelGraphService.getPanelChartData();
+    this.http.get(this.environmentService.buildUrl('all/reports/biweeklyPanelResults'), { withCredentials: true })
+      .subscribe(
       (resp) => {
-        this.panelChartData = this.vhpgs.fillPanelChartData(resp.json(), this.panelChartData);
+        this.panelChartData = this.vpHomePanelGraphService.fillPanelChartData(resp.json(), this.panelChartData);
         console.log(this.panelChartData);
         this.hasPanelGraphData = true;
       }
 
-    );
+      );
   }
 
 }

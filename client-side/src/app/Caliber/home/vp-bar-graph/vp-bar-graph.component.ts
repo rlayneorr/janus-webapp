@@ -7,6 +7,7 @@ import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
+import { EnvironmentService } from '../../services/environment.service';
 
 @Component({
   selector: 'app-vp-bar-graph',
@@ -32,22 +33,25 @@ export class VpBarGraphComponent implements OnInit {
   public allbatches: any;
 
 
-  constructor(private vhbgs: VpHomeBarGraphService,
+  constructor(private vpHomeBarGraphService: VpHomeBarGraphService,
     private http: Http,
-    private vhss: VpHomeSelectorService) { }
+    private vpHomeSelectorService: VpHomeSelectorService,
+    private environmentService: EnvironmentService) { }
 
   ngOnInit() {
     this.hasBarChartData = false;
     this.selectedState = false;
-    this.barChartData = this.vhbgs.getBarChartData();
-    this.http.get(environment.getVpHomeBarChart, { withCredentials: true })
+    this.barChartData = this.vpHomeBarGraphService.getBarChartData();
+    const url = this.environmentService.buildUrl('all/reports/batch/week/stacked-bar-current-week');
+    console.log(url);
+    this.http.get(url, { withCredentials: true })
       .subscribe(
       (resp) => {
         this.results = resp.json();
         this.results.sort();
-        this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, '', '');
-        this.addresses = this.vhss.populateAddresses(this.results);
-        this.states = this.vhss.populateStates(this.addresses);
+        this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
+        this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
+        this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasBarChartData = true;
         this.populateBatchStatuses();
       });
@@ -62,7 +66,7 @@ export class VpBarGraphComponent implements OnInit {
       } else {
         this.modalInfoArray.push({ 'id': <number>batch.batchId, 'week': <number>batch.weeks });
       }
-      this.http.get(environment.apiQCNotesForBatchIdAndWeek(batch.batchId, batch.weeks))
+      this.http.get(this.environmentService.buildUrl(`qc/note/batch/${batch.batchId}/${batch.weeks}/`))
         .subscribe((resp) => { console.log(resp.json()); this.overallBatchStatusArray.push(resp.json().qcStatus); });
     }
   }
@@ -75,16 +79,17 @@ export class VpBarGraphComponent implements OnInit {
       this.selectedState = false;
     } else {
       this.selectedState = true;
-      this.cities = this.vhss.populateCities(this.selectedBarState, this.addresses);
+      this.cities = this.vpHomeSelectorService.populateCities(this.selectedBarState, this.addresses);
     }
-    this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
+    this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
   }
   // after a city is selected, update the graph to reflect the selected city
   hasCity(city) {
     if (this.cities.size > 1) {
       this.hasBarChartData = false;
-      this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, this.selectedBarState, this.selectedBarCity);
+      this.barChartData = this.vpHomeBarGraphService
+        .fillChartData(this.results, this.barChartData, this.selectedBarState, this.selectedBarCity);
       this.hasBarChartData = true;
     }
   }
