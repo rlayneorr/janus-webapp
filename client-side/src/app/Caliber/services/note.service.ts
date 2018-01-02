@@ -12,6 +12,7 @@ import { EnvironmentService } from './environment.service';
 // entities
 import { Note } from '../entities/Note';
 import { Trainee } from '../entities/Trainee';
+import { Batch } from '../entities/Batch';
 
 
 @Injectable()
@@ -135,5 +136,38 @@ export class NoteService {
       this.savedSubject.next(saved);
     });
   }
+
+      /**
+   * Find all QC trainee notes in a batch for the week
+   *
+   * @param batch: Batch
+   * @param note: Note
+  */
+  public getAllQCTraineeNotes(batch: Batch, note: Note): void {
+    const url = this.envService.buildUrl(`/qc/note/trainee/${batch.batchId}/${note.week}`);
+
+    this.listSubject.next([]);
+
+    this.http.get<Note[]>(url).subscribe((notes) => {
+      this.listSubject.next(notes);
+    });
+}
+
+ /**
+ * Find the weekly QC batch note for the week
+ *
+ * @param batch: Batch
+ * @param note: Note
+*/
+
+public findQCBatchNotes(batch: Batch, note: Note): void {
+  const url = this.envService.buildUrl(`/qc/note/batch/${batch.batchId}/${note.week}`);
+
+  this.listSubject.next([]);
+
+    this.http.get<Note[]>(url).subscribe((notes) => {
+      this.listSubject.next(notes);
+    });
+}
 
 }

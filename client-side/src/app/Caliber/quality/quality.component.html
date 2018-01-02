@@ -1,1 +1,25 @@
-quality works!
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 top10">
+            <ul class="nav-tabs">
+                <li ngbDropdown class="d-inline-block">
+                    <a ngbDropdownToggle>2017</a>
+                    <div ngbDropdownMenu>
+                        <button class="dropdown-item">2014</button>
+                        <button class="dropdown-item">2015</button>
+                        <button class="dropdown-item">2016</button>
+                        <button class="dropdown-item">2018</button>
+                    </div>
+                </li>
+                <li ngbDropdown class="d-inline-block">
+                    <a ngbDropdownToggle>{{currentBatch.trainer.name}} - {{currentBatch.startDate | date:"MM/dd/yy"}}</a>
+                    <div ngbDropdownMenu class="list-item">
+                        <button class="dropdown-item" *ngFor="let batch of batches">
+                            {{batch.trainer.name}} - {{batch.startDate | date:"MM/dd/yy"}}
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
