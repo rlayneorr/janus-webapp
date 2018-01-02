@@ -4,9 +4,9 @@ export class DataSet {
     data: any[];
     label: any;
     fill: boolean;
+    stack: string;
     constructor() {
         this.data = [];
-        this.fill = false;
     }
 
 }

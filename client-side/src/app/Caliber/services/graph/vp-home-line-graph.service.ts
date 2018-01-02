@@ -68,6 +68,7 @@ export class VpHomeLineGraphService {
     for (const item of holder) {
       let currentWeek = 1;
       const dataHolder = new DataSet();
+      dataHolder.fill = false;
       dataHolder.label = item.label;
       let iterator = 0;
       const keys = Object.keys(item.grades);
