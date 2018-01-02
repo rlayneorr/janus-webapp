@@ -7,46 +7,21 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // services
+import { AbstractApiService } from './abstract-api.service';
 import { EnvironmentService } from './environment.service';
 
 // entities
 import { Category } from '../entities/Category';
 
-
+/**
+* this service manages calls to the web services
+* for Category objects
+*/
 @Injectable()
-export class CategoryService {
-  private envService: EnvironmentService;
-  private http: HttpClient;
-
-  private listSubject: BehaviorSubject<Category[]>;
-  private savedSubject: Subject<Category>;
+export class CategoryService extends AbstractApiService<Category> {
 
   constructor(envService: EnvironmentService, httpClient: HttpClient) {
-    this.envService = envService;
-    this.http = httpClient;
-
-    this.listSubject = new BehaviorSubject([]);
-    this.savedSubject = new Subject();
-  }
-
-  /**
-  * returns a behavior observable of the current
-  * category list
-  *
-  * @return Observable<Category[]>
-  */
-  public getList(): Observable<Category[]> {
-    return this.listSubject.asObservable();
-  }
-
-  /**
-  * returns a publication observable of the last
-  * Category saved
-  *
-  * @return Observable<Grade[]>
-  */
-  public getSaved(): Observable<Category> {
-    return this.savedSubject.asObservable();
+    super(envService, httpClient);
   }
 
  /*
@@ -62,9 +37,9 @@ export class CategoryService {
  *
  */
  public fetchAll(): void {
-   const url = this.envService.buildUrl('vp/category');
+   const url = 'vp/category';
 
-   this.http.get<Category[]>(url).subscribe( (categories) => this.listSubject.next(categories) );
+   super.doGetList(url);
  }
 
  /**
@@ -74,9 +49,9 @@ export class CategoryService {
  *
  */
  public fetchAllActive(): void {
-   const url = this.envService.buildUrl('category/all');
+   const url = 'category/all';
 
-   this.http.get<Category[]>(url).subscribe( (categories) => this.listSubject.next(categories) );
+   super.doGetList(url);
  }
 
   /**
@@ -89,9 +64,9 @@ export class CategoryService {
  * @return Observable<Category>
  */
  public fetchById(id: number): Observable<Category> {
-   const url = this.envService.buildUrl(`category/${id}`);
+   const url = `category/${id}`;
 
-   return this.http.get<Category>(url);
+   return super.doGetOneObservable(url);
  }
 
   /**
@@ -102,11 +77,10 @@ export class CategoryService {
   *
   * @param category: Category
   */
-  public create(category: Category): void {
-    const url = this.envService.buildUrl('vp/category');
-    const data = JSON.stringify(category);
+  public save(category: Category): void {
+    const url = 'vp/category';
 
-    this.http.post<Category>(url, data).subscribe((saved) => this.savedSubject.next(saved));
+    super.doPost(category, url);
   }
 
   /**
@@ -118,10 +92,9 @@ export class CategoryService {
    * @param category: Category
    */
   public update(category: Category): void {
-    const url = this.envService.buildUrl('vp/category/update');
-    const data = JSON.stringify(category);
+    const url = 'vp/category/update';
 
-    this.http.put<Category>(url, data).subscribe((updated) => this.savedSubject.next(updated));
+    super.doPut(category, url);
   }
 
 }
