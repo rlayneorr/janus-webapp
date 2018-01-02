@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http/';
+import { VpHomePanelGraphService } from '../../services/graph/vp-home-panel-graph.service';
+import { ChartDataEntity } from '../../entities/ChartDataEntity';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @Component({
   selector: 'app-vp-panel-graph',
@@ -6,10 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vp-panel-graph.component.css']
 })
 export class VpPanelGraphComponent implements OnInit {
-
-  constructor() { }
+  public panelChartData: ChartDataEntity;
+  public hasPanelGraphData = false;
+  constructor(private http: Http, private vhpgs: VpHomePanelGraphService) { }
 
   ngOnInit() {
+    this.panelChartData = this.vhpgs.getPanelChartData();
+    this.http.get('http://localhost:8080/all/reports/biweeklyPanelResults', {withCredentials: true})
+    .subscribe(
+      (resp) => {
+        this.panelChartData = this.vhpgs.fillPanelChartData(resp.json(), this.panelChartData);
+        console.log(this.panelChartData);
+        this.hasPanelGraphData = true;
+      }
+
+    );
   }
 
 }

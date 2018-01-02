@@ -68,6 +68,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
+import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 
 @NgModule({
   imports: [
@@ -138,6 +139,7 @@ import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.servic
     LocationService,
     CategoriesService,
     VpHomeBarGraphService,
+    VpHomePanelGraphService,
   ],
   bootstrap: [
     TrainersComponent
