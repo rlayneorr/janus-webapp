@@ -46,6 +46,7 @@ import { PanelComponent } from './panel/panel.component';
 import { OverallFeedbackComponent } from './reports/overall-feedback/overall-feedback.component';
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
@@ -69,6 +70,7 @@ import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { BatchOverallLineChartComponent } from './reports/batch-overall-line-chart/batch-overall-line-chart.component';
+import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.component';
 import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/assessment-breakdown.component';
 
 @NgModule({
@@ -116,6 +118,7 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
     // pipes
     TraineeSearchPipePipe,
     GraphDataPipe,
+    OrderByPipe,
     PanelBatchAllTraineesComponent,
     BatchOverallLineChartComponent,
     AssessmentBreakdownComponent,
