@@ -81,7 +81,7 @@ export class VpBarGraphComponent implements OnInit {
       this.hasBarChartData = true;
     }
   }
-  onClick(event) {
+  onClick(event: any) {
     console.log(event);
   }
 
