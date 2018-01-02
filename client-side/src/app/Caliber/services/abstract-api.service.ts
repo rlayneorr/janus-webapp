@@ -15,6 +15,7 @@ export abstract class AbstractApiService<T> {
 
   protected listSubject: BehaviorSubject<T[]>;
   protected savedSubject: Subject<T>;
+  protected updatedSubject: Subject<T>;
   protected deletedSubject: Subject<T>;
 
   constructor(envService: EnvironmentService, httpClient: HttpClient) {
@@ -23,6 +24,7 @@ export abstract class AbstractApiService<T> {
 
     this.listSubject = new BehaviorSubject([]);
     this.savedSubject = new Subject();
+    this.updatedSubject = new Subject();
     this.deletedSubject = new Subject();
   }
 
@@ -44,6 +46,16 @@ export abstract class AbstractApiService<T> {
    */
   public getSaved(): Observable<T> {
     return this.savedSubject.asObservable();
+  }
+
+  /**
+   * returns a publication observable of the last
+   * object updated
+   *
+   * @return Observable<T[]>
+   */
+  public getUpdated(): Observable<T> {
+    return this.updatedSubject.asObservable();
   }
 
   /**
@@ -127,7 +139,7 @@ export abstract class AbstractApiService<T> {
 
   /**
  * performs a PUT request and places the result in the
- * savedSubject on success
+ * updatedSubject on success
  *
  * @param apiUrl: string
  * @param object: T
@@ -137,7 +149,7 @@ export abstract class AbstractApiService<T> {
     const body = JSON.stringify(object);
 
     this.http.put<T>(url, body).subscribe((data) => {
-        this.savedSubject.next(data);
+        this.updatedSubject.next(data);
       });
   }
 
