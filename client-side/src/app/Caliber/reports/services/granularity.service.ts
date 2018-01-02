@@ -24,7 +24,20 @@ export class GranularityService {
   public currentTrainee$ = this.currentTrainee.asObservable();
   public currentWeek$ = this.currentWeek.asObservable();
 
-  constructor() { }
+  constructor() {
+    /*   Default values used for testing   */
+
+    // const testBatch: Batch = new Batch();
+    // testBatch.batchId = 2201;
+    // this.currentBatch.next(testBatch);
+
+    // const testTrainee: Trainee = new Trainee();
+    // testTrainee.traineeId = 5532;
+    // this.currentTrainee.next(testTrainee);
+
+    // const week = 0;
+    // this.currentWeek.next(week);
+   }
 
   /*
   =================================
@@ -52,7 +65,7 @@ export class GranularityService {
    * Pushes the specified week number to the currentWeek subject.
    * @param week - Week number to push to the subject.
    */
-  pushWeek(week: Number) {
+  pushWeek(week: number) {
     this.currentWeek.next(week);
   }
 }

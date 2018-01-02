@@ -35,7 +35,7 @@ import { AssessComponent } from './assess/assess.component';
 import { NavComponent } from '../nav/nav.component';
 import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
-import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.component';
+import { WeeklyLineChartComponent } from './reports/weekly-line-chart/weekly-line-chart.component';
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
@@ -71,6 +71,7 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { BatchOverallLineChartComponent } from './reports/batch-overall-line-chart/batch-overall-line-chart.component';
 import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.component';
+import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/assessment-breakdown.component';
 
 @NgModule({
   imports: [
@@ -120,7 +121,7 @@ import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.
     OrderByPipe,
     PanelBatchAllTraineesComponent,
     BatchOverallLineChartComponent,
-    PanelFeedbackComponent,
+    AssessmentBreakdownComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
