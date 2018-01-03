@@ -153,8 +153,6 @@ import { EvaluationService } from './services/evaluation.service';
   ],
   entryComponents: [
     BarGraphModalComponent,
-    VpHomeBarGraphService,
-    VpHomePanelGraphService
   ],
 })
 export class CaliberModule { }

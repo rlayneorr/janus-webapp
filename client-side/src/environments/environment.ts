@@ -88,4 +88,7 @@ export const environment = {
   /* Evaluation service API endpoints */
   apiFetchAllQCTraineeNotes: (batchId: Number, weekId: Number) =>
     environment.context + `qc/note/trainee/${batchId}/${weekId}`,
+
+    apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
+    environment.context + `qc/note/batch/${batchId}/${weekId}`,
 };

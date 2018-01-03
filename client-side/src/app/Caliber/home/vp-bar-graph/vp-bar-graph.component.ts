@@ -12,6 +12,8 @@ import { ReportingService } from '../../../services/reporting.service';
 import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../../../environments/environment';
 import { EnvironmentService } from '../../services/environment.service';
+import { EvaluationService } from '../../services/evaluation.service';
+import { Note } from '../../entities/Note';
 
 @Component({
   selector: 'app-vp-bar-graph',
@@ -35,6 +37,8 @@ export class VpBarGraphComponent implements OnInit {
   }];
   public modal: BarGraphModalComponent;
   public techSub: Subscription;
+  public QCSub: Subscription;
+  public batchSub: Subscription;
 
   @Input()
   public allbatches: any;
@@ -43,6 +47,7 @@ export class VpBarGraphComponent implements OnInit {
   constructor(private vhbgs: VpHomeBarGraphService,
     private vhss: VpHomeSelectorService,
     private rs: ReportingService,
+    private es: EvaluationService,
     private modalService: NgbModal,
     private http: HttpClient,
     private vpHomeSelectorService: VpHomeSelectorService,
@@ -109,6 +114,8 @@ export class VpBarGraphComponent implements OnInit {
   onClick(event: any) {
     const chartInfo = this.modalInfoArray[event.active[0]._index];
     let tech: Array<String>;
+    let trainees: Array<Note>;
+    let batchNotes: Array<Note>;
 
     const modalRef = this.modalService.open(BarGraphModalComponent);
 
@@ -117,6 +124,30 @@ export class VpBarGraphComponent implements OnInit {
       if (result) {
         tech = result.data;
         modalRef.componentInstance.tech = tech;
+      }
+    });
+
+    this.es.FetchAllQCTraineeNotes(chartInfo.id, chartInfo.week);
+    this.QCSub = this.es.allQCTraineeNotes$.subscribe((result) => {
+      if (result) {
+        trainees = result.data;
+
+        // Styling
+        trainees.forEach(item => {
+          if (!item.content) {
+            item.content = '-';
+          }
+        });
+
+        modalRef.componentInstance.trainees = trainees;
+      }
+    });
+
+    this.es.FetchAllQCBatchNotes(chartInfo.id, chartInfo.week);
+    this.batchSub = this.es.allQCBatchNotes$.subscribe((result) => {
+      if (result) {
+        batchNotes = result.data;
+        modalRef.componentInstance.batchNotes = batchNotes;
       }
     });
   }
