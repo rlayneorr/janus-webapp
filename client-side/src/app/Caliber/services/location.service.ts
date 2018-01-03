@@ -7,10 +7,11 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 import { environment } from '../../../environments/environment';
+import { AlertsService } from './alerts.service';
 
 // entities
 import { Location } from '../../entities/Location';
-import { AlertsService } from './alerts.service';
+
 
 /**
  * this service is used to make API calls
@@ -34,11 +35,11 @@ export class LocationService {
    */
   getAll() {
     this.http.get<Location[]>(environment.getAllLocations).subscribe((resp) => {
-      console.log('got all locations');
+      this.alertService.success('Got all locations successfully!');
       this.dataSubject.next(resp);
     },
       (err) => {
-        console.log('error fetching all locations');
+        this.alertService.error('Failed to get all locations!');
       });
   }
 

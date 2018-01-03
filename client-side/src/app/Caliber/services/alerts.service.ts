@@ -7,20 +7,18 @@ import { Observable } from 'rxjs/Observable';
 export class AlertsService {
   private subject = new Subject<any>();
 
-
-  constructor(private router: Router) {
-      // clear alert message on route change
+  constructor() {
   }
 
   success(message: string, keepAfterNavigationChange = false) {
-      this.subject.next({ type: 'success', text: message });
+    this.subject.next({ type: 'success', text: message });
   }
 
   error(message: string, keepAfterNavigationChange = false) {
-      this.subject.next({ type: 'error', text: message });
+    this.subject.next({ type: 'error', text: message });
   }
 
   getMessage(): Observable<any> {
-      return this.subject.asObservable();
+    return this.subject.asObservable();
   }
 }
