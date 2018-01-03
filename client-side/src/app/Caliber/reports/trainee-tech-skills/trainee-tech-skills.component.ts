@@ -71,6 +71,7 @@ export class TraineeTechSkillsComponent implements OnInit {
         this.traineesData[this.traineesList.indexOf(result.params.traineeId)] = result.data;
       }
     });
+    // set up trainee weekly sub
     this.traineeWeeklyRadar = this.reportsService.traineeWeeklyRadar$.subscribe((result) => {
       if (result) {
         this.chartData.push(result.data);
@@ -91,8 +92,8 @@ export class TraineeTechSkillsComponent implements OnInit {
           this.trainee = result;
         }
       });
-    
-    // granularity batch sub; controls what setup us run.
+
+    // granularity batch sub; controls what setup is run.
     this.batchSubscription = this.granularityService.currentBatch$.subscribe(
       (result) => {
         if (result.batchId !== this.batchId) {
@@ -106,6 +107,7 @@ export class TraineeTechSkillsComponent implements OnInit {
         }
       });
     // data formating for weekly trainee chart
+    // this is a subscription since it need both datasets to be updated
     this.batchFilter = Observable.combineLatest(this.reportsService.batchOverallRadar$, this.reportsService.traineeWeeklyRadar$).subscribe(
       () => {
         // only do this there is enough data
@@ -144,6 +146,7 @@ export class TraineeTechSkillsComponent implements OnInit {
   }
   /**
    * Sets up some variables and send requests for overall radar
+   * @param result is the whole batch object.
    */
   overallSetup(result: any) {
     this.chartData = [];
@@ -186,7 +189,8 @@ export class TraineeTechSkillsComponent implements OnInit {
   }
   /**
    * closes the trainee selector modal
-  */
+   * @param reason
+   */
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -198,6 +202,7 @@ export class TraineeTechSkillsComponent implements OnInit {
   }
   /**
    * Adds/removes trainee from chart based on modal checks
+   * @param index is the index to the trainee in traineesList to be added/removed from chartData
   */
   traineeChecked(index: number) {
     console.log('debug: ' + this.traineesNames[index]);
@@ -211,6 +216,11 @@ export class TraineeTechSkillsComponent implements OnInit {
       this.chartData = this.chartData.concat([this.traineesData[index]]);
     }
   }
+  /**
+   * removes a single element from an array
+   * @param array
+   * @param element
+   */
   remove(array: any[], element: any) {
     return array.filter(e => e !== element);
   }
