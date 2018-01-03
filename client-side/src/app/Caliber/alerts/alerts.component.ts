@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 import { AlertsService } from '../services/alerts.service';
-import { NotificationsService } from 'angular2-notifications';
+import { NotificationsService } from 'angular2-notifications-lite';
 
 @Component({
   moduleId: module.id.toString(),
@@ -24,7 +24,6 @@ export class AlertsComponent implements OnInit {
     lastOnBottom: true,
     showProgressBar: false,
     preventDuplicates: true,
-    animate: null,
   };
 
   constructor(private alertService: AlertsService,
