@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -25,6 +24,7 @@ import { PDFService } from './services/pdf.service';
 import { CaliberModule } from './Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './janus/footer/footer.component';
 
 
 // loading routes from child modules this way will lazy load them
@@ -47,7 +47,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpModule,
     NgbModule.forRoot(),
     FormsModule,
@@ -61,6 +60,7 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     JanusComponent,
+    FooterComponent
   ],
   providers: [
     ChuckNorrisService,

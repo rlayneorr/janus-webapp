@@ -23,6 +23,7 @@ export const environment = {
   getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
   getAllTiers: 'http://localhost:8080/types/trainer/role/all',
   editTrainer: 'http://localhost:8080/vp/trainer/update',
+
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint: (skill: string, training: string, startDate) =>
     environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`,
@@ -79,8 +80,15 @@ export const environment = {
     environment.context + `all/assessments/average/${batchId}/${weekId}`,
 
   apiTechnologiesForTheWeek: (batchId: Number, weekId: Number) =>
-    environment.context + `all/assessments/categories/batch/${batchId}/${weekId}`,
+    environment.context + `all/assessments/categories/batch/${batchId}/week/${weekId}`,
 
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
+
+  /* Evaluation service API endpoints */
+  apiFetchAllQCTraineeNotes: (batchId: Number, weekId: Number) =>
+    environment.context + `qc/note/trainee/${batchId}/${weekId}`,
+
+  apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
+    environment.context + `qc/note/batch/${batchId}/${weekId}`,
 };
