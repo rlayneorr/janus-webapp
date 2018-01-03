@@ -8,11 +8,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Input } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { EnvironmentService } from '../../services/environment.service';
+import { DataSet } from '../../entities/DataSet';
 
 @Component({
   selector: 'app-vp-bar-graph',
   templateUrl: './vp-bar-graph.component.html',
-  styleUrls: ['./vp-bar-graph.component.css']
+  styleUrls: ['./vp-bar-graph.component.css', '../homeCSS/vpHomeCharts.css']
 })
 export class VpBarGraphComponent implements OnInit {
   public barChartData: ChartDataEntity;
@@ -29,8 +30,8 @@ export class VpBarGraphComponent implements OnInit {
     id: number;
     week: number;
   }];
-  @Input()
   public allbatches: any;
+  public hasBatchStatuses = false;
 
 
   constructor(private vpHomeBarGraphService: VpHomeBarGraphService,
@@ -50,15 +51,24 @@ export class VpBarGraphComponent implements OnInit {
         this.results = resp;
         this.results.sort();
         this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
+        console.log(this.barChartData);
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
         this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasBarChartData = true;
-        this.populateBatchStatuses();
+        this.http.get(this.environmentService.buildUrl('/qc/batch/all')).subscribe(
+          (resp2) => {
+             this.allbatches = resp2;
+             this.populateBatchStatuses();
+         });
+
       });
   }
   // gets the statuses of the batches as well as stores the batch id and week
   // into a seperate array used for the modal
   populateBatchStatuses() {
+    this.hasBatchStatuses = false;
+    this.overallBatchStatusArray = [];
+    this.modalInfoArray = undefined;
     for (const result of this.results) {
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
       if (this.modalInfoArray === undefined) {
@@ -72,6 +82,7 @@ export class VpBarGraphComponent implements OnInit {
           this.overallBatchStatusArray.push(temp.qcStatus);
         });
     }
+    this.hasBatchStatuses = true;
   }
   // called when a state is selected to get cities for the cities drop down
   // as well as re-populate the chartData
@@ -99,6 +110,10 @@ export class VpBarGraphComponent implements OnInit {
   // used to call the modal
   onClick(event) {
     console.log(event);
+  }
+
+  getDataPoints(j) {
+    return this.barChartData.data.filter(i => i.stack == j+1);
   }
 
 }

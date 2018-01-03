@@ -18,7 +18,7 @@
       </div>
       <div class="panel-body">
         <div class="chart-container top5">
-          <canvas baseChart
+          <canvas baseChart (window:resize) = "onResize($event)"
            class="chart chart-line"
             *ngIf="hasData" [datasets]="lineChartData.data" [options]="lineChartData.options" [labels]="lineChartData.labels"
             [colors]="lineChartData.colors" [chartType]="lineChartData.type">

@@ -15,11 +15,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient, private environmentService: EnvironmentService) { }
 
   ngOnInit() {
-    console.log('home component request');
-    this.http.get(this.environmentService.buildUrl('/qc/batch/all')).subscribe(
-       (resp) => {
-          this.batches = resp;
-      });
   }
 
   // clean up subscriptions

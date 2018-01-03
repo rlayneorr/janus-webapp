@@ -31,7 +31,7 @@
 
         </div>
         <div>
-          <table class="table table-responsive" style="border-collapse: collapse;">
+          <table class="table table-responsive" style="border-collapse: collapse;" *ngIf = "hasBatchStatuses">
             <tbody>
               <tr>
                 <th class="col-sm-2 col-md-2 col-lg-2"></th>
@@ -40,7 +40,7 @@
               </tr>
               <tr *ngFor="let label of barChartData.labels; let j = index;">
                 <th class="col-sm-2 col-md-2 col-lg-2">{{label}}</th>
-                <td class="col-sm-2 col-md-2 col-lg-2" *ngFor="let dataPoint of barChartData.data">{{dataPoint.data}}</td>
+                <td class="col-sm-2 col-md-2 col-lg-2" *ngFor="let dataPoint of barChartData.data">{{dataPoint.data[j]}}</td>
                 <td class="overall-batch-health" [ngClass]="{'color-red': overallBatchStatusArray[j] === 'Poor',
                 'color-yellow': overallBatchStatusArray[j] === 'Average',
                 'color-green': overallBatchStatusArray[j] === 'Good'}">
