@@ -68,22 +68,21 @@ table th[class*=col-] {
 }
 .chart {
     min-height: 300px;
-    height: 100%;
 }
 
 @media (max-width: 975px) {
-    .chart {
+    .chart-container {
         height: 300px;
     }
 }
 
 @media ( min-width : 975px) and (max-width: 1182px) {
-    .chart {
+    .chart-container {
         height: 432px;
     }
 }
 @media (min-width : 1182px) {
-    .chart {
+    .chart-container {
         height: 532px;
     }
 }

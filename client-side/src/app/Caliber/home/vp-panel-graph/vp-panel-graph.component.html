@@ -9,7 +9,8 @@
             [options]="panelChartData.options" [chartType]="panelChartData.type">
           </canvas>
         </div>
-        <table ng-if="currentPanelsLineLabels" class="table table-responsive" style="border-collapse: collapse;">
+        <div class = "table-responsive">
+        <table  class="table" style="border-collapse: collapse;">
           <tbody>
             <tr>
               <th class="col-sm-1 col-md-1 col-lg-1"></th>
@@ -21,6 +22,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </div>

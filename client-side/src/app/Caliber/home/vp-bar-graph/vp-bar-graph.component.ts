@@ -66,6 +66,51 @@ export class VpBarGraphComponent implements OnInit {
       (resp) => {
         this.results = resp;
         this.results.sort();
+        console.log(resp);
+        // this.results.push( {
+        //   address: {},
+        //   qcStatus: {
+        //     Poor: 8,
+        //     Superstar: 18,
+        //     Good: 1,
+        //     Average: 2,
+        //   },
+        //   id: 2201,
+        //   label: 'Boe Jackson',
+        // });
+        // this.results.push( {
+        //   address: {},
+        //   qcStatus: {
+        //     Poor: 8,
+        //     Superstar: 18,
+        //     Good: 1,
+        //     Average: 2,
+        //   },
+        //   id: 2201,
+        //   label: 'Joe Jackson',
+        // });
+        // this.results.push( {
+        //   address: {},
+        //   qcStatus: {
+        //     Poor: 8,
+        //     Superstar: 18,
+        //     Good: 1,
+        //     Average: 3,
+        //   },
+        //   id: 2201,
+        //   label: 'Moe Jackson',
+        // });
+        // this.results.push( {
+        //   address: {},
+        //   qcStatus: {
+        //     Poor: 19,
+        //     Superstar: 0,
+        //     Good: 0,
+        //     Average: 12,
+        //   },
+        //   id: 2201,
+        //   label: 'Toe Jackson',
+        // });
         this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
         console.log(this.barChartData);
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
@@ -171,7 +216,7 @@ export class VpBarGraphComponent implements OnInit {
   }
 
   getDataPoints(j) {
-    return this.barChartData.data.filter(i => i.stack == j+1);
+    return this.barChartData.data.filter(i => i.stack === j + 1);
   }
 
 }
