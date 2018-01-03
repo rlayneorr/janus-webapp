@@ -10,8 +10,8 @@ export class Batch {
     coTrainer: Trainer;
     skillType: string;
     trainingType: string;
-    startDate: string;
-    endDate: string;
+    startDate: Date;
+    endDate: Date;
     location: string;
     address: Address;
     goodGradeThreshold: number;
