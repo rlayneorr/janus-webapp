@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NavModule } from '../nav/nav.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
-import { SimpleNotificationsModule } from '../../../node_modules/angular2-notifications';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 // routing
 import { routes } from './caliber.routes';

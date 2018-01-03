@@ -112,6 +112,7 @@ export class VpBarGraphComponent implements OnInit {
     }
   }
   onClick(event: any) {
+    // console.log(event.active[0]._index);
     const chartInfo = this.modalInfoArray[event.active[0]._index];
     let tech: Array<String>;
     let trainees: Array<Note>;
