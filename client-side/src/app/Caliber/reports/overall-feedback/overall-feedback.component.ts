@@ -37,7 +37,7 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
   private allNoteSubscription: Subscription;
 
   private weekSubscription: Subscription;
-  private weekTopics: Array<Array<String>>;
+  weekTopics: Array<string>;
 
   // These should be filled in by subjects.
   private traineeSubscription: Subscription;
@@ -48,52 +48,52 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
               private reportService: ReportingService) { }
 
   ngOnInit() {
-
     this.traineeSubscription = this.granularityService.currentTrainee$.subscribe((trainee) => {
-
-      if (trainee) {
-        const traineeId = trainee.traineeId;
-
-        // Trainee QC Subscription
-        if (this.qcNoteSubscription) { this.qcNoteSubscription.unsubscribe(); }
-        this.qcNoteSubscription = this.evalService.allQCTraineeOverallNotes$.subscribe((result) => {
-          if (result) {
-            this.qcNotes = result.data;
-          } else {
-            this.evalService.fetchAllQCTraineeOverallNotes(traineeId);
-          }
-        });
-
-        // Trainee Overall Subscription
-        if (this.allNoteSubscription) { this.allNoteSubscription.unsubscribe(); }
-        this.allNoteSubscription = this.evalService.allTraineeNotes$.subscribe((result) => {
-          if (result) {
-            this.allNotes = result.data;
-          } else {
-            this.evalService.fetchAllTraineeNotes(traineeId);
-          }
-        });
-      }
+        this.evalService.fetchAllQCTraineeOverallNotes(trainee.traineeId);
+        this.evalService.fetchAllTraineeNotes(trainee.traineeId);
     });
 
     this.batchSubscription = this.granularityService.currentBatch$.subscribe((batch) => {
+      this.reportService.fetchTechnologiesUpToWeek(batch.batchId, batch.gradedWeeks);
+    });
 
-      if (this.weekSubscription) { this.weekSubscription.unsubscribe(); }
-      this.weekSubscription = this.reportService.technologiesUpToWeek$.subscribe((result) => {
-        if (result) {
-          this.weekTopics = result.data;
-        } else {
-          this.reportService.fetchTechnologiesUpToWeek(batch.batchId, batch.gradedWeeks);
-        }
-      });
+    this.qcNoteSubscription = this.evalService.allQCTraineeOverallNotes$.subscribe((result) => {
+      if (result) {
+        this.qcNotes = result.data;
+      }
+    });
+
+    this.allNoteSubscription = this.evalService.allTraineeNotes$.subscribe((result) => {
+      if (result) {
+        this.allNotes = result.data;
+      }
+    });
+
+    this.weekSubscription = this.reportService.technologiesUpToWeek$.subscribe((result) => {
+      if (result) {
+        this.weekTopics = this.techArray(result.data);
+      }
     });
   }
 
-  weekArray(notes: Array<Note>): Array<Number> {
-    const result = Array<Number>();
+  techArray(tech: Array<Array<string>>): Array<string> {
+    const result = Array<string>();
 
-    for (const note of notes) {
-      result.push(note.week);
+    for (const t of tech) {
+      result.push(this.techString(t));
+    }
+
+    return result;
+  }
+
+  techString(tech: Array<String>) {
+    let result = '';
+
+    for (let i = 0; i < tech.length; i++) {
+      result += tech[i];
+      if (i < tech.length - 1) {
+        result += ', ';
+      }
     }
 
     return result;
