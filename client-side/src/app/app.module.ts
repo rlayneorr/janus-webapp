@@ -24,7 +24,6 @@ import { PDFService } from './services/pdf.service';
 import { CaliberModule } from './Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FooterComponent } from './janus/footer/footer.component';
 
 
 // loading routes from child modules this way will lazy load them
@@ -60,7 +59,6 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     JanusComponent,
-    FooterComponent
   ],
   providers: [
     ChuckNorrisService,
