@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
 import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Input } from '@angular/core';
@@ -10,6 +10,8 @@ import { BarGraphModalComponent } from './bar-graph-modal/bargraphmodal.componen
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ReportingService } from '../../../services/reporting.service';
 import { Subscription } from 'rxjs/Subscription';
+import { environment } from '../../../../environments/environment';
+import { EnvironmentService } from '../../services/environment.service';
 
 @Component({
   selector: 'app-vp-bar-graph',
@@ -39,64 +41,68 @@ export class VpBarGraphComponent implements OnInit {
 
 
   constructor(private vhbgs: VpHomeBarGraphService,
-     private http: Http,
-     private vhss: VpHomeSelectorService,
-     private rs: ReportingService,
-     private modalService: NgbModal) { }
+    private vhss: VpHomeSelectorService,
+    private rs: ReportingService,
+    private modalService: NgbModal,
+    private http: HttpClient,
+    private vpHomeSelectorService: VpHomeSelectorService,
+    private environmentService: EnvironmentService) { }
 
   ngOnInit() {
-    console.log(this.allbatches);
     this.hasBarChartData = false;
     this.selectedState = false;
     this.barChartData = this.vhbgs.getBarChartData();
-    this.http.get('http://localhost:8080/all/reports/batch/week/stacked-bar-current-week', { withCredentials: true })
+    const url = this.environmentService.buildUrl('all/reports/batch/week/stacked-bar-current-week');
+    console.log(url);
+    this.http.get(url, { withCredentials: true })
       .subscribe(
       (resp) => {
-        this.results = resp.json();
-        // console.log(this.results);
+        this.results = resp;
         this.results.sort();
-        this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, '', '');
-        this.addresses = this.vhss.populateAddresses(this.results);
-        this.states = this.vhss.populateStates(this.addresses);
+        this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, '', '');
+        this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
+        this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasBarChartData = true;
-        // console.log(this.barChartData);
         this.populateBatchStatuses();
       });
   }
-
+  // gets the statuses of the batches as well as stores the batch id and week
+  // into a seperate array used for the modal
   populateBatchStatuses() {
     for (const result of this.results) {
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
-      // console.log(batch);
       if (this.modalInfoArray === undefined) {
-        this.modalInfoArray = [{'id': <number>batch.batchId, 'week': <number>batch.weeks}];
+        this.modalInfoArray = [{ 'id': <number>batch.batchId, 'week': <number>batch.weeks }];
       } else {
-        this.modalInfoArray.push({'id': <number>batch.batchId, 'week': <number>batch.weeks});
+        this.modalInfoArray.push({ 'id': <number>batch.batchId, 'week': <number>batch.weeks });
       }
-      this.http.get('http://localhost:8080/qc/note/batch/' + batch.batchId + '/' + batch.weeks + '/')
-      .subscribe( (resp) => this.overallBatchStatusArray.push(resp.json().qcStatus));
+      this.http.get(this.environmentService.buildUrl(`qc/note/batch/${batch.batchId}/${batch.weeks}/`))
+        .subscribe((resp) => {
+          const temp: any = resp;
+          this.overallBatchStatusArray.push(temp.qcStatus);
+        });
     }
-    console.log(this.overallBatchStatusArray);
-    console.log(this.modalInfoArray);
   }
-
+  // called when a state is selected to get cities for the cities drop down
+  // as well as re-populate the chartData
   findCities(state) {
     this.hasBarChartData = false;
     this.selectedBarCity = '';
     if (state === '') {
       this.selectedState = false;
-      this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, '', '');
     } else {
       this.selectedState = true;
-      this.cities = this.vhss.populateCities(this.selectedBarState, this.addresses);
+      this.cities = this.vpHomeSelectorService.populateCities(this.selectedBarState, this.addresses);
     }
-    this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, this.selectedBarState, '');
+    this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
-    // console.log(this.barChartData);
   }
+  // after a city is selected, update the graph to reflect the selected city
   hasCity(city) {
     if (this.cities.size > 1) {
-      this.barChartData = this.vhbgs.fillBarChartData(this.results, this.barChartData, this.selectedBarState, this.selectedBarCity);
+      this.hasBarChartData = false;
+      this.barChartData = this.vhbgs
+        .fillChartData(this.results, this.barChartData, this.selectedBarState, this.selectedBarCity);
       this.hasBarChartData = true;
     }
   }

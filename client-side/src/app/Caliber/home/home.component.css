@@ -20,6 +20,10 @@ p {
 	.chart-container {
 		min-height: 8.8em;
 	}
+	.container {
+		padding-right: 0px;
+		padding-left: 0px;
+	}
 }
 
 @media ( min-width : 401px) and (max-width: 600px) {
