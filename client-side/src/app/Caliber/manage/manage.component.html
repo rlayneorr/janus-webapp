@@ -1,5 +1,4 @@
 <p>
-<<<<<<< HEAD
   Manage component by Austin Hearn
 </p>
 
@@ -56,12 +55,10 @@
                 </div>
                 <!-- Dropdown for location -->
                 <div class="form-group col-md-6 col-sm-6">
-                  <label for="commonLocations">Location :</label>
-                  <!-- ng-options is used ass opposed to ng-repeat because an entire object needs to be passed -->
-                  <select ng-model="location.model" id="location" required
-                    class="form-control" ng-required="true"
-                    ng-options="option as (option.company + ', ' + option.street + ' ' + option.city + ' ' + option.state + ' ' + option.zipcode) group by option.state for option in (location.options | orderBy:['state','company']  | filter : {active:true})  track by option.addressId">
-                    <option value="" value="">Select Location</option>
+                    <label for="location">Location</label> <select
+                    ng-model="Location.model" class="form-control" id="locaion">
+                    <option value="" disabled>Select Location</option>
+                    <option *ngFor="let location of locations">{{location.company}}, {{location.addressId}}, {{location.street}}, {{location.city}}, {{location.state}}, {{location.zipcode}}</option>
                   </select>
                 </div>
               </div>
@@ -209,6 +206,19 @@
                           <tbody>
                             <tr *ngFor="let trainee of currentBatch.trainees">
                                 <td>{{trainee.name}}</td>
+                                <td>{{trainee.email}}</td>
+                                <td>{{trainee.trainingStatus}}</td>
+                                <td>{{trainee.phoneNumber}}</td>
+                                <td>{{trainee.skypeId}}</td>
+                                <td>
+                                    <a [href]="trainee.profileUrl">Trainee Profile</a>
+                                </td>
+                                <td>{{trainee.recruiterName}}</td>
+                                <td>{{trainee.college}}</td>
+                                <td>{{trainee.degree}}</td>
+                                <td>{{trainee.major}}</td>
+                                <td>{{trainee.techScreenerName}}</td>
+                                <td>{{trainee.projectCompletion}}</td>
                             </tr>      
                           </tbody>
                         </table>
@@ -283,7 +293,3 @@
   </div>
 
 </div>
-=======
-  manage works!
-</p>
->>>>>>> revaturions

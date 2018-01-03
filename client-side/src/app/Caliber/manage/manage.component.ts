@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BatchService} from '../services/batch.service';
 import { TrainerService } from '../services/trainer.service';
+import { LocationService } from '../services/location.service';
+import { Location } from '../entities/Location';
 import { Trainer } from '../entities/Trainer';
 import { Batch } from '../entities/Batch';
-import {CreateBatchComponent} from '../components/modals/create.batch.component';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe} from '@angular/common';
 import { format } from 'url';
@@ -27,14 +28,21 @@ export class ManageComponent implements OnInit, OnDestroy {
   currentYear = 2017;
   currentBatch: Batch;
 
+  traineeProfileUrl: string;
+
 
   trainers: Trainer[] = [];
   trainerNames: string[] = [];
 
+  locations: Location[] = [];
+  locationNames: string[] = [];
+
   batchSub: Subscription;
   trainerSub: Subscription;
+  locationSub: Subscription;
 
   constructor(private batchService: BatchService, private trainerService: TrainerService,
+    private locationService: LocationService,
     private modalService: NgbModal, private datePipe: DatePipe) {
    }
 
@@ -57,6 +65,11 @@ export class ManageComponent implements OnInit, OnDestroy {
        for (let i = 0; i < this.trainers.length; i++) {
          this.trainerNames.push(this.trainers[i].name);
        }
+     });
+
+     this.locationService.fetchAll();
+     this.locationSub = this.locationService.getList().subscribe(location => {
+       this.locations = location;
      });
 
   }
@@ -108,6 +121,7 @@ export class ManageComponent implements OnInit, OnDestroy {
 
     this.currentBatch = batch;
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
