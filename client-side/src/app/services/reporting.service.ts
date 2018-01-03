@@ -23,6 +23,9 @@ export class ReportingService {
   private traineeOverallRadar = new BehaviorSubject<CacheData>(null);
   public traineeOverallRadar$ = this.traineeOverallRadar.asObservable();
 
+  private traineeWeeklyRadar = new BehaviorSubject<CacheData>(null);
+  public traineeWeeklyRadar$ = this.traineeWeeklyRadar.asObservable();
+
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
@@ -143,7 +146,7 @@ export class ReportingService {
 
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
+        success => this.assessmentBreakdownBarChart.next({ params: params, data: success }));
     }
 
   }
@@ -164,7 +167,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.batchOverallBar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallBar.next({params: params, data: success}));
+        success => this.batchOverallBar.next({ params: params, data: success }));
     }
 
   }
@@ -187,7 +190,7 @@ export class ReportingService {
 
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
+        success => this.assessmentBreakdownBarChart.next({ params: params, data: success }));
     }
   }
 
@@ -216,7 +219,7 @@ export class ReportingService {
 
     if (this.needsRefresh(this.batchOverallLineChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallLineChart.next({params: params, data: success}));
+        success => this.batchOverallLineChart.next({ params: params, data: success }));
     }
   }
 
@@ -239,7 +242,17 @@ export class ReportingService {
   fetchTraineeUpToWeekRadarChart(week: Number, traineeId: Number) {
     const endpoint = environment.apiTraineeUpToWeekRadarChart(week, traineeId);
 
-    // TODO: Implement API call and subject push logic
+    // Params object for refresh check
+    const params = {
+      traineeId: traineeId,
+      week: week
+    };
+
+    // call backend API if data is not fresh
+    if (this.needsRefresh(this.traineeOverallRadar, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.traineeWeeklyRadar.next({ params: params, data: success }));
+    }
 
   }
 
@@ -260,7 +273,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.traineeOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.traineeOverallRadar.next({params: params, data: success}));
+        success => this.traineeOverallRadar.next({ params: params, data: success }));
     }
   }
 
@@ -281,7 +294,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.batchOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallRadar.next({params: params, data: success}));
+        success => this.batchOverallRadar.next({ params: params, data: success }));
     }
   }
 
@@ -315,7 +328,7 @@ export class ReportingService {
    */
   fetchTechnologiesUpToWeek(batchId: Number, week: Number) {
 
-    const params = {batchId: batchId};
+    const params = { batchId: batchId };
 
     if (this.needsRefresh(this.technologiesUpToWeek, params)) {
       const result = Array<any>(week);
@@ -329,7 +342,7 @@ export class ReportingService {
           currentSub++;
 
           if (currentSub === week) {
-            this.technologiesUpToWeek.next({params: params, data: result});
+            this.technologiesUpToWeek.next({ params: params, data: result });
           }
         });
       }
@@ -353,7 +366,7 @@ export class ReportingService {
       this.httpClient.get(endpoint).subscribe(
         success => {
           console.log(success);
-          this.panelBatchAllTrainees.next({params: params, data: success});
+          this.panelBatchAllTrainees.next({ params: params, data: success });
         });
     }
   }
