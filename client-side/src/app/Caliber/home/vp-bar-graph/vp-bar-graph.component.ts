@@ -129,7 +129,7 @@ export class VpBarGraphComponent implements OnInit {
     const chartInfo = this.modalInfoArray[event.active[0]._index];
     let tech: Array<String>;
     let trainees: Array<Note>;
-    let batchNotes: Array<Note>;
+    let batchNotes: Note;
 
     // open the Modal
     const modalRef = this.modalService.open(BarGraphModalComponent);
