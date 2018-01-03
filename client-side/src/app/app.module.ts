@@ -47,7 +47,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpModule,
     NgbModule.forRoot(),
     FormsModule,
