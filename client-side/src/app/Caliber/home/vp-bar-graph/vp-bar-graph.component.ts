@@ -111,15 +111,18 @@ export class VpBarGraphComponent implements OnInit {
       this.hasBarChartData = true;
     }
   }
+
+  // when you click on a bar graph, show detailed information
   onClick(event: any) {
-    // console.log(event.active[0]._index);
     const chartInfo = this.modalInfoArray[event.active[0]._index];
     let tech: Array<String>;
     let trainees: Array<Note>;
     let batchNotes: Array<Note>;
 
+    // open the Modal
     const modalRef = this.modalService.open(BarGraphModalComponent);
 
+    // populate Technoloiges
     this.rs.fetchTechnologiesForTheWeek(chartInfo.id, chartInfo.week);
     this.techSub = this.rs.technologiesForTheWeek$.subscribe((result) => {
       if (result) {
@@ -128,6 +131,7 @@ export class VpBarGraphComponent implements OnInit {
       }
     });
 
+    // populate detailed trainee notes
     this.es.FetchAllQCTraineeNotes(chartInfo.id, chartInfo.week);
     this.QCSub = this.es.allQCTraineeNotes$.subscribe((result) => {
       if (result) {
@@ -144,6 +148,7 @@ export class VpBarGraphComponent implements OnInit {
       }
     });
 
+    // populate qc overal information
     this.es.FetchAllQCBatchNotes(chartInfo.id, chartInfo.week);
     this.batchSub = this.es.allQCBatchNotes$.subscribe((result) => {
       if (result) {
