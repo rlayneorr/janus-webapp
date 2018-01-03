@@ -1,20 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from '../../services/categories.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { Category } from '../../entities/Category';
-import { Http } from '@angular/http';
-import { environment } from '../../../../environments/environment';
+
+// rxjs
 import { Subscription } from 'rxjs/Subscription';
+
+// services
+import { CategoriesService } from '../../services/categories.service';
+import { environment } from '../../../../environments/environment';
+
+// entities
+import { Category } from '../../entities/Category';
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
+
 export class CategoriesComponent implements OnInit {
   model = new Category();
   newCategory: Category = new Category();
+
   private categorySubscription: Subscription;
+
   categories: Category[];
   currentCategory: Category;
   isActive: boolean;

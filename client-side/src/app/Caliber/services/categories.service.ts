@@ -25,7 +25,7 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) {
     this.fetchAll();
-  }
+   }
 
   /**
    * retrieves a list of all categories and pushes them to the

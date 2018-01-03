@@ -15,6 +15,7 @@ export const environment = {
   editCurrentCategory: 'http://localhost:8080/vp/category/update',
   editLocation: 'http://localhost:8080/vp/location/update',
   deleteLocation: 'http://localhost:8080/vp/location/delete',
+  reactivateLocation: 'http://localhost:8080/vp/location/reactivate',
   addLocation: 'http://localhost:8080/vp/location/create',
   deleteTrainer: 'http://localhost:8080/vp/trainer/delete',
   getAllLocations: 'http://localhost:8080/all/location/all/',

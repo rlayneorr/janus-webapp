@@ -18,8 +18,10 @@
       </div>
       <div class="panel-body">
         <div class="chart-container top5">
-          <canvas baseChart class="chart chart-line" *ngIf="hasData" [datasets]="lineChartData.data" [options]="lineChartData.options" [labels]="lineChartData.labels"
-            [colors]="lineChartData.colors" [chartType]="lineChartData.type" (chartHover)="onHover">
+          <canvas baseChart
+           class="chart chart-line"
+            *ngIf="hasData" [datasets]="lineChartData.data" [options]="lineChartData.options" [labels]="lineChartData.labels"
+            [colors]="lineChartData.colors" [chartType]="lineChartData.type">
           </canvas>
         </div>
         <div>
