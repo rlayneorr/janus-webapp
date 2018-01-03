@@ -1,10 +1,9 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 
 if (environment.production) {
   enableProdMode();
