@@ -68,10 +68,9 @@ table th[class*=col-] {
 }
 .chart {
     min-height: 300px;
-    height: 100%;
 }
 
-@media (max-width: 975px) {
+/* @media (max-width: 975px) {
     .chart {
         height: 300px;
     }
@@ -86,4 +85,4 @@ table th[class*=col-] {
     .chart {
         height: 532px;
     }
-}
+} */
