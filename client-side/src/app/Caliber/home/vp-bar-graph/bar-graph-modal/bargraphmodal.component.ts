@@ -12,7 +12,7 @@ export class BarGraphModalComponent implements OnInit {
     public modalInfoArray: any;
     public tech: Array<String>;
     public trainees: Array<Note>;
-    public batchNotes: Array<Note>;
+    public batchNotes: Note;
 
     constructor(public activeModal: NgbActiveModal) {
     }
