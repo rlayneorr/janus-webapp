@@ -118,15 +118,12 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
-<<<<<<< HEAD
     BatchOverallLineChartComponent,
     AssessmentBreakdownComponent,
-=======
     ToolbarFilterPipe,
   ],
   exports: [
     TraineeTechSkillsComponent,
->>>>>>> cda31d68c56e0901702175308437cd8c34eed4d2
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -151,9 +148,6 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
   ],
   bootstrap: [
     TrainersComponent
-  ],
-  exports: [
-    TraineeTechSkillsComponent,
   ]
 })
 export class CaliberModule { }

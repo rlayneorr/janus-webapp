@@ -335,7 +335,7 @@ export class ReportingService {
    */
   fetchPanelBatchAllTrainees(batchId: Number) {
     const endpoint = environment.apiPanelBatchAllTrainees(batchId);
-    console.log(endpoint);
+    // console.log(endpoint);
     const params = {
       batchId: batchId
     };
@@ -343,7 +343,7 @@ export class ReportingService {
     if (this.needsRefresh(this.panelBatchAllTrainees, params)) {
       this.httpClient.get(endpoint).subscribe(
         success => {
-          console.log(success);
+          // console.log(success);
           this.panelBatchAllTrainees.next({params: params, data: success});
         });
     }

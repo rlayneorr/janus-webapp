@@ -40,11 +40,11 @@ export class WeeklyLineChartComponent implements OnInit {
   ngOnInit() {
     this.dataSubscription = this.reportsService.batchOverallBar$.subscribe((result) => {
       if (!result) {
-        console.log('data not received');
+        // console.log('data not received');
         this.chartData = null;
         this.reportsService.fetchBatchOverallBarChart(this.batchId);
       } else {
-        console.log('data received');
+        // console.log('data received');
 
         // Adds batch information (trainee and overallScore) to the batch array
         for (const trainee of Object.entries(result.data)) {
