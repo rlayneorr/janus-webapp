@@ -1,43 +1,48 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 import { AlertsService } from '../services/alerts.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id.toString(),
   selector: 'app-alerts',
-  templateUrl: './alerts.component.html',
+  template: '<simple-notifications [options]="options"></simple-notifications>',
   styleUrls: ['./alerts.component.css'],
-  animations: [
-    trigger('show', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate(200, style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        style({ opacity: 1 }),
-        animate(300, style({ opacity: 0 }))
-      ]),
-      transition('enter => leave', animate('600ms ease-out')),
-      transition('leave => enter', animate('1000ms ease-in'))
-    ])
-  ]
 })
 export class AlertsComponent implements OnInit {
 
   message: any;
-  show = false;
 
-  constructor(private alertService: AlertsService) { }
+  /**
+   * global config for notification
+   */
+  public options = {
+    position: ["top", "left"],
+    timeOut: 3000,
+    maxStack: 5,
+    lastOnBottom: false,
+    showProgressBar: false,
+    preventDuplicates: true,
+  };
+
+  constructor(private alertService: AlertsService,
+    private notif: NotificationsService) { }
 
   ngOnInit() {
-    this.alertService.getMessage().subscribe(message => {
-      this.message = message;
-      this.show = true;
-      const timeoutId = setTimeout(() => {
-        this.show = false;
-      }, 2000);
-    });
-    console.log(this.message);
+    this.showNotif();
   }
 
+  /**
+   * display success/error notif
+   */
+  showNotif() {
+    this.alertService.getMessage().subscribe(message => {
+      this.message = message;
+      if (this.message.type === 'success') {
+        this.notif.success('', this.message.text);
+      } else {
+        this.notif.error('', this.message.text);
+      }
+    });
+  }
 }

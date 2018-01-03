@@ -137,7 +137,11 @@ export class TrainerService {
 
     this.http.get<Trainer[]>(url).subscribe((trainers) => {
       this.listSubject.next(trainers);
-    });
+      this.alertService.success('Retrieved all trainers successfully!');
+    },
+      (err) => {
+        this.alertService.error('Failed to retrieve all trainers!');
+      });
   }
 
   /**
@@ -178,9 +182,9 @@ export class TrainerService {
       this.savedSubject.next(updatedTrainer);
       this.alertService.success('Updated trainer successfully!');
     },
-  (err) => {
-    this.alertService.error('Failed to update trainer!');
-  });
+      (err) => {
+        this.alertService.error('Failed to update trainer!');
+      });
   }
 
   /**
@@ -226,10 +230,13 @@ export class TrainerService {
    * @param trainer
    */
   public deleteTrainer(trainer): void {
-
-    this.http.request('delete', environment.deleteTrainer, {body: trainer})
-    .subscribe( (resp) => {
-      this.fetchAll();
-    });
+    this.http.request('delete', environment.deleteTrainer, { body: trainer })
+      .subscribe((resp) => {
+        this.fetchAll();
+        this.alertService.success('Trainer deactivated successfully!');
+      },
+      (err) => {
+        this.alertService.error('Failed to reactivate trainer!');
+      });
   }
 }
