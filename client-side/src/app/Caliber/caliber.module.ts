@@ -72,6 +72,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
 import { BatchOverallLineChartComponent } from './reports/batch-overall-line-chart/batch-overall-line-chart.component';
 import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.component';
 import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/assessment-breakdown.component';
+import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedback.component';
 
 @NgModule({
   imports: [
@@ -85,6 +86,11 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
     ReactiveFormsModule,
   ],
   declarations: [
+    // pipes
+    TraineeSearchPipePipe,
+    GraphDataPipe,
+    OrderByPipe,
+
     // components
     CaliberComponent,
     HomeComponent,
@@ -114,14 +120,10 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
     TrainerProfileComponent,
     PanelComponent,
     OverallFeedbackComponent,
-
-    // pipes
-    TraineeSearchPipePipe,
-    GraphDataPipe,
-    OrderByPipe,
     PanelBatchAllTraineesComponent,
     BatchOverallLineChartComponent,
     AssessmentBreakdownComponent,
+    WeeklyFeedbackComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
