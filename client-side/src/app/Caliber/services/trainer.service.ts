@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 // services
 import { EnvironmentService } from './environment.service';
 import { environment } from '../../../environments/environment';
+import { AlertsService } from './alerts.service';
 
 // entities
 import { Trainer } from '../entities/Trainer';
@@ -27,12 +28,14 @@ export class TrainerService {
   private savedSubject: Subject<Trainer>;
   private deletedSubject: Subject<Trainer>;
   private envService: EnvironmentService;
+  private alertService: AlertsService;
 
   private sendCredentials: boolean;
 
-  constructor(private httpClient: HttpClient, envService: EnvironmentService) {
+  constructor(private httpClient: HttpClient, envService: EnvironmentService, alertService: AlertsService) {
     this.http = httpClient;
     this.envService = envService;
+    this.alertService = alertService;
 
     this.listSubject = new BehaviorSubject([]);
     this.titlesSubject = new BehaviorSubject([]);
@@ -134,7 +137,11 @@ export class TrainerService {
 
     this.http.get<Trainer[]>(url).subscribe((trainers) => {
       this.listSubject.next(trainers);
-    });
+      this.alertService.success('Retrieved all trainers successfully!');
+    },
+      (err) => {
+        this.alertService.error('Failed to retrieve all trainers!');
+      });
   }
 
   /**
@@ -149,9 +156,14 @@ export class TrainerService {
     const url = this.envService.buildUrl('vp/trainer/create');
     const data = JSON.stringify(trainer);
 
-    this.http.post<Trainer>(url, data).subscribe((savedTrainer) => {
-      this.savedSubject.next(savedTrainer);
-    });
+    this.http.post<Trainer>(url, data).subscribe(
+      (savedTrainer) => {
+        this.savedSubject.next(savedTrainer);
+        this.alertService.success('Created trainer successfully!');
+      },
+      (err) => {
+        this.alertService.error('Failed to create trainer!');
+      });
   }
 
   /**
@@ -168,7 +180,11 @@ export class TrainerService {
 
     this.http.put<Trainer>(url, data).subscribe((updatedTrainer) => {
       this.savedSubject.next(updatedTrainer);
-    });
+      this.alertService.success('Updated trainer successfully!');
+    },
+      (err) => {
+        this.alertService.error('Failed to update trainer!');
+      });
   }
 
   /**
@@ -180,11 +196,11 @@ export class TrainerService {
   public getTitles(): void {
 
     this.http.get<any[]>(environment.getAllTitles).subscribe((titles) => {
-      console.log('got all titles');
+      this.alertService.success('Got all titles successfully!');
       this.titlesSubject.next(titles);
     },
       (err) => {
-        console.log('error getting titles');
+        this.alertService.error('Failed to get all titles!');
       });
   }
 
@@ -197,11 +213,11 @@ export class TrainerService {
   public getTiers(): void {
 
     this.http.get<any[]>(environment.getAllTiers).subscribe((tiers) => {
-      console.log('got all tiers');
+      this.alertService.success('Got all roles successfully!');
       this.tiersSubject.next(tiers);
     },
       (err) => {
-        console.log('error getting tiers');
+        this.alertService.error('Failed to get all roles!');
       });
   }
 
@@ -214,10 +230,13 @@ export class TrainerService {
    * @param trainer
    */
   public deleteTrainer(trainer): void {
-
-    this.http.request('delete', environment.deleteTrainer, {body: trainer})
-    .subscribe( (resp) => {
-      this.fetchAll();
-    });
+    this.http.request('delete', environment.deleteTrainer, { body: trainer })
+      .subscribe((resp) => {
+        this.fetchAll();
+        this.alertService.success('Trainer deactivated successfully!');
+      },
+      (err) => {
+        this.alertService.error('Failed to reactivate trainer!');
+      });
   }
 }

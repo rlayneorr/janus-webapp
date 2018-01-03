@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NavModule } from '../nav/nav.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
+import { SimpleNotificationsModule } from '../../../node_modules/angular2-notifications';
 
 // routing
 import { routes } from './caliber.routes';
@@ -33,6 +34,7 @@ import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
+import { AlertsService } from './services/alerts.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -70,6 +72,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -80,6 +83,7 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     FormsModule,
     ChartsModule,
     ReactiveFormsModule,
+    SimpleNotificationsModule.forRoot(),
   ],
   declarations: [
 
@@ -138,6 +142,7 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     TrainerService,
     LocationService,
     CategoriesService,
+    AlertsService,
     VpHomeBarGraphService,
     VpHomePanelGraphService
   ],
