@@ -65,14 +65,4 @@ export class VpLineGraphComponent implements OnInit {
       this.hasData = true;
     }
   }
-  onResize (event) {
-    if (event.target.innerWidth < 767) {
-      this.lineChartData.options.maintainAspectRatio = false;
-    } else {
-      this.lineChartData.options.maintainAspectRatio = true;
-    }
-    const data = this.lineChartData.data;
-    this.lineChartData.data.length = 0;
-    this.lineChartData.data = data;
-  }
 }
