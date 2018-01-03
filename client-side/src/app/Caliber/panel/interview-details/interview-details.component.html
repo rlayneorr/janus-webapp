@@ -25,4 +25,43 @@
       <hr/>
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col">
+      <label for="trainingTrack">Training Track</label>
+      <input class="form-control" id="trainingTrack" type="text" value="{{trainingTrack}}" readonly>
+    </div>
+    <div class="col">
+      <label for="interviewTime">Interview Time</label>
+      <ngb-timepicker [(ngModel)]="time" [meridian]="true" [spinners]="false"></ngb-timepicker>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="panelRound">Panel Round</label>
+      <input class="form-control" id="panelRound" type="text" value="{{panelRound}}" readonly>
+    </div>
+    <div class="col">
+      <label for="interviewMode">Interview Mode</label>
+      <select class="form-control" id="interviewMode">
+        <option>Skype</option>
+        <option>Phone</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="recordingConsent">Recording Consent</label>
+      <select class="form-control" id="recordingConsent">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <div class="col">
+      <label for="internetConnectivity">Internet Connectivity</label>
+      <select class="form-control" id="internetConnectivity">
+        <option>Stable</option>
+        <option>Unstable</option>
+      </select>
+    </div>
+  </div>

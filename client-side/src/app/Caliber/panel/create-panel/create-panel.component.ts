@@ -18,13 +18,13 @@ export class CreatePanelComponent implements OnInit {
   constructor(private modalService: NgbModal, private searchBar: PanelSearchbarComponent) { }
 
   ngOnInit() {
-    this.searchBar.getTraineeSubject().subscribe( (trainee) => {
+    this.searchBar.getTraineeSubject().subscribe((trainee) => {
       this.trainee = trainee;
     });
   }
 
   open(content) {
-    this.modalService.open(content, {size: 'xl'}).result.then((result) => {
+    this.modalService.open(content, { size: 'xl' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -39,5 +39,9 @@ export class CreatePanelComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  onSubmit() {
+
   }
 }

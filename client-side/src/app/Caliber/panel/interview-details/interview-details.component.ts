@@ -11,6 +11,7 @@ import { Trainee } from '../../entities/Trainee';
 
 // services
 import { BatchService } from '../../services/batch.service';
+import { PanelService } from '../../services/panel.service';
 
 @Component({
   selector: 'app-interview-details',
@@ -22,10 +23,12 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
   traineeSubscription: Subscription;
   trainee: Trainee;
   batchList: any;
+  panelList: any;
   batchSubscription: Subscription;
   trainingTrack: any;
+  panelRound: any;
 
-  constructor(private searchBar: PanelSearchbarComponent, private batchService: BatchService) { }
+  constructor(private searchBar: PanelSearchbarComponent, private batchService: BatchService, private panelService: PanelService) { }
 
   ngOnInit() {
     this.traineeSubscription = this.searchBar.getTraineeSubject().subscribe((trainee) => {
@@ -42,6 +45,11 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
           }
         }
       }
+    });
+
+    this.panelService.getList().subscribe((panelList) => {
+      this.panelList = panelList;
+      this.panelRound = this.panelList.length;
     });
   }
 
