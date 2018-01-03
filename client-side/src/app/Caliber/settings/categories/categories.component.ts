@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 // rxjs
 import { Subscription } from 'rxjs/Subscription';
@@ -12,6 +14,7 @@ import { environment } from '../../../../environments/environment';
 // entities
 import { Category } from '../../entities/Category';
 
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -19,9 +22,9 @@ import { Category } from '../../entities/Category';
 })
 
 export class CategoriesComponent implements OnInit {
-  model = new Category();
   newCategory: Category = new Category();
 
+  addForm: FormGroup;
   private categorySubscription: Subscription;
 
   categories: Category[];
@@ -30,9 +33,14 @@ export class CategoriesComponent implements OnInit {
   tableLogic: any = [];
   columns;
   numColumns: number;
-  constructor(private categoriesService: CategoriesService, private modalService: NgbModal) { }
+  constructor(private categoriesService: CategoriesService, private modalService: NgbModal,
+    private fb: FormBuilder) {
+   }
+
   // Loads all categories
   ngOnInit() {
+    this.initFormControl();
+    // console.log(this.columns);
     this.categorySubscription = this.categoriesService.categories$.subscribe((resp) => {
       this.categories = resp;
       this.numColumns = this.categories.length / 8 + 1;
@@ -42,8 +50,15 @@ export class CategoriesComponent implements OnInit {
       this.columns = Array.apply(null, { length: this.numColumns }).map(Number.call, Number);
     });
   }
-  addNewCategory() {
-    this.newCategory.skillCategory = this.model.skillCategory;
+
+  initFormControl() {
+    this.addForm = this.fb.group({
+      'name': [this.newCategory.skillCategory, Validators.required]
+    });
+  }
+
+  addNewCategory(value) {
+    this.newCategory.skillCategory = value.name;
     this.newCategory.active = true;
     this.categoriesService.addNewCategory(this.newCategory);
   }
