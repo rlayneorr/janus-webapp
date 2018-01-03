@@ -24,6 +24,7 @@ export class AlertsComponent implements OnInit {
     lastOnBottom: true,
     showProgressBar: false,
     preventDuplicates: true,
+    animate: null,
   };
 
   constructor(private alertService: AlertsService,
