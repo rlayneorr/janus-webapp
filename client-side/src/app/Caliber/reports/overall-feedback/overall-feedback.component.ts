@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 /**
- * Creates a table of the overall feedback of a given trainee in a given
+ * Creates a table of the overall feedback of a given trainee in a given batch.
  *
  * @author Micah West
  * Requests made:
