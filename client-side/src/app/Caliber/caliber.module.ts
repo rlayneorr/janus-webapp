@@ -12,6 +12,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
 import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 
+
 // routing
 import { routes } from './caliber.routes';
 import { SpringInterceptor } from './interceptors/spring.interceptor';
@@ -70,6 +71,9 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
+import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
+import { EvaluationService } from './services/evaluation.service';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 
 
@@ -116,12 +120,14 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     PanelComponent,
     ReactivateLocationComponent,
     AlertsComponent,
+    BarGraphModalComponent,
 
     // pipes
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
     TierPipe,
+    OrderByPipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -144,13 +150,17 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     CategoriesService,
     AlertsService,
     VpHomeBarGraphService,
-    VpHomePanelGraphService
+    VpHomePanelGraphService,
+    EvaluationService,
   ],
   bootstrap: [
     TrainersComponent
   ],
   exports: [
     TraineeTechSkillsComponent,
+  ],
+  entryComponents: [
+    BarGraphModalComponent,
   ],
 })
 export class CaliberModule { }

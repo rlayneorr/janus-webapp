@@ -36,8 +36,10 @@ export class VpHomePanelGraphService {
             stepSize : 1
           }
         } ],
-        responsive: true,
+
       },
+      responsive: true,
+      maintainAspectRatio: false,
       tooltips: {
         mode: 'x',
     },

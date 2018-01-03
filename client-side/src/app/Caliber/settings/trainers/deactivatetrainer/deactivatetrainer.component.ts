@@ -9,7 +9,6 @@ import { TrainerService } from '../../../services/trainer.service';
     selector: 'app-deactivatetrainer',
     templateUrl: './deactivatetrainer.component.html',
     styleUrls: ['./deactivatetrainer.component.css'],
-    providers: [TrainerService],
     encapsulation: ViewEncapsulation.None,
   })
 export class DeactivateTrainerComponent implements OnInit {

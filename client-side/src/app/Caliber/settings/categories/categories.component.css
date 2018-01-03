@@ -1,13 +1,10 @@
-a {
-	color: #F26925;
-}
 
-.btn-primary, .fa .fa-file-code-o {
-	color: white !important;
-	border-color: white !important;
-	background-color: #F26925 !important;
-	background-image: none;
+/* New CSS */
+.table-hover:hover {
+    background: rgba(242, 105, 37, 0.3)
 }
+.pointer {cursor: pointer;}
+
 .col {
 	padding-right: 8%;
 }
@@ -18,6 +15,20 @@ a {
         width: 100%;
     }
 }
+/* End New CSS */
+
+
+a {
+	color: rgb(242, 105, 37);
+}
+
+.btn-primary, .fa .fa-file-code-o {
+	color: white !important;
+	border-color: white !important;
+	background-color: rgb(242, 105, 37) !important;
+	background-image: none;
+}
+
 
 .fa-check{
 	color: #81f575;
