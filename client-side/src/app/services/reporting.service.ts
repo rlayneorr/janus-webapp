@@ -33,6 +33,9 @@ export class ReportingService {
   private batchOverallBar = new BehaviorSubject<CacheData>(null);
   public batchOverallBar$ = this.batchOverallBar.asObservable();
 
+  private technologiesForTheWeek = new BehaviorSubject<CacheData>(null);
+  public technologiesForTheWeek$ = this.technologiesForTheWeek.asObservable();
+
   private technologiesUpToWeek = new BehaviorSubject<CacheData>(null);
   public technologiesUpToWeek$ = this.technologiesUpToWeek.asObservable();
 
@@ -314,10 +317,26 @@ export class ReportingService {
 
   }
 
+  /**
+   * Updates the single week subject to contain the topics covered
+   * by a given batch for a given week.
+   * @param batchId - Batch whose week topics we're fetching.
+   * @param week - How many weeks we're requesting.
+   */
   fetchTechnologiesForTheWeek(batchId: Number, weekId: Number) {
     const endpoint = environment.apiTechnologiesForTheWeek(batchId, weekId);
 
-    // TODO: Implement API call and subject push logic
+    // Params object for refresh check
+    const params = {
+      batchId: batchId,
+      weekId: weekId
+    };
+
+    // call backend API if data is not fresh
+    if (this.needsRefresh(this.technologiesForTheWeek, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.technologiesForTheWeek.next({params: params, data: success}));
+    }
   }
 
   /**
