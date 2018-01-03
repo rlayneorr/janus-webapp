@@ -55,7 +55,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     }
 
-    yearChange(year): boolean {
+    loadYears(year): boolean {
       if (year === new Date().getFullYear()) {
         return true;
       }

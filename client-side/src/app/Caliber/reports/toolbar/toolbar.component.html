@@ -2,7 +2,7 @@
   <div class="col">
     <select class="button" #startDate (change)="yearOnChange()">
       <ng-container class="container" *ngFor="let year of yearList">
-        <option [ngValue]="year" [selected]="yearChange(year)">{{ year }}</option>
+        <option [ngValue]="year" [selected]="loadYears(year)">{{ year }}</option>
       </ng-container>
     </select>
 
