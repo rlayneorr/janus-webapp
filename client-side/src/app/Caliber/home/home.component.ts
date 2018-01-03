@@ -12,7 +12,7 @@ import { EnvironmentService } from '../services/environment.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  private batches: any;
+  public batches: any;
   constructor(private http: HttpClient, private environmentService: EnvironmentService) { }
 
   ngOnInit() {
