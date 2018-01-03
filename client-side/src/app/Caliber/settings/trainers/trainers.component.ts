@@ -54,13 +54,17 @@ export class TrainersComponent implements OnInit, OnDestroy {
     });
   }
 
-
+/**
+ * adds a new trainer to the database
+ * @param modal: modal from create trainer form
+ */
   addTrainer(modal: Trainer) {
     this.newTrainer = modal;
     console.log(modal);
     console.log(modal.name);
     this.trainerService.create(this.newTrainer);
-    this.trainers.push(this.newTrainer);
+    this.trainerService.fetchAll();
+    // this.trainers.push(this.newTrainer);
   }
 
 
