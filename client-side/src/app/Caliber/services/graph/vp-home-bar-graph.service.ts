@@ -11,6 +11,10 @@ export class VpHomeBarGraphService {
   public getBarChartData(): ChartDataEntity {
     const barChartData = new ChartDataEntity();
     barChartData.options = {
+      legendCallback: function(chart) {
+        console.log('legendCallback');
+        console.log(chart);
+    },
       legend: {
         display: true,
         labels: {
@@ -34,7 +38,9 @@ export class VpHomeBarGraphService {
             mirror: true
           }
         }]
-      }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
     };
     barChartData.data = [];
     barChartData.type = 'bar';
@@ -55,8 +61,10 @@ export class VpHomeBarGraphService {
       console.log(result);
       barChartData.labels.push(result.label);
       // barChartData.id.push(result.id);
-      let i = 0;
+      let i;
+      console.log(result.qcStatus);
       for (const key of Object.keys(result.qcStatus)) {
+        console.log(key);
         if (key === 'Poor') {
           i = 0;
           barChartData.colors[i] = this.cs.generateLineColor('rgba(234, 40, 37,');
@@ -75,8 +83,10 @@ export class VpHomeBarGraphService {
           dataset.data.push(result.qcStatus[key]);
           dataset.label = key;
           dataset.id = result.id;
-          dataset.stack = '' + chartnum;
+          //dataset.stack = '' + chartnum;
           barChartData.data[i] = dataset;
+        } else {
+          barChartData.data[i].data.push(result.qcStatus[key]);
         }
       }
       chartnum++;

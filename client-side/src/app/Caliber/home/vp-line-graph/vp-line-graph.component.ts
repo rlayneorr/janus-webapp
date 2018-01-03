@@ -11,7 +11,7 @@ import { EnvironmentService } from '../../services/environment.service';
 @Component({
   selector: 'app-vp-line-graph',
   templateUrl: './vp-line-graph.component.html',
-  styleUrls: ['./vp-line-graph.component.css']
+  styleUrls: ['../homeCSS/vpHomeCharts.css']
 })
 export class VpLineGraphComponent implements OnInit {
   public results: any;
@@ -64,5 +64,15 @@ export class VpLineGraphComponent implements OnInit {
         .fillChartData(this.results, this.lineChartData, this.selectedLineState, this.selectedLineCity);
       this.hasData = true;
     }
+  }
+  onResize (event) {
+    if (event.target.innerWidth < 767) {
+      this.lineChartData.options.maintainAspectRatio = false;
+    } else {
+      this.lineChartData.options.maintainAspectRatio = true;
+    }
+    const data = this.lineChartData.data;
+    this.lineChartData.data.length = 0;
+    this.lineChartData.data = data;
   }
 }

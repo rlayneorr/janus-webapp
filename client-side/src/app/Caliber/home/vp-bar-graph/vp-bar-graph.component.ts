@@ -14,11 +14,12 @@ import { environment } from '../../../../environments/environment';
 import { EnvironmentService } from '../../services/environment.service';
 import { EvaluationService } from '../../services/evaluation.service';
 import { Note } from '../../entities/Note';
+import { DataSet } from '../../entities/DataSet';
 
 @Component({
   selector: 'app-vp-bar-graph',
   templateUrl: './vp-bar-graph.component.html',
-  styleUrls: ['./vp-bar-graph.component.css']
+  styleUrls: ['./vp-bar-graph.component.css', '../homeCSS/vpHomeCharts.css']
 })
 export class VpBarGraphComponent implements OnInit {
   public barChartData: ChartDataEntity;
@@ -42,9 +43,10 @@ export class VpBarGraphComponent implements OnInit {
 
   @Input()
   public allbatches: any;
+  public hasBatchStatuses = false;
 
 
-  constructor(private vhbgs: VpHomeBarGraphService,
+  constructor(private vpHomeBarGraphService: VpHomeBarGraphService,
     private vhss: VpHomeSelectorService,
     private rs: ReportingService,
     private es: EvaluationService,
@@ -56,7 +58,7 @@ export class VpBarGraphComponent implements OnInit {
   ngOnInit() {
     this.hasBarChartData = false;
     this.selectedState = false;
-    this.barChartData = this.vhbgs.getBarChartData();
+    this.barChartData = this.vpHomeBarGraphService.getBarChartData();
     const url = this.environmentService.buildUrl('all/reports/batch/week/stacked-bar-current-week');
     console.log(url);
     this.http.get(url, { withCredentials: true })
@@ -64,16 +66,25 @@ export class VpBarGraphComponent implements OnInit {
       (resp) => {
         this.results = resp;
         this.results.sort();
-        this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, '', '');
+        this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
+        console.log(this.barChartData);
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
         this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasBarChartData = true;
-        this.populateBatchStatuses();
+        this.http.get(this.environmentService.buildUrl('/qc/batch/all')).subscribe(
+          (resp2) => {
+             this.allbatches = resp2;
+             this.populateBatchStatuses();
+         });
+
       });
   }
   // gets the statuses of the batches as well as stores the batch id and week
   // into a seperate array used for the modal
   populateBatchStatuses() {
+    this.hasBatchStatuses = false;
+    this.overallBatchStatusArray = [];
+    this.modalInfoArray = undefined;
     for (const result of this.results) {
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
       if (this.modalInfoArray === undefined) {
@@ -87,6 +98,7 @@ export class VpBarGraphComponent implements OnInit {
           this.overallBatchStatusArray.push(temp.qcStatus);
         });
     }
+    this.hasBatchStatuses = true;
   }
   // called when a state is selected to get cities for the cities drop down
   // as well as re-populate the chartData
@@ -99,14 +111,14 @@ export class VpBarGraphComponent implements OnInit {
       this.selectedState = true;
       this.cities = this.vpHomeSelectorService.populateCities(this.selectedBarState, this.addresses);
     }
-    this.barChartData = this.vhbgs.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
+    this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
   }
   // after a city is selected, update the graph to reflect the selected city
   hasCity(city) {
     if (this.cities.size > 1) {
       this.hasBarChartData = false;
-      this.barChartData = this.vhbgs
+      this.barChartData = this.vpHomeBarGraphService
         .fillChartData(this.results, this.barChartData, this.selectedBarState, this.selectedBarCity);
       this.hasBarChartData = true;
     }
@@ -156,6 +168,10 @@ export class VpBarGraphComponent implements OnInit {
         modalRef.componentInstance.batchNotes = batchNotes;
       }
     });
+  }
+
+  getDataPoints(j) {
+    return this.barChartData.data.filter(i => i.stack == j+1);
   }
 
 }
