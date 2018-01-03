@@ -23,6 +23,7 @@ export const environment = {
   getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
   getAllTiers: 'http://localhost:8080/types/trainer/role/all',
   editTrainer: 'http://localhost:8080/vp/trainer/update',
+
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint: (skill: string, training: string, startDate) =>
     environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`,

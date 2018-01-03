@@ -138,6 +138,12 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     TrainerService,
     LocationService,
     CategoriesService,
+  ],
+  bootstrap: [
+    TrainersComponent
+  ],
+  exports: [
+    TraineeTechSkillsComponent,
     VpHomeBarGraphService,
     VpHomePanelGraphService,
   ],
