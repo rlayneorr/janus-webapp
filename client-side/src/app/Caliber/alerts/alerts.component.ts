@@ -6,7 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
   moduleId: module.id.toString(),
   selector: 'app-alerts',
-  template: '<simple-notifications [options]="options"></simple-notifications>',
+  templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.css'],
 })
 export class AlertsComponent implements OnInit {
@@ -19,8 +19,9 @@ export class AlertsComponent implements OnInit {
   public options = {
     position: ["top", "left"],
     timeOut: 3000,
-    maxStack: 5,
-    lastOnBottom: false,
+    maxStack: 10,
+    maxLength: 36,
+    lastOnBottom: true,
     showProgressBar: false,
     preventDuplicates: true,
   };
