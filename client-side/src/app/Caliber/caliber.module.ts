@@ -24,6 +24,8 @@ import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
 import { CategoryService } from './services/category.service';
+import { SkillService } from './services/skill.service';
+import { TrainingTypeService } from './services/training-type.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -68,6 +70,7 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+
 
 
 
@@ -138,6 +141,8 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     LocationService,
     CategoryService,
     CategoriesService,
+    SkillService,
+    TrainingTypeService,
   ],
   bootstrap: [
     TrainersComponent
