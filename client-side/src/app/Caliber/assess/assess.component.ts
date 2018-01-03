@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, NgModule, ViewEncapsulation, ElementRef} from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
 import { BatchService } from '../services/batch.service';
 import { HttpClientModule  } from '@angular/common/http';
@@ -12,6 +12,9 @@ import { Grade } from '../entities/Grade';
 import { Trainee } from '../entities/Trainee';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../entities/Category';
+import { Note } from '../entities/Note';
+import { NoteService } from '../services/note.service';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -29,11 +32,14 @@ export class AssessComponent implements OnInit {
   assessments: Assessment[] = [];
   selectedBatch: Batch = new Batch();
   grades: Grade[] = [];
-  selectedWeek: 1;
+  selectedWeek: number;
   categories: Category[] = [];
+  notes: Note[] = [];
+
+  newAssessment: Assessment = new Assessment();
 
   constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
-  private gradeService: GradeService, private categoryService: CategoryService) {
+  private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService) {
 
   }
 
@@ -45,29 +51,56 @@ export class AssessComponent implements OnInit {
     } else {
       this.getAssessments(id);
       this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, id);
+      this.noteService.fetchTraineeNotesByBatchIdByWeek(this.selectedBatch.batchId, id);
       this.selectedWeek = id;
     }
   }
 
   ngOnInit() {
+    this.selectedWeek = 1;
     this.batchService.fetchAll();
     this.categoryService.fetchAllActive();
+    this.noteService.getList().subscribe(notes => this.notes = notes);
     this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
     this.gradeService.getList().subscribe(grade => this.grades = grade);
-    this.categoryService.getList().subscribe(categories => this.categories = categories);
+    this.categoryService.getList().subscribe(categories => {
+      this.categories = categories;
+      this.newAssessment.category = this.findCategory('Java');
+    });
     this.batchService.getList().subscribe(batch => {
       this.batches = batch;
       if (this.batches.length !== 0) {
         this.selectedBatch = this.batches[0];
         this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
         this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+        this.noteService.fetchTraineeNotesByBatchIdByWeek(this.selectedBatch.batchId, 1);
       }
     });
 
   }
 
+  changeCategory(categorySelect: ElementRef) {
+    const newCategory = $(categorySelect).find(':selected').val();
+    this.newAssessment.category = this.findCategory(newCategory);
+  }
+
+  findCategory(category: any): Category {
+    let matchingCat;
+    this.categories.forEach(element => {
+      if (element.skillCategory === category) {
+        matchingCat = element;
+      }
+    });
+
+    return matchingCat;
+  }
+
   getGrade(grade: Grade[]) {
-    return grade[0].score;
+    return grade[0];
+  }
+
+  getNote(note: Note[]) {
+    return note[0].content;
   }
 
   open(content) {
@@ -83,14 +116,22 @@ export class AssessComponent implements OnInit {
     this.batchService.update(this.selectedBatch);
   }
 
-  addAssessment(type, category, score) {
-    const newAssess = new Assessment();
-    newAssess.category = category;
-    newAssess.type = type;
-    newAssess.rawScore = score;
-    newAssess.week = this.selectedWeek;
+  addAssessment() {
+    console.log(this.newAssessment);
+    this.newAssessment.week = <number>this.selectedWeek;
+    this.newAssessment.batch = this.selectedBatch;
+    this.assessmentService.create(this.newAssessment);
 
-    this.assessmentService.create(newAssess);
+    this.selectedBatch.trainees.forEach(trainee => {
+      const grade = new Grade();
+      grade.assessment = this.newAssessment;
+      grade.trainee = trainee;
+      grade.score = 0;
+      const newDate = new Date();
+      grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth());
+      console.log(grade);
+      this.gradeService.create(grade);
+    });
   }
 
   counter(i: number) {

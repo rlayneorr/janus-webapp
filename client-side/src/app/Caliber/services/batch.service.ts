@@ -51,14 +51,9 @@ export class BatchService extends AbstractApiService<Batch> {
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
      */
     public fetchAll(): void {
-<<<<<<< HEAD
-      const url = this.envService.buildUrl('vp/batch/all');
-      this.fetch(url);
-=======
       const url = 'vp/batch/all';
 
       super.doGetList(url);
->>>>>>> revaturions
     }
 
     /**

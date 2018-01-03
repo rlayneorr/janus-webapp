@@ -68,6 +68,7 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+import { CategorySkillPipe } from './pipes/category-skill.pipe';
 
 
 
@@ -117,6 +118,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
     GradeByTraineeByAssessmentPipe,
+    CategorySkillPipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
