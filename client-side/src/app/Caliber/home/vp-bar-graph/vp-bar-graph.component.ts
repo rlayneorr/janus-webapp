@@ -171,7 +171,7 @@ export class VpBarGraphComponent implements OnInit {
   }
 
   getDataPoints(j) {
-    return this.barChartData.data.filter(i => i.stack == j+1);
+    return this.barChartData.data.filter(i => i.stack === j + 1);
   }
 
 }
