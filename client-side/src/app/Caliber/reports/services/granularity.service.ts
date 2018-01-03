@@ -35,7 +35,7 @@ export class GranularityService {
         'email': 'patrick.walsh@revature.com', 'tier': 'ROLE_VP'
       },
       'coTrainer': null, 'skillType': 'J2EE', 'trainingType': 'University',
-      'startDate': '2017-02-13', 'endDate': '2017-12-19',
+      'startDate': new Date('2017-02-13'), 'endDate': new Date('2017-12-19'),
       'location': 'Tech Incubator at Queens College, 65-30 Kissena Blvd, CEP Hall 2, Queens, NY 11367',
       'address': {
         'addressId': 1, 'street': '65-30 Kissena Blvd, CEP Hall 2', 'city': 'Queens', 'state': 'NY',
@@ -170,7 +170,7 @@ export class GranularityService {
     };
     this.currentTrainee.next(testTrainee);
 
-    const week = 5;
+    const week = 0;
     this.currentWeek.next(week);
   }
 
