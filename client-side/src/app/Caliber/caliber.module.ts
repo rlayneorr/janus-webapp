@@ -31,6 +31,8 @@ import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.serv
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
 import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
+import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
+import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -58,8 +60,6 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
-import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
-import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
 import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { CreatelocationComponent } from './settings/locations/createlocation/createlocation.component';
@@ -138,20 +138,14 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     TrainerService,
     LocationService,
     CategoriesService,
-  ],
-  bootstrap: [
-    TrainersComponent
-  ],
-  exports: [
-    TraineeTechSkillsComponent,
     VpHomeBarGraphService,
-    VpHomePanelGraphService,
+    VpHomePanelGraphService
   ],
   bootstrap: [
     TrainersComponent
   ],
   exports: [
     TraineeTechSkillsComponent,
-  ]
+  ],
 })
 export class CaliberModule { }
