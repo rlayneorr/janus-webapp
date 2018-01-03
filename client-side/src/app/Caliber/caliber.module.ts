@@ -32,6 +32,9 @@ import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.serv
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
 import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
+import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
+import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
+import { AlertsService } from './services/alerts.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -68,7 +71,6 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
-import { AlertsService } from './services/alerts.service';
 
 
 @NgModule({
@@ -141,12 +143,14 @@ import { AlertsService } from './services/alerts.service';
     LocationService,
     CategoriesService,
     AlertsService,
+    VpHomeBarGraphService,
+    VpHomePanelGraphService
   ],
   bootstrap: [
     TrainersComponent
   ],
   exports: [
     TraineeTechSkillsComponent,
-  ]
+  ],
 })
 export class CaliberModule { }
