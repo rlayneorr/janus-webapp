@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { AbstractApiService } from './abstract-api.service';
 import { EnvironmentService } from './environment.service';
 
-// batches
+// entities
 import { Batch } from '../entities/Batch';
 
 
@@ -57,6 +57,9 @@ export class BatchService extends AbstractApiService<Batch> {
     }
 
     /**
+    * @overloade
+    * @see save()
+    *
     * transmits a batch to be saved in persistent
     * storage on the server and pushes the saved
     * object on the saved subject
@@ -66,6 +69,19 @@ export class BatchService extends AbstractApiService<Batch> {
     * @param batch: Batch
     */
     public create(batch: Batch): void {
+      this.save(batch);
+    }
+
+    /**
+    * transmits a batch to be saved in persistent
+    * storage on the server and pushes the saved
+    * object on the saved subject
+    *
+    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
+    *
+    * @param batch: Batch
+    */
+    public save(batch: Batch): void {
       const url = 'all/batch/create';
 
       super.doPost(batch, url);

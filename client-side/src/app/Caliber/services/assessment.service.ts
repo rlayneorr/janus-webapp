@@ -43,6 +43,10 @@ export class AssessmentService extends AbstractApiService<Assessment> {
   }
 
   /**
+   * @overload
+   *
+   * @see save()
+   *
    * creates an assessment and pushes the created assessement on
    * the savedSubject
    *
@@ -51,6 +55,18 @@ export class AssessmentService extends AbstractApiService<Assessment> {
    * @param assessment: Assessment
    */
   public create(assessment: Assessment): void {
+    this.save(assessment);
+  }
+
+ /**
+ * creates an assessment and pushes the created assessement on
+ * the savedSubject
+ *
+ * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
+ *
+ * @param assessment: Assessment
+ */
+  public save(assessment: Assessment): void {
     const url = 'trainer/assessment/create';
 
     super.doPost(assessment, url);
