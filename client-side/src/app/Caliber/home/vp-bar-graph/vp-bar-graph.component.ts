@@ -50,66 +50,22 @@ export class VpBarGraphComponent implements OnInit {
       (resp) => {
         this.results = resp;
         this.results.sort();
-        console.log(resp);
-        // this.results.push( {
-        //   address: {},
-        //   qcStatus: {
-        //     Poor: 8,
-        //     Superstar: 18,
-        //     Good: 1,
-        //     Average: 2,
-        //   },
-        //   id: 2201,
-        //   label: 'Boe Jackson',
-        // });
-        // this.results.push( {
-        //   address: {},
-        //   qcStatus: {
-        //     Poor: 8,
-        //     Superstar: 18,
-        //     Good: 1,
-        //     Average: 2,
-        //   },
-        //   id: 2201,
-        //   label: 'Joe Jackson',
-        // });
-        // this.results.push( {
-        //   address: {},
-        //   qcStatus: {
-        //     Poor: 8,
-        //     Superstar: 18,
-        //     Good: 1,
-        //     Average: 3,
-        //   },
-        //   id: 2201,
-        //   label: 'Moe Jackson',
-        // });
-        // this.results.push( {
-        //   address: {},
-        //   qcStatus: {
-        //     Poor: 19,
-        //     Superstar: 0,
-        //     Good: 0,
-        //     Average: 12,
-        //   },
-        //   id: 2201,
-        //   label: 'Toe Jackson',
-        // });
         this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
-        console.log(this.barChartData);
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
         this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasBarChartData = true;
         this.http.get(this.environmentService.buildUrl('/qc/batch/all')).subscribe(
           (resp2) => {
-             this.allbatches = resp2;
-             this.populateBatchStatuses();
-         });
+            this.allbatches = resp2;
+            this.populateBatchStatuses();
+          });
 
       });
   }
-  // gets the statuses of the batches as well as stores the batch id and week
-  // into a seperate array used for the modal
+  /** gets the statuses of the batches as well as stores the batch id and week
+  * into a seperate array used for the modal
+  * @return void
+  */
   populateBatchStatuses() {
     this.hasBatchStatuses = false;
     this.overallBatchStatusArray = [];
@@ -129,8 +85,10 @@ export class VpBarGraphComponent implements OnInit {
     }
     this.hasBatchStatuses = true;
   }
-  // called when a state is selected to get cities for the cities drop down
-  // as well as re-populate the chartData
+  /** called when a state is selected to get cities for the cities drop down
+  * as well as re-populate the chartData
+  * @param state:string
+  */
   findCities(state) {
     this.hasBarChartData = false;
     this.selectedBarCity = '';
@@ -143,7 +101,11 @@ export class VpBarGraphComponent implements OnInit {
     this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
   }
-  // after a city is selected, update the graph to reflect the selected city
+
+  /**
+   * after a city is selected, update the graph to reflect the selected city
+   * @param city: string
+   */
   hasCity(city) {
     if (this.cities.size > 1) {
       this.hasBarChartData = false;
@@ -155,10 +117,6 @@ export class VpBarGraphComponent implements OnInit {
   // used to call the modal
   onClick(event) {
     console.log(event);
-  }
-
-  getDataPoints(j) {
-    return this.barChartData.data.filter(i => i.stack == j+1);
   }
 
 }
