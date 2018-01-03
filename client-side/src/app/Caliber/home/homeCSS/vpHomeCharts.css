@@ -70,19 +70,19 @@ table th[class*=col-] {
     min-height: 300px;
 }
 
-/* @media (max-width: 975px) {
-    .chart {
+@media (max-width: 975px) {
+    .chart-container {
         height: 300px;
     }
 }
 
 @media ( min-width : 975px) and (max-width: 1182px) {
-    .chart {
+    .chart-container {
         height: 432px;
     }
 }
 @media (min-width : 1182px) {
-    .chart {
+    .chart-container {
         height: 532px;
     }
-} */
+}
