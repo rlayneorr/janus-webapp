@@ -18,7 +18,7 @@ export class AlertsComponent implements OnInit {
    */
   public options = {
     position: ["top", "left"],
-    timeOut: 3000,
+    timeOut: 2500,
     maxStack: 10,
     maxLength: 36,
     lastOnBottom: true,
