@@ -78,4 +78,11 @@ export const environment = {
 
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
+
+    /* Evaluation service API endpoints */
+  apiFetchAllQCTraineeNotes: (batchId: Number, weekId: Number) =>
+  environment.context + `qc/note/trainee/${batchId}/${weekId}`,
+
+apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
+  environment.context + `qc/note/batch/${batchId}/${weekId}`,
 };
