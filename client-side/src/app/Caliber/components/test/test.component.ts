@@ -30,7 +30,7 @@ export class TestComponent implements OnInit, OnDestroy {
   private data: any[];
 
 
-  constructor(private service: TrainerService ) {
+  constructor(private service: BatchService ) {
     this.service = service;
   }
 
@@ -91,7 +91,7 @@ export class TestComponent implements OnInit, OnDestroy {
       // }
     });
 
-    // this.service.fetchAll();
+    this.service.fetchAll();
     // this.service.fetchAllByBatch(3002);
     // this.service.fetchByBatchIdByWeek(2201, 1);
   }

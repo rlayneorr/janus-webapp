@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { AbstractApiService } from './abstract-api.service';
 import { EnvironmentService } from './environment.service';
 
-// batches
+// entities
 import { Batch } from '../entities/Batch';
 
 

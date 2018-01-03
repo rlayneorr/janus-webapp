@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
 // entities
-import { environment } from '../../../environments/environment';
 import { Category } from '../entities/Category';
 
 // services
