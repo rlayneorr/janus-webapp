@@ -15,6 +15,17 @@ import { GranularityService } from '../services/granularity.service';
 import { EvaluationService } from '../../../services/evaluation.service';
 import { ReportingService } from '../../../services/reporting.service';
 
+/**
+ * Creates a table of the weekly feedback of a given trainee
+ * in a given batch on a given week.
+ *
+ * @author Micah West
+ * Requests made:
+ * Batch's Week-to-week topics (reporting service)
+ * QC Note on a given trainee
+ * Trainer note on a given trainee
+ */
+
 @Component({
   selector: 'app-weekly-feedback',
   templateUrl: './weekly-feedback.component.html',
