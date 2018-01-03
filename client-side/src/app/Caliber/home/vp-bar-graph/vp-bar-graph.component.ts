@@ -6,6 +6,10 @@ import { Http } from '@angular/http';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Input } from '@angular/core';
+import { BarGraphModalComponent } from './bar-graph-modal/bargraphmodal.component';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ReportingService } from '../../../services/reporting.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-vp-bar-graph',
@@ -27,13 +31,18 @@ export class VpBarGraphComponent implements OnInit {
     id: number;
     week: number;
   }];
+  public modal: BarGraphModalComponent;
+  public techSub: Subscription;
+
   @Input()
   public allbatches: any;
 
 
   constructor(private vhbgs: VpHomeBarGraphService,
      private http: Http,
-     private vhss: VpHomeSelectorService) { }
+     private vhss: VpHomeSelectorService,
+     private rs: ReportingService,
+     private modalService: NgbModal) { }
 
   ngOnInit() {
     console.log(this.allbatches);
@@ -59,7 +68,7 @@ export class VpBarGraphComponent implements OnInit {
     for (const result of this.results) {
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
       // console.log(batch);
-      if(this.modalInfoArray === undefined) {
+      if (this.modalInfoArray === undefined) {
         this.modalInfoArray = [{'id': <number>batch.batchId, 'week': <number>batch.weeks}];
       } else {
         this.modalInfoArray.push({'id': <number>batch.batchId, 'week': <number>batch.weeks});
@@ -92,7 +101,18 @@ export class VpBarGraphComponent implements OnInit {
     }
   }
   onClick(event: any) {
-    console.log(event);
+    const chartInfo = this.modalInfoArray[event.active[0]._index];
+    let tech: Array<String>;
+
+    const modalRef = this.modalService.open(BarGraphModalComponent);
+
+    this.rs.fetchTechnologiesForTheWeek(chartInfo.id, chartInfo.week);
+    this.techSub = this.rs.technologiesForTheWeek$.subscribe((result) => {
+      if (result) {
+        tech = result.data;
+        modalRef.componentInstance.tech = tech;
+      }
+    });
   }
 
 }

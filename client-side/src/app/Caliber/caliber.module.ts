@@ -69,6 +69,8 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
+import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
+import { EvaluationService } from './services/evaluation.service';
 
 @NgModule({
   imports: [
@@ -112,6 +114,7 @@ import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.se
     PanelComponent,
     ReactivateLocationComponent,
     AlertsComponent,
+    BarGraphModalComponent,
 
     // pipes
     TraineeSearchPipePipe,
@@ -140,12 +143,16 @@ import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.se
     CategoriesService,
     VpHomeBarGraphService,
     VpHomePanelGraphService,
+    EvaluationService,
   ],
   bootstrap: [
     TrainersComponent
   ],
   exports: [
     TraineeTechSkillsComponent,
+  ],
+  entryComponents: [
+    BarGraphModalComponent
   ]
 })
 export class CaliberModule { }
