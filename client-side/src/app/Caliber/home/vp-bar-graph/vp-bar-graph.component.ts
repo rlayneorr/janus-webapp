@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
 import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Input } from '@angular/core';
@@ -34,7 +34,7 @@ export class VpBarGraphComponent implements OnInit {
 
 
   constructor(private vpHomeBarGraphService: VpHomeBarGraphService,
-    private http: Http,
+    private http: HttpClient,
     private vpHomeSelectorService: VpHomeSelectorService,
     private environmentService: EnvironmentService) { }
 
@@ -47,7 +47,7 @@ export class VpBarGraphComponent implements OnInit {
     this.http.get(url, { withCredentials: true })
       .subscribe(
       (resp) => {
-        this.results = resp.json();
+        this.results = resp;
         this.results.sort();
         this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
@@ -67,7 +67,10 @@ export class VpBarGraphComponent implements OnInit {
         this.modalInfoArray.push({ 'id': <number>batch.batchId, 'week': <number>batch.weeks });
       }
       this.http.get(this.environmentService.buildUrl(`qc/note/batch/${batch.batchId}/${batch.weeks}/`))
-        .subscribe((resp) => { console.log(resp.json()); this.overallBatchStatusArray.push(resp.json().qcStatus); });
+        .subscribe((resp) => {
+          const temp: any = resp;
+          this.overallBatchStatusArray.push(temp.qcStatus);
+        });
     }
   }
   // called when a state is selected to get cities for the cities drop down

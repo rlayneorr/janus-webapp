@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
-import { WeeklyProgress } from '../../entities/weeklyProgress';
 import { DataSet } from '../../entities/DataSet';
 import { ColorService } from '../colors/color.service';
 
@@ -15,37 +14,39 @@ export class VpHomeLineGraphService {
     const lineChartData = new ChartDataEntity();
     lineChartData.colors = [lineChartData.mainColor, lineChartData.secondaryColor];
     lineChartData.options = {
-        legend: {
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 10
+        }
+      },
+      scales: {
+        xAxes: [{
+          scaleLabel: {
             display: true,
-            labels: {
-                boxWidth: 10
-            }
-        },
-        scales: {
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Week'
-                }
+            labelString: 'Week'
+          }
 
-            }],
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Score'
-                },
+        }],
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Score'
+          },
 
-                ticks: {
-                    suggestedMin: 40,
-                    suggestedMax: 100,
-                    stepSize: 20
-                }
-            }]
-        },
-        datasetFill: false,
-        tooltips: {
-            mode: 'x',
-        },
+          ticks: {
+            suggestedMin: 40,
+            suggestedMax: 100,
+            stepSize: 20
+          }
+        }]
+      },
+      datasetFill: false,
+      tooltips: {
+        mode: 'x',
+      },
+      responsive: true,
+      maintainAspectRatio: false,
     };
     lineChartData.data = [];
     lineChartData.type = 'line';
@@ -53,7 +54,7 @@ export class VpHomeLineGraphService {
 
   }
 
-  public fillChartData(results: Array<WeeklyProgress>, lineChartData: ChartDataEntity, state: string, city: string) {
+  public fillChartData(results: any, lineChartData: ChartDataEntity, state: string, city: string) {
     let holder;
     lineChartData = this.clearLineChartData(lineChartData);
     if (state !== '') {

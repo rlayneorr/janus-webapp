@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http/';
+import { HttpClient } from '@angular/common/http/';
 import { VpHomePanelGraphService } from '../../services/graph/vp-home-panel-graph.service';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
@@ -14,7 +14,7 @@ import { EnvironmentService } from '../../services/environment.service';
 export class VpPanelGraphComponent implements OnInit {
   public panelChartData: ChartDataEntity;
   public hasPanelGraphData = false;
-  constructor(private http: Http, private vpHomePanelGraphService: VpHomePanelGraphService,
+  constructor(private http: HttpClient, private vpHomePanelGraphService: VpHomePanelGraphService,
     private environmentService: EnvironmentService) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class VpPanelGraphComponent implements OnInit {
     this.http.get(this.environmentService.buildUrl('all/reports/biweeklyPanelResults'), { withCredentials: true })
       .subscribe(
       (resp) => {
-        this.panelChartData = this.vpHomePanelGraphService.fillPanelChartData(resp.json(), this.panelChartData);
+        this.panelChartData = this.vpHomePanelGraphService.fillPanelChartData(resp, this.panelChartData);
         console.log(this.panelChartData);
         this.hasPanelGraphData = true;
       }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
-import { WeeklyProgress } from '../../entities/weeklyProgress';
+import { HttpClient } from '@angular/common/http';
 import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
 import { VpHomeLineGraphService } from '../../services/graph/vp-home-line-graph.service';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
@@ -15,7 +14,7 @@ import { EnvironmentService } from '../../services/environment.service';
   styleUrls: ['./vp-line-graph.component.css']
 })
 export class VpLineGraphComponent implements OnInit {
-  public results: Array<WeeklyProgress>;
+  public results: any;
   public addresses = [];
   public lineChartData: ChartDataEntity;
   public hasData = false;
@@ -25,7 +24,7 @@ export class VpLineGraphComponent implements OnInit {
   public cities: Set<string>;
   public selectedState = false;
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private vpHomeLineGraphService: VpHomeLineGraphService,
     private vpHomeSelectorService: VpHomeSelectorService,
 
@@ -36,7 +35,7 @@ export class VpLineGraphComponent implements OnInit {
     this.http.get(this.environmentService.buildUrl('all/reports/dashboard'), { withCredentials: true })
       .subscribe(
       (resp) => {
-        this.results = resp.json();
+        this.results = resp;
         this.results.sort();
         this.lineChartData = this.vpHomeLineGraphService.fillChartData(this.results, this.lineChartData, '', '');
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);

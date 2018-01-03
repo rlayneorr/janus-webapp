@@ -35,7 +35,8 @@ export class VpHomePanelGraphService {
             // suggestedMax : max + 1,
             stepSize : 1
           }
-        } ]
+        } ],
+        responsive: true,
       },
       tooltips: {
         mode: 'x',
