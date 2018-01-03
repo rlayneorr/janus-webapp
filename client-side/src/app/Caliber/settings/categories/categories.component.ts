@@ -21,10 +21,9 @@ export class CategoriesComponent implements OnInit {
   tableLogic: any = [];
   columns;
   numColumns: number;
-  constructor(private categoriesService: CategoriesService, private modalService: NgbModal, private http: Http) { }
+  constructor(private categoriesService: CategoriesService, private modalService: NgbModal) { }
   // Loads all categories
   ngOnInit() {
-    // console.log(this.columns);
     this.categorySubscription = this.categoriesService.categories$.subscribe((resp) => {
       this.categories = resp;
       this.numColumns = this.categories.length / 8 + 1;
@@ -39,7 +38,7 @@ export class CategoriesComponent implements OnInit {
     this.newCategory.active = true;
     this.categoriesService.addNewCategory(this.newCategory);
   }
-  // Change status of active
+  // Change active status of category
   activeChange(activeValue) {
     console.log(activeValue);
     this.isActive = activeValue;
@@ -59,7 +58,7 @@ export class CategoriesComponent implements OnInit {
         break;
       case 1:
         if (index > this.categories.length / this.numColumns) {
-          // If the numbers of categories is ever less than 3 then this condition will activate
+          // If the numbers of categories is 3 then this condition will activate
           if (this.numColumns === 3) {
             if (index < ((this.categories.length / this.numColumns) * 2)) {
               return true;
@@ -74,8 +73,7 @@ export class CategoriesComponent implements OnInit {
       case 2:
         if (index > ((this.categories.length / this.numColumns) * 2)) {
           return true;
-        }
-        break;
+        } break;
       default:
         break;
     }
