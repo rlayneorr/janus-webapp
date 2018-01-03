@@ -6,7 +6,15 @@
 
 :host ::ng-deep simple-notifications .sn-content {
     font-size: 16px;
-    width: 40vh;
-    height: 4vh;
+    width: 100%;
+    height: 100%;
     text-align: left;
+}
+
+:host ::ng-deep simple-notifications .sn-title {
+    font-size: 18px;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    font-weight: 750;
 }

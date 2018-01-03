@@ -40,9 +40,9 @@ export class AlertsComponent implements OnInit {
     this.alertService.getMessage().subscribe(message => {
       this.message = message;
       if (this.message.type === 'success') {
-        this.notif.success('', this.message.text);
+        this.notif.success('Success', this.message.text);
       } else {
-        this.notif.error('', this.message.text);
+        this.notif.error('Error', this.message.text);
       }
     });
   }
