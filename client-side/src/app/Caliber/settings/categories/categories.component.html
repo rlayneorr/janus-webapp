@@ -36,10 +36,10 @@
                             {{category.skillCategory}}
                         </td>
                         <!-- Display active condition -->
-                        <td class='text-right' *ngIf='!category.active && nextColumn(c,i)'>
+                        <td class='text-center' *ngIf='!category.active && nextColumn(c,i)'>
                             <span style="color: #ff7575" class="fa fa-times fa-2x" aria-hidden="true"></span>
                         </td>
-                        <td class='text-right' *ngIf='category.active && nextColumn(c,i)'>
+                        <td class='text-center' *ngIf='category.active && nextColumn(c,i)'>
                             <span style="color: #81f575" class="fa fa-check fa-2x" aria-hidden="true"></span>
                         </td>
                     </tr>
