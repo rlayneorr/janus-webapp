@@ -1,15 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
+import { AlertsService } from '../services/alerts.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
+  moduleId: module.id.toString(),
   selector: 'app-alerts',
-  templateUrl: './alerts.component.html',
-  styleUrls: ['./alerts.component.css']
+  template: '<simple-notifications [options]="options"></simple-notifications>',
+  styleUrls: ['./alerts.component.css'],
 })
 export class AlertsComponent implements OnInit {
 
-  constructor() { }
+  message: any;
+
+  /**
+   * global config for notification
+   */
+  public options = {
+    position: ["top", "left"],
+    timeOut: 3000,
+    maxStack: 5,
+    lastOnBottom: false,
+    showProgressBar: false,
+    preventDuplicates: true,
+  };
+
+  constructor(private alertService: AlertsService,
+    private notif: NotificationsService) { }
 
   ngOnInit() {
+    this.showNotif();
   }
 
+  /**
+   * display success/error notif
+   */
+  showNotif() {
+    this.alertService.getMessage().subscribe(message => {
+      this.message = message;
+      if (this.message.type === 'success') {
+        this.notif.success('', this.message.text);
+      } else {
+        this.notif.error('', this.message.text);
+      }
+    });
+  }
 }

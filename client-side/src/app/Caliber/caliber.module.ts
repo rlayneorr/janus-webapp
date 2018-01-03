@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NavModule } from '../nav/nav.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
+import { SimpleNotificationsModule } from '../../../node_modules/angular2-notifications';
 
 // routing
 import { routes } from './caliber.routes';
@@ -33,6 +34,7 @@ import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
+import { AlertsService } from './services/alerts.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -72,6 +74,7 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
 import { EvaluationService } from './services/evaluation.service';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -82,6 +85,7 @@ import { EvaluationService } from './services/evaluation.service';
     FormsModule,
     ChartsModule,
     ReactiveFormsModule,
+    SimpleNotificationsModule.forRoot(),
   ],
   declarations: [
 
@@ -141,6 +145,7 @@ import { EvaluationService } from './services/evaluation.service';
     TrainerService,
     LocationService,
     CategoriesService,
+    AlertsService,
     VpHomeBarGraphService,
     VpHomePanelGraphService,
     EvaluationService,
