@@ -28,13 +28,7 @@
           [chartType]="barChartData.type" 
           (chartClick)="onClick($event)">
           </canvas> 
-          <!-- <canvas id="chart1" baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [chartType]="barChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas> -->
+
         </div>
         <div>
           <table class="table table-responsive" style="border-collapse: collapse;">
@@ -47,7 +41,10 @@
               <tr *ngFor="let label of barChartData.labels; let j = index;">
                 <th class="col-sm-2 col-md-2 col-lg-2">{{label}}</th>
                 <td class="col-sm-2 col-md-2 col-lg-2" *ngFor="let dataPoint of barChartData.data">{{dataPoint.data}}</td>
-                <!-- <td class="overall-batch-health" ng-init="getOverallBatchFeedbackMap()" ng-class="{'color-red': qcOverallNotes[stackedBarIds[$index]] === 'Poor', 'color-yellow': qcOverallNotes[stackedBarIds[$index]] === 'Average', 'color-green': qcOverallNotes[stackedBarIds[$index]] === 'Good'}">{{qcOverallNotes[stackedBarIds[$index]]}}</td> -->
+                <td class="overall-batch-health" [ngClass]="{'color-red': overallBatchStatusArray[j] === 'Poor',
+                'color-yellow': overallBatchStatusArray[j] === 'Average',
+                'color-green': overallBatchStatusArray[j] === 'Good'}">
+                {{overallBatchStatusArray[j]}}</td>
               </tr>
             </tbody>
           </table>
@@ -55,8 +52,4 @@
       </div>
     </div>
   </div>
-<<<<<<< HEAD
--->
-=======
 </div>
->>>>>>> 5388e0de33e154bad762893a1348706e0ea96a1e

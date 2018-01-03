@@ -58,6 +58,8 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
+import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
+import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
 import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { CreatelocationComponent } from './settings/locations/createlocation/createlocation.component';
@@ -67,7 +69,6 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
-import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 
 @NgModule({
   imports: [
@@ -144,6 +145,13 @@ import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.servic
   exports: [
     TraineeTechSkillsComponent,
     VpHomeBarGraphService,
+    VpHomePanelGraphService,
+  ],
+  bootstrap: [
+    TrainersComponent
+  ],
+  exports: [
+    TraineeTechSkillsComponent,
   ]
 })
 export class CaliberModule { }

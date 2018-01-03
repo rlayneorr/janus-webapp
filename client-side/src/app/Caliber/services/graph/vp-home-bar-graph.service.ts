@@ -40,10 +40,18 @@ export class VpHomeBarGraphService {
     barChartData.type = 'bar';
     return barChartData;
   }
-  public fillBarChartData(results: any, barChartData: ChartDataEntity, state: string, city: string): ChartDataEntity {
+  public fillChartData(results: any, barChartData: ChartDataEntity, state: string, city: string): ChartDataEntity {
+    let holder;
     barChartData = this.clearBarChartData(barChartData);
+    if (state !== '') {
+      holder = results.filter(i => i.address.state === state);
+      if (city !== '') {
+        holder = holder.filter(i => i.address.city === city);
+      }
+    }
     let chartnum = 1;
     for (const result of results) {
+      console.log('result');
       console.log(result);
       barChartData.labels.push(result.label);
       // barChartData.id.push(result.id);
@@ -66,6 +74,7 @@ export class VpHomeBarGraphService {
           const dataset = new DataSet();
           dataset.data.push(result.qcStatus[key]);
           dataset.label = key;
+          dataset.id = result.id;
           dataset.stack = '' + chartnum;
           barChartData.data[i] = dataset;
         }

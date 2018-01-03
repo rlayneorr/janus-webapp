@@ -6,11 +6,9 @@ export class ColorService {
   constructor() { }
 
   public getLineColors(amount: number) {
-    console.log(this.lineColors.length);
     if (amount > this.lineColors.length) {
       this.createLineColors(amount - this.lineColors.length);
     }
-    console.log(this.lineColors);
     return this.lineColors.slice(0, amount);
   }
   private createLineColors(amount: number) {
