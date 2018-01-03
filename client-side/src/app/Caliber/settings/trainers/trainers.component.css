@@ -43,3 +43,8 @@
     outline: none !important;
     box-shadow: none;
  }
+
+ app-alerts {
+     position: absolute;
+     z-index: 99999;
+ }

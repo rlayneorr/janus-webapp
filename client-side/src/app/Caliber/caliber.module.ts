@@ -1,6 +1,5 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -11,7 +10,8 @@ import { CommonModule } from '@angular/common';
 import { NavModule } from '../nav/nav.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
-import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SimpleNotificationsModule } from 'angular2-notifications-lite';
+
 
 // routing
 import { routes } from './caliber.routes';
@@ -74,6 +74,7 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
 import { EvaluationService } from './services/evaluation.service';
 import { OrderByPipe } from './pipes/order-by.pipe';
+
 
 
 @NgModule({
