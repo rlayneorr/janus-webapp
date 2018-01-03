@@ -122,9 +122,10 @@ export class TraineeTechSkillsComponent implements OnInit {
           this.dataSetLabels[1] = this.dataSetLabels[0];
           this.dataSetLabels[0] = swap;
 
-          // need the datasets to be the same length
+          // need the datasets to be the same length so shorten the overall dataset
           if (Object.entries(this.chartData[1]).length !== Object.entries(this.chartData[0]).length) {
             const objArr = [];
+            // change the objects into arrays
             const longArr = Object.entries(this.chartData[1]);
             const shortArr = Object.entries(this.chartData[0]);
 
@@ -135,6 +136,7 @@ export class TraineeTechSkillsComponent implements OnInit {
                 }
               }
             }
+            // make a new object from the array
             this.chartData[1] = {};
             for (let i = 0; i < objArr.length; i++) {
               this.chartData[1][objArr[i][0]] = objArr[i][1];
