@@ -5,7 +5,7 @@
             <br>
             <ul class="nav nav-tabs justify-content-end">
                 <li id="addButton" role="button" (click)="open(addCategory)">
-                    <button type="button" class="btn btn-secondary">
+                    <button type="button" class="btn btn-secondary pointer">
                         <strong>Create Category
                           <i class="fa fa-plus" aria-hidden="true"></i>
                         </strong>
@@ -31,15 +31,15 @@
                 </thead>
                 <tbody>
                     <!-- Load all categories -->
-                    <tr *ngFor="let category of categories; let i=index;">
-                        <td *ngIf='nextColumn(c,i)' (click)='editopen(editCategory,category);'>
+                    <tr *ngFor="let category of categories; let i=index;" class='table-hover'>
+                        <td *ngIf='nextColumn(c,i)' (click)='editopen(editCategory,category);' class='pointer'>
                             {{category.skillCategory}}
                         </td>
-                        <!-- Check for active condition -->
-                        <td class='text-right' *ngIf='!category.active && nextColumn(c,i)'>
+                        <!-- Display active condition -->
+                        <td class='text-center' *ngIf='!category.active && nextColumn(c,i)'>
                             <span style="color: #ff7575" class="fa fa-times fa-2x" aria-hidden="true"></span>
                         </td>
-                        <td class='text-right' *ngIf='category.active && nextColumn(c,i)'>
+                        <td class='text-center' *ngIf='category.active && nextColumn(c,i)'>
                             <span style="color: #81f575" class="fa fa-check fa-2x" aria-hidden="true"></span>
                         </td>
                     </tr>
@@ -52,7 +52,7 @@
 
 <!-- Add category modal -->
 <ng-template #addCategory let-c="close" let-d="dismiss">
-    <form #myForm="ngForm" class="form-control">
+    <form #myForm="ngForm" [formGroup]="addForm">
         <div class="modal-header">
             <h4 class="modal-title">Add Category</h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -63,13 +63,13 @@
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
                     <label for="categoryName">Category:</label>
-                    <input [(ngModel)]='model.skillCategory' name="category" type="text" class="form-control" id="categoryName" placeholder="Category"
-                        required>
+                    <input formControlName= "name" name="category" type="text" class="form-control" id="categoryName" placeholder="Category"
+                        required/>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="addNewCategory(); c();" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button (click)="addNewCategory(myForm.value); c();" type="button" [disabled]="!myForm.valid" class="btn btn-primary" data-dismiss="modal">Submit</button>
             <button type="button" class="btn btn-outline-dark" (click)="c()">Close</button>
         </div>
     </form>
@@ -81,7 +81,7 @@
         <div class="modal-header">
             <h4 class="modal-title">Edit Category</h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true" class='fa fa-times-circle-o'></span>
             </button>
         </div>
         <div class="modal-body">

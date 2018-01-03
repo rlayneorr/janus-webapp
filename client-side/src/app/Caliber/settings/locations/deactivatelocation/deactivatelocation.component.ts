@@ -9,7 +9,6 @@ import { Location } from '../../../../entities/Location';
     selector: 'app-deactivatelocation',
     templateUrl: './deactivatelocation.component.html',
     styleUrls: ['./deactivatelocation.component.css'],
-    providers: [LocationService],
     encapsulation: ViewEncapsulation.None,
   })
 export class DeactivateLocationComponent implements OnInit {

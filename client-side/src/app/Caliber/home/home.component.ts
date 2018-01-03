@@ -11,7 +11,8 @@ import { EnvironmentService } from '../services/environment.service';
   styleUrls: ['./home.component.css', '../../../assets/css/styles.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private batches: any;
+
+  public batches: any;
   constructor(private http: HttpClient, private environmentService: EnvironmentService) { }
 
   ngOnInit() {

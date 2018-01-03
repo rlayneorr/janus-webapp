@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NavModule } from '../nav/nav.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 // routing
 import { routes } from './caliber.routes';
@@ -31,6 +32,9 @@ import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.serv
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
 import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
+import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
+import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
+import { AlertsService } from './services/alerts.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -58,8 +62,6 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
-import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
-import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
 import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { CreatelocationComponent } from './settings/locations/createlocation/createlocation.component';
@@ -69,6 +71,9 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
+import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
+import { EvaluationService } from './services/evaluation.service';
+
 
 @NgModule({
   imports: [
@@ -80,6 +85,7 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     FormsModule,
     ChartsModule,
     ReactiveFormsModule,
+    SimpleNotificationsModule.forRoot(),
   ],
   declarations: [
 
@@ -112,6 +118,7 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     PanelComponent,
     ReactivateLocationComponent,
     AlertsComponent,
+    BarGraphModalComponent,
 
     // pipes
     TraineeSearchPipePipe,
@@ -138,14 +145,19 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     TrainerService,
     LocationService,
     CategoriesService,
+    AlertsService,
     VpHomeBarGraphService,
     VpHomePanelGraphService,
+    EvaluationService,
   ],
   bootstrap: [
     TrainersComponent
   ],
   exports: [
     TraineeTechSkillsComponent,
-  ]
+  ],
+  entryComponents: [
+    BarGraphModalComponent,
+  ],
 })
 export class CaliberModule { }
