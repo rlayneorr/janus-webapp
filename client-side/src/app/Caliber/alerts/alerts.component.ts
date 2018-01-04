@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 import { AlertsService } from '../services/alerts.service';
-import { NotificationsService } from 'angular2-notifications';
+import { NotificationsService } from 'angular2-notifications-lite';
 
 @Component({
   moduleId: module.id.toString(),
   selector: 'app-alerts',
-  template: '<simple-notifications [options]="options"></simple-notifications>',
+  templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.css'],
 })
 export class AlertsComponent implements OnInit {
@@ -18,9 +18,10 @@ export class AlertsComponent implements OnInit {
    */
   public options = {
     position: ["top", "left"],
-    timeOut: 3000,
-    maxStack: 5,
-    lastOnBottom: false,
+    timeOut: 2500,
+    maxStack: 10,
+    maxLength: 36,
+    lastOnBottom: true,
     showProgressBar: false,
     preventDuplicates: true,
   };
@@ -39,9 +40,9 @@ export class AlertsComponent implements OnInit {
     this.alertService.getMessage().subscribe(message => {
       this.message = message;
       if (this.message.type === 'success') {
-        this.notif.success('', this.message.text);
+        this.notif.success('Success', this.message.text);
       } else {
-        this.notif.error('', this.message.text);
+        this.notif.error('Error', this.message.text);
       }
     });
   }
