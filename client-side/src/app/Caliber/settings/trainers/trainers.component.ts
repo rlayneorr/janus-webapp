@@ -63,7 +63,9 @@ export class TrainersComponent implements OnInit, OnDestroy {
     console.log(modal);
     console.log(modal.name);
     this.trainerService.save(this.newTrainer);
-    this.trainerService.fetchAll();
+    this.trainerService.getSaved().subscribe((resp) => {
+      this.trainerService.fetchAll();
+    });
     // this.trainers.push(this.newTrainer);
   }
 
