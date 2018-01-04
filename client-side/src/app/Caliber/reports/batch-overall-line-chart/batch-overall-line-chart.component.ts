@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**
  * Component utilizes service API calls to fetch and display an overall

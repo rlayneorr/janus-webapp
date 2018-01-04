@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReportingService } from '../../../services/reporting.service';
 import { GradeService } from '../../services/grade.service';
 import { Subscription } from 'rxjs/Subscription';
 import { GranularityService } from '../services/granularity.service';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**
  * Component will display a bar graph comparing the specific trainees
