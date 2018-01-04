@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col">
-    <select class="button" id="startDate" (change)="yearOnChange()" (click)="createBatchWeeks(); createTrainees();">
+    <select class="button" id="startDate" (change)="yearOnChange()" (click)="yearOnChange()">
       <ng-container class="container" *ngFor="let year of yearList">
         <option [ngValue]="year" [selected]="loadYears(year)">{{ year }}</option>
       </ng-container>
@@ -10,7 +10,7 @@
 
     <!-- <span *ngIf="batchesBasedOnYear.length > 0"> -->
     <span>
-      <select class="button" id="batch" (change)="batchOnChange()">
+      <select class="button" id="batch" (change)="batchOnChange()" (click)="batchOnChange()">
         <ng-container class="container" *ngIf="latestBatch !== null && batchesBasedOnYearList.length === 0">
           <option [value]="latestBatch.batchId">{{ latestBatch.trainer.name }} - {{ latestBatch.startDate }}</option>
         </ng-container>
@@ -24,7 +24,7 @@
     
       <span class="paddingRight"></span>
   
-      <select class="button" id="week" (change)="weekOnChange()">
+      <select class="button" id="week" (change)="weekOnChange()" (click)="weekOnChange()">
         <ng-container class="container" *ngFor="let week of batchWeeksList; let i = index;">
           <option [value]="i">{{ week }}</option>
         </ng-container>
@@ -32,7 +32,7 @@
     
       <span class="paddingRight"></span>
   
-      <select class="button" id="trainee" (change)="traineeOnChange()">
+      <select class="button" id="trainee" (change)="traineeOnChange()" (change)="traineeOnChange()">
         <option [value]="0">Trainee (All)</option>
         <ng-container class="container" *ngFor="let trainee of traineesList">
           <option [value]="trainee.traineeId">{{ trainee.name }}</option>

@@ -60,7 +60,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
           this.createBatchWeeks();
           this.createTrainees();
           this.pushToGranularityService();
-          console.log(this.granularityService.currentBatch$);
         }
       });
 
@@ -151,19 +150,23 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       this.getBatchesByYear();
       this.createBatchWeeks();
       this.createTrainees();
+      this.pushToGranularityService();
     }
 
     weekOnChange() {
       // week on change logic
+      this.pushToGranularityService();
     }
 
     batchOnChange() {
       this.createBatchWeeks();
       this.createTrainees();
+      this.pushToGranularityService();
     }
 
     traineeOnChange() {
       // trainee on change logic
+      this.pushToGranularityService();
     }
     /********************************
      * END On Change Events
@@ -210,7 +213,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
      * Pushes all current selected information to granularity service.
      */
     pushToGranularityService() {
-      this.granularityService.pushBatch(this.getBatchById(Number(this.batchSelect)));
+      this.granularityService.pushBatch(this.getBatchById(Number(this.batchSelect.value)));
       this.granularityService.pushTrainee(this.getTraineeById(Number(this.traineeSelect.value)));
       this.granularityService.pushWeek(this.getWeek());
     }
@@ -269,10 +272,30 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     public debug(): void {
       // console.log(this.batchList[0].startDate.toString().substr(0, 4));
       // console.log(this.yearSelect.value);
-      console.log(this.yearSelect.value);
-      console.log(this.batchSelect.value);
-      console.log(this.weekSelect.value);
-      console.log(this.traineeSelect.value);
+      // console.log(this.yearSelect.value);
+      // console.log(this.batchSelect.value);
+      // console.log(this.weekSelect.value);
+      // console.log(this.traineeSelect.value);
+
+      /*
+      this.granularityService.currentBatch$.subscribe(response => {
+        if (response) {
+          console.log(response);
+        }
+      });
+
+      this.granularityService.currentTrainee$.subscribe(response => {
+        if (response) {
+          console.log(response);
+        }
+      });
+
+      this.granularityService.currentWeek$.subscribe(response => {
+        if (response) {
+          console.log(response);
+        }
+      });
+      */
     }
 
     /*
