@@ -221,7 +221,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         trainee.traineeId = 0;
         console.log(this.latestBatch);
         this.granularityService.pushBatch(this.latestBatch);
-        this.granularityService.pushTrainee(trainee);
+        this.granularityService.pushTrainee(this.traineeSelect.value);
         this.granularityService.pushWeek(this.getWeek());
       } else { // else add current selections
         this.granularityService.pushBatch(this.getBatchById(Number(this.batchSelect.value)));

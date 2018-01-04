@@ -185,7 +185,8 @@ export class GranularityService {
    * @param trainee - Trainee to push to the subject.
    */
   pushTrainee(trainee: Trainee) {
-    console.log('next trainee');
+    console.log('next trainee: ');
+    console.log(trainee);
     this.currentTrainee.next(trainee);
   }
 
@@ -205,7 +206,7 @@ export class GranularityService {
    * @param week - Week number to push to the subject.
    */
   pushWeek(week: number) {
-    console.log('next week');
+    console.log('next week: ' + week);
     this.currentWeek.next(week);
   }
 
