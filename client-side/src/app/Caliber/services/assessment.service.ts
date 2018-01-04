@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // rxjs
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 // services
 import { AbstractApiService } from './abstract-api.service';
@@ -62,14 +63,56 @@ export class AssessmentService extends AbstractApiService<Assessment> {
  * creates an assessment and pushes the created assessement on
  * the savedSubject
  *
+ * NOTE: the createAssessment on the AssessmentController does NOT
+ * return the created assessment object with the generated ID so
+ * this is going to fake it
+ *
  * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
  *
  * @param assessment: Assessment
  */
   public save(assessment: Assessment): void {
-    const url = 'trainer/assessment/create';
+    const url = this.envService.buildUrl('trainer/assessment/create');
+    const body = JSON.stringify(assessment);
+    let subscription: Subscription;
 
-    super.doPost(assessment, url);
+    this.http.post<void>(url, body, { responseType: 'text'} ).subscribe( () => {}, (error) => {
+      this.fetchByBatchIdByWeek(assessment.batch.batchId, assessment.week);
+
+      this.listSubject.subscribe( (list) => {
+        //subscription.unsubscribe();
+
+        const matches = list.filter( (value) => {
+          switch (true) {
+            case ( value.title !== assessment.title ) :
+            case ( value.rawScore !== assessment.rawScore ) :
+            case ( value.type !== assessment.type ) :
+            case ( value.category !== assessment.category ) :
+              return false;
+            default:
+              return true;
+          }
+        });
+
+        /*
+        * reverse sort with the highest id value on top
+        */
+        matches.sort( (a, b) => {
+          switch (true) {
+            case ( a.assessmentId > b.assessmentId ):
+              return -1;
+            case ( a.assessmentId < b.assessmentId ):
+              return 1;
+            default:
+              return 0;
+          }
+        });
+
+        console.log(matches);
+
+        this.savedSubject.next(matches[0]);
+      });
+    });
   }
 
   /**

@@ -19,6 +19,8 @@ export abstract class AbstractApiService<T> {
   protected updatedSubject: Subject<T>;
   protected deletedSubject: Subject<T>;
 
+  private messages: {};
+
   constructor(envService: EnvironmentService, httpClient: HttpClient) {
     this.envService = envService;
     this.http = httpClient;
@@ -27,6 +29,15 @@ export abstract class AbstractApiService<T> {
     this.savedSubject = new Subject();
     this.updatedSubject = new Subject();
     this.deletedSubject = new Subject();
+  }
+
+  /**
+   * sets the current error message
+   *
+   * @param message
+   */
+  public setMessages(messages: {}): void {
+    Object.assign(this.messages, messages);
   }
 
  /**
@@ -145,7 +156,9 @@ export abstract class AbstractApiService<T> {
 
     this.http.post<T>(url, body).subscribe((data) => {
       this.savedSubject.next(data);
-    });
+      if ( this.messages.hasOwnProperty('success') {
+        this.alertService.succes(this.messages.success);
+      });
   }
 
   /**

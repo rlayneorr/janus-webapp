@@ -32,7 +32,7 @@ export class TrainingTypeService extends AbstractApiService<string> {
   */
 
   /**
-  * retrievs all skills and pushes them on the listSubject
+  * retrieves all skills and pushes them on the listSubject
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */
