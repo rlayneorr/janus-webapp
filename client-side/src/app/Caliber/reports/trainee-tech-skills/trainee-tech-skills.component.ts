@@ -97,7 +97,7 @@ export class TraineeTechSkillsComponent implements OnInit {
     this.batchSubscription = this.granularityService.currentBatch$.subscribe(
       (result) => {
         // Make sure batchId is not undefined
-        if (this.batchId) {
+        if (result) {
           if (result.batchId !== this.batchId) {
             this.batchId = result.batchId;
             this.dataSetLabels.push(result.trainingName);

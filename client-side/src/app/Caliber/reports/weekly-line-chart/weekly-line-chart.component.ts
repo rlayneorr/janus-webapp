@@ -45,8 +45,7 @@ export class WeeklyLineChartComponent implements OnInit {
       if (!result) {
         // console.log('data not received');
         this.chartData = null;
-        this.getBatchId();
-        this.reportsService.fetchBatchOverallBarChart(this.batchId);
+        this.reportsService.fetchBatchOverallBarChart(this.getBatchId());
       } else {
         // console.log('data received');
 
@@ -56,14 +55,17 @@ export class WeeklyLineChartComponent implements OnInit {
         }
 
         // First sort array by highest scores, then create chart with sorted array
-
         const sortedBatchArray = this.sortByHighestScore(result.data);
         const newbatch = {};
+
+        // for (let i = 0; i < sortedBatchArray.length; i++) {
+        //   newbatch[sortedBatchArray[i][0]] = sortedBatchArray[i][1];
+        // }
+        // console.log(newbatch);
 
         for (let i = 0; i < sortedBatchArray.length; i++) {
           newbatch[sortedBatchArray[i][0]] = sortedBatchArray[i][1];
         }
-
         this.createChartData(newbatch);
       }
     });
@@ -111,6 +113,10 @@ export class WeeklyLineChartComponent implements OnInit {
       }
     });
     return this.batchId;
+  }
+
+  getBatch() {
+
   }
 
   /**

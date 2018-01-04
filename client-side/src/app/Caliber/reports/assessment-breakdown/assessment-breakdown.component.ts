@@ -93,7 +93,7 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
       this.weekSub = this.granularityService.currentWeek$.subscribe(
           data => {
             // Make sure traineeId is not undefined
-            if (this.week) {
+            if (data) {
               this.week = data; this.tryFetch();
             }
           });
@@ -101,7 +101,7 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
       this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
           data => {
             // Make sure traineeId is not undefined
-            if (this.traineeId) {
+            if (data) {
               this.traineeId = data.traineeId; this.tryFetch();
             }
           });
