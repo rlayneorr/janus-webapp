@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+/**
+ * This toolbar is responsible for updating the charts information.
+ *
+ * @author Edel Benavides
+ * @author Brandon
+ */
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { BatchService } from '../../../Caliber/services/batch.service';
 import { Batch } from '../../entities/Batch';
@@ -7,6 +13,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { forEach } from '@angular/router/src/utils/collection';
+import { GranularityService } from '../services/granularity.service';
+import { Trainee } from '../../entities/Trainee';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,25 +24,28 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class ToolbarComponent implements OnInit, OnDestroy {
 
   // http://localhost:8080/vp/batch/all
-  @ViewChild('startDate') year;
+  // Toolbar selections
+  yearSelect: any;
+  batchSelect: any;
+  weekSelect: any;
+  traineeSelect: any;
+  latestBatch: Batch = null;
 
-  private batchService: BatchService;
-  private trainerService: TrainerService;
-
+  // Arrays
   batchList: Array<Batch>;
+  batchesBasedOnYearList: Array<Batch> = [];
   trainerList: Array<Trainer>;
   yearList;
-  batchSelect: Object = {};
-  weekSelect: Object = {};
-  yearSelect: Object = {};
-  traineeSelect: Object = {};
+  batchWeeksList: Array<String>;
+  traineesList: Array<Trainee>;
+
+  // Subscriptions
   private batchSubscription: Subscription;
   private trainerSubscription: Subscription;
 
-  constructor(batchService: BatchService, trainerService: TrainerService) {
-    this.batchService = batchService;
-    this.trainerService = trainerService;
-
+  constructor(private batchService: BatchService,
+              private trainerService: TrainerService,
+              private granularityService: GranularityService) {
     this.batchSubscription = new Subscription();
     this.trainerSubscription = new Subscription();
   }
@@ -44,27 +55,25 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.batchSubscription = this.batchService.getList().subscribe((batches) => {
         if (batches.length > 0) {
           this.batchList = batches;
+          this.latestBatch = this.batchList[0];
           this.createYearList();
-          this.year = this.year.nativeElement;
-          this.filterByBatch(2201);
+          this.createBatchWeeks();
+          this.createTrainees();
+          this.pushToGranularityService();
+          console.log(this.granularityService.currentBatch$);
         }
       });
+
+      // Initialize current selections
+      this.yearSelect = document.getElementById('startDate');
+      this.batchSelect = document.getElementById('batch');
+      this.weekSelect = document.getElementById('week');
+      this.traineeSelect = document.getElementById('trainee');
     }
 
-    filterByBatch(batchNum) {
-
-    }
-
-    loadYears(year): boolean {
-      if (year === new Date().getFullYear()) {
-        return true;
-      }
-    }
-
-    yearOnChange() {
-      console.log(this.year.value);
-    }
-
+    /************************************
+     * Generate dropdown information
+     ************************************/
     /**
      * Creates an array of all the batch years without duplicates.
      */
@@ -73,8 +82,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       this.yearList = new Set();
 
       // Add current year and next year
-      this.yearList.add(new Date().getFullYear());
-      this.yearList.add(new Date().getFullYear() + 1);
+      this.yearList.add(new Date().getFullYear().toString());
+      this.yearList.add((new Date().getFullYear() + 1).toString());
 
       // Add all batch years to Set. It will not allow duplicates
       for (const date of this.batchList) {
@@ -90,11 +99,183 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       });
     }
 
-    public debug(): void {
-      // console.log(this.batchList[0].startDate.toString().substr(0, 4));
-      console.log(this.year.value);
+    /**
+     * Returns an array of all weeks from current batch.
+     */
+    createBatchWeeks() {
+      const weeksArray = ['Week (All)'];
+      if (this.batchesBasedOnYearList.length === 0 && this.latestBatch) {
+        // Avoid empty fields
+        for (let i = 1; i <= this.getBatchById(this.latestBatch.batchId).weeks; i++) {
+          weeksArray.push(`Week ${i}`);
+        }
+      } else {
+        // Make sure batch selection if not empty
+        if (this.batchSelect) {
+          for (let i = 1; i <= this.getBatchById(Number(this.batchSelect.value)).weeks; i++) {
+            weeksArray.push(`Week ${i}`);
+          }
+        }
+      }
+
+      this.batchWeeksList = weeksArray;
+      return this.batchWeeksList;
     }
 
+    /**
+     * Returns an array of current trainees based on current batch selection.
+     */
+    createTrainees() {
+      let traineesArray = [];
+      // Avoid empty fields
+      if (this.batchesBasedOnYearList.length === 0 && this.latestBatch) {
+        traineesArray = this.getBatchById(this.latestBatch.batchId).trainees;
+      } else {
+        if (this.batchSelect) {
+          traineesArray = this.getBatchById(Number(this.batchSelect.value)).trainees;
+        }
+      }
+
+      this.traineesList = traineesArray;
+      this.sortTraineesByName();
+    }
+    /************************************
+     * END Generate dropdown information
+     ************************************/
+
+
+    /********************************
+     * On Change Events
+     ********************************/
+    yearOnChange() {
+      this.getBatchesByYear();
+      this.createBatchWeeks();
+      this.createTrainees();
+    }
+
+    weekOnChange() {
+      // week on change logic
+    }
+
+    batchOnChange() {
+      this.createBatchWeeks();
+      this.createTrainees();
+    }
+
+    traineeOnChange() {
+      // trainee on change logic
+    }
+    /********************************
+     * END On Change Events
+     ********************************/
+
+
+     /********************************
+     * Other functions
+     ********************************/
+    /**
+     * Returns Batch object from batch ID.
+     * @param batchId
+     */
+    getBatchById(batchId: number): Batch {
+      for (const batch of this.batchList) {
+        if (batchId === batch.batchId) {
+          return batch;
+        }
+      }
+    }
+
+    /**
+     * Returns Trainee object based on trainee ID.
+     * @param id
+     */
+    getTraineeById(id: number): Trainee {
+      for (const batch of this.batchList) {
+        for (const trainee of batch.trainees) {
+          if (trainee.traineeId === id) {
+            return trainee;
+          }
+        }
+      }
+    }
+
+    /**
+     * Returns current week selected as a number.
+     */
+    getWeek(): number {
+      return Number(this.weekSelect.value);
+    }
+
+    /**
+     * Pushes all current selected information to granularity service.
+     */
+    pushToGranularityService() {
+      this.granularityService.pushBatch(this.getBatchById(Number(this.batchSelect)));
+      this.granularityService.pushTrainee(this.getTraineeById(Number(this.traineeSelect.value)));
+      this.granularityService.pushWeek(this.getWeek());
+    }
+
+    /**
+     * Sorts the trainees list in ascending oreder.
+     */
+    sortTraineesByName() {
+      this.traineesList.sort(function(a, b) {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+
+    /**
+     * Return true to show last active year.
+     * @param year
+     */
+    loadYears(year): boolean {
+      if (year === this.yearList[2]) {
+        return true;
+      }
+    }
+
+    /**
+     * Returns an array of all batches of selected year.
+     * It is sorted in descending order.
+     * @param year
+     */
+    getBatchesByYear(): Array<Batch> {
+      const batches: Array<Batch> = [];
+      if (this.batchList) { // make sure batchList is not empty
+        for (const batch of this.batchList) {
+          if (this.yearSelect) { // make sure yearSelect is not empty
+            if (batch.startDate.toString().substring(0, 4) === this.yearSelect.value) {
+              batches.push(batch);
+            }
+          }
+        }
+      }
+
+      this.batchesBasedOnYearList = batches;
+      return this.batchesBasedOnYearList;
+    }
+    /********************************
+     * END other functions
+     ********************************/
+
+    public debug(): void {
+      // console.log(this.batchList[0].startDate.toString().substr(0, 4));
+      // console.log(this.yearSelect.value);
+      console.log(this.yearSelect.value);
+      console.log(this.batchSelect.value);
+      console.log(this.weekSelect.value);
+      console.log(this.traineeSelect.value);
+    }
+
+    /*
     public cleanBatchList(): void {
       for (let i = 0; i < this.batchList.length; i++) {
         if (this.batchList[i].startDate.toString().substr(0, 4) === this.batchList[i + 1].startDate.toString().substr(0, 4)) {
@@ -102,6 +283,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         }
       }
     }
+    */
 
     ngOnDestroy() {
       this.batchSubscription.unsubscribe();
