@@ -8,13 +8,16 @@ export class VpHomeBarGraphService {
 
   constructor(private cs: ColorService) { }
 
+  /**
+   * Factory for creating ChartDataEntity
+   * used for the stacked barchart on Vp Home
+   *
+   * @returns ChartDataEntity
+   */
+
   public getBarChartData(): ChartDataEntity {
     const barChartData = new ChartDataEntity();
     barChartData.options = {
-      legendCallback: function(chart) {
-        console.log('legendCallback');
-        console.log(chart);
-    },
       legend: {
         display: true,
         labels: {
@@ -46,6 +49,16 @@ export class VpHomeBarGraphService {
     barChartData.type = 'bar';
     return barChartData;
   }
+
+      /**
+     * Populates and returns a ChartDataEntity.
+     * @param results: any
+     * @param barChartData: ChartDataEntity
+     * @param state: string
+     * @param city: string
+     * @return ChartDataEntity
+     */
+
   public fillChartData(results: any, barChartData: ChartDataEntity, state: string, city: string): ChartDataEntity {
     let holder;
     barChartData = this.clearBarChartData(barChartData);
@@ -54,11 +67,10 @@ export class VpHomeBarGraphService {
       if (city !== '') {
         holder = holder.filter(i => i.address.city === city);
       }
+    } else {
+      holder = results;
     }
-    let chartnum = 1;
-    for (const result of results) {
-      console.log('result');
-      console.log(result);
+    for (const result of holder) {
       barChartData.labels.push(result.label);
       // barChartData.id.push(result.id);
       let i;
@@ -83,20 +95,25 @@ export class VpHomeBarGraphService {
           dataset.data.push(result.qcStatus[key]);
           dataset.label = key;
           dataset.id = result.id;
-          //dataset.stack = '' + chartnum;
           barChartData.data[i] = dataset;
         } else {
           barChartData.data[i].data.push(result.qcStatus[key]);
         }
       }
-      chartnum++;
     }
 
     return barChartData;
   }
 
+
+  /**
+   * Clears the arrays of a ChartDataEntity
+   * @param ChartDataEntity
+   * @returns ChartDataEntity
+   */
+
   private clearBarChartData(barChartData: ChartDataEntity): ChartDataEntity {
-    barChartData.colors.length = 0;
+    barChartData.colors = [];
     barChartData.data.length = 0;
     barChartData.labels.length = 0;
     return barChartData;
