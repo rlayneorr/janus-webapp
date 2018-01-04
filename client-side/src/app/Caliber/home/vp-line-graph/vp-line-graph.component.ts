@@ -43,8 +43,12 @@ export class VpLineGraphComponent implements OnInit {
         this.hasData = true;
       });
   }
-  // called when a state is selected to get cities for the cities drop down
-  // as well as re-populate the chartData
+
+  /**
+  * called when a state is selected to get cities for the cities drop down
+  * as well as re-populate the chartData
+  */
+
   findCities(state) {
     this.hasData = false;
     this.selectedLineCity = '';
@@ -57,7 +61,11 @@ export class VpLineGraphComponent implements OnInit {
     this.lineChartData = this.vpHomeLineGraphService.fillChartData(this.results, this.lineChartData, this.selectedLineState, '');
     this.hasData = true;
   }
-  // after a city is selected, update the graph to reflect the selected city
+
+  /**
+  *  after a city is selected, update the graph to reflect the selected city
+  */
+
   hasCity(city) {
     if (this.cities.size > 1) {
       this.lineChartData = this.vpHomeLineGraphService
