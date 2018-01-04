@@ -117,8 +117,9 @@ add or edit a trainer-->
       </button>
     </div>
 
+    <div class="modal-body">
     <form #addTrainerForm="ngForm" [formGroup]="addForm">
-      <div class="modal-body">
+      
         <div class="form-group">
           <div class="row">
             <div class="col-md-6">
@@ -129,7 +130,7 @@ add or edit a trainer-->
               </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-md-6">
               <!-- Field for Trainer email -->
               <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
               <div class="col-sm-12">
@@ -162,12 +163,12 @@ add or edit a trainer-->
             </div>
           </div>
         </div>
+      </form>
       </div>
       <div class="modal-footer">
         <button type="button" data-dismiss="modal" [disabled]="!addForm.valid" (click)="addTrainer(addTrainerForm.value); c()" class="btn btn-add">Save</button>
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
       </div>
-    </form>
 
   </ng-template>
 </div>
