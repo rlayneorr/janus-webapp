@@ -70,7 +70,6 @@ export class VpHomeBarGraphService {
     } else {
       holder = results;
     }
-    let chartnum = 1;
     for (const result of holder) {
       barChartData.labels.push(result.label);
       // barChartData.id.push(result.id);
@@ -96,13 +95,11 @@ export class VpHomeBarGraphService {
           dataset.data.push(result.qcStatus[key]);
           dataset.label = key;
           dataset.id = result.id;
-          //dataset.stack = '' + chartnum;
           barChartData.data[i] = dataset;
         } else {
           barChartData.data[i].data.push(result.qcStatus[key]);
         }
       }
-      chartnum++;
     }
 
     return barChartData;
