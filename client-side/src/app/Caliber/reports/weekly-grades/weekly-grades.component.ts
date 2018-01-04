@@ -76,11 +76,7 @@ export class WeeklyGradesComponent implements OnInit, OnDestroy {
 
     this.noteSub = this.noteService.getList().subscribe((list) => {
       this.traineeNotes = list.filter(note => note.type === 'TRAINEE');
-      this.batchNote = list.reduce((prev, curr) => {
-        if (curr.type === 'BATCH') {
-          return curr;
-        }
-      });
+      this.batchNote = this.findNote(list, 'QC_BATCH');
     });
   }
 
@@ -150,5 +146,14 @@ export class WeeklyGradesComponent implements OnInit, OnDestroy {
     this.granularitySub.unsubscribe();
     this.noteSub.unsubscribe();
     this.reportSub.unsubscribe();
+  }
+
+  findNote(arr: Array<Note>, type: String): Note {
+    for (const note of arr) {
+      if (note.type === type) {
+        return note;
+      }
+    }
+    return new Note();
   }
 }
