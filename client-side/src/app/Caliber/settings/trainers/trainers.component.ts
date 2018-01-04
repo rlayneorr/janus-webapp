@@ -70,15 +70,14 @@ export class TrainersComponent implements OnInit, OnDestroy {
     // this.trainers.push(this.newTrainer);
   }
 
-
   open(content) {
     this.modalService.open(content);
   }
 
   /**
    * backup original fields, and open modal for editing
-   * @param content: modal form 
-   * @param modalTrainer: trainer belong to this modal 
+   * @param content: modal form
+   * @param modalTrainer: trainer belong to this modal
    */
   editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
@@ -114,7 +113,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
     }
   }
 
-
   newTierChange(newTier) {
     this.model.tier = newTier;
   }
@@ -143,7 +141,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
       this.trainerService.fetchAll();
     });
   }
-
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
