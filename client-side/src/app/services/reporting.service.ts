@@ -29,6 +29,8 @@ export class ReportingService {
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
+  private qcStatusDoughnut = new BehaviorSubject<CacheData>(null);
+  public qcStatusDoughnut$ = this.batchOverallRadar.asObservable();
   // Bar chart used for the Cumulative Scores Graph
   private batchOverallBar = new BehaviorSubject<CacheData>(null);
   public batchOverallBar$ = this.batchOverallBar.asObservable();
@@ -64,6 +66,7 @@ export class ReportingService {
     // Clear all data stored in subjects
     this.traineeOverallRadar.next(null);
     this.batchOverallRadar.next(null);
+    this.qcStatusDoughnut.next(null);
     this.batchOverallBar.next(null);
     this.technologiesUpToWeek.next(null);
   }
@@ -85,9 +88,9 @@ export class ReportingService {
 
   /**
    * Fetch the batch comparison average script
-   * @param skill - Skill to compare
-   * @param training - Training
-   * @param date - Date
+   * @param skill Skill to compare
+   * @param training Training
+   * @param date Date
    * @returns Number - batch average for comparison
    */
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
@@ -97,6 +100,26 @@ export class ReportingService {
 
 
   /* Doughnut / Pie charts */
+
+  /**
+     * Fetches doughnut chart of all QC statuses for this batch
+     * @param batchId the id of the batch being fetched
+     * Data can be subscribed to @ qcStatusDoughnut$
+     */
+  fetchQcStatusDoughnutChart(batchId: Number) {
+    const endpoint = environment.apiPieChartCurrentWeekQCStatus(batchId);
+
+    // Params object for refresh check
+    const params = {
+      batchId: batchId
+    };
+
+    // call backend API if data is not fresh
+    if (this.needsRefresh(this.qcStatusDoughnut, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.qcStatusDoughnut.next({ params: params, data: success }));
+    }
+  }
 
   /**
    *
@@ -113,7 +136,6 @@ export class ReportingService {
 
   fetchPieChartCurrentWeekQCStatus(batchId: Number) {
     const endpoint = environment.apiPieChartCurrentWeekQCStatus(batchId);
-
     // TODO: Implement API call and subject push logic
 
   }
@@ -137,7 +159,7 @@ export class ReportingService {
 
   fetchBatchWeekSortedBarChart(batchId: Number, week: Number) {
     const endpoint = environment.apiBatchWeekSortedBarChart(batchId, week);
-
+    
     const params = {
       batchId: batchId,
       week: week
@@ -147,8 +169,6 @@ export class ReportingService {
       this.httpClient.get(endpoint).subscribe(
         success => this.BatchWeekSortedBarChart.next({ params: params, data: success }));
     }
-
-
   }
 
   fetchBatchOverallTraineeBarChart(batchId: Number, traineeId: Number) {
