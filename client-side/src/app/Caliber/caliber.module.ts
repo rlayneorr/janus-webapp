@@ -24,6 +24,8 @@ import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
 import { CategoryService } from './services/category.service';
+import { SkillService } from './services/skill.service';
+import { TrainingTypeService } from './services/training-type.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -42,7 +44,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
-import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
+import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { PanelComponent } from './panel/panel.component';
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
@@ -68,7 +70,8 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
-import { CategorySkillPipe } from './pipes/category-skill.pipe';
+import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
+
 
 
 
@@ -110,7 +113,7 @@ import { CategorySkillPipe } from './pipes/category-skill.pipe';
     GraphComponent,
     TableComponent,
     TestComponent,
-    TrainerProfileComponent,
+    TrainerProfilesComponent,
     PanelComponent,
 
     // pipes
@@ -118,7 +121,7 @@ import { CategorySkillPipe } from './pipes/category-skill.pipe';
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
     GradeByTraineeByAssessmentPipe,
-    CategorySkillPipe,
+    BatchByTrainerPipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -140,6 +143,8 @@ import { CategorySkillPipe } from './pipes/category-skill.pipe';
     LocationService,
     CategoryService,
     CategoriesService,
+    SkillService,
+    TrainingTypeService,
   ],
   bootstrap: [
     TrainersComponent

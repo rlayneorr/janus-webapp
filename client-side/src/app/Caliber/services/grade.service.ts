@@ -79,6 +79,10 @@ export class GradeService extends AbstractApiService<Grade> {
   }
 
   /**
+   * @overload
+   *
+   * @see save()
+   *
    * transmits a new Grade to be created and pushes the
    * created Grade on the savedSubject
    *
@@ -87,6 +91,19 @@ export class GradeService extends AbstractApiService<Grade> {
    * @param grade: Grade
    */
   public create(grade: Grade): void {
+    this.save(grade);
+  }
+
+
+  /**
+   * transmits a new Grade to be created and pushes the
+   * created Grade on the savedSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
+   *
+   * @param grade: Grade
+   */
+  public save(grade: Grade): void {
     const url = 'trainer/grade/create';
 
     super.doPost(grade, url);
