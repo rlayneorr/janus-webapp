@@ -13,6 +13,7 @@ import { PDFService } from '../../services/pdf.service';
  * This component display the weekly line chart. It also has a download
  * button that allows to save the graph as a PDF.
  * @author Edel Benavides
+ * @author Robert Choboy
  */
 
 @Component({
@@ -32,8 +33,8 @@ export class WeeklyLineChartComponent implements OnInit {
   public data;
 
   public barChartData: any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
   constructor(private reportingService: ReportingService, private pdfService: PDFService, private http: Http) { }

@@ -28,12 +28,16 @@ export class ReportingService {
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
+  private qcStatusDoughnut = new BehaviorSubject<CacheData>(null);
+  public qcStatusDoughnut$ = this.batchOverallRadar.asObservable();
+
   constructor(private httpClient: HttpClient) { }
 
   refresh() {
     // Clear all data stored in subjects
     this.traineeOverallRadar.next(null);
     this.batchOverallRadar.next(null);
+    this.qcStatusDoughnut.next(null);
   }
 
   private needsRefresh(sub: BehaviorSubject<CacheData>, params: any): boolean {
@@ -48,9 +52,9 @@ export class ReportingService {
 
   /**
    * Fetch the batch comparison average script
-   * @param skill - Skill to compare
-   * @param training - Training
-   * @param date - Date
+   * @param skill Skill to compare
+   * @param training Training
+   * @param date Date
    * @returns Number - batch average for comparison
    */
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
@@ -60,6 +64,26 @@ export class ReportingService {
 
 
   /* Doughnut / Pie charts */
+
+  /**
+     * Fetches doughnut chart of all QC statuses for this batch
+     * @param batchId the id of the batch being fetched
+     * Data can be subscribed to @ qcStatusDoughnut$
+     */
+  fetchQcStatusDoughnutChart(batchId: Number) {
+    const endpoint = environment.apiPieChartCurrentWeekQCStatus(batchId);
+
+    // Params object for refresh check
+    const params = {
+      batchId: batchId
+    };
+
+    // call backend API if data is not fresh
+    if (this.needsRefresh(this.qcStatusDoughnut, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.qcStatusDoughnut.next({ params: params, data: success }));
+    }
+  }
 
   /**
    *
@@ -76,7 +100,6 @@ export class ReportingService {
 
   fetchPieChartCurrentWeekQCStatus(batchId: Number) {
     const endpoint = environment.apiPieChartCurrentWeekQCStatus(batchId);
-
     // TODO: Implement API call and subject push logic
 
   }
@@ -102,7 +125,6 @@ export class ReportingService {
     const endpoint = environment.apiBatchWeekSortedBarChart(batchId, week);
 
     // TODO: Implement API call and subject push logic
-
   }
 
   fetchBatchOverallTraineeBarChart(batchId: Number, traineeId: Number) {
@@ -188,7 +210,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.traineeOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.traineeOverallRadar.next({params: params, data: success}));
+        success => this.traineeOverallRadar.next({ params: params, data: success }));
     }
   }
 
@@ -209,7 +231,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.batchOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallRadar.next({params: params, data: success}));
+        success => this.batchOverallRadar.next({ params: params, data: success }));
     }
   }
 
