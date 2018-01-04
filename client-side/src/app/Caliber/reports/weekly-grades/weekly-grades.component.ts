@@ -76,7 +76,7 @@ export class WeeklyGradesComponent implements OnInit, OnDestroy {
 
     this.noteSub = this.noteService.getList().subscribe((list) => {
       this.traineeNotes = list.filter(note => note.type === 'TRAINEE');
-      this.batchNote = this.findNote(list, 'QC_BATCH');
+      this.batchNote = this.findNote(list, 'BATCH');
     });
   }
 
