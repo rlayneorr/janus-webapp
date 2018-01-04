@@ -17,7 +17,7 @@ export class VpHomeLineGraphService {
    * @returns ChartDataEntity
    */
 
-  public getLineChartData() {
+  public getLineChartData(): ChartDataEntity {
     const lineChartData = new ChartDataEntity();
     lineChartData.colors = [lineChartData.mainColor, lineChartData.secondaryColor];
     lineChartData.options = {
@@ -73,7 +73,7 @@ export class VpHomeLineGraphService {
   * @return ChartDataEntity
   */
 
-  public fillChartData(results: any, lineChartData: ChartDataEntity, state: string, city: string) {
+  public fillChartData(results: any, lineChartData: ChartDataEntity, state: string, city: string): ChartDataEntity {
     let holder;
     lineChartData = this.clearLineChartData(lineChartData);
     if (state !== '') {
@@ -119,7 +119,7 @@ export class VpHomeLineGraphService {
  * @returns ChartDataEntity
  */
 
-  private clearLineChartData(lineChartData: ChartDataEntity) {
+  private clearLineChartData(lineChartData: ChartDataEntity): ChartDataEntity {
     lineChartData.data.length = 0;
     lineChartData.labels.length = 0;
     lineChartData.colors = [];
