@@ -156,9 +156,6 @@ import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative
   ],
   bootstrap: [
     TrainersComponent
-  ],
-  exports: [
-    TraineeTechSkillsComponent,
   ]
 })
 export class CaliberModule { }
