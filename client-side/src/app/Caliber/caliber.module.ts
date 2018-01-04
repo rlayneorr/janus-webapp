@@ -75,6 +75,8 @@ import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.
 import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/assessment-breakdown.component';
 import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedback.component';
 import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.component';
+import { WeeklyAuditComponent } from './reports/weekly-audit/weekly-audit.component';
+import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative-scores.component';
 
 @NgModule({
   imports: [
@@ -128,6 +130,8 @@ import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.com
     AssessmentBreakdownComponent,
     WeeklyFeedbackComponent,
     WeeklyGradesComponent,
+    WeeklyAuditComponent,
+    CumulativeScoreComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
