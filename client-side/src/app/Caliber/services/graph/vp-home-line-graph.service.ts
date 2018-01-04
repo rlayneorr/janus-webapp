@@ -10,6 +10,13 @@ export class VpHomeLineGraphService {
     this.cs.setVPHomeLineColors([this.lineChartData.mainColor, this.lineChartData.secondaryColor]);
   }
 
+  /**
+   * Factory for creating ChartDataEntity
+   * used for the line chart on Vp Home
+   *
+   * @returns ChartDataEntity
+   */
+
   public getLineChartData() {
     const lineChartData = new ChartDataEntity();
     lineChartData.colors = [lineChartData.mainColor, lineChartData.secondaryColor];
@@ -54,6 +61,15 @@ export class VpHomeLineGraphService {
 
   }
 
+  /**
+  * Populates and returns a ChartDataEntity.
+  * @param results: any
+  * @param barChartData: ChartDataEntity
+  * @param state: string
+  * @param city: string
+  * @return ChartDataEntity
+  */
+
   public fillChartData(results: any, lineChartData: ChartDataEntity, state: string, city: string) {
     let holder;
     lineChartData = this.clearLineChartData(lineChartData);
@@ -95,10 +111,16 @@ export class VpHomeLineGraphService {
     return lineChartData;
   }
 
+  /**
+ * Clears the arrays of a ChartDataEntity
+ * @param ChartDataEntity
+ * @returns ChartDataEntity
+ */
+
   private clearLineChartData(lineChartData: ChartDataEntity) {
     lineChartData.data.length = 0;
     lineChartData.labels.length = 0;
-    lineChartData.colors.length = 0;
+    lineChartData.colors = [];
     return lineChartData;
   }
 }
