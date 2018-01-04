@@ -92,11 +92,11 @@ export class VpHomePanelGraphService {
   /**
    * converts string to date
    * @param year: number
-   * @param day: string
+   * @param day: any
    * @return Date
    */
 
-  private dateFromDay(year: number, day: string): Date {
+  private dateFromDay(year: number, day: any): Date {
     const date = new Date(year, 0);
     return new Date(date.setDate(day));
   }

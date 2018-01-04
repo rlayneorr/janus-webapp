@@ -41,7 +41,7 @@ export class VpBarGraphComponent implements OnInit {
   public QCSub: Subscription;
   public batchSub: Subscription;
 
-  @Input()
+
   public allbatches: any;
   public hasBatchStatuses = false;
 
