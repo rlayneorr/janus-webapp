@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PanelReview } from '../../entities/PanelReview';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
+import { GranularityService } from '../services/granularity.service';
 
 
 /**
@@ -17,11 +18,14 @@ import { ReportingService } from '../../../services/reporting.service';
 })
 export class PanelBatchAllTraineesComponent implements OnInit {
 
+  private batchIdSub: Subscription;
+  batchId: number = null;
+
   public data: Array<PanelReview> = null;
   public headings: Array<String> = null;
   private dataSubscription: Subscription;
 
-  constructor(private reportsService: ReportingService) { }
+  constructor(private reportsService: ReportingService, private granularityService: GranularityService) { }
 
   ngOnInit() {
     this.dataSubscription = this.reportsService.panelBatchAllTrainees$
@@ -33,6 +37,11 @@ export class PanelBatchAllTraineesComponent implements OnInit {
         }
       });
 
-    this.reportsService.fetchPanelBatchAllTrainees(2200);
+    this.batchIdSub = this.granularityService.currentBatch$.subscribe((result) => {
+      if (this.batchId !== result.batchId) {
+        this.batchId = result.batchId;
+        this.reportsService.fetchPanelBatchAllTrainees(this.batchId);
+      }
+    });
   }
 }
