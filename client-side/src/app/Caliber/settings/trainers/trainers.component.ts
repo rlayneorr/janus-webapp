@@ -54,19 +54,21 @@ export class TrainersComponent implements OnInit, OnDestroy {
     });
   }
 
-/**
- * adds a new trainer to the database
- * @param modal: modal from create trainer form
- */
+  /**
+   * adds a new trainer to the database
+   * @param modal: modal from create trainer form
+   */
   addTrainer(modal: Trainer) {
     this.newTrainer = modal;
     console.log(modal);
     console.log(modal.name);
     this.trainerService.create(this.newTrainer);
-    this.trainerService.fetchAll();
+    this.trainerService.getSaved().subscribe(
+      succ => this.trainerService.fetchAll(),
+      err => console.log('error')
+    );
     // this.trainers.push(this.newTrainer);
   }
-
 
   open(content) {
     this.modalService.open(content);
@@ -74,8 +76,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   /**
    * backup original fields, and open modal for editing
-   * @param content: modal form 
-   * @param modalTrainer: trainer belong to this modal 
+   * @param content: modal form
+   * @param modalTrainer: trainer belong to this modal
    */
   editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
@@ -90,10 +92,10 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
-/**
- * Tier was changed, update with new value
- * @param newTier: tier string
- */
+  /**
+   * Tier was changed, update with new value
+   * @param newTier: tier string
+   */
   tierChange(newTier) {
     this.newTier = newTier;
   }
@@ -111,7 +113,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
     }
   }
 
-
   newTierChange(newTier) {
     this.model.tier = newTier;
   }
@@ -127,14 +128,19 @@ export class TrainersComponent implements OnInit, OnDestroy {
    */
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
-    this.currEditTrainer.tier = this.newTier;
-    this.currEditTrainer.title = this.newTitle;
-    this.currEditTrainer.name = modal.name;
-    this.currEditTrainer.email = modal.email;
+    let temp = new Trainer();
+    temp.trainerId = this.currEditTrainer.trainerId;
+    temp.tier = this.newTier;
+    temp.title = this.newTitle;
+    temp.name = modal.name;
+    temp.email = modal.email;
     // call trainerService to update
-    this.trainerService.update(this.currEditTrainer);
+    this.trainerService.update(temp);
+    this.trainerService.getSaved().subscribe((resp) => {
+      this.currEditTrainer = temp;
+      this.trainerService.fetchAll();
+    });
   }
-
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
