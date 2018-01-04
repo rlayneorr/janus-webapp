@@ -23,7 +23,6 @@ export class VpPanelGraphComponent implements OnInit {
       .subscribe(
       (resp) => {
         this.panelChartData = this.vpHomePanelGraphService.fillPanelChartData(resp, this.panelChartData);
-        console.log(this.panelChartData);
         this.hasPanelGraphData = true;
       }
 

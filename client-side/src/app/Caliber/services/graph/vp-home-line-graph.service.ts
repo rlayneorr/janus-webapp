@@ -110,7 +110,6 @@ export class VpHomeLineGraphService {
       lineChartData.labels.push('Week ' + i);
     }
     lineChartData.colors = this.cs.getLineColors(lineChartData.data.length);
-    console.log(lineChartData);
     return lineChartData;
   }
 

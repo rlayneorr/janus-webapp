@@ -97,7 +97,6 @@ export class VpBarGraphComponent implements OnInit {
         });
     }
     this.hasBatchStatuses = true;
-    console.log(this.barChartData);
   }
   /** called when a state is selected to get cities for the cities drop down
   * as well as re-populate the chartData
@@ -114,7 +113,6 @@ export class VpBarGraphComponent implements OnInit {
     }
     this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
-    console.log(this.barChartData);
   }
 
   /**

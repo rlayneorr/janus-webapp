@@ -75,9 +75,7 @@ export class VpHomeBarGraphService {
       barChartData.labels.push(result.label);
       // barChartData.id.push(result.id);
       let i;
-      console.log(result.qcStatus);
       for (const key of Object.keys(result.qcStatus)) {
-        console.log(key);
         if (key === 'Poor') {
           i = 0;
           barChartData.colors[i] = this.cs.generateLineColor('rgba(234, 40, 37,');
