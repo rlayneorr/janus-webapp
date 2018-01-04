@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReportingService } from '../../../services/reporting.service';
 import { GradeService } from '../../services/grade.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -8,30 +8,32 @@ import { GranularityService } from '../services/granularity.service';
  * Component will display a bar graph comparing the specific trainees
  * assessment for the specified week or overall if all weeks selected
  * compared to the batch average
+ *
+ * @author Mitch Goshorn
  */
 @Component({
   selector: 'app-assessment-breakdown',
   templateUrl: './assessment-breakdown.component.html',
   styleUrls: ['./assessment-breakdown.component.css']
 })
-export class AssessmentBreakdownComponent implements OnInit {
+export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
   private batchId: Number;
   private week: Number;
-  private TraineeId: Number;
+  private traineeId: Number;
 
   private batchIdSub: Subscription;
   private weekSub: Subscription;
   private traineeIdSub: Subscription;
 
-  private data: Array<any>;
-  private labels: Array<string>;
+  public data: Array<any>;
+  public labels: Array<string>;
   private dataSubscription: Subscription;
 
   private chartType = 'bar';
   private barChartLegend = true;
 
-  constructor(private reportService: ReportingService, private granularityService: GranularityService) { }
+  constructor(private reportsService: ReportingService, private granularityService: GranularityService) { }
 
   public options = {
     scales: {
@@ -44,9 +46,17 @@ export class AssessmentBreakdownComponent implements OnInit {
     }
   };
 
+  public chartColors: Array<any> = [
+    { // Trainee - Complimentary
+      backgroundColor: 'rgb(37,242,227)',
+    },
+    { // Revature Orange
+      backgroundColor: 'rgb(242, 105, 37)',
+    }];
+
   ngOnInit() {
 
-    this.dataSubscription = this.reportService.batchWeekTraineeBarChart$.subscribe(
+    this.dataSubscription = this.reportsService.assessmentBreakdownBarChart$.subscribe(
       (result) => {
         if (result) {
 
@@ -73,21 +83,49 @@ export class AssessmentBreakdownComponent implements OnInit {
       });
 
       this.batchIdSub = this.granularityService.currentBatch$.subscribe(
-          data => { this.batchId = data.batchId; this.tryFetch(); });
+          data => {
+            // Make sure batchId is not undefined
+            if (this.batchId) {
+              this.batchId = data.batchId; this.tryFetch();
+            }
+          });
 
       this.weekSub = this.granularityService.currentWeek$.subscribe(
-          data => { this.week = data; this.tryFetch(); });
+          data => {
+            // Make sure traineeId is not undefined
+            if (this.week) {
+              this.week = data; this.tryFetch();
+            }
+          });
 
       this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
-          data => { this.TraineeId = data.traineeId; this.tryFetch(); });
-
-    // this.reportService.fetchBatchWeekTraineeBarChart(2201, 1, 5532);
+          data => {
+            // Make sure traineeId is not undefined
+            if (this.traineeId) {
+              this.traineeId = data.traineeId; this.tryFetch();
+            }
+          });
   }
 
   tryFetch() {
-    if (this.batchIdSub && this.weekSub && this.traineeIdSub) {
-      this.reportService.fetchBatchWeekTraineeBarChart(this.batchId, this.week, this.TraineeId);
+    // Check that all objects are present
+    if (this.batchId && this.week !== null && this.traineeId) {
+      if (this.week === 0) {
+        // If week is 0, fetch data for all weeks
+        this.reportsService.fetchBatchOverallTraineeBarChart(this.batchId, this.traineeId);
+      } else {
+        // Else fetch data for the specific week
+        this.reportsService.fetchBatchWeekTraineeBarChart(this.batchId, this.week, this.traineeId);
+      }
     }
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from subscriptions
+    this.batchIdSub.unsubscribe();
+    this.weekSub.unsubscribe();
+    this.traineeIdSub.unsubscribe();
+    this.dataSubscription.unsubscribe();
   }
 
 }

@@ -17,8 +17,8 @@ import { GranularityService } from '../services/granularity.service';
 })
 export class WeeklyLineChartComponent implements OnInit {
 
-  @Input()
-  public batchId: number;
+  // @Input()
+  public batchId = 0;
 
   public chartData: any = [];
   public scoresAverage = 0;
