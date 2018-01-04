@@ -12,6 +12,7 @@ import { CategoryService } from './category.service';
 
 // entities
 import { Category } from '../entities/Category';
+import { AlertsService } from './alerts.service';
 
 /**
 * @deprecated
