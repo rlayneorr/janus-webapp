@@ -28,6 +28,12 @@ export class TrainerService extends AbstractApiService<Trainer> {
   private tiersSubject = new BehaviorSubject<string[]>([]);
 
   /**
+  * current trainer for trainer profile page
+  */
+  private trainerSource = new BehaviorSubject<Trainer>(null);
+  currentTrainer = this.trainerSource.asObservable();
+
+  /**
   * @deprecated
   * -> retained for backwards compatibility
   */
@@ -76,6 +82,14 @@ export class TrainerService extends AbstractApiService<Trainer> {
   */
   public getTierList(): Observable<string[]> {
     return this.tiersSubject.asObservable();
+  }
+
+  /**
+  *
+  * sets current trainer
+  */
+  public changeCurrentTrainer(trainer: Trainer) {
+    this.trainerSource.next(trainer);
   }
 
   /*

@@ -18,6 +18,8 @@ import { Trainee } from '../../entities/Trainee';
 import { Assessment } from '../../entities/Assessment';
 import { LocationService } from '../../services/location.service';
 import { PanelService } from '../../services/panel.service';
+import { SkillService } from '../../services/skill.service';
+import { TrainingTypeService } from '../../services/training-type.service';
 
 @Component({
   selector: 'app-test',
@@ -30,7 +32,7 @@ export class TestComponent implements OnInit, OnDestroy {
   private data: any[];
 
 
-  constructor(private service: BatchService ) {
+  constructor(private service: LocationService ) {
     this.service = service;
   }
 
