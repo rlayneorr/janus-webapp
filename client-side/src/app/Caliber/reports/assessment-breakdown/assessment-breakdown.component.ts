@@ -3,6 +3,7 @@ import { ReportingService } from '../../../services/reporting.service';
 import { GradeService } from '../../services/grade.service';
 import { Subscription } from 'rxjs/Subscription';
 import { GranularityService } from '../services/granularity.service';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**
  * Component will display a bar graph comparing the specific trainees
@@ -14,7 +15,7 @@ import { GranularityService } from '../services/granularity.service';
   templateUrl: './assessment-breakdown.component.html',
   styleUrls: ['./assessment-breakdown.component.css']
 })
-export class AssessmentBreakdownComponent implements OnInit {
+export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
   private batchId: Number;
   private week: Number;
@@ -105,6 +106,14 @@ export class AssessmentBreakdownComponent implements OnInit {
         this.reportsService.fetchBatchWeekTraineeBarChart(this.batchId, this.week, this.traineeId);
       }
     }
+  }
+
+  // Unsubscribes all subscriptions when component is destroyed
+  ngOnDestroy() {
+    this.batchIdSub.unsubscribe();
+    this.weekSub.unsubscribe();
+    this.traineeIdSub.unsubscribe();
+    this.dataSubscription.unsubscribe();
   }
 
 }
