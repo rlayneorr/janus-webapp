@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/merge';
 
 // services
 import { EnvironmentService } from './environment.service';
@@ -56,6 +57,16 @@ export abstract class AbstractApiService<T> {
    */
   public getUpdated(): Observable<T> {
     return this.updatedSubject.asObservable();
+  }
+
+  /**
+   * returns a publication observable of an object
+   * saved or updated
+   *
+   * @return Observable<T>
+   */
+  public getSavedOrUpdated(): Observable<T> {
+    return Observable.merge( this.getSaved(), this.getUpdated() );
   }
 
   /**
@@ -133,8 +144,8 @@ export abstract class AbstractApiService<T> {
     const body = JSON.stringify(object);
 
     this.http.post<T>(url, body).subscribe((data) => {
-        this.savedSubject.next(data);
-      });
+      this.savedSubject.next(data);
+    });
   }
 
   /**
@@ -149,8 +160,8 @@ export abstract class AbstractApiService<T> {
     const body = JSON.stringify(object);
 
     this.http.put<T>(url, body).subscribe((data) => {
-        this.updatedSubject.next(data);
-      });
+      this.updatedSubject.next(data);
+    });
   }
 
  /**
@@ -166,7 +177,7 @@ export abstract class AbstractApiService<T> {
     const url = this.envService.buildUrl(apiUrl, params);
 
     this.http.delete(url).subscribe(() => {
-        this.deletedSubject.next(object);
-      });
+      this.deletedSubject.next(object);
+    });
   }
 }
