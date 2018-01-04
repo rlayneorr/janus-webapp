@@ -3,6 +3,18 @@
   <div class="row">
     <div class="col-md-12 col-lg-12 tab-panes">
       <br>
+      <ul class="nav nav-tabs">
+        <li (click) = "toggleActive()">
+          <button type="button" class="btn btn-secondary">
+            <strong>Active</strong>
+          </button>
+        </li>
+        <li (click) = "toggleInactive()">
+          <button type="button" class="btn btn-secondary">
+            <strong>Inactive</strong>
+          </button>
+        </li>
+      </ul>
       <ul class="nav nav-tabs justify-content-end">
         <li (click)="open(addTrainerContent)">
           <button type="button" class="btn btn-secondary">
