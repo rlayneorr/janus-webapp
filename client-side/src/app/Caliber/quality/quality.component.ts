@@ -1,35 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Batch } from '../entities/Batch';
 import { NoteService } from '../services/note.service';
 import { BatchService } from '../services/batch.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-quality',
   templateUrl: './quality.component.html',
   styleUrls: ['./quality.component.css']
 })
-export class QualityComponent implements OnInit {
+export class QualityComponent implements OnInit, OnDestroy {
 
   batches: Batch[];
   currentBatch: Batch;
   currentYear: number;
 
+  batchSubscription: Subscription;
 
-  constructor(private noteService: NoteService, private batchService: BatchService) {
-    this.batchService.fetchAll();
-    this.batchService.getList().subscribe( (batches) => {
-      this.batches = batches;
-      this.currentBatch = this.batches[0];
-    });
+
+  constructor(private batchService: BatchService) {
+    this.setCurrentYear(2018);
   }
 
   ngOnInit() {
-    this.getCurrentYearFromCurrentBatch();
-  }
+    this.batchService.fetchAll();
+    this.batchSubscription = this.batchService.getList()
+      .subscribe( (batches) => this.setBatches(batches) );
+   }
 
-  getCurrentYearFromCurrentBatch() {
-    this.currentYear = this.currentBatch.startDate.getFullYear();
-  }
+   ngOnDestroy() {
+    this.batchSubscription.unsubscribe();
+   }
 
+   private setBatches(batches: Batch[]): void {
+    this.batches = batches;
+    this.currentBatch = this.batches[0];
+   }
+
+   private onBatchSelect(batchId: number) {
+     console.log(batchId);
+     for (let i = 0; i < this.batches.length; i++) {
+       if (batchId == this.batches[i].batchId) {
+         this.currentBatch = this.batches[i];
+       }
+     }
+   }
+
+   public setCurrentYear(currentYear: number): void {
+     this.currentYear = currentYear;
+     console.log(currentYear);
+   }
+
+   getTrackedYears(): number[] {
+     const thisYear: number = new Date().getFullYear();
+     const trackedYears = [];
+
+     for (let i = 0; i < 3; i++) {
+       trackedYears.push(thisYear - i);
+     }
+     // console.log(trackedYears);
+     return trackedYears;
+   }
+
+  // test() {
+  //   console.log('batches ' + this.batches);
+  //   console.log('batches type ' + typeof this.batches);
+  //   console.log('currentBatch ' + this.currentBatch);
+  //   console.log('currentBatch type ' + typeof this.currentBatch);
+
+  //   this.currentYear = this.currentBatch.startDate.getFullYear();
+  //   console.log(this.currentYear);
+  // }
 
 }

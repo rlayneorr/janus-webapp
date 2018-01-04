@@ -2,24 +2,39 @@
     <div class="row">
         <div class="col-md-12 col-lg-12 top10">
             <ul class="nav-tabs">
-                <li ngbDropdown class="d-inline-block">
-                    <a ngbDropdownToggle>2017</a>
+                <!-- <li ngbDropdown class="d-inline-block">
+                    <a ngbDropdownToggle>{{ currentBatch.startDate }}</a>
                     <div ngbDropdownMenu>
-                        <button class="dropdown-item">2014</button>
+                        <button class="dropdown-item" (click)="setCurrentYear(2014)">2014</button>
                         <button class="dropdown-item">2015</button>
                         <button class="dropdown-item">2016</button>
                         <button class="dropdown-item">2018</button>
                     </div>
+                </li> -->
+                <li>
+                    <select [ngModel]="currentYear" (ngModelChange)="setCurrentYear($event)" class="custom-select">
+                        <option [value]="year" *ngFor="let year of getTrackedYears()">{{ year }}</option>
+                    </select>
                 </li>
-                <li ngbDropdown class="d-inline-block">
-                    <a ngbDropdownToggle>{{currentBatch.trainer.name}} - {{currentBatch.startDate | date:"MM/dd/yy"}}</a>
+                <li>
+                    <select [ngModel]="currentBatch" (ngModelChange)="onBatchSelect($event)" class="custom-select">
+                        <option [value]="batch.batchId" *ngFor="let batch of batches | DisplayBatchByYear:currentYear; let i = index" [attr.selected]="i === 0">
+                            {{ i }}   {{ batch.trainer.name }} - {{ batch.startDate | date:"MM/dd/yy" }}
+                        </option>
+                    </select>
+                </li>
+                <!-- <li ngbDropdown class="d-inline-block">
+                    <a ngbDropdownToggle>{{ currentBatch?.trainer.name }} - {{ currentBatch?.startDate | date:"MM/dd/yy" }}</a>
                     <div ngbDropdownMenu class="list-item">
-                        <button class="dropdown-item" *ngFor="let batch of batches">
-                            {{batch.trainer.name}} - {{batch.startDate | date:"MM/dd/yy"}}
+                        <button class="dropdown-item" *ngFor="let batch of batches | DisplayBatchByYear:currentYear">
+                            {{ batch.trainer.name }} - {{ batch.startDate | date:"MM/dd/yy" }}
                         </button>
                     </div>
-                </li>
+                </li> -->
             </ul>
+        </div>
+        <div class="col-md-12 col-lg-12 top10">
+            <app-quality-feedback [batch]="currentBatch"></app-quality-feedback>
         </div>
     </div>
 </div>

@@ -68,6 +68,8 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+import { DisplayBatchByYear } from './pipes/display-batch-by-year.pipe';
+import { QualityFeedbackComponent } from './quality/quality-feedback/quality-feedback.component';
 
 
 
@@ -117,6 +119,8 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
     GradeByTraineeByAssessmentPipe,
+    DisplayBatchByYear,
+    QualityFeedbackComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests

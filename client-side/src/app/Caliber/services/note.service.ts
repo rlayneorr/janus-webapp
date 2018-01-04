@@ -97,7 +97,7 @@ export class NoteService extends AbstractApiService<Note> {
   }
 
  /**
-  * retrieves all trainer enetered Batch notes associated with
+  * retrieves all trainer entered Batch notes associated with
   * the passed batch ID and week number and returns an observable
   * which holds the array of notes found
   *
@@ -113,7 +113,7 @@ export class NoteService extends AbstractApiService<Note> {
   }
 
  /**
-  * retrieves all trainer enetered Trainee notes associated with
+  * retrieves all trainer entered Trainee notes associated with
   * the passed batch ID and week number and returns an observable
   * which holds the array of notes found
   *
