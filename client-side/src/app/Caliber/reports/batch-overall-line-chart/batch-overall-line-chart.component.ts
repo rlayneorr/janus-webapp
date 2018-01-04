@@ -102,7 +102,7 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
     this.batchSub = this.granularityService.currentBatch$.subscribe(
       (result) => {
         // Make sure batchId is not undefined
-        if (this.batchId) {
+        if (result) {
           if (result.batchId !== this.batchId) {
             this.batchId = result.batchId;
             this.fetch();

@@ -40,7 +40,7 @@ export class PanelBatchAllTraineesComponent implements OnInit, OnDestroy {
     // Subscription for batch selection in toolbar
     this.batchIdSub = this.granularityService.currentBatch$.subscribe((result) => {
       // Make sure batchId is not undefined
-      if (this.batchId) {
+      if (result) {
         if (this.batchId !== result.batchId) {
           this.batchId = result.batchId;
           this.reportsService.fetchPanelBatchAllTrainees(this.batchId);

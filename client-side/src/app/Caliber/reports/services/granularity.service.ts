@@ -194,7 +194,6 @@ export class GranularityService {
    */
   pushBatch(batch: Batch) {
     this.currentBatch.next(batch);
-    this.displayBatch();
   }
 
   /**
@@ -203,11 +202,5 @@ export class GranularityService {
    */
   pushWeek(week: number) {
     this.currentWeek.next(week);
-  }
-
-  displayBatch() {
-    this.currentBatch$.subscribe(response => {
-      console.log(response);
-    });
   }
 }
