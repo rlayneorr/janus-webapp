@@ -47,6 +47,7 @@ import { OverallFeedbackComponent } from './reports/overall-feedback/overall-fee
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { FilterByPipe } from './pipes/filter-by.pipe';
 
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
@@ -73,6 +74,7 @@ import { BatchOverallLineChartComponent } from './reports/batch-overall-line-cha
 import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.component';
 import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/assessment-breakdown.component';
 import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedback.component';
+import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.component';
 
 @NgModule({
   imports: [
@@ -90,6 +92,7 @@ import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedba
     TraineeSearchPipePipe,
     GraphDataPipe,
     OrderByPipe,
+    FilterByPipe,
 
     // components
     CaliberComponent,
@@ -124,6 +127,7 @@ import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedba
     BatchOverallLineChartComponent,
     AssessmentBreakdownComponent,
     WeeklyFeedbackComponent,
+    WeeklyGradesComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
