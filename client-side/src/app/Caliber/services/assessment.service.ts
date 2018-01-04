@@ -8,9 +8,11 @@ import { Subscription } from 'rxjs/Subscription';
 // services
 import { AbstractApiService } from './abstract-api.service';
 import { EnvironmentService } from './environment.service';
+import { AlertsService } from './alerts.service';
 
 // entities
 import { Assessment } from '../entities/Assessment';
+
 
 
 /**
@@ -20,8 +22,8 @@ import { Assessment } from '../entities/Assessment';
 @Injectable()
 export class AssessmentService extends AbstractApiService<Assessment> {
 
-  constructor(eService: EnvironmentService, httpClient: HttpClient) {
-    super(eService, httpClient);
+  constructor(eService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
+    super(eService, httpClient, alertService);
   }
 
    /*
@@ -125,8 +127,12 @@ export class AssessmentService extends AbstractApiService<Assessment> {
    */
   public update(assessment: Assessment): void {
     const url = 'trainer/assessment/update';
+    const messages = {
+      success: 'Assessment updated successfully',
+      error: 'Assessment failed to update',
+    };
 
-    super.doPut(assessment, url);
+    super.doPut(assessment, url, {}, messages);
   }
 
   /**
@@ -139,8 +145,12 @@ export class AssessmentService extends AbstractApiService<Assessment> {
    */
   public delete(assessment: Assessment): void {
     const url = `trainer/assessment/delete/${assessment.assessmentId}`;
+    const messages = {
+      success: 'Assessment deleted successfully',
+      error: 'Assessment failed to delete',
+    };
 
-    super.doDelete(assessment, url);
+    super.doDelete(assessment, url, {}, messages);
   }
 
 

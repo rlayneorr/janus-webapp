@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // services
 import { AbstractApiService } from './abstract-api.service';
 import { EnvironmentService } from './environment.service';
+import { AlertsService } from './alerts.service';
 
 
 /**
@@ -12,8 +13,8 @@ import { EnvironmentService } from './environment.service';
 @Injectable()
 export class TrainingTypeService extends AbstractApiService<string> {
 
-  constructor(envService: EnvironmentService, httpClient: HttpClient) {
-    super(envService, httpClient);
+  constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
+    super(envService, httpClient, alertService);
 
     this.initialize();
   }
@@ -38,8 +39,12 @@ export class TrainingTypeService extends AbstractApiService<string> {
   */
   public fetchAll(): void {
     const url = 'types/training/all';
+    const messages = {
+      success: 'Training Types retrieved successfully',
+      error: 'Training Types retrieval failed',
+    };
 
-    super.doGetList(url);
+    super.doGetList(url, {}, messages);
   }
 
 }
