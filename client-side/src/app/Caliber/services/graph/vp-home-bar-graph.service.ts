@@ -67,9 +67,11 @@ export class VpHomeBarGraphService {
       if (city !== '') {
         holder = holder.filter(i => i.address.city === city);
       }
+    } else {
+      holder = results;
     }
     let chartnum = 1;
-    for (const result of results) {
+    for (const result of holder) {
       barChartData.labels.push(result.label);
       // barChartData.id.push(result.id);
       let i;
@@ -114,7 +116,7 @@ export class VpHomeBarGraphService {
    */
 
   private clearBarChartData(barChartData: ChartDataEntity): ChartDataEntity {
-    barChartData.colors.length = 0;
+    barChartData.colors = [];
     barChartData.data.length = 0;
     barChartData.labels.length = 0;
     return barChartData;

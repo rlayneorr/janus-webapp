@@ -120,7 +120,7 @@ export class VpHomeLineGraphService {
   private clearLineChartData(lineChartData: ChartDataEntity) {
     lineChartData.data.length = 0;
     lineChartData.labels.length = 0;
-    lineChartData.colors.length = 0;
+    lineChartData.colors = [];
     return lineChartData;
   }
 }
