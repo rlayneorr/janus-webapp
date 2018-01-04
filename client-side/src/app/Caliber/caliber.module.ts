@@ -38,6 +38,7 @@ import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.se
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
+import { TrainerPipePipe } from './pipes/trainer-pipe.pipe';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -118,6 +119,7 @@ import { ReactivateLocationComponent } from './settings/locations/reactivateloca
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
     TierPipe,
+    TrainerPipePipe
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests

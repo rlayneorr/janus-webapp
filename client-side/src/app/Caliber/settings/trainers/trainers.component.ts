@@ -27,7 +27,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   rForm: FormGroup;
   addForm: FormGroup;
-
   constructor(private trainerService: TrainerService,
     private modalService: NgbModal, private fb: FormBuilder) { }
 

@@ -27,7 +27,7 @@ add or edit a trainer-->
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let trainer of trainers">
+      <tr *ngFor="let trainer of (trainers | trainerPipe:'a')">
         <td>
           {{trainer.name}}
         </td>
