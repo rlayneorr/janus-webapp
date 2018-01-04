@@ -128,6 +128,7 @@ import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.com
     AssessmentBreakdownComponent,
     WeeklyFeedbackComponent,
     WeeklyGradesComponent,
+    PanelFeedbackComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
