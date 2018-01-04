@@ -35,7 +35,7 @@ export class WeeklyGradesComponent implements OnInit, OnDestroy {
   assessments: Array<Assessment>;
   grades: Array<Grade>;
   traineeNotes: Array<Note>;
-  batchNotes: Array<Note>;
+  batchNote: Note;
   weekTopics: string;
 
   batch: Batch;
@@ -76,7 +76,11 @@ export class WeeklyGradesComponent implements OnInit, OnDestroy {
 
     this.noteSub = this.noteService.getList().subscribe((list) => {
       this.traineeNotes = list.filter(note => note.type === 'TRAINEE');
-      this.batchNotes = list.filter(note => note.type === 'BATCH');
+      this.batchNote = list.reduce((prev, curr) => {
+        if (curr.type === 'BATCH') {
+          return curr;
+        }
+      });
     });
   }
 
