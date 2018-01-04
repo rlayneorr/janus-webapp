@@ -170,7 +170,7 @@ export class GranularityService {
     };
     this.currentTrainee.next(testTrainee);
 
-    const week = 0;
+    const week = 3;
     this.currentWeek.next(week);
   }
 
