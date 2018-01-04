@@ -17,6 +17,13 @@
 
 .revature-orange{
     color: #F26925;
-    
-
 }
+
+.revature-button {
+    background-color: #F26925;
+}
+
+.clickable {
+    cursor: pointer;
+}
+

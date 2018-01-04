@@ -37,6 +37,8 @@ export class AssessComponent implements OnInit {
   notes: Note[] = [];
 
   newAssessment: Assessment = new Assessment();
+  editingAssessment: Assessment = new Assessment();
+  selectedAssessment: Assessment = new Assessment();
 
   constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
   private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService) {
@@ -70,11 +72,28 @@ export class AssessComponent implements OnInit {
     this.batchService.getList().subscribe(batch => {
       this.batches = batch;
       if (this.batches.length !== 0) {
-        this.selectedBatch = this.batches[0];
+        this.selectedBatch = this.batches[3];
         this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
         this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
         this.noteService.fetchTraineeNotesByBatchIdByWeek(this.selectedBatch.batchId, 1);
       }
+    });
+
+    // Every time an assessment is created, a set of default grades are created.
+    this.assessmentService.getSaved().subscribe(assessment => {
+      console.log('subscription updated');
+
+      this.selectedBatch.trainees.forEach(trainee => {
+        console.log('looping');
+        const grade = new Grade();
+        grade.trainee = trainee;
+        grade.score = 0;
+        grade.assessment = assessment;
+        const newDate = new Date();
+        grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth());
+        this.gradeService.create(grade);
+      });
+
     });
 
   }
@@ -84,9 +103,15 @@ export class AssessComponent implements OnInit {
     this.newAssessment.category = this.findCategory(newCategory);
   }
 
+  editCategory(categorySelect: ElementRef) {
+    const newCategory = $(categorySelect).find(':selected').val();
+    this.editingAssessment.category = this.findCategory(newCategory);
+  }
+
   findCategory(category: any): Category {
     let matchingCat;
     this.categories.forEach(element => {
+
       if (element.skillCategory === category) {
         matchingCat = element;
       }
@@ -107,6 +132,10 @@ export class AssessComponent implements OnInit {
     this.modalService.open(content);
   }
 
+  editAssessment() {
+    this.assessmentService.update(this.editingAssessment);
+  }
+
   getAssessments(week: number) {
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
   }
@@ -117,21 +146,21 @@ export class AssessComponent implements OnInit {
   }
 
   addAssessment() {
-    console.log(this.newAssessment);
-    this.newAssessment.week = <number>this.selectedWeek;
+    this.newAssessment.week = this.selectedWeek;
     this.newAssessment.batch = this.selectedBatch;
+    console.log(this.newAssessment);
     this.assessmentService.create(this.newAssessment);
+  }
 
-    this.selectedBatch.trainees.forEach(trainee => {
-      const grade = new Grade();
-      grade.assessment = this.newAssessment;
-      grade.trainee = trainee;
-      grade.score = 0;
-      const newDate = new Date();
-      grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth());
-      console.log(grade);
-      this.gradeService.create(grade);
-    });
+  selectAssessment(assessment: Assessment) {
+    console.log(assessment);
+    this.selectedAssessment = assessment;
+    this.editingAssessment.assessmentId = this.selectedAssessment.assessmentId;
+    this.editingAssessment.batch = this.selectedAssessment.batch;
+    this.editingAssessment.category = this.selectedAssessment.category;
+    this.editingAssessment.rawScore = this.selectedAssessment.rawScore;
+    this.editingAssessment.type = this.selectedAssessment.type;
+    this.editingAssessment.week = this.selectedAssessment.week;
   }
 
   counter(i: number) {

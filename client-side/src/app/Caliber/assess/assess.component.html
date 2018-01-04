@@ -55,6 +55,42 @@
       </ng-template>
 <!-- END ADD ASSESSMENT MODAL -->
 
+<!-- START EDIT ASSESSMENT MODAL -->
+<ng-template #editAssessmentContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Add Assessment</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              <div class="form-group">
+                      <label>Assessment Category:</label>
+                      <select #cat class="form-control" id="categorySelect" (change)="editCategory(cat)">
+                        <option *ngFor="let category of this.categories">{{category | categorySkill}}</option>
+                      </select>
+              </div>
+              <div>
+                  <label>Max Points:</label>
+                  <input type="number" class ="form-control" value ="100" [(ngModel)]="editingAssessment.rawScore">
+              </div>
+              <div>
+                      <label>Assessment Type:</label>
+                      <select class="form-control" id="typeSelect" [(ngModel)]="editingAssessment.type">
+                        <option>Exam</option>
+                        <option>Verbal</option>
+                        <option>Project</option>
+                        <option>Other</option>
+                      </select>
+              </div>
+      </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-danger clickable" (click)="c('Close click')">Delete</button>
+      <button type="button" class="btn btn-primary revature-button clickable" (click)="editAssessment()">Update</button>
+    <button type="button" class="btn btn-outline-dark clickable" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+<!-- END EDIT ASSESSMENT MODAL -->
 
 <!-- TABS START -->
 <div class = "main-container">
@@ -74,7 +110,7 @@
           <th>
             Trainee
           </th>
-          <th *ngFor="let assessment of this.assessments">
+          <th class ="clickable" *ngFor="let assessment of this.assessments" (click)="open(editAssessmentContent); selectAssessment(assessment)">
             <div class = "assessment-header">{{assessment.title}}</div>
           </th>
           <th>

@@ -35,6 +35,7 @@ export class SpringInterceptor implements HttpInterceptor {
                 was returned
                */
                 console.log(error);
+
                 // stub -> a generic user feedback hook can be placed here
                 return Observable.empty<any>();
         });

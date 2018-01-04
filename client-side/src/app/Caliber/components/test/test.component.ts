@@ -53,21 +53,6 @@ export class TestComponent implements OnInit, OnDestroy {
     };
   }
 
-  public getTestAssessment(): Assessment {
-    return {
-      assessmentId: 3061,
-        title: 'Java Other',
-        rawScore: 20,
-        type: 'Other',
-        batch: null,
-        week: 1,
-        category: {
-          categoryId: 1,
-          skillCategory: 'Java',
-          active: true
-        }
-    };
-  }
 
   private log(object: any): void {
     console.log(object);
