@@ -9,7 +9,7 @@ import { EnvironmentService } from '../../services/environment.service';
 @Component({
   selector: 'app-vp-panel-graph',
   templateUrl: './vp-panel-graph.component.html',
-  styleUrls: ['./vp-panel-graph.component.css']
+  styleUrls: ['../homeCSS/vpHomeCharts.css']
 })
 export class VpPanelGraphComponent implements OnInit {
   public panelChartData: ChartDataEntity;

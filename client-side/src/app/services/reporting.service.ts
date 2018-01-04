@@ -32,6 +32,9 @@ export class ReportingService {
   private panelBatchAllTrainees = new BehaviorSubject<CacheData>(null);
   public panelBatchAllTrainees$ = this.panelBatchAllTrainees.asObservable();
 
+  private technologiesForTheWeek = new BehaviorSubject<CacheData>(null);
+  public technologiesForTheWeek$ = this.technologiesForTheWeek.asObservable();
+
   constructor(private httpClient: HttpClient) { }
 
   refresh() {
@@ -235,9 +238,19 @@ export class ReportingService {
 
   fetchTechnologiesForTheWeek(batchId: Number, weekId: Number) {
     const endpoint = environment.apiTechnologiesForTheWeek(batchId, weekId);
+    console.log(endpoint);
+    const params = {
+      batchId: batchId,
+      weekId: weekId
+    };
 
-    // TODO: Implement API call and subject push logic
-
+    if (this.needsRefresh(this.technologiesForTheWeek, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => {
+          console.log(success);
+          this.technologiesForTheWeek.next({params: params, data: success});
+        });
+    }
   }
 
   /**

@@ -1,3 +1,4 @@
+<app-alerts></app-alerts>
 <div class="container">
   <div class="row">
     <div class="col-md-12 col-lg-12 tab-panes">
@@ -39,6 +40,9 @@ add or edit a trainer-->
         </td>
         <td>
           {{trainer.tier | displayTier: trainer.tier}}
+        </td>
+        <td>
+          <i class="fa fa-user" style="color:#ff8e4d;" (click)="goToProfile(trainer)"></i>
         </td>
         <td>
           <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, trainer)"></i>
@@ -107,6 +111,7 @@ add or edit a trainer-->
     </div>
   </ng-template>
 
+  <!-- Modal for creating trainer -->
   <ng-template #addTrainerContent let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title">Add Trainer</h4>
@@ -120,6 +125,7 @@ add or edit a trainer-->
         <div class="form-group">
           <div class="row">
             <div class="col-md-6">
+              <!-- Field for Trainer name -->
               <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
               <div class="col-sm-12">
                 <input type="text" class="form-control" id="name" name="name" formControlName="name" placeholder="Trainer Name" />
@@ -127,26 +133,25 @@ add or edit a trainer-->
             </div>
 
             <div class="col-sm-6">
+              <!-- Field for Trainer email -->
               <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
               <div class="col-sm-12">
                 <input type="text" class="form-control" id="email" name="email" formControlName="email" placeholder="Email" />
               </div>
             </div>
           </div>
-        <!-- </div> -->
 
-        <!-- <div class="form-group"> -->
           <div class="row">
             <div class="col-md-6">
+              <!-- dropdown/filter for Trainer Title -->
+              <!-- Datalist to display titles -->
               <label class="col-sm-2 control-label text-nowrap" for="title">Title</label>
               <div class="col-sm-12">
-                <input list="trainerTitle" formControlName="title" type="text" class="form-control" id="title1" name="title" placeholder="Title"
-                />
-                <!--<select class="form-control" [ngModel]="model.title" (ngModelChange)="newTitleChange($event)" name="title">-->
+                <input list="trainerTitle" formControlName="title" type="text" class="form-control" id="title1" name="title" placeholder="Title"/>
+                <!-- Dropdown for Trainer tier/role -->
                 <datalist id="trainerTitle">
                   <option [value]="title" *ngFor="let title of titles">{{title}}</option>
                 </datalist>
-                <!--</select>-->
               </div>
             </div>
 

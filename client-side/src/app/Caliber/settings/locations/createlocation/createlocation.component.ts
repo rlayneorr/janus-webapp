@@ -4,34 +4,21 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { LocationService } from '../../../services/location.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
+
 
 @Component({
   selector: 'app-createlocation',
   templateUrl: './createlocation.component.html',
   styleUrls: ['./createlocation.component.css'],
-  animations:[
-    trigger('show', [
-        transition(':enter', [
-            style({ opacity: 0 }),
-            animate(200, style({ opacity: 1 }))
-        ]),
-        transition(':leave', [
-            style({ opacity: 1 }),
-            animate(300, style({ opacity: 0 }))
-        ]),
-        transition('enter => leave', animate('1000ms ease-in')),
-    ])
-  ]
 })
 export class CreatelocationComponent implements OnInit {
 
   currNewLocation = new Location();
-  newState: String;
-
+  newState: string;
+  show: boolean;
   rForm: FormGroup;
   private modalRef: NgbModalRef;
-  closeResult: String;
+  closeResult: string;
 
   constructor(private modalService: NgbModal,
     private locationService: LocationService,
@@ -69,20 +56,20 @@ export class CreatelocationComponent implements OnInit {
     });
   }
 
-   /**
-   * triggers whenever state field was changed
-   * @param newState: state was changed
-   */
+  /**
+  * triggers whenever state field was changed
+  * @param newState: state was changed
+  */
   stateChange(newState) {
     this.rForm.get('state').setValue(true);
     this.newState = newState;
   }
 
-    /**
-   * save all new fields into the location objet
-   * send the post request to create new location
-   * @param modal: fields from the modal 
-   */
+  /**
+ * save all new fields into the location objet
+ * send the post request to create new location
+ * @param modal: fields from the modal
+ */
   addLocation(modal) {
     this.currNewLocation.state = this.newState;
     this.currNewLocation.company = modal.company;
@@ -93,10 +80,10 @@ export class CreatelocationComponent implements OnInit {
     this.locationService.addLocation(this.currNewLocation);
   }
 
-/**
- * close the modal and reset input fields
- * @param content: modal to close
- */
+  /**
+   * close the modal and reset input fields
+   * @param content: modal to close
+   */
   close(content) {
     this.initFormControl();
     this.modalRef.close();

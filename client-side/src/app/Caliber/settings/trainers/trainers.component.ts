@@ -5,6 +5,7 @@ import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trainers',
@@ -22,20 +23,20 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   currEditTrainer: Trainer;
   newTrainer: Trainer;
-  newTier: String;
-  newTitle: String;
+  newTier: string;
+  newTitle: string;
 
   rForm: FormGroup;
   addForm: FormGroup;
   constructor(private trainerService: TrainerService,
-    private modalService: NgbModal, private fb: FormBuilder) { }
+    private modalService: NgbModal, private fb: FormBuilder, private route: Router) { }
 
   ngOnInit() {
     this.trainerService.populateOnStart();
     this.trainerSubscription = this.trainerService.getList().subscribe((resp) => {
       this.trainers = resp;
     });
-    this.trainerSubscription = this.trainerService.getTitlesList().subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getTitleList().subscribe((resp) => {
       this.titles = resp;
     });
     this.trainerSubscription = this.trainerService.getTierList().subscribe((resp) => {
@@ -53,15 +54,18 @@ export class TrainersComponent implements OnInit, OnDestroy {
     });
   }
 
-
+  /**
+   * adds a new trainer to the database
+   * @param modal: modal from create trainer form
+   */
   addTrainer(modal: Trainer) {
     this.newTrainer = modal;
     console.log(modal);
     console.log(modal.name);
-    this.trainerService.create(this.newTrainer);
-    this.trainers.push(this.newTrainer);
+    this.trainerService.save(this.newTrainer);
+    this.trainerService.fetchAll();
+    // this.trainers.push(this.newTrainer);
   }
-
 
   open(content) {
     this.modalService.open(content);
@@ -69,8 +73,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   /**
    * backup original fields, and open modal for editing
-   * @param content: modal form 
-   * @param modalTrainer: trainer belong to this modal 
+   * @param content: modal form
+   * @param modalTrainer: trainer belong to this modal
    */
   editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
@@ -85,10 +89,10 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { size: 'lg' });
   }
 
-/**
- * Tier was changed, update with new value
- * @param newTier: tier string
- */
+  /**
+   * Tier was changed, update with new value
+   * @param newTier: tier string
+   */
   tierChange(newTier) {
     this.newTier = newTier;
   }
@@ -106,7 +110,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
     }
   }
 
-
   newTierChange(newTier) {
     this.model.tier = newTier;
   }
@@ -122,14 +125,19 @@ export class TrainersComponent implements OnInit, OnDestroy {
    */
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
-    this.currEditTrainer.tier = this.newTier;
-    this.currEditTrainer.title = this.newTitle;
-    this.currEditTrainer.name = modal.name;
-    this.currEditTrainer.email = modal.email;
+    let temp = new Trainer();
+    temp.trainerId = this.currEditTrainer.trainerId;
+    temp.tier = this.newTier;
+    temp.title = this.newTitle;
+    temp.name = modal.name;
+    temp.email = modal.email;
     // call trainerService to update
-    this.trainerService.update(this.currEditTrainer);
+    this.trainerService.update(temp);
+    this.trainerService.getUpdated().subscribe((resp) => {
+      this.currEditTrainer = temp;
+      this.trainerService.fetchAll();
+    });
   }
-
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -146,4 +154,9 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.trainerSubscription.unsubscribe();
   }
 
+  // sets current trainer to clicked trainer and navigates to trainer profile page
+  goToProfile(trainer) {
+    this.trainerService.changeCurrentTrainer(trainer);
+    this.route.navigate(['Caliber/settings/trainer-profile']);
+  }
 }

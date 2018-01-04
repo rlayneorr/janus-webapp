@@ -6,13 +6,20 @@ import { HttpClient } from '@angular/common/http';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Input } from '@angular/core';
+import { BarGraphModalComponent } from './bar-graph-modal/bargraphmodal.component';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ReportingService } from '../../../services/reporting.service';
+import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../../../environments/environment';
 import { EnvironmentService } from '../../services/environment.service';
+import { EvaluationService } from '../../services/evaluation.service';
+import { Note } from '../../entities/Note';
+import { DataSet } from '../../entities/DataSet';
 
 @Component({
   selector: 'app-vp-bar-graph',
   templateUrl: './vp-bar-graph.component.html',
-  styleUrls: ['./vp-bar-graph.component.css']
+  styleUrls: ['./vp-bar-graph.component.css', '../homeCSS/vpHomeCharts.css']
 })
 export class VpBarGraphComponent implements OnInit {
   public barChartData: ChartDataEntity;
@@ -29,11 +36,21 @@ export class VpBarGraphComponent implements OnInit {
     id: number;
     week: number;
   }];
-  @Input()
+  public modal: BarGraphModalComponent;
+  public techSub: Subscription;
+  public QCSub: Subscription;
+  public batchSub: Subscription;
+
+
   public allbatches: any;
+  public hasBatchStatuses = false;
 
 
   constructor(private vpHomeBarGraphService: VpHomeBarGraphService,
+    private vhss: VpHomeSelectorService,
+    private rs: ReportingService,
+    private es: EvaluationService,
+    private modalService: NgbModal,
     private http: HttpClient,
     private vpHomeSelectorService: VpHomeSelectorService,
     private environmentService: EnvironmentService) { }
@@ -53,12 +70,22 @@ export class VpBarGraphComponent implements OnInit {
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
         this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasBarChartData = true;
-        this.populateBatchStatuses();
+        this.http.get(this.environmentService.buildUrl('/qc/batch/all')).subscribe(
+          (resp2) => {
+            this.allbatches = resp2;
+            this.populateBatchStatuses();
+          });
+
       });
   }
-  // gets the statuses of the batches as well as stores the batch id and week
-  // into a seperate array used for the modal
+  /** gets the statuses of the batches as well as stores the batch id and week
+  * into a seperate array used for the modal
+  * @return void
+  */
   populateBatchStatuses() {
+    this.hasBatchStatuses = false;
+    this.overallBatchStatusArray = [];
+    this.modalInfoArray = undefined;
     for (const result of this.results) {
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
       if (this.modalInfoArray === undefined) {
@@ -72,9 +99,13 @@ export class VpBarGraphComponent implements OnInit {
           this.overallBatchStatusArray.push(temp.qcStatus);
         });
     }
+    this.hasBatchStatuses = true;
+    console.log(this.barChartData);
   }
-  // called when a state is selected to get cities for the cities drop down
-  // as well as re-populate the chartData
+  /** called when a state is selected to get cities for the cities drop down
+  * as well as re-populate the chartData
+  * @param state:string
+  */
   findCities(state) {
     this.hasBarChartData = false;
     this.selectedBarCity = '';
@@ -86,8 +117,13 @@ export class VpBarGraphComponent implements OnInit {
     }
     this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
+    console.log(this.barChartData);
   }
-  // after a city is selected, update the graph to reflect the selected city
+
+  /**
+   * after a city is selected, update the graph to reflect the selected city
+   * @param city: string
+   */
   hasCity(city) {
     if (this.cities.size > 1) {
       this.hasBarChartData = false;
@@ -96,9 +132,51 @@ export class VpBarGraphComponent implements OnInit {
       this.hasBarChartData = true;
     }
   }
-  // used to call the modal
-  onClick(event) {
-    console.log(event);
+
+  // when you click on a bar graph, show detailed information
+  onClick(event: any) {
+    const chartInfo = this.modalInfoArray[event.active[0]._index];
+    let tech: Array<String>;
+    let trainees: Array<Note>;
+    let batchNotes: Note;
+
+    // open the Modal
+    const modalRef = this.modalService.open(BarGraphModalComponent);
+
+    // populate Technoloiges
+    this.rs.fetchTechnologiesForTheWeek(chartInfo.id, chartInfo.week);
+    this.techSub = this.rs.technologiesForTheWeek$.subscribe((result) => {
+      if (result) {
+        tech = result.data;
+        modalRef.componentInstance.tech = tech;
+      }
+    });
+
+    // populate detailed trainee notes
+    this.es.FetchAllQCTraineeNotes(chartInfo.id, chartInfo.week);
+    this.QCSub = this.es.allQCTraineeNotes$.subscribe((result) => {
+      if (result) {
+        trainees = result.data;
+
+        // Styling
+        trainees.forEach(item => {
+          if (!item.content) {
+            item.content = '-';
+          }
+        });
+
+        modalRef.componentInstance.trainees = trainees;
+      }
+    });
+
+    // populate qc overal information
+    this.es.FetchAllQCBatchNotes(chartInfo.id, chartInfo.week);
+    this.batchSub = this.es.allQCBatchNotes$.subscribe((result) => {
+      if (result) {
+        batchNotes = result.data;
+        modalRef.componentInstance.batchNotes = batchNotes;
+      }
+    });
   }
 
 }

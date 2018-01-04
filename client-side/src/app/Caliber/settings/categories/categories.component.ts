@@ -3,7 +3,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-
 // rxjs
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,7 +12,7 @@ import { environment } from '../../../../environments/environment';
 
 // entities
 import { Category } from '../../entities/Category';
-
+import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 @Component({
   selector: 'app-categories',
@@ -41,6 +40,7 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
     this.initFormControl();
     // console.log(this.columns);
+    this.categoriesService.fetchAll();
     this.categorySubscription = this.categoriesService.categories$.subscribe((resp) => {
       this.categories = resp;
       this.numColumns = this.categories.length / 8 + 1;
@@ -62,16 +62,19 @@ export class CategoriesComponent implements OnInit {
     this.newCategory.active = true;
     this.categoriesService.addNewCategory(this.newCategory);
   }
+
   // Change active status of category
   activeChange(activeValue) {
-    console.log(activeValue);
     this.isActive = activeValue;
   }
+
   // Send call to update active status
-  editCurrentCategory() {
+  editCurrentCategory(nameChange) {
+    this.currentCategory.skillCategory = nameChange.value.skillCategory;
     this.currentCategory.active = this.isActive;
     this.categoriesService.editCurrentCategory(this.currentCategory);
   }
+
   nextColumn(column, index) {
     // Logic for populating columns
     switch (column) {
@@ -102,12 +105,14 @@ export class CategoriesComponent implements OnInit {
         break;
     }
   }
+
   // Modal open functions
   open(content) {
     this.modalService.open(content).result.then((result) => {
     }, (reason) => {
     });
   }
+
   editopen(content, index: Category) {
     this.currentCategory = index;
     this.isActive = index.active;
