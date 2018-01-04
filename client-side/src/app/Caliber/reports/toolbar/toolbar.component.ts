@@ -208,6 +208,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
      * Pushes all current selected information to granularity service.
      */
     pushToGranularityService() {
+      console.log('batch: ' + this.batchSelect.value + ', trainee: ' + this.traineeSelect.value + ', week: ' + this.getWeek());
+
       // Check if initial selections are empty
       if (this.batchesBasedOnYearList.length === 0) {
         const trainee = new Trainee();
