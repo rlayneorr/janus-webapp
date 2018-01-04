@@ -134,7 +134,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
     temp.email = modal.email;
     // call trainerService to update
     this.trainerService.update(temp);
-    this.trainerService.getSaved().subscribe((resp) => {
+    this.trainerService.getUpdated().subscribe((resp) => {
       this.currEditTrainer = temp;
       this.trainerService.fetchAll();
     });
