@@ -25,7 +25,7 @@ export class ColorService {
       gen1Colour = incomingcolour;
     }
     const color = {
-      backgroundColor: gen1Colour + '.3)',
+      backgroundColor: gen1Colour + '.2)',
       pointBackgroundColor: gen1Colour + '.5)',
       borderColor: gen1Colour + '1)',
       pointHoverBackgroundColor: gen1Colour + '.3)',

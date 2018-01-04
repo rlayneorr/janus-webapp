@@ -32,6 +32,9 @@ export class VpHomeLineGraphService {
           scaleLabel: {
             display: true,
             labelString: 'Week'
+          },
+          ticks: {
+            autoSkip: false,
           }
 
         }],
@@ -44,7 +47,7 @@ export class VpHomeLineGraphService {
           ticks: {
             suggestedMin: 40,
             suggestedMax: 100,
-            stepSize: 20
+            stepSize: 20,
           }
         }]
       },

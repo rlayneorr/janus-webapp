@@ -32,7 +32,8 @@ export class VpHomeBarGraphService {
         yAxes: [{
           stacked: true,
           ticks: {
-            mirror: true
+            mirror: true,
+            autoSkip: false
           }
         }],
         xAxes: [{
