@@ -13,11 +13,11 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 export class CreatelocationComponent implements OnInit {
 
   currNewLocation = new Location();
-  newState: String;
+  newState: string;
 
   rForm: FormGroup;
   private modalRef: NgbModalRef;
-  closeResult: String;
+  closeResult: string;
 
   constructor(private modalService: NgbModal,
     private locationService: LocationService,

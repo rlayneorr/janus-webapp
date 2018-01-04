@@ -24,6 +24,8 @@ import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
 import { CategoryService } from './services/category.service';
+import { SkillService } from './services/skill.service';
+import { TrainingTypeService } from './services/training-type.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
@@ -42,7 +44,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
-import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
+import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { PanelComponent } from './panel/panel.component';
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
@@ -70,6 +72,8 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { DisplayBatchByYear } from './pipes/display-batch-by-year.pipe';
 import { QualityFeedbackComponent } from './quality/quality-feedback/quality-feedback.component';
+import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
+
 
 
 
@@ -111,7 +115,7 @@ import { QualityFeedbackComponent } from './quality/quality-feedback/quality-fee
     GraphComponent,
     TableComponent,
     TestComponent,
-    TrainerProfileComponent,
+    TrainerProfilesComponent,
     PanelComponent,
 
     // pipes
@@ -121,6 +125,7 @@ import { QualityFeedbackComponent } from './quality/quality-feedback/quality-fee
     GradeByTraineeByAssessmentPipe,
     DisplayBatchByYear,
     QualityFeedbackComponent,
+    BatchByTrainerPipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -142,6 +147,8 @@ import { QualityFeedbackComponent } from './quality/quality-feedback/quality-fee
     LocationService,
     CategoryService,
     CategoriesService,
+    SkillService,
+    TrainingTypeService,
   ],
   bootstrap: [
     TrainersComponent

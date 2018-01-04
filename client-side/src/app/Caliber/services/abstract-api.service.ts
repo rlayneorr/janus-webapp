@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/merge';
 
 // services
 import { EnvironmentService } from './environment.service';
@@ -15,6 +16,7 @@ export abstract class AbstractApiService<T> {
 
   protected listSubject: BehaviorSubject<T[]>;
   protected savedSubject: Subject<T>;
+  protected updatedSubject: Subject<T>;
   protected deletedSubject: Subject<T>;
 
   constructor(envService: EnvironmentService, httpClient: HttpClient) {
@@ -23,6 +25,7 @@ export abstract class AbstractApiService<T> {
 
     this.listSubject = new BehaviorSubject([]);
     this.savedSubject = new Subject();
+    this.updatedSubject = new Subject();
     this.deletedSubject = new Subject();
   }
 
@@ -44,6 +47,26 @@ export abstract class AbstractApiService<T> {
    */
   public getSaved(): Observable<T> {
     return this.savedSubject.asObservable();
+  }
+
+  /**
+   * returns a publication observable of the last
+   * object updated
+   *
+   * @return Observable<T[]>
+   */
+  public getUpdated(): Observable<T> {
+    return this.updatedSubject.asObservable();
+  }
+
+  /**
+   * returns a publication observable of an object
+   * saved or updated
+   *
+   * @return Observable<T>
+   */
+  public getSavedOrUpdated(): Observable<T> {
+    return Observable.merge( this.getSaved(), this.getUpdated() );
   }
 
   /**
@@ -121,13 +144,13 @@ export abstract class AbstractApiService<T> {
     const body = JSON.stringify(object);
 
     this.http.post<T>(url, body).subscribe((data) => {
-        this.savedSubject.next(data);
-      });
+      this.savedSubject.next(data);
+    });
   }
 
   /**
  * performs a PUT request and places the result in the
- * savedSubject on success
+ * updatedSubject on success
  *
  * @param apiUrl: string
  * @param object: T
@@ -137,8 +160,8 @@ export abstract class AbstractApiService<T> {
     const body = JSON.stringify(object);
 
     this.http.put<T>(url, body).subscribe((data) => {
-        this.savedSubject.next(data);
-      });
+      this.updatedSubject.next(data);
+    });
   }
 
  /**
@@ -154,7 +177,7 @@ export abstract class AbstractApiService<T> {
     const url = this.envService.buildUrl(apiUrl, params);
 
     this.http.delete(url).subscribe(() => {
-        this.deletedSubject.next(object);
-      });
+      this.deletedSubject.next(object);
+    });
   }
 }
