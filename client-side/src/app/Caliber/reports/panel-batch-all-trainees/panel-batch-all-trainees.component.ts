@@ -3,6 +3,7 @@ import { PanelReview } from '../../entities/PanelReview';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 
 /**
@@ -16,7 +17,7 @@ import { GranularityService } from '../services/granularity.service';
   templateUrl: './panel-batch-all-trainees.component.html',
   styleUrls: ['./panel-batch-all-trainees.component.css']
 })
-export class PanelBatchAllTraineesComponent implements OnInit {
+export class PanelBatchAllTraineesComponent implements OnInit, OnDestroy {
 
   private batchIdSub: Subscription;
   batchId: number = null;
@@ -28,6 +29,7 @@ export class PanelBatchAllTraineesComponent implements OnInit {
   constructor(private reportsService: ReportingService, private granularityService: GranularityService) { }
 
   ngOnInit() {
+    // Subscription for the data source
     this.dataSubscription = this.reportsService.panelBatchAllTrainees$
       .subscribe((result) => {
         if  (result) {
@@ -37,11 +39,17 @@ export class PanelBatchAllTraineesComponent implements OnInit {
         }
       });
 
+    // Subscription for batch selection in toolbar
     this.batchIdSub = this.granularityService.currentBatch$.subscribe((result) => {
       if (this.batchId !== result.batchId) {
         this.batchId = result.batchId;
         this.reportsService.fetchPanelBatchAllTrainees(this.batchId);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
+    this.batchIdSub.unsubscribe();
   }
 }
