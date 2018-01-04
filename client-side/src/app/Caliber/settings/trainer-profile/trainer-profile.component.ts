@@ -11,9 +11,6 @@ import { BatchService } from '../../services/batch.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
-
-
-
 @Component({
   selector: 'app-trainer-profile',
   templateUrl: './trainer-profile.component.html',
@@ -21,47 +18,53 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class TrainerProfilesComponent implements OnInit {
 
-  // create variables for all batches, and current trainer and their batch
+  /**
+  * create variables for all batches,
+  * current trainer and their batch
+  */
   currentTrainer: Trainer;
   batches: Array<Batch>;
   currentBatch: Batch;
 
-  // create variable for subscribing and trainers
+  /**
+  * create variables for subscribing and trainers
+  * and storing form data
+  */
   private trainerSubscription: Subscription;
   trainers: Array<Trainer>;
   titles: Array<any>;
   tiers: Array<any>;
-
-  // create temp variables
   model = new Trainer();
   currEditTrainer: Trainer;
   newTier: string;
   newTitle: string;
-
-  // create varible for form group
   rForm: FormGroup;
 
-  // get services
   constructor(private trainerService: TrainerService, private modalService: NgbModal,
     private batchService: BatchService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
-    // gets the appropriate trainer for the page from trainer service's current trainer
+  /**
+  * gets the current trainer for the page from trainer service's current trainer
+  * if the current trainer is null navigate back to the trainers page so that the user can select one
+  */
     this.trainerService.currentTrainer.subscribe(currentTrainer => this.currentTrainer = currentTrainer);
+    if (this.currentTrainer == null) {
+      this.router.navigate(['Caliber/settings/trainers']);
+    }
 
-    // if the trainer is null navigate back to the trainers page
-    if (this.currentTrainer == null) { this.router.navigate(['Caliber/settings/trainers']); }
-
-    // fetches all batches for the current trainer authenticated on the server side which is patrick walsh
+  /**
+  * fetches all batches and pushes into the batches object,
+  */
     this.batchService.fetchAll();
     this.batchService.getList().subscribe(
       (batches: Batch[]) => { this.batches = batches; }
     );
 
-    // fetches all trainers, titles and tiers and pushes them onto the trainers, titles and tiers subjects
+  /**
+  * fetches all trainers, titles and tiers and pushes them onto the trainers, titles and tiers subjects
+  */
     this.trainerService.populateOnStart();
-
-    // subsscribes to the subject
     this.trainerSubscription = this.trainerService.trainers$.subscribe((resp) => {
       this.trainers = resp;
     });
@@ -72,31 +75,56 @@ export class TrainerProfilesComponent implements OnInit {
       this.tiers = resp;
     });
   }
-  // opens a modal
+
+  /**
+  * opens a modal
+  *
+  * @param content: String
+  */
   open(content) {
     this.modalService.open(content);
   }
-  // opens a large modal
+
+  /**
+  * opens a large modal
+  *
+  * @param content: String
+  */
   openLarge(content) {
     this.modalService.open(content, { size: 'lg' });
   }
-  // sets the current batch
+
+  /**
+  * sets the current batch
+  * triggered when a user clicks to see the trainees for a current batch
+  *
+  * @param content: String
+  */
   setCurrentBatch(batch) {
     this.currentBatch = batch;
   }
-  // navigates to assess page
-  navAssess() {
+
+  /**
+  * navigates to the reports page
+  */
+  navReports() {
     this.router.navigate(['Caliber/reports']);
   }
-  // navigates to assess page
+
+  /**
+  * navigates to the manage page
+  */
   navManage() {
     this.router.navigate(['Caliber/manage']);
   }
 
-
-
-  // Open modal and get Trainer that belong to this modal
-  // Backup these fields before the edit
+  /**
+  * Open modal and get Trainer that belong to this modal
+  * Backup these fields before the edit
+  *
+  * @param content: String
+  * @param modalTrainer: Trainer
+  */
   editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
     this.newTier = modalTrainer.tier;
@@ -110,12 +138,20 @@ export class TrainerProfilesComponent implements OnInit {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  // When tier was changed
+  /**
+  * When tier was changed
+  *
+  * @param newTier: string
+  */
   tierChange(newTier) {
     this.newTier = newTier;
   }
 
-  // when title was changed
+  /**
+  * When title was changed
+  *
+  * @param newTitle: string
+  */
   titleChange(newTitle) {
     // Empty title, changed back to original
     if (newTitle === '') {
@@ -126,16 +162,11 @@ export class TrainerProfilesComponent implements OnInit {
     }
   }
 
-  // // Sets the model trainer's tier field
-  // newTierChange(newTier) {
-  //   this.model.tier = newTier;
-  // }
-  // // Sets the model trainer's tier field
-  // newTitleChange(newTitle) {
-  //   this.model.title = newTitle;
-  // }
-
-  // update button clicked, takes the value of the modal
+  /**
+  * update button clicked, takes the value of the modal
+  *
+  * @param modal: any
+  */
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
     this.currEditTrainer.tier = this.newTier;
