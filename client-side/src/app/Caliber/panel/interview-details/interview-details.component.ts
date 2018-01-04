@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms/';
 
 // components
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
@@ -8,10 +9,15 @@ import { Subscription } from 'rxjs/Subscription';
 
 // entities
 import { Trainee } from '../../entities/Trainee';
+import { Panel } from '../../entities/Panel';
+import { Batch } from '../../entities/Batch';
+
 
 // services
 import { BatchService } from '../../services/batch.service';
 import { PanelService } from '../../services/panel.service';
+
+
 
 @Component({
   selector: 'app-interview-details',
@@ -22,11 +28,12 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
 
   traineeSubscription: Subscription;
   trainee: Trainee;
-  batchList: any;
-  panelList: any;
+  batchList: Batch[];
+  panelList: Panel[];
   batchSubscription: Subscription;
-  trainingTrack: any;
-  panelRound: any;
+  trainingTrack: string;
+  panelRound: number;
+  interviewForm: FormGroup;
 
   constructor(private searchBar: PanelSearchbarComponent, private batchService: BatchService, private panelService: PanelService) { }
 
@@ -55,6 +62,16 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
         this.panelRound = this.panelList.length + 1;
       }
     });
+
+    this.interviewForm = new FormGroup({
+      trainee: new FormControl(),
+      interviewDate: new FormControl(),
+      format: new FormControl(),
+      recordingConsent: new FormControl(),
+      internet: new FormControl()
+    });
+
+
   }
 
   ngOnDestroy() {

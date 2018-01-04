@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./technical-feedback.component.css']
 })
 export class TechnicalFeedbackComponent implements OnInit {
-
+  technicalFeedbackList: any;
   constructor() { }
 
   ngOnInit() {
