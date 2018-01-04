@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**
  * Component utilizes service API calls to fetch and display an overall
@@ -14,7 +15,7 @@ import { GranularityService } from '../services/granularity.service';
   templateUrl: './batch-overall-line-chart.component.html',
   styleUrls: ['./batch-overall-line-chart.component.css']
 })
-export class BatchOverallLineChartComponent implements OnInit {
+export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
 
   public data: any = null;
   private dataSubscription: Subscription;
@@ -150,5 +151,12 @@ export class BatchOverallLineChartComponent implements OnInit {
       this.dataShown = this.data;
       this.labelsShown = this.labels;
     }
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from subscriptions
+    this.batchSub.unsubscribe();
+    this.weekSub.unsubscribe();
+    this.dataSubscription.unsubscribe();
   }
 }

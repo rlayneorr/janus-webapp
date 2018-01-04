@@ -9,6 +9,8 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
  * Component will display a bar graph comparing the specific trainees
  * assessment for the specified week or overall if all weeks selected
  * compared to the batch average
+ *
+ * @author Mitch Goshorn
  */
 @Component({
   selector: 'app-assessment-breakdown',
