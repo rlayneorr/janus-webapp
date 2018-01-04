@@ -90,10 +90,6 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
       this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
           data => { this.traineeId = data.traineeId; this.tryFetch(); });
-
-    // Used in testing without granularity support
-    // this.reportsService.fetchBatchWeekTraineeBarChart(2201, 1, 5532);
-    // this.reportsService.fetchBatchOverallTraineeBarChart(2201, 5532);
   }
 
   tryFetch() {
@@ -109,8 +105,8 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Unsubscribes all subscriptions when component is destroyed
   ngOnDestroy() {
+    // Unsubscribe from subscriptions
     this.batchIdSub.unsubscribe();
     this.weekSub.unsubscribe();
     this.traineeIdSub.unsubscribe();
