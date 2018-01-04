@@ -49,6 +49,9 @@ export class ReportingService {
   private assessmentBreakdownBarChart = new BehaviorSubject<CacheData>(null);
   public assessmentBreakdownBarChart$ = this.assessmentBreakdownBarChart.asObservable();
 
+  private BatchWeekSortedBarChart = new BehaviorSubject<CacheData>(null);
+  public BatchWeekSortedBarChart$ = this.BatchWeekSortedBarChart.asObservable();
+
   /*  Reports Charts */
 
 
@@ -135,7 +138,16 @@ export class ReportingService {
   fetchBatchWeekSortedBarChart(batchId: Number, week: Number) {
     const endpoint = environment.apiBatchWeekSortedBarChart(batchId, week);
 
-    // TODO: Implement API call and subject push logic
+    const params = {
+      batchId: batchId,
+      week: week
+    };
+
+    if (this.needsRefresh(this.BatchWeekSortedBarChart, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.BatchWeekSortedBarChart.next({ params: params, data: success }));
+    }
+
 
   }
 
@@ -335,7 +347,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.technologiesForTheWeek, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.technologiesForTheWeek.next({params: params, data: success}));
+        success => this.technologiesForTheWeek.next({ params: params, data: success }));
     }
   }
 

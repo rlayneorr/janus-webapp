@@ -1,4 +1,4 @@
-import { Component, OnInit, transition, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, transition } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { ReportingService } from '../../../services/reporting.service';
@@ -6,7 +6,6 @@ import { PDFService } from '../../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GranularityService } from '../services/granularity.service';
 import { Trainee } from '../../entities/Trainee';
-import { ChartData } from '../../entities/chartData';
 /**
  * @author John Hudson
 */
@@ -15,7 +14,7 @@ import { ChartData } from '../../entities/chartData';
   templateUrl: './trainee-tech-skills.component.html',
   styleUrls: ['./trainee-tech-skills.component.css']
 })
-export class TraineeTechSkillsComponent implements OnInit {
+export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
 
 
   private batchOverallSubscription: Subscription;
@@ -146,6 +145,17 @@ export class TraineeTechSkillsComponent implements OnInit {
       }
     );
   }
+
+  ngOnDestroy() {
+    this.batchOverallSubscription.unsubscribe();
+    this.traineeOverallRadar.unsubscribe();
+    this.traineeWeeklyRadar.unsubscribe();
+    this.batchFilter.unsubscribe();
+
+    this.batchSubscription.unsubscribe();
+    this.weekSubscription.unsubscribe();
+    this.traineeSubscription.unsubscribe();
+  }
   /**
    * Sets up some variables and send requests for overall radar
    * @param result is the whole batch object.
@@ -207,7 +217,7 @@ export class TraineeTechSkillsComponent implements OnInit {
    * @param index is the index to the trainee in traineesList to be added/removed from chartData
   */
   traineeChecked(index: number) {
-    console.log('debug: ' + this.traineesNames[index]);
+    // console.log('debug: ' + this.traineesNames[index]);
     if (this.trainees.includes(this.traineesList[index])) {
       this.trainees = this.remove(this.trainees, this.traineesList[index]);
       this.chartData = this.remove(this.chartData, this.traineesData[index]);
