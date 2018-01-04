@@ -88,7 +88,7 @@
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
                     <label for="categoryName">Category:</label>
-                    <input  name="skillCategory" type="text" class="form-control" [ngModel]="currentCategory.skillCategory" id="editCategory"
+                    <input  name="skillCategory" type="text" class="form-control" #name='ngModel' [ngModel]="currentCategory.skillCategory" id="editCategory"
                         placeholder="Category" required>
                 </div>
             </div>
@@ -103,7 +103,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="editCurrentCategory(); c()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button (click)="editCurrentCategory(myForm); c()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
             <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         </div>
     </form>

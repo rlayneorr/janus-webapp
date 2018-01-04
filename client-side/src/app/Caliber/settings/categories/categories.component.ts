@@ -13,6 +13,7 @@ import { environment } from '../../../../environments/environment';
 
 // entities
 import { Category } from '../../entities/Category';
+import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 
 @Component({
@@ -64,11 +65,11 @@ export class CategoriesComponent implements OnInit {
   }
   // Change active status of category
   activeChange(activeValue) {
-    console.log(activeValue);
     this.isActive = activeValue;
   }
   // Send call to update active status
-  editCurrentCategory() {
+  editCurrentCategory(nameChange) {
+    this.currentCategory.skillCategory = nameChange.value.skillCategory;
     this.currentCategory.active = this.isActive;
     this.categoriesService.editCurrentCategory(this.currentCategory);
   }
