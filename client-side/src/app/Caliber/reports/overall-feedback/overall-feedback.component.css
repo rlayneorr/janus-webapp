@@ -4,6 +4,16 @@ td {
     text-align: center;
 }
 
+td, th {
+    border: none;
+    border-top: 1px solid rgb(250, 250, 250);
+}
+
+.row-border {
+    border: none;
+    border-top: 2px solid rgb(221, 221, 221);
+}
+
 thead {
     font-weight: 800;
 }
@@ -26,4 +36,8 @@ table {
 .feedback-body {
     border: 1px solid rgb(221, 221, 221);
     border-top: 0px;
+}
+
+.align-left {
+    text-align: left;
 }
