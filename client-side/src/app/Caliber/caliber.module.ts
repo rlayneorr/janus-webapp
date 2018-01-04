@@ -130,6 +130,7 @@ import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative
     AssessmentBreakdownComponent,
     WeeklyFeedbackComponent,
     WeeklyGradesComponent,
+    PanelFeedbackComponent,
     WeeklyAuditComponent,
     CumulativeScoreComponent,
   ],
@@ -156,9 +157,6 @@ import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative
   ],
   bootstrap: [
     TrainersComponent
-  ],
-  exports: [
-    TraineeTechSkillsComponent,
   ]
 })
 export class CaliberModule { }
