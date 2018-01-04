@@ -130,6 +130,7 @@ import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative
     AssessmentBreakdownComponent,
     WeeklyFeedbackComponent,
     WeeklyGradesComponent,
+    PanelFeedbackComponent,
     WeeklyAuditComponent,
     CumulativeScoreComponent,
   ],
