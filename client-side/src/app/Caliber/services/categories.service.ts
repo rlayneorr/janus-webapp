@@ -66,7 +66,10 @@ export class CategoriesService {
   public editCurrentCategory(currentCategory: Category): void {
     const data = JSON.stringify(currentCategory);
     this.http.put(environment.editCurrentCategory, data).subscribe( (resp) => {
-      this.alertService.success('Successfully edited' + currentCategory.skillCategory);
-     });
+      this.alertService.success('Successfully edited ' + currentCategory.skillCategory);
+     },
+    (err) => {
+      this.alertService.error('Failed to edit ' + currentCategory.skillCategory);
+    });
   }
 }
