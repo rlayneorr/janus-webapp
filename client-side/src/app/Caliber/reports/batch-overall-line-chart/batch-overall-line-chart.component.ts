@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
@@ -14,7 +14,7 @@ import { GranularityService } from '../services/granularity.service';
   templateUrl: './batch-overall-line-chart.component.html',
   styleUrls: ['./batch-overall-line-chart.component.css']
 })
-export class BatchOverallLineChartComponent implements OnInit {
+export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
 
   public data: any = null;
   private dataSubscription: Subscription;
@@ -150,5 +150,12 @@ export class BatchOverallLineChartComponent implements OnInit {
       this.dataShown = this.data;
       this.labelsShown = this.labels;
     }
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from subscriptions
+    this.batchSub.unsubscribe();
+    this.weekSub.unsubscribe();
+    this.dataSubscription.unsubscribe();
   }
 }
