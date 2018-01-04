@@ -49,7 +49,11 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
 
     this.panelService.getList().subscribe((panelList) => {
       this.panelList = panelList;
-      this.panelRound = this.panelList.length;
+      if (this.panelRound == null) {
+        this.panelRound = 1;
+      } else {
+        this.panelRound = this.panelList.length + 1;
+      }
     });
   }
 
