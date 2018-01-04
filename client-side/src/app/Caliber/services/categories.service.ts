@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 
 // entities
 import { Category } from '../entities/Category';
+import { AlertsService } from './alerts.service';
 
 /**
  * this service is used to manage API calls
@@ -23,7 +24,7 @@ export class CategoriesService {
 
   categories$: Observable<any> = this.dataSubject.asObservable(); // this is how components should access the data if you want to cache it
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private alertService: AlertsService) {
     this.fetchAll();
    }
 
@@ -35,6 +36,7 @@ export class CategoriesService {
   public fetchAll(): void {
     this.http.get<Category[]>(environment.getAllCategories).subscribe( (resp) => {
       this.dataSubject.next(resp);
+      this.alertService.success('Got all Categories successfully');
     });
   }
 
@@ -47,7 +49,11 @@ export class CategoriesService {
   public addNewCategory(newCategory: Category): void {
     const data = JSON.stringify(newCategory);
     this.http.post<Category>(environment.addNewCategory, data).subscribe( (resp) => {
+      this.alertService.success('Added a new Category');
       this.fetchAll();
+    },
+    (err) => {
+      this.alertService.error('Failed to add new Category');
     });
   }
 
@@ -59,6 +65,8 @@ export class CategoriesService {
    */
   public editCurrentCategory(currentCategory: Category): void {
     const data = JSON.stringify(currentCategory);
-    this.http.put(environment.editCurrentCategory, data).subscribe( (resp) => { });
+    this.http.put(environment.editCurrentCategory, data).subscribe( (resp) => {
+      this.alertService.success('Successfully edited' + currentCategory.skillCategory);
+     });
   }
 }
