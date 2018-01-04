@@ -207,7 +207,7 @@ export class GranularityService {
 
   displayBatch() {
     this.currentBatch$.subscribe(response => {
-      console.log(response);
+      console.log('displaying batch: ' + response);
     });
   }
 }
