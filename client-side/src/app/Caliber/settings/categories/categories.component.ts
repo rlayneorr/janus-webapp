@@ -3,7 +3,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-
 // rxjs
 import { Subscription } from 'rxjs/Subscription';
 
@@ -41,6 +40,7 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
     this.initFormControl();
     // console.log(this.columns);
+    this.categoriesService.fetchAll();
     this.categorySubscription = this.categoriesService.categories$.subscribe((resp) => {
       this.categories = resp;
       this.numColumns = this.categories.length / 8 + 1;
@@ -68,7 +68,8 @@ export class CategoriesComponent implements OnInit {
     this.isActive = activeValue;
   }
   // Send call to update active status
-  editCurrentCategory() {
+  editCurrentCategory(nameChange) {
+    this.currentCategory.skillCategory = nameChange.value.skillCategory;
     this.currentCategory.active = this.isActive;
     this.categoriesService.editCurrentCategory(this.currentCategory);
   }

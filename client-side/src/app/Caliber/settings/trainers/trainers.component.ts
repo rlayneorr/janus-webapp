@@ -37,7 +37,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.trainerSubscription = this.trainerService.getList().subscribe((resp) => {
       this.trainers = resp;
     });
-    this.trainerSubscription = this.trainerService.getTitlesList().subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getTitleList().subscribe((resp) => {
       this.titles = resp;
     });
     this.trainerSubscription = this.trainerService.getTierList().subscribe((resp) => {
@@ -63,7 +63,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.newTrainer = modal;
     console.log(modal);
     console.log(modal.name);
-    this.trainerService.create(this.newTrainer);
+    this.trainerService.save(this.newTrainer);
     this.trainerService.fetchAll();
     // this.trainers.push(this.newTrainer);
   }

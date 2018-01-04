@@ -39,7 +39,7 @@ export class TrainerService extends AbstractApiService<Trainer> {
   titles$: Observable<any> = this.getTitleList();
   tiers$: Observable<any> = this.getTierList();
 
-  constructor(httpClient: HttpClient, envService: EnvironmentService, http: Http) {
+  constructor(httpClient: HttpClient, envService: EnvironmentService) {
     super(envService, httpClient);
 
     this.populateOnStart();

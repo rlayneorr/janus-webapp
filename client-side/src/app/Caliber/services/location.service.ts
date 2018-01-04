@@ -33,9 +33,11 @@ export class LocationService extends AbstractApiService<Location> {
   * you can also use the getList() method directly going forward
   */
   locations$: Observable<any> = super.getList();
+  alertService: AlertsService;
 
-  constructor( envService: EnvironmentService, httpClient: HttpClient ) {
+  constructor( envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService ) {
     super(envService, httpClient);
+    this.alertService = alertService;
   }
 
   /**
@@ -189,6 +191,23 @@ export class LocationService extends AbstractApiService<Location> {
   */
   public deleteLocation(location: Location) {
     this.delete(location);
+  }
+
+  reactivateLocation(location: Location) {
+    location.active = true;
+    this.http.request('put', environment.reactivateLocation,
+      {
+        withCredentials: true,
+        body: location
+      })
+      .subscribe(
+      resp => {
+        this.alertService.success('Location reactivated successfully!');
+      },
+      err => {
+        this.alertService.error('Location failed to reactivate!');
+      }
+      );
   }
 
 }
