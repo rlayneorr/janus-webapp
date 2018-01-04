@@ -21,41 +21,56 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class TrainerProfilesComponent implements OnInit {
 
-  trainers: Array<Trainer>;
+  // create variables for all batches, and current trainer and their batch
   currentTrainer: Trainer;
   batches: Array<Batch>;
   currentBatch: Batch;
 
+  // create variable for subscribing and trainers
   private trainerSubscription: Subscription;
+  trainers: Array<Trainer>;
   titles: Array<any>;
   tiers: Array<any>;
-  model = new Trainer();
 
+  // create temp variables
+  model = new Trainer();
   currEditTrainer: Trainer;
   newTier: string;
   newTitle: string;
 
+  // create varible for form group
   rForm: FormGroup;
 
+  // get services
   constructor(private trainerService: TrainerService, private modalService: NgbModal,
     private batchService: BatchService, private router: Router, private fb: FormBuilder) { }
 
-ngOnInit() {
-  // gets the appropriate trainer for the page
-  this.trainerService.currentTrainer.subscribe(currentTrainer => this.currentTrainer = currentTrainer);
-  // if the trainer is null navigate back to the trainers page
-  if (this.currentTrainer == null) { this.router.navigate(['Caliber/settings/trainers']); }
-  // fetches all batches for the current trainer authenticated on the server side which is patrick walsh
-  this.batchService.fetchAll();
-  this.batchService.getList().subscribe(
-    (batches: Batch[]) => { this.batches = batches; }
-  );
-}
-  // updates a specfic trainers info
-  updateInfo() {
-    console.log('in the update trainer method Name: ' + this.currentTrainer.name + ' Email: '
-      + this.currentTrainer.email + ' Tier: ' + this.currentTrainer.tier);
-      this.trainerService.updateTrainer(this.currentTrainer);
+  ngOnInit() {
+    // gets the appropriate trainer for the page from trainer service's current trainer
+    this.trainerService.currentTrainer.subscribe(currentTrainer => this.currentTrainer = currentTrainer);
+
+    // if the trainer is null navigate back to the trainers page
+    if (this.currentTrainer == null) { this.router.navigate(['Caliber/settings/trainers']); }
+
+    // fetches all batches for the current trainer authenticated on the server side which is patrick walsh
+    this.batchService.fetchAll();
+    this.batchService.getList().subscribe(
+      (batches: Batch[]) => { this.batches = batches; }
+    );
+
+    // fetches all trainers, titles and tiers and pushes them onto the trainers, titles and tiers subjects
+    this.trainerService.populateOnStart();
+
+    // subsscribes to the subject
+    this.trainerSubscription = this.trainerService.trainers$.subscribe((resp) => {
+      this.trainers = resp;
+    });
+    this.trainerSubscription = this.trainerService.titles$.subscribe((resp) => {
+      this.titles = resp;
+    });
+    this.trainerSubscription = this.trainerService.tiers$.subscribe((resp) => {
+      this.tiers = resp;
+    });
   }
   // opens a modal
   open(content) {
@@ -63,7 +78,7 @@ ngOnInit() {
   }
   // opens a large modal
   openLarge(content) {
-    this.modalService.open(content, {size: 'lg'});
+    this.modalService.open(content, { size: 'lg' });
   }
   // sets the current batch
   setCurrentBatch(batch) {
@@ -71,7 +86,7 @@ ngOnInit() {
   }
   // navigates to assess page
   navAssess() {
-    this.router.navigate(['Caliber/assess']);
+    this.router.navigate(['Caliber/reports']);
   }
   // navigates to assess page
   navManage() {
@@ -111,15 +126,16 @@ ngOnInit() {
     }
   }
 
-  // Update button was clicked, try to update to database
-  newTierChange(newTier) {
-    this.model.tier = newTier;
-  }
+  // // Sets the model trainer's tier field
+  // newTierChange(newTier) {
+  //   this.model.tier = newTier;
+  // }
+  // // Sets the model trainer's tier field
+  // newTitleChange(newTitle) {
+  //   this.model.title = newTitle;
+  // }
 
-  newTitleChange(newTitle) {
-    this.model.title = newTitle;
-  }
-
+  // update button clicked, takes the value of the modal
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
     this.currEditTrainer.tier = this.newTier;
