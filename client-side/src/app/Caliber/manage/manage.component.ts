@@ -11,6 +11,8 @@ import { format } from 'url';
 import { Subscription } from 'rxjs/Subscription';
 import { DisplayBatchByYear } from './manage.pipe';
 import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
+import { TrainingTypeService } from '../services/training-type.service';
+import { SkillService } from '../services/skill.service';
 // import { exists } from 'fs';
 
 @Component({
@@ -27,27 +29,37 @@ export class ManageComponent implements OnInit, OnDestroy {
   batchYearsNoDuplicates: number[] = [];
   currentYear = 2017;
   currentBatch: Batch;
+  createNewBatch: Batch = new Batch;
 
   traineeProfileUrl: string;
+
+  test: string;
 
 
   trainers: Trainer[] = [];
   trainerNames: string[] = [];
 
   locations: Location[] = [];
-  locationNames: string[] = [];
+
+  trainingTypes: string[] = [];
+  skills: string[] = [];
 
   batchSub: Subscription;
   trainerSub: Subscription;
   locationSub: Subscription;
+  trainingTypeSub: Subscription;
+  skillSub: Subscription;
 
   constructor(private batchService: BatchService, private trainerService: TrainerService,
-    private locationService: LocationService,
+    private locationService: LocationService, private trainingTypeService: TrainingTypeService,
+    private skillService: SkillService,
     private modalService: NgbModal, private datePipe: DatePipe) {
    }
 
 
    ngOnInit() {
+
+    /* fetches all batches */
       this.batchService.fetchAll();
       this.batchSub = this.batchService.getList().subscribe(batch => {
         this.batches = batch;
@@ -59,6 +71,7 @@ export class ManageComponent implements OnInit, OnDestroy {
       this.batchYearsNoDuplicates = Array.from(new Set(batchYears));
      });
 
+     /* fetches all trainers */
      this.trainerService.fetchAll();
      this.trainerSub = this.trainerService.getList().subscribe(trainer => {
        this.trainers = trainer;
@@ -67,10 +80,24 @@ export class ManageComponent implements OnInit, OnDestroy {
        }
      });
 
+     /* fetches all training locations */
      this.locationService.fetchAll();
      this.locationSub = this.locationService.getList().subscribe(location => {
        this.locations = location;
      });
+
+     /*fetches all training types */
+     /*this.trainingTypeService.fetchAll();*/
+     this.trainingTypeSub = this.trainingTypeService.getList().subscribe(trainingType => {
+       this.trainingTypes = trainingType;
+     });
+
+     /*fetches all skills */
+     this.skillSub = this.skillService.getList().subscribe(skill => {
+       this.skills = skill;
+     });
+
+
 
   }
 
@@ -80,9 +107,10 @@ export class ManageComponent implements OnInit, OnDestroy {
 
   }
 
-  createBatch() {
-
-
+  createNewBatchFunction() {
+    
+    console.log(this.createNewBatch);
+    this.batchService.save(this.createNewBatch);
   }
 
   deleteBatch() {
@@ -91,8 +119,6 @@ export class ManageComponent implements OnInit, OnDestroy {
 
 
   openCreateBatchModal(createBatch) {
-
-    console.log(this.trainers);
 
     this.modalService.open(createBatch).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -120,6 +146,18 @@ export class ManageComponent implements OnInit, OnDestroy {
     });
 
     this.currentBatch = batch;
+  }
+
+  openUpdateBatchModal(updateBatch, batch) {
+
+    this.modalService.open(updateBatch).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
+    this.currentBatch = batch;
+
   }
 
 
