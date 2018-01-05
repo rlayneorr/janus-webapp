@@ -27,6 +27,9 @@ import { RouteService } from './services/route.service';
 import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
+import { CategoryService } from './services/category.service';
+import { SkillService } from './services/skill.service';
+import { TrainingTypeService } from './services/training-type.service';
 import { ColorService } from './services/colors/color.service';
 import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.service';
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
@@ -35,11 +38,16 @@ import { LocationService } from './services/location.service';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { AlertsService } from './services/alerts.service';
+import { EvaluationService } from './services/evaluation.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
+import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
+import { TrainerPipePipe } from './pipes/trainer-pipe.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -52,7 +60,7 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
-import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
+import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { PanelComponent } from './panel/panel.component';
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
@@ -72,10 +80,6 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
-import { EvaluationService } from './services/evaluation.service';
-import { OrderByPipe } from './pipes/order-by.pipe';
-
-
 
 @NgModule({
   imports: [
@@ -116,18 +120,22 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     GraphComponent,
     TableComponent,
     TestComponent,
-    TrainerProfileComponent,
+    TrainerProfilesComponent,
     PanelComponent,
     ReactivateLocationComponent,
     AlertsComponent,
     BarGraphModalComponent,
+    PanelBatchAllTraineesComponent,
 
     // pipes
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
     TierPipe,
+    TrainerPipePipe,
     OrderByPipe,
+    GradeByTraineeByAssessmentPipe,
+    BatchByTrainerPipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -147,11 +155,14 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     ColorService,
     TrainerService,
     LocationService,
+    CategoryService,
     CategoriesService,
     AlertsService,
     VpHomeBarGraphService,
     VpHomePanelGraphService,
     EvaluationService,
+    SkillService,
+    TrainingTypeService,
   ],
   bootstrap: [
     TrainersComponent

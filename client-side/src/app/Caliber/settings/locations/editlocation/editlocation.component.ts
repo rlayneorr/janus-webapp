@@ -14,15 +14,15 @@ export class EditlocationComponent implements OnInit {
 
   @Input()
   currEditLocation: Location;
-  newCompanyName: String;
-  newStreet: String;
-  newCity: String;
-  newZip: String;
-  newState: String;
+  newCompanyName: string;
+  newStreet: string;
+  newCity: string;
+  newZip: string;
+  newState: string;
 
   rForm: FormGroup;
   private modalRef: NgbModalRef;
-  closeResult: String;
+  closeResult: string;
 
   constructor(private modalService: NgbModal,
     private locationService: LocationService,
@@ -81,7 +81,7 @@ export class EditlocationComponent implements OnInit {
   /**
    * save all new fields into the location objet
    * send the update request
-   * @param modal: fields from the modal 
+   * @param modal: fields from the modal
    */
   updateLocation(modal) {
     this.currEditLocation.state = this.newState;
@@ -89,6 +89,7 @@ export class EditlocationComponent implements OnInit {
     this.currEditLocation.city = modal.city;
     this.currEditLocation.street = modal.street;
     this.currEditLocation.zipcode = modal.zipcode;
+    this.popTemp();
     this.locationService.updateLocation(this.currEditLocation);
   }
 

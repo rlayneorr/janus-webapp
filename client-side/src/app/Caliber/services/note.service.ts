@@ -2,64 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/merge';
 
 // services
 import { EnvironmentService } from './environment.service';
+import { AbstractApiService } from './abstract-api.service';
+import { AlertsService } from './alerts.service';
 
 // entities
 import { Note } from '../entities/Note';
 import { Trainee } from '../entities/Trainee';
 
-
+/**
+* this service manages calls to the web services
+* for Note objects
+*/
 @Injectable()
-export class NoteService {
-  private envService: EnvironmentService;
-  private http: HttpClient;
+export class NoteService extends AbstractApiService<Note> {
 
-  private listSubject: BehaviorSubject<Note[]>;
-  private savedSubject: Subject<Note>;
-  private deletedSubject: Subject<Note>;
-
-  constructor(envService: EnvironmentService, httpClient: HttpClient) {
-    this.envService = envService;
-    this.http = httpClient;
-
-    this.listSubject = new BehaviorSubject([]);
-    this.savedSubject = new Subject();
-    this.deletedSubject = new Subject();
-  }
-
- /**
- * returns a behavior observable of the current
- * panel list by trainee
- *
- * @return Observable<Note[]>
- */
-  public getList(): Observable<Note[]> {
-    return this.listSubject.asObservable();
-  }
-
-  /**
-   * returns a publication observable of the last
-   * panel saved
-   *
-   * @return Observable<Note[]>
-   */
-  public getSaved(): Observable<Note> {
-    return this.savedSubject.asObservable();
-  }
-
-  /**
-   * returns a publication observable of the last
-   * panel deleted
-   *
-   * @return Observable<Note[]>
-   */
-  public getDeleted(): Observable<Note> {
-    return this.deletedSubject.asObservable();
+  constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
+    super(envService, httpClient, alertService);
   }
 
   /*
@@ -69,37 +32,119 @@ export class NoteService {
  */
 
  /**
-  * retrievs all notes associated with the passed
+  * retrieves all notes associated with the passed
   * batch ID and week number and pushes the results
   * on the listSubject
+  *
+  * delegates the call to 4 separate Note API hooks for:
+  * -> batch notes entered by trainer
+  * -> trainee notes enetered by trainer
+  * -> batch notes enetered by quality control
+  * -> trainee notes by quality control
   *
   * @param batchId: number
   * @param week: number
   *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public fetchByBatchIdByWeek(batchId: number, week: number): void {
-    const url = this.envService.buildUrl(`trainer/note/batch/${batchId}/${week}`);
+    const $nonQcbatchNotes = this.fetchBatchNotesByBatchIdByWeek(batchId, week);
+    const $nonQctraineeNotes = this.fetchTraineeNotesByBatchIdByWeek(batchId, week);
+    const $qcBatchNotes = this.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
+    const $qcTraineeNotes = this.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
 
-    this.http.get<Note[]>(url).subscribe( (notes) => {
-      this.listSubject.next(notes);
-    });
+    let results: Note[] = [];
+
+    Observable.merge($nonQcbatchNotes, $nonQctraineeNotes, $qcBatchNotes, $qcTraineeNotes)
+      .subscribe( (notes) => {
+          results = results.concat(notes); // merge all results into one array
+        },
+        (error) => {
+          super.pushAlert('error', 'Notes retrieval failed');
+        }, // errors are already sent to the console in the SpringInterceptor
+        () => {
+          this.listSubject.next(results); // send the merged results
+          super.pushAlert('success', 'Notes retrieved successfully');
+        }
+      );
+  }
+
+
+  /**
+  * retrieves all quality control Batch notes associated with
+  * the passed batch ID and week number and returns an observable
+  * which holds the array of notes found
+  *
+  * @param batchId: number
+  * @param week: number
+  *
+  * @return Observable<Note[]>
+  */
+  public fetchQcBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
+    const url = `qc/note/batch/${batchId}/${week}`;
+
+    return super.doGetListObservable(url);
+  }
+
+ /**
+  * retrieves all quality control Trainee notes associated with
+  * the passed batch ID and week number and returns an observable
+  * which holds the array of notes found
+  *
+  * @param batchId: number
+  * @param week: number
+  *
+  * @return Observable<Note[]>
+  */
+  public fetchQcTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
+    const url = `qc/note/trainee/${batchId}/${week}`;
+
+    return super.doGetListObservable(url);
+  }
+
+ /**
+  * retrieves all trainer enetered Batch notes associated with
+  * the passed batch ID and week number and returns an observable
+  * which holds the array of notes found
+  *
+  * @param batchId: number
+  * @param week: number
+  *
+  * @return Observable<Note[]>
+  */
+  public fetchBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
+    const url = `trainer/note/batch/${batchId}/${week}`;
+
+    return super.doGetListObservable(url);
+  }
+
+ /**
+  * retrieves all trainer enetered Trainee notes associated with
+  * the passed batch ID and week number and returns an observable
+  * which holds the array of notes found
+  *
+  * @param batchId: number
+  * @param week: number
+  *
+  * @return Observable<Note[]>
+  */
+  public fetchTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
+    const url = `trainer/note/trainee/${batchId}/${week}`;
+
+    return super.doGetListObservable(url);
   }
 
   /**
-  * retrievs all notes associated with the passed
+  * retrieves all notes associated with the passed
   * trainee and pushes the results on the listSubject
   *
   * @param trainee: Trainee
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchByTrainee(trainee: Trainee): void {
-    const url = this.envService.buildUrl(`all/notes/trainee/${trainee.traineeId}`);
+  public fetchByTrainee(trainee: Trainee): Observable<Note[]> {
+    const url = `all/notes/trainee/${trainee.traineeId}`;
 
-    this.http.get<Note[]>(url).subscribe( (notes) => {
-      this.listSubject.next(notes);
-    });
+    return super.doGetListObservable(url);
   }
 
   /**
@@ -108,15 +153,28 @@ export class NoteService {
    *
    * @param note: Note
    *
-   * spring-securigy: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public update(note: Note): void {
-    const url = this.envService.buildUrl('note/update');
-    const data = JSON.stringify(note);
+    const url = 'note/update';
+    const messages = {
+      success: 'Note updated successfully',
+      error: 'Note update failed',
+    };
 
-    this.http.post<Note>(url, data).subscribe( (updated) => {
-      this.savedSubject.next(updated);
-    });
+    super.doPost(note, url, {}, messages); // yes, the API implemented this as a POST method: @see EvaluationController
+  }
+
+  /**
+ * transmits a note to be saved and pushes the
+ * saved note on the savedSubject
+ *
+ * @param note: Note
+ *
+ * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
+ */
+  public create(note: Note): void {
+    this.save(note);
   }
 
   /**
@@ -127,12 +185,14 @@ export class NoteService {
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
-  public create(note: Note): void {
-    const url = this.envService.buildUrl('note/create');
-    const data = JSON.stringify(note);
+  public save(note: Note): void {
+    const url = 'note/create';
+    const messages = {
+      success: 'Note saved successfully',
+      error: 'Note save failed',
+    };
 
-    this.http.post<Note>(url, data).subscribe((saved) => {
-      this.savedSubject.next(saved);
-    });
+    super.doPost(note, url, {}, messages);
   }
+
 }
