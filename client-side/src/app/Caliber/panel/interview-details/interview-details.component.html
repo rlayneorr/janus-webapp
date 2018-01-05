@@ -1,31 +1,3 @@
-<<<<<<< HEAD
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h3>Interview Details</h3>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <label for="associateName">Associate Name</label>
-      <input class="form-control" id="associateName" type="text" value="{{trainee.name}}" readonly>
-    </div>
-    <div class="col">
-      <label for="interviewDate">Interview Date</label>
-      <form class="form-inline">
-        <div class="form-group">
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-            <button class="input-group-addon" (click)="d.toggle()" type="button">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-      <hr/>
-    </div>
-=======
 <div class="border border-secondary">
   <div class="container" id="interviewDetails">
 
@@ -35,14 +7,14 @@
       </div>
     </div>
 
-    <form [formGroup]="interviewForm">
+    <div class="form-group" [formGroup]="interviewForm">
 
       <div class="row">
 
         <div class="col">
           <div class="form-group">
             <label for="associateName">Associate Name</label>
-            <input class="form-control" id="associateName" formControlName="trainee" type="text" value="{{trainee.name}}" readonly>
+            <input class="form-control" id="associateName" type="text" value="{{trainee.name}}" readonly>
           </div>
         </div>
 
@@ -72,7 +44,7 @@
         <div class="col">
           <div class="form-group">
             <label for="interviewTime">Interview Time</label>
-            <ngb-timepicker name="time" [meridian]="true" [spinners]="false"></ngb-timepicker>
+            <ngb-timepicker name="time" [ngModelOptions]="{standalone: true}" [(ngModel)]="time" [meridian]="true" [spinners]="false"></ngb-timepicker>
           </div>
         </div>
 
@@ -114,8 +86,8 @@
         </div>
 
       </div>
-    </form>
-
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
+    </div>
   </div>
 </div>
+
+<pre>{{interviewForm.value | json}}</pre>

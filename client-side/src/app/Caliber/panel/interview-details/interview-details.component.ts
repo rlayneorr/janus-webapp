@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-<<<<<<< HEAD
-=======
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms/';
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 // components
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
@@ -12,11 +10,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 // entities
 import { Trainee } from '../../entities/Trainee';
-<<<<<<< HEAD
-
-// services
-import { BatchService } from '../../services/batch.service';
-=======
 import { Panel } from '../../entities/Panel';
 import { Batch } from '../../entities/Batch';
 
@@ -26,7 +19,6 @@ import { BatchService } from '../../services/batch.service';
 import { PanelService } from '../../services/panel.service';
 
 
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
 
 @Component({
   selector: 'app-interview-details',
@@ -37,22 +29,15 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
 
   traineeSubscription: Subscription;
   trainee: Trainee;
-<<<<<<< HEAD
-  batchList: any;
-  batchSubscription: Subscription;
-  trainingTrack: any;
-
-  constructor(private searchBar: PanelSearchbarComponent, private batchService: BatchService) { }
-=======
   batchList: Batch[];
   panelList: Panel[];
   batchSubscription: Subscription;
   trainingTrack: string;
   panelRound: number;
-  interviewForm: FormGroup;
+
+  @Input() interviewForm: FormGroup;
 
   constructor(private searchBar: PanelSearchbarComponent, private batchService: BatchService, private panelService: PanelService) { }
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
 
   ngOnInit() {
     this.traineeSubscription = this.searchBar.getTraineeSubject().subscribe((trainee) => {
@@ -70,8 +55,6 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
         }
       }
     });
-<<<<<<< HEAD
-=======
 
     this.panelService.getList().subscribe((panelList) => {
       this.panelList = panelList;
@@ -82,16 +65,12 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.interviewForm = new FormGroup({
-      trainee: new FormControl(),
-      interviewDate: new FormControl(),
-      format: new FormControl(),
-      recordingConsent: new FormControl(),
-      internet: new FormControl()
-    });
-
-
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
+  //   this.interviewForm = new FormGroup({
+  //     interviewDate: new FormControl(),
+  //     format: new FormControl(),
+  //     recordingConsent: new FormControl(),
+  //     internet: new FormControl()
+  //   });
   }
 
   ngOnDestroy() {

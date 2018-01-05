@@ -61,20 +61,12 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
-<<<<<<< HEAD
-import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
-import { PanelComponent } from './panel/panel/panel.component';
-import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
-import { PanelTableComponent } from './panel/panel-table/panel-table.component';
-=======
-
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { PanelComponent } from './panel/panel.component';
 import { PanelTableComponent } from './panel/panel-table/panel-table.component';
 import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
 import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 
@@ -94,18 +86,15 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
-<<<<<<< HEAD
+import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
+import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
+import { OverallFeedbackComponent } from './panel/overall-feedback/overall-feedback.component';
 import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
-
-
-=======
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
-import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
-import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
+
 
 @NgModule({
   imports: [
@@ -148,10 +137,8 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
     TestComponent,
     TrainerProfilesComponent,
     PanelComponent,
-<<<<<<< HEAD
     PanelSearchbarComponent,
     PanelTableComponent,
-=======
     ReactivateLocationComponent,
     AlertsComponent,
     BarGraphModalComponent,
@@ -159,22 +146,18 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
     PanelSearchbarComponent,
     CreatePanelComponent,
     InterviewDetailsComponent,
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
 
     // pipes
     GraphDataPipe,
     GradeByTraineeByAssessmentPipe,
-<<<<<<< HEAD
     InterviewDetailsComponent,
     CreatePanelComponent,
-=======
     BatchByTrainerPipe,
     TierPipe,
     OrderByPipe,
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
-    
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
+    OverallFeedbackComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests

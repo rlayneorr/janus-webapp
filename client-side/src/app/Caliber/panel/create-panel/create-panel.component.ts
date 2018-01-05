@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms/';
+
 
 // entities
 import { Trainee } from '../../entities/Trainee';
@@ -15,7 +18,9 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
   trainee: Trainee;
-  constructor(private modalService: NgbModal, private searchBar: PanelSearchbarComponent) { }
+  panelForm: FormGroup;
+  // technologies: FormGroup;
+  constructor(private modalService: NgbModal, private searchBar: PanelSearchbarComponent, private fb: FormBuilder) { }
 
   ngOnInit() {
 <<<<<<< HEAD
@@ -25,6 +30,34 @@ export class CreatePanelComponent implements OnInit {
 >>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
       this.trainee = trainee;
     });
+
+    this.panelForm = this.fb.group({
+      interviewForm: this.fb.group({
+        interviewDate: [''],
+        format: [''],
+        recordingConsent: [''],
+        internet: ['']
+      }),
+        feedback: this.fb.array([])
+    });
+    this.addFeedback();
+  }
+
+  initFeedback() {
+    return this.fb.group({
+      technology: [''],
+      result: [''],
+      status: [''],
+      comment: ['']
+    });
+  }
+
+  addFeedback() {
+    const control = <FormArray>this.panelForm.controls['feedback'];
+    const feedbCtrl = this.initFeedback();
+
+    control.push(feedbCtrl);
+    console.log('added feedback');
   }
 
   open(content) {
