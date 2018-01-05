@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PanelComponent } from './panel.component';
+import { GeneralFeedbackComponent } from './general-feedback.component';
 
-describe('PanelComponent', () => {
-  let component: PanelComponent;
-  let fixture: ComponentFixture<PanelComponent>;
+describe('GeneralFeedbackComponent', () => {
+  let component: GeneralFeedbackComponent;
+  let fixture: ComponentFixture<GeneralFeedbackComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PanelComponent ]
+      declarations: [ GeneralFeedbackComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PanelComponent);
+    fixture = TestBed.createComponent(GeneralFeedbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
