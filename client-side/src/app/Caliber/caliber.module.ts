@@ -73,6 +73,7 @@ import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
 import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
+import { OverallFeedbackComponent } from './panel/overall-feedback/overall-feedback.component';
 
 
 
@@ -126,6 +127,7 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
     GradeByTraineeByAssessmentPipe,
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
+    OverallFeedbackComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
