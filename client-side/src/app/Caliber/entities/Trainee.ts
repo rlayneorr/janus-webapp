@@ -15,5 +15,9 @@ export class Trainee {
     major: string;
     techScreenerName: string;
     projectCompletion: string;
+<<<<<<< HEAD
  //   batch: Batch;
+=======
+    // batch: Batch;
+>>>>>>> revaturions-dev
 }

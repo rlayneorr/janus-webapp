@@ -53,6 +53,7 @@ import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
 import { DisplayBatchByYear } from './manage/manage.pipe';
 import { FilterByPipe } from './pipes/filter-by.pipe';
 import { ToolbarFilterPipe } from './pipes/toolbar-filter.pipe';
+import { AddressToStringPipe } from './pipes/address-to-string.pipe';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -101,7 +102,6 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
 import { ReportsService } from './services/reports.service';
 import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
 import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
-import { AddressToStringPipe } from './pipes/address-to-string.pipe';
 
 @NgModule({
   imports: [
@@ -117,6 +117,21 @@ import { AddressToStringPipe } from './pipes/address-to-string.pipe';
   ],
   declarations: [
     // pipes
+    GraphDataPipe,
+    PanelBatchAllTraineesComponent,
+    GradeByTraineeByAssessmentPipe,
+    DisplayBatchByYear,
+    BatchByTrainerPipe,
+    CategorySkillPipe,
+    NoteByTraineeByWeekPipe,
+    TierPipe,
+    TrainerPipePipe,
+    OrderByPipe,
+    GradeByTraineeByAssessmentPipe,
+    BatchByTrainerPipe,
+    GeneralFeedbackComponent,
+    TechnicalFeedbackComponent,
+    AddressToStringPipe,
     GraphDataPipe,
     OrderByPipe,
     FilterByPipe,
@@ -168,24 +183,7 @@ import { AddressToStringPipe } from './pipes/address-to-string.pipe';
     PanelSearchbarComponent,
     CreatePanelComponent,
     InterviewDetailsComponent,
-
-    // pipes
-    GraphDataPipe,
-    PanelBatchAllTraineesComponent,
-    GradeByTraineeByAssessmentPipe,
-    DisplayBatchByYear,
-    BatchByTrainerPipe,
-    CategorySkillPipe,
-    NoteByTraineeByWeekPipe,
-    TierPipe,
-    TrainerPipePipe,
-    OrderByPipe,
-    GradeByTraineeByAssessmentPipe,
-    BatchByTrainerPipe,
-    GeneralFeedbackComponent,
-    TechnicalFeedbackComponent,
-    AddressToStringPipe,
-  ],
+ ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
     BatchService,
