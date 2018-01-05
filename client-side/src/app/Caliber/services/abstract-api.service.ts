@@ -135,7 +135,6 @@ export abstract class AbstractApiService<T> {
    */
   protected doGetListObservable(apiUrl: string, params: any = {}): Observable<T[]> {
     const url = this.envService.buildUrl(apiUrl, params);
-    console.log(url);
     return this.http.get<T[]>(url);
   }
 
