@@ -45,6 +45,7 @@ import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-asse
 import { CategorySkillPipe } from './pipes/category-skill.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
+import { TrainerPipePipe } from './pipes/trainer-pipe.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
 import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
@@ -141,13 +142,17 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
 
     // pipes
     GraphDataPipe,
+    PanelBatchAllTraineesComponent,
     GradeByTraineeByAssessmentPipe,
     DisplayBatchByYear,
     BatchByTrainerPipe,
     CategorySkillPipe,
     NoteByTraineeByWeekPipe,
     TierPipe,
+    TrainerPipePipe,
     OrderByPipe,
+    GradeByTraineeByAssessmentPipe,
+    BatchByTrainerPipe,
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
   ],
@@ -171,12 +176,12 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
     LocationService,
     CategoryService,
     CategoriesService,
-    SkillService,
-    TrainingTypeService,
     AlertsService,
     VpHomeBarGraphService,
     VpHomePanelGraphService,
     EvaluationService,
+    SkillService,
+    TrainingTypeService,
   ],
   bootstrap: [
     TrainersComponent
