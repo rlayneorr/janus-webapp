@@ -4,7 +4,7 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 // rxjs
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/of';
 
 /**
  * this class intercepts each HTTP request, clones it,
@@ -36,7 +36,7 @@ export class SpringInterceptor implements HttpInterceptor {
                */
                 console.log(error);
                 // stub -> a generic user feedback hook can be placed here
-                return Observable.empty<any>();
+                return Observable.of(null);
         });
     }
 }

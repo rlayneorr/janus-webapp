@@ -12,7 +12,8 @@ import { Subscription } from 'rxjs/Subscription';
 export class QualityComponent implements OnInit, OnDestroy {
 
   batches: Batch[];
-  currentBatch: Batch;
+
+  currentBatch: Batch = new Batch();
   currentYear: number;
 
   batchSubscription: Subscription;

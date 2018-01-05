@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import { Batch } from '../../entities/Batch';
 import { NoteService } from '../../services/note.service';
 import { Note } from '../../entities/Note';
@@ -9,26 +9,46 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './quality-feedback.component.html',
   styleUrls: ['./quality-feedback.component.css']
 })
-export class QualityFeedbackComponent implements OnInit, OnDestroy {
+export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
 
-  @Input() batch: Batch;  // property is going to RECEIVE input from outside
-  QcTraineeNotes: Note[];
-  QcTraineeNotesSubscription: Subscription;
-  test: any;
+  @Input() batch: Batch;
+  qcBatchNote: Note[];
+  qcTraineeNotes: Note[];
+  notesSubscription: Subscription;
+  week = 1;
 
-  constructor(private noteService: NoteService) { }
+  constructor(private noteService: NoteService) {
+    this.notesSubscription = this.noteService.getList()
+      .subscribe( (notes) => this.setNotes(notes) );
+   }
 
   ngOnInit() {
-    this.QcTraineeNotesSubscription = this.noteService.fetchQcTraineeNotesByBatchIdByWeek(2201, 5)
-    .subscribe( (notes) => this.setQcTraineeNotes(notes));
+    // this.fetchNotes();
   }
 
   ngOnDestroy() {
-    this.QcTraineeNotesSubscription.unsubscribe();
+    this.notesSubscription.unsubscribe();
   }
 
-  setQcTraineeNotes(QcTraineeNotes) {
-    this.QcTraineeNotes = QcTraineeNotes;
+  ngOnChanges() {
+    this.fetchNotes();
+  }
+
+  setNotes(notes: Note[]): void {
+    this.qcBatchNote = notes.filter(note => note.type === 'QC_BATCH');
+    this.qcTraineeNotes = notes.filter(note => note.type === 'QC_TRAINEE');
+    console.log(notes);
+    console.log(this.qcBatchNote);
+    console.log(this.qcTraineeNotes);
+  }
+
+  fetchNotes() {
+    this.noteService.fetchByBatchIdByWeek(this.batch.batchId, this.week);
+  }
+
+  changeWeek(week: number) {
+    this.week = week;
+    this.fetchNotes();
   }
 
   getBatchWeeks(): number[] {
@@ -36,9 +56,18 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy {
     for (let i = 1; i < this.batch.weeks + 1; i++) {
       batchWeeks.push(i);
     }
-    // console.log(this.batch.batchId);
-    console.log(this.QcTraineeNotes);
     return batchWeeks;
+  }
+
+  getNoteOnTrainee(index: number) {
+    return this.qcTraineeNotes[index].content;
+  }
+
+  test() {
+    console.log(this.batch.batchId);
+    console.log(this.week);
+    console.log(this.qcBatchNote);
+    console.log(this.qcTraineeNotes[1].trainee.name);
   }
 
 }

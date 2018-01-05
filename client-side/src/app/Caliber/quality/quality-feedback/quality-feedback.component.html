@@ -1,7 +1,25 @@
-<ul>
-  <li *ngFor="let number of getBatchWeeks()">
-      Week {{ number }}
+<ul *ngIf="batch">
+  <li *ngFor="let week of getBatchWeeks()" (click)="changeWeek(week)">
+    <button>Week {{ week }}</button>
   </li>
 </ul>
 
-<p>Current batch trainer: {{ batch.batchId }}</p>
+<table>
+  <thead>
+    <tr>
+      <th>Trainee</th>
+      <th>Individual Feedback</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let trainee of batch.trainees; let i = index">
+      <td>{{ trainee.name }}</td>
+      <td>button</td>
+      <td class="col-sm-9 col-md-9 col-lg-9">
+        <textarea id="noteTextArea" cols="75" rows="3" maxlength="4000"
+          placeholder="Note on {{ trainee.name }}"></textarea>
+      </td>
+    </tr>
+  </tbody>
+</table>
