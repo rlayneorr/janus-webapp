@@ -73,8 +73,8 @@ export class LocationService extends AbstractApiService<Location> {
   public fetchAll(): void {
     const url = 'all/location/all/';
     const messages = {
-      success: 'Got all locations successfully!',
-      error: 'Failed to get all locations!',
+      success: 'Locations retrieved successfully',
+      error: 'Failed to retrieve locations',
     };
 
     super.doGetList(url, {}, messages);

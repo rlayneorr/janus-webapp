@@ -15,7 +15,7 @@ export class CreatelocationComponent implements OnInit {
 
   currNewLocation = new Location();
   newState: string;
-
+  show: boolean;
   rForm: FormGroup;
   private modalRef: NgbModalRef;
   closeResult: string;
@@ -68,7 +68,7 @@ export class CreatelocationComponent implements OnInit {
   /**
  * save all new fields into the location objet
  * send the post request to create new location
- * @param modal: fields from the modal 
+ * @param modal: fields from the modal
  */
   addLocation(modal) {
     this.currNewLocation.state = this.newState;
@@ -78,6 +78,9 @@ export class CreatelocationComponent implements OnInit {
     this.currNewLocation.zipcode = modal.zipcode;
     this.currNewLocation.active = true;
     this.locationService.addLocation(this.currNewLocation);
+    this.locationService.getSaved().subscribe((succ) => {
+      this.locationService.fetchAll();
+    });
   }
 
   /**

@@ -35,7 +35,7 @@ export class TestComponent implements OnInit, OnDestroy {
   private data: any[];
 
 
-  constructor(private service: AssessmentService ) {
+  constructor(private service: NoteService ) {
 
   }
 
@@ -122,22 +122,22 @@ export class TestComponent implements OnInit, OnDestroy {
   // }
 
   ngOnInit() {
-    this.service.save( this.getTestAssessment() );
+    // this.service.save( this.getTestAssessment() );
 
-    this.service.getSaved().subscribe( (saved) => console.log(saved) );
+    // this.service.getSaved().subscribe( (saved) => console.log(saved) );
 
-    // this.subscription = this.service.getList().subscribe( (data) => {
-    //   this.data = data;
-    //   this.log(this.data);
+    this.subscription = this.service.getList().subscribe( (data) => {
+      this.data = data;
+      this.log(this.data);
 
-    //   // if ( this.data.length > 0 ) {
-    //   //   this.testCreate();
-    //   // }
-    // });
+      // if ( this.data.length > 0 ) {
+      //   this.testCreate();
+      // }
+    });
 
     // this.service.fetchAll();
     // this.service.fetchAllByBatch(3002);
-    // this.service.fetchByBatchIdByWeek(2201, 1);
+    this.service.fetchByBatchIdByWeek(2150, 5);
   }
 
   ngOnDestroy() {

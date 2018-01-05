@@ -17,7 +17,7 @@ export class VpHomeLineGraphService {
    * @returns ChartDataEntity
    */
 
-  public getLineChartData() {
+  public getLineChartData(): ChartDataEntity {
     const lineChartData = new ChartDataEntity();
     lineChartData.colors = [lineChartData.mainColor, lineChartData.secondaryColor];
     lineChartData.options = {
@@ -32,6 +32,9 @@ export class VpHomeLineGraphService {
           scaleLabel: {
             display: true,
             labelString: 'Week'
+          },
+          ticks: {
+            autoSkip: false,
           }
 
         }],
@@ -44,7 +47,7 @@ export class VpHomeLineGraphService {
           ticks: {
             suggestedMin: 40,
             suggestedMax: 100,
-            stepSize: 20
+            stepSize: 20,
           }
         }]
       },
@@ -70,7 +73,7 @@ export class VpHomeLineGraphService {
   * @return ChartDataEntity
   */
 
-  public fillChartData(results: any, lineChartData: ChartDataEntity, state: string, city: string) {
+  public fillChartData(results: any, lineChartData: ChartDataEntity, state: string, city: string): ChartDataEntity {
     let holder;
     lineChartData = this.clearLineChartData(lineChartData);
     if (state !== '') {
@@ -107,7 +110,6 @@ export class VpHomeLineGraphService {
       lineChartData.labels.push('Week ' + i);
     }
     lineChartData.colors = this.cs.getLineColors(lineChartData.data.length);
-    console.log(lineChartData);
     return lineChartData;
   }
 
@@ -117,7 +119,7 @@ export class VpHomeLineGraphService {
  * @returns ChartDataEntity
  */
 
-  private clearLineChartData(lineChartData: ChartDataEntity) {
+  private clearLineChartData(lineChartData: ChartDataEntity): ChartDataEntity {
     lineChartData.data.length = 0;
     lineChartData.labels.length = 0;
     lineChartData.colors = [];

@@ -1,58 +1,62 @@
-<app-alerts></app-alerts>
 <div class="container">
-  <div class="row">
-    <div class="col-md-12 col-lg-12 tab-panes">
-      <br>
-      <ul class="nav nav-tabs justify-content-end">
-        <li (click)="open(addTrainerContent)">
-          <button type="button" class="btn btn-secondary">
-            <strong>Create Trainer
-              <i class="fa fa-plus" aria-hidden="true"></i>
-            </strong>
-          </button>
-        </li>
-      </ul>
-    </div>
+  <div class="test">
+    <br>
+    <button type="button" class="btn btn-secondary" (click)="buttonChange('ACTIVE')">
+      <strong>Active</strong>
+    </button>
+
+    <button type="button" class="btn btn-secondary" (click)="buttonChange('ROLE_INACTIVE')">
+      <strong>Inactive</strong>
+    </button>
+
+    <button type="button" class="btn btn-secondary" (click)="open(addTrainerContent)" style='float: right;'>
+      <strong>Create Trainer
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </strong>
+    </button>
   </div>
 
-<!--Trainers table. Displays the trainer's name, title, email, and tier, and the icons to
+  <!--Trainers table. Displays the trainer's name, title, email, and tier, and the icons to
 add or edit a trainer-->
-<div id="trainers-table" class = "table-responsive">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Email</th>
-        <th>Tier</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let trainer of trainers">
-        <td>
-          {{trainer.name}}
-        </td>
-        <td>
-          {{trainer.title}}
-        </td>
-        <td>
-          {{trainer.email}}
-        </td>
-        <td>
-          {{trainer.tier | displayTier: trainer.tier}}
-        </td>
-        <td>
-          <i class="fa fa-user" style="color:#ff8e4d;" (click)="goToProfile(trainer)"></i>
-        </td>
-        <td>
-          <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, trainer)"></i>
-        </td>
-        <td>
-          <app-deactivatetrainer [trainer] = "trainer"></app-deactivatetrainer>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div id="trainers-table" class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Email</th>
+          <th>Tier</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trainer of (trainers | trainerPipe:this.activeStatus)">
+          <td>
+            {{trainer.name}}
+          </td>
+          <td>
+            {{trainer.title}}
+          </td>
+          <td>
+            {{trainer.email}}
+          </td>
+          <td>
+            {{trainer.tier | displayTier: trainer.tier}}
+          </td>
+          <td>
+            <i class="fa fa-user" style="color:#ff8e4d;" (click)="goToProfile(trainer)"></i>
+          </td>
+          <td>
+            <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, trainer)"></i>
+          </td>
+          <td>
+            <app-deactivatetrainer [trainer]="trainer"></app-deactivatetrainer>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
   </div>
 
@@ -71,13 +75,12 @@ add or edit a trainer-->
             <div class="col-md-6">
               <!-- Field for Trainer name -->
               <label class="col-sm-2 control-label text-nowrap" for="name">Trainer Name:</label>
-              <input type="text" class="form-control" id="name" name="name"  formControlName="name" placeholder="Trainer Name"
-              />
+              <input type="text" class="form-control" id="name" name="name" formControlName="name" placeholder="Trainer Name" />
             </div>
             <div class="col-md-6">
               <!-- Field for email -->
               <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
-              <input type="text" class="form-control"  formControlName="email" id="email" name="email" placeholder="Email" />
+              <input type="text" class="form-control" formControlName="email" id="email" name="email" placeholder="Email" />
             </div>
           </div>
 
@@ -86,7 +89,7 @@ add or edit a trainer-->
               <!-- dropdown/filter for Trainer Title -->
               <!-- Datalist to display titles -->
               <label class="col-sm-2 control-label text-nowrap" for="title">Enter Title</label>
-              <input class="form-control"  formControlName="title" (ngModelChange)="titleChange($event)" list="browsers" name="browser">
+              <input class="form-control" formControlName="title" (ngModelChange)="titleChange($event)" list="browsers" name="browser">
               <datalist id="browsers">
                 <option [value]="title" *ngFor="let title of titles">
               </datalist>
@@ -94,8 +97,8 @@ add or edit a trainer-->
             <div class="col-md-6">
               <!-- Dropdown for Trainer tier/role -->
               <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label>
-              <select class="form-control"  formControlName="tier" (ngModelChange)="tierChange($event)" name="tier">
-                <option [value]="tier" *ngFor="let tier of tiers">{{tier | slice:5}}</option>
+              <select class="form-control" formControlName="tier" (ngModelChange)="tierChange($event)" name="tier">
+                <option [value]="tier" *ngFor="let tier of tiers">{{tier | displayTier}}</option>
               </select>
 
             </div>
@@ -121,8 +124,8 @@ add or edit a trainer-->
     </div>
 
     <div class="modal-body">
-    <form #addTrainerForm="ngForm" [formGroup]="addForm">
-      
+      <form #addTrainerForm="ngForm" [formGroup]="addForm">
+
         <div class="form-group">
           <div class="row">
             <div class="col-md-6">
@@ -148,7 +151,8 @@ add or edit a trainer-->
               <!-- Datalist to display titles -->
               <label class="col-sm-2 control-label text-nowrap" for="title">Title</label>
               <div class="col-sm-12">
-                <input list="trainerTitle" formControlName="title" type="text" class="form-control" id="title1" name="title" placeholder="Title"/>
+                <input list="trainerTitle" formControlName="title" type="text" class="form-control" id="title1" name="title" placeholder="Title"
+                />
                 <!-- Dropdown for Trainer tier/role -->
                 <datalist id="trainerTitle">
                   <option [value]="title" *ngFor="let title of titles">{{title}}</option>
@@ -160,18 +164,18 @@ add or edit a trainer-->
               <label class="col-sm-2 control-label text-nowrap" for="tier">Tier</label>
               <div class="col-sm-12">
                 <select class="form-control" formControlName="tier" (ngModelChange)="newTierChange($event)" name="tier">
-                  <option [value]="tier" *ngFor="let tier of tiers">{{tier}}</option>
+                  <option [value]="tier" *ngFor="let tier of tiers">{{tier | displayTier}}</option>
                 </select>
               </div>
             </div>
           </div>
         </div>
       </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" data-dismiss="modal" [disabled]="!addForm.valid" (click)="addTrainer(addTrainerForm.value); c()" class="btn btn-add">Save</button>
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" data-dismiss="modal" [disabled]="!addForm.valid" (click)="addTrainer(addTrainerForm.value); c()" class="btn btn-add">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    </div>
 
   </ng-template>
 </div>
