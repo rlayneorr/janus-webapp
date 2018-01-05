@@ -34,7 +34,7 @@ export class CategoriesComponent implements OnInit {
   numColumns: number;
   constructor(private categoriesService: CategoriesService, private modalService: NgbModal,
     private fb: FormBuilder) {
-   }
+  }
 
   // Loads all categories
   ngOnInit() {
@@ -65,12 +65,18 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  // Change active status of category
+  /**
+   *  Change active status of Category
+   * @param activeValue
+   **/
   activeChange(activeValue) {
     this.isActive = activeValue;
   }
 
-  // Send call to update active status
+  /**
+   *  Send call to update active status
+   * @param nameChange
+   **/
   editCurrentCategory(nameChange) {
     this.currentCategory.skillCategory = nameChange.value.skillCategory;
     this.currentCategory.active = this.isActive;
@@ -80,8 +86,12 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  /**
+   * Populates the Columns with Categories
+   * @param column
+   * @param index
+   **/
   nextColumn(column, index) {
-    // Logic for populating columns
     switch (column) {
       case 0:
         if (index < this.categories.length / this.numColumns) {
@@ -118,6 +128,11 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens the edit modal
+   * @param content
+   * @param index
+   */
   editopen(content, index: Category) {
     this.currentCategory = index;
     this.isActive = index.active;
