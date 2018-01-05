@@ -30,7 +30,6 @@ import { NoteService } from './services/note.service';
 import { CategoryService } from './services/category.service';
 import { SkillService } from './services/skill.service';
 import { TrainingTypeService } from './services/training-type.service';
-import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { ColorService } from './services/colors/color.service';
 import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.service';
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
@@ -43,6 +42,8 @@ import { EvaluationService } from './services/evaluation.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
+import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
+import { CategorySkillPipe } from './pipes/category-skill.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
@@ -76,6 +77,10 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
+
+
+
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
@@ -131,6 +136,8 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     GraphDataPipe,
     GradeByTraineeByAssessmentPipe,
     BatchByTrainerPipe,
+    CategorySkillPipe,
+    NoteByTraineeByWeekPipe,
     TierPipe,
     OrderByPipe,
   ],
