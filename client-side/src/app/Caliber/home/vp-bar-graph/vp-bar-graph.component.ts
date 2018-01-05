@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
 import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
@@ -25,7 +25,7 @@ import { ReportsService } from '../../services/reports.service';
   templateUrl: './vp-bar-graph.component.html',
   styleUrls: ['./vp-bar-graph.component.css', '../homeCSS/vpHomeCharts.css']
 })
-export class VpBarGraphComponent implements OnInit {
+export class VpBarGraphComponent implements OnInit, OnDestroy {
   public barChartData: ChartDataEntity;
   public results: any;
   public addresses;
@@ -77,6 +77,9 @@ export class VpBarGraphComponent implements OnInit {
         this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasBarChartData = true;
         this.QcBatchSub = this.batchService.getList().subscribe( (resp2) => {
+          if(resp2 === []) {
+            this.batchService.fetchAll();
+          }
           this.allbatches = resp2;
           this.populateBatchStatuses();
           this.alertService.success('Successfully fetched QC Progress!');
@@ -195,4 +198,7 @@ export class VpBarGraphComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.QcBatchSub.unsubscribe();
+  }
 }
