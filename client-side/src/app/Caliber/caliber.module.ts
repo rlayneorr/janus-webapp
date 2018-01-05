@@ -42,11 +42,13 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 
 // pipes
-import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
+
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
+import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
+
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -59,8 +61,17 @@ import { WeeklyLineChartComponent } from './weekly-line-chart/weekly-line-chart.
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
+
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { PanelComponent } from './panel/panel.component';
+import { PanelTableComponent } from './panel/panel-table/panel-table.component';
+import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
+import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
+import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
+
+import { GraphDataPipe } from './pipes/graph-data.pipe';
+
+
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
 import { VpPanelGraphComponent } from './home/vp-panel-graph/vp-panel-graph.component';
@@ -79,6 +90,8 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
+import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
+import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
 
 @NgModule({
   imports: [
@@ -125,14 +138,19 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     AlertsComponent,
     BarGraphModalComponent,
     PanelBatchAllTraineesComponent,
+    PanelSearchbarComponent,
+    CreatePanelComponent,
+    InterviewDetailsComponent,
 
     // pipes
-    TraineeSearchPipePipe,
     GraphDataPipe,
     GradeByTraineeByAssessmentPipe,
     BatchByTrainerPipe,
     TierPipe,
     OrderByPipe,
+    GeneralFeedbackComponent,
+    TechnicalFeedbackComponent,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
