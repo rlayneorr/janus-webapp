@@ -115,13 +115,13 @@ export class ManageComponent implements OnInit, OnDestroy {
    */
   createNewBatchFunction() {
     console.log(this.createNewBatch);
-    this.batchService.save(this.createNewBatch);
+
+    const newDate = this.datePipe.transform(this.createNewBatch.startDate, 'yyyy-MM-dd');
+    console.log(this.createNewBatch.startDate);
+    /*this.batchService.save(this.createNewBatch);*/
   }
 
   createNewTraineeFunction() {
-    console.log(this.createNewTrainee.name);
-    console.log(this.createNewTrainee.email);
-    console.log(this.createNewTrainee);
     this.traineeService.save(this.createNewTrainee);
   }
 
