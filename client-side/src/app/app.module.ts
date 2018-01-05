@@ -52,7 +52,7 @@ const routes: Routes = [
     NavModule,
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   declarations: [
     AppComponent,
