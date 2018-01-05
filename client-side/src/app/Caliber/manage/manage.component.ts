@@ -38,7 +38,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   locations: Address[] = [];
   trainingTypes: string[] = [];
   skills: string[] = [];
-  
+
   /* Subscriptions */
   batchSub: Subscription;
   trainerSub: Subscription;
@@ -49,7 +49,9 @@ export class ManageComponent implements OnInit, OnDestroy {
   constructor(private batchService: BatchService, private trainerService: TrainerService,
     private locationService: LocationService, private trainingTypeService: TrainingTypeService,
     private skillService: SkillService,
-    private modalService: NgbModal, private datePipe: DatePipe) {
+    private modalService: NgbModal,
+    private datePipe: DatePipe
+  ) {
    }
 
 
