@@ -63,13 +63,12 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     private reportsService: ReportsService) { }
 
   ngOnInit() {
-    this.batchService.fetchAll();
     this.hasBarChartData = false;
     this.selectedState = false;
     this.barChartData = this.vpHomeBarGraphService.getBarChartData();
-    this.reportsService.fetchReportsStackedBarCurrentWeek()
-      .subscribe(
+    this.http.get(this.environmentService.buildUrl('qc/batch/all')).subscribe(
       (resp) => {
+        console.log(this.results);
         this.results = resp;
         this.results.sort();
         this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
@@ -199,6 +198,5 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.QcBatchSub.unsubscribe();
   }
 }
