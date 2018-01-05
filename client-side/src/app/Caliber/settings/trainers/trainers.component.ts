@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-trainers',
   templateUrl: './trainers.component.html',
-  styleUrls: ['./trainers.component.css',
-    '../../../../../node_modules/font-awesome/css/font-awesome.css']
+  styleUrls: ['./trainers.component.css']
 })
 
 export class TrainersComponent implements OnInit, OnDestroy {
@@ -37,7 +36,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.trainerSubscription = this.trainerService.getList().subscribe((resp) => {
       this.trainers = resp;
     });
-    this.trainerSubscription = this.trainerService.getTitleList().subscribe((resp) => {
+    this.trainerSubscription = this.trainerService.getTitlesList().subscribe((resp) => {
       this.titles = resp;
     });
     this.trainerSubscription = this.trainerService.getTierList().subscribe((resp) => {
