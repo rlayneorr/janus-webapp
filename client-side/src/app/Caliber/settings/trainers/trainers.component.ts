@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-trainers',
   templateUrl: './trainers.component.html',
-  styleUrls: ['./trainers.component.css',
-    '../../../../../node_modules/font-awesome/css/font-awesome.css']
+  styleUrls: ['./trainers.component.css']
 })
 
 export class TrainersComponent implements OnInit, OnDestroy {
@@ -20,7 +19,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
   titles: Array<any>;
   tiers: Array<any>;
   model = new Trainer();
-
+  activeStatus: String;
   currEditTrainer: Trainer;
   newTrainer: Trainer;
   newTier: string;
@@ -28,7 +27,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   rForm: FormGroup;
   addForm: FormGroup;
-
   constructor(private trainerService: TrainerService,
     private modalService: NgbModal, private fb: FormBuilder, private route: Router) { }
 
@@ -63,11 +61,10 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.newTrainer = modal;
     console.log(modal);
     console.log(modal.name);
-    this.trainerService.create(this.newTrainer);
-    this.trainerService.getSaved().subscribe(
-      succ => this.trainerService.fetchAll(),
-      err => console.log('error')
-    );
+    this.trainerService.save(this.newTrainer);
+    this.trainerService.getSaved().subscribe((resp) => {
+      this.trainerService.fetchAll();
+    });
     // this.trainers.push(this.newTrainer);
   }
 
@@ -121,6 +118,9 @@ export class TrainersComponent implements OnInit, OnDestroy {
   newTitleChange(newTitle) {
     this.model.title = newTitle;
   }
+  buttonChange(status: String) {
+    this.activeStatus = status;
+  }
 
   /**
    * update the fields in currently edited trainer
@@ -129,7 +129,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
    */
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
-    let temp = new Trainer();
+    const temp = new Trainer();
     temp.trainerId = this.currEditTrainer.trainerId;
     temp.tier = this.newTier;
     temp.title = this.newTitle;
@@ -137,7 +137,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
     temp.email = modal.email;
     // call trainerService to update
     this.trainerService.update(temp);
-    this.trainerService.getSaved().subscribe((resp) => {
+    this.trainerService.getUpdated().subscribe((resp) => {
       this.currEditTrainer = temp;
       this.trainerService.fetchAll();
     });
