@@ -36,9 +36,9 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
   // batch id of batch being viewed
   public batch: Batch = new Batch();
   // current week
-  public week: Number;
+  public week: Number = 0;
   // current trainee
-  public trainee: Trainee;
+  public trainee: Trainee = new Trainee();
   // list of trainees (id) that could be displayed
   public traineesList: number[] = [];
   // this is where trainee radar data is stored until it needs to be displayed
@@ -90,6 +90,9 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
       (result) => {
         if (result !== this.week) {
           this.week = result;
+          // console.log('week: ');
+          // console.log(result);
+          this.setUp();
         }
       });
     // granularity trainee sub
@@ -97,6 +100,9 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
       (result) => {
         if (result !== this.trainee) {
           this.trainee = result;
+          // console.log('trainee: ');
+          // console.log(result);
+          this.setUp();
         }
       });
 
@@ -106,11 +112,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
         if (result.batchId !== this.batch.batchId) {
           this.batch = result;
           this.dataSetLabels = [this.batch.trainingName];
-          if (this.week === 0 && this.trainee.traineeId === 0) {
-            this.overallSetup(result);
-          } else {
-            this.weekSetup();
-          }
+          this.setUp();
         }
       });
     // data formating for weekly trainee chart
@@ -194,15 +196,23 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     this.weekSubscription.unsubscribe();
     this.traineeSubscription.unsubscribe();
   }
+  setUp() {
+    if (this.trainee && this.trainee.traineeId) {
+      if (this.week === 0 && this.trainee.traineeId === 0) {
+        this.overallSetup();
+      } else {
+        this.weekSetup();
+      }
+    }
+  }
   /**
    * Sets up some variables and send requests for overall radar
-   * @param result is the whole batch object.
    */
-  overallSetup(result: any) {
+  overallSetup() {
     this.chartData = [];
-    for (let i = 0; i < result.trainees.length; i++) {
-      this.traineesList.push(result.trainees[i].traineeId);
-      this.traineesNames.push(result.trainees[i].name);
+    for (let i = 0; i < this.batch.trainees.length; i++) {
+      this.traineesList.push(this.batch.trainees[i].traineeId);
+      this.traineesNames.push(this.batch.trainees[i].name);
     }
     this.reportsService.fetchBatchOverallRadarChart(this.batch.batchId);
     // create requests for radar data for each trainee in traineeList
@@ -217,9 +227,9 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
   weekSetup() {
     this.chartData = [];
     this.dataSetLabels.push(this.trainee.name);
-    console.log('dataset labels : ' + this.dataSetLabels);
     this.reportsService.fetchBatchOverallRadarChart(this.batch.batchId);
     if (this.week === 0) {
+      console.log('debug');
       this.reportsService.fetchTraineeOverallRadarChart(this.trainee.traineeId);
     } else {
       this.reportsService.fetchTraineeUpToWeekRadarChart(this.week, this.trainee.traineeId);
