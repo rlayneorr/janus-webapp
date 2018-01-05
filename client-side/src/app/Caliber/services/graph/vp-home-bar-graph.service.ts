@@ -107,6 +107,7 @@ export class VpHomeBarGraphService {
 
   /**
    * Clears the arrays of a ChartDataEntity
+   * without this the chart won't redraw
    * @param ChartDataEntity
    * @returns ChartDataEntity
    */
