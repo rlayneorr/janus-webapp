@@ -1,5 +1,5 @@
-import { Trainee } from './Trainee';
 import { Batch } from './Batch';
+import { Trainee } from './Trainee';
 
 export class Note {
     public static TYPE_QCBATCH = 'QC_BATCH';
