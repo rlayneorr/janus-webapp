@@ -55,8 +55,6 @@ export class ReportingService {
   public BatchWeekSortedBarChart$ = this.BatchWeekSortedBarChart.asObservable();
 
   /*  Reports Charts */
-
-
   constructor(private httpClient: HttpClient) { }
 
   /**
@@ -159,7 +157,7 @@ export class ReportingService {
 
   fetchBatchWeekSortedBarChart(batchId: Number, week: Number) {
     const endpoint = environment.apiBatchWeekSortedBarChart(batchId, week);
-    
+
     const params = {
       batchId: batchId,
       week: week
@@ -357,6 +355,7 @@ export class ReportingService {
    */
   fetchTechnologiesForTheWeek(batchId: Number, weekId: Number) {
     const endpoint = environment.apiTechnologiesForTheWeek(batchId, weekId);
+    console.log(endpoint);
 
     // Params object for refresh check
     const params = {
