@@ -28,7 +28,7 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts",
-        "uat": "environments/environemtn.uat.ts"
+        "uat": "environments/environment.uat.ts"
       }
     }
   ],

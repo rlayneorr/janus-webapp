@@ -1,12 +1,6 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-
 export const environment = {
-  production: false,
-  context: 'http://localhost:8080/',
-  bootContext: 'http://localhost/',
+  production: true,
+  context: 'http://localhost:8080/', // change for what the production environment would actually be
 
   // API calls for the VP functionality group
   addNewCategory: 'http://localhost:8080/vp/category',
@@ -18,6 +12,8 @@ export const environment = {
   reactivateLocation: 'http://localhost:8080/vp/location/reactivate',
   addLocation: 'http://localhost:8080/vp/location/create',
   deleteTrainer: 'http://localhost:8080/vp/trainer/delete',
+  getAllLocations: 'http://localhost:8080/all/location/all/',
+  getAllTrainers: 'http://localhost:8080/all/trainer/all',
   getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
   getAllTiers: 'http://localhost:8080/types/trainer/role/all',
   editTrainer: 'http://localhost:8080/vp/trainer/update',
@@ -96,10 +92,10 @@ export const environment = {
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
 
-  /* Evaluation service API endpoints */
+    /* Evaluation service API endpoints */
   apiFetchAllQCTraineeNotes: (batchId: Number, weekId: Number) =>
-    environment.context + `qc/note/trainee/${batchId}/${weekId}`,
+  environment.context + `qc/note/trainee/${batchId}/${weekId}`,
 
-  apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
-    environment.context + `qc/note/batch/${batchId}/${weekId}`,
+apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
+  environment.context + `qc/note/batch/${batchId}/${weekId}`,
 };
