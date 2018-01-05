@@ -48,6 +48,7 @@ import { OverallFeedbackComponent } from './reports/overall-feedback/overall-fee
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterByPipe } from './pipes/filter-by.pipe';
+import { ToolbarFilterPipe } from './pipes/toolbar-filter.pipe';
 
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
@@ -77,6 +78,7 @@ import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedba
 import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.component';
 import { WeeklyAuditComponent } from './reports/weekly-audit/weekly-audit.component';
 import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative-scores.component';
+import { DoughnutComponent } from './doughnut/doughnut.component';
 
 @NgModule({
   imports: [
@@ -95,6 +97,7 @@ import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative
     GraphDataPipe,
     OrderByPipe,
     FilterByPipe,
+    ToolbarFilterPipe,
 
     // components
     CaliberComponent,
@@ -133,6 +136,7 @@ import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative
     PanelFeedbackComponent,
     WeeklyAuditComponent,
     CumulativeScoreComponent,
+    DoughnutComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
