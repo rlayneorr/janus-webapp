@@ -65,8 +65,7 @@ import { WeeklyLineChartComponent } from './reports/weekly-line-chart/weekly-lin
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
-import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
-import { PanelComponent } from './panel/panel.component';
+import { PanelComponent } from './panel/panel/panel.component';
 import { OverallFeedbackComponent } from './reports/overall-feedback/overall-feedback.component';
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { PanelTableComponent } from './panel/panel-table/panel-table.component';
@@ -116,7 +115,6 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
   ],
   declarations: [
     // pipes
-    TraineeSearchPipePipe,
     GraphDataPipe,
     OrderByPipe,
     FilterByPipe,
