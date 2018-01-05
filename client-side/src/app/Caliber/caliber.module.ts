@@ -43,7 +43,9 @@ import { HttpClient } from '@angular/common/http';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
 import { TrainerProfileComponent } from './trainer-profile/trainer-profile.component';
-import { PanelComponent } from './panel/panel.component';
+import { PanelComponent } from './panel/panel/panel.component';
+import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
+import { PanelTableComponent } from './panel/panel-table/panel-table.component';
 
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 
@@ -68,6 +70,8 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
+import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
 
 
 
@@ -111,12 +115,16 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
     TestComponent,
     TrainerProfileComponent,
     PanelComponent,
+    PanelSearchbarComponent,
+    PanelTableComponent,
 
     // pipes
     TraineeSearchPipePipe,
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
     GradeByTraineeByAssessmentPipe,
+    InterviewDetailsComponent,
+    CreatePanelComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
