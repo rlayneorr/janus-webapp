@@ -75,6 +75,9 @@ export class CategoriesComponent implements OnInit {
     this.currentCategory.skillCategory = nameChange.value.skillCategory;
     this.currentCategory.active = this.isActive;
     this.categoriesService.editCurrentCategory(this.currentCategory);
+    this.categoriesService.getUpdated().subscribe((resp) => {
+      this.categoriesService.fetchAll();
+    });
   }
 
   nextColumn(column, index) {
