@@ -40,7 +40,8 @@
                 </div>
                 <div class="form-group col-md-6 col-sm-6">
                     <label for="trainingType">Training Type</label> <select
-                    [(ngModel)]="createNewBatch.trainingType" class="form-control" id="trainer">
+                    [(ngModel)]="createNewBatch.trainingType" class="form-control" id="trainer"
+                    placeholder="Select Training Type">
                     <option value="" disabled>Select Training Type</option>
                     <option *ngFor="let trainType of trainingTypes">{{trainType}}</option>
                   </select>
@@ -56,28 +57,28 @@
                 </div>
                 <!-- Dropdown for location -->
                 <div class="form-group col-md-6 col-sm-6">
-                    <label for="location">Location</label> <select
-                    [(ngModel)]="createNewBatch.location" class="form-control" id="location">
-                    <option value="" disabled>Select Location</option>
-                    <option *ngFor="let location of locations">{{location}}</option>
-                  </select>
+                    <label for="location">Location</label>
+                    <select #selectLocation (change)="onCreateBatchLocationSelect(selectLocation.value)" class="form-control" id="trainer">
+                        <option value="" disabled>Select Location</option>
+                      <option *ngFor="let location of locations" [value]="location.addressId">{{location.city}}, {{location.state}}</option>
+                    </select>
                 </div>
               </div>
                 <!-- Dropdown ends -->
           <div class="row">
               <div class="form-group col-md-6 col-sm-6">
-                  <label for="trainer">Trainer:</label> <select
-                    [(ngModel)]="createNewBatch.trainer" class="form-control" id="trainer">
-                    <option value="" disabled>Select Trainer</option>
-                    <option *ngFor="let trainer of trainers">{{trainer.name}}</option>
+                  <label for="trainer">Trainer:</label>
+                  <select #selectCreateBatchTrainer (change)="onCreateBatchTrainerSelect(selectCreateBatchTrainer.value)" class="form-control" id="trainer">
+                      <option value="" disabled>Select Trainer</option>
+                    <option *ngFor="let trainer of trainers" [value]="trainer.trainerId">{{trainer.name}}</option>
                   </select>
               </div>
               <div class="form-group col-md-6 col-sm-6">
-                <label for="co-trainer">Co-Trainer:</label> <select
-                  [(ngModel)]="createNewBatch.coTrainer" class="form-control" id="co-trainer">
-                  <option value="" disabled>Select Co-Trainer</option>
-                  <option *ngFor="let trainer of trainers">{{trainer.name}}</option>
-                </select>
+                  <label for="trainer">Co-Trainer:</label>
+                  <select #selectCreateBatchCoTrainer (change)="onCreateBatchCoTrainerSelect(selectCreateBatchCoTrainer.value)" class="form-control" id="trainer">
+                      <option value="" disabled>Select Co-Trainer</option>
+                    <option *ngFor="let trainer of trainers" [value]="trainer.trainerId">{{trainer.name}}</option>
+                  </select>
               </div>
             </div>
             <div class="row">
@@ -329,20 +330,20 @@
             </div>
             <!-- Dropdown for location -->
             <div class="form-group col-md-6 col-sm-6">
-                <label for="location">Location</label> <select
-                [(ngModel)]="currentBatch.location" class="form-control" id="location">
-                <option value="" disabled>Select Location</option>
-                <option *ngFor="let location of locations">{{location}}</option>
-              </select>
+                <label for="location">Location</label>
+                <select #selectUpdateLocation (change)="onUpdateBatchLocationSelect(selectUpdateLocation.value)" class="form-control" id="location">
+                    <option value="" disabled>Select Location</option>
+                  <option *ngFor="let location of locations" [value]="location.addressId" [selected]="location.addressId === currentBatch.address.addressId">{{location.addressId}}, {{location.city}}, {{location.state}}</option>
+                </select>
             </div>
           </div>
             <!-- Dropdown ends -->
       <div class="row">
           <div class="form-group col-md-6 col-sm-6">
-              <label for="trainer">Trainer:</label> <select
-                [ngModel]="currentBatch.trainer" (ngOnModelChange)="$event" class="form-control" id="trainer">
-                <option value="" disabled>Select Trainer</option>
-                <option *ngFor="let trainer of trainers" [value]="trainer">{{trainer.name}}</option>
+              <label for="trainer">Trainer:</label> 
+                <select #selectTrainer (change)="onTrainerSelect(selectTrainer.value)" class="form-control" id="trainer">
+                  <option value="" disabled>Select Trainer</option>
+                <option *ngFor="let trainer of trainers" [value]="trainer.trainerId" [selected]="trainer.trainerId === currentBatch.trainer.trainerId">{{trainer.name}}</option>
               </select>
           </div>
           <div class="form-group col-md-6 col-sm-6">

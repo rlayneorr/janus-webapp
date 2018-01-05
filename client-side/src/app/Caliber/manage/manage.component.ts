@@ -13,6 +13,7 @@ import { DisplayBatchByYear } from './manage.pipe';
 import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 import { TrainingTypeService } from '../services/training-type.service';
 import { SkillService } from '../services/skill.service';
+import { Address } from '../entities/Address';
 // import { exists } from 'fs';
 
 @Component({
@@ -28,22 +29,17 @@ export class ManageComponent implements OnInit, OnDestroy {
   batchByYear: Date[] = [];
   batchYearsNoDuplicates: number[] = [];
   currentYear = 2017;
-  currentBatch: Batch;
+  currentBatch: Batch = new Batch;
   createNewBatch: Batch = new Batch;
-
   traineeProfileUrl: string;
-
   test: string;
-
-
   trainers: Trainer[] = [];
   trainerNames: string[] = [];
-
-  locations: Location[] = [];
-
+  locations: Address[] = [];
   trainingTypes: string[] = [];
   skills: string[] = [];
-
+  
+  /* Subscriptions */
   batchSub: Subscription;
   trainerSub: Subscription;
   locationSub: Subscription;
@@ -64,6 +60,8 @@ export class ManageComponent implements OnInit, OnDestroy {
       this.batchSub = this.batchService.getList().subscribe(batch => {
         this.batches = batch;
         const batchYears = [];
+        /* implemented built in date pipe to display only 4 digit years 
+        for the select year drop down to filter batches by year */
         for (let i = 0; i < this.batches.length; i++) {
           const newDate = this.datePipe.transform(this.batches[i].startDate, 'yyyy');
           batchYears.push(newDate);
@@ -107,9 +105,11 @@ export class ManageComponent implements OnInit, OnDestroy {
 
   }
 
+  /** Creates a new batch from batch service
+   * createNewBatch is a batch that is dynamically populated from the modal
+   * and function calls from the html in the modal
+   */
   createNewBatchFunction() {
-    
-    console.log(this.createNewBatch);
     this.batchService.save(this.createNewBatch);
   }
 
@@ -118,6 +118,9 @@ export class ManageComponent implements OnInit, OnDestroy {
   }
 
 
+  /** Displays the Create Batch modal and assigns current batch
+   * to the batch that is passed in from the table row
+   */
   openCreateBatchModal(createBatch) {
 
     this.modalService.open(createBatch).result.then((result) => {
@@ -127,6 +130,9 @@ export class ManageComponent implements OnInit, OnDestroy {
     });
   }
 
+  /** Displays the Import Batch modal and assigns current batch
+   * to the batch that is passed in from the table row
+   */
   openImportBatchModal(importBatch) {
 
     this.modalService.open(importBatch).result.then((result) => {
@@ -137,6 +143,9 @@ export class ManageComponent implements OnInit, OnDestroy {
 
   }
 
+/** Displays the View Batch Trainees modal and assigns current batch
+   * to the batch that is passed in from the table row
+   */
   openViewBatchTraineesModal(traineesInBatch, batch) {
 
     this.modalService.open(traineesInBatch, {size: 'lg', container: '.batch-trainee-modal-container'}).result.then((result) => {
@@ -148,6 +157,9 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.currentBatch = batch;
   }
 
+  /** Displays the Update Batch modal and assigns current batch
+   * to the batch that is passed in from the table row
+   */
   openUpdateBatchModal(updateBatch, batch) {
 
     this.modalService.open(updateBatch).result.then((result) => {
@@ -160,7 +172,65 @@ export class ManageComponent implements OnInit, OnDestroy {
 
   }
 
+  /** Dynamically updates the createBatch location selected inside the 
+   * create batch modal whenever a location is selected from the dropdown
+   */
+  onCreateBatchLocationSelect(addressId: number): void {
+    for (const location of this.locations) {
+      if ( Number(location.addressId) === Number(addressId) ) {
+        this.createNewBatch.address = location;
+      }
+    }
+  }
 
+  /** Dynamically updates the currentBatch location selected inside the
+   * update batch modal whenever a new trainer is selected from the dropdown
+   */
+  onUpdateBatchLocationSelect(addressId: number): void {
+    for (const location of this.locations) {
+      if ( Number(location.addressId) === Number(addressId) ) {
+        console.log('found location match ' + this.currentBatch.address.addressId);
+        this.currentBatch.address = location;
+      }
+    }
+
+  }
+
+  /** This dynamically updates the currentBatch trainer selected inside the 
+   * update batch modal whenever a new trainer is selected from the dropdown *
+   * */
+  onTrainerSelect(trainerId: number): void {
+    for (const trainer of this.trainers) {
+      if ( Number(trainer.trainerId) === Number(trainerId) ) {
+        this.currentBatch.trainer = trainer;
+      }
+    }
+  }
+
+  /** Dynamically updates the createBatch trainer selected inside the
+   * create batch modal whenever a trainer is selected from the dropdown
+   */
+  onCreateBatchTrainerSelect(trainerId: number): void {
+    for (const trainer of this.trainers) {
+      if ( Number(trainer.trainerId) === Number(trainerId) ) {
+        this.createNewBatch.trainer = trainer;
+      }
+    }
+  }
+
+
+  /** Dynamically updates the createBatch coTrainer selected inside the
+   * create batch modal whenever a trainer is selected from the dropdown
+   */
+  onCreateBatchCoTrainerSelect(trainerId: number ): void {
+    for (const trainer of this.trainers) {
+      if ( Number(trainer.trainerId) === Number(trainerId) ) {
+        this.createNewBatch.coTrainer = trainer;
+      }
+    }
+  }
+
+  /** Modal functionality */
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -171,6 +241,7 @@ export class ManageComponent implements OnInit, OnDestroy {
     }
   }
 
+  /** Keeps track of current year to display batch by years */
   updateYear(year) {
     this.currentYear = year;
   }

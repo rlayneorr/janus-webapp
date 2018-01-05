@@ -10,7 +10,7 @@ import { AbstractApiService } from './abstract-api.service';
 import { EnvironmentService } from './environment.service';
 
 // entities
-import { Location } from '../../entities/Location';
+import { Location } from '../entities/Location';
 
 /**
 * this service manages calls to the web services
