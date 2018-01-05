@@ -45,6 +45,7 @@ import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
+import { TrainerPipePipe } from './pipes/trainer-pipe.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
 
@@ -131,6 +132,7 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     GraphDataPipe,
     PanelBatchAllTraineesComponent,
     TierPipe,
+    TrainerPipePipe,
     OrderByPipe,
     GradeByTraineeByAssessmentPipe,
     BatchByTrainerPipe,
