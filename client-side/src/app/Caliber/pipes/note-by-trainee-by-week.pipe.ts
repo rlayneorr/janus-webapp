@@ -7,11 +7,20 @@ import { Trainee } from '../entities/Trainee';
 })
 export class NoteByTraineeByWeekPipe implements PipeTransform {
 
-  transform(value: Note[], trainee: Trainee, week: number ): Note[] {
+  transform(value: Note[], trainee: Trainee, week: number ): string {
 
-    return value.filter( (note) => {
-        return (note != null && note.trainee != null && note.content != null && note.trainee.traineeId === trainee.traineeId && note.week === week);
-      });
+    const n = value.filter( (note) => {
+
+        return (note.type === 'TRAINEE' && note.trainee != null &&
+          note.trainee.traineeId === trainee.traineeId && Number(note.week) === Number(week));
+      })[0];
+
+      if (n != null) {
+        return n.content;
+      } else {
+        return '';
+      }
+
   }
 
 }
