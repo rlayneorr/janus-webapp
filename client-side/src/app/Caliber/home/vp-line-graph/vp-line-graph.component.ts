@@ -8,6 +8,7 @@ import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { environment } from '../../../../environments/environment';
 import { EnvironmentService } from '../../services/environment.service';
 import { AlertsService } from '../../services/alerts.service';
+import { ReportsService } from '../../services/reports.service';
 
 @Component({
   selector: 'app-vp-line-graph',
@@ -29,12 +30,12 @@ export class VpLineGraphComponent implements OnInit {
     private vpHomeLineGraphService: VpHomeLineGraphService,
     private vpHomeSelectorService: VpHomeSelectorService,
     private alertService: AlertsService,
-    private environmentService: EnvironmentService) { }
+    private environmentService: EnvironmentService,
+    private reportsService: ReportsService) { }
 
   ngOnInit() {
     this.lineChartData = this.vpHomeLineGraphService.getLineChartData();
-    this.http.get(this.environmentService.buildUrl('all/reports/dashboard'), { withCredentials: true })
-      .subscribe(
+    this.reportsService.fetchReportsDashboard().subscribe(
       (resp) => {
         this.results = resp;
         this.results.sort();
