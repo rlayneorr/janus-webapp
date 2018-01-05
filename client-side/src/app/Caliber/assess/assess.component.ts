@@ -18,13 +18,15 @@ import * as $ from 'jquery';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GradeByTraineeByAssessmentPipe } from '../pipes/grade-by-trainee-by-assessment.pipe';
 import { NoteByTraineeByWeekPipe } from '../pipes/note-by-trainee-by-week.pipe';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-assess',
   templateUrl: './assess.component.html',
   styleUrls: ['./assess.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [DatePipe],
 })
 export class AssessComponent implements OnInit {
 
@@ -41,13 +43,15 @@ export class AssessComponent implements OnInit {
   rForm: FormGroup;
 
   newAssessment: Assessment = new Assessment();
-
   editingAssessment: Assessment = new Assessment();
-
   selectedAssessment: Assessment = new Assessment();
 
+  years: Set<any> = new Set<any>();
+  currentYear = 2017;
+
   constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
-  private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService, private fb: FormBuilder) {
+  private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService, 
+  private fb: FormBuilder, private datePipe: DatePipe) {
 
   }
 
@@ -67,6 +71,7 @@ export class AssessComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.selectedWeek = 1;
     this.batchService.fetchAll();
     this.categoryService.fetchAllActive();
@@ -82,10 +87,12 @@ export class AssessComponent implements OnInit {
     this.batchService.getList().subscribe(batch => {
       this.batches = batch;
       if (this.batches.length !== 0) {
-        this.selectedBatch = this.batches[4];
-        this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
-        this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
-        this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+        this.changeBatch(this.batches[4]);
+
+        // Set the year dropdown.
+        this.batches.forEach(b => {
+          this.years.add(this.datePipe.transform(b.startDate, 'yyyy'));
+        });
       }
     });
 
@@ -107,15 +114,9 @@ export class AssessComponent implements OnInit {
 
   }
 
-  changeCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.newAssessment.category = this.findCategory(newCategory);
-  }
-
-  editCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.editingAssessment.category = this.findCategory(newCategory);
-  }
+/****************************************************************************************
+                                      ASSESSMENTS
+*****************************************************************************************/
 
   editAssessment(content, modalAssessment: Assessment) {
     this.editingAssessment = modalAssessment;
@@ -131,6 +132,31 @@ export class AssessComponent implements OnInit {
     this.assessmentService.delete(this.editingAssessment);
   }
 
+  addAssessment() {
+    this.newAssessment.week = this.selectedWeek;
+    this.newAssessment.batch = this.selectedBatch;
+    console.log(this.newAssessment);
+    this.assessmentService.create(this.newAssessment);
+  }
+
+  getAssessments(week: number) {
+    this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
+  }
+
+/****************************************************************************************
+                                      CATEGORIES
+*****************************************************************************************/
+
+  editCategory(categorySelect: ElementRef) {
+    const newCategory = $(categorySelect).find(':selected').val();
+    this.editingAssessment.category = this.findCategory(newCategory);
+  }
+
+  changeCategory(categorySelect: ElementRef) {
+    const newCategory = $(categorySelect).find(':selected').val();
+    this.newAssessment.category = this.findCategory(newCategory);
+  }
+
   findCategory(category: any): Category {
     let matchingCat;
     this.categories.forEach(element => {
@@ -142,6 +168,11 @@ export class AssessComponent implements OnInit {
 
     return matchingCat;
   }
+
+
+/****************************************************************************************
+                                      GRADES
+*****************************************************************************************/
 
   updateGrade(grade: Grade, input) {
     grade.score = input.value;
@@ -161,17 +192,27 @@ export class AssessComponent implements OnInit {
     return false;
   }
 
+/****************************************************************************************
+                                      NOTES
+*****************************************************************************************/
+
   getNote(trainee: Trainee) {
-    const note = new NoteByTraineeByWeekPipe().transform(this.notes, trainee, this.selectedWeek);
+    let note: Note;
+    note = new NoteByTraineeByWeekPipe().transform(this.notes, trainee, this.selectedWeek);
     return note;
   }
 
-  open(content) {
-    this.modalService.open(content);
+  updateNote(note: Note, input) {
+    note.content = input.value;
+    this.noteService.update(note);
   }
 
-  getAssessments(week: number) {
-    this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
+/****************************************************************************************
+                                      OTHER
+*****************************************************************************************/
+
+  open(content) {
+    this.modalService.open(content);
   }
 
   addWeek() {
@@ -179,11 +220,20 @@ export class AssessComponent implements OnInit {
     this.batchService.update(this.selectedBatch);
   }
 
-  addAssessment() {
-    this.newAssessment.week = this.selectedWeek;
-    this.newAssessment.batch = this.selectedBatch;
-    console.log(this.newAssessment);
-    this.assessmentService.create(this.newAssessment);
+  changeYear(year: number) {
+    this.currentYear = Number(year);
+  }
+
+  changeBatch(batch: Batch) {
+    this.selectedBatch = batch;
+    this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+    this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+    this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
+
+    if (this.selectedBatch.weeks < this.selectedWeek) {
+      this.selectedWeek = 1;
+    }
+
   }
 
   counter(i: number) {
