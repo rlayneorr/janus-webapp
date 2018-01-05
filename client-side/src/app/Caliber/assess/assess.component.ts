@@ -105,7 +105,7 @@ export class AssessComponent implements OnInit {
         grade.score = 0;
         grade.assessment = assessment;
         const newDate = new Date();
-        grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(), 
+        grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(),
         newDate.getMinutes());
         this.gradeService.create(grade);
       });
@@ -135,7 +135,6 @@ export class AssessComponent implements OnInit {
   addAssessment() {
     this.newAssessment.week = this.selectedWeek;
     this.newAssessment.batch = this.selectedBatch;
-    console.log(this.newAssessment);
     this.assessmentService.create(this.newAssessment);
   }
 
@@ -199,6 +198,9 @@ export class AssessComponent implements OnInit {
   getNote(trainee: Trainee) {
     let note: Note;
     note = new NoteByTraineeByWeekPipe().transform(this.notes, trainee, this.selectedWeek);
+    if (note.content === undefined) {
+      note.content = '';
+    }
     return note;
   }
 
@@ -225,15 +227,14 @@ export class AssessComponent implements OnInit {
   }
 
   changeBatch(batch: Batch) {
-    this.selectedBatch = batch;
-    this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
-    this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
-    this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
-
     if (this.selectedBatch.weeks < this.selectedWeek) {
       this.selectedWeek = 1;
     }
 
+    this.selectedBatch = batch;
+    this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
+    this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
+    this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
   }
 
   counter(i: number) {

@@ -152,7 +152,7 @@
             <div *ngIf="checkGradeLoading(getGrade(trainee, assessment))">loading thing</div>
         </td>
         <td>
-            <textarea #inputNote *ngIf="trainee" class="form-control note" id="exampleTextarea" rows="2" [value]="getNote(trainee).content" (change)="updateNote(getNote(trainee), inputNote)"></textarea>
+            <textarea #inputNote *ngIf="trainee" class="form-control note" id="exampleTextarea" rows="3" [value]="getNote(trainee).content" (change)="updateNote(getNote(trainee), inputNote)"></textarea>
         </td>
       </tr>
     </table>
