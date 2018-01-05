@@ -123,6 +123,9 @@ export class TestComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.service.save( this.getTestAssessment() );
+
+    this.service.getSaved().subscribe( (saved) => console.log(saved) );
+
     // this.subscription = this.service.getList().subscribe( (data) => {
     //   this.data = data;
     //   this.log(this.data);

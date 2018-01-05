@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 // rxjs
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/delay';
 
 // services
 import { AbstractApiService } from './abstract-api.service';
@@ -67,7 +69,7 @@ export class AssessmentService extends AbstractApiService<Assessment> {
  *
  * NOTE: the createAssessment on the AssessmentController does NOT
  * return the created assessment object with the generated ID so
- * this is going to fake it
+ * this is going to fake it and not make a lot of sense as a result
  *
  * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
  *
@@ -75,21 +77,21 @@ export class AssessmentService extends AbstractApiService<Assessment> {
  */
   public save(assessment: Assessment): void {
     const url = this.envService.buildUrl('trainer/assessment/create');
+    const fetchUrl = `trainer/assessment/${assessment.batch.batchId}/${assessment.week}`;
     const body = JSON.stringify(assessment);
-    let subscription: Subscription;
 
-    this.http.post<void>(url, body, { responseType: 'text'} ).subscribe( () => {}, (error) => {
+    this.http.post(url, body, { responseType: 'text'} ).subscribe( () => {
       this.fetchByBatchIdByWeek(assessment.batch.batchId, assessment.week);
 
-      this.listSubject.subscribe( (list) => {
-        //subscription.unsubscribe();
-
+      super.doGetListObservable(fetchUrl).subscribe( (list) => {
+        // console.log(assessment);
+        // console.log(list);
         const matches = list.filter( (value) => {
           switch (true) {
             case ( value.title !== assessment.title ) :
             case ( value.rawScore !== assessment.rawScore ) :
             case ( value.type !== assessment.type ) :
-            case ( value.category !== assessment.category ) :
+            case ( value.category.categoryId !== assessment.category.categoryId ) :
               return false;
             default:
               return true;
@@ -110,9 +112,8 @@ export class AssessmentService extends AbstractApiService<Assessment> {
           }
         });
 
-        console.log(matches);
-
         this.savedSubject.next(matches[0]);
+        this.listSubject.next(list);
       });
     });
   }
@@ -152,8 +153,5 @@ export class AssessmentService extends AbstractApiService<Assessment> {
 
     super.doDelete(assessment, url, {}, messages);
   }
-
-
-
 
 }

@@ -12,7 +12,7 @@ export class Batch {
     trainingType: string;
     startDate: Date;
     endDate: Date;
-    location: Location;
+    location: string;
     address: Address;
     goodGradeThreshold: number;
     borderlineGradeThreshold: number;

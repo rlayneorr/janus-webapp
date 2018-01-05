@@ -36,10 +36,10 @@ export class TrainerService extends AbstractApiService<Trainer> {
   * -> retained for backwards compatibility
   */
   trainers$: Observable<any> = this.getList(); // this is how components should access the data if you want to cache it
-  titles$: Observable<any> = this.getTitleList();
+  titles$: Observable<any> = this.getTitlesList();
   tiers$: Observable<any> = this.getTierList();
 
-  constructor(httpClient: HttpClient, envService: EnvironmentService, http: Http, alertService: AlertsService) {
+  constructor(httpClient: HttpClient, envService: EnvironmentService, alertService: AlertsService) {
     super(envService, httpClient, alertService);
 
     this.populateOnStart();
@@ -71,7 +71,7 @@ export class TrainerService extends AbstractApiService<Trainer> {
   /**
   * returns an observable of trainer title strings
   */
-  public getTitleList(): Observable<string[]> {
+  public getTitlesList(): Observable<string[]> {
     return this.titlesSubject.asObservable();
   }
 
@@ -126,6 +126,18 @@ export class TrainerService extends AbstractApiService<Trainer> {
     };
 
     super.doGetList(url, {}, messages);
+  }
+
+  /**
+   * creates a trainer and pushes the created trainer on the
+   * savedSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param trainer: Trainer
+   */
+  public create(trainer: Trainer): void {
+    this.save(trainer);
   }
 
    /**

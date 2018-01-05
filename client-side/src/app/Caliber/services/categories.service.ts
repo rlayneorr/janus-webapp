@@ -11,6 +11,7 @@ import { Category } from '../entities/Category';
 // services
 import { EnvironmentService } from './environment.service';
 import { AlertsService } from './alerts.service';
+import { CategoryService } from './category.service';
 
 /**
  * this service is used to manage API calls
@@ -18,6 +19,8 @@ import { AlertsService } from './alerts.service';
  */
 @Injectable()
 export class CategoriesService extends CategoryService {
+
+  categories$ = this.listSubject.asObservable();
 
   constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
     super(envService, httpClient, alertService);

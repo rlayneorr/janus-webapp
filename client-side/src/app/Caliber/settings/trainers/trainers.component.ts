@@ -22,6 +22,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
   model = new Trainer();
 
   currEditTrainer: Trainer;
+  newTrainer: Trainer;
   newTier: string;
   newTitle: string;
 
