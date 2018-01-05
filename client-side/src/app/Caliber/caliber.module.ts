@@ -30,7 +30,6 @@ import { NoteService } from './services/note.service';
 import { CategoryService } from './services/category.service';
 import { SkillService } from './services/skill.service';
 import { TrainingTypeService } from './services/training-type.service';
-import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { ColorService } from './services/colors/color.service';
 import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.service';
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
@@ -62,13 +61,12 @@ import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/traine
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
-import { PanelComponent } from './panel/panel.component';
+import { PanelComponent } from './panel/panel/panel.component';
 import { PanelTableComponent } from './panel/panel-table/panel-table.component';
 import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
 import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
 
-import { GraphDataPipe } from './pipes/graph-data.pipe';
 
 
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
@@ -89,8 +87,6 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
 import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
 import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
 import { OverallFeedbackComponent } from './panel/overall-feedback/overall-feedback.component';
-import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
-import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';

@@ -32,7 +32,7 @@
         <div class="form-group">
           <label for="technology"></label>
           <select class="form-control" id="technology" formControlName="technology">
-            <option *ngFor="let technology of filteredTechList">{{technology.skillCategory}}</option>
+            <option *ngFor="let technology of filteredTechList" [value] = "technology">{{technology.skillCategory}}</option>
           </select>
         </div>
       </div>
