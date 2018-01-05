@@ -135,7 +135,6 @@ export abstract class AbstractApiService<T> {
    */
   protected doGetListObservable(apiUrl: string, params: any = {}): Observable<T[]> {
     const url = this.envService.buildUrl(apiUrl, params);
-    console.log(url);
     return this.http.get<T[]>(url);
   }
 
@@ -149,6 +148,8 @@ export abstract class AbstractApiService<T> {
   protected doPost(object: T, apiUrl: string, params: any = {}, messages: any = {}): void {
     const url = this.envService.buildUrl(apiUrl, params);
     const body = JSON.stringify(object);
+
+    console.log(body);
 
     this.http.post<T>(url, body).subscribe((data) => {
       this.savedSubject.next(data);

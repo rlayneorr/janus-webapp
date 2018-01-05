@@ -51,17 +51,18 @@ export class AssessComponent implements OnInit {
 
   }
 
+  // This event is called when the user switches tabs (for Weeks).
   fetchNews(evt: any) {
     const id = evt.nextId;
 
     if (id === '+') {
-      this.open(document.getElementById('addWeek'));
+      this.modalService.open(document.getElementById('addWeek'));
       return;
     } else {
       this.getAssessments(id);
       this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, id);
-      this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, id);
       this.selectedWeek = id;
+      this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, id);
     }
   }
 
@@ -69,7 +70,9 @@ export class AssessComponent implements OnInit {
     this.selectedWeek = 1;
     this.batchService.fetchAll();
     this.categoryService.fetchAllActive();
-    this.noteService.getList().subscribe(notes => this.notes = notes);
+    this.noteService.getList().subscribe(notes => {
+      return this.notes = notes;
+    });
     this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
     this.gradeService.getList().subscribe(grade => this.grades = grade);
     this.categoryService.getList().subscribe(categories => {
@@ -79,25 +82,24 @@ export class AssessComponent implements OnInit {
     this.batchService.getList().subscribe(batch => {
       this.batches = batch;
       if (this.batches.length !== 0) {
-        this.selectedBatch = this.batches[3];
+        this.selectedBatch = this.batches[4];
         this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
         this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
         this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, 1);
       }
     });
 
-    // Every time an assessment is created, a set of default grades are created.
+    // Every time an assessment is created, a set of default grades is created.
     this.assessmentService.getSaved().subscribe(assessment => {
-      console.log('subscription updated');
 
       this.selectedBatch.trainees.forEach(trainee => {
-        console.log('looping');
         const grade = new Grade();
         grade.trainee = trainee;
         grade.score = 0;
         grade.assessment = assessment;
         const newDate = new Date();
-        grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth());
+        grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(), 
+        newDate.getMinutes());
         this.gradeService.create(grade);
       });
 
@@ -160,11 +162,11 @@ export class AssessComponent implements OnInit {
   }
 
   getNote(trainee: Trainee) {
-    return new NoteByTraineeByWeekPipe().transform(this.notes, trainee, this.selectedWeek)[0];
+    const note = new NoteByTraineeByWeekPipe().transform(this.notes, trainee, this.selectedWeek);
+    return note;
   }
 
   open(content) {
-    console.log(this.notes);
     this.modalService.open(content);
   }
 
