@@ -132,11 +132,7 @@ export class GradeService extends AbstractApiService<Grade> {
       error: 'Grade update failed',
     };
 
-<<<<<<< HEAD
-    super.doPost(grade, url);
-=======
     super.doPost(grade, url, {}, messages);
->>>>>>> revaturions
   }
 
 }

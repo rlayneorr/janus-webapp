@@ -43,15 +43,12 @@ import { EvaluationService } from './services/evaluation.service';
 
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
-<<<<<<< HEAD
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { CategorySkillPipe } from './pipes/category-skill.pipe';
-=======
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
->>>>>>> revaturions
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -81,17 +78,14 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
-<<<<<<< HEAD
 import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
 import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
 
 
 
-=======
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
->>>>>>> revaturions
 
 @NgModule({
   imports: [
@@ -144,13 +138,10 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     GraphDataPipe,
     GradeByTraineeByAssessmentPipe,
     BatchByTrainerPipe,
-<<<<<<< HEAD
     CategorySkillPipe,
     NoteByTraineeByWeekPipe,
-=======
     TierPipe,
     OrderByPipe,
->>>>>>> revaturions
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests

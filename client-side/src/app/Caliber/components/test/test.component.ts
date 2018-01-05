@@ -58,8 +58,6 @@ export class TestComponent implements OnInit, OnDestroy {
     };
   }
 
-<<<<<<< HEAD
-=======
   public getTestAssessment(): Assessment {
     return {
         assessmentId: 0,
@@ -75,7 +73,6 @@ export class TestComponent implements OnInit, OnDestroy {
         }
     };
   }
->>>>>>> revaturions
 
   public getTestBatch(): Batch {
     return {
