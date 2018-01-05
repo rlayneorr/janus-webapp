@@ -43,7 +43,6 @@ import { EvaluationService } from './services/evaluation.service';
 // pipes
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { CategorySkillPipe } from './pipes/category-skill.pipe';
-import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
@@ -151,7 +150,6 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
     OrderByPipe,
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
-    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
