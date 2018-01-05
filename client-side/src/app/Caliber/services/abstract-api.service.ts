@@ -218,4 +218,25 @@ export abstract class AbstractApiService<T> {
       }
     }
   }
+
+  /**
+   * used to convert date values returned by the
+   * ng-bootstrap module into ISO strings
+   *
+   * @param date: any
+   *
+   * @return string
+   */
+  protected stringifyDate(date: any): string {
+    const dateString = [
+      date.year,
+      date.month,
+      date.day,
+    ].join('-');
+
+    return [
+      dateString,
+      'T00:00:00.0',
+    ].join('');
+  }
 }

@@ -94,12 +94,10 @@ export class BatchService extends AbstractApiService<Batch> {
     public save(batch: Batch): void {
       const url = 'all/batch/create';
       const messages = {
-        success: 'Batch list saved successfully',
-        error: 'Batch list save failed',
+        success: 'Batch saved successfully',
+        error: 'Batch save failed',
       };
-      const clone = this.stringifyDates(batch);
-
-      console.log(clone);
+      const clone = this.prepareForApi(batch);
 
       super.doPost(clone, url, {}, messages);
     }
@@ -115,11 +113,12 @@ export class BatchService extends AbstractApiService<Batch> {
     public update(batch: Batch): void {
       const url = 'all/batch/update';
       const messages = {
-        success: 'Batch list updated successfully',
-        error: 'Batch list updated failed',
+        success: 'Batch updated successfully',
+        error: 'Batch updated failed',
       };
+      const clone = this.prepareForApi(batch);
 
-      super.doPut(batch, url, {}, messages);
+      super.doPut(clone, url, {}, messages);
     }
 
     /**
@@ -134,34 +133,29 @@ export class BatchService extends AbstractApiService<Batch> {
     public delete(batch: Batch): void {
       const url = `all/batch/delete/${batch.batchId}`;
       const messages = {
-        success: 'Batch list deleted successfully',
-        error: 'Batch list deleteion failed',
+        success: 'Batch deleted successfully',
+        error: 'Batch deleteion failed',
       };
 
       super.doDelete(batch, url, {}, messages);
     }
 
-    protected stringifyDates(batch: Batch): any {
+    /**
+     * produces a clone of the batch object that
+     * has changes required for the API in order
+     * to be processed
+     *
+     * @param batch: Batch
+     *
+     * @return any
+     */
+    protected prepareForApi(batch: Batch): any {
       const output: any = {};
       Object.assign(output, batch);
 
-      output.startDate = this.stringifyDate(batch.startDate);
-      output.endDate = this.stringifyDate(batch.endDate);
+      output.startDate = super.stringifyDate(batch.startDate);
+      output.endDate = super.stringifyDate(batch.endDate);
 
       return output;
     }
-
-    protected stringifyDate(date: any): string {
-      const dateString =  [
-        date.year,
-        date.month,
-        date.day,
-      ].join('-');
-
-      return [
-        dateString,
-        'T00:00:00.0',
-      ].join('');
-    }
-
 }
