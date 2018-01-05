@@ -14,6 +14,8 @@ import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 import { TrainingTypeService } from '../services/training-type.service';
 import { SkillService } from '../services/skill.service';
 import { Address } from '../entities/Address';
+import { TraineeService } from '../services/trainee.service';
+import { Trainee } from '../entities/Trainee';
 // import { exists } from 'fs';
 
 @Component({
@@ -31,6 +33,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   currentYear = 2017;
   currentBatch: Batch = new Batch;
   createNewBatch: Batch = new Batch;
+  batchToUpdate: Batch = new Batch;
   traineeProfileUrl: string;
   test: string;
   trainers: Trainer[] = [];
@@ -38,7 +41,8 @@ export class ManageComponent implements OnInit, OnDestroy {
   locations: Address[] = [];
   trainingTypes: string[] = [];
   skills: string[] = [];
-
+  createNewTrainee: Trainee = new Trainee;
+  
   /* Subscriptions */
   batchSub: Subscription;
   trainerSub: Subscription;
@@ -48,10 +52,8 @@ export class ManageComponent implements OnInit, OnDestroy {
 
   constructor(private batchService: BatchService, private trainerService: TrainerService,
     private locationService: LocationService, private trainingTypeService: TrainingTypeService,
-    private skillService: SkillService,
-    private modalService: NgbModal,
-    private datePipe: DatePipe
-  ) {
+    private skillService: SkillService, private traineeService: TraineeService,
+    private modalService: NgbModal, private datePipe: DatePipe) {
    }
 
 
@@ -112,18 +114,51 @@ export class ManageComponent implements OnInit, OnDestroy {
    * and function calls from the html in the modal
    */
   createNewBatchFunction() {
+    console.log(this.createNewBatch);
     this.batchService.save(this.createNewBatch);
   }
 
-  deleteBatch() {
+  createNewTraineeFunction() {
+    console.log(this.createNewTrainee.name);
+    console.log(this.createNewTrainee.email);
+    console.log(this.createNewTrainee);
+    this.traineeService.save(this.createNewTrainee);
+  }
+
+
+  updateBatchFunction() {
+    this.batchService.update(this.batchToUpdate);
+    console.log(this.currentBatch);
+  }
+
+  deleteBatchFunction(batch) {
+    this.batchService.delete(batch);
 
   }
+
+
+  deleteTraineeFunction(trainee) {
+    /** In the original caliber app, deleting trainee removes the trainee
+     * but the trainee reappears in the active trainees 
+     * Even when you remove the trainee, it isn't moved to inactive
+     * This is because the trainee object is detached from the database
+     * 
+     * This method shouldn't call traineeService, it needs to call a batchService
+     * and apply a deleteTraineeByBatch(batch, trainee) so it can remove the trainee
+     * from the current batch, and not delete the trainee overall
+     * 
+     * Later implementation needs to move a trainee from active to inactive
+     * and be able to actually delete a trainee from the database entirely
+     */
+    this.traineeService.delete(trainee);
+  }
+
 
 
   /** Displays the Create Batch modal and assigns current batch
    * to the batch that is passed in from the table row
    */
-  openCreateBatchModal(createBatch) {
+  openBatchModal(createBatch) {
 
     this.modalService.open(createBatch).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -164,6 +199,7 @@ export class ManageComponent implements OnInit, OnDestroy {
    */
   openUpdateBatchModal(updateBatch, batch) {
 
+
     this.modalService.open(updateBatch).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -172,6 +208,7 @@ export class ManageComponent implements OnInit, OnDestroy {
 
     this.currentBatch = batch;
 
+    this.batchToUpdate = Object.assign({}, this.currentBatch);
   }
 
   /** Dynamically updates the createBatch location selected inside the 
@@ -183,6 +220,11 @@ export class ManageComponent implements OnInit, OnDestroy {
         this.createNewBatch.address = location;
       }
     }
+    /** Create batch also requires a "location" field inside of it
+     *  For now, we will just send a string for the city since the address
+     * is already set
+     */
+    this.createNewBatch.location = this.createNewBatch.address.city;
   }
 
   /** Dynamically updates the currentBatch location selected inside the
