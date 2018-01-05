@@ -68,20 +68,10 @@ import { TestComponent } from './components/test/test.component';
 import { PanelComponent } from './panel/panel/panel.component';
 import { OverallFeedbackComponent } from './reports/overall-feedback/overall-feedback.component';
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
-<<<<<<< HEAD
-import { PanelComponent } from './panel/panel/panel.component';
-=======
->>>>>>> de14e315ef2c744c5d96a9c44790ebfd7fbab2c5
 import { PanelTableComponent } from './panel/panel-table/panel-table.component';
 import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
 import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> de14e315ef2c744c5d96a9c44790ebfd7fbab2c5
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
 import { VpPanelGraphComponent } from './home/vp-panel-graph/vp-panel-graph.component';
@@ -105,16 +95,9 @@ import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.com
 import { WeeklyAuditComponent } from './reports/weekly-audit/weekly-audit.component';
 import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative-scores.component';
 import { DoughnutComponent } from './doughnut/doughnut.component';
-import { AlertsComponent } from './alerts/alerts.component';
-import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
-import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
 import { ReportsService } from './services/reports.service';
 import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
 import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
-<<<<<<< HEAD
-import { OverallFeedbackComponent } from './panel/overall-feedback/overall-feedback.component';
-=======
->>>>>>> de14e315ef2c744c5d96a9c44790ebfd7fbab2c5
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
@@ -184,8 +167,8 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     CreatePanelComponent,
     InterviewDetailsComponent,
     GeneralFeedbackComponent,
-    TechnicalFeedbackComponent
-    
+    TechnicalFeedbackComponent,
+
 
     // pipes
     GraphDataPipe,
@@ -200,7 +183,7 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     OrderByPipe,
     GradeByTraineeByAssessmentPipe,
     BatchByTrainerPipe,
-    
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
