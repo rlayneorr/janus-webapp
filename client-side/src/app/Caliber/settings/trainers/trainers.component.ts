@@ -5,12 +5,12 @@ import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trainers',
   templateUrl: './trainers.component.html',
-  styleUrls: ['./trainers.component.css',
-    '../../../../../node_modules/font-awesome/css/font-awesome.css']
+  styleUrls: ['./trainers.component.css']
 })
 
 export class TrainersComponent implements OnInit, OnDestroy {
@@ -22,14 +22,14 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   currEditTrainer: Trainer;
   newTrainer: Trainer;
-  newTier: String;
-  newTitle: String;
+  newTier: string;
+  newTitle: string;
 
   rForm: FormGroup;
   addForm: FormGroup;
 
   constructor(private trainerService: TrainerService,
-    private modalService: NgbModal, private fb: FormBuilder) { }
+    private modalService: NgbModal, private fb: FormBuilder, private route: Router) { }
 
   ngOnInit() {
     this.trainerService.populateOnStart();
@@ -62,11 +62,10 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.newTrainer = modal;
     console.log(modal);
     console.log(modal.name);
-    this.trainerService.create(this.newTrainer);
-    this.trainerService.getSaved().subscribe(
-      succ => this.trainerService.fetchAll(),
-      err => console.log('error')
-    );
+    this.trainerService.save(this.newTrainer);
+    this.trainerService.getSaved().subscribe((resp) => {
+      this.trainerService.fetchAll();
+    });
     // this.trainers.push(this.newTrainer);
   }
 
@@ -128,7 +127,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
    */
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
-    let temp = new Trainer();
+    const temp = new Trainer();
     temp.trainerId = this.currEditTrainer.trainerId;
     temp.tier = this.newTier;
     temp.title = this.newTitle;
@@ -136,7 +135,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
     temp.email = modal.email;
     // call trainerService to update
     this.trainerService.update(temp);
-    this.trainerService.getSaved().subscribe((resp) => {
+    this.trainerService.getUpdated().subscribe((resp) => {
       this.currEditTrainer = temp;
       this.trainerService.fetchAll();
     });
@@ -157,4 +156,9 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.trainerSubscription.unsubscribe();
   }
 
+  // sets current trainer to clicked trainer and navigates to trainer profile page
+  goToProfile(trainer) {
+    this.trainerService.changeCurrentTrainer(trainer);
+    this.route.navigate(['Caliber/settings/trainer-profile']);
+  }
 }
