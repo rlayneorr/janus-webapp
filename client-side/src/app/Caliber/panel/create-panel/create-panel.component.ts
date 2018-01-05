@@ -23,11 +23,7 @@ export class CreatePanelComponent implements OnInit {
   constructor(private modalService: NgbModal, private searchBar: PanelSearchbarComponent, private fb: FormBuilder) { }
 
   ngOnInit() {
-<<<<<<< HEAD
-    this.searchBar.getTraineeSubject().subscribe( (trainee) => {
-=======
     this.searchBar.getTraineeSubject().subscribe((trainee) => {
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
       this.trainee = trainee;
     });
 
@@ -61,11 +57,7 @@ export class CreatePanelComponent implements OnInit {
   }
 
   open(content) {
-<<<<<<< HEAD
-    this.modalService.open(content, {size: 'xl'}).result.then((result) => {
-=======
     this.modalService.open(content, { size: 'xl' }).result.then((result) => {
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -81,11 +73,8 @@ export class CreatePanelComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-<<<<<<< HEAD
-=======
 
   onSubmit() {
 
   }
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
 }

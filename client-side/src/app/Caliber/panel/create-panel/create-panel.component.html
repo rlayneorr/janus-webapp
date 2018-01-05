@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-<ng-template  #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title">Panel Interview Feedback</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    <div class="modal-body">
-      <div class="row">
-        <div class="col-6">
-          <app-interview-details></app-interview-details>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-    </div>
-  </ng-template>
-
-  <button class="btn btn-lg btn-outline-primary" [disabled]="trainee==null" (click)="open(content)">Create Panel</button>
-  <hr>
-=======
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Panel Interview Feedback</h4>
@@ -83,4 +58,3 @@
 
 <button class="btn btn-lg btn-outline-primary" [disabled]="trainee==null" (click)="open(content)">Create Panel</button>
 <hr>
->>>>>>> 27be40a5dd5b6c158f8178d90677dbd2bbb79619
