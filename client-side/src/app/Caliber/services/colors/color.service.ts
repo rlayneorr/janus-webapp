@@ -6,28 +6,32 @@ export class ColorService {
   constructor() { }
 
   public getLineColors(amount: number) {
-    console.log(this.lineColors.length);
     if (amount > this.lineColors.length) {
       this.createLineColors(amount - this.lineColors.length);
     }
-    console.log(this.lineColors);
     return this.lineColors.slice(0, amount);
   }
   private createLineColors(amount: number) {
     for (let i = 0; i < amount; i++) {
-      this.lineColors.push(this.generateLineColor());
+      this.lineColors.push(this.generateLineColor(undefined));
     }
   }
 
-  private generateLineColor() {
-    const gen1Color = this.generateRandomRGBA();
+  public generateLineColor(incomingcolour) {
+    let gen1Colour;
+    if (incomingcolour === undefined) {
+      gen1Colour = this.generateRandomRGBA();
+    } else {
+      gen1Colour = incomingcolour;
+    }
     const color = {
-      backgroundColor: gen1Color + '.5)',
-      pointBackgroundColor: gen1Color + '.5)',
-      borderColor: gen1Color + '1)',
-      pointHoverBackgroundColor: gen1Color + '.3)',
-      pointHoverBorderColor: gen1Color + '.3)',
-      pointBorderColor: '#fff'
+      backgroundColor: gen1Colour + '.3)',
+      pointBackgroundColor: gen1Colour + '.5)',
+      borderColor: gen1Colour + '1)',
+      pointHoverBackgroundColor: gen1Colour + '.3)',
+      pointHoverBorderColor: gen1Colour + '.3)',
+      pointBorderColor: '#fff',
+      borderWidth: 2,
     };
     return color;
   }

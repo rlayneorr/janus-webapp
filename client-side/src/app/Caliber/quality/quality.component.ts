@@ -38,7 +38,7 @@ export class QualityComponent implements OnInit, OnDestroy {
     this.currentBatch = this.batches[0];
    }
 
-   private onBatchSelect(batchId: number) {
+   onBatchSelect(batchId: number) {
      console.log(batchId);
      for (let i = 0; i < this.batches.length; i++) {
        if (batchId == this.batches[i].batchId) {
