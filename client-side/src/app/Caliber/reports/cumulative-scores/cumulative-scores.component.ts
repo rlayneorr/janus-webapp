@@ -104,4 +104,10 @@ export class CumulativeScoreComponent implements OnInit, OnDestroy {
         }
         return result;
     }
+    /**
+   * downloads pdf via pdf service
+  */
+    downloadPDF() {
+        this.pdfService.downloadPDF('cumulative-skills');
+    }
 }
