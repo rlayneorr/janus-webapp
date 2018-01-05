@@ -3,12 +3,12 @@
     <div class="col-md-12 col-lg-12 tab-panes">
       <br>
       <ul class="nav nav-tabs">
-        <li>
+        <li (click) = "buttonChange('ACTIVE')">
           <button type="button" class="btn btn-secondary">
             <strong>Active</strong>
           </button>
         </li>
-        <li>
+        <li (click) = "buttonChange('INACTIVE')">
           <button type="button" class="btn btn-secondary">
             <strong>Inactive</strong>
           </button>
@@ -39,7 +39,7 @@ add or edit a trainer-->
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let trainer of trainers">
+      <tr *ngFor="let trainer of (trainers | trainerPipe:this.activeStatus)">
         <td>
           {{trainer.name}}
         </td>
