@@ -6,6 +6,7 @@ import { PDFService } from '../../../services/pdf.service';
 import { ReportingService } from '../../../services/reporting.service';
 import { Subscription } from 'rxjs/Subscription';
 import { GranularityService } from '../services/granularity.service';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Displays the QC statuses of a given batch as a doughnut chart.
@@ -19,6 +20,7 @@ import { GranularityService } from '../services/granularity.service';
 export class QcDoughnutComponent implements OnInit {
 
   public batchId = 0;
+  public week = 1;
   public dataSetLabels: string[] = ['batch'];
   public chartData: number[];
   public chartType = 'doughnut';
@@ -29,10 +31,18 @@ export class QcDoughnutComponent implements OnInit {
 
   ngOnInit() {
 
-    this.batchSubscription = this.granularityService.currentBatch$.subscribe((batch) => {
+    this.batchSubscription = Observable.combineLatest(
+      this.granularityService.currentBatch$, this.granularityService.currentWeek$).subscribe((batchWeek) => {
+      const batch = batchWeek[0];
+      const week = batchWeek[1];
       this.batchId = batch.batchId;
+      this.week = week;
       this.dataSetLabels = [batch.trainingName];
-      this.reportsService.fetchQcStatusDoughnutChart(batch.batchId);
+      if (week === 0) {
+        this.reportsService.fetchQcStatusDoughnutChart(batch.batchId);
+      } else {
+        this.reportsService.fetchBatchWeekPieChart(batch.batchId, week);
+      }
     });
 
     this.dataSubscription = this.reportsService.qcStatusDoughnut$.subscribe((result) => {
@@ -41,19 +51,6 @@ export class QcDoughnutComponent implements OnInit {
         this.chartData = [result.data];
       }
     });
-  }
-
-  /**
-   * Sets current batch ID and returns it.
-   * Access current batch from granularity to retrieve batch ID.
-   */
-  getBatchId(): number {
-    this.granularityService.currentBatch$.subscribe(response => {
-      if (response) {
-        this.batchId = response.batchId;
-      }
-    });
-    return this.batchId;
   }
 
   /**

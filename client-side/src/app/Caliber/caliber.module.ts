@@ -78,7 +78,7 @@ import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedba
 import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.component';
 import { WeeklyAuditComponent } from './reports/weekly-audit/weekly-audit.component';
 import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative-scores.component';
-import { QcDoughnutComponent } from './reports/doughnut/doughnut.component';
+import { QcDoughnutComponent } from './reports/qc-doughnut/qc-doughnut.component';
 
 @NgModule({
   imports: [
