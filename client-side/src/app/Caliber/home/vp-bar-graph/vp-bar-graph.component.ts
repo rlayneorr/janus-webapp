@@ -70,22 +70,19 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     this.hasBarChartData = false;
     this.selectedState = false;
     this.barChartData = this.vpHomeBarGraphService.getBarChartData();
-    const first: Observable<any> = this.reportsService.fetchReportsStackedBarCurrentWeek();
-    const second: Observable<any> = this.batchService.getList();
-    first.merge(second).subscribe(
+    const Observable1: Observable<any> = this.reportsService.fetchReportsStackedBarCurrentWeek();
+    const Observable2: Observable<any> = this.batchService.getList();
+    Observable1.merge(Observable2).subscribe(
       (resp) => {
         this.counter++;
-        console.log("resp");
-        console.log(resp);
-        if(resp.length > 0) {
+        if (resp.length > 0) {
           this.holder.push(resp);
         }
         if (this.counter > 2) {
-          console.log('results');
-          console.log(this.holder);
+          // have to sort to find which object is in the array the result of Observable1 will have a qcStatus field
           this.results = this.holder.filter(i => ('qcStatus' in i[0]))[0];
+          // the result of Observable2 will have a batchId status.  Have to check the first item in the returned array i[0]
           this.allbatches = this.holder.filter(i => ('batchId' in i[0]))[0];
-          console.log(this.results);
           this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
           this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
           this.states = this.vpHomeSelectorService.populateStates(this.addresses);
@@ -105,8 +102,6 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     this.hasBatchStatuses = false;
     this.overallBatchStatusArray = [];
     this.modalInfoArray = undefined;
-    console.log(this.results);
-    console.log(this.allbatches);
     for (const result of this.results) {
 
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
@@ -117,7 +112,6 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
       }
       this.noteService.fetchQcBatchNotesByBatchIdByWeek(batch.batchId, batch.weeks).subscribe((resp) => {
         const temp: any = resp;
-        console.log(temp);
         this.overallBatchStatusArray.push(temp.qcStatus);
       });
     }
