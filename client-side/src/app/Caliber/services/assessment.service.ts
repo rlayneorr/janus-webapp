@@ -88,7 +88,6 @@ export class AssessmentService extends AbstractApiService<Assessment> {
         // console.log(list);
         const matches = list.filter( (value) => {
           switch (true) {
-            case ( value.title !== assessment.title ) :
             case ( value.rawScore !== assessment.rawScore ) :
             case ( value.type !== assessment.type ) :
             case ( value.category.categoryId !== assessment.category.categoryId ) :

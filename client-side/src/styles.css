@@ -1,3 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* needed to unset the max with for a large modal on the manage component within caliber */
+.batch-trainee-modal-container > .modal > div {
+    max-width: unset;
+}
 /************************
     Footer
 ************************/
