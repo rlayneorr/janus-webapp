@@ -9,7 +9,6 @@ import { TrainerService } from '../../../services/trainer.service';
     selector: 'app-deactivatetrainer',
     templateUrl: './deactivatetrainer.component.html',
     styleUrls: ['./deactivatetrainer.component.css'],
-    providers: [TrainerService],
     encapsulation: ViewEncapsulation.None,
   })
 export class DeactivateTrainerComponent implements OnInit {
@@ -29,5 +28,6 @@ export class DeactivateTrainerComponent implements OnInit {
 
     deactivateTrainer() {
         this.ts.deleteTrainer(this.trainer);
+        this.trainer.tier = 'ROLE_INACTIVE';
     }
 }

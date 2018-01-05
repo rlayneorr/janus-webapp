@@ -9,13 +9,11 @@ import { Observable } from 'rxjs/Observable';
 // services
 import { AbstractApiService } from './abstract-api.service';
 import { EnvironmentService } from './environment.service';
+import { environment } from '../../../environments/environment';
+import { AlertsService } from './alerts.service';
 
 // entities
 import { Trainer } from '../entities/Trainer';
-
-import { Inject } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { environment } from '../../../environments/environment';
 
 /**
  * this service manages calls to the web service
@@ -28,15 +26,21 @@ export class TrainerService extends AbstractApiService<Trainer> {
   private tiersSubject = new BehaviorSubject<string[]>([]);
 
   /**
+  * current trainer for trainer profile page
+  */
+  private trainerSource = new BehaviorSubject<Trainer>(null);
+  currentTrainer = this.trainerSource.asObservable();
+
+  /**
   * @deprecated
   * -> retained for backwards compatibility
   */
   trainers$: Observable<any> = this.getList(); // this is how components should access the data if you want to cache it
-  titles$: Observable<any> = this.getTitleList();
+  titles$: Observable<any> = this.getTitlesList();
   tiers$: Observable<any> = this.getTierList();
 
-  constructor(httpClient: HttpClient, envService: EnvironmentService, http: Http) {
-    super(envService, httpClient);
+  constructor(httpClient: HttpClient, envService: EnvironmentService, alertService: AlertsService) {
+    super(envService, httpClient, alertService);
 
     this.populateOnStart();
   }
@@ -67,7 +71,7 @@ export class TrainerService extends AbstractApiService<Trainer> {
   /**
   * returns an observable of trainer title strings
   */
-  public getTitleList(): Observable<string[]> {
+  public getTitlesList(): Observable<string[]> {
     return this.titlesSubject.asObservable();
   }
 
@@ -76,6 +80,14 @@ export class TrainerService extends AbstractApiService<Trainer> {
   */
   public getTierList(): Observable<string[]> {
     return this.tiersSubject.asObservable();
+  }
+
+  /**
+  *
+  * sets current trainer
+  */
+  public changeCurrentTrainer(trainer: Trainer) {
+    this.trainerSource.next(trainer);
   }
 
   /*
@@ -100,16 +112,32 @@ export class TrainerService extends AbstractApiService<Trainer> {
     return super.doGetOneObservable(url);
   }
 
-   /**
-     * retrieves all trainers and pushes them on the
-     * list subject
-     *
-     * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
-     */
+  /**
+    * retrieves all trainers and pushes them on the
+    * list subject
+    *
+    * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
+    */
   public fetchAll(): void {
     const url = 'all/trainer/all';
+    const messages = {
+      success: 'Trainers retrieved successfully',
+      error: 'Trainers retrieval failed',
+    };
 
-    super.doGetList(url);
+    super.doGetList(url, {}, messages);
+  }
+
+  /**
+   * creates a trainer and pushes the created trainer on the
+   * savedSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param trainer: Trainer
+   */
+  public create(trainer: Trainer): void {
+    this.save(trainer);
   }
 
    /**
@@ -122,8 +150,12 @@ export class TrainerService extends AbstractApiService<Trainer> {
    */
   public save(trainer: Trainer): void {
     const url = 'vp/trainer/create';
+    const messages = {
+      success: 'Trainer saved successfully',
+      error: 'Trainer save failed',
+    };
 
-    super.doPost(trainer, url);
+    super.doPost(trainer, url, {}, messages);
   }
 
   /**
@@ -136,8 +168,12 @@ export class TrainerService extends AbstractApiService<Trainer> {
    */
   public update(trainer: Trainer): void {
     const url = 'vp/trainer/update';
+    const messages = {
+      success: 'Trainer updated successfully',
+      error: 'Trainer update failed',
+    };
 
-    super.doPut(trainer, url);
+    super.doPut(trainer, url, {}, messages);
   }
 
   /**
@@ -152,9 +188,15 @@ export class TrainerService extends AbstractApiService<Trainer> {
   * @param trainer: Trainer
   */
   public delete(trainer: Trainer): void {
+    const url = 'vp/trainer/update';
+    const messages = {
+      success: 'Trainer deactivated successfully',
+      error: 'Trainer deactivation failed',
+    };
+
     trainer.tier = Trainer.ROLE_INACTIVE;
 
-    this.update(trainer);
+    super.doPut(trainer, url, {}, messages);
   }
 
   /**
