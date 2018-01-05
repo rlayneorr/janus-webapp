@@ -87,6 +87,7 @@ import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-traine
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
+import { ReportsService } from './services/reports.service';
 import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
 import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
 
@@ -182,6 +183,7 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
     EvaluationService,
     SkillService,
     TrainingTypeService,
+    ReportsService,
   ],
   bootstrap: [
     TrainersComponent

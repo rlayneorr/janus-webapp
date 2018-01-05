@@ -15,7 +15,7 @@ export class VpHomePanelGraphService {
    * @returns ChartDataEntity
    */
 
-  public getPanelChartData() {
+  public getPanelChartData(): ChartDataEntity {
     const panelChartData = new ChartDataEntity();
     panelChartData.options = {
       legend : {
