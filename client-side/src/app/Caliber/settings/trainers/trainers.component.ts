@@ -20,7 +20,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
   titles: Array<any>;
   tiers: Array<any>;
   model = new Trainer();
-
+  activeStatus: String;
   currEditTrainer: Trainer;
   newTrainer: Trainer;
   newTier: string;
@@ -118,6 +118,9 @@ export class TrainersComponent implements OnInit, OnDestroy {
 
   newTitleChange(newTitle) {
     this.model.title = newTitle;
+  }
+  buttonChange(status: String) {
+    this.activeStatus = status;
   }
 
   /**
