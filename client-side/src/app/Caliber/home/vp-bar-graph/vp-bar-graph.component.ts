@@ -47,9 +47,8 @@ export class VpBarGraphComponent implements OnInit {
 
 
   constructor(private vpHomeBarGraphService: VpHomeBarGraphService,
-    private vhss: VpHomeSelectorService,
-    private rs: ReportingService,
-    private es: EvaluationService,
+    private reportingService: ReportingService,
+    private evaluationService: EvaluationService,
     private modalService: NgbModal,
     private http: HttpClient,
     private vpHomeSelectorService: VpHomeSelectorService,
@@ -59,9 +58,7 @@ export class VpBarGraphComponent implements OnInit {
     this.hasBarChartData = false;
     this.selectedState = false;
     this.barChartData = this.vpHomeBarGraphService.getBarChartData();
-    const url = this.environmentService.buildUrl('all/reports/batch/week/stacked-bar-current-week');
-    console.log(url);
-    this.http.get(url, { withCredentials: true })
+    this.http.get(this.environmentService.buildUrl('all/reports/batch/week/stacked-bar-current-week'), { withCredentials: true })
       .subscribe(
       (resp) => {
         this.results = resp;
@@ -144,8 +141,8 @@ export class VpBarGraphComponent implements OnInit {
     const modalRef = this.modalService.open(BarGraphModalComponent);
 
     // populate Technoloiges
-    this.rs.fetchTechnologiesForTheWeek(chartInfo.id, chartInfo.week);
-    this.techSub = this.rs.technologiesForTheWeek$.subscribe((result) => {
+    this.reportingService.fetchTechnologiesForTheWeek(chartInfo.id, chartInfo.week);
+    this.techSub = this.reportingService.technologiesForTheWeek$.subscribe((result) => {
       if (result) {
         tech = result.data;
         modalRef.componentInstance.tech = tech;
@@ -153,8 +150,8 @@ export class VpBarGraphComponent implements OnInit {
     });
 
     // populate detailed trainee notes
-    this.es.FetchAllQCTraineeNotes(chartInfo.id, chartInfo.week);
-    this.QCSub = this.es.allQCTraineeNotes$.subscribe((result) => {
+    this.evaluationService.FetchAllQCTraineeNotes(chartInfo.id, chartInfo.week);
+    this.QCSub = this.evaluationService.allQCTraineeNotes$.subscribe((result) => {
       if (result) {
         trainees = result.data;
 
@@ -170,8 +167,8 @@ export class VpBarGraphComponent implements OnInit {
     });
 
     // populate qc overal information
-    this.es.FetchAllQCBatchNotes(chartInfo.id, chartInfo.week);
-    this.batchSub = this.es.allQCBatchNotes$.subscribe((result) => {
+    this.evaluationService.FetchAllQCBatchNotes(chartInfo.id, chartInfo.week);
+    this.batchSub = this.evaluationService.allQCBatchNotes$.subscribe((result) => {
       if (result) {
         batchNotes = result.data;
         modalRef.componentInstance.batchNotes = batchNotes;
