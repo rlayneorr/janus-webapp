@@ -120,7 +120,7 @@ export class GradeService extends AbstractApiService<Grade> {
   public update(grade: Grade): void {
     const url = 'trainer/grade/update';
 
-    super.doPut(grade, url);
+    super.doPost(grade, url);
   }
 
 }

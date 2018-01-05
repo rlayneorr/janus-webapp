@@ -2,7 +2,7 @@
 
 
 <!-- START ADD WEEK MODAL-->
-  <ng-template #addWeekContent let-c="close" let-d="dismiss">
+  <ng-template #addWeekContent let-c="close" let-d="dismiss" id ="addWeek">
     <div class="modal-header">
       <h4 class="modal-title">Add Week</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -66,7 +66,7 @@
       <div class="modal-body">
               <div class="form-group">
                       <label>Assessment Category:</label>
-                      <select #cat class="form-control" id="categorySelect" (change)="editCategory(cat)">
+                      <select #cat class="form-control" id="categorySelect" (change)="editCategory(cat)" [value]="editingAssessment.category.skillCategory">
                         <option *ngFor="let category of this.categories">{{category | categorySkill}}</option>
                       </select>
               </div>
@@ -85,8 +85,8 @@
               </div>
       </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-danger clickable" (click)="c('Close click')">Delete</button>
-      <button type="button" class="btn btn-primary revature-button clickable" (click)="editAssessment()">Update</button>
+      <button type="button" class="btn btn-danger clickable" (click)="deleteAssessment(); c('Close click');">Delete</button>
+      <button type="button" class="btn btn-primary revature-button clickable" (click)="updateAssessment(); c('Close click');">Update</button>
     <button type="button" class="btn btn-outline-dark clickable" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>
@@ -99,7 +99,12 @@
                 <ng-template ngbTabTitle>
                     <div class="revature-orange"><b>Week {{i+1}}</b></div> </ng-template>
                 <ng-template ngbTabContent></ng-template>
-              </ngb-tab>
+        </ngb-tab>
+        <ngb-tab id="+">
+            <ng-template ngbTabTitle>
+                <div class="revature-orange"><b>+</b></div> </ng-template>
+            <ng-template ngbTabContent></ng-template>
+    </ngb-tab>
       </ngb-tabset>
       <button  (click)="open(addWeekContent)">+</button>
 <!-- TABS END -->
@@ -110,10 +115,10 @@
           <th>
             Trainee
           </th>
-          <th class ="clickable" *ngFor="let assessment of this.assessments" (click)="open(editAssessmentContent); selectAssessment(assessment)">
-            <div class = "assessment-header">{{assessment.title}}</div>
+          <th class ="clickable" *ngFor="let assessment of this.assessments" (click)="editAssessment(editAssessmentContent, assessment);">
+            <div class = "assessment-header">{{assessment.category.skillCategory}} {{assessment.type}}</div>
           </th>
-          <th>
+          <th class = "note">
             Notes
           </th>
         </tr>
@@ -123,10 +128,12 @@
           {{trainee.name}}
         </td>
         <td *ngFor="let assessment of this.assessments">
-            <input class="form-control assessment-area" type="text" [value]="this.getGrade(this.grades | gradeByTraineeByAssessment: trainee: assessment).score">
+            <input #inputGradeScore class="form-control assessment-area" type="text" [value]="this.getGrade(trainee, assessment).score"
+            (change)="updateGrade(this.getGrade(trainee, assessment), inputGradeScore)">
+            <div *ngIf="checkGradeLoading(getGrade(trainee, assessment))">loading thing</div>
         </td>
         <td>
-            <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
+            <textarea class="form-control note" id="exampleTextarea" rows="2" [value]="this.getNote(trainee).content"></textarea>
         </td>
       </tr>
     </table>

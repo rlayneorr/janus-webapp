@@ -30,6 +30,7 @@ import { TrainingTypeService } from './services/training-type.service';
 // pipes
 import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
+import { CategorySkillPipe } from './pipes/category-skill.pipe';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -71,6 +72,7 @@ import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
+import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
 
 
 
@@ -122,6 +124,8 @@ import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
     PanelBatchAllTraineesComponent,
     GradeByTraineeByAssessmentPipe,
     BatchByTrainerPipe,
+    CategorySkillPipe,
+    NoteByTraineeByWeekPipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
