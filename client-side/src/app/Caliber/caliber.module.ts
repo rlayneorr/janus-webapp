@@ -43,10 +43,13 @@ import { EvaluationService } from './services/evaluation.service';
 // pipes
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { CategorySkillPipe } from './pipes/category-skill.pipe';
+import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
+import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
+import { DisplayBatchByYear } from './manage/manage.pipe';
 
 
 // components
@@ -81,7 +84,6 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
-import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
@@ -141,6 +143,7 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
     // pipes
     GraphDataPipe,
     GradeByTraineeByAssessmentPipe,
+    DisplayBatchByYear,
     BatchByTrainerPipe,
     CategorySkillPipe,
     NoteByTraineeByWeekPipe,
