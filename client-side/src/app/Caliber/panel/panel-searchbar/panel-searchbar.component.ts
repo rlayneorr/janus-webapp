@@ -33,7 +33,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
   traineeList = [];
   traineeNameList: any = [];
   batchSubscription: Subscription;
-  traineeSubscription: Subscription;
+  // traineeSubscription: Subscription;
   closeResult: string;
 
   protected traineeSubject: BehaviorSubject<Trainee>;
@@ -99,7 +99,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.batchSubscription.unsubscribe();
-    this.traineeSubscription.unsubscribe();
+    // this.traineeSubscription.unsubscribe();
   }
 
 }
