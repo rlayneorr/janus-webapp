@@ -60,6 +60,7 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
       (result) => {
         if (result) {
 
+          console.log('breakdown: data incoming' + result);
           const incomingTraineeData: any = { data: [], label: 'Trainee' };
           const incomingBatchData: any = { data: [], label: 'Batch' };
           const incomingLabels: any = [];
@@ -84,17 +85,19 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
       this.batchIdSub = this.granularityService.currentBatch$.subscribe(
           data => {
+            console.log('breakdown - batch incoming with id : ' + data.batchId);
             // Make sure batchId is not undefined
-            if (this.batchId) {
-              this.batchId = data.batchId; this.tryFetch();
-            }
+            this.batchId = data.batchId; this.tryFetch();
           });
 
       this.weekSub = this.granularityService.currentWeek$.subscribe(
           data => {
             // Make sure traineeId is not undefined
+            console.log('breakdown - batch incoming week: ' + data);
+            console.log(data);
             if (data) {
-              this.week = data; this.tryFetch();
+              this.week = data;
+              this.tryFetch();
             }
           });
 
@@ -109,7 +112,8 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
   tryFetch() {
     // Check that all objects are present
-    if (this.batchId && this.week !== null && this.traineeId) {
+    console.log('breakdown - fetching state: batchId: ' + this.batchId + ' week: ' + this.week + ' traineeId:' + this.traineeId);
+    if (this.batchId && this.week !== null && this.traineeId > 0) {
       if (this.week === 0) {
         // If week is 0, fetch data for all weeks
         this.reportsService.fetchBatchOverallTraineeBarChart(this.batchId, this.traineeId);
