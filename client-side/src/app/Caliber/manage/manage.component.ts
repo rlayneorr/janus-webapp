@@ -43,6 +43,9 @@ export class ManageComponent implements OnInit, OnDestroy {
   skills: string[] = [];
   createNewTrainee: Trainee = new Trainee;
   
+
+  sDate: Date;
+  eDate: Date;
   /* Subscriptions */
   batchSub: Subscription;
   trainerSub: Subscription;
@@ -114,11 +117,7 @@ export class ManageComponent implements OnInit, OnDestroy {
    * and function calls from the html in the modal
    */
   createNewBatchFunction() {
-    console.log(this.createNewBatch);
-
-    const newDate = this.datePipe.transform(this.createNewBatch.startDate, 'yyyy-MM-dd');
-    console.log(this.createNewBatch.startDate);
-    /*this.batchService.save(this.createNewBatch);*/
+    this.batchService.save(this.createNewBatch);
   }
 
   createNewTraineeFunction() {

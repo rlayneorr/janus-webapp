@@ -121,6 +121,7 @@ import { AddressToStringPipe } from './pipes/address-to-string.pipe';
     OrderByPipe,
     FilterByPipe,
     ToolbarFilterPipe,
+    AddressToStringPipe,
 
     // components
     CaliberComponent,
