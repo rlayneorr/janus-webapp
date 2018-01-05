@@ -41,7 +41,6 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 
 // pipes
-import { TraineeSearchPipePipe } from './pipes/trainee-search-pipe.pipe';
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { CategorySkillPipe } from './pipes/category-skill.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
@@ -62,7 +61,7 @@ import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/traine
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
-import { PanelComponent } from './panel/panel.component';
+import { PanelComponent } from './panel/panel/panel.component';
 import { PanelTableComponent } from './panel/panel-table/panel-table.component';
 import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
 import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
@@ -134,6 +133,7 @@ import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical
     AlertsComponent,
     BarGraphModalComponent,
     PanelBatchAllTraineesComponent,
+    PanelTableComponent,
     PanelSearchbarComponent,
     CreatePanelComponent,
     InterviewDetailsComponent,

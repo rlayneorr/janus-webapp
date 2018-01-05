@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 // entities
@@ -10,7 +10,9 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 @Component({
   selector: 'app-create-panel',
   templateUrl: './create-panel.component.html',
-  styleUrls: ['./create-panel.component.css']
+  styleUrls: ['./create-panel.component.css'],
+  encapsulation: ViewEncapsulation.None,  // Use the native Shadow DOM to encapsulate our CSS
+
 })
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
