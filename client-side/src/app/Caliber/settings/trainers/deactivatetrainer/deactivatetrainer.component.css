@@ -4,6 +4,9 @@
 	src: url('../../../../../assets/fonts/Futura-Std-Book.otf') format('opentype');
 }
 */
+.fa-times {
+    cursor: pointer;
+}
 .close {
     color: rgb(242, 105, 37);
 }

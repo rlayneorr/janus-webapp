@@ -15,6 +15,7 @@ import { EnvironmentService } from '../../services/environment.service';
 import { EvaluationService } from '../../services/evaluation.service';
 import { Note } from '../../entities/Note';
 import { DataSet } from '../../entities/DataSet';
+import { AlertsService } from '../../services/alerts.service';
 
 @Component({
   selector: 'app-vp-bar-graph',
@@ -51,6 +52,7 @@ export class VpBarGraphComponent implements OnInit {
     private evaluationService: EvaluationService,
     private modalService: NgbModal,
     private http: HttpClient,
+    private alertService: AlertsService,
     private vpHomeSelectorService: VpHomeSelectorService,
     private environmentService: EnvironmentService) { }
 
@@ -71,9 +73,13 @@ export class VpBarGraphComponent implements OnInit {
           (resp2) => {
             this.allbatches = resp2;
             this.populateBatchStatuses();
+            this.alertService.success('Successfully fetched QC Progress!');
           });
 
-      });
+      },
+    (err) => {
+      this.alertService.error('Failed to fetch QC Progress!');
+    });
   }
   /** gets the statuses of the batches as well as stores the batch id and week
   * into a seperate array used for the modal
