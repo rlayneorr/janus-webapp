@@ -7,10 +7,10 @@ import { Address } from '../entities/Address';
 export class AddressToStringPipe implements PipeTransform {
 
   transform(value: Address): string {
-    const address = [
+    const address = (value.company) ? [
       value.company,
       value.street,
-    ].join(',');
+    ].join(',') : value.street ;
 
     const cityState = [
       value.city,
