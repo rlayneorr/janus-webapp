@@ -30,7 +30,6 @@ import { NoteService } from './services/note.service';
 import { CategoryService } from './services/category.service';
 import { SkillService } from './services/skill.service';
 import { TrainingTypeService } from './services/training-type.service';
-import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
 import { ColorService } from './services/colors/color.service';
 import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.service';
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
@@ -78,7 +77,6 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
-import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
 import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
 
 
