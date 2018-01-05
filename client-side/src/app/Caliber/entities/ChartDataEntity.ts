@@ -13,7 +13,8 @@ export class ChartDataEntity {
         borderColor: 'rgba(114, 164, 194, 1)',
         pointHoverBackgroundColor: 'rgba(114, 164, 194, .3)',
         pointHoverBorderColor: 'rgba(114, 164, 194, .3)',
-        pointBorderColor: '#fff'
+        pointBorderColor: '#fff',
+        borderWidth: 2
     };
     secondaryColor = {
         backgroundColor: 'rgba(252, 180, 20, .6)',
@@ -21,7 +22,8 @@ export class ChartDataEntity {
         borderColor: 'rgba(252, 180, 20, 1)',
         pointHoverBackgroundColor: 'rgba(252, 180, 20, .3)',
         pointHoverBorderColor: 'rgba(252, 180, 20, .3)',
-        pointBorderColor: '#fff'
+        pointBorderColor: '#fff',
+        borderWidth: 2
     };
     type: String;
 

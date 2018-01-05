@@ -135,7 +135,6 @@ export abstract class AbstractApiService<T> {
    */
   protected doGetListObservable(apiUrl: string, params: any = {}): Observable<T[]> {
     const url = this.envService.buildUrl(apiUrl, params);
-
     return this.http.get<T[]>(url);
   }
 
@@ -149,6 +148,8 @@ export abstract class AbstractApiService<T> {
   protected doPost(object: T, apiUrl: string, params: any = {}, messages: any = {}): void {
     const url = this.envService.buildUrl(apiUrl, params);
     const body = JSON.stringify(object);
+
+    console.log(body);
 
     this.http.post<T>(url, body).subscribe((data) => {
       this.savedSubject.next(data);
@@ -216,5 +217,26 @@ export abstract class AbstractApiService<T> {
           break;
       }
     }
+  }
+
+  /**
+   * used to convert date values returned by the
+   * ng-bootstrap module into ISO strings
+   *
+   * @param date: any
+   *
+   * @return string
+   */
+  protected stringifyDate(date: any): string {
+    const dateString = [
+      date.year,
+      date.month,
+      date.day,
+    ].join('-');
+
+    return [
+      dateString,
+      'T00:00:00.0',
+    ].join('');
   }
 }

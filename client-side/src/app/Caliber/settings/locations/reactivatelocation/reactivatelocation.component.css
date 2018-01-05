@@ -4,6 +4,10 @@
 	src: url('../../../../../assets/fonts/Futura-Std-Book.otf') format('opentype');
 }
 */
+#reactivate {
+    cursor: pointer;
+}
+
 .close {
     color: rgb(242, 105, 37);
 }

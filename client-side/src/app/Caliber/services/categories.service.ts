@@ -5,18 +5,24 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
-// entities
-import { Category } from '../entities/Category';
-
 // services
+import { environment } from '../../../environments/environment';
 import { EnvironmentService } from './environment.service';
-import { AlertsService } from './alerts.service';
 import { CategoryService } from './category.service';
 
+
+// entities
+import { Category } from '../entities/Category';
+import { AlertsService } from './alerts.service';
+
 /**
- * this service is used to manage API calls
- * for the category objects
- */
+* @deprecated
+*
+* @see CategoryService
+*
+* this service manages calls to the web services
+* for Category objects
+*/
 @Injectable()
 export class CategoriesService extends CategoryService {
 

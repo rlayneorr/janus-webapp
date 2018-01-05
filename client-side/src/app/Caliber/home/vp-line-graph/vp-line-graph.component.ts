@@ -7,6 +7,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { environment } from '../../../../environments/environment';
 import { EnvironmentService } from '../../services/environment.service';
+import { AlertsService } from '../../services/alerts.service';
+import { ReportsService } from '../../services/reports.service';
 
 @Component({
   selector: 'app-vp-line-graph',
@@ -27,13 +29,13 @@ export class VpLineGraphComponent implements OnInit {
   constructor(private http: HttpClient,
     private vpHomeLineGraphService: VpHomeLineGraphService,
     private vpHomeSelectorService: VpHomeSelectorService,
-
-    private environmentService: EnvironmentService) { }
+    private alertService: AlertsService,
+    private environmentService: EnvironmentService,
+    private reportsService: ReportsService) { }
 
   ngOnInit() {
     this.lineChartData = this.vpHomeLineGraphService.getLineChartData();
-    this.http.get(this.environmentService.buildUrl('all/reports/dashboard'), { withCredentials: true })
-      .subscribe(
+    this.reportsService.fetchReportsDashboard().subscribe(
       (resp) => {
         this.results = resp;
         this.results.sort();
@@ -41,7 +43,12 @@ export class VpLineGraphComponent implements OnInit {
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
         this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasData = true;
-      });
+        this.alertService.success('Successfully fetched Weekly Progress!');
+      },
+      (err) => {
+        this.alertService.error('Failed to fetch Weekly Progress!');
+      }
+    );
   }
 
   /**

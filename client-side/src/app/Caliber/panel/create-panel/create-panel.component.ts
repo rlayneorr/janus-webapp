@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms/';
@@ -13,7 +13,9 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 @Component({
   selector: 'app-create-panel',
   templateUrl: './create-panel.component.html',
-  styleUrls: ['./create-panel.component.css']
+  styleUrls: ['./create-panel.component.css'],
+  encapsulation: ViewEncapsulation.None,  // Use the native Shadow DOM to encapsulate our CSS
+
 })
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
@@ -57,7 +59,7 @@ export class CreatePanelComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, { size: 'xl' }).result.then((result) => {
+    this.modalService.open(content, { size: 'lg' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
