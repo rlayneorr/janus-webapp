@@ -113,8 +113,9 @@ export class GradeService extends AbstractApiService<Grade> {
       success: 'Grade saved successfully',
       error: 'Grade save failed',
     };
+    const clone = this.prepareForApi(grade);
 
-    super.doPost(grade, url, {}, messages);
+    super.doPost(clone, url, {}, messages);
   }
 
   /**
@@ -131,8 +132,28 @@ export class GradeService extends AbstractApiService<Grade> {
       success: 'Grade updated successfully',
       error: 'Grade update failed',
     };
+    const clone = this.prepareForApi(grade);
 
-    super.doPost(grade, url, {}, messages);
+    super.doPost(clone, url, {}, messages);
+  }
+
+    /**
+     * produces a clone of the grade object that
+     * has changes required for the API in order
+     * to be processed
+     *
+     * @param batch: Batch
+     *
+     * @return any
+     */
+  protected prepareForApi(grade: Grade) {
+    const output: any = {};
+
+    Object.assign(output, grade);
+
+    output.dateReceived = super.stringifyDate(grade.dateReceived);
+
+    return output;
   }
 
 }
