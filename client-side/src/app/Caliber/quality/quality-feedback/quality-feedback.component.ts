@@ -3,6 +3,7 @@ import { Batch } from '../../entities/Batch';
 import { NoteService } from '../../services/note.service';
 import { Note } from '../../entities/Note';
 import { Subscription } from 'rxjs/Subscription';
+import { Trainee } from '../../entities/Trainee';
 
 @Component({
   selector: 'app-quality-feedback',
@@ -23,7 +24,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
    }
 
   ngOnInit() {
-    // this.fetchNotes();
+
   }
 
   ngOnDestroy() {
@@ -59,8 +60,15 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     return batchWeeks;
   }
 
-  getNoteOnTrainee(index: number) {
-    return this.qcTraineeNotes[index].content;
+  getNoteOnTrainee(trainee: Trainee) {
+    let traineeNote = '';
+    for (let i = 0; i < this.qcTraineeNotes.length; i++) {
+      if (trainee.traineeId === this.qcTraineeNotes[i].trainee.traineeId) {
+        traineeNote = this.qcTraineeNotes[i].content;
+      }
+    }
+    console.log(traineeNote);
+    return traineeNote;
   }
 
   test() {
@@ -68,6 +76,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     console.log(this.week);
     console.log(this.qcBatchNote);
     console.log(this.qcTraineeNotes[1].trainee.name);
+
   }
 
 }

@@ -38,15 +38,6 @@ export class QualityComponent implements OnInit, OnDestroy {
     this.currentBatch = this.batches[0];
    }
 
-   onBatchSelect(batchId: number) {
-     console.log(batchId);
-     for (let i = 0; i < this.batches.length; i++) {
-       if (batchId == this.batches[i].batchId) {
-         this.currentBatch = this.batches[i];
-       }
-     }
-   }
-
    public setCurrentYear(currentYear: number): void {
      this.currentYear = currentYear;
      console.log(currentYear);
@@ -63,14 +54,13 @@ export class QualityComponent implements OnInit, OnDestroy {
      return trackedYears;
    }
 
-  // test() {
-  //   console.log('batches ' + this.batches);
-  //   console.log('batches type ' + typeof this.batches);
-  //   console.log('currentBatch ' + this.currentBatch);
-  //   console.log('currentBatch type ' + typeof this.currentBatch);
-
-  //   this.currentYear = this.currentBatch.startDate.getFullYear();
-  //   console.log(this.currentYear);
-  // }
+   onBatchSelect(batchId: number) {
+    console.log(batchId);
+    for (let i = 0; i < this.batches.length; i++) {
+      if (batchId == this.batches[i].batchId) {
+        this.currentBatch = this.batches[i];
+      }
+    }
+  }
 
 }
