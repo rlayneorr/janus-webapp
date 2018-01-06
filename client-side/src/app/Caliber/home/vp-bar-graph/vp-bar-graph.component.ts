@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
 import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
@@ -15,13 +15,17 @@ import { EnvironmentService } from '../../services/environment.service';
 import { EvaluationService } from '../../services/evaluation.service';
 import { Note } from '../../entities/Note';
 import { DataSet } from '../../entities/DataSet';
+import { AlertsService } from '../../services/alerts.service';
+import { BatchService } from '../../services/batch.service';
+import { NoteService } from '../../services/note.service';
+import { ReportsService } from '../../services/reports.service';
 
 @Component({
   selector: 'app-vp-bar-graph',
   templateUrl: './vp-bar-graph.component.html',
   styleUrls: ['./vp-bar-graph.component.css', '../homeCSS/vpHomeCharts.css']
 })
-export class VpBarGraphComponent implements OnInit {
+export class VpBarGraphComponent implements OnInit, OnDestroy {
   public barChartData: ChartDataEntity;
   public results: any;
   public addresses;
@@ -40,7 +44,7 @@ export class VpBarGraphComponent implements OnInit {
   public techSub: Subscription;
   public QCSub: Subscription;
   public batchSub: Subscription;
-
+  public QcBatchSub: Subscription;
 
   public allbatches: any;
   public hasBatchStatuses = false;
@@ -51,29 +55,45 @@ export class VpBarGraphComponent implements OnInit {
     private evaluationService: EvaluationService,
     private modalService: NgbModal,
     private http: HttpClient,
+    private alertService: AlertsService,
     private vpHomeSelectorService: VpHomeSelectorService,
-    private environmentService: EnvironmentService) { }
+    private environmentService: EnvironmentService,
+    private batchService: BatchService,
+    private noteService: NoteService,
+    private reportsService: ReportsService) { }
 
   ngOnInit() {
     this.hasBarChartData = false;
     this.selectedState = false;
     this.barChartData = this.vpHomeBarGraphService.getBarChartData();
-    this.http.get(this.environmentService.buildUrl('all/reports/batch/week/stacked-bar-current-week'), { withCredentials: true })
-      .subscribe(
+    this.http.get(this.environmentService.buildUrl('qc/batch/all')).subscribe(
       (resp) => {
+        console.log(this.results);
         this.results = resp;
         this.results.sort();
         this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, '', '');
         this.addresses = this.vpHomeSelectorService.populateAddresses(this.results);
         this.states = this.vpHomeSelectorService.populateStates(this.addresses);
         this.hasBarChartData = true;
-        this.http.get(this.environmentService.buildUrl('/qc/batch/all')).subscribe(
-          (resp2) => {
-            this.allbatches = resp2;
-            this.populateBatchStatuses();
-          });
+        this.QcBatchSub = this.batchService.getList().subscribe( (resp2) => {
+          if(resp2 === []) {
+            this.batchService.fetchAll();
+          }
+          this.allbatches = resp2;
+          this.populateBatchStatuses();
+          this.alertService.success('Successfully fetched QC Progress!');
+        });
+        // this.http.get(this.environmentService.buildUrl('/qc/batch/all')).subscribe(
+        //   (resp2) => {
+        //     this.allbatches = resp2;
+        //     this.populateBatchStatuses();
+        //     this.alertService.success('Successfully fetched QC Progress!');
+        //   });
 
-      });
+      },
+    (err) => {
+      this.alertService.error('Failed to fetch QC Progress!');
+    });
   }
   /** gets the statuses of the batches as well as stores the batch id and week
   * into a seperate array used for the modal
@@ -83,21 +103,23 @@ export class VpBarGraphComponent implements OnInit {
     this.hasBatchStatuses = false;
     this.overallBatchStatusArray = [];
     this.modalInfoArray = undefined;
+    console.log(this.results);
+    console.log(this.allbatches);
     for (const result of this.results) {
+
       const batch = this.allbatches.filter(i => i.batchId === result.id)[0];
       if (this.modalInfoArray === undefined) {
         this.modalInfoArray = [{ 'id': <number>batch.batchId, 'week': <number>batch.weeks }];
       } else {
         this.modalInfoArray.push({ 'id': <number>batch.batchId, 'week': <number>batch.weeks });
       }
-      this.http.get(this.environmentService.buildUrl(`qc/note/batch/${batch.batchId}/${batch.weeks}/`))
-        .subscribe((resp) => {
+      this.noteService.fetchQcBatchNotesByBatchIdByWeek(batch.batchId, batch.weeks).subscribe((resp) => {
           const temp: any = resp;
+          console.log(temp);
           this.overallBatchStatusArray.push(temp.qcStatus);
         });
     }
     this.hasBatchStatuses = true;
-    console.log(this.barChartData);
   }
   /** called when a state is selected to get cities for the cities drop down
   * as well as re-populate the chartData
@@ -114,7 +136,6 @@ export class VpBarGraphComponent implements OnInit {
     }
     this.barChartData = this.vpHomeBarGraphService.fillChartData(this.results, this.barChartData, this.selectedBarState, '');
     this.hasBarChartData = true;
-    console.log(this.barChartData);
   }
 
   /**
@@ -176,4 +197,6 @@ export class VpBarGraphComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+  }
 }

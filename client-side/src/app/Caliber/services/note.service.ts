@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // rxjs
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/merge';
 import 'rxjs/add/observable/merge';
 
 // services
