@@ -10,12 +10,12 @@ export class AddressToStringPipe implements PipeTransform {
     const address = (value.company) ? [
       value.company,
       value.street,
-    ].join(',') : value.street ;
+    ].join(', ') : value.street ;
 
     const cityState = [
       value.city,
       value.state,
-    ].join(',');
+    ].join(', ');
 
     const a = [
       address,

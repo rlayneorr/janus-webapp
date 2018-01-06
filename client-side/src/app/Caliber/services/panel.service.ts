@@ -86,6 +86,7 @@ export class PanelService extends AbstractApiService<Panel> {
       success: 'Panels saved successfully',
       error: 'Panel save failed',
     };
+    const clone = this.prepareForApi(panel);
 
     super.doPost(panel, url, {}, messages);
   }
@@ -104,8 +105,9 @@ export class PanelService extends AbstractApiService<Panel> {
       success: 'Panels updated successfully',
       error: 'Panel udpated failed',
     };
+    const clone = this.prepareForApi(panel);
 
-    super.doPut(panel, url, {}, messages);
+    super.doPut(clone, url, {}, messages);
   }
 
   /**
@@ -124,6 +126,25 @@ export class PanelService extends AbstractApiService<Panel> {
     };
 
     super.doDelete(panel, url, {}, messages);
+  }
+
+  /**
+ * produces a clone of the Panel object that
+ * has changes required for the API in order
+ * to be processed
+ *
+ * @param batch: Batch
+ *
+ * @return any
+ */
+  protected prepareForApi(panel: Panel) {
+    const output: any = {};
+
+    Object.assign(output, panel);
+
+    output.interviewDate = super.stringifyDate(panel.interviewDate);
+
+    return output;
   }
 
 }
