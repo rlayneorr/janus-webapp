@@ -10,6 +10,7 @@ import { Grade } from '../../entities/Grade';
 import { Trainee } from '../../entities/Trainee';
 import { Assessment } from '../../entities/Assessment';
 import { Batch } from '../../entities/Batch';
+import { Note } from '../../entities/Note';
 
 // services
 import { BatchService } from '../../services/batch.service';
@@ -23,6 +24,7 @@ import { LocationService } from '../../services/location.service';
 import { PanelService } from '../../services/panel.service';
 import { SkillService } from '../../services/skill.service';
 import { TrainingTypeService } from '../../services/training-type.service';
+import { QCStatusService } from '../../services/qcstatus.service';
 
 @Component({
   selector: 'app-test',
@@ -35,7 +37,7 @@ export class TestComponent implements OnInit, OnDestroy {
   private data: any[];
 
 
-  constructor(private service: NoteService ) {
+  constructor(private service: QCStatusService ) {
 
   }
 
@@ -138,7 +140,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
     // this.service.fetchAll();
     // this.service.fetchAllByBatch(3002);
-    this.service.fetchByBatchIdByWeek(2150, 5);
+    // this.service.fetchByBatchIdByWeek(2150, 5);
   }
 
   ngOnDestroy() {

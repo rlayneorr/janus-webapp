@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let trainee of batch.trainees; let i = index">
+    <tr *ngFor="let trainee of batch?.trainees; let i = index">
       <td>{{ trainee?.name }}</td>
       <td>
         <button><i></i></button>  
