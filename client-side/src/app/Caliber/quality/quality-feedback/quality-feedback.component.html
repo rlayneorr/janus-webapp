@@ -19,7 +19,7 @@
     <tr *ngFor="let trainee of batch?.trainees; let i = index">
       <td>{{ trainee?.name }}</td>
       <td>
-        <button><i></i></button>  
+        <app-feedback-icon [status]="getQcStatusOnTrainee(trainee)"></app-feedback-icon>
       </td>
       <td class="col-sm-9 col-md-9 col-lg-9">
         <textarea [ngModel]="getNoteOnTrainee(trainee)" id="noteTextArea" cols="75" rows="3" maxlength="4000"
@@ -29,7 +29,7 @@
   </tbody>
 </table>
 
-<div class="row centered">
+<!-- <div class="row centered">
   <h4 class="text-centered">Overall FeedBack</h4>
 
   <button class="col-lg-4 col-md-4 col-sm-4">button</button>
@@ -39,7 +39,7 @@
 
 <div>
   <textarea id="" cols="30" rows="10"></textarea>
-</div>
+</div> -->
 
 <div class="row">
   <hr class="w-100" />

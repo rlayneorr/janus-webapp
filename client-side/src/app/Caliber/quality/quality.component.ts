@@ -35,8 +35,9 @@ export class QualityComponent implements OnInit, OnDestroy {
 
    private setBatches(batches: Batch[]): void {
     this.batches = batches;
-    this.currentBatch = this.batches[0];
    }
+
+
 
    public setCurrentYear(currentYear: number): void {
      this.currentYear = currentYear;
@@ -57,7 +58,7 @@ export class QualityComponent implements OnInit, OnDestroy {
    onBatchSelect(batchId: number) {
     console.log(batchId);
     for (let i = 0; i < this.batches.length; i++) {
-      if (batchId == this.batches[i].batchId) {
+      if (Number(batchId) === Number(this.batches[i].batchId)) {
         this.currentBatch = this.batches[i];
       }
     }
