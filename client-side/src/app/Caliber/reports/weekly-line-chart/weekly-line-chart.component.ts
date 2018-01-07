@@ -19,7 +19,7 @@ import { GranularityService } from '../services/granularity.service';
 export class WeeklyLineChartComponent implements OnInit {
 
   public batchId = 0;
-  public traineeId = 0;
+  public traineeId = -1;
   public chartData: any = [];
   public scoresAverage = 0;
 
@@ -77,6 +77,12 @@ export class WeeklyLineChartComponent implements OnInit {
           newbatch[sortedBatchArray[i][0]] = sortedBatchArray[i][1];
         }
         this.createChartData(newbatch);
+      }
+    });
+
+    this.granularityService.currentTrainee$.subscribe(response => {
+      if (response) {
+        this.traineeId = response.traineeId;
       }
     });
   }

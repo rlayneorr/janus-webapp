@@ -1,5 +1,6 @@
 /**
- * This toolbar is responsible for updating the charts information.
+ * This toolbar is responsible for updating the charts information
+ * and pushing data to the granularity service.
  *
  * @author Edel Benavides
  * @author Brandon Richardson
@@ -11,7 +12,6 @@ import { Batch } from '../../entities/Batch';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
-import { Trainer } from '../../entities/Trainer';
 import { GranularityService } from '../services/granularity.service';
 import { Trainee } from '../../entities/Trainee';
 import { Subject } from 'rxjs/Subject';
@@ -77,7 +77,6 @@ export class ToolbarComponent implements OnInit {
     this.batchSubscription = this.batchService.getList().subscribe(response => {
 
       if (response.length > 0) {
-        console.log('INIT INSIDE OBSERVABLE MIDDLE');
         this.batchList = response;
 
         // Generate dropdown information for years
