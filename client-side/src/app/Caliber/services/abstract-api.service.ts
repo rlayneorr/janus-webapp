@@ -20,7 +20,7 @@ export abstract class AbstractApiService<T> {
   protected updatedSubject: Subject<T>;
   protected deletedSubject: Subject<T>;
 
-  private alertService: AlertsService;
+  protected alertService: AlertsService;
 
   constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
     this.envService = envService;
@@ -148,8 +148,6 @@ export abstract class AbstractApiService<T> {
   protected doPost(object: T, apiUrl: string, params: any = {}, messages: any = {}): void {
     const url = this.envService.buildUrl(apiUrl, params);
     const body = JSON.stringify(object);
-
-    console.log(body);
 
     this.http.post<T>(url, body).subscribe((data) => {
       this.savedSubject.next(data);

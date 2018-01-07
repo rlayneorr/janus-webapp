@@ -40,6 +40,7 @@ import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.servic
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
+import { QCStatusService } from './services/qcstatus.service';
 
 // pipes
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
@@ -53,6 +54,7 @@ import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
 import { DisplayBatchByYear } from './manage/manage.pipe';
 import { FilterByPipe } from './pipes/filter-by.pipe';
 import { ToolbarFilterPipe } from './pipes/toolbar-filter.pipe';
+import { AddressToStringPipe } from './pipes/address-to-string.pipe';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -102,9 +104,11 @@ import { DoughnutComponent } from './doughnut/doughnut.component';
 import { ReportsService } from './services/reports.service';
 import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
 import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
+import { BatchModalComponent } from './manage/batch/batch-modal.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
+
 
 @NgModule({
   imports: [
@@ -120,6 +124,21 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
   ],
   declarations: [
     // pipes
+    GraphDataPipe,
+    PanelBatchAllTraineesComponent,
+    GradeByTraineeByAssessmentPipe,
+    DisplayBatchByYear,
+    BatchByTrainerPipe,
+    CategorySkillPipe,
+    NoteByTraineeByWeekPipe,
+    TierPipe,
+    TrainerPipePipe,
+    OrderByPipe,
+    GradeByTraineeByAssessmentPipe,
+    BatchByTrainerPipe,
+    GeneralFeedbackComponent,
+    TechnicalFeedbackComponent,
+    AddressToStringPipe,
     GraphDataPipe,
     OrderByPipe,
     FilterByPipe,
@@ -170,6 +189,7 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     PanelSearchbarComponent,
     CreatePanelComponent,
     InterviewDetailsComponent,
+    BatchModalComponent,
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
 
@@ -188,7 +208,6 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     OrderByPipe,
     GradeByTraineeByAssessmentPipe,
     BatchByTrainerPipe,
-    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -218,6 +237,7 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     SkillService,
     TrainingTypeService,
     ReportsService,
+    QCStatusService,
   ],
   bootstrap: [
     TrainersComponent
@@ -227,6 +247,7 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
   ],
   entryComponents: [
     BarGraphModalComponent,
+    BatchModalComponent,
   ],
 })
 export class CaliberModule { }

@@ -1,4 +1,4 @@
-import { Technology } from './technology';
+import { Technology } from './Technology';
 
 export class PanelFeedback {
     id: number;

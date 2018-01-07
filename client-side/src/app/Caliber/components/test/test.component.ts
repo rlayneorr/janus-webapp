@@ -54,7 +54,8 @@ export class TestComponent implements OnInit, OnDestroy {
       degree: null,
       major: null,
       techScreenerName: null,
-      projectCompletion: null
+      projectCompletion: null,
+      batch: null,
     };
   }
 
