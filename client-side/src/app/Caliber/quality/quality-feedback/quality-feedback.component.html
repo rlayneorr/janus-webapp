@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let trainee of batch.trainees; let i = index">
+    <tr *ngFor="let trainee of batch?.trainees; let i = index">
       <td>{{ trainee?.name }}</td>
       <td>
         <!-- <select [ngModel]="" (ngModelChange)="" class="custom-select">
@@ -31,7 +31,7 @@
   </tbody>
 </table>
 
-<div class="row centered">
+<!-- <div class="row centered">
   <h4 class="text-centered">Overall FeedBack</h4>
 
   <button class="col-lg-4 col-md-4 col-sm-4">button</button>
@@ -41,4 +41,4 @@
 
 <div>
   <textarea id="" cols="30" rows="10"></textarea>
-</div>
+</div> -->
