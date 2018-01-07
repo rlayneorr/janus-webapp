@@ -72,7 +72,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ON INIT');
     this.batchService.fetchAll();
 
     this.batchSubscription = this.batchService.getList().subscribe(response => {
@@ -103,7 +102,6 @@ export class ToolbarComponent implements OnInit {
       }
 
     });
-    console.log('ON INIT END');
   }
 
   /**

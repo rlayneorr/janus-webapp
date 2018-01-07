@@ -183,32 +183,28 @@
   </span> -->
 
   <span class="search">
-    <form>
-      <input class="search" ng-model="chosenTrainee" list="traineeList" type="search" id="searchTextBox" placeholder="Search..." class="search"
+    
+      <input ng-model="chosenTrainee" list="traineeList" type="search" id="searchTextBox" placeholder="Search..." class="search"
             autocomplete="off">
 
-      <!-- <button type="submit" class="searchButton"><i class="fa fa-search"></i></button> -->
+      <!-- <i class="fa fa-search"></i> -->
 
       <datalist id="traineeList">
         <ng-container class="container" *ngFor="let trainee of traineesList">
           <option [value]="trainee.name" class="ng-binding ng-scope">{{ trainee.name }} | {{ trainee.email }} | {{ trainee.skypeId }}</option>
         </ng-container>
       </datalist>
-    </form>
-  </span>
+    
 
-  <span>
-    <span ngbDropdown placement="bottom-right">
-      <button class="btn btn-default" type="button" id="dropdownMenu1" ngbDropdownToggle>
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-      </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownConfig">
-        <li>
-          <a ng-click="downloadAllChartButton()"> Charts </a>
-        </li>
-        <li>
-          <a ng-click="generatePDF()"> Charts + Feedback </a>
-        </li>
+    <span>
+      <div ngbDropdown class="d-inline-block" placement="bottom-right">
+        <span ngbDropdownToggle id="downloadCharts" class="downloadCharts">
+          <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        </span>
+        <div ngbDropdownMenu aria-labelledby="downloadCharts">
+          <button class="dropdown-item"><b>Charts</b></button>
+          <button class="dropdown-item"><b>Charts + Feedback</b></button>
+        </div>
       </div>
     </span>
   </span>
