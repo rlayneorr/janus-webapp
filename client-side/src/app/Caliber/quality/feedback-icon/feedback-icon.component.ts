@@ -8,11 +8,12 @@ import { Note } from '../../entities/Note';
 })
 export class FeedbackIconComponent implements OnInit {
   @Input() status: string;
+  @Input() css: string;     // additinal classes you may want to apply
 
   constructor() { }
 
   public getStatusIconClass(): any {
-    return {
+    const cssClasses =  {
       'fa': true,
       'fa-star': ( this.status === Note.STATUS_SUPERSTAR),
       'fa-smile-o': ( this.status === Note.STATUS_GOOD),
@@ -21,6 +22,14 @@ export class FeedbackIconComponent implements OnInit {
       'fa-question': ( this.status === Note.STATUS_UNDEFINED),
       'mx-2': true,
     };
+
+    if ( this.css ) {
+      for ( const cssClass of this.css.split(' ') ) {
+          cssClasses[cssClass] = true;
+      }
+    }
+
+    return cssClasses;
   }
 
   ngOnInit() {

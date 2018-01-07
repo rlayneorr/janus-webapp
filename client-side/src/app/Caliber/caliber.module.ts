@@ -51,10 +51,11 @@ import { TrainerPipePipe } from './pipes/trainer-pipe.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { BatchByTrainerPipe } from './pipes/trainerbatch.pipe';
 import { NoteByTraineeByWeekPipe } from './pipes/note-by-trainee-by-week.pipe';
-import { DisplayBatchByYear } from './manage/manage.pipe';
+import { DisplayBatchByYear } from './pipes/display-batch-by-year.pipe';
 import { FilterByPipe } from './pipes/filter-by.pipe';
 import { ToolbarFilterPipe } from './pipes/toolbar-filter.pipe';
 import { AddressToStringPipe } from './pipes/address-to-string.pipe';
+import { TraineeSearch } from './pipes/trainee-search.pipe';
 
 // components
 import { CaliberComponent } from './caliber.component';
@@ -90,9 +91,6 @@ import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
 import { QualityFeedbackComponent } from './quality/quality-feedback/quality-feedback.component';
-
-
-
 import { BatchOverallLineChartComponent } from './reports/batch-overall-line-chart/batch-overall-line-chart.component';
 import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.component';
 import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/assessment-breakdown.component';
@@ -109,6 +107,7 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
 import { FeedbackIconComponent } from './quality/feedback-icon/feedback-icon.component';
+import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedback/quality-overall-feedback.component';
 
 
 @NgModule({
@@ -144,6 +143,7 @@ import { FeedbackIconComponent } from './quality/feedback-icon/feedback-icon.com
     OrderByPipe,
     FilterByPipe,
     ToolbarFilterPipe,
+    TraineeSearch,
 
     // components
     CaliberComponent,
@@ -195,6 +195,7 @@ import { FeedbackIconComponent } from './quality/feedback-icon/feedback-icon.com
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
     FeedbackIconComponent,
+    QualityOverallFeedbackComponent,
 
     // pipes
     GraphDataPipe,

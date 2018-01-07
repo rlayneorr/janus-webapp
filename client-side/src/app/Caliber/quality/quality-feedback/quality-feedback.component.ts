@@ -14,7 +14,7 @@ import { QCStatusService } from '../../services/qcstatus.service';
 export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() batch: Batch;
-  qcBatchNote: Note[];
+  qcBatchNotes: Note[];
   qcTraineeNotes: Note[];
 
   notesSubscription: Subscription;
@@ -25,7 +25,6 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   week = 1;
 
   constructor(private noteService: NoteService, private qcStatusService: QCStatusService) {
-    this.qcBatchNote = [];
     this.qcTraineeNotes = [];
     this.qcStatuses = [];
    }
@@ -50,11 +49,33 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  getQcBatchNote(): Note {
+    let note: Note;
+
+    if ( this.qcBatchNotes.length === 1 ) {
+      note = this.qcBatchNotes[0];
+    } else {
+      note = {
+        noteId: 0,
+        type: Note.TYPE_QCBATCH,
+        qcStatus: Note.STATUS_UNDEFINED,
+        qcFeedback: true,
+        content: '',
+        week: this.week,
+        batch: this.batch,
+        trainee: null,
+        maxVisibility: 'ROLE_PANEL',
+      };
+    }
+
+    return note;
+  }
+
   setNotes(notes: Note[]): void {
-    this.qcBatchNote = notes.filter(note => note.type === 'QC_BATCH');
+    this.qcBatchNotes = notes.filter(note => note.type === 'QC_BATCH');
     this.qcTraineeNotes = notes.filter(note => note.type === 'QC_TRAINEE');
     // console.log(notes);
-    console.log(this.qcBatchNote);
+    console.log(this.qcBatchNotes);
     console.log(this.qcTraineeNotes);
   }
 
@@ -99,8 +120,11 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
 
   updateQcStatusOnTraineeNote(trainee: Trainee) {
     // tslint:disable-next-line:prefer-const
-    let currentTraineeStatus = this.getNoteOnTrainee(trainee);
+    let currentTraineeStatus = this.getQcStatusOnTrainee(trainee);
     const currentTraineeNote = this.getNoteOnTrainee(trainee);
+
+    
+
   }
 
   changeWeek(week: number) {
