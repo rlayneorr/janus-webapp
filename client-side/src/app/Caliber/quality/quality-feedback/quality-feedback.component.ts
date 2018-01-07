@@ -47,8 +47,6 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges() {
     if (this.batch) {
       this.fetchNotes();
-      console.log('changes');
-      console.log(this.batch);
     }
   }
 
@@ -56,8 +54,8 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     this.qcBatchNote = notes.filter(note => note.type === 'QC_BATCH');
     this.qcTraineeNotes = notes.filter(note => note.type === 'QC_TRAINEE');
     // console.log(notes);
-    // console.log(this.qcBatchNote);
-    // console.log(this.qcTraineeNotes);
+    console.log(this.qcBatchNote);
+    console.log(this.qcTraineeNotes);
   }
 
   setQcStatuses(statuses: string[]) {
@@ -86,6 +84,23 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     }
     // console.log(traineeNote);
     return traineeNote;
+  }
+
+  getQcStatusOnTrainee(trainee: Trainee) {
+    let traineeQcStatus = '';
+    for (let i = 0; i < this.qcTraineeNotes.length; i++) {
+      if (trainee.traineeId === this.qcTraineeNotes[i].trainee.traineeId) {
+        traineeQcStatus = this.qcTraineeNotes[i].qcStatus;
+      }
+    }
+    // console.log(traineeQcStatus);
+    return traineeQcStatus;
+  }
+
+  updateQcStatusOnTraineeNote(trainee: Trainee) {
+    // tslint:disable-next-line:prefer-const
+    let currentTraineeStatus = this.getNoteOnTrainee(trainee);
+    const currentTraineeNote = this.getNoteOnTrainee(trainee);
   }
 
   changeWeek(week: number) {
