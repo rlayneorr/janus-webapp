@@ -14,8 +14,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
 import { GranularityService } from '../services/granularity.service';
 import { Trainee } from '../../entities/Trainee';
-import { Subject } from 'rxjs/Subject';
-import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-toolbar',
@@ -24,7 +22,6 @@ import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ToolbarComponent implements OnInit {
 
-  // http://localhost:8080/vp/batch/all
   // Toolbar selections
   yearSelect: number;
   batchSelect: number;
@@ -46,27 +43,6 @@ export class ToolbarComponent implements OnInit {
   // Subscriptions
   private batchSubscription: Subscription;
   private trainerSubscription: Subscription;
-
-  /************************************
-   * Used for search bar
-   ************************************/
-  searchModel: any;
-
-  @ViewChild('searchBox') searchBox: NgbTypeahead;
-  focus$ = new Subject<string>();
-  click$ = new Subject<string>();
-
-  search = (text$: Observable<string>) =>
-    text$
-      .debounceTime(200).distinctUntilChanged()
-      .merge(this.focus$)
-      .merge(this.click$.filter(() => !this.searchBox.isPopupOpen()))
-      .map(term => (term === '' ? this.traineesListNames : this.traineesListNames.filter(
-        trainee => trainee.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10)
-      )
-  /************************************
-   * END Used for search bar
-   ************************************/
 
   constructor(private batchService: BatchService , private granularityService: GranularityService) {
   }
@@ -112,6 +88,13 @@ export class ToolbarComponent implements OnInit {
     this.batchSelect = Number((<HTMLInputElement>document.getElementById('batch')).value);
     this.weekSelect = Number((<HTMLInputElement>document.getElementById('week')).value);
     this.traineeSelect = Number((<HTMLInputElement>document.getElementById('trainee')).value);
+  }
+
+  /**
+   * Clears the input search box.
+   */
+  clearSearchBox() {
+    (<HTMLInputElement>document.getElementById('searchTextBox')).value = '';
   }
 
   /************************************
@@ -203,6 +186,7 @@ export class ToolbarComponent implements OnInit {
     this.createTraineesDropdown();
     this.currentTrainee = this.createEmptyTrainee();
     this.pushToGranularityService();
+    this.clearSearchBox();
   }
 
   /**
@@ -216,6 +200,7 @@ export class ToolbarComponent implements OnInit {
     this.createTraineesDropdown();
     this.currentTrainee = this.createEmptyTrainee();
     this.pushToGranularityService();
+    this.clearSearchBox();
   }
 
   /**
@@ -238,11 +223,26 @@ export class ToolbarComponent implements OnInit {
     if (traineeId === 0) {
       // Creates empty trainee with ID of 0 if no trainee exists
       this.currentTrainee = this.createEmptyTrainee();
+      this.clearSearchBox();
     } else {
       // Set current Trainee if trainee ID exists
       this.currentTrainee = this.getTraineeByIdFromSelection(traineeId);
+      this.clearSearchBox();
     }
     this.pushToGranularityService();
+  }
+
+  /**
+   * Searches trainees list. If found, performs the traineeOnClick(traineeId) method.
+   */
+  searchTrainees() {
+    const input = (<HTMLInputElement>document.getElementById('searchTextBox')).value;
+    for (const trainee of this.traineesList) {
+      if (trainee.name === input) {
+        this.traineeOnClick(trainee.traineeId);
+        (<HTMLInputElement>document.getElementById('searchTextBox')).value = input;
+      }
+    }
   }
 
   /************************************

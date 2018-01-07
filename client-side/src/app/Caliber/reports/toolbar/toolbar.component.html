@@ -1,133 +1,3 @@
-<!-- <div class="container">
-  <div class="col">
-    <select class="button" id="startDate" (change)="yearOnChange()">
-      <ng-container class="container" *ngFor="let year of yearList">
-        <option [ngValue]="year">{{ year }}</option>
-      </ng-container>
-    </select>
-
-    <span class="paddingRight"></span>
-
-    <select class="button" id="batch" (change)="batchOnChange()">
-      <ng-container class="container" *ngIf="currentBatch !== null && batchesBasedOnYearList.length === 0">
-        <option [value]="currentBatch.batchId">{{ currentBatch.trainer.name }} - {{ currentBatch.startDate }}</option>
-      </ng-container>
-      
-      <ng-container class="container" *ngIf="batchesBasedOnYearList.length > 0">
-        <ng-container class="container" *ngFor="let batch of getBatchesByYear()">
-          <option [value]="batch.batchId">{{ batch.trainer.name }} - {{ batch.startDate }}</option>
-        </ng-container>
-      </ng-container>
-    </select>
-  
-    <span class="paddingRight"></span>
-
-    <select class="button" id="week" (change)="weekOnChange()">
-      <ng-container class="container" *ngFor="let week of batchWeeksList; let i = index;">
-        <option [value]="i">{{ week }}</option>
-      </ng-container>
-    </select>
-  
-    <span class="paddingRight"></span>
-
-    <select class="button" id="trainee" (change)="traineeOnChange()">
-      <option [value]="0">Trainee (All)</option>
-      <ng-container class="container" *ngFor="let trainee of traineesList">
-        <option [value]="trainee.traineeId">{{ trainee.name }}</option>
-      </ng-container>
-    </select>
-
-    <form class="pull-right">
-      <input ng-model="chosenTrainee" list="traineeList" type="search" id="searchTextBox" placeholder="Search..." class="search"
-            autocomplete="off">
-
-      <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
-
-      <datalist id="traineeList">
-        <ng-container class="container" *ngFor="let trainee of traineesList">
-          <option [value]="trainee.name" class="ng-binding ng-scope">{{ trainee.name }} | {{ trainee.email }} | {{ trainee.skypeId }}</option>
-        </ng-container>
-      </datalist>
-
-      <span class="dropdown" ngbDropdown placement="bottom-right">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" ngbDropdownToggle>
-          <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownConfig">
-            <li>
-              <a ng-click="downloadAllChartButton()"> Charts </a>
-            </li>
-            <li>
-              <a ng-click="generatePDF()"> Charts + Feedback </a>
-            </li>
-        </div>
-      </span>
-    </form>
-  </div>
-  <hr>
-</div> -->
-
-
-
-
-<!-- <div class="container">
-  <div class="col">
-
-    <span ngbDropdown #yearDrop="ngbDropdown">
-      <button class="button" id="startDate" ngbDropdownToggle [value]="yearSelectValue">{{yearSelectValue}}</button>
-      <div ngbDropdownMenu aria-labelledby="startDate">
-        <div *ngFor="let year of yearList">
-          <button class="dropdown-item" [value]="year" (click)="yearOnClick(year);">{{ year }}</button>
-        </div>
-      </div>
-    </span>
-
-    <span class="paddingRight"></span>
-
-    <span ngbDropdown #batchDrop="ngbDropdown" *ngIf="currentBatch && batchesBasedOnYearList.length === 0">
-      <button class="button" id="batch" ngbDropdownToggle [value]="currentBatch.batchId">{{ currentBatch.trainer.name }} - {{ currentBatch.startDate | date: 'MM/dd/yyyy' }}</button>
-      <div ngbDropdownMenu aria-labelledby="batch">
-        <button class="dropdown-item" [value]="currentBatch.batchId" (click)="batchOnClick(currentBatch.batchId)">{{ currentBatch.trainer.name }} - {{ currentBatch.startDate | date: 'MM/dd/yyyy' }}</button>
-      </div>
-    </span>
-    <span ngbDropdown #batchDrop="ngbDropdown" *ngIf="batchesBasedOnYearList.length">
-      <button class="button" id="batch" ngbDropdownToggle [value]="currentBatch.batchId">edel - {{ currentBatch.trainer.name }} - {{ currentBatch.startDate | date: 'MM/dd/yyyy' }}</button>
-      <div ngbDropdownMenu aria-labelledby="batch">
-        <div *ngFor="let batch of getBatchesByYear()">
-          <button class="dropdown-item" [value]="batch.batchId" (click)="batchOnClick(batch.batchId)">{{ batch.trainer.name }} - {{ batch.startDate | date: 'MM/dd/yyyy' }}</button>
-        </div>
-      </div>
-    </span>
-
-    <span class="paddingRight"></span>
-
-    <span ngbDropdown #weekDrop="ngbDropdown">
-      <button class="button" id="week" ngbDropdownToggle [value]="weekSelectValue" *ngIf="!weekSelectValue || weekSelectValue === 0">Week (All)</button>
-      <button class="button" id="week" ngbDropdownToggle [value]="weekSelectValue" *ngIf="weekSelectValue > 0">Week {{ weekSelectValue }}</button>
-      <div ngbDropdownMenu aria-labelledby="week">
-        <button class="dropdown-item" [value]="0" (click)="weekOnClick(0)">All</button>
-        <div *ngFor="let week of batchWeeksList; let i = index;">
-          <button class="dropdown-item" [value]="i" (click)="weekOnClick(i+1)">{{ week }}</button>
-        </div>
-      </div>
-    </span>
-
-    <span class="paddingRight"></span>
-    
-    <span ngbDropdown #traineeDrop="ngbDropdown">
-      <button class="button" id="trainee" ngbDropdownToggle [value]="currentTrainee.traineeId" *ngIf="!currentTrainee.traineeId">Trainee (All)</button>
-      <button class="button" id="trainee" ngbDropdownToggle [value]="currentTrainee.traineeId" *ngIf="currentTrainee.name">{{ currentTrainee.name }}</button>
-      <div ngbDropdownMenu aria-labelledby="week">
-        <button class="dropdown-item" [value]="0" (click)="traineeOnClick(0)">All</button>
-        <div *ngFor="let trainee of traineesList">
-          <button class="dropdown-item" [value]="trainee.traineeId" (click)="traineeOnClick(trainee.traineeId)">{{ trainee.name }}</button>
-        </div>
-      </div>
-    </span>
-
-  </div>
-</div> -->
-
 <div class="container" *ngIf="batchList">
 
   <span class="col">
@@ -178,35 +48,33 @@
     </div>
   </span>
 
-  <!-- <span class="search">
-    <input #searchBox type="text" [(ngModel)]="searchModel" [ngbTypeahead]="search" placeholder="Search..."/>
-  </span> -->
-
   <span class="search">
-    
+    <form>
+      
       <input ng-model="chosenTrainee" list="traineeList" type="search" id="searchTextBox" placeholder="Search..." class="search"
             autocomplete="off">
-
-      <!-- <i class="fa fa-search"></i> -->
+      <span class="fa fa-search" (click)="searchTrainees()"></span>
+      <input type="submit" (click)="searchTrainees()" style="display: none">
 
       <datalist id="traineeList">
         <ng-container class="container" *ngFor="let trainee of traineesList">
-          <option [value]="trainee.name" class="ng-binding ng-scope">{{ trainee.name }} | {{ trainee.email }} | {{ trainee.skypeId }}</option>
+          <option [value]="trainee.name" class="ng-binding ng-scope">{{ trainee.name }}</option>
         </ng-container>
       </datalist>
     
 
-    <span>
-      <div ngbDropdown class="d-inline-block" placement="bottom-right">
-        <span ngbDropdownToggle id="downloadCharts" class="downloadCharts">
-          <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-        </span>
-        <div ngbDropdownMenu aria-labelledby="downloadCharts">
-          <button class="dropdown-item"><b>Charts</b></button>
-          <button class="dropdown-item"><b>Charts + Feedback</b></button>
+      <span>
+        <div ngbDropdown class="d-inline-block" placement="bottom-right">
+          <span ngbDropdownToggle id="downloadCharts" class="downloadCharts">
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+          </span>
+          <div ngbDropdownMenu aria-labelledby="downloadCharts">
+            <button class="dropdown-item"><b>Charts</b></button>
+            <button class="dropdown-item"><b>Charts + Feedback</b></button>
+          </div>
         </div>
-      </div>
-    </span>
+      </span>
+    </form>
   </span>
 
 </div>
