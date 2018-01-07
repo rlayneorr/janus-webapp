@@ -6,6 +6,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { environment } from '../../../../environments/environment.prod';
 import { EnvironmentService } from '../../services/environment.service';
 import { AlertsService } from '../../services/alerts.service';
+import { ReportsService } from '../../services/reports.service';
 
 @Component({
   selector: 'app-vp-panel-graph',
@@ -16,20 +17,16 @@ export class VpPanelGraphComponent implements OnInit {
   public panelChartData: ChartDataEntity;
   public hasPanelGraphData = false;
   constructor(private http: HttpClient, private vpHomePanelGraphService: VpHomePanelGraphService,
-    private environmentService: EnvironmentService, private alertService: AlertsService) { }
+    private environmentService: EnvironmentService, private alertService: AlertsService,
+    private reportsService: ReportsService) { }
 
   ngOnInit() {
     this.panelChartData = this.vpHomePanelGraphService.getPanelChartData();
-    this.http.get(this.environmentService.buildUrl('all/reports/biweeklyPanelResults'), { withCredentials: true })
+    this.reportsService.fetchReportsBiWeeklyPanel()
       .subscribe(
       (resp) => {
         this.panelChartData = this.vpHomePanelGraphService.fillPanelChartData(resp, this.panelChartData);
-        console.log(this.panelChartData);
         this.hasPanelGraphData = true;
-        this.alertService.success('Successfully fetched Panel Progress!');
-      },
-      (err) => {
-        this.alertService.error('Failed to fetch Panel Progress!');
       }
     );  }
 

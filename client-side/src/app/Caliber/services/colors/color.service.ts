@@ -5,7 +5,13 @@ export class ColorService {
   lineColors = [];
   constructor() { }
 
-  public getLineColors(amount: number) {
+  /**
+   * Gets the required amount of line colors.
+   * Spawns new colors if there aren't enough colors stored.
+   * @param amount : number
+   * @returns Array<any>
+   */
+  public getLineColors(amount: number): Array<any> {
     if (amount > this.lineColors.length) {
       this.createLineColors(amount - this.lineColors.length);
     }
@@ -16,8 +22,12 @@ export class ColorService {
       this.lineColors.push(this.generateLineColor(undefined));
     }
   }
-
-  public generateLineColor(incomingcolour) {
+  /**
+   * Creates a random new color if a color isn't passed in
+   * @param incomingcolour
+   * @returns any
+   */
+  public generateLineColor(incomingcolour): any {
     let gen1Colour;
     if (incomingcolour === undefined) {
       gen1Colour = this.generateRandomRGBA();
@@ -25,7 +35,7 @@ export class ColorService {
       gen1Colour = incomingcolour;
     }
     const color = {
-      backgroundColor: gen1Colour + '.3)',
+      backgroundColor: gen1Colour + '.2)',
       pointBackgroundColor: gen1Colour + '.5)',
       borderColor: gen1Colour + '1)',
       pointHoverBackgroundColor: gen1Colour + '.3)',
@@ -35,12 +45,20 @@ export class ColorService {
     };
     return color;
   }
-
-  private generateRandomRGBA() {
+  /**
+   * creates a random rgba string for the generate line color method
+   * @returns string
+   */
+  private generateRandomRGBA(): string {
     return `rgba(${Math.floor(Math.random() * 256) + 1},
     ${Math.floor(Math.random() * 256) + 1},
     ${Math.floor(Math.random() * 256) + 1}, `;
   }
+  /**
+   * sets vpHomeLineColors
+   * @param colors
+   *
+   */
   public setVPHomeLineColors(colors: Array<any>) {
     this.lineColors = colors;
   }
