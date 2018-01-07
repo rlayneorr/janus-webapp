@@ -17,3 +17,24 @@ select {
 .paddingRight {
     padding-right: 25px;
 }
+
+.search {
+    display: inline-block;
+    position: relative;
+}   
+
+.search input {
+    width: auto;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.search input { 
+    text-indent: 16px;
+}
+.search .fa-search { 
+    position: absolute;
+    top: 10px;
+    left: auto;
+    right: 10px;
+}
