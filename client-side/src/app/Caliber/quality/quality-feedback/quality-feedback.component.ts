@@ -16,6 +16,9 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   qcBatchNote: Note[];
   qcTraineeNotes: Note[];
   notesSubscription: Subscription;
+
+  qcStatus: string;
+
   week = 1;
 
   constructor(private noteService: NoteService) {
