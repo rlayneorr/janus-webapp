@@ -101,9 +101,6 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
 import { ReportsService } from './services/reports.service';
 import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
 import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
-import { AlertsComponent } from './alerts/alerts.component';
-import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
-import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
 
 @NgModule({
   imports: [
@@ -170,8 +167,8 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     CreatePanelComponent,
     InterviewDetailsComponent,
     GeneralFeedbackComponent,
-    TechnicalFeedbackComponent
-    
+    TechnicalFeedbackComponent,
+  
 
     // pipes
     GraphDataPipe,
