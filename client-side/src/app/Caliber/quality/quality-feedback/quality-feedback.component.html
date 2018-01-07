@@ -19,7 +19,9 @@
     <tr *ngFor="let trainee of batch.trainees; let i = index">
       <td>{{ trainee?.name }}</td>
       <td>
-        <button><i></i></button>  
+        <!-- <select [ngModel]="" (ngModelChange)="" class="custom-select">
+          <option [value]="" ></option>
+        </select> -->
       </td>
       <td class="col-sm-9 col-md-9 col-lg-9">
         <textarea [ngModel]="getNoteOnTrainee(trainee)" id="noteTextArea" cols="75" rows="3" maxlength="4000"

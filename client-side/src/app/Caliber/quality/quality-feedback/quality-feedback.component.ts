@@ -17,7 +17,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   qcTraineeNotes: Note[];
   notesSubscription: Subscription;
 
-  qcStatus: string;
+  qcStatus: string[];
 
   week = 1;
 
@@ -74,12 +74,17 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     return traineeNote;
   }
 
-  test() {
-    console.log(this.batch.batchId);
-    console.log(this.week);
-    console.log(this.qcBatchNote);
-    console.log(this.qcTraineeNotes[1].trainee.name);
-
+  setQcStatus(): string[] {
+    
+    return this.qcStatus;
   }
+
+  // test() {
+  //   console.log(this.batch.batchId);
+  //   console.log(this.week);
+  //   console.log(this.qcBatchNote);
+  //   console.log(this.qcTraineeNotes[1].trainee.name);
+
+  // }
 
 }
