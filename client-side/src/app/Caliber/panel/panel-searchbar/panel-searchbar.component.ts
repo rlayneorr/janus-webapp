@@ -99,7 +99,6 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.batchSubscription.unsubscribe();
-    // this.traineeSubscription.unsubscribe();
   }
 
 }

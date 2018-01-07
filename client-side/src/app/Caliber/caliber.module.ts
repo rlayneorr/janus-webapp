@@ -40,6 +40,7 @@ import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.servic
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
+import { QCStatusService } from './services/qcstatus.service';
 
 // pipes
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
@@ -88,6 +89,10 @@ import { QualityComponent } from './quality/quality.component';
 import { GraphComponent } from './reports/graph/graph.component';
 import { TableComponent } from './reports/table/table.component';
 import { PanelBatchAllTraineesComponent } from './reports/panel-batch-all-trainees/panel-batch-all-trainees.component';
+import { QualityFeedbackComponent } from './quality/quality-feedback/quality-feedback.component';
+
+
+
 import { BatchOverallLineChartComponent } from './reports/batch-overall-line-chart/batch-overall-line-chart.component';
 import { PanelFeedbackComponent } from './reports/panel-feedback/panel-feedback.component';
 import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/assessment-breakdown.component';
@@ -96,13 +101,14 @@ import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.com
 import { WeeklyAuditComponent } from './reports/weekly-audit/weekly-audit.component';
 import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative-scores.component';
 import { DoughnutComponent } from './doughnut/doughnut.component';
-import { AlertsComponent } from './alerts/alerts.component';
-import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
-import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
 import { ReportsService } from './services/reports.service';
 import { GeneralFeedbackComponent } from './panel/general-feedback/general-feedback.component';
 import { TechnicalFeedbackComponent } from './panel/technical-feedback/technical-feedback.component';
 import { BatchModalComponent } from './manage/batch/batch-modal.component';
+import { AlertsComponent } from './alerts/alerts.component';
+import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
+import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
+
 
 @NgModule({
   imports: [
@@ -184,7 +190,25 @@ import { BatchModalComponent } from './manage/batch/batch-modal.component';
     CreatePanelComponent,
     InterviewDetailsComponent,
     BatchModalComponent,
- ],
+    GeneralFeedbackComponent,
+    TechnicalFeedbackComponent,
+
+
+    // pipes
+    GraphDataPipe,
+    PanelBatchAllTraineesComponent,
+    GradeByTraineeByAssessmentPipe,
+    DisplayBatchByYear,
+    QualityFeedbackComponent,
+    BatchByTrainerPipe,
+    CategorySkillPipe,
+    NoteByTraineeByWeekPipe,
+    TierPipe,
+    TrainerPipePipe,
+    OrderByPipe,
+    GradeByTraineeByAssessmentPipe,
+    BatchByTrainerPipe,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
     BatchService,
@@ -213,6 +237,7 @@ import { BatchModalComponent } from './manage/batch/batch-modal.component';
     SkillService,
     TrainingTypeService,
     ReportsService,
+    QCStatusService,
   ],
   bootstrap: [
     TrainersComponent

@@ -20,7 +20,7 @@ export abstract class AbstractApiService<T> {
   protected updatedSubject: Subject<T>;
   protected deletedSubject: Subject<T>;
 
-  private alertService: AlertsService;
+  protected alertService: AlertsService;
 
   constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
     this.envService = envService;

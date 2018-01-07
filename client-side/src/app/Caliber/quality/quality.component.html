@@ -1,1 +1,23 @@
-quality works!
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 top10">
+            <ul class="nav-tabs">
+                <li>
+                    <select [ngModel]="currentYear" (ngModelChange)="setCurrentYear($event)" class="custom-select">
+                        <option [value]="year" *ngFor="let year of getTrackedYears()">{{ year }}</option>
+                    </select>
+                </li>
+                <li>
+                    <select [ngModel]="currentBatch" (ngModelChange)="onBatchSelect($event)" class="custom-select">
+                        <option [value]="batch.batchId" *ngFor="let batch of batches | DisplayBatchByYear:currentYear; let i = index" [attr.selected]="i === 0">
+                            {{ i }}   {{ batch.trainer.name }} - {{ batch.startDate | date:"MM/dd/yy" }}
+                        </option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-12 col-lg-12 top10">
+            <app-quality-feedback [batch]="currentBatch"></app-quality-feedback>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,12 @@ export class Note {
     public static TYPE_TRAINEE = 'TRAINEE';
     public static TYPE_BATCH = 'BATCH';
 
+    public static STATUS_SUPERSTAR = 'Superstar';
+    public static STATUS_GOOD = 'Good';
+    public static STATUS_AVERAGE = 'Average';
+    public static STATUS_POOR = 'Poor';
+    public static STATUS_UNDEFINED = 'Undefined';
+
     noteId: number;
     content: string;
     week: number;

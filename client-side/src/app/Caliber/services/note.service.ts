@@ -14,6 +14,7 @@ import { AlertsService } from './alerts.service';
 // entities
 import { Note } from '../entities/Note';
 import { Trainee } from '../entities/Trainee';
+import { Batch } from '../entities/Batch';
 
 /**
 * this service manages calls to the web services
@@ -103,7 +104,7 @@ export class NoteService extends AbstractApiService<Note> {
   }
 
  /**
-  * retrieves all trainer enetered Batch notes associated with
+  * retrieves all trainer entered Batch notes associated with
   * the passed batch ID and week number and returns an observable
   * which holds the array of notes found
   *
@@ -119,7 +120,7 @@ export class NoteService extends AbstractApiService<Note> {
   }
 
  /**
-  * retrieves all trainer enetered Trainee notes associated with
+  * retrieves all trainer entered Trainee notes associated with
   * the passed batch ID and week number and returns an observable
   * which holds the array of notes found
   *
@@ -195,5 +196,38 @@ export class NoteService extends AbstractApiService<Note> {
 
     super.doPost(note, url, {}, messages);
   }
+
+      /**
+   * Find all QC trainee notes in a batch for the week
+   *
+   * @param batch: Batch
+   * @param note: Note
+  */
+  public getAllQCTraineeNotes(batch: Batch, note: Note): void {
+    const url = this.envService.buildUrl(`/qc/note/trainee/${batch.batchId}/${note.week}`);
+
+    this.listSubject.next([]);
+
+    this.http.get<Note[]>(url).subscribe((notes) => {
+      this.listSubject.next(notes);
+    });
+}
+
+ /**
+ * Find the weekly QC batch note for the week
+ *
+ * @param batch: Batch
+ * @param note: Note
+*/
+
+public findQCBatchNotes(batch: Batch, note: Note): void {
+  const url = this.envService.buildUrl(`/qc/note/batch/${batch.batchId}/${note.week}`);
+
+  this.listSubject.next([]);
+
+    this.http.get<Note[]>(url).subscribe((notes) => {
+      this.listSubject.next(notes);
+    });
+}
 
 }
