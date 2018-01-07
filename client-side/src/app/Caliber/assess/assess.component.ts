@@ -70,6 +70,7 @@ export class AssessComponent implements OnInit {
     }
   }
 
+
   ngOnInit() {
 
     this.selectedWeek = 1;
@@ -181,7 +182,26 @@ export class AssessComponent implements OnInit {
   }
 
   getGrade(trainee: Trainee, assessment: Assessment) {
-    return new GradeByTraineeByAssessmentPipe().transform(this.grades, trainee, assessment)[0];
+    const grade = new GradeByTraineeByAssessmentPipe().transform(this.grades, trainee, assessment)[0];
+
+    if (grade != null) {
+      return grade;
+    } else {
+      const tempGrade = new Grade();
+      tempGrade.score = 0;
+      tempGrade.assessment = assessment;
+      tempGrade.trainee = trainee;
+      return tempGrade;
+    }
+  }
+
+  getPercentage(assessment: Assessment) {
+    let sum = 0;
+    this.assessments.forEach(a => {
+      sum += a.rawScore;
+    });
+
+    return Math.round((assessment.rawScore / sum) * 100);
   }
 
   checkGradeLoading(grade: Grade) {

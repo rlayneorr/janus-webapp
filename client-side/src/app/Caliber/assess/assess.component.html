@@ -135,7 +135,7 @@
             Trainee
           </th>
           <th class ="clickable" *ngFor="let assessment of this.assessments" (click)="editAssessment(editAssessmentContent, assessment);">
-            <div class = "assessment-header">{{assessment.category.skillCategory}} {{assessment.type}}</div>
+            <div class = "assessment-header">{{assessment.category.skillCategory}} {{assessment.type}} {{getPercentage(assessment)}}%</div>
           </th>
           <th class = "note">
             Notes
@@ -157,5 +157,6 @@
       </tr>
     </table>
 </div>
+
 
 
