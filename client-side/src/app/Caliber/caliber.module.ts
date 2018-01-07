@@ -108,6 +108,7 @@ import { BatchModalComponent } from './manage/batch/batch-modal.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
+import { FeedbackIconComponent } from './quality/feedback-icon/feedback-icon.component';
 
 
 @NgModule({
@@ -193,7 +194,7 @@ import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/barg
     BatchModalComponent,
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
-
+    FeedbackIconComponent,
 
     // pipes
     GraphDataPipe,
