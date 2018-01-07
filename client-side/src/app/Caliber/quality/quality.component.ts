@@ -4,10 +4,15 @@ import { NoteService } from '../services/note.service';
 import { BatchService } from '../services/batch.service';
 import { Subscription } from 'rxjs/Subscription';
 
+// pipes
+import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
+
+
 @Component({
   selector: 'app-quality',
   templateUrl: './quality.component.html',
-  styleUrls: ['./quality.component.css']
+  styleUrls: ['./quality.component.css'],
+  providers: [ DisplayBatchByYear ],
 })
 export class QualityComponent implements OnInit, OnDestroy {
 
@@ -19,7 +24,10 @@ export class QualityComponent implements OnInit, OnDestroy {
   batchSubscription: Subscription;
 
 
-  constructor(private batchService: BatchService) {
+  constructor(
+    private batchService: BatchService,
+    private batchesByYearPipe: DisplayBatchByYear
+  ) {
     this.setCurrentYear(2018);
   }
 
@@ -38,9 +46,21 @@ export class QualityComponent implements OnInit, OnDestroy {
    }
 
 
+   public onYearSelect(year: number) {
+     const currentYearBatches: Batch[] = this.batchesByYearPipe.transform(this.batches, year);
+     this.setCurrentYear(year);
+     
+     if ( currentYearBatches.length > 0 ) {
+       this.currentBatch = currentYearBatches[0];
+     } else {
+       this.currentBatch = null;
+     }
+
+   }
 
    public setCurrentYear(currentYear: number): void {
      this.currentYear = currentYear;
+
      console.log(currentYear);
    }
 
@@ -57,11 +77,12 @@ export class QualityComponent implements OnInit, OnDestroy {
 
    onBatchSelect(batchId: number) {
     console.log(batchId);
-    for (let i = 0; i < this.batches.length; i++) {
-      if (Number(batchId) === Number(this.batches[i].batchId)) {
-        this.currentBatch = this.batches[i];
-      }
+    const selectedBatches = this.batches.filter( (batch) => ( Number(batch.batchId) === Number(batchId) ) );
+
+    if ( selectedBatches.length === 1 ) {
+      this.currentBatch = selectedBatches[0];
     }
+
   }
 
 }

@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let trainee of batch?.trainees; let i = index">
+    <tr *ngFor="let trainee of batch?.trainees">
       <td>{{ trainee?.name }}</td>
       <td>
         <app-feedback-icon [status]="getQcStatusOnTrainee(trainee)"></app-feedback-icon>

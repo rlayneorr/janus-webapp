@@ -3,13 +3,13 @@
         <div class="col-md-12 col-lg-12 top10">
             <ul class="nav-tabs">
                 <li>
-                    <select [ngModel]="currentYear" (ngModelChange)="setCurrentYear($event)" class="custom-select">
+                    <select [ngModel]="currentYear" (ngModelChange)="onYearSelect($event)" class="custom-select">
                         <option [value]="year" *ngFor="let year of getTrackedYears()">{{ year }}</option>
                     </select>
                 </li>
                 <li>
-                    <select [ngModel]="currentBatch" (ngModelChange)="onBatchSelect($event)" class="custom-select">
-                        <option [value]="batch.batchId" *ngFor="let batch of batches | DisplayBatchByYear:currentYear; let i = index" [attr.selected]="i === 0">
+                    <select #batchSelect (change)="onBatchSelect(batchSelect.value)" class="custom-select">
+                        <option [value]="batch.batchId" *ngFor="let batch of batches | DisplayBatchByYear:currentYear; let i = index" [selected]="batch.batchId === currentBatch.batchId">
                             {{ i }}   {{ batch.trainer.name }} - {{ batch.startDate | date:"MM/dd/yy" }}
                         </option>
                     </select>
