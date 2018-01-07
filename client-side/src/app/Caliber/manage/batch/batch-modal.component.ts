@@ -25,12 +25,12 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() initialBatch: Batch;
 
-  private batch: Batch;
+  public batch: Batch;
 
-  private trainers: Trainer[];
-  private skills: string[];
-  private locations: Address[];
-  private trainingTypes: string[];
+  public trainers: Trainer[];
+  public skills: string[];
+  public locations: Address[];
+  public trainingTypes: string[];
 
   private savedBatchSubscription: Subscription;
   private trainingTypeListSubscription: Subscription;

@@ -34,10 +34,12 @@ import { QCStatusService } from '../../services/qcstatus.service';
 
 export class TestComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
+  private subscriptionB: Subscription;
   private data: any[];
+  private dataB: any[];
 
 
-  constructor(private service: QCStatusService ) {
+  constructor(private service: QCStatusService, private serviceB: NoteService) {
 
   }
 
@@ -112,6 +114,14 @@ export class TestComponent implements OnInit, OnDestroy {
     };
   }
 
+  private getTestBatchNote(): Note {
+    const qcNotes: Note[] = this.dataB.filter( (note) => note.type = Note.TYPE_QCBATCH);
+
+    if ( qcNotes.length > 0 ) {
+      return qcNotes[0];
+    }
+  }
+
   private log(object: any): void {
     console.log(object);
   }
@@ -138,13 +148,18 @@ export class TestComponent implements OnInit, OnDestroy {
       // }
     });
 
+    this.subscriptionB = this.serviceB.getList().subscribe( (data) => this.dataB = data );
+
+    this.serviceB.fetchByBatchIdByWeek(2201, 1);
+
     // this.service.fetchAll();
     // this.service.fetchAllByBatch(3002);
     // this.service.fetchByBatchIdByWeek(2150, 5);
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
+    this.subscriptionB.unsubscribe();
   }
 
 }

@@ -18,7 +18,7 @@ export class Note {
     week: number;
     batch: Batch;
     trainee: Trainee;
-    maxVisibility: number;
+    maxVisibility: string;
     type: string;
     qcFeedback: boolean;
     qcStatus: string;

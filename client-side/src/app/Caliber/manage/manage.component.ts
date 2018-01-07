@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 // pipes
 import { DatePipe } from '@angular/common';
-import { DisplayBatchByYear } from './manage.pipe';
+import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
 import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 // services
