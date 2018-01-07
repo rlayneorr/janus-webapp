@@ -34,18 +34,18 @@ import { QCStatusService } from '../../services/qcstatus.service';
 
 export class TestComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private subscriptionB: Subscription;
-  private data: any[];
-  private dataB: any[];
+  // private subscriptionB: Subscription;
+  private data: any;
+  // private dataB: any[];
 
 
-  constructor(private service: QCStatusService, private serviceB: NoteService) {
+  constructor(private service: TraineeService) {
 
   }
 
   public getTestTrainee(): Trainee {
     return {
-      traineeId: 5524,
+      traineeId: 0,
       resourceId: null,
       name: 'Cartagena, Michael',
       email: 'mcartagenaez8@gmail.com',
@@ -59,7 +59,7 @@ export class TestComponent implements OnInit, OnDestroy {
       major: null,
       techScreenerName: null,
       projectCompletion: null,
-      batch: null,
+      batch: this.getTestBatch(),
     };
   }
 
@@ -114,13 +114,13 @@ export class TestComponent implements OnInit, OnDestroy {
     };
   }
 
-  private getTestBatchNote(): Note {
-    const qcNotes: Note[] = this.dataB.filter( (note) => note.type = Note.TYPE_QCBATCH);
+  // private getTestBatchNote(): Note {
+  //   const qcNotes: Note[] = this.dataB.filter( (note) => note.type = Note.TYPE_QCBATCH);
 
-    if ( qcNotes.length > 0 ) {
-      return qcNotes[0];
-    }
-  }
+  //   if ( qcNotes.length > 0 ) {
+  //     return qcNotes[0];
+  //   }
+  // }
 
   private log(object: any): void {
     console.log(object);
@@ -139,7 +139,7 @@ export class TestComponent implements OnInit, OnDestroy {
 
     // this.service.getSaved().subscribe( (saved) => console.log(saved) );
 
-    this.subscription = this.service.getList().subscribe( (data) => {
+    this.subscription = this.service.getSaved().subscribe( (data) => {
       this.data = data;
       this.log(this.data);
 
@@ -148,18 +148,28 @@ export class TestComponent implements OnInit, OnDestroy {
       // }
     });
 
-    this.subscriptionB = this.serviceB.getList().subscribe( (data) => this.dataB = data );
+    // this.subscriptionB = this.serviceB.getList().subscribe( (data) => this.dataB = data );
 
-    this.serviceB.fetchByBatchIdByWeek(2201, 1);
+    // this.serviceB.fetchByBatchIdByWeek(2201, 1);
 
     // this.service.fetchAll();
     // this.service.fetchAllByBatch(3002);
     // this.service.fetchByBatchIdByWeek(2150, 5);
+
+    this.saveTraineeTest();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.subscriptionB.unsubscribe();
+    // this.subscriptionB.unsubscribe();
+  }
+
+  private saveTraineeTest(): void {
+    const trainee: Trainee = this.getTestTrainee();
+
+    console.log(trainee);
+
+    this.service.save(trainee);
   }
 
 }
