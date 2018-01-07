@@ -6,7 +6,7 @@
 const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/caliber';
 export const environment = {
   production: false,
-  context: 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/caliber',
+  context: 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/caliber/',
   bootContext: 'http://localhost/',
 
   // API calls for the VP functionality group
