@@ -212,13 +212,9 @@ import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedb
     OrderByPipe,
     GradeByTraineeByAssessmentPipe,
     BatchByTrainerPipe,
-<<<<<<< HEAD
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
     QcDoughnutComponent,
-=======
-
->>>>>>> fa4a8fb6ee353fb34f789ab9b7b033260bc2b145
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests

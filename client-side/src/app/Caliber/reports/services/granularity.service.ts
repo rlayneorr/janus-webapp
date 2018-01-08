@@ -14,7 +14,7 @@ import { Batch } from '../../entities/Batch';
 
 @Injectable()
 export class GranularityService {
-, batch: null
+
   /* Subjects & Paired Observables */
   private currentBatch = new ReplaySubject<Batch>(1);
   private currentTrainee = new ReplaySubject<Trainee>(1);
