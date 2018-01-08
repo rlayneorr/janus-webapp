@@ -71,7 +71,7 @@
         </div>
         <div class="modal-footer">
             <button (click)="addNewCategory(myForm.value); c();" type="button" [disabled]="!myForm.valid" class="btn btn-primary" data-dismiss="modal">Submit</button>
-            <button type="button" class="btn btn-outline-dark" (click)="c()">Close</button>
+            <button type="button" class="btn btn-outline-dark" (click)="c(); this.resetFormControl();">Close</button>
         </div>
     </form>
 </ng-template>
