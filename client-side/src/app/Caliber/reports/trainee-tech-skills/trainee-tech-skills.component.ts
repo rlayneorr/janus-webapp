@@ -93,8 +93,6 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
       (result) => {
         if (result !== this.week) {
           this.week = result;
-          // console.log('week: ');
-          // console.log(result);
           this.setUp();
         }
       });
@@ -103,8 +101,6 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
       (result) => {
         if (result !== this.trainee) {
           this.trainee = result;
-          // console.log('trainee: ');
-          // console.log(result);
           this.setUp();
         }
       });
@@ -241,7 +237,6 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
 
       this.reportsService.fetchBatchOverallRadarChart(this.batch.batchId);
       if (this.week === 0) {
-        console.log('debug');
         this.reportsService.fetchTraineeOverallRadarChart(this.trainee.traineeId);
       } else {
         this.reportsService.fetchTraineeUpToWeekRadarChart(this.week, this.trainee.traineeId);
@@ -283,7 +278,6 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * @param index is the index to the trainee in traineesList to be added/removed from chartData
   */
   traineeChecked(index: number) {
-    // console.log('debug: ' + this.traineesNames[index]);
     if (this.trainees.includes(this.traineesList[index])) {
       this.trainees = this.remove(this.trainees, this.traineesList[index]);
       this.chartData = this.remove(this.chartData, this.traineesData[index]);
