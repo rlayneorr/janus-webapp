@@ -29,6 +29,10 @@ export class ReportingService {
   private batchOverallRadar = new BehaviorSubject<CacheData>(null);
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
+  private lineTraineeOverall = new BehaviorSubject<CacheData>(null);
+  public lineTraineeOverall$ = this.lineTraineeOverall.asObservable();
+
+
   private qcStatusDoughnut = new BehaviorSubject<CacheData>(null);
   public qcStatusDoughnut$ = this.qcStatusDoughnut.asObservable();
 
@@ -249,6 +253,8 @@ export class ReportingService {
 
   /* Line Charts */
 
+
+
   fetchTraineeUpToWeekLineChart(batchId: Number, weekId: Number, traineeId: Number) {
     const endpoint = environment.apiTraineeUpToWeekLineChart(batchId, weekId, traineeId);
 
@@ -258,10 +264,19 @@ export class ReportingService {
 
   fetchTraineeOverallLineChart(batchId: Number, traineeId: Number) {
     const endpoint = environment.apiTraineeOverallLineChart(batchId, traineeId);
-
-    // TODO: Implement API call and subject push logic
-
+    const params = {
+      batchId: batchId,
+      traineeId: traineeId
+    };
+    if (this.needsRefresh(this.lineTraineeOverall, params)) {
+      this.httpClient.get(endpoint).subscribe(
+       
+        success => { console.log('success')
+        this.lineTraineeOverall.next({ params: params, data: success });
+      });
   }
+}
+  
 
   fetchBatchOverallLineChart(batchId: Number) {
     const endpoint = environment.apiBatchOverallLineChart(batchId);
@@ -278,8 +293,8 @@ export class ReportingService {
 
   fetchCurrentBatchesLineChart() {
     const endpoint = environment.apiCurrentBatchesLineChart;
-
-    // TODO: Implement API call and subject push logic
+    
+    
 
   }
 
@@ -317,6 +332,8 @@ export class ReportingService {
    */
   fetchTraineeOverallRadarChart(traineeId: Number) {
     const endpoint = environment.apiTraineeOverallRadarChart(traineeId);
+
+  
 
     // Params object for refresh check
     const params = {
