@@ -8,8 +8,8 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 import { AbstractApiService } from './abstract-api.service';
-import { EnvironmentService } from './environment.service';
 import { AlertsService } from './alerts.service';
+import { environment } from '../../../environments/environment';
 
 // entities
 import { Batch } from '../entities/Batch';
@@ -23,8 +23,8 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 @Injectable()
 export class BatchService extends AbstractApiService<Batch> {
 
-    constructor(httpClient: HttpClient, envService: EnvironmentService, alertService: AlertsService) {
-      super(envService, httpClient, alertService);
+    constructor(httpClient: HttpClient, alertService: AlertsService) {
+      super(httpClient, alertService);
     }
 
     /*
@@ -41,13 +41,13 @@ export class BatchService extends AbstractApiService<Batch> {
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
      */
     public fetchAllByTrainer(): void {
-      const url = 'trainer/batch/all';
+      const url = environment.batch.fetchAllByTrainer();
       const messages = {
         success: 'Batch list retrieved successfully',
         error: 'Batch list retrieval failed',
       };
 
-      super.doGetList(url, {}, messages);
+      super.doGetList(url, messages);
     }
 
     /**
@@ -57,13 +57,13 @@ export class BatchService extends AbstractApiService<Batch> {
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
      */
     public fetchAll(): void {
-      const url = 'vp/batch/all';
+      const url = environment.batch.fetchAll();
       const messages = {
         success: 'Batch list retrieved successfully',
         error: 'Batch list retrieval failed',
       };
 
-      super.doGetList(url, {}, messages);
+      super.doGetList(url, messages);
     }
 
     /**
@@ -92,14 +92,14 @@ export class BatchService extends AbstractApiService<Batch> {
     * @param batch: Batch
     */
     public save(batch: Batch): void {
-      const url = 'all/batch/create';
+      const url = environment.batch.save();
       const messages = {
         success: 'Batch saved successfully',
         error: 'Batch save failed',
       };
       const clone = this.prepareForApi(batch);
 
-      super.doPost(clone, url, {}, messages);
+      super.doPost(clone, url, messages);
     }
 
     /**
@@ -111,14 +111,14 @@ export class BatchService extends AbstractApiService<Batch> {
      * @param batch: Batch
      */
     public update(batch: Batch): void {
-      const url = 'all/batch/update';
+      const url = environment.batch.update();
       const messages = {
         success: 'Batch updated successfully',
         error: 'Batch updated failed',
       };
       const clone = this.prepareForApi(batch);
 
-      super.doPut(clone, url, {}, messages);
+      super.doPut(clone, url, messages);
     }
 
     /**
@@ -131,13 +131,13 @@ export class BatchService extends AbstractApiService<Batch> {
      * @param batch: Batch
      */
     public delete(batch: Batch): void {
-      const url = `all/batch/delete/${batch.batchId}`;
+      const url = environment.batch.delete(batch.batchId);
       const messages = {
         success: 'Batch deleted successfully',
         error: 'Batch deleteion failed',
       };
 
-      super.doDelete(batch, url, {}, messages);
+      super.doDelete(batch, url, messages);
     }
 
     /**
