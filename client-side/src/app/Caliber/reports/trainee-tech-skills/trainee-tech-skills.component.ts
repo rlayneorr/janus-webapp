@@ -167,6 +167,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     this.traineeOverallRadar.unsubscribe();
     this.traineeWeeklyRadar.unsubscribe();
     this.weekBatchFilter.unsubscribe();
+    this.granularity.unsubscribe();
 
     this.batchSubscription.unsubscribe();
     this.weekSubscription.unsubscribe();
