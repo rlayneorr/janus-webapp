@@ -50,7 +50,7 @@ export class AssessComponent implements OnInit {
   currentYear = 2017;
 
   constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
-  private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService, 
+  private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService,
   private fb: FormBuilder, private datePipe: DatePipe) {
 
   }
@@ -211,6 +211,23 @@ export class AssessComponent implements OnInit {
     return false;
   }
 
+  getOverallAverage() {
+    let sum = 0;
+
+    this.assessments.forEach(a => {
+      const percentage = this.getPercentage(a);
+
+      this.selectedBatch.trainees.forEach(trainee => {
+        sum += (this.getGrade(trainee, a).score * percentage) / 100;
+      });
+
+      sum /= this.selectedBatch.trainees.length;
+      // console.log(sum + ' ' + a.category.skillCategory);
+    });
+
+    return sum;
+  }
+
 /****************************************************************************************
                                       NOTES
 *****************************************************************************************/
@@ -238,6 +255,7 @@ export class AssessComponent implements OnInit {
   }
 
   addWeek() {
+    console.log(this.selectedBatch);
     this.selectedBatch.weeks += 1;
     this.batchService.update(this.selectedBatch);
   }

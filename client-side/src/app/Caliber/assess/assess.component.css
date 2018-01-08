@@ -1,7 +1,7 @@
 .main-container {
     padding: 10%;
     padding-bottom: 0px;
-    padding-top: 0px;
+    padding-top: 3%;
 }
 
 .assessment-area {
@@ -10,19 +10,53 @@
     align-content: center;
 }
 
+.no-padding {
+    padding: 0px;
+    border: 0px;
+}
+
 .assessment-header {
     min-width: 10%;
     width: 10%;
+    height: 10%;
     text-align: center;
     font-weight: bold;
+    font-style: italic;
+}
+
+.float-right {
+    float: right;
 }
 
 .revature-orange{
     color: #fa7427;
 }
 
+.centered {
+    text-align: center;
+}
+
+.divider {
+    margin: 10px;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.inline {
+    display: inline-block;
+}
+
 .revature-button {
     background-color: #fa7427;
+}
+
+.batch-select{
+    color: #fa7427;
+    border: 0mm;
+    max-width: 35%;
+    font-weight: bold;
 }
 
 .clickable {
@@ -31,10 +65,7 @@
 
 .note {
     width: 100%;
-}
-
-.plus {
-    
+    font-size: 15px;
 }
 
 .btn-update {
