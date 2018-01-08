@@ -22,6 +22,10 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
+// These are the pdf width and height in pixels
+const pdfHeight = 787;
+const pdfWidth = 531;
+
 @Injectable()
 export class PDFService {
 
@@ -59,11 +63,6 @@ export class PDFService {
    * It creates an image of the elements and saves it as a PDF.
    * @param chartToDownload - Element id name.
    * @param filename - Name of the file.
-      * pdf: 8.5in x 11in => 180mm x 270mm => 531px x 787px
-      * https://andrew.hedges.name/experiments/aspect_ratio/
-      * (original height / original width) x new width = new height
-      * (1200 / 1600) x 400 = 300
-      * (original width / original height) x new height = new width
    */
   public downloadCharts(): void {
     const charts = document.getElementsByClassName('charts');
@@ -73,49 +72,52 @@ export class PDFService {
       const originalHeight = charts[i].clientHeight;
       const originalWidth = charts[i].clientWidth;
 
-        if (originalHeight > 787) {
-          html2canvas(charts[i]).then(canvas => {
-            // new heights and width in pixels
-            let newHeight = 787;
-            let newWidth = (originalWidth / originalHeight) * newHeight;
+      html2canvas(charts[i]).then(canvas => {
+        canvas = canvas.toDataURL('image/jpeg', 1);
+        // Ignore canvas if it's not an image
+        if (canvas.match('image/jpeg')) {
+          // new heights and width in pixels
+          let newHeight = 0;
+          let newWidth = 180;
 
-            // converts pixels to mm
-            newHeight = (newHeight / 75) * 25.4;
-            newWidth = (newWidth / 75) * 25.4;
+          if (originalHeight > pdfHeight) {
+            if (originalHeight - pdfHeight > 500) {
+              newHeight = newHeight / 1.5;
+              newWidth = newWidth / 1.5;
+            }
+          }
 
-            // Add image and safe PDF
+          // SAVE PDF
+          if ((i + 1) === charts.length) {
+            // Add image, add new page, and safe PDF
+            pdf.addImage(canvas, 'JPEG', 10, 10, newWidth, newHeight);
+            pdf.save('Charts');
+          } else {
+            // Add image and add new page
             pdf.addImage(canvas, 'JPEG', 10, 10, newWidth, newHeight);
             pdf.addPage();
-            if ((i + 1) === charts.length) {
-              pdf.save('Charts');
-            }
-        });
-      } else {  // else add image and add new page
-          html2canvas(charts[i]).then(canvas => {
-            // Add image and safe PDF
-            pdf.addImage(canvas, 'JPEG', 10, 10, 180, 0);
-            pdf.addPage();
-            if ((i + 1) === charts.length) {
-              pdf.save('Charts');
-            }
-          });
+          }
         }
+
+      }); // end html2canvas
 
     } // end for loop
   }
 
   /**
    * Downloads HTML body content. Sends request to server to generate PDF.
+   * Pending implementation.
+   * @ignore Implementation not completed.
    */
   public downloadPDFwithFeedback() {
-    const html = {'title': 'download', 'html': '<h3>PDF!!!</h3>'};
+    const html = '';
     this.http.post(environment.context + 'report/generate', html).subscribe(response => {
-      console.log(response);
+      // console.log(response);
     },
 
     err => {
-      console.log('Error generating PDF!');
-      console.log(err);
+      // console.log('Error generating PDF!');
+      // console.log(err);
     });
   }
 

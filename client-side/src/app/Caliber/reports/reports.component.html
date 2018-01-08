@@ -1,5 +1,5 @@
 <app-toolbar></app-toolbar>
-<div class="container" *ngIf="ready && currentTrainee">
+<div class="container">
     <div class="row reports-row">
         <div class="col-md-12">
             <!-- <app-cumulative-skills></app-cumulative-skills> -->
@@ -9,8 +9,8 @@
     </div>
     <div class="row reports-row"> 
         <div class="col-md-4">
-            <!-- <app-quality-audit *ngIf="weekId > 0 && currentTrainee.traineeId === 0"></app-quality-audit>-->
-            <app-trainee-tech-skills *ngIf="!(weekId !== 0 && currentTrainee.traineeId === 0)"></app-trainee-tech-skills>
+            <div class="charts"><app-weekly-audit *ngIf="weekId > 0 && currentTrainee.traineeId === 0"></app-weekly-audit></div>
+            <!-- <app-trainee-tech-skills *ngIf="!(weekId !== 0 && currentTrainee.traineeId === 0)"></app-trainee-tech-skills> -->
         </div>
         <div class="col-md-8">
             <div class="charts"><app-batch-overall-line-chart></app-batch-overall-line-chart></div>
