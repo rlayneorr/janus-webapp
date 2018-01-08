@@ -3,18 +3,17 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AbstractApiService } from './abstract-api.service';
-import { EnvironmentService } from './environment.service';
 import { AlertsService } from './alerts.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class QCStatusService extends AbstractApiService<string> {
 
   constructor(
-    envService: EnvironmentService,
     http: HttpClient,
     alertService: AlertsService
   ) {
-    super(envService, http, alertService);
+    super(http, alertService);
 
     this.fetchAll();
   }
@@ -23,13 +22,13 @@ export class QCStatusService extends AbstractApiService<string> {
    * retrieve all QCStatus types
    */
   public fetchAll(): void {
-    const url = 'types/qcstatus/all';
+    const url = environment.qcStatus.fetchAll();
     const messages = {
       success: 'QC Status types retrieved successfully',
       error: 'QC Status types retrieval failed',
     };
 
-    super.doGetList(url, {}, messages);
+    super.doGetList(url, messages);
   }
 
 }

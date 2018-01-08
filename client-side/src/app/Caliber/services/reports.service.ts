@@ -8,8 +8,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ReportsService extends AbstractApiService<any> {
 
-  constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
-    super(envService, httpClient, alertService);
+  constructor(httpClient: HttpClient, alertService: AlertsService) {
+    super(httpClient, alertService);
   }
 
   public fetchReportsStackedBarCurrentWeek(): Observable<any[]> {

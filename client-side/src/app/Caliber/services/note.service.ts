@@ -8,6 +8,7 @@ import 'rxjs/add/observable/merge';
 
 // services
 import { EnvironmentService } from './environment.service';
+import { environment } from '../../../environments/environment';
 import { AbstractApiService } from './abstract-api.service';
 import { AlertsService } from './alerts.service';
 
@@ -23,8 +24,8 @@ import { Batch } from '../entities/Batch';
 @Injectable()
 export class NoteService extends AbstractApiService<Note> {
 
-  constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
-    super(envService, httpClient, alertService);
+  constructor(httpClient: HttpClient, alertService: AlertsService) {
+    super(httpClient, alertService);
   }
 
   /*
@@ -82,7 +83,7 @@ export class NoteService extends AbstractApiService<Note> {
   * @return Observable<Note[]>
   */
   public fetchQcBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = `qc/note/batch/${batchId}/${week}`;
+    const url = environment.note.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
 
     return super.doGetListObservable(url);
   }
@@ -98,7 +99,7 @@ export class NoteService extends AbstractApiService<Note> {
   * @return Observable<Note[]>
   */
   public fetchQcTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = `qc/note/trainee/${batchId}/${week}`;
+    const url = environment.note.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
 
     return super.doGetListObservable(url);
   }
@@ -114,7 +115,7 @@ export class NoteService extends AbstractApiService<Note> {
   * @return Observable<Note[]>
   */
   public fetchBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = `trainer/note/batch/${batchId}/${week}`;
+    const url = environment.note.fetchBatchNotesByBatchIdByWeek(batchId, week);
 
     return super.doGetListObservable(url);
   }
@@ -130,7 +131,7 @@ export class NoteService extends AbstractApiService<Note> {
   * @return Observable<Note[]>
   */
   public fetchTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = `trainer/note/trainee/${batchId}/${week}`;
+    const url = environment.note.fetchTraineeNotesByBatchIdByWeek(batchId, week);
 
     return super.doGetListObservable(url);
   }
@@ -144,7 +145,7 @@ export class NoteService extends AbstractApiService<Note> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public fetchByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = `all/notes/trainee/${trainee.traineeId}`;
+    const url = environment.note.fetchByTrainee(trainee.traineeId);
 
     return super.doGetListObservable(url);
   }
@@ -158,13 +159,13 @@ export class NoteService extends AbstractApiService<Note> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public update(note: Note): void {
-    const url = 'note/update';
+    const url = environment.note.update();
     const messages = {
       success: 'Note updated successfully',
       error: 'Note update failed',
     };
 
-    super.doPost(note, url, {}, messages); // yes, the API implemented this as a POST method: @see EvaluationController
+    super.doPost(note, url, messages); // yes, the API implemented this as a POST method: @see EvaluationController
   }
 
   /**
@@ -188,13 +189,13 @@ export class NoteService extends AbstractApiService<Note> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public save(note: Note): void {
-    const url = 'note/create';
+    const url = environment.note.save();
     const messages = {
       success: 'Note saved successfully',
       error: 'Note save failed',
     };
 
-    super.doPost(note, url, {}, messages);
+    super.doPost(note, url, messages);
   }
 
       /**
@@ -204,7 +205,7 @@ export class NoteService extends AbstractApiService<Note> {
    * @param note: Note
   */
   public getAllQCTraineeNotes(batch: Batch, note: Note): void {
-    const url = this.envService.buildUrl(`/qc/note/trainee/${batch.batchId}/${note.week}`);
+    const url = environment.note.getAllQCTraineeNotes(batch.batchId, note.week);
 
     this.listSubject.next([]);
 
@@ -221,7 +222,7 @@ export class NoteService extends AbstractApiService<Note> {
 */
 
 public findQCBatchNotes(batch: Batch, note: Note): void {
-  const url = this.envService.buildUrl(`/qc/note/batch/${batch.batchId}/${note.week}`);
+  const url = environment.note.findQCBatchNotes(batch.batchId, note.week);
 
   this.listSubject.next([]);
 

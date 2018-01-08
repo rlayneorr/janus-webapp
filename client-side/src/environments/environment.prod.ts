@@ -1,6 +1,91 @@
+const context = 'http://localhost/';
+
 export const environment = {
   production: true,
-  context: 'http://localhost:8080/', // change for what the production environment would actually be
+  context: context, // change for what the production environment would actually be
+
+  assessment: {
+    fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
+    save: () => `${context}trainer/assessment/create`,
+    update: () => `${context}trainer/assessment/update`,
+    delete: (assessmentId: number) => `${context}trainer/assessment/delete/${assessmentId}`,
+  },
+
+  batch: {
+    fetchAllByTrainer: () => `${context}trainer/batch/all`,
+    fetchAll: () => `${context}vp/batch/all`,
+    save: () => `${context}all/batch/create`,
+    update: () => `${context}all/batch/update`,
+    delete: (batchId) => `${context}all/batch/delete/${batchId}`,
+  },
+
+  category: {
+    fetchAll: () => `${context}vp/category`,
+    fetchAllActive: () => `${context}category/all`,
+    fetchById: (id: number) => `${context}category/${id}`,
+    save: () => `${context}vp/category`,
+    update: () => `${context}vp/category/update`,
+  },
+
+  location: {
+    fetchAll: () => `${context}all/location/all/`,
+    save: () => `${context}vp/location/create`,
+    update: () => `${context}vp/location/update`,
+  },
+
+  note: {
+    fetchQcBatchNotesByBatchIdByWeek: (batchId: number, week: number) => `${context}qc/note/batch/${batchId}/${week}`,
+    fetchQcTraineeNotesByBatchIdByWeek: (batchId: number, week: number) => `${context}qc/note/batch/${batchId}/${week}`,
+    fetchBatchNotesByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/note/batch/${batchId}/${week}`,
+    fetchTraineeNotesByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/note/trainee/${batchId}/${week}`,
+    fetchByTrainee: (traineeId: number) => `${context}all/notes/trainee/${traineeId}`,
+    update: () => `${context}note/update`,
+    save: () => `${context}note/create`,
+    getAllQCTraineeNotes: (batchId: number, week: number) => `${context}qc/note/trainee/${batchId}/${week}`,
+    findQCBatchNotes: (batchId: number, week: number) => `${context}qc/note/batch/${batchId}/${week}`,
+  },
+
+  panel: {
+    fetchAll: () => `${context}panel/all`,
+    fetchAllByTrainee: (traineeId) => `${context}panel/trainee/${traineeId}`,
+    save: () => `${context}panel/create`,
+    update: () => `${context}panel/update`,
+    delete: (panelId: number) => `${context}panel/delete/${panelId}`,
+  },
+
+  grade: {
+    fetchByBatchIdByWeek: (batchId, week) => `${context}all/grades/batch/${batchId}/week/${week}`,
+    save: () => `${context}trainer/grade/create`,
+    update: () => `${context}trainer/grade/update`,
+  },
+
+  qcStatus: {
+    fetchAll: () => `${context}types/qcstatus/all`,
+  },
+
+  skill: {
+    fetchAll: () => `${context}types/skill/all`,
+  },
+
+  trainee: {
+    fetchAllByBatch: (batchId: number) => `${context}all/trainee?batchId=${batchId}`,
+    save: () => `${context}all/trainee/create`,
+    update: () => `${context}all/trainee/update`,
+    delete: (traineeId: number) => `${context}all/trainee/delete/${traineeId}`,
+  },
+
+  trainer: {
+    fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
+    fetchAll: () => `${context}all/trainer/all`,
+    save: () => `${context}all/trainer/all`,
+    update: () => `${context}vp/trainer/update`,
+    getTitles: () => `${context}vp/trainer/titles`,
+    getTiers: () => `${context}types/trainer/role/all`,
+  },
+
+  trainingType: {
+    fetchAll: () => `${context}types/training/all`,
+  },
 
   // API calls for the VP functionality group
   addNewCategory: 'http://localhost:8080/vp/category',
