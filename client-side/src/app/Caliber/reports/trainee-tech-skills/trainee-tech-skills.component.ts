@@ -34,7 +34,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     private pdfService: PDFService, private modalService: NgbModal, private granularityService: GranularityService) { }
 
   // batch id of batch being viewed
-  public batch: Batch = new Batch();
+  public batch: Batch;
   // current week
   public week: Number = 0;
   // current trainee
@@ -54,7 +54,10 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
 
   // Chart type assignment
   public chartType = 'radar';
-
+  /**
+   * Sets up all data for component
+   * calls functions for setup
+   */
   ngOnInit() {
     this.chartData = [];
     this.dataSetLabels = [];
@@ -109,7 +112,13 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     // granularity batch sub; controls what setup is run.
     this.batchSubscription = this.granularityService.currentBatch$.subscribe(
       (result) => {
-        if (result.batchId !== this.batch.batchId) {
+        if (this.batch) {
+          if (result.batchId !== this.batch.batchId) {
+            this.batch = result;
+            this.dataSetLabels = [this.batch.trainingName];
+            this.setUp();
+          }
+        } else {
           this.batch = result;
           this.dataSetLabels = [this.batch.trainingName];
           this.setUp();
@@ -197,7 +206,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     this.traineeSubscription.unsubscribe();
   }
   setUp() {
-    if (this.trainee.traineeId === 0) {
+    if (this.batch && this.trainee.traineeId === 0) {
       if (this.week === 0 && this.trainee.traineeId === 0) {
         this.overallSetup();
       } else {
