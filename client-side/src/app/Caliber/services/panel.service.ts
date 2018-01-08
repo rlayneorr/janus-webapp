@@ -68,7 +68,7 @@ export class PanelService extends AbstractApiService<Panel> {
   *
   * @param panel: Panel
   */
-  public create(panel: Panel): void {
+  public create(panel: any): void {
     this.save(panel);
   }
 
@@ -80,8 +80,8 @@ export class PanelService extends AbstractApiService<Panel> {
   *
   * @param panel: Panel
   */
-  public save(panel: Panel): void {
-    const url = 'panel/create';
+  public save(panel: any): void {
+    const url = `panel/create`;
     const messages = {
       success: 'Panels saved successfully',
       error: 'Panel save failed',

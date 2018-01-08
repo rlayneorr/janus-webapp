@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms/';
-
+import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 // entities
 import { Trainee } from '../../entities/Trainee';
@@ -13,6 +13,7 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 
 // services
 import { PanelService } from '../../services/panel.service';
+
 
 
 @Component({
@@ -28,10 +29,11 @@ export class CreatePanelComponent implements OnInit {
   panelForm: FormGroup;
   panelObj: any;
   serializedPanel: any;
-  reformatPanel: any = {};
+  reformatPanel: Panel = new Panel;
   reformatDate: any;
   panelList: Panel[];
   panelRound: number;
+  modalRef: NgbModalRef;
 
   constructor(private modalService: NgbModal, private searchBar: PanelSearchbarComponent, private fb: FormBuilder,
     private panelService: PanelService) { }
@@ -48,32 +50,34 @@ export class CreatePanelComponent implements OnInit {
           this.panelRound = this.panelList.length + 1;
         }
       });
-
     });
 
     this.panelForm = this.fb.group({
       interviewForm: this.fb.group({
-        interviewDate: ['', Validators.required],
-        format: ['', Validators.required],
-        recordingConsent: ['', Validators.required],
-        internet: ['', Validators.required],
+        interviewDate: [''],
+        interviewTime: [''],
+        format: [''],
+        recordingConsent: [''],
+        internet: [''],
         panelRound: [''],
       }),
       generalFeedback: this.fb.group({
-        associateIntro: ['', Validators.required],
-        projectOneDescription: ['', Validators.required],
-        projectTwoDescription: ['', Validators.required],
-        projectThreeDescription: ['', Validators.required],
-        communicationSkills: ['', Validators.required],
+        associateIntro: [''],
+        projectOneDescription: [''],
+        projectTwoDescription: [''],
+        projectThreeDescription: [''],
+        communicationSkills: [''],
       }),
       feedback: this.fb.array([]),
       overallFeedback: this.fb.group({
-        duration: ['', Validators.required],
+        duration: [''],
         recordingLink: [''],
-        status: ['', Validators.required],
-        overall: ['', Validators.required]
+        status: [''],
+        overall: ['']
       })
     });
+
+    this.addFeedback();
   }
 
   initFeedback() {
@@ -112,7 +116,8 @@ export class CreatePanelComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, { size: 'lg' }).result.then((result) => {
+    this.modalRef = this.modalService.open(content, { size: 'lg' });
+    this.modalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -136,45 +141,32 @@ export class CreatePanelComponent implements OnInit {
       '-' +
       this.panelObj.interviewForm.interviewDate.month +
       '-' +
-      this.panelObj.interviewForm.interviewDate.day;
+      this.panelObj.interviewForm.interviewDate.day +
+      'T' +
+      this.panelObj.interviewForm.interviewTime.hour +
+      ':' +
+      this.panelObj.interviewForm.interviewTime.minute +
+      ':00Z';
 
-    this.reformatPanel['format'] = this.panelObj.interviewForm.format;
-    this.reformatPanel['panelRound'] = this.panelRound;
-    this.reformatPanel['recordingConsent'] = this.panelObj.interviewForm.recordingConsent;
-    this.reformatPanel['internet'] = this.panelObj.interviewForm.internet;
-    this.reformatPanel['interviewDate'] = this.reformatDate;
-    this.reformatPanel['associateIntro'] = this.panelObj.generalFeedback.associateIntro;
-    this.reformatPanel['projectOneDescription'] = this.panelObj.generalFeedback.projectOneDescription;
-    this.reformatPanel['projectTwoDescription'] = this.panelObj.generalFeedback.projectTwoDescription;
-    this.reformatPanel['projectThreeDescription'] = this.panelObj.generalFeedback.projectThreeDescription;
-    this.reformatPanel['communicationSKills'] = this.panelObj.generalFeedback.communicationSkills;
-    this.reformatPanel['feedback'] = this.panelObj.feedback;
-    this.reformatPanel['duration'] = this.panelObj.overallFeedback.duration;
-    this.reformatPanel['recordingLink'] = this.panelObj.overallFeedback.recordingLink;
-    this.reformatPanel['status'] = this.panelObj.overallFeedback.status;
-    this.reformatPanel['overall'] = this.panelObj.overallFeedback.overall;
-    this.reformatPanel['trainee'] = this.trainee;
+    this.reformatPanel.format = this.panelObj.interviewForm.format;
+    this.reformatPanel.panelRound = this.panelRound;
+    this.reformatPanel.recordingConsent = this.panelObj.interviewForm.recordingConsent;
+    this.reformatPanel.internet = this.panelObj.interviewForm.internet;
+    this.reformatPanel.interviewDate = this.reformatDate;
+    this.reformatPanel.associateIntro = this.panelObj.generalFeedback.associateIntro;
+    this.reformatPanel.projectOneDescription = this.panelObj.generalFeedback.projectOneDescription;
+    this.reformatPanel.projectTwoDescription = this.panelObj.generalFeedback.projectTwoDescription;
+    this.reformatPanel.projectThreeDescription = this.panelObj.generalFeedback.projectThreeDescription;
+    this.reformatPanel.communicationSkills = this.panelObj.generalFeedback.communicationSkills;
+    this.reformatPanel.feedback = this.panelObj.feedback;
+    this.reformatPanel.duration = this.panelObj.overallFeedback.duration;
+    this.reformatPanel.recordingLink = this.panelObj.overallFeedback.recordingLink;
+    this.reformatPanel.status = this.panelObj.overallFeedback.status;
+    this.reformatPanel.overall = this.panelObj.overallFeedback.overall;
+    this.reformatPanel.trainee = this.trainee;
+    this.reformatPanel.panelist = {};
 
     this.panelService.create(this.reformatPanel);
-    // console.log(this.reformatPanel);
-
-    // interviewDate: [''],
-    //     format: [''],
-    //     recordingConsent: [''],
-    //     internet: [''],
-    //   }),
-    //   generalFeedback: this.fb.group({
-    //     associateIntro: [''],
-    //     projectOneDescription: [''],
-    //     projectTwoDescription: [''],
-    //     projectThreeDescription: [''],
-    //     communicationSkills: [''],
-    //   }),
-    //   feedback: this.fb.array([]),
-    //   overallFeedback: this.fb.group({
-    //     duration: [''],
-    //     recordingLink: [''],
-    //     status: [''],
-    //     overall: ['']
+    this.modalRef.close();
   }
 }

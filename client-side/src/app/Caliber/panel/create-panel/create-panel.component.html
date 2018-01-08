@@ -17,16 +17,16 @@
         </div>
       </div>
 
-      <div class="border border-secondary">
-        <div class="row top-buffer">
+      <div class="top-buffer">
 
-          <!-- <div class="row"> -->
-          <div class="col-1">
-          </div>
-          <div class="col-11">
+      </div>
+
+      <div class="border border-secondary">
+        <div class="row">
+          <div class="col-12">
             <h3>Technical Feedback</h3>
           </div>
-          <!-- </div> -->
+
 
           <div class="col-11">
             <div formArrayName="feedback">
@@ -34,7 +34,7 @@
                 <app-technical-feedback [technologyForm]="panelForm.controls.feedback.controls[i]"></app-technical-feedback>
 
 
-                <button id="deleteFeedback" (click)="deleteFeedback(i)">
+                <button class="btn btn-secondary" id="deleteFeedback" (click)="deleteFeedback(i)">
                   <i class="fa fa-minus" aria-hidden="true"></i>
                 </button>
 
@@ -45,7 +45,7 @@
 
           <div class="row justify-content-center">
             <div class="col-1 align-self-end">
-              <button type="button" id="addFeedback" (click)="addFeedback()">
+              <button type="button" class="btn btn-secondary" id="addFeedback" (click)="addFeedback()">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </button>
             </div>
@@ -61,15 +61,15 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-default">Save</button>
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn btn-secondary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
       </div>
     </form>
   </div>
-  <pre>{{panelForm.value | json}}</pre>
 
 
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" [disabled]="trainee==null" (click)="open(content)">Create Panel</button>
-<hr>
+<button class="btn btn-lg btn-secondary" [disabled]="trainee==null" (click)="open(content)">
+  Create Panel <i class="fa fa-plus" aria-hidden="true"></i>
+</button>
