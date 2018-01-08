@@ -13,11 +13,11 @@ export class ReportsService extends AbstractApiService<any> {
     super(envService, httpClient, alertService);
   }
 
-   /**
-  * Retrieves information for the vp-home-bar-chart
-  *
-  * @return Observable<any[]>
-  */
+  /**
+   * Retrieves information for the vp-home-bar-chart
+   * @returns {Observable<any[]>}
+   * @memberof ReportsService
+   */
   public fetchReportsStackedBarCurrentWeek(): Observable<any[]> {
 
     return super.doGetListObservable(environment.reportsStackedBarCurrentWeek);
@@ -25,8 +25,8 @@ export class ReportsService extends AbstractApiService<any> {
 
   /**
    * Retrieves all information for the vp-home-line-chart
-   *
-   * @returns Observable<any[]>
+   * @returns {Observable<any[]>}
+   * @memberof ReportsService
    */
   public fetchReportsDashboard(): Observable<any[]> {
 
@@ -35,8 +35,8 @@ export class ReportsService extends AbstractApiService<any> {
 
   /**
    * Retrieves all information for the vp-home-panel-line-chart
-   *
-   * @returns Observable<any[]>
+   * @returns {Observable<any[]>}
+   * @memberof ReportsService
    */
   public fetchReportsBiWeeklyPanel(): Observable<any[]> {
 
