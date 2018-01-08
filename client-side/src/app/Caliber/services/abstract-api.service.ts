@@ -226,11 +226,17 @@ export abstract class AbstractApiService<T> {
    * @return string
    */
   protected stringifyDate(date: any): string {
-    const dateString = [
-      date.year,
-      date.month,
-      date.day,
-    ].join('-');
+    let dateString: string;
+
+    if ( date.hasOwnProperty('year') === false ) {
+      dateString = date;
+    } else {
+      dateString = [
+        date.year,
+        date.month,
+        date.day,
+      ].join('-');
+    }
 
     return [
       dateString,

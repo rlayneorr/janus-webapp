@@ -23,7 +23,7 @@
           <option *ngFor="let status of qcStatuses" [value]="status" [selected]="getQcStatusOnTrainee(trainee) === status">{{ status }}</option>
         </select>
         <p class="mx-auto">
-          <app-feedback-icon [status]="statusMap[trainee.traineeId]" css="text-orange"></app-feedback-icon>
+          <app-feedback-icon [status]="statusMap[trainee.traineeId]" css="fa-2x text-orange"></app-feedback-icon>
         </p>  
       </td>
       <td class="col-sm-9 col-md-9 col-lg-9">
