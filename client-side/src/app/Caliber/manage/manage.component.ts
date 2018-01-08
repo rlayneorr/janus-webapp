@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 // pipes
 import { DatePipe } from '@angular/common';
-import { DisplayBatchByYear } from './manage.pipe';
+import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
 import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 // services
@@ -300,7 +300,7 @@ export class ManageComponent implements OnInit, OnDestroy {
    */
   deleteTraineeFunction(trainee) {
     /** In the original caliber app, deleting trainee removes the trainee
-     * but the trainee reappears in the active trainees 
+     * but the trainee reappears in the active trainees
      * Even when you remove the trainee, it isn't moved to inactive
      * This is because the trainee object is detached from the database
      *

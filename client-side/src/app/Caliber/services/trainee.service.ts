@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AbstractApiService } from './abstract-api.service';
-import { EnvironmentService } from './environment.service';
 import { AlertsService } from './alerts.service';
+import { environment } from '../../../environments/environment';
 
 // entities
 import { Trainee } from '../entities/Trainee';
@@ -16,8 +16,8 @@ import { Trainee } from '../entities/Trainee';
 @Injectable()
 export class TraineeService extends AbstractApiService<Trainee> {
 
-  constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
-    super(envService, httpClient, alertService);
+  constructor(httpClient: HttpClient, alertService: AlertsService) {
+    super(httpClient, alertService);
    }
 
 
@@ -36,14 +36,18 @@ export class TraineeService extends AbstractApiService<Trainee> {
    * @param batchId: number
    */
    public fetchAllByBatch(batchId: number): void {
+<<<<<<< HEAD
      console.log('fetchallbybatch service being called');
      const url = 'all/trainee';
+=======
+     const url = environment.trainee.fetchAllByBatch(batchId);
+>>>>>>> revaturions-dev
      const messages = {
         success: 'Trainees retrieved successfully',
         error: 'Trainee retrieval failed',
      };
 
-     super.doGetList(url, {batch: batchId}, messages);
+     super.doGetList(url, messages);
    }
 
 
@@ -68,7 +72,7 @@ export class TraineeService extends AbstractApiService<Trainee> {
    * @param trainee: Trainee
    */
    public save(trainee: Trainee): void {
-    const url = 'all/trainee/create';
+    const url = environment.trainee.save();
     const messages = {
       success: 'Trainee saved successfully',
       error: 'Trainee save failed',
@@ -86,13 +90,13 @@ export class TraineeService extends AbstractApiService<Trainee> {
    * @param trainee: Trainee
    */
    public update(trainee: Trainee): void {
-     const url = 'all/trainee/update';
+     const url = environment.trainee.update();
      const messages = {
        success: 'Trainee updated successfully',
        error: 'Trainee update failed',
      };
 
-     super.doPut(trainee, url, {}, messages);
+     super.doPut(trainee, url, messages);
    }
 
    /**
@@ -104,13 +108,13 @@ export class TraineeService extends AbstractApiService<Trainee> {
    * @param trainee: Trainee
    */
    public delete(trainee: Trainee): void {
-     const url = `all/trainee/delete/${trainee.traineeId}`;
+     const url = environment.trainee.delete(trainee.traineeId);
      const messages = {
        success: 'Trainee deleted successfully',
        error: 'Trainee deletion failed',
      };
 
-     super.doDelete(trainee, url, {}, messages);
+     super.doDelete(trainee, url, messages);
    }
 
 
