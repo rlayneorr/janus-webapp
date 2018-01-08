@@ -197,11 +197,10 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     this.traineeSubscription.unsubscribe();
   }
   setUp() {
-    if (this.trainee && this.trainee.traineeId) {
+    if (this.trainee.traineeId === 0) {
       if (this.week === 0 && this.trainee.traineeId === 0) {
         this.overallSetup();
       } else {
-
         this.weekSetup();
       }
     }
