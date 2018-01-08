@@ -11,12 +11,16 @@ export const environment = {
   // API calls for the VP functionality group
   addNewCategory: 'http://localhost:8080/vp/category',
   getAllCategories: 'http://localhost:8080/vp/category',
-  addNewTrainer: 'http://localhost:8080/vp/trainer/create',
   editCurrentCategory: 'http://localhost:8080/vp/category/update',
+
+  // Location API calls
   editLocation: 'http://localhost:8080/vp/location/update',
   deleteLocation: 'http://localhost:8080/vp/location/delete',
   reactivateLocation: 'http://localhost:8080/vp/location/reactivate',
   addLocation: 'http://localhost:8080/vp/location/create',
+  
+  // Trainer API calls
+  addNewTrainer: 'http://localhost:8080/vp/trainer/create',
   deleteTrainer: 'http://localhost:8080/vp/trainer/delete',
   getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
   getAllTiers: 'http://localhost:8080/types/trainer/role/all',
