@@ -46,8 +46,7 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
   public techSub: Subscription;
   public QCSub: Subscription;
   public batchSub: Subscription;
-  public QcBatchSub: Subscription;
-  private stackedSubscription: Subscription;
+  private mergedObservablesSubscription: Subscription;
   public allbatches: any;
   public hasBatchStatuses = false;
   public counter = 0;
@@ -72,7 +71,7 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     this.barChartData = this.vpHomeBarGraphService.getBarChartData();
     const Observable1: Observable<any> = this.reportsService.fetchReportsStackedBarCurrentWeek();
     const Observable2: Observable<any> = this.batchService.getList();
-    Observable1.merge(Observable2).subscribe(
+    this.mergedObservablesSubscription = Observable1.merge(Observable2).subscribe(
       (resp) => {
         this.counter++;
         if (resp.length > 0) {
@@ -195,8 +194,7 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     try {
-      this.QcBatchSub.unsubscribe();
-      this.stackedSubscription.unsubscribe();
+      this.mergedObservablesSubscription.unsubscribe();
     } catch (Exception) { }
 
   }
