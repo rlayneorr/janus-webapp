@@ -22,6 +22,13 @@ export const environment = {
   getAllTiers: 'http://localhost:8080/types/trainer/role/all',
   editTrainer: 'http://localhost:8080/vp/trainer/update',
 
+  /**
+ * Reports Service API endpoints
+ */
+  reportsStackedBarCurrentWeek: context + 'all/reports/batch/week/stacked-bar-current-week',
+  reportsDashBoard: context + 'all/reports/dashboard',
+  reportsBiWeeklyPanel: context + 'all/reports/biweeklyPanelResults',
+
   /* Evaluation Service API endpoints */
   apiAllQCTraineeOverallNotes: (traineeId: Number) =>
     environment.context + `qc/note/trainee/${traineeId}`,
