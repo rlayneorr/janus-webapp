@@ -123,6 +123,11 @@ export class TrainersComponent implements OnInit, OnDestroy {
   newTitleChange(newTitle) {
     this.model.title = newTitle;
   }
+
+  /**
+   * Changes param passed for Active/Inactive Buttons
+   * @param status: status value
+   */
   buttonChange(status: String) {
     this.activeStatus = status;
   }
