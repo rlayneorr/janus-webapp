@@ -30,7 +30,7 @@
     </div>
     <div class="modal-body">
       <p>Are you sure you wish to create a new week? (This cannot be undone.)</p>
-      <button (click)="this.addWeek(); c('Close click')">Confirm</button>
+      <button type="button" class="btn btn-primary revature-button clickable" (click)="addWeek(); c('Close click');">Confirm</button>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
@@ -121,11 +121,10 @@
         </ngb-tab>
         <ngb-tab id="+" [disabled]="true" (click)="open(addWeek)">
             <ng-template ngbTabTitle>
-                <div class="revature-orange"><b>+</b></div> </ng-template>
+                <div class="btn btn-secondary plus"  (click)="open(addWeekContent)"><strong>+</strong></div> </ng-template>
             <ng-template ngbTabContent></ng-template>
     </ngb-tab>
       </ngb-tabset>
-      <button  (click)="open(addWeekContent)">+</button>
 <!-- TABS **END** -->
 
     <table class="table table-responsive" style="border-collapse: collapse;">
@@ -135,7 +134,7 @@
             Trainee
           </th>
           <th class ="clickable" *ngFor="let assessment of this.assessments" (click)="editAssessment(editAssessmentContent, assessment);">
-            <div class = "assessment-header">{{assessment.category.skillCategory}} {{assessment.type}} {{getPercentage(assessment)}}%</div>
+            <div class = "assessment-header">{{assessment.category.skillCategory}} {{assessment.type}} ({{getPercentage(assessment)}}%)</div>
           </th>
           <th class = "note">
             Notes
