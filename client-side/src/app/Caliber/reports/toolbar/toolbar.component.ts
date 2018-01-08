@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
 import { GranularityService } from '../services/granularity.service';
 import { Trainee } from '../../entities/Trainee';
+import { PDFService } from '../../../services/pdf.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -44,7 +45,9 @@ export class ToolbarComponent implements OnInit {
   private batchSubscription: Subscription;
   private trainerSubscription: Subscription;
 
-  constructor(private batchService: BatchService , private granularityService: GranularityService) {
+  constructor(private batchService: BatchService,
+              private granularityService: GranularityService,
+              private pdfService: PDFService) {
   }
 
   ngOnInit() {
@@ -307,4 +310,10 @@ export class ToolbarComponent implements OnInit {
     return emptyTrainee;
   }
 
+  /************************************
+   * PDF Service
+   ************************************/
+  downloadCharts() {
+    this.pdfService.downloadCharts();
+  }
 }
