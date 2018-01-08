@@ -5,7 +5,7 @@
 <div class="row mb-5">
     <div class="col-md-2">
         <div class="row">
-            <select #statusSelect class="custom-select mx-auto" (change)="setNoteStatus(statusSelect.value)" >
+            <select #statusSelect class="custom-select mx-auto" (change)="onStatusChange(statusSelect.value)" >
                 <option *ngFor="let status of qcStatuses" [value]="status" [selected]="status === batchNote?.qcStatus">{{ status }}</option>
             </select>
         </div>

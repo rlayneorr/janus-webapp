@@ -40,12 +40,16 @@ export class QualityOverallFeedbackComponent implements OnInit, OnDestroy, OnCha
   }
 
   /**
-  * steps to perform when the qcStatus value
-  * is changed by the user
+  * set the status selected value
+  * to the value of the batch note's status
+  * choosing a default if no batch note
+  * is injected
   */
-  private onStatusChange() {
+  private setSelectedStatus() {
     if ( this.batchNote ) {
       this.selectedStatus = this.batchNote.qcStatus;
+    } else {
+      this.selectedStatus = Note.STATUS_UNDEFINED;
     }
   }
 
@@ -53,11 +57,12 @@ export class QualityOverallFeedbackComponent implements OnInit, OnDestroy, OnCha
   * push the value selected by the user
   * into the batchNote object represented
   */
-  public setNoteStatus(status: string) {
+  public onStatusChange(status: string) {
     if ( this.batchNote ) {
       this.batchNote.qcStatus = status;
-      this.onStatusChange();
     }
+
+    this.setSelectedStatus();
   }
 
   ngOnInit() {
@@ -66,7 +71,7 @@ export class QualityOverallFeedbackComponent implements OnInit, OnDestroy, OnCha
   }
 
   ngOnChanges(): void {
-    this.onStatusChange();
+    this.setSelectedStatus();
   }
 
   ngOnDestroy(): void {

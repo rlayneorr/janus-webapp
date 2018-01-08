@@ -28,7 +28,7 @@ export class QualityComponent implements OnInit, OnDestroy {
     private batchService: BatchService,
     private batchesByYearPipe: DisplayBatchByYear
   ) {
-    this.setCurrentYear(2018);
+    this.setCurrentYear( this.getCalendarYear() );
   }
 
   ngOnInit() {
@@ -58,6 +58,10 @@ export class QualityComponent implements OnInit, OnDestroy {
 
    }
 
+   private getCalendarYear(): number {
+     return new Date().getFullYear();
+   }
+
    public setCurrentYear(currentYear: number): void {
      this.currentYear = currentYear;
 
@@ -65,7 +69,7 @@ export class QualityComponent implements OnInit, OnDestroy {
    }
 
    getTrackedYears(): number[] {
-     const thisYear: number = new Date().getFullYear();
+     const thisYear: number = this.getCalendarYear();
      const trackedYears = [];
 
      for (let i = 0; i < 3; i++) {
