@@ -32,7 +32,7 @@ export const environment = {
   },
 
   location: {
-    fetchAll: () => `${context}all/location/all/`,
+    fetchAll: () => `${context}all/location/all`,
     save: () => `${context}vp/location/create`,
     update: () => `${context}vp/location/update`,
   },
