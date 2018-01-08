@@ -149,8 +149,6 @@ export abstract class AbstractApiService<T> {
     const url = this.envService.buildUrl(apiUrl, params);
     const body = JSON.stringify(object);
 
-    console.log(body);
-
     this.http.post<T>(url, body).subscribe((data) => {
       this.savedSubject.next(data);
       this.pushAlert('success', messages);

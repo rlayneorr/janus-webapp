@@ -139,8 +139,8 @@
     <table class="table table-responsive" style="border-collapse: collapse;">
       <thead>
         <tr>
-          <th class ="clickable assessment-header">
-            <div class = "assessment-header">Trainee</div>
+          <th class ="clickable trainee-header">
+            <div class ="clickable trainee-header">Trainee</div>
           </th>
           <th class ="clickable assessment-header" *ngFor="let assessment of this.assessments" (click)="editAssessment(editAssessmentContent, assessment);">
             <div class = "assessment-header">{{assessment.category.skillCategory}} {{assessment.type}} ({{getPercentage(assessment)}}%)</div>

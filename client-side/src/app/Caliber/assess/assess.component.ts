@@ -108,6 +108,7 @@ export class AssessComponent implements OnInit {
         const newDate = new Date();
         grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(),
         newDate.getMinutes());
+        console.log(grade);
         this.gradeService.create(grade);
       });
 
@@ -204,13 +205,6 @@ export class AssessComponent implements OnInit {
     return Math.round((assessment.rawScore / sum) * 100);
   }
 
-  checkGradeLoading(grade: Grade) {
-    if (this.updatingGrades.has(grade)) {
-      return true;
-    }
-    return false;
-  }
-
   getOverallAverage() {
     let sum = 0;
 
@@ -241,8 +235,23 @@ export class AssessComponent implements OnInit {
     return note;
   }
 
+  addWeekOfNotes(week: number) {
+    this.selectedBatch.trainees.forEach(trainee => {
+      const note = new Note();
+      note.content = ' ';
+      note.trainee = trainee;
+      note.batch = this.selectedBatch;
+      note.maxVisibility = 2;
+      note.qcFeedback = false;
+      note.week = week;
+      note.type = 'TRAINEE';
+      this.noteService.create(note);
+    });
+  }
+
   updateNote(note: Note, input) {
     note.content = input.value;
+    note.batch = this.selectedBatch;
     this.noteService.update(note);
   }
 
@@ -257,6 +266,7 @@ export class AssessComponent implements OnInit {
   addWeek() {
     console.log(this.selectedBatch);
     this.selectedBatch.weeks += 1;
+    this.addWeekOfNotes(this.selectedBatch.weeks);
     this.batchService.update(this.selectedBatch);
   }
 
