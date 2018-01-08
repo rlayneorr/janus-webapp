@@ -1,117 +1,51 @@
 import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
-
-// rxjs
-import { Subscription } from 'rxjs/Subscription';
-
-// services
+import { Batch } from '../../entities/Batch';
 import { NoteService } from '../../services/note.service';
+import { Note } from '../../entities/Note';
+import { Subscription } from 'rxjs/Subscription';
+import { Trainee } from '../../entities/Trainee';
 import { QCStatusService } from '../../services/qcstatus.service';
 import { BatchService } from '../../services/batch.service';
-
-// entities
-import { Batch } from '../../entities/Batch';
-import { Note } from '../../entities/Note';
-import { Trainee } from '../../entities/Trainee';
-
-
 
 @Component({
   selector: 'app-quality-feedback',
   templateUrl: './quality-feedback.component.html',
   styleUrls: ['./quality-feedback.component.css']
 })
-
 export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() batch: Batch;
+  qcBatchNotes: Note[];
+  qcTraineeNotes: Note[];
 
-  public statusList: string[];
-  public notes: Note[];
-  public week: number;
+  notesSubscription: Subscription;
+  qcStatusSubscription: Subscription;
 
-  private qcStatusSubscription: Subscription;
-  private noteListSubscription: Subscription;
+  qcStatuses: string[];
+  selectedStatus: string;
 
-  constructor(
-    private noteService: NoteService,
-    private qcStatusService: QCStatusService,
-    private batchService: BatchService
-  ) {
+  week = 1;
+  statusMap;
 
-    this.week = 1;
-  }
+  constructor(private noteService: NoteService, private qcStatusService: QCStatusService, private batchService: BatchService) {
+    this.qcTraineeNotes = [];
+    this.qcStatuses = [];
+   }
 
-
-  /**
-  * filters the list passed to return only the
-  * QC Trainee notes
-  *
-  * @param notes: Note[]
-  *
-  * @return Note[]
-  */
-  public getTraineeNotes(notes: Note[]): Note[] {
-    return notes.filter( (note) => ( note.type === Note.TYPE_QCTRAINEE ) );
-  }
-
-  /**
-  * set the list of possible statuses
-  */
-  private setStatusList(data: string[]): void {
-   this.statusList = data;
-  }
-
-  /**
-  * set the list of notes
-  */
-  private setNoteList(notes: Note[] ): void {
-    this.notes = notes;
-  }
-
-  /**
-  * trigger the NoteService to retrieve
-  * all notes
-  */
-  private fetchNotes(): void {
-    this.noteService.fetchByBatchIdByWeek(this.batch.batchId, this.week);
-  }
-
-  /**
-  * factory method for creating a new instance
-  * of a note object
-  *
-  * @param type: string
-  * @param isQcFeedback: boolean
-  */
-  private createNote(type: string, isQcFeedback = true): Note {
-    return {
-        noteId: 0,
-        type: type,
-        qcStatus: Note.STATUS_UNDEFINED,
-        qcFeedback: isQcFeedback,
-        content: '',
-        week: this.week,
-        batch: this.batch,
-        trainee: null,
-        maxVisibility: 'ROLE_PANEL',
-    };
-  }
-
-
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.qcStatusSubscription = this.qcStatusService.getList()
-      .subscribe( (data) => this.setStatusList(data) );
+      .subscribe( (statuses) => this.setQcStatuses(statuses) );
 
-    this.noteListSubscription = this.noteService.getList()
+    this.notesSubscription = this.noteService.getList()
       .subscribe( (notes) => {
         console.log(notes);
-        this.setNoteList(notes);
+        this.setNotes(notes);
+
       });
   }
 
-  ngOnDestroy(): void {
-    this.noteListSubscription.unsubscribe();
+  ngOnDestroy() {
+    this.notesSubscription.unsubscribe();
     this.qcStatusSubscription.unsubscribe();
   }
 
@@ -177,6 +111,9 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     // console.log(statuses);
   }
 
+  fetchNotes() {
+    this.noteService.fetchByBatchIdByWeek(this.batch.batchId, this.week);
+  }
 
   getBatchWeeks(): number[] {
     const batchWeeks: number[] = [];
@@ -198,7 +135,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     this.batchService.update(this.batch);
   }
 
-  private addMissingNotes(): void {
+  addMissingNotes(): void {
     // console.log(this.batch);
 
     if ( this.batch.trainees ) {
@@ -281,6 +218,13 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
         });
       }
     }
+    // console.log(this.qcTraineeNotes);
   }
+  // test() {
+  //   console.log(this.batch.batchId);
+  //   console.log(this.week);
+  //   console.log(this.qcBatchNote);
+  //   console.log(this.qcTraineeNotes[1].trainee.name);
 
+  // }
 }
