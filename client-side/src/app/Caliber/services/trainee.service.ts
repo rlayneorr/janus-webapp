@@ -36,6 +36,7 @@ export class TraineeService extends AbstractApiService<Trainee> {
    * @param batchId: number
    */
    public fetchAllByBatch(batchId: number): void {
+     console.log('fetchallbybatch service being called');
      const url = 'all/trainee';
      const messages = {
         success: 'Trainees retrieved successfully',
