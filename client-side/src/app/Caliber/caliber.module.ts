@@ -41,6 +41,7 @@ import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.se
 import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
+import { TraineeStatusService } from './services/trainee-status.service';
 
 // pipes
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
@@ -240,6 +241,7 @@ import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedb
     TrainingTypeService,
     ReportsService,
     QCStatusService,
+    TraineeStatusService,
   ],
   bootstrap: [
     TrainersComponent
