@@ -3,28 +3,32 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
+const context = 'http://localhost:8080/';
 export const environment = {
   production: false,
-  context: 'http://localhost:8080/',
+  context: context,
   bootContext: 'http://localhost/',
 
   // API calls for the VP functionality group
-  addNewCategory: 'http://localhost:8080/vp/category',
-  getAllCategories: 'http://localhost:8080/vp/category',
-  editCurrentCategory: 'http://localhost:8080/vp/category/update',
+  addNewCategory: context + 'vp/category',
+  getAllCategories: context + 'vp/category',
+  editCurrentCategory: context + 'vp/category/update',
 
   // Location API calls
-  editLocation: 'http://localhost:8080/vp/location/update',
-  deleteLocation: 'http://localhost:8080/vp/location/delete',
-  reactivateLocation: 'http://localhost:8080/vp/location/reactivate',
-  addLocation: 'http://localhost:8080/vp/location/create',
-  
+  editLocation: context + 'vp/location/update',
+  deleteLocation: context + 'vp/location/delete',
+  reactivateLocation: context + 'vp/location/reactivate',
+  addLocation: context + 'vp/location/create',
+
   // Trainer API calls
-  addNewTrainer: 'http://localhost:8080/vp/trainer/create',
-  deleteTrainer: 'http://localhost:8080/vp/trainer/delete',
-  getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
-  getAllTiers: 'http://localhost:8080/types/trainer/role/all',
-  editTrainer: 'http://localhost:8080/vp/trainer/update',
+  addNewTrainer: context + 'vp/trainer/create',
+  deleteTrainer: context + 'vp/trainer/delete',
+  getAllTitles: context + 'vp/trainer/titles/',
+  getAllTiers: context + 'types/trainer/role/all',
+  editTrainer: context + 'vp/trainer/update',
+
+  // VP HOME API calls
+
 
   /* Evaluation Service API endpoints */
   apiAllQCTraineeOverallNotes: (traineeId: Number) =>
