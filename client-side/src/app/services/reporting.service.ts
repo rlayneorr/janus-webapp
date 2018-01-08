@@ -30,7 +30,11 @@ export class ReportingService {
   public batchOverallRadar$ = this.batchOverallRadar.asObservable();
 
   private qcStatusDoughnut = new BehaviorSubject<CacheData>(null);
+
+  public qcStatusDoughnut$ = this.batchOverallRadar.asObservable();
+
   public qcStatusDoughnut$ = this.qcStatusDoughnut.asObservable();
+
   // Bar chart used for the Cumulative Scores Graph
   private batchOverallBar = new BehaviorSubject<CacheData>(null);
   public batchOverallBar$ = this.batchOverallBar.asObservable();

@@ -87,14 +87,16 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
           data => {
             console.log('breakdown - batch incoming with id : ' + data.batchId);
             // Make sure batchId is not undefined
-            this.batchId = data.batchId; this.tryFetch();
+
+            if (data) {
+              this.batchId = data.batchId; this.tryFetch();
+            }
+
           });
 
       this.weekSub = this.granularityService.currentWeek$.subscribe(
           data => {
             // Make sure traineeId is not undefined
-            console.log('breakdown - batch incoming week: ' + data);
-            console.log(data);
             if (data) {
               this.week = data;
               this.tryFetch();
@@ -103,7 +105,6 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
       this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
           data => {
-            // Make sure traineeId is not undefined
             if (data) {
               this.traineeId = data.traineeId; this.tryFetch();
             }
