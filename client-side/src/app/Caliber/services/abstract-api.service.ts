@@ -8,11 +8,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 
 // services
-import { EnvironmentService } from './environment.service';
 import { AlertsService } from './alerts.service';
 
 export abstract class AbstractApiService<T> {
-  protected envService: EnvironmentService;
   protected http: HttpClient;
 
   protected listSubject: BehaviorSubject<T[]>;
@@ -20,10 +18,9 @@ export abstract class AbstractApiService<T> {
   protected updatedSubject: Subject<T>;
   protected deletedSubject: Subject<T>;
 
-  private alertService: AlertsService;
+  protected alertService: AlertsService;
 
-  constructor(envService: EnvironmentService, httpClient: HttpClient, alertService: AlertsService) {
-    this.envService = envService;
+  constructor(httpClient: HttpClient, alertService: AlertsService) {
     this.http = httpClient;
     this.alertService = alertService;
 
@@ -96,8 +93,7 @@ export abstract class AbstractApiService<T> {
    *
    * @param apiUrl: string
    */
-  protected doGetList(apiUrl: string, params: any = {}, messages: any = {}): void {
-    const url = this.envService.buildUrl(apiUrl, params);
+  protected doGetList(url: string, messages: any = {}): void {
 
     this.listSubject.next([]);
 
@@ -118,8 +114,7 @@ export abstract class AbstractApiService<T> {
    *
    * @return Observable<T>
    */
-  protected doGetOneObservable(apiUrl: string, params: any = {}): Observable<T> {
-    const url = this.envService.buildUrl(apiUrl, params);
+  protected doGetOneObservable(url: string): Observable<T> {
 
     return this.http.get<T>(url);
   }
@@ -133,8 +128,7 @@ export abstract class AbstractApiService<T> {
    *
    * @return Observable<T[]>
    */
-  protected doGetListObservable(apiUrl: string, params: any = {}): Observable<T[]> {
-    const url = this.envService.buildUrl(apiUrl, params);
+  protected doGetListObservable(url: string): Observable<T[]> {
     return this.http.get<T[]>(url);
   }
 
@@ -145,8 +139,7 @@ export abstract class AbstractApiService<T> {
  * @param apiUrl: string
  * @param object: T
  */
-  protected doPost(object: T, apiUrl: string, params: any = {}, messages: any = {}): void {
-    const url = this.envService.buildUrl(apiUrl, params);
+  protected doPost(object: T, url: string, messages: any = {}): void {
     const body = JSON.stringify(object);
 
     this.http.post<T>(url, body).subscribe((data) => {
@@ -164,8 +157,7 @@ export abstract class AbstractApiService<T> {
  * @param apiUrl: string
  * @param object: T
  */
-  protected doPut(object: T, apiUrl: string, params: any = {}, messages: any = {}): void {
-    const url = this.envService.buildUrl(apiUrl, params);
+  protected doPut(object: T, url: string, messages: any = {}): void {
     const body = JSON.stringify(object);
 
     this.http.put<T>(url, body).subscribe((data) => {
@@ -185,8 +177,7 @@ export abstract class AbstractApiService<T> {
  * @param apiUrl: string
  * @param object: T
  */
-  protected doDelete(object: T, apiUrl: string, params: any = {}, messages: any = {}): void {
-    const url = this.envService.buildUrl(apiUrl, params);
+  protected doDelete(object: T, url: string, messages: any = {}): void {
 
     this.http.delete(url).subscribe(() => {
       this.deletedSubject.next(object);
