@@ -48,8 +48,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.addForm = this.fb.group({
       'name': ['', Validators.required],
       'email': ['', Validators.required],
-      'title': [''],
-      'tier': [''],
+      'title': ['', Validators.required],
+      'tier': ['', Validators.required],
     });
   }
 
@@ -84,8 +84,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.rForm = this.fb.group({
       'name': [this.currEditTrainer.name, Validators.required],
       'email': [this.currEditTrainer.email, Validators.required],
-      'title': [this.newTitle],
-      'tier': [this.newTier],
+      'title': [this.newTitle, Validators.required],
+      'tier': [this.newTier, Validators.required],
     });
     this.modalService.open(content, { size: 'lg' });
   }

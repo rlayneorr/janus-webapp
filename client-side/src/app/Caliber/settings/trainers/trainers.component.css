@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+.fa-user {
+    cursor: pointer;
+}
+
 #addTrainerButton {
     padding: 10px;
 }

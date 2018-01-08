@@ -3,24 +3,49 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
+const context = 'http://localhost:8080/';
 export const environment = {
   production: false,
-  context: 'http://localhost:8080/',
+  context: context,
   bootContext: 'http://localhost/',
 
   // API calls for the VP functionality group
-  addNewCategory: 'http://localhost:8080/vp/category',
-  getAllCategories: 'http://localhost:8080/vp/category',
-  addNewTrainer: 'http://localhost:8080/vp/trainer/create',
-  editCurrentCategory: 'http://localhost:8080/vp/category/update',
-  editLocation: 'http://localhost:8080/vp/location/update',
-  deleteLocation: 'http://localhost:8080/vp/location/delete',
-  reactivateLocation: 'http://localhost:8080/vp/location/reactivate',
-  addLocation: 'http://localhost:8080/vp/location/create',
-  deleteTrainer: 'http://localhost:8080/vp/trainer/delete',
-  getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
-  getAllTiers: 'http://localhost:8080/types/trainer/role/all',
-  editTrainer: 'http://localhost:8080/vp/trainer/update',
+  getAllCategories: context + 'vp/category',
+  addNewCategory: context + 'vp/category',
+  editCurrentCategory: context + 'vp/category/update',
+
+  // Location API calls
+  getAllLocations: context + 'all/location/all',
+  editLocation: context + 'vp/location/update',
+  deleteLocation: context + 'vp/location/update',
+  reactivateLocation: context + 'vp/location/reactivate',
+  addLocation: context + 'vp/location/create',
+
+  // Trainer API calls
+  getAllTitles: context + 'vp/trainer/titles',
+  getAllTiers: context + 'types/trainer/role/all',
+  getAllTrainers: context + 'all/trainer/all',
+  addNewTrainer: context + 'vp/trainer/create',
+  deleteTrainer: context + 'vp/trainer/update',
+  editTrainer: context + 'vp/trainer/update',
+
+  // Reports Service API endpoints
+  reportsStackedBarCurrentWeek: context + 'all/reports/batch/week/stacked-bar-current-week',
+  reportsDashBoard: context + 'all/reports/dashboard',
+  reportsBiWeeklyPanel: context + 'all/reports/biweeklyPanelResults',
+
+  /* Evaluation Service API endpoints */
+  apiAllQCTraineeOverallNotes: (traineeId: Number) =>
+    environment.context + `qc/note/trainee/${traineeId}`,
+
+  apiAllTraineeNotes: (traineeId: Number) =>
+    environment.context + `all/notes/trainee/${traineeId}`,
+
+  apiQCTraineeNote: (traineeId: Number, week: Number) =>
+    environment.context + `/qc/note/trainee/${traineeId}/for/${week}`,
+
+  apiTraineeNote: (traineeId: Number, week: Number) =>
+    environment.context + `/trainer/note/trainee/${traineeId}/for/${week}`,
 
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint: (skill: string, training: string, startDate) =>

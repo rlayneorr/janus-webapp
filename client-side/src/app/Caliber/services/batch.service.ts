@@ -13,6 +13,7 @@ import { AlertsService } from './alerts.service';
 
 // entities
 import { Batch } from '../entities/Batch';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 
 
 /**
@@ -96,8 +97,11 @@ export class BatchService extends AbstractApiService<Batch> {
         success: 'Batch list saved successfully',
         error: 'Batch list save failed',
       };
+      const clone = this.stringifyDates(batch);
 
-      super.doPost(batch, url, {}, messages);
+      console.log(clone);
+
+      super.doPost(clone, url, {}, messages);
     }
 
     /**
@@ -135,6 +139,29 @@ export class BatchService extends AbstractApiService<Batch> {
       };
 
       super.doDelete(batch, url, {}, messages);
+    }
+
+    protected stringifyDates(batch: Batch): any {
+      const output: any = {};
+      Object.assign(output, batch);
+
+      output.startDate = this.stringifyDate(batch.startDate);
+      output.endDate = this.stringifyDate(batch.endDate);
+
+      return output;
+    }
+
+    protected stringifyDate(date: any): string {
+      const dateString =  [
+        date.year,
+        date.month,
+        date.day,
+      ].join('-');
+
+      return [
+        dateString,
+        'T00:00:00.0',
+      ].join('');
     }
 
 }

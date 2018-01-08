@@ -32,7 +32,8 @@ export class VpHomeBarGraphService {
         yAxes: [{
           stacked: true,
           ticks: {
-            mirror: true
+            mirror: true,
+            autoSkip: false
           }
         }],
         xAxes: [{
@@ -74,9 +75,7 @@ export class VpHomeBarGraphService {
       barChartData.labels.push(result.label);
       // barChartData.id.push(result.id);
       let i;
-      console.log(result.qcStatus);
       for (const key of Object.keys(result.qcStatus)) {
-        console.log(key);
         if (key === 'Poor') {
           i = 0;
           barChartData.colors[i] = this.cs.generateLineColor('rgba(234, 40, 37,');
@@ -108,6 +107,7 @@ export class VpHomeBarGraphService {
 
   /**
    * Clears the arrays of a ChartDataEntity
+   * without this the chart won't redraw
    * @param ChartDataEntity
    * @returns ChartDataEntity
    */
