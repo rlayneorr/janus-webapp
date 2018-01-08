@@ -76,11 +76,10 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
 
   constructor(private reportsService: ReportingService, private granularityService: GranularityService) {}
 
-  ngOnInit() { 
+  ngOnInit() {
     this.granularitySubscription = Observable.combineLatest(
-      this.granularityService.currentBatch$, this.granularityService.currentTrainee$, 
-      this.granularityService.currentWeek$).subscribe((batchdata) =>
-      {
+      this.granularityService.currentBatch$, this.granularityService.currentTrainee$,
+      this.granularityService.currentWeek$).subscribe((batchdata) => {
         const batch = batchdata[0];
         const trainee = batchdata[1];
         const week = batchdata[2];
@@ -89,29 +88,28 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
         this.week = week;
         this.labels = [batch.trainingName];
 
-        if (trainee.traineeId === 0 )
-        {
-          return 
+        if (trainee.traineeId === 0 ) {
+          return;
         }
         this.reportsService.fetchTraineeOverallLineChart(batch.batchId, trainee.traineeId);
 
-        
+
       }
-    )
+    );
     this.dataSubscription = this.reportsService.lineTraineeOverall$.subscribe(
       (data) => {
         const newBatchData = [];
         const newTraineeData = [];
         const newLabels = [];
 
-        if(!data) {
-          console.log('data request failed to resolve');
+        if (!data) {
+          // console.log('data request failed to resolve');
           return;
         }
         // console.log(data);
         for (const key in data.data) {
           if (data.data.hasOwnProperty(key)) {
-            console.log(data.data[key]);
+            // console.log(data.data[key]);
             newBatchData.push(data.data[key][1].toFixed(2));
             newTraineeData.push(data.data[key][0].toFixed(2));
             newLabels.push(key);
@@ -120,13 +118,12 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
         this.labels = newLabels;
         this.data = [{data: newTraineeData, label: 'trainee'},
                     {data: newBatchData, label: 'batch'}];
-                    console.log(this.data) 
+                    console.log(this.data);
       }
-      
-    )
+
+    );
   }
-    
-      
+
 
   // Fetches data when new data is pushed in
   private fetch() {

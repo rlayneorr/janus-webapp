@@ -33,15 +33,15 @@ export class PanelBatchAllTraineesComponent implements OnInit, OnDestroy {
         if  (result) {
           this.data = result.data;
         } else {
-          console.log('Panel data failed to load');
+          // console.log('Panel data failed to load');
         }
       });
 
     // Subscription for batch selection in toolbar
     this.batchIdSub = this.granularityService.currentBatch$.subscribe((result) => {
 
-      console.log('data incoming to panel from granularity');
-      console.log(result);
+      // console.log('data incoming to panel from granularity');
+      // console.log(result);
 
       // Make sure batchId is not undefined
       if (result.batchId) {
