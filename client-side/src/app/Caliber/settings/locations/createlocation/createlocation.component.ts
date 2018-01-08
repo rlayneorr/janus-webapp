@@ -24,6 +24,11 @@ export class CreatelocationComponent implements OnInit {
     private locationService: LocationService,
     private fb: FormBuilder) { }
 
+  /**
+   * initialize the form control for validators
+   * 
+   * @memberof CreatelocationComponent
+   */
   ngOnInit() {
     this.initFormControl();
 
@@ -92,6 +97,14 @@ export class CreatelocationComponent implements OnInit {
     this.modalRef.close();
   }
 
+  /**
+   * get the cause for closing modal
+   * 
+   * @private
+   * @param {*} reason 
+   * @returns {string} 
+   * @memberof CreatelocationComponent
+   */
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

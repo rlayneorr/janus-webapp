@@ -28,6 +28,12 @@ export class EditlocationComponent implements OnInit {
     private locationService: LocationService,
     private fb: FormBuilder) { }
 
+  /**
+   * backup original data for current trainer being edited
+   * initialize the form group
+   * 
+   * @memberof EditlocationComponent
+   */
   ngOnInit() {
     this.popTemp();
 
@@ -92,17 +98,25 @@ export class EditlocationComponent implements OnInit {
     this.popTemp();
     this.locationService.update(this.currEditLocation);
   }
-/**
- * close the modal and clear form
- * 
- * @param {any} content 
- * @memberof EditlocationComponent
- */
-close(content) {
+  /**
+   * close the modal and clear form
+   * 
+   * @param {any} content 
+   * @memberof EditlocationComponent
+   */
+  close(content) {
     this.initFormControl();
     this.modalRef.close();
   }
 
+  /**
+   * returns the cause for closing modal
+   * 
+   * @private
+   * @param {*} reason 
+   * @returns {string} 
+   * @memberof EditlocationComponent
+   */
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

@@ -10,7 +10,7 @@ import { Location } from '../../../entities/Location';
     templateUrl: './deactivatelocation.component.html',
     styleUrls: ['./deactivatelocation.component.css'],
     encapsulation: ViewEncapsulation.None,
-  })
+})
 export class DeactivateLocationComponent implements OnInit {
     @Input()
     location: Location;
@@ -22,10 +22,21 @@ export class DeactivateLocationComponent implements OnInit {
 
     }
 
+    /**
+     * open up the modal
+     * 
+     * @param {any} content 
+     * @memberof DeactivateLocationComponent
+     */
     showModal(content) {
         this.modalService.open(content);
     }
 
+    /**
+     * deactivating a location by setting status to false
+     * 
+     * @memberof DeactivateLocationComponent
+     */
     deactivateLocation() {
         this.location.active = false;
         this.ls.delete(this.location);

@@ -10,25 +10,29 @@ export const environment = {
   bootContext: 'http://localhost/',
 
   // API calls for the VP functionality group
-  addNewCategory: context + 'vp/category',
   getAllCategories: context + 'vp/category',
+  addNewCategory: context + 'vp/category',
   editCurrentCategory: context + 'vp/category/update',
 
   // Location API calls
+  getAllLocations: context + 'all/location/all',
   editLocation: context + 'vp/location/update',
-  deleteLocation: context + 'vp/location/delete',
+  deleteLocation: context + 'vp/location/update',
   reactivateLocation: context + 'vp/location/reactivate',
   addLocation: context + 'vp/location/create',
 
   // Trainer API calls
-  addNewTrainer: context + 'vp/trainer/create',
-  deleteTrainer: context + 'vp/trainer/delete',
-  getAllTitles: context + 'vp/trainer/titles/',
+  getAllTitles: context + 'vp/trainer/titles',
   getAllTiers: context + 'types/trainer/role/all',
+  getAllTrainers: context + 'all/trainer/all',
+  addNewTrainer: context + 'vp/trainer/create',
+  deleteTrainer: context + 'vp/trainer/update',
   editTrainer: context + 'vp/trainer/update',
 
-  // VP HOME API calls
-
+  // Reports Service API endpoints
+  reportsStackedBarCurrentWeek: context + 'all/reports/batch/week/stacked-bar-current-week',
+  reportsDashBoard: context + 'all/reports/dashboard',
+  reportsBiWeeklyPanel: context + 'all/reports/biweeklyPanelResults',
 
   /* Evaluation Service API endpoints */
   apiAllQCTraineeOverallNotes: (traineeId: Number) =>
