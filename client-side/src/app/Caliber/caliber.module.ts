@@ -94,7 +94,6 @@ import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedba
 import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.component';
 import { WeeklyAuditComponent } from './reports/weekly-audit/weekly-audit.component';
 import { WeeklyCumulativeScoreComponent } from './reports/weekly-cumulative-scores/weekly-cumulative-scores.component';
-import { DoughnutComponent } from './doughnut/doughnut.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { ReactivateLocationComponent } from './settings/locations/reactivatelocation/reactivatelocation.component';
 import { BarGraphModalComponent } from './home/vp-bar-graph/bar-graph-modal/bargraphmodal.component';
@@ -158,7 +157,7 @@ import { QcDoughnutComponent } from './reports/qc-doughnut/qc-doughnut.component
     PanelFeedbackComponent,
     WeeklyAuditComponent,
     WeeklyCumulativeScoreComponent,
-    DoughnutComponent,
+    QcDoughnutComponent,
     ReactivateLocationComponent,
     AlertsComponent,
     BarGraphModalComponent,
