@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms/';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 // components
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
@@ -33,7 +34,8 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
   batchSubscription: Subscription;
   trainingTrack: string;
   panelRound: number;
-  interviewForm: FormGroup;
+
+  @Input() interviewForm: FormGroup;
 
   constructor(private searchBar: PanelSearchbarComponent, private batchService: BatchService, private panelService: PanelService) { }
 
@@ -63,15 +65,12 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.interviewForm = new FormGroup({
-      trainee: new FormControl(),
-      interviewDate: new FormControl(),
-      format: new FormControl(),
-      recordingConsent: new FormControl(),
-      internet: new FormControl()
-    });
-
-
+  //   this.interviewForm = new FormGroup({
+  //     interviewDate: new FormControl(),
+  //     format: new FormControl(),
+  //     recordingConsent: new FormControl(),
+  //     internet: new FormControl()
+  //   });
   }
 
   ngOnDestroy() {

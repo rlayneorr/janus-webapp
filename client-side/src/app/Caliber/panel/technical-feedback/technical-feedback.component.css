@@ -1,4 +1,15 @@
-container {
+textarea {
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.container {
     padding: 10px;
 }
 
+.fa.fa-plus {
+    margin-top: 35px;
+}
