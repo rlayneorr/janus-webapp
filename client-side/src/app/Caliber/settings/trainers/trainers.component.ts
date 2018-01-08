@@ -44,6 +44,11 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.initFormControl();
   }
 
+  /**
+   * initialize form control for validations
+   * 
+   * @memberof TrainersComponent
+   */
   initFormControl() {
     this.addForm = this.fb.group({
       'name': ['', Validators.required],
@@ -142,7 +147,14 @@ export class TrainersComponent implements OnInit, OnDestroy {
       this.trainerService.fetchAll();
     });
   }
-
+  /**
+   * get the cause for modal dismissal
+   * 
+   * @private
+   * @param {*} reason 
+   * @returns {string} 
+   * @memberof TrainersComponent
+   */
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -152,13 +164,21 @@ export class TrainersComponent implements OnInit, OnDestroy {
       return `with: ${reason}`;
     }
   }
-
-  // clean up subscriptions
+  /**
+   * clean up subscriptions
+   * 
+   * @memberof TrainersComponent
+   */
   ngOnDestroy() {
     this.trainerSubscription.unsubscribe();
   }
 
-  // sets current trainer to clicked trainer and navigates to trainer profile page
+  /**
+   * set current trainer to clicked  trainer and navigates to trainer profile page
+   * 
+   * @param {any} trainer 
+   * @memberof TrainersComponent
+   */
   goToProfile(trainer) {
     this.trainerService.changeCurrentTrainer(trainer);
     this.route.navigate(['Caliber/settings/trainer-profile']);
