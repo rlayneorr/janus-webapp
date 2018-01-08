@@ -11,14 +11,15 @@
         <div class="col-md-4">
             <!-- <app-quality-audit *ngIf="weekId > 0 && currentTrainee.traineeId === 0"></app-quality-audit>-->
             <app-trainee-tech-skills *ngIf="!(weekId !== 0 && currentTrainee.traineeId === 0)"></app-trainee-tech-skills>
+            <app-qc-doughnut *ngIf="weekId > 0 && currentTrainee.traineeId === 0"></app-qc-doughnut>
         </div>
         <div class="col-md-8">
             <app-batch-overall-line-chart *ngIf="currentTrainee.traineeId > 0"></app-batch-overall-line-chart>
-            
+            <app-assessment-breakdown *ngIf="currentTrainee.traineeId === 0 && weekId > 0"></app-assessment-breakdown>
             <app-panel-batch-all-trainees></app-panel-batch-all-trainees>
         </div>
     </div>
 
-<!--     <app-overall-feedback *ngIf="currentTrainee.traineeId > 0"></app-overall-feedback> -->
-<!--     <app-panel-feedback *ngIf="currentTrainee.traineeId > 0"></app-panel-feedback> -->
+    <app-overall-feedback *ngIf="currentTrainee.traineeId > 0"></app-overall-feedback> 
+    <app-panel-feedback *ngIf="currentTrainee.traineeId > 0"></app-panel-feedback>
 </div>

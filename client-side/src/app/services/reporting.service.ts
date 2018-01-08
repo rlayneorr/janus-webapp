@@ -175,7 +175,15 @@ export class ReportingService {
   fetchBatchWeekAvgBarChart(batchId: Number, week: Number) {
     const endpoint = environment.apiBatchWeekAvgBarChart(batchId, week);
 
-    // TODO: Implement API call and subject push logic
+    const params = {
+      batchId: batchId,
+      week: week
+    };
+
+    if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
+      this.httpClient.get(endpoint).subscribe(
+        success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
+    }
 
   }
 
@@ -270,13 +278,13 @@ export class ReportingService {
     };
     if (this.needsRefresh(this.lineTraineeOverall, params)) {
       this.httpClient.get(endpoint).subscribe(
-       
-        success => { console.log('success')
+
+        success => { console.log('success');
         this.lineTraineeOverall.next({ params: params, data: success });
       });
   }
 }
-  
+
 
   fetchBatchOverallLineChart(batchId: Number) {
     const endpoint = environment.apiBatchOverallLineChart(batchId);
@@ -293,8 +301,6 @@ export class ReportingService {
 
   fetchCurrentBatchesLineChart() {
     const endpoint = environment.apiCurrentBatchesLineChart;
-    
-    
 
   }
 
@@ -332,8 +338,6 @@ export class ReportingService {
    */
   fetchTraineeOverallRadarChart(traineeId: Number) {
     const endpoint = environment.apiTraineeOverallRadarChart(traineeId);
-
-  
 
     // Params object for refresh check
     const params = {
