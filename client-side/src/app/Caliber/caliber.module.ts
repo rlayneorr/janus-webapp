@@ -195,6 +195,7 @@ import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedb
     BatchModalComponent,
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
+  
     PanelOverallFeedbackComponent,
     FeedbackIconComponent,
     QualityOverallFeedbackComponent,
