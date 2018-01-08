@@ -90,7 +90,7 @@ export class EditlocationComponent implements OnInit {
     this.currEditLocation.street = modal.street;
     this.currEditLocation.zipcode = modal.zipcode;
     this.popTemp();
-    this.locationService.updateLocation(this.currEditLocation);
+    this.locationService.update(this.currEditLocation);
   }
 
   // close funciton, reset form

@@ -19,7 +19,7 @@ export class LocationsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.locationService.getAll();
+    this.locationService.fetchAll();
     this.locationSubscription = this.locationService.locations$.subscribe((resp) => {
       this.locations = resp;
     });

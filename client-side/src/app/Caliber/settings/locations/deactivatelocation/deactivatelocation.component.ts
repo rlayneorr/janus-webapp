@@ -28,6 +28,6 @@ export class DeactivateLocationComponent implements OnInit {
 
     deactivateLocation() {
         this.location.active = false;
-        this.ls.deleteLocation(this.location);
+        this.ls.delete(this.location);
     }
 }
