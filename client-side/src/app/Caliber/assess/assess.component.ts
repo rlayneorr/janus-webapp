@@ -131,6 +131,11 @@ export class AssessComponent implements OnInit {
   }
 
   deleteAssessment() {
+    this.assessments.forEach(a => {
+      if (Number(a.assessmentId) === Number(this.editingAssessment.assessmentId)) {
+        this.assessments.splice(this.assessments.indexOf(a), 1);
+      }
+    });
     this.assessmentService.delete(this.editingAssessment);
   }
 
