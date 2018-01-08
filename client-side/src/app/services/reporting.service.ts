@@ -392,7 +392,6 @@ export class ReportingService {
    */
   fetchTechnologiesForTheWeek(batchId: Number, weekId: Number) {
     const endpoint = environment.apiTechnologiesForTheWeek(batchId, weekId);
-    console.log(endpoint);
 
     // Params object for refresh check
     const params = {
