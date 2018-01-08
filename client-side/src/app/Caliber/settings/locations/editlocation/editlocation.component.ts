@@ -92,9 +92,13 @@ export class EditlocationComponent implements OnInit {
     this.popTemp();
     this.locationService.update(this.currEditLocation);
   }
-
-  // close funciton, reset form
-  close(content) {
+/**
+ * close the modal and clear form
+ * 
+ * @param {any} content 
+ * @memberof EditlocationComponent
+ */
+close(content) {
     this.initFormControl();
     this.modalRef.close();
   }

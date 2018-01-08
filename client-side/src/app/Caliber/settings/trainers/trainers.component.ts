@@ -44,10 +44,15 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.initFormControl();
   }
 
+  /**
+   * initialize form control for validations
+   * 
+   * @memberof TrainersComponent
+   */
   initFormControl() {
     this.addForm = this.fb.group({
-      'name': ['', Validators.required],
-      'email': ['', Validators.required],
+      'name': [''],
+      'email': [''],
       'title': [''],
       'tier': [''],
     });
