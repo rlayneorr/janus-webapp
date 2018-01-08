@@ -31,7 +31,6 @@ export class PanelTableComponent implements OnInit {
 
     this.panelService.getList().subscribe((panelList) => {
       this.panelList = panelList;
-      console.log(this.panelList);
     });
   }
 

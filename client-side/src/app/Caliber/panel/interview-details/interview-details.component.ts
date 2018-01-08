@@ -50,7 +50,6 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
         for (let j = 0; j < this.batchList[i].trainees.length; j++) {
           if (this.batchList[i].trainees[j].name === this.trainee.name) {
             this.trainingTrack = this.batchList[i].skillType;
-            console.log(this.trainingTrack);
           }
         }
       }
@@ -58,19 +57,12 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
 
     this.panelService.getList().subscribe((panelList) => {
       this.panelList = panelList;
-      if (this.panelRound == null) {
+      if (this.panelList == null) {
         this.panelRound = 1;
       } else {
         this.panelRound = this.panelList.length + 1;
       }
     });
-
-  //   this.interviewForm = new FormGroup({
-  //     interviewDate: new FormControl(),
-  //     format: new FormControl(),
-  //     recordingConsent: new FormControl(),
-  //     internet: new FormControl()
-  //   });
   }
 
   ngOnDestroy() {
