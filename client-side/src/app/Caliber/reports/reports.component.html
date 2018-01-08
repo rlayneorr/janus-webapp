@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <!-- <app-cumulative-skills></app-cumulative-skills> -->
             <app-weekly-line-chart></app-weekly-line-chart>
-            <app-assessment-breakdown></app-assessment-breakdown>
+            <app-assessment-breakdown *ngIf="currentTrainee.traineeId > 0"></app-assessment-breakdown>
         </div>
     </div>
     <div class="row reports-row"> 
