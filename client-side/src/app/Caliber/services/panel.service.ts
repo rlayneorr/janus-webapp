@@ -81,8 +81,6 @@ export class PanelService extends AbstractApiService<Panel> {
   * @param panel: Panel
   */
   public save(panel: Panel): void {
-    const url = `panel/create`;
-  public save(panel: Panel): void {
     const url = environment.panel.save();
     const messages = {
       success: 'Panels saved successfully',
