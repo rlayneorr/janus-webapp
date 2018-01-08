@@ -143,25 +143,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
           this.dataSetLabels[0] = swap;
 
           // need the datasets to be the same length so shorten the overall dataset
-          if (Object.entries(this.chartData[1]).length !== Object.entries(this.chartData[0]).length) {
-            const objArr = [];
-            // change the objects into arrays
-            const longArr = Object.entries(this.chartData[1]);
-            const shortArr = Object.entries(this.chartData[0]);
-
-            for (let i = 0; i < longArr.length; i++) {
-              for (let j = 0; j < shortArr.length; j++) {
-                if (longArr[i][0] === shortArr[j][0]) {
-                  objArr.push(longArr[i]);
-                }
-              }
-            }
-            // make a new object from the array
-            this.chartData[1] = {};
-            for (let i = 0; i < objArr.length; i++) {
-              this.chartData[1][objArr[i][0]] = objArr[i][1];
-            }
-          }
+          this.dataSetAlign();
         }
       }
       );
@@ -172,25 +154,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
         if (this.chartData.length === 2) {
 
           // need the datasets to be the same length so shorten the overall dataset
-          if (Object.entries(this.chartData[1]).length !== Object.entries(this.chartData[0]).length) {
-            const objArr = [];
-            // change the objects into arrays
-            const longArr = Object.entries(this.chartData[1]);
-            const shortArr = Object.entries(this.chartData[0]);
-
-            for (let i = 0; i < longArr.length; i++) {
-              for (let j = 0; j < shortArr.length; j++) {
-                if (longArr[i][0] === shortArr[j][0]) {
-                  objArr.push(longArr[i]);
-                }
-              }
-            }
-            // make a new object from the array
-            this.chartData[1] = {};
-            for (let i = 0; i < objArr.length; i++) {
-              this.chartData[1][objArr[i][0]] = objArr[i][1];
-            }
-          }
+          this.dataSetAlign();
         }
       }
       );
@@ -248,6 +212,31 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
         this.reportsService.fetchTraineeOverallRadarChart(this.trainee.traineeId);
       } else {
         this.reportsService.fetchTraineeUpToWeekRadarChart(this.week, this.trainee.traineeId);
+      }
+    }
+  }
+
+  /**
+   * makes datasets the same length
+   */
+  dataSetAlign() {
+    if (Object.entries(this.chartData[1]).length !== Object.entries(this.chartData[0]).length) {
+      const objArr = [];
+      // change the objects into arrays
+      const longArr = Object.entries(this.chartData[1]);
+      const shortArr = Object.entries(this.chartData[0]);
+
+      for (let i = 0; i < longArr.length; i++) {
+        for (let j = 0; j < shortArr.length; j++) {
+          if (longArr[i][0] === shortArr[j][0]) {
+            objArr.push(longArr[i]);
+          }
+        }
+      }
+      // make a new object from the array
+      this.chartData[1] = {};
+      for (let i = 0; i < objArr.length; i++) {
+        this.chartData[1][objArr[i][0]] = objArr[i][1];
       }
     }
   }
