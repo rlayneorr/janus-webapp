@@ -21,8 +21,10 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   qcStatusSubscription: Subscription;
 
   qcStatuses: string[];
+  selectedStatus: string;
 
   week = 1;
+  statusMap;
 
   constructor(private noteService: NoteService, private qcStatusService: QCStatusService) {
     this.qcTraineeNotes = [];
@@ -72,16 +74,74 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   setNotes(notes: Note[]): void {
-    this.qcBatchNotes = notes.filter(note => note.type === 'QC_BATCH');
     this.qcTraineeNotes = notes.filter(note => note.type === 'QC_TRAINEE');
-    // console.log(notes);
-    console.log(this.qcBatchNotes);
+    this.qcBatchNotes = notes.filter(note => note.type === 'QC_BATCH');
+
+    // if ( this.batch ) {
+    //   for (const trainee of this.batch.trainees) {
+    //     const traineeNote = this.getNoteOnTrainee(trainee);
+    //     if (traineeNote === null) {
+    //       this.qcTraineeNotes.push({
+    //           noteId: 0,
+    //           type: Note.TYPE_QCTRAINEE,
+    //           qcStatus: Note.STATUS_UNDEFINED,
+    //           qcFeedback: true,
+    //           content: '',
+    //           week: this.week,
+    //           batch: this.batch,
+    //           trainee: trainee,
+    //           maxVisibility: 'ROLE_PANEL',
+    //         });
+    //     }
+    //   }
+    // }
+
+    // this.addMissingNotes();
+
+    this.buildStatusMap();
+
     console.log(this.qcTraineeNotes);
+    console.log(this.statusMap);
+
+    // console.log(notes);
+    // console.log(this.qcBatchNotes);
+    // console.log(this.qcTraineeNotes);
+  }
+
+  addMissingNotes(): void {
+    console.log(this.batch);
+
+    for ( let i = 0; i < this.batch.trainees.length; i++ ) {
+        // const traineeNote = this.getNoteOnTrainee(trainee);
+        // if (traineeNote === null) {
+        //   notes.push({
+        //       noteId: 0,
+        //       type: Note.TYPE_QCTRAINEE,
+        //       qcStatus: Note.STATUS_UNDEFINED,
+        //       qcFeedback: true,
+        //       content: '',
+        //       week: this.week,
+        //       batch: this.batch,
+        //       trainee: trainee,
+        //       maxVisibility: 'ROLE_PANEL',
+        //     });
+        // }
+        console.log(i);
+      }
+  }
+
+  buildStatusMap(): void {
+    this.statusMap = {};
+
+    for (const note of this.qcTraineeNotes) {
+      this.statusMap[note.trainee.traineeId] = note.qcStatus;
+    }
+    // console.log(this.statusMap);
   }
 
   setQcStatuses(statuses: string[]) {
     this.qcStatuses = statuses;
-    console.log(statuses);
+    // console.log(statuses);
   }
 
   fetchNotes() {
@@ -96,14 +156,23 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     return batchWeeks;
   }
 
+  changeWeek(week: number) {
+    this.week = week;
+    this.fetchNotes();
+  }
+
+  addWeekToBatch() {
+    this.batch.weeks += 1;
+  }
+
   getNoteOnTrainee(trainee: Trainee) {
-    let traineeNote = '';
+    let traineeNote = null;
     for (let i = 0; i < this.qcTraineeNotes.length; i++) {
       if (trainee.traineeId === this.qcTraineeNotes[i].trainee.traineeId) {
-        traineeNote = this.qcTraineeNotes[i].content;
+        traineeNote = this.qcTraineeNotes[i];
+        break;
       }
     }
-    // console.log(traineeNote);
     return traineeNote;
   }
 
@@ -118,18 +187,20 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     return traineeQcStatus;
   }
 
-  updateQcStatusOnTraineeNote(trainee: Trainee) {
-    // tslint:disable-next-line:prefer-const
-    let currentTraineeStatus = this.getQcStatusOnTrainee(trainee);
-    const currentTraineeNote = this.getNoteOnTrainee(trainee);
-
-    
-
+  updateQcStatusOnTraineeNote(status: string, trainee: Trainee) {
+    const traineeNote = this.getNoteOnTrainee(trainee);
+    traineeNote.qcstatus = status;
+    this.noteService.update(traineeNote);
+    this.statusMap[trainee.traineeId] = status;
   }
 
-  changeWeek(week: number) {
-    this.week = week;
-    this.fetchNotes();
+  updateTraineeNoteContent(noteContent: string, trainee: Trainee) {
+    const traineeNote = this.getNoteOnTrainee(trainee);
+    traineeNote.content = noteContent;
+    this.noteService.update(traineeNote);
+    // console.log(traineeNote);
+    // console.log(traineeNote.content);
+    // this.fetchNotes();
   }
 
   // test() {
