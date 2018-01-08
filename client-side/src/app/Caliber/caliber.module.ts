@@ -77,7 +77,7 @@ import { AssessmentBreakdownComponent } from './reports/assessment-breakdown/ass
 import { WeeklyFeedbackComponent } from './reports/weekly-feedback/weekly-feedback.component';
 import { WeeklyGradesComponent } from './reports/weekly-grades/weekly-grades.component';
 import { WeeklyAuditComponent } from './reports/weekly-audit/weekly-audit.component';
-import { CumulativeScoreComponent } from './reports/cumulative-scores/cumulative-scores.component';
+import { WeeklyCumulativeScoreComponent } from './reports/weekly-cumulative-scores/weekly-cumulative-scores.component';
 import { DoughnutComponent } from './doughnut/doughnut.component';
 
 @NgModule({
@@ -135,7 +135,7 @@ import { DoughnutComponent } from './doughnut/doughnut.component';
     WeeklyGradesComponent,
     PanelFeedbackComponent,
     WeeklyAuditComponent,
-    CumulativeScoreComponent,
+    WeeklyCumulativeScoreComponent,
     DoughnutComponent,
   ],
   providers: [
