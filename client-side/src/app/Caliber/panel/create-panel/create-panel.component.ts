@@ -6,9 +6,14 @@ import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@ang
 
 // entities
 import { Trainee } from '../../entities/Trainee';
+import { Panel } from '../../entities/Panel';
 
 // components
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
+
+// services
+import { PanelService } from '../../services/panel.service';
+
 
 @Component({
   selector: 'app-create-panel',
@@ -21,24 +26,54 @@ export class CreatePanelComponent implements OnInit {
   closeResult: string;
   trainee: Trainee;
   panelForm: FormGroup;
-  // technologies: FormGroup;
-  constructor(private modalService: NgbModal, private searchBar: PanelSearchbarComponent, private fb: FormBuilder) { }
+  panelObj: any;
+  serializedPanel: any;
+  reformatPanel: any = {};
+  reformatDate: any;
+  panelList: Panel[];
+  panelRound: number;
+
+  constructor(private modalService: NgbModal, private searchBar: PanelSearchbarComponent, private fb: FormBuilder,
+    private panelService: PanelService) { }
 
   ngOnInit() {
     this.searchBar.getTraineeSubject().subscribe((trainee) => {
       this.trainee = trainee;
+
+      this.panelService.getList().subscribe((panelList) => {
+        this.panelList = panelList;
+        if (this.panelList == null) {
+          this.panelRound = 1;
+        } else {
+          this.panelRound = this.panelList.length + 1;
+        }
+      });
+
     });
 
     this.panelForm = this.fb.group({
       interviewForm: this.fb.group({
-        interviewDate: [''],
-        format: [''],
-        recordingConsent: [''],
-        internet: ['']
+        interviewDate: ['', Validators.required],
+        format: ['', Validators.required],
+        recordingConsent: ['', Validators.required],
+        internet: ['', Validators.required],
+        panelRound: [''],
       }),
-        feedback: this.fb.array([])
+      generalFeedback: this.fb.group({
+        associateIntro: ['', Validators.required],
+        projectOneDescription: ['', Validators.required],
+        projectTwoDescription: ['', Validators.required],
+        projectThreeDescription: ['', Validators.required],
+        communicationSkills: ['', Validators.required],
+      }),
+      feedback: this.fb.array([]),
+      overallFeedback: this.fb.group({
+        duration: ['', Validators.required],
+        recordingLink: [''],
+        status: ['', Validators.required],
+        overall: ['', Validators.required]
+      })
     });
-    this.addFeedback();
   }
 
   initFeedback() {
@@ -50,12 +85,30 @@ export class CreatePanelComponent implements OnInit {
     });
   }
 
+  deleteFeedback(i) {
+    const control = <FormArray>this.panelForm.controls['feedback'];
+    control.removeAt(i);
+  }
+
   addFeedback() {
     const control = <FormArray>this.panelForm.controls['feedback'];
     const feedbCtrl = this.initFeedback();
+    let panelStatus;
 
+    for (let i = 0; i < this.panelForm.controls['feedback'].value.length; i++) {
+      if (this.panelForm.controls['feedback'].value[i].status === 'Repanel') {
+        this.panelForm.controls['overallFeedback'].get('status').patchValue('Repanel');
+        panelStatus = 'Repanel';
+      } else if (panelStatus === 'Pass') {
+        this.panelForm.controls['overallFeedback'].get('status').patchValue('Pass');
+      } else if (panelStatus === 'Repanel') {
+        this.panelForm.controls['overallFeedback'].get('status').patchValue('Repanel');
+      } else {
+        panelStatus = 'Pass';
+        this.panelForm.controls['overallFeedback'].get('status').patchValue('Pass');
+      }
+    }
     control.push(feedbCtrl);
-    console.log('added feedback');
   }
 
   open(content) {
@@ -76,7 +129,52 @@ export class CreatePanelComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  Submit() {
+    this.panelObj = this.panelForm.getRawValue();
+    this.reformatDate =
+      this.panelObj.interviewForm.interviewDate.year +
+      '-' +
+      this.panelObj.interviewForm.interviewDate.month +
+      '-' +
+      this.panelObj.interviewForm.interviewDate.day;
 
+    this.reformatPanel['format'] = this.panelObj.interviewForm.format;
+    this.reformatPanel['panelRound'] = this.panelRound;
+    this.reformatPanel['recordingConsent'] = this.panelObj.interviewForm.recordingConsent;
+    this.reformatPanel['internet'] = this.panelObj.interviewForm.internet;
+    this.reformatPanel['interviewDate'] = this.reformatDate;
+    this.reformatPanel['associateIntro'] = this.panelObj.generalFeedback.associateIntro;
+    this.reformatPanel['projectOneDescription'] = this.panelObj.generalFeedback.projectOneDescription;
+    this.reformatPanel['projectTwoDescription'] = this.panelObj.generalFeedback.projectTwoDescription;
+    this.reformatPanel['projectThreeDescription'] = this.panelObj.generalFeedback.projectThreeDescription;
+    this.reformatPanel['communicationSKills'] = this.panelObj.generalFeedback.communicationSkills;
+    this.reformatPanel['feedback'] = this.panelObj.feedback;
+    this.reformatPanel['duration'] = this.panelObj.overallFeedback.duration;
+    this.reformatPanel['recordingLink'] = this.panelObj.overallFeedback.recordingLink;
+    this.reformatPanel['status'] = this.panelObj.overallFeedback.status;
+    this.reformatPanel['overall'] = this.panelObj.overallFeedback.overall;
+    this.reformatPanel['trainee'] = this.trainee;
+
+    this.panelService.create(this.reformatPanel);
+    // console.log(this.reformatPanel);
+
+    // interviewDate: [''],
+    //     format: [''],
+    //     recordingConsent: [''],
+    //     internet: [''],
+    //   }),
+    //   generalFeedback: this.fb.group({
+    //     associateIntro: [''],
+    //     projectOneDescription: [''],
+    //     projectTwoDescription: [''],
+    //     projectThreeDescription: [''],
+    //     communicationSkills: [''],
+    //   }),
+    //   feedback: this.fb.array([]),
+    //   overallFeedback: this.fb.group({
+    //     duration: [''],
+    //     recordingLink: [''],
+    //     status: [''],
+    //     overall: ['']
   }
 }

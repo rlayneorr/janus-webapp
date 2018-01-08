@@ -44,7 +44,7 @@
         <div class="col">
           <div class="form-group">
             <label for="interviewTime">Interview Time</label>
-            <ngb-timepicker name="time" [ngModelOptions]="{standalone: true}" [(ngModel)]="time" [meridian]="true" [spinners]="false"></ngb-timepicker>
+            <ngb-timepicker name="time" [meridian]="true" [spinners]="false"></ngb-timepicker>
           </div>
         </div>
 
@@ -54,7 +54,7 @@
 
         <div class="col">
           <label for="panelRound">Panel Round</label>
-          <input class="form-control" id="panelRound" type="text" value="{{panelRound}}" readonly>
+          <input class="form-control" formControlName="panelRound" id="panelRound" type="text" value="{{panelRound}}" readonly>
         </div>
 
         <div class="col">

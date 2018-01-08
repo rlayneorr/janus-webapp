@@ -6,6 +6,6 @@ textarea {
     display: none; 
 }
 
-.fa.fa-plus {
-    margin-top: 35px;
+.container {
+    padding: 10px;
 }
