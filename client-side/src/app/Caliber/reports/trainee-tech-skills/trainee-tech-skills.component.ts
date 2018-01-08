@@ -52,6 +52,8 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
   // same but for the labels provided to the graph-data pipe
   public dataSetLabels: string[] = [];
 
+  private overallId: boolean;
+
   // Chart type assignment
   public chartType = 'radar';
   /**
@@ -65,7 +67,10 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     this.batchOverallSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
       if (result) {
         if (this.batch.batchId === result.params.batchId) {
-          this.chartData.unshift(result.data);
+          if (!this.overallId) {
+            this.overallId = true;
+            this.chartData.unshift(result.data);
+          }
         }
       }
     });
@@ -201,8 +206,14 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     this.weekSubscription.unsubscribe();
     this.traineeSubscription.unsubscribe();
   }
+  /**
+   * general set up would go here.
+   */
   setUp() {
     if (this.batch) {
+      this.chartData = [];
+      this.overallId = false;
+      this.reportsService.fetchBatchOverallRadarChart(this.batch.batchId);
       if (this.week === 0 && this.trainee.traineeId === 0) {
         this.overallSetup();
       } else {
@@ -214,7 +225,6 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * Sets up some variables and send requests for overall radar
    */
   overallSetup() {
-    this.chartData = [];
     for (let i = 0; i < this.batch.trainees.length; i++) {
       this.traineesList.push(this.batch.trainees[i].traineeId);
       this.traineesNames.push(this.batch.trainees[i].name);
@@ -231,11 +241,9 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * Sets up some variables and send requests for weekly radar
    */
   weekSetup() {
-    this.chartData = [];
     if (this.batch.batchId) {
       this.dataSetLabels.push(this.trainee.name);
 
-      this.reportsService.fetchBatchOverallRadarChart(this.batch.batchId);
       if (this.week === 0) {
         this.reportsService.fetchTraineeOverallRadarChart(this.trainee.traineeId);
       } else {
