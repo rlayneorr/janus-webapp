@@ -36,12 +36,7 @@ export class TraineeService extends AbstractApiService<Trainee> {
    * @param batchId: number
    */
    public fetchAllByBatch(batchId: number): void {
-<<<<<<< HEAD
-     console.log('fetchallbybatch service being called');
-     const url = 'all/trainee';
-=======
      const url = environment.trainee.fetchAllByBatch(batchId);
->>>>>>> revaturions-dev
      const messages = {
         success: 'Trainees retrieved successfully',
         error: 'Trainee retrieval failed',

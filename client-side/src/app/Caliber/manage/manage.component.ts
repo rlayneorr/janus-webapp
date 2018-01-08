@@ -18,6 +18,7 @@ import { LocationService } from '../services/location.service';
 import { TrainingTypeService } from '../services/training-type.service';
 import { SkillService } from '../services/skill.service';
 import { TraineeService } from '../services/trainee.service';
+import { TraineeStatusService } from '../services/trainee-status.service';
 
 // entities
 import { Location } from '../entities/Location';
@@ -57,6 +58,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   locations: Address[] = [];
   trainingTypes: string[] = [];
   skills: string[] = [];
+  statuses: string[] = [];
   createNewTrainee: Trainee = new Trainee;
   isNew: Boolean;
 
@@ -82,7 +84,8 @@ export class ManageComponent implements OnInit, OnDestroy {
     private traineeService: TraineeService,
     private modalService: NgbModal,
     private datePipe: DatePipe,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private traineeStatusService: TraineeStatusService
   ) {
     this.batches = [];
   }
@@ -228,9 +231,12 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.skills = skills;
   }
 
+  private setTraineeStatuses(statuses: string[]): void {
+    this.statuses = statuses;
+  }
+
 
   ngOnInit() {
-
     /* keep an updated list of batches */
     this.batchListSub = this.batchService.getList()
       .subscribe((batches) => this.setBatches(batches));
@@ -272,7 +278,6 @@ export class ManageComponent implements OnInit, OnDestroy {
   /* Creates a new trainee and assigns the current batch to its batch field
   Training status is assigned since there is no training status service yet in angular */
   createNewTraineeFunction() {
-    this.createNewTrainee.trainingStatus = 'Employed';
     this.createNewTrainee.batch = this.currentBatch;
     this.traineeService.save(this.createNewTrainee);
   }
@@ -286,7 +291,6 @@ export class ManageComponent implements OnInit, OnDestroy {
   so that there is no circular reference
   'Employed' is assigned since there is no training status service yet */
   updateTraineeFunction() {
-    this.createNewTrainee.trainingStatus = 'Employed';
     const emptyBatch = Object.assign({}, this.currentBatch);
     emptyBatch.trainees = [];
     this.createNewTrainee.batch = emptyBatch;
@@ -300,7 +304,7 @@ export class ManageComponent implements OnInit, OnDestroy {
    */
   deleteTraineeFunction(trainee) {
     /** In the original caliber app, deleting trainee removes the trainee
-     * but the trainee reappears in the active trainees
+     * but the trainee reappears in the active trainees 
      * Even when you remove the trainee, it isn't moved to inactive
      * This is because the trainee object is detached from the database
      *
@@ -310,7 +314,7 @@ export class ManageComponent implements OnInit, OnDestroy {
      *
      * Later implementation needs to move a trainee from active to inactive
      * and be able to actually delete a trainee from the database entirely
-     * 
+     *
      * Currently we are achieving the delete by assigning the trainee batch to null
      */
     trainee.batch = null;
