@@ -27,12 +27,7 @@ export const environment = {
   getAllTiers: context + 'types/trainer/role/all',
   editTrainer: context + 'vp/trainer/update',
 
-  // VP HOME API calls
-
-
-  /**
- * Reports Service API endpoints
- */
+  // Reports Service API endpoints
   reportsStackedBarCurrentWeek: context + 'all/reports/batch/week/stacked-bar-current-week',
   reportsDashBoard: context + 'all/reports/dashboard',
   reportsBiWeeklyPanel: context + 'all/reports/biweeklyPanelResults',

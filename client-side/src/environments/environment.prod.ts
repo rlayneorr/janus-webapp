@@ -1,30 +1,32 @@
+const context = 'http://localhost:8080/';
 export const environment = {
   production: true,
-  context: 'http://localhost:8080/', // change for what the production environment would actually be
+  context: context, // change for what the production environment would actually be
 
   // API calls for the VP functionality group
-  addNewCategory: 'http://localhost:8080/vp/category',
-  getAllCategories: 'http://localhost:8080/vp/category',
-  addNewTrainer: 'http://localhost:8080/vp/trainer/create',
-  editCurrentCategory: 'http://localhost:8080/vp/category/update',
-  editLocation: 'http://localhost:8080/vp/location/update',
-  deleteLocation: 'http://localhost:8080/vp/location/delete',
-  reactivateLocation: 'http://localhost:8080/vp/location/reactivate',
-  addLocation: 'http://localhost:8080/vp/location/create',
-  deleteTrainer: 'http://localhost:8080/vp/trainer/delete',
-  getAllLocations: 'http://localhost:8080/all/location/all/',
-  getAllTrainers: 'http://localhost:8080/all/trainer/all',
-  getAllTitles: 'http://localhost:8080/vp/trainer/titles/',
-  getAllTiers: 'http://localhost:8080/types/trainer/role/all',
-  editTrainer: 'http://localhost:8080/vp/trainer/update',
+  addNewCategory: context + 'vp/category',
+  getAllCategories: context + 'vp/category',
+  editCurrentCategory: context + 'vp/category/update',
 
-  /**
-   * Reports Service API endpoints
-   */
+  // Location API calls
+  editLocation: context + 'vp/location/update',
+  deleteLocation: context + 'vp/location/delete',
+  reactivateLocation: context + 'vp/location/reactivate',
+  addLocation: context + 'vp/location/create',
+
+  // Trainer API calls
+  addNewTrainer: context + 'vp/trainer/create',
+  deleteTrainer: context + 'vp/trainer/delete',
+  getAllTitles: context + 'vp/trainer/titles/',
+  getAllTiers: context + 'types/trainer/role/all',
+  editTrainer: context + 'vp/trainer/update',
+
+  // Reports Service API endpoints
   reportsStackedBarCurrentWeek: context + 'all/reports/batch/week/stacked-bar-current-week',
   reportsDashBoard: context + 'all/reports/dashboard',
   reportsBiWeeklyPanel: context + 'all/reports/biweeklyPanelResults',
- 
+
+
 
 
   /* Evaluation Service API endpoints */
