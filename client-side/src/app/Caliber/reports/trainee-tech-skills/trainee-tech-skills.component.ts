@@ -63,13 +63,16 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * calls functions for setup
    */
   ngOnInit() {
+    this.chartData = [];
     // set up batch overall sub; put data in index 0 of chartData
     this.batchOverallSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
       if (result) {
-        if (this.batch.batchId === result.params.batchId) {
-          if (!this.overallDataFlag) {
-            this.overallDataFlag = true;
-            this.chartData.unshift(result.data);
+        if (this.batch) {
+          if (this.batch.batchId === result.params.batchId) {
+            if (!this.overallDataFlag) {
+              this.overallDataFlag = true;
+              this.chartData.unshift(result.data);
+            }
           }
         }
       }
