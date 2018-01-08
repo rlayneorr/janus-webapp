@@ -22,6 +22,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
   private traineeOverallRadar: Subscription;
   private traineeWeeklyRadar: Subscription;
   private weekBatchFilter: Subscription;
+  private granularity: Subscription;
   private overallBatchFilter: Subscription;
 
   private batchSubscription: Subscription;
@@ -52,7 +53,8 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
   // same but for the labels provided to the graph-data pipe
   public dataSetLabels: string[] = [];
 
-  private overallId: boolean;
+  private overallDataFlag: boolean;
+  private traineeDataFlag: boolean;
 
   // Chart type assignment
   public chartType = 'radar';
@@ -61,14 +63,12 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * calls functions for setup
    */
   ngOnInit() {
-    this.chartData = [];
-    this.dataSetLabels = [];
     // set up batch overall sub; put data in index 0 of chartData
     this.batchOverallSubscription = this.reportsService.batchOverallRadar$.subscribe((result) => {
       if (result) {
         if (this.batch.batchId === result.params.batchId) {
-          if (!this.overallId) {
-            this.overallId = true;
+          if (!this.overallDataFlag) {
+            this.overallDataFlag = true;
             this.chartData.unshift(result.data);
           }
         }
@@ -77,8 +77,10 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     // set up trainee overall sub
     this.traineeOverallRadar = this.reportsService.traineeOverallRadar$.subscribe((result) => {
       if (result) {
+
         if (this.trainee.traineeId !== 0) {
-          if (this.trainee.traineeId === result.params.traineeId) {
+          if (!this.traineeDataFlag) {
+            this.traineeDataFlag = true;
             this.chartData.push(result.data);
           }
         } else {
@@ -89,7 +91,10 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
     // set up trainee weekly sub
     this.traineeWeeklyRadar = this.reportsService.traineeWeeklyRadar$.subscribe((result) => {
       if (result) {
-        this.chartData.push(result.data);
+        if (!this.traineeDataFlag) {
+          this.chartData.push(result.data);
+          this.traineeDataFlag = true;
+        }
       }
     });
 
@@ -98,7 +103,6 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
       (result) => {
         if (result !== this.week) {
           this.week = result;
-          this.setUp();
         }
       });
     // granularity trainee sub
@@ -106,7 +110,6 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
       (result) => {
         if (result !== this.trainee) {
           this.trainee = result;
-          this.setUp();
         }
       });
 
@@ -116,14 +119,14 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
         if (this.batch) {
           if (result.batchId !== this.batch.batchId) {
             this.batch = result;
-            this.dataSetLabels = [this.batch.trainingName];
-            this.setUp();
           }
         } else {
           this.batch = result;
-          this.dataSetLabels = [this.batch.trainingName];
-          this.setUp();
         }
+      });
+    this.granularity = Observable.combineLatest(this.granularityService.currentBatch$,
+      this.granularityService.currentTrainee$, this.granularityService.currentWeek$).subscribe(() => {
+        this.setUp();
       });
     // data formating for weekly trainee chart
     // this is a subscription since it need both datasets to be updated
@@ -152,7 +155,6 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
       () => {
         // only do this there is enough data
         if (this.chartData.length === 2) {
-
           // need the datasets to be the same length so shorten the overall dataset
           this.dataSetAlign();
         }
@@ -176,11 +178,14 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
   setUp() {
     if (this.batch) {
       this.chartData = [];
-      this.overallId = false;
+      this.dataSetLabels = [];
+      this.overallDataFlag = false;
+      this.traineeDataFlag = false;
+      this.dataSetLabels = [this.batch.trainingName];
       this.reportsService.fetchBatchOverallRadarChart(this.batch.batchId);
       if (this.week === 0 && this.trainee.traineeId === 0) {
         this.overallSetup();
-      } else {
+      } else if (this.trainee.traineeId !== 0) {
         this.weekSetup();
       }
     }
