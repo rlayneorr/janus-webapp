@@ -34,7 +34,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   currentTrainee: Trainee = null;
   ready = false;
   // When this has value 0, ALL TRAINEES is selected, otherwise it is a specific trainee
-  weekId = 0;
+  weekId: number = null;
 
   constructor(private granularityService: GranularityService) { }
 
