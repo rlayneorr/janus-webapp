@@ -20,7 +20,7 @@ export class QualityOverallFeedbackComponent implements OnInit, OnDestroy, OnCha
 
   public qcStatuses: string[];
   public selectedStatus: string;
-  
+
   private qcStatusListSubscription: Subscription;
 
   constructor(
