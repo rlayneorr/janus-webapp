@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms/';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // components
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
@@ -37,8 +37,19 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
 
   @Input() interviewForm: FormGroup;
 
+  /**
+   *
+   * @param searchBar
+   * @param batchService
+   * @param panelService
+   */
   constructor(private searchBar: PanelSearchbarComponent, private batchService: BatchService, private panelService: PanelService) { }
 
+  /**
+  * Sets the current trainee, gets active technologies, gets panel round for panel viewing
+  *
+  * @method
+  */
   ngOnInit() {
     this.traineeSubscription = this.searchBar.getTraineeSubject().subscribe((trainee) => {
       this.trainee = trainee;
@@ -65,6 +76,9 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Unsubscribes subscriptions
+   */
   ngOnDestroy() {
     this.traineeSubscription.unsubscribe();
     this.batchSubscription.unsubscribe();

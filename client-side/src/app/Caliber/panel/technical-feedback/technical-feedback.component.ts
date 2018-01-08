@@ -19,9 +19,15 @@ export class TechnicalFeedbackComponent implements OnInit {
 
   @Input() technologyForm: FormGroup;
 
-
+  /**
+   *
+   * @param categoryService
+   */
   constructor(private categoryService: CategoriesService) { }
 
+  /**
+   * gets technology list and filters out duplicates
+   */
   ngOnInit() {
     this.categoryService.fetchAll();
     this.categoryService.getList().subscribe((techList) => {

@@ -35,9 +35,19 @@ export class CreatePanelComponent implements OnInit {
   panelRound: number;
   modalRef: NgbModalRef;
 
+  /**
+   *
+   * @param modalService
+   * @param searchBar
+   * @param fb
+   * @param panelService
+   */
   constructor(private modalService: NgbModal, private searchBar: PanelSearchbarComponent, private fb: FormBuilder,
     private panelService: PanelService) { }
 
+  /**
+   * sets current trainee and creates formgroups for the add panel modal
+   */
   ngOnInit() {
     this.searchBar.getTraineeSubject().subscribe((trainee) => {
       this.trainee = trainee;
@@ -80,6 +90,9 @@ export class CreatePanelComponent implements OnInit {
     this.addFeedback();
   }
 
+  /**
+   * creates a new technology feedback
+   */
   initFeedback() {
     return this.fb.group({
       technology: [''],
@@ -89,11 +102,18 @@ export class CreatePanelComponent implements OnInit {
     });
   }
 
+  /**
+   * deletes the technology feedback
+   * @param i
+   */
   deleteFeedback(i) {
     const control = <FormArray>this.panelForm.controls['feedback'];
     control.removeAt(i);
   }
 
+  /**
+   * adds new technology feedback to form array
+   */
   addFeedback() {
     const control = <FormArray>this.panelForm.controls['feedback'];
     const feedbCtrl = this.initFeedback();
@@ -115,6 +135,10 @@ export class CreatePanelComponent implements OnInit {
     control.push(feedbCtrl);
   }
 
+  /**
+   * opens panel modal
+   * @param content
+   */
   open(content) {
     this.modalRef = this.modalService.open(content, { size: 'lg' });
     this.modalRef.result.then((result) => {
@@ -124,6 +148,10 @@ export class CreatePanelComponent implements OnInit {
     });
   }
 
+  /**
+   * modal close reason
+   * @param reason
+   */
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -134,6 +162,9 @@ export class CreatePanelComponent implements OnInit {
     }
   }
 
+  /**
+   * creates panel object from form and saves panel to trainee
+   */
   Submit() {
     this.panelObj = this.panelForm.getRawValue();
     this.reformatDate =
