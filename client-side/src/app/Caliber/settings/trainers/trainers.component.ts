@@ -71,6 +71,7 @@ export class TrainersComponent implements OnInit, OnDestroy {
       this.trainerService.fetchAll();
     });
     // this.trainers.push(this.newTrainer);
+    this.initFormControl();
   }
 
   open(content) {

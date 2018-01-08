@@ -53,6 +53,11 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  resetFormControl() {
+    this.addForm = this.fb.group({
+      'name': ['', Validators.required]
+    });
+  }
   initFormControl() {
     this.addForm = this.fb.group({
       'name': [this.newCategory.skillCategory, Validators.required]
@@ -71,6 +76,7 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.getSaved().subscribe((succ) => {
       this.categoriesService.fetchAll();
     });
+    this.resetFormControl();
   }
 
   /**
