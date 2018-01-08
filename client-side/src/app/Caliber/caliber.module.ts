@@ -65,7 +65,7 @@ import { AssessComponent } from './assess/assess.component';
 import { NavComponent } from '../nav/nav.component';
 import { ManageComponent } from './manage/manage.component';
 import { ReportsComponent } from './reports/reports.component';
-import { WeeklyLineChartComponent } from './reports/weekly-line-chart/weekly-line-chart.component';
+import { AllCumulativeScoresComponent } from './reports/all-cumulative-scores/all-cumulative-scores.component';
 import { TraineeTechSkillsComponent } from './reports/trainee-tech-skills/trainee-tech-skills.component';
 import { ToolbarComponent } from './reports/toolbar/toolbar.component';
 import { TestComponent } from './components/test/test.component';
@@ -152,7 +152,7 @@ import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedb
     AssessComponent,
     ManageComponent,
     ReportsComponent,
-    WeeklyLineChartComponent,
+    AllCumulativeScoresComponent,
     VpBarGraphComponent,
     VpLineGraphComponent,
     VpPanelGraphComponent,

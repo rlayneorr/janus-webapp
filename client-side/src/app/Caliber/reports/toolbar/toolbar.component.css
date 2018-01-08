@@ -1,8 +1,9 @@
 .button {
     background-color: rgb(255, 255, 255);
     border: none;
+    border-radius: 4px;
+    margin-right: 10px;
     color: #F26925;
-    margin-top: 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -10,14 +11,27 @@
     font-weight: bold;
 }
 
-.paddingRight {
-    padding-right: 25px;
+.button {
+    margin: 0px;
+    margin-top: 20px;
+    height: 40px;
+}
+
+.button:hover,
+.button:focus {
+    color: #337ab7;
+    background-color: #f3f3f1;
+    transition: all 500ms linear;
+    transition-delay: 0.25s;
+    -webkit-transition-delay: 0.25s;
 }
 
 .search {
+    margin: 0px;
+    margin-left: 98px;
     display: inline-block;
     position: relative;
-}   
+}
 
 .search input {
     width: 275px;
@@ -27,6 +41,15 @@
     padding: 5px 30px 5px 10px;
     text-indent: 10px;
     color: #4b4a4a
+}
+
+.fa-search {
+    position: absolute;
+    cursor: pointer;
+    left: 250px;
+    top: 7px;
+    color: rgb(151, 151, 151) !important;
+    margin-left: 90px;
 }
 
 .downloadCharts { 
@@ -43,10 +66,15 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#dbdbdb',GradientType=0 ); /* IE6-9 */
 }
 
-.fa-search {
-    position: absolute;
-    cursor: pointer;
-    left: 250px;
-    top: 7px;
-    color: rgb(151, 151, 151) !important;
+.dropdown-item {
+    font-weight: bold;
+    font-size: 80%;
+}
+
+.dropdown-item:hover {
+    background-color: #eee;
+}
+
+hr {
+    margin: 0px;
 }
