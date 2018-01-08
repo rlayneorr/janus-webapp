@@ -58,6 +58,9 @@ export class ToolbarComponent implements OnInit {
         // Generate dropdown information for years
         this.createYearDropdown();
 
+        // Set granularity to not ready
+        this.granularityService.pushReady(false);
+
         // Generate dropdown information for batches and set initial values
         this.createBatchDropdown();
         this.batchSelect = this.batchYearList[0].batchId;
@@ -74,6 +77,7 @@ export class ToolbarComponent implements OnInit {
 
         // Push to granularity service.
         this.pushToGranularityService();
+        this.granularityService.pushReady(true);
       }
 
     });
@@ -178,6 +182,7 @@ export class ToolbarComponent implements OnInit {
    * @param year - New year number from selection.
    */
   yearOnClick(year): void {
+    this.granularityService.pushReady(false);
     this.yearSelect = year;
     this.createBatchDropdown();
     this.batchSelect = this.batchYearList[0].batchId;
@@ -186,6 +191,7 @@ export class ToolbarComponent implements OnInit {
     this.createTraineesDropdown();
     this.currentTrainee = this.createEmptyTrainee();
     this.pushToGranularityService();
+    this.granularityService.pushReady(true);
     this.clearSearchBox();
   }
 
@@ -194,12 +200,14 @@ export class ToolbarComponent implements OnInit {
    * @param batchId - New batch ID from selection.
    */
   batchOnClick(batchId): void {
+    this.granularityService.pushReady(false);
     this.batchSelect = batchId;
     this.currentBatch = this.getBatchByIdFromSelection(batchId);
     this.createWeeksDropdown();
     this.createTraineesDropdown();
     this.currentTrainee = this.createEmptyTrainee();
     this.pushToGranularityService();
+    this.granularityService.pushReady(true);
     this.clearSearchBox();
   }
 
