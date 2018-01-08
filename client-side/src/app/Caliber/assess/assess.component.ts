@@ -117,8 +117,7 @@ export class AssessComponent implements OnInit {
         grade.score = 0;
         grade.assessment = assessment;
         const newDate = new Date();
-        grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(),
-        newDate.getMinutes());
+        grade.dateReceived = new Date('01-01-2000');
         this.gradeService.create(grade);
       });
 
@@ -193,7 +192,7 @@ export class AssessComponent implements OnInit {
   updateGrade(trainee: Trainee, assessment: Assessment, input) {
     const grade = this.getGrade(trainee, assessment);
     grade.score = Number(input.value);
-    console.log(grade);
+    grade.dateReceived = '2000-01-01T01:01:01.000Z';
     this.updatingGrades.add(grade);
     this.gradeService.update(grade);
   }
@@ -268,7 +267,7 @@ export class AssessComponent implements OnInit {
       note.content = ' ';
       note.trainee = trainee;
       note.batch = this.selectedBatch;
-      note.maxVisibility = 2;
+      note.maxVisibility = '2';
       note.qcFeedback = false;
       note.week = week;
       note.type = 'TRAINEE';
