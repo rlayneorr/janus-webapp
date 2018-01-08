@@ -34,7 +34,7 @@ export class ToolbarComponent implements OnInit {
 
   // Arrays
   private yearList: Array<number>;              // Contains list of all years from batches
-  private batchList: Array<Batch>;              // Contains list of all batches
+  batchList: Array<Batch>;              // Contains list of all batches
   private batchYearList: Array<Batch>;          // Contains list of all batches based on year selection
   private weekList: Array<number>;              // Contains list of all weeks based on batch selection
   private traineesList: Array<Trainee>;         // Contains list of all trainees based on batch selection

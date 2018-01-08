@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-8">
             <app-batch-overall-line-chart *ngIf="currentTrainee.traineeId > 0"></app-batch-overall-line-chart>
-            
+            <app-assessment-breakdown *ngIf="currentTrainee.traineeId === 0 && weekId > 0"></app-assessment-breakdown>
             <app-panel-batch-all-trainees></app-panel-batch-all-trainees>
         </div>
     </div>
