@@ -27,19 +27,12 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   public batch: Batch;
 
-<<<<<<< HEAD
   private trainers: Trainer[];
   private skills: string[];
   private locations: Address[];
   private trainingTypes: string[];
   batchType: string;
   isNewBatch: boolean;
-=======
-  public trainers: Trainer[];
-  public skills: string[];
-  public locations: Address[];
-  public trainingTypes: string[];
->>>>>>> revaturions-dev
 
   private savedBatchSubscription: Subscription;
   private trainingTypeListSubscription: Subscription;

@@ -68,6 +68,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   trainerListSub: Subscription;
   locationListSub: Subscription;
   trainingTypeListSub: Subscription;
+  traineeStatusListSub: Subscription;
   skillListSub: Subscription;
   savedBatchSub: Subscription;
   deletedBatchSub: Subscription;
@@ -184,6 +185,7 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.setCurrentYear(years[years.length - 1]);
   }
 
+
   /**
    * Sets all the trainee objects to each batch
    *
@@ -241,6 +243,10 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.batchListSub = this.batchService.getList()
       .subscribe((batches) => this.setBatches(batches));
 
+    /* keeps an updated list of trainee Statuses */
+    this.traineeStatusListSub = this.traineeStatusService.getList()
+      .subscribe((statuses) => this.setTraineeStatuses(statuses));
+
     /* reacts to saved batches */
     this.savedBatchSub = this.batchService.getSaved()
       .subscribe((saved) => this.onSavedBatch(saved));
@@ -279,6 +285,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   Training status is assigned since there is no training status service yet in angular */
   createNewTraineeFunction() {
     this.createNewTrainee.batch = this.currentBatch;
+    console.log(this.createNewTrainee);
     this.traineeService.save(this.createNewTrainee);
   }
 

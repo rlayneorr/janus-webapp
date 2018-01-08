@@ -144,11 +144,7 @@ import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedb
     OrderByPipe,
     FilterByPipe,
     ToolbarFilterPipe,
-<<<<<<< HEAD
-    AddressToStringPipe,
-=======
     TraineeSearch,
->>>>>>> revaturions-dev
 
     // components
     CaliberComponent,

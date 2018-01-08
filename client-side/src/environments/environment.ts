@@ -93,7 +93,7 @@ export const environment = {
   },
 
   traineeStatus: {
-    fetchAll: () => `${context}trainingstatus/all`,
+    fetchAll: () => `${context}types/trainingstatus/all`,
   },
 
   // API calls for the VP functionality group
