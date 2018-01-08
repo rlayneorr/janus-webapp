@@ -206,9 +206,10 @@ export class AssessComponent implements OnInit {
   }
 
   getOverallAverage() {
-    let sum = 0;
+    let total = 0;
 
     this.assessments.forEach(a => {
+      let sum = 0;
       const percentage = this.getPercentage(a);
 
       this.selectedBatch.trainees.forEach(trainee => {
@@ -216,10 +217,10 @@ export class AssessComponent implements OnInit {
       });
 
       sum /= this.selectedBatch.trainees.length;
-      // console.log(sum + ' ' + a.category.skillCategory);
+      total += sum;
     });
 
-    return sum;
+    return total;
   }
 
 /****************************************************************************************
@@ -283,6 +284,15 @@ export class AssessComponent implements OnInit {
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
+  }
+
+  switchBatch(id: number) {
+    this.batches.forEach(batch => {
+
+      if (Number(batch.batchId) === Number(id)) {
+        this.changeBatch(batch);
+      }
+    });
   }
 
   counter(i: number) {
