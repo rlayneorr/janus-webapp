@@ -74,17 +74,28 @@ export class AssessComponent implements OnInit {
   ngOnInit() {
 
     this.selectedWeek = 1;
+
     this.batchService.fetchAll();
+
     this.categoryService.fetchAllActive();
+
     this.noteService.getList().subscribe(notes => {
       return this.notes = notes;
     });
+
     this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
+
     this.gradeService.getList().subscribe(grade => this.grades = grade);
+
+    this.gradeService.getSaved().subscribe(grade => {
+      this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
+    });
+
     this.categoryService.getList().subscribe(categories => {
       this.categories = categories;
       this.newAssessment.category = this.findCategory('Java');
     });
+
     this.batchService.getList().subscribe(batch => {
       this.batches = batch;
       if (this.batches.length !== 0) {
@@ -108,7 +119,6 @@ export class AssessComponent implements OnInit {
         const newDate = new Date();
         grade.dateReceived = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), newDate.getHours(),
         newDate.getMinutes());
-        console.log(grade);
         this.gradeService.create(grade);
       });
 
@@ -180,11 +190,12 @@ export class AssessComponent implements OnInit {
                                       GRADES
 *****************************************************************************************/
 
-  updateGrade(grade: Grade, input) {
-    grade.score = input.value;
+  updateGrade(trainee: Trainee, assessment: Assessment, input) {
+    const grade = this.getGrade(trainee, assessment);
+    grade.score = Number(input.value);
+    console.log(grade);
     this.updatingGrades.add(grade);
     this.gradeService.update(grade);
-    console.log(this.notes);
   }
 
   getGrade(trainee: Trainee, assessment: Assessment) {
@@ -226,6 +237,16 @@ export class AssessComponent implements OnInit {
     });
 
     return total;
+  }
+
+  getAssessmentAverage(assessment: Assessment) {
+    let total = 0;
+
+    this.selectedBatch.trainees.forEach(trainee => {
+      total += this.getGrade(trainee, assessment).score;
+    });
+
+    return total / this.selectedBatch.trainees.length;
   }
 
 /****************************************************************************************

@@ -130,7 +130,7 @@
         </td>
         <td *ngFor="let assessment of assessments">
             <input #inputGradeScore class="form-control assessment-area" type="text" [value]="getGrade(trainee, assessment).score"
-            (change)="updateGrade(this.getGrade(trainee, assessment), inputGradeScore)">
+            (change)="updateGrade(trainee, assessment, inputGradeScore)">
         </td>
         <td>
             <textarea #inputNote *ngIf="trainee" class="form-control note" id="exampleTextarea" rows="2" [value]="getNote(trainee).content" (change)="updateNote(getNote(trainee), inputNote)"></textarea>
@@ -138,10 +138,9 @@
       </tr>
       <tr>
         <td><strong>Average</strong></td>
-        <td *ngFor="let assessment of assessments" class = "centered">avg</td>
+        <td *ngFor="let assessment of assessments" class = "centered">{{getAssessmentAverage(assessment) | number:'1.2-2'}}%</td>
         <td><strong>Weekly Batch Average: </strong>{{getOverallAverage() | number:'1.2-2'}}%</td>
       </tr>
-      
     </table>
 </div>
 
