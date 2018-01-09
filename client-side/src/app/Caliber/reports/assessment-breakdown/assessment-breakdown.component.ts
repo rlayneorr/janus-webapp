@@ -27,8 +27,8 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
   private granularitySub: Subscription;
   private dataSubscription: Subscription;
 
-  public data: Array<any>;
-  public labels: Array<string>;
+  public data: Array<any> = [{ data: [], label: ''}];
+  public labels: Array<string> [];
 
   private chartType = 'bar';
   private barChartLegend = true;
@@ -73,20 +73,28 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
           // Format data as chart expects it
           for (const key in result.data) {
             if (result.data.hasOwnProperty(key)) {
+
+                // If both batch and trainee data
                 if (this.traineeId !== 0) {
                   incomingTraineeData.data.push(result.data[key][0].toFixed(2));
                   incomingBatchData.data.push(result.data[key][1].toFixed(2));
-                  this.data = [incomingTraineeData, incomingBatchData];
                 } else {
+                  // else only batch data
                   incomingBatchData.data.push(result.data[key][0].toFixed(2));
-                  this.data = [incomingBatchData];
                 }
                 // Fixing decimal length for charts
                 incomingLabels.push(key);
-                this.labels = incomingLabels;
             }
           }
-        } else {
+          // Assign data to data object for display
+          this.labels = incomingLabels;
+          if (this.traineeId !== 0) {
+            this.data = undefined;
+            this.data = [incomingTraineeData, incomingBatchData];
+          } else {
+            this.data = undefined;
+            this.data = [incomingBatchData];
+          }
         }
       });
 
