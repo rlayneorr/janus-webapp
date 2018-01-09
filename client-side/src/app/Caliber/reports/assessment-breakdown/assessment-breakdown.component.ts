@@ -24,14 +24,11 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
   private week: Number;
   private traineeId: Number;
 
-  private batchIdSub: Subscription;
-  private weekSub: Subscription;
-  private traineeIdSub: Subscription;
   private granularitySub: Subscription;
+  private dataSubscription: Subscription;
 
   public data: Array<any>;
   public labels: Array<string>;
-  private dataSubscription: Subscription;
 
   private chartType = 'bar';
   private barChartLegend = true;
@@ -104,32 +101,6 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
         this.tryFetch();
       });
 
-      // this.batchIdSub = this.granularityService.currentBatch$.subscribe(
-      //     data => {
-      //       console.log('breakdown - batch incoming with id : ' + data.batchId);
-      //       // Make sure batchId is not undefined
-
-      //       if (data) {
-      //         this.batchId = data.batchId; this.tryFetch();
-      //       }
-
-      //     });
-
-      // this.weekSub = this.granularityService.currentWeek$.subscribe(
-      //     data => {
-      //       // Make sure traineeId is not undefined
-      //       if (data) {
-      //         this.week = data;
-      //         this.tryFetch();
-      //       }
-      //     });
-
-      // this.traineeIdSub = this.granularityService.currentTrainee$.subscribe(
-      //     data => {
-      //       if (data) {
-      //         this.traineeId = data.traineeId; this.tryFetch();
-      //       }
-      //     });
   }
 
   tryFetch() {
@@ -149,8 +120,8 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // Unsubscribe from subscriptions
-    this.granularitySub.unsubscribe();
-    this.dataSubscription.unsubscribe();
+    if (this.granularitySub)    { this.granularitySub.unsubscribe(); }
+    if (this.dataSubscription)  { this.dataSubscription.unsubscribe(); }
   }
 
 }

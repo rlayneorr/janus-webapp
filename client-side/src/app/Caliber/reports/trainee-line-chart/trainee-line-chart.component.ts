@@ -16,13 +16,11 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 export class TraineeLineChartComponent implements OnInit, OnDestroy {
 
   public data: any = null;
-  private dataSubscription: Subscription;
   public dataShown = null;
   private batchId: Number;
   private week: number;
 
-  private batchSub: Subscription;
-  private weekSub: Subscription;
+  private dataSubscription: Subscription;
   private granularitySubscription: Subscription;
 
   public traineeId: Subscription;
@@ -156,8 +154,7 @@ export class TraineeLineChartComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // Unsubscribe from subscriptions
-    this.batchSub.unsubscribe();
-    this.weekSub.unsubscribe();
-    this.dataSubscription.unsubscribe();
+    if (this.granularitySubscription) { this.granularitySubscription.unsubscribe(); }
+    if (this.dataSubscription) { this.dataSubscription.unsubscribe(); }
   }
 }
