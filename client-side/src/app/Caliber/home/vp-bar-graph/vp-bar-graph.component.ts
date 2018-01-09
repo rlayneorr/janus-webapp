@@ -46,8 +46,7 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
   public techSub: Subscription;
   public QCSub: Subscription;
   public batchSub: Subscription;
-  public QcBatchSub: Subscription;
-  private stackedSubscription: Subscription;
+  private mergedObservablesSubscription: Subscription;
   public allbatches: any;
   public hasBatchStatuses = false;
   public counter = 0;
@@ -64,6 +63,10 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     private noteService: NoteService,
     private reportsService: ReportsService) { }
 
+  /**
+   * Does API calls and organizes the data returned from the calls
+   * @memberof VpBarGraphComponent
+   */
   ngOnInit() {
     this.counter = 0;
     this.batchService.fetchAll();
@@ -72,7 +75,7 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     this.barChartData = this.vpHomeBarGraphService.getBarChartData();
     const Observable1: Observable<any> = this.reportsService.fetchReportsStackedBarCurrentWeek();
     const Observable2: Observable<any> = this.batchService.getList();
-    Observable1.merge(Observable2).subscribe(
+    this.mergedObservablesSubscription = Observable1.merge(Observable2).subscribe(
       (resp) => {
         this.counter++;
         if (resp.length > 0) {
@@ -94,10 +97,12 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
         this.alertService.error('Failed to fetch QC Progress!');
       });
   }
-  /** gets the statuses of the batches as well as stores the batch id and week
-  * into a seperate array used for the modal
-  * @return void
-  */
+
+  /**
+   * gets the statuses of the batches as well as stores the batch id and week
+   * into a seperate array used for the modall
+   * @memberof VpBarGraphComponent
+   */
   populateBatchStatuses() {
     this.hasBatchStatuses = false;
     this.overallBatchStatusArray = [];
@@ -117,10 +122,15 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     }
     this.hasBatchStatuses = true;
   }
-  /** called when a state is selected to get cities for the cities drop down
-  * as well as re-populate the chartData
-  * @param state:string
-  */
+
+  /**
+   * called when a state is selected to get cities for the cities drop down
+   * as well as re-populate the chartData
+   *
+   * @param {any} state
+   * @memberof VpBarGraphComponent
+   */
+
   findCities(state) {
     this.hasBarChartData = false;
     this.selectedBarCity = '';
@@ -136,7 +146,8 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
 
   /**
    * after a city is selected, update the graph to reflect the selected city
-   * @param city: string
+   * @param {any} city
+   * @memberof VpBarGraphComponent
    */
   hasCity(city) {
     if (this.cities.size > 1) {
@@ -147,7 +158,11 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
     }
   }
 
-  // when you click on a bar graph, show detailed information
+  /**
+   * when you click on a bar graph, show detailed information
+   * @param {*} event
+   * @memberof VpBarGraphComponent
+   */
   onClick(event: any) {
     const chartInfo = this.modalInfoArray[event.active[0]._index];
     let tech: Array<String>;
@@ -195,8 +210,7 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     try {
-      this.QcBatchSub.unsubscribe();
-      this.stackedSubscription.unsubscribe();
+      this.mergedObservablesSubscription.unsubscribe();
     } catch (Exception) { }
 
   }

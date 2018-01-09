@@ -37,6 +37,12 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
         scaleLabel: {
           display: true,
           labelString: 'Average'
+        },
+        ticks: {
+          beginAtZero: false,
+          fixedStepSize: 20,
+          max: 100,
+          suggestedMin: 40
         }
       }]
     }
@@ -94,19 +100,14 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
         // Update display data with new data accounting for week limitation
         this.updateWeeks();
 
-      } else {
-        console.log('line chart data failed to load');
       }
     });
 
     this.batchSub = this.granularityService.currentBatch$.subscribe(
       (result) => {
-        // Make sure batchId is not undefined
-        if (result) {
-          if (result.batchId !== this.batchId) {
-            this.batchId = result.batchId;
-            this.fetch();
-          }
+        if (result.batchId !== this.batchId) {
+          this.batchId = result.batchId;
+          this.fetch();
         }
     });
 
