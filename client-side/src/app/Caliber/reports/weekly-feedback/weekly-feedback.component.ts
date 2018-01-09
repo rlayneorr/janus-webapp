@@ -102,12 +102,12 @@ export class WeeklyFeedbackComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.qcNoteSubscription.unsubscribe();
-    this.trainerNoteSubscription.unsubscribe();
-    this.traineeSubscription.unsubscribe();
-    this.batchSubscription.unsubscribe();
-    this.weekSubscription.unsubscribe();
-    this.topicSubscription.unsubscribe();
+    if (this.qcNoteSubscription)      { this.qcNoteSubscription.unsubscribe(); }
+    if (this.trainerNoteSubscription) { this.trainerNoteSubscription.unsubscribe(); }
+    if (this.traineeSubscription)     { this.traineeSubscription.unsubscribe(); }
+    if (this.batchSubscription)       { this.batchSubscription.unsubscribe(); }
+    if (this.weekSubscription)        { this.weekSubscription.unsubscribe(); }
+    if (this.topicSubscription)       { this.topicSubscription.unsubscribe(); }
   }
 
 }

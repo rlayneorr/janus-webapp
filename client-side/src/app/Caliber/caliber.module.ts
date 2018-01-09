@@ -110,6 +110,7 @@ import { BatchModalComponent } from './manage/batch/batch-modal.component';
 import { PanelOverallFeedbackComponent } from './panel/overall-feedback/panel-overall-feedback.component';
 import { FeedbackIconComponent } from './quality/feedback-icon/feedback-icon.component';
 import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedback/quality-overall-feedback.component';
+import { TraineeLineChartComponent } from './reports/trainee-line-chart/trainee-line-chart.component';
 
 @NgModule({
   imports: [
@@ -216,6 +217,7 @@ import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedb
     GeneralFeedbackComponent,
     TechnicalFeedbackComponent,
     QcDoughnutComponent,
+    TraineeLineChartComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
