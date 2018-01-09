@@ -27,8 +27,8 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
   private granularitySub: Subscription;
   private dataSubscription: Subscription;
 
-  public data: Array<any> = [{ data: [], label: ''}];
-  public labels: Array<string> [];
+  public data: Array<any>;
+  public labels: Array<string>;
 
   private chartType = 'bar';
   private barChartLegend = true;
@@ -88,13 +88,12 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
           }
           // Assign data to data object for display
           this.labels = incomingLabels;
-          if (this.traineeId !== 0) {
-            this.data = undefined;
-            this.data = [incomingTraineeData, incomingBatchData];
-          } else {
+          this.data = undefined;
+          this.data = [incomingTraineeData, incomingBatchData];
+          /* else {
             this.data = undefined;
             this.data = [incomingBatchData];
-          }
+          }*/
         }
       });
 
@@ -113,14 +112,16 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
   tryFetch() {
     // Check that all objects are present
-    if (this.batchId && this.week !== undefined) {
+    if (this.batchId && this.week !== undefined && this.traineeId) {
       if (this.week === 0) {
         // If week is 0, fetch data for all weeks
+        this.data = null;
         this.reportsService.fetchBatchOverallTraineeBarChart(this.batchId, this.traineeId);
       } else if (this.traineeId === 0) {
         this.reportsService.fetchBatchWeekAvgBarChart(this.batchId, this.week);
       } else {
         // Else fetch data for the specific week
+        this.data = null;
         this.reportsService.fetchBatchWeekTraineeBarChart(this.batchId, this.week, this.traineeId);
       }
     }
