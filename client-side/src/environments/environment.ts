@@ -5,8 +5,7 @@
 const context = 'http://localhost:8080/';
 export const environment = {
   production: false,
-  context: context,
-  bootContext: 'http://localhost/',
+  context: context, // change for what the production environment would actually be
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
@@ -182,10 +181,10 @@ export const environment = {
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
 
-  /* Evaluation service API endpoints */
+    /* Evaluation service API endpoints */
   apiFetchAllQCTraineeNotes: (batchId: Number, weekId: Number) =>
-    environment.context + `qc/note/trainee/${batchId}/${weekId}`,
+  environment.context + `qc/note/trainee/${batchId}/${weekId}`,
 
-  apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
-    environment.context + `qc/note/batch/${batchId}/${weekId}`,
+apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
+  environment.context + `qc/note/batch/${batchId}/${weekId}`,
 };

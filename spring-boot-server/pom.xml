@@ -26,6 +26,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>janus-server</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
