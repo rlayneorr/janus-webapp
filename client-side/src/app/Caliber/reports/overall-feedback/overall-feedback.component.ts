@@ -58,8 +58,11 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
         this.batch = batchTraineeWeek[0];
         this.trainee = batchTraineeWeek[1];
         this.week = batchTraineeWeek[2];
-        this.noteService.fetchByTrainee(this.trainee);
-        this.reportService.fetchTechnologiesUpToWeek(batchTraineeWeek[0].batchId, batchTraineeWeek[0].gradedWeeks);
+
+        if (this.week > 0) {
+          this.noteService.fetchByTrainee(this.trainee);
+          this.reportService.fetchTechnologiesUpToWeek(this.batch.batchId, this.batch.gradedWeeks);
+        }
       });
 
     this.noteSubscription = this.noteService.getTraineeList().subscribe((list) => {

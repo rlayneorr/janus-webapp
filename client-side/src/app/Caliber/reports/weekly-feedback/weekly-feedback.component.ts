@@ -77,8 +77,11 @@ export class WeeklyFeedbackComponent implements OnInit, OnDestroy {
         this.trainee = traineeWeekBatch[0];
         this.week = traineeWeekBatch[1];
         this.batch = traineeWeekBatch[2];
-        this.noteService.fetchByTrainee(this.trainee);
-        this.reportService.fetchTechnologiesForTheWeek(this.batch.batchId, this.week);
+
+        if (this.trainee.traineeId > 0 && this.week > 0) {
+          this.noteService.fetchByTrainee(this.trainee);
+          this.reportService.fetchTechnologiesForTheWeek(this.batch.batchId, this.week);
+        }
     });
 
     this.noteSubscription = this.noteService.getList().subscribe((list) => {
