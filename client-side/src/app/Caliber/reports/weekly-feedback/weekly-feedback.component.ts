@@ -122,9 +122,9 @@ export class WeeklyFeedbackComponent implements OnInit, OnDestroy {
    * @memberof WeeklyFeedbackComponent
    */
   ngOnDestroy() {
-    this.noteSubscription.unsubscribe();
-    this.granularitySubscription.unsubscribe();
-    this.topicSubscription.unsubscribe();
+    if (this.noteSubscription)        { this.noteSubscription.unsubscribe(); }
+    if (this.granularitySubscription) { this.granularitySubscription.unsubscribe(); }
+    if (this.topicSubscription)       { this.topicSubscription.unsubscribe(); }
   }
 
 }
