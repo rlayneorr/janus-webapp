@@ -5,7 +5,7 @@
  * @author Edel Benavides
  * @author Brandon Richardson
  */
-import { Component, OnInit, ViewChild, } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, } from '@angular/core';
 
 import { BatchService } from '../../../Caliber/services/batch.service';
 import { Batch } from '../../entities/Batch';
@@ -21,7 +21,7 @@ import { PDFService } from '../../../services/pdf.service';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnDestroy {
 
   // Toolbar selections
   public yearSelect: number;
@@ -43,7 +43,6 @@ export class ToolbarComponent implements OnInit {
 
   // Subscriptions
   private batchSubscription: Subscription;
-  private trainerSubscription: Subscription;
 
   constructor(private batchService: BatchService,
               private granularityService: GranularityService,
@@ -327,5 +326,9 @@ export class ToolbarComponent implements OnInit {
 
   downloadPDFwithFeedback() {
     this.pdfService.downloadPDFwithFeedback();
+  }
+
+  ngOnDestroy() {
+    this.batchSubscription.unsubscribe();
   }
 }
