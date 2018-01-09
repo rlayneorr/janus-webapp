@@ -44,6 +44,12 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
         scaleLabel: {
           display: true,
           labelString: 'Average'
+        },
+        ticks: {
+          beginAtZero: false,
+          fixedStepSize: 10,
+          max: 100,
+          suggestedMin: 40
         }
       }]
     }

@@ -37,6 +37,12 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
         scaleLabel: {
           display: true,
           labelString: 'Average'
+        },
+        ticks: {
+          beginAtZero: false,
+          fixedStepSize: 20,
+          max: 100,
+          suggestedMin: 40
         }
       }]
     }
