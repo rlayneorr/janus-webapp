@@ -21,8 +21,8 @@
         </div>
     </div>
     <app-weekly-grades *ngIf="!allWeeks && allTrainees"></app-weekly-grades>
-    <app-weekly-feedback *ngIf="!allWeeks && !allTrainees"></app-weekly-feedback>
     <app-weekly-audit *ngIf="!allWeeks && allTrainees"></app-weekly-audit>
+    <app-weekly-feedback *ngIf="!allWeeks && !allTrainees"></app-weekly-feedback>
     <app-overall-feedback *ngIf="allWeeks && !allTrainees"></app-overall-feedback>
     <app-panel-feedback *ngIf="allWeeks && !allTrainees"></app-panel-feedback>
 </div>
