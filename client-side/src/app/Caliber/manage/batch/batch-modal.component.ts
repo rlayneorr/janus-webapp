@@ -105,7 +105,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     /** Create batch also requires a "location" field inside of it
      *  For now, we will just send a string for the city since the address
      * is already set
-     * 
+     *
      * The address/location entities need to be redesigned across the application
      */
     this.batch.location = this.batch.address.city;
@@ -175,7 +175,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     If current batch has a field asssigned already we are updating a batch
 
     isNewBatch is assigned so that the proper functions are called from the buttons
-    
+
     This should be redesigned */
 
     if (this.batch.trainer == null) {
