@@ -25,6 +25,8 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
   private week: Number;
   private traineeId: Number;
 
+  private viewReady = false;
+
   // Subscriptions for granularity and API
   private granularitySub: Subscription;
   private dataSubscription: Subscription;
@@ -83,6 +85,7 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
           } else {
             this.setupTrainee(result);
           }
+          this.viewReady = true;
         }
       });
 
@@ -131,7 +134,6 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
     }
     // Assign data to data object for display
     this.labels = incomingLabels;
-    this.data = undefined;
     this.data = [incomingBatchData];
   }
 
@@ -156,7 +158,6 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
     // Assign data to data object for display
     this.labels = incomingLabels;
-    this.data = undefined;
     this.data = [incomingTraineeData, incomingBatchData];
   }
 
@@ -169,15 +170,14 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
     if (this.batchId && this.week !== undefined && this.traineeId !== undefined) {
       if (this.week === 0) {
         // If week is 0, fetch data for all weeks
-        this.data = null;
         this.reportsService.fetchBatchOverallTraineeBarChart(this.batchId, this.traineeId);
       } else if (this.traineeId === 0) {
         this.reportsService.fetchBatchWeekAvgBarChart(this.batchId, this.week);
       } else {
         // Else fetch data for the specific week
-        this.data = null;
         this.reportsService.fetchBatchWeekTraineeBarChart(this.batchId, this.week, this.traineeId);
       }
+      this.viewReady = false;
     }
   }
 }
