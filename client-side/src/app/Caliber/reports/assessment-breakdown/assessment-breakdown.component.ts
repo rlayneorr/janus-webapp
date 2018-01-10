@@ -20,20 +20,22 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
+  // Data needed for API calls
   private batchId: Number;
   private week: Number;
   private traineeId: Number;
 
+  // Subscriptions for granularity and API
   private granularitySub: Subscription;
   private dataSubscription: Subscription;
 
+  // Data to be injected into chart
   public data: Array<any>;
   public labels: Array<string>;
 
+  // Chart options
   private chartType = 'bar';
   private barChartLegend = true;
-
-  constructor(private reportsService: ReportingService, private granularityService: GranularityService) { }
 
   public options = {
     scales: {
@@ -52,51 +54,39 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
     }
   };
 
+  // Define colors used by chart
   public chartColors: Array<any> = [
     { // Trainee - Complimentary
       backgroundColor: 'rgb(37,242,227)',
     },
     { // Revature Orange
       backgroundColor: 'rgb(242, 105, 37)',
-    }];
+  }];
 
+  /*============ Lifecycle Methods ==============*/
+
+  constructor(private reportsService: ReportingService, private granularityService: GranularityService) { }
+
+  /**
+   * Initialize state of component
+   */
   ngOnInit() {
 
+    // setup API data subscription
     this.dataSubscription = this.reportsService.assessmentBreakdownBarChart$.subscribe(
       (result) => {
         if (result) {
 
-          const incomingTraineeData: any = { data: [], label: 'Trainee' };
-          const incomingBatchData: any = { data: [], label: 'Batch' };
-          const incomingLabels: any = [];
-
-          // Format data as chart expects it
-          for (const key in result.data) {
-            if (result.data.hasOwnProperty(key)) {
-
-                // If both batch and trainee data
-                if (this.traineeId !== 0) {
-                  incomingTraineeData.data.push(result.data[key][0].toFixed(2));
-                  incomingBatchData.data.push(result.data[key][1].toFixed(2));
-                } else {
-                  // else only batch data
-                  incomingBatchData.data.push(result.data[key][0].toFixed(2));
-                }
-                // Fixing decimal length for charts
-                incomingLabels.push(key);
-            }
+          // Call appropriate data manipulation method for given state
+          if (this.traineeId === 0) {
+            this.setupBatch(result);
+          } else {
+            this.setupTrainee(result);
           }
-          // Assign data to data object for display
-          this.labels = incomingLabels;
-          this.data = undefined;
-          this.data = [incomingTraineeData, incomingBatchData];
-          /* else {
-            this.data = undefined;
-            this.data = [incomingBatchData];
-          }*/
         }
       });
 
+      // Setup granularity subscription
       this.granularitySub = Observable.combineLatest(
         this.granularityService.currentBatch$,
         this.granularityService.currentWeek$,
@@ -110,9 +100,73 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   * Destroys subscriptions when component is destroyed
+   */
+  ngOnDestroy() {
+    // Unsubscribe from subscriptions
+    if (this.granularitySub)    { this.granularitySub.unsubscribe(); }
+    if (this.dataSubscription)  { this.dataSubscription.unsubscribe(); }
+  }
+
+
+  /*============ Helper Methods ==============*/
+
+
+  /**
+   * Mutates data form and prepares structure for graph when
+   * only batch data is being displayed
+   */
+  public setupBatch(data) {
+    const incomingBatchData: any = { data: [], label: 'Batch' };
+    const incomingLabels: any = [];
+
+    for (const key in data.data) {
+      if (data.data.hasOwnProperty(key)) {
+          // else only batch data
+          incomingBatchData.data.push(data.data[key][0].toFixed(2));
+          // Fixing decimal length for charts
+          incomingLabels.push(key);
+      }
+    }
+    // Assign data to data object for display
+    this.labels = incomingLabels;
+    this.data = undefined;
+    this.data = [incomingBatchData];
+  }
+
+  /**
+   * Mutates data form and prepares structure for graph when a trainee
+   * is selected to compare the batch data with.
+   * @param data - Incoming data from API call
+   */
+  public setupTrainee(data) {
+
+    const incomingTraineeData: any = { data: [], label: 'Trainee' };
+    const incomingBatchData: any = { data: [], label: 'Batch' };
+    const incomingLabels: any = [];
+
+    for (const key in data.data) {
+      if (data.data.hasOwnProperty(key)) {
+          incomingTraineeData.data.push(data.data[key][0].toFixed(2));
+          incomingBatchData.data.push(data.data[key][1].toFixed(2));
+          incomingLabels.push(key);
+      }
+    }
+
+    // Assign data to data object for display
+    this.labels = incomingLabels;
+    this.data = undefined;
+    this.data = [incomingTraineeData, incomingBatchData];
+  }
+
+  /**
+   * Logic gate for API calls.
+   * Defines if state is ready for an API call and calls the appropriate call based on the valid state.
+   */
   tryFetch() {
     // Check that all objects are present
-    if (this.batchId && this.week !== undefined && this.traineeId) {
+    if (this.batchId && this.week !== undefined && this.traineeId !== undefined) {
       if (this.week === 0) {
         // If week is 0, fetch data for all weeks
         this.data = null;
@@ -126,11 +180,4 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
       }
     }
   }
-
-  ngOnDestroy() {
-    // Unsubscribe from subscriptions
-    if (this.granularitySub)    { this.granularitySub.unsubscribe(); }
-    if (this.dataSubscription)  { this.dataSubscription.unsubscribe(); }
-  }
-
 }
