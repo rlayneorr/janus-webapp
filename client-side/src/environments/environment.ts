@@ -81,7 +81,7 @@ export const environment = {
   trainer: {
     fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
     fetchAll: () => `${context}all/trainer/all`,
-    save: () => `${context}all/trainer/all`,
+    save: () => `${context}vp/trainer/create`,
     update: () => `${context}vp/trainer/update`,
     getTitles: () => `${context}vp/trainer/titles`,
     getTiers: () => `${context}types/trainer/role/all`,
