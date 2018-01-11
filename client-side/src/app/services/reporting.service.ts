@@ -227,6 +227,10 @@ export class ReportingService {
 
   /**
    * Fetch data for a sorted bar chart from backend given a specific batchID and week.
+   *
+   * Data is stored at @property {BehaviorSubject<CacheData>} BatchWeekSortedBarChart
+   * Data is exposed at @property {Observable<CacheData>} BatchWeekSortedBarChart$
+   *
    * @param batchId ID of batch to fetch
    * @param week Week of batch program to get by
    */
@@ -269,6 +273,9 @@ export class ReportingService {
 
   /**
    * Fetches overall batch for Cumulative Scores bar chart.
+   * data and parameters in @property {BehaviorSubject<CacheData>} batchOverallBar
+   * and exposed through @property {Observable<CachedData>} batchOverallBar$
+   *
    * @param batchId - batch whose cumulative score data should be fetched
    * @author Edel Benavides
    */
@@ -291,6 +298,8 @@ export class ReportingService {
   /**
    * Fetches topical assessment data on a given week for a given user along with the
    * average assessment of a given batch
+   * data and parameters in @property {BehaviorSubject<CacheData>} assessmentBreakdownBarChart
+   * and exposed through @property {Observable<CachedData>} assessmentBreakdownChart$
    * @param batchId
    * @param weekId
    * @param traineeId
