@@ -25,7 +25,7 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
   private week: Number;
   private traineeId: Number;
 
-  private viewReady = false;
+  public viewReady = false;
 
   // Subscriptions for granularity and API
   private granularitySub: Subscription;
