@@ -198,6 +198,8 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * Sets up some variables and send requests for overall radar
    */
   overallSetup() {
+    this.traineesList = [];
+    this.traineesNames = [];
     for (let i = 0; i < this.batch.trainees.length; i++) {
       this.traineesList.push(this.batch.trainees[i].traineeId);
       this.traineesNames.push(this.batch.trainees[i].name);
