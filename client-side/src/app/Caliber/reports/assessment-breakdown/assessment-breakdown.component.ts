@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { GranularityService } from '../services/granularity.service';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Observable } from 'rxjs/Observable';
+import { PDFService } from '../../../services/pdf.service';
 
 /**
  * Component will display a bar graph comparing the specific trainees
@@ -67,7 +68,7 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
 
   /*============ Lifecycle Methods ==============*/
 
-  constructor(private reportsService: ReportingService, private granularityService: GranularityService) { }
+  constructor(private reportsService: ReportingService, private granularityService: GranularityService, private pdfService: PDFService) { }
 
   /**
    * Initialize state of component
@@ -179,5 +180,12 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
       }
       this.viewReady = false;
     }
+  }
+
+  /**
+   * Downloads assessment scores chart as a PDF file with a specified name.
+   */
+  public downloadPDF(): void {
+    this.pdfService.downloadPDFwithFilename('assessment-breakdown', 'Assessment-breakdown');
   }
 }

@@ -198,6 +198,8 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * Sets up some variables and send requests for overall radar
    */
   overallSetup() {
+    this.traineesList = [];
+    this.traineesNames = [];
     for (let i = 0; i < this.batch.trainees.length; i++) {
       this.traineesList.push(this.batch.trainees[i].traineeId);
       this.traineesNames.push(this.batch.trainees[i].name);
@@ -253,7 +255,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * downloads pdf via pdf service
   */
   downloadPDF() {
-    this.pdfService.downloadPDF('trainee-tech-skills');
+    this.pdfService.downloadPDFwithFilename('trainee-tech-skills', 'Trainee-tech-skills');
   }
   /**
    * Opens the trainee selector modal

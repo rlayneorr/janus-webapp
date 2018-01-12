@@ -4,19 +4,19 @@
         <div class="col-md-12">
             <div class="charts"><app-all-cumulative-scores *ngIf="allWeeks && allTrainees"></app-all-cumulative-scores></div>
             <div class="charts"><app-weekly-cumulative-skills *ngIf="!allWeeks && allTrainees"></app-weekly-cumulative-skills></div>
-            <app-assessment-breakdown *ngIf="!allTrainees"></app-assessment-breakdown>
+            <div class="charts"><app-assessment-breakdown *ngIf="!allTrainees"></app-assessment-breakdown></div>
         </div>
     </div>
     <div class="row reports-row"> 
         <div class="col-md-5">
-            <app-trainee-tech-skills *ngIf="!(!allWeeks && allTrainees)"></app-trainee-tech-skills>
-            <app-qc-doughnut *ngIf="!allWeeks && allTrainees"></app-qc-doughnut>
+            <div class="charts"><app-trainee-tech-skills *ngIf="!(!allWeeks && allTrainees)"></app-trainee-tech-skills></div>
+            <div class="charts"><app-qc-doughnut *ngIf="!allWeeks && allTrainees"></app-qc-doughnut></div>
         </div>
         <div class="col-md-7">
-            <app-batch-overall-line-chart *ngIf="allTrainees && allWeeks"></app-batch-overall-line-chart>
-            <app-trainee-line-chart *ngIf="!allTrainees"></app-trainee-line-chart>
-            <app-assessment-breakdown *ngIf="allTrainees && !allWeeks"></app-assessment-breakdown>
-            <app-panel-batch-all-trainees *ngIf="allWeeks && allTrainees"></app-panel-batch-all-trainees>
+            <div class="charts"><app-batch-overall-line-chart *ngIf="allTrainees && allWeeks"></app-batch-overall-line-chart></div>
+            <div class="charts"><app-trainee-line-chart *ngIf="!allTrainees"></app-trainee-line-chart></div>
+            <div class="charts"><app-assessment-breakdown *ngIf="allTrainees && !allWeeks"></app-assessment-breakdown></div>
+            <div class="charts"><app-panel-batch-all-trainees *ngIf="allWeeks && allTrainees"></app-panel-batch-all-trainees></div>
         </div>
     </div>
     <app-weekly-grades *ngIf="!allWeeks && allTrainees"></app-weekly-grades>

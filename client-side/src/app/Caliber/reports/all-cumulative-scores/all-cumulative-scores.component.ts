@@ -139,17 +139,10 @@ export class AllCumulativeScoresComponent implements OnInit {
   }
 
   /**
-   * Downloads cumulative scores chart as a PDF file.
-   */
-  public downloadPDF(): void {
-    this.pdfService.downloadPDF('chart');
-  }
-
-  /**
    * Downloads cumulative scores chart as a PDF file with a specified name.
    */
-  public downloadPDFwithFilename(filename): void {
-    this.pdfService.downloadPDFwithFilename('chart', filename);
+  public downloadPDF(): void {
+    this.pdfService.downloadPDFwithFilename('chart', 'Cumulative-Scores-All');
   }
 
   public downloadPDFwithFeedback() {
