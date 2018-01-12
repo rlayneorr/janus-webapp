@@ -58,10 +58,8 @@ export class PDFService {
   }
 
   /**
-   * Creates a PDF with input name from a given element id, then downloads it.
-   * It creates an image of the elements and saves it as a PDF.
-   * @param chartToDownload - Element id name.
-   * @param filename - Name of the file.
+   * Creates a PDF from all the charts with class name 'charts', then downloads it.
+   * It creates an image of each chart element and saves it as one PDF.
    */
   public downloadCharts(): void {
     const charts = document.getElementsByClassName('charts');
@@ -82,14 +80,14 @@ export class PDFService {
           if (charts[i].clientHeight > pdfHeight) {
             newWidth = this.getNewWidth(charts[i].clientHeight, charts[i].clientWidth);
             newHeight = this.convertPixelsToMM(pdfHeight);
-            if ( ( (newWidth / 25.4) * 75) > pdfWidth) {
+            if (this.convertMMtoPixels(newWidth) > pdfWidth) {
               newWidth = 180;
               newHeight = 0;
             }
           } else if (charts[i].clientWidth > pdfWidth) {
             newWidth = this.convertPixelsToMM(pdfWidth);
             newHeight = this.getNewHeight(charts[i].clientHeight, charts[i].clientWidth);
-            if ( ( (newWidth / 25.4) * 75) > pdfWidth) {
+            if (this.convertMMtoPixels(newWidth) > pdfWidth) {
               newWidth = newWidth / 1.2;
               newHeight = newHeight / 1.2;
             }
@@ -134,8 +132,12 @@ export class PDFService {
     });
   }
 
-  convertPixelsToMM(number) {
+  convertPixelsToMM(number): number {
     return (number / 75 ) * 25.4;
+  }
+
+  convertMMtoPixels(number): number {
+    return (number / 25.4) * 75;
   }
 
   /**
