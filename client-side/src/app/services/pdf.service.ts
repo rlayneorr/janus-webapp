@@ -37,9 +37,18 @@ export class PDFService {
    * @param chartToDownload - Element id name.
    */
   public downloadPDF(chartToDownload): void {
-    html2canvas(document.getElementById(chartToDownload)).then(canvas => {
+    const chart = document.getElementById(chartToDownload);
+    let newHeight = 0;
+    let newWidth = 180;
+    html2canvas(chart).then(canvas => {
         const pdf = new jsPDF();
-        pdf.addImage(canvas, 'JPEG', 10, 10, 190, 0);
+        console.log(chart.clientHeight + ' vs ' + pdfHeight);
+        console.log(chart.clientWidth + ' vs ' + pdfWidth);
+        if (chart.clientWidth < pdfWidth) {
+          newWidth = this.convertPixelsToMM(chart.clientWidth);
+          newHeight = this.convertPixelsToMM(chart.clientHeight);
+        }
+        pdf.addImage(canvas, 'JPEG', 10, 10, newWidth, newHeight);
         pdf.save('report.pdf');
     });
   }
@@ -69,8 +78,8 @@ export class PDFService {
     const pdf = new jsPDF();  // default size in mm
     for (let i = 0; i < charts.length; i++) {
       charts[i].setAttribute('id', `chart${i}`);
-      const originalHeight = charts[i].clientHeight;
-      const originalWidth = charts[i].clientWidth;
+      const originalHeight = this.convertPixelsToMM(charts[i].clientHeight);
+      const originalWidth = this.convertPixelsToMM(charts[i].clientWidth);
 
       html2canvas(charts[i]).then(canvas => {
         canvas = canvas.toDataURL('image/jpeg', 1);
@@ -82,9 +91,17 @@ export class PDFService {
 
           if (originalHeight > pdfHeight) {
             if (originalHeight - pdfHeight > 500) {
-              newHeight = newHeight / 1.5;
-              newWidth = newWidth / 1.5;
+              newHeight = this.convertPixelsToMM(newHeight / 1.4);
+              newWidth = this.convertPixelsToMM(newWidth / 1.4);
+            } else if (originalHeight - pdfHeight < 500) {
+              newHeight = this.convertPixelsToMM(newHeight / 1.2);
+              newWidth = this.convertPixelsToMM(newWidth / 1.2);
             }
+          }
+
+          if (originalWidth < pdfWidth && originalHeight < pdfHeight) {
+            newWidth = this.convertPixelsToMM(originalWidth);
+            newHeight = this.convertPixelsToMM(originalHeight);
           }
 
           // SAVE PDF
@@ -96,6 +113,11 @@ export class PDFService {
             // Add image and add new page
             pdf.addImage(canvas, 'JPEG', 10, 10, newWidth, newHeight);
             pdf.addPage();
+          }
+        } else {
+          // SAVE PDF
+          if ((i + 1) === charts.length) {
+            pdf.save('Charts');
           }
         }
 
@@ -119,6 +141,10 @@ export class PDFService {
       // console.log('Error generating PDF!');
       // console.log(err);
     });
+  }
+
+  convertPixelsToMM(number) {
+    return (number / 75 ) * 25.4;
   }
 
 }
