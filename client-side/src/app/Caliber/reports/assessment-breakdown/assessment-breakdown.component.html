@@ -1,7 +1,10 @@
-<div class="container">
-    <header class="panel-heading">Assessment Breakdown</header>
+<div class="container" *ngIf="viewReady" id="assessment-breakdown">
+    <header class="panel-heading">
+      Assessment Breakdown
+      <i (click)="downloadPDF()" class="fa fa-download"></i>
+    </header>
     <div class="panel-body">
-      <canvas *ngIf="data" baseChart
+      <canvas  baseChart
             [datasets]="data"
             [labels]="labels"
             [options]="options"
@@ -9,7 +12,7 @@
             [chartType]="chartType"></canvas>
     </div>
     <div class="table-responsive">
-      <table *ngIf="data" class="table" style="border-collapse: collapse;">
+      <table class="table" style="border-collapse: collapse;">
         <tbody>
           <tr>
             <th></th>

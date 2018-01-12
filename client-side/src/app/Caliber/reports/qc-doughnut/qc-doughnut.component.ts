@@ -47,7 +47,6 @@ export class QcDoughnutComponent implements OnInit {
 
     this.dataSubscription = this.reportsService.qcStatusDoughnut$.subscribe((result) => {
       if (result) {
-        console.log(result.data);
         this.chartData = [result.data];
       }
     });
@@ -57,6 +56,6 @@ export class QcDoughnutComponent implements OnInit {
    * Downloads weekly chart as a PDF file.
    */
   public downloadPDF(): void {
-    this.pdfService.downloadPDF('chart');
+    this.pdfService.downloadPDFwithFilename('qc-status', 'QC-Status');
   }
 }
