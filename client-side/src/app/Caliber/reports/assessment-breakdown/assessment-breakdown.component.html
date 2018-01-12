@@ -1,5 +1,8 @@
-<div class="container" *ngIf="viewReady">
-    <header class="panel-heading">Assessment Breakdown</header>
+<div class="container" *ngIf="viewReady" id="assessment-breakdown">
+    <header class="panel-heading">
+      Assessment Breakdown
+      <i (click)="downloadPDF()" class="fa fa-download"></i>
+    </header>
     <div class="panel-body">
       <canvas  baseChart
             [datasets]="data"

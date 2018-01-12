@@ -255,7 +255,7 @@ export class TraineeTechSkillsComponent implements OnInit, OnDestroy {
    * downloads pdf via pdf service
   */
   downloadPDF() {
-    this.pdfService.downloadPDF('trainee-tech-skills');
+    this.pdfService.downloadPDFwithFilename('trainee-tech-skills', 'Trainee-tech-skills');
   }
   /**
    * Opens the trainee selector modal

@@ -107,6 +107,6 @@ export class WeeklyCumulativeScoreComponent implements OnInit, OnDestroy {
      * downloads pdf via pdf service
      */
     downloadPDF() {
-        this.pdfService.downloadPDF('cumulative-skills');
+        this.pdfService.downloadPDFwithFilename('cumulative-skills', `Cumulative-Scores-Week-${this.week}`);
     }
 }

@@ -56,6 +56,6 @@ export class QcDoughnutComponent implements OnInit {
    * Downloads weekly chart as a PDF file.
    */
   public downloadPDF(): void {
-    this.pdfService.downloadPDF('chart');
+    this.pdfService.downloadPDFwithFilename('qc-status', 'QC-Status');
   }
 }
