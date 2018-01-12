@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ReportingService } from '../../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
 import { Observable } from 'rxjs/Observable';
+import { PDFService } from '../../../services/pdf.service';
 
 /**
  * Component utilizes service API calls to fetch and display an overall
@@ -83,7 +84,7 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
 
   /*================ Life Cycle Methods ===================*/
 
-  constructor(private reportsService: ReportingService, private granularityService: GranularityService) {}
+  constructor(private reportsService: ReportingService, private granularityService: GranularityService, private pdfService: PDFService) {}
 
   /**
    * Initializes subscriptions and initial state
@@ -175,6 +176,11 @@ export class BatchOverallLineChartComponent implements OnInit, OnDestroy {
       this.labelsShown = this.labels;
     }
   }
+
+  /**
+   * Downloads chart as PDF.
+   */
+  downloadPDF() {
+    this.pdfService.downloadPDFwithFilename('batch-weekly-progress', `batch-weekly-progress`);
+  }
 }
-
-

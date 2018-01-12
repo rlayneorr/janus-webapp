@@ -1,5 +1,8 @@
-<div class="container" *ngIf="dataShown">
-    <header class="panel-heading">Weekly Progress</header>
+<div class="container" *ngIf="dataShown" id="batch-weekly-progress">
+    <header class="panel-heading">
+      Weekly Progress
+      <i (click)="downloadPDF()" class="fa fa-download"></i>
+    </header>
     <div class="panel-body">
       <canvas  baseChart
             [datasets]="dataShown"

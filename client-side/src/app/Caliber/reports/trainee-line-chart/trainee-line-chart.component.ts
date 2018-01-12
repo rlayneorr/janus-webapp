@@ -4,6 +4,7 @@ import { ReportingService } from '../../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
 import { Observable } from 'rxjs/Observable';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { PDFService } from '../../../services/pdf.service';
 
 /**
  * @author Robert Choboy
@@ -76,7 +77,7 @@ export class TraineeLineChartComponent implements OnInit, OnDestroy {
     }
   ];
 
-  constructor(private reportsService: ReportingService, private granularityService: GranularityService) {}
+  constructor(private reportsService: ReportingService, private granularityService: GranularityService, private pdfService: PDFService) {}
 
   ngOnInit() {
     this.granularitySubscription = Observable.combineLatest(
@@ -156,5 +157,12 @@ export class TraineeLineChartComponent implements OnInit, OnDestroy {
     // Unsubscribe from subscriptions
     if (this.granularitySubscription) { this.granularitySubscription.unsubscribe(); }
     if (this.dataSubscription) { this.dataSubscription.unsubscribe(); }
+  }
+
+  /**
+   * Downloads the chart as a PDF.
+   */
+  downloadPDF() {
+    this.pdfService.downloadPDFwithFilename('trainee-weekly-progress', `Trainee-weekly-progress`);
   }
 }
