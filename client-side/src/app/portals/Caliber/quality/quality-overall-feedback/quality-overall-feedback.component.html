@@ -1,0 +1,33 @@
+<hr style="height: 1px; border: solid 1px black; background-color: black; margin-top: -5px">
+<div class="row">
+    <h5 class="mx-auto">Overall Feedback</h5>
+</div>
+<div>
+    <div>
+        <div class="row mt-3 text-center">
+            <div class="col-md-4" *ngIf="showGood">
+                <app-feedback-icon [status]="Good" style="color:Green; font-size:25px;" css="fa-smile-o" (click)="onStatusChange('Good')"></app-feedback-icon>
+            </div>
+            <div class="col-md-4" *ngIf="!showGood">
+                <app-feedback-icon [status]="Good" style="color:Gray; font-size:25px;" css="fa-smile-o" (click)="onStatusChange('Good')"></app-feedback-icon>
+            </div>
+            <div class="col-md-4" *ngIf="showMeh">
+                <app-feedback-icon [status]="Average" css="fa-meh-o" style="color:Yellow; font-size:25px;" (click)="onStatusChange('Average')"></app-feedback-icon>
+            </div>
+            <div class="col-md-4" *ngIf="!showMeh">
+                <app-feedback-icon [status]="Average" css="fa-meh-o" style="color:Gray; font-size:25px;" (click)="onStatusChange('Average')"></app-feedback-icon>
+            </div>
+            <div class="col-md-4" *ngIf="showBad">
+                <app-feedback-icon [status]="Poor" css="fa-frown-o" style="font-size:25px; color:Red" (click)="onStatusChange('Poor')"></app-feedback-icon>
+            </div>
+            <div class="col-md-4" *ngIf="!showBad">
+                <app-feedback-icon [status]="Poor" css="fa-frown-o" style="font-size:25px; color:Gray" (click)="onStatusChange('Poor')"></app-feedback-icon>
+            </div>
+        </div>
+        <br>
+        <div class="col-md-12">
+            <textarea *ngIf="batchNote" class="form-control" [(ngModel)]="batchNote.content" (change)="saveNote(batchNote)" rows="3"></textarea>
+        </div>
+        <br>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col col-sm-12">
+  
+      <div class="pull-right">
+        <app-create-panel> </app-create-panel>
+      </div>
+  
+      <div class="input-group mb-3" class="pull-right">
+        <div class="input-group">
+  
+          <input list="dropdown-item" id="typeahead-basic" placeholder="Search for Trainee" type="text" value={{name}} class="form-control"
+            (input)="setTraineeBySearch($event)" />
+  
+          <datalist id="dropdown-item">
+            <option [value]="trainees.name" *ngFor="let trainees of traineeList">
+              {{trainees.name}} | {{trainees.email}} | {{trainees.skypeId}}
+            </option>
+          </datalist>
+  
+          <span class="icon">
+            <button type="submit" class="SearchButton">
+              <i class="fa fa-search" style="color: #868e96"></i>
+            </button>
+          </span>
+  
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <hr>

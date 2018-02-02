@@ -1,0 +1,39 @@
+a {
+    color: #f26925;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: #F26925;
+    border-bottom: 1px solid #ebe8e8;
+    border-color: white;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    color: #10009c !important;
+    transition: 1s;
+}
+
+.container {
+    font-size: 14px;
+    text-align: left;
+    margin-left: 0px;
+}
+
+.shift-category {
+    font-size: 14px;
+    margin-top: -18px;
+    margin-bottom: -13px;
+}
+
+textarea {
+    resize: none;
+    overflow-x: hidden;
+    height: 75px;
+}

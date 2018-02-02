@@ -1,0 +1,79 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" style="font-size:110%;">Panel Interview Feedback Form</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="f-group" [formGroup]="panelForm" (ngSubmit)="Submit()">
+      <div class="row">
+        <div class="col-6">
+          <app-interview-details [interviewForm]="panelForm.controls.interviewForm"></app-interview-details>
+        </div>
+        <div class="col-6">
+          <app-general-feedback [generalFeedback]="panelForm.controls.generalFeedback"></app-general-feedback>
+        </div>
+      </div>
+      <div class="top-buffer">
+      </div>
+      <div class="border border-secondary">
+        <div class="row">
+          <div class="col-12">
+            <h3 id="title" class="panel-heading">Technical Feedback</h3>
+          </div>
+          <div class="col-11">
+              <hr/>
+              <div class="row justify-content-center" id="heading" style="padding-top:4px;">
+                <div class="col-3">
+                  <strong>Technology</strong>
+                </div>
+                <div class="col-3">
+                  <strong>Result</strong>
+                </div>
+                <div class="col-2">
+                  <strong>Repanel</strong>
+                </div>
+                <div class="col-3">
+                  <strong>Comment</strong>
+                </div>
+              </div>
+              <hr/>
+            <div formArrayName="feedback">
+              <div *ngFor="let app-technical-feedback of panelForm.controls.feedback.controls; let i=index; let last=last">
+                <app-technical-feedback [technologyForm]="panelForm.controls.feedback.controls[i]"></app-technical-feedback>
+                
+                    <div class="fixedplus" *ngIf="last; else elseBlock">
+                    <button type="button" class="btn btn-secondary" id="addFeedback" (click)="addFeedback()">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                    </div>
+                    
+                    <ng-template #elseBlock>
+                        <div class="fixedmin">
+                <button class="btn btn-secondary" id="deleteFeedback" (click)="deleteFeedback(i)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+                </ng-template>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row top-buffer">
+        <div class="col-12">
+          <app-panel-overall-feedback [overallFeedback]="panelForm.controls.overallFeedback"></app-panel-overall-feedback>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-default" (click)="c('Close click')">Close</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<button class="btn btn-lg btn-secondary" [disabled]="trainee==null" (click)="open(content)">
+  Create Panel <i class="fa fa-plus" aria-hidden="true"></i>
+</button>

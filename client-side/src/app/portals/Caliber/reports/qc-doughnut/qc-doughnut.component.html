@@ -1,0 +1,14 @@
+<div class="container no-padding-donut">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Quality Audit
+      <i (click)="downloadPDF()" class="fa fa-download"></i>
+    </div>
+    <div id="chart" class="panel-body">
+      <app-graph *ngIf="chartData" [data]="(chartData) | graphData:dataSetLabels" [legend]=true [type]="chartType"></app-graph>
+      <div class="table-responsive">
+        <app-table *ngIf="chartData" [data]="(chartData) | graphData:dataSetLabels" [type]="chartType"></app-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+/* Selectors */
+a {
+	color: #F26925;
+}
+a:hover {
+	color: #2c1da1;
+	text-decoration: none;
+}
+h1 {
+	font-size: 36px;
+}
+p {
+	font-size: 14px;
+	margin: 0 0 30px 0;
+}
+
+/* Classes */
+.home-header {
+	padding: 0px;
+}
+
+/**************************************************
+	Previous Batch Code
+**************************************************/
+/* @media ( max-width : 400px) {
+	.chart-container {
+		min-height: 8.8em;
+	}
+	.container {
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+}
+@media ( min-width : 401px) and (max-width: 600px) {
+	.chart-container {
+		min-height: 11.8em;
+	}
+}
+@media ( min-width : 601px) {
+	.chart-container {
+		min-height: 25.8em;
+	}
+} */

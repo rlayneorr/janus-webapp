@@ -1,30 +1,30 @@
-<ul class="navbar-nav ml-auto" style="padding-right:15px">
+<ul class="navbar-nav ml-auto margin-nav">
   <li class="nav-item">
     <a class="nav-link" routerLink="/Caliber/home" routerLinkActive="activeLink">Home</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="showManage">
     <a class="nav-link" routerLink="/Caliber/manage" routerLinkActive="activeLink">Manage Batch</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="showAssess">
     <a class="nav-link" routerLink="/Caliber/assess" routerLinkActive="activeLink">Assess Batch</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="showQuality">
     <a class="nav-link" routerLink="/Caliber/quality" routerLinkActive="activeLink">Quality Audit</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="showPanel">
     <a class="nav-link" routerLink="/Caliber/panel" routerLinkActive="activeLink">Panel</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="showReports">
     <a class="nav-link" routerLink="/Caliber/reports" routerLinkActive="activeLink">Reports</a>
   </li>
   <li class="nav-item" (click)="$event.stopPropagation()" routerLinkActive="activeLink">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto caliber-adj-onresize">
         <li #myDrop = "ngbDropdown" ngbDropdown class="d-inline-block">
-          <a class="nav-link dropdown-toggle" id="settingsMenu" ngbDropdownToggle>Settings</a>
-          <div ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
-            <button class="dropdown-item" routerLink="/Caliber/settings/trainers" (click) = "myDrop.close()"> Trainers </button>
-            <button class="dropdown-item" routerLink="/Caliber/settings/locations" (click) = "myDrop.close()"> Locations </button>
-            <button class="dropdown-item" routerLink="/Caliber/settings/categories" (click) = "myDrop.close()"> Categories </button>
+          <a class="nav-link dropdown-toggle c-pointer" id="settingsMenu" ngbDropdownToggle >Settings</a>
+          <div  ngbDropdownMenu aria-labelledby="settingsMenu" (click)="toggleCollapse()">
+            <button class="dropdown-item c-pointer f-size" routerLink="/Caliber/settings/trainers" (click) = "myDrop.close()"> Trainers </button>
+            <button class="dropdown-item c-pointer f-size" routerLink="/Caliber/settings/locations" (click) = "myDrop.close()"> Locations </button>
+            <button class="dropdown-item c-pointer f-size" routerLink="/Caliber/settings/categories" (click) = "myDrop.close()"> Categories </button>
           </div>
         </li>
       </ul>

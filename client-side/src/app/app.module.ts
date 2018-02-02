@@ -15,15 +15,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
-import { CategoriesService } from './Caliber/services/categories.service';
+import { CategoriesService } from './portals/Caliber/services/categories.service';
 import { Trainer } from './entities/Trainer';
 
 
 import { ReportingService } from './services/reporting.service';
 import { PDFService } from './services/pdf.service';
-import { CaliberModule } from './Caliber/caliber.module';
-import { TraineeTechSkillsComponent } from './Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
+import { CaliberModule } from './portals/Caliber/caliber.module';
+import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RoleGuard } from './role-guard';
+import { CookieService } from 'ngx-cookie-service';
 
 
 // loading routes from child modules this way will lazy load them
@@ -34,9 +36,9 @@ const routes: Routes = [
     component: JanusComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'Caliber', loadChildren: './Caliber/caliber.module#CaliberModule' },
-      { path: 'AssignForce', loadChildren: './Assign-Force/assign-force.module#AssignForceModule' },
-      { path: 'TrackForce', loadChildren: './Track-Force/track-force.module#TrackForceModule' },
+      { path: 'Caliber', loadChildren: './portals/Caliber/caliber.module#CaliberModule' },
+      { path: 'AssignForce', loadChildren: './portals/Assign-Force/assign-force.module#AssignForceModule' },
+      { path: 'TrackForce', loadChildren: './portals/Track-Force/track-force.module#TrackForceModule' },
       { path: '**', pathMatch: 'full', redirectTo: '/dashboard' }
     ]
   },
@@ -64,6 +66,8 @@ const routes: Routes = [
     ChuckNorrisService,
     ReportingService,
     PDFService,
+    RoleGuard,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

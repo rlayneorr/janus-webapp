@@ -1,0 +1,70 @@
+h2 {
+    text-align: center;
+}
+
+.chartContainer {
+    padding: 0.5vmin;
+    border: 1px solid lightgrey;
+    border-top: none;
+    background: white;
+}
+
+.container {
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.data-box {
+    font-size: 80%;
+    text-align: center;
+    width: 10%;
+}
+
+.data-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3vmin;
+}
+
+.data-head {
+    font-weight: bold; 
+}
+
+.fa {
+    cursor: pointer;
+}
+
+.modal-body-row{
+    border-bottom: 1px solid LightGrey;
+    margin-bottom   : 5px;
+}
+
+.panel {
+    margin-bottom: 20px;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.panel-default {
+    border-color: #ddd
+}
+
+.table-responsive {
+    overflow: scroll; /* Scrollbar are always visible */
+    overflow: auto;   /* Scrollbar is displayed as it's needed */
+}

@@ -1,11 +1,117 @@
+.activeLink[_ngcontent-c3] {
+    box-shadow: none !important;
+    font-weight: bold !important;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+}
+
 nav {
-  background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+    /* background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%); */
+    border-bottom: 1px solid #dedede;
+}
+
+nav[_ngcontent-c2] {
+    border-bottom: 1px solid #ffffff !important;
+    height: 82px;
+    margin-bottom: 20px;
+    -webkit-box-shadow: 1px -12px 28px -1px rgba(0, 0, 0, 0.87);
+    -moz-box-shadow: 1px -12px 28px -1px rgba(0, 0, 0, 0.87);
+    box-shadow: 1px -12px 28px -1px rgba(0, 0, 0, 0.87);
+}
+
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-right: .75rem !important;
+    padding-left: .75rem !important;
+}
+
+.nav-link a:hover {
+    color: #999;
+}
+
+.nav-link:active, .nav-link:hover {
+    text-decoration: none;
+    font-weight: bold !important;
+    color: rgba(0, 0, 0, 0.86) !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 0.5) !important;
+    /* font-size: 14px !important;
+    font-weight: 600; */
+    /* font-family: 'Futura-Std-Heavy'; */
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: rgba(0,0,0,.7);
+}
+
+/* nav {
+    background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);
+    border-bottom: 1px solid #dedede;
+} */
+
+.navbar-light .navbar-nav .nav-link {
+    /* color: rgba(0, 0, 0, 0.5); */
+    color: #777;
+    font-size: 14px !important;
+    font-weight: 600;
+    font-family: 'Futura-Std-Heavy' !important;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: rgba(0,0,0,.7);
 }
 
 .rev-logo {
-  width: auto;
-  height: 2em;
-  margin-right: 2em;
+    width: auto;
+    height: 2em;
+    margin-right: 2em;
 }
 
+/***************************************************
+    Mobile Behavior
+/***************************************************/
+.calibar-nav-bg {
+    margin-top: -10px;
+    background-color: white;
+}
+
+.current-app-position {
+    position: relative; 
+    bottom: -4px;
+}
+
+.display-front {
+    z-index: 5;
+}
+
+.img-adjust-position {
+    height: 38px;
+}
+
+.nav-pad {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.shift-dropdown {
+    margin-top: -5px;
+}
+
+.shift-left {
+    margin-left: 10px;
+}
+
+.shift-down {
+    margin-top: 2px;
+}
+
+.shift-right {
+    margin-right: 10px;
+}
+
+#dropdownBasic1:hover {
+    color: black !important;
+}

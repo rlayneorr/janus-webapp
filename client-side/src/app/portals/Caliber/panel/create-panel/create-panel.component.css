@@ -1,0 +1,105 @@
+.top-buffer {
+    padding-top: 20px;
+}
+hr{
+    margin: 4px 3% 4px 3%;
+}
+label.heading {
+    margin: 0px 0px 0px 0px;
+    font-weight: 600;
+    font-size: 85%;
+}
+.panel-heading{
+    font-size: 90%!important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 10px 15px;
+}
+#heading{
+    font-family: 'Futura-Std-Bold';
+    font-size: 90%;
+}
+/* label {
+    margin: 0px 0px 0px 0px;
+    font-weight: 550;
+} */
+div.border.border-secondary {
+    padding-bottom: 30px;
+}
+.f-group {
+    margin-bottom: 0rem;
+}
+.modal-header {
+	background-color: #f1f2f4;
+	border-radius: 6px;
+}
+#title {
+    color:white;
+    font-weight: 500;
+    font-size: 125%;
+}
+/*
+* custom size for NgModal
+*/
+@media (min-width: 992px) {
+    .modal-lg {
+        max-width: 60%;
+    }
+}
+
+.align-self-end {
+    margin-bottom: 90px;
+}
+
+.border.border-secondary{
+    border-color: rgba(134, 142, 150, 0.3)!important;
+}
+.btn-secondary:disabled {
+    background-color: white;
+    color: #fa7427;
+    border-bottom: 1px solid #ebe8e8;
+    border-color: white;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: #F26925;
+    font-size: 16px; 
+    font-weight: bolder;
+    border-bottom: 1px solid #ebe8e8;
+    border-color: white;
+}
+.btn-secondary:hover:enabled {
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    color: #10009c;
+    transition: 1s;
+}
+
+.btn-primary:hover:enabled {
+    background-color: #F26925;
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+ app-alerts {
+     position: absolute;
+     z-index: 99999;
+ }
+
+ .fixedplus{
+    float: right;
+    margin-right: -2vmin;
+    margin-top: -8vmin;
+ }
+
+ .fixedmin{
+    float: right;
+    margin-top: -8vmin;
+    margin-right: -4vmin;
+ }
+
+ 

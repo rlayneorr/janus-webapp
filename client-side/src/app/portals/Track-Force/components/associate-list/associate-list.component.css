@@ -1,0 +1,97 @@
+.pointer {
+  cursor: pointer;
+}
+
+.edit {
+  /* width: 4px; */
+  width: 4%;
+}
+
+.id {
+  /* width: 10px; */
+  width: 13%;
+}
+
+.first {
+  /* width: 10px; */
+  width: 10%;
+}
+
+.last {
+  /* width: 10px; */
+  width: 10%;
+}
+
+.status {
+  /* width: 20px; */
+  width: 20%;
+}
+
+.client {
+  /* width: 20%; */
+  width: 20%;
+}
+
+.batch {
+  /* width: 20px; */
+  width: 20%;
+}
+
+#info {
+  border-color: #c8c8c8;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.pre-scrollable {
+  max-height: 300px !important;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+.well {
+  padding-top: 0px;
+}
+
+.TrackforceAssociateListTable {
+  font-size: 14px;
+}
+
+#info tr:nth-child(odd) {background-color: #FFFFFF}
+#info tr:nth-child(even) {background-color: #F9F9F9}
+
+.bk-color{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: black;
+  background-color: #ebedea;
+}
+
+.max-dim{
+width: 100%!important;
+height: 85vh!important;
+padding-top: 25px;
+margin:0px;
+}
+
+.table-responsive {
+  height: 50vh;
+}
+

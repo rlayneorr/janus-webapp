@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col">
+    <div class="panelborder">
+        
+      <h3 class="h3">Panel Feedback</h3>
+      
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Trainee Name</th>
+              <th scope="col">Date</th>
+              <th scope="col">Panelist</th>
+              <th scope="col">Panel Status</th>
+              <th scope="col">Repeat Topics</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let panel of panelList">
+              <td>{{panel.trainee.name}}</td>
+              <td>{{panel.interviewDate}}</td>
+              <td>{{panel.panelist.name}}</td>
+              <td class="chesymbol" *ngIf="panel.status=='Repanel'">
+                <app-feedback-icon css="panel-status-failed fa fa-times fa-2x panel-glyph text-red">
+                </app-feedback-icon>
+              </td>
+              <td class="chesymbol" *ngIf="panel.status=='Pass'">
+                <app-feedback-icon css="fa fa-check fa-2x text-green">
+                </app-feedback-icon>
+              </td>
+
+
+              <div *ngIf="panel.status == 'Repanel'; else minus_sign">
+                <ng-container *ngFor="let feedback of panel.feedback">
+                  <tr class="strong" *ngIf="feedback.status == 'Repanel'">{{feedback.technology.skillCategory}}</tr>
+                </ng-container>
+              </div>
+
+              <ng-template #minus_sign>
+                <app-feedback-icon css="fa-minus fa-2x text-yellow negsymbol">
+                </app-feedback-icon>
+              </ng-template>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row">
+        <div class="col">
+
+          <h6 class="h6" *ngIf="panelList == null">
+            This is {{name}} 's first panel!
+          </h6>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

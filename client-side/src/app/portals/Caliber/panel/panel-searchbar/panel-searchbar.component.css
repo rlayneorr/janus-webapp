@@ -1,0 +1,72 @@
+.dropdown-menu{
+    overflow:auto;
+  }
+
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+ app-alerts {
+     position: absolute;
+     z-index: 99999;
+ }
+
+
+ .icon {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    margin-left: 17px;
+    margin-top: 17px;
+    z-index: 3;
+    color: grey;
+}
+
+
+.input-group .form-control{
+    width: 250px;
+    padding-right: 35px;
+}
+
+
+input{
+
+        width: 100%;
+        height: 34px;
+        border-radius:4px !important;
+        padding: 6px 12px;
+        font-size: 14px;
+        position: absolute;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+
+}
+body{
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+.SearchButton {
+    background-color: Transparent;
+    border: none;
+    padding-right: 30px;
+    height: 34px;
+    width: 35px;
+    overflow: hidden;
+    outline: none;
+}
+
+hr{
+    border-width: 1px;
+    margin-bottom: 1rem;
+    margin-top: 0rem;
+    margin-left: 0px;
+    margin-right: 0px;
+}

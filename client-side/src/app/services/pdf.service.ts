@@ -32,42 +32,45 @@ export class PDFService {
   constructor(private http: HttpClient) { }
 
   /**
+   * Creates a PDF from a given element id, then downloads it.
+   * It creates an image of the elements and saves it as a PDF.
+   * @param chartToDownload - Element id name.
+   */
+  public downloadPDF(chartToDownload): void {
+    html2canvas(document.getElementById(chartToDownload)).then(canvas => {
+        const pdf = new jsPDF();
+        pdf.addImage(canvas, 'JPEG', 10, 10, 190, 0);
+        pdf.save('report.pdf');
+    });
+  }
+
+  /**
    * Creates a PDF with input name from a given element id, then downloads it.
    * It creates an image of the elements and saves it as a PDF.
    * @param chartToDownload - Element id name.
    * @param filename - Name of the file.
    */
   public downloadPDFwithFilename(chartToDownload, filename): void {
-    const chart = document.getElementById(chartToDownload);
-    let newHeight = 0;
-    let newWidth = 180;
-    html2canvas(chart).then(canvas => {
+    html2canvas(document.getElementById(chartToDownload)).then(canvas => {
         const pdf = new jsPDF();
-        if (chart.clientHeight > pdfHeight) {
-          newWidth = this.getNewWidth(chart.clientHeight, chart.clientWidth);
-          newHeight = this.convertPixelsToMM(pdfHeight);
-        }
-
-        if (chart.clientWidth > pdfWidth ) {
-          newWidth = this.convertPixelsToMM(pdfWidth);
-          newHeight = this.getNewHeight(chart.clientHeight, chart.clientWidth);
-        }
-        pdf.addImage(canvas, 'JPEG', 10, 10, newWidth, newHeight);
+        pdf.addImage(canvas, 'JPEG', 10, 10, 190, 0);
         pdf.save(filename);
     });
   }
 
   /**
-   * Creates a PDF from all the charts with class name 'charts', then downloads it.
-   * It creates an image of each chart element and saves it as one PDF.
+   * Creates a PDF with input name from a given element id, then downloads it.
+   * It creates an image of the elements and saves it as a PDF.
+   * @param chartToDownload - Element id name.
+   * @param filename - Name of the file.
    */
   public downloadCharts(): void {
     const charts = document.getElementsByClassName('charts');
     const pdf = new jsPDF();  // default size in mm
     for (let i = 0; i < charts.length; i++) {
       charts[i].setAttribute('id', `chart${i}`);
-      const originalHeight = this.convertPixelsToMM(charts[i].clientHeight);
-      const originalWidth = this.convertPixelsToMM(charts[i].clientWidth);
+      const originalHeight = charts[i].clientHeight;
+      const originalWidth = charts[i].clientWidth;
 
       html2canvas(charts[i]).then(canvas => {
         canvas = canvas.toDataURL('image/jpeg', 1);
@@ -77,36 +80,22 @@ export class PDFService {
           let newHeight = 0;
           let newWidth = 180;
 
-          if (charts[i].clientHeight > pdfHeight) {
-            newWidth = this.getNewWidth(charts[i].clientHeight, charts[i].clientWidth);
-            newHeight = this.convertPixelsToMM(pdfHeight);
-            if (this.convertMMtoPixels(newWidth) > pdfWidth) {
-              newWidth = 180;
-              newHeight = 0;
-            }
-          } else if (charts[i].clientWidth > pdfWidth) {
-            newWidth = this.convertPixelsToMM(pdfWidth);
-            newHeight = this.getNewHeight(charts[i].clientHeight, charts[i].clientWidth);
-            if (this.convertMMtoPixels(newWidth) > pdfWidth) {
-              newWidth = newWidth / 1.2;
-              newHeight = newHeight / 1.2;
+          if (originalHeight > pdfHeight) {
+            if (originalHeight - pdfHeight > 500) {
+              newHeight = newHeight / 1.5;
+              newWidth = newWidth / 1.5;
             }
           }
 
-          // Add image to PDF
-          pdf.addImage(canvas, 'JPEG', 10, 10, newWidth, newHeight);
-
           // SAVE PDF
           if ((i + 1) === charts.length) {
+            // Add image, add new page, and safe PDF
+            pdf.addImage(canvas, 'JPEG', 10, 10, newWidth, newHeight);
             pdf.save('Charts');
           } else {
-            // Add new page
+            // Add image and add new page
+            pdf.addImage(canvas, 'JPEG', 10, 10, newWidth, newHeight);
             pdf.addPage();
-          }
-        } else {
-          // SAVE PDF
-          if ((i + 1) === charts.length) {
-            pdf.save('Charts');
           }
         }
 
@@ -130,32 +119,6 @@ export class PDFService {
       // console.log('Error generating PDF!');
       // console.log(err);
     });
-  }
-
-  convertPixelsToMM(number): number {
-    return (number / 75 ) * 25.4;
-  }
-
-  convertMMtoPixels(number): number {
-    return (number / 25.4) * 75;
-  }
-
-  /**
-   * Returns new width in mm based pdfHeight.
-   */
-  getNewWidth(originalHeight, originalWidth) {
-    // (original width / original height) x new height = new width
-    const newWidth = (originalWidth / originalHeight) * pdfHeight;
-    return this.convertPixelsToMM(newWidth);
-  }
-
-  /**
-   * Returns new height in mm based pdfHeight.
-   */
-  getNewHeight(originalHeight, originalWidth) {
-    // (original height / original width) x new width = new height
-    const newHeight = (originalHeight / originalWidth) * pdfWidth;
-    return this.convertPixelsToMM(newHeight);
   }
 
 }

@@ -1,0 +1,106 @@
+.h3 {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color:white;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-color: #F26925;
+}
+thead{
+    font-size: 14px;
+    border-top-style: none;
+    width: 80%;
+}
+.text-green {
+    color: #81f575;
+}
+
+.text-red {
+    color: #ff7575;
+}
+.text-yellow {
+    color: rgb(252, 221, 115);
+}
+
+.glyphicon-remove{
+content: "\e014";
+}
+.table{
+    width: 98%;
+    max-width: 100%;
+    background-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -1px;
+}
+
+.panelborder{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    margin-bottom: 19px;
+}
+.btn-secondary {
+    background-color: white;
+    color: #fa7427;
+    border-bottom: 1px solid #ebe8e8;
+    border-color: white;
+}
+.btn-secondary:hover:enabled {
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    color: #10009c;
+    transition: 1s;
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+ app-alerts {
+     position: absolute;
+     z-index: 99999;
+ }
+
+.h6 {
+     width: 98%;
+     text-align: center;
+    background-color:#337ab7;
+    color:white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+ }
+ .strong{
+    font-weight: 700;
+    line-height: 1.42857143;
+    font-family: 'Futura-Std-Book';
+    text-align: center;
+ }
+ .center{
+     text-align: center;
+ }
+ .chesymbol{
+     padding-left: 37px;
+     padding-top: 0px;
+ }
+ .table-responsive{
+    padding-bottom: 11px;
+ }
+ .close {
+    height: 50px;
+    width: 100px;
+    background-color: white;
+    border-radius: 5px;
+ }
+ .close:after {
+    float:left;
+    content:"\d7";
+    font-size:100px;
+    color:red;
+    font-weight:bold;
+    left:-2px
+ }

@@ -1,0 +1,249 @@
+app-alerts {
+    position: absolute;
+    z-index: 99999;
+}
+
+textarea {
+    resize: none;
+}
+
+/* IDs */
+#addTrainerButton {
+    padding: 10px;
+}
+
+#assessTable td{
+    padding: 8px;
+}
+
+#main-container {
+    margin-top:2%;
+ 
+}
+
+#weekTabset .nav-tabs{
+    margin-top: -5px;
+    border-bottom: none;
+}
+
+#weekTabset .nav-link {
+    color: #F26925 !important;
+    z-index: 1;
+}
+
+#weekTabset .nav-link:hover{
+    color: #23527c !important;
+    background-color: #f1f2f4;
+    transition: 1s;
+}
+
+#weekTabset .nav-link.active{
+    color: #555 !important;
+    background-color: white !important;
+    cursor: default;
+    border-bottom: solid 1px white;
+}
+
+/* Classes */
+.assessment-area {
+    width:80px;
+    text-align: center;
+    align-content: center;
+
+}
+
+.assessment-header {
+    height: 10%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.batch-select{
+    color: #F26925;
+    border: 0mm;
+    width: auto;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Futura-Std-Heavy';
+}
+
+.batch-select:hover{
+    color: #23527c !important;
+    background-color: #f1f2f4;
+    transition: 1s;
+}
+
+.btn-custom:focus,.btn-custom:active, .btn-secondary:not([disabled]):not(.disabled).active, .btn-secondary:not([disabled]):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    border: solid 1px blue !important;
+    border-radius: 3px 3px 0px 0px !important;
+    box-shadow: none !important;
+    background-color: #f1f1f1 !important;
+    color: #F26925 !important;
+   transition: 0s;
+}
+
+.b-default {
+    background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%) !important;
+    border-color: #ccc !important;
+}
+
+.b-default:hover {
+    background-color: #666 !important;
+}
+
+.btn-add {
+    background-color: #F26925;
+    color: white;
+}
+
+.btn-danger {
+    float: center !important;
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+.btn-secondary {
+    background-color: white;
+    color: #F26925;
+    border-bottom: 1px solid #ebe8e8;
+    border-color: white;
+    transition: 1s;
+}
+
+.btn-secondary:hover {
+    background-color: #f1f2f4;
+    border: 1px solid #f1f2f4;
+    color: #23527c;
+    transition: 1s;
+}
+
+.btn-update {
+    background-color: #F26925;
+    color: white;
+}
+
+.buttons{
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 7px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+.close:hover {
+    opacity: .4;
+}
+
+.col-sm-2 {
+    padding-top: 10px;
+}
+
+.divider {
+    margin: 10px;
+}
+
+.fa-pencil {
+    cursor: pointer;
+}
+
+.fa-user {
+    cursor: pointer;
+}
+
+.float-right {
+    float: right;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: -1px;
+    z-index: 1;
+}
+
+.no-padding {
+    padding: 0px;
+    border: 0px;
+}
+
+.note {
+    width: 100%;
+    font-size: 14px;
+}
+
+.p {
+    text-align:center;
+}
+
+.revature-button {
+    background-color: #F26925;
+}
+
+.revature-orange{
+    color: #F26925;
+}
+
+.revature-button:hover {
+    background-color: #f1f2f4;
+    border: 1px solid #f1f2f4;
+    color: #23527c;
+    transition: 1s;
+}
+
+.save-button {
+	border: solid 1px;
+	padding: 6px;
+	box-shadow: 1px 3px 4px #888888;
+	color: #F26925 !important;
+	background: white;
+    border-radius: 5px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 6px;
+}
+
+.save-button:hover {
+    color: #0053b6 !important;
+    transition: 1s;
+}
+
+.stickyHead {
+    background-color: #ffffff;
+    box-shadow: 0px 3px 3px 0px rgb(240, 240, 240);
+    position: fixed;
+    top: 0;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.trainee-header {
+    min-width: 10%;
+    width: 10%;
+    margin-right: 13vmin !important;
+    text-align: center;
+    font-weight: bold;
+}

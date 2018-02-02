@@ -1,0 +1,67 @@
+thead {
+    font-weight: bold;
+    text-align: center;
+}
+
+.container {
+    padding: 0;
+}
+
+.panel {
+    margin-bottom: 20px;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.panel-default {
+    border-color: #ddd
+}
+
+.panel-repeat-topics-passed {
+    color: rgb(252,221,115);
+}
+
+.panel-status-failed {
+    color: #ff7575;
+}
+
+.panel-status-pass {
+    color: #81f575;
+}
+
+.table td, .table th {
+    border-top: none !important;
+}
+
+.table tr {
+    border-top: 1px solid #e9ecef !important;
+    border-bottom-right-radius: .5vmin;
+    border-bottom-left-radius: .5vmin;
+    text-align: center;
+}
+
+.trainee-name {
+    text-align: left;
+}
+
+@media only screen and (max-width: 765px) {
+    .table-mobile {
+       border: solid 1px #ddd;
+       border-radius: 3px;
+    }
+}

@@ -1,0 +1,36 @@
+select {
+    color: #F26925;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: #F26925;
+    border-bottom: 1px solid #ebe8e8;
+    border-color: white;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    color: #10009c;
+    transition: 1s;
+}
+
+.btn:focus,.btn:active {
+    outline: none;
+    box-shadow: none;
+ }
+
+ .btn-custom:focus,.btn-custom:active {
+    border: solid 1px blue !important;
+    border-radius: 3px 3px 0px 0px !important;
+    box-shadow: none !important;
+    background-color: #f1f1f1 !important;
+    color: #F26925 !important;
+    transition: 0s;
+ }
+
+ .custom-bold {
+     font-weight: bolder !important;
+ }

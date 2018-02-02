@@ -1,0 +1,248 @@
+<!-- TABS **START** -->
+<!-- <div id="main-container"> -->
+<div class="container pad-container f-size">
+
+  <div class="row">
+    <div class="col col-xs-5">
+
+      <!-- <select class="align-on-mobile" #yearSelect class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchYear(yearSelect.value)">
+        <option [value]="year" *ngFor="let year of years">{{year}}</option>
+      </select> -->
+
+      <div ngbDropdown class="d-inline-block">
+
+        <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic1" ngbDropdownToggle>
+          <strong>{{currentYear}}</strong>
+        </button>
+
+        <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic1" (click)="switchYear(currentYear)">
+          <div *ngFor="let year of years" class="custom-bold">
+            <button class="dropdown-item c-pointer f-size" (click)="changeYear(year)">
+              <strong>{{ year }}</strong>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div ngbDropdown class="d-inline-block">
+
+        <!-- <select #bat class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchBatch(bat.value)">
+          <option [value]="batch.batchId" *ngFor="let batch of yearBatches">{{batch.trainer.name}} - {{batch.startDate | date: 'shortDate'}}</option>
+        </select> -->
+
+        <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic2" ngbDropdownToggle>
+          <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
+        </button>
+
+        <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic2" (click)="switchBatch(selectedBatch.batchId)">
+          <div *ngFor="let  batch of yearBatches" class="custom-bold">
+            <button class="dropdown-item c-pointer f-size" (click)="changeBatch(selectedBatch)">
+              <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col col-xs-7 rightHeaderTab">
+      <button class="btn btn-secondary b-top-radius f-size" (click)="open(addAssessmentContent)">
+        <strong>Create Assessment
+          <span class="fa fa-plus"></span>
+        </strong>
+      </button>
+    </div>
+  </div>
+
+  <hr class="shift-hr" style="width: 100%">
+
+  <br>
+
+  <div class="row">
+    <div class="col">
+      <ngb-tabset id="weekTabset" activeId="{{this.selectedWeek}}" (tabChange)="fetchNews($event)" style="margin-top: -2px; border-bottom: white">
+        <ngb-tab id="{{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index">
+          <ng-template ngbTabTitle>
+            <div>Week {{i+1}}</div>
+          </ng-template>
+          <ng-template ngbTabContent></ng-template>
+        </ngb-tab>
+        <ngb-tab id="+" [disabled]="true" (click)="open(addWeek)" class="no-padding">
+          <ng-template ngbTabTitle class="no-padding">
+            <div (click)="open(addWeekContent)">
+              <span class="fa fa-plus"></span>
+            </div>
+          </ng-template>
+          <ng-template ngbTabContent></ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+  <!-- TABS **END** -->
+  <div class="row">
+    <div class="col">
+      <table class="table table-mobile table-responsive" style="border-collapse: collapse;">
+        <thead [ngClass]="{'stickyHead':pageOffsetValue > 235}">
+          <thead>
+          <tr>
+            <th class="trainee-header">
+              <div class="trainee-header">Trainee</div>
+            </th>
+            <th class="clickable assessment-header" *ngFor="let assessment of this.assessments" (click)="editAssessment(editAssessmentContent, assessment);">
+              <div class="assessment-header">{{assessment.category.skillCategory}} {{assessment.type}} ({{getPercentage(assessment)}}%)</div>
+            </th>
+            <th class="note">
+              Notes
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trainee of selectedBatch.trainees">
+            <td>
+              {{trainee.name}}
+            </td>
+            <td *ngFor="let assessment of assessments">
+              <input #inputGradeScore class="form-control assessment-area" type="text" [value]="getGrade(trainee, assessment).score" (change)="updateGrade(trainee, assessment, inputGradeScore)">
+            </td>
+            <td>
+              <textarea #inputNote *ngIf="trainee" class="form-control note" id="exampleTextarea" rows="2" [value]="getNote(trainee).content"
+                (change)="updateNote(getNote(trainee), inputNote)"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Average</strong>
+            </td>
+            <td *ngFor="let assessment of assessments" class="centered">{{getAssessmentAverage(assessment) | number:'1.2-2'}}%</td>
+            <td style="width: 100%">
+              <strong>Weekly Batch Average: </strong>{{getOverallAverage() | number:'1.2-2'}}%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea> -->
+      <textarea #inputBatchNote *ngIf="this.batches" class='form-control' placeholder="Enter your overall feedback on the batch" [value]="getWeekBatchNote(this.selectedBatch).content" (change)="updateNote(getWeekBatchNote(this.selectedBatch), inputBatchNote)"></textarea>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <a ng-click="c('Close click');" ng-show="showFloppy" class="save-button fade-in c-pointer">
+        <span class="fa fa-floppy-o fa-2x" aria-hidden="true"></span> Save
+      </a>
+    </div>
+  </div>
+</div>
+<br>
+<!-- </div> -->
+
+<!--ADD WEEK MODAL **START** -->
+<ng-template #addWeekContent let-c="close" let-d="dismiss" id="addWeek">
+  <div class="modal-body">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p class="p">Add a new week?</p>
+    <p class="p">This process cannot be undone.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary revature-button clickable" (click)="addWeek(); c('Close click');">Yes</button>
+    <button type="button" class="btn btn-default" (click)="c('Close click');">No</button>
+  </div>
+</ng-template>
+<!--ADD WEEK MODAL **END**  -->
+
+<!--ADD ASSESSMENT MODAL **START** -->
+<ng-template #addAssessmentContent let-c="close" let-d="dismiss">
+  <div class="modal-header" style="background-color: #f1f2f4">
+    <h4 class="modal-title" style="font-size: 18px">Create New Assessment</h4>
+    <button type="button" class="close clickable" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group f-size">
+      <label>
+        <strong>Assessment Category:</strong>
+      </label>
+      <select #cat class="form-control f-size" id="categorySelect" (change)="changeCategory(cat)">
+        <option value="" disabled>Select Assessment Category</option>
+        <option *ngFor="let category of this.categories">{{category | categorySkill}}</option>
+      </select>
+    </div>
+    <div class="container f-size" style="padding: 0px">
+      <div class="row">
+        <div class="col-sm-6">
+          <label>
+            <strong>Max Points:</strong>
+          </label>
+          <input type="number" class="form-control f-size" value="100" [(ngModel)]="newAssessment.rawScore" placeholder="99">
+        </div>
+        <div class="col-sm-6">
+          <label>
+            <strong>Assessment Type:</strong>
+          </label>
+          <select class="form-control f-size" id="typeSelect" [(ngModel)]="newAssessment.type">
+            <option [ngValue]="undefined" selected disabled>Select Assessment Test</option>
+            <option>Exam</option>
+            <option>Verbal</option>
+            <option>Project</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="margin-top:5px">
+    <button class="btn btn-revature f-size" (click)="this.addAssessment(); c('Close click')">Save</button>
+    <button class="btn b-default f-size" (click)="c('Cross click')">Close</button>
+  </div>
+</ng-template>
+<!--ADD ASSESSMENT MODAL **END**  -->
+
+<!-- EDIT ASSESSMENT MODAL **START** -->
+<ng-template #editAssessmentContent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Edit Assessment</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Assessment Category:</label>
+      <select #cat class="form-control" id="categorySelect" (change)="editCategory(cat)" [value]="editingAssessment.category.skillCategory">
+        <option *ngFor="let category of this.categories">{{category | categorySkill}}</option>
+      </select>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Max Points:</label>
+          <input type="number" class="form-control" value="100" [(ngModel)]="editingAssessment.rawScore">
+        </div>
+        <div class="col-sm-6">
+          <label>Assessment Type:</label>
+          <select class="form-control" id="typeSelect" [(ngModel)]="editingAssessment.type">
+            <option>Exam</option>
+            <option>Verbal</option>
+            <option>Project</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" style="position: absolute; left: 2vmin;" class="btn btn-danger clickable" (click)="deleteAssessment(); c('Close click');">Delete</button>
+    <button type="button" class="btn btn-primary revature-button clickable" (click)="updateAssessment(); c('Close click');">Update</button>
+    <button class="btn btn-default" (click)="c('Cross click')">Close</button>
+  </div>
+</ng-template>
+<!--EDIT ASSESSMENT MODAL **END**  -->
+
+<div detect-scroll (onScroll)="getPageOffsetHeight($event)"></div>

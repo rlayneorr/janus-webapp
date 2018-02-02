@@ -1,0 +1,83 @@
+/* Tags */
+td {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+    font-weight: 800;
+}
+
+/* Classes */
+.container {
+    margin-bottom: 20px;
+    padding: 0px;
+}
+
+.feedback-heading {
+    background: #72A4C2;
+    color: white;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.flex-col {
+    flex: 1;
+}
+
+.flex-container {
+    width: 100%;
+    padding-top: 8px;
+    display: flex;
+}
+
+.flex-grid {
+    display: flex;
+}
+
+.left {
+    text-align: left;
+}
+
+.overall-feedback-title {
+    font-weight: 500;
+    text-align: left;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.panel-status-failed {
+    color: #ff7575;
+}
+
+.panel-status-pass {
+    color: #81f575;
+}
+
+.row-border {
+    border-bottom: solid 1px #ddd;
+}
+
+@media only screen and (max-width: 765px) {
+    .table-mobile {
+       border: solid 1px #ddd;
+       border-radius: 3px;
+    }
+}

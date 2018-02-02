@@ -1,0 +1,67 @@
+<div class="container pad-container f-size">
+
+    <div class="row">
+
+        <div class="col">
+            <!-- <button _ngcontent-c11="" aria-haspopup="true" class="button dropdown-toggle"(change)="onYearSelect(yearSelect.value)" id="week" ngbdropdowntoggle="" value="0" aria-expanded="false">Week (All)</button>-->
+            <form name="batchSelector" class="form-inline">
+
+                <div ngbDropdown class="d-inline-block">
+
+                    <!-- <select #yearSelect name="yearSelect" (change)="onYearSelect(yearSelect.value)" class="btn btn-secondary btn-custom b-top-radius mr-3 custom-bold">
+                        <option [value]="year" *ngFor="let year of getTrackedYears()" class="custom-bold">{{ year }}</option>
+                    </select> -->
+
+                    <button class="btn btn-secondary  btn-custom b-top-radius" id="dropdownBasic1" ngbDropdownToggle>
+                        <strong>{{ currentYear }}</strong>
+                    </button>
+
+                    <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic1" (click)="onYearSelect(currentYear)">
+                        <div *ngFor="let year of getTrackedYears()" class="custom-bold">
+                            <button class="dropdown-item c-pointer" (click)="setCurrentYear(year)" style="font-size: 12px">
+                                <b>{{ year }}</b>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div ngbDropdown class="d-inline-block mr-2">
+
+                        <!-- <select name="batchSelect" #batchSelect *ngIf="getBatchesOfCurrentYear().length > 0" (change)="onBatchSelect(batchSelect.value)"
+                            class="btn btn-custom btn-secondary b-top-radius custom-bold mr-3">
+                            <option [value]="batch.batchId" *ngFor="let batch of getBatchesOfCurrentYear()" [selected]="batch.batchId === currentBatch.batchId">
+                                {{ batch.trainer.name }} - {{ batch.startDate | date:"MM/dd/yy" }}
+                            </option>
+                        </select> -->
+
+                        <button *ngIf="getBatchesOfCurrentYear().length > 0" (change)="onBatchSelect(currentBatch)" class="btn btn-secondary  btn-custom b-top-radius"
+                            id="dropdownBasic2" ngbDropdownToggle>
+                            <strong>{{ currentBatch.trainer.name }} - {{ currentBatch.startDate | date:"MM/dd/yy" }}</strong>
+                        </button>
+
+                        <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                            <div *ngFor="let batch of getBatchesOfCurrentYear()" class="custom-bold">
+                                <button class="dropdown-item c-pointer" style="font-size: 12px" (click)="currentBatch = batch">
+                                    <b>{{ batch.trainer.name }} - {{ batch.startDate | date:"MM/dd/yy" }}</b>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <hr class="w-100 shift-hr" />
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <app-quality-feedback *ngIf="currentBatch.trainees.length > 0" [batch]="currentBatch"></app-quality-feedback>
+        </div>
+    </div>
+
+</div>

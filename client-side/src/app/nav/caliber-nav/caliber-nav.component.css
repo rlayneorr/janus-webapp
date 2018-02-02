@@ -1,3 +1,69 @@
 .activeLink{
     box-shadow: 0px 2px 0px #ff8737;
 }
+
+.activeLink[_ngcontent-c3] {
+    box-shadow: none !important;
+    font-weight: bold !important;
+    color: rgba(0, 0, 0, 0.86) !important;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+}
+
+.dropdown-settings {
+    margin-left: 0px;
+}
+
+.margin-nav {
+    margin-top: -3px; 
+    margin-right: 85px;
+}
+
+/* nav {
+    background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);
+    border-bottom: 1px solid #dedede;
+} */
+
+nav[_ngcontent-c2] {
+    border-bottom: 1px solid #ffffff !important;
+    height: 82px;
+    margin-bottom: 20px;
+    -webkit-box-shadow: 1px -12px 28px -1px rgba(0, 0, 0, 0.87);
+    -moz-box-shadow: 1px -12px 28px -1px rgba(0, 0, 0, 0.87);
+    box-shadow: 1px -12px 28px -1px rgba(0, 0, 0, 0.87);
+}
+
+.nav-link {
+    margin-left: 10px;
+}
+
+.nav-link:active, .nav-link:hover {
+    text-decoration: none;
+    font-weight: bold !important;
+    color: rgba(0, 0, 0, 0.86) !important;
+}
+
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-right: .75rem !important;
+    padding-left: .75rem !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    /* color: rgba(0, 0, 0, 0.5); */
+    color: #777;
+    font-size: 14px !important;
+    font-weight: 600;
+    font-family: 'Futura-Std-Heavy' !important;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: rgba(0,0,0,.7);
+}
+
+.rev-logo {
+    width: auto;
+    height: 2em;
+    margin-right: 2em;
+}

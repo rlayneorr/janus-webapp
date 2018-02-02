@@ -1,0 +1,76 @@
+
+/* Tags */
+canvas {
+    padding: 3vmin;
+}
+
+tbody {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+td {
+    width: auto !important;
+}
+
+th {
+    text-align: left;
+}
+
+tr {
+    padding-right: none !important;
+    padding-left: none !important;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+tr:last-child, tr:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+}
+
+/* Classes*/
+.chart-container {
+	padding: .5em;
+	background-color: #ffffff;
+}
+
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.top5 {
+	margin-top: .5em;
+}
+
+.topic-heading {
+    font-weight: bolder;
+}
+
+.trainee-name {
+    text-align: left;
+}
+
+@media only screen and (max-width: 765px) {
+    .table-mobile {
+       border: solid 1px #ddd;
+       border-radius: 3px;
+    }
+}

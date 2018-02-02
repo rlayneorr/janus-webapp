@@ -1,0 +1,142 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{batchType}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div class="row">
+
+    <div class="form-group col-md-6 col-sm-6">
+      <label for="trainingName">
+        <strong>Training Name:</strong>
+      </label>
+      <input [(ngModel)]="batch.trainingName" type="text" class="form-control" id="trainingName" placeholder="1611 Jul11 Java"
+        ng-required="true">
+    </div>
+
+    <div class="form-group col-md-6 col-sm-6">
+      <label for="trainingType">
+        <strong>Training Type:</strong>
+      </label>
+      <select [ngModel]="defaultValue1" [(ngModel)]="batch.trainingType" class="form-control" id="trainer">
+        <option [disabled]="true">{{defaultValue1}}</option>
+        <option *ngFor="let trainType of trainingTypes">{{trainType}}</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-md-6 col-sm-6">
+      <label for="skills">
+        <strong>Skill Type:</strong>
+      </label>
+      <select [ngModel]="defaultValue2" [(ngModel)]="batch.skillType" class="form-control" id="skills">
+        <option [disabled]="true">{{defaultValue2}}</option>
+        <option *ngFor="let skill of skills">{{skill}}</option>
+      </select>
+    </div>
+
+    <!-- Dropdown for location -->
+    <div class="form-group col-md-6 col-sm-6">
+      <label for="location">
+        <strong>Location:</strong>
+      </label>
+      <select #selectLocation (change)="onLocationSelect(selectLocation.value)" class="form-control" id="trainer">
+        <option value="" disabled>Select Location</option>
+        <option *ngFor="let location of locations" [value]="location.addressId" [selected]="batch.address ? batch.address.addressId === location.addressId : false">{{ location | addressToString }}</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-md-6 col-sm-6">
+      <label for="trainer">
+        <strong>Trainer:</strong>
+      </label>
+      <select #selectCreateBatchTrainer (change)="onTrainerSelect(selectCreateBatchTrainer.value)" class="form-control" id="trainer">
+        <option value="">Select Trainer</option>
+        <option *ngFor="let trainer of trainerService.listSubject | async" [value]="trainer.trainerId" [selected]="batch.trainer ? batch.trainer.trainerId === trainer.trainerId : false">{{trainer.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-6">
+      <label for="trainer">
+        <strong>Co-Trainer:</strong>
+      </label>
+      <select #selectCreateBatchCoTrainer (change)="onCoTrainerSelect(selectCreateBatchCoTrainer.value)" class="form-control" id="trainer">
+        <option value="">Select Co-Trainer</option>
+        <option *ngFor="let trainer of trainerService.listSubject | async" [value]="trainer.trainerId" [selected]="batch.cotrainer ? batch.coTrainer.trainerId === trainer.trainerId : false">{{trainer.name}}</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-md-6 col-sm-6" moment-picker="startDate.model" format="YYYY-MM-DD">
+      <label for="start-date">
+        <strong>Start Date:</strong>
+      </label>
+      <div class="input-group" id="start-date" data-datepicker="true">
+        <input class="form-control" [(placeholder)]="batch.startDate" name="dp" [(ngModel)]="batch.startDate" ngbDatepicker #d="ngbDatepicker">
+        <button class="input-group-addon" (click)="d.toggle()" type="button">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-6" moment-picker="endDate.model" format="YYYY-MM-DD">
+      <label for="end-date">
+        <strong>End Date:</strong>
+      </label>
+      <div class="input-group" id="end-date" data-datepicker="true">
+        <input class="form-control" [(placeholder)]="batch.endDate" name="dp2" [(ngModel)]="batch.endDate" ngbDatepicker #d2="ngbDatepicker">
+        <button class="input-group-addon" (click)="d2.toggle()" type="button">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-md-6 col-sm-6">
+      <label for="goodGrade">
+        <strong>Good Grade:</strong>
+        <span title="The minimum acceptable grade." alt="The minimum acceptable grade." class="glyphicon glyphicon-question-sign"></span>
+      </label>
+      <input [(ngModel)]="batch.goodGradeThreshold" ng-change="setMinGrade()" type="number" min="0" step="1" class="form-control"
+        id="goodGrade" placeholder="80" ng-required="true">
+    </div>
+
+    <div class="form-group col-md-6 col-sm-6">
+      <label for="borderlineGrade">
+        <strong>Passing Grade:</strong>
+        <span title="The minimum grade required to pass. Falling below this grade will likely result in disciplinary action." alt="The minimum grade required to pass. Falling below this grade will likely result in disciplinary action."
+          class="glyphicon glyphicon-question-sign"></span>
+      </label>
+      <input [(ngModel)]="batch.borderlineGradeThreshold" ng-change="lowerMinGrade()" type="number" min="0" step="1" class="form-control"
+        id="borderlineGrade" placeholder="50" ng-required="true">
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="modal-footer">
+  <button *ngIf="!isNewBatch" class="btn btn-primary" (click)="save()">
+    <strong>Update</strong>
+  </button>
+  <button *ngIf="isNewBatch" class="btn btn-primary" (click)="create()">
+    <strong>Save</strong>
+  </button>
+</div>

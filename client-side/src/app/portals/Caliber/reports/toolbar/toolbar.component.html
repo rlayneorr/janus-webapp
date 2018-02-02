@@ -1,0 +1,108 @@
+<div class="container pad-container" *ngIf="batchList">
+
+  <div class="row">
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button ngbDropdownToggle class="btn btn-secondary btn-custom b-top-radius c-pointer f-size" id="year" [value]="yearSelect">
+          <strong>{{yearSelect}}</strong>
+        </button>
+        <div class="dropdown-year" ngbDropdownMenu aria-labelledby="year">
+          <div *ngFor="let year of yearList">
+            <button class="dropdown-item c-pointer f-size" [value]="year" (click)="yearOnClick(year)">
+              <strong>{{year}}</strong>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div ngbDropdown class="d-inline-block">
+        <button ngbDropdownToggle class="btn btn-secondary btn-custom b-top-radius c-pointer f-size" id="batch" [value]="batchSelect">
+          <strong>{{currentBatch.trainer.name}} - {{ currentBatch.startDate | date: 'MM/dd/yyyy'}}</strong>
+        </button>
+        <div class="dropdown-year" ngbDropdownMenu aria-labelledby="batch">
+          <div *ngFor="let batch of batchYearList">
+            <button class="dropdown-item c-pointer f-size" [value]="batch.batchId" (click)="batchOnClick(batch.batchId)">
+              <strong>{{ batch.trainer.name }} - {{ batch.startDate | date: 'MM/dd/yyyy'}}</strong>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div ngbDropdown class="d-inline-block">
+        <button ngbDropdownToggle class="btn btn-secondary btn-custom b-top-radius c-pointer f-size" id="week" [value]="weekSelect"
+          *ngIf="weekSelect === 0">
+          <strong>Week (All)</strong>
+        </button>
+        <button ngbDropdownToggle class="btn btn-secondary btn-custom b-top-radius c-pointer f-size" id="week" [value]="weekSelect"
+          *ngIf="weekSelect > 0">
+          <strong>Week {{ weekSelect }}</strong>
+        </button>
+        <div class="dropdown-year" ngbDropdownMenu aria-labelledby="week">
+          <div *ngFor="let week of weekList">
+            <button class="dropdown-item c-pointer f-size" [value]="week" (click)="weekOnClick(week)" *ngIf="week === 0">
+              <strong>All</strong>
+            </button>
+            <button class="dropdown-item c-pointer f-size" [value]="week" (click)="weekOnClick(week)" *ngIf="week > 0">
+              <strong>Week {{ week }}</strong>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div ngbDropdown class="d-inline-block">
+        <button ngbDropdownToggle class="btn btn-secondary btn-custom b-top-radius c-pointer f-size" id="trainee" [value]="traineeSelect"
+          *ngIf="traineeSelect === 0">
+          <strong>Trainee (All)</strong>
+        </button>
+        <button ngbDropdownToggle class="btn btn-secondary btn-custom b-top-radius c-pointer f-size" id="trainee" [value]="traineeSelect"
+          *ngIf="traineeSelect > 0">
+          <strong>{{ currentTrainee.name }}</strong>
+        </button>
+        <div class="dropdown-year" ngbDropdownMenu aria-labelledby="trainee">
+          <button class="dropdown-item" [value]="0" (click)="traineeOnClick(0)">All</button>
+          <div *ngFor="let trainee of traineesList">
+            <button class="dropdown-item c-pointer f-size" [value]="trainee.traineeId" (click)="traineeOnClick(trainee.traineeId)">{{ trainee.name }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col rightHeaderTab">
+      <div class="search">
+        <form>
+
+          <input ng-model="chosenTrainee" list="traineeList" type="search" id="searchTextBox" placeholder="Search..." class="search" style="position: relative; bottom: 5px"
+            autocomplete="off">
+          <input type="submit" (click)="searchTrainees()" style="display: none">
+          <span class="fa fa-search" (click)="searchTrainees()" style="position: relative; bottom: 5px"></span>
+          <datalist id="traineeList">
+            <ng-container class="container" *ngFor="let trainee of traineesList">
+              <option [value]="trainee.name" class="ng-binding ng-scope">{{ trainee.name }}</option>
+            </ng-container>
+          </datalist>
+
+
+          <div ngbDropdown class="d-inline-block" style="position: relative; right: 20px; bottom: 5px; margin-top: 5px">
+            <span ngbDropdownToggle id="downloadCharts" class="downloadCharts">
+              <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+            </span>
+            <div ngbDropdownMenu aria-labelledby="downloadCharts">
+              <button class="dropdown-item" (click)="downloadCharts()">
+                <b>Charts</b>
+              </button>
+              <button class="dropdown-item">
+                <b>Charts + Feedback</b>
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <hr class="shift-hr" style="width: 100%">
+
+</div>

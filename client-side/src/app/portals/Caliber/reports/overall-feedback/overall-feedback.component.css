@@ -1,0 +1,77 @@
+/* Tags */
+table {
+    border-top: 0px;
+    border-right: none;
+    border-left: none;
+}
+
+td {
+    text-align: center;
+}
+
+td:last-child{
+    padding-bottom:0vmin;
+}
+
+td:nth-child(5n+0){
+    padding-left: 10vmin;
+    padding-right: 10vmin;
+}
+
+td, th {
+    border: none;
+    padding-left: 5vmin;
+    padding-right: 5vmin;
+    padding-top: 1vmin;
+    padding-bottom: 1vmin;
+}
+
+thead {
+    font-weight: 800;
+}
+
+/* Classes */
+.align-left {
+    text-align: left;
+}
+
+.container {
+    margin-bottom: 20px;
+    padding: 0px;
+}
+
+.feedback-body {
+    border-top: 0px;
+}
+
+.feedback-heading {
+    background: rgb(242, 105, 37);
+    color: white;
+    padding: 1vmin;
+    border-top-left-radius: .5vmin;
+    border-top-right-radius: .5vmin;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+@media only screen and (max-width: 765px) {
+    .table-mobile {
+       border: solid 1px #ddd;
+       border-radius: 3px;
+    }
+}

@@ -1,0 +1,34 @@
+<div>
+  <div class="container">
+    <header class="panel-heading">Overall Feedback</header>
+    <div class="panel-body">
+    <div class="table-hover table-mobile table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Week</td>
+            <td>Categories</td>
+            <td>Quality Audit</td>
+            <td>QC Feedback</td>
+            <td>Trainer Feedback</td>
+          </tr>
+        </thead>
+        <tbody *ngFor="let topic of weekTopics; let week = index">
+          <tr>
+            <td>{{week+1}}</td>
+            <td>{{topic | arrToString}}</td>
+            <td *ngIf="!qcWeek(week+1)" colspan="2">
+              <em>No QC notes were found for this trainee.</em>
+            </td>
+            <td *ngIf="qcWeek(week+1) && qcWeek(week+1).qcStatus">{{qcWeek(week+1).qcStatus}}</td>
+            <td *ngIf="qcWeek(week+1) && !qcWeek(week+1).qcStatus">-</td>
+            <td *ngIf="qcWeek(week+1) && qcWeek(week+1).content">{{qcWeek(week+1).content}}</td>
+            <td *ngIf="qcWeek(week+1) && !qcWeek(week+1).content">-</td>
+            <td *ngIf="traineeNotes && traineeNotes.length > 0 && traineeWeek(week+1)">{{traineeWeek(week+1).content}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</div>

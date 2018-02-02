@@ -1,0 +1,64 @@
+.btn-update {
+    background-color: #F26925;
+    color: white;
+}
+
+.btn-add {
+    background-color: #F26925;
+    color: white;
+}
+
+.fa-pencil {
+    cursor: pointer;
+}
+
+.fa-user {
+    cursor: pointer;
+}
+
+.close {
+    cursor: pointer;
+    float: right;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+}
+
+
+#addTrainerButton {
+    padding: 10px;
+}
+
+.col-sm-2 {
+    padding-top: 10px;
+}
+/* #tier { 
+    width:100%; 
+} 
+#tier option { 
+    width:100%; 
+} */
+
+.btn-secondary {
+    background-color: white;
+    color: #F26925;
+    border-bottom: 1px solid #ebe8e8;
+    border-color: white;
+}
+.btn-secondary:hover {
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    color: #23527c;
+    transition: 1s;
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+ app-alerts {
+     position: absolute;
+     z-index: 99999;
+ }

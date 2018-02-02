@@ -1,0 +1,38 @@
+h2 {
+    text-align: center;
+}
+
+.container {
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.data-box {
+    font-size: 80%;
+    text-align: center;
+    width: 10%;
+}
+
+.data-head {
+    font-weight: bold; 
+}
+
+.fa {
+    cursor: pointer;
+}
+
+.panel-body {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    padding: 15px;
+}
+.panel-heading {
+    background-color: #f26925;
+    border: solid 1px transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 15px;
+}

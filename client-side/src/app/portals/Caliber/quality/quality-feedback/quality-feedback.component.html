@@ -1,0 +1,88 @@
+<ngb-tabset #tabSet="ngbTabset" (tabChange)="checkForAddTab($event)">
+  <ngb-tab *ngFor="let week of getBatchWeeks() " [id]="'week-' + week">
+
+    <ng-template ngbTabTitle>
+      <div (click)="setWeek(week)">Week {{ week }}</div>
+    </ng-template>
+
+    <ng-template ngbTabContent>
+
+      <br>
+
+      <div class="shift-category">
+        <strong>Categories covered this week:</strong> {{ technologies }}
+      </div>
+
+      <hr>
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
+            <b>Trainee</b>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
+            <b>Individual Feedback</b>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-8 col-lg-2 col-xl-2">
+            <b>Notes</b>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col">
+
+            <div *ngFor="let row of data" class="row my-1" style="padding: 0px">
+
+              <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
+                <p>
+                  {{ row.trainee.name }}
+                </p>
+              </div>
+
+              <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 col-xl-2" style="padding: 0px">
+                <div class="row" (click)="onStatusChange(row, row.note.qcStatus)">
+                  <p style="margin-left: 20px">
+                    <app-feedback-icon *ngIf="row.note.qcStatus=='Good'" [status]="row.note.qcStatus" css="fa-2x text-green"></app-feedback-icon>
+                    <app-feedback-icon *ngIf="row.note.qcStatus=='Undefined'" [status]="row.note.qcStatus" css="fa-2x text-orange"></app-feedback-icon>
+                    <app-feedback-icon *ngIf="row.note.qcStatus=='Poor'" [status]="row.note.qcStatus" css="fa-2x text-red"></app-feedback-icon>
+                    <app-feedback-icon *ngIf="row.note.qcStatus=='Superstar'" [status]="row.note.qcStatus" css="fa-2x text-blue">
+                    </app-feedback-icon>
+                    <app-feedback-icon *ngIf="row.note.qcStatus=='Average'" [status]="row.note.qcStatus" css="fa-2x text-yellow"></app-feedback-icon>
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
+                <textarea class="form-control" [(ngModel)]="row.note.content" rows="2" (change)="saveNote(row.note)"></textarea>
+              </div>
+
+              <hr style="margin: 5px 0px 1px 1px; width: 100%">
+
+            </div>
+          </div>
+
+          <br />
+        </div>
+      </div>
+
+      <br>
+
+      <app-quality-overall-feedback [batchNote]="getBatchNote()"></app-quality-overall-feedback>
+    </ng-template>
+  </ngb-tab>
+
+  <ngb-tab id="addWeekTab">
+    <ng-template ngbTabTitle>
+
+      <span class="fa fa-plus text-orange"></span>
+
+    </ng-template>
+  </ngb-tab>
+
+</ngb-tabset>

@@ -7,7 +7,7 @@ import { NavComponent } from './nav.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CaliberNavComponent } from './caliber-nav/caliber-nav.component';
-import { AssignForceComponent } from '../Assign-Force/assign-force.component';
+import { AssignForceComponent } from '../portals/Assign-Force/assign-force.component';
 import { AssignForceNavComponent } from './assign-force-nav/assign-force-nav.component';
 import { TracknForceNavComponent } from './track-force-nav/track-force-nav.component';
 
