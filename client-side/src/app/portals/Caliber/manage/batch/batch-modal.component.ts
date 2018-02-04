@@ -53,7 +53,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     private trainingTypeService: TrainingTypeService,
     private skillService: SkillService,
     private locationService: LocationService,
-    private trainerService: TrainerService
+    public trainerService: TrainerService
   ) {
     this.batch = new Batch();
     this.setLocations([]);

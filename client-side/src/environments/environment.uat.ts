@@ -6,6 +6,7 @@ const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/
 export const environment = {
   production: false,
   context: context, // change for what the production environment would actually be
+  url: 'http://localhost:8085/',
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,

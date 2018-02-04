@@ -3,6 +3,7 @@ const context = 'http://localhost:9999/';
 export const environment = {
   production: true,
   context: context, // change for what the production environment would actually be
+  url: 'http://localhost:8085/',
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
