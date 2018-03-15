@@ -218,7 +218,7 @@ export const Dependencies = {
     DeleteTraineeModalComponent,
     CannotDeleteTraineeModalComponent,
     CannotDeleteModalComponent,
-    ScreeningComponent,
+  
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests

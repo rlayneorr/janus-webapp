@@ -121,6 +121,7 @@ import { DeleteTraineeModalComponent } from './manage/delete-trainee-modal/delet
 import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
 
 import {ScreeningComponent} from './settings/screening/screening.component' 
+import {TracksComponent} from './settings/screening/tracks/tracks.component' 
 @NgModule({
   imports: [
     CommonModule,
@@ -219,6 +220,7 @@ import {ScreeningComponent} from './settings/screening/screening.component'
     DeleteTraineeModalComponent,
     CannotDeleteTraineeModalComponent,
     ScreeningComponent,
+    TracksComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
