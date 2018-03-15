@@ -119,6 +119,7 @@ import { DeleteBatchModalComponent } from './manage/delete-batch-modal/delete-ba
 import { CannotDeleteModalComponent } from './manage/cannot-delete-modal/cannot-delete-modal.component';
 import { DeleteTraineeModalComponent } from './manage/delete-trainee-modal/delete-trainee-modal.component';
 import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
+import { ScreeningComponent } from './settings/screening/screening.component';
 
 @NgModule({
   imports: [
@@ -217,6 +218,7 @@ import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-traine
     CannotDeleteModalComponent,
     DeleteTraineeModalComponent,
     CannotDeleteTraineeModalComponent,
+    ScreeningComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
