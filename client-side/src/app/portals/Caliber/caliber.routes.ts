@@ -16,6 +16,8 @@ import { PanelComponent } from './panel/panel/panel.component';
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { RoleGuard, roles } from '../../role-guard';
 
+import {ScreeningComponent} from './settings/screening/screening.component'
+
 export const routes: Routes = [
   {
     path: '',
@@ -90,7 +92,11 @@ export const routes: Routes = [
           {
             path: 'trainer-profile',
             component: TrainerProfilesComponent,
-          }
+          },
+          {
+            path:'screening',
+           component: ScreeningComponent,
+          },
         ]
       },
       {

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-screening',
@@ -10,6 +12,7 @@ export class ScreeningComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("it worked");
   }
 
 }
