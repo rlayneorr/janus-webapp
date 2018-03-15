@@ -218,6 +218,7 @@ import { ScreeningComponent } from './settings/screening/screening.component';
     CannotDeleteModalComponent,
     DeleteTraineeModalComponent,
     CannotDeleteTraineeModalComponent,
+    ScreeningComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
