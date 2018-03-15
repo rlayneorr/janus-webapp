@@ -121,7 +121,6 @@ import { DeleteTraineeModalComponent } from './manage/delete-trainee-modal/delet
 import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
 import { ScreeningComponent } from './settings/screening/screening.component';
 
-import {ScreeningComponent} from './settings/screening/screening.component' 
 @NgModule({
   imports: [
     CommonModule,
