@@ -19,8 +19,9 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
   ]
 })
 export class TracksComponent implements OnInit {
-  public tracks:any[];
-  public inactiveTracks: any[];
+  public tracks:any[]=[];
+  public inactiveTracks:any[]=[];
+  public allTracks:any[]=[];
   state:string='small';
 
   animate(item:any){
@@ -47,27 +48,46 @@ export class TracksComponent implements OnInit {
    
   }
   removeElement(item:any){
-    for(let i = item;i<this.tracks.length-1;i++){
-        let currentPostion = this.tracks[i];
-        let nextPosition = this.tracks[i+1];
-
-        this.tracks[i] = nextPosition;
-        this.tracks[i+1]= currentPostion;
-
-    };
-    this.inactiveTracks[this.inactiveTracks.length]=this.tracks[this.tracks.length-1];
-    this.tracks.pop();
-    /*
-    for(let i = this.tracks.indexOf(item);i<this.tracks.length;i++){
-        this.tracks.pop();
+    let thing:any;
+    for(let i = 0 ;i<this.allTracks.length;i++){
+      thing = this.allTracks[i];
+      if(thing.Name == item.Name){
+        thing.Active = false;
+        this.allTracks[i] = thing;
+      }
     }
-    this.inactiveTracks[this.inactiveTracks.length]={Name:item}
-*/
+    this.setTracks();
+  }
+  setTracks(){
+    let thing:any;
+    this.tracks = [];
+    this.inactiveTracks = [];
+    for(let i = 0; i<this.allTracks.length;i++){
+      thing = this.allTracks[i];
+      if(thing.Active == true){
+        this.tracks[this.tracks.length]=thing;
+      }else if (thing.Active == false){
+        this.inactiveTracks[this.inactiveTracks.length]=thing;
+      }
+    }
   }
   constructor() { }
 
   ngOnInit() {
-    this.tracks = [
+
+    this.allTracks = [
+      {Name:"Java",Active:true},
+      {Name:'.Net',Active:true},
+      {Name:'SDET',Active:true},
+      {Name:'Label',Active:true},
+      {Name:"Pega",Active:false},
+      {Name:'Salesforce',Active:false},
+      {Name:'Software Engineer',Active:false}
+    ]
+    this.setTracks()
+
+
+   /* this.tracks = [
       {Name:"Java",Active:true},
       {Name:'.Net',Active:true},
       {Name:'SDET',Active:true},
@@ -79,7 +99,7 @@ export class TracksComponent implements OnInit {
       {Name:"Pega",Active:false},
       {Name:'Salesforce',Active:false},
       {Name:'Software Engineer',Active:false},
-    ];
+    ];*/
     
   }
 
