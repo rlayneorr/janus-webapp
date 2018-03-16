@@ -45,7 +45,7 @@ export class TracksComponent implements OnInit {
        items[i].parentElement.setAttribute("style","background:white");
      }
    }
-   
+
   }
   removeElement(item:any){
     let thing:any;
@@ -100,7 +100,7 @@ export class TracksComponent implements OnInit {
       {Name:'Salesforce',Active:false},
       {Name:'Software Engineer',Active:false},
     ];*/
-    
+
   }
 
 }
