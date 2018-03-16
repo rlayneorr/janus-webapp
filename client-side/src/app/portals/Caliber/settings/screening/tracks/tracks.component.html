@@ -1,1 +1,57 @@
-<p>Tracks Works !!</p>
+<div class="move">
+    <div class="container">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+
+                        <h1>Tracks</h1>
+                        <br>
+                        <br>
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>Active</tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let track of tracks">
+                                    <td>{{track.Name}}</td>
+                                    <td>
+                                        <span class="fa fa-pencil"></span>&nbsp;&nbsp;
+                                        <span class="fa fa-remove"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead>
+                            <tr>Inactive</tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let inact of inactiveTracks">
+                                <td>{{inact.Name}}</td>
+                                <td>
+                                    <span class="fa fa-pencil"></span>&nbsp;&nbsp;
+                                    <span class="fa fa-remove"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

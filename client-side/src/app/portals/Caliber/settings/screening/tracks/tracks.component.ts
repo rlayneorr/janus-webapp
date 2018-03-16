@@ -6,10 +6,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./tracks.component.css']
 })
 export class TracksComponent implements OnInit {
+  public tracks:any[];
+  public inactiveTracks: any[];
   constructor() { }
 
   ngOnInit() {
-    console.log("it worked");
+    this.tracks = [
+      {Name:"Java"},
+      {Name:'.Net'},
+      {Name:'SDET'},
+      {Name:'Label'},
+    ];
+
+
+    this.inactiveTracks = [
+      {Name:"Pega"},
+      {Name:'Salesforce'},
+      {Name:'Software Engineer'},
+    ];
+    
   }
 
 }
