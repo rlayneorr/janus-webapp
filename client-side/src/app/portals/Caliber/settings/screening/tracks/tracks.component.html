@@ -1,29 +1,29 @@
 <div class="move">
     <div class="container">
-        <div class="wrapper">
+        <div class="wrapper" [@move]='state' >
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
 
-                        <h1>Tracks</h1>
-                        <br>
-                        <br>
-                        <br>
-                        <table class="table">
-                            <thead>
-                                <tr>Active</tr>
-                            </thead>
+                    <h1>Tracks</h1>
+                    <br>
+                    <br>
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>Active</tr>
+                        </thead>
 
-                            <tbody>
-                                <tr *ngFor="let track of tracks">
-                                    <td>{{track.Name}}</td>
-                                    <td>
-                                        <span class="fa fa-pencil"></span>&nbsp;&nbsp;
-                                        <span class="fa fa-remove"></span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <tbody>
+                            <tr *ngFor="let track of tracks"(mouseover)="colorDarken(track)" (mouseleave)="colorLighten(track)">
+                                <td>{{track.Name}}</td>
+                                <td>
+                                    <span (click)="animate(track)" class="fa fa-pencil"></span>&nbsp;&nbsp;
+                                    <span class="fa fa-remove"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                 </div>
                 <div class="col-md-3"></div>
@@ -39,8 +39,8 @@
                             <tr>Inactive</tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let inact of inactiveTracks">
-                                <td>{{inact.Name}}</td>
+                            <tr *ngFor="let inact of inactiveTracks"(mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">
+                                <td >{{inact.Name}}</td>
                                 <td>
                                     <span class="fa fa-pencil"></span>&nbsp;&nbsp;
                                     <span class="fa fa-remove"></span>
@@ -55,3 +55,4 @@
 
     </div>
 </div>
+<button id="workplox" (click)='workPlox()'>Go</button>
