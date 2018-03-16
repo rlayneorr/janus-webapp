@@ -44,6 +44,25 @@ export class TracksComponent implements OnInit {
        items[i].parentElement.setAttribute("style","background:white");
      }
    }
+   
+  }
+  removeElement(item:any){
+    for(let i = item;i<this.tracks.length-1;i++){
+        let currentPostion = this.tracks[i];
+        let nextPosition = this.tracks[i+1];
+
+        this.tracks[i] = nextPosition;
+        this.tracks[i+1]= currentPostion;
+
+    };
+    this.inactiveTracks[this.inactiveTracks.length]=this.tracks[this.tracks.length-1];
+    this.tracks.pop();
+    /*
+    for(let i = this.tracks.indexOf(item);i<this.tracks.length;i++){
+        this.tracks.pop();
+    }
+    this.inactiveTracks[this.inactiveTracks.length]={Name:item}
+*/
   }
   constructor() { }
 
