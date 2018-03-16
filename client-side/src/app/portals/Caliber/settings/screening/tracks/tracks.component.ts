@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 //import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-tracks',
   templateUrl: './tracks.component.html',
@@ -45,7 +46,7 @@ export class TracksComponent implements OnInit {
        items[i].parentElement.setAttribute("style","background:white");
      }
    }
-   
+
   }
   removeElement(item:any){
     let thing:any;
@@ -71,7 +72,22 @@ export class TracksComponent implements OnInit {
       }
     }
   }
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
+
+  closeResult: string;
+  open(content) {
+  this.modalService.open(content);
+}
+
+private getDismissReason(reason: any): string {
+  if (reason === ModalDismissReasons.ESC) {
+    return 'by pressing ESC';
+  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    return 'by clicking on a backdrop';
+  } else {
+    return  `with: ${reason}`;
+  }
+}
 
   ngOnInit() {
 
@@ -100,7 +116,7 @@ export class TracksComponent implements OnInit {
       {Name:'Salesforce',Active:false},
       {Name:'Software Engineer',Active:false},
     ];*/
-    
+
   }
 
 }
