@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Question } from '../entities/Question';
 
 const httpOptions = {
 headers: new HttpHeaders({
@@ -18,11 +19,11 @@ export class QuestionsService {
       return this.http.post(this.url + "createQuestion", question, httpOptions);
   }
 
-  deactivateQuestion(questionId: int){
+  deactivateQuestion(questionId: number){
       return this.http.put(this.url + "deactivateQuestion", questionId, httpOptions);
   }
 
-  activateQuestion(questionId: int){
+  activateQuestion(questionId: number){
       return this.http.put(this.url + "activateQuestion", questionId, httpOptions);
   }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TrackBucket } from '../entities/TrackBucket';
 
 const httpOptions = {
 headers: new HttpHeaders({
@@ -15,32 +16,32 @@ export class TracksService {
   url: string = "/track/";
 
   //Buckets will probably be an array of buckets after model/entity is created
-  createTrack(description: string, buckets: string[], weights){
-    return this.url.post(this.url + "createTrack", {description: description, buckets: buckets, weights: weights}, httpOptions);
+  createTrack(name: string){
+    return this.http.post(this.url + "createTrack", {name: name}, httpOptions);
   }
 
-  deactivateTrack(trackId: int){
-      return this.url.put(this.url + "deactivateTrack", trackId, httpOptions);
+  deactivateTrack(trackId: number){
+      return this.http.put(this.url + "deactivateTrack", trackId, httpOptions);
   }
 
-  activateTrack(trackId: int){
-      return this.url.put(this.url + "activateTrack", trackId, httpOptions);
+  activateTrack(trackId: number){
+      return this.http.put(this.url + "activateTrack", trackId, httpOptions);
   }
 
   getTracks(){
-      return this.url.get(this.url + "getTracks");
+      return this.http.get(this.url + "getTracks");
   }
 
-  updateTrack(trackId: int){
-      return this.url.put(this.url + "updateTrack", trackId, httpOptions);
+  updateTrack(trackBuckets: TrackBucket[]){
+      return this.http.put(this.url + "updateTrack", {trackBuckets: trackBuckets}, httpOptions);
   }
 
-  getTrackById(trackId: int){
-      return this.url.get(this.url + "getTrack/" + trackId);
+  getTrackById(trackId: number){
+      return this.http.get(this.url + "getTrack/" + trackId);
   }
 
-  getBucketsByTrack(trackId: int){
-      return this.url.get(this.url + "getTopics/" + trackId);
+  getBucketsByTrack(trackId: number){
+      return this.http.get(this.url + "getTopics/" + trackId);
   }
 
 }
