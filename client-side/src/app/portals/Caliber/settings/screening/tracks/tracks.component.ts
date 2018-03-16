@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 //import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Track } from '../entities/Track';
+import { TracksService } from '../services/tracks.service';
+
 @Component({
   selector: 'app-tracks',
   templateUrl: './tracks.component.html',
@@ -72,22 +76,44 @@ export class TracksComponent implements OnInit {
       }
     }
   }
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService) { }
 
-  closeResult: string;
-  open(content) {
-  this.modalService.open(content);
-}
 
-private getDismissReason(reason: any): string {
-  if (reason === ModalDismissReasons.ESC) {
-    return 'by pressing ESC';
-  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-    return 'by clicking on a backdrop';
-  } else {
-    return  `with: ${reason}`;
+  createTrack: FormGroup;
+  newTrack: Track;
+
+  /**
+   * initialize form control for validations
+   *
+   * @memberof TracksComponent
+   */
+  initFormControl() {
+    this.createTrack = this.fb.group({
+      'name': ['', Validators.required],
+    });
   }
-}
+
+    open(content) {
+      this.modalService.open(content);
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
+    }
+
+    addNewTrack(modal: Track){
+        this.newTrack = modal;
+        console.log(modal);
+        console.log("The new track has a name of " + this.newTrack.name);
+        //this.trackService.createTrack(this.newTrack.name).subscribe();
+        this.initFormControl();
+    }
 
   ngOnInit() {
 
@@ -117,6 +143,7 @@ private getDismissReason(reason: any): string {
       {Name:'Software Engineer',Active:false},
     ];*/
 
+    this.initFormControl();
   }
 
 }
