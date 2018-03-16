@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Bucket } from '../entities/Bucket';
 const httpOptions = {
 headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -14,7 +14,7 @@ export class BucketsService {
 
   url: string = "/bucket/";
 
-  getBucketQuestions(bucketId: int){
+  getBucketQuestions(bucketId: number){
       return this.http.get(this.url + "bucketQuestions/" + bucketId);
   }
 
@@ -22,12 +22,12 @@ export class BucketsService {
       return this.http.get(this.url + "getBuckets");
   }
 
-  getBucketById(bucketId: int){
+  getBucketById(bucketId: number){
       return this.http.get(this.url + bucketId);
   }
 
   //Need to create bucket models
-  createNewBucket(bucket){
+  createNewBucket(bucket: Bucket){
       return this.http.post(this.url + "createBucket", bucket, httpOptions);
   }
 
