@@ -44,6 +44,12 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 
+//1801-caliber-dev-angels services
+import { QuestionsService } from './settings/screening/services/questions.service';
+import { TracksService } from './settings/screening/services/tracks.service';
+import { BucketsService } from './settings/screening/services/buckets.service';
+import { TagsService } from './settings/screening/services/tags.service';
+
 //N.T.
 import { ApiService } from './util/api.service';
 
@@ -253,7 +259,11 @@ import {TracksComponent} from './settings/screening/tracks/tracks.component' ;
     ReportsService,
     QCStatusService,
     TraineeStatusService,
-    ApiService
+    ApiService,
+    QuestionsService,
+    TracksService,
+    BucketsService,
+    TagsService,
   ],
   bootstrap: [
     TrainersComponent
