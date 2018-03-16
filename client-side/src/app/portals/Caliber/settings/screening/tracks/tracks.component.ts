@@ -12,7 +12,7 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
         transform:'translateX(0)'
       })),
       state('large',style({
-        transform:'translateX(-500%)'
+        transform:'translateX(-35%)'
       })),
       transition('small =>large',animate('300ms ease-in')),
     ]),
@@ -68,17 +68,17 @@ export class TracksComponent implements OnInit {
 
   ngOnInit() {
     this.tracks = [
-      {Name:"Java"},
-      {Name:'.Net'},
-      {Name:'SDET'},
-      {Name:'Label'},
+      {Name:"Java",Active:true},
+      {Name:'.Net',Active:true},
+      {Name:'SDET',Active:true},
+      {Name:'Label',Active:true},
     ];
 
 
     this.inactiveTracks = [
-      {Name:"Pega"},
-      {Name:'Salesforce'},
-      {Name:'Software Engineer'},
+      {Name:"Pega",Active:false},
+      {Name:'Salesforce',Active:false},
+      {Name:'Software Engineer',Active:false},
     ];
     
   }
