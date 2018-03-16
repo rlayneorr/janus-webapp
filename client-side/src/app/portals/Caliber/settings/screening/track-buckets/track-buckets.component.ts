@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrackBucketsComponent implements OnInit {
 
+  public buckets: any[]=[];
+  public activeBuckets: any[]=[];
+
   constructor() { }
 
   ngOnInit() {
+    this.activeBuckets=[
+      {Name:"OOP"},
+      {Name:"Spring"}
+
+    ]
   }
 
 }
