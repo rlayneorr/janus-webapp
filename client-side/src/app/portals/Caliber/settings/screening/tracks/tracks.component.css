@@ -1,0 +1,9 @@
+.wrapper{
+    border: 1px solid black;
+    box-shadow: 5px 9px;
+    border-radius: 5px;
+    text-align: center;
+}
+td{
+    text-align: left;
+}

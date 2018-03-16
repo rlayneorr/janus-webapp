@@ -126,7 +126,8 @@ import { CannotDeleteModalComponent } from './manage/cannot-delete-modal/cannot-
 import { DeleteTraineeModalComponent } from './manage/delete-trainee-modal/delete-trainee-modal.component';
 import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
 import { ScreeningComponent } from './settings/screening/screening.component';
-
+import {TracksComponent} from './settings/screening/tracks/tracks.component' ;
+//import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 @NgModule({
   imports: [
     CommonModule,
@@ -139,7 +140,9 @@ import { ScreeningComponent } from './settings/screening/screening.component';
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
     ScrollEventModule,
-    Ng2PageScrollModule
+    Ng2PageScrollModule,
+
+    //BrowserAnimationsModule,
   ],
   declarations: [
     // pipes
@@ -225,6 +228,7 @@ import { ScreeningComponent } from './settings/screening/screening.component';
     DeleteTraineeModalComponent,
     CannotDeleteTraineeModalComponent,
     ScreeningComponent,
+    TracksComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
