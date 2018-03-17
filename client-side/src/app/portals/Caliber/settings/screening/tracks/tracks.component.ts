@@ -109,22 +109,33 @@ export class TracksComponent implements OnInit {
 
     addNewTrack(modal: Track){
         this.newTrack = modal;
-        console.log(modal);
-        console.log("The new track has a name of " + this.newTrack.name);
+        let sum = 0;
+        let addedBucket = false;
+        for(let bucketIndex in this.testBuckets){
+            if(this.testBuckets[bucketIndex].isActive == true){
+                addedBucket = true;
+                sum += this.testBuckets[bucketIndex].weight;
+            }
+        }
+        if(!addedBucket || sum == 100){
+            console.log("The sum of active buckets is: " + sum);
+        } else {
+            console.log("The weight has to equal 100");
+        }
         //this.trackService.createTrack(this.newTrack.name).subscribe();
         this.initFormControl();
     }
 
     testBuckets = [
-        {"bucket": "Java", "isActive":false},
-        {"bucket": "HTML", "isActive":false},
-        {"bucket": "OOP", "isActive":false},
-        {"bucket": "SQL", "isActive":false},
+        {"bucket": "Java", "isActive":false, "weight": 0},
+        {"bucket": "HTML", "isActive":false, "weight": 0},
+        {"bucket": "OOP", "isActive":false, "weight": 0},
+        {"bucket": "SQL", "isActive":false, "weight": 0},
     ];
 
     addToActive(bucket){
         bucket.isActive = true;
-        console.log(bucket);
+        console.log(this.testBuckets);
     }
 
     removeFromActive(bucket){
