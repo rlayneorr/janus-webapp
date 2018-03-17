@@ -115,6 +115,22 @@ export class TracksComponent implements OnInit {
         this.initFormControl();
     }
 
+    testBuckets = [
+        {"bucket": "Java", "isActive":false},
+        {"bucket": "HTML", "isActive":false},
+        {"bucket": "OOP", "isActive":false},
+        {"bucket": "SQL", "isActive":false},
+    ];
+
+    addToActive(bucket){
+        bucket.isActive = true;
+        console.log(bucket);
+    }
+
+    removeFromActive(bucket){
+        bucket.isActive = false;
+    }
+
   ngOnInit() {
 
     this.allTracks = [
