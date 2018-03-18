@@ -53,13 +53,13 @@ export class RequestService {
 //   return this.http.get(this.dataPath + '/batch/date');
 // }
 
-// public getClients(): Observable<any> {
-//   return this.http.get(this.dataPath + '/client');
-// }
+ public getClients(): Observable<any> {
+   return this.http.get(this.dataPath + '/client');
+ }
 
-// public getTotals(): Observable<any> {
-//   return this.http.get(this.dataPath + '/summary');
-// }
+ public getTotals(): Observable<any> {
+   return this.http.get(this.dataPath + '/summary');
+ }
 
 // public getSkills(): Observable<any> {
 //   return this.http.get(this.dataPath + '/skills');
@@ -82,8 +82,8 @@ export class RequestService {
 // }
 
 // get first match of Client Object
-//getOneClient(clientId: number): Observable<any> {
-//  return this.http.get(this.trackPath + '/clients/' + clientId);
-//}
+getOneClient(clientId: number): Observable<any> {
+  return this.http.get(this.trackPath + '/clients/' + clientId);
+}
 
 }
