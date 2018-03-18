@@ -2,3 +2,10 @@
 	background-color: white;
 	margin: 10px 0;
 }
+
+.title{
+	text-align: center;
+	text-decoration: underline;
+	margin-bottom: 40px;
+	margin-top: 40px;
+}
