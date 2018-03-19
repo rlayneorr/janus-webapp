@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 //import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+//activate tracks 
+//inactive should be a minus
+// storing data in a service
+// creating track and adding buckets
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 @Component({
   selector: 'app-tracks',
@@ -8,13 +12,13 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
   styleUrls: ['./tracks.component.css'],
   animations:[
     trigger('move',[
-      state('small',style({
+      state('center',style({
         transform:'translateX(0)'
       })),
-      state('large',style({
+      state('left',style({
         transform:'translateX(-35%)'
       })),
-      transition('small =>large',animate('300ms ease-in')),
+      transition('center =>left',animate('300ms ease-in')),
     ]),
   ]
 })
@@ -22,13 +26,13 @@ export class TracksComponent implements OnInit {
   public tracks:any[]=[];
   public inactiveTracks:any[]=[];
   public allTracks:any[]=[];
-  state:string='small';
+  state:string='center';
 
   animate(item:any){
-    this.state=(this.state==='small'?'large':'small');
+    this.state=(this.state==='center'?'left':'center');
   }
   workPlox(){
-    this.state=(this.state==='small'?'large':'small');
+    this.state=(this.state==='center'?'left':'center');
   }
   colorDarken(item:any){
    let items= document.getElementsByTagName("td");
@@ -49,6 +53,7 @@ export class TracksComponent implements OnInit {
   }
   removeElement(item:any){
     let thing:any;
+    console.log(item);
     for(let i = 0 ;i<this.allTracks.length;i++){
       thing = this.allTracks[i];
       if(thing.Name == item.Name){
