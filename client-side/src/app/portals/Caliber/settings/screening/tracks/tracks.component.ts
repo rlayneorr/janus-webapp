@@ -6,6 +6,11 @@ import { Router } from '@angular/router';
 // storing data in a service
 // creating track and adding buckets
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Track } from '../entities/Track';
+import { TracksService } from '../services/tracks.service';
+
 @Component({
   selector: 'app-tracks',
   templateUrl: './tracks.component.html',
@@ -49,7 +54,7 @@ export class TracksComponent implements OnInit {
        items[i].parentElement.setAttribute("style","background:white");
      }
    }
-   
+
   }
   removeElement(item:any){
     let thing:any;
@@ -76,7 +81,71 @@ export class TracksComponent implements OnInit {
       }
     }
   }
-  constructor() { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService) { }
+
+
+  createTrack: FormGroup;
+  newTrack: Track;
+
+  /**
+   * initialize form control for validations
+   *
+   * @memberof TracksComponent
+   */
+  initFormControl() {
+    this.createTrack = this.fb.group({
+      'name': ['', Validators.required],
+    });
+  }
+
+    open(content) {
+      this.modalService.open(content);
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
+    }
+
+    addNewTrack(modal: Track){
+        this.newTrack = modal;
+        let sum = 0;
+        let addedBucket = false;
+        for(let bucketIndex in this.testBuckets){
+            if(this.testBuckets[bucketIndex].isActive == true){
+                addedBucket = true;
+                sum += this.testBuckets[bucketIndex].weight;
+            }
+        }
+        if(!addedBucket || sum == 100){
+            console.log("The sum of active buckets is: " + sum);
+        } else {
+            console.log("The weight has to equal 100");
+        }
+        //this.trackService.createTrack(this.newTrack.name).subscribe();
+        this.initFormControl();
+    }
+
+    testBuckets = [
+        {"bucket": "Java", "isActive":false, "weight": 0},
+        {"bucket": "HTML", "isActive":false, "weight": 0},
+        {"bucket": "OOP", "isActive":false, "weight": 0},
+        {"bucket": "SQL", "isActive":false, "weight": 0},
+    ];
+
+    addToActive(bucket){
+        bucket.isActive = true;
+        console.log(this.testBuckets);
+    }
+
+    removeFromActive(bucket){
+        bucket.isActive = false;
+    }
 
   ngOnInit() {
 
@@ -105,7 +174,8 @@ export class TracksComponent implements OnInit {
       {Name:'Salesforce',Active:false},
       {Name:'Software Engineer',Active:false},
     ];*/
-    
+
+    this.initFormControl();
   }
 
 }

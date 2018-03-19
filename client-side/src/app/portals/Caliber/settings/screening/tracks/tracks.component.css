@@ -8,3 +8,16 @@ td{
     padding-left:8em;
     text-align: left;
 }
+
+.percentSign{
+    background-color: inherit;
+    border-right: 1px solid #ccc;
+}
+
+.bucketWeight{
+    text-align: right;
+}
+
+.revatureOrange{
+    background-color: #F26925;
+}
