@@ -39,12 +39,12 @@ export class LoginComponent implements OnInit {
   */
   ngOnInit() {
     const user = this.authService.getUser();
-    if (user != null){
-      if (user.tfRoleId === 4){
-        this.router.navigate(['associate-view', user.userId]);
-      }
-      this.router.navigate(['root']);
-    }
+    // if (user != null){
+    //   if (user.tfRoleId === 4){
+    //     this.router.navigate(['associate-view', user.userId]);
+    //   }
+    //   this.router.navigate(['root']);
+    // }
 
   }
 
