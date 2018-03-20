@@ -16,8 +16,8 @@ export class TracksService {
   url: string = "/track/";
 
   //Buckets will probably be an array of buckets after model/entity is created
-  createTrack(name: string){
-    return this.http.post(this.url + "createTrack", {name: name}, httpOptions);
+  createTrack(name: string, trackBuckets: TrackBucket[]){
+    return this.http.post(this.url + "createTrack", {name: name, trackBuckets: trackBuckets}, httpOptions);
   }
 
   deactivateTrack(trackId: number){

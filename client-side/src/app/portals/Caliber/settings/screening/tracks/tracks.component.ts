@@ -11,6 +11,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Track } from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
+import { Bucket } from '../entities/Bucket';
+import{ TrackBucket } from '../entities/TrackBucket'
 
 @Component({
   selector: 'app-tracks',
@@ -149,34 +151,58 @@ export class TracksComponent implements OnInit {
         let sum = 0;
         let addedBucket = false;
         for(let bucketIndex in this.testBuckets){
-            if(this.testBuckets[bucketIndex].isActive == true){
+            if(this.testBuckets[bucketIndex].mappedToTrack == true){
                 addedBucket = true;
-                sum += this.testBuckets[bucketIndex].weight;
+                // sum += this.testBuckets[bucketIndex].weight;
             }
         }
         if(!addedBucket || sum == 100){
             console.log("The sum of active buckets is: " + sum);
         } else {
-            console.log("The weight has to equal 100");
+            console.log("The weight has to equal 100, bucket is mapped: ");
         }
         //this.trackService.createTrack(this.newTrack.name).subscribe();
         this.initFormControl();
     }
 
-    testBuckets = [
-        {"bucket": "Java", "isActive":false, "weight": 0},
-        {"bucket": "HTML", "isActive":false, "weight": 0},
-        {"bucket": "OOP", "isActive":false, "weight": 0},
-        {"bucket": "SQL", "isActive":false, "weight": 0},
-    ];
+    java: Bucket = new Bucket(0, "Java", "This is Java");
+    sql: Bucket = new Bucket(1, "SQL", "This is SQL");
+    oop: Bucket = new Bucket(2, "OOP", "This is OOP");
+    html: Bucket = new Bucket(3, "HTML", "This is HTML");
 
-    addToActive(bucket){
-        bucket.isActive = true;
-        console.log(this.testBuckets);
+    testBuckets: Bucket[] = [
+        this.java,
+        this.sql,
+        this.oop,
+        this.html
+    ]
+
+    testTrackBuckets: TrackBucket[] = [
+        { trackId: 0, bucketId: 0, weight: 50 },
+        { trackId: 0, bucketId: 1, weight: 20 },
+        { trackId: 0, bucketId: 2, weight: 30 }
+    ]
+
+    testSingleTrack: Track = {id: 0, name: "Java", isActive: true}
+
+    // set the track buckets within ALL BUCKETS to be already mapped
+    editAllBuckets(){
+        for(let index in this.testTrackBuckets){
+            for(let allIndex in this.testBuckets){
+                if(this.testTrackBuckets[index].bucketId == this.testBuckets[allIndex].id){
+                    this.testBuckets[allIndex].weight = this.testTrackBuckets[index].weight;
+                    this.testBuckets[allIndex].mappedToTrack = true;
+                }
+            }
+        }
     }
 
-    removeFromActive(bucket){
-        bucket.isActive = false;
+    addToMapped(bucket){
+        bucket.mappedToTrack = true;
+    }
+
+    removeFromMapped(bucket){
+        bucket.mappedToTrack = false;
     }
 
   ngOnInit() {
