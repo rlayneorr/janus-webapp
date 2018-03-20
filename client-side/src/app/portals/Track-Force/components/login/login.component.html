@@ -18,16 +18,19 @@
       </div>
     </div>
 </div> -->
+<div id="background">
+  <img [src]="backgroundImg" alt="Background Image"/>
+</div>
 <div class="container">
-  <div class="title">
-    <h2>Login Screen </h2>
-  </div>
   <div class="row" id="pwd-container">
     <div class="col-md-4"></div>
       <div class="col-md-4">
         <section class="login-form">
           <form class="form-signin" role="login">
-            <img src="../../../assets/logo.png" class="img-responsive" alt="" />
+            <img [src]="logo" class="img-responsive" alt="Background image" />
+            <div *ngIf="errMsg" class="alert alert-danger">
+              {{errMsg}}
+            </div>
             <label for="username" class="sr-only">Username: </label>
             <input class="form-control" type="text" placeholder="Username" name="username" id="username" required class="form-control input-lg" [(ngModel)]="username"/>
             <label for="password" class="sr-only">Password: </label>
@@ -37,3 +40,4 @@
         </section>
       </div>
     </div>
+</div>
