@@ -1,4 +1,46 @@
-<div class="move">
+<div class="move" [@move]='state'>
+    <div class="container">
+       <div class = "wrapper">
+            <h1 style="text-align:center;color:#F26925">Tracks</h1>
+            <br>
+            <br>
+            <br>
+            <h6 style="text-align:center">Active</h6>
+           
+            <ul *ngFor="let track of tracks" style="list-style-type:none">
+                <hr>
+                <li class="lists" (mouseover)="colorDarken(track)" (mouseleave)="colorLighten(track)" (click)="animate(track)" >{{track.Name}}
+                        <span class="fa fa-pencil marker"></span>
+                        <span class="fa fa-remove marker2" (click)="removeElement(track)"></span>
+                </li>
+            </ul>
+            <hr>
+            <br>
+            <br>
+
+            <h6 style="text-align:center">Inactive</h6>
+           
+            <ul *ngFor="let inact of inactiveTracks" style="list-style-type:none">
+                    <hr>
+                <li (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">{{inact.Name}}
+                    
+                        <span class="fa fa-pencil marker"></span>
+                        <span class="fa fa-remove marker2"></span>
+                </li>
+            </ul>
+            <hr>
+        </div>
+
+        <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
+    </div>
+</div>
+<label class="switch">
+        <input type="checkbox" [@slider]='state2'>
+        <div class="round" (click)="animate2(track)"></div>
+        <span class="slider" > </span>
+      </label>
+
+<!--div class="move">
     <div class="container">
         <div class="wrapper" [@move]='state'>
             <div class="row">
@@ -15,7 +57,7 @@
                                 <td (click)="animate(track)">{{track.Name}}</td>
                                 <td>
                                     <span class="fa fa-pencil"></span>&nbsp;&nbsp;
-                                    <span class="fa fa-remove" (click)="removeElement(i)"></span>
+                                    <span class="fa fa-remove" (click)="removeElement(track)"></span>
                                 </td>
                             </tr>
                         </tbody>
@@ -51,54 +93,57 @@
         </div>
 
     </div>
-</div>
+</div-->
 
 <ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Create a Track</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-      <form  #addTrackForm="ngForm" [formGroup]="createTrack">
-          <div class="form-group row">
-              <label for="name" class="col-sm-2 col-form-label">Name:</label>
-              <div class="col-sm-10">
-                  <input type="text" id="name" name="name" placeholder="Track Name" formControlName="name" class="form-control">
-              </div>
-          </div>
-          <div class="form-group row">
-              <label for="buckets" class="col-sm-2 col-form-label">Buckets:</label>
-              <div class="col-sm-10">
-                  <div *ngFor="let bucket of testBuckets; let index = index">
-                      <div class="input-group col-sm-9" *ngIf="bucket.isActive">
-                          <span class="input-group-addon col-sm-4 revatureOrange">{{bucket.bucket}}</span>
-                          <input type="number" name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="testBuckets[index].weight" [ngModelOptions]="{standalone: true}">
-                          <span class="input-group-addon percentSign">%</span>
-                          <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromActive(bucket)"><span aria-hidden="true">&times;</span></button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="form-group row">
-              <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
-              <div class="col-sm-10 row">
-                  <span *ngFor="let bucket of testBuckets">
-                      <span *ngIf="!bucket.isActive">
-                          <span class="input-group-addon" (click)="addToActive(bucket)" style="margin: 1px">{{bucket.bucket}}</span>
-                      </span>
-                  </span>
+    <div class="modal-header">
+        <h4 class="modal-title">Create a Track</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #addTrackForm="ngForm" [formGroup]="createTrack">
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="name" name="name" placeholder="{{state}}" formControlName="name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="buckets" class="col-sm-2 col-form-label">Buckets:</label>
+                <div class="col-sm-10">
+                    <div *ngFor="let bucket of testBuckets; let index = index">
+                        <div class="input-group col-sm-9" *ngIf="bucket.isActive">
+                            <span class="input-group-addon col-sm-4 revatureOrange">{{bucket.bucket}}</span>
+                            <input type="number" name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="testBuckets[index].weight"
+                                [ngModelOptions]="{standalone: true}">
+                            <span class="input-group-addon percentSign">%</span>
+                            <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromActive(bucket)">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
+                <div class="col-sm-10 row">
+                    <span *ngFor="let bucket of testBuckets">
+                        <span *ngIf="!bucket.isActive">
+                            <span class="input-group-addon" (click)="addToActive(bucket)" style="margin: 1px">{{bucket.bucket}}</span>
+                        </span>
+                    </span>
 
-              </div>
+                </div>
 
-          </div>
-      </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-    <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Track'); addNewTrack(addTrackForm.value)">Save</button>
-  </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Track'); addNewTrack(addTrackForm.value)">Save</button>
+    </div>
 </ng-template>
 
-<button class="btn" id="workplox" (click)='workPlox()'>Go</button>
+<!--button class="btn" id="workplox" (click)='workPlox()'>Go</button-->
