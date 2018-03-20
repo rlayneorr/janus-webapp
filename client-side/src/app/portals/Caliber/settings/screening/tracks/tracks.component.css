@@ -1,9 +1,29 @@
-.wrapper{
-   /* border: 1px solid black;
-    box-shadow: 5px 9px;
-    border-radius: 5px;*/
-    text-align: center;
+body {
+    font-family: 'Futura-Std-Book';
 }
+.wrapper{
+    /*border: 1px solid black;
+    box-shadow: 5px 9px;
+    border-radius: 5px;
+    text-align: center;*/
+    position: relative;
+    width: 55%;   
+    left: 25%;
+}
+.btn{
+    position: absolute;
+    left: 67%;
+}
+.marker{
+    position:absolute;
+    left:95%;
+}
+.marker2{
+    position: absolute;
+    left:100%;
+}
+
+
 td{
     padding-left:8em;
     text-align: left;
@@ -21,3 +41,41 @@ td{
 .revatureOrange{
     background-color: #F26925;
 }
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  /* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 8px;
+  bottom: 4px;
+  background-color: white;
+}
+.slider.round {
+    border-radius: 34px;
+  }
+  .slider.round:before {
+    border-radius: 50%;
+  }
+input:checked + .slider {
+    background-color: #2196F3;
+  }

@@ -18,13 +18,24 @@ import { TracksService } from '../services/tracks.service';
   animations:[
     trigger('move',[
       state('center',style({
-        transform:'translateX(0)'
+        transform:'translateX(0) scaleX(1)'
       })),
       state('left',style({
-        transform:'translateX(-35%)'
+        transform:'translateX(-28%) scaleX(0.82)'
+        
       })),
       transition('center =>left',animate('300ms ease-in')),
-    ]),
+    ]), 
+    trigger('slider',[
+      state('starting',style({
+        transform:'translateX(0)'
+      })),
+      state('ending',style({
+        transform:'translateX(28px)'
+        
+      })),
+      transition('starting=>ending',animate('300ms ease-in')),
+    ])
   ]
 })
 export class TracksComponent implements OnInit {
@@ -32,26 +43,40 @@ export class TracksComponent implements OnInit {
   public inactiveTracks:any[]=[];
   public allTracks:any[]=[];
   state:string='center';
+  state2:string='starting';
+
 
   animate(item:any){
+    //console.log("sthap clicken me");
     this.state=(this.state==='center'?'left':'center');
+
+    console.log(state)
   }
-  workPlox(){
-    this.state=(this.state==='center'?'left':'center');
+
+  animate2(item:any){
+    //console.log("sthap clicken me");
+    this.state2=(this.state2==='starting'?'ending':'starting');
+
+    console.log(state)
   }
+
   colorDarken(item:any){
-   let items= document.getElementsByTagName("td");
+    //should be td
+   let items= document.getElementsByTagName("li");
+   //console.log(items)
+  // console.log(item)
    for(let i =0;i<items.length;i++){
-     if(items[i].innerHTML === item.Name){
-       items[i].parentElement.setAttribute("style","background:#E8E8E8");
+     if(items[i].innerText === item.Name){
+       items[i].parentElement.setAttribute("style","background:#E8E8E8;list-style-type:none");
      }
    }
   }
   colorLighten(item:any){
-   let items= document.getElementsByTagName("td");
+    // should be td
+   let items= document.getElementsByTagName("li");
    for(let i =0;i<items.length;i++){
-     if(items[i].innerHTML === item.Name){
-       items[i].parentElement.setAttribute("style","background:white");
+     if(items[i].innerText === item.Name){
+       items[i].parentElement.setAttribute("style","background:white;list-style-type:none");
      }
    }
 
@@ -148,7 +173,7 @@ export class TracksComponent implements OnInit {
     }
 
   ngOnInit() {
-
+    
     this.allTracks = [
       {Name:"Java",Active:true},
       {Name:'.Net',Active:true},
@@ -156,11 +181,12 @@ export class TracksComponent implements OnInit {
       {Name:'Label',Active:true},
       {Name:"Pega",Active:false},
       {Name:'Salesforce',Active:false},
-      {Name:'Software Engineer',Active:false}
+      {Name:'Software',Active:false}
     ]
+    
     this.setTracks()
 
-
+    console.log(this.inactiveTracks);
    /* this.tracks = [
       {Name:"Java",Active:true},
       {Name:'.Net',Active:true},
