@@ -1,6 +1,6 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Router} from '@angular/router';
-import {trigger,state,style,transition,animate,keyframes}  from '@angular/animations';
+import {trigger, state,style, transition, animate, keyframes}  from '@angular/animations';
 import {TrackBucket} from '../entities/TrackBucket';
 import { Bucket } from '../entities/Bucket';
 import {BucketsService} from '../services/buckets.service';
@@ -59,12 +59,8 @@ export class TrackBucketsComponent implements OnInit {
       {Name:"Core Java",Weight:40 ,isActive:true},
       {Name:"SQL",Weight:30,isActive:true}
     ]
-
-    
-  
+ 
 }
-
-
 
   getTracks():any{
     return this.allTrackBuckets;
