@@ -40,6 +40,7 @@ import { BatchService } from './services/batch-service/batch.service';
 import { SkillsetService } from './services/skill-set-service/skill-set.service';
 import { DataSyncService } from './services/datasync-service/data-sync.service';
 import { CreateUserService } from './services/create-user-service/create-user.service';
+import { PredictionService } from './services/prediction-service/prediction.service';
 
 ///
 //  FILTERS
@@ -61,6 +62,7 @@ import { RouterLinkStubDirective, RouterOutletStubComponent } from './testing-he
 import { FooterComponent } from './components/footer/footer/footer.component';
 
 import { CommonModule } from '@angular/common';
+import { PredictionsComponent } from './components/predictions/predictions.component';
 
 
 @NgModule({
@@ -83,7 +85,8 @@ import { CommonModule } from '@angular/common';
     AssociateViewComponent,
     RouterLinkStubDirective,
     RouterOutletStubComponent,
-    FooterComponent
+    FooterComponent,
+    PredictionsComponent
   ],
   imports: [
     // BrowserModule,
@@ -105,6 +108,7 @@ import { CommonModule } from '@angular/common';
     CreateUserService,
     SkillsetService,
     DataSyncService,
+    PredictionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
