@@ -34,16 +34,21 @@ import { TracksService } from '../services/tracks.service';
         transform:'translateX(28px)'
         
       })),
+
       transition('starting=>ending',animate('300ms ease-in')),
     ])
+
   ]
 })
+
 export class TracksComponent implements OnInit {
+
   public tracks:any[]=[];
   public inactiveTracks:any[]=[];
   public allTracks:any[]=[];
   state:string='center';
   state2:string='starting';
+
 
 
   animate(item:any){
@@ -106,6 +111,7 @@ export class TracksComponent implements OnInit {
       }
     }
   }
+
   constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService) { }
 
 
