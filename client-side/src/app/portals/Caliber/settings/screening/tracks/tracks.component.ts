@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 //inactive should be a minus
 // storing data in a service
 // creating track and adding buckets
+//variable for current track name
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Track } from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
 import { Bucket } from '../entities/Bucket';
-import{ TrackBucket } from '../entities/TrackBucket'
+import { TrackBucket } from '../entities/TrackBucket';
 
 @Component({
   selector: 'app-tracks',
@@ -27,17 +28,17 @@ import{ TrackBucket } from '../entities/TrackBucket'
 
       })),
       transition('center =>left',animate('300ms ease-in')),
-    ]),
-    trigger('slider',[
+    ]), 
+    trigger('buckets',[
       state('starting',style({
-        transform:'translateX(0)'
+        transform:'translateX(3000%)'
       })),
       state('ending',style({
-        transform:'translateX(28px)'
-
+        transform:'translateX(100%)'
+        
       })),
 
-      transition('starting=>ending',animate('300ms ease-in')),
+      transition('starting=>ending',animate('300ms')),
     ])
 
   ]
@@ -50,21 +51,22 @@ export class TracksComponent implements OnInit {
   public allTracks:any[]=[];
   state:string='center';
   state2:string='starting';
+  show:boolean = false;
 
 
 
   animate(item:any){
     //console.log("sthap clicken me");
     this.state=(this.state==='center'?'left':'center');
-
-    console.log(state)
+    this.show=(this.show=== false?true:false);
+    //console.log(state)
   }
 
-  animate2(item:any){
+  animate2(){
     //console.log("sthap clicken me");
     this.state2=(this.state2==='starting'?'ending':'starting');
 
-    console.log(state)
+    console.log(this.state2)
   }
 
   colorDarken(item:any){
@@ -152,7 +154,7 @@ export class TracksComponent implements OnInit {
         let sum = 0;
         let addedBucket = false;
         for(let bucketIndex in this.testBuckets){
-            if(this.testBuckets[bucketIndex].mappedToTrack == true){
+            if(this.testBuckets[bucketIndex].isActive == true){
                 addedBucket = true;
                 sum += this.testBuckets[bucketIndex].weight;
             }
@@ -160,7 +162,7 @@ export class TracksComponent implements OnInit {
         if(!addedBucket || sum == 100){
             console.log("Congrats! The sum of active buckets is: " + sum);
         } else {
-            console.log("The weight has to equal 100, bucket is mapped: ");
+            console.log("The weight has to equal 100");
         }
         //this.trackService.createTrack(this.newTrack.name).subscribe();
         this.initFormControl();
@@ -203,12 +205,13 @@ export class TracksComponent implements OnInit {
         }
     }
 
-    addToMapped(bucket){
-        bucket.mappedToTrack = true;
+    addToActive(bucket){
+        bucket.isActive = true;
+        console.log(this.testBuckets);
     }
 
-    removeFromMapped(bucket){
-        bucket.mappedToTrack = false;
+    removeFromActive(bucket){
+        bucket.isActive = false;
     }
 
   ngOnInit() {
