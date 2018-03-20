@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-bucket',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bucket.component.css']
 })
 export class BucketComponent implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit() {

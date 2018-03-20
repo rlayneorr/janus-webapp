@@ -15,8 +15,8 @@ export class QuestionsService {
 
   url: string = "/question/";
 
-  createNewQuestion(question: Question){
-      return this.http.post(this.url + "createQuestion", question, httpOptions);
+  createNewQuestion(bucketId: number, question: Question){
+      return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.text, answers: question.answers, tagIds: question.tagIds}, httpOptions);
   }
 
   deactivateQuestion(questionId: number){
@@ -25,6 +25,10 @@ export class QuestionsService {
 
   activateQuestion(questionId: number){
       return this.http.put(this.url + "activateQuestion", questionId, httpOptions);
+  }
+
+  getBucketQuestions(bucketId: number){
+      return this.http.get(this.url + "bucketQuestions/" + bucketId);
   }
 
 }
