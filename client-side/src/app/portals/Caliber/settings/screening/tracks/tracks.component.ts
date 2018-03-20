@@ -152,11 +152,11 @@ export class TracksComponent implements OnInit {
         for(let bucketIndex in this.testBuckets){
             if(this.testBuckets[bucketIndex].mappedToTrack == true){
                 addedBucket = true;
-                // sum += this.testBuckets[bucketIndex].weight;
+                sum += this.testBuckets[bucketIndex].weight;
             }
         }
         if(!addedBucket || sum == 100){
-            console.log("The sum of active buckets is: " + sum);
+            console.log("Congrats! The sum of active buckets is: " + sum);
         } else {
             console.log("The weight has to equal 100, bucket is mapped: ");
         }
