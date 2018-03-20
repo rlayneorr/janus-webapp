@@ -30,6 +30,8 @@ export class TracksComponent implements OnInit {
   state:string='small';
 
   animate(item:any){
+    console.log(item);
+    console.log(state);
     this.state=(this.state==='small'?'large':'small');
   }
   workPlox(){

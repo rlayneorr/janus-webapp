@@ -18,6 +18,7 @@ import { RoleGuard, roles } from '../../role-guard';
 import {ScreeningComponent} from './settings/screening/screening.component';
 import {BucketComponent} from './settings/screening/bucket/bucket.component';
 import {TrackBucketsComponent} from './settings/screening/track-buckets/track-buckets.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -96,7 +97,8 @@ export const routes: Routes = [
           {
             path:'screening',
            component: ScreeningComponent,
-          },
+          }
+          ,
           {
             path:'topics',
             component: BucketComponent,
