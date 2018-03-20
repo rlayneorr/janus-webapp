@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Bucket } from '../entities/Bucket';
+
 const httpOptions = {
 headers: new HttpHeaders({
         'Content-Type':  'application/json',
