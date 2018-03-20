@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Component, OnInit,Input } from '@angular/core';
 import {Router} from '@angular/router';
 import {trigger,state,style,transition,animate,keyframes}  from '@angular/animations';
@@ -7,14 +6,6 @@ import {BucketsService} from '../services/buckets.service';
 import {Track} from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
 import {TracksComponent} from '../tracks/tracks.component';
-=======
-import { Component, OnInit } from '@angular/core';
-import { Track } from '../entities/Track';
-import { TrackBucket } from '../entities/TrackBucket';
-import { Bucket } from '../entities/Bucket';
-import { BucketsService } from '../services/buckets.service';
-
->>>>>>> b68e1f0ba9702740a9250f5659c5e486a44d3b43
 @Component({
   selector: 'app-track-buckets',
   templateUrl: './track-buckets.component.html',

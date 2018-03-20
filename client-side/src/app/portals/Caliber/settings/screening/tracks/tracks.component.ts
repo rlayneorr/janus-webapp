@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 //import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+//activate tracks 
+//inactive should be a minus
+// storing data in a service
+// creating track and adding buckets
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,54 +17,78 @@ import { TracksService } from '../services/tracks.service';
   styleUrls: ['./tracks.component.css'],
   animations:[
     trigger('move',[
-      state('small',style({
+      state('center',style({
+        transform:'translateX(0) scaleX(1)'
+      })),
+      state('left',style({
+        transform:'translateX(-28%) scaleX(0.82)'
+        
+      })),
+      transition('center =>left',animate('300ms ease-in')),
+    ]), 
+    trigger('slider',[
+      state('starting',style({
         transform:'translateX(0)'
       })),
-      state('large',style({
-        transform:'translateX(-35%)'
+      state('ending',style({
+        transform:'translateX(28px)'
+        
       })),
-      transition('small => large',animate('300ms ease-in')),
-    ]),
+
+      transition('starting=>ending',animate('300ms ease-in')),
+    ])
+
   ]
 })
 
 export class TracksComponent implements OnInit {
 
-  /** Everything in a class is public if not specified. Everything in a module 
-   * is private unless export keyword is used.
-  **/
-  tracks: any[] = [];
-  inactiveTracks: any[] = [];
-  allTracks: any[] = [];
-  state:string = 'small';
+  public tracks:any[]=[];
+  public inactiveTracks:any[]=[];
+  public allTracks:any[]=[];
+  state:string='center';
+  state2:string='starting';
+
+
 
   animate(item:any){
-    console.log(item);
-    console.log(state);
-    this.state=(this.state==='small'?'large':'small');
+    //console.log("sthap clicken me");
+    this.state=(this.state==='center'?'left':'center');
+
+    console.log(state)
   }
-  workPlox(){
-    this.state=(this.state==='small'?'large':'small');
+
+  animate2(item:any){
+    //console.log("sthap clicken me");
+    this.state2=(this.state2==='starting'?'ending':'starting');
+
+    console.log(state)
   }
+
   colorDarken(item:any){
-   let items= document.getElementsByTagName("td");
+    //should be td
+   let items= document.getElementsByTagName("li");
+   //console.log(items)
+  // console.log(item)
    for(let i =0;i<items.length;i++){
-     if(items[i].innerHTML === item.Name){
-       items[i].parentElement.setAttribute("style","background:#E8E8E8");
+     if(items[i].innerText === item.Name){
+       items[i].parentElement.setAttribute("style","background:#E8E8E8;list-style-type:none");
      }
    }
   }
   colorLighten(item:any){
-   let items= document.getElementsByTagName("td");
+    // should be td
+   let items= document.getElementsByTagName("li");
    for(let i =0;i<items.length;i++){
-     if(items[i].innerHTML === item.Name){
-       items[i].parentElement.setAttribute("style","background:white");
+     if(items[i].innerText === item.Name){
+       items[i].parentElement.setAttribute("style","background:white;list-style-type:none");
      }
    }
 
   }
   removeElement(item:any){
     let thing:any;
+    console.log(item);
     for(let i = 0 ;i<this.allTracks.length;i++){
       thing = this.allTracks[i];
       if(thing.Name == item.Name){
@@ -151,7 +179,7 @@ export class TracksComponent implements OnInit {
     }
 
   ngOnInit() {
-
+    
     this.allTracks = [
       {Name:"Java",Active:true},
       {Name:'.Net',Active:true},
@@ -159,11 +187,12 @@ export class TracksComponent implements OnInit {
       {Name:'Label',Active:true},
       {Name:"Pega",Active:false},
       {Name:'Salesforce',Active:false},
-      {Name:'Software Engineer',Active:false}
+      {Name:'Software',Active:false}
     ]
+    
     this.setTracks()
 
-
+    console.log(this.inactiveTracks);
    /* this.tracks = [
       {Name:"Java",Active:true},
       {Name:'.Net',Active:true},
