@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
         if (user.tfRoleId === 4){
           this.router.navigate(['associate-view', user.userId]);
         } else {
-          this.router.navigate(['root']);
+          this.router.navigateByUrl('/TrackForce/home');
         }
       },
       err => {
