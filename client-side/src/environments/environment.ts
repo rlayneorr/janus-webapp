@@ -7,6 +7,8 @@ export const environment = {
   production: false,
   context: context, // change for what the production environment would actually be
   url: 'http://54.166.255.85:8085/',
+  assets: 'http://52.70.53.136:8086/angular/assets/',
+  //assets: '../../../../../assets/', //url for local testing
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
