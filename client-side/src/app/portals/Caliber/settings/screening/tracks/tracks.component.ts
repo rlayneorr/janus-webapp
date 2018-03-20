@@ -78,6 +78,7 @@ export class TracksComponent implements OnInit {
      }
    }
   }
+
   colorLighten(item:any){
     // should be td
    let items= document.getElementsByTagName("li");
@@ -86,8 +87,8 @@ export class TracksComponent implements OnInit {
        items[i].parentElement.setAttribute("style","background:white;list-style-type:none");
      }
    }
-
   }
+
   removeElement(item:any){
     let thing:any;
     console.log(item);
@@ -100,6 +101,7 @@ export class TracksComponent implements OnInit {
     }
     this.setTracks();
   }
+  
   setTracks(){
     let thing:any;
     this.tracks = [];
