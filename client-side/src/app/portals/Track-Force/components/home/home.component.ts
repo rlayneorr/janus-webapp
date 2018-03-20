@@ -14,6 +14,8 @@ import {ChartOptions} from '../../models/ng2-charts-options.model';
 import '../../constants/selected-status.constants';
 import { SelectedStatusConstants } from '../../constants/selected-status.constants';
 import {User} from "../../models/user.model";
+//import {AuthenticationService} from "../../../Caliber/services/authentication.service";
+import {AuthenticationService} from "../../services/authentication-service/authentication.service";
 
 const MONTHS_3 = 788923800;
 
@@ -88,16 +90,24 @@ export class HomeComponent {
     private us: CreateUserService,
     private cs: ClientListService,
     private bs: BatchService,
-    private as: AssociateService
-  ) { }
+    private as: AssociateService,
+    private authenticationService:AuthenticationService
+  )
+  {
+    let user = this.authenticationService.getUser();
+    if(user){
+      this.user = user;
+    }
+  }
 
   ngOnInit() {
-    // if(!this.user){
-    //   console.log('entered');
-    //   this.rout.navigateByUrl('/login').catch(error=>{
-    //     console.log(error);
-    //   });
-    // }
+    let user = this.authenticationService.getUser();
+    if(user){
+      this.user = user;
+    }
+    if(!this.user){
+      this.rout.navigateByUrl('TrackForce/login').catch(error=>{console.log(error)});
+    }
     this.load();
   }
 
