@@ -27,4 +27,8 @@ export class QuestionsService {
       return this.http.put(this.url + "activateQuestion", questionId, httpOptions);
   }
 
+  getBucketQuestions(bucketId: number){
+      return this.http.get(this.url + "bucketQuestions/" + bucketId);
+  }
+
 }

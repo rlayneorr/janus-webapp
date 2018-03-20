@@ -9,8 +9,8 @@
 
             <ul *ngFor="let track of tracks" style="list-style-type:none">
                 <hr>
-                <li class="lists" (mouseover)="colorDarken(track)" (mouseleave)="colorLighten(track)" (click)="animate(track)" >{{track.Name}}
-                        <span class="fa fa-pencil marker"></span>
+                <li class="lists" (mouseover)="colorDarken(track)" (mouseleave)="colorLighten(track)" (click)="animate(track)" >{{track.name}}
+                        <span class="fa fa-pencil marker" (click)="editTrack(track)"></span>
                         <span class="fa fa-remove marker2" (click)="removeElement(track)"></span>
                 </li>
             </ul>
@@ -22,7 +22,7 @@
 
             <ul *ngFor="let inact of inactiveTracks" style="list-style-type:none">
                     <hr>
-                <li (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">{{inact.Name}}
+                <li (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">{{inact.name}}
 
                         <span class="fa fa-pencil marker"></span>
                         <span class="fa fa-remove marker2"></span>
