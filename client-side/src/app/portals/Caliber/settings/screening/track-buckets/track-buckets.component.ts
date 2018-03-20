@@ -3,6 +3,7 @@ import { Track } from '../entities/Track';
 import { TrackBucket } from '../entities/TrackBucket';
 import { Bucket } from '../entities/Bucket';
 import { BucketsService } from '../services/buckets.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-track-buckets',
@@ -12,9 +13,11 @@ import { BucketsService } from '../services/buckets.service';
 
 export class TrackBucketsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
   }
-
+  open(content) {
+    this.modalService.open(content);
+  }
 }

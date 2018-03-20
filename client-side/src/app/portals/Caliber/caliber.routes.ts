@@ -17,6 +17,9 @@ import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-pro
 import { RoleGuard, roles } from '../../role-guard';
 
 import {ScreeningComponent} from './settings/screening/screening.component'
+import { Component } from '@angular/core';
+import { Bucket } from './settings/screening/entities/Bucket';
+import { BucketComponent } from './settings/screening/bucket/bucket.component';
 
 export const routes: Routes = [
   {
@@ -95,8 +98,16 @@ export const routes: Routes = [
           },
           {
             path:'screening',
-           component: ScreeningComponent,
+            component: ScreeningComponent,
+            children:[
+              
+            ]
           },
+          {
+            path: 'editCatagory',
+            component: BucketComponent
+          }
+        
         ]
       },
       {
