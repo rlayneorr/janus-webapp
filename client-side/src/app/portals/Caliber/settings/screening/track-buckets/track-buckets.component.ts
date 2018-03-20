@@ -34,8 +34,17 @@ export class TrackBucketsComponent implements OnInit {
         items[i].parentElement.setAttribute("style","background:white");
       }
     }
-  
    }
+
+   routeToBucket(item:any){
+     let items=document.getElementsByTagName("td");
+     for(let i =0;i<items.length;i++){
+       if(items[i].innerText===item.name){
+         
+       }
+     }
+   }
+
   constructor(
     private tracks : TracksComponent
   //  private tracksService: TracksService, 
@@ -53,8 +62,6 @@ export class TrackBucketsComponent implements OnInit {
       {Name:"SQL",Weight:30,isActive:true}
     ]
 
-    
-  
 }
 
 
