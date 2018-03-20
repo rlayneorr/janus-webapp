@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 //inactive should be a minus
 // storing data in a service
 // creating track and adding buckets
+//variable for current track name
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

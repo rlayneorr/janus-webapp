@@ -10,7 +10,7 @@ body {
     width: 55%;   
     left: 25%;
 }
-.btn{
+#createTrack{
     position: absolute;
     left: 67%;
 }
@@ -70,7 +70,7 @@ td{
   bottom: 4px;
   background-color: white;
 }
-.slider.round {
+.round {
     border-radius: 34px;
   }
   .slider.round:before {
