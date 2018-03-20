@@ -37,9 +37,11 @@ export class TracksComponent implements OnInit {
   animate(item:any){
     this.state=(this.state==='small'?'large':'small');
   }
+
   workPlox(){
     this.state=(this.state==='small'?'large':'small');
   }
+
   colorDarken(item:any){
    let items= document.getElementsByTagName("td");
    for(let i =0;i<items.length;i++){
@@ -48,6 +50,7 @@ export class TracksComponent implements OnInit {
      }
    }
   }
+
   colorLighten(item:any){
    let items= document.getElementsByTagName("td");
    for(let i =0;i<items.length;i++){
@@ -55,8 +58,8 @@ export class TracksComponent implements OnInit {
        items[i].parentElement.setAttribute("style","background:white");
      }
    }
-
   }
+
   removeElement(item:any){
     let thing:any;
     for(let i = 0 ;i<this.allTracks.length;i++){
@@ -68,6 +71,7 @@ export class TracksComponent implements OnInit {
     }
     this.setTracks();
   }
+  
   setTracks(){
     let thing:any;
     this.tracks = [];
