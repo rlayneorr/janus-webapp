@@ -19,7 +19,8 @@ import { RoleGuard, roles } from '../../role-guard';
 import {ScreeningComponent} from './settings/screening/screening.component'
 import { Component } from '@angular/core';
 import { Bucket } from './settings/screening/entities/Bucket';
-import { BucketComponent } from './settings/screening/bucket/bucket.component';
+import {BucketComponent} from './settings/screening/bucket/bucket.component';
+import {TrackBucketsComponent} from './settings/screening/track-buckets/track-buckets.component';
 
 export const routes: Routes = [
   {
@@ -104,10 +105,13 @@ export const routes: Routes = [
             ]
           },
           {
-            path: 'editCatagory',
+            path: 'category',
             component: BucketComponent
+          },
+          {
+            path: 'trackTopics',
+            component: TrackBucketsComponent,
           }
-        
         ]
       },
       {
