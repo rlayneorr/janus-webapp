@@ -10,9 +10,6 @@ import { environment } from '../../../../../environments/environment'
 
 @Injectable()
 export class ClientListService {
-  getAllClientsNames(): any {
-    throw new Error("Method not implemented.");
-  }
   private url: string = environment.url + 'TrackForce/';
 
   constructor(private http: HttpClient) { }
