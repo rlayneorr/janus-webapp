@@ -1,5 +1,6 @@
 body {
     font-family: 'Futura-Std-Book';
+    overflow: hidden;
 }
 .wrapper{
     /*border: 1px solid black;
@@ -11,8 +12,8 @@ body {
     left: 25%;
 }
 #createTrack{
-    position: absolute;
-    left: 67%;
+    /*position: absolute;
+    left: 67%;*/
 }
 .marker{
     position:absolute;
