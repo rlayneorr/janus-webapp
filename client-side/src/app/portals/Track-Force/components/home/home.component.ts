@@ -92,12 +92,9 @@ export class HomeComponent {
   ) { }
 
   ngOnInit() {
-    // if(!this.user){
-    //   console.log('entered');
-    //   this.rout.navigateByUrl('/login').catch(error=>{
-    //     console.log(error);
-    //   });
-    // }
+    if(!this.user){
+      this.rout.navigateByUrl('TrackForce/login').catch(error=>{console.log(error)});
+    }
     this.load();
   }
 
