@@ -6,7 +6,7 @@
             <br>
             <br>
             <h6 style="text-align:center">Active</h6>
-           
+
             <ul *ngFor="let track of tracks" style="list-style-type:none">
                 <hr>
                 <li class="lists" (mouseover)="colorDarken(track)" (mouseleave)="colorLighten(track)" (click)="animate(track)" >{{track.Name}}
@@ -19,11 +19,11 @@
             <br>
 
             <h6 style="text-align:center">Inactive</h6>
-           
+
             <ul *ngFor="let inact of inactiveTracks" style="list-style-type:none">
                     <hr>
                 <li (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">{{inact.Name}}
-                    
+
                         <span class="fa fa-pencil marker"></span>
                         <span class="fa fa-remove marker2"></span>
                 </li>
@@ -95,45 +95,47 @@
     </div>
 </div-->
 
+<!-- Modal for creating a new Track -->
 <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title">Create a Track</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form #addTrackForm="ngForm" [formGroup]="createTrack">
-            <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">Name:</label>
-                <div class="col-sm-10">
-                    <input type="text" id="name" name="name" placeholder="{{state}}" formControlName="name" class="form-control">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="buckets" class="col-sm-2 col-form-label">Buckets:</label>
-                <div class="col-sm-10">
-                    <div *ngFor="let bucket of testBuckets; let index = index">
-                        <div class="input-group col-sm-9" *ngIf="bucket.isActive">
-                            <span class="input-group-addon col-sm-4 revatureOrange">{{bucket.bucket}}</span>
-                            <input type="number" name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="testBuckets[index].weight"
-                                [ngModelOptions]="{standalone: true}">
-                            <span class="input-group-addon percentSign">%</span>
-                            <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromActive(bucket)">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
-                <div class="col-sm-10 row">
-                    <span *ngFor="let bucket of testBuckets">
-                        <span *ngIf="!bucket.isActive">
-                            <span class="input-group-addon" (click)="addToActive(bucket)" style="margin: 1px">{{bucket.bucket}}</span>
-                        </span>
-                    </span>
+  <div class="modal-header">
+      <!-- If a track got clicked, Title is Edit -->
+    <h4 class="modal-title" *ngIf="!testSingleTrack">Create a Track</h4>
+     <h4 class="modal-title" *ngIf="testSingleTrack">Edit Track</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form  #addTrackForm="ngForm" [formGroup]="createTrack">
+          <div class="form-group row">
+              <label for="name" class="col-sm-2 col-form-label">Name:</label>
+              <div class="col-sm-10">
+                  <!-- If a track is clicked, ngModel the name -->
+                  <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]="testSingleTrack.name" *ngIf="testSingleTrack">
+                  <input type="text" id="name" name="name" placeholder="Track Name" formControlName="name" class="form-control" *ngIf="!testSingleTrack">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="buckets" class="col-sm-2 col-form-label">Buckets:</label>
+              <div class="col-sm-10">
+                  <div *ngFor="let bucket of testBuckets; let index = index">
+                      <div class="input-group col-sm-9" *ngIf="bucket.mappedToTrack">
+                          <span class="input-group-addon col-sm-4 revatureOrange">{{bucket.name}}</span>
+                          <input type="number" name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucket.weight" [ngModelOptions]="{standalone: true}">
+                          <span class="input-group-addon percentSign">%</span>
+                          <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromMapped(bucket)"><span aria-hidden="true">&times;</span></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
+              <div class="col-sm-10 row">
+                  <span *ngFor="let bucket of testBuckets">
+                      <span *ngIf="!bucket.mappedToTrack">
+                          <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
+                      </span>
+                  </span>
 
                 </div>
 
