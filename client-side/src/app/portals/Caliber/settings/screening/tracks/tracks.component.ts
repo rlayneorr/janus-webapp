@@ -19,15 +19,20 @@ import { TracksService } from '../services/tracks.service';
       state('large',style({
         transform:'translateX(-35%)'
       })),
-      transition('small =>large',animate('300ms ease-in')),
+      transition('small => large',animate('300ms ease-in')),
     ]),
   ]
 })
+
 export class TracksComponent implements OnInit {
-  public tracks:any[]=[];
-  public inactiveTracks:any[]=[];
-  public allTracks:any[]=[];
-  state:string='small';
+
+  /** Everything in a class is public if not specified. Everything in a module 
+   * is private unless export keyword is used.
+  **/
+  tracks: any[] = [];
+  inactiveTracks: any[] = [];
+  allTracks: any[] = [];
+  state:string = 'small';
 
   animate(item:any){
     console.log(item);
@@ -78,6 +83,7 @@ export class TracksComponent implements OnInit {
       }
     }
   }
+
   constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService) { }
 
 

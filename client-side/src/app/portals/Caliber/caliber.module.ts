@@ -49,6 +49,7 @@ import { QuestionsService } from './settings/screening/services/questions.servic
 import { TracksService } from './settings/screening/services/tracks.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
 import { TagsService } from './settings/screening/services/tags.service';
+import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
 
 //N.T.
 import { ApiService } from './util/api.service';
@@ -130,6 +131,7 @@ import {TracksComponent} from './settings/screening/tracks/tracks.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { TrackBucketsComponent } from './settings/screening/track-buckets/track-buckets.component' ;
 //import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -268,12 +270,13 @@ import { TrackBucketsComponent } from './settings/screening/track-buckets/track-
     TracksService,
     BucketsService,
     TagsService,
+    HttpErrorHandlerService
   ],
   bootstrap: [
     TrainersComponent
   ],
   exports: [
-    TraineeTechSkillsComponent,
+    TraineeTechSkillsComponent
   ],
   entryComponents: [
     BarGraphModalComponent,
