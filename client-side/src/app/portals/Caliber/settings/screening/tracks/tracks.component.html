@@ -1,3 +1,5 @@
+<app-track-buckets style="position: absolute;left:50%" *ngIf='show' ></app-track-buckets>
+
 <div class="move" [@move]='state'>
     <div class="container">
        <div class = "wrapper">
@@ -30,14 +32,15 @@
             </ul>
             <hr>
         </div>
-        <button class="btn" id="createTrack" (click)="open(content)">Create Track</button>
+        <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
     </div>
-    <label class="switch">
+    </div>
+    <!--label class="switch">
             <input type="checkbox" [@slider]='state2'>
             <div class="round" (click)="animate2(track)"></div>
             <span class="slider" > </span>
-          </label>
-
+          </label-->
+    
     <!--div class="move">
         <div class="container">
             <div class="wrapper" [@move]='state'>
