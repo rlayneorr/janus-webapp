@@ -15,10 +15,6 @@ export class BucketsService {
 
   url: string = "/bucket/";
 
-  getBucketQuestions(bucketId: number){
-      return this.http.get(this.url + "bucketQuestions/" + bucketId);
-  }
-
   getAllBuckets(){
       return this.http.get(this.url + "getBuckets");
   }

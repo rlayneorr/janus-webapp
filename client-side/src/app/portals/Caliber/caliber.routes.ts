@@ -15,7 +15,10 @@ import { QualityComponent } from './quality/quality.component';
 import { PanelComponent } from './panel/panel/panel.component';
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { RoleGuard, roles } from '../../role-guard';
-import {ScreeningComponent} from './settings/screening/screening.component';
+
+import {ScreeningComponent} from './settings/screening/screening.component'
+import { Component } from '@angular/core';
+import { Bucket } from './settings/screening/entities/Bucket';
 import {BucketComponent} from './settings/screening/bucket/bucket.component';
 import {TrackBucketsComponent} from './settings/screening/track-buckets/track-buckets.component';
 
@@ -96,12 +99,14 @@ export const routes: Routes = [
           },
           {
             path:'screening',
-           component: ScreeningComponent,
-          }
-          ,
+            component: ScreeningComponent,
+            children:[
+              
+            ]
+          },
           {
-            path:'topics',
-            component: BucketComponent,
+            path: 'category',
+            component: BucketComponent
           },
           {
             path: 'trackTopics',
