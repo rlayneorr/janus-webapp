@@ -146,6 +146,8 @@ export class TracksComponent implements OnInit {
         { trackId: 0, bucketId: 2, weight: 30 }
     ]
 
+    testSingleTrack: Track = {id: 0, name: "Java", isActive: true}
+
     // set the track buckets within ALL BUCKETS to be already mapped
     editAllBuckets(){
         for(let index in this.testTrackBuckets){
