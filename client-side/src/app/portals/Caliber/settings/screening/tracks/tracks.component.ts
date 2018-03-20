@@ -225,8 +225,6 @@ export class TracksComponent implements OnInit {
       {Name:'SDET',Active:true},
       {Name:'Label',Active:true},
     ];
-
-
     this.inactiveTracks = [
       {Name:"Pega",Active:false},
       {Name:'Salesforce',Active:false},
