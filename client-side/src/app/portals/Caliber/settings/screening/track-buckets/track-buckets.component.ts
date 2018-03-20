@@ -2,10 +2,13 @@ import { Component, OnInit,Input } from '@angular/core';
 import {Router} from '@angular/router';
 import {trigger,state,style,transition,animate,keyframes}  from '@angular/animations';
 import {TrackBucket} from '../entities/TrackBucket';
+import { Bucket } from '../entities/Bucket';
 import {BucketsService} from '../services/buckets.service';
 import {Track} from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
 import {TracksComponent} from '../tracks/tracks.component';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-track-buckets',
   templateUrl: './track-buckets.component.html',
@@ -37,12 +40,16 @@ export class TrackBucketsComponent implements OnInit {
   
    }
   constructor(
-    private tracks : TracksComponent
+    private tracks : TracksComponent,
+    private modalService: NgbModal
   //  private tracksService: TracksService, 
   //  private route: ActivatedRoute,
   //  private location: Location
   ) { }
 
+  open(content) {
+    this.modalService.open(content);
+  }
 
   ngOnInit() {
     
