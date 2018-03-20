@@ -1,4 +1,5 @@
 <div class="move" [@move]='state'>
+
     <div class="container">
        <div class = "wrapper">
             <h1 style="text-align:center;color:#F26925">Tracks</h1>
@@ -30,67 +31,65 @@
             </ul>
             <hr>
         </div>
-
-        <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
     </div>
-</div>
-<label class="switch">
-        <input type="checkbox" [@slider]='state2'>
-        <div class="round" (click)="animate2(track)"></div>
-        <span class="slider" > </span>
-      </label>
-
-<!--div class="move">
-    <div class="container">
-        <div class="wrapper" [@move]='state'>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <h1>Tracks</h1>
-                    <br>
-                    <table class="table">
-                        <thead>
-                            <tr>Active</tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let track of tracks;let i = index" (mouseover)="colorDarken(track)" (mouseleave)="colorLighten(track)">
-                                <td (click)="animate(track)">{{track.Name}}</td>
-                                <td>
-                                    <span class="fa fa-pencil"></span>&nbsp;&nbsp;
-                                    <span class="fa fa-remove" (click)="removeElement(track)"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+    <label class="switch">
+            <input type="checkbox" [@slider]='state2'>
+            <div class="round" (click)="animate2(track)"></div>
+            <span class="slider" > </span>
+          </label>
+    
+    <!--div class="move">
+        <div class="container">
+            <div class="wrapper" [@move]='state'>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <h1>Tracks</h1>
+                        <br>
+                        <table class="table">
+                            <thead>
+                                <tr>Active</tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let track of tracks;let i = index" (mouseover)="colorDarken(track)" (mouseleave)="colorLighten(track)">
+                                    <td (click)="animate(track)">{{track.Name}}</td>
+                                    <td>
+                                        <span class="fa fa-pencil"></span>&nbsp;&nbsp;
+                                        <span class="fa fa-remove" (click)="removeElement(track)"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="col-md-3"></div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <table class="table">
-                        <thead>
-                            <tr>Inactive</tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let inact of inactiveTracks" (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">
-                                <td (click)="animate(track)">{{inact.Name}}</td>
-                                <td>
-                                    <span class="fa fa-pencil"></span>&nbsp;&nbsp;
-                                    <span class="fa fa-remove"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <br>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <table class="table">
+                            <thead>
+                                <tr>Inactive</tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let inact of inactiveTracks" (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">
+                                    <td (click)="animate(track)">{{inact.Name}}</td>
+                                    <td>
+                                        <span class="fa fa-pencil"></span>&nbsp;&nbsp;
+                                        <span class="fa fa-remove"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="col-md-3"></div>
+                <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
             </div>
-            <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
         </div>
+
 
     </div>
 </div-->
