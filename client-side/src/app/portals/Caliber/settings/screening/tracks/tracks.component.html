@@ -11,7 +11,7 @@
             <ul *ngFor="let track of tracks" style="list-style-type:none">
                 <hr>
                 <li class="lists" (mouseover)="colorDarken(track)" (mouseleave)="colorLighten(track)" (click)="animate(track)" >{{track.name}}
-                        <span class="fa fa-pencil marker" (click)="editTrack(track)"></span>
+                        <span class="fa fa-pencil marker" (click)="editTrack(track); open(content)"></span>
                         <span class="fa fa-remove marker2" (click)="removeElement(track)"></span>
                 </li>
             </ul>
@@ -31,13 +31,14 @@
             </ul>
             <hr>
         </div>
+        <button class="btn" id="createTrack" (click)="open(content)">Create Track</button>
     </div>
     <label class="switch">
             <input type="checkbox" [@slider]='state2'>
             <div class="round" (click)="animate2(track)"></div>
             <span class="slider" > </span>
           </label>
-    
+
     <!--div class="move">
         <div class="container">
             <div class="wrapper" [@move]='state'>
