@@ -13,6 +13,7 @@ import {ThemeConstants} from '../../constants/theme.constants';
 import {ChartOptions} from '../../models/ng2-charts-options.model';
 import '../../constants/selected-status.constants';
 import { SelectedStatusConstants } from '../../constants/selected-status.constants';
+import {User} from "../../models/user.model";
 
 const MONTHS_3 = 788923800;
 
@@ -65,6 +66,7 @@ export class HomeComponent {
   private deployedData: number[] = [0, 0];
   private mappedData: number[] = [0, 0, 0, 0];
   private unmappedData: number[] = [0, 0, 0, 0];
+  private user:User;
 
 
   /**
@@ -90,6 +92,12 @@ export class HomeComponent {
   ) { }
 
   ngOnInit() {
+    // if(!this.user){
+    //   console.log('entered');
+    //   this.rout.navigateByUrl('/login').catch(error=>{
+    //     console.log(error);
+    //   });
+    // }
     this.load();
   }
 
