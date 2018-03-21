@@ -1,23 +1,48 @@
-body {
-    font-family: 'Futura-Std-Book';
-    overflow: hidden;
+h3 {
+  text-align: center;
+  color: #F26925;
 }
-.wrapper{
+
+h6 {
+  text-align: center;
+}
+
+#xIcon {
+  color: #F26925;
+  margin-left: 10px;
+}
+
+#penIcon {
+  color: #F26925;
+}
+
+/*.wrapper{*/
     /*border: 1px solid black;
     box-shadow: 5px 9px;
     border-radius: 5px;
     text-align: center;*/
-    position: relative;
-    width: 55%;
-    left: 25%;
-}
+    /*position: relative;*/
+    /*width: 55%;*/
+    /*left: 25%;*/
+/*}*/
+
 #createTrack{
+<<<<<<< HEAD
   float: right;
+=======
+    /*position: absolute;
+    left: 67%;*/
+    float: right;
+>>>>>>> 8c30649606ab70606998713853fac7513cfb2f4e
 }
+
+/** not being used **/
 .marker{
     position:absolute;
     left:95%;
 }
+
+/** not being used **/
 .marker2{
     position: absolute;
     left:100%;

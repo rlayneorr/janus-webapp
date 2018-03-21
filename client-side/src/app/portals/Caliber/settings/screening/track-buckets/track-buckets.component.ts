@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Router} from '@angular/router';
-import {trigger, state,style, transition, animate, keyframes}  from '@angular/animations';
-import {TrackBucket} from '../entities/TrackBucket';
+import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate, keyframes}  from '@angular/animations';
+import { TrackBucket } from '../entities/TrackBucket';
 import { Bucket } from '../entities/Bucket';
-import {BucketsService} from '../services/buckets.service';
-import {Track} from '../entities/Track';
+import { BucketsService } from '../services/buckets.service';
+import { Track } from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
-import {TracksComponent} from '../tracks/tracks.component';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import {Observable} from 'rxjs/Observable';
+import { TracksComponent } from '../tracks/tracks.component';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-track-buckets',
@@ -17,12 +17,12 @@ import {Observable} from 'rxjs/Observable';
 })
 
 export class TrackBucketsComponent implements OnInit {
-  @Input() track: Track;
-  public allTrackBuckets: any[]=[];
-  public trackBuckets=[];
-  state:string='small';
 
- 
+  @Input() track: Track;
+  allTrackBuckets: any[] = [];
+  trackBuckets = [];
+  state:string = 'small';
+
   colorDarken(item:any){
     let items= document.getElementsByTagName("td");
     for(let i =0;i<items.length;i++){
