@@ -1,6 +1,10 @@
 h3 {
   text-align: center;
-  color: #F26925;
+  color: white;
+}
+
+.card-header {
+  background-color: #F26925;
 }
 
 h6 {
@@ -16,6 +20,11 @@ h6 {
   color: #F26925;
 }
 
+i {
+  cursor: pointer;
+  cursor: hand;
+}
+
 /*.wrapper{*/
     /*border: 1px solid black;
     box-shadow: 5px 9px;
@@ -26,11 +35,11 @@ h6 {
     /*left: 25%;*/
 /*}*/
 
-#createTrack{
-    /*position: absolute;
-    left: 67%;*/
-    float: right;
-}
+/*#createTrack{*/
+    /*position: absolute;*/
+    /*left: 67%;*/
+    /*float: right;*/
+/*}*/
 
 /** not being used **/
 .marker{

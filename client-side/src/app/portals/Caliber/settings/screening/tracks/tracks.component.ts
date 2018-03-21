@@ -24,7 +24,7 @@ import { TrackBucket } from '../entities/TrackBucket';
         transform:'translateX(0) scaleX(1)'
       })),
       state('left',style({
-        transform:'translateX(-28%) scaleX(0.82)'
+        transform:'translateX(-28%) scaleX(1)'
 
       })),
       transition('center =>left',animate('300ms ease-in')),
