@@ -1,6 +1,10 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Question } from '../entities/Question';
+import { Tag } from '../entities/Tag';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TAGS } from '../mock-tag';
 
 @Component({
   selector: 'app-bucket',
@@ -9,14 +13,23 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class BucketComponent implements OnInit {
   
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder) { }
+
+  createQuestion: FormGroup;
+  newQuestion: Question;
+  allTags: Tag[];
 
   ngOnInit() {
+    this.allTags = TAGS;
   }
   open(content) {
     this.modalService.open(content);
   }
-  
+  initFormControl() {
+    this.createQuestion = this.fb.group({
+      'name': ['', Validators.required],
+    });
+  }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -26,5 +39,9 @@ export class BucketComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
+  addNewQuestion(modal: Question){
+    this.newQuestion = modal;
+    this.initFormControl;
+}
 }
 
