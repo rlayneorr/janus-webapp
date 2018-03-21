@@ -6,7 +6,7 @@
                 <table class="table">       
                     <div *ngIf="track.name === 'Java'">
                         <tbody>
-                                <tr *ngFor="let trackBucket of allTrackBuckets;let i = index" (mouseover)="colorDarken(trackBucket)" (mouseleave)="colorLighten(trackBucket)">
+                                <tr *ngFor="let trackBucket of allTrackBuckets;let i = index" (mouseover)="colorDarken(trackBucket)" (mouseleave)="colorLighten(trackBucket)" (click)="routeToBucket()">
                                         <td class="col-md-2">{{trackBucket.Name}}</td>
                                         <td class="col-md-4">
                                         {{trackBucket.Weight}}%
