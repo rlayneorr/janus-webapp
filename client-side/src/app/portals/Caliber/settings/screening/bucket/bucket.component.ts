@@ -46,6 +46,19 @@ export class BucketComponent implements OnInit {
     this.initFormControl;
   }
   addTagToQuestion(tag){
+    let currentTag: any;
+    let newAllTags : Tag[] = [];
+    let i: number = 0;
+    for(i; i < this.allTags.length; i++)
+    {
+      currentTag = this.allTags[i];
+      if(tag.id != currentTag.id){
+        newAllTags.push(currentTag);
+        //this.currentTags.splice(i,1);
+        console.log(currentTag.id);
+      } 
+    }
+    this.allTags = newAllTags;
     this.currentTags.push(tag);
   }
   removeTagFromQuestion(tag){
@@ -66,7 +79,7 @@ export class BucketComponent implements OnInit {
         console.log(currentTag.id);
       } 
     }
-    
+    this.allTags.push(tag);
     this.currentTags = newCurrentTags;
     console.log(this.currentTags);
   }
