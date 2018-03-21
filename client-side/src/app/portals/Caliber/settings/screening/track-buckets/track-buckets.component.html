@@ -1,16 +1,15 @@
 <div class="moveRight">
     <div class="track-bucket-container">
-                <h3 class="tb-heading">Topics</h3>
-                <div *ngIf="track.name === 'Java'">
-                    <ul *ngFor="let trackBucket of allTrackBuckets;let i=index" 
-                    style="list-style-type:none">
-                        <hr>
-                        <li class="lists"
-                        (click)="routeToBucket(trackBucket.Name)">
-                            {{trackBucket.Name}}   {{trackBucket.Weight}}%
-                            <span class="fa fa-pencil marker"></span>
-                            <span class="fa fa-remove marker2" (click)="removeElement(trackBucket)"></span>
-                        </li>
-                    </ul>   
+        <h3 class="tb-heading">Categories</h3>
+        <div *ngIf="track.name === 'Java'">
+            <div class="list-group" *ngFor="let trackBucket of allTrackBuckets">
+                <a class="list-group-item list-group-item-action" (click)="routeToBucket(trackBucket.Name)">
+                  <span> {{trackBucket.Name}} 
+                    &nbsp;
+                    {{trackBucket.Weight}}%</span> 
+                    <i id="xIcon" class="fa fa-remove pull-right"></i>
+                    <i id="penIcon" class="fa fa-pencil pull-right"></i>
+                </a>
+            </div>
         </div>
     </div>
