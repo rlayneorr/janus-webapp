@@ -28,4 +28,8 @@ export class BucketsService {
       return this.http.post(this.url + "createBucket", bucket, httpOptions);
   }
 
+  getBucketsByTrack(trackID : number){
+      return this.http.get(this.url+ "")
+  }
+
 }

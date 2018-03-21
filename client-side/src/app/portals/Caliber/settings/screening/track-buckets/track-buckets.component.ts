@@ -1,13 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Router} from '@angular/router';
-import {trigger, state,style, transition, animate, keyframes}  from '@angular/animations';
-import {TrackBucket} from '../entities/TrackBucket';
+import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate, keyframes}  from '@angular/animations';
+import { TrackBucket } from '../entities/TrackBucket';
 import { Bucket } from '../entities/Bucket';
-import {BucketsService} from '../services/buckets.service';
-import {Track} from '../entities/Track';
+import { BucketsService } from '../services/buckets.service';
+import { Track } from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
-import {TracksComponent} from '../tracks/tracks.component';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { TracksComponent } from '../tracks/tracks.component';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-track-buckets',
@@ -16,12 +17,12 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class TrackBucketsComponent implements OnInit {
-  @Input() track: Track;
-  public allTrackBuckets: any[]=[];
-  public trackBuckets=[];
-  state:string='small';
 
- 
+  @Input() track: Track;
+  allTrackBuckets: any[] = [];
+  trackBuckets = [];
+  state:string = 'small';
+
   colorDarken(item:any){
     let items= document.getElementsByTagName("td");
     for(let i =0;i<items.length;i++){
@@ -37,12 +38,15 @@ export class TrackBucketsComponent implements OnInit {
         items[i].parentElement.setAttribute("style","background:white");
       }
     }
-  
    }
+
+ 
+
   constructor(
     private tracks : TracksComponent,
-    private modalService: NgbModal
-  //  private tracksService: TracksService, 
+    private modalService: NgbModal,
+    private tracksService: TracksService,
+    private router: Router
   //  private route: ActivatedRoute,
   //  private location: Location
   ) { }
@@ -52,7 +56,6 @@ export class TrackBucketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     this.track={id:1,name:"Java",isActive:true};
     this.allTrackBuckets=[
       {Name:"HTML/CSS",Weight:30 , isActive:true},
@@ -62,10 +65,18 @@ export class TrackBucketsComponent implements OnInit {
  
 }
 
-  getTracks():any{
+  getTracks(){
     return this.allTrackBuckets;
  }
-
+ /*
+ getTrackBuckets(id:number): Observable<TrackBucket>{
+   return this.tracksService.getBucketsByTrack(id);
+ }*/
+  //item: any
+  routeToBucket(){
+    this.router.navigateByUrl("/Caliber/settings/category");
+    console.log("routing to category");
+  }
 
   
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TrackBucket } from '../entities/TrackBucket';
-
+ 
 const httpOptions = {
 headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -12,6 +12,7 @@ headers: new HttpHeaders({
 export class TracksService {
 
   constructor(private http: HttpClient) { }
+  public trackBuckets : TrackBucket[]=[];
 
   url: string = "/track/";
 
@@ -40,8 +41,9 @@ export class TracksService {
       return this.http.get(this.url + "getTrack/" + trackId);
   }
 
-  getBucketsByTrack(trackId: number){
-      return this.http.get(this.url + "getTopics/" + trackId);
+  getBucketsByTrack(trackId: number){ 
+    return this.http.get(this.url + "getTopics/" + trackId);
+
   }
 
 }
