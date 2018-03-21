@@ -18,9 +18,11 @@ export class BucketComponent implements OnInit {
   createQuestion: FormGroup;
   newQuestion: Question;
   allTags: Tag[];
+  currentTags: Tag[];
 
   ngOnInit() {
     this.allTags = TAGS;
+    this.currentTags = [];
   }
   open(content) {
     this.modalService.open(content);
@@ -42,6 +44,31 @@ export class BucketComponent implements OnInit {
   addNewQuestion(modal: Question){
     this.newQuestion = modal;
     this.initFormControl;
-}
+  }
+  addTagToQuestion(tag){
+    this.currentTags.push(tag);
+  }
+  removeTagFromQuestion(tag){
+    let currentTag: any;
+    let newCurrentTags : Tag[] = [];
+    let i: number = 0;
+
+    console.log(this.currentTags);
+    console.log(tag.id);
+    for(i; i < this.currentTags.length; i++)
+    {
+      currentTag = this.currentTags[i];
+      
+      
+      if(tag.id != currentTag.id){
+        newCurrentTags.push(currentTag);
+        //this.currentTags.splice(i,1);
+        console.log(currentTag.id);
+      } 
+    }
+    
+    this.currentTags = newCurrentTags;
+    console.log(this.currentTags);
+  }
 }
 
