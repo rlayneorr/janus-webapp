@@ -1,19 +1,26 @@
-body {
-    font-family: 'Futura-Std-Book';
-    overflow: hidden;
+h3 {
+  text-align: center;
+  color: #F26925;
 }
-.wrapper{
+
+h6 {
+  text-align: center;
+}
+
+/*.wrapper{*/
     /*border: 1px solid black;
     box-shadow: 5px 9px;
     border-radius: 5px;
     text-align: center;*/
-    position: relative;
-    width: 55%;
-    left: 25%;
-}
+    /*position: relative;*/
+    /*width: 55%;*/
+    /*left: 25%;*/
+/*}*/
+
 #createTrack{
     /*position: absolute;
     left: 67%;*/
+    float: right;
 }
 .marker{
     position:absolute;
