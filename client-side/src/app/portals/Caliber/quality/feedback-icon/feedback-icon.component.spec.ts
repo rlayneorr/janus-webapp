@@ -5,14 +5,12 @@ describe('FeedbackIconComponent', () => {
   let component: FeedbackIconComponent;
   let fixture: ComponentFixture<FeedbackIconComponent>;
 
-  beforeEach(async(() =>
-  {
+  beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies)
     .compileComponents();
   }));
 
-  beforeEach(() =>
-  {
+  beforeEach(() => {
     fixture = TestBed.createComponent(FeedbackIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -266,7 +266,7 @@ export class ReportingService {
     };
 
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
-      if (traineeId != 0) {
+      if (traineeId !== 0) {
         this.httpClient.get(endpoint)
         .subscribe(success => this.assessmentBreakdownBarChart.next({ params: params, data: success }));
       }

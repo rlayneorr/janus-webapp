@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed, tick, fakeAsync, inject } from '@angular/core/testing';
 
-//Injected Services
+// Injected Services
 import { BatchService } from '../../services/batch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
 import { SkillService } from '../../services/skill.service';
@@ -53,7 +53,7 @@ describe('BatchModalComponent', () => {
 
   it('select location', async((done) => {
     component.onLocationSelect(1);
-    if (component.batch.address != undefined) {
+    if (component.batch.address !== undefined) {
       expect(component.batch.address.city).toEqual('Queens');
     }
   }), 1440000);

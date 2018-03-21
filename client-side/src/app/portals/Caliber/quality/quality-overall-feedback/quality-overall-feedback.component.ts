@@ -16,8 +16,7 @@ import { NoteService } from '../../services/note.service';
   styleUrls: ['./quality-overall-feedback.component.css']
 })
 
-export class QualityOverallFeedbackComponent implements OnInit, OnDestroy, OnChanges
-{
+export class QualityOverallFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   @Input() batchNote: Note;
 
   public qcStatuses: string[];
@@ -34,22 +33,18 @@ export class QualityOverallFeedbackComponent implements OnInit, OnDestroy, OnCha
     this.batchNote = new Note();
     this.selectedStatus = Note.STATUS_UNDEFINED;
   }
-setSmiley()
-{
-  if (this.batchNote.qcStatus == 'Good')
-  {
+setSmiley() {
+  if (this.batchNote.qcStatus === 'Good') {
     this.showGood = true;
     this.showMeh = false;
     this.showBad = false;
   }
-  if (this.batchNote.qcStatus == 'Average')
-  {
+  if (this.batchNote.qcStatus === 'Average') {
     this.showGood = false;
     this.showMeh = true;
     this.showBad = false;
   }
-  if (this.batchNote.qcStatus == 'Poor')
-  {
+  if (this.batchNote.qcStatus === 'Poor') {
     this.showGood = false;
     this.showMeh = false;
     this.showBad = true;
@@ -89,20 +84,17 @@ setSmiley()
       this.saveNote(this.batchNote);
       this.setSmiley();
     }
-    if (status == 'Good')
-    {
+    if (status === 'Good') {
       this.showGood = true;
       this.showMeh = false;
       this.showBad = false;
     }
-    if (status == 'Average')
-    {
+    if (status === 'Average') {
       this.showGood = false;
       this.showMeh = true;
       this.showBad = false;
     }
-    if (status == 'Poor')
-    {
+    if (status === 'Poor') {
       this.showGood = false;
       this.showMeh = false;
       this.showBad = true;

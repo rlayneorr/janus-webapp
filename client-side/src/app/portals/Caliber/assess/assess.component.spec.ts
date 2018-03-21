@@ -16,17 +16,18 @@ import { Dependencies } from '../caliber.test.module';
 
 describe('AssessComponent', () => {
   let component: AssessComponent;
+
   let fixture: ComponentFixture<AssessComponent>;
-  let modalService: ComponentFixture<AssessComponent>;
-  let batchService: ComponentFixture<AssessComponent>;
-  let assessmentService: ComponentFixture<AssessComponent>;
-  let gradeService: ComponentFixture<AssessComponent>;
-  let categoryService: ComponentFixture<AssessComponent>;
-  let noteService: ComponentFixture<AssessComponent>;
-  let fb: ComponentFixture<AssessComponent>;
-  let datePipe: ComponentFixture<AssessComponent>;
-  let categorySkill: ComponentFixture<AssessComponent>;
-  let alertsService: ComponentFixture<AssessComponent>;
+  // let modalService: ComponentFixture<AssessComponent>;
+  // let batchService: ComponentFixture<AssessComponent>;
+  // let assessmentService: ComponentFixture<AssessComponent>;
+  // let gradeService: ComponentFixture<AssessComponent>;
+  // let categoryService: ComponentFixture<AssessComponent>;
+  // let noteService: ComponentFixture<AssessComponent>;
+  // let fb: ComponentFixture<AssessComponent>;
+  // let datePipe: ComponentFixture<AssessComponent>;
+  // let categorySkill: ComponentFixture<AssessComponent>;
+  // let alertsService: ComponentFixture<AssessComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();

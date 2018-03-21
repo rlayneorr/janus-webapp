@@ -35,10 +35,20 @@ export class TrainersComponent implements OnInit, OnDestroy {
     this.trainerService.populateOnStart();
     this.trainerSubscription = this.trainerService.listSubject.subscribe((resp) => {
       this.trainers = resp;
-      if (resp) this.filteredTrainers = resp.filter(s => this.activeStatus == 'ROLE_INACTIVE' ? s.tier == this.activeStatus : s.tier != 'ROLE_INACTIVE');
+      if (resp) {
+        this.filteredTrainers = resp.filter(s => {
+          if (this.activeStatus === 'ROLE_INACTIVE') {
+            return s.tier === this.activeStatus;
+          } else {
+            return s.tier !== 'ROLE_INACTIVE';
+          }
+        });
+      }
     });
     this.trainerService.titlesSubject.subscribe(res => this.titles = res);
-    this.trainerService.tiersSubject.subscribe(res => this.tiers = (res.filter(tier => tier !== 'ROLE_INACTIVE'))); // filter out ROLE_INACTIVE
+    this.trainerService.tiersSubject.subscribe(res => {
+      this.tiers = (res.filter(tier => tier !== 'ROLE_INACTIVE')); // filter out ROLE_INACTIVE
+    });
     this.initFormControl();
   }
 

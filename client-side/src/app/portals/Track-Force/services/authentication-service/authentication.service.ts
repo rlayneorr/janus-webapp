@@ -36,10 +36,10 @@ export class AuthenticationService {
   *@return
   *The user object that contains the JWT, username, and role id
   */
-  login(username: string, password: string){
+  login(username: string, password: string) {
     return this.rs.login(username, password).map(
       user => {
-        if (user){
+        if (user) {
           localStorage.setItem(USER_KEY, JSON.stringify(user));
         }
         return user;
@@ -52,7 +52,7 @@ export class AuthenticationService {
   *
   *@param none
   */
-  logout(){
+  logout() {
     localStorage.removeItem(USER_KEY);
     this.router.navigate(['login']);
   }

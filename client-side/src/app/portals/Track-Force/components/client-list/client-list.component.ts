@@ -88,9 +88,11 @@ export class ClientListComponent implements OnInit {
           const stats = client.stats;
           if (stats.trainingMapped > 0 || stats.trainingUnmapped > 0 ||
             stats.reservedMapped > 0 || stats.openUnmapped > 0 ||
-          stats.selectedMapped > 0 || stats.selectedUnmapped > 0 ||
-          stats.confirmedMapped > 0 || stats.confirmedUnmapped > 0)
+            stats.selectedMapped > 0 || stats.selectedUnmapped > 0 ||
+            stats.confirmedMapped > 0 || stats.confirmedUnmapped > 0
+          ) {
             this.clientNames.push(client.tfClientName);
+          }
         }
       }, err => {
         console.log('Failed grabbing names');
@@ -124,7 +126,7 @@ export class ClientListComponent implements OnInit {
   // get client name and find id to request client information
   getOneClient(name: string) {
     this.selectedCompany = name;
-    const oneClient = this.clientInfo.find(item => item['tfClientName'] == name);
+    const oneClient = this.clientInfo.find(item => item['tfClientName'] === name);
     this.rs.getOneClient(oneClient.id)
       .subscribe(
       client => {

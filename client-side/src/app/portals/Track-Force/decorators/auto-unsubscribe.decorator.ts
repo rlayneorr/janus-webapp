@@ -6,6 +6,7 @@
  */
 
 // This automagical code obtained from https://netbasal.com/automagically-unsubscribe-in-angular-4487e9853a88
+// Why are we just pulling code from online????
 export function AutoUnsubscribe( constructor ) {
 
     // make copy of the ngOnDestroy callback

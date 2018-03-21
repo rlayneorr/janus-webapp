@@ -8,9 +8,9 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
  * an array that contains this
  **/
 export class AuthGuard implements CanActivate {
-	// dependency-injecting the router
+    // dependency-injecting the router
     constructor(private router: Router) {}
-	/**
+    /**
 	 *  The method provided to us by CanActivate interface. Controls whether or not the element with this...canActivate !
 	 *  Responsible for redirecting the user to the login page, and maintaining the state of their original request, which,
 	 *  when they log in, should be redirected to.

@@ -44,7 +44,7 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 
-//N.T.
+// N.T.
 import { ApiService } from './util/api.service';
 
 // pipes

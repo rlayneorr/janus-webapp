@@ -21,9 +21,9 @@ describe('ClientMappedComponent', () => {
   const testClientMappedService: ClientMappedService = new ClientMappedService(null);
   const testAuthService: AuthenticationService = new AuthenticationService(null, null);
 
-  //Setup service mocks
+  // Setup service mocks
   beforeAll(() => {
-    //Mock data
+    // Mock data
     const client1: ClientMappedModel = new ClientMappedModel();
     client1.name = 'Client 1';
     client1.count = 50;
@@ -34,10 +34,10 @@ describe('ClientMappedComponent', () => {
     client3.name = 'Client 3';
     client3.count = 40;
 
-    //Mock the ClientMappedService
+    // Mock the ClientMappedService
     spyOn(testClientMappedService, 'getAssociatesByStatus').and.returnValue(Observable.of([client1, client2, client3]));
 
-    //Mock the Authentication Service
+    // Mock the Authentication Service
     const user: User = new User();
     user.token = 'mockToken';
     user.username = 'mockUser';
@@ -45,7 +45,7 @@ describe('ClientMappedComponent', () => {
     spyOn(testAuthService, 'getUser').and.returnValue(user);
   });
 
-  //Dependancies
+  // Dependancies
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -73,28 +73,28 @@ describe('ClientMappedComponent', () => {
     fixture.detectChanges();
   });
 
-  //Smoke test. Check the component is created
+  // Smoke test. Check the component is created
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  //Grab mock data and test length of returned array
+  // Grab mock data and test length of returned array
   it('should grab data', () => {
     expect(component.clientMappedData.length).toEqual(3);
   });
 
-  //Test that chart is of type 'bar' by default
+  // Test that chart is of type 'bar' by default
   it('should display bar chart by default', () => {
-    //Variable containing the expected chart type
+    // Variable containing the expected chart type
     const chart_type = 'bar';
 
-    //Grab the graph from the DOM
+    // Grab the graph from the DOM
     const the_graph = document.getElementById('the_graph');
 
-    //Test the chartType field in Component
+    // Test the chartType field in Component
     expect(component.chartType).toEqual(chart_type);
 
-    //Test the chartType in the DOM
+    // Test the chartType in the DOM
     expect(the_graph.getAttribute('ng-reflect-chart-type')).toEqual(chart_type);
   });
 });

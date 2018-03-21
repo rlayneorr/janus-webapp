@@ -3,7 +3,7 @@
  * @author Leng
  */
 
- export class User{
+ export class User {
      username: String;
      passwordHash: String;
      tfRoleId: number;

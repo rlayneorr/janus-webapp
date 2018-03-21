@@ -13,7 +13,6 @@ import {AuthenticationService} from '../../services/authentication-service/authe
 import {RequestService} from '../../services/request-service/request.service';
 
 describe('ClientListComponent', () => {
-  let component: ClientListComponent;
   let fixture: ComponentFixture<ClientListComponent>;
 
   beforeEach(async(() => {
@@ -36,7 +35,7 @@ describe('ClientListComponent', () => {
 
 
   it('should create', async(() => {
-    const fixture = TestBed.createComponent(ClientListComponent);
+    fixture = TestBed.createComponent(ClientListComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));

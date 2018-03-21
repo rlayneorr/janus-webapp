@@ -32,13 +32,6 @@ import { HostListener } from '@angular/core/src/metadata/directives';
   providers: [DatePipe],
 })
 export class AssessComponent implements OnInit {
-
-  pageOffsetValue;
-
-  getPageOffsetHeight(event: ScrollEvent) {
-    this.pageOffsetValue = pageYOffset;
-  }
-
   assessment: Assessment;
 
   batches: Batch[] = [];
@@ -60,10 +53,13 @@ export class AssessComponent implements OnInit {
   yearBatches: Batch[] = [];
   selectedTrainees: Trainee[] = [];
 
+  pageOffsetValue;
   constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
-  private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService,
-  private fb: FormBuilder, private datePipe: DatePipe) {
+    private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService,
+    private fb: FormBuilder, private datePipe: DatePipe) {}
 
+  getPageOffsetHeight(event: ScrollEvent) {
+    this.pageOffsetValue = pageYOffset;
   }
 
   // This event is called when the user switches tabs (for Weeks).
@@ -116,7 +112,7 @@ export class AssessComponent implements OnInit {
         this.batches.forEach(b => {
           this.years.add(this.datePipe.transform(b.startDate, 'yyyy'));
           const sDate = new Date(b.startDate);
-          if (sDate.getFullYear() > this.currentYear){
+          if (sDate.getFullYear() > this.currentYear) {
             this.currentYear = sDate.getFullYear();
           }
         });
@@ -313,13 +309,13 @@ export class AssessComponent implements OnInit {
       note.type = 'TRAINEE';
       this.noteService.create(note);
     });
-    const note = new Note();
-    note.batch = this.selectedBatch;
-    note.maxVisibility = '3';
-    note.qcFeedback = false;
-    note.week = week;
-    note.type = 'BATCH';
-    this.noteService.create(note);
+    const batchNote = new Note();
+    batchNote.batch = this.selectedBatch;
+    batchNote.maxVisibility = '3';
+    batchNote.qcFeedback = false;
+    batchNote.week = week;
+    batchNote.type = 'BATCH';
+    this.noteService.create(batchNote);
   }
 
   updateNote(note: Note, input) {
@@ -361,9 +357,13 @@ export class AssessComponent implements OnInit {
 
     this.selectedTrainees = this.selectedBatch.trainees;
     this.selectedTrainees.sort((a, b) => {
-      if (a.name < b.name) return -1;
-      else if (a.name > b.name) return 1;
-      else return 0;
+      if (a.name < b.name) {
+        return -1;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return 0;
+      }
     });
   }
 
@@ -382,11 +382,11 @@ export class AssessComponent implements OnInit {
     const y = new Date(year, 0, 1);
     for (const batch of this.batches){
       const batchYear = new Date(batch.startDate);
-      if (batchYear.getFullYear() == y.getFullYear()) {
+      if (batchYear.getFullYear() === y.getFullYear()) {
         this.yearBatches[this.yearBatches.length] = batch;
       }
     }
-    if (this.yearBatches[0] != null){
+    if (this.yearBatches[0] != null) {
       this.selectedWeek = this.yearBatches[0].weeks;
       this.switchBatch(this.yearBatches[0].batchId);
 

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // services
 import { AlertsService } from './alerts.service';
 
-//Interfaces
+// Interfaces
 import { CRUD } from '../interfaces/api.interface';
 
 // rxjs
@@ -84,7 +84,7 @@ export class TraineeService implements CRUD<Trainee> {
   /*
     function that pushes a trainee into savedSubject
   */
-  public pushToSaved(trainee: Trainee){
+  public pushToSaved(trainee: Trainee) {
     this.savedSubject.next(trainee);
   }
 

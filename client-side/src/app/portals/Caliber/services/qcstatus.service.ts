@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertsService } from './alerts.service';
 import { urls } from './urls';
 
-//Interfaces
+// Interfaces
 import { Fetch } from '../interfaces/api.interface';
 
 // rxjs

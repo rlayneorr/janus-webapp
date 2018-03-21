@@ -7,7 +7,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 
-//util
+// util
 import * as _ from 'lodash';
 
 

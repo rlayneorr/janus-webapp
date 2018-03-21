@@ -17,24 +17,24 @@ import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 })
 
 export class AssociateListComponent implements OnInit {
-  //our collection of associates and clients
+  // our collection of associates and clients
   associates: Associate[];
   clients: Client[];
-  curriculums: Set<string>; //stored unique curriculums
+  curriculums: Set<string>; // stored unique curriculums
 
-  //used for filtering
+  // used for filtering
   searchByStatus = '';
   searchByClient = '';
   searchByText = '';
   searchByCurriculum = '';
 
-  //status/client to be updated
+  // status/client to be updated
   updateShow = false;
   updateStatus = '';
   updateClient: number;
   updated = false;
 
-  //used for ordering of rows
+  // used for ordering of rows
   desc = false;
   sortedColumn = '';
 
@@ -48,19 +48,15 @@ export class AssociateListComponent implements OnInit {
   }
 
   ngOnInit() {
-    //get current url
+    // get current url
     this.getAllAssociates();
     this.getClientNames();
 
     const url = window.location.href.split('/');
-    if (url.length == 8)//if values passed in, search by values
-    {
-      if (url[4] == 'client')
-      {
+    if (url.length === 8) { // if values passed in, search by values
+      if (url[4] === 'client') {
         this.searchByClient = url[5];
-      }
-      else if (url[4] == 'curriculum')
-      {
+      } else if (url[4] === 'curriculum') {
         this.searchByCurriculum = url[5];
       }
        this.searchByStatus = url[6].toUpperCase() + ',  ' + url[7].toUpperCase();
@@ -75,7 +71,7 @@ export class AssociateListComponent implements OnInit {
     this.rs.getAssociates().subscribe(data => {
       this.associates = data;
 
-      for (const associate of this.associates) {//get our curriculums
+      for (const associate of this.associates) { // get our curriculums
         this.curriculums.add(associate.curriculumName);
 
         if (associate.batchName === 'null') {
@@ -106,20 +102,28 @@ export class AssociateListComponent implements OnInit {
   sort(property) {
     this.desc = !this.desc;
     let direction;
-    if (property !== this.sortedColumn || this.updated)
-      //set ascending or descending
+    if (property !== this.sortedColumn || this.updated) {
+      // set ascending or descending
       direction = 1;
-    else direction = this.desc ? 1 : -1;
+    } else {
+      direction = this.desc ? 1 : -1;
+    }
 
     this.sortedColumn = property;
 
-    if (this.updated) this.updated = false;
+    if (this.updated) {
+      this.updated = false;
+    }
 
-    //sort the elements
+    // sort the elements
     this.associates.sort(function (a, b) {
-      if (a[property] < b[property]) return -1 * direction;
-      else if (a[property] > b[property]) return 1 * direction;
-      else return 0;
+      if (a[property] < b[property]) {
+        return -1 * direction;
+      } else if (a[property] > b[property]) {
+        return 1 * direction;
+      } else {
+        return 0;
+      }
     });
   }
 
@@ -131,7 +135,7 @@ export class AssociateListComponent implements OnInit {
     let i = 1;
     const self = this;
 
-    for (i; i <= this.associates.length; i++) { //grab the checked ids
+    for (i; i <= this.associates.length; i++) { // grab the checked ids
       const check = <HTMLInputElement>document.getElementById('' + i);
       if (check != null && check.checked) {
         ids.push(i);

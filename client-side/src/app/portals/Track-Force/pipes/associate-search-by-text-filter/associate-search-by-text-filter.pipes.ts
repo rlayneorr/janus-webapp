@@ -10,12 +10,15 @@ import { Pipe, PipeTransform } from '@angular/core';
  */
 export class AssociateSearchByTextFilter implements PipeTransform {
     transform(items: any[], searchText: string): any[] {
-
-        if (!items) return [];
-        if (!searchText) return items;
+        if (!items) {
+            return [];
+        }
+        if (!searchText) {
+            return items;
+        }
         searchText = searchText.toLowerCase();
 
-        //return results that contain firstname, lastname, status, client, ic
+        // return results that contain firstname, lastname, status, client, ic
         return items.filter(associate => {
             return associate.firstName.toLowerCase().includes(searchText)
             || associate.lastName.toLowerCase().includes(searchText)
