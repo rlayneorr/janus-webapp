@@ -1,25 +1,16 @@
 <div class="moveRight">
     <div class="track-bucket-container">
-        <div class="col-md-20">
-            <div class="col-md-20">
                 <h3 class="tb-heading">Topics</h3>
-                <table class="table">       
-                    <div *ngIf="track.name === 'Java'">
-                        <tbody>
-                                <tr *ngFor="let trackBucket of allTrackBuckets;let i = index" (mouseover)="colorDarken(trackBucket)" (mouseleave)="colorLighten(trackBucket)" (click)="routeToBucket()">
-                                        <td class="col-md-2">{{trackBucket.Name}}</td>
-                                        <td class="col-md-4">
-                                        {{trackBucket.Weight}}%
-                                            </td><td class="col-md-4">
-                                        <span class="fa fa-pencil"></span>&nbsp;&nbsp;
-                                        <span class="fa fa-remove" (click)="removeElement(i)"></span> 
-                                    </td>  
-                                </tr>
-                        </tbody>
-                    </div>
-                </table>
-            </div>
+                <div *ngIf="track.name === 'Java'">
+                    <ul *ngFor="let trackBucket of allTrackBuckets;let i=index" 
+                    style="list-style-type:none">
+                        <hr>
+                        <li class="lists"
+                        (click)="routeToBucket(trackBucket.Name)">
+                            {{trackBucket.Name}}   {{trackBucket.Weight}}%
+                            <span class="fa fa-pencil marker"></span>
+                            <span class="fa fa-remove marker2" (click)="removeElement(trackBucket)"></span>
+                        </li>
+                    </ul>   
         </div>
     </div>
-</div>
-
