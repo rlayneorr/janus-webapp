@@ -21,6 +21,7 @@ export class TrackBucketsComponent implements OnInit {
   @Input() track: Track;
   allTrackBuckets: any[] = [];
   trackBuckets = [];
+  testBuckets:any[]=[];
   state:string = 'small';
 
   colorDarken(item:any){
@@ -62,6 +63,7 @@ export class TrackBucketsComponent implements OnInit {
       {Name:"Core Java",Weight:40 ,isActive:true},
       {Name:"SQL",Weight:30,isActive:true}
     ]
+    this.testBuckets=["test1","test2","test3"]
  
 }
 
@@ -77,6 +79,11 @@ export class TrackBucketsComponent implements OnInit {
     this.router.navigateByUrl("/Caliber/settings/category?name="+item);
     console.log(item);
     console.log("routing to category");
+  }
+
+  showAddCategoryModal(){
+    
+    console.log("Show 'Add category' modal button clicked");
   }
 
   
