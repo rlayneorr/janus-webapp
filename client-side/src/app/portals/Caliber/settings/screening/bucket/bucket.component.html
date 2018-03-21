@@ -9,6 +9,7 @@
     </button>
   </div>
   <div class="modal-body">
+    <!--Add new question input text boxes-->
     <form  #addTrackForm="ngForm" [formGroup]="createTrack">
       <div class="form-group row">
         <label for = "questionText" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Question:</label>
@@ -46,11 +47,22 @@
           <input type = "text" id = "5pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
         </div>
       </div>
+      <!--Currently added tags-->
+      
+      <!--Add tags section-->
+      <div class="form-group row">
+          <label for="allTags" class="col-sm-6 col-form-label">Tags:</label>
+          <div class="col-sm-10 row">
+              <span *ngFor="let tag of allTags">
+                <span class="input-group-addon" (click)="addTagToQuestion(tag)" style="margin: 1px">{{tag.name}}</span>
+              </span>
+            </div>
+        </div>
       </form>
   </div>
   <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
-      <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Track'); addNewTrack(addTrackForm.value)">Save</button>
+      <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Question'); addNewQuestion(addQuestionForm.value)">Save</button>
   </div>
 </ng-template>
 <!--Ending of the add new question modal-->
