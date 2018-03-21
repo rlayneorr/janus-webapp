@@ -1,25 +1,32 @@
 <div class="moveRight">
     <div class="track-bucket-container">
-        <div class="col-md-20">
-            <div class="col-md-20">
-                <h3 class="tb-heading">Topics</h3>
-                <table class="table">       
-                    <div *ngIf="track.name === 'Java'">
-                        <tbody>
-                                <tr *ngFor="let trackBucket of allTrackBuckets;let i = index" (mouseover)="colorDarken(trackBucket)" (mouseleave)="colorLighten(trackBucket)" (click)="routeToBucket()">
-                                        <td class="col-md-2">{{trackBucket.Name}}</td>
-                                        <td class="col-md-4">
-                                        {{trackBucket.Weight}}%
-                                            </td><td class="col-md-4">
-                                        <span class="fa fa-pencil"></span>&nbsp;&nbsp;
-                                        <span class="fa fa-remove" (click)="removeElement(i)"></span> 
-                                    </td>  
-                                </tr>
-                        </tbody>
-                    </div>
-                </table>
+        <h3 class="tb-heading">Categories</h3>
+        <div *ngIf="track.name === 'Java'">
+            <div class="list-group" *ngFor="let trackBucket of allTrackBuckets">
+                <a class="list-group-item list-group-item-action" (click)="routeToBucket(trackBucket.Name)">
+                  <span> {{trackBucket.Name}} 
+                    &nbsp;
+                    {{trackBucket.Weight}}%</span> 
+                    <i id="xIcon" class="fa fa-remove pull-right"></i>
+                    <i id="penIcon" class="fa fa-pencil pull-right"></i>
+                </a>
             </div>
+          
         </div>
     </div>
-</div>
+    <h3 class="tb-heading" (click)="open(content)">Add Category</h3>
 
+    <ng-template #content let-c="close" let-d="dismiss">
+        <form>
+        <div class="form-group">
+           
+        <h3 class="tb-heading">Add a Category to this Track </h3>
+        <label>Category</label>
+        <select ng-model="trackBucket" 
+        ng-options="trackBucket.Name for trackBucket in allTrackBuckets"
+        formControlName="weight" class="form-control">
+        </select></div>
+        <input type="number" id="weight" name="weight" placeholder="Category Weight" formControlName="weight" class="form-control">
+        
+    </form>
+    </ng-template>
