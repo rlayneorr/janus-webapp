@@ -10,59 +10,47 @@ import { CookieService } from 'ngx-cookie-service';
   selector: 'app-caliber-nav',
   templateUrl: './caliber-nav.component.html',
   styleUrls: ['./caliber-nav.component.css'],
-  providers: [ RouteService ],
+  providers: [RouteService],
 })
 export class CaliberNavComponent implements OnInit, OnDestroy {
   @Input()
   collapsed = false;
-
-  willShow(path) {
-    routes.forEach(r => {
-      if (r.path == path) {
-        console.log(r.data.roles);
-        return r.data.roles.includes(this.cookies.get('role'));
-      }
-    });
-    routes[0].children.forEach(r => {
-      if (r.path == path) {
-        console.log(r.data.roles);
-        return r.data.roles.includes(this.cookies.get('role'));
-      }    });
-    return false;
-  }
 
   @Output()
   collapse: EventEmitter<any> = new EventEmitter<any>();
 
   private routeService: RouteService;
   private routeSubscription: Subscription;
-  private userRole= this.cookies.get('role');
+  private userRole;
 
-  showHome= true;
-  showManage: boolean= this.userRole == 'ROLE_VP' || this.userRole == 'ROLE_TRAINER' || this.userRole == 'ROLE_QC' || this.userRole == 'ROLE_PANEL';
-  showAssess: boolean= this.userRole == 'ROLE_VP' || this.userRole == 'ROLE_TRAINER';
-  showQuality: boolean= this.userRole == 'ROLE_VP' || this.userRole == 'ROLE_QC';
-  showPanel: boolean= this.userRole == 'ROLE_VP' || this.userRole == 'ROLE_PANEL';
-  showReports= true;
+  showHome = true;
+  showManage: boolean;
+  showAssess: boolean;
+  showQuality: boolean;
+  showPanel: boolean;
+  showReports = true;
 
-  routes: Routes;
 
-  constructor(routeSrv: RouteService, private cookies: CookieService) {
-    this.routeService = routeSrv;
-    this.routes = [];
+  constructor(private routeSrv: RouteService, private cookies: CookieService) {
   }
 
   ngOnInit() {
-    this.routeSubscription = this.routeService.getTopNavRoutes()
-      .subscribe( (routes) => this.routes = routes );
+    this.userRole = this.cookies.get('role');
+    this.showHome = true;
+    this.showManage = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_TRAINER' ||
+      this.userRole === 'ROLE_QC' || this.userRole === 'ROLE_PANEL';
+    this.showAssess = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_TRAINER';
+    this.showQuality = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_QC';
+    this.showPanel = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_PANEL';
+    this.showReports = true;
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
   }
 
   toggleCollapse() {
     this.collapsed = !this.collapsed;
     this.collapse.emit(this.collapsed);
   }
+
 }

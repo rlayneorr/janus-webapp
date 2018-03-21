@@ -1,0 +1,20 @@
+ ::ng-deep :root {
+	/*** Primary Colors ***/ 
+	--orange: #F26925; 
+	--white: #FFFFF; 
+	--dark-grey: #474C55;
+	/*** Secondary Colors ***/ 
+	--blue: #72A4C2; 
+	--yellow: #FCB414; 
+	--light-grey: #B9B9BA;
+}
+
+/*::ng-deep .card {
+	border-color: var(--orange);
+
+}*/
+
+  ::ng-deep .card-header {
+		background-color: var(--orange);
+		color: white;
+  }

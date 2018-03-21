@@ -69,10 +69,9 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   }
   public clickThroughFaces() {
     console.log(this.notes[0].qcStatus);
-    if (this.click == 0) {
+    if (this.click === 0) {
       this.click = 4;
-    }
-    else {
+    } else {
       this.click = this.click - 1;
     }
 
@@ -162,11 +161,10 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     let newStatus: any;
 
     for (i = 0; i < this.statusList.length; i++) {
-      if (status == this.statusList[i]) {
+      if (status === this.statusList[i]) {
         if (i >= 4) {
           newStatus = this.statusList[0];
-        }
-        else {
+        } else {
           newStatus = this.statusList[i + 1];
         }
       }
@@ -274,7 +272,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
 
     const data = [];
 
-    if (this.batch.trainees != undefined){
+    if (this.batch.trainees !== undefined) {
       this.batch.trainees.forEach( (trainee) => {
         const row = {
           batch: this.batch,

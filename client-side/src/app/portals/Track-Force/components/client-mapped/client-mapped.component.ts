@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientMappedService } from '../../services/client-mapped-service/client-mapped-service';
-import { ThemeConstants } from '../../constants/theme.constants'; //Used for colors in charts
+import { ThemeConstants } from '../../constants/theme.constants'; // Used for colors in charts
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { ChartsModule, Color } from 'ng2-charts';
 import { Router } from '@angular/router';
@@ -90,27 +90,27 @@ export class ClientMappedComponent implements OnInit {
     };
   }
 
-  //Run on initialization
+  // Run on initialization
   ngOnInit() {
-    //Fetch the statusId from the URL. Used to fetch and display data
-    //For now, parse out the desired number
-    //To-Do: Use "Activated Routes" to fetch the value
+    // Fetch the statusId from the URL. Used to fetch and display data
+    // For now, parse out the desired number
+    // To-Do: Use "Activated Routes" to fetch the value
     this.statusID = window.location.href.split('client-mapped/')[1];
-    this.statusID = Number(this.statusID) + 1; //Adjust the statud id. Values passed in are off by 1.
-    //Initialize 'selectedStatus' to correct string.
-    if (Number(this.statusID) == 1) {
+    this.statusID = Number(this.statusID) + 1; // Adjust the statud id. Values passed in are off by 1.
+    // Initialize 'selectedStatus' to correct string.
+    if (Number(this.statusID) === 1) {
       this.selectedStatus = 'Training';
-    } else if (Number(this.statusID) == 2) {
+    } else if (Number(this.statusID) === 2) {
       this.selectedStatus = 'Reserved';
-    } else if (Number(this.statusID) == 3) {
+    } else if (Number(this.statusID) === 3) {
       this.selectedStatus = 'Selected';
-    } else if (Number(this.statusID) == 4) {
+    } else if (Number(this.statusID) === 4) {
       this.selectedStatus = 'Confirmed';
     }
-    //Initialize the title
+    // Initialize the title
     this.chartOptions.title.text = this.selectedStatus;
 
-    //Initialize the chart to type 'bar'
+    // Initialize the chart to type 'bar'
     this.changeChartType('bar');
 
     // HTTP request to fetch data. See client-mapped-service
@@ -127,22 +127,24 @@ export class ClientMappedComponent implements OnInit {
       const temp_clientMappedData: number[] = [];
       console.log(data);
 
-      //Loop over 'data' and extract fetched information
+      // Loop over 'data' and extract fetched information
       for (const d in data) {
-        const temp_name = data[d].name;
-        const temp_count = data[d].count;
-        if (temp_count > 0){
-          //Check if the fetched name is empty
-          if (data[d].name == ''){
-            temp_clientMappedLabels.push('Empty Name');
-          } else {
-            temp_clientMappedLabels.push(data[d].name);
+        if (data.hasOwnProperty(d)) {
+          const temp_name = data[d].name;
+          const temp_count = data[d].count;
+          if (temp_count > 0) {
+            // Check if the fetched name is empty
+            if (data[d].name === '') {
+              temp_clientMappedLabels.push('Empty Name');
+            } else {
+              temp_clientMappedLabels.push(data[d].name);
+            }
+            temp_clientMappedData.push(data[d].count);
           }
-          temp_clientMappedData.push(data[d].count);
         }
       }
 
-      //Set data, trigger property binding
+      // Set data, trigger property binding
       this.clientMappedData = temp_clientMappedData;
       this.clientMappedLabels = temp_clientMappedLabels;
     });
@@ -154,23 +156,21 @@ export class ClientMappedComponent implements OnInit {
 	 * Removes the chart legend for charts that don't utilize it.
    * @param selectedType string containing the type of chart to display. Should contain 'bar', 'pie', or 'polarArea'
 	 */
-	public changeChartType(selectedType){
+  public changeChartType(selectedType) {
     this.chartType = selectedType;
 
-    //For 'bar' charts
-    if (selectedType == 'bar') {
+    // For 'bar' charts
+    if (selectedType === 'bar') {
       this.chartOptions.legend = {
         display: false
       };
 
-      //Add scales to options if it doesn't exist
+      // Add scales to options if it doesn't exist
       if (!this.chartOptions.legend.scales) {
         this.chartOptions.scales = {yAxes: [{ticks: {min: 0}}]};
       }
-    }
-    //For 'pie' or 'polarArea' charts
-    else if (selectedType == 'pie' || selectedType == 'polarArea'){
-      //Display legend
+    } else if (selectedType === 'pie' || selectedType === 'polarArea') { // For 'pie' or 'polarArea' charts
+      // Display legend
       this.chartOptions.legend = {
         display: true,
         position: 'right'
@@ -183,7 +183,7 @@ export class ClientMappedComponent implements OnInit {
     }
   }
 
-  //Placeholder for events. Current application specifications does not dictate any actions
+  // Placeholder for events. Current application specifications does not dictate any actions
   public chartClicked(e: any): void {
     console.log(e);
     this.rout.navigate([`associate-listing/client/${this.clientMappedLabels[e.active[0]._index]}/mapped/${this.chartOptions.title.text}`]);

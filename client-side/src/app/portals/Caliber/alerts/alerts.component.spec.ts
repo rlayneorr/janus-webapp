@@ -8,8 +8,8 @@ import { NotificationsService } from 'angular2-notifications-lite/src/notificati
 describe('AlertsComponent', () => {
   let component: AlertsComponent;
   let fixture: ComponentFixture<AlertsComponent>;
-  let alertService: ComponentFixture<AlertsComponent>;
-  let notificationsService: ComponentFixture<AlertsComponent>;
+  // let alertService: ComponentFixture<AlertsComponent>;
+  // let notificationsService: ComponentFixture<AlertsComponent>;
 
   const mockAlertServce = {};
   const mockNotificationService = {};

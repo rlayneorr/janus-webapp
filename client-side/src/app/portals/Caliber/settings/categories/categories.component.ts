@@ -75,7 +75,7 @@ export class CategoriesComponent implements OnInit {
     this.newCategory.active = true;
     this.categoryService.create(this.newCategory).subscribe((succ) =>
       this.categoriesService.fetchAll());
-    //may not need this statement without all of the inherited subjects
+    // may not need this statement without all of the inherited subjects
     this.resetFormControl();
   }
 

@@ -15,7 +15,7 @@ import { AlertsService } from './alerts.service';
 import { Trainer } from '../entities/Trainer';
 import { urls } from './urls';
 
-//Interfaces
+// Interfaces
 import { CRUD } from '../interfaces/api.interface';
 
 /**

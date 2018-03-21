@@ -11,7 +11,7 @@ import { Location } from '../../../entities/Location';
     styleUrls: ['./reactivatelocation.component.css'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ReactivateLocationComponent {
+export class ReactivateLocationComponent implements OnInit {
     @Input()
     location: Location;
 

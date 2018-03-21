@@ -33,7 +33,7 @@ export class RequestService {
     return this.http.get<any>(this.host + 'TrackForce/track/user/name');
   }
 
-  public updateAssociates(): Observable<any>{
+  public updateAssociates(): Observable<any> {
     return this.http.post<any>(this.trackPath + '/data/update/associate', {});
   }
 

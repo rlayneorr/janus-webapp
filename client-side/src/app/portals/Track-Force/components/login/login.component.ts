@@ -14,7 +14,7 @@ import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 })
 @AutoUnsubscribe
 export class LoginComponent implements OnInit {
-  //url to REST endpoint
+  // url to REST endpoint
   public username: string;
   public password: string;
 
@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
   */
   ngOnInit() {
     const user = this.authService.getUser();
-    if (user != null){
-      if (user.tfRoleId === 4){
+    if (user != null) {
+      if (user.tfRoleId === 4) {
         this.router.navigate(['associate-view', user.userId]);
       }
       this.router.navigate(['root']);
@@ -59,17 +59,15 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.username, this.password).subscribe(
       data => {
-        debugger;
         const user = this.authService.getUser();
-        //navigate to appropriate page if return is valid
-        if (user.tfRoleId === 4){
+        // navigate to appropriate page if return is valid
+        if (user.tfRoleId === 4) {
           this.router.navigate(['associate-view', user.userId]);
         } else {
           this.router.navigate(['root']);
         }
       },
       err => {
-        debugger;
         this.authService.logout();
       }
     );

@@ -26,8 +26,8 @@ export class AssociateViewComponent implements OnInit {
     private activated: ActivatedRoute) { }
 
   ngOnInit() {
-    //gets the associate id from the path
-    //the '+' coerces the parameter into a number
+    // gets the associate id from the path
+    // the '+' coerces the parameter into a number
     const id = +this.activated.snapshot.paramMap.get('id');
     this.getAssociate(id);
   }
@@ -38,7 +38,7 @@ export class AssociateViewComponent implements OnInit {
   *@param {number} id
   *the id number of the associate
   */
-  getAssociate(id: number){
+  getAssociate(id: number) {
     this.associateService.getAssociate(id).subscribe(
       data => {
         this.associate = data;
@@ -53,7 +53,7 @@ export class AssociateViewComponent implements OnInit {
   * for logging out the associates
   * clears the localStorage
   */
-  logout(){
+  logout() {
     this.authService.logout();
   }
 

@@ -10,6 +10,7 @@ import { CaliberNavComponent } from './caliber-nav/caliber-nav.component';
 import { AssignForceComponent } from '../portals/Assign-Force/assign-force.component';
 import { AssignForceNavComponent } from './assign-force-nav/assign-force-nav.component';
 import { TracknForceNavComponent } from './track-force-nav/track-force-nav.component';
+import { BamNavComponent } from './bam-nav/bam-nav.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { TracknForceNavComponent } from './track-force-nav/track-force-nav.compo
     NavComponent,
     CaliberNavComponent,
     AssignForceNavComponent,
-    TracknForceNavComponent
+    TracknForceNavComponent,
+    BamNavComponent
   ],
   providers: [],
   exports: [NavComponent]

@@ -16,6 +16,6 @@ export class Client {
     interviews: Interview[];
     statusInfo: StatusInfo;
 
-    constructor(){
+    constructor() {
     }
 }

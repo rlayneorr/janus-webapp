@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
@@ -27,7 +28,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
 
-
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,6 +39,7 @@ const routes: Routes = [
       { path: 'Caliber', loadChildren: './portals/Caliber/caliber.module#CaliberModule' },
       { path: 'AssignForce', loadChildren: './portals/Assign-Force/assign-force.module#AssignForceModule' },
       { path: 'TrackForce', loadChildren: './portals/Track-Force/track-force.module#TrackForceModule' },
+      { path: 'Bam', loadChildren: './portals/Bam/bam.module#BamModule' },
       { path: '**', pathMatch: 'full', redirectTo: '/dashboard' }
     ]
   },
@@ -54,7 +55,7 @@ const routes: Routes = [
     NavModule,
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,

@@ -28,7 +28,6 @@ import { ManageComponent } from './manage.component';
 import { Dependencies } from '../caliber.test.module';
 
 describe('ManageComponent', () => {
-
   let component: ManageComponent;
   let fixture: ComponentFixture<ManageComponent>;
 

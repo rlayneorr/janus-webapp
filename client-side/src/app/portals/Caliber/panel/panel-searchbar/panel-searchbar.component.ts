@@ -58,8 +58,9 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
   setBatchList() {
     this.batchSubscription = this.batchService.getList().subscribe(batchList => {
       this.batchList = batchList;
-      if (!this.traineeList.length)
+      if (!this.traineeList.length) {
         this.getTrainees(this.batchList);
+      }
     });
   }
 
@@ -85,7 +86,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
     this.panelService.fetchAllByTrainee(trainee);
     this.traineeSubject.next(this.trainee);
     this.name = this.trainee.name;
-    this.traineeService.pushToSaved(this.trainee);  //set selected trainee to savedSubject in traineeservice
+    this.traineeService.pushToSaved(this.trainee);  // set selected trainee to savedSubject in traineeservice
   }
 
   /**
@@ -98,7 +99,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
         this.trainee = this.traineeList[i];
         this.panelService.fetchAllByTrainee(this.trainee);
         this.traineeSubject.next(this.trainee);
-        this.traineeService.pushToSaved(this.trainee); //set selected trainee to savedsubject in traineeservice
+        this.traineeService.pushToSaved(this.trainee); // set selected trainee to savedsubject in traineeservice
       }
     }
   }

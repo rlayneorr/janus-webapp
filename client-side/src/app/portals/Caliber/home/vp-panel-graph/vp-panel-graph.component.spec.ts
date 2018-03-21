@@ -18,7 +18,6 @@ describe('VpPanelGraphComponent', () => {
 
   // beforeEachProviders(() => [TestService]);
 
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ VpPanelGraphComponent ],
@@ -39,7 +38,6 @@ describe('VpPanelGraphComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(VpPanelGraphComponent);
     component = fixture.componentInstance;
-
     // this.vpHomePanelGraphService = fixture.debugElement.injector.get(VpHomePanelGraphService);
     // this.alertsService = fixture.debugElement.injector.get(AlertsService);
     // this.reportsService = fixture.debugElement.injector.get(ReportsService);

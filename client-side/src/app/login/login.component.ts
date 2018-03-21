@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-
     this.http.post(environment.context + 'users/login', this.credential, {withCredentials: true})
       .subscribe( (succResp) => {
         if (succResp.text() !== '') {

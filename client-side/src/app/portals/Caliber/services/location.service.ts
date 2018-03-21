@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 // services
 import { AlertsService } from './alerts.service';
 
-//Interfaces
+// Interfaces
 import { CRUD } from '../interfaces/api.interface';
 
 // entities

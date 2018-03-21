@@ -221,8 +221,8 @@ export class ManageComponent implements OnInit, OnDestroy {
       console.log(b);
       console.log('--------------------------------');
       console.log(this.batches);
-      for (let i = 0; i < this.batches.length; i++){
-        if (this.batches[i].batchId == b.batchId){
+      for (let i = 0; i < this.batches.length; i++) {
+        if (this.batches[i].batchId === b.batchId) {
           this.batches[i] = b;
         }
       }
@@ -361,7 +361,7 @@ export class ManageComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(DeleteTraineeModalComponent);
     modalRef.componentInstance.trainee = trainee;
     modalRef.result.then(result => {
-      if (result == 'Delete') {
+      if (result === 'Delete') {
         this.traineeService.delete(trainee);
         this.modalService.open(CannotDeleteTraineeModalComponent);
       }
@@ -479,7 +479,7 @@ export class ManageComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(DeleteBatchModalComponent);
     modalRef.componentInstance.batch = batch;
     modalRef.result.then(result => {
-      if (result == 'Delete') {
+      if (result === 'Delete') {
         this.batchService.delete(batch);
         this.modalService.open(CannotDeleteModalComponent);
       }
@@ -537,9 +537,9 @@ export class ManageComponent implements OnInit, OnDestroy {
   /**
    * Switch trainee mode, set showDropped to !showDropped.
    */
-  switchTraineeView(){
+  switchTraineeView() {
     this.showDropped = !this.showDropped;
-    if (this.showDropped){
+    if (this.showDropped) {
       this.traineeService.fetchDroppedByBatch(this.currentBatch.batchId).subscribe(results => this.droppedTrainees = results);
     }
   }

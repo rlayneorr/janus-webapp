@@ -15,7 +15,7 @@ import { Trainee } from '../entities/Trainee';
 import { Panel } from '../entities/Panel';
 import { urls } from './urls';
 
-//Interfaces
+// Interfaces
 import { CRUD } from '../interfaces/api.interface';
 
 /**

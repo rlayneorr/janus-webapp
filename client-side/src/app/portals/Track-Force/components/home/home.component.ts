@@ -18,7 +18,7 @@ const MONTHS_3 = 788923800;
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   /**
  * http://usejsdoc.org/
@@ -147,7 +147,7 @@ export class HomeComponent {
 * clientMapped.html partial.
 */
   mappedOnClick(evt: any) {
-    if (evt.active[0] != undefined) {
+    if (evt.active[0] !== undefined) {
       console.log(evt.active[0]);
       this.rout.navigate([`client-mapped/${evt.active[0]._index}`]);
     }
@@ -162,7 +162,7 @@ export class HomeComponent {
    * skillset.html partial.
    */
   unmappedOnClick(evt: any) {
-    if (evt.active[0] != undefined) {
+    if (evt.active[0] !== undefined) {
       console.log(evt.active[0]);
       this.rout.navigate([`skillset/${evt.active[0]._index}`]);
     }

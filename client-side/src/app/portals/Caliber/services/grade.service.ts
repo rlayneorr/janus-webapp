@@ -123,7 +123,7 @@ export class GradeService implements CRUD<Grade> {
     return this.saveSubject.asObservable();
   }
 
-  public delete(grade: Grade): Observable<Grade>{
+  public delete(grade: Grade): Observable<Grade> {
     return Observable.of(grade);
 }
 

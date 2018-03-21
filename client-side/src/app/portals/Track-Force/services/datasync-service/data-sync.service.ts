@@ -5,7 +5,7 @@ import { Batch } from '../../models/batch.model';
 import { Curriculum } from '../../models/curriculum.model';
 import { MarketingStatus } from '../../models/marketing-status.model';
 import { RequestService } from '../request-service/request.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/Rx';
 
@@ -153,7 +153,6 @@ export class DataSyncService {
   private setMarketingStorage(data: any) {
     this.marketingStorage = data;
     this.marketingStorage.subscribe(() => {
-
     });
   }
 
