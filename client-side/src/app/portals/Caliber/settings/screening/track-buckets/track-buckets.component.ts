@@ -73,8 +73,9 @@ export class TrackBucketsComponent implements OnInit {
    return this.tracksService.getBucketsByTrack(id);
  }*/
   //item: any
-  routeToBucket(){
-    this.router.navigateByUrl("/Caliber/settings/category");
+  routeToBucket(item:any){
+    this.router.navigateByUrl("/Caliber/settings/category?name="+item);
+    console.log(item);
     console.log("routing to category");
   }
 
