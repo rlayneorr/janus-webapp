@@ -8,6 +8,7 @@ import {Track} from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
 import {TracksComponent} from '../tracks/tracks.component';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-track-buckets',
@@ -39,19 +40,13 @@ export class TrackBucketsComponent implements OnInit {
     }
    }
 
-   routeToBucket(item:any){
-     let items=document.getElementsByTagName("td");
-     for(let i =0;i<items.length;i++){
-       if(items[i].innerText===item.name){
-         
-       }
-     }
-   }
+ 
 
   constructor(
     private tracks : TracksComponent,
-    private modalService: NgbModal
-  //  private tracksService: TracksService, 
+    private modalService: NgbModal,
+    private tracksService: TracksService,
+    private router: Router
   //  private route: ActivatedRoute,
   //  private location: Location
   ) { }
@@ -61,7 +56,6 @@ export class TrackBucketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     this.track={id:1,name:"Java",isActive:true};
     this.allTrackBuckets=[
       {Name:"HTML/CSS",Weight:30 , isActive:true},
@@ -71,10 +65,18 @@ export class TrackBucketsComponent implements OnInit {
  
 }
 
-  getTracks():any{
+  getTracks(){
     return this.allTrackBuckets;
  }
-
+ /*
+ getTrackBuckets(id:number): Observable<TrackBucket>{
+   return this.tracksService.getBucketsByTrack(id);
+ }*/
+  //item: any
+  routeToBucket(){
+    this.router.navigateByUrl("/Caliber/settings/category");
+    console.log("routing to category");
+  }
 
   
 }
