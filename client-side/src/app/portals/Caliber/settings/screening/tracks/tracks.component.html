@@ -1,37 +1,38 @@
 <app-track-buckets style="position: absolute;left:50%" *ngIf='show' ></app-track-buckets>
 
 <div class="move" [@move]='state'>
-    <div class="container">
-        <div class="row justify-content-center">
-         <div class = "col-6">
-            <h3>Tracks</h3>
-    
-            <h6>Active</h6>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class = "col-6">
 
-            <div class="list-group list-group-flush" *ngFor="let track of tracks">
-                <button type="button" class="list-group-item list-group-item-action" (click)="animate(track)">
-                  {{track.name}}
-                  <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
-                  <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"></i>
-                </button>
-            </div>
+        <h3>Tracks</h3>
 
-            <h6>Inactive</h6>
+        <h6>Active</h6>
 
-            <ul *ngFor="let inact of inactiveTracks" style="list-style-type:none">
-                    <hr>
-                <li (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">{{inact.name}}
-
-                        <span class="fa fa-pencil marker"></span>
-                        <span class="fa fa-remove marker2"></span>
-                </li>
-            </ul>
-            <hr>
-          <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
-          </div>
+        <div class="list-group" *ngFor="let track of tracks">
+            <a class="list-group-item list-group-item-action" (click)="animate(track)">
+              {{track.name}}
+              <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
+              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"></i>
+            </a>
         </div>
+
+        <h6>Inactive</h6>
+
+        <ul *ngFor="let inact of inactiveTracks" style="list-style-type:none">
+                <hr>
+            <li (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">{{inact.name}}
+
+                    <span class="fa fa-pencil marker"></span>
+                    <span class="fa fa-remove marker2"></span>
+            </li>
+        </ul>
+        <hr>
+        <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
+      </div>
     </div>
   </div>
+</div>
     <!--label class="switch">
             <input type="checkbox" [@slider]='state2'>
             <div class="round" (click)="animate2(track)"></div>
