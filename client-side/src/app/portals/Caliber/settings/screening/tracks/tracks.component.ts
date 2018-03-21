@@ -29,18 +29,6 @@ import { TrackBucket } from '../entities/TrackBucket';
       })),
       transition('center =>left',animate('300ms ease-in')),
     ]), 
-    trigger('buckets',[
-      state('starting',style({
-        transform:'translateX(3000%)'
-      })),
-      state('ending',style({
-        transform:'translateX(100%)'
-        
-      })),
-
-      transition('starting=>ending',animate('300ms')),
-    ])
-
   ]
 })
 
@@ -56,24 +44,11 @@ export class TracksComponent implements OnInit {
 
 
   animate(item:any){
-    //console.log("sthap clicken me");
     this.state=(this.state==='center'?'left':'center');
-    this.show=(this.show=== false?true:false);
-    //console.log(state)
+    this.show=(this.show=== false?true:false);  
   }
-
-  animate2(){
-    //console.log("sthap clicken me");
-    this.state2=(this.state2==='starting'?'ending':'starting');
-
-    console.log(this.state2)
-  }
-
   colorDarken(item:any){
-    //should be td
    let items= document.getElementsByTagName("li");
-   //console.log(items)
-  // console.log(item)
    for(let i =0;i<items.length;i++){
      if(items[i].innerText === item.name){
        items[i].parentElement.setAttribute("style","background:#E8E8E8;list-style-type:none");
@@ -82,7 +57,6 @@ export class TracksComponent implements OnInit {
   }
 
   colorLighten(item:any){
-    // should be td
    let items= document.getElementsByTagName("li");
    for(let i =0;i<items.length;i++){
      if(items[i].innerText === item.name){
@@ -215,7 +189,6 @@ export class TracksComponent implements OnInit {
     }
 
   ngOnInit() {
-
     this.allTracks = [
       {name:"Java",isActive:true},
       {name:'.Net',isActive:true},
@@ -225,22 +198,8 @@ export class TracksComponent implements OnInit {
       {name:'Salesforce',isActive:false},
       {name:'Software',isActive:false}
     ]
-
     this.setTracks()
-
     console.log(this.inactiveTracks);
-   /* this.tracks = [
-      {Name:"Java",Active:true},
-      {Name:'.Net',Active:true},
-      {Name:'SDET',Active:true},
-      {Name:'Label',Active:true},
-    ];
-    this.inactiveTracks = [
-      {Name:"Pega",Active:false},
-      {Name:'Salesforce',Active:false},
-      {Name:'Software Engineer',Active:false},
-    ];*/
-
     this.initFormControl();
   }
 
