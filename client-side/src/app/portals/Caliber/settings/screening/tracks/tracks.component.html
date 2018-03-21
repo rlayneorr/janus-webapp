@@ -3,18 +3,19 @@
 <div class="move" [@move]='state'>
   <div class="container">
     <div class="row justify-content-center">
-      <div class = "col-6">
+      <div class = "card w-50">
 
-        <h3>Tracks</h3>
+        <h3 class="card-header">Tracks</h3>
 
-        <h6>Active</h6>
-
-        <div class="list-group" *ngFor="let track of tracks">
-            <a class="list-group-item list-group-item-action" (click)="animate(track)">
-              {{track.name}}
-              <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
-              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"></i>
-            </a>
+        <!-- <h6>Active</h6> -->
+        <div class="card-body">
+          <div class="list-group" *ngFor="let track of tracks">
+              <a class="list-group-item list-group-item-action" (click)="animate(track)">
+                {{track.name}}
+                <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
+                <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"></i>
+              </a>
+          </div>
         </div>
 
         <h6>Inactive</h6>
@@ -27,17 +28,18 @@
                     <span class="fa fa-remove marker2"></span>
             </li>
         </ul>
-        <hr>
-        <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
+
+        <button class="btn btn-primary btn-sm" id="createTrack" (click)='open(content)'>Create Track</button>
       </div>
     </div>
   </div>
 </div>
+
     <!--label class="switch">
             <input type="checkbox" [@slider]='state2'>
             <div class="round" (click)="animate2(track)"></div>
             <span class="slider" > </span>
-          </label-->
+        </label-->
     
     <!--div class="move">
         <div class="container">
