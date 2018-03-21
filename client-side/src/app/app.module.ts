@@ -19,9 +19,6 @@ import { ChuckNorrisService } from './services/chuck-norris.service';
 import { CategoriesService } from './portals/Caliber/services/categories.service';
 import { Trainer } from './entities/Trainer';
 
-
-import { ReportingService } from './services/reporting.service';
-import { PDFService } from './services/pdf.service';
 import { CaliberModule } from './portals/Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -65,8 +62,6 @@ const routes: Routes = [
   ],
   providers: [
     ChuckNorrisService,
-    ReportingService,
-    PDFService,
     RoleGuard,
     CookieService
   ],

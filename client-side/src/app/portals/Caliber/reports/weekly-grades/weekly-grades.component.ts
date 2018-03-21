@@ -10,13 +10,14 @@ import { GranularityService } from '../services/granularity.service';
 import { AssessmentService } from '../../services/assessment.service';
 import { GradeService } from '../../services/grade.service';
 import { NoteService } from '../../services/note.service';
-import { ReportingService } from '../../../../services/reporting.service';
+import { ReportingService } from '../../services/reporting.service';
 
 // entities
 import { Batch } from '../../entities/Batch';
 import { Assessment } from '../../entities/Assessment';
 import { Grade } from '../../entities/Grade';
 import { Note } from '../../entities/Note';
+
 
 @Component({
   selector: 'app-weekly-grades',

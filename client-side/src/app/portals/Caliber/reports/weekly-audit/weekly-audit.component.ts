@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // services
 import { GranularityService } from '../services/granularity.service';
 import { NoteService } from '../../services/note.service';
-import { ReportingService } from '../../../../services/reporting.service';
+import { ReportingService } from '../../services/reporting.service';
 
 // rxjs
 import { Subscription } from 'rxjs/Subscription';

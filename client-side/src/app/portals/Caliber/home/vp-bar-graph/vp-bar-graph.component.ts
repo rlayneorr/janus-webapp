@@ -8,7 +8,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Input } from '@angular/core';
 import { BarGraphModalComponent } from './bar-graph-modal/bargraphmodal.component';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ReportingService } from '../../../../services/reporting.service';
+import { ReportingService } from '../../services/reporting.service';
 import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../../../../environments/environment';
 import { EvaluationService } from '../../services/evaluation.service';

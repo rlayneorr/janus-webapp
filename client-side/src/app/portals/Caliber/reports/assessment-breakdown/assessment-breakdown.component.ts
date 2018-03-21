@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ReportingService } from '../../../../services/reporting.service';
-import { PDFService } from '../../../../services/pdf.service';
+import { ReportingService } from '../../services/reporting.service';
+import { PDFService } from '../../services/pdf.service';
 import { GradeService } from '../../services/grade.service';
 import { Subscription } from 'rxjs/Subscription';
 import { GranularityService } from '../services/granularity.service';

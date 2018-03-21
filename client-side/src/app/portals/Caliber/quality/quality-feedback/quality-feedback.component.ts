@@ -13,7 +13,7 @@ import { BatchService } from '../../services/batch.service';
 import { Batch } from '../../entities/Batch';
 import { Note } from '../../entities/Note';
 import { Trainee } from '../../entities/Trainee';
-import { ReportingService } from '../../../../services/reporting.service';
+import { ReportingService } from '../../services/reporting.service';
 import { urls } from '../../services/urls';
 
 
