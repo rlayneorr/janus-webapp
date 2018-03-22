@@ -73,7 +73,7 @@ export class TrackBucketsComponent implements OnInit {
 }
 
 
-  getTracks() {
+getTracks() {
     return this.allTrackBuckets;
   }
  /*
@@ -82,15 +82,15 @@ export class TrackBucketsComponent implements OnInit {
  }*/
   //item: any
   routeToBucket(item:any){
-    this.router.navigateByUrl("/Caliber/settings/category?name="+item);
-    console.log(item);
-    console.log("routing to category");
+  //  this.router.navigateByUrl("/Caliber/settings/category");
+   this.router.navigate(["Caliber/settings/category"]);
+ //   console.log(item);
+ //   console.log("routing to category");
   }
 
 
   showAddCategoryModal(){
-
-    console.log("Show 'Add category' modal button clicked");
+  //  console.log("Show 'Add category' modal button clicked");
   }
 
 }
