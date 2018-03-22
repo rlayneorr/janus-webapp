@@ -130,6 +130,7 @@ import { ScreeningComponent } from './settings/screening/screening.component';
 import {TracksComponent} from './settings/screening/tracks/tracks.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { TrackBucketsComponent } from './settings/screening/track-buckets/track-buckets.component' ;
+import { QuestionComponent} from './settings/screening/question/question.component'
 //import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -235,6 +236,7 @@ import { TrackBucketsComponent } from './settings/screening/track-buckets/track-
     TracksComponent,
     BucketComponent,
     TrackBucketsComponent,
+    QuestionComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
