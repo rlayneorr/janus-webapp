@@ -43,7 +43,7 @@ export class TrackBucketsComponent implements OnInit {
     }
    }
   **/
-  
+
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,
@@ -69,7 +69,7 @@ export class TrackBucketsComponent implements OnInit {
     this.testBuckets=["test1","test2","test3"]
 
     this.bucketName = this.bucketService.name;
- 
+
 }
 
 
