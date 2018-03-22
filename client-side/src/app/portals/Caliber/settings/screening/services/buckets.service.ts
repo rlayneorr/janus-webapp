@@ -16,13 +16,6 @@ headers: new HttpHeaders({
 @Injectable()
 export class BucketsService {
 
-<<<<<<< HEAD
-  constructor(private http: HttpClient) {}
-      public name:string
-
-  
-
-=======
   constructor(private http: HttpClient) { }
   name:string = null;
 >>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141
