@@ -37,9 +37,6 @@ export const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: '',
-  },
-  {
     path: 'client-listing',
     component: ClientListComponent
   },
