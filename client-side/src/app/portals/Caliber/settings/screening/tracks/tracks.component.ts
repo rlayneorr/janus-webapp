@@ -41,7 +41,7 @@ export class TracksComponent implements OnInit {
   animate(item:any){
     this.state=(this.state==='center'?'left':'center');
     this.show=(this.show=== false?true:false); 
-    this.buckets.name = item.name; 
+    this.bucket.name = item.name; 
     console.log(item);
   }
 
