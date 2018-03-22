@@ -1,77 +1,73 @@
 h3 {
-  text-align: center;
-  color: #F26925;
-}
-
-h6 {
-  text-align: center;
-}
-
-#xIcon {
-  color: #F26925;
-  margin-left: 10px;
-}
-
-#penIcon {
-  color: #F26925;
-}
-
-/*.wrapper{*/
-    /*border: 1px solid black;
-    box-shadow: 5px 9px;
-    border-radius: 5px;
-    text-align: center;*/
-    /*position: relative;*/
-    /*width: 55%;*/
-    /*left: 25%;*/
-/*}*/
-
-#createTrack{
-<<<<<<< HEAD
-  float: right;
-=======
-    /*position: absolute;
-    left: 67%;*/
-    float: right;
->>>>>>> 8c30649606ab70606998713853fac7513cfb2f4e
-}
-
-/** not being used **/
-.marker{
-    position:absolute;
-    left:95%;
-}
-
-/** not being used **/
-.marker2{
-    position: absolute;
-    left:100%;
-}
-
-
-td{
-    padding-left:8em;
-    text-align: left;
-}
-
-.percentSign{
-    background-color: inherit;
-    border-right: 1px solid #ccc;
-}
-
-.bucketWeight{
-    text-align: right;
-}
-
-.revatureOrange{
-    background-color: #F26925;
-}
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+    text-align: center;
+    color: #F26925;
   }
-  /* Hide default HTML checkbox */
-.switch input {display:none;}
+  
+  h6 {
+    text-align: center;
+  }
+  
+  #xIcon {
+    color: #F26925;
+    margin-left: 10px;
+  }
+  
+  #penIcon {
+    color: #F26925;
+  }
+  
+  /*.wrapper{*/
+      /*border: 1px solid black;
+      box-shadow: 5px 9px;
+      border-radius: 5px;
+      text-align: center;*/
+      /*position: relative;*/
+      /*width: 55%;*/
+      /*left: 25%;*/
+  /*}*/
+  
+  #createTrack{
+    float: right;
+      /*position: absolute;
+      left: 67%;*/
+      float: right;
 
+  }
+  
+  /** not being used **/
+  .marker{
+      position:absolute;
+      left:95%;
+  }
+  
+  /** not being used **/
+  .marker2{
+      position: absolute;
+      left:100%;
+  }
+  #list-item{
+      border: solid black 0.5px;
+  }
+  
+  .percentSign{
+      background-color: inherit;
+      border-right: 1px solid #ccc;
+  }
+  
+  .bucketWeight{
+      text-align: right;
+  }
+  
+  .revatureOrange{
+      background-color: #F26925;
+  }
+  .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    /* Hide default HTML checkbox */
+  .switch input {display:none;}
+
+  
