@@ -20,3 +20,8 @@ i {
   cursor: pointer;
   cursor: hand;
 }
+
+.tb-heading_rev_orange{
+  background-color: #F26925;
+  color:white;
+}

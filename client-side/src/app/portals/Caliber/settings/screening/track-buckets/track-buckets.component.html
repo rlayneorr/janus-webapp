@@ -33,11 +33,16 @@
 <ng-template #editname let-c="close" let-d="dismiss">
     <form>
         <div class="form-group">
-            <h3 class="tb-heading">Edit Category Name</h3>
-            <label>New Category name</label>
+     
+            <h3 class="tb-heading_rev_orange">Edit Category Name</h3>
+            <label>New Category name: 
+                  
+            </label>
             <input class="form-control" type="text" name="newName">
+            <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
             <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="editBucket(newName); c('Close click')">Save</button>
+        </div>
         </div>
     </form>
 </ng-template>
@@ -48,7 +53,7 @@ value for weight  -->
 <ng-template #content let-c="close" let-d="dismiss">
     <form>
         <div class="form-group">
-            <h3 class="tb-heading">Add a Category to this Track </h3>
+            <h3 class="tb-heading_rev_orange">Add a Category to this Track </h3>
             <label>Active Categories</label>
             <select class="form-control">
                 <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
