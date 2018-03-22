@@ -10,41 +10,41 @@
   </div>
   <div class="modal-body">
     <!--Add new question input text boxes-->
-    <form  #addTrackForm="ngForm">
+    <form #addQuestionForm="ngForm">
       <div class="form-group row">
         <label for = "questionText" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Question:</label>
         <div class="col-sm-9">
-          <input type = "text" id = "questionText" placeholder="Question" class="form-control border-right-0 bucketWeight" min="0" max="100">
+          <input name="question" [(ngModel)]="question.text" type = "text" id = "questionText" placeholder="Question" class="form-control border-right-0 bucketWeight" min="0" max="100">
         </div>
       </div>
       <div class="form-group row">
         <label for = "one point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">One point:</label>
         <div class="col-sm-9">
-          <input type = "text" id = "1pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
+          <input name="answer1" [(ngModel)]="question.answers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
         </div>
       </div>
       <div class="form-group row">
         <label for="two point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Two point:</label>
         <div class="col-sm-9">
-          <input type = "text" id = "2pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
+          <input name="answer2" [(ngModel)]="question.answers[1]" type = "text" id = "2pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
         </div>  
       </div>
       <div class="form-group row">
         <label for="three point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Three point:</label>
         <div class="col-sm-9"> 
-          <input type = "text" id = "3pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
+          <input name="answer3" [(ngModel)]= "question.answers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
         </div>
       </div>
       <div class="form-group row">
         <label for="four point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Four point:</label>
         <div class="col-sm-9">
-          <input type = "text" id = "4pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
+          <input name="answer4" [(ngModel)]="question.answers[3]" type = "text" id = "4pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
         </div> 
       </div>
       <div class="form-group row">
         <label for="five point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Five point:</label>
         <div class="col-sm-9">
-          <input type = "text" id = "5pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
+          <input name="answer4" [(ngModel)]="question.answers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
         </div>
       </div>
       <!--Currently added tags-->
@@ -65,11 +65,11 @@
           </span>
         </div>
       </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
+          <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Question'); addNewQuestion()">Save</button>
+      </div>
     </form>
-  </div>
-  <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
-      <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Question'); addNewQuestion(addQuestionForm.value)">Save</button>
   </div>
 </ng-template>
 <!--Ending of the add new question modal-->

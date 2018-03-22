@@ -5,6 +5,7 @@ import { Question } from '../entities/Question';
 import { Tag } from '../entities/Tag';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TAGS } from '../mock-tag';
+import {QuestionsService} from '../services/questions.service';
 
 @Component({
   selector: 'app-bucket',
@@ -19,10 +20,13 @@ export class BucketComponent implements OnInit {
   newQuestion: Question;
   allTags: Tag[];
   currentTags: Tag[];
+  question:Question;
 
   ngOnInit() {
     this.allTags = TAGS;
     this.currentTags = [];
+    this.question = new Question();
+    this.question.answers = [];
   }
   open(content) {
     this.modalService.open(content);
@@ -41,20 +45,36 @@ export class BucketComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-  addNewQuestion(modal: Question){
-    this.newQuestion = modal;
-    this.initFormControl;
+  addNewQuestion(){
+    let newCurrentTagIds : number[] = [];
+    let i: number = 0;
+    for(i; i < this.currentTags.length; i++)
+    {
+        newCurrentTagIds.push(this.currentTags[i].id);
+    }
+    this.question.tagIds= newCurrentTagIds;
+    console.log(this.question);
+    let qs: QuestionsService;
+    qs.createNewQuestion(0,this.question); 
   }
   addTagToQuestion(tag){
+    let currentTag: any;
+    let newAllTags : Tag[] = [];
+    let i: number = 0;
+    for(i; i < this.allTags.length; i++)
+    {
+      currentTag = this.allTags[i];
+      if(tag.id != currentTag.id){
+        newAllTags.push(currentTag);
+      } 
+    }
+    this.allTags = newAllTags;
     this.currentTags.push(tag);
   }
   removeTagFromQuestion(tag){
     let currentTag: any;
     let newCurrentTags : Tag[] = [];
     let i: number = 0;
-
-    console.log(this.currentTags);
-    console.log(tag.id);
     for(i; i < this.currentTags.length; i++)
     {
       currentTag = this.currentTags[i];
@@ -62,13 +82,10 @@ export class BucketComponent implements OnInit {
       
       if(tag.id != currentTag.id){
         newCurrentTags.push(currentTag);
-        //this.currentTags.splice(i,1);
-        console.log(currentTag.id);
       } 
     }
-    
+    this.allTags.push(tag);
     this.currentTags = newCurrentTags;
-    console.log(this.currentTags);
   }
 }
 
