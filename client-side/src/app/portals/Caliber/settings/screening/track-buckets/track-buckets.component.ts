@@ -50,7 +50,7 @@ export class TrackBucketsComponent implements OnInit {
     this.testBuckets=["test1","test2","test3"]
 
     this.bucketName = this.bucketService.name;
- 
+
 }
 
 
@@ -70,7 +70,7 @@ export class TrackBucketsComponent implements OnInit {
 
 
   showAddCategoryModal(){
-    
+
     console.log("Show 'Add category' modal button clicked");
   }
 
