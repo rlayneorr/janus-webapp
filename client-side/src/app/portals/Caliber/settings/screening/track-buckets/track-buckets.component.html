@@ -26,6 +26,7 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
   
       <!-- Beginning of Add Category modal - displays dropdown and text field to take in numeric
   value for weight  -->
@@ -74,3 +75,38 @@
         </form>
       
     </ng-template>
+=======
+</div>
+
+    <!-- Beginning of Add Category modal - displays dropdown and text field to take in numeric
+value for weight  -->
+
+    
+  <ng-template #content let-c="close" let-d="dismiss">
+      <form>
+        <div class="form-group">
+        <h3 class="tb-heading">Add a Category to this Track </h3>
+        <label>Active Categories</label>
+        <select class="form-control">
+        <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
+        </select></div>
+        <div>
+        <label>Inactive Categories</label>
+        <select class="form-control">
+                <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
+            </select>
+    
+            <!-- Weight input-->
+
+            <input type="number" id="weight" name="weight" placeholder="Category Weight" class="form-control">
+            <br>
+            <button class="form-control" (click)="addNewTrack(trackBucket.Name,weight)">Add New Track!</button> 
+        
+    </div>
+    <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            <button type="button" data-dismiss="modal" class="btn btn-outline-dark">Save</button>
+        </div>
+    </form>
+  </ng-template>
+>>>>>>> af5bdc04dfef2f2bc417cda5011802e117a4eec3
