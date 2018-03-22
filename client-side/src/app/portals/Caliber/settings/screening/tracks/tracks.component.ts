@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 // storing data in a service
 // creating track and adding buckets
 //variable for current track name
-import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Track } from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
 import { Bucket } from '../entities/Bucket';
 import { TrackBucket } from '../entities/TrackBucket';
+import { BucketsService} from '../services/buckets.service';
 
 @Component({
   selector: 'app-tracks',
@@ -20,25 +21,28 @@ import { TrackBucket } from '../entities/TrackBucket';
   styleUrls: ['./tracks.component.css'],
   animations:[
     trigger('move',[
-      state('center',style({
+      state('center', style({
         transform:'translateX(0) scaleX(1)'
       })),
-      state('left',style({
-        transform:'translateX(-28%) scaleX(1)'
+      state('left', style({
+        transform:'translateX(-25%) scaleX(1)'
 
       })),
-      transition('center =>left',animate('300ms ease-in')),
-    ]), 
+      transition('center => left',animate('100ms ease-in')),
+    ]),
+
     trigger('buckets',[
-      state('starting',style({
-        transform:'translateX(3000%)'
+
+      state('starting', style({
+        transform:'translateX(50%) scaleX(1)'
       })),
-      state('ending',style({
-        transform:'translateX(100%)'
+
+      state('ending', style({
+        transform:'translateX(0%) scaleX(1)'
         
       })),
 
-      transition('starting=>ending',animate('300ms')),
+      transition('starting => ending', animate('200ms ease-in')),
     ])
 
   ]
@@ -59,6 +63,7 @@ export class TracksComponent implements OnInit {
     //console.log("sthap clicken me");
     this.state=(this.state==='center'?'left':'center');
     this.show=(this.show=== false?true:false);
+     this.bucket.name = item.name;
     //console.log(state)
   }
 
@@ -118,7 +123,11 @@ export class TracksComponent implements OnInit {
     }
   }
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService) { }
+  constructor(
+    private modalService: NgbModal, 
+    private fb: FormBuilder, 
+    private trackService: TracksService,
+    private bucket:BucketsService) { }
 
 
   createTrack: FormGroup;
