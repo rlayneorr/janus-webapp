@@ -9,7 +9,7 @@ import { TracksService } from '../services/tracks.service';
 import { TracksComponent } from '../tracks/tracks.component';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
-
+import {DropdownModule} from 'ngx-dropdown';
 @Component({
   selector: 'app-track-buckets',
   templateUrl: './track-buckets.component.html',
@@ -21,8 +21,11 @@ export class TrackBucketsComponent implements OnInit {
   @Input() track: Track;
   allTrackBuckets: any[] = [];
   trackBuckets = [];
-  state:string = 'small';
+  testBuckets: any[] = [];
+  state: string = 'small';
+  bucketName:string = null;
 
+  /**
   colorDarken(item:any){
     let items= document.getElementsByTagName("td");
     for(let i =0;i<items.length;i++){
@@ -39,16 +42,16 @@ export class TrackBucketsComponent implements OnInit {
       }
     }
    }
-
- 
-
+  **/
+  
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,
     private tracksService: TracksService,
-    private router: Router
-  //  private route: ActivatedRoute,
-  //  private location: Location
+    private router: Router,
+    private bucketService:BucketsService,
+    //  private route: ActivatedRoute,
+    //  private location: Location
   ) { }
 
   open(content) {
@@ -56,27 +59,38 @@ export class TrackBucketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.track={id:1,name:"Java",isActive:true};
-    this.allTrackBuckets=[
-      {Name:"HTML/CSS",Weight:30 , isActive:true},
-      {Name:"Core Java",Weight:40 ,isActive:true},
-      {Name:"SQL",Weight:30,isActive:true}
+    this.track = {id: 1, name: "Java", isActive: true};
+    this.allTrackBuckets = [
+      {Name: "HTML/CSS", Weight: 30, isActive: true},
+      {Name: "Core Java", Weight: 40, isActive: true},
+      {Name: "SQL", Weight: 30, isActive: true}
     ]
+
+    this.testBuckets=["test1","test2","test3"]
+
+    this.bucketName = this.bucketService.name;
  
 }
 
-  getTracks(){
+
+  getTracks() {
     return this.allTrackBuckets;
- }
+  }
  /*
  getTrackBuckets(id:number): Observable<TrackBucket>{
    return this.tracksService.getBucketsByTrack(id);
  }*/
   //item: any
-  routeToBucket(){
-    this.router.navigateByUrl("/Caliber/settings/category");
+  routeToBucket(item:any){
+    this.router.navigateByUrl("/Caliber/settings/category?name="+item);
+    console.log(item);
     console.log("routing to category");
   }
 
-  
+
+  showAddCategoryModal(){
+    
+    console.log("Show 'Add category' modal button clicked");
+  }
+
 }

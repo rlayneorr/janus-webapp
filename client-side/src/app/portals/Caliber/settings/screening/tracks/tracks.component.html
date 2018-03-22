@@ -1,20 +1,22 @@
-<app-track-buckets style="position: absolute;left:50%" *ngIf='show' ></app-track-buckets>
+<!-- style="position: absolute;left:50%"  -->
+<app-track-buckets style="position: absolute;left:25%; width: 100%;" *ngIf='show'></app-track-buckets>
 
 <div class="move" [@move]='state'>
   <div class="container">
     <div class="row justify-content-center">
-      <div class = "col-6">
+      <div class = "card w-50">
 
-        <h3>Tracks</h3>
+        <h3 class="card-header">Tracks</h3>
 
-        <h6>Active</h6>
-
-        <div class="list-group" *ngFor="let track of tracks">
-            <a class="list-group-item list-group-item-action" (click)="animate(track)">
-              {{track.name}}
-              <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
-              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"></i>
-            </a>
+        <!-- <h6>Active</h6> -->
+        <div class="card-body">
+          <div class="list-group" *ngFor="let track of tracks">
+              <a class="list-group-item list-group-item-action" (click)="animate(track)">
+                {{track.name}}
+                <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
+                <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"></i>
+              </a>
+          </div>
         </div>
 
         <h6>Inactive</h6>
@@ -27,17 +29,25 @@
                     <span class="fa fa-remove marker2"></span>
             </li>
         </ul>
-        <hr>
-        <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
+
+        <button class="btn btn-primary btn-sm" id="createTrack" (click)='open(content)'>Create Track</button>
       </div>
     </div>
 </div>
+
+
+
     <!--label class="switch">
             <input type="checkbox" [@slider]='state2'>
             <div class="round" (click)="animate2(track)"></div>
             <span class="slider" > </span>
+<<<<<<< HEAD
           </label-->
 
+=======
+        </label-->
+    
+>>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141
     <!--div class="move">
         <div class="container">
             <div class="wrapper" [@move]='state'>
@@ -129,15 +139,13 @@
           <div class="form-group row">
               <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
               <div class="col-sm-10 row">
-                  <span *ngFor="let bucket of testBuckets">
-                      <span *ngIf="!bucket.mappedToTrack">
-                          <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
-                      </span>
-                  </span>
-
-                </div>
-
+                <span *ngFor="let bucket of testBuckets">
+                    <span *ngIf="!bucket.mappedToTrack">
+                        <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
+                    </span>
+                </span>
             </div>
+        </div>
         </form>
     </div>
     <div class="modal-footer">
@@ -145,3 +153,9 @@
         <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Track'); addNewTrack(addTrackForm.value)">Save</button>
     </div>
 </ng-template>
+<<<<<<< HEAD
+=======
+
+
+<!--button class="btn" id="workplox" (click)='workPlox()'>Go</button-->
+>>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141

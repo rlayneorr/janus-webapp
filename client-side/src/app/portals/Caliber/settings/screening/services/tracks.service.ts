@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators';
+
 import { TrackBucket } from '../entities/TrackBucket';
- 
+import { Bucket } from '../entities/Bucket';
+
+
 const httpOptions = {
 headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -37,13 +44,9 @@ export class TracksService {
       return this.http.put(this.url + "updateTrack", {trackBuckets: trackBuckets}, httpOptions);
   }
 
-  getTrackById(trackId: number){
-      return this.http.get(this.url + "getTrack/" + trackId);
-  }
-
-  getBucketsByTrack(trackId: number){ 
-    return this.http.get(this.url + "getTopics/" + trackId);
-
+  /** Temporary solution for this func, need to double check with back-end **/
+  getBucketsByTrack(trackId: number): Observable<Bucket[]> {
+    return this.http.get<Bucket[]>(this.url + "getTopics/" + trackId);
   }
 
 }
