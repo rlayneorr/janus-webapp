@@ -24,25 +24,6 @@ export class TrackBucketsComponent implements OnInit {
   state: string = 'small';
   bucketName:string = null;
 
-  /**
-  colorDarken(item:any){
-    let items= document.getElementsByTagName("td");
-    for(let i =0;i<items.length;i++){
-      if(items[i].innerHTML === item.Name){
-        items[i].parentElement.setAttribute("style","background:#E8E8E8");
-      }
-    }
-   }
-   colorLighten(item:any){
-    let items= document.getElementsByTagName("td");
-    for(let i =0;i<items.length;i++){
-      if(items[i].innerHTML === item.Name){
-        items[i].parentElement.setAttribute("style","background:white");
-      }
-    }
-   }
-  **/
-
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,
@@ -72,7 +53,7 @@ export class TrackBucketsComponent implements OnInit {
 }
 
 
-  getTracks() {
+getTracks() {
     return this.allTrackBuckets;
   }
  /*
@@ -81,15 +62,15 @@ export class TrackBucketsComponent implements OnInit {
  }*/
   //item: any
   routeToBucket(item:any){
-    this.router.navigateByUrl("/Caliber/settings/category?name="+item);
-    console.log(item);
-    console.log("routing to category");
+  //  this.router.navigateByUrl("/Caliber/settings/category");
+   this.router.navigate(["Caliber/settings/category"]);
+ //   console.log(item);
+ //   console.log("routing to category");
   }
 
 
   showAddCategoryModal(){
-
-    console.log("Show 'Add category' modal button clicked");
+  //  console.log("Show 'Add category' modal button clicked");
   }
 
 }
