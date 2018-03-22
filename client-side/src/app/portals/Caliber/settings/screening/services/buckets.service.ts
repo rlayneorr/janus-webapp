@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators';
+
 import { Bucket } from '../entities/Bucket';
 
 const httpOptions = {
@@ -15,6 +20,7 @@ export class BucketsService {
 
   url: string = "/bucket/";
 
+  /** Gets all of company's buckets */
   getAllBuckets(){
       return this.http.get(this.url + "getBuckets");
   }
@@ -28,8 +34,5 @@ export class BucketsService {
       return this.http.post(this.url + "createBucket", bucket, httpOptions);
   }
 
-  getBucketsByTrack(trackID : number){
-      return this.http.get(this.url+ "")
-  }
 
 }

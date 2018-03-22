@@ -1,4 +1,5 @@
-<app-track-buckets style="position: absolute;left:50%" *ngIf='show' ></app-track-buckets>
+<!-- style="position: absolute;left:50%"  -->
+<app-track-buckets style="position: absolute;left:50%" *ngIf='show'></app-track-buckets>
 
 <div class="move" [@move]='state'>
   <div class="container">
@@ -34,6 +35,8 @@
     </div>
   </div>
 </div>
+
+
 
     <!--label class="switch">
             <input type="checkbox" [@slider]='state2'>
@@ -146,5 +149,6 @@
         <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Track'); addNewTrack(addTrackForm.value)">Save</button>
     </div>
 </ng-template>
+
 
 <!--button class="btn" id="workplox" (click)='workPlox()'>Go</button-->

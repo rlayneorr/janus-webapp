@@ -21,9 +21,10 @@ export class TrackBucketsComponent implements OnInit {
   @Input() track: Track;
   allTrackBuckets: any[] = [];
   trackBuckets = [];
-  testBuckets:any[]=[];
-  state:string = 'small';
+  testBuckets: any[] = [];
+  state: string = 'small';
 
+  /**
   colorDarken(item:any){
     let items= document.getElementsByTagName("td");
     for(let i =0;i<items.length;i++){
@@ -40,7 +41,8 @@ export class TrackBucketsComponent implements OnInit {
       }
     }
    }
-
+  **/
+  
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,

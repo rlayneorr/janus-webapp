@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 // storing data in a service
 // creating track and adding buckets
 //variable for current track name
-import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Track } from '../entities/Track';
@@ -20,25 +20,28 @@ import { TrackBucket } from '../entities/TrackBucket';
   styleUrls: ['./tracks.component.css'],
   animations:[
     trigger('move',[
-      state('center',style({
+      state('center', style({
         transform:'translateX(0) scaleX(1)'
       })),
-      state('left',style({
+      state('left', style({
         transform:'translateX(-28%) scaleX(1)'
 
       })),
-      transition('center =>left',animate('300ms ease-in')),
-    ]), 
+      transition('center => left',animate('100ms ease-in')),
+    ]),
+
     trigger('buckets',[
-      state('starting',style({
-        transform:'translateX(3000%)'
+
+      state('starting', style({
+        transform:'translateX(50%) scaleX(1)'
       })),
-      state('ending',style({
-        transform:'translateX(100%)'
+
+      state('ending', style({
+        transform:'translateX(0%) scaleX(1)'
         
       })),
 
-      transition('starting=>ending',animate('300ms')),
+      transition('starting => ending', animate('200ms ease-in')),
     ])
 
   ]
