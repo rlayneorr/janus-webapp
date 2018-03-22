@@ -3,7 +3,7 @@ export class Bucket {
     name: string;
     description: string;
     isActive?: boolean = true;
-    mappedToTrack?: boolean = false;
+    mappedToSkillType?: boolean = false;
     weight?: number;
     constructor(id, name, description){
         this.id = id;

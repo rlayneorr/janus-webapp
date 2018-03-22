@@ -1,4 +1,4 @@
-export class Track{
+export class SkillType{
     id: number;
     name: string;
     isActive: boolean;

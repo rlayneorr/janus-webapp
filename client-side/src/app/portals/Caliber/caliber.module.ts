@@ -46,7 +46,7 @@ import { TraineeStatusService } from './services/trainee-status.service';
 
 //1801-caliber-dev-angels services
 import { QuestionsService } from './settings/screening/services/questions.service';
-import { TracksService } from './settings/screening/services/tracks.service';
+import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
 import { TagsService } from './settings/screening/services/tags.service';
 import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
@@ -127,11 +127,12 @@ import { CannotDeleteModalComponent } from './manage/cannot-delete-modal/cannot-
 import { DeleteTraineeModalComponent } from './manage/delete-trainee-modal/delete-trainee-modal.component';
 import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
 import { ScreeningComponent } from './settings/screening/screening.component';
-import {TracksComponent} from './settings/screening/tracks/tracks.component';
+import {SkillTypesComponent} from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { TrackBucketsComponent } from './settings/screening/track-buckets/track-buckets.component' ;
 import { QuestionComponent} from './settings/screening/question/question.component'
-//import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TagFilterPipe } from './settings/screening/question/question.filter';
+
 
 @NgModule({
   imports: [
@@ -147,7 +148,6 @@ import { QuestionComponent} from './settings/screening/question/question.compone
     ScrollEventModule,
     Ng2PageScrollModule,
 
-    //BrowserAnimationsModule,
   ],
   declarations: [
     // pipes
@@ -172,6 +172,7 @@ import { QuestionComponent} from './settings/screening/question/question.compone
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
+    TagFilterPipe,
 
     // components
     CaliberComponent,
@@ -233,9 +234,9 @@ import { QuestionComponent} from './settings/screening/question/question.compone
     DeleteTraineeModalComponent,
     CannotDeleteTraineeModalComponent,
     ScreeningComponent,
-    TracksComponent,
+    SkillTypesComponent,
     BucketComponent,
-    TrackBucketsComponent,
+    SkillTypeBucketsComponent,
     QuestionComponent
   ],
   providers: [
@@ -269,7 +270,7 @@ import { QuestionComponent} from './settings/screening/question/question.compone
     TraineeStatusService,
     ApiService,
     QuestionsService,
-    TracksService,
+    SkillTypesService,
     BucketsService,
     TagsService,
     HttpErrorHandlerService
@@ -278,7 +279,7 @@ import { QuestionComponent} from './settings/screening/question/question.compone
     TrainersComponent
   ],
   exports: [
-    TraineeTechSkillsComponent
+    TraineeTechSkillsComponent,
   ],
   entryComponents: [
     BarGraphModalComponent,
