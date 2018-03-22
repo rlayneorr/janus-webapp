@@ -23,7 +23,7 @@ import {BucketsService} from'../services/buckets.service';
 
       })),
       transition('center =>left',animate('300ms ease-in')),
-    ]), 
+    ]),
   ]
 })
 
@@ -39,16 +39,14 @@ export class TracksComponent implements OnInit {
 
 
   animate(item:any){
-    this.state=(this.state==='center'?'left':'center');
-    this.show=(this.show=== false?true:false); 
-    this.bucket.name = item.name; 
-    console.log(item);
+    this.state='left';
+    this.show = true;
+    this.bucket.name = item.name;
   }
 
 
   removeElement(item:any){
     let thing:any;
-    console.log(item);
     for(let i = 0 ;i<this.allTracks.length;i++){
       thing = this.allTracks[i];
       if(thing.name == item.name){
@@ -94,10 +92,21 @@ export class TracksComponent implements OnInit {
     });
   }
 
+    // open(content) {
+    //   this.modalService.open(content);
+    //   event.stopPropagation();
+    // }
+
+    closeResult;
     open(content) {
-      this.modalService.open(content);
+      this.modalService.open(content).result.then((result) => {
+        this.testSingleTrack = null;
+      }, (reason) => {
+        this.testSingleTrack = null;
+      });
       event.stopPropagation();
     }
+
 
     private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
@@ -146,9 +155,10 @@ export class TracksComponent implements OnInit {
         { trackId: 0, bucketId: 2, weight: 30 }
     ]
 
-    testSingleTrack: Track = {id: 0, name: "Java", isActive: true}
+    testSingleTrack: Track;
 
     editTrack(track){
+        this.testSingleTrack = new Track();
         this.testSingleTrack.name = track.name;
         this.editAllBuckets();
     }
@@ -167,13 +177,19 @@ export class TracksComponent implements OnInit {
 
     addToMapped(bucket){
         bucket.mappedToTrack = true;
-        console.log(this.testBuckets);
     }
 
     removeFromMapped(bucket){
         bucket.mappedToTrack = false;
-
     }
+
+    clearTrackBuckets(){
+        for(let index in this.testBuckets){
+            this.testBuckets[index].mappedToTrack = false;
+            this.testBuckets[index].weight = 0;
+        }
+    }
+
 
   ngOnInit() {
     this.allTracks = [
@@ -185,8 +201,7 @@ export class TracksComponent implements OnInit {
       {name:'Salesforce',isActive:false},
       {name:'Software',isActive:false}
     ]
-    this.setTracks()
-    console.log(this.inactiveTracks);
+    this.setTracks();
     this.initFormControl();
   }
 

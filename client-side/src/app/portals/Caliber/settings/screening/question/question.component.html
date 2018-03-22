@@ -14,37 +14,37 @@
       <div class="form-group row">
         <label for = "questionText" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Question:</label>
         <div class="col-sm-9">
-          <input name="question" [(ngModel)]="question.text" type = "text" id = "questionText" placeholder="Question" class="form-control border-right-0 bucketWeight" min="0" max="100">
+          <input name="question" [(ngModel)]="question.text" type = "text" id = "questionText" placeholder="Question" class="form-control bucketWeight" min="0" max="100">
         </div>
       </div>
       <div class="form-group row">
         <label for = "one point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">One point:</label>
         <div class="col-sm-9">
-          <input name="answer1" [(ngModel)]="question.answers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
+          <input name="answer1" [(ngModel)]="question.answers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
         </div>
       </div>
       <div class="form-group row">
         <label for="two point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Two point:</label>
         <div class="col-sm-9">
           <input name="answer2" [(ngModel)]="question.answers[1]" type = "text" id = "2pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
-        </div>  
+        </div>
       </div>
       <div class="form-group row">
         <label for="three point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Three point:</label>
-        <div class="col-sm-9"> 
-          <input name="answer3" [(ngModel)]= "question.answers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
+        <div class="col-sm-9">
+          <input name="answer3" [(ngModel)]= "question.answers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
         </div>
       </div>
       <div class="form-group row">
         <label for="four point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Four point:</label>
         <div class="col-sm-9">
           <input name="answer4" [(ngModel)]="question.answers[3]" type = "text" id = "4pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
-        </div> 
+        </div>
       </div>
       <div class="form-group row">
         <label for="five point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Five point:</label>
         <div class="col-sm-9">
-          <input name="answer4" [(ngModel)]="question.answers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100"> 
+          <input name="answer4" [(ngModel)]="question.answers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control border-right-0 bucketWeight" min="0" max="100">
         </div>
       </div>
       <!--Currently added tags-->
@@ -58,7 +58,7 @@
       </div>
       <!--Add new tag section-->
       <div class="form-group row">
-          <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="col-sm-12 col-form-label" min="0" max="100"  align = "center"> 
+          <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="col-sm-12 col-form-label" min="0" max="100"  align = "center">
       </div>
       <!--Add tags section-->
       <div class="form-group row">

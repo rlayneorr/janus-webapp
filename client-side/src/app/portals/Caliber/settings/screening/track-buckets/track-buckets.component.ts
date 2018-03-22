@@ -23,6 +23,7 @@ export class TrackBucketsComponent implements OnInit {
   testBuckets: any[] = [];
   state: string = 'small';
   bucketName:string = null;
+  testBucketPlease;
 
   constructor(
     private tracks : TracksComponent,
@@ -47,9 +48,8 @@ export class TrackBucketsComponent implements OnInit {
       {Name: "SQL", Weight: 30, isActive: true}
     ]
 
-    this.testBuckets=["test1","test2","test3"]
+    this.testBuckets=["test1","test2","test3"];
 
-    this.bucketName = this.bucketService.name;
 
 }
 /*
