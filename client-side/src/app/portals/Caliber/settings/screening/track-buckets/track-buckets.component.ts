@@ -37,6 +37,7 @@ export class TrackBucketsComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content);
+    event.stopPropagation();
   }
 
   ngOnInit() {
@@ -51,9 +52,23 @@ export class TrackBucketsComponent implements OnInit {
 
 
 }
-
+/*
+id: number;
+    name: string;
+    description: string;
+    isActive?: boolean = true;
+    mappedToTrack?: boolean = false;
+    weight?: number;
+ */
+testSingleBucket : Bucket = {id:1,name:"JavaScript",description:"basic JS", isActive: true, mappedToTrack:false,
+weight:20}
+editBucket(name){
+  this.testSingleBucket.name =name;
+ // console.log("Need to edit bucket");
+}
 
 getTracks() {
+
     return this.allTrackBuckets;
   }
  /*
