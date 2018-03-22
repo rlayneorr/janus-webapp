@@ -21,6 +21,7 @@ export class TrackBucketsComponent implements OnInit {
   @Input() track: Track;
   allTrackBuckets: any[] = [];
   trackBuckets = [];
+  testBuckets:any[]=[];
   state:string = 'small';
 
   colorDarken(item:any){
@@ -40,15 +41,13 @@ export class TrackBucketsComponent implements OnInit {
     }
    }
 
- 
-
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,
     private tracksService: TracksService,
     private router: Router
-  //  private route: ActivatedRoute,
-  //  private location: Location
+    //  private route: ActivatedRoute,
+    //  private location: Location
   ) { }
 
   open(content) {
@@ -56,18 +55,21 @@ export class TrackBucketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.track={id:1,name:"Java",isActive:true};
-    this.allTrackBuckets=[
-      {Name:"HTML/CSS",Weight:30 , isActive:true},
-      {Name:"Core Java",Weight:40 ,isActive:true},
-      {Name:"SQL",Weight:30,isActive:true}
+    this.track = {id: 1, name: "Java", isActive: true};
+    this.allTrackBuckets = [
+      {Name: "HTML/CSS", Weight: 30, isActive: true},
+      {Name: "Core Java", Weight: 40, isActive: true},
+      {Name: "SQL", Weight: 30, isActive: true}
     ]
+
+    this.testBuckets=["test1","test2","test3"]
  
 }
 
-  getTracks(){
+
+  getTracks() {
     return this.allTrackBuckets;
- }
+  }
  /*
  getTrackBuckets(id:number): Observable<TrackBucket>{
    return this.tracksService.getBucketsByTrack(id);
@@ -79,5 +81,10 @@ export class TrackBucketsComponent implements OnInit {
     console.log("routing to category");
   }
 
-  
+
+  showAddCategoryModal(){
+    
+    console.log("Show 'Add category' modal button clicked");
+  }
+
 }

@@ -5,22 +5,24 @@
 <div class="move" [@move]='state'>
   <div class="container">
     <div class="row justify-content-center">
-      <div class = "col-6">
+      <div class = "card w-50">
 
-        <h3>Tracks</h3>
+        <h3 class="card-header">Tracks</h3>
 
-        <h6>Active</h6>
-
-        <div class="list-group" *ngFor="let track of tracks">
-            <a class="list-group-item list-group-item-action" (click)="animate(track)">
-              {{track.name}}
-              <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
-              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"></i>
-            </a>
+        <!-- <h6>Active</h6> -->
+        <div class="card-body">
+          <div class="list-group" *ngFor="let track of tracks">
+              <a class="list-group-item list-group-item-action" (click)="animate(track)">
+                {{track.name}}
+                <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
+                <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"></i>
+              </a>
+          </div>
         </div>
 
         <h6>Inactive</h6>
 
+<<<<<<< HEAD
         <div class="list-group" *ngFor="let inact of inactiveTracks">
             <a class="list-group-item list-group-item-action">
               {{inact.name}}
@@ -29,15 +31,28 @@
             </a>
         </div>
         <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
+=======
+        <ul *ngFor="let inact of inactiveTracks" style="list-style-type:none">
+                <hr>
+            <li (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">{{inact.name}}
+
+                    <span class="fa fa-pencil marker"></span>
+                    <span class="fa fa-remove marker2"></span>
+            </li>
+        </ul>
+
+        <button class="btn btn-primary btn-sm" id="createTrack" (click)='open(content)'>Create Track</button>
+>>>>>>> add6ae106b4c4f6daba3bf77f806a48554e0e0e2
       </div>
     </div>
   </div>
 </div>
+
     <!--label class="switch">
             <input type="checkbox" [@slider]='state2'>
             <div class="round" (click)="animate2(track)"></div>
             <span class="slider" > </span>
-          </label-->
+        </label-->
     
 
 <!-- Modal for creating a new Track -->
@@ -76,13 +91,13 @@
           <div class="form-group row">
               <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
               <div class="col-sm-10 row">
-                  <span *ngFor="let bucket of testBuckets">
-                      <span *ngIf="!bucket.mappedToTrack">
-                          <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
-                      </span>
-                  </span>
-                </div>
+                <span *ngFor="let bucket of testBuckets">
+                    <span *ngIf="!bucket.mappedToTrack">
+                        <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
+                    </span>
+                </span>
             </div>
+        </div>
         </form>
     </div>
     <div class="modal-footer">

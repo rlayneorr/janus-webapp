@@ -11,5 +11,22 @@
                     <i id="penIcon" class="fa fa-pencil pull-right"></i>
                 </a>
             </div>
+          
         </div>
     </div>
+    <h3 class="tb-heading" (click)="open(content)">Add Category</h3>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <form>
+        <div class="form-group">
+           
+        <h3 class="tb-heading">Add a Category to this Track </h3>
+        <label>Category</label>
+        <select ng-model="trackBucket" 
+        ng-options="trackBucket.Name for trackBucket in allTrackBuckets"
+        formControlName="weight" class="form-control">
+        </select></div>
+        <input type="number" id="weight" name="weight" placeholder="Category Weight" formControlName="weight" class="form-control">
+        
+    </form>
+    </ng-template>
