@@ -26,56 +26,6 @@
       </div>
     </div>
   </div>
-<<<<<<< HEAD
-  
-      <!-- Beginning of Add Category modal - displays dropdown and text field to take in numeric
-  value for weight  -->
-  
-      <ng-template #content let-c="close" let-d="dismiss">
-              <div class="modal-body">
-          <form>
-              <div>
-                  <h3 class="tb-heading">Add a Category to this Track </h3>
-                  <label>Active Categories</label>
-                  <!-- Dropdown menu - shows list of available buckets-->
-                  <select class="form-control">
-                      <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
-                  </select>
-                  <label>Inactive Categories</label>
-                  <select class="form-control">
-                          <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
-                      </select>
-                  
-              </div>
-  
-              <!-- Weight input-->
-  
-              <input type="number" id="weight" name="weight" placeholder="Category Weight" formControlName="weight" class="form-control">
-              <br>
-              <button class="form-control" (click)="addNewTrack(trackBucket.Name,weight)">Add New Track!</button> 
-          </form>
-      </div>
-      <div class="modal-footer">
-              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-              <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Track'); addNewTrack(addTrackForm.value)">Save</button>
-          </div>
-      </ng-template>
-    <ng-template #content let-c="close" let-d="dismiss">
-        <form>
-          <div class="form-group">
-          <h3 class="tb-heading">Add a Category to this Track </h3>
-          <label>Category</label>
-          <select class="form-control">
-          <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
-          </select></div>
-  
-          <input type="number" id="weight" name="weight" 
-            placeholder="Category Weight" formControlName="weight" 
-            class="form-control">
-        </form>
-      
-    </ng-template>
-=======
 </div>
 
     <!-- Beginning of Add Category modal - displays dropdown and text field to take in numeric
@@ -109,4 +59,3 @@ value for weight  -->
         </div>
     </form>
   </ng-template>
->>>>>>> af5bdc04dfef2f2bc417cda5011802e117a4eec3
