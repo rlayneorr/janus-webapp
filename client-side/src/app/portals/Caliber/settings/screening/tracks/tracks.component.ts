@@ -96,6 +96,7 @@ export class TracksComponent implements OnInit {
 
     open(content) {
       this.modalService.open(content);
+      event.stopPropagation();
     }
 
     private getDismissReason(reason: any): string {
