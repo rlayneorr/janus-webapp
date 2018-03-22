@@ -8,13 +8,16 @@ import { catchError } from 'rxjs/operators';
 import { Bucket } from '../entities/Bucket';
 
 const httpOptions = {
-headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-    })
-};
+
+    headers: new HttpHeaders({
+            'Content-Type':  'application/json',
+        })
+    };
 
 @Injectable()
 export class BucketsService {
+
+  testBucket: Bucket = new Bucket(0, "Java", "This is Java");
 
   constructor(private http: HttpClient) { }
   name:string = null;
@@ -36,7 +39,3 @@ export class BucketsService {
 
 
 }
-
- 
-
-

@@ -23,7 +23,7 @@ import {BucketsService} from'../services/buckets.service';
 
       })),
       transition('center =>left',animate('300ms ease-in')),
-    ]), 
+    ]),
   ]
 })
 
@@ -40,8 +40,8 @@ export class TracksComponent implements OnInit {
 
   animate(item:any){
     this.state=(this.state==='center'?'left':'center');
-    this.show=(this.show=== false?true:false); 
-    this.bucket.name = item.name; 
+    this.show=(this.show=== false?true:false);
+    this.bucket.name = item.name;
     console.log(item);
   }
 
@@ -173,6 +173,7 @@ export class TracksComponent implements OnInit {
         bucket.mappedToTrack = false;
 
     }
+
 
   ngOnInit() {
     this.allTracks = [

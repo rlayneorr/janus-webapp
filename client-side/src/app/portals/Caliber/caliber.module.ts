@@ -130,8 +130,7 @@ import { ScreeningComponent } from './settings/screening/screening.component';
 import {TracksComponent} from './settings/screening/tracks/tracks.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { TrackBucketsComponent } from './settings/screening/track-buckets/track-buckets.component' ;
-import { QuestionComponent} from './settings/screening/question/question.component'
-//import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { QuestionComponent} from './settings/screening/question/question.component';
 
 @NgModule({
   imports: [
@@ -147,7 +146,6 @@ import { QuestionComponent} from './settings/screening/question/question.compone
     ScrollEventModule,
     Ng2PageScrollModule,
 
-    //BrowserAnimationsModule,
   ],
   declarations: [
     // pipes
@@ -278,7 +276,7 @@ import { QuestionComponent} from './settings/screening/question/question.compone
     TrainersComponent
   ],
   exports: [
-    TraineeTechSkillsComponent
+    TraineeTechSkillsComponent,
   ],
   entryComponents: [
     BarGraphModalComponent,
