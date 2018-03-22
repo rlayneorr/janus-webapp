@@ -18,7 +18,6 @@ export class BucketsService {
 
   constructor(private http: HttpClient) { }
   name:string = null;
->>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141
   url: string = "/bucket/";
 
   /** Gets all of company's buckets */
