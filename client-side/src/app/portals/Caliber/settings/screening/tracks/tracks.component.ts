@@ -6,14 +6,18 @@ import { Router } from '@angular/router';
 // storing data in a service
 // creating track and adding buckets
 //variable for current track name
-import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Track } from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
 import { Bucket } from '../entities/Bucket';
 import { TrackBucket } from '../entities/TrackBucket';
+<<<<<<< HEAD
 import {BucketsService} from'../services/buckets.service';
+=======
+import { BucketsService} from '../services/buckets.service';
+>>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141
 
 @Component({
   selector: 'app-tracks',
@@ -21,15 +25,35 @@ import {BucketsService} from'../services/buckets.service';
   styleUrls: ['./tracks.component.css'],
   animations:[
     trigger('move',[
-      state('center',style({
+      state('center', style({
         transform:'translateX(0) scaleX(1)'
       })),
-      state('left',style({
-        transform:'translateX(-28%) scaleX(1)'
+      state('left', style({
+        transform:'translateX(-25%) scaleX(1)'
 
       })),
+<<<<<<< HEAD
       transition('center =>left',animate('300ms ease-in')),
     ]), 
+=======
+      transition('center => left',animate('100ms ease-in')),
+    ]),
+
+    trigger('buckets',[
+
+      state('starting', style({
+        transform:'translateX(50%) scaleX(1)'
+      })),
+
+      state('ending', style({
+        transform:'translateX(0%) scaleX(1)'
+        
+      })),
+
+      transition('starting => ending', animate('200ms ease-in')),
+    ])
+
+>>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141
   ]
 })
 
@@ -46,9 +70,22 @@ export class TracksComponent implements OnInit {
 
   animate(item:any){
     this.state=(this.state==='center'?'left':'center');
+<<<<<<< HEAD
     this.show=(this.show=== false?true:false); 
     this.buckets.name = item.name; 
     console.log(item);
+=======
+    this.show=(this.show=== false?true:false);
+     this.bucket.name = item.name;
+    //console.log(state)
+  }
+
+  animate2(){
+    //console.log("sthap clicken me");
+    this.state2=(this.state2==='starting'?'ending':'starting');
+
+    console.log(this.state2)
+>>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141
   }
   colorDarken(item:any){
    let items= document.getElementsByTagName("li");
@@ -95,7 +132,15 @@ export class TracksComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService,private buckets:BucketsService) { }
+=======
+  constructor(
+    private modalService: NgbModal, 
+    private fb: FormBuilder, 
+    private trackService: TracksService,
+    private bucket:BucketsService) { }
+>>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141
 
 
   createTrack: FormGroup;

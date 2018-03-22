@@ -1,4 +1,5 @@
 <div class="moveRight">
+<<<<<<< HEAD
     <div class="track-bucket-container">
         <h3 class="tb-heading">{{bucketName}}</h3>
         <div *ngIf="track.name === 'Java'">
@@ -12,21 +13,47 @@
                 </a>
             </div>
           
-        </div>
-    </div>
-    <h3 class="tb-heading" (click)="open(content)">Add Category</h3>
+=======
 
-    <ng-template #content let-c="close" let-d="dismiss">
-        <form>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="card w-50">
+        <h3 class="card-header">{{bucketName}}</h3>
+
+        <div class="card-body">
+          <div *ngIf="track.name === 'Java'">
+              <div class="list-group" *ngFor="let trackBucket of allTrackBuckets">
+                  <a class="list-group-item list-group-item-action" (click)="routeToBucket(trackBucket.Name)">
+                    <span> {{trackBucket.Name}} 
+                      &nbsp;
+                      {{trackBucket.Weight}}%</span> 
+                      <i id="xIcon" class="fa fa-remove pull-right"></i>
+                      <i id="penIcon" class="fa fa-pencil pull-right"></i>
+                  </a>
+              </div>
+          </div>
+>>>>>>> 022ca5798a721053a1bb5bbc8ce166c12249e141
+        </div>
+
+        <button class="btn btn-primary btn-sm" id="createTrack" (click)='open(content)'>Add Category</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+      <form>
         <div class="form-group">
-           
         <h3 class="tb-heading">Add a Category to this Track </h3>
         <label>Category</label>
-        <select ng-model="trackBucket" 
-        ng-options="trackBucket.Name for trackBucket in allTrackBuckets"
-        formControlName="weight" class="form-control">
+        <select class="form-control">
+        <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
         </select></div>
-        <input type="number" id="weight" name="weight" placeholder="Category Weight" formControlName="weight" class="form-control">
-        
-    </form>
-    </ng-template>
+
+        <input type="number" id="weight" name="weight" 
+          placeholder="Category Weight" formControlName="weight" 
+          class="form-control">
+      </form>
+    
+  </ng-template>

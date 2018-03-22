@@ -9,7 +9,6 @@ import { TracksService } from '../services/tracks.service';
 import { TracksComponent } from '../tracks/tracks.component';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
-
 @Component({
   selector: 'app-track-buckets',
   templateUrl: './track-buckets.component.html',
@@ -21,10 +20,11 @@ export class TrackBucketsComponent implements OnInit {
   @Input() track: Track;
   allTrackBuckets: any[] = [];
   trackBuckets = [];
-  testBuckets:any[]=[];
-  state:string = 'small';
-  bucketName:string= null;
+  testBuckets: any[] = [];
+  state: string = 'small';
+  bucketName:string = null;
 
+  /**
   colorDarken(item:any){
     let items= document.getElementsByTagName("td");
     for(let i =0;i<items.length;i++){
@@ -41,13 +41,14 @@ export class TrackBucketsComponent implements OnInit {
       }
     }
    }
-
+  **/
+  
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,
     private tracksService: TracksService,
     private router: Router,
-    private buckets:BucketsService,
+    private bucketService:BucketsService,
     //  private route: ActivatedRoute,
     //  private location: Location
   ) { }
@@ -66,7 +67,7 @@ export class TrackBucketsComponent implements OnInit {
 
     this.testBuckets=["test1","test2","test3"]
 
-    this.bucketName = this.buckets.name;
+    this.bucketName = this.bucketService.name;
  
 }
 
