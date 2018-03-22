@@ -21,9 +21,11 @@ export class TrackBucketsComponent implements OnInit {
   @Input() track: Track;
   allTrackBuckets: any[] = [];
   trackBuckets = [];
-  testBuckets:any[]=[];
-  state:string = 'small';
+  testBuckets: any[] = [];
+  state: string = 'small';
+  bucketName:string = null;
 
+  /**
   colorDarken(item:any){
     let items= document.getElementsByTagName("td");
     for(let i =0;i<items.length;i++){
@@ -40,12 +42,14 @@ export class TrackBucketsComponent implements OnInit {
       }
     }
    }
-
+  **/
+  
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,
     private tracksService: TracksService,
-    private router: Router
+    private router: Router,
+    private bucketService:BucketsService,
     //  private route: ActivatedRoute,
     //  private location: Location
   ) { }
@@ -63,6 +67,8 @@ export class TrackBucketsComponent implements OnInit {
     ]
 
     this.testBuckets=["test1","test2","test3"]
+
+    this.bucketName = this.bucketService.name;
  
 }
 
