@@ -44,6 +44,13 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 
+//1801-caliber-dev-angels services
+import { QuestionsService } from './settings/screening/services/questions.service';
+import { SkillTypesService } from './settings/screening/services/skillTypes.service';
+import { BucketsService } from './settings/screening/services/buckets.service';
+import { TagsService } from './settings/screening/services/tags.service';
+import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
+
 //N.T.
 import { ApiService } from './util/api.service';
 
@@ -119,6 +126,11 @@ import { DeleteBatchModalComponent } from './manage/delete-batch-modal/delete-ba
 import { CannotDeleteModalComponent } from './manage/cannot-delete-modal/cannot-delete-modal.component';
 import { DeleteTraineeModalComponent } from './manage/delete-trainee-modal/delete-trainee-modal.component';
 import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
+import { ScreeningComponent } from './settings/screening/screening.component';
+import {SkillTypesComponent} from './settings/screening/skillTypes/skillTypes.component';
+import { BucketComponent } from './settings/screening/bucket/bucket.component';
+import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component' ;
+import { QuestionComponent} from './settings/screening/question/question.component';
 
 @NgModule({
   imports: [
@@ -132,7 +144,8 @@ import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-traine
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
     ScrollEventModule,
-    Ng2PageScrollModule
+    Ng2PageScrollModule,
+
   ],
   declarations: [
     // pipes
@@ -217,6 +230,11 @@ import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-traine
     CannotDeleteModalComponent,
     DeleteTraineeModalComponent,
     CannotDeleteTraineeModalComponent,
+    ScreeningComponent,
+    SkillTypesComponent,
+    BucketComponent,
+    SkillTypeBucketsComponent,
+    QuestionComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -247,7 +265,12 @@ import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-traine
     ReportsService,
     QCStatusService,
     TraineeStatusService,
-    ApiService
+    ApiService,
+    QuestionsService,
+    SkillTypesService,
+    BucketsService,
+    TagsService,
+    HttpErrorHandlerService
   ],
   bootstrap: [
     TrainersComponent

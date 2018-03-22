@@ -1,0 +1,22 @@
+h3 {
+  text-align: center;
+  color: white;
+}
+
+.card-header {
+  background-color: #F26925;
+}
+
+#xIcon {
+	color: #F26925;
+	margin-left: 10px;
+}
+
+#penIcon {
+	color: #F26925;
+}
+
+i {
+  cursor: pointer;
+  cursor: hand;
+}

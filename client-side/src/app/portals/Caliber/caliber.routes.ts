@@ -16,6 +16,12 @@ import { PanelComponent } from './panel/panel/panel.component';
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { RoleGuard, roles } from '../../role-guard';
 
+import {ScreeningComponent} from './settings/screening/screening.component'
+import { Component } from '@angular/core';
+import { Bucket } from './settings/screening/entities/Bucket';
+import {BucketComponent} from './settings/screening/bucket/bucket.component';
+import {SkillTypeBucketsComponent} from './settings/screening/skillType-buckets/skillType-buckets.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -90,6 +96,21 @@ export const routes: Routes = [
           {
             path: 'trainer-profile',
             component: TrainerProfilesComponent,
+          },
+          {
+            path:'screening',
+            component: ScreeningComponent,
+            children:[
+
+            ]
+          },
+          {
+            path: 'category',
+            component: BucketComponent
+          },
+          {
+            path: 'skillTypeTopics',
+            component: SkillTypeBucketsComponent,
           }
         ]
       },
