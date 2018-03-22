@@ -40,25 +40,11 @@ export class TracksComponent implements OnInit {
 
   animate(item:any){
     this.state=(this.state==='center'?'left':'center');
-<<<<<<< HEAD
     this.show=(this.show=== false?true:false); 
     this.bucket.name = item.name; 
     console.log(item);
   }
 
-=======
-    this.show=(this.show=== false?true:false);
-     this.bucket.name = item.name;
-    //console.log(state)
-  }
-
-  animate2(){
-    //console.log("sthap clicken me");
-    this.state2=(this.state2==='starting'?'ending':'starting');
-
-    console.log(this.state2)
-  }
->>>>>>> f6f0e151100e75475a2bd0e9f54e556817115be5
 
   removeElement(item:any){
     let thing:any;
