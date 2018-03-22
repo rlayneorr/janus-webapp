@@ -59,18 +59,4 @@ value for weight  -->
             <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Track'); addNewTrack(addTrackForm.value)">Save</button>
         </div>
     </ng-template>
-  <ng-template #content let-c="close" let-d="dismiss">
-      <form>
-        <div class="form-group">
-        <h3 class="tb-heading">Add a Category to this Track </h3>
-        <label>Category</label>
-        <select class="form-control">
-        <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
-        </select></div>
-
-        <input type="number" id="weight" name="weight" 
-          placeholder="Category Weight" formControlName="weight" 
-          class="form-control">
-      </form>
-    
-  </ng-template>
+  
