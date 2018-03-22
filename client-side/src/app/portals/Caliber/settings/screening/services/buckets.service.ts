@@ -11,8 +11,10 @@ headers: new HttpHeaders({
 @Injectable()
 export class BucketsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
       public name:string
+
+  
 
   url: string = "/bucket/";
 
@@ -34,5 +36,7 @@ export class BucketsService {
   }
 
 }
+
+ 
 
 

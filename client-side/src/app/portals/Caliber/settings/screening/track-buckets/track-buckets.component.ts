@@ -23,7 +23,7 @@ export class TrackBucketsComponent implements OnInit {
   trackBuckets = [];
   testBuckets:any[]=[];
   state:string = 'small';
-  bucketName:String= null;
+  bucketName:string= null;
 
   colorDarken(item:any){
     let items= document.getElementsByTagName("td");
