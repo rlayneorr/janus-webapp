@@ -5,6 +5,7 @@ import { Question } from '../entities/Question';
 import { Tag } from '../entities/Tag';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TAGS } from '../mock-tag';
+import {Questions} from '../mock-questions-array'
 import {QuestionsService} from '../services/questions.service';
 import {TagsService} from '../services/tags.service';
 
@@ -22,12 +23,15 @@ export class QuestionComponent implements OnInit {
   allTags: Tag[];
   currentTags: Tag[];
   question:Question;
+  questions: Question[];
+  filter: Tag = new Tag();
 
   ngOnInit() {
     this.allTags = TAGS;
     this.currentTags = [];
     this.question = new Question();
     this.question.answers = [];
+    this.questions = Questions;
   }
   open(content) {
     this.modalService.open(content);

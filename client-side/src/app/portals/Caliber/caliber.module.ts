@@ -130,7 +130,10 @@ import { ScreeningComponent } from './settings/screening/screening.component';
 import {TracksComponent} from './settings/screening/tracks/tracks.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { TrackBucketsComponent } from './settings/screening/track-buckets/track-buckets.component' ;
-import { QuestionComponent} from './settings/screening/question/question.component';
+import { QuestionComponent} from './settings/screening/question/question.component'
+import { TagFilterPipe } from './settings/screening/question/question.filter';
+//import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
   imports: [
@@ -170,6 +173,7 @@ import { QuestionComponent} from './settings/screening/question/question.compone
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
+    TagFilterPipe,
 
     // components
     CaliberComponent,
