@@ -17,7 +17,7 @@ headers: new HttpHeaders({
 export class BucketsService {
 
   constructor(private http: HttpClient) { }
-
+  name:string = null;
   url: string = "/bucket/";
 
   /** Gets all of company's buckets */

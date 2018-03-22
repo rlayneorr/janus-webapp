@@ -23,6 +23,7 @@ export class TrackBucketsComponent implements OnInit {
   trackBuckets = [];
   testBuckets: any[] = [];
   state: string = 'small';
+  bucketName:string = null;
 
   /**
   colorDarken(item:any){
@@ -47,7 +48,8 @@ export class TrackBucketsComponent implements OnInit {
     private tracks : TracksComponent,
     private modalService: NgbModal,
     private tracksService: TracksService,
-    private router: Router
+    private router: Router,
+    private bucketService:BucketsService,
     //  private route: ActivatedRoute,
     //  private location: Location
   ) { }
@@ -65,6 +67,8 @@ export class TrackBucketsComponent implements OnInit {
     ]
 
     this.testBuckets=["test1","test2","test3"]
+
+    this.bucketName = this.bucketService.name;
  
 }
 

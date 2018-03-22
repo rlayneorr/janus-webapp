@@ -13,6 +13,7 @@ import { Track } from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
 import { Bucket } from '../entities/Bucket';
 import { TrackBucket } from '../entities/TrackBucket';
+import { BucketsService} from '../services/buckets.service';
 
 @Component({
   selector: 'app-tracks',
@@ -24,7 +25,7 @@ import { TrackBucket } from '../entities/TrackBucket';
         transform:'translateX(0) scaleX(1)'
       })),
       state('left', style({
-        transform:'translateX(-28%) scaleX(1)'
+        transform:'translateX(-25%) scaleX(1)'
 
       })),
       transition('center => left',animate('100ms ease-in')),
@@ -62,6 +63,7 @@ export class TracksComponent implements OnInit {
     //console.log("sthap clicken me");
     this.state=(this.state==='center'?'left':'center');
     this.show=(this.show=== false?true:false);
+     this.bucket.name = item.name;
     //console.log(state)
   }
 
@@ -121,7 +123,11 @@ export class TracksComponent implements OnInit {
     }
   }
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService) { }
+  constructor(
+    private modalService: NgbModal, 
+    private fb: FormBuilder, 
+    private trackService: TracksService,
+    private bucket:BucketsService) { }
 
 
   createTrack: FormGroup;
