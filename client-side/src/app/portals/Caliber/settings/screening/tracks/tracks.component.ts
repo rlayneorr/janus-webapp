@@ -13,6 +13,7 @@ import { Track } from '../entities/Track';
 import { TracksService } from '../services/tracks.service';
 import { Bucket } from '../entities/Bucket';
 import { TrackBucket } from '../entities/TrackBucket';
+import {BucketsService} from'../services/buckets.service';
 
 @Component({
   selector: 'app-tracks',
@@ -45,7 +46,9 @@ export class TracksComponent implements OnInit {
 
   animate(item:any){
     this.state=(this.state==='center'?'left':'center');
-    this.show=(this.show=== false?true:false);  
+    this.show=(this.show=== false?true:false); 
+    this.buckets.name = item.name; 
+    console.log(item);
   }
   colorDarken(item:any){
    let items= document.getElementsByTagName("li");
@@ -92,7 +95,7 @@ export class TracksComponent implements OnInit {
     }
   }
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService) { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder, private trackService: TracksService,private buckets:BucketsService) { }
 
 
   createTrack: FormGroup;

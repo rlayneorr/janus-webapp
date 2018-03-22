@@ -1,6 +1,6 @@
 <div class="moveRight">
     <div class="track-bucket-container">
-        <h3 class="tb-heading">Categories</h3>
+        <h3 class="tb-heading">{{bucketName}}</h3>
         <div *ngIf="track.name === 'Java'">
             <div class="list-group" *ngFor="let trackBucket of allTrackBuckets">
                 <a class="list-group-item list-group-item-action" (click)="routeToBucket(trackBucket.Name)">

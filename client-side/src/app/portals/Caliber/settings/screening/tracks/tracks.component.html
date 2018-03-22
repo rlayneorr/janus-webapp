@@ -22,7 +22,6 @@
 
         <h6>Inactive</h6>
 
-<<<<<<< HEAD
         <div class="list-group" *ngFor="let inact of inactiveTracks">
             <a class="list-group-item list-group-item-action">
               {{inact.name}}
@@ -31,18 +30,6 @@
             </a>
         </div>
         <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
-=======
-        <ul *ngFor="let inact of inactiveTracks" style="list-style-type:none">
-                <hr>
-            <li (mouseover)="colorDarken(inact)" (mouseleave)="colorLighten(inact)">{{inact.name}}
-
-                    <span class="fa fa-pencil marker"></span>
-                    <span class="fa fa-remove marker2"></span>
-            </li>
-        </ul>
-
-        <button class="btn btn-primary btn-sm" id="createTrack" (click)='open(content)'>Create Track</button>
->>>>>>> add6ae106b4c4f6daba3bf77f806a48554e0e0e2
       </div>
     </div>
   </div>

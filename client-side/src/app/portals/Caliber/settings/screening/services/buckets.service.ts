@@ -12,6 +12,7 @@ headers: new HttpHeaders({
 export class BucketsService {
 
   constructor(private http: HttpClient) { }
+      public name:string
 
   url: string = "/bucket/";
 
@@ -33,3 +34,5 @@ export class BucketsService {
   }
 
 }
+
+
