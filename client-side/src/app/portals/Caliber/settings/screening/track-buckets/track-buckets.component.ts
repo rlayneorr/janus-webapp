@@ -23,6 +23,7 @@ export class TrackBucketsComponent implements OnInit {
   testBuckets: any[] = [];
   state: string = 'small';
   bucketName:string = null;
+  testBucketPlease;
 
   constructor(
     private tracks : TracksComponent,
@@ -36,6 +37,7 @@ export class TrackBucketsComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content);
+    event.stopPropagation();
   }
 
   ngOnInit() {
@@ -46,14 +48,27 @@ export class TrackBucketsComponent implements OnInit {
       {Name: "SQL", Weight: 30, isActive: true}
     ]
 
-    this.testBuckets=["test1","test2","test3"]
+    this.testBuckets=["test1","test2","test3"];
 
-    this.bucketName = this.bucketService.name;
 
 }
-
+/*
+id: number;
+    name: string;
+    description: string;
+    isActive?: boolean = true;
+    mappedToTrack?: boolean = false;
+    weight?: number;
+ */
+testSingleBucket : Bucket = {id:1,name:"JavaScript",description:"basic JS", isActive: true, mappedToTrack:false,
+weight:20}
+editBucket(name){
+  this.testSingleBucket.name =name;
+ // console.log("Need to edit bucket");
+}
 
 getTracks() {
+
     return this.allTrackBuckets;
   }
  /*
