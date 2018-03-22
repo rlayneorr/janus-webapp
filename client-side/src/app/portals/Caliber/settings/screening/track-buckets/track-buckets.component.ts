@@ -25,25 +25,6 @@ export class TrackBucketsComponent implements OnInit {
   state: string = 'small';
   bucketName:string = null;
 
-  /**
-  colorDarken(item:any){
-    let items= document.getElementsByTagName("td");
-    for(let i =0;i<items.length;i++){
-      if(items[i].innerHTML === item.Name){
-        items[i].parentElement.setAttribute("style","background:#E8E8E8");
-      }
-    }
-   }
-   colorLighten(item:any){
-    let items= document.getElementsByTagName("td");
-    for(let i =0;i<items.length;i++){
-      if(items[i].innerHTML === item.Name){
-        items[i].parentElement.setAttribute("style","background:white");
-      }
-    }
-   }
-  **/
-
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,
