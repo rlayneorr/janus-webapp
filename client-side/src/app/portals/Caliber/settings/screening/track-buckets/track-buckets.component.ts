@@ -9,7 +9,7 @@ import { TracksService } from '../services/tracks.service';
 import { TracksComponent } from '../tracks/tracks.component';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
-import {DropdownModule} from 'ngx-dropdown';
+
 @Component({
   selector: 'app-track-buckets',
   templateUrl: './track-buckets.component.html',
@@ -25,25 +25,6 @@ export class TrackBucketsComponent implements OnInit {
   state: string = 'small';
   bucketName:string = null;
 
-  /**
-  colorDarken(item:any){
-    let items= document.getElementsByTagName("td");
-    for(let i =0;i<items.length;i++){
-      if(items[i].innerHTML === item.Name){
-        items[i].parentElement.setAttribute("style","background:#E8E8E8");
-      }
-    }
-   }
-   colorLighten(item:any){
-    let items= document.getElementsByTagName("td");
-    for(let i =0;i<items.length;i++){
-      if(items[i].innerHTML === item.Name){
-        items[i].parentElement.setAttribute("style","background:white");
-      }
-    }
-   }
-  **/
-  
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,

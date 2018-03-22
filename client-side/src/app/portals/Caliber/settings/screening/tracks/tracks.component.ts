@@ -74,28 +74,6 @@ export class TracksComponent implements OnInit {
     console.log(this.state2)
   }
 
-  colorDarken(item:any){
-    //should be td
-   let items= document.getElementsByTagName("li");
-   //console.log(items)
-  // console.log(item)
-   for(let i =0;i<items.length;i++){
-     if(items[i].innerText === item.name){
-       items[i].parentElement.setAttribute("style","background:#E8E8E8;list-style-type:none");
-     }
-   }
-  }
-
-  colorLighten(item:any){
-    // should be td
-   let items= document.getElementsByTagName("li");
-   for(let i =0;i<items.length;i++){
-     if(items[i].innerText === item.name){
-       items[i].parentElement.setAttribute("style","background:white;list-style-type:none");
-     }
-   }
-  }
-
   removeElement(item:any){
     let thing:any;
     console.log(item);
@@ -214,13 +192,14 @@ export class TracksComponent implements OnInit {
         }
     }
 
-    addToActive(bucket){
-        bucket.isActive = true;
-        console.log(this.testBuckets);
+
+    addToMapped(bucket){
+      bucket.mappedToTrack = true;
+      console.log(this.testBuckets);
     }
 
-    removeFromActive(bucket){
-        bucket.isActive = false;
+    removeFromMapped(bucket){
+      bucket.mappedToTrack = false;
     }
 
   ngOnInit() {
