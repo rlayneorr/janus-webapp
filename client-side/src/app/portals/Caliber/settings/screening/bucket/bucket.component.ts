@@ -48,19 +48,23 @@ export class BucketComponent implements OnInit {
   addNewQuestion(){
     let newCurrentTagIds : number[] = [];
     let i: number = 0;
+    let qs: QuestionsService;
+
     for(i; i < this.currentTags.length; i++)
     {
         newCurrentTagIds.push(this.currentTags[i].id);
     }
     this.question.tagIds= newCurrentTagIds;
-    console.log(this.question);
-    let qs: QuestionsService;
-    qs.createNewQuestion(0,this.question); 
+    if(!this.question.answers.indexOf("")){
+      qs.createNewQuestion(0,this.question);
+      console.log(this.question); 
+    }
   }
   addTagToQuestion(tag){
     let currentTag: any;
     let newAllTags : Tag[] = [];
     let i: number = 0;
+
     for(i; i < this.allTags.length; i++)
     {
       currentTag = this.allTags[i];
@@ -75,6 +79,7 @@ export class BucketComponent implements OnInit {
     let currentTag: any;
     let newCurrentTags : Tag[] = [];
     let i: number = 0;
+
     for(i; i < this.currentTags.length; i++)
     {
       currentTag = this.currentTags[i];
