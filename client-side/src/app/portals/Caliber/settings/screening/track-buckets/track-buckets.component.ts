@@ -9,7 +9,6 @@ import { TracksService } from '../services/tracks.service';
 import { TracksComponent } from '../tracks/tracks.component';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
-
 @Component({
   selector: 'app-track-buckets',
   templateUrl: './track-buckets.component.html',
