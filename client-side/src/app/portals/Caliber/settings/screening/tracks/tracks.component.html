@@ -135,13 +135,13 @@
           <div class="form-group row">
               <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
               <div class="col-sm-10 row">
-                  <span *ngFor="let bucket of testBuckets">
-                      <span *ngIf="!bucket.mappedToTrack">
-                          <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
-                      </span>
-                  </span>
-                </div>
+                <span *ngFor="let bucket of testBuckets">
+                    <span *ngIf="!bucket.mappedToTrack">
+                        <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
+                    </span>
+                </span>
             </div>
+        </div>
         </form>
     </div>
     <div class="modal-footer">

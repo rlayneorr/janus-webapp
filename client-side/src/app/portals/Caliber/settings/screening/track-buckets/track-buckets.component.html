@@ -1,5 +1,6 @@
 <div class="moveRight">
 
+
   <div class="container">
     <div class="row justify-content-center">
       <div class="card w-50">
@@ -28,14 +29,15 @@
   <ng-template #content let-c="close" let-d="dismiss">
       <form>
         <div class="form-group">
-           
         <h3 class="tb-heading">Add a Category to this Track </h3>
         <label>Category</label>
-        <select ng-model="trackBucket" 
-        ng-options="trackBucket.Name for trackBucket in allTrackBuckets"
-        formControlName="weight" class="form-control">
+        <select class="form-control">
+        <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
         </select></div>
-        <input type="number" id="weight" name="weight" placeholder="Category Weight" formControlName="weight" class="form-control">
 
+        <input type="number" id="weight" name="weight" 
+          placeholder="Category Weight" formControlName="weight" 
+          class="form-control">
       </form>
+    
   </ng-template>
