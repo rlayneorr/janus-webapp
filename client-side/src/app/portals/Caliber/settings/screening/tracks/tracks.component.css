@@ -24,22 +24,11 @@ i {
   cursor: pointer;
   cursor: hand;
 }
-
-/*.wrapper{*/
-    /*border: 1px solid black;
-    box-shadow: 5px 9px;
-    border-radius: 5px;
-    text-align: center;*/
-    /*position: relative;*/
-    /*width: 55%;*/
-    /*left: 25%;*/
-/*}*/
-
-/*#createTrack{*/
-    /*position: absolute;*/
-    /*left: 67%;*/
-    /*float: right;*/
-/*}*/
+#buckets{
+    position: absolute;
+    left:33%;
+    width: 80%;
+}
 
 /** not being used **/
 .marker{
@@ -82,13 +71,5 @@ i {
   .revatureOrange{
       background-color: #F26925;
   }
-  .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-    /* Hide default HTML checkbox */
-  .switch input {display:none;}
 
   
