@@ -39,7 +39,7 @@ import { BucketsService} from '../services/buckets.service';
 
       state('ending', style({
         transform:'translateX(0%) scaleX(1)'
-        
+
       })),
 
       transition('starting => ending', animate('200ms ease-in')),
@@ -108,7 +108,7 @@ export class TracksComponent implements OnInit {
     }
     this.setTracks();
   }
-  
+
   setTracks(){
     let thing:any;
     this.tracks = [];
@@ -124,8 +124,8 @@ export class TracksComponent implements OnInit {
   }
 
   constructor(
-    private modalService: NgbModal, 
-    private fb: FormBuilder, 
+    private modalService: NgbModal,
+    private fb: FormBuilder,
     private trackService: TracksService,
     private bucket:BucketsService) { }
 
@@ -214,13 +214,13 @@ export class TracksComponent implements OnInit {
         }
     }
 
-    addToActive(bucket){
-        bucket.isActive = true;
+    addToMapped(bucket){
+        bucket.mappedToTrack = true;
         console.log(this.testBuckets);
     }
 
-    removeFromActive(bucket){
-        bucket.isActive = false;
+    removeFromMapped(bucket){
+        bucket.mappedToTrack = false;
     }
 
   ngOnInit() {

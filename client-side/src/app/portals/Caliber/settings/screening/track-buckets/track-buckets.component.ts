@@ -9,7 +9,7 @@ import { TracksService } from '../services/tracks.service';
 import { TracksComponent } from '../tracks/tracks.component';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
-import {DropdownModule} from 'ngx-dropdown';
+
 @Component({
   selector: 'app-track-buckets',
   templateUrl: './track-buckets.component.html',
@@ -43,7 +43,7 @@ export class TrackBucketsComponent implements OnInit {
     }
    }
   **/
-  
+
   constructor(
     private tracks : TracksComponent,
     private modalService: NgbModal,
@@ -69,7 +69,7 @@ export class TrackBucketsComponent implements OnInit {
     this.testBuckets=["test1","test2","test3"]
 
     this.bucketName = this.bucketService.name;
- 
+
 }
 
 
@@ -89,7 +89,7 @@ export class TrackBucketsComponent implements OnInit {
 
 
   showAddCategoryModal(){
-    
+
     console.log("Show 'Add category' modal button clicked");
   }
 
