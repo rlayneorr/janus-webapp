@@ -44,6 +44,10 @@ export class TracksService {
       return this.http.put(this.url + "updateTrack", {trackBuckets: trackBuckets}, httpOptions);
   }
 
+  getTrackById(trackId: number){
+    return this.http.get(this.url + "getTrack/" + trackId);
+}
+
   /** Temporary solution for this func, need to double check with back-end **/
   getBucketsByTrack(trackId: number): Observable<Bucket[]> {
     return this.http.get<Bucket[]>(this.url + "getTopics/" + trackId);
