@@ -17,7 +17,7 @@
                 {{track.name}}
                 <i id="xIcon" class="fa fa-remove pull-right removeHoverTT" (click)="removeElement(track)"><span class="removeToolTip">Remove</span></i>
                 <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"><span class="editToolTip">Edit</span></i>
-                
+
               </a>
           </div>
         </div>
@@ -31,12 +31,12 @@
               <i id="penIcon" class="fa fa-pencil pull-right"></i>
             </a>
         </div>
-        <button class="btn" id="createTrack" (click)='open(content)'>Create Track</button>
+        <button class="btn" id="createTrack" (click)='open(content); clearTrackBuckets()'>Create Track</button>
       </div>
     </div>
   </div>
 </div>
-    
+
 
 <!-- Modal for creating a new Track -->
 <ng-template #content let-c="close" let-d="dismiss">
