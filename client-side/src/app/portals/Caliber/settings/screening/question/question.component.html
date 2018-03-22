@@ -7,7 +7,7 @@
 <!--Update Question modal-->
 
 
-Create New Question Button
+<!--Create New Question Button-->
 <button class="btn" id="createTrack" (click)='open(content)'>New Question</button>
 <!--Beginning of the add new question modal-->
 <ng-template #content let-c="close" let-d="dismiss">
@@ -80,34 +80,32 @@ Create New Question Button
               </span>
             </div>
           </div>
-          </ng-template>
+          
       <!-- Add new tag section-->
       <div class="form-group row">
           <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="col-sm-12 col-form-label" min="0" max="100"  align = "center">
       </div>
       <!--Add tags section-->
-      <div class="form-group row">
-        <label for="allTags" class="col-sm-3 col-form-label">All Tags:</label>
-        <div class="col-sm-9">
-          <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100">
+        <div class="form-group row">
+          <label for="allTags" class="col-sm-3 col-form-label">All Tags:</label>
+          <div class="col-sm-9">
+            <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100">
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <span *ngFor="let tag of allTags| tagfilter:filter">
-          <span class="input-group-addon" (click)="addTagToQuestion(tag)" style="margin: 1px">{{tag.name}}</span>
-        </span>
-      </div>
+        <div class="form-group row">
+          <span *ngFor="let tag of allTags| tagfilter:filter">
+            <span class="input-group-addon" (click)="addTagToQuestion(tag)" style="margin: 1px">{{tag.name}}</span>
+          </span>
+        </div>
       </ngb-panel>
-    </ngb-accordion>
-      <div class="modal-footer">
+      </ngb-accordion>
+        <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
           <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)=" addNewQuestion()">Save</button>
-          <br>
-          <br>
-          <br>
           <p id="newQuestionAlert"></p>
-      </div>
-    </form>
+        </div>
+      </form>
+      </ng-template>
     </div>
 </ng-template>
 <!--Ending of the add new question modal -->
