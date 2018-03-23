@@ -64,7 +64,8 @@
                   <div *ngFor="let bucket of testBuckets; let index = index">
                       <div class="input-group col-sm-9" *ngIf="bucket.mappedToSkillType">
                           <span class="input-group-addon col-sm-4 revatureOrange">{{bucket.name}}</span>
-                          <input type="number" name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucket.weight" [ngModelOptions]="{standalone: true}">
+                          <input type="number" #weight name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucket.weight" [ngModelOptions]="{standalone: true}" (keyup)="checkBucketSum()">
+                          <input type="number" name="sum" formControlName="bucketWeightSum" [hidden]="true" [(ngModel)]="bucketWeightSum" *ngIf="bucket">
                           <span class="input-group-addon percentSign">%</span>
                           <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromMapped(bucket)"><span aria-hidden="true">&times;</span></button>
                       </div>
@@ -85,6 +86,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create SkillType'); addNewSkillType(addSkillTypeForm.value)">Save</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create SkillType'); addNewSkillType(addSkillTypeForm.value)" [disabled]="!addSkillTypeForm.valid">Save</button>
     </div>
 </ng-template>
