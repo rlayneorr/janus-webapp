@@ -12,6 +12,9 @@
       <div id="clients-list-well" class="well">
         <!-- <input type="checkbox" [checked]="showNoData" name="showNoData">
         <label for="showNoData">Show Clients With No Associates</label> -->
+        <h1 id="clientTitle">Show Clients With No Associates</h1>
+        <br>
+        <br>
         <ul id="clients-list">
           <!-- populate list of company names -->
           <li *ngFor="let clientName of clientNames | searchFilter : searchName" (click)="getOneClient(clientName)">

@@ -205,7 +205,7 @@ export class HomeComponent {
   mappedOnClick(evt: any) {
     if (evt.active[0] != undefined) {
       //navigate to client-mapped component
-      this.rout.navigate([`client-mapped/${evt.active[0]._index}`]);
+      this.rout.navigate([`TrackForce/client-mapped/${evt.active[0]._index}`]);
     }
   };
   /**
