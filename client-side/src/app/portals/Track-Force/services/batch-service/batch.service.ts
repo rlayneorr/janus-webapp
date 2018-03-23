@@ -9,7 +9,7 @@ import {Associate} from '../../models/associate.model';
 
 @Injectable()
 export class BatchService {
-  private batchPath: string = "TrackForce/batches";
+  private batchPath: string = "TrackForce/api/batches";
 
   constructor(private http: HttpClient) {}
 
