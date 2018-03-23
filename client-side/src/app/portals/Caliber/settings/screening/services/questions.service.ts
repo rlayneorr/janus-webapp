@@ -13,6 +13,7 @@ export class QuestionsService {
 
   constructor(private http: HttpClient) { }
 
+  /** https://hydra-question-service.cfapps.io/ **/
   url: string = "/question/";
 
   createNewQuestion(bucketId: number, question: Question){
