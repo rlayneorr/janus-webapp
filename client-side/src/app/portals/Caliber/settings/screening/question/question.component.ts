@@ -15,7 +15,7 @@ import {TagsService} from '../services/tags.service';
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
-  
+
   constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService : TagsService, questionService: QuestionsService) { }
 
   createQuestion: FormGroup;
@@ -65,7 +65,7 @@ export class QuestionComponent implements OnInit {
     this.question.tagIds= newCurrentTagIds;
     if(this.question.answers.length==5 && this.question.text){
       //questionSerice.createNewQuestion(0,this.question);
-      document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!"; 
+      document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
       this.question = new Question();
       this.question.answers = [];
     }
@@ -83,7 +83,7 @@ export class QuestionComponent implements OnInit {
       currentTag = this.allTags[i];
       if(tag.id != currentTag.id){
         newAllTags.push(currentTag);
-      } 
+      }
     }
     this.allTags = newAllTags;
     this.currentTags.push(tag);
@@ -96,14 +96,13 @@ export class QuestionComponent implements OnInit {
     for(i; i < this.currentTags.length; i++)
     {
       currentTag = this.currentTags[i];
-      
-      
+
+
       if(tag.id != currentTag.id){
         newCurrentTags.push(currentTag);
-      } 
+      }
     }
     this.allTags.push(tag);
     this.currentTags = newCurrentTags;
   }
 }
-

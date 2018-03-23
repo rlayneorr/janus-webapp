@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrackBucketsComponent } from './track-buckets.component';
+import { SkillTypeBucketsComponent } from './skillType-buckets.component';
 
-describe('TrackBucketsComponent', () => {
-  let component: TrackBucketsComponent;
-  let fixture: ComponentFixture<TrackBucketsComponent>;
+describe('SkillTypeBucketsComponent', () => {
+  let component: SkillTypeBucketsComponent;
+  let fixture: ComponentFixture<SkillTypeBucketsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrackBucketsComponent ]
+      declarations: [ SkillTypeBucketsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrackBucketsComponent);
+    fixture = TestBed.createComponent(SkillTypeBucketsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

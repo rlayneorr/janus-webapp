@@ -1,22 +1,22 @@
 <!-- Buckets-->
-<app-track-buckets id= "buckets" *ngIf='show' class="col-8" ></app-track-buckets>
+<app-skillType-buckets id= "buckets" *ngIf='show' class="col-8" ></app-skillType-buckets>
 
 
-<!-- Tracks List-->
+<!-- SkillTypes List-->
 <div class="move" [@move]='state'>
   <div class="container">
     <div class="row justify-content-center">
       <div class = "card w-50">
 
-        <h3 class="card-header">Tracks</h3>
+        <h3 class="card-header">Skill Types</h3>
 
         <!-- <h6>Active</h6> -->
         <div class="card-body">
-          <div class="list-group" *ngFor="let track of tracks">
-              <a class="list-group-item list-group-item-action" (click)="animate(track)">
-                {{track.name}}
-                <i id="xIcon" class="fa fa-remove pull-right removeHoverTT" (click)="removeElement(track)"><span class="removeToolTip">Remove</span></i>
-                <i id="penIcon" class="fa fa-pencil pull-right" (click)="editTrack(track); open(content)"><span class="editToolTip">Edit</span></i>
+          <div class="list-group" *ngFor="let skillType of skillTypes">
+              <a class="list-group-item list-group-item-action" (click)="animate(skillType)">
+                {{skillType.name}}
+                <i id="xIcon" class="fa fa-remove pull-right removeHoverTT" (click)="removeElement(skillType)"><span class="removeToolTip">Remove</span></i>
+                <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)"><span class="editToolTip">Edit</span></i>
 
               </a>
           </div>
@@ -24,45 +24,45 @@
 
         <h6>Inactive</h6>
 
-        <div class="list-group" *ngFor="let inact of inactiveTracks">
+        <div class="list-group" *ngFor="let inact of inactiveSkillTypes">
             <a class="list-group-item list-group-item-action">
               {{inact.name}}
-              <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(track)"></i>
+              <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(skillType)"></i>
               <i id="penIcon" class="fa fa-pencil pull-right"></i>
             </a>
         </div>
-        <button class="btn" id="createTrack" (click)='open(content); clearTrackBuckets()'>Create Track</button>
+        <button class="btn" id="createSkillType" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- Modal for creating a new Track -->
+<!-- Modal for creating a new SkillType -->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-      <!-- If a track got clicked, Title is Edit -->
-    <h4 class="modal-title" *ngIf="!testSingleTrack">Create a Track</h4>
-     <h4 class="modal-title" *ngIf="testSingleTrack">Edit Track</h4>
+      <!-- If a skillType got clicked, Title is Edit -->
+    <h4 class="modal-title" *ngIf="!testSingleSkillType">Create a SkillType</h4>
+     <h4 class="modal-title" *ngIf="testSingleSkillType">Edit SkillType</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-      <form  #addTrackForm="ngForm" [formGroup]="createTrack">
+      <form  #addSkillTypeForm="ngForm" [formGroup]="createSkillType">
           <div class="form-group row">
               <label for="name" class="col-sm-2 col-form-label">Name:</label>
               <div class="col-sm-10">
-                  <!-- If a track is clicked, ngModel the name -->
-                  <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]="testSingleTrack.name" *ngIf="testSingleTrack">
-                  <input type="text" id="name" name="name" placeholder="Track Name" formControlName="name" class="form-control" *ngIf="!testSingleTrack">
+                  <!-- If a skillType is clicked, ngModel the name -->
+                  <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]="testSingleSkillType.name" *ngIf="testSingleSkillType">
+                  <input type="text" id="name" name="name" placeholder="SkillType Name" formControlName="name" class="form-control" *ngIf="!testSingleSkillType">
               </div>
           </div>
           <div class="form-group row">
               <label for="buckets" class="col-sm-2 col-form-label">Buckets:</label>
               <div class="col-sm-10">
                   <div *ngFor="let bucket of testBuckets; let index = index">
-                      <div class="input-group col-sm-9" *ngIf="bucket.mappedToTrack">
+                      <div class="input-group col-sm-9" *ngIf="bucket.mappedToSkillType">
                           <span class="input-group-addon col-sm-4 revatureOrange">{{bucket.name}}</span>
                           <input type="number" name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucket.weight" [ngModelOptions]="{standalone: true}">
                           <span class="input-group-addon percentSign">%</span>
@@ -75,7 +75,7 @@
               <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
               <div class="col-sm-10 row">
                 <span *ngFor="let bucket of testBuckets">
-                    <span *ngIf="!bucket.mappedToTrack">
+                    <span *ngIf="!bucket.mappedToSkillType">
                         <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
                     </span>
                 </span>
@@ -85,6 +85,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create Track'); addNewTrack(addTrackForm.value)">Save</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create SkillType'); addNewSkillType(addSkillTypeForm.value)">Save</button>
     </div>
 </ng-template>

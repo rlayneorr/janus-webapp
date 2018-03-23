@@ -1,34 +1,34 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, state, style, transition, animate, keyframes}  from '@angular/animations';
-import { TrackBucket } from '../entities/TrackBucket';
+import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import { Bucket } from '../entities/Bucket';
 import { BucketsService } from '../services/buckets.service';
-import { Track } from '../entities/Track';
-import { TracksService } from '../services/tracks.service';
-import { TracksComponent } from '../tracks/tracks.component';
+import { SkillType } from '../entities/SkillType';
+import { SkillTypesService } from '../services/skillTypes.service';
+import { SkillTypesComponent } from '../skillTypes/skillTypes.component';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
 @Component({
-  selector: 'app-track-buckets',
-  templateUrl: './track-buckets.component.html',
-  styleUrls: ['./track-buckets.component.css'],
+  selector: 'app-skillType-buckets',
+  templateUrl: './skillType-buckets.component.html',
+  styleUrls: ['./skillType-buckets.component.css'],
 })
 
-export class TrackBucketsComponent implements OnInit {
+export class SkillTypeBucketsComponent implements OnInit {
 
-  @Input() track: Track;
-  allTrackBuckets: any[] = [];
-  trackBuckets = [];
+  @Input() skillType: SkillType;
+  allSkillTypeBuckets: any[] = [];
+  skillTypeBuckets = [];
   testBuckets: any[] = [];
   state: string = 'small';
   bucketName:string = null;
   testBucketPlease;
 
   constructor(
-    private tracks : TracksComponent,
+    private skillTypes : SkillTypesComponent,
     private modalService: NgbModal,
-    private tracksService: TracksService,
+    private skillTypesService: SkillTypesService,
     private router: Router,
     private bucketService:BucketsService,
     //  private route: ActivatedRoute,
@@ -41,8 +41,8 @@ export class TrackBucketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.track = {id: 1, name: "Java", isActive: true};
-    this.allTrackBuckets = [
+    this.skillType = {id: 1, name: "Java", isActive: true};
+    this.allSkillTypeBuckets = [
       {Name: "HTML/CSS", Weight: 30, isActive: true},
       {Name: "Core Java", Weight: 40, isActive: true},
       {Name: "SQL", Weight: 30, isActive: true}
@@ -57,23 +57,23 @@ id: number;
     name: string;
     description: string;
     isActive?: boolean = true;
-    mappedToTrack?: boolean = false;
+    mappedToSkillType?: boolean = false;
     weight?: number;
  */
-testSingleBucket : Bucket = {id:1,name:"JavaScript",description:"basic JS", isActive: true, mappedToTrack:false,
+testSingleBucket : Bucket = {id:1,name:"JavaScript",description:"basic JS", isActive: true, mappedToSkillType:false,
 weight:20}
 editBucket(name){
   this.testSingleBucket.name =name;
  // console.log("Need to edit bucket");
 }
 
-getTracks() {
+getSkillTypes() {
 
-    return this.allTrackBuckets;
+    return this.allSkillTypeBuckets;
   }
  /*
- getTrackBuckets(id:number): Observable<TrackBucket>{
-   return this.tracksService.getBucketsByTrack(id);
+ getSkillTypeBuckets(id:number): Observable<SkillTypeBucket>{
+   return this.skillTypesService.getBucketsBySkillType(id);
  }*/
   //item: any
   routeToBucket(item:any){
