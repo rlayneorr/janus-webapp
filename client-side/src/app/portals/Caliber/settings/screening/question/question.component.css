@@ -1,6 +1,9 @@
 h3 {
-    text-align: center;
-    color: #F26925;
+  text-align: center;
+  color: white;
+}
+  .card-header {
+    background-color: #F26925;
   }
   
   h6 {
@@ -19,3 +22,22 @@ h3 {
     background-color: #F26925;
     color: white;
 }  
+#xIcon {
+  color: #F26925;
+  margin-left: 10px;
+}
+
+#xIcon:hover{
+    color:black;
+}
+
+#penIcon {
+  color: #F26925;
+}
+#penIcon:hover{
+    color:black;
+}
+i {
+  cursor: pointer;
+  cursor: hand;
+}

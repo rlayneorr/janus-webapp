@@ -10,30 +10,22 @@
 
         <!-- <h6>Active</h6> -->
         <div class="card-body">
-          <div class="list-group" *ngFor="let question of Questions">
-              <a class="list-group-item list-group-item-action" (click)="animate(skillType)">
+          <div class="list-group" *ngFor="let question of questions">
+              <a class="list-group-item list-group-item-action">
                 {{question.text}}
-                <i id="xIcon" class="fa fa-remove pull-right removeHoverTT" (click)="removeElement(skillType)"><span class="removeToolTip">Remove</span></i>
-                <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)"><span class="editToolTip">Edit</span></i>
-
+                <i id="xIcon" class="fa fa-remove pull-right removeHoverTT" (click)="deactivateQuestion(question)"><a class="removeToolTip">Deactivate</a></i>
+                <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(content)"><span class="editToolTip">Edit</span></i>
               </a>
           </div>
-        </div>
+          <button class="btn" (click)='open(content);'>Create New Question</button>
       </div>
     </div>
   </div>
 </div>
-<!--Inactive Questions-->
-
-<!--Update Question modal-->
-
-
-<!--Create New Question Button-->
-<button class="btn" id="createTrack" (click)='open(content)'>New Question</button>
 <!--Beginning of the add new question modal-->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" *ngIf="!testSingleTrack">Create New Question</h4>
+    <h4 class="modal-title" *ngIf="!testSingleTrack">Question Editor</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
