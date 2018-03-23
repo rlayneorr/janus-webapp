@@ -218,7 +218,7 @@ export class HomeComponent {
   unmappedOnClick(evt: any) {
     if (evt.active[0] != undefined) {
       //navigate to skillset component
-      this.rout.navigate([`skillset/${evt.active[0]._index}`]);
+      this.rout.navigate([`TrackForce/skillset/${evt.active[0]._index}`]);
     }
   }
 
