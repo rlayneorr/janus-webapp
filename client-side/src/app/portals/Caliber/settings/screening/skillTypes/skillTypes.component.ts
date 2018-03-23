@@ -21,11 +21,8 @@ export class SkillTypesComponent implements OnInit {
   public inactiveSkillTypes:any[]=[];
   public allSkillTypes:any[]=[];
   public bigGroup:any[]=[];
-  state:string='center';
-  state2:string='starting';
-  show:boolean = false;
   bucketWeightSum: number = 0;
-  
+
   removeElement(item:any){
     let thing:any;
     for(let i = 0 ;i<this.allSkillTypes.length;i++){
