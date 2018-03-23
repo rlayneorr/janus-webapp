@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
@@ -18,8 +18,8 @@ import {BucketsService} from'../services/buckets.service';
       state('center',style({
         transform:'translateX(0) scaleX(1)'
       })),
-      state('left', style({
-        transform: 'translateX(-28%) scaleX(1)'
+      state('left',style({
+        transform:'translateX(-28%) scaleX(1)'
 
       })),
       transition('center =>left',animate('300ms ease-in')),
@@ -96,7 +96,6 @@ export class SkillTypesComponent implements OnInit {
     //   this.modalService.open(content);
     //   event.stopPropagation();
     // }
-
     closeResult;
     open(content) {
       this.modalService.open(content).result.then((result) => {
@@ -106,7 +105,6 @@ export class SkillTypesComponent implements OnInit {
       });
       event.stopPropagation();
     }
-  }
 
 
     private getDismissReason(reason: any): string {
@@ -137,21 +135,18 @@ export class SkillTypesComponent implements OnInit {
         //this.skillTypeService.createSkillType(this.newSkillType.name).subscribe();
         this.initFormControl();
     }
-    //this.trackService.createTrack(this.newTrack.name).subscribe();
-    this.initFormControl();
-  }
 
-  java: Bucket = new Bucket(0, "Java", "This is Java");
-  sql: Bucket = new Bucket(1, "SQL", "This is SQL");
-  oop: Bucket = new Bucket(2, "OOP", "This is OOP");
-  html: Bucket = new Bucket(3, "HTML", "This is HTML");
+    java: Bucket = new Bucket(0, "Java", "This is Java");
+    sql: Bucket = new Bucket(1, "SQL", "This is SQL");
+    oop: Bucket = new Bucket(2, "OOP", "This is OOP");
+    html: Bucket = new Bucket(3, "HTML", "This is HTML");
 
-  testBuckets: Bucket[] = [
-    this.java,
-    this.sql,
-    this.oop,
-    this.html
-  ]
+    testBuckets: Bucket[] = [
+        this.java,
+        this.sql,
+        this.oop,
+        this.html
+    ]
 
     testSkillTypeBuckets: SkillTypeBucket[] = [
         { skillTypeId: 0, bucketId: 0, weight: 50 },
@@ -177,9 +172,7 @@ export class SkillTypesComponent implements OnInit {
                 }
             }
         }
-      }
     }
-  }
 
     addToMapped(bucket){
         bucket.mappedToSkillType = true;
