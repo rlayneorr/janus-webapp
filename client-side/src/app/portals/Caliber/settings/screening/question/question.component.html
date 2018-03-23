@@ -1,18 +1,38 @@
 <!--List of all the Question for the Skill Type-->
 
 <!--Active Questions-->
+<div class="move" [@move]='state'>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class = "card w-50">
 
-<!--Inactive Questions-->
+        <h3 class="card-header">Questions</h3>
 
-<!--Update Question modal-->
-
-
-Create New Question Button
-<button class="btn" id="createTrack" (click)='open(content)'>New Question</button>
+        <!-- <h6>Active</h6> -->
+        <div class="card-body">
+          <div class="list-group" *ngFor="let question of questions">
+              <a class="list-group-item list-group-item-action" *ngIf = "question">
+                {{question.text}}
+                <i id="xIcon">
+                  <label class="switch">
+                      <input type="checkbox" [checked] = question.isActive (change) = "deactivateQuesiton(question)">
+                      <span class="slider round"></span>
+                  </label>
+              </i>
+              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editQuestion(question); open(content)">
+                  <span class="editToolTip">Edit</span>
+              </i>
+              </a>
+          </div>   
+      </div>
+      <button class="btn" (click)='setQuestionNull(); open(content);'>Create New Question</button>
+    </div>
+  </div>
+</div>
 <!--Beginning of the add new question modal-->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" *ngIf="!testSingleTrack">Create New Question</h4>
+    <h4 class="modal-title" *ngIf="!testSingleTrack">Question Editor</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -32,31 +52,31 @@ Create New Question Button
             <div class="form-group row">
               <label for = "one point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">One point:</label>
               <div class="col-sm-9">
-                <input name="answer1" [(ngModel)]="question.answers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control" min="0" max="100"> 
+                <input name="answer1" [(ngModel)]="question.answers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
               </div>
             </div>
             <div class="form-group row">
               <label for="two point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Two point:</label>
               <div class="col-sm-9">
                 <input name="answer2" [(ngModel)]="question.answers[1]" type = "text" id = "2pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
-              </div>  
+              </div>
             </div>
             <div class="form-group row">
               <label for="three point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Three point:</label>
-              <div class="col-sm-9"> 
-                <input name="answer3" [(ngModel)]= "question.answers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control" min="0" max="100"> 
+              <div class="col-sm-9">
+                <input name="answer3" [(ngModel)]= "question.answers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
               </div>
             </div>
             <div class="form-group row">
               <label for="four point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Four point:</label>
               <div class="col-sm-9">
                 <input name="answer4" [(ngModel)]="question.answers[3]" type = "text" id = "4pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
-              </div> 
+              </div>
             </div>
             <div class="form-group row">
               <label for="five point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Five point:</label>
               <div class="col-sm-9">
-                <input name="answer4" [(ngModel)]="question.answers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control" min="0" max="100"> 
+                <input name="answer4" [(ngModel)]="question.answers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
               </div>
             </div>
           </ng-template>
@@ -67,10 +87,10 @@ Create New Question Button
         <ngb-panel title="Tags">
           <ng-template ngbPanelContent>
             <div  class="form-group row">
-              <label for="allTags" class="col-form-label col-sm-4">Selected Tags:</label>
+              <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
            <!--Add new tag section-->
-              <div class="col-sm-8 col-form-label"  align = "center">
-                <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="col-sm-8" placeholder="add new tag"> 
+              <div class="col-sm-9 col-form-label"  align = "center">
+                <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
               </div>
           </div>
           <div class="form-group row">
@@ -80,23 +100,19 @@ Create New Question Button
               </span>
             </div>
           </div>
-          </ng-template>
-      <!-- Add new tag section-->
-      <div class="form-group row">
-          <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="col-sm-12 col-form-label" min="0" max="100"  align = "center">
-      </div>
       <!--Add tags section-->
       <div class="form-group row">
         <label for="allTags" class="col-sm-3 col-form-label">All Tags:</label>
         <div class="col-sm-9">
-          <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100">
+          <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100" class = "form-control">
         </div>
       </div>
       <div class="form-group row">
         <span *ngFor="let tag of allTags| tagfilter:filter">
-          <span class="input-group-addon" (click)="addTagToQuestion(tag)" style="margin: 1px">{{tag.name}}</span>
+          <span *ngIf = "tag" class="input-group-addon" (click)="addTagToQuestion(tag)" style="margin: 1px">{{tag.name}}</span>
         </span>
       </div>
+      </ng-template>
       </ngb-panel>
     </ngb-accordion>
       <div class="modal-footer">

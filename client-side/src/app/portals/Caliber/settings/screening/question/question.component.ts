@@ -8,14 +8,27 @@ import { TAGS } from '../mock-tag';
 import {Questions} from '../mock-questions-array'
 import {QuestionsService} from '../services/questions.service';
 import {TagsService} from '../services/tags.service';
+import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css']
+  styleUrls: ['./question.component.css'],
+  animations:[
+    trigger('move',[
+      state('center',style({
+        transform:'translateX(0) scaleX(1)'
+      })),
+      state('left',style({
+        transform:'translateX(-28%) scaleX(1)'
+
+      })),
+      transition('center =>left',animate('300ms ease-in')),
+    ]),
+  ]
 })
 export class QuestionComponent implements OnInit {
-  
+
   constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService : TagsService, questionService: QuestionsService) { }
 
   createQuestion: FormGroup;
@@ -50,6 +63,30 @@ export class QuestionComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
+  //ToDo
+  deactivateQuestion(question){
+  }
+  setQuestionNull(){
+    this.question = new Question();
+    this.question.answers = [];
+  }
+  editQuestion(question){
+    this.question = question;
+    let i: number = 0;
+    
+
+    for(i; i < this.allTags.length; i++){
+      let j: number = 0;
+      for(j; j < question.tagIds.length; j++){
+        if(this.allTags[i]){
+          if(this.allTags[i].id==question.tagIds[j]){
+            this.currentTags.push(this.allTags[i]);
+            this.allTags[i]=null;
+          } 
+        }  
+      }
+    }
+  }
   newTag(newTag : string){
     this.tagsService.createNewTag(newTag);
     this.allTags
@@ -58,14 +95,13 @@ export class QuestionComponent implements OnInit {
     let newCurrentTagIds : number[] = [];
     let i: number = 0;
 
-    for(i; i < this.currentTags.length; i++)
-    {
+    for(i; i < this.currentTags.length; i++){
         newCurrentTagIds.push(this.currentTags[i].id);
     }
     this.question.tagIds= newCurrentTagIds;
     if(this.question.answers.length==5 && this.question.text){
       //questionSerice.createNewQuestion(0,this.question);
-      document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!"; 
+      document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
       this.question = new Question();
       this.question.answers = [];
     }
@@ -81,9 +117,11 @@ export class QuestionComponent implements OnInit {
     for(i; i < this.allTags.length; i++)
     {
       currentTag = this.allTags[i];
-      if(tag.id != currentTag.id){
-        newAllTags.push(currentTag);
-      } 
+      if(tag && currentTag){
+        if(tag.id != currentTag.id){
+          newAllTags.push(currentTag);
+        }
+      }
     }
     this.allTags = newAllTags;
     this.currentTags.push(tag);
@@ -96,14 +134,13 @@ export class QuestionComponent implements OnInit {
     for(i; i < this.currentTags.length; i++)
     {
       currentTag = this.currentTags[i];
-      
-      
+
+
       if(tag.id != currentTag.id){
         newCurrentTags.push(currentTag);
-      } 
+      }
     }
     this.allTags.push(tag);
     this.currentTags = newCurrentTags;
   }
 }
-
