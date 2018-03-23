@@ -1,18 +1,38 @@
 <!--List of all the Question for the Skill Type-->
 
 <!--Active Questions-->
+<div class="move" [@move]='state'>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class = "card w-50">
 
-<!--Inactive Questions-->
+        <h3 class="card-header">Questions</h3>
 
-<!--Update Question modal-->
-
-
-Create New Question Button
-<button class="btn" id="createTrack" (click)='open(content)'>New Question</button>
+        <!-- <h6>Active</h6> -->
+        <div class="card-body">
+          <div class="list-group" *ngFor="let question of questions">
+              <a class="list-group-item list-group-item-action">
+                {{question.text}}
+                <i id="xIcon">
+                  <label class="switch">
+                      <input type="checkbox" [checked] = question.isActive (change) = "removeQuesiton(question)">
+                      <span class="slider round"></span>
+                  </label>
+              </i>
+              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
+                  <span class="editToolTip">Edit</span>
+              </i>
+              </a>
+          </div>   
+      </div>
+      <button class="btn" (click)='open(content);'>Create New Question</button>
+    </div>
+  </div>
+</div>
 <!--Beginning of the add new question modal-->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" *ngIf="!testSingleTrack">Create New Question</h4>
+    <h4 class="modal-title" *ngIf="!testSingleTrack">Question Editor</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -67,10 +87,10 @@ Create New Question Button
         <ngb-panel title="Tags">
           <ng-template ngbPanelContent>
             <div  class="form-group row">
-              <label for="allTags" class="col-form-label col-sm-4">Selected Tags:</label>
+              <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
            <!--Add new tag section-->
-              <div class="col-sm-8 col-form-label"  align = "center">
-                <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="col-sm-8" placeholder="add new tag">
+              <div class="col-sm-9 col-form-label"  align = "center">
+                <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
               </div>
           </div>
           <div class="form-group row">
@@ -80,16 +100,11 @@ Create New Question Button
               </span>
             </div>
           </div>
-
-      <!-- Add new tag section-->
-      <div class="form-group row">
-          <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="col-sm-12 col-form-label" min="0" max="100"  align = "center">
-      </div>
       <!--Add tags section-->
       <div class="form-group row">
         <label for="allTags" class="col-sm-3 col-form-label">All Tags:</label>
         <div class="col-sm-9">
-          <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100">
+          <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100" class = "form-control">
         </div>
       </div>
       <div class="form-group row">

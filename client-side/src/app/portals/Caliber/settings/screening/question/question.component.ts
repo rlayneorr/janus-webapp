@@ -8,11 +8,24 @@ import { TAGS } from '../mock-tag';
 import {Questions} from '../mock-questions-array'
 import {QuestionsService} from '../services/questions.service';
 import {TagsService} from '../services/tags.service';
+import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css']
+  styleUrls: ['./question.component.css'],
+  animations:[
+    trigger('move',[
+      state('center',style({
+        transform:'translateX(0) scaleX(1)'
+      })),
+      state('left',style({
+        transform:'translateX(-28%) scaleX(1)'
+
+      })),
+      transition('center =>left',animate('300ms ease-in')),
+    ]),
+  ]
 })
 export class QuestionComponent implements OnInit {
 
@@ -49,6 +62,10 @@ export class QuestionComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+  //ToDo
+  deactivateQuestion(question){
+
   }
   newTag(newTag : string){
     this.tagsService.createNewTag(newTag);

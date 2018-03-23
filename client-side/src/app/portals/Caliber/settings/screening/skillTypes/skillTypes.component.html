@@ -1,41 +1,39 @@
 <!-- Buckets-->
-<app-skillType-buckets id= "buckets" *ngIf='show' class="col-8" ></app-skillType-buckets>
+<app-skillType-buckets id="buckets" *ngIf='show' class="col-8"></app-skillType-buckets>
 
 
 <!-- SkillTypes List-->
 <div class="move" [@move]='state'>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class = "card w-50">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card w-50">
 
-        <h3 class="card-header">Skill Types</h3>
+                <h3 class="card-header">Skill Types</h3>
 
-        <!-- <h6>Active</h6> -->
-        <div class="card-body">
-          <div class="list-group" *ngFor="let skillType of skillTypes">
-              <a class="list-group-item list-group-item-action" (click)="animate(skillType)">
-                {{skillType.name}}
-                <i id="xIcon" class="fa fa-remove pull-right removeHoverTT" (click)="removeElement(skillType)"><span class="removeToolTip">Remove</span></i>
-                <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)"><span class="editToolTip">Edit</span></i>
+                <!-- <h6>Active</h6> -->
+                <div class="card-body">
+                    <div class="list-group" *ngFor="let skillType of bigGroup">
+                        <a class="list-group-item list-group-item-action" (click)="animate(skillType)">
+                            {{skillType.name}}
+                            <i id="xIcon">
+                                <label class="switch">
+                                    <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
+                                    <span class="slider round"></span>
+                                </label>
+                            </i>
+                            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
+                                <span class="editToolTip">Edit</span>
+                            </i>
 
-              </a>
-          </div>
+                        </a>
+                    </div>
+                </div>
+                <button class="btn" id="createSkillType" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
+            </div>
         </div>
-
-        <h6>Inactive</h6>
-
-        <div class="list-group" *ngFor="let inact of inactiveSkillTypes">
-            <a class="list-group-item list-group-item-action">
-              {{inact.name}}
-              <i id="xIcon" class="fa fa-remove pull-right" (click)="removeElement(skillType)"></i>
-              <i id="penIcon" class="fa fa-pencil pull-right"></i>
-            </a>
-        </div>
-        <button class="btn" id="createSkillType" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
-      </div>
     </div>
-  </div>
 </div>
+
 
 
 <!-- Modal for creating a new SkillType -->
@@ -79,9 +77,8 @@
                     <span *ngIf="!bucket.mappedToSkillType">
                         <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
                     </span>
-                </span>
+                </div>
             </div>
-        </div>
         </form>
     </div>
     <div class="modal-footer">
