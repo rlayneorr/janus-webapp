@@ -1,9 +1,9 @@
 <!-- Buckets-->
-<app-skillType-buckets id="buckets" *ngIf='show' class="col-8"></app-skillType-buckets>
+<!--app-skillType-buckets id="buckets" *ngIf='show' class="col-8"></app-skillType-buckets-->
 
 
 <!-- SkillTypes List-->
-<div class="move" [@move]='state'>
+<div class="move">
     <div class="container">
         <div class="row justify-content-center">
             <div class="card w-50">
@@ -16,7 +16,7 @@
                         <a class="list-group-item list-group-item-action" (click)="animate(skillType)">
                             {{skillType.name}}
                             <i id="xIcon">
-                                <label class="switch">
+                                <label class="switch" (ondrag) = "testing(skillType)">
                                     <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
                                     <span class="slider round"></span>
                                 </label>
@@ -34,7 +34,17 @@
     </div>
 </div>
 
+<p>Drag the p element back and forth between the two rectangles:</p>
 
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <p ondragstart="dragStart(event)" ondrag="dragging(event)" draggable="true" id="dragtarget">Drag me!</p>
+</div>
+
+<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<p style="clear:both;"><strong>Note:</strong> drag events are not supported in Internet Explorer 8 and earlier versions or Safari 5.1 and earlier versions.</p>
+
+<p id="demo"></p>
 
 <!-- Modal for creating a new SkillType -->
 <ng-template #content let-c="close" let-d="dismiss">

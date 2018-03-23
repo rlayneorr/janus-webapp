@@ -105,11 +105,11 @@ export const routes: Routes = [
             ]
           },
           {
-            path: 'category',
+            path: 'screening/category',
             component: BucketComponent
           },
           {
-            path: 'skillTypeTopics',
+            path: 'screening/skillTypeTopics',
             component: SkillTypeBucketsComponent,
           }
         ]

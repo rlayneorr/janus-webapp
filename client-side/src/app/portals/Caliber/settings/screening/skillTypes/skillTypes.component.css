@@ -162,4 +162,16 @@ i {
   }
 
 
+
+
+  .droptarget {
+    float: left; 
+    width: 100px; 
+    height: 35px;
+    margin: 15px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+
+
   

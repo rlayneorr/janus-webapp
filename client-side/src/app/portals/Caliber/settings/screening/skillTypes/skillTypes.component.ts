@@ -9,22 +9,11 @@ import { Bucket } from '../entities/Bucket';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import {BucketsService} from'../services/buckets.service';
 
+
 @Component({
   selector: 'app-skillTypes',
   templateUrl: './skillTypes.component.html',
   styleUrls: ['./skillTypes.component.css'],
-  animations:[
-    trigger('move',[
-      state('center',style({
-        transform:'translateX(0) scaleX(1)'
-      })),
-      state('left',style({
-        transform:'translateX(-28%) scaleX(1)'
-
-      })),
-      transition('center =>left',animate('300ms ease-in')),
-    ]),
-  ]
 })
 
 export class SkillTypesComponent implements OnInit {
@@ -37,7 +26,9 @@ export class SkillTypesComponent implements OnInit {
   state2:string='starting';
   show:boolean = false;
 
-
+testing(item:any){
+  console.log(item);
+}
 
   animate(item:any){
     this.state='left';
@@ -86,7 +77,9 @@ export class SkillTypesComponent implements OnInit {
     private modalService: NgbModal,
     private fb: FormBuilder,
     private skillTypeService: SkillTypesService,
-    private bucket:BucketsService) { }
+    private bucket:BucketsService,
+  ) { }
+    
 
 
   createSkillType: FormGroup;
@@ -216,4 +209,27 @@ export class SkillTypesComponent implements OnInit {
     this.initFormControl();
   }
 
+}
+
+
+
+
+
+function dragStart(event) {
+  event.dataTransfer.setData("Text", event.target.id);
+}
+
+function dragging(event) {
+  document.getElementById("demo").innerHTML = "The p element is being dragged";
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drop(event) {
+  event.preventDefault();
+  var data = event.dataTransfer.getData("Text");
+  event.target.appendChild(document.getElementById(data));
+  document.getElementById("demo").innerHTML = "The p element was dropped";
 }
