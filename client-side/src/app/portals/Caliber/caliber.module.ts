@@ -129,11 +129,7 @@ import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-traine
 import { ScreeningComponent } from './settings/screening/screening.component';
 import {SkillTypesComponent} from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
-<<<<<<< HEAD
-import { SkillTypeBucketsComponent} from './settings/screening/skillType-buckets/skillType-buckets.component' ;
-=======
 import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component' ;
->>>>>>> 8a7fcc4584412f8c22a1f8cc86e8c1bf258eec24
 import { QuestionComponent} from './settings/screening/question/question.component'
 import { TagFilterPipe } from './settings/screening/question/question.filter';
 
