@@ -32,6 +32,7 @@ export class SkillTypesComponent implements OnInit {
   public skillTypes:any[]=[];
   public inactiveSkillTypes:any[]=[];
   public allSkillTypes:any[]=[];
+  public bigGroup:any[]=[];
   state:string='center';
   state2:string='starting';
   show:boolean = false;
@@ -50,11 +51,12 @@ export class SkillTypesComponent implements OnInit {
     for(let i = 0 ;i<this.allSkillTypes.length;i++){
       thing = this.allSkillTypes[i];
       if(thing.name == item.name){
-        thing.isActive = false;
+        thing.isActive = !thing.isActive;
         this.allSkillTypes[i] = thing;
       }
     }
     this.setSkillTypes();
+
   }
 
   setSkillTypes(){
@@ -69,6 +71,15 @@ export class SkillTypesComponent implements OnInit {
         this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
+
+    this.bigGroup = [];
+    for(let j = 0; j< this.skillTypes.length;j++){
+      this.bigGroup.push(this.skillTypes[j]);
+    }
+    for(let k = 0; k< this.inactiveSkillTypes.length;k++){
+      this.bigGroup.push(this.inactiveSkillTypes[k]);
+    }
+    console.log(this.bigGroup);
   }
 
   constructor(
@@ -96,7 +107,6 @@ export class SkillTypesComponent implements OnInit {
     //   this.modalService.open(content);
     //   event.stopPropagation();
     // }
-
     closeResult;
     open(content) {
       this.modalService.open(content).result.then((result) => {
@@ -202,6 +212,7 @@ export class SkillTypesComponent implements OnInit {
       {name:'Software',isActive:false}
     ]
     this.setSkillTypes();
+    console.dir(this.bigGroup);
     this.initFormControl();
   }
 
