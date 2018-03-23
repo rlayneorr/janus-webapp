@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
@@ -12,21 +12,23 @@ import {BucketsService} from'../services/buckets.service';
 @Component({
   selector: 'app-skillTypes',
   templateUrl: './skillTypes.component.html',
-  styleUrls: ['./skillTypes.component.css']
+  styleUrls: ['./skillTypes.component.css'],
 })
 
 export class SkillTypesComponent implements OnInit {
 
-  skillTypes: any[] = [];
-  inactiveSkillTypes: any[] = [];
-  allSkillTypes: any[] = [];
+  public skillTypes:any[]=[];
+  public inactiveSkillTypes:any[]=[];
+  public allSkillTypes:any[]=[];
+  public bigGroup:any[]=[];
+  bucketWeightSum: number = 0;
 
-  removeElement(item:any) {
-    let thing: any;
-    for(let i = 0 ; i < this.allSkillTypes.length; i++) {
+  removeElement(item:any){
+    let thing:any;
+    for(let i = 0 ;i<this.allSkillTypes.length;i++){
       thing = this.allSkillTypes[i];
-      if(thing.name == item.name) {
-        thing.isActive = false;
+      if(thing.name == item.name){
+        thing.isActive = !thing.isActive;
         this.allSkillTypes[i] = thing;
       }
     }

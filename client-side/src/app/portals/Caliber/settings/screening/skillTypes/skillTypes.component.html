@@ -4,38 +4,33 @@
 
 
 <!-- SkillTypes List-->
-<div>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class = "card w-50">
+<div id="STcontent" class="container">
+  <div class="row justify-content-center">
+    <div class = "card w-50">
 
-        <h3 class="card-header">Skill Types</h3>
+      <h6 class="card-header">Skill Types</h6>
 
-                <!-- <h6>Active</h6> -->
-                <div class="card-body">
-                    <div class="list-group" *ngFor="let skillType of bigGroup">
-                        <a class="list-group-item list-group-item-action">
-                            {{skillType.name}}
-                            <i id="xIcon">
-                                <label class="switch">
-                                    <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
-                                    <span class="slider round"></span>
-                                </label>
-                            </i>
-                            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
-                                <span class="editToolTip">Edit</span>
-                            </i>
+      <div class="card-body">
+          <div class="list-group" *ngFor="let skillType of bigGroup">
+              <a class="list-group-item list-group-item-action">
+                  {{skillType.name}}
+                  <i id="xIcon">
+                      <label class="switch">
+                          <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
+                          <span class="slider round"></span>
+                      </label>
+                  </i>
+                  <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
+                      <span class="editToolTip">Edit</span>
+                  </i>
 
-                        </a>
-                    </div>
-                </div>
-                <button class="btn" id="createSkillType" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
-            </div>
-        </div>
+              </a>
+          </div>
+      </div>
+      <button class="btn" id="createSkillType" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
     </div>
+  </div>
 </div>
-
-
 
 <!-- Modal for creating a new SkillType -->
 <ng-template #content let-c="close" let-d="dismiss">
