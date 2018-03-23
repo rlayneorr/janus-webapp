@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
@@ -12,44 +12,20 @@ import {BucketsService} from'../services/buckets.service';
 @Component({
   selector: 'app-skillTypes',
   templateUrl: './skillTypes.component.html',
-  styleUrls: ['./skillTypes.component.css'],
-  animations:[
-    trigger('move',[
-      state('center',style({
-        transform:'translateX(0) scaleX(1)'
-      })),
-      state('left',style({
-        transform:'translateX(-28%) scaleX(1)'
-
-      })),
-      transition('center =>left',animate('300ms ease-in')),
-    ]),
-  ]
+  styleUrls: ['./skillTypes.component.css']
 })
 
 export class SkillTypesComponent implements OnInit {
 
-  public skillTypes:any[]=[];
-  public inactiveSkillTypes:any[]=[];
-  public allSkillTypes:any[]=[];
-  state:string='center';
-  state2:string='starting';
-  show:boolean = false;
+  skillTypes: any[] = [];
+  inactiveSkillTypes: any[] = [];
+  allSkillTypes: any[] = [];
 
-
-
-  animate(item:any){
-    this.state='left';
-    this.show = true;
-    this.bucket.name = item.name;
-  }
-
-
-  removeElement(item:any){
-    let thing:any;
-    for(let i = 0 ;i<this.allSkillTypes.length;i++){
+  removeElement(item:any) {
+    let thing: any;
+    for(let i = 0 ; i < this.allSkillTypes.length; i++) {
       thing = this.allSkillTypes[i];
-      if(thing.name == item.name){
+      if(thing.name == item.name) {
         thing.isActive = false;
         this.allSkillTypes[i] = thing;
       }

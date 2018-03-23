@@ -1,6 +1,7 @@
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-screening',
@@ -9,10 +10,11 @@ import { Router } from '@angular/router';
 })
 export class ScreeningComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router) { }
 
+  
   ngOnInit() {
-    console.log("it worked");
+    // console.log("it worked");
   }
 
 }
