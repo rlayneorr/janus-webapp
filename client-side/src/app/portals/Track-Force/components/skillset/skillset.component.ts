@@ -172,7 +172,7 @@ export class SkillsetComponent implements OnInit {
 
   public goToAssociateList(event) {
     if (event.active[0] != undefined) {
-      this.router.navigate([`associate-listing/curriculum/${this.skillsetLabels[event.active[0]._index]}/unmapped/${this.selectedStatus}`]);
+      this.router.navigate([`/TrackForce/associate-listing/curriculum/${this.skillsetLabels[event.active[0]._index]}/unmapped/${this.selectedStatus}`]);
     }
   }
 
