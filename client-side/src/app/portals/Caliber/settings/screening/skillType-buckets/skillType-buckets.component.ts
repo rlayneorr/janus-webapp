@@ -24,17 +24,24 @@ export class SkillTypeBucketsComponent implements OnInit {
   state: string = 'small';
   bucketName:string = null;
   testBucketPlease;
+  show:boolean = false;
 
   constructor(
     private skillTypes : SkillTypesComponent,
     private modalService: NgbModal,
     private skillTypesService: SkillTypesService,
     private router: Router,
-    private bucketService:BucketsService,
+    private bucketsService:BucketsService,
     //  private route: ActivatedRoute,
     //  private location: Location
   ) { }
-
+/*
+  showBucket(item:any){
+   // this.state='left';
+    this.show = true;
+    this.bucketService.name = item.name;
+  }
+*/
   open(content) {
     this.modalService.open(content);
     event.stopPropagation();
@@ -78,9 +85,14 @@ getSkillTypes() {
   //item: any
   routeToBucket(item:any){
   //  this.router.navigateByUrl("/Caliber/settings/category");
+  console.log(item);
+  this.bucketsService.testBucket.name = item;
+  console.log(this.bucketsService.testBucket.name);
+  this.bucketsService.getDescription();
+
+  console.log("The description: "+ this.bucketsService.testBucket.description);
    this.router.navigate(["Caliber/settings/category"]);
- //   console.log(item);
- //   console.log("routing to category");
+
   }
 
 

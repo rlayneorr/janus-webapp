@@ -1,16 +1,61 @@
+<!-- Showing Bucket (Category) name and description - non-editable -->
 <div>
-<h3>
-{{bucketsService.testBucket.name}}
-</h3>
-<h4>Edit Bucket Name</h4>
-</div>
-<div>
-<h2>
-    {{bucketsService.testBucket.description}}
-</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card-width">
+                 <h3>
+                        {{this.bucketsService.testBucket.name}}     
+                 </h3>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card-width">
+                <p>
+                    {{this.bucketsService.testBucket.description}}
+                   </p>
+            </div>
+        </div>
+    </div>
 
-<h4>EditBucket Description</h4>
+    <!--Question Component-->
+    <app-question></app-question>
 </div>
-<!--Question Component-->
-<h3>Check those Questions</h3>
-<app-question></app-question>
+
+<!--Creating edit name modal -->
+<ng-template #editname let-c="close" let-d="dismiss">
+    <form>
+        <div class="form-group">
+
+            <h3 class="tb-heading_rev_orange">Edit Category Name</h3>
+            <label>New Category name:
+
+            </label>
+            <input class="form-control" type="text" name="new_name">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="editBucketName(new_name); c('Close click')">Save</button>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<!--Creating edit description modal -->
+<ng-template #editdesc let-c="close" let-d="dismiss">
+    <form>
+        <div class="form-group">
+
+            <h3 class="tb-heading_rev_orange">Edit Description</h3>
+            <label>New Description:
+
+            </label>
+            <input class="form-control" type="text" name="new_desc">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="editBucketDescription(new_desc); c('Close click')">Save</button>
+            </div>
+        </div>
+    </form>
+</ng-template>
