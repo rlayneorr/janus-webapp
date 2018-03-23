@@ -3,16 +3,16 @@ import { Router } from '@angular/router';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Track } from '../entities/Track';
-import { TracksService } from '../services/tracks.service';
+import { SkillType } from '../entities/SkillType';
+import { SkillTypesService } from '../services/skillTypes.service';
 import { Bucket } from '../entities/Bucket';
-import { TrackBucket } from '../entities/TrackBucket';
+import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import {BucketsService} from'../services/buckets.service';
 
 @Component({
-  selector: 'app-tracks',
-  templateUrl: './tracks.component.html',
-  styleUrls: ['./tracks.component.css'],
+  selector: 'app-skillTypes',
+  templateUrl: './skillTypes.component.html',
+  styleUrls: ['./skillTypes.component.css'],
   animations:[
     trigger('move',[
       state('center',style({
@@ -27,11 +27,11 @@ import {BucketsService} from'../services/buckets.service';
   ]
 })
 
-export class TracksComponent implements OnInit {
+export class SkillTypesComponent implements OnInit {
 
-  public tracks:any[]=[];
-  public inactiveTracks:any[]=[];
-  public allTracks:any[]=[];
+  public skillTypes:any[]=[];
+  public inactiveSkillTypes:any[]=[];
+  public allSkillTypes:any[]=[];
   state:string='center';
   state2:string='starting';
   show:boolean = false;
@@ -47,26 +47,26 @@ export class TracksComponent implements OnInit {
 
   removeElement(item:any){
     let thing:any;
-    for(let i = 0 ;i<this.allTracks.length;i++){
-      thing = this.allTracks[i];
+    for(let i = 0 ;i<this.allSkillTypes.length;i++){
+      thing = this.allSkillTypes[i];
       if(thing.name == item.name){
         thing.isActive = false;
-        this.allTracks[i] = thing;
+        this.allSkillTypes[i] = thing;
       }
     }
-    this.setTracks();
+    this.setSkillTypes();
   }
 
-  setTracks(){
+  setSkillTypes(){
     let thing:any;
-    this.tracks = [];
-    this.inactiveTracks = [];
-    for(let i = 0; i<this.allTracks.length;i++){
-      thing = this.allTracks[i];
+    this.skillTypes = [];
+    this.inactiveSkillTypes = [];
+    for(let i = 0; i<this.allSkillTypes.length;i++){
+      thing = this.allSkillTypes[i];
       if(thing.isActive == true){
-        this.tracks[this.tracks.length]=thing;
+        this.skillTypes[this.skillTypes.length]=thing;
     }else if (thing.isActive == false){
-        this.inactiveTracks[this.inactiveTracks.length]=thing;
+        this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
   }
@@ -74,20 +74,20 @@ export class TracksComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private trackService: TracksService,
+    private skillTypeService: SkillTypesService,
     private bucket:BucketsService) { }
 
 
-  createTrack: FormGroup;
-  newTrack: Track;
+  createSkillType: FormGroup;
+  newSkillType: SkillType;
 
   /**
    * initialize form control for validations
    *
-   * @memberof TracksComponent
+   * @memberof SkillTypesComponent
    */
   initFormControl() {
-    this.createTrack = this.fb.group({
+    this.createSkillType = this.fb.group({
       'name': ['', Validators.required],
     });
   }
@@ -100,9 +100,9 @@ export class TracksComponent implements OnInit {
     closeResult;
     open(content) {
       this.modalService.open(content).result.then((result) => {
-        this.testSingleTrack = null;
+        this.testSingleSkillType = null;
       }, (reason) => {
-        this.testSingleTrack = null;
+        this.testSingleSkillType = null;
       });
       event.stopPropagation();
     }
@@ -118,8 +118,8 @@ export class TracksComponent implements OnInit {
       }
     }
 
-    addNewTrack(modal: Track){
-        this.newTrack = modal;
+    addNewSkillType(modal: SkillType){
+        this.newSkillType = modal;
         let sum = 0;
         let addedBucket = false;
         for(let bucketIndex in this.testBuckets){
@@ -133,7 +133,7 @@ export class TracksComponent implements OnInit {
         } else {
             console.log("The weight has to equal 100");
         }
-        //this.trackService.createTrack(this.newTrack.name).subscribe();
+        //this.skillTypeService.createSkillType(this.newSkillType.name).subscribe();
         this.initFormControl();
     }
 
@@ -149,50 +149,50 @@ export class TracksComponent implements OnInit {
         this.html
     ]
 
-    testTrackBuckets: TrackBucket[] = [
-        { trackId: 0, bucketId: 0, weight: 50 },
-        { trackId: 0, bucketId: 1, weight: 20 },
-        { trackId: 0, bucketId: 2, weight: 30 }
+    testSkillTypeBuckets: SkillTypeBucket[] = [
+        { skillTypeId: 0, bucketId: 0, weight: 50 },
+        { skillTypeId: 0, bucketId: 1, weight: 20 },
+        { skillTypeId: 0, bucketId: 2, weight: 30 }
     ]
 
-    testSingleTrack: Track;
+    testSingleSkillType: SkillType;
 
-    editTrack(track){
-        this.testSingleTrack = new Track();
-        this.testSingleTrack.name = track.name;
+    editSkillType(skillType){
+        this.testSingleSkillType = new SkillType();
+        this.testSingleSkillType.name = skillType.name;
         this.editAllBuckets();
     }
 
-    // set the track buckets within ALL BUCKETS to be already mapped
+    // set the skillType buckets within ALL BUCKETS to be already mapped
     editAllBuckets(){
-        for(let index in this.testTrackBuckets){
+        for(let index in this.testSkillTypeBuckets){
             for(let allIndex in this.testBuckets){
-                if(this.testTrackBuckets[index].bucketId == this.testBuckets[allIndex].id){
-                    this.testBuckets[allIndex].weight = this.testTrackBuckets[index].weight;
-                    this.testBuckets[allIndex].mappedToTrack = true;
+                if(this.testSkillTypeBuckets[index].bucketId == this.testBuckets[allIndex].id){
+                    this.testBuckets[allIndex].weight = this.testSkillTypeBuckets[index].weight;
+                    this.testBuckets[allIndex].mappedToSkillType = true;
                 }
             }
         }
     }
 
     addToMapped(bucket){
-        bucket.mappedToTrack = true;
+        bucket.mappedToSkillType = true;
     }
 
     removeFromMapped(bucket){
-        bucket.mappedToTrack = false;
+        bucket.mappedToSkillType = false;
     }
 
-    clearTrackBuckets(){
+    clearSkillTypeBuckets(){
         for(let index in this.testBuckets){
-            this.testBuckets[index].mappedToTrack = false;
+            this.testBuckets[index].mappedToSkillType = false;
             this.testBuckets[index].weight = 0;
         }
     }
 
 
   ngOnInit() {
-    this.allTracks = [
+    this.allSkillTypes = [
       {name:"Java",isActive:true},
       {name:'.Net',isActive:true},
       {name:'SDET',isActive:true},
@@ -201,7 +201,7 @@ export class TracksComponent implements OnInit {
       {name:'Salesforce',isActive:false},
       {name:'Software',isActive:false}
     ]
-    this.setTracks();
+    this.setSkillTypes();
     this.initFormControl();
   }
 

@@ -18,7 +18,14 @@ const httpOptions = {
 
 @Injectable()
 export class BucketsService {
-
+/*
+    id: number;
+    name: string;
+    description: string;
+    isActive?: boolean = true;
+    mappedToTrack?: boolean = false;
+    weight?: number;
+    */
   testBucket: Bucket = new Bucket(0, "Java", "This is Java");
 
   //Making an Observable

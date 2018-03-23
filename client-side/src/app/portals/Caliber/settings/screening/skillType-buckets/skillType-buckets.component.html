@@ -1,4 +1,4 @@
-<!-- trackBuckets component appears when list item in the Track component is clicked  -->
+<!-- skillTypeBuckets component appears when list item in the SkillType component is clicked  -->
 
 <div class="moveRight">
 
@@ -9,10 +9,10 @@
                 <h3 class="card-header">{{bucketService.name}}</h3>
 
                 <div class="card-body">
-                    <div *ngIf="track.name === 'Java'">
-                        <div class="list-group" *ngFor="let trackBucket of allTrackBuckets">
-                            <a class="list-group-item list-group-item-action" (click)="routeToBucket(trackBucket.Name)">
-                                <span> {{trackBucket.Name}} &nbsp; {{trackBucket.Weight}}%
+                    <div *ngIf="skillType.name === 'Java'">
+                        <div class="list-group" *ngFor="let skillTypeBucket of allSkillTypeBuckets">
+                            <a class="list-group-item list-group-item-action" (click)="routeToBucket(skillTypeBucket.Name)">
+                                <span> {{skillTypeBucket.Name}} &nbsp; {{skillTypeBucket.Weight}}%
                                 </span>
                                 <i id="xIcon" class="fa fa-remove pull-right"></i>
                                 <i id="penIcon" class="fa fa-pencil pull-right" (click)=" open(editname)"></i>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary btn-sm" id="createTrack" (click)='open(content)'>Add Category</button>
+                <button class="btn btn-primary btn-sm" id="createSkillType" (click)='open(content)'>Add Category</button>
             </div>
         </div>
     </div>
@@ -53,23 +53,23 @@ value for weight  -->
 <ng-template #content let-c="close" let-d="dismiss">
     <form>
         <div class="form-group">
-            <h3 class="tb-heading_rev_orange">Add a Category to this Track </h3>
+            <h3 class="tb-heading">Add a Category to this SkillType </h3>
             <label>Active Categories</label>
             <select class="form-control">
-                <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
+                <option *ngFor="let skillTypeBucket of allSkillTypeBuckets">{{skillTypeBucket.Name}}</option>
             </select>
         </div>
         <div>
             <label>Inactive Categories</label>
             <select class="form-control">
-                <option *ngFor="let trackBucket of allTrackBuckets">{{trackBucket.Name}}</option>
+                <option *ngFor="let skillTypeBucket of allSkillTypeBuckets">{{skillTypeBucket.Name}}</option>
             </select>
 
             <!-- Weight input-->
 
-            <input type="number" id="weight" name="weight" placeholder="Category Weight" formControlName="weight" class="form-control">
+            <input type="number" id="weight" name="weight" placeholder="Category Weight" class="form-control">
             <br>
-            <button class="form-control" (click)="addNewTrack(trackBucket.Name,weight)">Add New Track!</button>
+            <button class="form-control" (click)="addNewSkillType(skillTypeBucket.Name,weight)">Add New SkillType!</button>
 
         </div>
         <div class="modal-footer">

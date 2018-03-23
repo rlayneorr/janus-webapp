@@ -11,7 +11,7 @@ h3 {
 	color: #F26925;
 	margin-left: 10px;
 }
-  
+
 #penIcon {
 	color: #F26925;
 }
@@ -19,9 +19,4 @@ h3 {
 i {
   cursor: pointer;
   cursor: hand;
-}
-
-.tb-heading_rev_orange{
-  background-color: #F26925;
-  color:white;
 }
