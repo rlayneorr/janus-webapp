@@ -63,6 +63,10 @@ export class QuestionComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
+  //ToDo
+  deactivateQuestion(question){
+
+  }
   newTag(newTag : string){
     this.tagsService.createNewTag(newTag);
     this.allTags

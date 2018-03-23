@@ -22,6 +22,7 @@ export class SkillTypesComponent implements OnInit {
   public inactiveSkillTypes:any[]=[];
   public allSkillTypes:any[]=[];
   public bigGroup:any[]=[];
+<<<<<<< HEAD
   state:string='center';
   state2:string='starting';
   show:boolean = false;
@@ -36,6 +37,9 @@ testing(item:any){
     this.bucket.name = item.name;
   }
 
+=======
+  bucketWeightSum: number = 0;
+>>>>>>> ebd4d6dbeefdd3328d0c09500fc8b5b9b6c9f37c
 
   removeElement(item:any){
     let thing:any;
@@ -93,7 +97,10 @@ testing(item:any){
   initFormControl() {
     this.createSkillType = this.fb.group({
       'name': ['', Validators.required],
-    });
+      'bucketWeightSum': ['', Validators.compose(
+          [Validators.min(100), Validators.max(100)]
+      )]
+  });
   }
 
     // open(content) {
@@ -123,16 +130,15 @@ testing(item:any){
 
     addNewSkillType(modal: SkillType){
         this.newSkillType = modal;
-        let sum = 0;
         let addedBucket = false;
         for(let bucketIndex in this.testBuckets){
-            if(this.testBuckets[bucketIndex].isActive == true){
+            if(this.testBuckets[bucketIndex].mappedToSkillType == true){
                 addedBucket = true;
-                sum += this.testBuckets[bucketIndex].weight;
+                this.bucketWeightSum += this.testBuckets[bucketIndex].weight;
             }
         }
-        if(!addedBucket || sum == 100){
-            console.log("Congrats! The sum of active buckets is: " + sum);
+        if(!addedBucket || this.bucketWeightSum == 100){
+            console.log("Congrats! The sum of active buckets is: " + this.bucketWeightSum);
         } else {
             console.log("The weight has to equal 100");
         }
@@ -180,6 +186,7 @@ testing(item:any){
 
     addToMapped(bucket){
         bucket.mappedToSkillType = true;
+        this.bucketWeightSum = 0;
     }
 
     removeFromMapped(bucket){
@@ -193,6 +200,14 @@ testing(item:any){
         }
     }
 
+    checkBucketSum(){
+        this.bucketWeightSum = 0;
+        for(let index in this.testBuckets){
+            if(this.testBuckets[index].mappedToSkillType == true){
+                this.bucketWeightSum += this.testBuckets[index].weight;
+            }
+        }
+    }
 
   ngOnInit() {
     this.allSkillTypes = [
@@ -210,6 +225,7 @@ testing(item:any){
   }
 
 }
+<<<<<<< HEAD
 
 
 
@@ -233,3 +249,5 @@ function drop(event) {
   event.target.appendChild(document.getElementById(data));
   document.getElementById("demo").innerHTML = "The p element was dropped";
 }
+=======
+>>>>>>> ebd4d6dbeefdd3328d0c09500fc8b5b9b6c9f37c
