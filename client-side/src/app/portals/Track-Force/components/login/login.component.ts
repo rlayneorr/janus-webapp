@@ -62,13 +62,13 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.username, this.password).subscribe(
       data => {
-        debugger;
+        //debugger;
         const user = this.authService.getUser();
         //navigate to appropriate page if return is valid
         if (user.tfRoleId === 4){
           this.router.navigate(['associate-view', user.userId]);
         } else {
-          this.router.navigate(['root']);
+          this.router.navigateByUrl('/TrackForce/home');
         }
       },
       err => {

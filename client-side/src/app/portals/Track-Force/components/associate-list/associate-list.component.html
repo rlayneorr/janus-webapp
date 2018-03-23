@@ -65,14 +65,14 @@
                 <input type="checkbox" id={{associate.id}}>
               </td>
               <td>
-                <a [routerLink]="['/form-comp',associate.id]" class="id">{{associate.id}}</a>
+                <a [routerLink]="['/TrackForce/form-comp',associate.id]" class="id">{{associate.id}}</a>
               </td>
               <td class="first">{{associate.firstName}}</td>
               <td class="last">{{associate.lastName}}</td>
               <td class="status">{{associate.marketingStatus}}</td>
               <td class="client">{{associate.client}}</td>
               <td class="batch">
-                <a [routerLink]="['/batch-details', associate.bid]">{{associate.batchName}}</a>
+                <a [routerLink]="['/TrackForce/batch-details', associate.bid]">{{associate.batchName}}</a>
               </td>
             </ng-container>
           </tr>
