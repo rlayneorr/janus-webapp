@@ -13,18 +13,6 @@ import {BucketsService} from'../services/buckets.service';
   selector: 'app-skillTypes',
   templateUrl: './skillTypes.component.html',
   styleUrls: ['./skillTypes.component.css'],
-  animations:[
-    trigger('move',[
-      state('center',style({
-        transform:'translateX(0) scaleX(1)'
-      })),
-      state('left',style({
-        transform:'translateX(-28%) scaleX(1)'
-
-      })),
-      transition('center =>left',animate('300ms ease-in')),
-    ]),
-  ]
 })
 
 export class SkillTypesComponent implements OnInit {
@@ -33,19 +21,7 @@ export class SkillTypesComponent implements OnInit {
   public inactiveSkillTypes:any[]=[];
   public allSkillTypes:any[]=[];
   public bigGroup:any[]=[];
-  state:string='center';
-  state2:string='starting';
-  show:boolean = false;
   bucketWeightSum: number = 0;
-
-
-
-  animate(item:any){
-    this.state='left';
-    this.show = true;
-    this.bucket.name = item.name;
-  }
-
 
   removeElement(item:any){
     let thing:any;

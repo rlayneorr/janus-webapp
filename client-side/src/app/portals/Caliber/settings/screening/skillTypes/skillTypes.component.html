@@ -1,9 +1,5 @@
-<!-- Buckets-->
-<app-skillType-buckets id="buckets" *ngIf='show' class="col-8"></app-skillType-buckets>
-
-
 <!-- SkillTypes List-->
-<div class="move" [@move]='state'>
+<div class="move">
     <div class="container">
         <div class="row justify-content-center">
             <div class="card w-50">
@@ -13,7 +9,7 @@
                 <!-- <h6>Active</h6> -->
                 <div class="card-body">
                     <div class="list-group" *ngFor="let skillType of bigGroup">
-                        <a class="list-group-item list-group-item-action" (click)="animate(skillType)">
+                        <a class="list-group-item list-group-item-action">
                             {{skillType.name}}
                             <i id="xIcon">
                                 <label class="switch">
@@ -77,7 +73,8 @@
                     <span *ngIf="!bucket.mappedToSkillType">
                         <span class="input-group-addon" (click)="addToMapped(bucket)" style="margin: 1px">{{bucket.name}}</span>
                     </span>
-                </div>
+                </span>
+              </div>
             </div>
         </form>
     </div>
