@@ -64,8 +64,18 @@ export class QuestionComponent implements OnInit {
     }
   }
   //ToDo
-  deactivateQuestion(question){
+  deactivateQuesiton(question){
+    
+    if(question.isActive){
+      console.log("true");
+      this.questionService.deactivateQuestion;
+   }
+    else{
+      console.log("false");
+      this.questionService.activateQuestion;
+   }
   }
+    
   setQuestionNull(){
     this.question = new Question();
     this.question.answers = [];
