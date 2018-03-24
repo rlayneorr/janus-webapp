@@ -29,7 +29,7 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
 })
 export class QuestionComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService : TagsService, questionService: QuestionsService) { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService : TagsService, private questionService: QuestionsService) { }
 
   createQuestion: FormGroup;
   newQuestion: Question;
@@ -100,8 +100,15 @@ export class QuestionComponent implements OnInit {
     }
     this.question.tagIds= newCurrentTagIds;
     if(this.question.answers.length==5 && this.question.text){
-      //questionSerice.createNewQuestion(0,this.question);
-      document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
+      if(this.question.id){
+        //this.questionService.updateQuestion(0,this.question);
+        document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
+      }
+      else{
+        //this.questionService.createNewQuestion(0,this.question);
+        document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
+      }
+
       this.question = new Question();
       this.question.answers = [];
     }

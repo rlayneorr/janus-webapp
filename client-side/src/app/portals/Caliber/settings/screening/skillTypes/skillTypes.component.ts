@@ -1,33 +1,34 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
 import { Bucket } from '../entities/Bucket';
-import { SkillTypeBucket } from '../entities/SkillTypeBucket';
+//import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import {BucketsService} from'../services/buckets.service';
 
 @Component({
   selector: 'app-skillTypes',
   templateUrl: './skillTypes.component.html',
-  styleUrls: ['./skillTypes.component.css']
+  styleUrls: ['./skillTypes.component.css'],
 })
 
 export class SkillTypesComponent implements OnInit {
 
-  skillTypes: any[] = [];
-  inactiveSkillTypes: any[] = [];
-  allSkillTypes: any[] = [];
-  bigGroup: any[] = [];
-  bucketWeightSum: number;
-  removeElement(item:any) {
-    let thing: any;
-    for(let i = 0 ; i < this.allSkillTypes.length; i++) {
+  public skillTypes:any[]=[];
+  public inactiveSkillTypes:any[]=[];
+  public allSkillTypes:any[]=[];
+  public bigGroup:any[]=[];
+  bucketWeightSum: number = 0;
+
+  removeElement(item:any){
+    let thing:any;
+    for(let i = 0 ;i<this.allSkillTypes.length;i++){
       thing = this.allSkillTypes[i];
-      if(thing.name == item.name) {
-        thing.isActive = false;
+      if(thing.name == item.name){
+        thing.isActive = !thing.isActive;
         this.allSkillTypes[i] = thing;
       }
     }
@@ -136,22 +137,23 @@ export class SkillTypesComponent implements OnInit {
         this.oop,
         this.html
     ]
-
+/*
     testSkillTypeBuckets: SkillTypeBucket[] = [
         { skillTypeId: 0, bucketId: 0, weight: 50 },
         { skillTypeId: 0, bucketId: 1, weight: 20 },
         { skillTypeId: 0, bucketId: 2, weight: 30 }
     ]
-
+*/
     testSingleSkillType: SkillType;
 
     editSkillType(skillType){
         this.testSingleSkillType = new SkillType();
         this.testSingleSkillType.name = skillType.name;
-        this.editAllBuckets();
+   //     this.editAllBuckets();
     }
 
     // set the skillType buckets within ALL BUCKETS to be already mapped
+ /*
     editAllBuckets(){
         for(let index in this.testSkillTypeBuckets){
             for(let allIndex in this.testBuckets){
@@ -162,7 +164,7 @@ export class SkillTypesComponent implements OnInit {
             }
         }
     }
-
+*/
     addToMapped(bucket){
         bucket.mappedToSkillType = true;
         this.bucketWeightSum = 0;
