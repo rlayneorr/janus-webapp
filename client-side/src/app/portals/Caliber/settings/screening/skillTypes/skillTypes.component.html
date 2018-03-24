@@ -6,8 +6,8 @@
       <h6 class="card-header">Skill Types</h6>
 
       <div class="card-body">
-          <div class="list-group" *ngFor="let skillType of bigGroup">
-              <a class="list-group-item list-group-item-action">
+          <div class="list-group">
+              <a class="list-group-item list-group-item-action" *ngFor="let skillType of bigGroup">
                   {{skillType.name}}
                   <i id="xIcon">
                       <label class="switch">
