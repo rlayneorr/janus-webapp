@@ -35,6 +35,19 @@ export class SkillTypesComponent implements OnInit {
 
   }
 
+
+
+  testingGettingTags(){
+    var tag ={
+        tagName : "Dolly",
+        tagId :7
+    }
+    this.skillTypeService.testingCreatingTags(tag);
+   this.skillTypeService.testingGetTags().subscribe(
+      data =>{
+        console.log(data);
+      });
+  }
   setSkillTypes(){
     let thing:any;
     this.skillTypes = [];
@@ -47,15 +60,6 @@ export class SkillTypesComponent implements OnInit {
         this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
-
-    this.bigGroup = [];
-    for(let j = 0; j< this.skillTypes.length;j++){
-      this.bigGroup.push(this.skillTypes[j]);
-    }
-    for(let k = 0; k< this.inactiveSkillTypes.length;k++){
-      this.bigGroup.push(this.inactiveSkillTypes[k]);
-    }
-    console.log(this.bigGroup);
   }
 
   constructor(
