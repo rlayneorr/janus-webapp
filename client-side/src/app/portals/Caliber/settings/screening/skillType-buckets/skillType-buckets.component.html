@@ -1,36 +1,41 @@
-<!-- skillTypeBuckets component appears when list item in the SkillType component is clicked  -->
+<!-- skillTypeBuckets list  -->
+<div id="ABcontent" class="container">
+  <div class="row justify-content-center">
+    <div class="card w-50">
+      <h6 class="card-header">All Buckets</h6>
+      <div class="card-body">
+        <p>This is All Buckets in skillType-buckets.component!!!</p>
 
-<div class="moveRight">
+        <ul class="heroes">
+          <li *ngFor="let bucket of buckets">
+            <a>
+              <span>{{bucket.id}}</span>
+              <span>{{bucket.name}}</span>
+            </a>
+          </li>
+        </ul>
+        <!--  <div *ngIf="skillType.name === 'Java'">
+              <div class="list-group" *ngFor="let skillTypeBucket of allSkillTypeBuckets">
+                  <a class="list-group-item list-group-item-action" (click)="routeToBucket(skillTypeBucket.Name)">
+                      <span> {{skillTypeBucket.Name}} &nbsp; {{skillTypeBucket.Weight}}%
+                      </span>
+                      <i id="xIcon" class="fa fa-remove pull-right"></i>
+                      <i id="penIcon" class="fa fa-pencil pull-right" (click)=" open(editname)"></i>
 
+                  </a>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card w-50">
-                <h3 class="card-header">{{bucketService.name}}</h3>
+              </div>
+          </div> -->
 
-                <div class="card-body">
-                    <div *ngIf="skillType.name === 'Java'">
-                        <div class="list-group" *ngFor="let skillTypeBucket of allSkillTypeBuckets">
-                            <a class="list-group-item list-group-item-action" (click)="routeToBucket(skillTypeBucket.Name)">
-                                <span> {{skillTypeBucket.Name}} &nbsp; {{skillTypeBucket.Weight}}%
-                                </span>
-                                <i id="xIcon" class="fa fa-remove pull-right"></i>
-                                <i id="penIcon" class="fa fa-pencil pull-right" (click)=" open(editname)"></i>
-
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-
-                <button class="btn btn-primary btn-sm" id="createSkillType" (click)='open(content)'>Add Category</button>
-            </div>
-        </div>
-    </div>
+      </div>
+          <!--  <button class="btn btn-primary btn-sm" id="createSkillType" (click)='open(content)'>Add Category</button> -->
+    </div> 
+  </div> 
 </div>
 
+
 <!--Creating edit name modal -->
-<ng-template #editname let-c="close" let-d="dismiss">
+<!-- <ng-template #editname let-c="close" let-d="dismiss">
     <form>
         <div class="form-group">
             <h3 class="tb-heading">Edit Category Name</h3>
@@ -40,12 +45,12 @@
             <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="editBucket(newName); c('Close click')">Save</button>
         </div>
     </form>
-</ng-template>
+</ng-template> -->
 
 <!-- Beginning of Add Category modal - displays dropdown and text field to take in numeric
 value for weight  -->
 
-<ng-template #content let-c="close" let-d="dismiss">
+<!-- <ng-template #content let-c="close" let-d="dismiss">
     <form>
         <div class="form-group">
             <h3 class="tb-heading">Add a Category to this SkillType </h3>
@@ -58,11 +63,11 @@ value for weight  -->
             <label>Inactive Categories</label>
             <select class="form-control">
                 <option *ngFor="let skillTypeBucket of allSkillTypeBuckets">{{skillTypeBucket.Name}}</option>
-            </select>
+            </select> -->
 
             <!-- Weight input-->
 
-            <input type="number" id="weight" name="weight" placeholder="Category Weight" class="form-control">
+<!--             <input type="number" id="weight" name="weight" placeholder="Category Weight" class="form-control">
             <br>
             <button class="form-control" (click)="addNewSkillType(skillTypeBucket.Name,weight)">Add New SkillType!</button>
 
@@ -72,4 +77,4 @@ value for weight  -->
             <button type="button" data-dismiss="modal" (click)="c('Close click')" class="btn btn-outline-dark">Save</button>
         </div>
     </form>
-</ng-template>
+</ng-template> -->

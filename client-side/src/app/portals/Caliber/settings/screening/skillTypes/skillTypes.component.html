@@ -1,62 +1,31 @@
 <!-- SkillTypes List-->
-<div class="move">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card w-50">
+<div id="STcontent" class="container">
+  <div class="row justify-content-center">
+    <div class = "card w-50">
 
-                <h3 class="card-header">Skill Types</h3>
+      <h6 class="card-header">Skill Types</h6>
 
-                <!-- <h6>Active</h6> -->
-                <div class="card-body">
-                    <div class="list-group" *ngFor="let skillType of skillTypes">
-                        <a class="list-group-item list-group-item-action">
-                            {{skillType.name}}
-                            <i id="xIcon">
-                                <label class="switch" (ondrag) = "testing(skillType)">
-                                    <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
-                                    <span class="slider round"></span>
-                                </label>
-                            </i>
-                            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
-                                <span class="editToolTip">Edit</span>
-                            </i>
+      <div class="card-body">
+          <div class="list-group" *ngFor="let skillType of bigGroup">
+              <a class="list-group-item list-group-item-action">
+                  {{skillType.name}}
+                  <i id="xIcon">
+                      <label class="switch">
+                          <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
+                          <span class="slider round"></span>
+                      </label>
+                  </i>
+                  <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
+                      <span class="editToolTip">Edit</span>
+                  </i>
 
-                        </a>
-                    </div>
-                    <div class="list-group" *ngFor="let skillType of inactiveSkillTypes">
-                            <a class="list-group-item list-group-item-action">
-                                {{skillType.name}}
-                                <i id="xIcon">
-                                    <label class="switch" (ondrag) = "testing(skillType)">
-                                        <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </i>
-                                <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
-                                    <span class="editToolTip">Edit</span>
-                                </i>
-    
-                            </a>
-                        </div>
-                </div>
-                <button class="btn" id="createSkillType" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
-            </div>
-        </div>
+              </a>
+          </div>
+      </div>
+      <button class="btn btn-primary btn-sm" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
     </div>
+  </div>
 </div>
-
-<p>Drag the p element back and forth between the two rectangles:</p>
-<button (click)="testingGettingTags()">Tag Action</button>
-
-<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
-  <p ondragstart="dragStart(event)" ondrag="dragging(event)" draggable="true" id="dragtarget">Drag me!</p>
-</div>
-
-<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-
-<p style="clear:both;"><strong>Note:</strong> drag events are not supported in Internet Explorer 8 and earlier versions or Safari 5.1 and earlier versions.</p>
-
-<p id="demo"></p>
 
 <!-- Modal for creating a new SkillType -->
 <ng-template #content let-c="close" let-d="dismiss">
