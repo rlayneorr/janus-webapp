@@ -4,28 +4,21 @@
     <div class="card w-50">
       <h6 class="card-header">All Buckets</h6>
       <div class="card-body">
+        <!--* Search bar, maybe -->
         <p>This is All Buckets in skillType-buckets.component!!!</p>
 
-        <ul class="heroes">
-          <li *ngFor="let bucket of buckets">
-            <a>
-              <span>{{bucket.id}}</span>
-              <span>{{bucket.name}}</span>
+        <!-- dev -->
+        <div class="list-group list-group-flush">
+            <!-- clickable to route to Bucket, refactor skillTypeBucket to Bucket -->
+            <!--* check routeToBucket() -->
+            <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(skillTypeBucket.Name)">
+                <div>{{bucket.name}}</div>
+                <small>{{bucket.description}}</small>
+                <!--* check open(editname) -->
+                <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(editname)"></i>
             </a>
-          </li>
-        </ul>
-        <!--  <div *ngIf="skillType.name === 'Java'">
-              <div class="list-group" *ngFor="let skillTypeBucket of allSkillTypeBuckets">
-                  <a class="list-group-item list-group-item-action" (click)="routeToBucket(skillTypeBucket.Name)">
-                      <span> {{skillTypeBucket.Name}} &nbsp; {{skillTypeBucket.Weight}}%
-                      </span>
-                      <i id="xIcon" class="fa fa-remove pull-right"></i>
-                      <i id="penIcon" class="fa fa-pencil pull-right" (click)=" open(editname)"></i>
+        </div>
 
-                  </a>
-
-              </div>
-          </div> -->
 
       </div>
           <!--  <button class="btn btn-primary btn-sm" id="createSkillType" (click)='open(content)'>Add Category</button> -->
