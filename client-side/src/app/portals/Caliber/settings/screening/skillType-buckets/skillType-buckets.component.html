@@ -11,7 +11,7 @@
         <div class="list-group list-group-flush">
             <!-- clickable to route to Bucket, refactor skillTypeBucket to Bucket -->
             <!--* check routeToBucket() -->
-            <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(skillTypeBucket.Name)">
+            <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(bucket)">
                 <div>{{bucket.name}}</div>
                 <small>{{bucket.description}}</small>
                 <!--* check open(editname) -->

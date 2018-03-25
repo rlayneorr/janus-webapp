@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'; // Input was also added for ??? reason
 import { Bucket } from '../entities/Bucket';
 import { BucketsService } from '../services/buckets.service';
-// import { Router } from '@angular/router';
+ import { Router } from '@angular/router';
 // import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 // import { SkillType } from '../entities/SkillType';
 // import { SkillTypesService } from '../services/skillTypes.service';
@@ -23,7 +23,8 @@ export class SkillTypeBucketsComponent implements OnInit {
   /** variable to hold bucket being edited */
   editBucket: Bucket;
 
-  constructor(private bucketService: BucketsService) {}
+  constructor(private bucketService: BucketsService,
+    private router: Router) {}
 
   ngOnInit() {
     this.getBuckets();
@@ -45,7 +46,7 @@ export class SkillTypeBucketsComponent implements OnInit {
     // private skillTypes: SkillTypesComponent,
     // private modalService: NgbModal,
     // private skillTypesService: SkillTypesService,
-    // private router: Router,
+     
     // private bucketService:BucketsService,
 
     //  private route: ActivatedRoute,
@@ -70,14 +71,7 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   // }
 
-  /*
-  id: number;
-      name: string;
-      description: string;
-      isActive?: boolean = true;
-      mappedToSkillType?: boolean = false;
-      weight?: number;
-   */
+
 
   // testSingleBucket: Bucket = {
     // id: 1, 
@@ -104,12 +98,16 @@ export class SkillTypeBucketsComponent implements OnInit {
   }*/
  
   //item: any
-  // routeToBucket(item: any) {
-    //  this.router.navigateByUrl("/Caliber/settings/category");
-    // this.router.navigate(["Caliber/settings/category"]);
-    // console.log(item);
-    // console.log("routing to category");
-  // }
+   routeToBucket(item: Bucket) {
+    //this.router.navigateByUrl("/Caliber/settings/category");
+    
+    this.bucketService.setBucket(item);
+   //this.router.navigate(["Caliber/settings/category"]);
+
+    console.log("The name: " +this.bucketService.getCurrentBucket());
+    console.log(this.bucketService.getCurrentBucket());
+     console.log("routing to category");
+   }
 
 
   // showAddCategoryModal(){
