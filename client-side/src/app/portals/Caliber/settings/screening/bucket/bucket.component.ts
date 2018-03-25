@@ -12,13 +12,13 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'app-bucket',
   templateUrl: './bucket.component.html',
+  providers: [ BucketsService ],
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
 
   questionList;
   theBucket: Bucket;
-  obsBucket: Observable<Bucket>;
   constructor(
     private bucketService: BucketsService,
     private modalService: NgbModal,
@@ -30,9 +30,10 @@ export class BucketComponent implements OnInit {
     this.questionList = [
       { id: 1, text: "test", answers: ["1", "2"], tagIds: [1, 2], isActive: true }
     ]
-
-    this.getCurrentBucket();
-    //console.log(this.bucketService.getCurrentBucket());
+  
+    this.theBucket=this.bucketService.getCurrentBucket();
+   console.log("In bucket");
+    console.log(this.bucketService.getCurrentBucket());
 
   }
 
@@ -65,5 +66,4 @@ export class BucketComponent implements OnInit {
     this.questionService.getBucketQuestions(bucketID).subscribe(questions => this.questionList = questions);
 
   };
-
 }

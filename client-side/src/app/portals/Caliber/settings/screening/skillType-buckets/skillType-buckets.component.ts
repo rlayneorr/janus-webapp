@@ -2,12 +2,6 @@ import { Component, OnInit } from '@angular/core'; // Input was also added for ?
 import { Bucket } from '../entities/Bucket';
 import { BucketsService } from '../services/buckets.service';
  import { Router } from '@angular/router';
-// import { SkillTypeBucket } from '../entities/SkillTypeBucket';
-// import { SkillType } from '../entities/SkillType';
-// import { SkillTypesService } from '../services/skillTypes.service';
-// import { SkillTypesComponent } from '../skillTypes/skillTypes.component';
-// import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-// import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-skillType-buckets',
@@ -34,41 +28,29 @@ export class SkillTypeBucketsComponent implements OnInit {
     this.bucketService.getAllBuckets()
       .subscribe(buckets => this.buckets = buckets);
   }
+
+   routeToBucket(item: Bucket) {
+    //this.router.navigateByUrl("/Caliber/settings/category");
+    
+    this.bucketService.setBucket(item);
   
-  // @Input() skillType: SkillType; // what is this???
-  // allSkillTypeBuckets: any[] = [];
-  // skillTypeBuckets = [];
-  // testBuckets: any[] = [];
 
-  // bucketName:string = null;
+    console.log("The name: " +this.bucketService.getCurrentBucket());
+    console.log(this.bucketService.getCurrentBucket());
+     console.log("routing to category");
+     this.ngOnDestroy(item);
+     this.router.navigate(["Caliber/settings/category"]);
+   }
+  
+   ngOnDestroy(item:Bucket){
+     this.bucketService.setBucket(item);
+   }
 
-  // constructor(
-    // private skillTypes: SkillTypesComponent,
-    // private modalService: NgbModal,
-    // private skillTypesService: SkillTypesService,
-     
-    // private bucketService:BucketsService,
 
-    //  private route: ActivatedRoute,
-    //  private location: Location
-  // ) { }
-
+  
   // open(content) {
     // this.modalService.open(content);
     // event.stopPropagation();
-  // }
-
-  // ngOnInit() {
-    // this.skillType = {id: 1, name: "Java", isActive: true};
-    // this.allSkillTypeBuckets = [
-      // {Name: "HTML/CSS", Weight: 30, isActive: true},
-      // {Name: "Core Java", Weight: 40, isActive: true},
-      // {Name: "SQL", Weight: 30, isActive: true}
-    // ]
-
-    // this.testBuckets=["test1","test2","test3"];
-
-
   // }
 
 
@@ -98,20 +80,5 @@ export class SkillTypeBucketsComponent implements OnInit {
   }*/
  
   //item: any
-   routeToBucket(item: Bucket) {
-    //this.router.navigateByUrl("/Caliber/settings/category");
-    
-    this.bucketService.setBucket(item);
-   //this.router.navigate(["Caliber/settings/category"]);
-
-    console.log("The name: " +this.bucketService.getCurrentBucket());
-    console.log(this.bucketService.getCurrentBucket());
-     console.log("routing to category");
-   }
-
-
-  // showAddCategoryModal(){
-    // console.log("Show 'Add category' modal button clicked");
-  // }
 
 }

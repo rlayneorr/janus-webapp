@@ -26,8 +26,7 @@ export class BucketsService {
   bucketSubject = new Subject();
   /** For development only */
  
- currentBucket: Bucket;
-  private bucketObs: Observable<Bucket>;
+ public currentBucket: Bucket;
 
   constructor(private http: HttpClient) {}
 
@@ -62,8 +61,9 @@ export class BucketsService {
          console.log("Bucket is null");
      }
     
-  }
-
+  
+   
+ }
   setName(name:string)
   {
       
