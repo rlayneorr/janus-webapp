@@ -12,16 +12,30 @@ h6 {
   background-color: #F26925;
 }
 
-#xIcon {
-	color: #F26925;
-	margin-left: 10px;
-}
-
 #penIcon {
 	color: #F26925;
+	margin-right: 10px;
+}
+
+a {
+  cursor: pointer;
+  cursor: hand;
 }
 
 i {
   cursor: pointer;
   cursor: hand;
+}
+
+.modal-header {
+	background-color: #F26925;
+}
+
+.modal-title {
+  text-align: center;
+  color: white;
+}
+
+.close {
+	color: white;
 }

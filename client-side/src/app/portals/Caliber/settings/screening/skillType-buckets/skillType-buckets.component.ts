@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core'; // Input was also added for ??? reason
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+/** component, service imports */
 import { Bucket } from '../entities/Bucket';
 import { BucketsService } from '../services/buckets.service';
- import { Router } from '@angular/router';
+/** style lib. imports */
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
-  providers: [ BucketsService ],
-  styleUrls: ['./skillType-buckets.component.css']
+  styleUrls: ['./skillType-buckets.component.css'],
+  providers: [ BucketsService ]
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
@@ -17,8 +20,10 @@ export class SkillTypeBucketsComponent implements OnInit {
   /** variable to hold bucket being edited */
   editBucket: Bucket;
 
-  constructor(private bucketService: BucketsService,
-    private router: Router) {}
+  constructor(
+    private router: Router,
+    private bucketService: BucketsService,
+    private modalService: NgbModal) {}
 
   ngOnInit() {
     this.getBuckets();
@@ -29,7 +34,45 @@ export class SkillTypeBucketsComponent implements OnInit {
       .subscribe(buckets => this.buckets = buckets);
   }
 
-   routeToBucket(item: Bucket) {
+  /** Save the selected 'bucket' in 'bucket.service' to be used in 
+    * 'bucket.component'.
+    * Then route to 'bucket.component'.  
+    */
+  routeToBucket(item: Bucket) {
+    this.router.navigate(["Caliber/settings/category"]);
+    console.log(item);
+    console.log("routing to category");
+  }
+
+
+  /** Modal variables, and functions */
+  closeResult: string;
+
+  open(editBucket) {
+    this.modalService.open(editBucket).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+
+  // @Input() skillType: SkillType; // what is this???
+  // allSkillTypeBuckets: any[] = [];
+  // skillTypeBuckets = [];
+  // testBuckets: any[] = [];
+
+  /* routeToBucket(item: Bucket) {
     //this.router.navigateByUrl("/Caliber/settings/category");
     
     this.bucketService.setBucket(item);
@@ -41,19 +84,21 @@ export class SkillTypeBucketsComponent implements OnInit {
      this.ngOnDestroy(item);
      this.router.navigate(["Caliber/settings/category"]);
    }
-  
+  */
    ngOnDestroy(item:Bucket){
      this.bucketService.setBucket(item);
    }
 
 
-  
-  // open(content) {
-    // this.modalService.open(content);
-    // event.stopPropagation();
-  // }
 
-
+  /*
+  id: number;
+      name: string;
+      description: string;
+      isActive?: boolean = true;
+      mappedToSkillType?: boolean = false;
+      weight?: number;
+   */
 
   // testSingleBucket: Bucket = {
     // id: 1, 
@@ -78,7 +123,9 @@ export class SkillTypeBucketsComponent implements OnInit {
   getSkillTypeBuckets(id:number): Observable<SkillTypeBucket>{
     return this.skillTypesService.getBucketsBySkillType(id);
   }*/
- 
-  //item: any
+
+  // showAddCategoryModal(){
+    // console.log("Show 'Add category' modal button clicked");
+  // }
 
 }
