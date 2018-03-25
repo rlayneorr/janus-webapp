@@ -8,7 +8,21 @@
 
                 <!-- <h6>Active</h6> -->
                 <div class="card-body">
-                    <div class="list-group" *ngFor="let skillType of bigGroup">
+                    <div class="list-group" *ngFor="let skillType of skillTypes">
+                        <a class="list-group-item list-group-item-action">
+                            {{skillType.name}}
+                            <i id="xIcon">
+                                <label class="switch">
+                                    <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
+                                    <span class="slider round"></span>
+                                </label>
+                            </i>
+                            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content); checkBucketSum()">
+                                <span class="editToolTip">Edit</span>
+                            </i>
+                        </a>
+                    </div>
+                    <div class="list-group" *ngFor="let skillType of inactiveSkillTypes">
                         <a class="list-group-item list-group-item-action">
                             {{skillType.name}}
                             <i id="xIcon">
@@ -33,11 +47,10 @@
 
 
 <!-- Modal for creating a new SkillType -->
-<ng-template #content let-c="close" let-d="dismiss">
+<!-- <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-      <!-- If a skillType got clicked, Title is Edit -->
     <h4 class="modal-title" *ngIf="!testSingleSkillType">Create a SkillType</h4>
-     <h4 class="modal-title" *ngIf="testSingleSkillType">Edit SkillType</h4>
+     <h4 class="modal-title" *ngIf="testSingleSkillType">Edit Skill Type</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -47,7 +60,6 @@
           <div class="form-group row">
               <label for="name" class="col-sm-2 col-form-label">Name:</label>
               <div class="col-sm-10">
-                  <!-- If a skillType is clicked, ngModel the name -->
                   <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]="testSingleSkillType.name" *ngIf="testSingleSkillType">
                   <input type="text" id="name" name="name" placeholder="SkillType Name" formControlName="name" class="form-control" *ngIf="!testSingleSkillType">
               </div>
@@ -59,7 +71,7 @@
                       <div class="input-group col-sm-9" *ngIf="bucket.mappedToSkillType">
                           <span class="input-group-addon col-sm-4 revatureOrange">{{bucket.name}}</span>
                           <input type="number" #weight name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucket.weight" [ngModelOptions]="{standalone: true}" (keyup)="checkBucketSum()">
-                          <input type="number" name="sum" formControlName="bucketWeightSum" [hidden]="true" [(ngModel)]="bucketWeightSum" *ngIf="bucket">
+                          <input type="number" name="sum" class="form-control border-right-0" formControlName="bucketWeightSum" [hidden]="true" [(ngModel)]="bucketWeightSum" *ngIf="bucket">
                           <span class="input-group-addon percentSign">%</span>
                           <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromMapped(bucket)"><span aria-hidden="true">&times;</span></button>
                       </div>
@@ -76,6 +88,56 @@
                 </span>
               </div>
             </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create SkillType'); addNewSkillType(addSkillTypeForm.value)" [disabled]="!addSkillTypeForm.valid">Save</button>
+    </div>
+</ng-template> -->
+
+<!-- TESTING NESTED FORLOOPS-->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" *ngIf="!testSingleSkillType">Create a Skill Type</h4>
+     <h4 class="modal-title" *ngIf="testSingleSkillType">Edit Skill Type</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form  #addSkillTypeForm="ngForm" [formGroup]="createSkillType">
+          <div class="form-group row">
+              <label for="name" class="col-sm-2 col-form-label">Name:</label>
+              <div class="col-sm-10">
+                  <input type="text" id="name" name=name formControlName="name" class="form-control" *ngIf="testSingleSkillType"  [value]="testSingleSkillType.skillTypeName">
+                  <input type="text" id="name" name="name" formControlName="name" placeholder="SkillType Name" class="form-control" *ngIf="!testSingleSkillType">
+              </div>
+          </div>
+          <div *ngIf="testSingleSkillType">
+              <div class="form-group row">
+                  <label for="buckets" class="col-sm-2 col-form-label">Buckets:</label>
+                  <div class="col-sm-10">
+                      <div *ngFor="let bucketWeight of bucketsAndWeights">
+                          <div class="input-group col-sm-9">
+                              <span class="input-group-addon col-sm-4 revatureOrange">{{bucketWeight.bucket.name}}</span>
+                              <input type="number" #weight name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucketWeight.weight" [ngModelOptions]="{standalone: true}" (keyup)="checkBucketSum()">
+                              <input type="number" name="sum" class="form-control border-right-0" formControlName="bucketWeightSum" [hidden]="true" [(ngModel)]="bucketWeightSum" *ngIf="bucketWeight">
+                              <span class="input-group-addon percentSign">%</span>
+                              <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromSkillTypeBuckets(bucketWeight.bucket); checkBucketSum()"><span aria-hidden="true">&times;</span></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
+                  <div class="col-sm-10 row">
+                    <span *ngFor="let bucket of testBuckets">
+                        <span class="input-group-addon" (click)="addToSkillTypeBuckets(bucket); checkBucketSum()" style="margin: 1px" *ngIf="!checkContains(bucket)">{{bucket.name}}</span>
+                    </span>
+                  </div>
+              </div>
+          </div>
         </form>
     </div>
     <div class="modal-footer">

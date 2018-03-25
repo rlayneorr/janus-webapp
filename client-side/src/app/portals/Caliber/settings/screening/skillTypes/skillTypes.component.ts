@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
 import { Bucket } from '../entities/Bucket';
@@ -27,7 +27,7 @@ export class SkillTypesComponent implements OnInit {
     let thing:any;
     for(let i = 0 ;i<this.allSkillTypes.length;i++){
       thing = this.allSkillTypes[i];
-      if(thing.name == item.name){
+      if(thing.skillTypeName == item.skillTypeName){
         thing.isActive = !thing.isActive;
         this.allSkillTypes[i] = thing;
       }
@@ -48,16 +48,7 @@ export class SkillTypesComponent implements OnInit {
         this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
-
-    this.bigGroup = [];
-    for(let j = 0; j< this.skillTypes.length;j++){
-      this.bigGroup.push(this.skillTypes[j]);
-    }
-    for(let k = 0; k< this.inactiveSkillTypes.length;k++){
-      this.bigGroup.push(this.inactiveSkillTypes[k]);
-    }
-    console.log(this.bigGroup);
-  }
+}
 
   constructor(
     private modalService: NgbModal,
@@ -83,11 +74,7 @@ export class SkillTypesComponent implements OnInit {
   });
   }
 
-    // open(content) {
-    //   this.modalService.open(content);
-    //   event.stopPropagation();
-    // }
-    closeResult;
+
     open(content) {
       this.modalService.open(content).result.then((result) => {
         this.testSingleSkillType = null;
@@ -97,20 +84,10 @@ export class SkillTypesComponent implements OnInit {
       event.stopPropagation();
     }
 
-
-    private getDismissReason(reason: any): string {
-      if (reason === ModalDismissReasons.ESC) {
-        return 'by pressing ESC';
-      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-        return 'by clicking on a backdrop';
-      } else {
-        return  `with: ${reason}`;
-      }
-    }
-
     addNewSkillType(modal: SkillType){
         this.newSkillType = modal;
         let addedBucket = false;
+        console.log(modal.skillTypeName)
         for(let bucketIndex in this.testBuckets){
             if(this.testBuckets[bucketIndex].mappedToSkillType == true){
                 addedBucket = true;
@@ -119,10 +96,8 @@ export class SkillTypesComponent implements OnInit {
         }
         if(!addedBucket || this.bucketWeightSum == 100){
             console.log("Congrats! The sum of active buckets is: " + this.bucketWeightSum);
-        } else {
-            console.log("The weight has to equal 100");
+            //this.skillTypeService.createSkillType(this.newSkillType.skillTypeName).subscribe();
         }
-        //this.skillTypeService.createSkillType(this.newSkillType.name).subscribe();
         this.initFormControl();
     }
 
@@ -138,6 +113,8 @@ export class SkillTypesComponent implements OnInit {
         this.html
     ]
 
+    bucketsAndWeights = [];
+
     testSkillTypeBuckets: SkillTypeBucket[] = [
         { skillTypeId: 0, bucketId: 0, weight: 50 },
         { skillTypeId: 0, bucketId: 1, weight: 20 },
@@ -146,32 +123,79 @@ export class SkillTypesComponent implements OnInit {
 
     testSingleSkillType: SkillType;
 
+    //WITHOUT NESTED FORLOOPS
+    // editSkillType(skillType){
+    //     this.testSingleSkillType = new SkillType();
+    //     this.testSingleSkillType.skillTypeName = skillType.skillTypeName;
+    //     this.editAllBuckets();
+    // }
+    //
+    // //set the skillType buckets within ALL BUCKETS to be already mapped
+    // editAllBuckets(){
+    //     for(let index in this.testSkillTypeBuckets){
+    //         for(let allIndex in this.testBuckets){
+    //             if(this.testSkillTypeBuckets[index].bucketId == this.testBuckets[allIndex].skillTypeId){
+    //                 this.testBuckets[allIndex].weight = this.testSkillTypeBuckets[index].weight;
+    //                 this.testBuckets[allIndex].mappedToSkillType = true;
+    //             }
+    //         }
+    //     }
+    // }
+
     editSkillType(skillType){
-        this.testSingleSkillType = new SkillType();
-        this.testSingleSkillType.name = skillType.name;
-        this.editAllBuckets();
+        this.testSingleSkillType = {
+            skillTypeName: skillType.name,
+            skillTypeId: skillType.id,
+            isActive: true,
+            buckets: [this.java, this.oop, this.html],
+            weights: [50,30,20]
+        }
+        this.combineBucketsAndWeights();
     }
 
-    // set the skillType buckets within ALL BUCKETS to be already mapped
-    editAllBuckets(){
-        for(let index in this.testSkillTypeBuckets){
-            for(let allIndex in this.testBuckets){
-                if(this.testSkillTypeBuckets[index].bucketId == this.testBuckets[allIndex].id){
-                    this.testBuckets[allIndex].weight = this.testSkillTypeBuckets[index].weight;
-                    this.testBuckets[allIndex].mappedToSkillType = true;
-                }
-            }
+    checkContains(bucket){
+        if(this.testSingleSkillType){
+            return this.testSingleSkillType.buckets.includes(bucket);
+        }
+        return false;
+    }
+
+    addToSkillTypeBuckets(bucket){
+        if(this.testSingleSkillType){
+            this.testSingleSkillType.buckets.push(bucket);
+            this.testSingleSkillType.weights.push(0);
+            this.combineBucketsAndWeights();
         }
     }
 
-    addToMapped(bucket){
-        bucket.mappedToSkillType = true;
-        this.bucketWeightSum = 0;
+    removeFromSkillTypeBuckets(bucket){
+        if(this.testSingleSkillType){
+            for(let singleBucketIndex in this.testSingleSkillType.buckets){
+                if(this.testSingleSkillType.buckets[singleBucketIndex] == bucket){
+                    this.testSingleSkillType.buckets.splice(Number(singleBucketIndex), 1);
+                    this.testSingleSkillType.weights.splice(Number(singleBucketIndex), 1);
+                }
+            }
+            this.combineBucketsAndWeights();
+        }
     }
 
-    removeFromMapped(bucket){
-        bucket.mappedToSkillType = false;
+    combineBucketsAndWeights(){
+        this.bucketsAndWeights = [];
+        for(let index in this.testSingleSkillType.buckets){
+            this.bucketsAndWeights.push({"bucket":this.testSingleSkillType.buckets[index], "weight":this.testSingleSkillType.weights[index]});
+        }
     }
+
+    //ORIGINAL MODAL METHODS
+    // addToMapped(bucket){
+    //     bucket.mappedToSkillType = true;
+    //     this.bucketWeightSum = 0;
+    // }
+    //
+    // removeFromMapped(bucket){
+    //     bucket.mappedToSkillType = false;
+    // }
 
     clearSkillTypeBuckets(){
         for(let index in this.testBuckets){
@@ -182,10 +206,8 @@ export class SkillTypesComponent implements OnInit {
 
     checkBucketSum(){
         this.bucketWeightSum = 0;
-        for(let index in this.testBuckets){
-            if(this.testBuckets[index].mappedToSkillType == true){
-                this.bucketWeightSum += this.testBuckets[index].weight;
-            }
+        for(let index of this.bucketsAndWeights){
+            this.bucketWeightSum += index.weight;
         }
     }
 
@@ -200,7 +222,6 @@ export class SkillTypesComponent implements OnInit {
       {name:'Software',isActive:false}
     ]
     this.setSkillTypes();
-    console.dir(this.bigGroup);
     this.initFormControl();
   }
 

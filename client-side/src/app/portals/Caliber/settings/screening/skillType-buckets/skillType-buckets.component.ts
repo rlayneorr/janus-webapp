@@ -41,7 +41,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.skillType = {id: 1, name: "Java", isActive: true};
+    this.skillType = {skillTypeId: 1, skillTypeName: "Java", isActive: true, buckets: [], weights: []};
     this.allSkillTypeBuckets = [
       {Name: "HTML/CSS", Weight: 30, isActive: true},
       {Name: "Core Java", Weight: 40, isActive: true},
