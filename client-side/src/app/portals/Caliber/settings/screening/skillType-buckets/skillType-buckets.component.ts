@@ -11,6 +11,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
   styleUrls: ['./skillType-buckets.component.css'],
+  providers: [ BucketsService ]
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
@@ -29,25 +30,13 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   ngOnInit() {
     this.getBuckets()
-}
+  }
 
-getBuckets():void {
-    this.bucketService.getAllBuckets().subscribe(buckets => this.buckets = buckets);
-}
+  getBuckets(): void {
+      this.bucketService.getAllBuckets()
+        .subscribe(buckets => this.buckets = buckets);
+  }
 
-/*
-id: number;
-    name: string;
-    description: string;
-    isActive?: boolean = true;
-    mappedToSkillType?: boolean = false;
-    weight?: number;
- */
-
-getSkillTypes() {
-
-    //return this.allSkillTypeBuckets;
- }
 
   /** Save the selected 'bucket' in 'bucket.service' to be used in
     * 'bucket.component'.
