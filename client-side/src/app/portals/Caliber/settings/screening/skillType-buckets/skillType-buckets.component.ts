@@ -40,8 +40,10 @@ export class SkillTypeBucketsComponent implements OnInit {
     * Then route to 'bucket.component'.  
     */
   routeToBucket(item: Bucket) {
-    this.bucketService.setBucket(item);;
-    this.router.navigate(["Caliber/settings/category"]);
+
+    this.router.navigate(["Caliber/settings/screening/category"]);
+    console.log(item);
+
     console.log("routing to category");
     console.log(this.bucketService.currentBucket);
   }

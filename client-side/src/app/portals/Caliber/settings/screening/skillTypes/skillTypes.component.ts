@@ -8,6 +8,7 @@ import { Bucket } from '../entities/Bucket';
 //import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import {BucketsService} from'../services/buckets.service';
 
+
 @Component({
   selector: 'app-skillTypes',
   templateUrl: './skillTypes.component.html',
@@ -20,8 +21,6 @@ export class SkillTypesComponent implements OnInit {
   public inactiveSkillTypes:any[]=[];
   public allSkillTypes:any[]=[];
   public bigGroup:any[]=[];
-  bucketWeightSum: number = 0;
-
   removeElement(item:any){
     let thing:any;
     for(let i = 0 ;i<this.allSkillTypes.length;i++){
@@ -35,6 +34,19 @@ export class SkillTypesComponent implements OnInit {
 
   }
 
+
+
+  testingGettingTags(){
+    var tag ={
+        tagName : "Dolly",
+        tagId :7
+    }
+    this.skillTypeService.testingCreatingTags(tag);
+   this.skillTypeService.testingGetTags().subscribe(
+      data =>{
+        console.log(data);
+      });
+  }
   setSkillTypes(){
     let thing:any;
     this.skillTypes = [];
@@ -47,22 +59,16 @@ export class SkillTypesComponent implements OnInit {
         this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
-
-    this.bigGroup = [];
-    for(let j = 0; j< this.skillTypes.length;j++){
-      this.bigGroup.push(this.skillTypes[j]);
-    }
-    for(let k = 0; k< this.inactiveSkillTypes.length;k++){
-      this.bigGroup.push(this.inactiveSkillTypes[k]);
-    }
-    console.log(this.bigGroup);
+    console.log(this.skillTypes);
   }
 
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
     private skillTypeService: SkillTypesService,
-    private bucket:BucketsService) { }
+    private bucket:BucketsService,
+  ) { }
+    
 
 
   createSkillType: FormGroup;
@@ -76,10 +82,7 @@ export class SkillTypesComponent implements OnInit {
   initFormControl() {
     this.createSkillType = this.fb.group({
       'name': ['', Validators.required],
-      'bucketWeightSum': ['', Validators.compose(
-          [Validators.min(100), Validators.max(100)]
-      )]
-  });
+    });
   }
 
     // open(content) {
@@ -109,15 +112,16 @@ export class SkillTypesComponent implements OnInit {
 
     addNewSkillType(modal: SkillType){
         this.newSkillType = modal;
+        let sum = 0;
         let addedBucket = false;
         for(let bucketIndex in this.testBuckets){
-            if(this.testBuckets[bucketIndex].mappedToSkillType == true){
+            if(this.testBuckets[bucketIndex].isActive == true){
                 addedBucket = true;
-                this.bucketWeightSum += this.testBuckets[bucketIndex].weight;
+                sum += this.testBuckets[bucketIndex].weight;
             }
         }
-        if(!addedBucket || this.bucketWeightSum == 100){
-            console.log("Congrats! The sum of active buckets is: " + this.bucketWeightSum);
+        if(!addedBucket || sum == 100){
+            console.log("Congrats! The sum of active buckets is: " + sum);
         } else {
             console.log("The weight has to equal 100");
         }
@@ -166,7 +170,6 @@ export class SkillTypesComponent implements OnInit {
 */
     addToMapped(bucket){
         bucket.mappedToSkillType = true;
-        this.bucketWeightSum = 0;
     }
 
     removeFromMapped(bucket){
@@ -180,14 +183,6 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
-    checkBucketSum(){
-        this.bucketWeightSum = 0;
-        for(let index in this.testBuckets){
-            if(this.testBuckets[index].mappedToSkillType == true){
-                this.bucketWeightSum += this.testBuckets[index].weight;
-            }
-        }
-    }
 
   ngOnInit() {
     this.allSkillTypes = [
