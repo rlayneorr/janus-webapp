@@ -59,6 +59,7 @@ export class SkillTypesComponent implements OnInit {
         this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
+    console.log(this.skillTypes);
   }
 
   constructor(
