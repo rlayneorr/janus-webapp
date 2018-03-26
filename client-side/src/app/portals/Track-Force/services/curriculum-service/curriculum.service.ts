@@ -11,7 +11,7 @@ import { Curriculum } from '../../models/curriculum.model';
 
 @Injectable()
 export class CurriculumService {
-  private url: string = environment.msurl + '8090';
+  private url: string = environment.msurl + '8096';
 
   constructor(private http: HttpClient) { }
 
