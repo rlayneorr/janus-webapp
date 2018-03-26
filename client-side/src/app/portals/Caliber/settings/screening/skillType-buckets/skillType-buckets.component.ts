@@ -10,7 +10,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
   styleUrls: ['./skillType-buckets.component.css'],
-  providers: [ BucketsService ]
+ // providers: [ BucketsService ]
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
@@ -27,6 +27,7 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   ngOnInit() {
     this.getBuckets();
+    
   }
 
   getBuckets(): void {
@@ -39,9 +40,12 @@ export class SkillTypeBucketsComponent implements OnInit {
     * Then route to 'bucket.component'.  
     */
   routeToBucket(item: Bucket) {
+
     this.router.navigate(["Caliber/settings/screening/category"]);
     console.log(item);
+
     console.log("routing to category");
+    console.log(this.bucketService.currentBucket);
   }
 
 
@@ -72,18 +76,20 @@ export class SkillTypeBucketsComponent implements OnInit {
   // skillTypeBuckets = [];
   // testBuckets: any[] = [];
 
-  // bucketName:string = null;
+  /* routeToBucket(item: Bucket) {
+    //this.router.navigateByUrl("/Caliber/settings/category");
+    
+    this.bucketService.setBucket(item);
+  
 
-  // constructor(
-    // private skillTypes: SkillTypesComponent,
-    // private modalService: NgbModal,
-    // private skillTypesService: SkillTypesService,
-    // private router: Router,
-    // private bucketService:BucketsService,
+    console.log("The name: " +this.bucketService.getCurrentBucket());
+    console.log(this.bucketService.getCurrentBucket());
+     console.log("routing to category");
+     this.ngOnDestroy(item);
+     this.router.navigate(["Caliber/settings/category"]);
+   }
+  */
 
-    //  private route: ActivatedRoute,
-    //  private location: Location
-  // ) { }
 
 
   /*
