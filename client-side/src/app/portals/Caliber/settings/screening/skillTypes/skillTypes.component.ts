@@ -21,6 +21,32 @@ export class SkillTypesComponent implements OnInit {
   public inactiveSkillTypes:any[]=[];
   public allSkillTypes:any[]=[];
   public bucketWeightSum: number = 0;
+  public newSkillType: SkillType;
+  public error: boolean;
+
+  java: Bucket = new Bucket(0, "Java", "This is Java");
+  sql: Bucket = new Bucket(1, "SQL", "This is SQL");
+  oop: Bucket = new Bucket(2, "OOP", "This is OOP");
+  html: Bucket = new Bucket(3, "HTML", "This is HTML");
+
+  testBuckets: Bucket[] = [
+      this.java,
+      this.sql,
+      this.oop,
+      this.html
+  ]
+
+  bucketsAndWeights = [];
+
+  testSkillTypeBuckets: SkillTypeBucket[] = [
+      { skillTypeId: 0, bucketId: 0, weight: 50 },
+      { skillTypeId: 0, bucketId: 1, weight: 20 },
+      { skillTypeId: 0, bucketId: 2, weight: 30 }
+  ]
+
+  testSingleSkillType: SkillType;
+
+  modalServiceRef;
 
   removeElement(item:any){
     let thing:any;
@@ -70,33 +96,16 @@ export class SkillTypesComponent implements OnInit {
     private bucket:BucketsService,
   ) { }
 
-
-
-  createSkillType: FormGroup;
-  newSkillType: SkillType;
-
-  /**
-   * initialize form control for validations
-   *
-   * @memberof SkillTypesComponent
-   */
-  // initFormControl() {
-  //   this.createSkillType = this.fb.group({
-  //     'skillTypeName': ['', Validators.required],
-  //     'bucketWeightSum': ['', Validators.compose(
-  //         [Validators.min(100), Validators.max(100)]
-  //     )]
-  //   });
-  // }
-
-
     open(content) {
-      this.modalService.open(content).result.then((result) => {
+      this.modalServiceRef = this.modalService.open(content);
+      this.modalServiceRef.result.then((result) => {
         this.testSingleSkillType = null;
         this.bucketsAndWeights = null;
+        this.error = null;
       }, (reason) => {
         this.testSingleSkillType = null;
-        this.bucketsAndWeights = null
+        this.bucketsAndWeights = null;
+        this.error = null;
       });
       event.stopPropagation();
     }
@@ -112,31 +121,17 @@ export class SkillTypesComponent implements OnInit {
                 this.bucketWeightSum += this.bucketsAndWeights[index].weight;
             }
         }
-        console.log(this.bucketWeightSum);
+        if(this.bucketWeightSum == 100){
+            this.modalServiceRef.close();
+        }
+        else {
+            this.error = true;
+            console.log(this.bucketWeightSum);
+        }
         // this.initFormControl();
     }
 
-    java: Bucket = new Bucket(0, "Java", "This is Java");
-    sql: Bucket = new Bucket(1, "SQL", "This is SQL");
-    oop: Bucket = new Bucket(2, "OOP", "This is OOP");
-    html: Bucket = new Bucket(3, "HTML", "This is HTML");
 
-    testBuckets: Bucket[] = [
-        this.java,
-        this.sql,
-        this.oop,
-        this.html
-    ]
-
-    bucketsAndWeights = [];
-
-    testSkillTypeBuckets: SkillTypeBucket[] = [
-        { skillTypeId: 0, bucketId: 0, weight: 50 },
-        { skillTypeId: 0, bucketId: 1, weight: 20 },
-        { skillTypeId: 0, bucketId: 2, weight: 30 }
-    ]
-
-    testSingleSkillType: SkillType;
 
     editSkillType(skillType){
         this.testSingleSkillType = {
@@ -182,20 +177,6 @@ export class SkillTypesComponent implements OnInit {
             this.bucketsAndWeights.push({"bucket":this.testSingleSkillType.buckets[index], "weight":this.testSingleSkillType.weights[index]});
         }
     }
-
-    clearSkillTypeBuckets(){
-        for(let index in this.testBuckets){
-            this.testBuckets[index].mappedToSkillType = false;
-            this.testBuckets[index].weight = 0;
-        }
-    }
-
-    // checkBucketSum(){
-    //     this.bucketWeightSum = 0;
-    //     for(let index of this.bucketsAndWeights){
-    //         this.bucketWeightSum += index.weight;
-    //     }
-    // }
 
   ngOnInit() {
     this.allSkillTypes = [

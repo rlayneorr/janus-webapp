@@ -33,7 +33,7 @@
               </a>
           </div>
       </div>
-      <button class="btn btn-primary btn-sm" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
+      <button class="btn btn-primary btn-sm" (click)='open(content)'>Create Skill Type</button>
     </div>
   </div>
 </div>
@@ -71,6 +71,8 @@
                               <span aria-hidden="true">&times;</span></button>
                           </div>
                       </div>
+                      <br>
+                      <p *ngIf="error" class="text-danger">The sum of the buckets has to equal <strong>100</strong></p>
                   </div>
               </div>
               <div class="form-group row">
@@ -86,6 +88,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create SkillType'); addNewSkillType(addSkillTypeForm.value)" [disabled]="!addSkillTypeForm.valid">Save</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="addNewSkillType(addSkillTypeForm.value)" [disabled]="!addSkillTypeForm.valid">Save</button>
     </div>
 </ng-template>
