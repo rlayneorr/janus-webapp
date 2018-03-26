@@ -12,7 +12,7 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'app-bucket',
   templateUrl: './bucket.component.html',
- // providers: [ BucketsService ],
+  providers: [ BucketsService ],
   styleUrls: ['./bucket.component.css'],
 })
 export class BucketComponent implements OnInit {
@@ -31,7 +31,7 @@ export class BucketComponent implements OnInit {
       { id: 1, text: "test", answers: ["1", "2"], tagIds: [1, 2], isActive: true }
     ]
   
-    this.bucketService.getCurrentBucket();
+  //  this.bucketService.getCurrentBucket();
    console.log("In bucket");
     console.log(this.bucketService.getCurrentBucket());
 

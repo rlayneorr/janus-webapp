@@ -59,10 +59,7 @@ export class BucketsService {
      }
      else{
          console.log("Bucket is null");
-     }
-    
-  
-   
+     } 
  }
   setName(name:string)
   {
