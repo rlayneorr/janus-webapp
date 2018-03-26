@@ -88,6 +88,7 @@ export class AssociateListComponent implements OnInit {
     let self = this;
 
     this.associateService.getAllAssociates().subscribe(data => {
+      console.log(data);
       this.associates = data;
       console.log(this.associates);
 

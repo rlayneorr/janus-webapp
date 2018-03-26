@@ -11,7 +11,7 @@ import { environment } from '../../../../../environments/environment'
 @Injectable()
 export class ClientListService {
   // private url: string = environment.url + 'TrackForce/';
-  private url: string = environment.msurl + '8090/';
+  private url: string = environment.msurl + '8090';
 
   constructor(private http: HttpClient) { }
 

@@ -51,6 +51,7 @@ export class BatchListComponent implements OnInit {
     this.dataReady = false;
     this.batchService.getDefaultBatches().subscribe(
       (batches) => {
+        console.log(batches);
         this.batches = batches;
         this.updateCountPerCurriculum();
         this.dataReady = true;

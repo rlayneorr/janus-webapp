@@ -75,6 +75,7 @@ export class FormComponent implements OnInit {
 
         this.associateService.getAssociate(this.id).subscribe(
           data => {
+            console.log(data);
             this.associate = <Associate>data;
             console.log("FROM BACK-END: "+data.clientStartDate);
             if (data.clientStartDate.toString() == "0")

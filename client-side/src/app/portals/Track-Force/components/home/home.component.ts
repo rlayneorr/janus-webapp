@@ -113,6 +113,7 @@ export class HomeComponent {
 
   load() {
     this.as.getAllAssociates().subscribe(response => {
+      console.log(response);
       this.associates = response;
       let trainingMapped = 0;
       let trainingUnmapped = 0;

@@ -57,6 +57,7 @@ export class AssociateViewComponent implements OnInit {
   getAssociate(id: number){
     this.associateService.getAssociate(id).subscribe(
       data => {
+        console.log(data);
         this.associate = data;
       },
       err => {
