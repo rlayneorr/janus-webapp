@@ -93,6 +93,7 @@ export class SkillTypesComponent implements OnInit {
     open(content) {
       this.modalService.open(content).result.then((result) => {
         this.testSingleSkillType = null;
+       console.log(ModalDismissReasons);
       }, (reason) => {
         this.testSingleSkillType = null;
       });
