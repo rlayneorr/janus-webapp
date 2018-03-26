@@ -98,8 +98,10 @@ export class QuestionComponent implements OnInit {
     }
   }
   newTag(newTag : string){
-    this.tagsService.createNewTag(newTag);
-    this.allTags
+    let tag : Tag = new Tag();
+    tag.name = newTag;
+    tag.id = this.tagsService.createNewTag(newTag);
+    this.currentTags.push(tag);
   }
   addNewQuestion(){
     let newCurrentTagIds : number[] = [];

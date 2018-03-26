@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core'; // Input was also added for ??? reason
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+/** component, service imports */
 import { Bucket } from '../entities/Bucket';
 import { BucketsService } from '../services/buckets.service';
-// import { Router } from '@angular/router';
-// import { SkillTypeBucket } from '../entities/SkillTypeBucket';
-// import { SkillType } from '../entities/SkillType';
-// import { SkillTypesService } from '../services/skillTypes.service';
-// import { SkillTypesComponent } from '../skillTypes/skillTypes.component';
-// import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-// import { Observable } from 'rxjs/Observable';
+/** style lib. imports */
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
-  providers: [ BucketsService ],
-  styleUrls: ['./skillType-buckets.component.css']
+  styleUrls: ['./skillType-buckets.component.css'],
+  providers: [ BucketsService ]
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
@@ -23,7 +20,10 @@ export class SkillTypeBucketsComponent implements OnInit {
   /** variable to hold bucket being edited */
   editBucket: Bucket;
 
-  constructor(private bucketService: BucketsService) {}
+  constructor(
+    private router: Router,
+    private bucketService: BucketsService,
+    private modalService: NgbModal) {}
 
   ngOnInit() {
     this.getBuckets();
@@ -33,7 +33,40 @@ export class SkillTypeBucketsComponent implements OnInit {
     this.bucketService.getAllBuckets()
       .subscribe(buckets => this.buckets = buckets);
   }
-  
+
+  /** Save the selected 'bucket' in 'bucket.service' to be used in 
+    * 'bucket.component'.
+    * Then route to 'bucket.component'.  
+    */
+  routeToBucket(item: Bucket) {
+    this.router.navigate(["Caliber/settings/category"]);
+    console.log(item);
+    console.log("routing to category");
+  }
+
+
+  /** Modal variables, and functions */
+  closeResult: string;
+
+  open(editBucket) {
+    this.modalService.open(editBucket).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+
   // @Input() skillType: SkillType; // what is this???
   // allSkillTypeBuckets: any[] = [];
   // skillTypeBuckets = [];
@@ -52,23 +85,6 @@ export class SkillTypeBucketsComponent implements OnInit {
     //  private location: Location
   // ) { }
 
-  // open(content) {
-    // this.modalService.open(content);
-    // event.stopPropagation();
-  // }
-
-  // ngOnInit() {
-    // this.skillType = {id: 1, name: "Java", isActive: true};
-    // this.allSkillTypeBuckets = [
-      // {Name: "HTML/CSS", Weight: 30, isActive: true},
-      // {Name: "Core Java", Weight: 40, isActive: true},
-      // {Name: "SQL", Weight: 30, isActive: true}
-    // ]
-
-    // this.testBuckets=["test1","test2","test3"];
-
-
-  // }
 
   /*
   id: number;
@@ -102,15 +118,6 @@ export class SkillTypeBucketsComponent implements OnInit {
   getSkillTypeBuckets(id:number): Observable<SkillTypeBucket>{
     return this.skillTypesService.getBucketsBySkillType(id);
   }*/
- 
-  //item: any
-  // routeToBucket(item: any) {
-    //  this.router.navigateByUrl("/Caliber/settings/category");
-    // this.router.navigate(["Caliber/settings/category"]);
-    // console.log(item);
-    // console.log("routing to category");
-  // }
-
 
   // showAddCategoryModal(){
     // console.log("Show 'Add category' modal button clicked");
