@@ -11,7 +11,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
   styleUrls: ['./skillType-buckets.component.css'],
-  providers: [ BucketsService ]
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
