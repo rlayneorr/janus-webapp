@@ -5,34 +5,30 @@
 
       <h6 class="card-header">Skill Types</h6>
 
-                <!-- <h6>Active</h6> -->
-                <div class="card-body">
-                    <div class="list-group" *ngFor="let skillType of skillTypes">
-                        <a class="list-group-item list-group-item-action">
-                            {{skillType.name}}
-                            <i id="xIcon">
-                                <label class="switch">
-                                    <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
-                                    <span class="slider round"></span>
-                                </label>
-                            </i>
-                            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content); checkBucketSum()">
-                                <span class="editToolTip">Edit</span>
-                            </i>
-                        </a>
-                    </div>
-                    <div class="list-group" *ngFor="let skillType of inactiveSkillTypes">
-                        <a class="list-group-item list-group-item-action">
-                            {{skillType.name}}
-                            <i id="xIcon">
-                                <label class="switch">
-                                    <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
-                                    <span class="slider round"></span>
-                                </label>
-                            </i>
-                            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
-                                <span class="editToolTip">Edit</span>
-                            </i>
+      <div class="card-body">
+          <div class="list-group">
+                <a class="list-group-item list-group-item-action" *ngFor="let skillType of skillTypes">
+                        {{skillType.name}}
+                        <i id="xIcon">
+                            <label class="switch">
+                                <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
+                                <span class="slider round"></span>
+                            </label>
+                        </i>
+                        <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                        </i>
+
+                    </a>
+              <a class="list-group-item list-group-item-action" *ngFor="let skillType of inactiveSkillTypes">
+                  {{skillType.name}}
+                  <i id="xIcon">
+                      <label class="switch">
+                          <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
+                          <span class="slider round"></span>
+                      </label>
+                  </i>
+                  <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
+                  </i>
 
               </a>
           </div>
@@ -57,8 +53,8 @@
           <div class="form-group row">
               <label for="name" class="col-sm-2 col-form-label">Name:</label>
               <div class="col-sm-10">
-                  <input type="text" id="name" name=name formControlName="name" class="form-control" *ngIf="testSingleSkillType"  [value]="testSingleSkillType.skillTypeName">
-                  <input type="text" id="name" name="name" formControlName="name" placeholder="SkillType Name" class="form-control" *ngIf="!testSingleSkillType">
+                  <input type="text" id="name" name=name formControlName="skillTypeName" class="form-control" *ngIf="testSingleSkillType"  [value]="testSingleSkillType.skillTypeName">
+                  <input type="text" id="name" name="name" formControlName="skillTypeName" placeholder="SkillType Name" class="form-control" *ngIf="!testSingleSkillType">
               </div>
           </div>
           <div *ngIf="testSingleSkillType">

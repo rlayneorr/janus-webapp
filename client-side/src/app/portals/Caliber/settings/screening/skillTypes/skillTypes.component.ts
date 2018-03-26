@@ -8,6 +8,7 @@ import { Bucket } from '../entities/Bucket';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import {BucketsService} from'../services/buckets.service';
 
+
 @Component({
   selector: 'app-skillTypes',
   templateUrl: './skillTypes.component.html',
@@ -19,8 +20,7 @@ export class SkillTypesComponent implements OnInit {
   public skillTypes:any[]=[];
   public inactiveSkillTypes:any[]=[];
   public allSkillTypes:any[]=[];
-  public bigGroup:any[]=[];
-  bucketWeightSum: number = 0;
+  public bucketWeightSum: number;
 
   removeElement(item:any){
     let thing:any;
@@ -35,6 +35,19 @@ export class SkillTypesComponent implements OnInit {
 
   }
 
+
+
+  testingGettingTags(){
+    var tag ={
+        tagName : "Dolly",
+        tagId :7
+    }
+    this.skillTypeService.testingCreatingTags(tag);
+   this.skillTypeService.testingGetTags().subscribe(
+      data =>{
+        console.log(data);
+      });
+  }
   setSkillTypes(){
     let thing:any;
     this.skillTypes = [];
@@ -47,14 +60,16 @@ export class SkillTypesComponent implements OnInit {
         this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
-}
+    console.log(this.skillTypes);
+  }
 
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
     private skillTypeService: SkillTypesService,
-    private bucketService:BucketsService,
-    public router: Router) { }
+    private bucket:BucketsService,
+  ) { }
+
 
 
   createSkillType: FormGroup;
@@ -67,19 +82,21 @@ export class SkillTypesComponent implements OnInit {
    */
   initFormControl() {
     this.createSkillType = this.fb.group({
-      'name': ['', Validators.required],
+      'skillTypeName': ['', Validators.required],
       'bucketWeightSum': ['', Validators.compose(
           [Validators.min(100), Validators.max(100)]
       )]
-  });
+    });
   }
 
 
     open(content) {
       this.modalService.open(content).result.then((result) => {
         this.testSingleSkillType = null;
+        this.initFormControl();
       }, (reason) => {
         this.testSingleSkillType = null;
+        this.initFormControl();
       });
       event.stopPropagation();
     }

@@ -8,14 +8,19 @@
         <p>Search bar maybe!!!</p>
         <!-- List of all buckets -->
         <div class="list-group list-group-flush">
-          <!-- clickable to route to Bucket, refactor skillTypeBucket to Bucket -->
-          <!--* TODO routeToBucket() -->
-          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(bucket)">
-            <div>{{bucket.name}}</div>
-            <small>{{bucket.description}}</small>
-            <!--* open(editBucket), calls modal to open -->
-            <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(editBucket); $event.stopPropagation()"></i>
-          </a>
+
+
+          <li class="list-group-item list-group-item-action" *ngFor="let bucket of buckets">
+            <!-- clickable to route to Bucket, refactor skillTypeBucket to Bucket -->
+            <!--* check routeToBucket() -->
+            <a (click)="routeToBucket(bucket)">
+              <div>{{bucket.name}}</div>
+              <small>{{bucket.description}}</small>
+            </a>
+            <!--* check open(editname) -->
+            <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(editBucket)" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
+          </li>
+
 
         </div>
       </div>
