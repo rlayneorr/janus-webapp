@@ -24,7 +24,7 @@ export class AssociateService {
      * Get all of the associates
      */
     getAllAssociates(): Observable<any> {
-        let url: string = environment.url + this.associatePath;
+        let url: string = environment.msurl + '8091/all/associate';
         return this.http.get(url);
     }
 
