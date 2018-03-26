@@ -36,6 +36,11 @@ export class BucketsService {
     // return this.http.get(this.url + "getBuckets");
   }
 
+  /** PUT: update the hero on the server. Returns the updated hero upon success. */
+  updateBucket (bucket: Bucket): Observable<Bucket> {
+    return this.http.post<Bucket>(this.url, bucket, httpOptions)
+  }
+
   getBucketById(bucketId: number){
       return this.http.get(this.url + bucketId);
   }
