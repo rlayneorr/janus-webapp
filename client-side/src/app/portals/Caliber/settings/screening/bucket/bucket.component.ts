@@ -13,7 +13,6 @@ export class BucketComponent implements OnInit {
   constructor(private bucketsService: BucketsService) { }
 
   ngOnInit() {
-      console.log(this.bucketsService.getCurrentBucket());
   }
 
 }

@@ -183,14 +183,6 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
-
-    routeToBucket(item: Bucket){
-        let bucket = new Bucket(4, "test", "testBucket");
-        this.bucketService.setBucket(item);;
-        this.router.navigate(["Caliber/settings/category"]);
-        console.log("routing to category");
-        console.log(this.bucketService.currentBucket);
-    }
   ngOnInit() {
     this.allSkillTypes = [
       {name:"Java",isActive:true},

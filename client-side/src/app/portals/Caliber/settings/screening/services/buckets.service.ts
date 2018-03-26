@@ -43,19 +43,4 @@ export class BucketsService {
       return this.http.post(this.url + "createBucket", bucket, httpOptions);
   }
   
-  currentBucket;
-
-  setBucket(bucket: Bucket){
-      this.currentBucket = bucket;
-  }
-  getCurrentBucket():Bucket {
-    // console.log("Current bucket called");
-    if(this.currentBucket!=null){
-        return this.currentBucket;
-    }
-    else{
-        console.log("Bucket is null");
-    }
-  }
-
 }
