@@ -97,4 +97,3 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 }
-
