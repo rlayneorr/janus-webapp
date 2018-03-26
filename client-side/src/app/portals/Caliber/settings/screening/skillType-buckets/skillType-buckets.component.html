@@ -14,14 +14,14 @@
             <div>{{bucket.name}}</div>
             <small>{{bucket.description}}</small>
             <!--* editBucket(bucket), passes the bucket selected to component side.
-                * open(editBucket), calls modal to open. -->
+                * open(edit), calls modal to open. -->
             <i id="penIcon" class="fa fa-pencil pull-right" (click)="editBucket(bucket); open(edit)"></i>
           </a>
         </div>
       </div>
 
-      <!--* 'open(content)'  -->
-      <button type="button" class="btn btn-primary btn-sm" (click)="open(content)">Create Category</button>
+      <!--* 'open(create)'  -->
+      <button type="button" class="btn btn-primary btn-sm" (click)="open(create)">Create Category</button>
     </div> 
   </div> 
 </div>
@@ -40,10 +40,10 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label>Name:</label>
-        <input type="text" [(ngModel)]="bucketToEdit.name" [ngModelOptions]="{standalone: true}"/><br>
-        <label>Description:</label>
-        <textarea type="text" [(ngModel)]="bucketToEdit.description" [ngModelOptions]="{standalone: true}"></textarea>
+        <label>Name:</label><br>
+        <input  class="form-control" type="text" [(ngModel)]="currBucket.name" [ngModelOptions]="{standalone: true}"/><br>
+        <label>Description:</label><br>
+        <textarea class="form-control" type="text" [(ngModel)]="currBucket.description" [ngModelOptions]="{standalone: true}"></textarea>
       </div>
     </form>
   </div>
@@ -52,6 +52,34 @@
     <button type="button" class="btn btn-primary btn-sm" (click)="c('Close click')">Close</button>
     <!--* updateBucket(), updates the selected bucket to update database -->
     <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" (click)="updateBucket(); c('Close click')">Save</button>
+  </div>
+</ng-template>
+
+<!--Create Bucket modal -->
+<!--* Create name, description -->
+<ng-template #create let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Create Category</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Name:</label><br>
+        <input  class="form-control" type="text" [(ngModel)]="newBucket.name" [ngModelOptions]="{standalone: true}"/><br>
+        <label>Description:</label><br>
+        <textarea class="form-control" type="text" [(ngModel)]="newBucket.description" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-sm" (click)="c('Close click')">Close</button>
+    <!--* create(), creates new bucket in the database -->
+    <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" (click)="createBucket(); c('Close click')">Create</button>
   </div>
 </ng-template>
 
