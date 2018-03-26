@@ -5,10 +5,10 @@
       <h6 class="card-header">All Buckets</h6>
       <div class="card-body">
         <!--* Search bar, maybe -->
-        <p>This is All Buckets in skillType-buckets.component!!!</p>
-
-        <!-- dev -->
+        <p>Search bar maybe!!!</p>
+        <!-- List of all buckets -->
         <div class="list-group list-group-flush">
+
 
           <li class="list-group-item list-group-item-action" *ngFor="let bucket of buckets">
             <!-- clickable to route to Bucket, refactor skillTypeBucket to Bucket -->
@@ -18,15 +18,14 @@
               <small>{{bucket.description}}</small>
             </a>
             <!--* check open(editname) -->
-            <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(editBucket)"></i>
+            <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(editBucket)" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
           </li>
 
+
         </div>
-
-
       </div>
 
-      <!--* need to fix 'open(content)'  -->
+      <!--* TODO 'open(content)'  -->
       <button type="button" class="btn btn-primary btn-sm" (click)='open(content)'>Create Category</button>
     </div> 
   </div> 
@@ -47,7 +46,7 @@
   </form> -->
 
   <div class="modal-header">
-    <h6 class="modal-title">Edit Bucket</h6>
+    <h6 class="modal-title">Edit Category</h6>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -59,6 +58,8 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-primary btn-sm" (click)="c('Close click')">Close</button>
+    <!--* Need to  -->
+    <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" (click)="editBucket(newName); c('Close click')">Save</button>
   </div>
 </ng-template>
 

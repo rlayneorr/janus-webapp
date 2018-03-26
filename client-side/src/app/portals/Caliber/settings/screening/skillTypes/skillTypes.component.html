@@ -7,7 +7,19 @@
 
       <div class="card-body">
           <div class="list-group">
-              <a class="list-group-item list-group-item-action" *ngFor="let skillType of bigGroup">
+                <a class="list-group-item list-group-item-action" *ngFor="let skillType of skillTypes">
+                        {{skillType.name}}
+                        <i id="xIcon">
+                            <label class="switch">
+                                <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
+                                <span class="slider round"></span>
+                            </label>
+                        </i>
+                        <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                        </i>
+      
+                    </a>
+              <a class="list-group-item list-group-item-action" *ngFor="let skillType of inactiveSkillTypes">
                   {{skillType.name}}
                   <i id="xIcon">
                       <label class="switch">
@@ -15,8 +27,7 @@
                           <span class="slider round"></span>
                       </label>
                   </i>
-                  <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
-                      <span class="editToolTip">Edit</span>
+                  <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
                   </i>
 
               </a>
