@@ -112,7 +112,7 @@ export class BatchService {
     return this.http.delete(this.url + '/delete/batch/' + id);
   }
 
-  getBatchByName(id:number): Observable<any> {
+  getBatchLocationById(id:number): Observable<any> {
     return this.http.get(this.url + '/one/batchlocation/byid/' + id);
   }
 
