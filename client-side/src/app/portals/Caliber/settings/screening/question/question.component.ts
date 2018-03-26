@@ -29,7 +29,7 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
 })
 export class QuestionComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService : TagsService, private questionService: QuestionsService) { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService: TagsService, private questionService: QuestionsService) { }
 
   createQuestion: FormGroup;
   newQuestion: Question;
@@ -64,7 +64,7 @@ export class QuestionComponent implements OnInit {
     }
   }
   deactivateQuesiton(question){
-    
+
     if(question.isActive){
       console.log("true");
       this.questionService.deactivateQuestion;
@@ -74,7 +74,7 @@ export class QuestionComponent implements OnInit {
       this.questionService.activateQuestion;
    }
   }
-    
+
   setQuestionNull(){
     this.question = new Question();
     this.question.answers = [];
@@ -82,7 +82,7 @@ export class QuestionComponent implements OnInit {
   editQuestion(question){
     this.question = question;
     let i: number = 0;
-    
+
 
     for(i; i < this.allTags.length; i++){
       let j: number = 0;
@@ -91,8 +91,8 @@ export class QuestionComponent implements OnInit {
           if(this.allTags[i].id==question.tagIds[j]){
             this.currentTags.push(this.allTags[i]);
             this.allTags[i]=null;
-          } 
-        }  
+          }
+        }
       }
     }
   }
