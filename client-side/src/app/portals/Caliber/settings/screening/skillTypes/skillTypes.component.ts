@@ -54,7 +54,8 @@ export class SkillTypesComponent implements OnInit {
     private modalService: NgbModal,
     private fb: FormBuilder,
     private skillTypeService: SkillTypesService,
-    private bucket:BucketsService) { }
+    private bucketService:BucketsService,
+    public router: Router) { }
 
 
   createSkillType: FormGroup;
@@ -123,25 +124,6 @@ export class SkillTypesComponent implements OnInit {
 
     testSingleSkillType: SkillType;
 
-    //WITHOUT NESTED FORLOOPS
-    // editSkillType(skillType){
-    //     this.testSingleSkillType = new SkillType();
-    //     this.testSingleSkillType.skillTypeName = skillType.skillTypeName;
-    //     this.editAllBuckets();
-    // }
-    //
-    // //set the skillType buckets within ALL BUCKETS to be already mapped
-    // editAllBuckets(){
-    //     for(let index in this.testSkillTypeBuckets){
-    //         for(let allIndex in this.testBuckets){
-    //             if(this.testSkillTypeBuckets[index].bucketId == this.testBuckets[allIndex].skillTypeId){
-    //                 this.testBuckets[allIndex].weight = this.testSkillTypeBuckets[index].weight;
-    //                 this.testBuckets[allIndex].mappedToSkillType = true;
-    //             }
-    //         }
-    //     }
-    // }
-
     editSkillType(skillType){
         this.testSingleSkillType = {
             skillTypeName: skillType.name,
@@ -187,16 +169,6 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
-    //ORIGINAL MODAL METHODS
-    // addToMapped(bucket){
-    //     bucket.mappedToSkillType = true;
-    //     this.bucketWeightSum = 0;
-    // }
-    //
-    // removeFromMapped(bucket){
-    //     bucket.mappedToSkillType = false;
-    // }
-
     clearSkillTypeBuckets(){
         for(let index in this.testBuckets){
             this.testBuckets[index].mappedToSkillType = false;
@@ -211,6 +183,14 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
+
+    routeToBucket(item: Bucket){
+        let bucket = new Bucket(4, "test", "testBucket");
+        this.bucketService.setBucket(item);;
+        this.router.navigate(["Caliber/settings/category"]);
+        console.log("routing to category");
+        console.log(this.bucketService.currentBucket);
+    }
   ngOnInit() {
     this.allSkillTypes = [
       {name:"Java",isActive:true},
