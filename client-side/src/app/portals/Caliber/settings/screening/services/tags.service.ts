@@ -11,9 +11,9 @@ headers: new HttpHeaders({
 @Injectable()
 export class TagsService {
 
-  constructor(private http: HttpClient, private tag:Tag) { }
+  constructor(private http: HttpClient) { }
   url: string = "/tag/";
-
+  tag: Tag;
   getAllTags(){
       return this.http.get(this.url + "getTags");
   }

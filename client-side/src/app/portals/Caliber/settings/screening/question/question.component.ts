@@ -63,7 +63,6 @@ export class QuestionComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-  //ToDo
   deactivateQuesiton(question){
     
     if(question.isActive){
@@ -100,8 +99,8 @@ export class QuestionComponent implements OnInit {
   newTag(newTag : string){
     let tag : Tag = new Tag();
     tag.name = newTag;
-    tag.id = this.tagsService.createNewTag(newTag);
-    this.currentTags.push(tag);
+    //tag.id = this.tagsService.createNewTag(newTag);
+    //this.currentTags.push(tag);
   }
   addNewQuestion(){
     let newCurrentTagIds : number[] = [];

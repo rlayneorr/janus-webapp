@@ -46,8 +46,11 @@
           <input name="question" [(ngModel)]="question.text" type = "text" id = "questionText" placeholder="Question" class="form-control bucketWeight" min="0" max="100">
         </div>
       </div>
-      <ngb-accordion #acc="ngbAccordion">
-        <ngb-panel title="Answers">
+      <ngb-accordion #acc="ngbAccordion"  >
+          <ngb-panel>
+              <ng-template ngbPanelTitle >
+                <span >Questions</span>
+              </ng-template>
           <ng-template ngbPanelContent>
             <div class="form-group row">
               <label for = "one point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">One point:</label>
