@@ -57,5 +57,14 @@ export class AppPage {
   getClientListTitleText() {
     return element(by.id('clientTitle')).getText();
   }
+
+  clickCharts(){
+    browser.actions().
+    mouseMove(element(by.tagName('canvas')[2])).
+    mouseMove({x: 200, y: 100}).
+    doubleClick().
+    perform();
+    browser.pause();
+  }
   
 }
