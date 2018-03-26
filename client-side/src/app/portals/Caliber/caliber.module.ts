@@ -139,6 +139,7 @@ import { QuestionComponent} from './settings/screening/question/question.compone
 import { TagFilterPipe } from './settings/screening/question/question.filter';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -289,7 +290,7 @@ import { TagFilterPipe } from './settings/screening/question/question.filter';
     SkillTypesService,
     BucketsService,
     TagsService,
-    HttpErrorHandlerService
+    HttpErrorHandlerService,
   ],
   bootstrap: [
     TrainersComponent

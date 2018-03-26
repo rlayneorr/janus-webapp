@@ -9,6 +9,7 @@ import {Questions} from '../mock-questions-array'
 import {QuestionsService} from '../services/questions.service';
 import {TagsService} from '../services/tags.service';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
+import {BucketsService} from '../services/buckets.service';
 
 @Component({
   selector: 'app-question',
@@ -29,7 +30,7 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
 })
 export class QuestionComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService : TagsService, private questionService: QuestionsService) { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService : TagsService, private questionService: QuestionsService,private bucketsService:BucketsService) { }
 
   createQuestion: FormGroup;
   newQuestion: Question;
@@ -38,7 +39,6 @@ export class QuestionComponent implements OnInit {
   question:Question;
   questions: Question[];
   filter: Tag = new Tag();
-
   ngOnInit() {
     this.allTags = TAGS;
     this.currentTags = [];
@@ -100,7 +100,7 @@ export class QuestionComponent implements OnInit {
   newTag(newTag : string){
     let tag : Tag = new Tag();
     tag.name = newTag;
-    tag.id = this.tagsService.createNewTag(newTag);
+   // tag.id = this.tagsService.createNewTag(newTag);
     this.currentTags.push(tag);
   }
   addNewQuestion(){

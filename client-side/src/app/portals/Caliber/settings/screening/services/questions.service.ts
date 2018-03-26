@@ -15,6 +15,7 @@ export class QuestionsService {
 
   /** https://hydra-question-service.cfapps.io/ **/
   url: string = "/question/";
+  question: any = "empty";
 
   createNewQuestion(bucketId: number, question: Question){
       return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.text, answers: question.answers, tagIds: question.tagIds}, httpOptions);

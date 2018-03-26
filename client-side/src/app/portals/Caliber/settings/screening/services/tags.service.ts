@@ -11,17 +11,17 @@ headers: new HttpHeaders({
 @Injectable()
 export class TagsService {
 
-  constructor(private http: HttpClient, private tag:Tag) { }
+  constructor(private http: HttpClient) { }
   url: string = "/tag/";
 
   getAllTags(){
       return this.http.get(this.url + "getTags");
   }
 
-  createNewTag(name: string):number{
-    this.http.post(this.url + "createNewTag", name, httpOptions).subscribe(data=>{
+  createNewTag(name: string){
+   /* this.http.post(this.url + "createNewTag", name, httpOptions).subscribe(data=>{
         this.tag = (data as Tag);
     });
-    return this.tag.id;
+    return this.tag.id;*/
   }
 }
