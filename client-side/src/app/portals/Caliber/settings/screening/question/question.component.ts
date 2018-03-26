@@ -9,7 +9,7 @@ import {Questions} from '../mock-questions-array'
 import {QuestionsService} from '../services/questions.service';
 import {TagsService} from '../services/tags.service';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
-
+import {BucketsService} from '../services/buckets.service';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -29,7 +29,10 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
 })
 export class QuestionComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService: TagsService, private questionService: QuestionsService) { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder,
+     private tagsService: TagsService,
+      private questionService: QuestionsService,
+    private bucketService: BucketsService) { }
 
   createQuestion: FormGroup;
   newQuestion: Question;

@@ -55,7 +55,7 @@ getSkillTypes() {
     this.bucketService.setBucket(item);
     console.log("routing to category");
     console.log(this.bucketService.currentBucket);
-    this.router.navigate(["Caliber/settings/category"]);
+    this.router.navigate(["Caliber/settings/screening/category"]);
   }
 
   /** Stores the value of selected bucket to a 'bucketToEdit' */
