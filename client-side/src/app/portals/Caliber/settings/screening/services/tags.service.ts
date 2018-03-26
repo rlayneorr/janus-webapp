@@ -10,8 +10,8 @@ headers: new HttpHeaders({
 
 @Injectable()
 export class TagsService {
-
-  constructor(private http: HttpClient, private tag:Tag) { }
+    tag: Tag;
+  constructor(private http: HttpClient) { }
   url: string = "/tag/";
 
   getAllTags(){
