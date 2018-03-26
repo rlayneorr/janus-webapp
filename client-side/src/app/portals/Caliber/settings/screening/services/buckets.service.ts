@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import{ Subject } from 'rxjs/Subject';
-
+ 
 import { Bucket } from '../entities/Bucket';
 
 const httpOptions = {
@@ -24,10 +24,9 @@ export class BucketsService {
   url: string = "api/buckets";
   /** Making an Observable */
   bucketSubject = new Subject();
-  
-
   /** For development only */
-  testBucket: Bucket = new Bucket(0, "Java", "This is Java");
+ 
+ public currentBucket: Bucket;
 
   constructor(private http: HttpClient) {}
 
@@ -46,5 +45,41 @@ export class BucketsService {
       return this.http.post(this.url + "createBucket", bucket, httpOptions);
   }
 
+  setBucket(bucket:Bucket){
+     // console.log("Set bucket called");
+
+     this.currentBucket=bucket;
+    //  console.log(this.currentBucket);
+  }
+
+  getCurrentBucket():Bucket {
+     // console.log("Current bucket called");
+     if(this.currentBucket!=null){
+     return this.currentBucket;
+     }
+     else{
+         console.log("Bucket is null");
+     }
+    
+  
+   
+ }
+  setName(name:string)
+  {
+      
+      this.currentBucket.name=name;
+  }
+
+  getName(id:number){
+      return this.currentBucket.name;
+  }
+
+  setDescription(desc:string){
+      this.currentBucket.description=desc;
+  }
+  
+  getDescription(){
+      return this.currentBucket.description;
+  }
 
 }
