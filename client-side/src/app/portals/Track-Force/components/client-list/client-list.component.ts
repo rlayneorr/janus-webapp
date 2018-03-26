@@ -79,6 +79,7 @@ export class ClientListComponent implements OnInit {
     var self = this;
     this.clientService.getAllClients().subscribe(
       clients => {
+        console.log(clients);
         // save array of object Client
         self.clientInfo = clients;
         // clear name list to reload list and run through filter
