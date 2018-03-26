@@ -1,6 +1,4 @@
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-screening',
@@ -9,10 +7,9 @@ import { Router } from '@angular/router';
 })
 export class ScreeningComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-    console.log("it worked");
-  }
+  
+  ngOnInit() {}
 
 }

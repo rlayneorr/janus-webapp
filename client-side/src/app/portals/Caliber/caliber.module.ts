@@ -50,6 +50,11 @@ import { SkillTypesService } from './settings/screening/services/skillTypes.serv
 import { BucketsService } from './settings/screening/services/buckets.service';
 import { TagsService } from './settings/screening/services/tags.service';
 import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
+/** for in memory data service 
+  * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
+  */
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './settings/screening/services/in-memory-data.service';
 
 //N.T.
 import { ApiService } from './util/api.service';
@@ -148,6 +153,17 @@ import { TagFilterPipe } from './settings/screening/question/question.filter';
     ScrollEventModule,
     Ng2PageScrollModule,
 
+    //1801-caliber-dev-angels services
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {
+        dataEncapsulation: false,
+        passThruUnknownUrl: true,
+        put204: false // return entity after PUT/update
+      }
+    )
   ],
   declarations: [
     // pipes

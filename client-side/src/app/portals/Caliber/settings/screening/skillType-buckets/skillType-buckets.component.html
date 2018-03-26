@@ -1,51 +1,67 @@
-<!-- skillTypeBuckets component appears when list item in the SkillType component is clicked  -->
+<!-- skillTypeBuckets list  -->
+<div id="ABcontent" class="container">
+  <div class="row justify-content-center">
+    <div class="card w-50">
+      <h6 class="card-header">All Buckets</h6>
+      <div class="card-body">
+        <!--* Search bar, maybe -->
+        <p>Search bar maybe!!!</p>
+        <!-- List of all buckets -->
+        <div class="list-group list-group-flush">
+          <!-- clickable to route to Bucket, refactor skillTypeBucket to Bucket -->
+          <!--* TODO routeToBucket() -->
+          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(bucket)">
+            <div>{{bucket.name}}</div>
+            <small>{{bucket.description}}</small>
+            <!--* open(editBucket), calls modal to open -->
+            <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(editBucket); $event.stopPropagation()"></i>
+          </a>
 
-<div class="moveRight">
-
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card w-50">
-                <h3 class="card-header">{{bucketService.name}}</h3>
-
-                <div class="card-body">
-                    <div *ngIf="skillType.name === 'Java'">
-                        <div class="list-group" *ngFor="let skillTypeBucket of allSkillTypeBuckets">
-                            <a class="list-group-item list-group-item-action" (click)="routeToBucket(skillTypeBucket.Name)">
-                                <span> {{skillTypeBucket.Name}} &nbsp; {{skillTypeBucket.Weight}}%
-                                </span>
-                                <i id="xIcon" class="fa fa-remove pull-right"></i>
-                                <i id="penIcon" class="fa fa-pencil pull-right" (click)=" open(editname)"></i>
-
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-
-                <button class="btn btn-primary btn-sm" id="createSkillType" (click)='open(content)'>Add Category</button>
-            </div>
         </div>
-    </div>
+      </div>
+
+      <!--* TODO 'open(content)'  -->
+      <button type="button" class="btn btn-primary btn-sm" (click)='open(content)'>Create Category</button>
+    </div> 
+  </div> 
 </div>
 
-<!--Creating edit name modal -->
-<ng-template #editname let-c="close" let-d="dismiss">
-    <form>
-        <div class="form-group">
-            <h3 class="tb-heading">Edit Category Name</h3>
-            <label>New Category name</label>
-            <input class="form-control" type="text" name="newName">
-            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-            <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="editBucket(newName); c('Close click')">Save</button>
-        </div>
-    </form>
+
+<!--Edit Bucket modal -->
+<!--* Editable name, description -->
+<ng-template #editBucket let-c="close" let-d="dismiss">
+<!--   <form>
+    <div class="form-group">
+      <h3 class="tb-heading">Edit Category Name</h3>
+      <label>New Category name</label>
+      <input class="form-control" type="text" name="newName">
+      <button type="button" class="btn btn-primary btn-sm" (click)="c('Close click')">Close</button>
+      <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" (click)="editBucket(newName); c('Close click')">Save</button>
+    </div>
+  </form> -->
+
+  <div class="modal-header">
+    <h6 class="modal-title">Edit Category</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <p>One fine body&hellip;</p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-sm" (click)="c('Close click')">Close</button>
+    <!--* Need to  -->
+    <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" (click)="editBucket(newName); c('Close click')">Save</button>
+  </div>
 </ng-template>
 
 <!-- Beginning of Add Category modal - displays dropdown and text field to take in numeric
 value for weight  -->
 
-<ng-template #content let-c="close" let-d="dismiss">
+<!-- <ng-template #content let-c="close" let-d="dismiss">
     <form>
         <div class="form-group">
             <h3 class="tb-heading">Add a Category to this SkillType </h3>
@@ -58,11 +74,11 @@ value for weight  -->
             <label>Inactive Categories</label>
             <select class="form-control">
                 <option *ngFor="let skillTypeBucket of allSkillTypeBuckets">{{skillTypeBucket.Name}}</option>
-            </select>
+            </select> -->
 
             <!-- Weight input-->
 
-            <input type="number" id="weight" name="weight" placeholder="Category Weight" class="form-control">
+<!--             <input type="number" id="weight" name="weight" placeholder="Category Weight" class="form-control">
             <br>
             <button class="form-control" (click)="addNewSkillType(skillTypeBucket.Name,weight)">Add New SkillType!</button>
 
@@ -72,4 +88,4 @@ value for weight  -->
             <button type="button" data-dismiss="modal" (click)="c('Close click')" class="btn btn-outline-dark">Save</button>
         </div>
     </form>
-</ng-template>
+</ng-template> -->

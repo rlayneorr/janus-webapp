@@ -11,21 +11,21 @@
         <!-- <h6>Active</h6> -->
         <div class="card-body">
           <div class="list-group" *ngFor="let question of questions">
-              <a class="list-group-item list-group-item-action">
+              <a class="list-group-item list-group-item-action" *ngIf = "question">
                 {{question.text}}
                 <i id="xIcon">
                   <label class="switch">
-                      <input type="checkbox" [checked] = question.isActive (change) = "removeQuesiton(question)">
+                      <input type="checkbox" [checked] = question.isActive (change) = "deactivateQuesiton(question)">
                       <span class="slider round"></span>
                   </label>
               </i>
-              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)">
+              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editQuestion(question); open(content)">
                   <span class="editToolTip">Edit</span>
               </i>
               </a>
           </div>   
       </div>
-      <button class="btn" (click)='open(content);'>Create New Question</button>
+      <button class="btn" (click)='setQuestionNull(); open(content);'>Create New Question</button>
     </div>
   </div>
 </div>
@@ -86,20 +86,30 @@
       <ngb-accordion #acc="ngbAccordion">
         <ngb-panel title="Tags">
           <ng-template ngbPanelContent>
-            <div  class="form-group row">
-              <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
-           <!--Add new tag section-->
-              <div class="col-sm-9 col-form-label"  align = "center">
-                <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
+              <div class="row">
+                <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
+                <!--Add new tag section-->
+                <div class="col-sm-9 col-form-label"  align = "center">
+                  <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
+                </div>
               </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-10 row">
-              <span *ngFor="let tag of currentTags">
-                <span *ngIf = "tag" class="input-group-addon revatureOrange" (click)="removeTagFromQuestion(tag)" style="margin: 1px" [innerHTML]="tag.name"></span>
-              </span>
-            </div>
-          </div>
+              <div id = "allTagsDiv"  class="form-group row">
+                <div id = "allTagsDiv" data-spy="scroll" data-offset="50">
+                  <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-sm-11 col-8">
+                          <div class="form-group row">
+                            <div class="col-sm-12 row">
+                              <span *ngFor="let tag of currentTags">
+                                <span *ngIf = "tag" class="input-group-addon revatureOrange" (click)="removeTagFromQuestion(tag)" style="margin: 1px" [innerHTML]="tag.name"></span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>     
       <!--Add tags section-->
       <div class="form-group row">
         <label for="allTags" class="col-sm-3 col-form-label">All Tags:</label>
@@ -107,11 +117,19 @@
           <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100" class = "form-control">
         </div>
       </div>
-      <div class="form-group row">
-        <span *ngFor="let tag of allTags| tagfilter:filter">
-          <span class="input-group-addon" (click)="addTagToQuestion(tag)" style="margin: 1px">{{tag.name}}</span>
-        </span>
-      </div>
+      <div id = "allTagsDiv" data-spy="scroll" data-offset="50">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-sm-11 col-8">
+                  <div class="form-group row">
+                    <span *ngFor="let tag of allTags| tagfilter:filter">
+                      <span *ngIf = "tag" class="input-group-addon" (click)="addTagToQuestion(tag)" style="margin: 1px">{{tag.name}}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       </ng-template>
       </ngb-panel>
     </ngb-accordion>
@@ -121,7 +139,9 @@
           <br>
           <br>
           <br>
-          <p id="newQuestionAlert"></p>
+      </div>
+      <div class="form-group row">
+        <p id="newQuestionAlert"></p>
       </div>
     </form>
     </div>

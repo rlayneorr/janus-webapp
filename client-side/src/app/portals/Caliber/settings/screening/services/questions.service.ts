@@ -13,11 +13,16 @@ export class QuestionsService {
 
   constructor(private http: HttpClient) { }
 
+  /** https://hydra-question-service.cfapps.io/ **/
   url: string = "/question/";
 
   createNewQuestion(bucketId: number, question: Question){
       return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.text, answers: question.answers, tagIds: question.tagIds}, httpOptions);
   }
+
+  updateQuestion(bucketId: number, question: Question){
+    return this.http.post(this.url + "updateQuestion", {bucketId: bucketId, text: question.text, answers: question.answers, tagIds: question.tagIds}, httpOptions);
+}
 
   deactivateQuestion(questionId: number){
       return this.http.put(this.url + "deactivateQuestion", questionId, httpOptions);
