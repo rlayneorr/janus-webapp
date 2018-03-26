@@ -34,7 +34,6 @@ export class PlacementService {
     return this.http.get(this.url + '/all/placement/getByAssociateId/' + associateId);
   }
 
-   //-- create a placement
   createPlacement(placement: Placement): Observable<any> {
     return this.http.post(this.url + '/placement/create', {placement: placement});
   }

@@ -27,7 +27,6 @@ export class CurriculumService {
     return this.http.get(this.url + '/one/curriculum/' + curriculumId);
   }
 
-   //-- create a curriculum
   createCurriculum(curriculum: Curriculum): Observable<any> {
     return this.http.post(this.url + '/curriculum/create/', {curriculum: curriculum});
   }

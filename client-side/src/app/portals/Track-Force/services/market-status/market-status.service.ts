@@ -10,7 +10,7 @@ import { MarketingStatus } from '../../models/marketing-status.model';
  */
 
 @Injectable()
-export class InterviewService {
+export class MarketStatusService {
   private url: string = environment.msurl + '8094';
 
   constructor(private http: HttpClient) { }
@@ -20,7 +20,7 @@ export class InterviewService {
   }
 
   getAllMarketingStatusMapped(): Observable<any> {
-    return this.http.get(this.url + '/all/marketingstatus/mapped' + associateId);
+    return this.http.get(this.url + '/all/marketingstatus/mapped');
   }
 
   getOneMarketingStatus(name: string): Observable<any> {
@@ -31,7 +31,7 @@ export class InterviewService {
     return this.http.post(this.url + '/add/marketingstatus', {marketingStatus: marketingStatus});
   }
 
-  updateMarketingStatus(marketingStatus: MarketingStatus, id:number): Observable<any> {
+  updateMarketingStatus(marketingStatus: MarketingStatus, id: number): Observable<any> {
     return this.http.put(this.url + '/update/marketingstatus' +  id, {marketingStatus: marketingStatus});
   }
 
