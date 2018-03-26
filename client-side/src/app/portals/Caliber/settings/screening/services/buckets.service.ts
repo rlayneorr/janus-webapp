@@ -36,18 +36,18 @@ export class BucketsService {
     // return this.http.get(this.url + "getBuckets");
   }
 
+  getBucketById(bucketId: number){
+      return this.http.get(this.url + bucketId);
+  }
+
   /** PUT: update the hero on the server. Returns the updated hero upon success. */
   updateBucket (bucket: Bucket): Observable<Bucket> {
     return this.http.post<Bucket>(this.url, bucket, httpOptions)
   }
 
-  getBucketById(bucketId: number){
-      return this.http.get(this.url + bucketId);
-  }
-
-  //Need to create bucket models
-  createNewBucket(bucket: Bucket){
-      return this.http.post(this.url + "createBucket", bucket, httpOptions);
+  /** POST: add a new bucket to the database */
+  createNewBucket(bucket: Bucket): Observable<Bucket> {
+      return this.http.post<Bucket>(this.url, bucket, httpOptions);
   }
 
   setBucket(bucket:Bucket){
@@ -65,8 +65,8 @@ export class BucketsService {
      else{
          console.log("Bucket is null");
      }
+  }
 
- }
   setName(name:string)
   {
 
