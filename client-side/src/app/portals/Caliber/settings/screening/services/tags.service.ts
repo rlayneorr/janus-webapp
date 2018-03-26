@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Tag} from '../entities/Tag'
 
 const httpOptions = {
 headers: new HttpHeaders({
@@ -9,16 +10,18 @@ headers: new HttpHeaders({
 
 @Injectable()
 export class TagsService {
-
+    tag: Tag;
   constructor(private http: HttpClient) { }
-
   url: string = "/tag/";
 
   getAllTags(){
       return this.http.get(this.url + "getTags");
   }
 
-  createNewTag(name: string){
-      return this.http.post(this.url + "createNewTag", name, httpOptions);
+  createNewTag(name: string):number{
+    this.http.post(this.url + "createNewTag", name, httpOptions).subscribe(data=>{
+        this.tag = (data as Tag);
+    });
+    return this.tag.id;
   }
 }
