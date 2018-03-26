@@ -86,6 +86,7 @@ export class SkillTypesComponent implements OnInit {
         this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
+  //  console.log(this.skillTypes.length);
     console.log(this.skillTypes);
   }
 
@@ -180,13 +181,13 @@ export class SkillTypesComponent implements OnInit {
 
   ngOnInit() {
     this.allSkillTypes = [
-      {name:"Java",isActive:true},
-      {name:'.Net',isActive:true},
-      {name:'SDET',isActive:true},
-      {name:'Label',isActive:true},
-      {name:"Pega",isActive:false},
-      {name:'Salesforce',isActive:false},
-      {name:'Software',isActive:false}
+      {skillTypeName:"Java",isActive:true},
+      {skillTypeName:'.Net',isActive:true},
+      {skillTypeName:'SDET',isActive:true},
+      {skillTypeName:'Label',isActive:true},
+      {skillTypeName:"Pega",isActive:false},
+      {skillTypeName:'Salesforce',isActive:false},
+      {skillTypeName:'Software',isActive:false}
     ]
     this.setSkillTypes();
   }

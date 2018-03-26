@@ -8,7 +8,7 @@
       <div class="card-body">
           <div class="list-group">
                 <a class="list-group-item list-group-item-action" *ngFor="let skillType of skillTypes">
-                        {{skillType.name}}
+                        {{skillType.skillTypeName}}
                         <i id="xIcon">
                             <label class="switch">
                                 <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
@@ -20,7 +20,7 @@
 
                     </a>
               <a class="list-group-item list-group-item-action" *ngFor="let skillType of inactiveSkillTypes">
-                  {{skillType.name}}
+                  {{skillType.skillTypeName}}
                   <i id="xIcon">
                       <label class="switch">
                           <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
