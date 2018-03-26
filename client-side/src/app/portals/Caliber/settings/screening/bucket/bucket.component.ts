@@ -4,8 +4,10 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { BucketsService } from '../services/buckets.service';
 import { QuestionsService } from '../services/questions.service';
-import { Question } from '../entities/Question'
-import { Bucket } from '../entities/Bucket'
+import { Question } from '../entities/Question';
+import { Bucket } from '../entities/Bucket';
+import { Tag } from '../entities/Tag';
+import { TAGS } from '../mock-tag';
 import { SkillTypesService } from '../services/skillTypes.service';
 import {Observable} from 'rxjs/Observable';
 
@@ -30,9 +32,9 @@ export class BucketComponent implements OnInit {
     this.questionList = [
       { id: 1, text: "test", answers: ["1", "2"], tagIds: [1, 2], isActive: true }
     ]
-  
+
     this.bucketService.getCurrentBucket();
-   console.log("In bucket");
+    console.log("In bucket");
     console.log(this.bucketService.getCurrentBucket());
 
   }
@@ -42,9 +44,9 @@ export class BucketComponent implements OnInit {
     event.stopPropagation();
   }
   getCurrentBucket(){
-   
+
     return this.bucketService.getCurrentBucket();
-   
+
   }
    addBucket(name: String, description: String) { }
   // public addQuestion() {};
@@ -60,7 +62,7 @@ export class BucketComponent implements OnInit {
   }
 
    showQuestionsForThisBucket(bucketID: number) {
-    // this.questionService.getBucketQuestions(bucketID); 
+    // this.questionService.getBucketQuestions(bucketID);
     // Mock data
     //this.questionService.getBucketQuestions(bucketID);
     this.questionService.getBucketQuestions(bucketID).subscribe(questions => this.questionList = questions);

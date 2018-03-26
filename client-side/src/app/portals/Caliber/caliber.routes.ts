@@ -18,7 +18,6 @@ import { RoleGuard, roles } from '../../role-guard';
 
 import {ScreeningComponent} from './settings/screening/screening.component'
 import { Component } from '@angular/core';
-import { Bucket } from './settings/screening/entities/Bucket';
 import {BucketComponent} from './settings/screening/bucket/bucket.component';
 import {SkillTypeBucketsComponent} from './settings/screening/skillType-buckets/skillType-buckets.component';
 
