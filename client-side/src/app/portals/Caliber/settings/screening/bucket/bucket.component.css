@@ -18,3 +18,10 @@ h3 {
   .revatureOrange{
     background-color: #F26925;
 }  
+.card-width{
+  width: 85%;
+  height: 50%;
+}
+.card-height{
+  height: 25%;
+}

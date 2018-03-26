@@ -29,7 +29,7 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
 })
 export class QuestionComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService : TagsService, questionService: QuestionsService) { }
+  constructor(private modalService: NgbModal, private fb: FormBuilder, private tagsService: TagsService, private questionService: QuestionsService) { }
 
   createQuestion: FormGroup;
   newQuestion: Question;
@@ -64,8 +64,18 @@ export class QuestionComponent implements OnInit {
     }
   }
   //ToDo
-  deactivateQuestion(question){
+  deactivateQuesiton(question){
+
+    if(question.isActive){
+      console.log("true");
+      this.questionService.deactivateQuestion;
+   }
+    else{
+      console.log("false");
+      this.questionService.activateQuestion;
+   }
   }
+
   setQuestionNull(){
     this.question = new Question();
     this.question.answers = [];
@@ -73,7 +83,7 @@ export class QuestionComponent implements OnInit {
   editQuestion(question){
     this.question = question;
     let i: number = 0;
-    
+
 
     for(i; i < this.allTags.length; i++){
       let j: number = 0;
@@ -82,14 +92,16 @@ export class QuestionComponent implements OnInit {
           if(this.allTags[i].id==question.tagIds[j]){
             this.currentTags.push(this.allTags[i]);
             this.allTags[i]=null;
-          } 
-        }  
+          }
+        }
       }
     }
   }
   newTag(newTag : string){
-    this.tagsService.createNewTag(newTag);
-    this.allTags
+    let tag : Tag = new Tag();
+    tag.name = newTag;
+    tag.id = this.tagsService.createNewTag(newTag);
+    this.currentTags.push(tag);
   }
   addNewQuestion(){
     let newCurrentTagIds : number[] = [];
@@ -100,8 +112,15 @@ export class QuestionComponent implements OnInit {
     }
     this.question.tagIds= newCurrentTagIds;
     if(this.question.answers.length==5 && this.question.text){
-      //questionSerice.createNewQuestion(0,this.question);
-      document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
+      if(this.question.id){
+        //this.questionService.updateQuestion(0,this.question);
+        document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
+      }
+      else{
+        //this.questionService.createNewQuestion(0,this.question);
+        document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
+      }
+
       this.question = new Question();
       this.question.answers = [];
     }
