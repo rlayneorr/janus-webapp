@@ -10,7 +10,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
   styleUrls: ['./skillType-buckets.component.css'],
-  providers: [ BucketsService ]
+ // providers: [ BucketsService ]
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
@@ -27,6 +27,7 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   ngOnInit() {
     this.getBuckets();
+    
   }
 
   getBuckets(): void {
@@ -39,9 +40,13 @@ export class SkillTypeBucketsComponent implements OnInit {
     * Then route to 'bucket.component'.  
     */
   routeToBucket(item: Bucket) {
+  
+    this.bucketService.setBucket(item);
+    this.ngOnDestroy(item);
     this.router.navigate(["Caliber/settings/category"]);
-    console.log(item);
     console.log("routing to category");
+
+    console.log(this.bucketService.currentBucket);
   }
 
 
@@ -85,9 +90,6 @@ export class SkillTypeBucketsComponent implements OnInit {
      this.router.navigate(["Caliber/settings/category"]);
    }
   */
-   ngOnDestroy(item:Bucket){
-     this.bucketService.setBucket(item);
-   }
 
 
 
