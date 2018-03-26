@@ -6,11 +6,11 @@ import { BucketsService } from '../services/buckets.service';
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
+
 @Component({
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
   styleUrls: ['./skillType-buckets.component.css'],
-  providers: [ BucketsService ]
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
@@ -26,26 +26,36 @@ export class SkillTypeBucketsComponent implements OnInit {
     private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.getBuckets();
-    
-  }
+    this.getBuckets()
+}
 
-  getBuckets(): void {
-    this.bucketService.getAllBuckets()
-      .subscribe(buckets => this.buckets = buckets);
-  }
+getBuckets():void {
+    this.bucketService.getAllBuckets().subscribe(buckets => this.buckets = buckets);
+}
 
-  /** Save the selected 'bucket' in 'bucket.service' to be used in 
+/*
+id: number;
+    name: string;
+    description: string;
+    isActive?: boolean = true;
+    mappedToSkillType?: boolean = false;
+    weight?: number;
+ */
+
+getSkillTypes() {
+
+    //return this.allSkillTypeBuckets;
+ }
+
+  /** Save the selected 'bucket' in 'bucket.service' to be used in
     * 'bucket.component'.
-    * Then route to 'bucket.component'.  
+    * Then route to 'bucket.component'.
     */
   routeToBucket(item: Bucket) {
-
-    this.router.navigate(["Caliber/settings/screening/category"]);
-    console.log(item);
-
+    this.bucketService.setBucket(item);
     console.log("routing to category");
     console.log(this.bucketService.currentBucket);
+    this.router.navigate(["Caliber/settings/category"]);
   }
 
 
@@ -78,9 +88,9 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   /* routeToBucket(item: Bucket) {
     //this.router.navigateByUrl("/Caliber/settings/category");
-    
+
     this.bucketService.setBucket(item);
-  
+
 
     console.log("The name: " +this.bucketService.getCurrentBucket());
     console.log(this.bucketService.getCurrentBucket());
@@ -102,10 +112,10 @@ export class SkillTypeBucketsComponent implements OnInit {
    */
 
   // testSingleBucket: Bucket = {
-    // id: 1, 
-    // name: "JavaScript", 
-    // description: "basic JS", 
-    // isActive: true, 
+    // id: 1,
+    // name: "JavaScript",
+    // description: "basic JS",
+    // isActive: true,
     // mappedToSkillType: false,
     // weight: 20
   // }
