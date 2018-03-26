@@ -10,7 +10,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
-  styleUrls: ['./skillType-buckets.component.css'],
+  styleUrls: ['./skillType-buckets.component.css']
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
@@ -66,9 +66,12 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 
+  /** INCOMPLETE, ERROR TypeError: Cannot read property 'name' of null */
   createBucket() {
-    console.log('CREATING' + this.currBucket);
-    // TODO
+    // The server will generate the id for this new hero
+    this.bucketService.createNewBucket(this.newBucket)
+      .subscribe(bucket => {console.log(bucket)
+        this.buckets.push(bucket)});
   }
 
   /** Modal variables, and functions */
@@ -76,8 +79,7 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
-      this.newBucket.name = '';
-      this.newBucket.description = '';
+      this.newBucket = new Bucket('','','');
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.newBucket.name = '';
