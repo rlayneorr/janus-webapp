@@ -6,11 +6,11 @@ import { BucketsService } from '../services/buckets.service';
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
+
 @Component({
   selector: 'app-skillType-buckets',
   templateUrl: './skillType-buckets.component.html',
   styleUrls: ['./skillType-buckets.component.css'],
- // providers: [ BucketsService ]
 })
 
 export class SkillTypeBucketsComponent implements OnInit {
@@ -26,18 +26,13 @@ export class SkillTypeBucketsComponent implements OnInit {
     private modalService: NgbModal) {}
 
   ngOnInit() {
-<<<<<<< HEAD
-    this.skillType = {skillTypeId: 1, skillTypeName: "Java", isActive: true, buckets: [], weights: []};
-    this.allSkillTypeBuckets = [
-      {Name: "HTML/CSS", Weight: 30, isActive: true},
-      {Name: "Core Java", Weight: 40, isActive: true},
-      {Name: "SQL", Weight: 30, isActive: true}
-    ]
-
-    this.testBuckets=["test1","test2","test3"];
-
-
+    this.getBuckets()
 }
+
+getBuckets():void {
+    this.bucketService.getAllBuckets().subscribe(buckets => this.buckets = buckets);
+}
+
 /*
 id: number;
     name: string;
@@ -46,36 +41,21 @@ id: number;
     mappedToSkillType?: boolean = false;
     weight?: number;
  */
-testSingleBucket : Bucket = {id:1,name:"JavaScript",description:"basic JS", isActive: true, mappedToSkillType:false,
-weight:20}
-editBucket(name){
-  this.testSingleBucket.name =name;
- // console.log("Need to edit bucket");
-}
 
 getSkillTypes() {
 
-    return this.allSkillTypeBuckets;
-=======
-    this.getBuckets();
-    
-  }
+    //return this.allSkillTypeBuckets;
+ }
 
-  getBuckets(): void {
-    this.bucketService.getAllBuckets()
-      .subscribe(buckets => this.buckets = buckets);
->>>>>>> 386eb9fa629004602acd81ac053b9a2f7cd3f9dc
-  }
-
-  /** Save the selected 'bucket' in 'bucket.service' to be used in 
+  /** Save the selected 'bucket' in 'bucket.service' to be used in
     * 'bucket.component'.
-    * Then route to 'bucket.component'.  
+    * Then route to 'bucket.component'.
     */
   routeToBucket(item: Bucket) {
-    this.bucketService.setBucket(item);;
-    this.router.navigate(["Caliber/settings/category"]);
+    this.bucketService.setBucket(item);
     console.log("routing to category");
     console.log(this.bucketService.currentBucket);
+    this.router.navigate(["Caliber/settings/category"]);
   }
 
 
@@ -90,9 +70,6 @@ getSkillTypes() {
     });
   }
 
-<<<<<<< HEAD
-}
-=======
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -111,9 +88,9 @@ getSkillTypes() {
 
   /* routeToBucket(item: Bucket) {
     //this.router.navigateByUrl("/Caliber/settings/category");
-    
+
     this.bucketService.setBucket(item);
-  
+
 
     console.log("The name: " +this.bucketService.getCurrentBucket());
     console.log(this.bucketService.getCurrentBucket());
@@ -135,10 +112,10 @@ getSkillTypes() {
    */
 
   // testSingleBucket: Bucket = {
-    // id: 1, 
-    // name: "JavaScript", 
-    // description: "basic JS", 
-    // isActive: true, 
+    // id: 1,
+    // name: "JavaScript",
+    // description: "basic JS",
+    // isActive: true,
     // mappedToSkillType: false,
     // weight: 20
   // }
@@ -163,4 +140,3 @@ getSkillTypes() {
   // }
 
 }
->>>>>>> 386eb9fa629004602acd81ac053b9a2f7cd3f9dc

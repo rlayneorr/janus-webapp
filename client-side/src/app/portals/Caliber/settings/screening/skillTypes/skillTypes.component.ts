@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
 import { Bucket } from '../entities/Bucket';
-//import { SkillTypeBucket } from '../entities/SkillTypeBucket';
+import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import {BucketsService} from'../services/buckets.service';
 
 @Component({
@@ -120,7 +120,7 @@ export class SkillTypesComponent implements OnInit {
         { skillTypeId: 0, bucketId: 1, weight: 20 },
         { skillTypeId: 0, bucketId: 2, weight: 30 }
     ]
-*/
+
     testSingleSkillType: SkillType;
 
     editSkillType(skillType){
