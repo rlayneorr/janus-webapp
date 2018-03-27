@@ -40,16 +40,6 @@ it('should go Client List Page', () => {
     expect(page.getClientListTitleText()).toEqual('Show Clients With No Associates');
   });
 
-it('should scroll through client list and find a chart for each client', () => {
-    var numClients = page.getNumberOfClients().then(number=>{
-      for(let i = 1; i <= number; i++){
-        console.log(number);
-        page.clickClientAtIndex(i);
-        expect(page.getClientNameAtIndex(i)).toEqual(page.getClientListChartTitle());
-      }
-    });
-  
-});
 
 it('should click first client', () => {
     page.clickFirstClient();
@@ -108,5 +98,15 @@ xdescribe('test-chart', () => {
   // it('should click charts',() =>{
   //   page.clickCharts();
   // })
+
+/*  it('should scroll through client list and find a chart for each client', () => {
+    var numClients = page.getNumberOfClients().then(number=>{
+      for(let i = 1; i <= number; i++){
+        console.log(number);
+        page.clickClientAtIndex(i);
+        expect(page.getClientNameAtIndex(i)).toEqual(page.getClientListChartTitle());
+      }
+    });*/
   
 });
+  
