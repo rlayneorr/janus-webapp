@@ -5,17 +5,18 @@
       <h6 class="card-header">All Buckets</h6>
       <div class="card-body">
         <!--* Search bar, maybe -->
-        <p>Search bar maybe!!!</p>
-        <mat-chip-list>
-          <mat-chip>Papadum</mat-chip>
-          <mat-chip>Naan</mat-chip>
-          <mat-chip>Dal</mat-chip>
-        </mat-chip-list>
+    
+        <div class="form-group row">
+          <div class="col-sm-9">
+            <!--A search bar to help sift through the unadded tags for when the amount of tags is increased-->
+     <input type="text" name="bucket" [(ngModel)]="filter.name" placeholder="Search Buckets" min="0" max="100" class = "form-control">
+          </div>
+        </div>
         <!-- List of all buckets -->
         <div class="list-group list-group-flush">
           <!-- clickable to route to Bucket, refactor skillTypeBucket to Bucket -->
           <!--* TODO routeToBucket() -->
-          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(bucket)">
+          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets| bucketFilter:filter" (click)="routeToBucket(bucket)">
             <div>{{bucket.name}}</div>
             <small>{{bucket.description}}</small>
             <!--* editBucket(bucket), passes the bucket selected to component side.
