@@ -56,7 +56,7 @@ export class QuestionComponent implements OnInit {
     this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
     this.currentBucket = this.bucketService.getCurrentBucket();
     if(this.currentBucket){
-      this.questionService.getBucketQuestions(this.currentBucket.id).subscribe(data=>{
+      this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
         console.log(data);
         this.questions = (data as Question[]);
       })
@@ -97,22 +97,22 @@ export class QuestionComponent implements OnInit {
    }
   }
 
-/*A simple function that nullifies the currently selected question to 
+/*A simple function that nullifies the currently selected question to
 * be used primarily after a successful save */
   setQuestionNull(){
     this.question = new Question();
     this.sampleAnswers = [];
   }
 
-  /*This function will set the required fields of the selected 
+  /*This function will set the required fields of the selected
   * function to edit to help the  add new question function decide
-  * wheather to add or update a question and to fill in the fields 
+  * wheather to add or update a question and to fill in the fields
   * with the selected questions sample answers and question text*/
   editQuestion(question){
     this.question = question;
     let i: number = 0;
     this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
-    
+
     //this.currentTags = this.questionService.
     /*
     for(i; i < this.allTags.length; i++){
@@ -135,9 +135,9 @@ export class QuestionComponent implements OnInit {
     //this.currentTags.push(tag);
   }
 
-  /*This function will check to see if all of the fields are filled 
-  * and to see if the questio has an Id already to decided wheather 
-  * to alert the user, add a new question, or to update a current 
+  /*This function will check to see if all of the fields are filled
+  * and to see if the questio has an Id already to decided wheather
+  * to alert the user, add a new question, or to update a current
   * question*/
   addNewQuestion(){
     let newCurrentTagIds : number[] = [];
@@ -148,7 +148,7 @@ export class QuestionComponent implements OnInit {
     }
     if(this.sampleAnswers.length==5 && this.question.questionText){
       if(this.question.questionId){
-        console.log(this.questionService.updateQuestion(this.currentBucket.id,this.question));
+        this.questionService.updateQuestion(this.currentBucket.id,this.question);
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
       }
       else{
@@ -201,5 +201,5 @@ export class QuestionComponent implements OnInit {
     this.allTags.push(tag);
     this.currentTags = newCurrentTags;
   }
-  
+
 }
