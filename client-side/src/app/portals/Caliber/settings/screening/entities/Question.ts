@@ -1,7 +1,10 @@
 export class Question {
-    id: number;
-    text: string;
-    answers: string[];
-    tagIds: number[];
-    isActive: boolean;
+    questionId: number;
+    bucketId: number;
+    questionText: string;
+    sampleAnswer1: string;
+    sampleAnswer2: string;
+    sampleAnswer3: string;
+    sampleAnswer4: string;
+    sampleAnswer5: string;
 }

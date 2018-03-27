@@ -111,7 +111,14 @@ export const routes: Routes = [
 
             ]
           },
-
+          {
+           path: 'screening/category',
+            component: BucketComponent
+          },
+          {
+            path:'screening/skillTypeTopics',
+            component: SkillTypeBucketsComponent,
+          }
         ]
       },
       {

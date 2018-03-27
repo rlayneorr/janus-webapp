@@ -137,7 +137,7 @@ import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component' ;
 import { QuestionComponent} from './settings/screening/question/question.component'
 import { TagFilterPipe } from './settings/screening/question/question.filter';
-
+import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType-buckets.filter';
 
 
 @NgModule({
@@ -190,6 +190,7 @@ import { TagFilterPipe } from './settings/screening/question/question.filter';
     TraineeSearch,
     ArrToStringPipe,
     TagFilterPipe,
+    BucketFilterPipe,
 
     // components
     CaliberComponent,
