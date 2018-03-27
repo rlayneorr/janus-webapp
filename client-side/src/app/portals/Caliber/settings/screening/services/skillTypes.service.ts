@@ -42,7 +42,8 @@ export class SkillTypesService {
     }
 
     updateSkillType(skillTypeBuckets: SkillTypeBucket[]) {
-        return this.http.put(this.url + "updateSkillType", { skillTypeBuckets: skillTypeBuckets }, httpOptions);
+        return this.http.put(this.url + "updateSkillType", { skillTypeBuckets: skillTypeBuckets }, 
+        httpOptions);
     }
 
     getSkillTypeById(skillTypeId: number) {
