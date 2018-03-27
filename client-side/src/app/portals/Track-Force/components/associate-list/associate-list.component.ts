@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AssociateService } from '../../services/associates-service/associates-service';
 import { Associate } from '../../models/associate.model';
+import { Batch} from '../../models/batch.model';
+import { Curriculum } from '../../models/curriculum.model';
 import { RequestService } from '../../services/request-service/request.service';
 import { Client } from '../../models/client.model';
 import { ClientListService } from '../../services/client-list-service/client-list.service';
@@ -8,6 +10,7 @@ import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { User } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { CurriculumService } from '../../services/curriculum-service/curriculum.service';
+import { BatchService } from '../../services/batch-service/batch.service';
 
 /**
  * Component for the Associate List page
@@ -55,6 +58,7 @@ export class AssociateListComponent implements OnInit {
     private associateService: AssociateService,//TfAssociate,
     private clientService: ClientListService,
     private curriculumnService: CurriculumService,
+    private batchService: BatchService,
     private rs: RequestService,
     private activated: ActivatedRoute
   ) {
@@ -82,24 +86,38 @@ export class AssociateListComponent implements OnInit {
       this.searchByStatus = mapping.toUpperCase() + ": " + status.toUpperCase();
     }
   }
-
+  tempCurrId : number;
+  newCurr : Curriculum;
   /**
    * Set our array of all associates
    */
   getAllAssociates() {
     let self = this;
+    this.curriculumnService.getAllCurriculums().subscribe(items=>{
+      console.log(items);
+    });
 
     this.associateService.getAllAssociates().subscribe(data => {
-      console.log(data);
       this.associates = data;
       console.log(this.associates);
 
       for (let associate of this.associates) {//get our curriculums from the associates
-      //  this.curriculums.add(associate.curriculumName);
+      
+       this.batchService.getCurrIdById(associate.batchId).subscribe(item => {
+        this.tempCurrId = item;
+        console.log(item);
 
-      //  if (associate.batchName === 'null') {
-      //    associate.batchName = 'None'
-     //   }
+          this.curriculumnService.getOneCurriculum(this.tempCurrId).subscribe(item2 => {
+            console.log("First one...: " + item2['curriculumName']);
+            this.newCurr = item2;
+            this.curriculums.add(item2['curriculumName']);
+       }
+      );
+
+        
+      }
+      );
+      
       }
       this.curriculums.delete("");
       this.curriculums.delete("null");

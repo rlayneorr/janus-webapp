@@ -65,10 +65,10 @@
                 <input type="checkbox" id={{associate.id}}>
               </td>
               <td>
-                <a [routerLink]="['/TrackForce/form-comp',associate.id]" class="id">{{associate.id}}</a>
+                <a [routerLink]="['/TrackForce/form-comp',associate.id]" class="id">{{associate.associateId}}</a>
               </td>
-              <td class="first">{{associate.firstName}}</td>
-              <td class="last">{{associate.lastName}}</td>
+              <td class="first">{{associate.associateFirstName}}</td>
+              <td class="last">{{associate.associateLastName}}</td>
               <td class="status">{{associate.marketingStatus}}</td>
               <td class="client">{{associate.client}}</td>
               <td class="batch">
