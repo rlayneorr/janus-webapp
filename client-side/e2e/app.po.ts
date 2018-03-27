@@ -56,6 +56,15 @@ export class AppPage {
     element(by.xpath('//*[@id="clients-list"]/li[1]/span')).click();
   }
   
+  clickCharts(){
+    browser.actions().
+    mouseMove(element(by.tagName('canvas')[2])).
+    mouseMove({x: 200, y: 100}).
+    doubleClick().
+    perform();
+    browser.pause();
+  }
+  
   getFirstClientListName(){
     return element(by.xpath('//*[@id="clients-list"]/li[1]/span')).getText();
   }
