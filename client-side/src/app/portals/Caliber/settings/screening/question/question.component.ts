@@ -2,6 +2,7 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
+import { Bucket } from '../entities/Bucket';
 import { Tag } from '../entities/Tag';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TAGS } from '../mock-tag';
@@ -10,6 +11,8 @@ import {QuestionsService} from '../services/questions.service';
 import {TagsService} from '../services/tags.service';
 import {trigger,state,style,transition,animate,keyframes} from '@angular/animations';
 import {BucketsService} from '../services/buckets.service';
+import { SkillType } from '../entities/SkillType';
+import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -29,11 +32,9 @@ import {BucketsService} from '../services/buckets.service';
 })
 export class QuestionComponent implements OnInit {
 
-  constructor(
-    private modalService: NgbModal, 
-    private fb: FormBuilder,
+  constructor(private modalService: NgbModal, private fb: FormBuilder,
     private tagsService: TagsService,
-      private questionService: QuestionsService,
+    private questionService: QuestionsService,
     private bucketService: BucketsService) { }
 
   createQuestion: FormGroup;
@@ -44,6 +45,7 @@ export class QuestionComponent implements OnInit {
   sampleAnswers: String[];
   questions: Question[];
   filter: Tag = new Tag();
+  currentBucket: Bucket;
 
   ngOnInit() {
     this.allTags = TAGS;
@@ -51,15 +53,21 @@ export class QuestionComponent implements OnInit {
     this.question = new Question();
     this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
     this.questions = Questions;
+    this.currentBucket = this.bucketService.currentBucket;
   }
+
+  /*Used to open a bootstrap modal*/
   open(content) {
     this.modalService.open(content);
   }
+
   initFormControl() {
     this.createQuestion = this.fb.group({
       'name': ['', Validators.required],
     });
   }
+
+  /*A currently unused function that will ive the reason for a modal closing*/
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -69,8 +77,8 @@ export class QuestionComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-  deactivateQuesiton(question){
 
+  deactivateQuesiton(question){
     if(question.isActive){
       console.log("true");
       this.questionService.deactivateQuestion;
@@ -81,10 +89,17 @@ export class QuestionComponent implements OnInit {
    }
   }
 
+/*A simple function that nullifies the currently selected question to 
+* be used primarily after a successful save */
   setQuestionNull(){
     this.question = new Question();
     this.sampleAnswers = [];
   }
+
+  /*This function will set the required fields of the selected 
+  * function to edit to help the  add new question function decide
+  * wheather to add or update a question and to fill in the fields 
+  * with the selected questions sample answers and question text*/
   editQuestion(question){
     this.question = question;
     let i: number = 0;
@@ -103,12 +118,18 @@ export class QuestionComponent implements OnInit {
       }
     }*/
   }
+  //TO DO
   newTag(newTag : string){
     let tag : Tag = new Tag();
     tag.name = newTag;
     //tag.id = this.tagsService.createNewTag(newTag);
     //this.currentTags.push(tag);
   }
+
+  /*This function will check to see if all of the fields are filled 
+  * and to see if the questio has an Id already to decided wheather 
+  * to alert the user, add a new question, or to update a current 
+  * question*/
   addNewQuestion(){
     let newCurrentTagIds : number[] = [];
     let i: number = 0;
@@ -133,6 +154,8 @@ export class QuestionComponent implements OnInit {
       document.getElementById("newQuestionAlert").innerHTML= "You must fill in all fields";
     }
   }
+
+  /*Adds the selected tag to the current tags array and removes it from the all tags array*/
   addTagToQuestion(tag){
     let currentTag: any;
     let newAllTags : Tag[] = [];
@@ -150,6 +173,8 @@ export class QuestionComponent implements OnInit {
     this.allTags = newAllTags;
     this.currentTags.push(tag);
   }
+
+   /*Adds the selected tag to the all tags array and removes it from the current tags array*/
   removeTagFromQuestion(tag){
     let currentTag: any;
     let newCurrentTags : Tag[] = [];

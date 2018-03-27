@@ -111,32 +111,9 @@ export class SkillTypesComponent implements OnInit {
       event.stopPropagation();
     }
 
-    addNewSkillType(modal: SkillType){
-        this.newSkillType = modal;
-        let addedBucket = false;
-        console.log(modal.skillTypeName);
-        this.bucketWeightSum = 0;
-        if(this.bucketsAndWeights){
-            for(let index in this.bucketsAndWeights){
-                addedBucket = true;
-                this.bucketWeightSum += this.bucketsAndWeights[index].weight;
-            }
-        }
-        if(this.bucketWeightSum == 100){
-            this.modalServiceRef.close();
-        }
-        else {
-            this.error = true;
-            console.log(this.bucketWeightSum);
-        }
-        // this.initFormControl();
-    }
-
-
-
     editSkillType(skillType){
         this.testSingleSkillType = {
-            skillTypeName: skillType.name,
+            skillTypeName: skillType.skillTypeName,
             skillTypeId: skillType.id,
             isActive: true,
             buckets: [this.java, this.oop, this.html],
@@ -179,6 +156,37 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
+    addNewSkillType(modal: SkillType){
+        this.newSkillType = modal;
+        let addedBucket = false;
+        console.log(modal.skillTypeName);
+        this.bucketWeightSum = 0;
+        if(this.bucketsAndWeights){
+            for(let index in this.bucketsAndWeights){
+                addedBucket = true;
+                this.bucketWeightSum += this.bucketsAndWeights[index].weight;
+            }
+        }
+        if(this.bucketWeightSum == 100){
+            this.modalServiceRef.close();
+        }
+        else {
+            this.error = true;
+        }
+    }
+
+    checkBucketSum(){
+        this.bucketWeightSum = 0;
+        for(let bucket of this.bucketsAndWeights){
+            this.bucketWeightSum += bucket.weight;
+        }
+        if(this.bucketWeightSum == 100){
+            this.error = false;
+        } else {
+            this.error = true;
+        }
+    }
+
   ngOnInit() {
     this.allSkillTypes = [
       {skillTypeName:"Java",isActive:true},
@@ -190,6 +198,9 @@ export class SkillTypesComponent implements OnInit {
       {skillTypeName:'Software',isActive:false}
     ]
     this.setSkillTypes();
+    this.skillTypeService.getSkillTypes().subscribe(results => {
+        console.log(results);
+    })
   }
 
 }
