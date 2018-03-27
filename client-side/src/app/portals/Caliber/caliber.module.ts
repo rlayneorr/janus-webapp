@@ -55,6 +55,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './settings/screening/services/in-memory-data.service';
+import { MatChipsModule } from '@angular/material/chips';
 
 //N.T.
 import { ApiService } from './util/api.service';
@@ -138,7 +139,6 @@ import { SkillTypeBucketsComponent } from './settings/screening/skillType-bucket
 import { QuestionComponent} from './settings/screening/question/question.component'
 import { TagFilterPipe } from './settings/screening/question/question.filter';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -163,7 +163,8 @@ import { TagFilterPipe } from './settings/screening/question/question.filter';
         passThruUnknownUrl: true,
         put204: false // return entity after PUT/update
       }
-    )
+    ),
+    MatChipsModule
   ],
   declarations: [
     // pipes

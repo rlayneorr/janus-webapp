@@ -12,8 +12,7 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'app-bucket',
   templateUrl: './bucket.component.html',
-  //providers: [ BucketsService ],
-  styleUrls: ['./bucket.component.css'],
+  styleUrls: ['./bucket.component.css']
 })
 export class BucketComponent implements OnInit {
 

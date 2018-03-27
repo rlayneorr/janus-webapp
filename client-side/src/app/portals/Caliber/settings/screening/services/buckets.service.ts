@@ -26,7 +26,7 @@ export class BucketsService {
   bucketSubject = new Subject();
   /** For development only */
 
- public currentBucket: Bucket;
+  public currentBucket: Bucket;
 
   constructor(private http: HttpClient) {}
 
