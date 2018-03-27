@@ -38,14 +38,6 @@ export class QuestionsService {
   }
 
   getBucketQuestions(bucketId: number){
-    console.log(this.url + "bucketQuestions/" + bucketId)
-    this.http.get(this.url + "bucketQuestions/" + bucketId).subscribe(data=>{
-        console.log(data);
-        this.questions = (data as Question[]);
-        return this.questions;
-    });
-    console.log(this.questions);
-    return this.questions;
+    return this.http.get(this.url + "bucketQuestions/" + bucketId);
   }
-
 }
