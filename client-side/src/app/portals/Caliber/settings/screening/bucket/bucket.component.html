@@ -3,23 +3,21 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="card-width">
-                 <h3>
-                     <!-- {{this.bucketsService.currentBucket.name}}     -->
-                 </h3>
+                <h3>
+                    {{this.bucketService.currentBucket.name}}
+                </h3>
             </div>
-        </div>
-    </div>
-    <br>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card-width">
-                <p>
-                  <!--  {{this.bucketsService.currentBucket.description}}-->
-                   </p>
-            </div>
-        </div>
-    </div>
 
+            <br>
+            <div class="container">
+
+                <p id="buck-description">
+                    {{this.bucketService.currentBucket.description}}
+                </p>
+            </div>
+
+        </div>
+    </div>
     <!--Question Component-->
     <app-question></app-question>
 

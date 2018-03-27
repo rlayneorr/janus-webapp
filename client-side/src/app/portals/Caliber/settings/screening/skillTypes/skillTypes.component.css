@@ -48,18 +48,19 @@ i {
   #list-item{
       border: solid black 0.5px;
   }
-  
+
   .percentSign{
       background-color: inherit;
       border-right: 1px solid #ccc;
   }
-  
+
   .bucketWeight{
       text-align: right;
   }
-  
+
   .revatureOrange{
       background-color: #F26925;
+      color: white;
   }
   #xIcon:hover .removeToolTip{
       visibility: visible;
@@ -70,7 +71,7 @@ i {
       float: right;
       left: 90%;
       top:70%;
-      
+
   }
 
   #penIcon:hover .editToolTip{
@@ -84,7 +85,7 @@ i {
     width: 10%;
     left: 87%;
     top:70%;
-    
+
 }
 /*
 .editToolTip:after {
@@ -108,10 +109,10 @@ i {
     height: 17px;
     margin-left: 10px;
   }
-  
+
   /* Hide default HTML checkbox */
   .switch input {display:none;}
-  
+
   /* The slider */
   .slider {
     position: absolute;
@@ -124,7 +125,7 @@ i {
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   .slider:before {
     position: absolute;
     content: "";
@@ -136,32 +137,28 @@ i {
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
+
   input:checked + .slider {
     background-color: #F26925;
   }
-  
+
   input:focus + .slider {
     box-shadow: 0 0 1px #F26925;
   }
-  
+
   input:checked + .slider:before {
     -webkit-transform: translateX(16px);
     -ms-transform: translateX(16px);
     transform: translateX(16px);
- 
-    
+
+
   }
-  
+
   /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
-  
+
   .slider.round:before {
     border-radius: 50%;
   }
-
-
-
-  
