@@ -36,6 +36,7 @@ export class QuestionComponent implements OnInit {
   allTags: Tag[];
   currentTags: Tag[];
   question:Question;
+  answers: String[];
   questions: Question[];
   filter: Tag = new Tag();
 
@@ -43,7 +44,7 @@ export class QuestionComponent implements OnInit {
     this.allTags = TAGS;
     this.currentTags = [];
     this.question = new Question();
-    this.question.answers = [];
+    this.answers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
     this.questions = Questions;
   }
   open(content) {
@@ -77,12 +78,12 @@ export class QuestionComponent implements OnInit {
 
   setQuestionNull(){
     this.question = new Question();
-    this.question.answers = [];
+    this.answers = [];
   }
   editQuestion(question){
     this.question = question;
     let i: number = 0;
-
+    this.answers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
 
     for(i; i < this.allTags.length; i++){
       let j: number = 0;
@@ -110,7 +111,7 @@ export class QuestionComponent implements OnInit {
         newCurrentTagIds.push(this.currentTags[i].id);
     }
     this.question.tagIds= newCurrentTagIds;
-    if(this.question.answers.length==5 && this.question.text){
+    if(this.answers.length==5 && this.question.text){
       if(this.question.id){
         //this.questionService.updateQuestion(0,this.question);
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
@@ -121,7 +122,7 @@ export class QuestionComponent implements OnInit {
       }
 
       this.question = new Question();
-      this.question.answers = [];
+      this.answers = [];
     }
     else{
       document.getElementById("newQuestionAlert").innerHTML= "You must fill in all fields";

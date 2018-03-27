@@ -17,11 +17,11 @@ export class QuestionsService {
   url: string = "/question/";
 
   createNewQuestion(bucketId: number, question: Question){
-      return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.text, answers: question.answers, tagIds: question.tagIds}, httpOptions);
+      return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.text, answers: question.sampleAnswer1, tagIds: question.tagIds}, httpOptions);
   }
 
   updateQuestion(bucketId: number, question: Question){
-    return this.http.post(this.url + "updateQuestion", {bucketId: bucketId, text: question.text, answers: question.answers, tagIds: question.tagIds}, httpOptions);
+    return this.http.post(this.url + "updateQuestion", {bucketId: bucketId, text: question.text, sampleAnswer1: question.sampleAnswer1,sampleAnswer2: question.sampleAnswer2, sampleAnswer3: question.sampleAnswer3,sampleAnswer4: question.sampleAnswer4,sampleAnswer5: question.sampleAnswer5,tagIds: question.tagIds}, httpOptions);
 }
 
   deactivateQuestion(questionId: number){
