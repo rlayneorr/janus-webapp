@@ -150,3 +150,13 @@ top:70%;
 
 }
 .accordion-toggle { display: block; }
+p{
+  color: #F26925;
+}
+fixed-modal .modal-content {
+  size: sm
+}
+.tabContent{
+  width: 410px;
+  height: 400px;
+}

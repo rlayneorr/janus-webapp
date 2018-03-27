@@ -5,13 +5,14 @@
       <h6 class="card-header">All Buckets</h6>
       <div class="card-body">
         <!--* Search bar, maybe -->
-    
+
         <div class="form-group row">
           <div class="col-sm-9">
             <!--A search bar to help sift through the unadded tags for when the amount of tags is increased-->
      <input type="text" name="bucket" [(ngModel)]="filter.name" placeholder="Search Buckets" min="0" max="100" class = "form-control">
           </div>
         </div>
+
         <!-- List of all buckets -->
         <div class="list-group list-group-flush">
           <!-- clickable to route to Bucket, refactor skillTypeBucket to Bucket -->
@@ -27,7 +28,7 @@
       </div>
 
       <!--* 'open(create)'  -->
-      <button type="button" class="btn btn-primary btn-sm" (click)="open(create)">Create Category</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="open(create)">Create Bucket</button>
     </div> 
   </div> 
 </div>
@@ -37,7 +38,7 @@
 <!--* Editable name, description -->
 <ng-template #edit let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h6 class="modal-title">Edit Category</h6>
+    <h6 class="modal-title">Edit Bucket</h6>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -65,7 +66,7 @@
 <!--* Create name, description -->
 <ng-template #create let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h6 class="modal-title">Create Category</h6>
+    <h6 class="modal-title">Create Bucket</h6>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
