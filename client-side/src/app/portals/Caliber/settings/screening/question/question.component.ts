@@ -148,7 +148,7 @@ export class QuestionComponent implements OnInit {
     }
     if(this.sampleAnswers.length==5 && this.question.questionText){
       if(this.question.questionId){
-        this.questionService.updateQuestion(this.currentBucket.id,this.question);
+        console.log(this.questionService.updateQuestion(this.currentBucket.id,this.question));
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
       }
       else{

@@ -11,8 +11,8 @@ headers: new HttpHeaders({
 @Injectable()
 export class TagsService {
     tag: Tag;
-  constructor(private http: HttpClient) { }
-  url: string = "/tag/";
+    url: string = "https://hydra-gateway-service.cfapps.io/question-service/tag/";
+  constructor(private http: HttpClient) { };
   getAllTags(){
       return this.http.get(this.url + "getTags");
   }
