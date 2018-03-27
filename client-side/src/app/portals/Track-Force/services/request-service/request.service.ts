@@ -8,6 +8,7 @@ import {User} from '../../models/user.model';
 export class RequestService {
 
   host: string = environment.url;
+  hostms: string = environment.msurl;
   trackPath: string = this.host + 'TrackForce/track';
   dataPath: string = this.host + 'TrackForce/track/data/get';
   /**
