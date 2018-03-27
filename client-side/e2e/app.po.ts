@@ -94,13 +94,13 @@ export class AppPage {
     element(by.id('associateListNav')).click();
   }
 
-  getNumberOfClients() : Promise<number> {
+  /*getNumberOfClients() : Promise<number> {
     return new Promise<number>((resolve) => {
       let data = element.all(by.xpath('//*[@id="clients-list"]/li')).count();
       resolve(data);
     });
     
-  }
+  }*/
 
   getClientNameAtIndex(index) {
     let indexString = '//*[@id="clients-list"]/li[' + index + ']/span'
