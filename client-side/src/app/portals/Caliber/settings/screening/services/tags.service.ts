@@ -13,7 +13,6 @@ export class TagsService {
     tag: Tag;
   constructor(private http: HttpClient) { }
   url: string = "/tag/";
-
   getAllTags(){
       return this.http.get(this.url + "getTags");
   }

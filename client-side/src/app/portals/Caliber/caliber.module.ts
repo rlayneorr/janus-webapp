@@ -138,7 +138,6 @@ import { SkillTypeBucketsComponent } from './settings/screening/skillType-bucket
 import { QuestionComponent} from './settings/screening/question/question.component'
 import { TagFilterPipe } from './settings/screening/question/question.filter';
 
-
 @NgModule({
   imports: [
     CommonModule,

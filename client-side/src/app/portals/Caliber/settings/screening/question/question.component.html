@@ -25,7 +25,7 @@
               </a>
           </div>
       </div>
-      <button class="btn" (click)='setQuestionNull(); open(content);'>Create New Question</button>
+      <button class="btn btn-primary btn-sm" (click)='setQuestionNull(); open(content);'>Create New Question</button>
     </div>
   </div>
 </div>
@@ -46,37 +46,40 @@
           <input name="question" [(ngModel)]="question.text" type = "text" id = "questionText" placeholder="Question" class="form-control bucketWeight" min="0" max="100">
         </div>
       </div>
-      <ngb-accordion #acc="ngbAccordion">
-        <ngb-panel title="Answers">
+      <ngb-accordion #acc="ngbAccordion"  >
+          <ngb-panel>
+              <ng-template ngbPanelTitle >
+                <span >Questions</span>
+              </ng-template>
           <ng-template ngbPanelContent>
             <div class="form-group row">
               <label for = "one point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">One point:</label>
               <div class="col-sm-9">
-                <input name="answer1" [(ngModel)]="question.answers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                <input name="answer1" [(ngModel)]="answers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
               </div>
             </div>
             <div class="form-group row">
               <label for="two point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Two point:</label>
               <div class="col-sm-9">
-                <input name="answer2" [(ngModel)]="question.answers[1]" type = "text" id = "2pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                <input name="answer2" [(ngModel)]="answers[1]" type = "text" id = "2pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
               </div>
             </div>
             <div class="form-group row">
               <label for="three point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Three point:</label>
               <div class="col-sm-9">
-                <input name="answer3" [(ngModel)]= "question.answers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                <input name="answer3" [(ngModel)]= "answers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
               </div>
             </div>
             <div class="form-group row">
               <label for="four point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Four point:</label>
               <div class="col-sm-9">
-                <input name="answer4" [(ngModel)]="question.answers[3]" type = "text" id = "4pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                <input name="answer4" [(ngModel)]="answers[3]" type = "text" id = "4pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
               </div>
             </div>
             <div class="form-group row">
               <label for="five point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Five point:</label>
               <div class="col-sm-9">
-                <input name="answer4" [(ngModel)]="question.answers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                <input name="answer4" [(ngModel)]="answers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
               </div>
             </div>
           </ng-template>
