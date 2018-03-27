@@ -21,7 +21,7 @@ export class BucketsService {
 
   /** This is our base URL endpoint */
   // url: string = "/bucket/";
-  url: string = "api/buckets";
+  url: string = "https://hydra-gateway-service.cfapps.io/bucket-service/bucket/";
   /** Making an Observable */
   bucketSubject = new Subject();
   /** For development only */
@@ -32,8 +32,7 @@ export class BucketsService {
 
   /** Gets all of company's buckets from server */
   getAllBuckets(): Observable<Bucket[]>{
-    return this.http.get<Bucket[]>(this.url)
-    // return this.http.get(this.url + "getBuckets");
+      return this.http.get(this.url + "getBuckets");
   }
 
   getBucketById(bucketId: number){

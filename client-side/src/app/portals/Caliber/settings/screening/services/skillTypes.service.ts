@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 
+import { SkillType } from '../entities/SkillType';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import { Bucket } from '../entities/Bucket';
 
@@ -19,14 +20,12 @@ const httpOptions = {
 export class SkillTypesService {
 
     constructor(private http: HttpClient) { }
-    public skillTypeBuckets: SkillTypeBucket[] = [];
-
-    //url: string = "/skillType/";
+    public skillTypeBuckets: Observable<SkillType[]>
     url: string = "https://hydra-gateway-service.cfapps.io/skilltype-service/skillType/";
 
-    //Buckets will probably be an array of buckets after model/entity is created
-    createSkillType(name: string, skillTypeBuckets: SkillTypeBucket[]) {
-        return this.http.post(this.url + "createSkillType", { name: name, skillTypeBuckets: skillTypeBuckets }, httpOptions);
+    createSkillType(skillType: SkillType) {
+        console.log(skillType);
+        return this.http.post(this.url + "createSkillType", skillType, httpOptions);
     }
 
     deactivateSkillType(skillTypeId: number) {
@@ -37,7 +36,7 @@ export class SkillTypesService {
         return this.http.put(this.url + "activateSkillType", skillTypeId, httpOptions);
     }
 
-    getSkillTypes() {
+    getSkillTypes():Observable<SkillType[]> {
         return this.http.get(this.url + "getSkillTypes");
     }
 
