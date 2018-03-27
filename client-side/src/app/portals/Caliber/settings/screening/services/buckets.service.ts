@@ -47,6 +47,7 @@ export class BucketsService {
 
   /** POST: add a new bucket to the database */
   createNewBucket(bucket: Bucket): Observable<Bucket> {
+      console.log(bucket);
       return this.http.post<Bucket>(this.url, bucket, httpOptions);
   }
 

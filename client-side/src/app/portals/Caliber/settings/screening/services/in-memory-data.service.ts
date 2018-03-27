@@ -12,8 +12,8 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
     weight?: number;
 
   * Remove these when not being used, or after development.
-    In 'caliber.module.ts'=> main import 
-    In 'caliber.module.ts'=> @NgModule => import: 
+    In 'caliber.module.ts'=> main import
+    In 'caliber.module.ts'=> @NgModule => import:
   */
 
 export class InMemoryDataService implements InMemoryDbService {
