@@ -42,7 +42,9 @@ export class QuestionsService {
     this.http.get(this.url + "bucketQuestions/" + bucketId).subscribe(data=>{
         console.log(data);
         this.questions = (data as Question[]);
+        return this.questions;
     });
+    console.log(this.questions);
     return this.questions;
   }
 
