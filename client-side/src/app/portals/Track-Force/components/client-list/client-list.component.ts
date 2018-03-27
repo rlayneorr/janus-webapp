@@ -9,6 +9,10 @@ import { SelectedStatusConstants } from '../../constants/selected-status.constan
 import { ThemeConstants } from '../../constants/theme.constants';
 import { Color } from 'ng2-charts';
 import { StatusInfo } from '../../models/status-info.model';
+import {MarketStatusService} from "../../services/market-status/market-status.service";
+import {AssociateService} from "../../services/associates-service/associates-service";
+import {InterviewService} from "../../services/interview-service/interview-service";
+import {PlacementService} from "../../services/placement-service/placement.service";
 
 /**
  * @author Han Jung
@@ -30,7 +34,7 @@ export class ClientListComponent implements OnInit {
   public barChartLabel: string[] = SelectedStatusConstants.CLIENT_LABELS;
   public barChartType: string = 'bar';
   public barChartLegend: boolean = true;
-  public barChartColors: Array<Color> = ThemeConstants.BAR_COLORS
+  public barChartColors: Array<Color> = ThemeConstants.BAR_COLORS;
 
   public barChartOptions: any = {
     display: true,
@@ -59,14 +63,18 @@ export class ClientListComponent implements OnInit {
         }
       }
     }
-  }
+  };
   // data values initialize to 1 for animation
   public barChartData: any[] = [{ data: [0, 0, 0, 0], label: 'Mapped' }, { data: [0, 0, 0, 0], label: 'Unmapped' }];
 
 
   constructor(
     private rs: RequestService,
-    private clientService: ClientListService
+    private clientService: ClientListService,
+    private marketStatus: MarketStatusService,
+    private associates: AssociateService,
+    private interviews: InterviewService,
+    private placement: PlacementService,
   ) {
   }
 
@@ -76,32 +84,58 @@ export class ClientListComponent implements OnInit {
 
   // get client names from data and push to clientNames string array
   getAllClients() {
-    var self = this;
+    let self = this;
+
+    this.marketStatus.getAllMarketingStatusMapped().subscribe(items => {
+      console.log(items);
+    });
+
+    this.placement.getAllPlacements().subscribe(items => {
+      console.log(items);
+    });
+
+    this.interviews.getAllInterviews().subscribe(items => {
+      console.log(items);
+    });
+
+    this.marketStatus.getAllMarketingStatus().subscribe(items => {
+      console.log(items);
+    });
+
+    this.associates.getAllAssociates().subscribe(items => {
+      console.log(items);
+    });
+
+    // this.clientService.getAllClients().subscribe(
+    //   clients => {
+    //     console.log(clients);
+    //     // save array of object Client
+    //     self.clientInfo = clients;
+    //     // clear name list to reload list and run through filter
+    //     self.clientNames.length = 0;
+    //     // push list of names to an array
+    //     for (let client of clients) {
+    //       // Hide clients who do not have associates
+    //       let stats = client.stats;
+    //       // if (!this.showNoData) {
+    //         if (stats.trainingMapped > 0 || stats.trainingUnmapped > 0 ||
+    //           stats.reservedMapped > 0 || stats.openUnmapped > 0 ||
+    //           stats.selectedMapped > 0 || stats.selectedUnmapped > 0 ||
+    //           stats.confirmedMapped > 0 || stats.confirmedUnmapped > 0)
+    //           this.clientNames.push(client.tfClientName);
+    //       //}
+    //       // else {
+    //       //   this.clientNames.push(client.tfClientName);
+    //       // }
+    //     }
+    //     this.initChartData();
+    //   }, err => {
+    //     console.error("Failed grabbing names");
+    //   });
+
     this.clientService.getAllClients().subscribe(
       clients => {
-        console.log(clients);
-        // save array of object Client
-        self.clientInfo = clients;
-        // clear name list to reload list and run through filter
-        self.clientNames.length = 0;
-        // push list of names to an array
-        for (let client of clients) {
-          // Hide clients who do not have associates
-          let stats = client.stats;
-          // if (!this.showNoData) {
-            if (stats.trainingMapped > 0 || stats.trainingUnmapped > 0 ||
-              stats.reservedMapped > 0 || stats.openUnmapped > 0 ||
-              stats.selectedMapped > 0 || stats.selectedUnmapped > 0 ||
-              stats.confirmedMapped > 0 || stats.confirmedUnmapped > 0)
-              this.clientNames.push(client.tfClientName);
-          //}
-          // else {
-          //   this.clientNames.push(client.tfClientName);
-          // }
-        }
-        this.initChartData();
-      }, err => {
-        console.error("Failed grabbing names");
+          console.log(clients);
       });
   }
 

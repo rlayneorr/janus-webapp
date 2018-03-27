@@ -83,8 +83,8 @@ export class AssociateService {
 
     private associatePath: string = "8091";
 
-    status: string
-    client: string
+    status: string;
+    client: string;
 
     constructor(private http: HttpClient) {}
 
@@ -103,7 +103,7 @@ export class AssociateService {
         return this.http.get(url);
     }
 
-    
+
 
     /**
      * @function getAssociatesByStatus

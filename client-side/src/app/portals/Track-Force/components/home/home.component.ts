@@ -93,7 +93,7 @@ export class HomeComponent {
     private bs: BatchService,
     private as: AssociateService,
     private ms: MarketStatusService,
-    private authenticationService:AuthenticationService
+    private authenticationService: AuthenticationService
   )
   {
     let user = this.authenticationService.getUser();
@@ -127,7 +127,7 @@ export class HomeComponent {
       let confirmedUnmapped = 0;
       let deployedMapped = 0;
       let deployedUnmapped = 0;
-      
+
       for (let i=0;i<this.associates.length;i++) {
         // iterate over associates and aggregate totals
         let marketingStatus : MarketingStatus;
