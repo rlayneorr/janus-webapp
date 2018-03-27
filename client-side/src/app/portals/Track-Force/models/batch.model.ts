@@ -18,7 +18,7 @@ import { Associate } from "./associate.model";
 export class Batch {
   id: number;
   batchName: string;
-  curriculumId: string;
+  curriculumId: number;
   locationId: string;
   startDate: Date;
   endDate: Date;

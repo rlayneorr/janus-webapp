@@ -27,6 +27,9 @@ export class MarketStatusService {
     return this.http.get(this.url + '/one/marketingstatus/' + name);
   }
 
+  getMarketingStatusById(id: number): Observable<any> {
+    return this.http.get(this.url + '/one/marketingstatus/byid/' + id);
+  }
   createMarketingStatus(marketingStatus: MarketingStatus): Observable<any> {
     return this.http.post(this.url + '/add/marketingstatus', {marketingStatus: marketingStatus});
   }

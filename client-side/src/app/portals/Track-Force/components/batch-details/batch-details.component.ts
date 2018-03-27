@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BatchService} from '../../services/batch-service/batch.service';
+import {AssociateService} from '../../services/associates-service/associates-service';
 import {Associate} from '../../models/associate.model';
 import {AutoUnsubscribe} from '../../decorators/auto-unsubscribe.decorator';
 import { ThemeConstants } from '../../constants/theme.constants';
@@ -70,7 +71,7 @@ export class BatchDetailsComponent implements OnInit {
     this.getMapStatusBatch();
   }
 
-  constructor(private route: ActivatedRoute, private batchService: BatchService) {
+  constructor(private route: ActivatedRoute, private batchService: BatchService,  private associateService: AssociateService) {
   }
 
   /**
@@ -81,7 +82,7 @@ export class BatchDetailsComponent implements OnInit {
       const batchId: number = +params['id'];
       this.isDataReady = false;
 
-      this.batchService.getAssociatesForBatch(batchId)
+      this.associateService.getAssociatesByBatch(batchId)
         .subscribe((data: Associate[]) => {
             console.log(data);
             this.associates = data;

@@ -14,8 +14,9 @@ import {ChartOptions} from '../../models/ng2-charts-options.model';
 import '../../constants/selected-status.constants';
 import { SelectedStatusConstants } from '../../constants/selected-status.constants';
 import {User} from "../../models/user.model";
-//import {AuthenticationService} from "../../../Caliber/services/authentication.service";
 import {AuthenticationService} from "../../services/authentication-service/authentication.service";
+import { MarketStatusService } from '../../services/market-status/market-status.service';
+import { MarketingStatus } from '../../models/marketing-status.model';
 
 const MONTHS_3 = 788923800;
 
@@ -91,6 +92,7 @@ export class HomeComponent {
     private cs: ClientListService,
     private bs: BatchService,
     private as: AssociateService,
+    private ms: MarketStatusService,
     private authenticationService:AuthenticationService
   )
   {
@@ -125,21 +127,23 @@ export class HomeComponent {
       let confirmedUnmapped = 0;
       let deployedMapped = 0;
       let deployedUnmapped = 0;
+      
       for (let i=0;i<this.associates.length;i++) {
         // iterate over associates and aggregate totals
+        let marketingStatus : MarketingStatus;
         let associate = this.associates[i];
-        let stats = associate.msid;
-        switch(stats) {
-          case 1: trainingMapped++; break;
-          case 2: reservedMapped++; break;
-          case 3: selectedMapped++; break;
-          case 4: confirmedMapped++; break;
-          case 5: deployedMapped++; break;
-          case 6: trainingUnmapped++; break;
-          case 7: openUnmapped++; break;
-          case 8: selectedUnmapped++; break;
-          case 9: confirmedUnmapped++; break;
-          case 10: deployedUnmapped++; break;
+        this.ms.getMarketingStatusById(this.associates[i].batchId).subscribe(mss => marketingStatus = mss);
+        switch(marketingStatus.name) {
+          case 'MAPPED: TRAINING': trainingMapped++; break;
+          case 'MAPPED: RESERVED': reservedMapped++; break;
+          case 'MAPPED: SELECTED': selectedMapped++; break;
+          case 'MAPPED: CONFIRMED': confirmedMapped++; break;
+          case 'MAPPED: DEPLOYED': deployedMapped++; break;
+          case 'UNMAPPED: TRAINING': trainingUnmapped++; break;
+          case 'UNMAPPED: OPEN': openUnmapped++; break;
+          case 'UNMAPPED: SELECTED': selectedUnmapped++; break;
+          case 'UNMAPPED: CONFIRMED': confirmedUnmapped++; break;
+          case 'UNMAPPED: DEPLOYED': deployedUnmapped++; break;
         }
       }
       /**

@@ -126,7 +126,7 @@ export class DataSyncService {
   }
 
   public fetchBatchStorageSortedById() {
-    this.bs.getBatchesSortedById().subscribe(data => {
+    this.bs.getAllBatchesMapped().subscribe(data => {
       // this.setBatchStorageSortedById(data);
     })
   }
@@ -137,7 +137,7 @@ export class DataSyncService {
   }
 
   public fetchBatchStorageSortedByDate() {
-    this.bs.getBatchesSortedByDate().subscribe(data => {
+    this.bs.getAllBatchesOrdered().subscribe(data => {
       // this.setBatchStorageSortedByDate(data);
     })
   }

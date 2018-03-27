@@ -16,6 +16,6 @@ export class Associate {
     ecid: number;
     endClientName: string;
     batchName: string;
-    batchId: string;
+    batchId: number;
     clientStartDate: Date;
 }
