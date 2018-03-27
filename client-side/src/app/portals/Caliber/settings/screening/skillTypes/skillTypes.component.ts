@@ -198,6 +198,9 @@ export class SkillTypesComponent implements OnInit {
       {skillTypeName:'Software',isActive:false}
     ]
     this.setSkillTypes();
+    this.skillTypeService.getSkillTypes().subscribe(results => {
+        console.log(results);
+    })
   }
 
 }
