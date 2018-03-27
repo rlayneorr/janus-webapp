@@ -104,12 +104,7 @@ export const routes: Routes = [
             ]
           },
           {
-<<<<<<< HEAD
-            //path: 'screening/category',
-            path: 'category',
-=======
            path: 'screening/category',
->>>>>>> e8718facc632241d058a542b5507c38853592048
             component: BucketComponent
           },
           {

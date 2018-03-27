@@ -39,7 +39,7 @@ export class QuestionComponent implements OnInit {
   allTags: Tag[];
   currentTags: Tag[];
   question:Question;
-  answers: String[];
+  sampleAnswers: String[];
   questions: Question[];
   filter: Tag = new Tag();
 
@@ -47,7 +47,7 @@ export class QuestionComponent implements OnInit {
     this.allTags = TAGS;
     this.currentTags = [];
     this.question = new Question();
-    this.answers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
+    this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
     this.questions = Questions;
   }
   open(content) {
@@ -81,13 +81,14 @@ export class QuestionComponent implements OnInit {
 
   setQuestionNull(){
     this.question = new Question();
-    this.answers = [];
+    this.sampleAnswers = [];
   }
   editQuestion(question){
     this.question = question;
     let i: number = 0;
-    this.answers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
-
+    this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
+    //this.currentTags = this.questionService.
+    /*
     for(i; i < this.allTags.length; i++){
       let j: number = 0;
       for(j; j < question.tagIds.length; j++){
@@ -98,7 +99,7 @@ export class QuestionComponent implements OnInit {
           }
         }
       }
-    }
+    }*/
   }
   newTag(newTag : string){
     let tag : Tag = new Tag();
@@ -113,8 +114,7 @@ export class QuestionComponent implements OnInit {
     for(i; i < this.currentTags.length; i++){
         newCurrentTagIds.push(this.currentTags[i].id);
     }
-    this.question.tagIds= newCurrentTagIds;
-    if(this.answers.length==5 && this.question.text){
+    if(this.sampleAnswers.length==5 && this.question.text){
       if(this.question.id){
         //this.questionService.updateQuestion(0,this.question);
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
@@ -125,7 +125,7 @@ export class QuestionComponent implements OnInit {
       }
 
       this.question = new Question();
-      this.answers = [];
+      this.sampleAnswers = [];
     }
     else{
       document.getElementById("newQuestionAlert").innerHTML= "You must fill in all fields";
