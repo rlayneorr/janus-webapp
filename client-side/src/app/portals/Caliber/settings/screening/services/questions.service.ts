@@ -14,7 +14,9 @@ export class QuestionsService {
   constructor(private http: HttpClient) { }
 
   /** https://hydra-question-service.cfapps.io/ **/
-  url: string = "https://hydra-gateway-service.cfapps.io/question-service/question/";
+  url: string="/question/"
+  //URL for actually connecting to backend
+ // url: string = "https://hydra-gateway-service.cfapps.io/question-service/question/";
   questions: Question[];
 
   createNewQuestion(bucketId: number, question: Question){

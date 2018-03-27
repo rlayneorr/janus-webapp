@@ -21,8 +21,10 @@ export class SkillTypesService {
     constructor(private http: HttpClient) { }
     public skillTypeBuckets: SkillTypeBucket[] = [];
 
-    //url: string = "/skillType/";
-    url: string = "https://hydra-gateway-service.cfapps.io/skilltype-service/skillType/";
+    //Test URL - Not connecting to actual backend
+    url: string = "/skillType/";
+    //URL Connecting to backend.
+   // url: string = "https://hydra-gateway-service.cfapps.io/skilltype-service/skillType/";
 
     //Buckets will probably be an array of buckets after model/entity is created
     createSkillType(name: string, skillTypeBuckets: SkillTypeBucket[]) {

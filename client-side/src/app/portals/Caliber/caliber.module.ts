@@ -55,7 +55,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './settings/screening/services/in-memory-data.service';
-import { MatChipsModule } from '@angular/material/chips';
+//import { MatChipsModule } from '@angular/material/chips';
 
 //N.T.
 import { ApiService } from './util/api.service';
@@ -165,7 +165,7 @@ import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType
         put204: false // return entity after PUT/update
       }
     ),
-    MatChipsModule
+   // MatChipsModule
   ],
   declarations: [
     // pipes

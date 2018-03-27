@@ -20,8 +20,13 @@ const httpOptions = {
 export class BucketsService {
 
   /** This is our base URL endpoint */
-  // url: string = "/bucket/";
+ //  url: string = "/bucket/";
+
+  //Test URL - not connecting to backend.
   url: string = "api/buckets";
+
+ // Actual URL for connecting to backend
+ // url:string = "https://hydra-gateway-service.cfapps.io/bucket-service/bucket/";
   /** Making an Observable */
   bucketSubject = new Subject();
   /** For development only */
@@ -29,7 +34,7 @@ export class BucketsService {
   private currentBucket: Bucket;
 
   constructor(private http: HttpClient) {}
-
+  
   /** Gets all of company's buckets from server */
   getAllBuckets(): Observable<Bucket[]>{
     return this.http.get<Bucket[]>(this.url)
