@@ -63,7 +63,7 @@ export class QuestionComponent implements OnInit {
 
   /*Used to open a bootstrap modal*/
   open(content) {
-    this.modalService.open(content);
+    this.modalService.open(content, { windowClass: 'fixed-modal' });
   }
 
   initFormControl() {
