@@ -28,25 +28,11 @@ export class SkillTypesComponent implements OnInit {
       thing = this.allSkillTypes[i];
       if(thing.skillTypeName == item.skillTypeName){
         thing.isActive = !thing.isActive;
-        this.allSkillTypes[i] = thing;
+        //this.allSkillTypes[i] = thing;
       }
     }
     this.setSkillTypes();
 
-  }
-
-
-
-  testingGettingTags(){
-    var tag ={
-        tagName : "Dolly",
-        tagId :7
-    }
-    this.skillTypeService.testingCreatingTags(tag);
-   this.skillTypeService.testingGetTags().subscribe(
-      data =>{
-        console.log(data);
-      });
   }
   setSkillTypes(){
     let thing:any;

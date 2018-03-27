@@ -100,17 +100,18 @@ export const routes: Routes = [
             path:'screening',
             component: ScreeningComponent,
             children:[
+              {
+                path: 'category',
+                component: SkillTypeBucketsComponent
+              },
+              {
+                path: 'screening/skillTypeTopics',
+                component: SkillTypeBucketsComponent,
+              }
 
             ]
           },
-          {
-            path: 'screening/category',
-            component: BucketComponent
-          },
-          {
-            path: 'screening/skillTypeTopics',
-            component: SkillTypeBucketsComponent,
-          }
+
         ]
       },
       {
