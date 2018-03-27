@@ -16,12 +16,12 @@ export class QuestionsService {
   /** https://hydra-question-service.cfapps.io/ **/
   url: string = "/question/";
 
-  createNewQuestion(bucketId: number, question: Question){
-      return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.text, answers: question.sampleAnswer1, tagIds: question.tagIds}, httpOptions);
+  createNewQuestion(bucketId: number, question: Question, tagIds: number[]){
+      return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.text, answers: question.sampleAnswer1, tagIds: tagIds}, httpOptions);
   }
 
-  updateQuestion(bucketId: number, question: Question){
-    return this.http.post(this.url + "updateQuestion", {bucketId: bucketId, text: question.text, sampleAnswer1: question.sampleAnswer1,sampleAnswer2: question.sampleAnswer2, sampleAnswer3: question.sampleAnswer3,sampleAnswer4: question.sampleAnswer4,sampleAnswer5: question.sampleAnswer5,tagIds: question.tagIds}, httpOptions);
+  updateQuestion(bucketId: number, question: Question, tagIds: number[]){
+    return this.http.post(this.url + "updateQuestion", {bucketId: bucketId, text: question.text, sampleAnswer1: question.sampleAnswer1,sampleAnswer2: question.sampleAnswer2, sampleAnswer3: question.sampleAnswer3,sampleAnswer4: question.sampleAnswer4,sampleAnswer5: question.sampleAnswer5,tagIds: tagIds}, httpOptions);
 }
 
   deactivateQuestion(questionId: number){
