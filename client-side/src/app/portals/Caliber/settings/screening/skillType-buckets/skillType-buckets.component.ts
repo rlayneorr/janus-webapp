@@ -70,8 +70,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   createBucket() {
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
-      .subscribe(bucket => {console.log(bucket)
-        this.buckets.push(bucket)});
+      .subscribe(bucket =>this.buckets.push(bucket));
   }
 
   /** Modal variables, and functions */
