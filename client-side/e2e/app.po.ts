@@ -27,7 +27,7 @@ export class AppPage {
   }
 
   getTrackForceLoginTitleText() {
-        return element(by.id('loginHeaderTrackForce')).getText();
+    return element(by.id('loginHeaderTrackForce')).getText();
   }
 
   sendTrackForceLogin(){
@@ -44,20 +44,18 @@ export class AppPage {
   }
 
   goToClientListPage() {
-    if(element(by.id('smallWindowNav')).isDisplayed()){
-      element(by.id('smallWindowNav')).click();
-      let e = element(by.xpath('//*[@id="clientListNav"]'));
-      e.click();
-    }else{
-      let e = element(by.id('clientListNav'));
-      e.click();
-    }
+    let e = element(by.id('clientListNav'));
+    e.click();
   }
 
   getClientListTitleText() {
     return element(by.id('clientTitle')).getText();
   }
 
+  clickFirstClient(){
+    element(by.xpath('//*[@id="clients-list"]/li[1]/span')).click();
+  }
+  
   clickCharts(){
     browser.actions().
     mouseMove(element(by.tagName('canvas')[2])).
@@ -67,4 +65,64 @@ export class AppPage {
     browser.pause();
   }
   
+  getFirstClientListName(){
+    return element(by.xpath('//*[@id="clients-list"]/li[1]/span')).getText();
+  }
+
+  getClientListChartTitle(){
+    return element(by.xpath('/html/body/div/app-root/app-janus/app-client-list/div/div[2]/div[2]/h1')).getText();
+  }
+
+  searchClientList(clientName) {
+    element(by.id('clientSearch')).sendKeys(clientName);
+    element(by.xpath('//*[@id="clients-list"]/li/span')).click();
+  }
+
+  clickClientListSearchResult() {
+    element(by.xpath('//*[@id="clients-list"]/li/span')).click();
+  }
+
+  goToBatchListPage() {
+    element(by.xpath('//*[@id="batchListNav"]')).click();
+  }
+
+  getBatchListTitleText() {
+    return element(by.xpath('/html/body/div/app-root/app-janus/app-batch-list/div/div/div[2]/div[1]/h3')).getText();
+  }
+
+  goToAssociateList() {
+    element(by.id('associateListNav')).click();
+  }
+
+  getNumberOfClients() : Promise<number> {
+    return new Promise<number>((resolve) => {
+      let data = element.all(by.xpath('//*[@id="clients-list"]/li')).count();
+      resolve(data);
+    });
+    
+  }
+
+  getClientNameAtIndex(index) {
+    let indexString = '//*[@id="clients-list"]/li[' + index + ']/span'
+    return element(by.xpath(indexString)).getText();
+  }
+
+  clickClientAtIndex(index) {
+    let indexString = '//*[@id="clients-list"]/li[' + index + ']/span'
+    return element(by.xpath(indexString)).click();
+
+  }
+
+  getAssociatePageTitle() {
+    return element(by.xpath('/html/body/div/app-root/app-janus/app-associate-list/div/h3')).getText();
+  }
+
+  goToPredictionsPage() {
+    element(by.id('predictionsNav')).click();    
+  }
+
+  getPredictionsPageTitle() {
+    return element(by.xpath('/html/body/div/app-root/app-janus/app-predictions/div/div/div[1]/h3')).getText();
+  }
+
 }
