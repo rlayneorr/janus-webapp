@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="card-width">
                 <h3 *ngIf = "this.theBucket">
-                    {{this.theBucket}}
+                    {{this.theBucket.name}}
                 </h3>
             </div>
 
@@ -12,7 +12,7 @@
             <div class="container">
 
                 <p  *ngIf = "this.theBucket" id="buck-description">
-                    {{this.theBucket}}
+                    {{this.theBucket.description}}
                 </p>
             </div>
 

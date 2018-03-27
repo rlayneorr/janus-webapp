@@ -29,8 +29,7 @@ export class BucketComponent implements OnInit {
     this.questionList = [
       { id: 1, text: "test", answers: ["1", "2"], tagIds: [1, 2], isActive: true }
     ]
-  
-  //  this.bucketService.getCurrentBucket();
+  this.theBucket=this.bucketService.getCurrentBucket();
    console.log("In bucket");
    console.log(this.bucketService.getCurrentBucket());
 
