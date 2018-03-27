@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AssociateService } from '../../services/associates-service/associates-service';
 import { Associate } from '../../models/associate.model'
+import { Placement } from '../../models/placement.model'
 import { ClientListService } from '../../services/client-list-service/client-list.service';
 import { Client } from '../../models/client.model';
 import { element } from 'protractor';
@@ -9,6 +10,7 @@ import { ActivatedRoute } from "@angular/router"
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { User } from '../../models/user.model';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
+import { PlacementService } from '../../services/placement-service/placement.service';
 
 /**
  * Component for viewing an individual associate and editing as admin.
@@ -40,6 +42,7 @@ export class FormComponent implements OnInit {
     id: number;
     formOpen: boolean;
     isVP: boolean;
+    placementData: Placement;
 
     // form booleans
     isMapped: boolean;
@@ -57,7 +60,8 @@ export class FormComponent implements OnInit {
     constructor(
       private associateService: AssociateService,
       private clientService: ClientListService,
-      private authService: AuthenticationService
+      private authService: AuthenticationService,
+      private placementService: PlacementService
     ) {
         //gets id from router url parameter
         var id = window.location.href.split("form-comp/")[1];
@@ -76,13 +80,14 @@ export class FormComponent implements OnInit {
         this.associateService.getAssociate(this.id).subscribe(
           data => {
             console.log(data);
+           this.placementService.getAllPlacementsByAssociateId(data.associateId).subscribe ( cr => this.placementData = cr);
             this.associate = <Associate>data;
-            console.log("FROM BACK-END: "+data.clientStartDate);
-            if (data.clientStartDate.toString() == "0")
-              this.associate.clientStartDate = null;
+            console.log("FROM BACK-END: "+this.placementData.startDate);
+            if (this.placementData.startDate.toString() == "0")
+            this.placementData.startDate = null;
             else
-              this.associate.clientStartDate = this.adjustDate(Number(data.clientStartDate)*1000);
-            console.log("DATE STORED: "+this.associate.clientStartDate);
+            this.placementData.startDate = this.adjustDate(Number(this.placementData.startDate)*1000);
+            console.log("DATE STORED: "+this.placementData.startDate);
           });
         this.clientService.getAllClients().subscribe(
           data => {
@@ -141,46 +146,48 @@ export class FormComponent implements OnInit {
         this.selectedMarketingStatus = 6;
       }
       console.log("About to update");
-      this.updateAssociate();
+      this.updatePlacement();
     }
 
     /**
      * Update the associate with the new client, status, and/or start date
      */
-    updateAssociate() {
+    updatePlacement() {
       console.log("START DATE: "+new Date(this.newStartDate).getTime());
       if (this.newStartDate) {
         var dateTime = Number((new Date(this.newStartDate).getTime())/1000);
       } else {
-        var dateTime = Number((new Date(this.associate.clientStartDate).getTime())/1000);
+        var dateTime = Number((new Date(this.placementData.startDate).getTime())/1000);
       }
       if (this.selectedMarketingStatus) {
         var newStatus = Number(this.selectedMarketingStatus);
       } else {
-        var newStatus = this.associate.msid;
+        var newStatus = this.associate.marketingStatusId;
       }
       if (this.selectedClient) {
         var newClient = this.selectedClient;
       } else {
-        var newClient = this.associate.clid;
+        var newClient = this.associate.clientId;
       }
-      var newAssociate = {
-        id: this.id,
-        mkStatus: newStatus,
-        clientId: newClient,
-        startDateUnixTime: dateTime
+      var newPlacement = {
+        placementId: this.placementData.placementId,
+        clientId: this.placementData.clientId,
+        endClientId: this.placementData.endClientId,
+        startDate: this.placementData.startDate,
+        endDate: this.placementData.endDate,
+        associateId: this.placementData.associateId
       };
-      this.associateService.updateAssociate(newAssociate).subscribe(
+      this.placementService.updatePlacement(newPlacement).subscribe(
         data => {
-          this.message = "Successfully updated associate";
-          this.associateService.getAssociate(this.id).subscribe(
+          this.message = "Successfully updated placement";
+          this.placementService.getOnePlacement(this.id).subscribe(
             data => {
-              this.associate = <Associate>data;
-              console.log(data.clientStartDate);
-              if (data.clientStartDate.toString() == "0")
-                this.associate.clientStartDate = null;
+              this.placementData = <Placement>data;
+              console.log(this.placementData.startDate);
+              if (this.placementData.startDate.toString() == "0")
+              this.placementData.startDate = null;
               else
-                this.associate.clientStartDate = this.adjustDate(Number(data.clientStartDate)*1000);
+              this.placementData.startDate = this.adjustDate(Number(this.placementData.startDate)*1000);
               this.resetAllFields();
           });
         }
