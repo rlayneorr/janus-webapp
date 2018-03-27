@@ -1,8 +1,15 @@
 h3 {
     text-align: center;
-    color: #F26925;
+    color: #f26925;
+      cursor: pointer;
+      cursor: hand;
   }
-  
+  h2{
+    text-align:center;
+    background-color: #F26926;
+    color:#FFFFFF;
+
+  }
   h6 {
     text-align: center;
   }
@@ -24,6 +31,12 @@ h3 {
 }
 .card-height{
   height: 25%;
+}
+
+.btn{
+  background-color:blue;
+  color:white;
+  text-align: center;
 }
 
 #buck-description{

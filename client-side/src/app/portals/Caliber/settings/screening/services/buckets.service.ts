@@ -47,8 +47,6 @@ export class BucketsService {
 
   /** PUT: update the hero on the server. Returns the updated hero upon success. */
   updateBucket (bucket: Bucket): Observable<Bucket> {
-      //https://hydra-gateway-service.cfapps.io/question-service/question/bucketQuestions/1
-      //https://hydra-gateway-service.cfapps.io/bucket-service/bucket/
     return this.http.post<Bucket>(this.url, bucket, httpOptions)
   }
 

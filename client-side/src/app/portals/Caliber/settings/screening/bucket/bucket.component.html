@@ -3,15 +3,15 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="card-width">
-                <h3 *ngIf = "this.theBucket">
+                <h2 *ngIf="this.theBucket">
                     {{this.theBucket.name}}
-                </h3>
+                </h2>
             </div>
 
             <br>
             <div class="container">
 
-                <p  *ngIf = "this.theBucket" id="buck-description">
+                <p *ngIf="this.theBucket" id="buck-description">
                     {{this.theBucket.description}}
                 </p>
             </div>
@@ -20,9 +20,12 @@
     </div>
     <!--Question Component-->
     <app-question></app-question>
-
+   
+            
+        
 </div>
-
+<br>
+<br>
 
 <!--Creating edit name modal -->
 <ng-template #editname let-c="close" let-d="dismiss">
@@ -30,7 +33,7 @@
         <div class="form-group">
 
             <h3 class="tb-heading_rev_orange">Edit Category Name</h3>
-            <label>New Category name:
+            <label>New Bucket name:
 
             </label>
             <input class="form-control" type="text" name="new_name">
@@ -40,6 +43,7 @@
             </div>
         </div>
     </form>
+
 </ng-template>
 
 <!--Creating edit description modal -->
@@ -59,3 +63,4 @@
         </div>
     </form>
 </ng-template>
+<h3 (click)="routeToScreening()">Back To Screening</h3>
