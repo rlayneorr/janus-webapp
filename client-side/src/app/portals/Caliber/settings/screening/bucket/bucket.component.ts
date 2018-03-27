@@ -41,9 +41,9 @@ export class BucketComponent implements OnInit {
     event.stopPropagation();
   }
   getCurrentBucket(){
-
-    return this.bucketService.getCurrentBucket();
-
+   this.theBucket=this.bucketService.getCurrentBucket();
+    return this.theBucket;
+   
   }
    addBucket(name: String, description: String) { }
   // public addQuestion() {};

@@ -26,7 +26,7 @@ export class BucketsService {
   bucketSubject = new Subject();
   /** For development only */
 
-  public currentBucket: Bucket;
+  private currentBucket: Bucket;
 
   constructor(private http: HttpClient) {}
 
@@ -41,6 +41,8 @@ export class BucketsService {
 
   /** PUT: update the hero on the server. Returns the updated hero upon success. */
   updateBucket (bucket: Bucket): Observable<Bucket> {
+      //https://hydra-gateway-service.cfapps.io/question-service/question/bucketQuestions/1
+      //https://hydra-gateway-service.cfapps.io/bucket-service/bucket/
     return this.http.post<Bucket>(this.url, bucket, httpOptions)
   }
 
@@ -70,19 +72,19 @@ export class BucketsService {
   setName(name:string)
   {
 
-      this.currentBucket.name=name;
+      this.currentBucket.bucketCategory=name;
   }
 
   getName(id:number){
-      return this.currentBucket.name;
+      return this.currentBucket.bucketCategory;
   }
 
   setDescription(desc:string){
-      this.currentBucket.description=desc;
+      this.currentBucket.bucketDescription=desc;
   }
 
   getDescription(){
-      return this.currentBucket.description;
+      return this.currentBucket.bucketDescription;
   }
 
 }

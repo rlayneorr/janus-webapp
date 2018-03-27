@@ -53,7 +53,7 @@ export class QuestionComponent implements OnInit {
     this.question = new Question();
     this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
     this.questions = Questions;
-    this.currentBucket = this.bucketService.currentBucket;
+    this.currentBucket = this.bucketService.getCurrentBucket();
   }
 
   /*Used to open a bootstrap modal*/
