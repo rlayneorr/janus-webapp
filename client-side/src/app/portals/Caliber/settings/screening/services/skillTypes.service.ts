@@ -40,8 +40,9 @@ export class SkillTypesService {
         return this.http.get(this.url + "getSkillTypes");
     }
 
-    updateSkillType(skillTypeBuckets: SkillTypeBucket[]) {
-        return this.http.put(this.url + "updateSkillType", { skillTypeBuckets: skillTypeBuckets }, httpOptions);
+    updateSkillType(skillType: SkillType, bucketIds, weights) {
+        console.log(skillType);
+        return this.http.post(this.url + "updateSkillType", { skillTypeName: skillType.skillTypeName, skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
     }
 
     getSkillTypeById(skillTypeId: number) {
@@ -50,7 +51,7 @@ export class SkillTypesService {
 
     /** Temporary solution for this func, need to double check with back-end **/
     getBucketsBySkillType(skillTypeId: number): Observable<Bucket[]> {
-        return this.http.get<Bucket[]>(this.url + "getTopics/" + skillTypeId);
+        return this.http.get<Bucket[]>(this.url + "getSkillTypeBuckets/" + skillTypeId);
     }
 
     testingGetTags() {

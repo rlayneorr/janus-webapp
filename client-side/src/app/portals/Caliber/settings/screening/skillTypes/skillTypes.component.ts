@@ -22,10 +22,13 @@ export class SkillTypesComponent implements OnInit {
   public allSkillTypes: SkillType[]=[];
   public allBuckets: Bucket[] = [];
   public bucketWeightSum: number = 0;
-  public newSkillType: SkillType;
+  public bucketsAndWeights = [];
+  public skillType: SkillType;
+  public singleSkillType: SkillType;
   public error: boolean;
+  public modalServiceRef;
 
-  bucketsAndWeights = [];
+
 
   testSkillTypeBuckets: SkillTypeBucket[] = [
       { skillTypeId: 0, bucketId: 0, weight: 50 },
@@ -33,9 +36,9 @@ export class SkillTypesComponent implements OnInit {
       { skillTypeId: 0, bucketId: 2, weight: 30 }
   ]
 
-  singleSkillType: SkillType;
 
-  modalServiceRef;
+
+
 
   removeElement(item:any){
     let thing:any;
@@ -44,24 +47,10 @@ export class SkillTypesComponent implements OnInit {
       if(thing.skillTypeName == item.skillTypeName){
         thing.isActive = !thing.isActive;
         this.allSkillTypes[i] = thing;
+        console.log(thing);
       }
     }
     this.setSkillTypes();
-
-  }
-
-
-
-  testingGettingTags(){
-    var tag ={
-        tagName : "Dolly",
-        tagId :7
-    }
-    this.skillTypeService.testingCreatingTags(tag);
-   this.skillTypeService.testingGetTags().subscribe(
-      data =>{
-        console.log(data);
-      });
   }
 
   setSkillTypes(){
@@ -69,7 +58,6 @@ export class SkillTypesComponent implements OnInit {
     this.skillTypes = [];
     this.inactiveSkillTypes = [];
     for(let i = 0; i<this.allSkillTypes.length;i++){
-        console.log(thing);
       thing = this.allSkillTypes[i];
       if(thing.isActive == true){
         this.skillTypes[this.skillTypes.length]=thing;
@@ -103,17 +91,19 @@ export class SkillTypesComponent implements OnInit {
     editSkillType(skillType){
         this.singleSkillType = {
             skillTypeName: skillType.skillTypeName,
-            skillTypeId: skillType.id,
+            skillTypeId: skillType.skillTypeId,
             skillTypeDescription: skillType.skillTypeDescription,
             isActive: true,
             buckets: [],
             weights: []
         }
+        this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
+            console.log(results);
+        })
         if(skillType.buckets){
             this.singleSkillType.buckets = skillType.buckets;
             this.singleSkillType.weights = skillType.weights;
         }
-        console.log(this.singleSkillType);
         this.combineBucketsAndWeights();
     }
 
@@ -151,8 +141,9 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
-    editNewSkillType(modal: SkillType){
-        this.newSkillType = modal;
+    updateSkillType(modal: SkillType){
+        this.skillType = modal;
+        this.skillType.skillTypeId = this.singleSkillType.skillTypeId;
         let addedBucket = false;
         console.log(modal.skillTypeName);
         this.bucketWeightSum = 0;
@@ -162,8 +153,16 @@ export class SkillTypesComponent implements OnInit {
                 this.bucketWeightSum += this.bucketsAndWeights[index].weight;
             }
         }
-        if(this.bucketWeightSum == 100){
+        if(this.bucketWeightSum == 100 || this.bucketsAndWeights.length == 0){
             this.modalServiceRef.close();
+            let bucketsId = [];
+            let weights = [];
+            for(let bucketWeight of this.bucketsAndWeights){
+                bucketsId.push(bucketWeight.bucket.bucketId);
+                weights.push(bucketWeight.weight);
+            }
+            this.skillTypeService.updateSkillType(this.skillType, bucketsId, weights).subscribe();
+            this.grabAllSkillTypes();
         }
         else {
             this.error = true;
@@ -171,8 +170,8 @@ export class SkillTypesComponent implements OnInit {
     }
 
     createNewSkillType(modal: SkillType){
-        this.newSkillType = modal;
-        this.skillTypeService.createSkillType(this.newSkillType).subscribe(results => {
+        this.skillType = modal;
+        this.skillTypeService.createSkillType(this.skillType).subscribe(results => {
             this.grabAllSkillTypes();
         })
     }
