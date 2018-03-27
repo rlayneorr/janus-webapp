@@ -7,6 +7,7 @@ import { ClientListService } from '../../services/client-list-service/client-lis
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { User } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
+import { CurriculumService } from '../../services/curriculum-service/curriculum.service';
 
 /**
  * Component for the Associate List page
@@ -53,6 +54,7 @@ export class AssociateListComponent implements OnInit {
   constructor(
     private associateService: AssociateService,//TfAssociate,
     private clientService: ClientListService,
+    private curriculumnService: CurriculumService,
     private rs: RequestService,
     private activated: ActivatedRoute
   ) {
@@ -93,11 +95,11 @@ export class AssociateListComponent implements OnInit {
       console.log(this.associates);
 
       for (let associate of this.associates) {//get our curriculums from the associates
-        this.curriculums.add(associate.curriculumName);
+      //  this.curriculums.add(associate.curriculumName);
 
-        if (associate.batchName === 'null') {
-          associate.batchName = 'None'
-        }
+      //  if (associate.batchName === 'null') {
+      //    associate.batchName = 'None'
+     //   }
       }
       this.curriculums.delete("");
       this.curriculums.delete("null");
