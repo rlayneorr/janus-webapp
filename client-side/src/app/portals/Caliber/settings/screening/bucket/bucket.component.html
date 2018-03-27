@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="card-width">
-                <h3>
+                <h3 *ngIf = "this.bucketService.currentBucket">
                     {{this.bucketService.currentBucket.name}}
                 </h3>
             </div>
@@ -11,7 +11,7 @@
             <br>
             <div class="container">
 
-                <p id="buck-description">
+                <p  *ngIf = "this.bucketService.currentBucket" id="buck-description">
                     {{this.bucketService.currentBucket.description}}
                 </p>
             </div>
