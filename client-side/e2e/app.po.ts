@@ -44,6 +44,7 @@ export class AppPage {
   }
 
   goToClientListPage() {
+    element(by.id('smallWindowNav')).click();
     let e = element(by.id('clientListNav'));
     e.click();
   }
@@ -83,6 +84,7 @@ export class AppPage {
   }
 
   goToBatchListPage() {
+    element(by.id('smallWindowNav')).click();
     element(by.xpath('//*[@id="batchListNav"]')).click();
   }
 
@@ -91,6 +93,7 @@ export class AppPage {
   }
 
   goToAssociateList() {
+    element(by.id('smallWindowNav')).click();
     element(by.id('associateListNav')).click();
   }
 
@@ -118,6 +121,7 @@ export class AppPage {
   }
 
   goToPredictionsPage() {
+    element(by.id('smallWindowNav')).click();
     element(by.id('predictionsNav')).click();    
   }
 
