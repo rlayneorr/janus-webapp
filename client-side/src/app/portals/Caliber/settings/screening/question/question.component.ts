@@ -29,8 +29,10 @@ import {BucketsService} from '../services/buckets.service';
 })
 export class QuestionComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder,
-     private tagsService: TagsService,
+  constructor(
+    private modalService: NgbModal, 
+    private fb: FormBuilder,
+    private tagsService: TagsService,
       private questionService: QuestionsService,
     private bucketService: BucketsService) { }
 
