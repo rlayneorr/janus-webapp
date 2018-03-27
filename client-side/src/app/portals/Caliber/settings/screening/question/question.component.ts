@@ -56,7 +56,10 @@ export class QuestionComponent implements OnInit {
     this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
     this.currentBucket = this.bucketService.getCurrentBucket();
     if(this.currentBucket){
-      this.questions = this.questionService.getBucketQuestions(this.currentBucket.id);
+      this.questionService.getBucketQuestions(this.currentBucket.id).subscribe(data=>{
+        console.log(data);
+        this.questions = (data as Question[]);
+      })
     }
     console.log(this.questions);
   }
@@ -145,11 +148,11 @@ export class QuestionComponent implements OnInit {
     }
     if(this.sampleAnswers.length==5 && this.question.questionText){
       if(this.question.questionId){
-        //this.questionService.updateQuestion(0,this.question);
+        this.questionService.updateQuestion(this.currentBucket.id,this.question);
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
       }
       else{
-        //this.questionService.createNewQuestion(0,this.question);
+        this.questionService.createNewQuestion(this.currentBucket.id,this.question);
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
       }
 
