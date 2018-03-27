@@ -24,7 +24,7 @@ describe('test-app App', () => {
     expect(page.getTrackForceTitleText()).toEqual('Track Force');
   });
 
-  it('should click Tracforce button and go to trackfroce login in page', () => {
+  it('should click Trackforce button and go to Trackforce login in page', () => {
     page.clickTrackForceButton();
     expect(page.getTrackForceLoginTitleText()).toEqual('Track Force Login');
   });
@@ -39,6 +39,41 @@ it('should go Client List Page', () => {
     expect(page.getClientListTitleText()).toEqual('Show Clients With No Associates');
   });
 
+it('should scroll through client list and find a chart for each client', () => {
+    var numClients = page.getNumberOfClients().then(number=>{
+      for(let i = 1; i <= number; i++){
+        console.log(number);
+        page.clickClientAtIndex(i);
+        expect(page.getClientNameAtIndex(i)).toEqual(page.getClientListChartTitle());
+      }
+    });
   
+});
+
+it('should click first client', () => {
+    page.clickFirstClient();
+    expect(page.getClientListChartTitle()).toEqual('22nd Century Technologies');
+  });  
+
+it('should search for a client and click result', () => {
+    page.searchClientList('FINRA');
+    page.clickClientListSearchResult();
+    expect(page.getClientListChartTitle()).toEqual('FINRA');
+});
+
+it('should go to batch-listing', () => {
+    page.goToBatchListPage();
+    expect(page.getBatchListTitleText()).toEqual('All Batches');
+});
+
+it('should go to associate listing', () => {
+    page.goToAssociateList();
+    expect(page.getAssociatePageTitle()).toEqual('Associates');
+});
+
+it('should go to predictions page', () => {
+    page.goToPredictionsPage();
+    expect(page.getPredictionsPageTitle()).toEqual('Predictions');
+});
 
 });
