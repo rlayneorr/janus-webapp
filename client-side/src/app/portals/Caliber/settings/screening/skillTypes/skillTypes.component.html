@@ -8,7 +8,7 @@
       <div class="card-body">
           <div class="list-group">
                 <a class="list-group-item list-group-item-action" *ngFor="let skillType of skillTypes">
-                        {{skillType.name}}
+                        {{skillType.skillTypeName}}
                         <i id="xIcon">
                             <label class="switch">
                                 <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
@@ -20,7 +20,7 @@
 
                     </a>
               <a class="list-group-item list-group-item-action" *ngFor="let skillType of inactiveSkillTypes">
-                  {{skillType.name}}
+                  {{skillType.skillTypeName}}
                   <i id="xIcon">
                       <label class="switch">
                           <input type="checkbox" [checked] = skillType.isActive (change) = "removeElement(skillType)">
@@ -33,7 +33,7 @@
               </a>
           </div>
       </div>
-      <button class="btn btn-primary btn-sm" (click)='open(content); clearSkillTypeBuckets()'>Create Skill Type</button>
+      <button class="btn btn-primary btn-sm" (click)='open(content)'>Create Skill Type</button>
     </div>
   </div>
 </div>
@@ -49,12 +49,12 @@
     </button>
   </div>
   <div class="modal-body">
-      <form  #addSkillTypeForm="ngForm" [formGroup]="createSkillType">
+      <form  #addSkillTypeForm="ngForm">
           <div class="form-group row">
               <label for="name" class="col-sm-2 col-form-label">Name:</label>
               <div class="col-sm-10">
-                  <input type="text" id="name" name=name formControlName="skillTypeName" class="form-control" *ngIf="testSingleSkillType"  [value]="testSingleSkillType.skillTypeName">
-                  <input type="text" id="name" name="name" formControlName="skillTypeName" placeholder="SkillType Name" class="form-control" *ngIf="!testSingleSkillType">
+                  <input type="text" id="skillTypeName" name=skillTypeName class="form-control" *ngIf="testSingleSkillType" required #skillTypeName="ngModel" [(ngModel)]="testSingleSkillType.skillTypeName">
+                  <input type="text" id="skillTypeName" name="skillTypeName" placeholder="SkillType Name" class="form-control" *ngIf="!testSingleSkillType" required ngModel>
               </div>
           </div>
           <div *ngIf="testSingleSkillType">
@@ -64,19 +64,22 @@
                       <div *ngFor="let bucketWeight of bucketsAndWeights">
                           <div class="input-group col-sm-9">
                               <span class="input-group-addon col-sm-4 revatureOrange">{{bucketWeight.bucket.name}}</span>
-                              <input type="number" #weight name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucketWeight.weight" [ngModelOptions]="{standalone: true}" (keyup)="checkBucketSum()">
-                              <input type="number" name="sum" class="form-control border-right-0" formControlName="bucketWeightSum" [hidden]="true" [(ngModel)]="bucketWeightSum" *ngIf="bucketWeight">
+                              <input type="number" #weight name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucketWeight.weight" [ngModelOptions]="{standalone: true}">
+                              <input type="number" name="sum" class="form-control border-right-0" [hidden]="true" [(ngModel)]="bucketWeightSum" *ngIf="bucketWeight">
                               <span class="input-group-addon percentSign">%</span>
-                              <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromSkillTypeBuckets(bucketWeight.bucket); checkBucketSum()"><span aria-hidden="true">&times;</span></button>
+                              <button type="button" class="close col-sm-3 revatureOrange" aria-label="Close" (click)="removeFromSkillTypeBuckets(bucketWeight.bucket);">
+                              <span aria-hidden="true">&times;</span></button>
                           </div>
                       </div>
+                      <br>
+                      <p *ngIf="error" class="text-danger">The sum of the buckets has to equal <strong>100</strong></p>
                   </div>
               </div>
               <div class="form-group row">
                   <label for="inactiveBuckets" class="col-sm-6 col-form-label">All Buckets:</label>
                   <div class="col-sm-10 row">
                     <span *ngFor="let bucket of testBuckets">
-                        <span class="input-group-addon" (click)="addToSkillTypeBuckets(bucket); checkBucketSum()" style="margin: 1px" *ngIf="!checkContains(bucket)">{{bucket.name}}</span>
+                        <span class="input-group-addon" (click)="addToSkillTypeBuckets(bucket)" style="margin: 1px" *ngIf="!checkContains(bucket)">{{bucket.name}}</span>
                     </span>
                   </div>
               </div>
@@ -85,6 +88,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Create SkillType'); addNewSkillType(addSkillTypeForm.value)" [disabled]="!addSkillTypeForm.valid">Save</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="addNewSkillType(addSkillTypeForm.value)" [disabled]="!addSkillTypeForm.valid">Save</button>
     </div>
 </ng-template>
