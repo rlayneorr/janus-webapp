@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { browser } from 'protractor';
 
-xdescribe('test-app App', () => {
+describe('test-app App', () => {
   let page: AppPage;
   
   beforeEach(() => {
@@ -79,7 +79,7 @@ it('should go to predictions page', () => {
 
 });
 
-describe('test-chart', () => {
+xdescribe('test-chart', () => {
   let page: AppPage;
   
   beforeEach(() => {
