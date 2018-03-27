@@ -22,7 +22,7 @@ export class SkillTypesService {
     public skillTypeBuckets: SkillTypeBucket[] = [];
 
     //url: string = "/skillType/";
-    url: string = "http://localhost:8080/tag/";
+    url: string = "https://hydra-gateway-service.cfapps.io/skilltype-service/skillType/";
 
     //Buckets will probably be an array of buckets after model/entity is created
     createSkillType(name: string, skillTypeBuckets: SkillTypeBucket[]) {
@@ -42,7 +42,8 @@ export class SkillTypesService {
     }
 
     updateSkillType(skillTypeBuckets: SkillTypeBucket[]) {
-        return this.http.put(this.url + "updateSkillType", { skillTypeBuckets: skillTypeBuckets }, httpOptions);
+        return this.http.put(this.url + "updateSkillType", { skillTypeBuckets: skillTypeBuckets }, 
+        httpOptions);
     }
 
     getSkillTypeById(skillTypeId: number) {

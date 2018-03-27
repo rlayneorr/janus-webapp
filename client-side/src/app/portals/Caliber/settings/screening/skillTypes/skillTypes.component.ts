@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
 import { Bucket } from '../entities/Bucket';
@@ -20,7 +20,33 @@ export class SkillTypesComponent implements OnInit {
   public skillTypes:any[]=[];
   public inactiveSkillTypes:any[]=[];
   public allSkillTypes:any[]=[];
-  public bucketWeightSum: number;
+  public bucketWeightSum: number = 0;
+  public newSkillType: SkillType;
+  public error: boolean;
+
+  java: Bucket = new Bucket(0, "Java", "This is Java");
+  sql: Bucket = new Bucket(1, "SQL", "This is SQL");
+  oop: Bucket = new Bucket(2, "OOP", "This is OOP");
+  html: Bucket = new Bucket(3, "HTML", "This is HTML");
+
+  testBuckets: Bucket[] = [
+      this.java,
+      this.sql,
+      this.oop,
+      this.html
+  ]
+
+  bucketsAndWeights = [];
+
+  testSkillTypeBuckets: SkillTypeBucket[] = [
+      { skillTypeId: 0, bucketId: 0, weight: 50 },
+      { skillTypeId: 0, bucketId: 1, weight: 20 },
+      { skillTypeId: 0, bucketId: 2, weight: 30 }
+  ]
+
+  testSingleSkillType: SkillType;
+
+  modalServiceRef;
 
   removeElement(item:any){
     let thing:any;
@@ -60,6 +86,7 @@ export class SkillTypesComponent implements OnInit {
         this.inactiveSkillTypes[this.inactiveSkillTypes.length]=thing;
       }
     }
+  //  console.log(this.skillTypes.length);
     console.log(this.skillTypes);
   }
 
@@ -70,79 +97,23 @@ export class SkillTypesComponent implements OnInit {
     private bucket:BucketsService,
   ) { }
 
-
-
-  createSkillType: FormGroup;
-  newSkillType: SkillType;
-
-  /**
-   * initialize form control for validations
-   *
-   * @memberof SkillTypesComponent
-   */
-  initFormControl() {
-    this.createSkillType = this.fb.group({
-      'skillTypeName': ['', Validators.required],
-      'bucketWeightSum': ['', Validators.compose(
-          [Validators.min(100), Validators.max(100)]
-      )]
-    });
-  }
-
-
     open(content) {
-      this.modalService.open(content).result.then((result) => {
+      this.modalServiceRef = this.modalService.open(content);
+      this.modalServiceRef.result.then((result) => {
         this.testSingleSkillType = null;
-        this.initFormControl();
+        this.bucketsAndWeights = null;
+        this.error = null;
       }, (reason) => {
         this.testSingleSkillType = null;
-        this.initFormControl();
+        this.bucketsAndWeights = null;
+        this.error = null;
       });
       event.stopPropagation();
     }
 
-    addNewSkillType(modal: SkillType){
-        this.newSkillType = modal;
-        let addedBucket = false;
-        console.log(modal.skillTypeName)
-        for(let bucketIndex in this.testBuckets){
-            if(this.testBuckets[bucketIndex].mappedToSkillType == true){
-                addedBucket = true;
-                this.bucketWeightSum += this.testBuckets[bucketIndex].weight;
-            }
-        }
-        if(!addedBucket || this.bucketWeightSum == 100){
-            console.log("Congrats! The sum of active buckets is: " + this.bucketWeightSum);
-            //this.skillTypeService.createSkillType(this.newSkillType.skillTypeName).subscribe();
-        }
-        this.initFormControl();
-    }
-
-    java: Bucket = new Bucket(0, "Java", "This is Java");
-    sql: Bucket = new Bucket(1, "SQL", "This is SQL");
-    oop: Bucket = new Bucket(2, "OOP", "This is OOP");
-    html: Bucket = new Bucket(3, "HTML", "This is HTML");
-
-    testBuckets: Bucket[] = [
-        this.java,
-        this.sql,
-        this.oop,
-        this.html
-    ]
-
-    bucketsAndWeights = [];
-
-    testSkillTypeBuckets: SkillTypeBucket[] = [
-        { skillTypeId: 0, bucketId: 0, weight: 50 },
-        { skillTypeId: 0, bucketId: 1, weight: 20 },
-        { skillTypeId: 0, bucketId: 2, weight: 30 }
-    ]
-
-    testSingleSkillType: SkillType;
-
     editSkillType(skillType){
         this.testSingleSkillType = {
-            skillTypeName: skillType.name,
+            skillTypeName: skillType.skillTypeName,
             skillTypeId: skillType.id,
             isActive: true,
             buckets: [this.java, this.oop, this.html],
@@ -185,32 +156,51 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
-    clearSkillTypeBuckets(){
-        for(let index in this.testBuckets){
-            this.testBuckets[index].mappedToSkillType = false;
-            this.testBuckets[index].weight = 0;
+    addNewSkillType(modal: SkillType){
+        this.newSkillType = modal;
+        let addedBucket = false;
+        console.log(modal.skillTypeName);
+        this.bucketWeightSum = 0;
+        if(this.bucketsAndWeights){
+            for(let index in this.bucketsAndWeights){
+                addedBucket = true;
+                this.bucketWeightSum += this.bucketsAndWeights[index].weight;
+            }
+        }
+        if(this.bucketWeightSum == 100){
+            this.modalServiceRef.close();
+        }
+        else {
+            this.error = true;
         }
     }
 
     checkBucketSum(){
         this.bucketWeightSum = 0;
-        for(let index of this.bucketsAndWeights){
-            this.bucketWeightSum += index.weight;
+        for(let bucket of this.bucketsAndWeights){
+            this.bucketWeightSum += bucket.weight;
+        }
+        if(this.bucketWeightSum == 100){
+            this.error = false;
+        } else {
+            this.error = true;
         }
     }
 
   ngOnInit() {
     this.allSkillTypes = [
-      {name:"Java",isActive:true},
-      {name:'.Net',isActive:true},
-      {name:'SDET',isActive:true},
-      {name:'Label',isActive:true},
-      {name:"Pega",isActive:false},
-      {name:'Salesforce',isActive:false},
-      {name:'Software',isActive:false}
+      {skillTypeName:"Java",isActive:true},
+      {skillTypeName:'.Net',isActive:true},
+      {skillTypeName:'SDET',isActive:true},
+      {skillTypeName:'Label',isActive:true},
+      {skillTypeName:"Pega",isActive:false},
+      {skillTypeName:'Salesforce',isActive:false},
+      {skillTypeName:'Software',isActive:false}
     ]
     this.setSkillTypes();
-    this.initFormControl();
+    this.skillTypeService.getSkillTypes().subscribe(results => {
+        console.log(results);
+    })
   }
 
 }

@@ -27,6 +27,7 @@ export class SkillTypeBucketsComponent implements OnInit {
     private bucketService: BucketsService,
     private modalService: NgbModal) {}
 
+    filter: Bucket= new Bucket(0,null,null);
   ngOnInit() {
     this.getBuckets()
   }
@@ -44,7 +45,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   routeToBucket(item: Bucket) {
     this.bucketService.setBucket(item);
     console.log("routing to category");
-    console.log(this.bucketService.currentBucket);
+    //console.log(this.bucketService.getCurrentBucket());
     this.router.navigate(["Caliber/settings/screening/category"]);
   }
 
@@ -70,8 +71,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   createBucket() {
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
-      .subscribe(bucket => {console.log(bucket)
-        this.buckets.push(bucket)});
+      .subscribe(bucket =>this.buckets.push(bucket));
   }
 
   /** Modal variables, and functions */
@@ -99,4 +99,3 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 }
-
