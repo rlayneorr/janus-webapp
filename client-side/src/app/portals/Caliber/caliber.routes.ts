@@ -104,7 +104,6 @@ export const routes: Routes = [
             ]
           },
           {
-
            path: 'screening/category',
             component: BucketComponent
           },
