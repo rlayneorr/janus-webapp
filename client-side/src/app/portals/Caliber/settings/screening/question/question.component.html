@@ -43,61 +43,66 @@
       <div class="form-group row">
         <label for = "questionText" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Question:</label>
         <div class="col-sm-9">
-          <input name="question" [(ngModel)]="question.text" type = "text" id = "questionText" placeholder="Question" class="form-control bucketWeight" min="0" max="100">
+          <input name="question" [(ngModel)]="question.questionText" type = "text" id = "questionText" placeholder="Question" class="form-control bucketWeight" min="0" max="100">
         </div>
       </div>
-      <ngb-accordion #acc="ngbAccordion"  >
-          <ngb-panel>
-              <ng-template ngbPanelTitle >
-                <span >Questions</span>
-              </ng-template>
-          <ng-template ngbPanelContent>
-            <div class="form-group row">
-              <label for = "one point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">One point:</label>
-              <div class="col-sm-9">
-                <input name="answer1" [(ngModel)]="sampleAnswers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="two point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Two point:</label>
-              <div class="col-sm-9">
-                <input name="answer2" [(ngModel)]="sampleAnswers[1]" type = "text" id = "2pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="three point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Three point:</label>
-              <div class="col-sm-9">
-                <input name="answer3" [(ngModel)]= "sampleAnswers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="four point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Four point:</label>
-              <div class="col-sm-9">
-                <input name="answer4" [(ngModel)]="sampleAnswers[3]" type = "text" id = "4pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="five point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Five point:</label>
-              <div class="col-sm-9">
-                <input name="answer4" [(ngModel)]="sampleAnswers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
-              </div>
-            </div>
-          </ng-template>
-        </ngb-panel>
-      </ngb-accordion>
-      <!--Currently added tags-->
-      <ngb-accordion #acc="ngbAccordion">
-        <ngb-panel title="Tags">
-          <ng-template ngbPanelContent>
-              <div class="row">
-                <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
-                <!--Add new tag section-->
-                <div class="col-sm-9 col-form-label"  align = "center">
-                  <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
+      <!--Sample answers collapsable-->
+      <button style="text-align:left" type="button" class="btn-block btn-light btn-outline-dark" (click)="answersCollapsed = !answersCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        Answers
+      </button>
+      <div id="collapseExample" [ngbCollapse]="answersCollapsed">
+          <div ngbPanelContent>
+              <br>
+              <div class="form-group row">
+                <label for = "one point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">One point:</label>
+                <div class="col-sm-9">
+                  <input name="answer1" [(ngModel)]="sampleAnswers[0]" type = "text" id = "1pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
                 </div>
               </div>
-              <!--Uses the same styling as the all tags, but this ection is to display the currently added tags in the question editor-->
-              <div id = "allTagsDiv"  class="form-group row">
+              <div class="form-group row">
+                <label for="two point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Two point:</label>
+                <div class="col-sm-9">
+                  <input name="answer2" [(ngModel)]="sampleAnswers[1]" type = "text" id = "2pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="three point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Three point:</label>
+                <div class="col-sm-9">
+                  <input name="answer3" [(ngModel)]= "sampleAnswers[2]" type = "text" id = "3pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="four point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Four point:</label>
+                <div class="col-sm-9">
+                  <input name="answer4" [(ngModel)]="sampleAnswers[3]" type = "text" id = "4pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="five point answer" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Five point:</label>
+                <div class="col-sm-9">
+                  <input name="answer4" [(ngModel)]="sampleAnswers[4]" type = "text" id = "5pointAnswer" placeholder="answer" class="form-control" min="0" max="100">
+                </div>
+              </div>
+            </div>
+      </div>
+      <!---->
+      <button style="text-align:left" type="button" class="btn-block btn-light btn-outline-dark" (click)="tagsCollapsed = !tagsCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        <span align = "left">Tags</span>
+      </button>
+      <div id="collapseExample" [ngbCollapse]="tagsCollapsed" class="card-body">
+          <div ngbPanelContent>
+            <br>
+            <div class="row">
+              <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
+              <!--Add new tag section-->
+              <div class="col-sm-9 col-form-label"  align = "center">
+                <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
+              </div>
+            </div>
+            <!--Uses the same styling as the all tags, but this section is to display the currently added tags in the question editor-->
+            <div id = "allTagsDiv"  class="form-group row">
                 <div id = "allTagsDiv" data-spy="scroll" data-offset="50">
                   <div class="container-fluid">
                       <div class="row">
@@ -115,7 +120,7 @@
                     </div>
                 </div>
               </div>
-      <!--Add tags section-->
+              <!--Add tags section-->
       <div class="form-group row">
         <label for="allTags" class="col-sm-3 col-form-label">All Tags:</label>
         <div class="col-sm-9">
@@ -137,9 +142,10 @@
               </div>
             </div>
           </div>
-      </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
+          </div>
+      </div>
+      <!---->
+      <!--Currently added tags-->
       <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
           <!--The save button will save/update a question so long as all of the fields have been filled and display a message that the question has been saved-->

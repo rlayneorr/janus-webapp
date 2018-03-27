@@ -19,7 +19,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const buckets = [
-      { id: 11, name: 'OOP', description: 'Inheritance, polymorphism, encapsulation, abstraction', isActive: true },
+      { id: 1, name: 'OOP', description: 'Inheritance, polymorphism, encapsulation, abstraction', isActive: true },
       { id: 12, name: 'SQL', description: 'Database knowledge', isActive: true },
       { id: 13, name: 'REST', description: 'Consume, and exposing RESTful service', isActive: false },
       { id: 14, name: 'Front-end', description: 'Plan design client side structure and attributes', isActive: true },
@@ -27,7 +27,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 16, name: 'United-BA', description: 'I will talk to you, and will do something?' },
       { id: 17, name: 'Canoeing 101', description: 'Remember not the canoe by a waterfall' },
       { id: 18, name: 'PEGA', description: "Cut the horn and don't let it fly" },
-      { id: 19, name: 'SalesForce 101', description: 'Just copy and past it, wash rinse, repeat' },
+      { id: 50, name: 'SalesForce 101', description: 'Just copy and past it, wash rinse, repeat' },
       { id: 17, name: 'AP PION?', description: 'Suggest all tech you know' }
     ];
     return {buckets};

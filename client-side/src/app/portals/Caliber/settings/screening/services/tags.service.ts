@@ -17,10 +17,10 @@ export class TagsService {
       return this.http.get(this.url + "getTags");
   }
 
-  createNewTag(name: string):number{
-    this.http.post(this.url + "createNewTag", name, httpOptions).subscribe(data=>{
+  createNewTag(newTag: Tag):Tag{
+    this.http.post(this.url + "createNewTag", newTag, httpOptions).subscribe(data=>{
         this.tag = (data as Tag);
     });
-    return this.tag.id;
+    return this.tag;
   }
 }

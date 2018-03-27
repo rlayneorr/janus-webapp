@@ -63,7 +63,7 @@ export class BucketComponent implements OnInit {
     // this.questionService.getBucketQuestions(bucketID); 
     // Mock data
     //this.questionService.getBucketQuestions(bucketID);
-    this.questionService.getBucketQuestions(bucketID).subscribe(questions => this.questionList = questions);
+    this.questionService.getBucketQuestions(bucketID);
 
   };
 }
