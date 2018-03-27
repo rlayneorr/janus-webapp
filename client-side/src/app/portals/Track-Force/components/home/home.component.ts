@@ -132,18 +132,17 @@ export class HomeComponent {
         // iterate over associates and aggregate totals
         let marketingStatus : MarketingStatus;
         let associate = this.associates[i];
-        this.ms.getMarketingStatusById(this.associates[i].batchId).subscribe(mss => marketingStatus = mss);
-        switch(marketingStatus.name) {
-          case 'MAPPED: TRAINING': trainingMapped++; break;
-          case 'MAPPED: RESERVED': reservedMapped++; break;
-          case 'MAPPED: SELECTED': selectedMapped++; break;
-          case 'MAPPED: CONFIRMED': confirmedMapped++; break;
-          case 'MAPPED: DEPLOYED': deployedMapped++; break;
-          case 'UNMAPPED: TRAINING': trainingUnmapped++; break;
-          case 'UNMAPPED: OPEN': openUnmapped++; break;
-          case 'UNMAPPED: SELECTED': selectedUnmapped++; break;
-          case 'UNMAPPED: CONFIRMED': confirmedUnmapped++; break;
-          case 'UNMAPPED: DEPLOYED': deployedUnmapped++; break;
+        switch(associate.marketingStatus) {
+          case 1: trainingMapped++; break;
+          case 2: reservedMapped++; break;
+          case 3: selectedMapped++; break;
+          case 4: confirmedMapped++; break;
+          case 5: deployedMapped++; break;
+          case 6: trainingUnmapped++; break;
+          case 7: openUnmapped++; break;
+          case 8: selectedUnmapped++; break;
+          case 9: confirmedUnmapped++; break;
+          case 10: deployedUnmapped++; break;
         }
       }
       /**
