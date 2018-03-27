@@ -31,10 +31,9 @@ export class BucketComponent implements OnInit {
       { id: 1, text: "test", answers: ["1", "2"], tagIds: [1, 2], isActive: true }
     ]
 
-  //Setting this.theBucket to the current bucket (the bucket passed from all buckets)
-  this.theBucket=this.bucketService.getCurrentBucket();
-  // console.log("In bucket");
-  // console.log(this.bucketService.getCurrentBucket());
+  //  this.bucketService.getCurrentBucket();
+   console.log("In bucket");
+   console.log(this.bucketService.getCurrentBucket());
 
   }
 
@@ -72,8 +71,8 @@ export class BucketComponent implements OnInit {
 
 
    showQuestionsForThisBucket() {
-     let bucketID: number = this.bucketService.getCurrentBucket().id;
-    // this.questionService.getBucketQuestions(bucketID); 
+     let bucketID: number = this.bucketService.getCurrentBucket().bucketId;
+    // this.questionService.getBucketQuestions(bucketID);
     // Mock data
     //this.questionService.getBucketQuestions(bucketID);
     this.questionService.getBucketQuestions(bucketID);

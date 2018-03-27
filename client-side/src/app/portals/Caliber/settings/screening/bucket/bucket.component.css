@@ -1,6 +1,10 @@
+#bucket-header
+{
+  background-color: #F26926;
+}
 h3 {
-    text-align: center;
-    color: #f26925;
+    text-align: right;
+    color: #FFFFFF;
       cursor: pointer;
       cursor: hand;
   }

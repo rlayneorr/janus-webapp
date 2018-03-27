@@ -1,14 +1,16 @@
 <!-- Showing Bucket (Category) name and description - non-editable -->
+<div id="bucket-header">
+    <h3 (click)="routeToScreening()">Back To Screening</h3>
+    <h2 *ngIf="this.theBucket">
+        {{this.theBucket.name}}
+    </h2>
+
+</div>
 <div>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="card-width">
-                <h2 *ngIf="this.theBucket">
-                    {{this.theBucket.name}}
-                </h2>
-            </div>
 
-            <br>
+
             <div class="container">
 
                 <p *ngIf="this.theBucket" id="buck-description">
@@ -20,9 +22,9 @@
     </div>
     <!--Question Component-->
     <app-question></app-question>
-   
-            
-        
+
+
+
 </div>
 <br>
 <br>
@@ -63,4 +65,3 @@
         </div>
     </form>
 </ng-template>
-<h3 (click)="routeToScreening()">Back To Screening</h3>

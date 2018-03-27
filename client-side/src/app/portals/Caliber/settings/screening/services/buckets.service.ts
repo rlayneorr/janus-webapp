@@ -20,13 +20,8 @@ const httpOptions = {
 export class BucketsService {
 
   /** This is our base URL endpoint */
- //  url: string = "/bucket/";
-
-  //Test URL - not connecting to backend.
-  url: string = "api/buckets";
-
- // Actual URL for connecting to backend
- // url:string = "https://hydra-gateway-service.cfapps.io/bucket-service/bucket/";
+  // url: string = "/bucket/";
+  url: string = "https://hydra-gateway-service.cfapps.io/bucket-service/bucket/";
   /** Making an Observable */
   bucketSubject = new Subject();
   /** For development only */
@@ -37,8 +32,7 @@ export class BucketsService {
   
   /** Gets all of company's buckets from server */
   getAllBuckets(): Observable<Bucket[]>{
-    return this.http.get<Bucket[]>(this.url)
-    // return this.http.get(this.url + "getBuckets");
+      return this.http.get(this.url + "getBuckets");
   }
 
   getBucketById(bucketId: number){
@@ -76,19 +70,19 @@ export class BucketsService {
   setName(name:string)
   {
 
-      this.currentBucket.name=name;
+      this.currentBucket.bucketCategory=name;
   }
 
   getName(id:number){
-      return this.currentBucket.name;
+      return this.currentBucket.bucketCategory;
   }
 
   setDescription(desc:string){
-      this.currentBucket.description=desc;
+      this.currentBucket.bucketDescription=desc;
   }
 
   getDescription(){
-      return this.currentBucket.description;
+      return this.currentBucket.bucketDescription;
   }
 
 }
