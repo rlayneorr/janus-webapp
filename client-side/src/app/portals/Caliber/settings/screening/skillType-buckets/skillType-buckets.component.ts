@@ -71,7 +71,7 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 
-  /** INCOMPLETE, ERROR TypeError: Cannot read property 'name' of null */
+  /** Creates new bucket */
   createBucket() {
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
