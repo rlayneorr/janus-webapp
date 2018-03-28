@@ -2,19 +2,19 @@
 {
   background-color: #F26926;
 }
-h3 {
-    text-align: right;
+
+#back-to-screen {
     color: #FFFFFF;
-      cursor: pointer;
-      cursor: hand;
-      padding-right: 15px;
-      padding-top: 10px;
+    cursor: pointer;
+    cursor: hand;
+    padding-top: 10px;
   }
   h2{
     text-align:center;
     background-color: #F26926;
     color:#FFFFFF;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    /*padding-bottom: 15px;*/
 
   }
   h6 {
@@ -48,4 +48,5 @@ h3 {
 
 #buck-description{
   text-align:center;
+  background-color: #FFFFFF;
 }

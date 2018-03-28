@@ -1,26 +1,20 @@
 <!-- Showing Bucket (Category) name and description - non-editable -->
 <div id="bucket-header">
-    <h3 (click)="routeToScreening()">Back To Screening</h3>
-    <h2 *ngIf="this.theBucket">
-        {{this.theBucket.bucketCategory}}
-    </h2>
-
+    <div class="pull-right container col-sm-2">
+        <a id="back-to-screen" (click)="routeToScreening()">Back To Screening</a>
+    </div>
+    <div class="container col-sm-8">
+        <h2 *ngIf="this.theBucket">
+            {{theBucket.bucketCategory}}
+        </h2>
+      
+    </div>
+    <p *ngIf="this.theBucket" id="buck-description">
+            {{theBucket.bucketDescription}}
+        </p>
 </div>
 <div>
-    <div class="container">
-        <div class="row justify-content-center">
-      
 
-
-            <div class="container">
-
-                <p  *ngIf = "this.theBucket" id="buck-description">
-                    {{theBucket.bucketDescription}}
-                </p>
-            </div>
-
-        </div>
-    </div>
     <!--Question Component-->
     <app-question></app-question>
 
