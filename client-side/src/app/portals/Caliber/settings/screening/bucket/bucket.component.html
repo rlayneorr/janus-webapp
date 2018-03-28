@@ -1,7 +1,7 @@
 <!-- Showing Bucket (Category) name and description - non-editable -->
 <div id="bucket-header">
     <div class="pull-right container col-sm-2">
-        <a id="back-to-screen" (click)="routeToScreening()">Back To Screening</a>
+        <a id="back-to-buckets" (click)="routeToScreening()">Back To All Buckets</a>
     </div>
     <div class="container col-sm-8">
         <h2 *ngIf="this.theBucket">
@@ -21,8 +21,6 @@
 
 
 </div>
-<br>
-<br>
 
 <!--Creating edit name modal -->
 <ng-template #editname let-c="close" let-d="dismiss">
