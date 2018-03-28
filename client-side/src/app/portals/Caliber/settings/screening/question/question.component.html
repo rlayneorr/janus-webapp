@@ -2,12 +2,10 @@
 <div class="move" [@move]='state'>
   <div class="container">
     <div class="row justify-content-center">
-      <div class = "card w-50">
+      <div class = "card w-50" >
 
-        <h3 class="card-header">Questions
-
-        </h3>
-        <div class="card-body">
+        <h6 class="card-header">Questions</h6>
+        <div class="card-body" id = "allQuestionsDiv">
           <div class="list-group" *ngFor="let question of questions">
               <a class="list-group-item list-group-item-action" *ngIf = "question">
                 {{question.questionText}}

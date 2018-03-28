@@ -104,6 +104,7 @@ export class QuestionComponent implements OnInit {
   setQuestionNull(){
     this.question = new Question();
     this.sampleAnswers = [];
+    this.currentTags = [];
   }
 
   /*This function will set the required fields of the selected
@@ -149,16 +150,25 @@ export class QuestionComponent implements OnInit {
     }
     return tagIds;
   }
+
   /*This function will check to see if all of the fields are filled
   * and to see if the questio has an Id already to decided wheather
   * to alert the user, add a new question, or to update a current
   * question*/
   addNewQuestion(){
+    this.tagsService.getAllTags().subscribe(data=>{
+      console.log(data);
+      this.allTags = (data as Tag[]);
+    });
     let newCurrentTagIds : number[] = [];
     let i: number = 0;
-
-    for(i; i < this.currentTags.length; i++){
+    if(this.question){
+      for(i; i < this.currentTags.length; i++){
         newCurrentTagIds.push(this.currentTags[i].tagId);
+      }
+   }
+    else{
+      this.currentTags=[];
     }
     if(this.sampleAnswers.length==5 && this.question.questionText){
       if(this.question.questionId){
@@ -169,6 +179,9 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.questionService.updateQuestion(this.currentBucket.bucketId,this.question, this.getTagIds()).subscribe();
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
+        this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
+          this.questions = (data as Question[]);
+        })
       }
       else{
         this.question.sampleAnswer1 = this.sampleAnswers[0];
@@ -178,9 +191,12 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.questionService.createNewQuestion(this.currentBucket.bucketId,this.question,this.getTagIds()).subscribe();
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
+        this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
+          this.questions = (data as Question[]);
+        })
       }
 
-      this.question = new Question();
+      this.setQuestionNull();
       this.sampleAnswers = [];
     }
     else{

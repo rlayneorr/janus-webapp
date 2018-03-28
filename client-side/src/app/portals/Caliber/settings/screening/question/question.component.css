@@ -9,6 +9,7 @@ h3 {
 
 h6 {
   text-align: center;
+  color: white;
 }
 
 #xIcon {
@@ -37,6 +38,17 @@ h6 {
   overflow : auto;
   height: 100px;
   width: 430px;
+}
+#questionTable{
+  margin: auto;
+  overflow : auto;
+  height: 500px;
+  width: 1300px;
+}
+#allQuestionsDiv{
+  overflow : auto;
+  height: 380px;
+  width: 565px;
 }
 /*Custom scrollbar*/
 
