@@ -33,7 +33,7 @@ export class BucketComponent implements OnInit {
   //  this.bucketService.getCurrentBucket();
    console.log("In bucket");
    console.log(this.bucketService.getCurrentBucket());
-
+    this.getCurrentBucket();
   }
 
    open(content) {
