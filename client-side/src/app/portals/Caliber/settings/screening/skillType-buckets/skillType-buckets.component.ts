@@ -54,7 +54,7 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket) {
-    this.currBucket = bucket;
+    this.currBucket.bucketCategory = bucket.bucketCategory;
     console.log(this.currBucket);
   }
 

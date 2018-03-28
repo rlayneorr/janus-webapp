@@ -133,6 +133,7 @@ export class SkillTypesComponent implements OnInit {
     * @param bucket: bucket object needed to be added to skill types.
     */
     addToSkillTypeBuckets(bucket){
+        console.log(this.bucketsAndWeights);
         if(this.singleSkillType){
             this.singleSkillType.buckets.push(bucket);
             this.singleSkillType.weights.push(0);
@@ -143,7 +144,10 @@ export class SkillTypesComponent implements OnInit {
     }
 
     /**
-    *
+    * Removes a bucket object from the selected skill type
+    * Removes the weight of the bucket from the selected skill type weights
+    * Removes the ID from the array of bucket Ids
+    * @param bucket: bucket object to be removed from all associates to the skill type
     */
     removeFromSkillTypeBuckets(bucket){
         if(this.singleSkillType){
@@ -171,6 +175,7 @@ export class SkillTypesComponent implements OnInit {
     }
 
     checkMinMax(index: number){
+        console.log(this.bucketsAndWeights);
         if(this.bucketsAndWeights[index].weights > 100){
             this.bucketsAndWeights[index].weights = 100;
         } else if(this.bucketsAndWeights[index].weights < 0){
@@ -216,6 +221,7 @@ export class SkillTypesComponent implements OnInit {
     }
 
     checkBucketSum(){
+        console.log(this.bucketsAndWeights);
         this.bucketWeightSum = 0;
         for(let bucket of this.bucketsAndWeights){
             this.bucketWeightSum += bucket.weights;
