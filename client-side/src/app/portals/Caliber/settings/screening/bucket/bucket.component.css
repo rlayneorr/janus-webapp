@@ -5,7 +5,6 @@
 
 }
 
-
 h2{
   text-align:left;
   background-color: #F5F5F5;
@@ -43,20 +42,15 @@ h6 {
 }
 
 .btn{
-  /*background-color:#6c757d;
-  text-align: left;
-    text-align: right;
-    color:  #FFFFFF;*/
-    color:#FFFFFF;
+  /*background-color:#c6c6c6;*/
+  /*text-align: left;*/
+    /*text-align: right;*/
+    /*color:  #000000;*/
     cursor: pointer;
     cursor: hand;
     padding-right: 15px;
     padding-top: 10px;
   
-}
-.btn:hover{
-  background-color:#e6e6e6;
-  color:black;
 }
 /*
 #back-to-buckets {
