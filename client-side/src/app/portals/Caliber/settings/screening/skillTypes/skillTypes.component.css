@@ -162,3 +162,8 @@ i {
   .slider.round:before {
     border-radius: 50%;
   }
+#bucket_bins{
+  margin-bottom: 2px;
+  opacity: 1;
+
+}
