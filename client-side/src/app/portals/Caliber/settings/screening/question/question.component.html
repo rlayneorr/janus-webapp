@@ -90,7 +90,7 @@
           </ngb-tab>
       
           <!-- content of 'All Buckets' -->
-          <ngb-tab title="Tags">
+          <ngb-tab title="Tags" (click) = "removeTagsFromAll()">
             <ng-template ngbTabContent>
               
                 <div ngbPanelContent class = "tabContent">
@@ -148,21 +148,6 @@
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
-      <!--Buttons-->
-      <div class="btn-group" data-toggle="buttons" role="group" align = "center">
-        <div>
-          <button style="text-align:left" type="button" class="btn btn-light btn-outline-dark" (click)="answersCollapsed = !answersCollapsed; tagsCollapsed = true"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-            <span>Answers</span> 
-          </button>
-        </div>
-        <div>
-          <button style="text-align:left" type="button" class="btn btn-light btn-outline-dark" (click)="tagsCollapsed = !tagsCollapsed; answersCollapsed = true"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-            <span >Tags</span>
-          </button>
-      </div>
-    </div>
       <!--Currently added tags-->
       <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
