@@ -54,7 +54,7 @@
               <label for="name" class="col-sm-2 col-form-label">Name:</label>
               <div class="col-sm-10">
                   <input type="text" id="skillTypeName" name=skillTypeName class="form-control" *ngIf="singleSkillType" required #skillTypeName="ngModel" [(ngModel)]="singleSkillType.skillTypeName" disabled>
-                  <input type="text" id="skillTypeName" name="skillTypeName" placeholder="SkillType Name" class="form-control" *ngIf="!singleSkillType" required ngModel disabled>
+                  <input type="text" id="skillTypeName" name="skillTypeName" placeholder="SkillType Name" class="form-control" *ngIf="!singleSkillType" required ngModel>
               </div>
 
               <!-- <label for="description" class="col-sm-2 col-form-label">Description:</label>
