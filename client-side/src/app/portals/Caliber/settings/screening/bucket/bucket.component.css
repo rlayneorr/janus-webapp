@@ -1,18 +1,23 @@
-#bucket-header
+.bucket-header
 {
-  background-color: #e6e6e6;
+  background-color: #F5F5F5;
+  text-align: left;
+  color:  #F26925;
 }
 
 #back-to-buckets {
     text-align: right;
-    color: #000000;
-    cursor: pointer;
-    cursor: hand;
+    color:  #F26925;
+      cursor: pointer;
+      cursor: hand;
+      padding-right: 15px;
+      padding-top: 10px;
   }
 
 h2{
   text-align:left;
-  color:#000000;
+  background-color: #F5F5F5;
+  color:#FFFFFF;
   padding-bottom: 15px;
   padding-top: 10px;
 

@@ -1,17 +1,24 @@
 <!-- Showing Bucket (Category) name and description - non-editable -->
-<div id="bucket-header">
-    <div class="container pull-right col-sm-2">
-        <a class="btn btn-sm" id="back-to-buckets" (click)="routeToScreening()">Back To All Buckets</a>
-    </div>
-    <div>
-        <div class="container col-sm-8">
-            <h2 *ngIf="this.theBucket">
-                {{theBucket.bucketCategory}}
-            </h2>
+<div class="bucket-header">
+    <h3 (click)="routeToScreening()">Back To Screening</h3>
+    <h2 *ngIf="this.theBucket" class="bucket-header">
+        {{this.theBucket.bucketCategory}}
+    </h2>
 
-            <p *ngIf="this.theBucket" id="buck-description">
-                    {{theBucket.bucketDescription}}
-                </p>
+        <p  *ngIf = "this.theBucket" class="bucket-header">
+            {{theBucket.bucketDescription}}
+        </p>
+   
+
+</div>
+<div>
+    <div class="container">
+        <div class="row justify-content-center">
+      
+
+
+
+
         </div>
 
 

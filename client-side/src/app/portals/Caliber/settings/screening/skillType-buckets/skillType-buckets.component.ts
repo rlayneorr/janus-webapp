@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 /** component, service imports */
 import { Bucket } from '../entities/Bucket';
 import { BucketsService } from '../services/buckets.service';
+import { QuestionsService } from '../services/questions.service';
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
@@ -25,6 +26,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   constructor(
     private router: Router,
     private bucketService: BucketsService,
+    private questionService:QuestionsService,
     private modalService: NgbModal) {}
 
     filter: Bucket= new Bucket();

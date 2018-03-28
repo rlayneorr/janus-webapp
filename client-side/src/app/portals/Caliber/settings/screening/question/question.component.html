@@ -17,9 +17,7 @@
                       <span class="slider round"></span>
                   </label>
               </i>
-              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editQuestion(question); open(content)">
-                  <span class="editToolTip">Edit</span>
-              </i>
+              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editQuestion(question); open(content)" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
               </a>
           </div>
       </div>
@@ -35,7 +33,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" >
     <!--Add new question input text boxes-->
     <form #addQuestionForm="ngForm">
       <div class="form-group row">
@@ -111,7 +109,7 @@
                                   <div class="form-group row">
                                       <!--Corresponding to an array in the backend that removes a tag when one is clicked and adds that tag back to the all tags array-->
                                       <span *ngFor="let tag of currentTags">
-                                        <span *ngIf = "tag" class="input-group-addon revatureOrange" (click)="removeTagFromQuestion(tag)" style="margin: 1px" [innerHTML]="tag.tagName"></span>
+                                        <span *ngIf = "tag" class="input-group-addon revatureOrange pillButtons" (click)="removeTagFromQuestion(tag)" [innerHTML]="tag.tagName"></span>
                                       </span>
                                   </div>
                                 </div>
@@ -133,7 +131,7 @@
                           <div class="form-group row">
                             <!--Custome filter that checks all of the tags against the string in the search bar above-->
                             <span *ngFor="let tag of allTags| tagfilter:filter">
-                              <span *ngIf = "tag" class="input-group-addon" (click)="addTagToQuestion(tag)" style="margin: 1px">{{tag.tagName}}</span>
+                              <span *ngIf = "tag" class="input-group-addon pillButtons" (click)="addTagToQuestion(tag)">{{tag.tagName}}</span>
                             </span>
                           </div>
                         </div>
