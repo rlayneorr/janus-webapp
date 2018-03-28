@@ -32,18 +32,21 @@ export class BucketsService {
 
   /** Gets all of company's buckets from server */
   getAllBuckets(): Observable<Bucket[]>{
-      return this.http.get(this.url + "getBuckets");
+      return this.http.get<Bucket[]>(this.url + "getBuckets");
   }
 
+  /* getSkillTypes():Observable<SkillType[]> {
+        return this.http.get<SkillType[]>(this.url + "getSkillTypes");
+    }
+
+   */
   getBucketById(bucketId: number){
       return this.http.get(this.url + bucketId);
   }
 
   /** PUT: update the hero on the server. Returns the updated hero upon success. */
   updateBucket (bucket: Bucket): Observable<Bucket> {
-      //https://hydra-gateway-service.cfapps.io/question-service/question/bucketQuestions/1
-      //https://hydra-gateway-service.cfapps.io/bucket-service/bucket/
-    return this.http.post<Bucket>(this.url + "updateBucket", bucket, httpOptions)
+    return this.http.post<Bucket>(this.url, bucket, httpOptions)
   }
 
   /** POST: add a new bucket to the database */

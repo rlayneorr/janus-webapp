@@ -1,4 +1,11 @@
 <!-- Showing Bucket (Category) name and description - non-editable -->
+<div id="bucket-header">
+    <h3 (click)="routeToScreening()">Back To Screening</h3>
+    <h2 *ngIf="this.theBucket">
+        {{this.theBucket.bucketCategory}}
+    </h2>
+
+</div>
 <div>
     <div class="container">
         <div class="row justify-content-center">
@@ -8,7 +15,7 @@
                 </h3>
             </div>
 
-            <br>
+
             <div class="container">
 
                 <p  *ngIf = "theBucket" id="buck-description">
@@ -21,8 +28,11 @@
     <!--Question Component-->
     <app-question></app-question>
 
-</div>
 
+
+</div>
+<br>
+<br>
 
 <!--Creating edit name modal -->
 <ng-template #editname let-c="close" let-d="dismiss">
@@ -30,7 +40,7 @@
         <div class="form-group">
 
             <h3 class="tb-heading_rev_orange">Edit Category Name</h3>
-            <label>New Category name:
+            <label>New Bucket name:
 
             </label>
             <input class="form-control" type="text" name="new_name">
@@ -40,6 +50,7 @@
             </div>
         </div>
     </form>
+
 </ng-template>
 
 <!--Creating edit description modal -->

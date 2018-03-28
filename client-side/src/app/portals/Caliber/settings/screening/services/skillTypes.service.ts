@@ -38,7 +38,7 @@ export class SkillTypesService {
     }
 
     getSkillTypes():Observable<SkillType[]> {
-        return this.http.get(this.url + "getSkillTypes");
+        return this.http.get<SkillType[]>(this.url + "getSkillTypes");
     }
 
     updateSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {

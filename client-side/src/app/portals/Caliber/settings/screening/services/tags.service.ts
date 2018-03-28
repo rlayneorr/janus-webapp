@@ -11,16 +11,17 @@ headers: new HttpHeaders({
 @Injectable()
 export class TagsService {
     tag: Tag;
-  constructor(private http: HttpClient) { }
-  url: string = "/tag/";
-  getAllTags(){
-      return this.http.get(this.url + "getTags");
-  }
-
-  createNewTag(newTag: Tag):Tag{
-    this.http.post(this.url + "createNewTag", newTag, httpOptions).subscribe(data=>{
-        this.tag = (data as Tag);
-    });
-    return this.tag;
+    url: string = "https://hydra-gateway-service.cfapps.io/question-service/tag/";
+    constructor(private http: HttpClient) { };
+    getAllTags(){
+      return this.http.get(this.url + "getAllTags");
+    }
+    getTagByQuestion(questionId : number){
+        return this.http.get(this.url + "getTagByQuestionId/"+questionId, httpOptions);
+    }
+    createNewTag(newTagName: string){
+        let newTag : Tag = new Tag();
+        newTag.tagName = newTagName;
+    return this.http.post(this.url + "createNewTag", newTag, httpOptions);
   }
 }
