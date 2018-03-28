@@ -218,26 +218,66 @@ export class ClientListComponent implements OnInit {
     ]
   }
 
+
+
   // get client name and find id to request client information
   getOneClient(name: string) {
     this.selectedCompany = name;
-    let oneClient = this.clientInfo.find(item => item['tfClientName'] == name);
+    let trainingMapped = 0;
+    let reservedMapped = 0;
+    let selectedMapped = 0;
+    let confirmedMapped = 0;
+    let trainingUnmapped = 0;
+    let openUnmapped = 0;
+    let selectedUnmapped = 0;
+    let confirmedUnmapped = 0;
+
+    let oneClient = this.clientInfo.find(item => item['tfClientName'] === name);
     this.clientService.getOneClient(oneClient.id).subscribe(
       client => {
         console.log(client);
-        this.client$ = client;
+        console.log(oneClient);
+        let status = oneClient['stats']['marketingStatusName'].toLowerCase();
+        if(status.includes('unmapped')) {
+          console.log('unmapped');
+          if(status.includes('training')){
+            trainingUnmapped++;
+          }
+        }else{
+          if(status.includes('training')){
+            trainingMapped++;
+          }
+        }
         this.barChartData = [
           {
-            data: [this.client$.stats.trainingMapped, this.client$.stats.reservedMapped, this.client$.stats.selectedMapped, this.client$.stats.confirmedMapped],
+            data: [trainingMapped, reservedMapped, selectedMapped, confirmedMapped],
             label: 'Mapped',
           },
           {
-            data: [this.client$.stats.trainingUnmapped, this.client$.stats.openUnmapped, this.client$.stats.selectedUnmapped, this.client$.stats.confirmedUnmapped],
+            data: [trainingUnmapped, openUnmapped, selectedUnmapped, confirmedUnmapped],
             label: 'Unmapped',
           }
         ]
-      }, err => {
-        console.error("Failed grabbing client");
       });
+
+
+    // let oneClient = this.clientInfo.find(item => item['tfClientName'] == name);
+    // this.clientService.getOneClient(oneClient.id).subscribe(
+    //   client => {
+    //     console.log(client);
+    //     this.client$ = client;
+    //     this.barChartData = [
+    //       {
+    //         data: [this.client$.stats.trainingMapped, this.client$.stats.reservedMapped, this.client$.stats.selectedMapped, this.client$.stats.confirmedMapped],
+    //         label: 'Mapped',
+    //       },
+    //       {
+    //         data: [this.client$.stats.trainingUnmapped, this.client$.stats.openUnmapped, this.client$.stats.selectedUnmapped, this.client$.stats.confirmedUnmapped],
+    //         label: 'Unmapped',
+    //       }
+    //     ]
+    //   }, err => {
+    //     console.error("Failed grabbing client");
+    //   });
   }
 }
