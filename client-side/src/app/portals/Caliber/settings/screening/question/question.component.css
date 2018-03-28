@@ -166,4 +166,5 @@ fixed-modal .modal-content {
   border-radius: 9%;
   width: 85px;
   height: 47px;
+  justify-content: center;
 }
