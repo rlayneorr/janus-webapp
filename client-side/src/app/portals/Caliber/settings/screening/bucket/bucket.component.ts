@@ -51,7 +51,7 @@ export class BucketComponent implements OnInit {
     this.theBucket=this.bucketService.getCurrentBucket();
   }
 
-  routeToScreening(){
+  routeToAllBuckets(){
     this.router.navigate(["Caliber/settings/screening"]);
   }
 
