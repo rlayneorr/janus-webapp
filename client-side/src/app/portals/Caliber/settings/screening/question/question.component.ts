@@ -13,6 +13,7 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
 import {BucketsService} from '../services/buckets.service';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
+import {AlertsService} from '../../../services/alerts.service';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -35,7 +36,8 @@ export class QuestionComponent implements OnInit {
   constructor(private modalService: NgbModal, private fb: FormBuilder,
     private tagsService: TagsService,
     private questionService: QuestionsService,
-    private bucketService: BucketsService) { }
+    private bucketService: BucketsService,
+    private alertsService:AlertsService,) { }
 
   newTagString : string;
   createQuestion: FormGroup;
@@ -248,4 +250,7 @@ export class QuestionComponent implements OnInit {
       this.addTagToQuestion(this.newTags[i]);
     }
   }
+  savedSuccessfully(){
+    this.alertsService.success("Saved successfully");
+}
 }
