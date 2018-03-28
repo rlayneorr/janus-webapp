@@ -3,11 +3,11 @@
   <div class="row justify-content-center">
     <div class="card w-50">
       <h6 class="card-header">All Buckets</h6>
-      <div class="card-body">
+      <div class="card-body" id="allSkillTypesDiv">
 
         <!--* Search bar, maybe -->
         <div class="form-group row">
-          <div class="col-sm-9">
+          <div class="col-sm-12">
             <!--A search bar to help sift through the unadded tags for when the amount of tags is increased-->
             <input type="text" name="bucket" [(ngModel)]="filter.name" placeholder="Search Buckets" min="0" max="100" class="form-control">
           </div>

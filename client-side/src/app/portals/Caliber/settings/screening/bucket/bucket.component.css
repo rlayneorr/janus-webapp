@@ -20,6 +20,7 @@ h3{
 
 #bucket-desc{
   padding-left:15px;
+  color: #FFFFFF;
 }
 
 h6 {
@@ -57,7 +58,6 @@ h6 {
     padding-top: 10px;
   
 }
-
 /*
 #back-to-buckets {
   text-align: right;
