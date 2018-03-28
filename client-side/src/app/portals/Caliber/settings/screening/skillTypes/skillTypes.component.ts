@@ -95,7 +95,7 @@ export class SkillTypesComponent implements OnInit {
             skillTypeDescription: skillType.skillTypeDescription,
             isActive: true,
             buckets: [],
-            weights: []
+            weights: [],
         }
         this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
             let skillTypeBucketAndWeights;
@@ -133,35 +133,36 @@ export class SkillTypesComponent implements OnInit {
     * @param bucket: bucket object needed to be added to skill types.
     */
     addToSkillTypeBuckets(bucket){
-        console.log(this.bucketsAndWeights);
         if(this.singleSkillType){
             this.singleSkillType.buckets.push(bucket);
             this.singleSkillType.weights.push(0);
             this.singleSkillTypeBucketIds.push(bucket.bucketId);
-            // this.bucketsAndWeights.push({weights: 0, bucketCategory: ''});
             this.combineBucketsAndWeights();
         }
     }
 
     /**
-    * Removes a bucket object from the selected skill type
-    * Removes the weight of the bucket from the selected skill type weights
-    * Removes the ID from the array of bucket Ids
+    * Removes all references to the bucket that is associated to the skill type
     * @param bucket: bucket object to be removed from all associates to the skill type
     */
     removeFromSkillTypeBuckets(bucket){
+        let tempArr = [];
         if(this.singleSkillType){
             for(let singleBucketIndex in this.singleSkillType.buckets){
                 if(this.singleSkillType.buckets[singleBucketIndex].bucketCategory == bucket){
-                    this.singleSkillType.buckets.splice(Number(singleBucketIndex), 1);
                     this.singleSkillType.weights.splice(Number(singleBucketIndex), 1);
                     this.singleSkillTypeBucketIds.splice(Number(singleBucketIndex), 1);
+                    this.bucketsAndWeights.splice(Number(singleBucketIndex), 1);
+                    this.singleSkillType.buckets.splice(Number(singleBucketIndex), 1);
                 }
             }
             this.combineBucketsAndWeights();
         }
     }
 
+    /**
+    *
+    */
     combineBucketsAndWeights(){
         if(this.bucketsAndWeights.length != 0){
             for(let index in this.bucketsAndWeights) {
@@ -175,7 +176,6 @@ export class SkillTypesComponent implements OnInit {
     }
 
     checkMinMax(index: number){
-        console.log(this.bucketsAndWeights);
         if(this.bucketsAndWeights[index].weights > 100){
             this.bucketsAndWeights[index].weights = 100;
         } else if(this.bucketsAndWeights[index].weights < 0){
@@ -198,8 +198,6 @@ export class SkillTypesComponent implements OnInit {
             this.modalServiceRef.close();
             let bucketsId = [];
             let weights = [];
-            // console.log(this.singleSkillTypeBucketIds);
-            // console.log(this.bucketsAndWeights);
             for(let index in this.bucketsAndWeights){
                 bucketsId.push(this.singleSkillTypeBucketIds[index]);
                 weights.push(this.bucketsAndWeights[index].weights);
@@ -221,7 +219,6 @@ export class SkillTypesComponent implements OnInit {
     }
 
     checkBucketSum(){
-        console.log(this.bucketsAndWeights);
         this.bucketWeightSum = 0;
         for(let bucket of this.bucketsAndWeights){
             this.bucketWeightSum += bucket.weights;
