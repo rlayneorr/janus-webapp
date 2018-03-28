@@ -10,8 +10,8 @@
               <a class="list-group-item list-group-item-action" *ngIf = "question">
                 {{question.questionText}}
                 <i id="xIcon">
-                  <label class="switch" >
-                      <input type="checkbox" [checked] = question.isActive (change) = "deactivateQuesiton(question)">
+                  <label class="switch">
+                      <input type="checkbox" [checked] = question.isActive (change) = "changeQuesitonStatus(question)">
                       <span class="slider round"></span>
                   </label>
               </i>
@@ -43,7 +43,6 @@
       <!--Sample answers collapsable-->
       <!---Tabbing-->
       <ngb-tabset>
-
           <!-- content of 'Skill Types' -->
           <ngb-tab title="Answers">
             <ng-template ngbTabContent>
