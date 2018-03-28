@@ -12,15 +12,14 @@ headers: new HttpHeaders({
 export class TagsService {
     tag: Tag;
     url: string = "https://hydra-gateway-service.cfapps.io/question-service/tag/";
-  constructor(private http: HttpClient) { };
-  getAllTags(){
-      return this.http.get(this.url + "getTags");
-  }
+    constructor(private http: HttpClient) { };
+    getAllTags(){
+      return this.http.get(this.url + "getAllTags");
+    }
 
-  createNewTag(newTag: Tag):Tag{
-    this.http.post(this.url + "createNewTag", newTag, httpOptions).subscribe(data=>{
-        this.tag = (data as Tag);
-    });
-    return this.tag;
+    createNewTag(newTagName: string){
+        let newTag : Tag = new Tag();
+        newTag.tagName = newTagName;
+    return this.http.post(this.url + "createNewTag", newTag, httpOptions);
   }
 }
