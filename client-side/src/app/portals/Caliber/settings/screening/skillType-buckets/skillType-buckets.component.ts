@@ -6,6 +6,7 @@ import { BucketsService } from '../services/buckets.service';
 import { QuestionsService } from '../services/questions.service';
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {AlertsService} from '../../../services/alerts.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class SkillTypeBucketsComponent implements OnInit {
     private router: Router,
     private bucketService: BucketsService,
     private questionService:QuestionsService,
-    private modalService: NgbModal) {}
+    private modalService: NgbModal,
+    private alertsService:AlertsService,) {}
 
     filter: Bucket= new Bucket();
   ngOnInit() {
@@ -55,7 +57,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket) {
     this.currBucket = bucket;
-    console.log(this.currBucket);
+    // console.log(this.currBucket);
   }
 
   updateBucket() {
@@ -71,12 +73,16 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 
-  /** INCOMPLETE, ERROR TypeError: Cannot read property 'name' of null */
+  /** Creates new bucket */
   createBucket() {
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket =>this.buckets.push(bucket));
   }
+
+  savedSuccessfully(){
+    this.alertsService.success("Saved successfully");
+}
 
   /** Modal variables, and functions */
   closeResult: string;
