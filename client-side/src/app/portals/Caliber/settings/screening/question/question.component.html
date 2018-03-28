@@ -133,7 +133,7 @@
                           <div class="form-group row">
                             <!--Custome filter that checks all of the tags against the string in the search bar above-->
                             <span *ngFor="let tag of allTags| tagfilter:filter">
-                              <span *ngIf = "tag" class="input-group-addon" (click)="addTagToQuestion(tag)" id= "pillButtons">{{tag.tagName}}</span>
+                              <span *ngIf = "tag" class="input-group-addon pillButton" (click)="addTagToQuestion(tag)">{{tag.tagName}}</span>
                             </span>
                           </div>
                         </div>
