@@ -8,7 +8,7 @@ import { Question } from '../entities/Question'
 import { Bucket } from '../entities/Bucket'
 import { SkillTypesService } from '../services/skillTypes.service';
 import {Observable} from 'rxjs/Observable';
-
+import {ScreeningComponent} from '../screening.component'
 @Component({
   selector: 'app-bucket',
   templateUrl: './bucket.component.html',
@@ -19,6 +19,7 @@ export class BucketComponent implements OnInit {
   questionList;
   theBucket: Bucket;
   constructor(
+    private router: Router,
     private bucketService: BucketsService,
     private modalService: NgbModal,
     private questionService: QuestionsService) {
@@ -33,30 +34,45 @@ export class BucketComponent implements OnInit {
   //  this.bucketService.getCurrentBucket();
    console.log("In bucket");
    console.log(this.bucketService.getCurrentBucket());
-
+  this.setBucket();
   }
 
    open(content) {
     this.modalService.open(content);
     event.stopPropagation();
   }
+
   getCurrentBucket(){
    this.theBucket=this.bucketService.getCurrentBucket();
     return this.theBucket;
-   
-  }
-   addBucket(name: String, description: String) { }
-  // public addQuestion() {};
-  //public editQuesiton(){};
-  //public deactivateQuestion(){};
 
+  }
+  setBucket(){
+    this.theBucket=this.bucketService.getCurrentBucket();
+  }
+
+  routeToScreening(){
+    this.router.navigate(["Caliber/settings/screening"]);
+  }
+
+  /*
+  setBucketName updates the bucket name
+  @param name : string
+  @return void
+  Calls bucketService
+   */
   setBucketName(name: string) {
     this.bucketService.setName(name);
   }
 
+  /*
+  setBucketDescription updates the bucket description
+  calls bucket service to update the bucket description
+   */
   setBucketDescription(desc: string) {
     this.bucketService.setDescription(desc);
   }
+
 
    showQuestionsForThisBucket() {
      let bucketID: number = this.bucketService.getCurrentBucket().bucketId;

@@ -100,7 +100,7 @@
                       <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
                       <!--Add new tag section-->
                       <div class="col-sm-9 col-form-label"  align = "center">
-                        <input #Tag (keyup.enter)="newTag(Tag.value)" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
+                        <input #Tag (keyup.enter)="newTag()" [(ngModel)]="newTagString" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
                       </div>
                     </div>
                     <!--Uses the same styling as the all tags, but this section is to display the currently added tags in the question editor-->

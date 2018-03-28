@@ -37,6 +37,7 @@ export class QuestionComponent implements OnInit {
     private questionService: QuestionsService,
     private bucketService: BucketsService) { }
 
+  newTagString : string;
   createQuestion: FormGroup;
   newQuestion: Question;
   newTags: Tag[];
@@ -57,7 +58,6 @@ export class QuestionComponent implements OnInit {
     this.currentBucket = this.bucketService.getCurrentBucket();
     if(this.currentBucket){
       this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
-        console.log(data);
         this.questions = (data as Question[]);
       })
       this.tagsService.getAllTags().subscribe(data=>{
@@ -65,7 +65,6 @@ export class QuestionComponent implements OnInit {
         this.allTags = (data as Tag[]);
       });
     }
-    console.log(this.questions);
   }
 
   /*Used to open a bootstrap modal*/
@@ -130,15 +129,14 @@ export class QuestionComponent implements OnInit {
     console.log(newTags.length);
   }
   /* */
-  newTag(newTagString : string){
+  newTag(){
     let newTag : Tag = new Tag();
-    newTag.tagName = newTagString;
-    this.tagsService.createNewTag(newTagString).subscribe(data=>{
-      console.log(data);
+    newTag.tagName = this.newTagString;
+    this.tagsService.createNewTag(this.newTagString).subscribe(data=>{
       newTag = (data as Tag);
     });
     this.currentTags.push(newTag);
-    document.getElementById("newTag").innerHTML = "";
+    this.newTagString = "";
   }
   getTagIds(){
     let tagIds : number[] =[];
@@ -229,6 +227,7 @@ export class QuestionComponent implements OnInit {
   removeTagsFromAll(){
     console.log("here");
     let i :number = 0;
+    this.currentTags = [];
     for(i;i<this.newTags.length;i++){
       this.addTagToQuestion(this.newTags[i]);
     }
