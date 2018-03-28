@@ -89,15 +89,15 @@ export class AssociateViewComponent implements OnInit {
   addInterview(){
     console.log(this.newInterview);
     let interview = {
-      associateId: this.associate.id,
+      associateId: this.associate.associateId,
       clientId: this.newInterview.client,
       typeId: this.newInterview.type,
       interviewDate: new Date(this.newInterview.date).getTime(),
       interviewFeedback: this.newInterview.feedback
     };
-    this.associateService.addInterviewForAssociate(this.associate.id,interview).subscribe(
+    this.associateService.addInterviewForAssociate(this.associate.associateId,interview).subscribe(
       data => {
-        this.getInterviews(this.associate.id);
+        this.getInterviews(this.associate.associateId);
       },
       err => {
         console.log(err);

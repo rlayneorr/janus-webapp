@@ -115,7 +115,7 @@ export class HomeComponent {
 
   load() {
     this.as.getAllAssociates().subscribe(response => {
-      console.log(response);
+      //console.log(response);
       this.associates = response;
       let trainingMapped = 0;
       let trainingUnmapped = 0;
@@ -132,7 +132,8 @@ export class HomeComponent {
         // iterate over associates and aggregate totals
         let marketingStatus : MarketingStatus;
         let associate = this.associates[i];
-        switch(associate.marketingStatus) {
+        console.log(associate.marketingStatusId);
+        switch(associate.marketingStatusId) {
           case 1: trainingMapped++; console.log('trainingMapped:' + trainingMapped);   break;
           case 2: reservedMapped++; console.log('reservedMapped: ' + reservedMapped); break;
           case 3: selectedMapped++; console.log('selectedMapped: '+ selectedMapped); break;

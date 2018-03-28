@@ -87,7 +87,9 @@ export class BatchService {
   getBatchById(id: number): Observable<any> {
     return this.http.get(this.url + '/one/batch/byid/' + id);
   }
-
+  getCurrIdById(id: number): Observable<any> {
+    return this.http.get(this.url + '/one/batch/curriculum/' + id);
+  }
   getAllBatchesOrdered(): Observable<any> {
     return this.http.get(this.url + '/all/batch/ordered');
   }
