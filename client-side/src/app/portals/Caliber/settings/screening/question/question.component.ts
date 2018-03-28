@@ -1,6 +1,6 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbTabset} from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { Tag } from '../entities/Tag';
@@ -37,7 +37,8 @@ export class QuestionComponent implements OnInit {
     private tagsService: TagsService,
     private questionService: QuestionsService,
     private bucketService: BucketsService,
-    private alertsService:AlertsService,) { }
+    private alertsService:AlertsService,
+    private tab:NgbTabset) { }
 
   newTagString : string;
   createQuestion: FormGroup;
@@ -52,6 +53,8 @@ export class QuestionComponent implements OnInit {
   currentBucket: Bucket;
   public answersCollapsed = true;
   public tagsCollapsed = true;
+
+  
 
   ngOnInit() {
     this.currentTags = [];
