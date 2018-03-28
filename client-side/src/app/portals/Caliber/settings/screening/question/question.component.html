@@ -144,14 +144,12 @@
       <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
           <!--The save button will save/update a question so long as all of the fields have been filled and display a message that the question has been saved-->
-          <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)=" addNewQuestion();savedSuccessfully()">Save</button>
+          <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)=" addNewQuestion()">Save</button>
           <br>
           <br>
           <br>
       </div>
       <div class="form-group row">
-        <!--This is an alert section to tell the user that a question has been saved or that the fields need to be filled-->
-        <p id="newQuestionAlert"></p>
       </div>
     </form>
     </div>
