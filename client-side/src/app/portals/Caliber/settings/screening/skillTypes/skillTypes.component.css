@@ -167,3 +167,11 @@ i {
   opacity: 1;
 
 }
+#xButton{
+  left: 109%;
+  opacity: 1;
+  position: absolute;
+  width: 10%;
+  height: 68%;
+  padding-bottom: 10%;
+}
