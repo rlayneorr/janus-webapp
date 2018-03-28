@@ -47,13 +47,14 @@ export class SkillTypesComponent implements OnInit {
       thing = this.allSkillTypes[i];
       if(thing.skillTypeName == item.skillTypeName){
         if(thing.isActive){
+            thing.isActive = !thing.isActive;
             this.skillTypeService.deactivateSkillType(thing.skillTypeId).subscribe();
-            this.grabAllSkillTypes();
         } else {
+            thing.isActive = !thing.isActive;
             this.skillTypeService.activateSkillType(thing.skillTypeId).subscribe();
-            this.grabAllSkillTypes();
         }
       }
+      this.setSkillTypes();
     }
   }
   setSkillTypes(){

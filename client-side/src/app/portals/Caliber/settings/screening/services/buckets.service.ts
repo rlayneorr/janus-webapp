@@ -46,12 +46,11 @@ export class BucketsService {
 
   /** PUT: update the hero on the server. Returns the updated hero upon success. */
   updateBucket (bucket: Bucket): Observable<Bucket> {
-    return this.http.post<Bucket>(this.url, bucket, httpOptions)
+    return this.http.post<Bucket>(this.url + "updateBucket", bucket, httpOptions)
   }
 
   /** POST: add a new bucket to the database */
   createNewBucket(bucket: Bucket): Observable<Bucket> {
-      console.log(bucket);
       return this.http.post<Bucket>(this.url + "createBucket", bucket, httpOptions);
   }
 
