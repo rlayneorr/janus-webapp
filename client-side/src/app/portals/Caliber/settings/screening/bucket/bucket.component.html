@@ -1,6 +1,9 @@
 <!-- Showing Bucket (Category) name and description - non-editable -->
 <div class="bucket-header">
-    <a class="btn pull-right" (click)="routeToAllBuckets()">Back To Skill Types</a>
+    <button class="btn btn-secondary b-top-radius pull-right" (click)="routeToAllBuckets()">
+            <i style="margin-left:5px" class="fa fa-backward" aria-hidden="true"></i>
+            <strong>Back To All Buckets</strong>
+          </button>
     <!--Bucket category (the name displayed)-->
     <h2 *ngIf="this.theBucket" class="bucket-header">
         {{this.theBucket.bucketCategory}}

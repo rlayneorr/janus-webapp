@@ -1,8 +1,8 @@
 .bucket-header
 {
-  background-color: #F5F5F5;
+  background-color: #6C757D;
   text-align: left;
-  color:  #000000;
+
 }
 
 
@@ -16,6 +16,7 @@ h2{
 }
 #bucket-desc{
   padding-left:15px;
+  color: #FFFFFF;
 }
 
 h6 {
@@ -42,15 +43,20 @@ h6 {
 }
 
 .btn{
-  background-color:#c6c6c6;
+  /*background-color:#6c757d;
   text-align: left;
     text-align: right;
-    color:  #000000;
+    color:  #FFFFFF;*/
+    color:#FFFFFF;
     cursor: pointer;
     cursor: hand;
     padding-right: 15px;
     padding-top: 10px;
   
+}
+.btn:hover{
+  background-color:#e6e6e6;
+  color:black;
 }
 /*
 #back-to-buckets {
