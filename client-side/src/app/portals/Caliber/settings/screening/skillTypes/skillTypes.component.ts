@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
@@ -78,7 +78,8 @@ export class SkillTypesComponent implements OnInit {
     private skillTypeService: SkillTypesService,
     private bucketsService:BucketsService,
     private alertsService:AlertsService,
-  ) { }
+    private tab:NgbTabset,
+  ) {  }
 
     open(content) {
       this.modalServiceRef = this.modalService.open(content);
@@ -248,9 +249,23 @@ export class SkillTypesComponent implements OnInit {
         this.alertsService.success("Saved successfully");
     }
 
+    testing(){
+        this.tab.activeId="tab-2"
+    }
+
   ngOnInit() {
+      console.log(this.bucketsService.routingToAllBuckets);
     this.grabAllSkillTypes();
     this.grabAllBuckets();
+    console.log(this.bucketsService.routingToAllBuckets);
+    console.log(this.tab.activeId);
+    var thing:string;
+    var signature:string;
+    if (this.bucketsService.routingToAllBuckets === true){
+        this.bucketsService.routingToAllBuckets = false;
+        this.tab.activeId="tab-2";
+
+      }
   }
 
 }

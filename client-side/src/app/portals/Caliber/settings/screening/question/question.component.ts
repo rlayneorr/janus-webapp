@@ -38,7 +38,7 @@ export class QuestionComponent implements OnInit {
     private questionService: QuestionsService,
     private bucketService: BucketsService,
     private alertsService:AlertsService,
-    private tab:NgbTabset) { }
+    ) { }
 
   newTagString : string;
   createQuestion: FormGroup;
