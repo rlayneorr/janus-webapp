@@ -57,7 +57,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket) {
     this.currBucket = bucket;
-    console.log(this.currBucket);
+    // console.log(this.currBucket);
   }
 
   updateBucket() {
@@ -73,7 +73,7 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 
-  /** INCOMPLETE, ERROR TypeError: Cannot read property 'name' of null */
+  /** Creates new bucket */
   createBucket() {
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
