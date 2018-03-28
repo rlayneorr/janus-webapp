@@ -1,6 +1,6 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
-import {NgbModal, ModalDismissReasons, NgbTabset} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { Tag } from '../entities/Tag';
@@ -37,8 +37,7 @@ export class QuestionComponent implements OnInit {
     private tagsService: TagsService,
     private questionService: QuestionsService,
     private bucketService: BucketsService,
-    private alertsService:AlertsService,
-    private tab:NgbTabset) { }
+    private alertsService:AlertsService) { }
 
   newTagString : string;
   createQuestion: FormGroup;
@@ -54,7 +53,7 @@ export class QuestionComponent implements OnInit {
   public answersCollapsed = true;
   public tagsCollapsed = true;
 
-  
+
 
   ngOnInit() {
     this.currentBucket = this.bucketService.getCurrentBucket();
@@ -95,7 +94,7 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  /** 
+  /**
    * Switches the question sent in as an argument from active to deactive
    * or from deactive to active based on it's current status
    **/
@@ -112,7 +111,7 @@ export class QuestionComponent implements OnInit {
 
   /**
    * A simple function that nullifies the currently selected question to
-   * be used primarily after a successful save 
+   * be used primarily after a successful save
    **/
   setQuestionNull(){
     this.question = new Question();
@@ -145,7 +144,7 @@ export class QuestionComponent implements OnInit {
     console.log(newTags.length);
   }
 
-  /** 
+  /**
    * This function will take the string in the new tag input field
    * and create a new tag with no Id, then get the same tag with a valid
    * Id from the tag service
@@ -161,8 +160,8 @@ export class QuestionComponent implements OnInit {
     this.newTagString = "";
   }
 
-  /** 
-   * Converts the currently added Tag array into an array of tad ids for 
+  /**
+   * Converts the currently added Tag array into an array of tad ids for
    * saving and updating.
    **/
   getTagIds(){
@@ -262,9 +261,9 @@ export class QuestionComponent implements OnInit {
     this.currentTags = newCurrentTags;
   }
 
-  /** 
+  /**
    * Resets the current tags and then re adds the tags specific to the current question.
-   * Used to update a question by populating the current tags with the tags currently 
+   * Used to update a question by populating the current tags with the tags currently
    * associated with that question.
    **/
   removeTagsFromAll(){
@@ -275,9 +274,9 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  /** 
-   * Used to populate the current question and the current tags with a selected question to be 
-   * edited. 
+  /**
+   * Used to populate the current question and the current tags with a selected question to be
+   * edited.
    **/
   updateQuestions(){
     if(this.currentBucket){
@@ -290,7 +289,7 @@ export class QuestionComponent implements OnInit {
       });
     }
   }
-  
+
   addNewTag(newTag : Tag){
     this.currentTags.push(newTag);
   }
