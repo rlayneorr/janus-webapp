@@ -153,3 +153,10 @@ top:70%;
 p{
   color: #F26925;
 }
+fixed-modal .modal-content {
+  size: sm
+}
+.tabContent{
+  width: 420px;
+  height: 400px;
+}

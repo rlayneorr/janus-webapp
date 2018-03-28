@@ -3,6 +3,7 @@ import { Bucket } from './Bucket';
 export class SkillType{
     skillTypeId: number;
     skillTypeName: string;
+    skillTypeDescription: string;
     isActive: boolean;
     buckets: Bucket[];
     weights: number[];

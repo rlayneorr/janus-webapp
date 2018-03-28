@@ -21,7 +21,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   /** variable to hold bucket being edited */
   currBucket: Bucket;
   /** variable to hold new bucket being created  */
-  newBucket: Bucket = new Bucket('', '', '');
+  newBucket: Bucket = new Bucket();
 
   constructor(
     private router: Router,
@@ -29,7 +29,7 @@ export class SkillTypeBucketsComponent implements OnInit {
     private questionService:QuestionsService,
     private modalService: NgbModal) {}
 
-    filter: Bucket= new Bucket(0,null,null);
+    filter: Bucket= new Bucket();
   ngOnInit() {
     this.getBuckets()
   }
@@ -62,7 +62,7 @@ export class SkillTypeBucketsComponent implements OnInit {
       this.bucketService.updateBucket(this.currBucket)
         .subscribe(bucket => {
           // replace the bucket in the buckets list with update from server
-          const ix = bucket ? this.buckets.findIndex(h => h.id === bucket.id) : -1;
+          const ix = bucket ? this.buckets.findIndex(h => h.bucketId === bucket.bucketId) : -1;
           if (ix > -1) { this.buckets[ix] = bucket; }
         });
       this.currBucket = undefined;
@@ -81,11 +81,11 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
-      this.newBucket = new Bucket('','','');
+      this.newBucket = new Bucket();
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.newBucket.name = '';
-      this.newBucket.description = '';
+      this.newBucket.bucketCategory = '';
+      this.newBucket.bucketDescription = '';
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();

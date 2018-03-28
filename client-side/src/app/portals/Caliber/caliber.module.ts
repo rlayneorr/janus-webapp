@@ -50,7 +50,7 @@ import { SkillTypesService } from './settings/screening/services/skillTypes.serv
 import { BucketsService } from './settings/screening/services/buckets.service';
 import { TagsService } from './settings/screening/services/tags.service';
 import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
-/** for in memory data service 
+/** for in memory data service
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -164,7 +164,7 @@ import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType
         passThruUnknownUrl: true,
         put204: false // return entity after PUT/update
       }
-    )
+    ),
   ],
   declarations: [
     // pipes

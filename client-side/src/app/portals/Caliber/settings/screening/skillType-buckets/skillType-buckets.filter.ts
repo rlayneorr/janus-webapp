@@ -20,7 +20,7 @@ export class BucketFilterPipe implements PipeTransform {
         for (let field in filter) {
             if (filter[field]) {
                 if (typeof filter[field] === 'string') {
-                    if (bucket.name.toLowerCase().indexOf(filter[field].toLowerCase()) === -1) {
+                    if (bucket.bucketCategory.toLowerCase().indexOf(filter[field].toLowerCase()) === -1) {
                         return false;
                     }
                 }
