@@ -27,7 +27,7 @@ export class ClientListComponent implements OnInit {
   public showNoData: boolean = false;
   public selectedCompany: string;
   public clientInfo: Client[];
-  public clientNames: string[] = [];
+  public clientNames: object[] = [];
   public client$: any;
   public searchName;
   // chart variable
@@ -84,38 +84,51 @@ export class ClientListComponent implements OnInit {
   getAllClients() {
     let self = this;
     this.clientInfo = [];
+    let i = 0;
     this.clientService.getAllClients().subscribe(clients => {
       this.associates.getAllAssociates().subscribe(associates => {
-        // console.log(clients);
-        // console.log(associates);
+        console.log(clients);
+        console.log(associates);
 
-        clients.forEach(client => {
-          let a = associates.filter(items => items['clientId'] === client['clientId']);
-          a.forEach(items => {
-            this.marketStatus.getMarketingStatusById(items['marketingStatusId']).subscribe(status => {
-              console.log(status);
-              const tempClient: Client = {
-                id: client['clientId'],
-                name: client['clientName'],
-                tfClientName: client['clientName'],
-                placements: null,
-                associates: null,
-                interviews: null,
-                stats: status,
-              };
-              // console.log('--------');
-              // console.log(tempClient);
-              this.clientInfo.push(tempClient);
-              this.clientNames.push(tempClient.tfClientName);
-            });
-          });
-        });
+        for(let client of clients){
+          let id = client['clientId'];
+          let name = client['clientName'];
+          if(client['clientId']){
+            const tempClient: Client = {
+                  id: id,
+                  name: name,
+                  tfClientName: name,
+                  placements: null,
+                  associates: null,
+                  interviews: null,
+                  stats: null,
+                };
+            let associateList = associates.filter(items => items['clientId'] === id);
+            this.clientNames.push({name: tempClient.tfClientName, id: id});
+            for(let associate of associateList){
+              this.marketStatus.getMarketingStatusById(associate['marketingStatusId']).subscribe(status=>{
+                tempClient.stats = status;
+                i++;
+                this.clientInfo.push(tempClient);
+                console.log(tempClient.tfClientName);
+                console.log(status);
+                console.log(i);
+
+              });
+            }
+          }
+          //console.log(client);
+        }
       });
+     //this.initChartData();
+     // console.log(this.clientInfo);
     });
 
     setTimeout(() => {
+      console.log(this.clientInfo);
       this.initChartData();
-    }, 4000);
+    }, 19000);
+
 
 
     // this.marketStatus.getAllMarketingStatusMapped().subscribe(items => {
@@ -177,6 +190,12 @@ export class ClientListComponent implements OnInit {
     let openUnmapped = 0;
     let selectedUnmapped = 0;
     let confirmedUnmapped = 0;
+    let terminatedUnmapped = 0;
+    let terminatedMapped = 0;
+    let deployedUnmapped = 0;
+    let deployedMapped = 0;
+    let directlyPlacedUnmapped = 0;
+    let directlyPlacedMapped = 0;
     // for (let i=0;i<this.clientInfo.length;i++) {
     //   let client: Client = this.clientInfo[i];
     //   let stats: StatusInfo = client.stats;
@@ -190,29 +209,67 @@ export class ClientListComponent implements OnInit {
     //   confirmedUnmapped += stats.confirmedUnmapped;
     // }
 
+
     for(let i = 0; i < this.clientInfo.length; i++)
     {
-      console.log(this.clientInfo[i]['stats']['marketingStatusName']);
+
+
+      //console.log(this.clientInfo[i]['stats']['marketingStatusName']);
       let status = this.clientInfo[i]['stats']['marketingStatusName'].toLowerCase();
-      if(status.includes('unmapped')) {
-        console.log('unmapped');
-        if(status.includes('training')){
-          trainingUnmapped++;
-        }
-      }else{
-        if(status.includes('training')){
+      console.log(status);
+      let isMapped = true;
+      if(status.includes('unmapped')){
+          isMapped = false;
+      }
+
+      if(status.includes('training')){
+        if(isMapped){
           trainingMapped++;
         }
+        else{
+          trainingUnmapped++;
+        }
+      }else if(status.includes('deployed')){
+        if(isMapped){
+          deployedMapped++;
+        }
+        else{
+          deployedUnmapped++;
+        }
+      }else if(status.includes('selected')){
+        if(isMapped){
+          selectedMapped++;
+        }
+        else{
+          selectedUnmapped++;
+        }
+      }else if(status.includes('directly placed')){
+        if(isMapped){
+          directlyPlacedMapped++;
+        }
+        else{
+          directlyPlacedUnmapped++;
+        }
+      }else if(status.includes('deployed')){
+        if(isMapped){
+          deployedMapped++;
+        }
+        else{
+          deployedUnmapped++;
+        }
+      }else if(status.includes('terminated')){
+        terminatedMapped++;
       }
     }
 
     this.barChartData = [
       {
-        data: [trainingMapped, reservedMapped, selectedMapped, confirmedMapped],
+        data: [trainingMapped, reservedMapped, selectedMapped, confirmedMapped, deployedMapped, terminatedMapped, directlyPlacedMapped],
         label: 'Mapped',
       },
       {
-        data: [trainingUnmapped, openUnmapped, selectedUnmapped, confirmedUnmapped],
+        data: [trainingUnmapped, openUnmapped, selectedUnmapped, confirmedUnmapped, deployedUnmapped, terminatedUnmapped,
+        directlyPlacedUnmapped],
         label: 'Unmapped',
       }
     ]
@@ -221,8 +278,7 @@ export class ClientListComponent implements OnInit {
 
 
   // get client name and find id to request client information
-  getOneClient(name: string) {
-    this.selectedCompany = name;
+  getOneClient(id) {
     let trainingMapped = 0;
     let reservedMapped = 0;
     let selectedMapped = 0;
@@ -231,34 +287,132 @@ export class ClientListComponent implements OnInit {
     let openUnmapped = 0;
     let selectedUnmapped = 0;
     let confirmedUnmapped = 0;
+    let terminatedUnmapped = 0;
+    let terminatedMapped = 0;
+    let deployedUnmapped = 0;
+    let deployedMapped = 0;
+    let directlyPlacedUnmapped = 0;
+    let directlyPlacedMapped = 0;
 
-    let oneClient = this.clientInfo.find(item => item['tfClientName'] === name);
-    this.clientService.getOneClient(oneClient.id).subscribe(
-      client => {
-        console.log(client);
-        console.log(oneClient);
-        let status = oneClient['stats']['marketingStatusName'].toLowerCase();
-        if(status.includes('unmapped')) {
-          console.log('unmapped');
-          if(status.includes('training')){
-            trainingUnmapped++;
-          }
-        }else{
-          if(status.includes('training')){
-            trainingMapped++;
-          }
+    console.log(id);
+
+    let data = this.clientInfo.filter(item=> item['id']===id);
+    console.log(data);
+
+    for(let stats of data){
+      console.log(stats);
+      let status = stats['stats']['marketingStatusName'].toLowerCase();
+      let isMapped = true;
+      if(status.includes('unmapped')){
+          isMapped = false;
+      }
+
+      if(status.includes('training')){
+        if(isMapped){
+          trainingMapped++;
         }
-        this.barChartData = [
-          {
-            data: [trainingMapped, reservedMapped, selectedMapped, confirmedMapped],
-            label: 'Mapped',
-          },
-          {
-            data: [trainingUnmapped, openUnmapped, selectedUnmapped, confirmedUnmapped],
-            label: 'Unmapped',
-          }
-        ]
-      });
+        else{
+          trainingUnmapped++;
+        }
+      }else if(status.includes('deployed')){
+        if(isMapped){
+          deployedMapped++;
+        }
+        else{
+          deployedUnmapped++;
+        }
+      }else if(status.includes('selected')){
+        if(isMapped){
+          selectedMapped++;
+        }
+        else{
+          selectedUnmapped++;
+        }
+      }else if(status.includes('directly placed')){
+        if(isMapped){
+          directlyPlacedMapped++;
+        }
+        else{
+          directlyPlacedUnmapped++;
+        }
+      }else if(status.includes('deployed')){
+        if(isMapped){
+          deployedMapped++;
+        }
+        else{
+          deployedUnmapped++;
+        }
+      }else if(status.includes('terminated')){
+        terminatedMapped++;
+      }
+      }
+
+
+    this.barChartData = [
+      {
+        data: [trainingMapped, reservedMapped, selectedMapped, confirmedMapped, deployedMapped, terminatedMapped, directlyPlacedMapped],
+        label: 'Mapped',
+      },
+      {
+        data: [trainingUnmapped, openUnmapped, selectedUnmapped, confirmedUnmapped, deployedUnmapped, terminatedUnmapped,
+        directlyPlacedUnmapped],
+        label: 'Unmapped',
+      }
+    ]
+    
+
+
+    // let oneClient = this.clientInfo.find(item => item['id']===id);
+    // console.log(oneClient);
+    // this.clientService.getOneClient(oneClient['id']).subscribe(
+    //   client => {
+    //     //console.log(client);
+    //     //console.log(oneClient);
+    //     let status = oneClient['stats']['marketingStatusName'].toLowerCase();
+    //     if(status.includes('unmapped')) {
+    //       if(status.includes('training')){
+    //         trainingUnmapped++;
+    //       }
+    //       if(status.includes('deployed')){
+    //         deployed++;
+    //       }
+    //       if(status.includes('reserved')){
+    //         openUnmapped++;
+    //       }
+    //       if(status.includes('selected')){
+    //         selectedUnmapped++;
+    //       }
+    //       if(status.includes('terminated')){
+    //         terminated++;
+    //       }
+    //     }else{
+    //       if(status.includes('terminated')){
+    //         terminated++;
+    //       }
+    //       if(status.includes('training')){
+    //         trainingMapped++;
+    //       }
+    //       if(status.includes('deployed')){
+    //         deployed++;
+    //       }
+    //       if(status.includes('reserved')){
+    //         selectedMapped++;
+    //       }
+    //       if(status.includes('selected')){
+    //         selectedMapped++;
+    //       }
+    //     }
+    //     this.barChartData = [
+    //       {
+    //         data: [trainingMapped, reservedMapped, selectedMapped, confirmedMapped, deployed, terminated],
+    //         label: 'Mapped',
+    //       },
+    //       {
+    //         data: [trainingUnmapped, openUnmapped, selectedUnmapped, confirmedUnmapped, deployed, terminated],
+    //         label: 'Unmapped',
+    //       }
+    //     ]
+    //   });
 
 
     // let oneClient = this.clientInfo.find(item => item['tfClientName'] == name);
