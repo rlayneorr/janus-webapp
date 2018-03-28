@@ -16,7 +16,9 @@ export class TagsService {
     getAllTags(){
       return this.http.get(this.url + "getAllTags");
     }
-
+    getTagByQuestion(questionId : number){
+        return this.http.get(this.url + "getTagByQuestionId/"+questionId, httpOptions);
+    }
     createNewTag(newTagName: string){
         let newTag : Tag = new Tag();
         newTag.tagName = newTagName;

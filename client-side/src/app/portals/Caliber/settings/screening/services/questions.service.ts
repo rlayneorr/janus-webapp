@@ -20,13 +20,13 @@ export class QuestionsService {
   createNewQuestion(bucketId: number, question: Question, tagIds: number[]){
     let theAnswers: string[]=[question.sampleAnswer1, question.sampleAnswer2, question.sampleAnswer3,question.sampleAnswer4,question.sampleAnswer5];
     console.log(theAnswers);
-      return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.questionText,  answers: theAnswers,tagIds:tagIds}, httpOptions);
+    return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.questionText, answers: theAnswers,tagIds:tagIds}, httpOptions);
   }
 
   updateQuestion(bucketId: number, question: Question, tagIds: number[]){
     let theAnswers: string[]=[question.sampleAnswer1, question.sampleAnswer2, question.sampleAnswer3,question.sampleAnswer4,question.sampleAnswer5];
     console.log(theAnswers);
-    return this.http.post(this.url + "updateQuestion", {bucketId: bucketId, text: question.questionText, answers: theAnswers,tagIds:tagIds}, httpOptions);
+    return this.http.post(this.url + "updateQuestion", {question : question,tagIds:tagIds}, httpOptions);
 }
 
   deactivateQuestion(questionId: number){

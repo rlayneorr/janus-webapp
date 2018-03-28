@@ -39,6 +39,7 @@ export class QuestionComponent implements OnInit {
 
   createQuestion: FormGroup;
   newQuestion: Question;
+  newTags: Tag[];
   allTags: Tag[];
   currentTags: Tag[];
   question:Question;
@@ -113,27 +114,22 @@ export class QuestionComponent implements OnInit {
   editQuestion(question){
     this.question = question;
     let i: number = 0;
+    let j : number = 0;
     this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
-    this.currentTags = [];
+    let newTags = [];
     this.tagsService.getAllTags().subscribe(data=>{
       console.log(data);
       this.allTags = (data as Tag[]);
     });
-    //this.currentTags = this.questionService.
-    /*
-    for(i; i < this.allTags.length; i++){
-      let j: number = 0;
-      for(j; j < question.tagIds.length; j++){
-        if(this.allTags[i]){
-          if(this.allTags[i].id==question.tagIds[j]){
-            this.currentTags.push(this.allTags[i]);
-            this.allTags[i]=null;
-          }
-        }
-      }
-    }*/
+    this.tagsService.getTagByQuestion(this.question.questionId).subscribe(data=>{
+      console.log(data);
+      this.newTags = (data as Tag[]);
+      this.removeTagsFromAll();
+    });
+    console.log(newTags);
+    console.log(newTags.length);
   }
-  //TO DO
+  /* */
   newTag(newTagString : string){
     let newTag : Tag = new Tag();
     newTag.tagName = newTagString;
@@ -145,10 +141,12 @@ export class QuestionComponent implements OnInit {
     document.getElementById("newTag").innerHTML = "";
   }
   getTagIds(){
-    let tagIds : number[];
+    let tagIds : number[] =[];
     let i: number = 0;
 
     for(i;i<this.currentTags.length;i++){
+      console.log(tagIds);
+      console.log(this.currentTags);
       tagIds[i]=this.currentTags[i].tagId;
     }
     return tagIds;
@@ -220,8 +218,6 @@ export class QuestionComponent implements OnInit {
     for(i; i < this.currentTags.length; i++)
     {
       currentTag = this.currentTags[i];
-
-
       if(tag.tagId != currentTag.tagId){
         newCurrentTags.push(currentTag);
       }
@@ -230,4 +226,11 @@ export class QuestionComponent implements OnInit {
     this.currentTags = newCurrentTags;
   }
 
+  removeTagsFromAll(){
+    console.log("here");
+    let i :number = 0;
+    for(i;i<this.newTags.length;i++){
+      this.addTagToQuestion(this.newTags[i]);
+    }
+  }
 }
