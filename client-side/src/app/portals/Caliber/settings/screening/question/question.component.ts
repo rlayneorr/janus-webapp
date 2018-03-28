@@ -137,6 +137,7 @@ export class QuestionComponent implements OnInit {
     });
     this.tagsService.getTagByQuestion(this.question.questionId).subscribe(data=>{
       this.newTags = (data as Tag[]);
+      console.log(this.newTags);
       this.removeTagsFromAll();
     });
   }
@@ -149,11 +150,13 @@ export class QuestionComponent implements OnInit {
   newTag(){
     let newTag : Tag = new Tag();
     newTag.tagName = this.newTagString;
-    this.tagsService.createNewTag(this.newTagString).subscribe(data=>{
-      newTag = (data as Tag);
-    });
-    this.addNewTag(newTag);
-    this.newTagString = "";
+    if(this.newTagString){
+      this.tagsService.createNewTag(this.newTagString).subscribe(data=>{
+        newTag = (data as Tag);
+      });
+      this.addNewTag(newTag);
+      this.newTagString = "";
+    }
   }
 
   /**
