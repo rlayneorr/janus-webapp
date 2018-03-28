@@ -132,18 +132,17 @@ export class HomeComponent {
         // iterate over associates and aggregate totals
         let marketingStatus : MarketingStatus;
         let associate = this.associates[i];
-        console.log(associate.marketingStatusId);
         switch(associate.marketingStatusId) {
-          case 1: trainingMapped++; console.log('trainingMapped:' + trainingMapped);   break;
-          case 2: reservedMapped++; console.log('reservedMapped: ' + reservedMapped); break;
-          case 3: selectedMapped++; console.log('selectedMapped: '+ selectedMapped); break;
-          case 4: confirmedMapped++; console.log('confirmedMapped: ' + confirmedMapped); break;
-          case 5: deployedMapped++; console.log('deployedMapped: ' + deployedMapped); break;
-          case 6: trainingUnmapped++; console.log('trainingUnmapped: ' + trainingUnmapped); break;
-          case 7: openUnmapped++; console.log('openUnmapped:' + openUnmapped); break;
-          case 8: selectedUnmapped++; console.log('selectedUnmapped: '+ selectedUnmapped); break;
-          case 9: confirmedUnmapped++; console.log('confirmedUnmapped: ' + confirmedUnmapped); break;
-          case 10: deployedUnmapped++; console.log('deployedUnmapped: ' + deployedUnmapped); break;
+          case 1: trainingMapped++; break;
+          case 2: reservedMapped++; break;
+          case 3: selectedMapped++; break;
+          case 4: confirmedMapped++; break;
+          case 5: deployedMapped++; break;
+          case 6: trainingUnmapped++; break;
+          case 7: openUnmapped++; break;
+          case 8: selectedUnmapped++; break;
+          case 9: confirmedUnmapped++; break;
+          case 10: deployedUnmapped++; break;
         }
       }
       /**

@@ -67,7 +67,7 @@ export class RequestService {
 // }
 
   public getStatuses(): Observable<any> {
-    return this.http.get(this.dataPath + '/marketing');
+    return this.http.get(this.hostms + '8094/all/marketingstatus');
   }
 
 // public getBatches(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {
