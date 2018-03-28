@@ -18,11 +18,15 @@ export class QuestionsService {
   questions: Question[];
 
   createNewQuestion(bucketId: number, question: Question, tagIds: number[]){
-      return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.questionText,  answers: [question.sampleAnswer1, question.sampleAnswer2, question.sampleAnswer3,question.sampleAnswer4,question.sampleAnswer5],tagIds:tagIds}, httpOptions);
+    let theAnswers: string[]=[question.sampleAnswer1, question.sampleAnswer2, question.sampleAnswer3,question.sampleAnswer4,question.sampleAnswer5];
+    console.log(theAnswers);
+      return this.http.post(this.url + "createQuestion", {bucketId: bucketId, text: question.questionText,  answers: theAnswers,tagIds:tagIds}, httpOptions);
   }
 
   updateQuestion(bucketId: number, question: Question, tagIds: number[]){
-    return this.http.post(this.url + "updateQuestion", {bucketId: bucketId, text: question.questionText, answers: [question.sampleAnswer1, question.sampleAnswer2, question.sampleAnswer3,question.sampleAnswer4,question.sampleAnswer5],tagIds:tagIds}, httpOptions);
+    let theAnswers: string[]=[question.sampleAnswer1, question.sampleAnswer2, question.sampleAnswer3,question.sampleAnswer4,question.sampleAnswer5];
+    console.log(theAnswers);
+    return this.http.post(this.url + "updateQuestion", {bucketId: bucketId, text: question.questionText, answers: theAnswers,tagIds:tagIds}, httpOptions);
 }
 
   deactivateQuestion(questionId: number){
