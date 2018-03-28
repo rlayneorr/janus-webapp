@@ -85,6 +85,7 @@ export class SkillTypesComponent implements OnInit {
     * Stores information about the skill type that was selected
     * If there are any buckets associated to the skill type,
     * set the array to the selected buckets to the array
+    * @param skillType: selected skill type
     */
     editSkillType(skillType){
         this.singleSkillType = {
@@ -110,6 +111,13 @@ export class SkillTypesComponent implements OnInit {
 
     }
 
+    /**
+    * Checks which buckets are currently associated with the selected skill Type
+    * If a bucket from all buckets already belong to the selected skill type, hide the bucket
+    * Includes with objects giving wrong results, so used an
+    * array of bucket ids to utilize the includes method.
+    * @param bucketId: Id of single bucket
+    */
     checkContains(bucketId){
         if(this.singleSkillType){
             return this.singleSkillTypeBucketIds.includes(bucketId);
@@ -117,6 +125,12 @@ export class SkillTypesComponent implements OnInit {
         return false;
     }
 
+    /**
+    * Adds a new bucket object to the selected skill type.
+    * Set weight of new bucket to be 0
+    * Add the bucketId to the array of Ids of selected skill type
+    * @param bucket: bucket object needed to be added to skill types.
+    */
     addToSkillTypeBuckets(bucket){
         if(this.singleSkillType){
             this.singleSkillType.buckets.push(bucket);
@@ -127,6 +141,9 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
+    /**
+    * 
+    */
     removeFromSkillTypeBuckets(bucket){
         if(this.singleSkillType){
             for(let singleBucketIndex in this.singleSkillType.buckets){
