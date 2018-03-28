@@ -35,6 +35,7 @@ export class SkillTypeBucketsComponent implements OnInit {
   getBuckets(): void {
       this.bucketService.getAllBuckets()
         .subscribe(buckets => this.buckets = buckets);
+       
   }
 
 
