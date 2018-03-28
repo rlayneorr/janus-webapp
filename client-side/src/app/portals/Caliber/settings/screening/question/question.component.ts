@@ -52,32 +52,34 @@ export class QuestionComponent implements OnInit {
   public tagsCollapsed = true;
 
   ngOnInit() {
+    this.currentBucket = this.bucketService.getCurrentBucket();
     this.currentTags = [];
     this.question = new Question();
     this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
-    this.currentBucket = this.bucketService.getCurrentBucket();
-    if(this.currentBucket){
-      this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
-        this.questions = (data as Question[]);
-      })
-      this.tagsService.getAllTags().subscribe(data=>{
-        console.log(data);
-        this.allTags = (data as Tag[]);
-      });
-    }
+    this.updateQuestions();
   }
 
-  /*Used to open a bootstrap modal*/
+  /**
+   * Used to open a bootstrap modal
+   * Takes in the Id of the modal and launches it
+   **/
   open(content) {
     this.modalService.open(content, { windowClass: 'fixed-modal' });
   }
+
+  /**
+   * Used to validate the create/update question form
+   **/
   initFormControl() {
     this.createQuestion = this.fb.group({
       'name': ['', Validators.required],
     });
   }
 
-  /*A currently unused function that will ive the reason for a modal closing*/
+  /**
+   * A currently unused function that will give the reason for a modal closing
+   * May be used later for giving different results based on how a modal is closed
+   **/
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -88,7 +90,11 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  deactivateQuesiton(question){
+  /** 
+   * Switches the question sent in as an argument from active to deactive
+   * or from deactive to active based on it's current status
+   **/
+  changeQuesitonStatus(question){
     if(question.isActive){
       console.log("true");
       this.questionService.deactivateQuestion(question.questionId).subscribe();
@@ -99,18 +105,22 @@ export class QuestionComponent implements OnInit {
    }
   }
 
-/*A simple function that nullifies the currently selected question to
-* be used primarily after a successful save */
+  /**
+   * A simple function that nullifies the currently selected question to
+   * be used primarily after a successful save 
+   **/
   setQuestionNull(){
     this.question = new Question();
     this.sampleAnswers = [];
     this.currentTags = [];
   }
 
-  /*This function will set the required fields of the selected
-  * function to edit to help the  add new question function decide
-  * wheather to add or update a question and to fill in the fields
-  * with the selected questions sample answers and question text*/
+  /**
+   * This function will set the required fields of the selected
+   * function to edit to help the  add new question function decide
+   * wheather to add or update a question and to fill in the fields
+   * with the selected questions sample answers and question text
+   **/
   editQuestion(question){
     this.question = question;
     let i: number = 0;
@@ -129,32 +139,43 @@ export class QuestionComponent implements OnInit {
     console.log(newTags);
     console.log(newTags.length);
   }
-  /* */
+
+  /** 
+   * This function will take the string in the new tag input field
+   * and create a new tag with no Id, then get the same tag with a valid
+   * Id from the tag service
+   **/
   newTag(){
     let newTag : Tag = new Tag();
     newTag.tagName = this.newTagString;
     this.tagsService.createNewTag(this.newTagString).subscribe(data=>{
       newTag = (data as Tag);
+      console.log(data);
     });
-    this.currentTags.push(newTag);
+    this.addNewTag(newTag);
     this.newTagString = "";
   }
+
+  /** 
+   * Converts the currently added Tag array into an array of tad ids for 
+   * saving and updating.
+   **/
   getTagIds(){
     let tagIds : number[] =[];
     let i: number = 0;
 
     for(i;i<this.currentTags.length;i++){
-      console.log(tagIds);
-      console.log(this.currentTags);
       tagIds[i]=this.currentTags[i].tagId;
     }
     return tagIds;
   }
 
-  /*This function will check to see if all of the fields are filled
-  * and to see if the questio has an Id already to decided wheather
-  * to alert the user, add a new question, or to update a current
-  * question*/
+  /**
+   * This function will check to see if all of the fields are filled
+   * and to see if the questio has an Id already to decided wheather
+   * to alert the user, add a new question, or to update a current
+   * question.
+   **/
   addNewQuestion(){
     this.tagsService.getAllTags().subscribe(data=>{
       console.log(data);
@@ -178,10 +199,6 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.questionService.updateQuestion(this.currentBucket.bucketId,this.question, this.getTagIds()).subscribe();
-        document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
-        this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
-          this.questions = (data as Question[]);
-        })
       }
       else{
         this.question.sampleAnswer1 = this.sampleAnswers[0];
@@ -190,12 +207,8 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.questionService.createNewQuestion(this.currentBucket.bucketId,this.question,this.getTagIds()).subscribe();
-        document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
-        this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
-          this.questions = (data as Question[]);
-        })
       }
-
+      this.updateQuestions();
       this.setQuestionNull();
       this.sampleAnswers = [];
     }
@@ -204,7 +217,9 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  /*Adds the selected tag to the current tags array and removes it from the all tags array*/
+  /**
+   * Adds the selected tag to the current tags array and removes it from the all tags array.
+   **/
   addTagToQuestion(tag){
     let currentTag: any;
     let newAllTags : Tag[] = [];
@@ -223,7 +238,9 @@ export class QuestionComponent implements OnInit {
     this.currentTags.push(tag);
   }
 
-   /*Adds the selected tag to the all tags array and removes it from the current tags array*/
+   /**
+    * Adds the selected tag to the all tags array and removes it from the current tags array
+    **/
   removeTagFromQuestion(tag){
     let currentTag: any;
     let newCurrentTags : Tag[] = [];
@@ -240,12 +257,35 @@ export class QuestionComponent implements OnInit {
     this.currentTags = newCurrentTags;
   }
 
+  /** 
+   * Resets the current tags and then re adds the tags specific to the current question.
+   * Used to update a question by populating the current tags with the tags currently 
+   * associated with that question.
+   **/
   removeTagsFromAll(){
-    console.log("here");
     let i :number = 0;
     this.currentTags = [];
     for(i;i<this.newTags.length;i++){
       this.addTagToQuestion(this.newTags[i]);
     }
+  }
+
+  /** 
+   * Used to populate the current question and the current tags with a selected question to be 
+   * edited. 
+   **/
+  updateQuestions(){
+    if(this.currentBucket){
+      this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
+        this.questions = (data as Question[]);
+      })
+      this.tagsService.getAllTags().subscribe(data=>{
+        console.log(data);
+        this.allTags = (data as Tag[]);
+      });
+    }
+  }
+  addNewTag(newTag : Tag){
+    this.currentTags.push(newTag);
   }
 }
