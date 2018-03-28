@@ -7,11 +7,14 @@ h3 {
     color: #FFFFFF;
       cursor: pointer;
       cursor: hand;
+      padding-right: 15px;
+      padding-top: 10px;
   }
   h2{
     text-align:center;
     background-color: #F26926;
     color:#FFFFFF;
+    padding-bottom: 15px;
 
   }
   h6 {
