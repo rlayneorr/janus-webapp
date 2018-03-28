@@ -153,8 +153,8 @@ export class QuestionComponent implements OnInit {
     if(this.newTagString){
       this.tagsService.createNewTag(this.newTagString).subscribe(data=>{
         newTag = (data as Tag);
+        this.currentTags.push(newTag);
       });
-      this.addNewTag(newTag);
       this.newTagString = "";
     }
   }
