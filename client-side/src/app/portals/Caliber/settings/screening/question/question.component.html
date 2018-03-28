@@ -12,12 +12,12 @@
               <a class="list-group-item list-group-item-action" *ngIf = "question">
                 {{question.questionText}}
                 <i id="xIcon">
-                  <label class="switch">
+                  <label class="switch" >
                       <input type="checkbox" [checked] = question.isActive (change) = "deactivateQuesiton(question)">
                       <span class="slider round"></span>
                   </label>
               </i>
-              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editQuestion(question); open(content)" data-toggle="tooltip" data-placement="bottom" title="Edit"></i>
+              <i id="penIcon" class="fa fa-pencil pull-right" (click)="editQuestion(question); open(content)" placement="top" ngbTooltip="edit"></i>
               </a>
           </div>
       </div>
