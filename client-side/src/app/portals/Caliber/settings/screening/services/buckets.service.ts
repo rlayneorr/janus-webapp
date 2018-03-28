@@ -32,8 +32,7 @@ export class BucketsService {
   
   /** Gets all of company's buckets from server */
   getAllBuckets(): Observable<Bucket[]>{
-   // return this.http.get<Bucket[]>(this.url)
-     return this.http.get<Bucket[]>(this.url+ "getBuckets");
+      return this.http.get<Bucket[]>(this.url + "getBuckets");
   }
 
   /* getSkillTypes():Observable<SkillType[]> {

@@ -88,11 +88,11 @@ export class QuestionComponent implements OnInit {
   deactivateQuesiton(question){
     if(question.isActive){
       console.log("true");
-      this.questionService.deactivateQuestion;
+      this.questionService.deactivateQuestion(question.questionId).subscribe();
    }
     else{
       console.log("false");
-      this.questionService.activateQuestion;
+      this.questionService.activateQuestion(question.questionId).subscribe();
    }
   }
 
