@@ -4,7 +4,7 @@
         <div class="card w-50">
 
             <h6 class="card-header">Skill Types</h6>
-            
+
             <div class="card-body">
                 <div class="list-group">
                     <a class="list-group-item list-group-item-action" *ngFor="let skillType of skillTypes">
@@ -35,7 +35,7 @@
             </div>
             <button class="btn btn-primary btn-sm" (click)='open(content)'>Create Skill Type</button>
         </div>
-        
+
     </div>
 </div>
 <!-- Modal for creating a new SkillType -->
@@ -95,8 +95,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="updateSkillType(addSkillTypeForm.value);savedSuccessfully()" [disabled]="!addSkillTypeForm.valid || error" *ngIf="singleSkillType && !hasBuckets">Save</button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="updateSkillType(addSkillTypeForm.value);savedSuccessfully()" [disabled]="!addSkillTypeForm.valid || error" *ngIf="singleSkillType && hasBuckets">Save</button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="c('Close click'); createNewSkillType(addSkillTypeForm.value);savedSuccessfully()" *ngIf="!singleSkillType">Create</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="updateSkillType(addSkillTypeForm.value); savedSuccessfully()" [disabled]="!addSkillTypeForm.valid || error" *ngIf="singleSkillType">Save</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="c('Close click'); createNewSkillType(addSkillTypeForm.value)" *ngIf="!singleSkillType">Create</button>
     </div>
 </ng-template>
