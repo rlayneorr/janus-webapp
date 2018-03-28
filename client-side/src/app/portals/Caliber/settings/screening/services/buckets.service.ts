@@ -24,6 +24,7 @@ export class BucketsService {
   url: string = "https://hydra-gateway-service.cfapps.io/bucket-service/bucket/";
   /** Making an Observable */
   bucketSubject = new Subject();
+  routingToAllBuckets:boolean = false;
   /** For development only */
 
   private currentBucket: Bucket;

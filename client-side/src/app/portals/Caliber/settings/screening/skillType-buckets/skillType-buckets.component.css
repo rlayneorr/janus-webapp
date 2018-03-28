@@ -11,6 +11,10 @@ h6 {
 .card-header {
   background-color: #F26925;
 }
+#allSkillTypesDiv{
+  overflow : auto;
+  height: 380px;
+}
 
 #penIcon {
 	color: #F26925;

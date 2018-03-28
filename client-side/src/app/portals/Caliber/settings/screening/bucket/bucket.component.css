@@ -1,12 +1,15 @@
 .bucket-header
 {
-  background-color: #F5F5F5;
+  background-color: #6c757d;
   text-align: left;
-  color:  #000000;
+  color:  #FFFFFF;
 }
 
+i {
+  margin-right: 10px;
+}
 
-h2{
+h3{
   text-align:left;
   background-color: #F5F5F5;
   color:#FFFFFF;
@@ -14,24 +17,27 @@ h2{
   padding-top: 10px;
 
 }
+
 #bucket-desc{
   padding-left:15px;
+  color: #FFFFFF;
 }
 
 h6 {
   text-align: center;
 }
   
-  #xIcon {
-    color: #F26925;
-    margin-left: 10px;
-  }
+#xIcon {
+  color: #F26925;
+  margin-left: 10px;
+}
   
-  #penIcon {
-    color: #F26925;
-  }
-  .revatureOrange{
-    background-color: #F26925;
+#penIcon {
+  color: #F26925;
+}
+
+.revatureOrange{
+  background-color: #F26925;
 }  
 .card-width{
   width: 85%;
@@ -42,10 +48,10 @@ h6 {
 }
 
 .btn{
-  background-color:#c6c6c6;
-  text-align: left;
-    text-align: right;
-    color:  #000000;
+  /*background-color:#c6c6c6;*/
+  /*text-align: left;*/
+    /*text-align: right;*/
+    /*color:  #000000;*/
     cursor: pointer;
     cursor: hand;
     padding-right: 15px;
