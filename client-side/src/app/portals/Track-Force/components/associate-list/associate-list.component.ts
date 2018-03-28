@@ -10,7 +10,9 @@ import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { User } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { CurriculumService } from '../../services/curriculum-service/curriculum.service';
+import { MarketStatusService } from '../../services/market-status/market-status.service';
 import { BatchService } from '../../services/batch-service/batch.service';
+import { MarketingStatus } from '../../models/marketing-status.model';
 
 /**
  * Component for the Associate List page
@@ -27,6 +29,7 @@ export class AssociateListComponent implements OnInit {
   //our collection of associates and clients
   associates: Associate[];
   clients: Client[];
+  marketingStatuses: MarketingStatus[];
   curriculums: Set<string>; //stored unique curriculums
 
   //used for filtering
@@ -59,6 +62,7 @@ export class AssociateListComponent implements OnInit {
     private clientService: ClientListService,
     private curriculumnService: CurriculumService,
     private batchService: BatchService,
+    private marketService : MarketStatusService,
     private rs: RequestService,
     private activated: ActivatedRoute
   ) {
@@ -88,6 +92,7 @@ export class AssociateListComponent implements OnInit {
   }
   tempCurrId : number;
   newCurr : Curriculum;
+  tempMarket: MarketingStatus;
   /**
    * Set our array of all associates
    */
@@ -96,29 +101,34 @@ export class AssociateListComponent implements OnInit {
     this.curriculumnService.getAllCurriculums().subscribe(items=>{
       console.log(items);
     });
-
+    
     this.associateService.getAllAssociates().subscribe(data => {
       this.associates = data;
       console.log(this.associates);
 
-      for (let associate of this.associates) {//get our curriculums from the associates
+
+      this.marketingStatuses = [];
+      for (let associate of this.associates) {//get our curriculums from the associate
+
+        
+        this.marketService.getMarketingStatusById(associate.marketingStatusId).subscribe(marketData => {
+
+          this.marketingStatuses.push(marketData);       
+      })
       
        this.batchService.getCurrIdById(associate.batchId).subscribe(item => {
         this.tempCurrId = item;
-        console.log(item);
 
           this.curriculumnService.getOneCurriculum(this.tempCurrId).subscribe(item2 => {
-            console.log("First one...: " + item2['curriculumName']);
             this.newCurr = item2;
             this.curriculums.add(item2['curriculumName']);
-       }
-      );
+       });
 
         
-      }
-      );
+      });
       
-      }
+    }
+    console.log(this.marketingStatuses);
       this.curriculums.delete("");
       this.curriculums.delete("null");
       self.sort("id"); //sort associates by ID
