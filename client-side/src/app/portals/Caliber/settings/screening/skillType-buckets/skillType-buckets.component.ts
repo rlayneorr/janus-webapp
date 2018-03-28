@@ -6,6 +6,7 @@ import { BucketsService } from '../services/buckets.service';
 import { QuestionsService } from '../services/questions.service';
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {AlertsService} from '../../../services/alerts.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class SkillTypeBucketsComponent implements OnInit {
     private router: Router,
     private bucketService: BucketsService,
     private questionService:QuestionsService,
-    private modalService: NgbModal) {}
+    private modalService: NgbModal,
+    private alertsService:AlertsService,) {}
 
     filter: Bucket= new Bucket();
   ngOnInit() {
@@ -82,6 +84,10 @@ export class SkillTypeBucketsComponent implements OnInit {
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket =>this.buckets.push(bucket));
   }
+
+  savedSuccessfully(){
+    this.alertsService.success("Saved successfully");
+}
 
   /** Modal variables, and functions */
   closeResult: string;

@@ -1,6 +1,6 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbTabset} from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { Tag } from '../entities/Tag';
@@ -13,6 +13,7 @@ import {trigger,state,style,transition,animate,keyframes} from '@angular/animati
 import {BucketsService} from '../services/buckets.service';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
+import {AlertsService} from '../../../services/alerts.service';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -35,7 +36,9 @@ export class QuestionComponent implements OnInit {
   constructor(private modalService: NgbModal, private fb: FormBuilder,
     private tagsService: TagsService,
     private questionService: QuestionsService,
-    private bucketService: BucketsService) { }
+    private bucketService: BucketsService,
+    private alertsService:AlertsService,
+    private tab:NgbTabset) { }
 
   newTagString : string;
   createQuestion: FormGroup;
@@ -50,6 +53,8 @@ export class QuestionComponent implements OnInit {
   currentBucket: Bucket;
   public answersCollapsed = true;
   public tagsCollapsed = true;
+
+  
 
   ngOnInit() {
     this.currentTags = [];
@@ -248,4 +253,7 @@ export class QuestionComponent implements OnInit {
       this.addTagToQuestion(this.newTags[i]);
     }
   }
+  savedSuccessfully(){
+    this.alertsService.success("Saved successfully");
+}
 }
