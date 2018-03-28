@@ -2,24 +2,20 @@
 {
   background-color: #F5F5F5;
   text-align: left;
-  color:  #F26925;
+  color:  #000000;
 }
 
-h3 {
-    text-align: right;
-    color:  #F26925;
-      cursor: pointer;
-      cursor: hand;
-      padding-right: 15px;
-      padding-top: 10px;
-  }
 
 h2{
   text-align:left;
   background-color: #F5F5F5;
   color:#FFFFFF;
-  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-top: 10px;
 
+}
+#bucket-desc{
+  padding-left:15px;
 }
 
 h6 {
@@ -46,11 +42,24 @@ h6 {
 }
 
 .btn{
-  background-color:blue;
-  color:white;
-  text-align: center;
+  background-color:#c6c6c6;
+  text-align: left;
+    text-align: right;
+    color:  #000000;
+    cursor: pointer;
+    cursor: hand;
+    padding-right: 15px;
+    padding-top: 10px;
+  
 }
+/*
+#back-to-buckets {
+  text-align: right;
+  color:  #000000;
+  cursor: pointer;
+  cursor: hand;
+  padding-right: 15px;
+  padding-top: 10px;
+}*/
 
-#buck-description{
-  text-align:center;
-}
+
