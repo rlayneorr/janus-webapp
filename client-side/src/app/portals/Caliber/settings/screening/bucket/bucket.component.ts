@@ -41,10 +41,11 @@ export class BucketComponent implements OnInit {
     this.modalService.open(content);
     event.stopPropagation();
   }
+
   getCurrentBucket(){
    this.theBucket=this.bucketService.getCurrentBucket();
     return this.theBucket;
-   
+
   }
   setBucket(){
     this.theBucket=this.bucketService.getCurrentBucket();

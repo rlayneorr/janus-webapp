@@ -29,7 +29,7 @@ export class BucketsService {
   private currentBucket: Bucket;
 
   constructor(private http: HttpClient) {}
-  
+
   /** Gets all of company's buckets from server */
   getAllBuckets(): Observable<Bucket[]>{
       return this.http.get<Bucket[]>(this.url + "getBuckets");
@@ -38,7 +38,7 @@ export class BucketsService {
   /* getSkillTypes():Observable<SkillType[]> {
         return this.http.get<SkillType[]>(this.url + "getSkillTypes");
     }
-  
+
    */
   getBucketById(bucketId: number){
       return this.http.get(this.url + bucketId);
@@ -52,14 +52,11 @@ export class BucketsService {
   /** POST: add a new bucket to the database */
   createNewBucket(bucket: Bucket): Observable<Bucket> {
       console.log(bucket);
-      return this.http.post<Bucket>(this.url, bucket, httpOptions);
+      return this.http.post<Bucket>(this.url + "createBucket", bucket, httpOptions);
   }
 
   setBucket(bucket:Bucket){
-     // console.log("Set bucket called");
-
      this.currentBucket=bucket;
-    //  console.log(this.currentBucket);
   }
 
   getCurrentBucket():Bucket {
@@ -72,9 +69,7 @@ export class BucketsService {
      }
   }
 
-  setName(name:string)
-  {
-
+  setName(name:string){
       this.currentBucket.bucketCategory=name;
   }
 

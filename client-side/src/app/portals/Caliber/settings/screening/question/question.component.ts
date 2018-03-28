@@ -58,7 +58,6 @@ export class QuestionComponent implements OnInit {
     this.currentBucket = this.bucketService.getCurrentBucket();
     if(this.currentBucket){
       this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
-        console.log(data);
         this.questions = (data as Question[]);
       })
       this.tagsService.getAllTags().subscribe(data=>{
@@ -66,7 +65,6 @@ export class QuestionComponent implements OnInit {
         this.allTags = (data as Tag[]);
       });
     }
-    console.log(this.questions);
   }
 
   /*Used to open a bootstrap modal*/
