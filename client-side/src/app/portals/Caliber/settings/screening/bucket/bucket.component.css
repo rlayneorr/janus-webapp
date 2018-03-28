@@ -1,21 +1,20 @@
 #bucket-header
 {
-  background-color: #F26926;
+  background-color: #e6e6e6;
 }
 
 #back-to-buckets {
     text-align: right;
-    color: #FFFFFF;
+    color: #000000;
     cursor: pointer;
     cursor: hand;
-    padding-top: 10px;
   }
 
 h2{
-  text-align:center;
-  background-color: #F26926;
-  color:#FFFFFF;
+  text-align:left;
+  color:#000000;
   padding-bottom: 15px;
+  padding-top: 10px;
 
 }
 
@@ -43,12 +42,8 @@ h6 {
 }
 
 .btn{
-  background-color:blue;
-  color:white;
-  text-align: center;
+  background-color:#c6c6c6;
+  text-align: left;
 }
 
-#buck-description{
-  text-align:center;
-  background-color: #FFFFFF;
-}
+
