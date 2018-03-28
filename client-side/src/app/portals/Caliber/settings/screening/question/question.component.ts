@@ -68,7 +68,6 @@ export class QuestionComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { windowClass: 'fixed-modal' });
   }
-
   initFormControl() {
     this.createQuestion = this.fb.group({
       'name': ['', Validators.required],
@@ -148,11 +147,11 @@ export class QuestionComponent implements OnInit {
     }
     if(this.sampleAnswers.length==5 && this.question.questionText){
       if(this.question.questionId){
-        this.questionService.updateQuestion(this.currentBucket.id,this.question);
+        this.questionService.updateQuestion(this.currentBucket.bucketId,this.question, []).subscribe();
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully updated!";
       }
       else{
-        this.questionService.createNewQuestion(this.currentBucket.id,this.question);
+        this.questionService.createNewQuestion(this.currentBucket.bucketId,this.question,[]).subscribe();
         document.getElementById("newQuestionAlert").innerHTML= "Question successfully saved!";
       }
 
