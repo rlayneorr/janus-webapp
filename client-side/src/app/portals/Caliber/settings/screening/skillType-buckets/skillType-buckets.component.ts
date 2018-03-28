@@ -54,7 +54,11 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket) {
+      //this.currBucket = bucket;
+    this.currBucket = new Bucket();
+    this.currBucket.bucketId = bucket.bucketId;
     this.currBucket.bucketCategory = bucket.bucketCategory;
+    this.currBucket.bucketDescription = bucket.bucketDescription;
     console.log(this.currBucket);
   }
 
@@ -67,6 +71,7 @@ export class SkillTypeBucketsComponent implements OnInit {
           const ix = bucket ? this.buckets.findIndex(h => h.bucketId === bucket.bucketId) : -1;
           if (ix > -1) { this.buckets[ix] = bucket; }
         });
+      this.getBuckets();
       this.currBucket = undefined;
     }
   }
