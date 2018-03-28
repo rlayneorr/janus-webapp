@@ -162,3 +162,19 @@ i {
   .slider.round:before {
     border-radius: 50%;
   }
+#bucket_bins{
+  margin-bottom: 2px;
+  opacity: 1;
+
+}
+#xButton{
+  left: 109%;
+  opacity: 1;
+  position: absolute;
+  width: 10%;
+  height: 68%;
+  padding-bottom: 10%;
+}
+#xButton:hover{
+  opacity: 0.5;
+}

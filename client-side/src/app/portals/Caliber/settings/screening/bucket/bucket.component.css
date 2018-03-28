@@ -1,11 +1,13 @@
-#bucket-header
+.bucket-header
 {
-  background-color: #F26926;
+  background-color: #F5F5F5;
+  text-align: left;
+  color:  #F26925;
 }
 
 h3 {
     text-align: right;
-    color: #FFFFFF;
+    color:  #F26925;
       cursor: pointer;
       cursor: hand;
       padding-right: 15px;
@@ -13,8 +15,8 @@ h3 {
   }
 
 h2{
-  text-align:center;
-  background-color: #F26926;
+  text-align:left;
+  background-color: #F5F5F5;
   color:#FFFFFF;
   padding-bottom: 15px;
 

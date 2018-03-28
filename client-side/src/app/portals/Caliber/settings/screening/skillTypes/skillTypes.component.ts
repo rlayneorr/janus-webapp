@@ -7,6 +7,7 @@ import { SkillTypesService } from '../services/skillTypes.service';
 import { Bucket } from '../entities/Bucket';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import {BucketsService} from'../services/buckets.service';
+import {AlertsService} from '../../../services/alerts.service'
 
 
 @Component({
@@ -57,7 +58,6 @@ export class SkillTypesComponent implements OnInit {
       this.setSkillTypes();
     }
   }
-
   setSkillTypes(){
     let thing:any;
     this.skillTypes = [];
@@ -77,6 +77,7 @@ export class SkillTypesComponent implements OnInit {
     private fb: FormBuilder,
     private skillTypeService: SkillTypesService,
     private bucketsService:BucketsService,
+    private alertsService:AlertsService,
   ) { }
 
     open(content) {
@@ -242,6 +243,9 @@ export class SkillTypesComponent implements OnInit {
         this.bucketsAndWeights = [];
         this.error = false;
         this.singleSkillTypeBucketIds = [];
+    }
+    savedSuccessfully(){
+        this.alertsService.success("Saved successfully");
     }
 
   ngOnInit() {
