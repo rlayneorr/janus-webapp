@@ -26,11 +26,11 @@ export class QuestionsService {
 }
 
   deactivateQuestion(questionId: number){
-    return this.http.put(this.url + "deactivateQuestion", questionId, httpOptions);
+    return this.http.put(this.url + "deactivateQuestion/" + questionId, httpOptions);
   }
 
   activateQuestion(questionId: number){
-    return this.http.put(this.url + "activateQuestion", questionId, httpOptions);
+    return this.http.put(this.url + "activateQuestion/" + questionId, httpOptions);
   }
 
   getBucketQuestions(bucketId: number){
