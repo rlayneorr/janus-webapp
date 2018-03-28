@@ -148,7 +148,6 @@ export class SkillTypesComponent implements OnInit {
     * @param bucket: bucket object to be removed from all associates to the skill type
     */
     removeFromSkillTypeBuckets(bucket){
-        let tempArr = [];
         if(this.singleSkillType){
             for(let singleBucketIndex in this.singleSkillType.buckets){
                 if(this.singleSkillType.buckets[singleBucketIndex].bucketCategory == bucket){
