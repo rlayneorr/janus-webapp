@@ -160,3 +160,7 @@ fixed-modal .modal-content {
   width: 420px;
   height: 400px;
 }
+#pillButtons{
+margin:10px;
+border-radius: 50%;
+}
