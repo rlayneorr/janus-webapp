@@ -175,3 +175,6 @@ i {
   height: 68%;
   padding-bottom: 10%;
 }
+#xButton:hover{
+  opacity: 0.5;
+}
