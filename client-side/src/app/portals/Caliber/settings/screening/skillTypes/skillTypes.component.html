@@ -11,8 +11,8 @@
                         {{skillType.skillTypeName}}
                         <i id="xIcon">
                             <label class="switch">
-                                <input type="checkbox" [checked]= skillType.isActive (change)="removeElement(skillType)">
-                                <span class="slider round"></span>
+                                <input type="checkbox" [checked]= skillType.isActive (change)="removeElement(skillType)" >
+                                <span class="slider round"placement="top" ngbTooltip="deactivate"></span>
                             </label>
                         </i>
                         <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)" placement="top" ngbTooltip="edit">
@@ -24,7 +24,7 @@
                         <i id="xIcon">
                             <label class="switch">
                                 <input type="checkbox" [checked]= skillType.isActive (change)="removeElement(skillType)">
-                                <span class="slider round"></span>
+                                <span class="slider round" placement="top" ngbTooltip="activate"></span>
                             </label>
                         </i>
                         <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)" placement="top" ngbTooltip="edit">
