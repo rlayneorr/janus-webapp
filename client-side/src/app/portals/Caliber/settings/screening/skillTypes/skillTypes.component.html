@@ -73,8 +73,7 @@
                               <span class="input-group-addon col-sm-5 revatureOrange">{{bucketWeight.bucketCategory}}</span>
                               <input type="number" #weight name="weight" class="form-control border-right-0 bucketWeight" min="0" max="100" [(ngModel)]="bucketWeight.weights" [ngModelOptions]="{standalone: true}" (keyup)="checkBucketSum(); checkMinMax(index)">
                               <input type="number" name="sum" class="form-control border-right-0" [hidden]="true" [(ngModel)]="bucketWeightSum" *ngIf="bucketWeight">
-                              <span class="input-group-addon percentSign" style="border-top-right-radius: 11%;
-                              border-bottom-right-radius: 11%;">%</span>
+                              <span class="input-group-addon percentSign" style="border-top-right-radius: 11%; border-bottom-right-radius: 11%;">%</span>
                               <button id = "xButton" type="button" class="close col-sm-2 revatureOrange rounded" aria-label="Close" (click)="removeFromSkillTypeBuckets(bucketWeight.bucketCategory); checkBucketSum()">
                               <span aria-hidden="true">&times;</span></button>
                           </div>
