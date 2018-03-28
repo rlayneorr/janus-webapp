@@ -58,6 +58,7 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   updateBucket() {
     if (this.currBucket) {
+        console.log(this.currBucket);
       this.bucketService.updateBucket(this.currBucket)
         .subscribe(bucket => {
           // replace the bucket in the buckets list with update from server
