@@ -164,7 +164,7 @@ import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType
         passThruUnknownUrl: true,
         put204: false // return entity after PUT/update
       }
-    ),
+    )
   ],
   declarations: [
     // pipes
