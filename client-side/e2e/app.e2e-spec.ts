@@ -8,10 +8,10 @@ describe('test-app App', () => {
     page = new AppPage();
   });
 
-  /*it('should display welcome message', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Please Select One Of the Following Applications :');
-  });*/
+ //   expect(page.getTitleText()).toEqual('Please Select One Of the Following Applications :');
+  });
 
   it('should display Assign force button', () => {
     expect(page.getAssignForceTitleText()).toEqual('Assign Force');
@@ -79,7 +79,3 @@ it('should go to predictions page', () => {
       }
     });*/
 });
-
-
-
-  
