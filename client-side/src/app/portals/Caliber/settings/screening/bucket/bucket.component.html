@@ -2,7 +2,7 @@
 <div id="bucket-header">
     <h3 (click)="routeToScreening()">Back To Screening</h3>
     <h2 *ngIf="this.theBucket">
-        {{this.theBucket.name}}
+        {{this.theBucket.bucketCategory}}
     </h2>
 
 </div>
@@ -14,7 +14,7 @@
             <div class="container">
 
                 <p *ngIf="this.theBucket" id="buck-description">
-                    {{this.theBucket.description}}
+                    {{this.theBucket.bucketDescription}}
                 </p>
             </div>
 

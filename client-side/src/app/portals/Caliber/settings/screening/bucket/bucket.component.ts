@@ -34,7 +34,7 @@ export class BucketComponent implements OnInit {
   //  this.bucketService.getCurrentBucket();
    console.log("In bucket");
    console.log(this.bucketService.getCurrentBucket());
-
+  this.setBucket();
   }
 
    open(content) {
@@ -46,7 +46,10 @@ export class BucketComponent implements OnInit {
     return this.theBucket;
    
   }
-  
+  setBucket(){
+    this.theBucket=this.bucketService.getCurrentBucket();
+  }
+
   routeToScreening(){
     this.router.navigate(["Caliber/settings/screening"]);
   }
