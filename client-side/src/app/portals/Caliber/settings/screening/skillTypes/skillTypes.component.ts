@@ -49,6 +49,9 @@ export class SkillTypesComponent implements OnInit {
         if(thing.isActive){
             this.skillTypeService.deactivateSkillType(thing.skillTypeId).subscribe();
             this.grabAllSkillTypes();
+        } else {
+            this.skillTypeService.activateSkillType(thing.skillTypeId).subscribe();
+            this.grabAllSkillTypes();
         }
       }
     }
@@ -78,16 +81,14 @@ export class SkillTypesComponent implements OnInit {
     open(content) {
       this.modalServiceRef = this.modalService.open(content);
       this.modalServiceRef.result.then((result) => {
-        this.singleSkillType = null;
-        this.bucketsAndWeights = null;
-        this.error = null;
+        this.resetFields();
       }, (reason) => {
-        this.singleSkillType = null;
-        this.bucketsAndWeights = null;
-        this.error = null;
+        this.resetFields();
       });
       event.stopPropagation();
     }
+
+    hasBuckets: boolean;
 
     editSkillType(skillType){
         this.singleSkillType = {
@@ -99,11 +100,14 @@ export class SkillTypesComponent implements OnInit {
             weights: []
         }
         this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
-            if(results){
-                let skillTypeBucketAndWeights;
-                skillTypeBucketAndWeights = results;
+            let skillTypeBucketAndWeights;
+            skillTypeBucketAndWeights = results;
+            if(skillTypeBucketAndWeights.bucket.length != 0){
+                this.hasBuckets = true;
                 this.singleSkillType.buckets = skillTypeBucketAndWeights.bucket;
                 this.singleSkillType.weights = skillTypeBucketAndWeights.weight;
+            } else {
+                this.hasBuckets = false;
             }
             this.combineBucketsAndWeights();
             for(let index of this.singleSkillType.buckets){
@@ -125,6 +129,7 @@ export class SkillTypesComponent implements OnInit {
             this.singleSkillType.buckets.push(bucket);
             this.singleSkillType.weights.push(0);
             this.singleSkillTypeBucketIds.push(bucket.bucketId);
+            // this.bucketsAndWeights.push({weights: 0, bucketCategory: ''});
             this.combineBucketsAndWeights();
         }
     }
@@ -133,7 +138,6 @@ export class SkillTypesComponent implements OnInit {
         if(this.singleSkillType){
             for(let singleBucketIndex in this.singleSkillType.buckets){
                 if(this.singleSkillType.buckets[singleBucketIndex].bucketCategory == bucket){
-                    console.log(this.singleSkillType.buckets[singleBucketIndex]);
                     this.singleSkillType.buckets.splice(Number(singleBucketIndex), 1);
                     this.singleSkillType.weights.splice(Number(singleBucketIndex), 1);
                     this.singleSkillTypeBucketIds.splice(Number(singleBucketIndex), 1);
@@ -144,9 +148,22 @@ export class SkillTypesComponent implements OnInit {
     }
 
     combineBucketsAndWeights(){
+        if(this.bucketsAndWeights.length != 0){
+            for(let index in this.bucketsAndWeights) {
+                this.singleSkillType.weights[index] = this.bucketsAndWeights[index].weights;
+            }
+        }
         this.bucketsAndWeights = [];
         for(let index in this.singleSkillType.buckets){
             this.bucketsAndWeights.push({"bucketCategory":this.singleSkillType.buckets[index].bucketCategory, "weights":this.singleSkillType.weights[index]});
+        }
+    }
+
+    checkMinMax(index: number){
+        if(this.bucketsAndWeights[index].weights > 100){
+            this.bucketsAndWeights[index].weights = 100;
+        } else if(this.bucketsAndWeights[index].weights < 0){
+            this.bucketsAndWeights[index].weights = 0;
         }
     }
 
@@ -171,13 +188,21 @@ export class SkillTypesComponent implements OnInit {
                 bucketsId.push(this.singleSkillTypeBucketIds[index]);
                 weights.push(this.bucketsAndWeights[index].weights);
             }
-            this.skillTypeService.updateSkillType(this.skillType, bucketsId, weights).subscribe();
-            this.grabAllSkillTypes();
+            if(this.hasBuckets){
+                console.log(this.singleSkillType.skillTypeName);
+                this.skillTypeService.updateSkillTypeBuckets(this.skillType, bucketsId, weights).subscribe();
+                console.log(this.singleSkillType.skillTypeName);
+
+            } else {
+                this.skillTypeService.updateSkillTypeBuckets(this.skillType, bucketsId, weights).subscribe();
+            }
+            this.grabAllSkillTypes()
         }
         else {
             this.error = true;
         }
     }
+
 
     createNewSkillType(modal: SkillType){
         this.skillType = modal;
@@ -209,6 +234,13 @@ export class SkillTypesComponent implements OnInit {
         this.bucketsService.getAllBuckets().subscribe(results =>{
             this.allBuckets = results;
         })
+    }
+
+    resetFields(){
+        this.singleSkillType = null;
+        this.bucketsAndWeights = [];
+        this.error = false;
+        this.singleSkillTypeBucketIds = [];
     }
 
   ngOnInit() {

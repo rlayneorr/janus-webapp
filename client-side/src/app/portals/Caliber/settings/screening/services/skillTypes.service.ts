@@ -13,6 +13,7 @@ import { Bucket } from '../entities/Bucket';
 const httpOptions = {
     headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
     })
 };
 
@@ -29,19 +30,23 @@ export class SkillTypesService {
     }
 
     deactivateSkillType(skillTypeId: number) {
-        return this.http.put(this.url + "deactivateSkillType/" + skillTypeId, httpOptions);
+        return this.http.get(this.url + "deactiveSkillType/" + skillTypeId, httpOptions);
     }
 
     activateSkillType(skillTypeId: number) {
-        return this.http.put(this.url + "activateSkillType", skillTypeId, httpOptions);
+        return this.http.get(this.url + "activeSkillType/" + skillTypeId, httpOptions);
     }
 
     getSkillTypes():Observable<SkillType[]> {
         return this.http.get(this.url + "getSkillTypes");
     }
 
-    updateSkillType(skillType: SkillType, bucketIds, weights) {
-        return this.http.post(this.url + "updateSkillType", { skillTypeName: skillType.skillTypeName, skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
+    updateSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
+        return this.http.post(this.url + "updateSkillTypeBucket", { skillTypeName: skillType.skillTypeName, skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
+    }
+
+    setSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
+        return this.http.post(this.url + "setSkillTypeBucket", { skillTypeName: skillType.skillTypeName, skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
     }
 
     getSkillTypeById(skillTypeId: number) {
@@ -52,13 +57,4 @@ export class SkillTypesService {
     getBucketsBySkillType(skillTypeId: number): Observable<SkillType[]> {
         return this.http.get<SkillType[]>(this.url + "getSkillTypeBucketsWithWeights/" + skillTypeId);
     }
-
-    testingGetTags() {
-        return this.http.get(this.url + "getAllTags");
-    }
-
-    testingCreatingTags(thing:any) {
-        this.http.post(this.url + "createNewTag", thing).subscribe();
-    }
-
 }

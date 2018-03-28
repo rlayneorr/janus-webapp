@@ -43,20 +43,17 @@ export class BucketsService {
   updateBucket (bucket: Bucket): Observable<Bucket> {
       //https://hydra-gateway-service.cfapps.io/question-service/question/bucketQuestions/1
       //https://hydra-gateway-service.cfapps.io/bucket-service/bucket/
-    return this.http.post<Bucket>(this.url, bucket, httpOptions)
+    return this.http.post<Bucket>(this.url + "updateBucket", bucket, httpOptions)
   }
 
   /** POST: add a new bucket to the database */
   createNewBucket(bucket: Bucket): Observable<Bucket> {
       console.log(bucket);
-      return this.http.post<Bucket>(this.url, bucket, httpOptions);
+      return this.http.post<Bucket>(this.url + "createBucket", bucket, httpOptions);
   }
 
   setBucket(bucket:Bucket){
-     // console.log("Set bucket called");
-
      this.currentBucket=bucket;
-    //  console.log(this.currentBucket);
   }
 
   getCurrentBucket():Bucket {
@@ -69,9 +66,7 @@ export class BucketsService {
      }
   }
 
-  setName(name:string)
-  {
-
+  setName(name:string){
       this.currentBucket.bucketCategory=name;
   }
 

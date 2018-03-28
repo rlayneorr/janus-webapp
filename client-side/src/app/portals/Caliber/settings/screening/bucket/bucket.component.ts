@@ -30,20 +30,18 @@ export class BucketComponent implements OnInit {
       { id: 1, text: "test", answers: ["1", "2"], tagIds: [1, 2], isActive: true }
     ]
 
-  //  this.bucketService.getCurrentBucket();
-   console.log("In bucket");
-   console.log(this.bucketService.getCurrentBucket());
-
+    this.getCurrentBucket();
   }
 
    open(content) {
     this.modalService.open(content);
     event.stopPropagation();
   }
+
   getCurrentBucket(){
    this.theBucket=this.bucketService.getCurrentBucket();
     return this.theBucket;
-   
+
   }
    addBucket(name: String, description: String) { }
   // public addQuestion() {};

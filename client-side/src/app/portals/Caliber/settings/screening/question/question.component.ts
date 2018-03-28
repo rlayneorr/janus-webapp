@@ -57,11 +57,9 @@ export class QuestionComponent implements OnInit {
     this.currentBucket = this.bucketService.getCurrentBucket();
     if(this.currentBucket){
       this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data=>{
-        console.log(data);
         this.questions = (data as Question[]);
       })
     }
-    console.log(this.questions);
   }
 
   /*Used to open a bootstrap modal*/
