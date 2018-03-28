@@ -100,11 +100,11 @@ export class QuestionComponent implements OnInit {
    **/
   changeQuesitonStatus(question){
     if(question.isActive){
-      console.log("true");
+      question.isActive = false;
       this.questionService.deactivateQuestion(question.questionId).subscribe();
    }
     else{
-      console.log("false");
+      question.isActive = true;
       this.questionService.activateQuestion(question.questionId).subscribe();
    }
   }
@@ -132,16 +132,12 @@ export class QuestionComponent implements OnInit {
     this.sampleAnswers = [this.question.sampleAnswer1,this.question.sampleAnswer2,this.question.sampleAnswer3,this.question.sampleAnswer4,this.question.sampleAnswer5];
     let newTags = [];
     this.tagsService.getAllTags().subscribe(data=>{
-      console.log(data);
       this.allTags = (data as Tag[]);
     });
     this.tagsService.getTagByQuestion(this.question.questionId).subscribe(data=>{
-      console.log(data);
       this.newTags = (data as Tag[]);
       this.removeTagsFromAll();
     });
-    console.log(newTags);
-    console.log(newTags.length);
   }
 
   /**
@@ -154,7 +150,6 @@ export class QuestionComponent implements OnInit {
     newTag.tagName = this.newTagString;
     this.tagsService.createNewTag(this.newTagString).subscribe(data=>{
       newTag = (data as Tag);
-      console.log(data);
     });
     this.addNewTag(newTag);
     this.newTagString = "";
@@ -182,7 +177,6 @@ export class QuestionComponent implements OnInit {
    **/
   addNewQuestion(){
     this.tagsService.getAllTags().subscribe(data=>{
-      console.log(data);
       this.allTags = (data as Tag[]);
     });
     let newCurrentTagIds : number[] = [];
@@ -203,6 +197,7 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.questionService.updateQuestion(this.currentBucket.bucketId,this.question, this.getTagIds()).subscribe();
+        this.updatedSuccessfully();
       }
       else{
         this.question.sampleAnswer1 = this.sampleAnswers[0];
@@ -211,13 +206,14 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.questionService.createNewQuestion(this.currentBucket.bucketId,this.question,this.getTagIds()).subscribe();
+        this.savedSuccessfully();
       }
       this.updateQuestions();
       this.setQuestionNull();
       this.sampleAnswers = [];
     }
     else{
-      document.getElementById("newQuestionAlert").innerHTML= "You must fill in all fields";
+      this.savedUnsuccessfull();
     }
   }
 
@@ -284,7 +280,6 @@ export class QuestionComponent implements OnInit {
         this.questions = (data as Question[]);
       })
       this.tagsService.getAllTags().subscribe(data=>{
-        console.log(data);
         this.allTags = (data as Tag[]);
       });
     }
@@ -295,5 +290,11 @@ export class QuestionComponent implements OnInit {
   }
   savedSuccessfully(){
     this.alertsService.success("Saved successfully");
-}
+  }
+  updatedSuccessfully(){
+    this.alertsService.success("Updated successfully");
+  }
+  savedUnsuccessfull(){
+    this.alertsService.error("All Fields Must be Filled");
+  }
 }
