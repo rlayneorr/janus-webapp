@@ -114,9 +114,6 @@ export class AssociateListComponent implements OnInit {
 
       this.marketingStatuses = [];
       for (let associate of this.associates) {//get our curriculums from the associate
-
-        
-      
       
        this.batchService.getCurrIdById(associate.batchId).subscribe(item => {
         this.tempCurrId = item;

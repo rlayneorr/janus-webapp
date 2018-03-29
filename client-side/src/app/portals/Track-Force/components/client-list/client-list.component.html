@@ -17,8 +17,8 @@
         <label for="showNoData">Show Clients With No Associates</label> -->
         <ul id="clients-list">
           <!-- populate list of company names -->
-          <li *ngFor="let clientName of clientNames | searchFilter : searchName" (click)="getOneClient(clientName)">
-            <span class="client-name">{{clientName}}</span>
+          <li *ngFor="let clientName of clientNames | searchFilter : searchName;" (click)="getOneClient(clientName.id)">
+            <span class="client-name">{{clientName.name}}</span>
           </li>
         </ul>
       </div>
