@@ -31,6 +31,7 @@ export class AssociateListComponent implements OnInit {
   clients: Client[];
   marketingStatuses: MarketingStatus[];
   curriculums: Set<string>; //stored unique curriculums
+  index: 0;
 
   //used for filtering
   searchByStatus: string = "";
@@ -105,16 +106,14 @@ export class AssociateListComponent implements OnInit {
     this.associateService.getAllAssociates().subscribe(data => {
       this.associates = data;
       console.log(this.associates);
+      
+      this.marketService.getAllMarketingStatus().subscribe(marketData => {
 
+        this.marketingStatuses = marketData;       
+    })
 
       this.marketingStatuses = [];
       for (let associate of this.associates) {//get our curriculums from the associate
-
-        
-        this.marketService.getMarketingStatusById(associate.msid).subscribe(marketData => {
-
-          this.marketingStatuses.push(marketData);       
-      })
       
        this.batchService.getCurrIdById(associate.batchId).subscribe(item => {
         this.tempCurrId = item;
