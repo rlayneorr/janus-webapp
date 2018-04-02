@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AssociateService } from '../../services/associates-service/associates-service';
 import { Associate } from '../../models/associate.model';
+import { Batch} from '../../models/batch.model';
+import { Curriculum } from '../../models/curriculum.model';
 import { RequestService } from '../../services/request-service/request.service';
 import { Client } from '../../models/client.model';
 import { ClientListService } from '../../services/client-list-service/client-list.service';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { User } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
+import { CurriculumService } from '../../services/curriculum-service/curriculum.service';
+import { MarketStatusService } from '../../services/market-status/market-status.service';
+import { BatchService } from '../../services/batch-service/batch.service';
+import { MarketingStatus } from '../../models/marketing-status.model';
 
 /**
  * Component for the Associate List page
@@ -23,7 +29,9 @@ export class AssociateListComponent implements OnInit {
   //our collection of associates and clients
   associates: Associate[];
   clients: Client[];
+  marketingStatuses: MarketingStatus[];
   curriculums: Set<string>; //stored unique curriculums
+  index: 0;
 
   //used for filtering
   searchByStatus: string = "";
@@ -53,6 +61,9 @@ export class AssociateListComponent implements OnInit {
   constructor(
     private associateService: AssociateService,//TfAssociate,
     private clientService: ClientListService,
+    private curriculumnService: CurriculumService,
+    private batchService: BatchService,
+    private marketService : MarketStatusService,
     private rs: RequestService,
     private activated: ActivatedRoute
   ) {
@@ -80,24 +91,39 @@ export class AssociateListComponent implements OnInit {
       this.searchByStatus = mapping.toUpperCase() + ": " + status.toUpperCase();
     }
   }
-
+  tempCurrId : number;
+  newCurr : Curriculum;
+  tempMarket: MarketingStatus;
   /**
    * Set our array of all associates
    */
   getAllAssociates() {
     let self = this;
-
+    this.curriculumnService.getAllCurriculums().subscribe(items=>{
+    });
+    
     this.associateService.getAllAssociates().subscribe(data => {
       this.associates = data;
       console.log(this.associates);
+      
+      this.marketService.getAllMarketingStatus().subscribe(marketData => {
+        this.marketingStatuses = marketData;       
+    })
 
-      for (let associate of this.associates) {//get our curriculums from the associates
-        this.curriculums.add(associate.curriculumName);
-
-        if (associate.batchName === 'null') {
-          associate.batchName = 'None'
-        }
-      }
+      this.marketingStatuses = [];
+     
+      for (let associate of this.associates) {//get our curriculums from the associate
+        if (associate.batchId != null && associate.batchId < 51 && associate.batchId != 26){
+       this.batchService.getCurrIdById(associate.batchId).subscribe(item => {
+        this.tempCurrId = item;
+          this.curriculumnService.getOneCurriculum(this.tempCurrId).subscribe(item2 => {
+            this.newCurr = item2;
+            this.curriculums.add(item2['curriculumName']);
+       });
+      });
+    }
+    }
+    console.log(this.marketingStatuses);
       this.curriculums.delete("");
       this.curriculums.delete("null");
       self.sort("id"); //sort associates by ID
@@ -125,7 +151,6 @@ export class AssociateListComponent implements OnInit {
     else direction = this.desc ? 1 : -1;
 
     this.sortedColumn = property; //current column being sorted
-
     if (this.updated)
       this.updated = false;
 

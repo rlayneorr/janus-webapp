@@ -13,28 +13,97 @@ import { forEach } from "@angular/router/src/utils/collection";
  */
 @Injectable()
 export class AssociateService {
-    private associatePath: string = "TrackForce/api/associates";
+    // private associatePath: string = "TrackForce/api/associates";
 
-    status: string
-    client: string
+    // status: string
+    // client: string
+
+    // constructor(private http: HttpClient) {}
+
+    // /**
+    //  * Get all of the associates
+    //  */
+    // getAllAssociates(): Observable<any> {
+    //     let url: string = environment.msurl + '8091/all/associate';
+    //     return this.http.get(url);
+    // }
+
+    // /** Get specific associate by id
+    //  * @param id - the id of the associate to retrieve
+    //  */
+    // getAssociate(id: number) {
+    //     let url: string = environment.url + this.associatePath + '/' + id;
+    //     return this.http.get<Associate>(url);
+    // }
+
+    // /**
+    //  * @function getAssociatesByStatus
+    //  * @description Make an http request to the /client webservice, fetching mapped associates
+    //  * with the given marketing status.
+    //  * @param statusId Contains the marketing status id used to fetch data
+    //  */
+    // getAssociatesByStatus(statusId: number) {
+    //   console.log("Inside Associate Service - getFilteredAssociates");
+    //   console.log("statusId: " + statusId);
+    //   return this.http.get(environment.url+this.associatePath+'/mapped/'+statusId);
+    // }
+
+    // /**
+    //  * Update the given associate's status/client
+    //  * @param ids of associates to be updated
+    //  */
+    // updateAssociates(ids: number[], ustatus: number, uclient: number): Observable<any> {
+    //     let url: string = environment.url + this.associatePath + "?";
+    //     let statusUrl: string = (ustatus ? "marketingStatusId="+ustatus : "");
+    //     let clientUrl: string = (uclient ? "clientId="+uclient : "");
+    //     if(ustatus){
+    //         url += statusUrl + (clientUrl != "" ? "&" : "");
+    //     }
+
+    //     if (uclient) {
+    //         url += clientUrl;
+    //     }
+    //     return this.http.put(url, ids);
+    // }
+
+    // updateAssociate(associate: any) {
+    //     let url: string = environment.url + this.associatePath + "/"+associate.id;
+    //     return this.http.put(url,associate);
+    // }
+
+    // getInterviewsForAssociate(id: number): Observable<any> {
+    //     let url: string = environment.url + this.associatePath + "/"+id+"/interviews/";
+    //     return this.http.get(url);
+    // }
+
+    // addInterviewForAssociate(id: number,interview: any): Observable<any> {
+    //   let url: string = environment.url + this.associatePath + "/"+id+"/interviews/";
+    //   return this.http.post(url, interview);
+    // }
+
+    private associatePath: string = "8091";
+
+    status: string;
+    client: string;
 
     constructor(private http: HttpClient) {}
-
-    /**
-     * Get all of the associates
-     */
-    getAllAssociates(): Observable<any> {
-        let url: string = environment.url + this.associatePath;
-        return this.http.get(url);
-    }
 
     /** Get specific associate by id
      * @param id - the id of the associate to retrieve
      */
     getAssociate(id: number) {
-        let url: string = environment.url + this.associatePath + '/' + id;
+        let url: string = environment.url + this.associatePath + '/one/associate/' + id;
         return this.http.get<Associate>(url);
     }
+    /**
+     * Get all of the associates
+     */
+    getAllAssociates(): Observable<any> {
+        let url: string = environment.msurl + this.associatePath + '/all/associate';
+        return this.http.get(url);
+    }
+
+
 
     /**
      * @function getAssociatesByStatus
@@ -45,8 +114,45 @@ export class AssociateService {
     getAssociatesByStatus(statusId: number) {
       console.log("Inside Associate Service - getFilteredAssociates");
       console.log("statusId: " + statusId);
-      return this.http.get(environment.url+this.associatePath+'/mapped/'+statusId);
+      return this.http.get( environment.url + this.associatePath + '/all/associate/marketingStatus/'+ statusId);
     }
+
+     /**
+     * @function getAssociatesByClient
+     * @description Make an http request to the /client webservice, fetching mapped associates
+     * with the given marketing status.
+     * @param statusId Contains the marketing status id used to fetch data
+     */
+    getAssociatesByClient(statusId: number) {
+        console.log("Inside Associate Service - getFilteredAssociates");
+        console.log("statusId: " + statusId);
+        return this.http.get( environment.url + this.associatePath + '/all/associate/client/'+ statusId);
+      }
+
+    /**
+     * @function getAssociatesByEndClient
+     * @description Make an http request to the /client webservice, fetching mapped associates
+     * with the given marketing status.
+     * @param statusId Contains the marketing status id used to fetch data
+     */
+    getAssociatesByEndClient(statusId: number) {
+        console.log("Inside Associate Service - getFilteredAssociates");
+        console.log("statusId: " + statusId);
+        return this.http.get( environment.url + this.associatePath + '/all/associate/endClient/'+ statusId);
+      }
+
+          /**
+     * @function getAssociatesByEndClient
+     * @description Make an http request to the /client webservice, fetching mapped associates
+     * with the given marketing status.
+     * @param statusId Contains the marketing status id used to fetch data
+     */
+    getAssociatesByBatch(statusId: number) {
+        console.log("Inside Associate Service - getFilteredAssociates");
+        console.log("statusId: " + statusId);
+        return this.http.get( environment.url + this.associatePath + '/all/associate/batch/'+ statusId);
+      }
+
 
     /**
      * Update the given associate's status/client

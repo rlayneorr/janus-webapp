@@ -14,8 +14,9 @@ import {ChartOptions} from '../../models/ng2-charts-options.model';
 import '../../constants/selected-status.constants';
 import { SelectedStatusConstants } from '../../constants/selected-status.constants';
 import {User} from "../../models/user.model";
-//import {AuthenticationService} from "../../../Caliber/services/authentication.service";
 import {AuthenticationService} from "../../services/authentication-service/authentication.service";
+import { MarketStatusService } from '../../services/market-status/market-status.service';
+import { MarketingStatus } from '../../models/marketing-status.model';
 
 const MONTHS_3 = 788923800;
 
@@ -91,7 +92,8 @@ export class HomeComponent {
     private cs: ClientListService,
     private bs: BatchService,
     private as: AssociateService,
-    private authenticationService:AuthenticationService
+    private ms: MarketStatusService,
+    private authenticationService: AuthenticationService
   )
   {
     let user = this.authenticationService.getUser();
@@ -113,6 +115,7 @@ export class HomeComponent {
 
   load() {
     this.as.getAllAssociates().subscribe(response => {
+      //console.log(response);
       this.associates = response;
       let trainingMapped = 0;
       let trainingUnmapped = 0;
@@ -124,11 +127,12 @@ export class HomeComponent {
       let confirmedUnmapped = 0;
       let deployedMapped = 0;
       let deployedUnmapped = 0;
+
       for (let i=0;i<this.associates.length;i++) {
         // iterate over associates and aggregate totals
+        let marketingStatus : MarketingStatus;
         let associate = this.associates[i];
-        let stats = associate.msid;
-        switch(stats) {
+        switch(associate.marketingStatusId) {
           case 1: trainingMapped++; break;
           case 2: reservedMapped++; break;
           case 3: selectedMapped++; break;

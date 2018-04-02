@@ -8,6 +8,7 @@ import {User} from '../../models/user.model';
 export class RequestService {
 
   host: string = environment.url;
+  hostms: string = environment.msurl;
   trackPath: string = this.host + 'TrackForce/track';
   dataPath: string = this.host + 'TrackForce/track/data/get';
   /**
@@ -66,7 +67,7 @@ export class RequestService {
 // }
 
   public getStatuses(): Observable<any> {
-    return this.http.get(this.dataPath + '/marketing');
+    return this.http.get(this.hostms + '8094/all/marketingstatus');
   }
 
 // public getBatches(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {

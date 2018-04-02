@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BatchService} from '../../services/batch-service/batch.service';
+import {AssociateService} from '../../services/associates-service/associates-service';
 import {Associate} from '../../models/associate.model';
 import {AutoUnsubscribe} from '../../decorators/auto-unsubscribe.decorator';
 import { ThemeConstants } from '../../constants/theme.constants';
@@ -70,7 +71,7 @@ export class BatchDetailsComponent implements OnInit {
     this.getMapStatusBatch();
   }
 
-  constructor(private route: ActivatedRoute, private batchService: BatchService) {
+  constructor(private route: ActivatedRoute, private batchService: BatchService,  private associateService: AssociateService) {
   }
 
   /**
@@ -81,8 +82,9 @@ export class BatchDetailsComponent implements OnInit {
       const batchId: number = +params['id'];
       this.isDataReady = false;
 
-      this.batchService.getAssociatesForBatch(batchId)
+      this.associateService.getAssociatesByBatch(batchId)
         .subscribe((data: Associate[]) => {
+            console.log(data);
             this.associates = data;
 
             //initiialize statuses
@@ -100,11 +102,11 @@ export class BatchDetailsComponent implements OnInit {
             statusMap.set(11, 0);
             statusMap.set(12, 0);
             for (const assoc of this.associates) {
-              let statusCount = statusMap.get(assoc.msid);
+              let statusCount = statusMap.get(assoc.marketingStatusId);
               if (statusCount === undefined) {
                 statusCount = -1;
               }
-              statusMap.set(assoc.msid, statusCount + 1);
+              statusMap.set(assoc.marketingStatusId, statusCount + 1);
             }
 
             let mappedCount: number = statusMap.get(1) + statusMap.get(2) + statusMap.get(3) + statusMap.get(4) + statusMap.get(5);
