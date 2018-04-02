@@ -110,9 +110,9 @@ export class ClientListComponent implements OnInit {
                 tempClient.stats = status;
                 i++;
                 this.clientInfo.push(tempClient);
-                console.log(tempClient.tfClientName);
-                console.log(status);
-                console.log(i);
+                // console.log(tempClient.tfClientName);
+                // console.log(status);
+                // console.log(i);
 
               });
             }
@@ -123,13 +123,6 @@ export class ClientListComponent implements OnInit {
      //this.initChartData();
      // console.log(this.clientInfo);
     });
-
-    setTimeout(() => {
-      console.log(this.clientInfo);
-      this.initChartData();
-    }, 19000);
-
-
 
     // this.marketStatus.getAllMarketingStatusMapped().subscribe(items => {
     //   console.log(items);
@@ -216,7 +209,7 @@ export class ClientListComponent implements OnInit {
 
       //console.log(this.clientInfo[i]['stats']['marketingStatusName']);
       let status = this.clientInfo[i]['stats']['marketingStatusName'].toLowerCase();
-      console.log(status);
+     // console.log(status);
       let isMapped = true;
       if(status.includes('unmapped')){
           isMapped = false;

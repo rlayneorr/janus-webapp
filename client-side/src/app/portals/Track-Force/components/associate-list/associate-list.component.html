@@ -70,7 +70,7 @@
               <td class="first">{{associate.associateFirstName}}</td>
               <td class="last">{{associate.associateLastName}}</td>
               <td class="status">{{marketingStatuses[associate.marketingStatusId - 1].marketingStatusName}}</td>
-              <td class="client">{{associate.clientId}}</td>
+              <td class="client"></td>
               <td class="batch">
                 <a [routerLink]="['/TrackForce/batch-details', associate.bid]">{{associate.batchId}}</a>
               </td>
@@ -115,4 +115,3 @@
       </div>
     </div>
 </div>
-<app-footer></app-footer>

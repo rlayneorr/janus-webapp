@@ -100,7 +100,6 @@ export class AssociateListComponent implements OnInit {
   getAllAssociates() {
     let self = this;
     this.curriculumnService.getAllCurriculums().subscribe(items=>{
-      console.log(items);
     });
     
     this.associateService.getAllAssociates().subscribe(data => {
@@ -108,24 +107,21 @@ export class AssociateListComponent implements OnInit {
       console.log(this.associates);
       
       this.marketService.getAllMarketingStatus().subscribe(marketData => {
-
         this.marketingStatuses = marketData;       
     })
 
       this.marketingStatuses = [];
+     
       for (let associate of this.associates) {//get our curriculums from the associate
-      
+        if (associate.batchId != null && associate.batchId < 51 && associate.batchId != 26){
        this.batchService.getCurrIdById(associate.batchId).subscribe(item => {
         this.tempCurrId = item;
-
           this.curriculumnService.getOneCurriculum(this.tempCurrId).subscribe(item2 => {
             this.newCurr = item2;
             this.curriculums.add(item2['curriculumName']);
        });
-
-        
       });
-      
+    }
     }
     console.log(this.marketingStatuses);
       this.curriculums.delete("");
@@ -155,7 +151,6 @@ export class AssociateListComponent implements OnInit {
     else direction = this.desc ? 1 : -1;
 
     this.sortedColumn = property; //current column being sorted
-
     if (this.updated)
       this.updated = false;
 
