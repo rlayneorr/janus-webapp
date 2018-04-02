@@ -11,7 +11,7 @@ import { SkillsetComponent } from '../skillset/skillset.component';
 import { ClientMappedComponent } from '../client-mapped/client-mapped.component';
 
 
-describe('HomeComponent', () => {
+xdescribe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
