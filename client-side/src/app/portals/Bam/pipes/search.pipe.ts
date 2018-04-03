@@ -29,10 +29,10 @@ export class SearchPipe implements PipeTransform {
         if (!field || !value) {
             return items;
         }
-        if (field === 'all') {
+        if (field == 'all') {
             return items.filter(item => {
                 for (const i in item) {
-                    if (item[i] !== undefined) {
+                    if (item[i] != undefined) {
                         if (item[i].toString().toLowerCase().includes(value.toLowerCase())) {
                             return true;
                         }

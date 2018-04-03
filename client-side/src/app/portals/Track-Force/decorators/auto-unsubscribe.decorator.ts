@@ -15,17 +15,18 @@ export function AutoUnsubscribe( constructor ) {
     // upon destruction of the component...
     constructor.prototype.ngOnDestroy = function () {
       // ...iterate thru its properties...
-      for ( const prop in this ) {
-        const property = this[ prop ];
+      for (const prop in this) {
+      const property = this[ prop ];
         // if property exists and has-a unsubscribe...
         if ( property && (typeof property.unsubscribe === 'function') ) {
-          //...call it
+
+          // ...call it
           property.unsubscribe();
         }
       }
       // if the callback we copied was function, we invoke it now with any arguments that were passed in
       //  via constructor
-      original && typeof original === 'function' && original.apply(this, arguments);
+       original && typeof original === 'function' && original.apply(this, arguments);
     };
 
 }

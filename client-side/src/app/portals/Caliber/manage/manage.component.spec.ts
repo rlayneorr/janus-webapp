@@ -27,7 +27,12 @@ import { ManageComponent } from './manage.component';
 // import * as Dep from './manage.component';
 import { Dependencies } from '../caliber.test.module';
 
+<<<<<<< HEAD
 describe('ManageComponent', () => {
+=======
+xdescribe('ManageComponent', () => {
+
+>>>>>>> 1808-bam-dev
   let component: ManageComponent;
   let fixture: ComponentFixture<ManageComponent>;
 

@@ -12,7 +12,8 @@ import { HomeComponent } from '../home/home.component';
 import {AuthenticationService} from '../../services/authentication-service/authentication.service';
 import {RequestService} from '../../services/request-service/request.service';
 
-describe('ClientListComponent', () => {
+xdescribe('ClientListComponent', () => {
+  let component: ClientListComponent;
   let fixture: ComponentFixture<ClientListComponent>;
 
   beforeEach(async(() => {

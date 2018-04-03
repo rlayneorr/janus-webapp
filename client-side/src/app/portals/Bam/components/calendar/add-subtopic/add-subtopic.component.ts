@@ -45,6 +45,7 @@ export class AddSubtopicComponent implements OnInit {
 
   public uniqueTopics = new Set();
   public topicMap = new Map();
+
   public subtopicList: Object[] = []; // strings
   public selectedTopic: string;
   public selectedSubtopic: string;
@@ -328,10 +329,10 @@ export class AddSubtopicComponent implements OnInit {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   selectSubtopic(subtopic: string) {
-    if (selectedSubtopic !== undefined) {
+    if (selectedSubtopic != undefined) {
       $(selectedSubtopic).css('opacity', 1);
     }
-    // html DOM object
+    //html DOM object
     selectedSubtopic = event.target;
     $(selectedSubtopic).css('opacity', 0.5);
     this.selectedSubtopic = subtopic;
@@ -341,13 +342,12 @@ export class AddSubtopicComponent implements OnInit {
   /**
    * Returns the SubtopicName object associated with the subtopic name
    * Returns null if it cannot find it.
-   *
    * @param subtopic
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   getSubtopicName(subtopic: string): SubtopicName {
     for (const subtopicName of this.subtopics) {
-      if (subtopic === subtopicName.name) {
+      if (subtopic == subtopicName.name) {
         return subtopicName;
       }
     }
@@ -370,10 +370,9 @@ export class AddSubtopicComponent implements OnInit {
       this.statusService.getDefaultStatus(),
       null
     );
-
-    // attach data to draggable element
+    //attach data to draggable element
     $(event.target).data('subtopic', subtopicData);
-    // set draggable
+    //set draggable
     $(event.target).draggable(
       {
         revert: true,
