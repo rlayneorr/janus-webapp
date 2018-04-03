@@ -45,7 +45,6 @@ export class AddSubtopicComponent implements OnInit {
 
   public uniqueTopics = new Set();
   public topicMap = new Map();
-
   public subtopicList: Object[] = []; // strings
   public selectedTopic: string;
   public selectedSubtopic: string;
@@ -329,10 +328,11 @@ export class AddSubtopicComponent implements OnInit {
    * @author Sean Sung | Batch: 1712-dec10-java-steve
    */
   selectSubtopic(subtopic: string) {
-    if (selectedSubtopic != undefined) {
+    // WHY ARE WE USING JQUERY??? FIX THIS
+    if (selectedSubtopic !== undefined) {
       $(selectedSubtopic).css('opacity', 1);
     }
-    //html DOM object
+    // html DOM object
     selectedSubtopic = event.target;
     $(selectedSubtopic).css('opacity', 0.5);
     this.selectedSubtopic = subtopic;
@@ -347,7 +347,7 @@ export class AddSubtopicComponent implements OnInit {
    */
   getSubtopicName(subtopic: string): SubtopicName {
     for (const subtopicName of this.subtopics) {
-      if (subtopic == subtopicName.name) {
+      if (subtopic === subtopicName.name) {
         return subtopicName;
       }
     }
@@ -370,9 +370,11 @@ export class AddSubtopicComponent implements OnInit {
       this.statusService.getDefaultStatus(),
       null
     );
-    //attach data to draggable element
+
+    // attach data to draggable element
+    // -Blake - Why are we using jquery?
     $(event.target).data('subtopic', subtopicData);
-    //set draggable
+    // set draggable
     $(event.target).draggable(
       {
         revert: true,

@@ -11,8 +11,6 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
 @Injectable()
 export class OrderPipe implements PipeTransform {
 
-
-
   /**
    * Returns sorted objects.
    * Leave the order param blank for default, ascending.

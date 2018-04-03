@@ -92,6 +92,5 @@ export class CalendarStatusService {
    */
   public getDefaultStatus(): SubtopicStatus {
     return new SubtopicStatus(1, Status.PLANNED);
-
   }
 }

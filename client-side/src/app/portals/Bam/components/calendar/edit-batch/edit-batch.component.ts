@@ -41,18 +41,19 @@ export class EditBatchComponent implements OnInit {
    * @param      {number}  typeId  The type id the batch wil change to.
    */
   submit(typeId) {
-    //Check dates
-    //if dates are not correct
-    //alert and return
-    if (this.batch.startDate > this.batch.endDate){
-      //alert
+
+    // Check dates
+    // if dates are not correct
+    // alert and return
+    if (this.batch.startDate > this.batch.endDate) {
+      // alert
       this.batchAlert('danger', `Error: End date can't be earlier than start date.`);
       return;
     }
 
     let selectedType: BatchType;
     for (let i = 0; i < this.batchTypes.length; i++) {
-      if (typeId == this.batchTypes[i].id) {
+      if (typeId === this.batchTypes[i].id) {
         selectedType = this.batchTypes[i];
         break;
       }

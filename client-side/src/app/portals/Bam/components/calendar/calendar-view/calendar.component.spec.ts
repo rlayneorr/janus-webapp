@@ -16,7 +16,7 @@ import { CalendarStatusService } from '../../../services/calendar-status.service
 import { AddSubtopicService } from '../../../services/add-subtopic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { BamUser } from '../../../models/bamuser.model';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { Batch } from '../../../models/batch.model';
 import { BatchType } from '../../../models/batchtype.model';
 
