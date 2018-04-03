@@ -2,14 +2,9 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-<<<<<<< HEAD
-const context = 'http://localhost:8080/';
-const bam = 'http://18.219.59.193:9001/api/v2';
-=======
 
 const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/';
 const bam = 'http://ec2-18-217-13-6.us-east-2.compute.amazonaws.com:8800/api/v2';
->>>>>>> master
 export const environment = {
   production: false,
 
@@ -202,18 +197,6 @@ export const environment = {
 
   /** BAM Specific Endpoints */
   bambatch: {
-<<<<<<< HEAD
-        getBatchAllUrl: () => `${bam}/batches/all`,
-        getPastBatchesUrl: (email: string) => `${bam}/batches/past/${email}/`,
-        getFutureBatchesUrl: (email: string) => `${bam}/batches/future/${email}/`,
-        getBatchInProgressUrl: (email: string) => `${bam}/batches/inprogress/${email}/`,
-        getAllBatchesInProgressUrl: (email: string) => `${bam}/batches/allinprogress/${email}/`,
-        getBatchByIdURL: (batchId: number) => `${bam}/batches/byid/${batchId}/`,
-        updateBatchUrl: () => `${bam}/batches/updatebatch`,
-        getAllBatchTypesUrl: () => `${bam}/batches/batchtypes`,
-        removeSubtopicFromBatchUrl: (subtopicId: number) => `${bam}/batches/${subtopicId}`,
-        getAllInProgressUrl: () => `${bam}/batches/currentbatches`
-=======
         getBatchAllUrl: () => `${bam}/batch/all`,
         getPastBatchesUrl: (email: string) => `${bam}/batch/past/${email}/`,
         getFutureBatchesUrl: (email: string) => `${bam}/batch/future/${email}/`,
@@ -224,7 +207,6 @@ export const environment = {
         getAllBatchTypesUrl: () => `${bam}/batch/batchtypes`,
         removeSubtopicFromBatchUrl: (subtopicId: number) => `${bam}/batch/${subtopicId}`,
         getAllInProgressUrl: () => `${bam}/batch/currentbatches`
->>>>>>> master
     },
 
     curriculum: {
@@ -257,20 +239,6 @@ export const environment = {
     },
 
     users: {
-<<<<<<< HEAD
-        getAllUsersUrl: () => `${bam}/users/all`,
-        getAllTrainersUrl: () => `${bam}/users/alltrainers`,
-        getAllAssociatesUrl: () => `${bam}/users/allassociates`,
-        getUsersInBatchUrl: (batchId: number) => `${bam}/users/inbatch/${batchId}`,
-        dropUserFromBatchUrl: (userId: number) => `${bam}/users/drop/${userId}`,
-        updateUserUrl: () => `${bam}/users/update`,
-        addUserUrl: () => `${bam}/users/register`,
-        resetPasswordUrl: () => `${bam}/users/reset`,
-        removeUserUrl: (userId: number) => `${bam}/users/remove/${userId}`,
-        addUserToBatchUrl: (batchId: number, userId: number) => `${bam}/users/add/${userId}/${batchId}`,
-        getUsersNotInBatchUrl: () => `${bam}/users/notinabatch`,
-        recoverPasswordUrl: () => `${bam}/users/recovery`
-=======
         getAllUsersUrl: () => `${bam}/user/all`,
         getAllTrainersUrl: () => `${bam}/user/alltrainers`,
         getAllAssociatesUrl: () => `${bam}/user/allassociates`,
@@ -283,7 +251,6 @@ export const environment = {
         addUserToBatchUrl: (batchId: number, userId: number) => `${bam}/user/add/${userId}/${batchId}`,
         getUsersNotInBatchUrl: () => `${bam}/user/notinabatch`,
         recoverPasswordUrl: () => `${bam}/user/recovery`
->>>>>>> master
     },
 
     topic: {
