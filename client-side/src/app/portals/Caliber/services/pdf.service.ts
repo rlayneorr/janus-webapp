@@ -19,8 +19,8 @@
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 // These are the pdf width and height in pixels
 const pdfHeight = 787;

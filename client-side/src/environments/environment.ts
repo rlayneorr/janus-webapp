@@ -6,6 +6,9 @@ const context = 'http://localhost:8080/';
 const bam = 'http://18.219.59.193:9001/api/v2';
 export const environment = {
   production: false,
+
+  hydraContext: 'https://virtserver.swaggerhub.com/blake2/Hydra/1.0.0/',
+
   context: context, // change for what the production environment would actually be
   bam: bam,
   url: 'http://localhost:8085/',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportingService } from '../../../../services/reporting.service';
-import { PDFService } from '../../../../services/pdf.service';
+import { ReportingService } from '../../services/reporting.service';
+import { PDFService } from '../../services/pdf.service';
 import { Subscription } from 'rxjs/Subscription';
 import { GranularityService } from '../services/granularity.service';
 

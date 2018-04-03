@@ -12,7 +12,7 @@ import { Note } from '../../entities/Note';
 
 // services
 import { GranularityService } from '../services/granularity.service';
-import { ReportingService } from '../../../../services/reporting.service';
+import { ReportingService } from '../../services/reporting.service';
 import { NoteService } from '../../services/note.service';
 
 /**

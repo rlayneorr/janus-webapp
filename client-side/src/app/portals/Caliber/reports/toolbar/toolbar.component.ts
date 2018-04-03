@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
 import { GranularityService } from '../services/granularity.service';
 import { Trainee } from '../../entities/Trainee';
-import { PDFService } from '../../../../services/pdf.service';
+import { PDFService } from '../../services/pdf.service';
 
 @Component({
   selector: 'app-toolbar',
