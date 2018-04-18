@@ -71,12 +71,12 @@ export class BatchService implements CRUD<Batch> {
      *
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
      */
-    public fetchAllByTrainer() {
-      this.http.get<any[]>(urls.batch.fetchAllByTrainer())
-      .subscribe((results) => {
-        this.listSubject.next(results);
-    });
-    }
+    // public fetchAllByTrainer() {
+    //   this.http.get<any[]>(urls.batch.fetchAllByTrainer())
+    //   .subscribe((results) => {
+    //     this.listSubject.next(results);
+    // });
+    // }
 
     /**
     * @overloade
