@@ -60,6 +60,9 @@ export class BatchService implements CRUD<Batch> {
       this.http.get<any[]>(urls.batch.fetchAll())
         .subscribe((results) => {
           this.listSubject.next(results);
+          this.http.get<any[]>('/skills/batches/batchId').subscribe((res) => {
+            //return whatever 
+          })
         });
       return this.listSubject.asObservable();
     }
