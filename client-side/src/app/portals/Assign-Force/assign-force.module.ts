@@ -11,6 +11,7 @@ import { NavComponent } from '../../nav/nav.component';
 import { NavModule } from '../../nav/nav.module';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
+import { SecurityContext } from '../../services/security-context.service';
 
 
 
@@ -24,9 +25,10 @@ import { CalendarComponent } from './calendar/calendar.component';
   ],
   declarations: [
     AssignForceComponent,
-    HomeComponent,
     CalendarComponent,
   ],
-  providers: []
+  providers: [
+    SecurityContext
+  ]
 })
 export class AssignForceModule { }

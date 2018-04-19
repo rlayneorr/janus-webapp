@@ -13,6 +13,11 @@ export const environment = {
   context: context, // change for what the production environment would actually be
   bam: bam,
   url: 'http://localhost:8085/',
+  clientId: "tjQhcs0O4mRV2iry6SAO0Gy1YQcBrWCa",
+  //clientId: "tjQhcs0O4mRV2iry6SAO0Gy1YQcBrWCa",
+  authDomain: "revature.auth0.com",
+  apiAudience: "hydra-gateway",
+  authNamespace: "https://revature.com/",
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
@@ -273,5 +278,25 @@ export const environment = {
       getSubtopicPoolUrl: () => `${bam}/curriculum/topicpool`,
       updateDateUrl: (subtopicId: number, batchId: number, date: number) =>
                       `${bam}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`
+  },
+
+  security_config:{
+    assignForce: {
+      roles: ["SVP of Technology", "Trainer"],
+      groups: ["Operations"],
+      permissions: []
+    },
+    trackForce: {
+      roles: [],
+      groups: []
+    },
+    caliber: {
+      roles: [],
+      groups: []
+    },
+    bam: {
+      roles: [],
+      groups: []
+    }
   }
 };
