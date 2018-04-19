@@ -13,11 +13,12 @@ export const urls = {
     },
 
     batch: {
-        fetchAllByTrainer: () => `${context}trainer/batch/all`,
-        fetchAll: () => `${context}vp/batch/all`,
-        save: () => `${context}all/batch/create`,
-        update: () => `${context}all/batch/update`,
-        delete: (batchId) => `${context}all/batch/delete/${batchId}`,
+        save: () => `${context}batch/`, // Post
+        fetchAll: () => `${context}batches/`, // Get
+        fetchById: (batchId) => `${context}batches/${batchId}`, // Get By Id
+        fetchAllByTrainer: (trainerId) => `${context}batches/trainer/${trainerId}`, // Get by Trainer Id
+        update: () => `${context}batch/`, // Put
+        delete: (batchId) => `${context}batch/${batchId}`, // Delete
     },
 
     category: {
