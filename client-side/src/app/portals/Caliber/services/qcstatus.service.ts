@@ -27,7 +27,7 @@ export class QCStatusService implements Fetch<string> {
   }
 
   /**
-   * retrieve all QCStatus types
+   * Retrieve all QCStatus types
    */
   public fetchAll(): Observable<string[]> {
     this.http.get<string[]>(urls.qcStatus.fetchAll()).subscribe((data) => {

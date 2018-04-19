@@ -27,7 +27,6 @@ export class CategoriesService extends CategoryService {
 
   constructor(httpClient: HttpClient, alertService: AlertsService) {
     super(httpClient, alertService);
-
     this.getAll();
   }
 

@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 /**
- * manages API calls for TrainingTypes
+ * Manages API calls for TrainingTypes
  */
 @Injectable()
 export class TrainingTypeService implements Fetch<String> {
@@ -32,7 +32,7 @@ export class TrainingTypeService implements Fetch<String> {
   */
 
   /**
-  * retrieves all skills and pushes them on the listSubject
+  * Retrieves all skills and pushes them on the listSubject.
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */

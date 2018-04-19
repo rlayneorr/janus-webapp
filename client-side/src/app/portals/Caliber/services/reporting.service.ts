@@ -6,8 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { PanelReview } from '../entities/PanelReview';
 import { urls } from './urls';
 
-
-
 /**
  * Service handles API calls and tracks fetched data for caching.
  * Fetched data is exposed by observables which get data from private
@@ -31,7 +29,6 @@ export class ReportingService {
 
   private lineTraineeOverall = new BehaviorSubject<CacheData>(null);
   public lineTraineeOverall$ = this.lineTraineeOverall.asObservable();
-
 
   private qcStatusDoughnut = new BehaviorSubject<CacheData>(null);
   public qcStatusDoughnut$ = this.qcStatusDoughnut.asObservable();
@@ -107,7 +104,6 @@ export class ReportingService {
    */
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
     const endpoint = urls.apiBatchComparisonAvgEndpoint(skill, training, startDate);
-
   }
 
 
@@ -116,14 +112,14 @@ export class ReportingService {
   =============================================*/
 
   /**
-     * Fetches doughnut chart of all QC statuses for this batch unless data
-     * matching these parameters is already being stored.
-     *
-     * Data stored in @property {BehaviorSubject<CacheData>} qcStatusDoughnut
-     * and exposed through @property {Observable<CacheData>} qcStatusDoughnut$
-     *
-     * @param batchId the id of the batch being fetched
-     */
+   * Fetches doughnut chart of all QC statuses for this batch unless data
+   * matching these parameters is already being stored.
+   *
+   * Data stored in @property {BehaviorSubject<CacheData>} qcStatusDoughnut
+   * and exposed through @property {Observable<CacheData>} qcStatusDoughnut$
+   *
+   * @param batchId the id of the batch being fetched
+   */
   fetchQcStatusDoughnutChart(batchId: Number) {
     const endpoint = urls.apiPieChartCurrentWeekQCStatus(batchId);
 
@@ -135,7 +131,8 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.qcStatusDoughnut, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.qcStatusDoughnut.next({ params: params, data: success }));
+        success => this.qcStatusDoughnut.next({params: params, data: success})
+      );
     }
   }
 
@@ -160,7 +157,8 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.qcStatusDoughnut, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.qcStatusDoughnut.next({ params: params, data: success }));
+        success => this.qcStatusDoughnut.next({params: params, data: success})
+      );
     }
 
   }
@@ -183,7 +181,8 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.qcStatusDoughnut, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.qcStatusDoughnut.next({ params: params, data: success }));
+        success => this.qcStatusDoughnut.next({params: params, data: success})
+      );
     }
   }
 
@@ -221,7 +220,8 @@ export class ReportingService {
 
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
+        success => this.assessmentBreakdownBarChart.next({params: params, data: success})
+      );
     }
   }
 
@@ -244,7 +244,7 @@ export class ReportingService {
 
     if (this.needsRefresh(this.BatchWeekSortedBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.BatchWeekSortedBarChart.next({ params: params, data: success }));
+        success => this.BatchWeekSortedBarChart.next({params: params, data: success}));
     }
   }
 
@@ -267,11 +267,9 @@ export class ReportingService {
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       if (traineeId !== 0) {
         this.httpClient.get(endpoint)
-        .subscribe(success => this.assessmentBreakdownBarChart.next({ params: params, data: success }));
+          .subscribe(success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
       }
-
     }
-
   }
 
   /**
@@ -293,9 +291,8 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.batchOverallBar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallBar.next({ params: params, data: success }));
+        success => this.batchOverallBar.next({params: params, data: success}));
     }
-
   }
 
   /**
@@ -318,13 +315,12 @@ export class ReportingService {
 
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.assessmentBreakdownBarChart.next({ params: params, data: success }));
+        success => this.assessmentBreakdownBarChart.next({params: params, data: success})
+      );
     }
   }
 
   /* Line Charts */
-
-
 
   fetchTraineeUpToWeekLineChart(batchId: Number, weekId: Number, traineeId: Number) {
     const endpoint = urls.apiTraineeUpToWeekLineChart(batchId, weekId, traineeId);
@@ -347,11 +343,10 @@ export class ReportingService {
     if (this.needsRefresh(this.lineTraineeOverall, params)) {
       this.httpClient.get(endpoint).subscribe(
 
-        success => { this.lineTraineeOverall.next({ params: params, data: success });
+        success => {this.lineTraineeOverall.next({params: params, data: success});
       });
+    }
   }
-}
-
 
   /**
    * Fetches data for use inbatch overall line chart if data with these parameters
@@ -367,7 +362,7 @@ export class ReportingService {
 
     if (this.needsRefresh(this.batchOverallLineChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallLineChart.next({ params: params, data: success }));
+        success => this.batchOverallLineChart.next({params: params, data: success}));
     }
   }
 
@@ -405,11 +400,9 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.traineeOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.traineeWeeklyRadar.next({ params: params, data: success }));
+        success => this.traineeWeeklyRadar.next({params: params, data: success}));
     }
-
   }
-
 
   /**
    * Updates Trainee overall tech skills data if necessary
@@ -427,7 +420,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.traineeOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.traineeOverallRadar.next({ params: params, data: success }));
+        success => this.traineeOverallRadar.next({params: params, data: success}));
     }
   }
 
@@ -448,7 +441,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.batchOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallRadar.next({ params: params, data: success }));
+        success => this.batchOverallRadar.next({params: params, data: success}));
     }
   }
 
@@ -488,7 +481,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.technologiesForTheWeek, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.technologiesForTheWeek.next({ params: params, data: success }));
+        success => this.technologiesForTheWeek.next({params: params, data: success}));
     }
   }
 
@@ -502,7 +495,7 @@ export class ReportingService {
    */
   fetchTechnologiesUpToWeek(batchId: Number, week: Number) {
 
-    const params = { batchId: batchId };
+    const params = {batchId: batchId};
 
     if (this.needsRefresh(this.technologiesUpToWeek, params)) {
       const result = Array<any>(week);
@@ -516,7 +509,7 @@ export class ReportingService {
           currentSub++;
 
           if (currentSub === week) {
-            this.technologiesUpToWeek.next({ params: params, data: result });
+            this.technologiesUpToWeek.next({params: params, data: result});
           }
         });
       }

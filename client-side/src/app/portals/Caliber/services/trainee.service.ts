@@ -16,9 +16,8 @@ import { Observable } from 'rxjs/Observable';
 import { Trainee } from '../entities/Trainee';
 import { urls } from './urls';
 
-
 /**
- * this service manages calls to the web service
+ * This service manages calls to the web service
  * for Trainee objects
  */
 @Injectable()
@@ -37,8 +36,7 @@ export class TraineeService implements CRUD<Trainee> {
     this.deletedSubject = new Subject();
    }
 
-
-   /*
+  /*
     =====================
     BEGIN: API calls
     =====================
@@ -52,15 +50,14 @@ export class TraineeService implements CRUD<Trainee> {
    *
    * @param batchId: number
    */
-   public fetchAllByBatch(batchId: number): void {
+  public fetchAllByBatch(batchId: number): void {
     this.fetchAll(batchId);
-   }
+  }
 
-
-   public fetchAll(batchId: number) {
+  public fetchAll(batchId: number) {
     this.http.get<any[]>(urls.trainee.fetchAllByBatch(batchId))
-       .subscribe((results) => this.listSubject.next(results));
-     return this.listSubject.asObservable();
+      .subscribe((results) => this.listSubject.next(results));
+    return this.listSubject.asObservable();
   }
 
   fetchDroppedByBatch(batchId: number) {
@@ -68,30 +65,28 @@ export class TraineeService implements CRUD<Trainee> {
   }
 
   /**
-  * creates a trainee and pushes the created trainee on the
-  * savedSubject
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
-  *
-  * @param trainee: Trainee
-  */
+   * creates a trainee and pushes the created trainee on the
+   * savedSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
+   *
+   * @param trainee: Trainee
+   */
   public create(trainee: Trainee) {
     this.http.post<any>(urls.trainee.save(), JSON.stringify(trainee))
       .subscribe((results) => this.savedSubject.next(results));
     return this.savedSubject.asObservable();
   }
 
-  /*
-    function that pushes a trainee into savedSubject
-  */
+  /**
+   * Function that pushes a trainee into savedSubject
+   */
   public pushToSaved(trainee: Trainee) {
     this.savedSubject.next(trainee);
   }
 
-
   /**
-   * updates a trainee and pushes the updated trainee on the
-   * savedSubject
+   * Given a trainee object, updates it on the database and returns the updated trainee.
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    *
@@ -103,8 +98,8 @@ export class TraineeService implements CRUD<Trainee> {
     return this.savedSubject.asObservable();
   }
 
-   /**
-   * deletes a trainee and pushes the deleted trainee on the
+  /**
+   * Deletes a trainee and pushes the deleted trainee on the
    * deletedSubject
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
