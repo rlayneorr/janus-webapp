@@ -71,3 +71,5 @@ Servers/
 # stashed files
 /stash
 .DS_Store
+
+**/.idea/
