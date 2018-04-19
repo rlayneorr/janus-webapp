@@ -13,17 +13,10 @@ xdescribe('CaliberHomeComponent', () => {
     TestBed.configureTestingModule(Dependencies);
     // .compileComponents();
 
-
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(HomeComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
 
   it('should create', () => {
     expect(5).toEqual(5);

@@ -54,6 +54,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
 
   /**
    * @function setBatchList
+   * Retrieves all batches from the batch service.
    */
   setBatchList() {
     this.batchSubscription = this.batchService.getList().subscribe(batchList => {
@@ -66,6 +67,11 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
 
   /**
    * @function getTrainees
+   *
+   * Given the list of batches, retrieves each trainee from each batch.
+   * Trainee objects are placed in the traineeList, and their names
+   * are placed in the traineeNameList.
+   *
    * @param batchList
    */
   getTrainees(batchList) {
@@ -79,6 +85,9 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
 
   /**
    * @function setTrainee
+   *
+   * Set a trainee to the savedSubject in traineeService.
+   *
    * @param trainee
    */
   setTrainee(trainee) {
@@ -86,12 +95,15 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
     this.panelService.fetchAllByTrainee(trainee);
     this.traineeSubject.next(this.trainee);
     this.name = this.trainee.name;
-    this.traineeService.pushToSaved(this.trainee);  // set selected trainee to savedSubject in traineeservice
+    this.traineeService.pushToSaved(this.trainee);
   }
 
   /**
    * @function setTraineeBySearch
-   * @param traineeName
+   *
+   * Given a trainee's name, retrieve the trainee object and set it to savedSubject in traineeService.
+   *
+   * @param traineeName - string
    */
   setTraineeBySearch(traineeName) {
     for (let i = 0; i < this.traineeList.length; i++) {
@@ -99,13 +111,14 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
         this.trainee = this.traineeList[i];
         this.panelService.fetchAllByTrainee(this.trainee);
         this.traineeSubject.next(this.trainee);
-        this.traineeService.pushToSaved(this.trainee); // set selected trainee to savedsubject in traineeservice
+        this.traineeService.pushToSaved(this.trainee);
       }
     }
   }
 
   /**
    * @function getTraineeSubject
+   * Retrieves the trainee currently set as the traineeSubject.
    */
   public getTraineeSubject(): Observable<Trainee> {
     return this.traineeSubject.asObservable();
@@ -113,6 +126,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
 
   /**
    * @function search
+   * Filters the list of trainee names based on the search string.
    */
   search = (text$: Observable<string>) =>
     text$
@@ -121,9 +135,6 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
       .map(term => term.length < 2 ? []
         : this.traineeNameList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
 
-  ngOnDestroy() {
-  }
+  ngOnDestroy() {}
 
 }
-
-

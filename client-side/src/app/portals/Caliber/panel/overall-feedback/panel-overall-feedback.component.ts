@@ -19,7 +19,6 @@ export class PanelOverallFeedbackComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

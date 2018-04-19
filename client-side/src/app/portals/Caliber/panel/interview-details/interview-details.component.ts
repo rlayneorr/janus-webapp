@@ -13,12 +13,9 @@ import { Trainee } from '../../entities/Trainee';
 import { Panel } from '../../entities/Panel';
 import { Batch } from '../../entities/Batch';
 
-
 // services
 import { BatchService } from '../../services/batch.service';
 import { PanelService } from '../../services/panel.service';
-
-
 
 @Component({
   selector: 'app-interview-details',

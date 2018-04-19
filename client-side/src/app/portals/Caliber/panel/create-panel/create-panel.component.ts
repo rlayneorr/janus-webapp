@@ -14,15 +14,13 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 // services
 import { PanelService } from '../../services/panel.service';
 
-
-
 @Component({
   selector: 'app-create-panel',
   templateUrl: './create-panel.component.html',
   styleUrls: ['./create-panel.component.css'],
   encapsulation: ViewEncapsulation.None,  // Use the native Shadow DOM to encapsulate our CSS
-
 })
+
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
   trainee: Trainee;
@@ -36,7 +34,6 @@ export class CreatePanelComponent implements OnInit {
   modalRef: NgbModalRef;
 
   /**
-   *
    * @param modalService
    * @param searchBar
    * @param fb
@@ -69,14 +66,14 @@ export class CreatePanelComponent implements OnInit {
         format: [''],
         recordingConsent: [''],
         internet: [''],
-        panelRound: [''],
+        panelRound: ['']
       }),
       generalFeedback: this.fb.group({
         associateIntro: [''],
         projectOneDescription: [''],
         projectTwoDescription: [''],
         projectThreeDescription: [''],
-        communicationSkills: [''],
+        communicationSkills: ['']
       }),
       feedback: this.fb.array([]),
       overallFeedback: this.fb.group({

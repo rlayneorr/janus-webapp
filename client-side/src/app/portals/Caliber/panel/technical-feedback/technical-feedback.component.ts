@@ -22,16 +22,15 @@ export class TechnicalFeedbackComponent implements OnInit {
   @Input() technologyForm: FormGroup;
 
   /**
-   *
    * @param categoryService
    */
   constructor(private categoryService: CategoriesService) {
     this.technologyForm = new FormGroup({
-       technology: new FormControl(),
-       result: new FormControl(),
-       status: new FormControl(),
-       comment: new FormControl()
-      });
+      technology: new FormControl(),
+      result: new FormControl(),
+      status: new FormControl(),
+      comment: new FormControl()
+    });
   }
 
   /**
