@@ -1,6 +1,6 @@
 import { environment } from '../../../../environments/environment';
 
-
+// url to our amazon ec2 instance
 const context = environment.context;
 
 export const urls = {
@@ -64,7 +64,9 @@ export const urls = {
     qcStatus: {
         fetchAll: () => `${context}types/qcstatus/all`,
     },
-
+    // Find out what /types/ is
+    // Consider replacing types/skill/all with /skill
+    // Add save: () => `${context}skill`,
     skill: {
         fetchAll: () => `${context}types/skill/all`,
     },

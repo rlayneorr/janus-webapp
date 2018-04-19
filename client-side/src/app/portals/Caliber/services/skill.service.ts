@@ -8,7 +8,6 @@ import { Fetch } from '../interfaces/api.interface';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { urls } from './urls';
 
-
 /**
  * manages API calls for skills
  */
@@ -18,13 +17,11 @@ export class SkillService implements Fetch<string> {
   public listSubject = new BehaviorSubject<string[]>([]);
 
   constructor(private httpClient: HttpClient) {
-
-
     this.initialize();
   }
 
   /**
-   * perform initialization processes
+   * Perform initialization processes
    */
   private initialize(): void {
     this.fetchAll();
@@ -37,12 +34,20 @@ export class SkillService implements Fetch<string> {
   */
 
   /**
-  * retrievs all skills and pushes them on the listSubject
+  * Retrieves all skills and pushes them on the listSubject
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */
   public fetchAll() {
-    this.httpClient.get<string[]>(urls.skill.fetchAll()).subscribe(res => this.listSubject.next(res));
+    const skillsList = this.httpClient.get<string[]>(urls.skill.fetchAll());
+    skillsList.subscribe(response => this.listSubject.next(response));
     return this.listSubject.asObservable();
   }
+  /**
+   * public save(newSkill: Skill) {
+   *  const postRequest = this.httpClient.post<Skill>(urls.skill.save(newSkill));
+   *  postRequest.susbcribe(response => this.postResponse = response);
+   *  return this.postResponse.asObservable();
+   * }
+   */
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit, NgModule, ViewEncapsulation, ElementRef} from '@angular/core';
+import { Component, OnInit, NgModule, ViewEncapsulation, ElementRef } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
 import { BatchService } from '../services/batch.service';
-import { HttpClientModule  } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Batch } from '../entities/Batch';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Assessment } from '../entities/Assessment';
@@ -140,9 +140,9 @@ export class AssessComponent implements OnInit {
 
   }
 
-/****************************************************************************************
-                                      ASSESSMENTS
-*****************************************************************************************/
+  /****************************************************************************************
+                                        ASSESSMENTS
+  *****************************************************************************************/
 
   editAssessment(content, modalAssessment: Assessment) {
     this.editingAssessment = modalAssessment;
@@ -172,9 +172,9 @@ export class AssessComponent implements OnInit {
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
   }
 
-/****************************************************************************************
-                                      CATEGORIES
-*****************************************************************************************/
+  /****************************************************************************************
+                                        CATEGORIES
+  *****************************************************************************************/
 
   editCategory(categorySelect: ElementRef) {
     const newCategory = $(categorySelect).find(':selected').val();
@@ -199,9 +199,9 @@ export class AssessComponent implements OnInit {
   }
 
 
-/****************************************************************************************
-                                      GRADES
-*****************************************************************************************/
+  /****************************************************************************************
+                                        GRADES
+  *****************************************************************************************/
 
   updateGrade(trainee: Trainee, assessment: Assessment, input) {
     const grade = this.getGrade(trainee, assessment);
@@ -262,9 +262,9 @@ export class AssessComponent implements OnInit {
     return total / this.selectedBatch.trainees.length;
   }
 
-/****************************************************************************************
-                                      NOTES
-*****************************************************************************************/
+  /****************************************************************************************
+                                        NOTES
+  *****************************************************************************************/
 
   getNote(trainee: Trainee) {
     let note: Note;
@@ -276,7 +276,7 @@ export class AssessComponent implements OnInit {
   }
 
   getWeekBatchNote(batch: Batch): Note {
-    const n = this.notes.filter( (note) => {
+    const n = this.notes.filter((note) => {
       return (note.type === 'BATCH' && Number(note.week) === Number(this.selectedWeek));
     })[0];
 
@@ -324,9 +324,9 @@ export class AssessComponent implements OnInit {
     this.noteService.update(note);
   }
 
-/****************************************************************************************
-                                      OTHER
-*****************************************************************************************/
+  /****************************************************************************************
+                                        OTHER
+  *****************************************************************************************/
 
   open(content) {
     this.modalService.open(content);
@@ -347,7 +347,7 @@ export class AssessComponent implements OnInit {
   }
 
   changeBatch(batch: Batch) {
-      this.selectedWeek = batch.weeks;
+    this.selectedWeek = batch.weeks;
 
     this.selectedBatch = batch;
 
@@ -380,7 +380,7 @@ export class AssessComponent implements OnInit {
     this.currentYear = year;
     this.yearBatches = [];
     const y = new Date(year, 0, 1);
-    for (const batch of this.batches){
+    for (const batch of this.batches) {
       const batchYear = new Date(batch.startDate);
       if (batchYear.getFullYear() === y.getFullYear()) {
         this.yearBatches[this.yearBatches.length] = batch;
