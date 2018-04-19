@@ -4,7 +4,7 @@ import { FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
 import { PanelFeedback } from '../../entities/PanelFeedback';
 
 // services
-import { CategoriesService } from '../../services/categories.service';
+import { CategoryService } from '../../services/category.service';
 import { Category } from '../../entities/Category';
 import { CreatePanelComponent } from '../create-panel/create-panel.component';
 import { Subject } from 'rxjs/Subject';
@@ -25,7 +25,7 @@ export class TechnicalFeedbackComponent implements OnInit {
    *
    * @param categoryService
    */
-  constructor(private categoryService: CategoriesService) {
+  constructor(private categoryService: CategoryService) {
     this.technologyForm = new FormGroup({
        technology: new FormControl(),
        result: new FormControl(),
