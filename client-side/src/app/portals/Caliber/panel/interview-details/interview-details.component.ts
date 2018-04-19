@@ -68,7 +68,7 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
       for (let i = 0; i < this.batchList.length; i++) {
         for (let j = 0; j < this.batchList[i].trainees.length; j++) {
           if (this.batchList[i].trainees[j].name === this.trainee.name) {
-            this.trainingTrack = this.batchList[i].skillType;
+            this.trainingTrack = this.batchList[i].skillType[j];
           }
         }
       }

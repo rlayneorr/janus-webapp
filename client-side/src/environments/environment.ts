@@ -3,7 +3,8 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/';
+// const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/';
+const context = 'http://localhost:8908/';
 const bam = 'http://ec2-18-217-13-6.us-east-2.compute.amazonaws.com:8800/api/v2';
 export const environment = {
   production: false,

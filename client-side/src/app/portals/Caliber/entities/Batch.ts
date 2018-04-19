@@ -8,7 +8,10 @@ export class Batch {
     trainingName: string;
     trainer: Trainer;
     coTrainer: Trainer;
-    skillType: string;
+
+    skill: string[];
+    skillType: string[];
+
     trainingType: string;
     startDate: Date;
     endDate: Date;

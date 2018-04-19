@@ -125,7 +125,10 @@ export class QualityComponent implements OnInit, OnDestroy {
       trainingName: '',
       trainer: null,
       coTrainer: null,
-      skillType: '',
+
+      skill: null,
+      skillType: null,
+
       trainingType: '',
       startDate: null,
       endDate: null,

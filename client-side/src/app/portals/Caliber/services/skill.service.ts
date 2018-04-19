@@ -42,7 +42,9 @@ export class SkillService implements Fetch<string> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */
   public fetchAll() {
-    this.httpClient.get<string[]>(urls.skill.fetchAll()).subscribe(res => this.listSubject.next(res));
+    this.httpClient.get<string[]>(urls.skill.fetchAll()).subscribe(
+      res => this.listSubject.next(res)
+    );
     return this.listSubject.asObservable();
   }
 }
