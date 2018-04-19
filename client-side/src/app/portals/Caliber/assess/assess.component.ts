@@ -62,9 +62,12 @@ export class AssessComponent implements OnInit {
     this.pageOffsetValue = pageYOffset;
   }
 
-  // This event is called when the user switches tabs (for Weeks).
-  fetchNews(evt: any) {
-    const id = evt.nextId;
+  /**
+   * This function is called when the user switches tabs from week to week.
+   * @param event The event
+   */
+  fetchNews(event: any) {
+    const id = event.nextId;
 
     if (id === '+') {
       this.modalService.open(document.getElementById('addWeek'));
@@ -79,7 +82,6 @@ export class AssessComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.selectedWeek = 1;
 
     this.batchService.fetchAll();
@@ -107,7 +109,6 @@ export class AssessComponent implements OnInit {
       this.batches = batch;
 
       if (this.batches.length !== 0) {
-
         // Set the year dropdown.
         this.batches.forEach(b => {
           this.years.add(this.datePipe.transform(b.startDate, 'yyyy'));
@@ -125,7 +126,6 @@ export class AssessComponent implements OnInit {
 
     // Every time an assessment is created, a set of default grades is created.
     this.assessmentService.getSaved().subscribe(assessment => {
-
       this.selectedBatch.trainees.forEach(trainee => {
         const grade = new Grade();
         grade.trainee = trainee;
@@ -135,61 +135,91 @@ export class AssessComponent implements OnInit {
         grade.dateReceived = new Date('01-01-2000');
         this.gradeService.create(grade);
       });
-
     });
-
   }
 
   /****************************************************************************************
                                         ASSESSMENTS
   *****************************************************************************************/
 
+ /**
+  * Opens the modal to edit an Assessment with and sets the current assessment being edited.
+  */
   editAssessment(content, modalAssessment: Assessment) {
     this.editingAssessment = modalAssessment;
     this.modalService.open(content);
   }
 
+  /**
+   * Calls AssessmentService to update the assessment currently being edited.
+   */
   updateAssessment() {
     this.assessmentService.update(this.editingAssessment);
   }
 
+  /**
+   * Calls AssessmentService to delete the assessment currently being edited and
+   * removes that assessment from our array of assessments.
+   */
   deleteAssessment() {
-    this.assessments.forEach(a => {
-      if (Number(a.assessmentId) === Number(this.editingAssessment.assessmentId)) {
-        this.assessments.splice(this.assessments.indexOf(a), 1);
+    this.assessments.forEach(assess => {
+      if (assess.assessmentId === this.editingAssessment.assessmentId) {
+        this.assessments.splice(this.assessments.indexOf(assess), 1);
       }
     });
     this.assessmentService.delete(this.editingAssessment);
   }
 
+  /**
+   * Calls AssessmentService to create an assessment with the week and batch pre-defined.
+   */
   addAssessment() {
     this.newAssessment.week = this.selectedWeek;
     this.newAssessment.batch = this.selectedBatch;
     this.assessmentService.create(this.newAssessment);
   }
 
+  /**
+   * Gets the Assessment for the selected Batch at the specified week.
+   * @param week The week number.
+   */
   getAssessments(week: number) {
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
   }
 
   /****************************************************************************************
-                                        CATEGORIES
+                                        SKILL
   *****************************************************************************************/
 
-  editCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.editingAssessment.category = this.findCategory(newCategory);
+  /**
+   * Called when a skill is changed. Sets the skill of the assessment being edited to the new skill.
+   * @param selectSkill The html element that was changed.
+   */
+  editCategory(selectSkill: ElementRef) {
+    const newSkill = $(selectSkill).find(':selected').val();
+    this.editingAssessment.category = this.findCategory(newSkill);
   }
 
-  changeCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.newAssessment.category = this.findCategory(newCategory);
+  /**
+   * Called when a skill is changed. Sets the skill of the new assessment to the new skill.
+   * @param skillSelect The html element that was changed.
+   */
+  changeCategory(skillSelect: ElementRef) {
+    const newSkill = $(skillSelect).find(':selected').val();
+    this.newAssessment.category = this.findCategory(newSkill);
   }
 
+  /**
+   * To become deprecated soon.
+   * Finds the skill within this.categories.
+   * @param category The skill to find
+   * @returns the skill within this.categories
+   */
   findCategory(category: any): Category {
     let matchingCat;
-    this.categories.forEach(element => {
 
+    // Replace the .forEach with .find
+    this.categories.forEach(element => {
       if (element.skillCategory === category) {
         matchingCat = element;
       }
@@ -197,12 +227,29 @@ export class AssessComponent implements OnInit {
 
     return matchingCat;
   }
-
+  // /**
+  //  * Finds the specified skill in this.categories
+  //  * @param category The skill to find
+  //  * @returns the skill within this.categories
+  //  */
+  // findCategory(category: any): Category {
+  //   return this.categories.find(element => {
+  //     if (element.skillCategory === category) {
+  //       return true;
+  //     }
+  //   });
+  // }
 
   /****************************************************************************************
                                         GRADES
   *****************************************************************************************/
 
+  /**
+   * Called
+   * @param trainee
+   * @param assessment
+   * @param input
+   */
   updateGrade(trainee: Trainee, assessment: Assessment, input) {
     const grade = this.getGrade(trainee, assessment);
     grade.score = Number(input.value);
