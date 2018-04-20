@@ -172,7 +172,7 @@
   <div class="modal-body">
     <div class="form-group f-size">
       <label>
-        <strong>Assessment Category:</strong>
+        <strong>Assessment Skill:</strong>
       </label>
       <select #skill class="form-control f-size" id="skillSelect" (change)="changeSkill(skill)">
         <option value="" disabled>Select Assessment Skill</option>
@@ -219,7 +219,7 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label>Assessment Category:</label>
+      <label>Assessment Skill:</label>
       <select #skill class="form-control" id="skillSelect" (change)="editSkill(skill)" [value]="editingAssessment.skill.skillName">
         <option *ngFor="let skill of this.skills">{{skill.skillName}}</option>
       </select>
