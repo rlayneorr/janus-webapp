@@ -4,11 +4,6 @@
 
   <div class="row">
     <div class="col col-xs-5">
-      <!--
-      <select class="align-on-mobile" #yearSelect class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchYear(yearSelect.value)">
-        <option [value]="year" *ngFor="let year of years">{{year}}</option>
-      </select>
-      -->
       <div ngbDropdown class="d-inline-block">
 
         <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic1" ngbDropdownToggle>
@@ -26,11 +21,6 @@
       </div>
 
       <div ngbDropdown class="d-inline-block">
-        <!--
-        <select #bat class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchBatch(bat.value)">
-          <option [value]="batch.batchId" *ngFor="let batch of yearBatches">{{batch.trainer.name}} - {{batch.startDate | date: 'shortDate'}}</option>
-        </select>
-        -->
         <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic2" ngbDropdownToggle>
           <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
         </button>
@@ -127,9 +117,6 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-10">
-      <!-- 
-      <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea>
-      -->
       <textarea #inputBatchNote *ngIf="this.batches" class='form-control' placeholder="Enter your overall feedback on the batch"
         [value]="getWeekBatchNote(this.selectedBatch).content" (change)="updateNote(getWeekBatchNote(this.selectedBatch), inputBatchNote)"></textarea>
     </div>

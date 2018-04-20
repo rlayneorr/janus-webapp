@@ -10,8 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GradeService } from '../services/grade.service';
 import { Grade } from '../entities/Grade';
 import { Trainee } from '../entities/Trainee';
-import { CategoryService } from '../services/category.service';
-import { Category } from '../entities/Category';
 import { Note } from '../entities/Note';
 import { NoteService } from '../services/note.service';
 import * as $ from 'jquery';
@@ -42,7 +40,6 @@ export class AssessComponent implements OnInit {
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
   skills: Array<Skill>;
-  categories: Category[] = [];
   notes: Note[] = [];
   rForm: FormGroup;
 
@@ -90,7 +87,6 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    // this.categoryService.fetchAllActive();
     this.skillService.fetchAllActive();
 
     this.noteService.getList().subscribe(
@@ -111,12 +107,6 @@ export class AssessComponent implements OnInit {
       }
     );
 
-    // this.categoryService.listSubject.subscribe(
-    //   categories => {
-    //     this.categories = categories;
-    //     this.newAssessment.category = this.findCategory('Java');
-    //   }
-    // );
     this.skillService.listSubject.subscribe(skills => {
       this.skills = skills;
     });
@@ -213,11 +203,6 @@ export class AssessComponent implements OnInit {
    * Called when a skill is changed. Sets the skill of the assessment being edited to the new skill.
    * @param selectSkill The html element that was changed.
    */
-  // editCategory(selectSkill: ElementRef) {
-  //   const newSkill = $(selectSkill).find(':selected').val();
-  //   this.editingAssessment.category = this.findCategory(newSkill);
-  // }
-
   editSkill(selectSkill: ElementRef) {
     const newSkill = $(selectSkill).find(':selected').val();
     this.editingAssessment.skill = this.findSkill(String(newSkill));
@@ -227,36 +212,16 @@ export class AssessComponent implements OnInit {
    * Called when a skill is changed. Sets the skill of the new assessment to the new skill.
    * @param skillSelect The html element that was changed.
    */
-  // changeCategory(skillSelect: ElementRef) {
-  //   const newSkill = $(skillSelect).find(':selected').val();
-  //   this.newAssessment.category = this.findCategory(newSkill);
-  // }
   changeSkill(skillSelect: ElementRef) {
     const newSkill = $(skillSelect).find(':selected').val();
     this.newAssessment.skill = this.findSkill(String(newSkill));
   }
 
   /**
-   * To become deprecated soon.
-   * Finds the skill within this.categories.
-   * @param category The skill to find.
-   * @returns the skill within this.categories.
+   * Finds the skill within this.skills.
+   * @param name The name of the skill to find.
+   * @returns the skill within this.skills.
    */
-  findCategory(category: any): Category {
-    let matchingCat;
-
-    // Replace the .forEach with .find
-    this.categories.forEach(
-      element => {
-        if (element.skillCategory === category) {
-          matchingCat = element;
-        }
-      }
-    );
-
-    return matchingCat;
-  }
-
   findSkill(name: string): Skill {
     return this.skills.find(skill => skill.skillName === name);
   }
