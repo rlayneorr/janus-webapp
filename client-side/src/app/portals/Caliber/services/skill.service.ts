@@ -11,18 +11,18 @@ import { AlertsService } from './alerts.service';
 import { environment } from '../../../../environments/environment';
 
 // entities
-import { Category } from '../entities/Category';
 import { CRUD } from '../interfaces/api.interface';
 import { urls } from './urls';
+import { Skill } from '../entities/Skill';
 
 /**
 * this service manages calls to the web services
-* for Category objects
+* for Skill objects
 */
 @Injectable()
-export class SkillService implements CRUD<Category> {
+export class SkillService implements CRUD<Skill> {
 
-  public listSubject = new BehaviorSubject<Category[]>([]);
+  public listSubject = new BehaviorSubject<Skill[]>([]);
 
   constructor(public httpClient: HttpClient, public alertService: AlertsService) {
     this.listSubject = new BehaviorSubject([]);
@@ -40,8 +40,8 @@ export class SkillService implements CRUD<Category> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
    *
    */
-  public fetchAll(): Observable<Category[]> {
-    this.httpClient.get<Category[]>(urls.category.fetchAll())
+  public fetchAll(): Observable<Skill[]> {
+    this.httpClient.get<Skill[]>(urls.skill.fetchAll())
       .subscribe(result => this.listSubject.next(result));
     return this.listSubject.asObservable();
   }
@@ -52,52 +52,52 @@ export class SkillService implements CRUD<Category> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   *
   */
-  public fetchAllActive(): Observable<Category[]> {
-    const url = urls.category.fetchAllActive();
-    this.httpClient.get<Category[]>(url)
+  public fetchAllActive(): Observable<Skill[]> {
+    const url = urls.skill.findAllActive();
+    this.httpClient.get<Skill[]>(url)
       .subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 
   /**
-  * retrieves a category by its ID
+  * retrieves a Skill by its ID
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   *
   * @param id: number
   *
-  * @return Observable<Category>
+  * @return Observable<Skill>
   */
-  public fetchById(id: number): Observable<Category> {
-    const url = urls.category.fetchById(id);
-    return this.httpClient.get<Category>(url);
+  public fetchById(name: string): Observable<Skill> {
+    const url = urls.skill.findByName(name);
+    return this.httpClient.get<Skill>(url);
   }
 
   /**
-  * transmits a new Category to be created.
+  * transmits a new Skill to be created.
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP')")
   *
-  * @param category: Category
+  * @param skill: Skill
   */
-  public create(category: Category): Observable<Category> {
-    const url = urls.category.save();
-    return this.httpClient.post<Category>(url, JSON.stringify(category));
+  public create(skill: Skill): Observable<Skill> {
+    const url = urls.skill.save();
+    return this.httpClient.post<Skill>(url, JSON.stringify(skill));
   }
 
   /**
-   * transmits a Category to be updated.
+   * transmits a Skill to be updated.
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP')")
    *
-   * @param category: Category
+   * @param skill: Skill
    */
-  public update(category: Category): Observable<Category> {
-    const url = urls.category.update();
-    return this.httpClient.put<Category>(url, JSON.stringify(category));
+  public update(skill: Skill): Observable<Skill> {
+    const url = urls.skill.update(skill.skillName);
+    return this.httpClient.put<Skill>(url, JSON.stringify(skill));
   }
 
-  public delete(category: Category): Observable<Category> {
-    return Observable.of(category);
+  public delete(skill: Skill): Observable<Skill> {
+    return Observable.of(skill);
   }
 }
