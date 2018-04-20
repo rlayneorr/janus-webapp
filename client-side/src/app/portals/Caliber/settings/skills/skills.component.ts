@@ -11,18 +11,18 @@ import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../../../../environments/environment';
 
 // entities
-import { Category } from '../../entities/Category';
+import { Skill } from '../../entities/Skill';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { HydraSkill } from '../../../../hydra-client/entities/HydraSkill';
 import { HydraSkillService } from '../../../../hydra-client/services/skill/hydra-skill.service';
 
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-skills',
+  templateUrl: './skills.component.html',
+  styleUrls: ['./skills.component.css']
 })
-export class CategoriesComponent implements OnInit {
+export class SkillsComponent implements OnInit {
   newCategory: HydraSkill = {
     skillId: 0,
     skill: '',
@@ -40,8 +40,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   /**
-   * Loads all Categories
-   * @memberof CategoriesComponent
+   * Loads all Skills
+   * @memberof SkillsComponent
    */
   ngOnInit() {
     this.initFormControl();

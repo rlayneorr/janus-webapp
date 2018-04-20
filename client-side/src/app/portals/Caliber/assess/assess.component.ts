@@ -10,8 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GradeService } from '../services/grade.service';
 import { Grade } from '../entities/Grade';
 import { Trainee } from '../entities/Trainee';
-import { CategoryService } from '../services/category.service';
-import { Category } from '../entities/Category';
+import { SkillService } from '../services/skill.service';
+import { Skill } from '../entities/Skill';
 import { Note } from '../entities/Note';
 import { NoteService } from '../services/note.service';
 import * as $ from 'jquery';
@@ -40,7 +40,7 @@ export class AssessComponent implements OnInit {
   grades: Grade[] = [];
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
-  categories: Category[] = [];
+  skills: Skill[] = [];
   notes: Note[] = [];
   rForm: FormGroup;
 
@@ -55,7 +55,7 @@ export class AssessComponent implements OnInit {
 
   pageOffsetValue;
   constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
-    private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService,
+    private gradeService: GradeService, private skillService: SkillService, private noteService: NoteService,
     private fb: FormBuilder, private datePipe: DatePipe) {}
 
   getPageOffsetHeight(event: ScrollEvent) {
@@ -84,7 +84,7 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    this.categoryService.fetchAllActive();
+    this.skillService.findAllActive();
 
     this.noteService.getList().subscribe(notes => {
       this.notes = notes;
@@ -98,9 +98,9 @@ export class AssessComponent implements OnInit {
       this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     });
 
-    this.categoryService.listSubject.subscribe(categories => {
-      this.categories = categories;
-      this.newAssessment.category = this.findCategory('Java');
+    this.skillService.listSubject.subscribe(skills => {
+      this.skills = skills;
+      this.newAssessment.skill = this.findSkill('Java');
     });
 
     this.batchService.getList().subscribe(batch => {
@@ -176,26 +176,26 @@ export class AssessComponent implements OnInit {
                                       CATEGORIES
 *****************************************************************************************/
 
-  editCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.editingAssessment.category = this.findCategory(newCategory);
+  editSkill(skillSelect: ElementRef) {
+    const newSkill = $(skillSelect).find(':selected').val();
+    this.editingAssessment.skill = this.findSkill(newSkill);
   }
 
-  changeCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.newAssessment.category = this.findCategory(newCategory);
+  changeSkill(skillSelect: ElementRef) {
+    const newSkill = $(skillSelect).find(':selected').val();
+    this.newAssessment.skill = this.findSkill(newSkill);
   }
 
-  findCategory(category: any): Category {
-    let matchingCat;
-    this.categories.forEach(element => {
+  findSkill(skill: any): Skill {
+    let matchingSkill;
+    this.skills.forEach(element => {
 
-      if (element.skillCategory === category) {
-        matchingCat = element;
+      if (element.skillName === skill) {
+        matchingSkill = element;
       }
     });
 
-    return matchingCat;
+    return matchingSkill;
   }
 
 

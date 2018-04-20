@@ -15,6 +15,7 @@ import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
+import { Category } from '../../entities/Category';
 import { ApiService } from '../../services/api.service';
 
 
@@ -162,7 +163,13 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
     /*fetches all skills */
     this.skillListSubscription = this.skillService.listSubject
-      .subscribe((skills) => this.setSkills(skills));
+      .subscribe((skills) => {
+        let arr = [];
+        skills.forEach(function (value){
+          arr.push(value.skillName);
+        })
+        this.setSkills(arr);
+      });
 
     /* fetches all batches */
     this.batchService.fetchAll();
