@@ -35,10 +35,10 @@ export class SkillService implements CRUD<Skill> {
   */
 
   /**
-   * retrieves all categories
+   * retrieves all skills
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-   *
+   * @returns An Observable list of Skills.
    */
   public fetchAll(): Observable<Skill[]> {
     this.httpClient.get<Skill[]>(urls.skill.fetchAll())
@@ -47,10 +47,10 @@ export class SkillService implements CRUD<Skill> {
   }
 
   /**
-  * retrieves all ACTIVE categories
+  * retrieves all ACTIVE skills
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-  *
+  * @returns An Observable list of Skills.
   */
   public fetchAllActive(): Observable<Skill[]> {
     const url = urls.skill.findAllActive();
@@ -60,25 +60,23 @@ export class SkillService implements CRUD<Skill> {
   }
 
   /**
-  * retrieves a Skill by its ID
+  * Makes a get request for a skill by its name.
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-  *
-  * @param id: number
-  *
-  * @return Observable<Skill>
+  * @param name The name of the Skill you want to find.
+  * @returns An Observable of Skill.
   */
-  public fetchById(name: string): Observable<Skill> {
+  public fetchByName(name: string): Observable<Skill> {
     const url = urls.skill.findByName(name);
     return this.httpClient.get<Skill>(url);
   }
 
   /**
-  * transmits a new Skill to be created.
+  * Makes a post request to create a new Skill.
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP')")
-  *
-  * @param skill: Skill
+  * @param skill Skill
+  * @returns An Observable of Skill.
   */
   public create(skill: Skill): Observable<Skill> {
     const url = urls.skill.save();
@@ -86,18 +84,22 @@ export class SkillService implements CRUD<Skill> {
   }
 
   /**
-   * transmits a Skill to be updated.
+   * Makes a put request to update a Skill.
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP')")
-   *
-   * @param skill: Skill
+   * @param skill Skill
    */
   public update(skill: Skill): Observable<Skill> {
     const url = urls.skill.update(skill.skillName);
     return this.httpClient.put<Skill>(url, JSON.stringify(skill));
   }
 
+  /**
+   * Makes a delete request on a skill.
+   * @param skill Skill
+   */
   public delete(skill: Skill): Observable<Skill> {
-    return Observable.of(skill);
+    const url = urls.skill.delete(skill.skillName);
+    return this.httpClient.delete<any>(url);
   }
 }

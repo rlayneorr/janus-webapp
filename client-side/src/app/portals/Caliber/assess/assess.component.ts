@@ -10,6 +10,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GradeService } from '../services/grade.service';
 import { Grade } from '../entities/Grade';
 import { Trainee } from '../entities/Trainee';
+<<<<<<< HEAD
+=======
+import { SkillService } from '../services/skill.service';
+import { Skill } from '../entities/Skill';
+>>>>>>> feature-skill-refactor-categories
 import { Note } from '../entities/Note';
 import { NoteService } from '../services/note.service';
 import * as $ from 'jquery';
@@ -39,7 +44,11 @@ export class AssessComponent implements OnInit {
   grades: Grade[] = [];
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
+<<<<<<< HEAD
   skills: Array<Skill>;
+=======
+  skills: Skill[] = [];
+>>>>>>> feature-skill-refactor-categories
   notes: Note[] = [];
   rForm: FormGroup;
 
@@ -53,11 +62,17 @@ export class AssessComponent implements OnInit {
   selectedTrainees: Trainee[] = [];
 
   pageOffsetValue;
+<<<<<<< HEAD
   constructor(
     private batchService: BatchService, private assessmentService: AssessmentService,
     private gradeService: GradeService, private skillService: SkillService,
     private modalService: NgbModal, private noteService: NoteService,
     private fb: FormBuilder, private datePipe: DatePipe) { }
+=======
+  constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
+    private gradeService: GradeService, private skillService: SkillService, private noteService: NoteService,
+    private fb: FormBuilder, private datePipe: DatePipe) {}
+>>>>>>> feature-skill-refactor-categories
 
   getPageOffsetHeight(event: ScrollEvent) {
     this.pageOffsetValue = pageYOffset;
@@ -87,7 +102,11 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
+<<<<<<< HEAD
     this.skillService.fetchAllActive();
+=======
+    this.skillService.findAllActive();
+>>>>>>> feature-skill-refactor-categories
 
     this.noteService.getList().subscribe(
       notes => { this.notes = notes; }
@@ -109,6 +128,10 @@ export class AssessComponent implements OnInit {
 
     this.skillService.listSubject.subscribe(skills => {
       this.skills = skills;
+<<<<<<< HEAD
+=======
+      this.newAssessment.skill = this.findSkill('Java');
+>>>>>>> feature-skill-refactor-categories
     });
 
     this.batchService.getList().subscribe(
@@ -195,6 +218,7 @@ export class AssessComponent implements OnInit {
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
   }
 
+<<<<<<< HEAD
   /****************************************************************************************
                                         SKILL
   *****************************************************************************************/
@@ -224,6 +248,32 @@ export class AssessComponent implements OnInit {
    */
   findSkill(name: string): Skill {
     return this.skills.find(skill => skill.skillName === name);
+=======
+/****************************************************************************************
+                                      CATEGORIES
+*****************************************************************************************/
+
+  editSkill(skillSelect: ElementRef) {
+    const newSkill = $(skillSelect).find(':selected').val();
+    this.editingAssessment.skill = this.findSkill(newSkill);
+  }
+
+  changeSkill(skillSelect: ElementRef) {
+    const newSkill = $(skillSelect).find(':selected').val();
+    this.newAssessment.skill = this.findSkill(newSkill);
+  }
+
+  findSkill(skill: any): Skill {
+    let matchingSkill;
+    this.skills.forEach(element => {
+
+      if (element.skillName === skill) {
+        matchingSkill = element;
+      }
+    });
+
+    return matchingSkill;
+>>>>>>> feature-skill-refactor-categories
   }
   /****************************************************************************************
                                         GRADES

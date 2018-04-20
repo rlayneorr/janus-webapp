@@ -15,6 +15,7 @@ import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
+import { Category } from '../../entities/Category';
 import { ApiService } from '../../services/api.service';
 
 
@@ -145,9 +146,9 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {
 
-    /*
-   * keep an updated list of trainers
-   */
+    /**
+     * Keep an updated list of trainers
+     */
     this.trainerListSubscription = this.trainerService.listSubject
       .subscribe((trainers) => this.setTrainers(trainers));
 
@@ -162,7 +163,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
     /*fetches all skills */
     this.skillListSubscription = this.skillService.fetchAll()
-      .subscribe((skills) => this.setSkills(skills));
+      .subscribe((skills) => this.setSkills(skills.map(skill => skill.skillName)));
 
     /* fetches all batches */
     this.batchService.fetchAll();
@@ -190,7 +191,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
     this.clone();
   }
-  /** 
+  /**
    * Unsubscribes from all subscriptions before destroyed.
    */
   ngOnDestroy(): void {
