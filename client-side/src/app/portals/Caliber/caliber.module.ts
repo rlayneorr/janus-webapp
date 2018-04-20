@@ -14,7 +14,6 @@ import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
-
 // routing
 import { routes } from './caliber.routes';
 import { SpringInterceptor } from './interceptors/spring.interceptor';
