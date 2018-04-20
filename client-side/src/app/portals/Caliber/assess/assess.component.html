@@ -92,7 +92,7 @@
               <div class="trainee-header">Trainee</div>
             </th>
             <th class="clickable assessment-header" *ngFor="let assessment of this.assessments" (click)="editAssessment(editAssessmentContent, assessment);">
-              <div class="assessment-header">{{assessment.category.skillCategory}} {{assessment.type}} ({{getPercentage(assessment)}}%)</div>
+              <div class="assessment-header">{{assessment.skill.skillName}} {{assessment.type}} ({{getPercentage(assessment)}}%)</div>
             </th>
             <th class="note">
               Notes
@@ -174,9 +174,9 @@
       <label>
         <strong>Assessment Category:</strong>
       </label>
-      <select #cat class="form-control f-size" id="categorySelect" (change)="changeCategory(cat)">
-        <option value="" disabled>Select Assessment Category</option>
-        <option *ngFor="let category of this.categories">{{category | categorySkill}}</option>
+      <select #skill class="form-control f-size" id="skillSelect" (change)="changeSkill(skill)">
+        <option value="" disabled>Select Assessment Skill</option>
+        <option *ngFor="let skill of this.skill">{{skill.skillName}}</option>
       </select>
     </div>
     <div class="container f-size" style="padding: 0px">
@@ -220,8 +220,8 @@
   <div class="modal-body">
     <div class="form-group">
       <label>Assessment Category:</label>
-      <select #cat class="form-control" id="categorySelect" (change)="editCategory(cat)" [value]="editingAssessment.category.skillCategory">
-        <option *ngFor="let category of this.categories">{{category | categorySkill}}</option>
+      <select #skill class="form-control" id="skillSelect" (change)="editSkill(skill)" [value]="editingAssessment.skill.skillName">
+        <option *ngFor="let skill of this.skills">{{skill.skillName}}</option>
       </select>
     </div>
     <div class="container">
