@@ -9,12 +9,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { urls } from './urls';
 
 /**
- * manages API calls for skills
+ * Manages API calls for skills
  */
 @Injectable()
 export class SkillService implements Fetch<string> {
 
-  public listSubject = new BehaviorSubject<string[]>([]);
+  public skillList = new BehaviorSubject<string[]>([]);
 
   constructor(private httpClient: HttpClient) {
     this.initialize();
@@ -34,20 +34,24 @@ export class SkillService implements Fetch<string> {
   */
 
   /**
-  * Retrieves all skills and pushes them on the listSubject
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
-  */
-  public fetchAll() {
-    const skillsList = this.httpClient.get<string[]>(urls.skill.fetchAll());
-    skillsList.subscribe(response => this.listSubject.next(response));
-    return this.listSubject.asObservable();
-  }
-  /**
-   * public save(newSkill: Skill) {
-   *  const postRequest = this.httpClient.post<Skill>(urls.skill.save(newSkill));
-   *  postRequest.susbcribe(response => this.postResponse = response);
-   *  return this.postResponse.asObservable();
-   * }
+   * Gets all skills and pushes them on the skillList
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
    */
+  public fetchAll() {
+    const skillsObservable = this.httpClient.get<string[]>(urls.skill.fetchAll());
+    skillsObservable.subscribe(response => this.skillList.next(response));
+    return this.skillList.asObservable();
+  }
+
+  /**
+   * Makes a post request to save user-created skill.
+   * @param newSkill The skill you want to save. {skillID:1, skillName:'name', isActive:true}
+   */
+  // public save(newSkill: Skill) {
+  //   const postRequest = this.httpClient.post<Skill>(urls.skill.save(newSkill));
+  //   postRequest.susbcribe(response => this.postResponse = response);
+  //   return this.postResponse.asObservable();
+  // }
+
 }

@@ -4,11 +4,11 @@
 
   <div class="row">
     <div class="col col-xs-5">
-
-      <!-- <select class="align-on-mobile" #yearSelect class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchYear(yearSelect.value)">
+      <!--
+      <select class="align-on-mobile" #yearSelect class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchYear(yearSelect.value)">
         <option [value]="year" *ngFor="let year of years">{{year}}</option>
-      </select> -->
-
+      </select>
+      -->
       <div ngbDropdown class="d-inline-block">
 
         <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic1" ngbDropdownToggle>
@@ -26,17 +26,17 @@
       </div>
 
       <div ngbDropdown class="d-inline-block">
-
-        <!-- <select #bat class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchBatch(bat.value)">
+        <!--
+        <select #bat class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchBatch(bat.value)">
           <option [value]="batch.batchId" *ngFor="let batch of yearBatches">{{batch.trainer.name}} - {{batch.startDate | date: 'shortDate'}}</option>
-        </select> -->
-
+        </select>
+        -->
         <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic2" ngbDropdownToggle>
           <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
         </button>
 
         <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic2" (click)="switchBatch(selectedBatch.batchId)">
-          <div *ngFor="let  batch of yearBatches" class="custom-bold">
+          <div *ngFor="let batch of yearBatches" class="custom-bold">
             <button class="dropdown-item c-pointer f-size" (click)="changeBatch(selectedBatch)">
               <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
             </button>
@@ -61,7 +61,9 @@
 
   <div class="row">
     <div class="col">
-      <ngb-tabset id="weekTabset" activeId="{{this.selectedWeek}}" (tabChange)="fetchNews($event)" style="margin-top: -2px; border-bottom: white">
+      <!-- 04-19-2018 Inline styling is supposed to be bad practice. Consider replacing with class. -->
+      <ngb-tabset id="weekTabset" activeId="{{this.selectedWeek}}" (tabChange)="fetchNews($event)"
+        style="margin-top: -2px; border-bottom: white">
         <ngb-tab id="{{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index">
           <ng-template ngbTabTitle>
             <div>Week {{i+1}}</div>
@@ -80,6 +82,7 @@
     </div>
   </div>
   <!-- TABS **END** -->
+  <!-- TABLE **START** -->
   <div class="row">
     <div class="col">
       <table class="table" style="border-collapse: collapse;">
@@ -102,7 +105,7 @@
               {{trainee.name}}
             </td>
             <td *ngFor="let assessment of assessments">
-              <input #inputGradeScore class="form-control assessment-area" type="text" [value]="getGrade(trainee, assessment).score" (change)="updateGrade(trainee, assessment, inputGradeScore)">
+              <input #inputGradeScore class="form-control assessment-area" type="number" [value]="getGrade(trainee, assessment).score" (change)="updateGrade(trainee, assessment, inputGradeScore)">
             </td>
             <td>
               <textarea #inputNote *ngIf="trainee" class="form-control note" id="exampleTextarea" rows="2" [value]="getNote(trainee).content"
@@ -124,8 +127,11 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-10">
-      <!-- <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea> -->
-      <textarea #inputBatchNote *ngIf="this.batches" class='form-control' placeholder="Enter your overall feedback on the batch" [value]="getWeekBatchNote(this.selectedBatch).content" (change)="updateNote(getWeekBatchNote(this.selectedBatch), inputBatchNote)"></textarea>
+      <!-- 
+      <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea>
+      -->
+      <textarea #inputBatchNote *ngIf="this.batches" class='form-control' placeholder="Enter your overall feedback on the batch"
+        [value]="getWeekBatchNote(this.selectedBatch).content" (change)="updateNote(getWeekBatchNote(this.selectedBatch), inputBatchNote)"></textarea>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -137,7 +143,7 @@
   </div>
 </div>
 <br>
-<!-- </div> -->
+<!-- TABLE **END** -->
 
 <!--ADD WEEK MODAL **START** -->
 <ng-template #addWeekContent let-c="close" let-d="dismiss" id="addWeek">
