@@ -9,4 +9,5 @@ export class Assessment {
     type: string;
     week: number;
     category: Category;
+    // refactor category to Skill
 }

@@ -23,7 +23,6 @@ import { ScrollEvent } from 'ngx-scroll-event';
 import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
 
-
 @Component({
   selector: 'app-assess',
   templateUrl: './assess.component.html',
@@ -54,9 +53,11 @@ export class AssessComponent implements OnInit {
   selectedTrainees: Trainee[] = [];
 
   pageOffsetValue;
-  constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
-    private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService,
-    private fb: FormBuilder, private datePipe: DatePipe) {}
+  constructor(
+    private batchService: BatchService, private assessmentService: AssessmentService,
+    private gradeService: GradeService, private categoryService: CategoryService,
+    private modalService: NgbModal, private noteService: NoteService,
+    private fb: FormBuilder, private datePipe: DatePipe) { }
 
   getPageOffsetHeight(event: ScrollEvent) {
     this.pageOffsetValue = pageYOffset;
@@ -88,41 +89,51 @@ export class AssessComponent implements OnInit {
 
     this.categoryService.fetchAllActive();
 
-    this.noteService.getList().subscribe(notes => {
-      this.notes = notes;
-    });
+    this.noteService.getList().subscribe(
+      notes => { this.notes = notes; }
+    );
 
-    this.assessmentService.getList().subscribe(assessment => this.assessments = assessment);
+    this.assessmentService.getList().subscribe(
+      assessments => { this.assessments = assessments; }
+    );
 
-    this.gradeService.listSubject.subscribe(grade => this.grades = grade);
+    this.gradeService.listSubject.subscribe(
+      grades => { this.grades = grades; }
+    );
 
-    this.gradeService.saveSubject.subscribe(grade => {
-      this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
-    });
-
-    this.categoryService.listSubject.subscribe(categories => {
-      this.categories = categories;
-      this.newAssessment.category = this.findCategory('Java');
-    });
-
-    this.batchService.getList().subscribe(batch => {
-      this.batches = batch;
-
-      if (this.batches.length !== 0) {
-        // Set the year dropdown.
-        this.batches.forEach(b => {
-          this.years.add(this.datePipe.transform(b.startDate, 'yyyy'));
-          const sDate = new Date(b.startDate);
-          if (sDate.getFullYear() > this.currentYear) {
-            this.currentYear = sDate.getFullYear();
-          }
-        });
-
-        this.switchYear(this.currentYear);
-        this.changeBatch(this.yearBatches[0]);
-        this.selectedWeek = this.selectedBatch.weeks;
+    this.gradeService.saveSubject.subscribe(
+      grade => {
+        this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
       }
-    });
+    );
+
+    this.categoryService.listSubject.subscribe(
+      categories => {
+        this.categories = categories;
+        this.newAssessment.category = this.findCategory('Java');
+      }
+    );
+
+    this.batchService.getList().subscribe(
+      batches => {
+        this.batches = batches;
+
+        if (this.batches.length !== 0) {
+          // Set the year dropdown.
+          this.batches.forEach(batch => {
+            this.years.add(this.datePipe.transform(batch.startDate, 'yyyy'));
+            const startDate = new Date(batch.startDate);
+            if (startDate.getFullYear() > this.currentYear) {
+              this.currentYear = startDate.getFullYear();
+            }
+          });
+
+          this.switchYear(this.currentYear);
+          this.changeBatch(this.yearBatches[0]);
+          this.selectedWeek = this.selectedBatch.weeks;
+        }
+      }
+    );
 
     // Every time an assessment is created, a set of default grades is created.
     this.assessmentService.getSaved().subscribe(assessment => {
@@ -142,9 +153,9 @@ export class AssessComponent implements OnInit {
                                         ASSESSMENTS
   *****************************************************************************************/
 
- /**
-  * Opens the modal to edit an Assessment with and sets the current assessment being edited.
-  */
+  /**
+   * Opens the modal to edit an Assessment with and sets the current assessment being edited.
+   */
   editAssessment(content, modalAssessment: Assessment) {
     this.editingAssessment = modalAssessment;
     this.modalService.open(content);
@@ -212,18 +223,20 @@ export class AssessComponent implements OnInit {
   /**
    * To become deprecated soon.
    * Finds the skill within this.categories.
-   * @param category The skill to find
-   * @returns the skill within this.categories
+   * @param category The skill to find.
+   * @returns the skill within this.categories.
    */
   findCategory(category: any): Category {
     let matchingCat;
 
     // Replace the .forEach with .find
-    this.categories.forEach(element => {
-      if (element.skillCategory === category) {
-        matchingCat = element;
+    this.categories.forEach(
+      element => {
+        if (element.skillCategory === category) {
+          matchingCat = element;
+        }
       }
-    });
+    );
 
     return matchingCat;
   }
@@ -233,11 +246,13 @@ export class AssessComponent implements OnInit {
   //  * @returns the skill within this.categories
   //  */
   // findCategory(category: any): Category {
-  //   return this.categories.find(element => {
+  //   return this.categories.find(
+  //    element => {
   //     if (element.skillCategory === category) {
   //       return true;
   //     }
-  //   });
+  //    }
+  //   );
   // }
 
   /****************************************************************************************
@@ -245,12 +260,12 @@ export class AssessComponent implements OnInit {
   *****************************************************************************************/
 
   /**
-   * Called
-   * @param trainee
-   * @param assessment
-   * @param input
+   * Called when user hits enter in the Grade Score Input element
+   * @param trainee The trainee whose assessment is being updated
+   * @param assessment The assessment whose grade is being updated
+   * @param input The id of the Grade Score Input element
    */
-  updateGrade(trainee: Trainee, assessment: Assessment, input) {
+  updateGrade(trainee: Trainee, assessment: Assessment, input: any) {
     const grade = this.getGrade(trainee, assessment);
     grade.score = Number(input.value);
     grade.dateReceived = '2000-01-01T01:01:01.000Z';
@@ -258,6 +273,11 @@ export class AssessComponent implements OnInit {
     this.gradeService.update(grade);
   }
 
+  /**
+   * Displays the trainee's grade for the specified assessment in the Grade Score Input element
+   * @param trainee The trainee whose assessment is being viewed
+   * @param assessment The assessment whose grade is being displayed
+   */
   getGrade(trainee: Trainee, assessment: Assessment) {
     const grade = new GradeByTraineeByAssessmentPipe().transform(this.grades, trainee, assessment)[0];
 
@@ -272,24 +292,34 @@ export class AssessComponent implements OnInit {
     }
   }
 
+  /**
+   * Compares the assessment's rawScore with the sum of the trainee's other assessments.
+   * Shown in the assessment header.
+   * @param assessment the assessment whose score you want to care.
+   * @returns assessment.rawScore / sumAll(this.assessment.rawScore) * 100.
+   */
   getPercentage(assessment: Assessment) {
     let sum = 0;
-    this.assessments.forEach(a => {
-      sum += a.rawScore;
-    });
+    this.assessments.forEach(
+      assess => { sum += assess.rawScore; }
+    );
 
     return Math.round((assessment.rawScore / sum) * 100);
   }
 
-  getOverallAverage() {
+  /**
+   * Compares the assessment's rawScore to every assessment by every trainee.
+   * @returns the weekly batch average.
+   */
+  getOverallAverage(): number {
     let total = 0;
 
-    this.assessments.forEach(a => {
+    this.assessments.forEach(assessment => {
       let sum = 0;
-      const percentage = this.getPercentage(a);
+      const percentage = this.getPercentage(assessment);
 
       this.selectedBatch.trainees.forEach(trainee => {
-        sum += (this.getGrade(trainee, a).score * percentage) / 100;
+        sum += (this.getGrade(trainee, assessment).score * percentage) / 100;
       });
 
       sum /= this.selectedBatch.trainees.length;
@@ -299,7 +329,12 @@ export class AssessComponent implements OnInit {
     return total;
   }
 
-  getAssessmentAverage(assessment: Assessment) {
+  /**
+   * Gets the batch average of the specified assessment.
+   * @param assessment The assessment to average
+   * @returns sum of trainee's scores divided by the number of trainees
+   */
+  getAssessmentAverage(assessment: Assessment): number {
     let total = 0;
 
     this.selectedBatch.trainees.forEach(trainee => {
@@ -313,7 +348,11 @@ export class AssessComponent implements OnInit {
                                         NOTES
   *****************************************************************************************/
 
-  getNote(trainee: Trainee) {
+  /**
+   * @param trainee The trainee whose note you want to read.
+   * @returns The content of the note on the specified trainee at the selected week.
+   */
+  getNote(trainee: Trainee): Note {
     let note: Note;
     note = new NoteByTraineeByWeekPipe().transform(this.notes, trainee, this.selectedWeek);
     if (note.content === undefined) {
@@ -322,9 +361,14 @@ export class AssessComponent implements OnInit {
     return note;
   }
 
+  /**
+   * @param batch The batch whose note you want to read
+   * @returns A new note if the note does not exist, or the note itself.
+   */
   getWeekBatchNote(batch: Batch): Note {
+    // Batch note is the first note in notes[]
     const n = this.notes.filter((note) => {
-      return (note.type === 'BATCH' && Number(note.week) === Number(this.selectedWeek));
+      return (note.type === 'BATCH' && note.week === this.selectedWeek);
     })[0];
 
     if (n != null) {
@@ -344,6 +388,10 @@ export class AssessComponent implements OnInit {
     }
   }
 
+  /**
+   * Initializes a note for every trainee and the batch for the specified week.
+   * @param week The week number.
+   */
   addWeekOfNotes(week: number) {
     this.selectedBatch.trainees.forEach(trainee => {
       const note = new Note();
@@ -365,7 +413,12 @@ export class AssessComponent implements OnInit {
     this.noteService.create(batchNote);
   }
 
-  updateNote(note: Note, input) {
+  /**
+   * Updates the note content with the value of the textarea element.
+   * @param note The note to update.
+   * @param input The textarea element.
+   */
+  updateNote(note: Note, input: any) {
     note.content = input.value;
     note.batch = this.selectedBatch;
     this.noteService.update(note);
@@ -375,10 +428,21 @@ export class AssessComponent implements OnInit {
                                         OTHER
   *****************************************************************************************/
 
-  open(content) {
+  /**
+   * Opens the specified modal.
+   * @param content The id of the modal to open.
+   */
+  open(content: any) {
     this.modalService.open(content);
   }
 
+  /**
+   * Used in the Add Week Modal. Adding a week to the selected Batch:
+   * - Initializes a note for every trainee and the batch
+   * - Updates the Batch in the database
+   * - Selects the new week
+   * - Retrieves all assessments, grades, and notes for the selected week.
+   */
   addWeek() {
     this.selectedBatch.weeks += 1;
     this.addWeekOfNotes(this.selectedBatch.weeks);
@@ -389,10 +453,19 @@ export class AssessComponent implements OnInit {
     this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
   }
 
+  /**
+   * Ordinary setter function. Should be named setYear()
+   */
   changeYear(year: number) {
-    this.currentYear = Number(year);
+    this.currentYear = year;
   }
 
+  /**
+   * Called when the user selects a Batch from the unnamed dropdown menu.
+   * Sets our selected variables to display the selected Batch's variables
+   * and sorts the Trainee list by name.
+   * @param batch The Batch to change to.
+   */
   changeBatch(batch: Batch) {
     this.selectedWeek = batch.weeks;
 
@@ -414,19 +487,29 @@ export class AssessComponent implements OnInit {
     });
   }
 
+  /**
+   * Only calls changeBatch()
+   * @deprecated Use changeBatch(Batch) instead.
+   * @param id The id of the Batch to switch to.
+   */
   switchBatch(id: number) {
     this.batches.forEach(batch => {
 
-      if (Number(batch.batchId) === Number(id)) {
+      if (batch.batchId === id) {
         this.changeBatch(batch);
       }
     });
   }
 
+  /**
+   * Called from the dropdown menu. Allows the user to view batches from a different year.
+   * @param year The year to switch to.
+   */
   switchYear(year: number) {
     this.currentYear = year;
     this.yearBatches = [];
     const y = new Date(year, 0, 1);
+
     for (const batch of this.batches) {
       const batchYear = new Date(batch.startDate);
       if (batchYear.getFullYear() === y.getFullYear()) {
@@ -436,11 +519,15 @@ export class AssessComponent implements OnInit {
     if (this.yearBatches[0] != null) {
       this.selectedWeek = this.yearBatches[0].weeks;
       this.switchBatch(this.yearBatches[0].batchId);
-
     }
   }
 
-  counter(i: number) {
+  /**
+   * This is being used to display numbered tabs. Not the most elegant solution...
+   * Only used to call: let i = index; in an *ngFor
+   * @param i The length of the array.
+   */
+  counter(i: number): Array<any> {
     return new Array(i);
   }
 

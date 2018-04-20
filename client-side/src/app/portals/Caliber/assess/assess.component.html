@@ -36,7 +36,7 @@
         </button>
 
         <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic2" (click)="switchBatch(selectedBatch.batchId)">
-          <div *ngFor="let  batch of yearBatches" class="custom-bold">
+          <div *ngFor="let batch of yearBatches" class="custom-bold">
             <button class="dropdown-item c-pointer f-size" (click)="changeBatch(selectedBatch)">
               <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
             </button>
@@ -61,7 +61,9 @@
 
   <div class="row">
     <div class="col">
-      <ngb-tabset id="weekTabset" activeId="{{this.selectedWeek}}" (tabChange)="fetchNews($event)" style="margin-top: -2px; border-bottom: white">
+      <!-- 04-19-2018 Inline styling is supposed to be bad practice. Consider replacing with class. -->
+      <ngb-tabset id="weekTabset" activeId="{{this.selectedWeek}}" (tabChange)="fetchNews($event)"
+        style="margin-top: -2px; border-bottom: white">
         <ngb-tab id="{{i+1}}" *ngFor="let in of counter(this.selectedBatch.weeks); let i = index">
           <ng-template ngbTabTitle>
             <div>Week {{i+1}}</div>
@@ -80,6 +82,7 @@
     </div>
   </div>
   <!-- TABS **END** -->
+  <!-- TABLE **START** -->
   <div class="row">
     <div class="col">
       <table class="table" style="border-collapse: collapse;">
@@ -140,6 +143,7 @@
   </div>
 </div>
 <br>
+<!-- TABLE **END** -->
 
 <!--ADD WEEK MODAL **START** -->
 <ng-template #addWeekContent let-c="close" let-d="dismiss" id="addWeek">
