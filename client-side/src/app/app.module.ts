@@ -5,7 +5,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
@@ -15,8 +14,6 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './Janus/janus.component';
-import { ChuckNorrisService } from './services/chuck-norris.service';
-import { CategoriesService } from './portals/Caliber/services/categories.service';
 import { Trainer } from './entities/Trainer';
 
 import { CaliberModule } from './portals/Caliber/caliber.module';
@@ -64,7 +61,6 @@ const routes: Routes = [
     JanusComponent,
   ],
   providers: [
-    ChuckNorrisService,
     RoleGuard,
     CookieService
   ],
