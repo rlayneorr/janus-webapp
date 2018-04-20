@@ -22,6 +22,8 @@ import { DatePipe } from '@angular/common';
 import { ScrollEvent } from 'ngx-scroll-event';
 import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
+import { Skill } from '../entities/Skill';
+import { SkillService } from '../services/skill.service';
 
 @Component({
   selector: 'app-assess',
@@ -39,6 +41,7 @@ export class AssessComponent implements OnInit {
   grades: Grade[] = [];
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
+  skills: Array<Skill>;
   categories: Category[] = [];
   notes: Note[] = [];
   rForm: FormGroup;
@@ -55,7 +58,7 @@ export class AssessComponent implements OnInit {
   pageOffsetValue;
   constructor(
     private batchService: BatchService, private assessmentService: AssessmentService,
-    private gradeService: GradeService, private categoryService: CategoryService,
+    private gradeService: GradeService, private skillService: SkillService,
     private modalService: NgbModal, private noteService: NoteService,
     private fb: FormBuilder, private datePipe: DatePipe) { }
 
@@ -87,7 +90,8 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    this.categoryService.fetchAllActive();
+    // this.categoryService.fetchAllActive();
+    this.skillService.fetchAllActive();
 
     this.noteService.getList().subscribe(
       notes => { this.notes = notes; }
@@ -107,12 +111,15 @@ export class AssessComponent implements OnInit {
       }
     );
 
-    this.categoryService.listSubject.subscribe(
-      categories => {
-        this.categories = categories;
-        this.newAssessment.category = this.findCategory('Java');
-      }
-    );
+    // this.categoryService.listSubject.subscribe(
+    //   categories => {
+    //     this.categories = categories;
+    //     this.newAssessment.category = this.findCategory('Java');
+    //   }
+    // );
+    this.skillService.listSubject.subscribe(skills => {
+      this.skills = skills;
+    });
 
     this.batchService.getList().subscribe(
       batches => {
@@ -206,18 +213,27 @@ export class AssessComponent implements OnInit {
    * Called when a skill is changed. Sets the skill of the assessment being edited to the new skill.
    * @param selectSkill The html element that was changed.
    */
-  editCategory(selectSkill: ElementRef) {
+  // editCategory(selectSkill: ElementRef) {
+  //   const newSkill = $(selectSkill).find(':selected').val();
+  //   this.editingAssessment.category = this.findCategory(newSkill);
+  // }
+
+  editSkill(selectSkill: ElementRef) {
     const newSkill = $(selectSkill).find(':selected').val();
-    this.editingAssessment.category = this.findCategory(newSkill);
+    this.editingAssessment.skill = this.findSkill(String(newSkill));
   }
 
   /**
    * Called when a skill is changed. Sets the skill of the new assessment to the new skill.
    * @param skillSelect The html element that was changed.
    */
-  changeCategory(skillSelect: ElementRef) {
+  // changeCategory(skillSelect: ElementRef) {
+  //   const newSkill = $(skillSelect).find(':selected').val();
+  //   this.newAssessment.category = this.findCategory(newSkill);
+  // }
+  changeSkill(skillSelect: ElementRef) {
     const newSkill = $(skillSelect).find(':selected').val();
-    this.newAssessment.category = this.findCategory(newSkill);
+    this.newAssessment.skill = this.findSkill(String(newSkill));
   }
 
   /**
@@ -240,21 +256,10 @@ export class AssessComponent implements OnInit {
 
     return matchingCat;
   }
-  // /**
-  //  * Finds the specified skill in this.categories
-  //  * @param category The skill to find
-  //  * @returns the skill within this.categories
-  //  */
-  // findCategory(category: any): Category {
-  //   return this.categories.find(
-  //    element => {
-  //     if (element.skillCategory === category) {
-  //       return true;
-  //     }
-  //    }
-  //   );
-  // }
 
+  findSkill(name: string): Skill {
+    return this.skills.find(skill => skill.skillName === name);
+  }
   /****************************************************************************************
                                         GRADES
   *****************************************************************************************/
