@@ -1,6 +1,6 @@
 import { environment } from '../../../../environments/environment';
 
-
+// url to our amazon ec2 instance
 const context = environment.context;
 
 export const urls = {
