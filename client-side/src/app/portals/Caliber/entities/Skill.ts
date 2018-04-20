@@ -1,5 +1,5 @@
 export class Skill {
-  skillID: number;
+  skillId: number;
   skillName: string;
   isActive: boolean;
 }

@@ -1,7 +1,10 @@
+import { Skill } from './Skill';
+
 export class SkillType {
-  skillTypeID: number;
+  skillTypeId: number;
   skillTypeName: string;
   skillTypeDesc: string;
+  skills: Array<Skill>;
   isActive: boolean;
   isCore: boolean;
 }
