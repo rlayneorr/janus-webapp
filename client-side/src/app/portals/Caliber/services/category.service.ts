@@ -28,50 +28,49 @@ export class CategoryService implements CRUD<Category> {
     this.listSubject = new BehaviorSubject([]);
   }
 
-  /*
-    =====================
-    BEGIN: API calls
-    =====================
-  */
+ /*
+   =====================
+   BEGIN: API calls
+   =====================
+ */
 
-  /**
-   * retrieves all categories
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-   *
-   */
-  public fetchAll(): Observable<Category[]> {
-    this.httpClient.get<Category[]>(urls.category.fetchAll())
-      .subscribe(result => this.listSubject.next(result));
-    return this.listSubject.asObservable();
-  }
+/**
+ * retrieves all categories
+ *
+ * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
+ *
+ */
+ public fetchAll(): Observable<Category[]> {
+   this.httpClient.get<Category[]>(urls.category.fetchAll()).subscribe(res => this.listSubject.next(res));
+   return this.listSubject.asObservable();
+ }
 
-  /**
-  * retrieves all ACTIVE categories
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-  *
-  */
-  public fetchAllActive(): Observable<Category[]> {
-    const url = urls.category.fetchAllActive();
-    this.httpClient.get<Category[]>(url)
-      .subscribe((results) => this.listSubject.next(results));
-    return this.listSubject.asObservable();
-  }
+ /**
+ * retrieves all ACTIVE categories
+ *
+ * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
+ *
+ */
+ public fetchAllActive(): Observable<Category[]> {
+   const url = urls.category.fetchAllActive();
+   this.httpClient.get<Category[]>(url)
+   .subscribe((results) => this.listSubject.next(results));
+   return this.listSubject.asObservable();
+ }
 
-  /**
-  * retrieves a category by its ID
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-  *
-  * @param id: number
-  *
-  * @return Observable<Category>
-  */
-  public fetchById(id: number): Observable<Category> {
-    const url = urls.category.fetchById(id);
-    return this.httpClient.get<Category>(url);
-  }
+ /**
+ * retrieves a category by its ID
+ *
+ * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
+ *
+ * @param id: number
+ *
+ * @return Observable<Category>
+ */
+ public fetchById(id: number): Observable<Category> {
+   const url = urls.category.fetchById(id);
+   return this.httpClient.get<Category>(url);
+ }
 
   /**
   * transmits a new Category to be created.

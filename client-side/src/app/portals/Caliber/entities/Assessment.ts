@@ -1,5 +1,5 @@
 import { Batch } from './Batch';
-import { Skill } from './Skill';
+import { Category } from './Category';
 
 export class Assessment {
     assessmentId: number;
@@ -8,5 +8,5 @@ export class Assessment {
     rawScore: number;
     type: string;
     week: number;
-    skill: Skill;
+    category: Category;
 }

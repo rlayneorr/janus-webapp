@@ -14,7 +14,7 @@ export class AlertsComponent implements OnInit {
   message: any;
 
   /**
-   * Global config for notifications
+   * global config for notification
    */
   public options = {
     position: ['bottom', 'left'],
@@ -26,25 +26,23 @@ export class AlertsComponent implements OnInit {
     preventDuplicates: true,
   };
 
-  constructor(
-    private alertService: AlertsService,
-    private notificationService: NotificationsService) { }
+  constructor(private alertService: AlertsService,
+    private notif: NotificationsService) { }
 
   ngOnInit() {
-    this.showNotification();
+    this.showNotif();
   }
 
   /**
-   * Gets a message from AlertService and displays the appropriate notification
-   * depending on whether message is a success or error
+   * display success/error notif
    */
-  showNotification() {
+  showNotif() {
     this.alertService.getMessage().subscribe(message => {
       this.message = message;
       if (this.message.type === 'success') {
-        this.notificationService.success('Success', this.message.text);
+        this.notif.success('Success', this.message.text);
       } else {
-        this.notificationService.error('Error', this.message.text);
+        this.notif.error('Error', this.message.text);
       }
     });
   }

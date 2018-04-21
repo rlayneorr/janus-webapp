@@ -1,6 +1,6 @@
 import { environment } from '../../../../environments/environment';
 
-// url to our amazon ec2 instance
+
 const context = environment.context;
 
 export const urls = {
@@ -20,7 +20,6 @@ export const urls = {
         delete: (batchId) => `${context}all/batch/delete/${batchId}`,
     },
 
-    // replace these endpoints with ours
     category: {
         fetchAll: () => `${context}vp/category`,
         fetchAllActive: () => `${context}category/all`,
@@ -65,26 +64,9 @@ export const urls = {
     qcStatus: {
         fetchAll: () => `${context}types/qcstatus/all`,
     },
-    // Old
-    // skill: {
-    //     fetchAll: () => `${context}types/skill/all`,
-    // },
 
     skill: {
-        fetchAll: () => `${context}skill`,
-        findAllActive: () => `${context}skill/active`,
-        findByName: (name: string) => `${context}skill/${name}`,
-        save: () => `${context}skill`,
-        update: (name: string) => `${context}skill/${name}`,
-        delete: (name: string) => `${context}skill/${name}`,
-    },
-
-    skillType: {
-        findAll: () => `${context}skilltype`,
-        findByName: (name: string) => `${context}skilltype/${name}`,
-        save: () => `${context}skilltype`,
-        update: (name: string) => `${context}skilltype/${name}`,
-        delete: (name: string) => `${context}skilltype/${name}`,
+        fetchAll: () => `${context}types/skill/all`,
     },
 
     trainee: {

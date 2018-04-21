@@ -10,14 +10,13 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 // services
 import { AlertsService } from './alerts.service';
-
+// import { environment } from '../../../environments/environment';
 // entities
 import { Assessment } from '../entities/Assessment';
 import { CRUD } from '../interfaces/api.interface';
 import { urls } from './urls';
-
 /**
- * This service manages calls to the web service
+ * this service manages calls to the web service
  * for Assessment objects
  */
 @Injectable()
@@ -26,8 +25,8 @@ export class AssessmentService implements CRUD<Assessment> {
   public savedSubject: Subject<Assessment>;
   public updatedSubject: Subject<Assessment>;
   public deletedSubject: Subject<Assessment>;
-
   constructor(public http: HttpClient, public alertService: AlertsService) {
+    // super(httpClient, alertService);
     this.listSubject = new BehaviorSubject([]);
     this.savedSubject = new Subject();
     this.updatedSubject = new Subject();
@@ -43,14 +42,14 @@ export class AssessmentService implements CRUD<Assessment> {
    =====================
    BEGIN: API calls
    =====================
-  */
+ */
   /**
-   * retrieves all assessments by batch ID by week number and pushes them
-   * on the list subject
-   *
-   * @param batchId: number
-   * @param week: number
-   */
+     * retrieves all assessments by batch ID by week number and pushes them
+     * on the list subject
+     *
+     * @param batchId: number
+     * @param week: number
+     */
   public fetchByBatchIdByWeek(batchId: number, week: number): Observable<Assessment[]> {
     this.listSubject.next([]);
     this.http.get<any[]>(urls.assessment.fetchByBatchIdByWeek(batchId, week))
@@ -65,7 +64,7 @@ export class AssessmentService implements CRUD<Assessment> {
    *
    * @see save()
    *
-   * Creates an assessment and pushes the created assessement on
+   * creates an assessment and pushes the created assessement on
    * the savedSubject
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
@@ -77,17 +76,17 @@ export class AssessmentService implements CRUD<Assessment> {
     return this.savedSubject.asObservable();
   }
   /**
-   * Creates an assessment and pushes the created assessement on
-   * the savedSubject
-   *
-   * NOTE: the createAssessment on the AssessmentController does NOT
-   * return the created assessment object with the generated ID so
-   * this is going to fake it and not make a lot of sense as a result
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-   *
-   * @param assessment: Assessment
-   */
+  * creates an assessment and pushes the created assessement on
+  * the savedSubject
+  *
+  * NOTE: the createAssessment on the AssessmentController does NOT
+  * return the created assessment object with the generated ID so
+  * this is going to fake it and not make a lot of sense as a result
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
+  *
+  * @param assessment: Assessment
+  */
   public save(assessment: Assessment): void {
     const url = urls.assessment.save();
     const fetchUrl = urls.assessment.fetchByBatchIdByWeek(assessment.batch.batchId, assessment.week);
@@ -98,7 +97,7 @@ export class AssessmentService implements CRUD<Assessment> {
           switch (true) {
             case (value.rawScore !== assessment.rawScore):
             case (value.type !== assessment.type):
-            case (value.skill.skillId !== assessment.skill.skillId):
+            case (value.category.categoryId !== assessment.category.categoryId):
               return false;
             default:
               return true;
@@ -145,7 +144,7 @@ export class AssessmentService implements CRUD<Assessment> {
    * @param assessment: Assessment
    */
   public delete(assessment: Assessment): Observable<any> {
-    const result = this.http.delete(urls.assessment.delete(assessment.assessmentId)).subscribe(res => {
+    const result = this.http.delete(urls.assessment.delete(assessment.assessmentId)).subscribe( res => {
       this.deletedSubject.next(assessment);
     });
     return this.deletedSubject.asObservable();

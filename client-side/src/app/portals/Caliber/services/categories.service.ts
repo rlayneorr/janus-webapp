@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // rxjs
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 // services
 import { environment } from '../../../../environments/environment';
 import { CategoryService } from './category.service';
+
 
 // entities
 import { Category } from '../entities/Category';

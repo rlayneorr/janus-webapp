@@ -14,6 +14,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
+
 // routing
 import { routes } from './caliber.routes';
 import { SpringInterceptor } from './interceptors/spring.interceptor';
@@ -34,6 +35,7 @@ import { TrainingTypeService } from './services/training-type.service';
 import { ColorService } from './services/colors/color.service';
 import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.service';
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
+import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
@@ -236,6 +238,7 @@ import { ReportingService } from './services/reporting.service';
     TrainerService,
     LocationService,
     CategoryService,
+    CategoriesService,
     GranularityService,
     AlertsService,
     VpHomeBarGraphService,

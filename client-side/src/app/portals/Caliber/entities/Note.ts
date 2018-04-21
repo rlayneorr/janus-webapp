@@ -2,7 +2,6 @@ import { Batch } from './Batch';
 import { Trainee } from './Trainee';
 
 export class Note {
-    // 1802Java-Nick says: Shouldn't this be readonly?
     public static TYPE_QCBATCH = 'QC_BATCH';
     public static TYPE_QCTRAINEE = 'QC_TRAINEE';
     public static TYPE_TRAINEE = 'TRAINEE';

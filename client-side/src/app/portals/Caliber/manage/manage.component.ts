@@ -16,6 +16,7 @@ import { BatchService } from '../services/batch.service';
 import { TrainerService } from '../services/trainer.service';
 import { LocationService } from '../services/location.service';
 import { TrainingTypeService } from '../services/training-type.service';
+import { SkillService } from '../services/skill.service';
 import { TraineeService } from '../services/trainee.service';
 import { TraineeStatusService } from '../services/trainee-status.service';
 
@@ -89,6 +90,7 @@ export class ManageComponent implements OnInit, OnDestroy {
     private trainerService: TrainerService,
     private locationService: LocationService,
     private trainingTypeService: TrainingTypeService,
+    private skillService: SkillService,
     private traineeService: TraineeService,
     private modalService: NgbModal,
     private datePipe: DatePipe,

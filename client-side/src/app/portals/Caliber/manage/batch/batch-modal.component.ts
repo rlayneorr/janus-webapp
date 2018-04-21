@@ -161,7 +161,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((types) => this.setTrainingTypes(types));
 
     /*fetches all skills */
-    this.skillListSubscription = this.skillService.fetchAll()
+    this.skillListSubscription = this.skillService.listSubject
       .subscribe((skills) => this.setSkills(skills));
 
     /* fetches all batches */
@@ -190,9 +190,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
     this.clone();
   }
-  /** 
-   * Unsubscribes from all subscriptions before destroyed.
-   */
+
   ngOnDestroy(): void {
     this.locationListSubscription.unsubscribe();
     this.trainerListSubscription.unsubscribe();
