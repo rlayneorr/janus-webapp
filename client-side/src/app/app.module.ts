@@ -24,6 +24,8 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
+import { CallbackComponent } from './callback/callback.component';
+import { AuthService } from './services/auth.service';
 import { HydraClientModule } from './hydra-client/hydra-client.module';
 import { environment } from '../environments/environment';
 
@@ -35,6 +37,7 @@ const routes: Routes = [
     component: JanusComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
+      {path: 'callback', component: CallbackComponent},
       { path: 'Caliber', loadChildren: './portals/Caliber/caliber.module#CaliberModule' },
       { path: 'AssignForce', loadChildren: './portals/Assign-Force/assign-force.module#AssignForceModule' },
       { path: 'TrackForce', loadChildren: './portals/Track-Force/track-force.module#TrackForceModule' },
@@ -62,11 +65,13 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     JanusComponent,
+    CallbackComponent,
   ],
   providers: [
     ChuckNorrisService,
     RoleGuard,
-    CookieService
+    CookieService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
