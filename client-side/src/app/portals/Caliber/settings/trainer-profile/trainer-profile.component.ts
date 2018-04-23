@@ -14,6 +14,7 @@ import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 import { HydraTraineeService } from '../../../../hydra-client/services/trainee/hydra-trainee.service';
+import { UserRole } from '../../../../hydra-client/entities/UserRole';
 
 @Component({
   selector: 'app-trainer-profile',
@@ -37,10 +38,10 @@ export class TrainerProfilesComponent implements OnInit {
   */
   trainers: Array<HydraTrainer>;
   titles: Array<any>;
-  roles: Array<any>;
+  roles: Array<UserRole>;
   model = new HydraTrainer();
   currEditTrainer: HydraTrainer;
-  newRole: string;
+  newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
 
@@ -66,7 +67,7 @@ export class TrainerProfilesComponent implements OnInit {
     //   (batches: Batch[]) => { this.batches = batches; }
     // );
 
-    this.batchService.fetchAllByTrainerId(this.currentTrainer.trainerId).subscribe(
+    this.batchService.fetchAllByTrainerId(this.currentTrainer.userId).subscribe(
       (batches: HydraBatch[]) => { this.batches = batches; }
     );
 
@@ -78,7 +79,7 @@ export class TrainerProfilesComponent implements OnInit {
     });
     this.trainerService.fetchTitles().subscribe(res => this.titles = res);
     this.trainerService.fetchRoles().subscribe(res => {
-      this.roles = (res.filter(role => role !== 'INACTIVE')); // filter out INACTIVE role
+      this.roles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
     });
   }
 

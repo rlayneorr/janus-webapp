@@ -38,7 +38,7 @@ export class DeactivateTrainerComponent implements OnInit {
      * @memberof DeactivateTrainerComponent
      */
     deactivateTrainer() {
-        this.trainer.role = 'INACTIVE';
+        this.trainer.role.role = 'INACTIVE';
         this.ts.update(this.trainer).subscribe((resp) => {
             this.ts.fetchAll();
         });

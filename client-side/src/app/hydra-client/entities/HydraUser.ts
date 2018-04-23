@@ -1,3 +1,5 @@
+import { UserRole } from "./UserRole";
+
 export class HydraUser {
     userId: number;
     firstName: string;
@@ -6,7 +8,7 @@ export class HydraUser {
     email: string;
     password: string;
     backupPassword: string;
-    role: string;
+    role: UserRole;
     mobilePhone: string;
     homePhone: string;
     token: string;
