@@ -1,17 +1,16 @@
 import { User } from './User';
+import { UserRole } from './UserRole';
 
 export class Trainer extends User {
    // public static ROLE_INACTIVE = 'ROLE_INACTIVE';
    title: string;
-    constructor(trainerId: number, password: string, firstName: string, lastName: string,
-        title: string, email: string, role: any) {
-            this.trainerId = trainerId;
-            this.password = password;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.title = title;
-            this.email = email;
-            this.role = role;
 
-        }
+   constructor(userId?: number, firstName?: string, middleName?: string, lastName?: string,
+    email?: string, password?: string, backupPassword?: string, role?: UserRole, 
+    mobilePhone?: string, homePhone?: string, token?: string, title?: string) {
+        super(userId, firstName, middleName, lastName, email, password,
+            backupPassword, role, mobilePhone, homePhone, token);
+        
+        this.title = title;
+    }
 }
