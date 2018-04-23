@@ -15,9 +15,9 @@ export class TrainerPipePipe implements PipeTransform {
    */
   transform(trainers: HydraTrainer[], status: String): HydraTrainer[] {
     if (status === 'ROLE_INACTIVE') {
-      return trainers.filter(trainer => trainer.role === status);
+      return trainers.filter(trainer => trainer.role.role === status);
     } else {
-      return trainers.filter(trainer => trainer.role !== 'ROLE_INACTIVE');
+      return trainers.filter(trainer => trainer.role.role !== 'ROLE_INACTIVE');
     }
   }
 }

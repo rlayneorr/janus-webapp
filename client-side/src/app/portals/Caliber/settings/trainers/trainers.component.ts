@@ -6,6 +6,7 @@ import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserRole } from '../../../../hydra-client/entities/UserRole';
 
 
 @Component({
@@ -18,12 +19,12 @@ export class TrainersComponent implements OnInit {
   trainers: HydraTrainer[] = [];
   filteredTrainers: HydraTrainer[] = [];
   titles: Array<any>;
-  roles: Array<any>;
+  roles: Array<UserRole>;
   model = new HydraTrainer();
   activeStatus: String;
   currEditTrainer: HydraTrainer;
   newTrainer: HydraTrainer;
-  newRole: any;
+  newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
   addForm: FormGroup;
@@ -37,14 +38,14 @@ export class TrainersComponent implements OnInit {
       this.trainers = resp;
       if (resp) {
         this.filteredTrainers = resp.filter(s => {
-            return s.role !== 'INACTIVE';
+            return s.role.role !== 'INACTIVE';
           }
         );
       }
     });
     this.trainerService.fetchTitles().subscribe(res => this.titles = res);
     this.trainerService.fetchRoles().subscribe(res => {
-      this.roles = (res.filter(role => role !== 'INACTIVE')); // filter out INACTIVE role
+      this.roles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
     });
     this.initFormControl();
   }
@@ -146,7 +147,7 @@ export class TrainersComponent implements OnInit {
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
     const temp = new HydraTrainer();
-    temp.trainerId = this.currEditTrainer.trainerId;
+    temp.userId = this.currEditTrainer.userId;
     temp.role = this.newRole;
     temp.title = this.newTitle;
     temp.firstName = modal.firstName;
