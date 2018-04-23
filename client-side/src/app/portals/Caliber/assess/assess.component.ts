@@ -23,7 +23,8 @@ import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-ba
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
-
+import { SkillService } from '../services/skill.service';
+import { Skill } from '../entities/Skill';
 
 @Component({
   selector: 'app-assess',
