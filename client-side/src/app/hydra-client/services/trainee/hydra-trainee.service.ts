@@ -68,4 +68,25 @@ export class HydraTraineeService {
     const url = this.urlService.trainees.delete(traineeId);
     return this.httpClient.delete<HydraTrainee>(url);
   }
+
+  /**
+   * Finds a specific trainee by their email.
+   * 
+   * @param email 
+   */
+  public findByEmail(email: string): Observable<HydraTrainee> {
+    const url = this.urlService.trainees.findByEmail(email);
+    return this.httpClient.get<HydraTrainee>(url);
+  }
+
+  /**
+   * Finds all trainees and returns the Observable.
+   * 
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
+   */
+  public findAll():Observable<HydraTrainee[]> {
+    const url = this.urlService.trainees.findAll();
+    return this.httpClient.get<HydraTrainee[]>(url);
+
+  }
 }
