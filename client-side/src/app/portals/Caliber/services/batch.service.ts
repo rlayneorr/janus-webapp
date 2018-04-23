@@ -18,6 +18,7 @@ import { Batch } from '../entities/Batch';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { urls } from './urls';
 import { stringifyDate } from '../util/utils';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 
 /**
@@ -28,6 +29,7 @@ import { stringifyDate } from '../util/utils';
 export class BatchService implements CRUD<Batch> {
 
     public listSubject: BehaviorSubject<Batch[]>;
+    public batches: Batch[];
     public savedSubject: Subject<Batch>;
     public updatedSubject: Subject<Batch>;
     public deletedSubject: Subject<Batch>;
@@ -59,10 +61,30 @@ export class BatchService implements CRUD<Batch> {
     public fetchAll() {
       this.http.get<any[]>(urls.batch.fetchAll())
         .subscribe((results) => {
-          this.listSubject.next(results);
-          this.http.get<any[]>('/skillType/batches/${Batch ID here}').subscribe(res => {
-            //return res;
-          });
+          for (let result in results) {
+            this.http.get<any[]>(urls.skill.fetchById(result['skillTypeId'])).subscribe(res => {
+              this.batches.push({
+                batchId: result['batchId'],
+                resourceId: result['resourceId'],
+                trainingName: result['trainingName'],
+                trainer: result['trainerId'],
+                coTrainer: result['cotrainerId'],
+                skill: res['skills'],
+                skillType: res['skillTypeName'],
+                trainingType: result['trainingType'],
+                startDate: result['startDate'],
+                endDate: result['endDate'],
+                location: result['location'],
+                address: result['address'],
+                goodGradeThreshold: null,
+                borderlineGradeThreshold: null,
+                trainees: result['traineeId'],
+                weeks: null,
+                gradedWeeks: null
+              });
+            });
+          }
+          this.listSubject.next(this.batches);
         });
       return this.listSubject.asObservable();
     }

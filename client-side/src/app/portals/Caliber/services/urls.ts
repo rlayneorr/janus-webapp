@@ -68,6 +68,7 @@ export const urls = {
 
     skill: {
         fetchAll: () => `${context}types/skill/all`,
+        fetchById: (skillTypeId) => `${context}skilltypes/${skillTypeId}`
     },
 
     trainee: {

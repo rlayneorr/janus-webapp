@@ -10,7 +10,7 @@ export class Batch {
     coTrainer: Trainer;
 
     skill: string[];
-    skillType: string[];
+    skillType: string;
 
     trainingType: string;
     startDate: Date;
