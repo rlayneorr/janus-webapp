@@ -20,8 +20,8 @@ import { DatePipe } from '@angular/common';
 import { ScrollEvent } from 'ngx-scroll-event';
 import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
-import { Skill } from '../entities/Skill';
 import { SkillService } from '../services/skill.service';
+import { Skill } from '../entities/Skill';
 
 @Component({
   selector: 'app-assess',
