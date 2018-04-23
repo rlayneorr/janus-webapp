@@ -19,15 +19,15 @@ export class TechnicalFeedbackComponent implements OnInit {
   techList: Category[];
   filteredTechList: Category[] = [];
 
-  @Input() technologyForm: FormGroup;
+  @Input() skillForm: FormGroup;
 
   /**
    *
    * @param categoryService
    */
   constructor(private categoryService: CategoriesService) {
-    this.technologyForm = new FormGroup({
-       technology: new FormControl(),
+    this.skillForm = new FormGroup({
+       skill: new FormControl(),
        result: new FormControl(),
        status: new FormControl(),
        comment: new FormControl()
@@ -35,7 +35,7 @@ export class TechnicalFeedbackComponent implements OnInit {
   }
 
   /**
-   * gets technology list and filters out duplicates
+   * gets skill list and filters out duplicates
    */
   ngOnInit() {
     this.categoryService.listSubject.asObservable().subscribe(cats => {
