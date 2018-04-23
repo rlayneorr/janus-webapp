@@ -56,7 +56,7 @@
       <div class="col-12" *ngIf="batchSelectionList.length != 0">
         <th>View Weekly Progress
           <select (change)="changeBatch($event.target.value)">
-            <option *ngFor="let batch of batchSelectionList" value="{{batch.id}}">{{batch.name}} - {{batch.trainer.fName}}</option>
+            <option *ngFor="let batch of batchSelectionList" value="{{batch.id}}">{{batch.name}} - {{batch.trainer.firstName}}</option>
           </select>
       </div>
       <div #barChart class="col-md-12">

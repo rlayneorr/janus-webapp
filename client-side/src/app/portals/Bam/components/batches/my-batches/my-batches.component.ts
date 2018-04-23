@@ -3,6 +3,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BatchService } from '../../../services/batch.service';
 import { Batch } from '../../../models/batch.model';
 import { SessionService } from '../../../services/session.service';
+import { UsersService } from '../../../services/users.service';
+import { CurriculumService } from '../../../services/curriculum.service';
 
 @Component({
   selector: 'app-my-batches',
@@ -11,14 +13,17 @@ import { SessionService } from '../../../services/session.service';
 })
 export class MyBatchesComponent implements OnInit {
 
-  email: string;
+  userId: number;
   filterText: string;
   batches: Batch[];
 
-  constructor(private batchService: BatchService, private sessionService: SessionService) { }
+  constructor(private batchService: BatchService,
+    private sessionService: SessionService,
+    private usersService: UsersService,
+    private currService: CurriculumService) { }
 
   ngOnInit() {
-    this.email = this.sessionService.getUser().email;
+    this.userId = this.sessionService.getUser().userId;
     this.loadCurrent();
   }
 
@@ -28,7 +33,7 @@ export class MyBatchesComponent implements OnInit {
    */
   loadCurrent() {
     this.batches = null;
-    this.batchService.getAllBatchesInProgress(this.email)
+    this.batchService.getAllBatchesInProgress(this.userId)
       .subscribe(batches => this.setbatches(batches),  err => this.batches = []);
   }
 
@@ -38,7 +43,7 @@ export class MyBatchesComponent implements OnInit {
    */
   loadPast() {
     this.batches = null;
-    this.batchService.getPastBatches(this.email)
+    this.batchService.getPastBatches(this.userId)
       .subscribe(batches => this.setbatches(batches), err => this.batches = []);
   }
 
@@ -48,7 +53,7 @@ export class MyBatchesComponent implements OnInit {
    */
   loadFuture() {
     this.batches = null;
-    this.batchService.getFutureBatches(this.email)
+    this.batchService.getFutureBatches(this.userId)
       .subscribe(batches => this.setbatches(batches), err => this.batches = []);
   }
 
@@ -59,6 +64,22 @@ export class MyBatchesComponent implements OnInit {
    */
   setbatches(batches) {
     this.batches = batches;
+
+    for (let i = 0; i < this.batches.length; i++) {
+
+      const userID = this.batches[i].trainerID;
+      const currID = this.batches[i].curriculumID;
+
+      this.usersService.getUserByID(userID).subscribe(trainer => {
+        this.batches[i].trainer = trainer;
+      }, err => this.batches[i].trainer = null);
+
+      this.currService.getCurriculumById(currID).subscribe(curriculum => {
+        this.batches[i].curriculum = curriculum[0];
+      });
+
+    }
+
     if (!batches) {
       this.batches = [];
     }

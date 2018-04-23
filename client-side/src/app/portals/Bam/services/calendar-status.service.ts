@@ -89,8 +89,9 @@ export class CalendarStatusService {
   /**
    * Returns default status id and string
    * @author Sean Sung | Batch: 1712-dec10-java-steve
+   *  Last updated by: Trevor Fortner (1802-Matt)
    */
-  public getDefaultStatus(): SubtopicStatus {
-    return new SubtopicStatus(1, Status.PLANNED);
+  public getDefaultStatus(): string {
+    return 'Planned';
   }
 }

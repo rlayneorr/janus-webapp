@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ViewContainerRef } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -17,7 +16,6 @@ import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
 import { CategoriesService } from './portals/Caliber/services/categories.service';
-import { Trainer } from './entities/Trainer';
 
 import { CaliberModule } from './portals/Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
@@ -26,6 +24,14 @@ import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
 import { HydraClientModule } from './hydra-client/hydra-client.module';
 import { environment } from '../environments/environment';
+import { HydraBatchUtilService } from './services/hydra-batch-util.service';
+
+// Error Alert
+import { ErrorAlertComponent } from './hydra-client/ui/error-alert/error-alert.component';
+import { HydraInterceptor } from './hydra-client/interceptors/hydra.interceptor';
+
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { ToastrOptions } from './hydra-client/ui/error-alert/toastr-options';
 
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
@@ -55,7 +61,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
     HttpClientModule,
-    HydraClientModule
+    HydraClientModule,
+    ToastModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -66,7 +73,10 @@ const routes: Routes = [
   providers: [
     ChuckNorrisService,
     RoleGuard,
-    CookieService
+    CookieService,
+    HydraBatchUtilService,
+    ErrorAlertComponent,
+    {provide: ToastOptions, useClass: ToastrOptions}
   ],
   bootstrap: [AppComponent]
 })
