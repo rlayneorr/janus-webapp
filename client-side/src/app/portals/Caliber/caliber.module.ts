@@ -164,6 +164,7 @@ import { TagFilterPipe } from './settings/screening/question/question.filter';
 import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
+import { CategoryService } from './services/category.service';
 
 
 @NgModule({
@@ -344,7 +345,9 @@ import { ReportingService } from './services/reporting.service';
     BucketsService,
     TagsService,
     HttpErrorHandlerService,
-    SimpleTraineeService
+    SimpleTraineeService,
+    CategoriesService,
+    CategoryService
   ],
   bootstrap: [
     TrainersComponent
