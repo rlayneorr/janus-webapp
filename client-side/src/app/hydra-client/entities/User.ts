@@ -1,17 +1,17 @@
 import { UserRole } from "./UserRole";
 
 export class User {
-    private userId: number;
-    private firstName: string;
-    private middleName: string;
-    private lastName: string;
-    private email: string;
-    private password: string;
-    private backupPassword: string;
-    private role: UserRole;
-    private mobilePhone: string;
-    private homePhone: string;
-    private token: string;
+    userId: number;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    backupPassword: string;
+    role: UserRole;
+    mobilePhone: string;
+    homePhone: string;
+    token: string;
 
     constructor(userId: number, firstName: string, middleName: string, lastName: string,
         email: string, password: string, backupPassword: string, role: UserRole, 
@@ -27,6 +27,6 @@ export class User {
             this.mobilePhone = mobilePhone;
             this.homePhone = homePhone;
             this.token = token;
-        }
-
     }
+
+}

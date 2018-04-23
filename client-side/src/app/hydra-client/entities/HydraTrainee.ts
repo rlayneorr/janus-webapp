@@ -23,11 +23,11 @@ export class HydraTrainee {
     endClient: string;
     traineeUserInfo: User;
 
-    constructor(traineeId: number, resourceId: number, trainingStatus: string, batch: HydraBatch, 
-        phoneNumber: string, skypeId: string, profileUrl: string,recruiterName: string, 
-        college: string, degree: string,major: string, techScreenerName: string,
-        projectCompletion: string, flagStatus: string, flagNotes: string, marketingStatus: string,
-        client: string, endClient: string, traineeUserInfo: HydraUser) {
+    constructor(traineeId?: number, resourceId?: number, trainingStatus?: string, batch?: HydraBatch, 
+        phoneNumber?: string, skypeId?: string, profileUrl?: string, recruiterName?: string, 
+        college?: string, degree?: string, major?: string, techScreenerName?: string,
+        projectCompletion?: string, flagStatus?: string, flagNotes?: string, marketingStatus?: string,
+        client?: string, endClient?: string, traineeUserInfo?: User) {
             this.traineeId = traineeId;
             this.resourceId = resourceId;
             this.trainingStatus = trainingStatus;

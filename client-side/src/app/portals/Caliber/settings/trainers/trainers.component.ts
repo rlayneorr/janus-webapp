@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
+import { Trainer } from '../../../../hydra-client/entities/Trainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,14 +16,14 @@ import { UserRole } from '../../../../hydra-client/entities/UserRole';
 })
 
 export class TrainersComponent implements OnInit {
-  trainers: HydraTrainer[] = [];
-  filteredTrainers: HydraTrainer[] = [];
+  trainers: Trainer[] = [];
+  filteredTrainers: Trainer[] = [];
   titles: Array<any>;
   roles: Array<UserRole>;
-  model = new HydraTrainer();
+  model = new Trainer();
   activeStatus: String;
-  currEditTrainer: HydraTrainer;
-  newTrainer: HydraTrainer;
+  currEditTrainer: Trainer;
+  newTrainer: Trainer;
   newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
@@ -70,7 +70,7 @@ export class TrainersComponent implements OnInit {
    * adds a new trainer to the database
    * @param modal: modal from create trainer form
    */
-  addTrainer(modal: HydraTrainer) {
+  addTrainer(modal: Trainer) {
     this.newTrainer = modal;
     console.log(modal);
     console.log(modal.firstName);
@@ -88,7 +88,7 @@ export class TrainersComponent implements OnInit {
    * @param content: modal form
    * @param modalTrainer: trainer belong to this modal
    */
-  editTrainer(content, modalTrainer: HydraTrainer) {
+  editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
@@ -146,7 +146,7 @@ export class TrainersComponent implements OnInit {
    */
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
-    const temp = new HydraTrainer();
+    const temp = new Trainer();
     temp.userId = this.currEditTrainer.userId;
     temp.role = this.newRole;
     temp.title = this.newTitle;
