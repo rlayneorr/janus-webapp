@@ -46,4 +46,3 @@ export class SkillService implements Fetch<string> {
     return this.listSubject.asObservable();
   }
 }
-

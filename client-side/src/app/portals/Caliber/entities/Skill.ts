@@ -3,4 +3,3 @@ export class Skill {
   skillName: string;
   isActive: boolean;
 }
-

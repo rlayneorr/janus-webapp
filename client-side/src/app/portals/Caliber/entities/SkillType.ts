@@ -8,4 +8,3 @@ export class SkillType {
   isActive: boolean;
   isCore: boolean;
 }
-

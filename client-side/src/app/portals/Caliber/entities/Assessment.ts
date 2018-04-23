@@ -10,4 +10,3 @@ export class Assessment {
     week: number;
     category: Category;
 }
-

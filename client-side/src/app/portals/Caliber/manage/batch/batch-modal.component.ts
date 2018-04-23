@@ -184,13 +184,10 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
     this.clone();
   }
-<<<<<<< HEAD
 
-=======
   /**
    * Unsubscribes from all subscriptions before destroyed.
    */
->>>>>>> feature-skills-refactor-assess-save
   ngOnDestroy(): void {
     this.locationListSubscription.unsubscribe();
     this.trainerListSubscription.unsubscribe();
