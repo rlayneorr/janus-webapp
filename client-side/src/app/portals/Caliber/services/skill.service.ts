@@ -101,3 +101,4 @@ export class SkillService implements CRUD<Skill> {
     return Observable.of(skill);
   }
 }
+

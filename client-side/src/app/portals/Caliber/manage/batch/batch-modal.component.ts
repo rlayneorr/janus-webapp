@@ -16,6 +16,7 @@ import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
 import { ApiService } from '../../services/api.service';
+import { Skill } from '../../entities/Skill';
 
 
 @Component({
@@ -62,8 +63,8 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     this.setSkills([]);
   }
 
-  public setSkills(skills: string[]): void {
-    this.skills = skills;
+  public setSkills(skills: Skill[]): void {
+    this.skills = skills.map(skill => skill.skillName);
   }
 
   public setLocations(locations: Address[]): void {
@@ -190,7 +191,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
     this.clone();
   }
-  /** 
+  /**
    * Unsubscribes from all subscriptions before destroyed.
    */
   ngOnDestroy(): void {

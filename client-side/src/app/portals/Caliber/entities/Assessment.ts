@@ -10,3 +10,4 @@ export class Assessment {
     week: number;
     skill: Skill;
 }
+

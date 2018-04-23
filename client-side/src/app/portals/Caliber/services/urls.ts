@@ -65,10 +65,6 @@ export const urls = {
     qcStatus: {
         fetchAll: () => `${context}types/qcstatus/all`,
     },
-    // Old
-    // skill: {
-    //     fetchAll: () => `${context}types/skill/all`,
-    // },
 
     skill: {
         fetchAll: () => `${context}skill`,
