@@ -1,8 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 
-const context = environment.context;
-
 @Injectable()
 export class UrlService {
   private context: string;
@@ -151,6 +149,6 @@ export class UrlService {
   };
 
   constructor() {
-    this.context = context;
+    this.context = environment.gambitContext;
   }
 }
