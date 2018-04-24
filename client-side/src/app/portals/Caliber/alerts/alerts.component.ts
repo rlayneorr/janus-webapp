@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
 import { AlertsService } from '../services/alerts.service';
 import { NotificationsService } from 'angular2-notifications-lite';
 

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../hydra-client/services/urls/url.service';
 
 
 @Injectable()
 export class AssignforcesyncService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private urlService: UrlService) { }
 
   /**
    * Pulls from the Assign force DB and populates the BAM DB
@@ -14,7 +15,7 @@ export class AssignforcesyncService {
    * @param
    */
   refreshBatches() {
-    this.http.get(environment.assignForce.refreshBatches()).map(
+    this.http.get(this.urlService.assignForce.refreshBatches()).map(
       data => {
         return data;
       }

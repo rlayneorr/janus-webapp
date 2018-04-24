@@ -6,7 +6,7 @@ export class SubtopicName {
     name: string;
     topic: TopicName;
     type: SubtopicType;
-    constructor(id: number, name: string, topic: TopicName, type: SubtopicName) {
+    constructor(id: number, name: string, topic: TopicName, type: SubtopicType) {
         this.id = id;
         this.name = name;
         this.topic = topic;
