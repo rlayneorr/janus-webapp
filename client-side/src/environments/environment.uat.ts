@@ -6,7 +6,7 @@ const context = 'https://dev-caliber.revature.tech';
 const bam = 'http://18.219.59.193:9001/api/v2';
 export const environment = {
   production: false,
-  gambitContext: 'http://hydra-gateway-service-dev.cfapps.io/api/v2',
+  gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000',
   context: context, // change for what the production environment would actually be
   bam: bam,
   url: 'http://localhost:8085/',
