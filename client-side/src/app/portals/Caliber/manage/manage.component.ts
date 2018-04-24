@@ -29,7 +29,7 @@ import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { Address } from '../entities/Address';
 import { Trainee } from '../entities/Trainee';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
-import { HydraTrainer } from '../../../hydra-client/entities/HydraTrainer';
+import { Trainer } from '../../../hydra-client/entities/Trainer';
 
 
 // components
@@ -63,7 +63,7 @@ export class ManageComponent implements OnInit {
   batchToUpdate: HydraBatch = new HydraBatch;
   traineeProfileUrl: string;
   test: string;
-  trainers: HydraTrainer[] = [];
+  trainers: Trainer[] = [];
   trainerNames: string[] = [];
   locations: Address[] = [];
   trainingTypes: string[] = [];
@@ -250,7 +250,7 @@ export class ManageComponent implements OnInit {
    *
    * @param trainers
    */
-  private setTrainers(trainers: HydraTrainer[]): void {
+  private setTrainers(trainers: Trainer[]): void {
     this.trainers = trainers;
   }
 

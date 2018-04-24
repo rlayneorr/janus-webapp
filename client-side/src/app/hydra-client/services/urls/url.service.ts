@@ -47,9 +47,10 @@ export class UrlService {
     fetchAll: () => `${this.context}/trainers`,
     save: () => `${this.context}/trainers`,
     update: () => `${this.context}/trainers`,
+    promote: () => `${this.context}/trainers/promote`,
     getTitles: () => `${this.context}/trainers/titles`,
     getRoles: () => `${this.context}/trainers/roles`,
-
+    delete: () => `${this.context}/trainers`,
   };
 
   assessment = {

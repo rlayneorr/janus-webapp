@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
+import { Trainer } from '../../../../hydra-client/entities/Trainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserRole } from '../../../../hydra-client/entities/UserRole';
 
 
 @Component({
@@ -15,15 +16,15 @@ import { Router } from '@angular/router';
 })
 
 export class TrainersComponent implements OnInit {
-  trainers: HydraTrainer[] = [];
-  filteredTrainers: HydraTrainer[] = [];
+  trainers: Trainer[] = [];
+  filteredTrainers: Trainer[] = [];
   titles: Array<any>;
-  roles: Array<any>;
-  model = new HydraTrainer();
+  roles: Array<UserRole>;
+  model = new Trainer();
   activeStatus: String;
-  currEditTrainer: HydraTrainer;
-  newTrainer: HydraTrainer;
-  newRole: any;
+  currEditTrainer: Trainer;
+  newTrainer: Trainer;
+  newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
   addForm: FormGroup;
@@ -37,14 +38,14 @@ export class TrainersComponent implements OnInit {
       this.trainers = resp;
       if (resp) {
         this.filteredTrainers = resp.filter(s => {
-            return s.role !== 'INACTIVE';
+            return s.role.role !== 'INACTIVE';
           }
         );
       }
     });
     this.trainerService.fetchTitles().subscribe(res => this.titles = res);
     this.trainerService.fetchRoles().subscribe(res => {
-      this.roles = (res.filter(role => role !== 'INACTIVE')); // filter out INACTIVE role
+      this.roles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
     });
     this.initFormControl();
   }
@@ -69,7 +70,7 @@ export class TrainersComponent implements OnInit {
    * adds a new trainer to the database
    * @param modal: modal from create trainer form
    */
-  addTrainer(modal: HydraTrainer) {
+  addTrainer(modal: Trainer) {
     this.newTrainer = modal;
     console.log(modal);
     console.log(modal.firstName);
@@ -87,7 +88,7 @@ export class TrainersComponent implements OnInit {
    * @param content: modal form
    * @param modalTrainer: trainer belong to this modal
    */
-  editTrainer(content, modalTrainer: HydraTrainer) {
+  editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
@@ -145,8 +146,8 @@ export class TrainersComponent implements OnInit {
    */
   updateTrainer(modal) {
     // replacing the trainer's fields with the new ones
-    const temp = new HydraTrainer();
-    temp.trainerId = this.currEditTrainer.trainerId;
+    const temp = new Trainer();
+    temp.userId = this.currEditTrainer.userId;
     temp.role = this.newRole;
     temp.title = this.newTitle;
     temp.firstName = modal.firstName;

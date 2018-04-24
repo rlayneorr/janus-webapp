@@ -9,11 +9,12 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
+import { Trainer } from '../../../../hydra-client/entities/Trainer';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 import { HydraTraineeService } from '../../../../hydra-client/services/trainee/hydra-trainee.service';
+import { UserRole } from '../../../../hydra-client/entities/UserRole';
 
 @Component({
   selector: 'app-trainer-profile',
@@ -26,7 +27,7 @@ export class TrainerProfilesComponent implements OnInit {
   * create variables for all batches,
   * current trainer and their batch
   */
-  currentTrainer: HydraTrainer;
+  currentTrainer: Trainer;
   batches: Array<HydraBatch>;
   currentBatch: HydraBatch;
   currentBatchTrainees: Array<HydraTrainee>;
@@ -35,12 +36,12 @@ export class TrainerProfilesComponent implements OnInit {
   * create variables for subscribing and trainers
   * and storing form data
   */
-  trainers: Array<HydraTrainer>;
+  trainers: Array<Trainer>;
   titles: Array<any>;
-  roles: Array<any>;
-  model = new HydraTrainer();
-  currEditTrainer: HydraTrainer;
-  newRole: string;
+  roles: Array<UserRole>;
+  model = new Trainer();
+  currEditTrainer: Trainer;
+  newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
 
@@ -66,7 +67,7 @@ export class TrainerProfilesComponent implements OnInit {
     //   (batches: Batch[]) => { this.batches = batches; }
     // );
 
-    this.batchService.fetchAllByTrainerId(this.currentTrainer.trainerId).subscribe(
+    this.batchService.fetchAllByTrainerId(this.currentTrainer.userId).subscribe(
       (batches: HydraBatch[]) => { this.batches = batches; }
     );
 
@@ -78,7 +79,7 @@ export class TrainerProfilesComponent implements OnInit {
     });
     this.trainerService.fetchTitles().subscribe(res => this.titles = res);
     this.trainerService.fetchRoles().subscribe(res => {
-      this.roles = (res.filter(role => role !== 'INACTIVE')); // filter out INACTIVE role
+      this.roles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
     });
   }
 
@@ -135,7 +136,7 @@ export class TrainerProfilesComponent implements OnInit {
   * @param content: String
   * @param modalTrainer: Trainer
   */
-  editTrainer(content, modalTrainer: HydraTrainer) {
+  editTrainer(content, modalTrainer: Trainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;

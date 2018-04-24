@@ -4,7 +4,7 @@ import { Input } from '@angular/core/';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 import { TrainerService } from '../../../../../hydra-client/services/trainer/trainer.service';
 import { setInterval } from 'timers';
-import { HydraTrainer } from '../../../../../hydra-client/entities/HydraTrainer';
+import { Trainer } from '../../../../../hydra-client/entities/Trainer';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { HydraTrainer } from '../../../../../hydra-client/entities/HydraTrainer'
 })
 export class DeactivateTrainerComponent implements OnInit {
     @Input()
-    trainer: HydraTrainer;
+    trainer: Trainer;
 
     constructor(private modalService: NgbModal, private ts: TrainerService) {
     }
@@ -38,7 +38,7 @@ export class DeactivateTrainerComponent implements OnInit {
      * @memberof DeactivateTrainerComponent
      */
     deactivateTrainer() {
-        this.trainer.role = 'INACTIVE';
+        this.trainer.role.role = 'INACTIVE';
         this.ts.update(this.trainer).subscribe((resp) => {
             this.ts.fetchAll();
         });
