@@ -78,7 +78,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     this.trainingTypes = types;
   }
 
-  public clone() {
+  public clone(): void {
     Object.assign(this.batch, this.initialBatch);
   }
 
@@ -143,7 +143,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     /*
    * keep an updated list of trainers

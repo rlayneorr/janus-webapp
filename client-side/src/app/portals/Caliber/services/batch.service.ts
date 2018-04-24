@@ -58,7 +58,7 @@ export class BatchService implements CRUD<Batch> {
      *
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
      */
-    public fetchAll() {
+    public fetchAll(): Observable<Batch[]> {
       this.http.get<any[]>(urls.batch.fetchAll())
         .subscribe((results) => {
           for (let result in results) {
@@ -115,7 +115,7 @@ export class BatchService implements CRUD<Batch> {
     *
     * @param batch: Batch
     */
-    public create(batch: Batch) {
+    public create(batch: Batch): Observable<Batch> {
       this.http.post<any>(urls.batch.save(), JSON.stringify(this.prepareForApi(batch)))
       .subscribe((results) => {
         this.savedSubject.next(results);
@@ -131,7 +131,7 @@ export class BatchService implements CRUD<Batch> {
      *
      * @param batch: Batch
      */
-    public update(batch: Batch) {
+    public update(batch: Batch): Observable<Batch> {
       this.http.put<any>(urls.batch.update(), JSON.stringify(this.prepareForApi(batch)))
       .subscribe((results) => {
         this.savedSubject.next(results);
@@ -148,7 +148,7 @@ export class BatchService implements CRUD<Batch> {
      *
      * @param batch: Batch
      */
-    public delete(batch: Batch) {
+    public delete(batch: Batch): Observable<Batch> {
       this.http.delete(urls.batch.delete(batch.batchId))
       .subscribe((results: any) => {
         this.deletedSubject.next(results);
@@ -165,8 +165,9 @@ export class BatchService implements CRUD<Batch> {
      *
      * @return any
      */
-    protected prepareForApi(batch: Batch) {
-      const output: any = {};
+    // We should find a way to make this have an explicit non-any type
+    protected prepareForApi(batch: Batch): any {
+      let output: any = {};
       Object.assign(output, batch);
 
       output.startDate = stringifyDate(batch.startDate);
