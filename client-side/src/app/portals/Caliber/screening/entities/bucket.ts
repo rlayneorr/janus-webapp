@@ -5,7 +5,7 @@ import {Question} from './question';
 */
 export interface Bucket {
     bucketID: number;
-    bucketCategory: string;
+    bucketSkill: string;
     bucketDescription: string;
     isActive: boolean;
     questions: Question[];

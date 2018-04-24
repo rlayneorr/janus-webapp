@@ -35,7 +35,7 @@ After the candidate has given their introduction,
 the screener will proceed to the question-and-answer part of the interview.
 A list of questions will be fetched from the server / database,
 based on the skills that the screener input on the candidate introduction page.
-Screener will be able to see a set of category tabs,
+Screener will be able to see a set of skill tabs,
 each of which has a set of questions in a table.
 
 Screener has the ability to navigate between tabs ad nauseam,
@@ -52,9 +52,9 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
   // Used to display the categories
   questionBuckets: Bucket[];
 
-  // holds the current category. Used to control
+  // holds the current skill. Used to control
   // which questions are displayed in the questions table.
-  currentCategory: Bucket;
+  currentSkill: Bucket;
 
   // value entered enables finish button
   generalComment: string;
@@ -90,7 +90,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
         myBuckets.push(
           {
             bucketID: e.bucketId,
-            bucketCategory: e.bucketCategory,
+            bucketSkill: e.bucketSkill,
             bucketDescription: e.bucketDescription,
             isActive: e.isActive,
             questions: [],
@@ -110,7 +110,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
         this.skillTypeBucketService.bucketsByWeight.buckets = JSON.parse(JSON.stringify(this.questionBuckets));
 
         if (this.questionBuckets.length > 0) {
-          this.currentCategory = this.questionBuckets[0];
+          this.currentSkill = this.questionBuckets[0];
         }
       }));
     }));
@@ -135,16 +135,16 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  // sets the current category, allowing for dynamic change
+  // sets the current skill, allowing for dynamic change
   // of the questions being displayed.
   setBucket(bucketID: number) {
     // iterate through each bucket
     // if the current bucket's id matches the bucket id
-    // of the category selected by the user
+    // of the skill selected by the user
     for (const bucket of this.questionBuckets) {
       if (bucket.bucketID === bucketID) {
-        // set the current category to the current bucket.
-        this.currentCategory = bucket;
+        // set the current skill to the current bucket.
+        this.currentSkill = bucket;
       }
     }
   }

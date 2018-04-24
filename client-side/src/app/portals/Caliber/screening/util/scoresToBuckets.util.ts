@@ -33,7 +33,7 @@ export class ScoresToBucketsUtil {
             }
             // If questions were answered from this bucket, mark bucket as used
             if (questionsAsked > 0) {
-                bucketNames[bucketIndex] = thisBucket.bucketCategory;
+                bucketNames[bucketIndex] = thisBucket.bucketSkill;
                 totalWeights += bucketsByWeight.weights[bucketIndex];
                 totalBuckets++;
             // If no questions from this bucket were asked, ignore in final calculations

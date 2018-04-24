@@ -2,43 +2,43 @@ import {Bucket} from '../entities/bucket';
 
 export const BUCKETS: Bucket[] = [
     { bucketID: 1,
-      bucketCategory: 'Basic Java',
+      bucketSkill: 'Basic Java',
       bucketDescription: 'OCA level Java questions',
       isActive: true,
       questions: null
     },
     { bucketID: 2,
-      bucketCategory: 'SQL',
+      bucketSkill: 'SQL',
       bucketDescription: 'SQL database questions',
       isActive: true,
       questions: null
     },
     { bucketID: 3,
-      bucketCategory: 'JavaScript',
+      bucketSkill: 'JavaScript',
       bucketDescription: 'JavaScript questions',
       isActive: true,
       questions: null
     },
     { bucketID: 4,
-      bucketCategory: 'HTML',
+      bucketSkill: 'HTML',
       bucketDescription: 'JavaScript questions',
       isActive: true,
       questions: null
     },
     { bucketID: 5,
-      bucketCategory: 'CSS',
+      bucketSkill: 'CSS',
       bucketDescription: 'JavaScript questions',
       isActive: true,
       questions: null
     },
     { bucketID: 6,
-      bucketCategory: 'Spring',
+      bucketSkill: 'Spring',
       bucketDescription: 'JavaScript questions',
       isActive: true,
       questions: null
     },
     { bucketID: 7,
-      bucketCategory: 'Angular',
+      bucketSkill: 'Angular',
       bucketDescription: 'JavaScript questions',
       isActive: true,
       questions: null
