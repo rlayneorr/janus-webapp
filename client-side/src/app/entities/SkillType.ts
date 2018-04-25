@@ -1,5 +1,10 @@
 import { Skill } from './Skill';
 
+/** 
+ * SkillType stores the main curriculum for a Revature training batch, such as:
+ * PEGA, MicroServices, Appian, JTA, .NET, etc.
+ */
+
 export class SkillType {
   skillTypeId: number;
   skillTypeName: string;
@@ -7,4 +12,6 @@ export class SkillType {
   skills: Array<Skill>;
   isActive: boolean;
   isCore: boolean;
+  weights: Array<number>;
+  buckets: Array<number>;
 }

@@ -22,7 +22,7 @@ import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
 import { SkillService } from '../services/skill.service';
-import { Skill } from '../entities/Skill';
+import { Skill } from '../../../entities/Skill';
 
 @Component({
   selector: 'app-assess',
@@ -84,7 +84,7 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    this.skillService.fetchAllActive();
+    this.skillService.findAllActive();
 
     this.noteService.getList().subscribe(notes => {
       this.notes = notes;

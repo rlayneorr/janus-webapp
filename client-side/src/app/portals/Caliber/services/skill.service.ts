@@ -13,14 +13,15 @@ import { environment } from '../../../../environments/environment';
 // entities
 import { CRUD } from '../interfaces/api.interface';
 import { urls } from './urls';
-import { Skill } from '../entities/Skill';
+import { Skill } from '../../../entities/Skill';
 
+const context = environment.skill;
 /**
 * this service manages calls to the web services
 * for Skill objects
 */
 @Injectable()
-export class SkillService implements CRUD<Skill> {
+export class SkillService {
 
   public listSubject = new BehaviorSubject<Skill[]>([]);
 
@@ -40,10 +41,8 @@ export class SkillService implements CRUD<Skill> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
    *
    */
-  public fetchAll(): Observable<Skill[]> {
-    this.httpClient.get<Skill[]>(urls.skill.fetchAll())
-      .subscribe(result => this.listSubject.next(result));
-    return this.listSubject.asObservable();
+  public findAll(): Observable<Skill[]> {
+    return this.httpClient.get<Skill[]>(context.findAll());
   }
 
   /**
@@ -52,11 +51,8 @@ export class SkillService implements CRUD<Skill> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   *
   */
-  public fetchAllActive(): Observable<Skill[]> {
-    const url = urls.skill.findAllActive();
-    this.httpClient.get<Skill[]>(url)
-      .subscribe((results) => this.listSubject.next(results));
-    return this.listSubject.asObservable();
+  public findAllActive(): Observable<Skill[]> {
+    return this.httpClient.get<Skill[]>(context.findAllActive());
   }
 
   /**
@@ -68,9 +64,21 @@ export class SkillService implements CRUD<Skill> {
   *
   * @return Observable<Skill>
   */
-  public fetchById(name: string): Observable<Skill> {
-    const url = urls.skill.findByName(name);
-    return this.httpClient.get<Skill>(url);
+  public findById(id: number): Observable<Skill> {
+    return this.httpClient.get<Skill>(context.findById(id));
+  }
+
+  /**
+   * Retrieves a skill by its name.
+   * 
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
+   * 
+   * @param name
+   * 
+   * @return Observable<Skill>
+   */
+  public findByName(name: string): Observable<Skill> {
+    return this.httpClient.get<Skill>(context.findByName(name));
   }
 
   /**
@@ -81,7 +89,7 @@ export class SkillService implements CRUD<Skill> {
   * @param skill: Skill
   */
   public create(skill: Skill): Observable<Skill> {
-    const url = urls.skill.save();
+    const url = environment.skill.save();
     return this.httpClient.post<Skill>(url, JSON.stringify(skill));
   }
 
@@ -93,11 +101,17 @@ export class SkillService implements CRUD<Skill> {
    * @param skill: Skill
    */
   public update(skill: Skill): Observable<Skill> {
-    const url = urls.skill.update(skill.skillName);
+    const url = environment.skill.updateById(skill.skillId);
     return this.httpClient.put<Skill>(url, JSON.stringify(skill));
   }
 
-  public delete(skill: Skill): Observable<Skill> {
-    return Observable.of(skill);
+  /**
+   * Transmits a Skill to be deleted from the database.
+   * 
+   * @param skill: Skill
+   */
+  public delete(skill: Skill): Observable<boolean> {
+    // return Observable.of(skill);
+    return this.httpClient.delete<boolean>(context.delete(skill.skillId));
   }
 }
