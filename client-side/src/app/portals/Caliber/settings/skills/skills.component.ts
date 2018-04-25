@@ -13,8 +13,8 @@ import { environment } from '../../../../../environments/environment';
 // entities
 import { Category } from '../../entities/Category';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { Skill } from '../../../../hydra-client/entities/Skill';
-import { SkillService } from '../../../../hydra-client/services/skill/skill.service';
+import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
+import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
 
 @Component({
   selector: 'app-skills',
@@ -22,7 +22,7 @@ import { SkillService } from '../../../../hydra-client/services/skill/skill.serv
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit {
-  newSkill: Skill = {
+  newSkill: GambitSkill = {
     skillId: 0,
     skillName: '',
     isActive: true
@@ -30,12 +30,12 @@ export class SkillsComponent implements OnInit {
 
   addForm: FormGroup;
 
-  skills: Skill[];
-  currentSkill: Skill;
+  skills: GambitSkill[];
+  currentSkill: GambitSkill;
 
   columns;
   numColumns: number;
-  constructor(private modalService: NgbModal, private skillService: SkillService, private fb: FormBuilder) {
+  constructor(private modalService: NgbModal, private skillService: GambitSkillService, private fb: FormBuilder) {
   }
 
   /**
@@ -151,7 +151,7 @@ export class SkillsComponent implements OnInit {
    * @param {Skill} index
    * @memberof SkillsComponent
    */
-  editopen(content, index: Skill) {
+  editopen(content, index: GambitSkill) {
     this.currentSkill = JSON.parse(JSON.stringify(index)); // essentially clone the object, there may be a better way
     this.modalService.open(content);
   }

@@ -1,4 +1,4 @@
-import { Skill } from './Skill';
+import { GambitSkill } from './GambitSkill';
 
 /**
  * SkillType stores the main curriculum for a Revature training batch, such as:
@@ -9,7 +9,7 @@ export class SkillType {
   skillTypeId: number;
   skillTypeName: string;
   skillTypeDesc: string;
-  skills: Array<Skill>;
+  skills: Array<GambitSkill>;
   isActive: boolean;
   isCore: boolean;
 }

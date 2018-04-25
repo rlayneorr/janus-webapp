@@ -11,7 +11,7 @@ import { AlertService } from '../alerts/alerts.service';
 import { environment } from '../../../../environments/environment';
 
 // entities
-import { Skill } from '../../../hydra-client/entities/Skill';
+import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
 
 const context = environment.skill;
 /**
@@ -19,9 +19,9 @@ const context = environment.skill;
 * for Skill objects
 */
 @Injectable()
-export class SkillService {
+export class GambitSkillService {
 
-  public listSubject = new BehaviorSubject<Skill[]>([]);
+  public listSubject = new BehaviorSubject<GambitSkill[]>([]);
 
   constructor(public httpClient: HttpClient, public alertService: AlertService) {
     this.listSubject = new BehaviorSubject([]);
@@ -38,8 +38,8 @@ export class SkillService {
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
    */
-  public findAll(): Observable<Skill[]> {
-    return this.httpClient.get<Skill[]>(context.findAll());
+  public findAll(): Observable<GambitSkill[]> {
+    return this.httpClient.get<GambitSkill[]>(context.findAll());
   }
 
   /**
@@ -47,8 +47,8 @@ export class SkillService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public findAllActive(): Observable<Skill[]> {
-    return this.httpClient.get<Skill[]>(context.findAllActive());
+  public findAllActive(): Observable<GambitSkill[]> {
+    return this.httpClient.get<GambitSkill[]>(context.findAllActive());
   }
 
   /**
@@ -57,10 +57,10 @@ export class SkillService {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   *
   * @param id: number
-  * @return Observable<Skill>
+  * @return Observable<GambitSkill>
   */
-  public findById(id: number): Observable<Skill> {
-    return this.httpClient.get<Skill>(context.findById(id));
+  public findById(id: number): Observable<GambitSkill> {
+    return this.httpClient.get<GambitSkill>(context.findById(id));
   }
 
   /**
@@ -69,10 +69,10 @@ export class SkillService {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
    *
    * @param name
-   * @return Observable<Skill>
+   * @return Observable<GambitSkill>
    */
-  public findByName(name: string): Observable<Skill> {
-    return this.httpClient.get<Skill>(context.findByName(name));
+  public findByName(name: string): Observable<GambitSkill> {
+    return this.httpClient.get<GambitSkill>(context.findByName(name));
   }
 
   /**
@@ -82,9 +82,9 @@ export class SkillService {
   *
   * @param skill: Skill
   */
-  public create(skill: Skill): Observable<Skill> {
+  public create(skill: GambitSkill): Observable<GambitSkill> {
     const url = environment.skill.save();
-    return this.httpClient.post<Skill>(url, JSON.stringify(skill));
+    return this.httpClient.post<GambitSkill>(url, JSON.stringify(skill));
   }
 
   /**
@@ -94,17 +94,17 @@ export class SkillService {
    *
    * @param skill: Skill
    */
-  public update(skill: Skill): Observable<Skill> {
+  public update(skill: GambitSkill): Observable<GambitSkill> {
     const url = environment.skill.updateById(skill.skillId);
-    return this.httpClient.put<Skill>(url, JSON.stringify(skill));
+    return this.httpClient.put<GambitSkill>(url, JSON.stringify(skill));
   }
 
   /**
    * Transmits a Skill to be deleted from the database.
    *
-   * @param skill: Skill
+   * @param skill: GambitSkill
    */
-  public delete(skill: Skill): Observable<boolean> {
+  public delete(skill: GambitSkill): Observable<boolean> {
     // return Observable.of(skill);
     return this.httpClient.delete<boolean>(context.delete(skill.skillId));
   }
