@@ -13,7 +13,7 @@ import { environment } from '../../../../environments/environment';
 // entities
 import { CRUD } from '../interfaces/api.interface';
 import { urls } from './urls';
-import { Skill } from '../../../entities/Skill';
+import { Skill } from '../../../hydra-client/entities/Skill';
 
 const context = environment.skill;
 /**

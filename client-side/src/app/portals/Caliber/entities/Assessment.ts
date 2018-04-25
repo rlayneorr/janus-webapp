@@ -1,5 +1,5 @@
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { Skill } from '../../../entities/Skill';
+import { Skill } from '../../../hydra-client/entities/Skill';
 
 export class Assessment {
     assessmentId: number;

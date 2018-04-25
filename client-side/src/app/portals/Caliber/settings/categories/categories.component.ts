@@ -14,7 +14,7 @@ import { environment } from '../../../../../environments/environment';
 import { Category } from '../../entities/Category';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 // import { HydraSkill } from '../../../../hydra-client/entities/HydraSkill';
-import { Skill } from '../../../../entities/Skill';
+import { Skill } from '../../../../hydra-client/entities/Skill';
 import { SkillService } from '../../services/skill.service';
 // import { HydraSkillService } from '../../../../hydra-client/services/skill/hydra-skill.service';
 

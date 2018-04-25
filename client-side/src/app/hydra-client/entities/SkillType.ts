@@ -12,6 +12,4 @@ export class SkillType {
   skills: Array<Skill>;
   isActive: boolean;
   isCore: boolean;
-  weights: Array<number>;
-  buckets: Array<number>;
 }
