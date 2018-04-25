@@ -87,10 +87,10 @@ import { Batch } from '../entities/Batch';
 
 describe('AssessmentService', () => {
 
-    //declarations
+    // declarations
     let a: Assessment;
-    
-    //configure the ngModule for each test
+
+    // configure the ngModule for each test
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
@@ -106,15 +106,16 @@ describe('AssessmentService', () => {
 
 
     fit('should return an Observable<Assessment>',
-        inject ([HttpTestingController, AssessmentService], (httpController : HttpTestingController, assessmentService: AssessmentService) => {
-          let b = new Batch(); 
+        inject ([HttpTestingController, AssessmentService],
+          (httpController: HttpTestingController, assessmentService: AssessmentService) => {
+          const b = new Batch();
           b.batchId = 19;
           const mockAssessments =  [
                     {assessmentId: 10, title: 'title', batch: b, rawScore: 0, type: 'type', week: 3, category: null}
           ];
 
           assessmentService.fetchByBatchIdByWeek(18, 3).subscribe((assess => {
-            let assessmentArr : Assessment[];
+            let assessmentArr: Assessment[];
             assessmentArr = assess;
             expect(assessmentArr[0].assessmentId).toBe(10);
           }));
