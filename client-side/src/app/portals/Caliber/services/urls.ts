@@ -66,7 +66,12 @@ export const urls = {
     },
 
     skill: {
-        fetchAll: () => `${context}types/skill/all`,
+        fetchAll: () => `${context}skill`,
+        findAllActive: () => `${context}skill/active`,
+        findByName: (name: string) => `${context}skill/${name}`,
+        save: () => `${context}skill`,
+        update: (name: string) => `${context}skill/${name}`,
+        delete: (name: string) => `${context}skill/${name}`
     },
 
     trainee: {
