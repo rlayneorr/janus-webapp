@@ -114,6 +114,9 @@ import { PanelOverallFeedbackComponent } from './panel/overall-feedback/panel-ov
 import { FeedbackIconComponent } from './quality/feedback-icon/feedback-icon.component';
 import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedback/quality-overall-feedback.component';
 import { TraineeLineChartComponent } from './reports/trainee-line-chart/trainee-line-chart.component';
+import { ScreeningComponent } from './screening/components/screening/screening.component';
+import { CandidatesScreeningListComponent } from './screening/components/candidates-screening-list/candidates-screening-list.component';
+import { QuestionsTableComponent } from './screening/components/questions-table/questions-table.component';
 import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
 import { FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -125,6 +128,18 @@ import { CannotDeleteModalComponent } from './manage/cannot-delete-modal/cannot-
 
 
 import { settings } from 'cluster';
+import { FinalReportComponent } from './screening/components/final-report/final-report.component';
+import { IntroductionComponent } from './screening/components/introduction/introduction.component';
+import { PassFailComponent } from './screening/components/pass-fail/pass-fail.component';
+import { ScreeningConfigComponent } from './settings/screening/screening.component';
+import { BucketComponent } from './settings/screening/bucket/bucket.component';
+import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component';
+import { PaginationControlsComponent, PaginatePipe } from 'ngx-pagination';
+import { SearchPipe } from './screening/util/search.pipe';
+import { ViolationFlagComponent } from './screening/components/violation-flag/violation-flag.component';
+import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
+import { QuestionComponent } from './settings/screening/question/question.component';
+import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 
 export const Dependencies = {
   imports: [
@@ -161,6 +176,9 @@ export const Dependencies = {
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
+    PaginatePipe,
+    SearchPipe,
+    BucketFilterPipe,
 
     // components
     CaliberComponent,
@@ -213,6 +231,20 @@ export const Dependencies = {
     PanelOverallFeedbackComponent,
     FeedbackIconComponent,
     QualityOverallFeedbackComponent,
+    ScreeningComponent,
+    CandidatesScreeningListComponent,
+    QuestionsTableComponent,
+    FinalReportComponent,
+    IntroductionComponent,
+    PassFailComponent,
+    ScreeningConfigComponent,
+    BucketComponent,
+    SkillTypeBucketsComponent,
+    TraineeLineChartComponent,
+    PaginationControlsComponent,
+    ViolationFlagComponent,
+    SkillTypesComponent,
+    QuestionComponent,
 
     DeleteBatchModalComponent,
     DeleteTraineeModalComponent,
@@ -261,6 +293,10 @@ export const Dependencies = {
   ],
   exports: [
     TraineeTechSkillsComponent,
+    TraineeLineChartComponent,
+    PaginationControlsComponent,
+    ViolationFlagComponent,
+    PaginatePipe,
   ],
   entryComponents: [
     BarGraphModalComponent,
