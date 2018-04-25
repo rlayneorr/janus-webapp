@@ -79,14 +79,11 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Response, ResponseOptions, XHRBackend} from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import { AssessmentService } from '../services/assessment.service';
 import { Assessment } from '../entities/Assessment';
-import { Batch } from '../../Track-Force/models/batch.model';
 import { AlertService } from '../../Bam/services/alert.service';
+import { Batch } from '../entities/Batch';
 
 describe('AssessmentService', () => {
 
@@ -111,7 +108,7 @@ describe('AssessmentService', () => {
     fit('should return an Observable<Assessment>',
         inject ([HttpTestingController, AssessmentService], (httpController : HttpTestingController, assessmentService: AssessmentService) => {
           let b = new Batch(); 
-          b.id = 19;
+          b.batchId = 19;
           const mockAssessments =  [
                     {assessmentId: 10, title: 'title', batch: b, rawScore: 0, type: 'type', week: 3, category: null}
           ];
