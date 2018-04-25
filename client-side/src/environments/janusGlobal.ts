@@ -7,13 +7,13 @@ export const janusGlobal = {
       name: 'Assign Force',
       homeUrl: '/AssignForce/home',
       baseUrl: '/AssignForce',
-      imgUrl: '../../assets/assign-force.png'
+      imgUrl: '../assets/assign-force.png'
     },
     {
       name: 'Caliber',
       homeUrl: '/Caliber/home',
       baseUrl: '/Caliber',
-      imgUrl: '../../assets/caliber.png'
+      imgUrl: '../assets/caliber.png'
     },
     {
       name: 'Track Force',

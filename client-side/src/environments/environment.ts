@@ -11,7 +11,11 @@ export const environment = {
 
   context: context, // change for what the production environment would actually be
   bam: bam,
-  url: 'http://localhost:80/',
+  url: 'http://54.166.255.85:8085/',
+  msurl: 'http://34.227.178.103:',
+
+  assets: 'http://52.87.205.55:8086/angular/assets/',
+  //assets: '../../../../../assets/', //url for local testing
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,

@@ -8,6 +8,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      //require('karma-phantomjs-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
@@ -27,11 +28,22 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false,
-	browserDisconnectTimeout: 20000,
-	browserNoActivityTimeout: 100000,
-	captureTimeout: 360000,
-	processKillTimeout: 10000,
+    customLaunchers: {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--headless',
+          '--remote-debugging-port=9222',
+        ]
+      }
+    },
+    browsers: ['ChromeHeadless'],
+    singleRun: true,
+    /** * maximum number of tries a browser will attempt in the case of a disconnection */ 
+    browserDisconnectTolerance: 2,
+    /** * How long will Karma wait for a message from a browser before disconnecting from it (in ms). */ 
+    browserNoActivityTimeout: 50000,
   });
+  
 };
+

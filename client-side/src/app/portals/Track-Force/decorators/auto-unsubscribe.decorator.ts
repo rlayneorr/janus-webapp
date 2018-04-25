@@ -6,7 +6,6 @@
  */
 
 // This automagical code obtained from https://netbasal.com/automagically-unsubscribe-in-angular-4487e9853a88
-// Why are we just pulling code from online???? - Blake
 export function AutoUnsubscribe( constructor ) {
 
     // make copy of the ngOnDestroy callback
@@ -15,17 +14,17 @@ export function AutoUnsubscribe( constructor ) {
     // upon destruction of the component...
     constructor.prototype.ngOnDestroy = function () {
       // ...iterate thru its properties...
-      for (const prop in this) {
-      const property = this[ prop ];
+      for ( const prop in this ) {
+        const property = this[ prop ];
         // if property exists and has-a unsubscribe...
         if ( property && (typeof property.unsubscribe === 'function') ) {
-          // ...call it
+          //...call it
           property.unsubscribe();
         }
       }
       // if the callback we copied was function, we invoke it now with any arguments that were passed in
-      // via constructor
-      // original && typeof original === 'function' && original.apply(this, arguments);
+      //  via constructor
+      original && typeof original === 'function' && original.apply(this, arguments);
     };
 
 }
