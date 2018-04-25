@@ -25,9 +25,9 @@ export class StubSessionService {
   constructor() {
       this.bamUser = {
         'userId': 3,
-        'fName': 'Ryan',
-        'mName': null,
-        'lName': 'Lessley',
+        'firstName': 'Ryan',
+        'middleName': null,
+        'lastName': 'Lessley',
         'email': 'rl@revature.com',
         'pwd': '1234',
         'role': 2,
@@ -43,7 +43,7 @@ export class StubSessionService {
   getSelectedBatch(): Batch {
 
     this.stubBatch = new Batch(12, 'name', new Date(), new Date(),
-    this.bamUser, new BatchType(11, 'type', 200));
+    this.bamUser, 101, 302);
 
     return this.stubBatch;
   }

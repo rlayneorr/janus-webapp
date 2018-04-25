@@ -10,7 +10,8 @@
     </div>
     
     <div class="col-md-2 calendar-sidebar">
-        
+      <p>Currently displaying: Batch {{this.selectedBatch.name}}</p>
+
       <div class="mb-2">Jump to a particular date</div>
       <p-calendar #datePicker [(ngModel)]="gotoDateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2030"
         [showIcon]="true" (onSelect)="jumpToDate(gotoDateValue)"></p-calendar>

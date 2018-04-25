@@ -9,7 +9,6 @@ import { BatchService } from '../../../services/batch.service';
 import { SessionService } from '../../../services/session.service';
 import { UsersService } from '../../../services/users.service';
 import { LocationStrategy } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { convertToParamMap, ParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -32,7 +31,7 @@ describe('EditBatchComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ EditBatchComponent ],
-      imports: [ HttpClientModule, RouterModule, BrowserAnimationsModule,
+      imports: [ HttpClientModule, RouterModule,
       RouterTestingModule.withRoutes([]) ],
       providers: [BatchService, SessionService, UsersService,
         LocationStrategy, AlertService],

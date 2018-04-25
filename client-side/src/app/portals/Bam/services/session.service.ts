@@ -15,29 +15,12 @@ export class SessionService {
   public selectedBatchSubject = new Subject<Batch>();
 
   constructor(private userService: UsersService, private batchService: BatchService) {
-    // Batch batch = new Batch(3, "Java", startDate: Date, endDate: Date, trainer: BamUser, type: BatchType);
+
     this.batch = batchService.getBatchById(50);
-    // this.id = id;
-    // this.name = name;
-    // this.startDate = startDate;
-    // this.endDate = endDate;
-    // this.trainer = trainer;
-    // this.type = type;
-    this.bamUser = {
-      'userId': 50,
-      'fName': 'Ryan',
-      'mName': null,
-      'lName': 'Lessley',
-      'email': 'rl@revature.com',
-      'pwd': '1234',
-      'role': 2,
-      'batch': null,
-      'phone': '1234567890',
-      'phone2': '8675309',
-      'skype': 'rl_skype',
-      'pwd2': null,
-      'assignForceID': 9
-    };
+
+    this.bamUser = new BamUser(50, 'Ryan', null, 'Lessley', 'rl@revature.com',
+      '1234', 2, null, '1234567890', '8675309', 'rl_skype', null, 9);
+
     sessionStorage.setItem('bamUser', JSON.stringify(this.bamUser));
   }
 

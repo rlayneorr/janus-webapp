@@ -64,7 +64,7 @@
             <tr *ngFor="let associate of associates | filterByText:searchByText">
               <ng-container *ngIf="(searchByStatus === associate.marketingStatus || searchByStatus === '')
               && (searchByClient === associate.client || searchByClient === '')
-              && (searchByCurriculum === associate.curriculumName || searchByCurriculum === '')">
+              && (searchByCurriculum === associate.name || searchByCurriculum === '')">
                 <td class="edit">
                   <input type="checkbox" id={{associate.id}}>
                 </td>

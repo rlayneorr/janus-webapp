@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 // rxjs
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
+import { ErrorAlertComponent } from '../ui/error-alert/error-alert.component';
+import { Subject } from 'rxjs/Subject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { AlertService } from '../services/alerts/alerts.service';
 
 /**
  * this class intercepts each HTTP request, clones it,
@@ -14,7 +18,9 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class HydraInterceptor implements HttpInterceptor {
 
-    constructor() { }
+    constructor(private alertServ: AlertService) {
+
+    }
 
     /*
     * intercept each HTTP rquest and return a modified request
@@ -27,6 +33,11 @@ export class HydraInterceptor implements HttpInterceptor {
             },
         });
 
-        return next.handle(modifiedRequest);
+        return next.handle(modifiedRequest).do((event: HttpEvent<any>) => {}, (err: any) => {
+            if (err instanceof HttpErrorResponse) {
+                this.alertServ.publishAlert(err.url);
+            }
+        });
     }
+
 }

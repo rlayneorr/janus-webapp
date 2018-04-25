@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-sm-12 col-md-8 col-lg-8 text-center" *ngIf="selectedCurr">
-            <img src="http://i67.tinypic.com/21mf91z.png" width="75px" height="75px"> {{selectedCurr.curriculumName}} Version #{{selectedCurr.curriculumVersion}}</div>
+            <img src="http://i67.tinypic.com/21mf91z.png" width="75px" height="75px"> {{selectedCurr.name}} Version #{{selectedCurr.version}}</div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4">
@@ -63,15 +63,15 @@
                     <button class="btn btn-block btn-primary" (click)="download()">Export Curriculum</button>
                 </div>
                 <div class="col" *ngIf="selectedCurr">
-                    <button class="btn btn-block btn-default" (click)="areYouSurePopulateCalendar(selectedCurr.isMaster)">Populate my Calendar</button>
+                    <!-- <button class="btn btn-block btn-default" (click)="areYouSurePopulateCalendar(selectedCurr.masterVersion)">Populate my Calendar</button> -->
                 </div>
                 <div class="text-center" *ngIf="populatingCalendar">
                     <i class="fa fa-spinner fa-pulse fa-5x"></i>
                 </div>
                 <div class="col text-right">
-                    <span (click)="areYouSureDeleteCurr(selectedCurr.isMaster)">
+                    <!-- <span (click)="areYouSureDeleteCurr(selectedCurr.masterVersion)">
                         <i class="cursor fa fa-trash fa-2x"></i>
-                    </span>
+                    </span> -->
                 </div>
             </div>
         </div>
@@ -97,11 +97,10 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <h6 *ngIf="selectedCurr">Save version #{{selectedCurr.curriculumVersion}} as new {{selectedCurr.curriculumName}} curriculum?</h6>
+                    <h6 *ngIf="selectedCurr">Save version #{{selectedCurr.version}} as new {{selectedCurr.name}} curriculum?</h6>
                 </div>
                 <div class="modal-footer">
-                    <button *ngIf="isFirstVer" class="btn btn-primary" data-dismiss="modal" (click)="saveCurr(true)">Save</button>
-                    <button *ngIf="!isFirstVer" class="btn btn-primary" data-dismiss="modal" (click)="openMasterModal()">Save</button>
+                    <button class="btn btn-primary" data-dismiss="modal" (click)="saveCurr(true)">Save</button>
                     <button class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -116,7 +115,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <h6 *ngIf="selectedCurr">Would you like to make #{{selectedCurr.curriculumVersion}} the new master version of {{selectedCurr.curriculumName}}?</h6>
+                    <h6 *ngIf="selectedCurr">Would you like to make #{{selectedCurr.version}} the new master version of {{selectedCurr.name}}?</h6>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal" (click)="saveCurr(true)">YES, I WOULD LIKE THIS TO BE THE NEW MASTER</button>
@@ -130,12 +129,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 *ngIf="selectedCurr" class="modal-title">DELETE {{selectedCurr.curriculumName}} VERSION #{{selectedCurr.curriculumVersion}}</h4>
+                    <h4 *ngIf="selectedCurr" class="modal-title">DELETE {{selectedCurr.name}} VERSION #{{selectedCurr.version}}</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <h6 *ngIf="selectedCurr">Are you sure you want to delete the current selected version ({{selectedCurr.curriculumName}} version
-                        #{{selectedCurr.curriculumVersion}})?
+                    <h6 *ngIf="selectedCurr">Are you sure you want to delete the current selected version ({{selectedCurr.name}} version
+                        #{{selectedCurr.version}})?
                     </h6>
                 </div>
                 <div class="modal-footer">
@@ -150,7 +149,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 *ngIf="selectedCurr" class="modal-title">DELETE {{selectedCurr.curriculumName}} VERSION #{{selectedCurr.curriculumVersion}}</h4>
+                    <h4 *ngIf="selectedCurr" class="modal-title">DELETE {{selectedCurr.name}} VERSION #{{selectedCurr.version}}</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -169,11 +168,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 *ngIf="selectedCurr" class="modal-title">POPULATE CALENDAR WITH {{selectedCurr.curriculumName}} VERSION #{{selectedCurr.curriculumVersion}}</h4>
+                    <h4 *ngIf="selectedCurr" class="modal-title">POPULATE CALENDAR WITH {{selectedCurr.name}} VERSION #{{selectedCurr.version}}</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <h6 *ngIf="selectedCurr">This will populate your calendar with the master {{selectedCurr.curriculumName}} curriculum. Are you sure?
+                    <h6 *ngIf="selectedCurr">This will populate your calendar with the master {{selectedCurr.name}} curriculum. Are you sure?
                     </h6>
                 </div>
                 <div class="modal-footer">
@@ -189,7 +188,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 *ngIf="selectedCurr" class="modal-title">POPULATE CALENDAR WITH {{selectedCurr.curriculumName}} VERSION #{{selectedCurr.curriculumVersion}}</h4>
+                    <h4 *ngIf="selectedCurr" class="modal-title">POPULATE CALENDAR WITH {{selectedCurr.name}} VERSION #{{selectedCurr.version}}</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">

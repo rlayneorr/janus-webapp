@@ -2,21 +2,21 @@
   <div>
     <img *ngIf="loading" src='/assets/img/revloading.gif'>
   </div>
-  <div *ngIf="!loading && currentBatch != null">
+  <div *ngIf="!loading && loadingSuccess && currentBatch != null">
     <div class="form-group row">
       <div>Add subtopic to calendar</div>
     </div>
     <div class="form-group row">
-      <label for="topics" class="form-label">Topic:</label>
-      <select [(ngModel)]="selectedTopic" class="form-control" id="topics" (change)="onChangeLoadSubtopics()">
-        <option selected>Select a Topic</option>
-        <option *ngFor="let topic of uniqueTopics" value="{{topic}}">{{topic}}</option>
-      </select>
-    </div>
-    <div class="form-group row">
-      <div class="form-label">Choose Subtopic:</div>
+        <div class="form-group row">
+        <label for="topics" class="form-label">Topic:</label>
+        <select [(ngModel)]="selectedTopic" class="form-control" id="topics" (change)="onChangeLoadSubtopics()">
+            <option value="Select a Topic" selected hidden>Select a topic</option>
+          <option *ngFor="let topic of uniqueTopics" value="{{topic}}">{{topic}}</option>
+        </select>
+      </div>
+      <div *ngIf="this.selectedTopic != 'Select a Topic'" class="form-label">Choose Subtopic:</div>
       <div class="select-box" (change)="onChangeGetSubtopicInfo()">
-        <div *ngFor="let subtopic of subtopicList" class="fc-select-subtopic" (click)="selectSubtopic(subtopic)" (mouseover)="setDraggableOnSubtopic($event, subtopic)">{{subtopic}}</div>
+        <div *ngFor="let subtopic of subtopicNameList" class="fc-select-subtopic" (click)="selectSubtopic(subtopic)" (mouseover)="setDraggableOnSubtopic($event, subtopic)">{{subtopic}}</div>
       </div>
     </div>
     <div class="form-group row">
@@ -42,8 +42,8 @@
   </div>
   <div class="modal-body">
     <h5>Would you like to override the date?</h5>
-    <p>Previous date: {{prevDate}}</p>
-    <p>Date selected: {{newDate}}</p>
+    <p>Previous date: {{prevDate | date:'short'}}</p>
+    <p>Date selected: {{newDate | date:'short'}}</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="c('ok')">OK</button>
