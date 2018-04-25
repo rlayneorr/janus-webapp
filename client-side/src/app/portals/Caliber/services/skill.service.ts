@@ -70,11 +70,11 @@ export class SkillService {
 
   /**
    * Retrieves a skill by its name.
-   * 
+   *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-   * 
+   *
    * @param name
-   * 
+   *
    * @return Observable<Skill>
    */
   public findByName(name: string): Observable<Skill> {
@@ -107,7 +107,7 @@ export class SkillService {
 
   /**
    * Transmits a Skill to be deleted from the database.
-   * 
+   *
    * @param skill: Skill
    */
   public delete(skill: Skill): Observable<boolean> {
