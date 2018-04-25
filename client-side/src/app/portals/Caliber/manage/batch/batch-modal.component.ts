@@ -16,7 +16,7 @@ import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
 import { ApiService } from '../../services/api.service';
-import { Skill } from '../../../../entities/Skill';
+import { Skill } from '../../../../hydra-client/entities/Skill';
 
 
 @Component({
