@@ -13,18 +13,15 @@ import { environment } from '../../../../../environments/environment';
 // entities
 import { Category } from '../../entities/Category';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-// import { HydraSkill } from '../../../../hydra-client/entities/HydraSkill';
 import { Skill } from '../../../../hydra-client/entities/Skill';
-import { SkillService } from '../../services/skill.service';
-// import { HydraSkillService } from '../../../../hydra-client/services/skill/hydra-skill.service';
-
+import { SkillService } from '../../../../hydra-client/services/skill/skill.service';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-skills',
+  templateUrl: './skills.component.html',
+  styleUrls: ['./skills.component.css']
 })
-export class CategoriesComponent implements OnInit {
+export class SkillsComponent implements OnInit {
   newSkill: Skill = {
     skillId: 0,
     skillName: '',
@@ -33,7 +30,6 @@ export class CategoriesComponent implements OnInit {
 
   addForm: FormGroup;
 
-  categories: Category[];
   skills: Skill[];
   currentSkill: Skill;
 
@@ -44,7 +40,7 @@ export class CategoriesComponent implements OnInit {
 
   /**
    * Loads all Skills
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
   ngOnInit() {
     this.initFormControl();
@@ -72,7 +68,7 @@ export class CategoriesComponent implements OnInit {
   /**
    * Adds a new Skill
    * @param {any} value
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
   addNewSkill(value) {
     this.newSkill.skillName = value.name;
@@ -87,7 +83,7 @@ export class CategoriesComponent implements OnInit {
   /**
    * Send call to update active status
    * @param {any} nameChange
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
   editCurrentSkill(nameChange) {
     this.skillService.update(this.currentSkill).subscribe((resp) => {
@@ -102,11 +98,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   /**
-   * Populates the Columns with Categories
+   * Populates the Columns with Skills
    * @param {any} column
    * @param {any} index
    * @returns
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
   nextColumn(column, index) {
     switch (column) {
@@ -141,7 +137,7 @@ export class CategoriesComponent implements OnInit {
   /**
    * Opens a Modal
    * @param {any} content
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
   open(content) {
     this.modalService.open(content).result.then((result) => {
@@ -153,7 +149,7 @@ export class CategoriesComponent implements OnInit {
    * Open the edit modal
    * @param {any} content
    * @param {Skill} index
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
   editopen(content, index: Skill) {
     this.currentSkill = JSON.parse(JSON.stringify(index)); // essentially clone the object, there may be a better way

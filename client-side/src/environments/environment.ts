@@ -9,7 +9,7 @@ export const environment = {
 
   gambitContext: 'http://localhost:8765',
 
-  context: context, // change for what the production environment would actually be
+  context: context,
   bam: bam,
   url: 'http://localhost:80/',
 
@@ -72,10 +72,6 @@ export const environment = {
   qcStatus: {
     fetchAll: () => `${context}types/qcstatus/all`,
   },
-
-  // skill: {
-  //   fetchAll: () => `${context}types/skill/all`,
-  // },
 
   skill: {
     findAll: () => `${context}/gambit-skills-service/skill`,

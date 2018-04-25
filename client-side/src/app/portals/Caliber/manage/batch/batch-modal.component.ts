@@ -10,7 +10,7 @@ import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 // services
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
-import { SkillService } from '../../services/skill.service';
+import { SkillService } from '../../../../hydra-client/services/skill/skill.service';
 import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';

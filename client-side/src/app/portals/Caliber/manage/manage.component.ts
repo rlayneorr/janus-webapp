@@ -16,7 +16,7 @@ import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
 import { LocationService } from '../services/location.service';
 import { TrainingTypeService } from '../services/training-type.service';
-import { SkillService } from '../services/skill.service';
+import { SkillService } from '../../../hydra-client/services/skill/skill.service';
 import { TraineeService } from '../services/trainee.service';
 import { TraineeStatusService } from '../services/trainee-status.service';
 import { HydraTraineeService } from '../../../hydra-client/services/trainee/hydra-trainee.service';

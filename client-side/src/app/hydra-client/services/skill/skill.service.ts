@@ -7,11 +7,10 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // services
-import { AlertsService } from './alerts.service';
+import { AlertService } from '../alerts/alerts.service';
 import { environment } from '../../../../environments/environment';
 
 // entities
-import { CRUD } from '../interfaces/api.interface';
 import { Skill } from '../../../hydra-client/entities/Skill';
 
 const context = environment.skill;
@@ -24,7 +23,7 @@ export class SkillService {
 
   public listSubject = new BehaviorSubject<Skill[]>([]);
 
-  constructor(public httpClient: HttpClient, public alertService: AlertsService) {
+  constructor(public httpClient: HttpClient, public alertService: AlertService) {
     this.listSubject = new BehaviorSubject([]);
   }
 
