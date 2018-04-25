@@ -7,7 +7,6 @@ export class AlertService {
   message = new Subject<string[]>();
   public messageObservable = this.message.asObservable();
 
-
   constructor() { }
 
   alert(type: string, message: string) {

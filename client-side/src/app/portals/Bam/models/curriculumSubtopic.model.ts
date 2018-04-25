@@ -1,5 +1,6 @@
 import { Curriculum } from './curriculum.model';
 import { SubtopicName } from './subtopicname.model';
+import { SubtopicCurric } from './subtopicCurric.model';
 
 export class CurriculumSubtopic {
     curriculumSubtopicId: number;

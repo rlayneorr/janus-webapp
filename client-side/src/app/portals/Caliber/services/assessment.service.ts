@@ -97,7 +97,7 @@ export class AssessmentService implements CRUD<Assessment> {
           switch (true) {
             case (value.rawScore !== assessment.rawScore):
             case (value.type !== assessment.type):
-            case (value.category.categoryId !== assessment.category.categoryId):
+            case (value.skill.skillId !== assessment.skill.skillId):
               return false;
             default:
               return true;
@@ -144,7 +144,7 @@ export class AssessmentService implements CRUD<Assessment> {
    * @param assessment: Assessment
    */
   public delete(assessment: Assessment): Observable<any> {
-    const result = this.http.delete(urls.assessment.delete(assessment.assessmentId)).subscribe( res => {
+    const result = this.http.delete(urls.assessment.delete(assessment.assessmentId)).subscribe(res => {
       this.deletedSubject.next(assessment);
     });
     return this.deletedSubject.asObservable();

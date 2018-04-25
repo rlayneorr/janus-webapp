@@ -1,3 +1,4 @@
+
 // modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -29,7 +30,6 @@ import { NoteService } from './services/note.service';
 import { GranularityService } from './reports/services/granularity.service';
 import { ReportingService } from './services/reporting.service';
 import { PDFService } from './services/pdf.service';
-import { CategoryService } from './services/category.service';
 import { SkillService } from './services/skill.service';
 import { TrainingTypeService } from './services/training-type.service';
 import { ColorService } from './services/colors/color.service';
@@ -124,6 +124,8 @@ import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-traine
 import { CannotDeleteModalComponent } from './manage/cannot-delete-modal/cannot-delete-modal.component';
 
 
+import { settings } from 'cluster';
+
 export const Dependencies = {
   imports: [
     CommonModule,
@@ -216,6 +218,7 @@ export const Dependencies = {
     DeleteTraineeModalComponent,
     CannotDeleteTraineeModalComponent,
     CannotDeleteModalComponent,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -234,8 +237,7 @@ export const Dependencies = {
     ColorService,
     TrainerService,
     LocationService,
-    CategoryService,
-    CategoriesService,
+    SkillService,
     GranularityService,
     AlertsService,
     VpHomeBarGraphService,

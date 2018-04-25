@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
-import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
+import { CurriculumSubtopic } from '../../../models/curriculumSubtopicZ.model';
 import { MainCurriculumViewComponent } from '../main-curriculum-view/main-curriculum-view.component';
 import { CourseStructureComponent } from '../course-structure/course-structure.component';
 import { Curriculum } from '../../../models/curriculum.model';
@@ -45,7 +45,7 @@ export class CurriculumWeekComponent implements OnInit {
 
   ngOnInit() {
     this.sortSubtopics();
-    this.progressBar();
+    // this.progressBar();
   }
   /**
    * This method returns the subtopic-topic names for the progress bar and a visual
@@ -54,14 +54,13 @@ export class CurriculumWeekComponent implements OnInit {
    * @author James Holzer, Shane Sistoza, Jeffrey Camacho, Jordan DeLong (1712-Steve)
    */
   progressBar() {
-
     this.weekDTO.days.forEach(element => {
       element.subtopics.forEach(subtopic => {
-        if (this.percentageMap[subtopic.topic.name] === undefined) {
-          this.percentageMap[subtopic.topic.name] = 1 ;
+        if (this.percentageMap[subtopic.parentTopic.topicName] === undefined) {
+          this.percentageMap[subtopic.parentTopic.topicName] = 1 ;
           this.total++;
           }else {
-            this.percentageMap[subtopic.topic.name] += 1 ;
+            this.percentageMap[subtopic.parentTopic.topicName] += 1 ;
             this.total++;
           }
       });
@@ -150,7 +149,6 @@ export class CurriculumWeekComponent implements OnInit {
  confirmWeekDeletion(weekNum: number) {
     event.stopPropagation();
     this.weekNum = weekNum;
-    console.log(weekNum);
  }
 
   removeWeekCall() {

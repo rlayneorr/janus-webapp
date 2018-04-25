@@ -6,6 +6,7 @@ import { BatchService } from '../../../services/batch.service';
 import { SessionService } from '../../../services/session.service';
 import { Observable } from 'rxjs/Observable';
 import { AlertService } from '../../../services/alert.service';
+import { BatchProgressBarComponent } from '../batch-progress-bar/batch-progress-bar.component';
 
 /**
  * @author Mohamed Swelam -- batch: 1712-dec11-Java-Steve
@@ -25,9 +26,9 @@ export class WelcomeComponent implements OnInit {
   private batches: Batch [];
   private selectedBatch: Batch;
 
-  constructor(private batchService: BatchService, private sessionService: SessionService, private alertService: AlertService) {
-
-   }
+  constructor(private batchService: BatchService,
+              private sessionService: SessionService,
+              private alertService: AlertService) { }
 
   ngOnInit() {
     this.currentUser = this.sessionService.getUser();
@@ -37,6 +38,7 @@ export class WelcomeComponent implements OnInit {
       this.getInProgressBatches();
     } else {
       this.getInProgressBatches();
+
     }
   }
 
@@ -46,8 +48,9 @@ export class WelcomeComponent implements OnInit {
    * and setting the response data to batches array.
    */
   getInProgressBatches() {
-    this.batchService.getAllBatchesInProgress(this.currentUser.email).subscribe(
-      response => {
+    // this.batchService.getAllBatchesInProgress(this.currentUser.email).subscribe(
+
+    this.batchService.getBatchAll().subscribe(response => {
         this.batches = response;
         if (this.batches !== null) {
           this.batchCount =  this.batches.length;

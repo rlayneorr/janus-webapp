@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BamUser } from '../models/bamuser.model';
 import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../hydra-client/services/urls/url.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
@@ -11,7 +12,15 @@ const httpOptions = {
 @Injectable()
 export class UsersService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private urlService: UrlService) { }
+
+  getUserByID(userId: number): Observable<BamUser> {
+    return this.http.get<BamUser>(this.urlService.users.getUserByID(userId)).map(
+      data => {
+        return data;
+      }
+    );
+  }
 
   /**
    * Gets all users.
@@ -19,7 +28,7 @@ export class UsersService {
    * @returns BamUser[]
    */
   getAllUsers(): Observable<BamUser[]> {
-    return this.http.get<BamUser[]>(environment.users.getAllUsersUrl()).map(
+    return this.http.get<BamUser[]>(this.urlService.users.getAllUsersUrl()).map(
       data => {
         return data;
       }
@@ -32,7 +41,7 @@ export class UsersService {
    * @returns BamUser[]
    */
   getAllTrainers(): Observable<BamUser[]> {
-    return this.http.get<BamUser[]>(environment.users.getAllTrainersUrl()).map(
+    return this.http.get<BamUser[]>(this.urlService.users.getAllTrainersUrl()).map(
       data => {
         return data;
       }
@@ -45,7 +54,7 @@ export class UsersService {
    * @returns BamUser[]
    */
   getAllAssociates(): Observable<BamUser[]> {
-    return this.http.get<BamUser[]>(environment.users.getAllAssociatesUrl()).map(
+    return this.http.get<BamUser[]>(this.urlService.users.getAllAssociatesUrl()).map(
       data => {
         return data;
       }
@@ -59,7 +68,7 @@ export class UsersService {
    * @param batchId number
    */
   getUsersInBatch(batchId: number): Observable<BamUser[]> {
-    return this.http.get<BamUser[]>(environment.users.getUsersInBatchUrl(batchId)).map(
+    return this.http.get<BamUser[]>(this.urlService.users.getUsersInBatchUrl(batchId)).map(
       data  => {
         return data;
       }
@@ -72,7 +81,7 @@ export class UsersService {
    * @param batchId number
    */
   dropUserFromBatch(batchId: number) {
-    return this.http.post(environment.users.dropUserFromBatchUrl(batchId), httpOptions).map(
+    return this.http.post(this.urlService.users.dropUserFromBatchUrl(batchId), httpOptions).map(
       data => {
         return data;
       }
@@ -85,7 +94,7 @@ export class UsersService {
    * @param currentUser BamUser
    */
   updateUser(currentUser: BamUser): Observable<BamUser> {
-    return this.http.post<BamUser>(environment.users.updateUserUrl(), currentUser).map(
+    return this.http.get<BamUser>(this.urlService.users.updateUserUrl(currentUser.userId)).map(
       data => {
         return data;
       }
@@ -98,7 +107,7 @@ export class UsersService {
    * @param newUser BamUser
    */
   addUser(newUser: BamUser): Observable<BamUser> {
-    return this.http.post<BamUser>(environment.users.addUserUrl(), newUser).map(
+    return this.http.post<BamUser>(this.urlService.users.addUserUrl(), newUser).map(
       data => {
         return data;
       }
@@ -112,7 +121,7 @@ export class UsersService {
    * @param userNewPass BamUser
    */
   resetPassword(userNewPass: BamUser): Observable<BamUser> {
-    return this.http.post<BamUser>(environment.users.resetPasswordUrl(), userNewPass).map(
+    return this.http.post<BamUser>(this.urlService.users.resetPasswordUrl(), userNewPass).map(
       data => {
         return data;
       }
@@ -125,7 +134,7 @@ export class UsersService {
    * @param recoverEmail string
    */
   recoverPassword(recoverEmail: string): Observable<BamUser> {
-    return this.http.post<BamUser>(environment.users.resetPasswordUrl(), recoverEmail).map(
+    return this.http.post<BamUser>(this.urlService.users.resetPasswordUrl(), recoverEmail).map(
       data => {
         return data;
       }
@@ -140,7 +149,7 @@ export class UsersService {
    * @param  batchId the batch id of batch to add user to
    */
   getUsersNotInBatch(): Observable<BamUser[]> {
-    return this.http.get<BamUser[]>(environment.users.getUsersNotInBatchUrl()).map(
+    return this.http.get<BamUser[]>(this.urlService.users.getUsersNotInBatchUrl()).map(
       data => {
         return data;
       }
@@ -155,7 +164,7 @@ export class UsersService {
    * @param  batchId the batch id of batch to add user to
    */
   addUserToBatch(batchId: number, userId: number): Observable<BamUser[]> {
-    return this.http.post<BamUser[]>(environment.users.addUserToBatchUrl(batchId, userId), httpOptions).map(
+    return this.http.post<BamUser[]>(this.urlService.users.addUserToBatchUrl(batchId, userId), httpOptions).map(
       data => {
         return data;
       }
@@ -169,7 +178,7 @@ export class UsersService {
    * @param  userId  the user id of user removed
    */
   removeUserFromBatch(userId: number): Observable<BamUser[]> {
-    return this.http.post<BamUser[]>(environment.users.removeUserUrl(userId), httpOptions).map(
+    return this.http.post<BamUser[]>(this.urlService.users.removeUserUrl(userId), httpOptions).map(
       data => {
         return data;
       }

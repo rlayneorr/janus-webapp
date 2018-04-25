@@ -14,6 +14,9 @@ import * as XLSX from 'xlsx';
 import * as XLSXStyle from 'xlsx-style';
 import { WeeksExportDTO } from '../../../models/weeksExportDTO';
 import { SubtopicService } from '../../../services/subtopic.service';
+import { Schedulez } from '../../../models/scheduleZ.model';
+import { SubtopicCurric } from '../../../models/subtopicCurric.model';
+import { Topic } from '../../../models/topic.model';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -114,7 +117,7 @@ export class MainCurriculumViewComponent implements OnInit {
             this.isNewVer = false;
         }
 
-        if (event.curriculumVersion === 1) {
+        if (event.version === 1) {
             this.isFirstVer = true;
             this.allWeeks = [];
         } else {
@@ -149,23 +152,27 @@ export class MainCurriculumViewComponent implements OnInit {
      * @param makeMaster: boolean
      */
     saveCurr(makeMaster: boolean) {
-        this.selectedCurr.curriculumNumberOfWeeks = this.weeks.length;
-        this.selectedCurr.curriculumCreator = this.sessionService.getUser();
-        this.selectedCurr.curriculumdateCreated = this.getCurrentDate();
-        if (makeMaster) {
-            this.selectedCurr.isMaster = 1;
-        }
+        this.selectedCurr.weekDuration = this.weeks.length;
+        this.selectedCurr.creatorId = this.sessionService.getUser().userId;
+        this.selectedCurr.modifierId = 0;
+        this.selectedCurr.dateCreated = Date.now();
+
         const meta = new MetaDTO(this.selectedCurr);
 
         const weeksDTO: WeeksDTO[] = [];
         this.weeks.forEach(elem => weeksDTO.push(elem.weekDTO));
 
-        const curriculumSubtopicDTO = new CurriculumSubtopicDTO(meta, weeksDTO);
-        this.curriculumService.addCurriculum(curriculumSubtopicDTO).subscribe(
+        this.curriculumService.addCurriculum(this.selectedCurr).subscribe(
             response => {
                 this.alertService.alert('success', 'Successfully saved ' +
-                    (<Curriculum>response.body).curriculumName + ' version #' + (<Curriculum>response.body).curriculumVersion);
-                this.refreshList(<Curriculum>response.body);
+                    response.name + ' version #' + response.version);
+
+                this.selectedCurr = response;
+                const unformatted_JSON = JSON.parse(JSON.stringify(weeksDTO));
+                const formatted_schedule = this.formatSchedule(unformatted_JSON);
+                this.curriculumService.addSchedule(formatted_schedule);
+
+                this.refreshList(response);
                 this.isNewVer = false;
             },
             error => {
@@ -176,6 +183,45 @@ export class MainCurriculumViewComponent implements OnInit {
         );
     }
 
+    formatSchedule( unformatted_JSON: any): Schedulez {
+        const schedule: Schedulez = new Schedulez();
+        schedule.curriculum = this.selectedCurr;
+        let i, j, k;
+        for (i = 0; i < unformatted_JSON.length; i++) { // for every week
+            for (j = 0; j < 5; j++) { // for every day
+                const hour = 9;
+
+                for (k = 0; k < unformatted_JSON[i].days[j].subtopics.length; k++) { // for every hour (or subtopic)
+                        const subtopic: SubtopicCurric = new SubtopicCurric();
+                        if (typeof unformatted_JSON[i].days[j].subtopics[k].id === 'undefined') {
+                            subtopic.subtopicId = unformatted_JSON[i].days[j].subtopics[k].subtopicId;
+                            subtopic.subtopicName = unformatted_JSON[i].days[j].subtopics[k].subtopicName;
+                            subtopic.parentTopic = unformatted_JSON[i].days[j].subtopics[k].parentTopic;
+                            subtopic.status = unformatted_JSON[i].days[j].subtopics[k].status;
+                        } else {
+                            subtopic.subtopicId = unformatted_JSON[i].days[j].subtopics[k].id;
+                            subtopic.subtopicName = unformatted_JSON[i].days[j].subtopics[k].name;
+                            const topic: Topic = new Topic();
+                            topic.topicID = unformatted_JSON[i].days[j].subtopics[k].topic.id;
+                            topic.topicName = unformatted_JSON[i].days[j].subtopics[k].topic.name;
+                            subtopic.parentTopic = topic;
+                        }
+
+                        subtopic.date.day = j + 1;
+                        const arbitraryTime = new Date('1970-01-01');
+                        arbitraryTime.setHours(hour + k);
+                        subtopic.date.startTime = arbitraryTime.getTime();
+                        arbitraryTime.setHours(hour + k + 1);
+                        subtopic.date.endTime = arbitraryTime.getTime();
+                        subtopic.date.week = i + 1;
+                        schedule.subtopics.push(subtopic);
+                }
+            }
+        }
+
+        return schedule;
+    }
+
     /**
      * Adds the newly saved curriculum object to the curriculum services'
      * behavior subject.
@@ -184,11 +230,11 @@ export class MainCurriculumViewComponent implements OnInit {
      */
     refreshList(curr: Curriculum) {
         const currList = this.curriculumService.allCurriculumData.getValue();
-        if (curr.isMaster === 1) {
+        if (curr.masterVersion === 1) {
             const masterIndex = currList.findIndex(
-                elem => (elem.isMaster === 1 && elem.curriculumName === curr.curriculumName));
+                elem => (elem.masterVersion === 1 && elem.name === curr.name));
             if (masterIndex !== -1) {
-                currList[masterIndex].isMaster = 0;
+                currList[masterIndex].masterVersion = 0;
             }
         }
         currList.push(curr);
@@ -248,7 +294,6 @@ export class MainCurriculumViewComponent implements OnInit {
                 maxWeek = e.curriculumSubtopicWeek;
             }
         });
-
         return maxWeek;
     }
 
@@ -360,15 +405,15 @@ export class MainCurriculumViewComponent implements OnInit {
 /**
  * Opens the modal with id areYouSurePopulateCalendar
  * @author Charlie Harris | 1712-dec11-java-steve
- * @param isMaster
+ * @param masterVersion
  */
-areYouSurePopulateCalendar(isMaster) {
-    if (isMaster === 1) {
+areYouSurePopulateCalendar(masterVersion) {
+    if (masterVersion === 1) {
         (<any>$('#areYouSurePopulateCalendar')).modal('show');
     } else {
-        const batchType = this.sessionService.getSelectedBatch().type.name;
-        this.alertService.alert('danger',
-            `You can only populate your calendar with the master version of your batch type, ${batchType}`);
+        // const batchType = this.sessionService.getSelectedBatch().type.name; //NO TYPE
+        this.alertService.alert('danger', 'NO TYPE');
+            // `You can only populate your calendar with the master version of your batch type, ${batchType}`);
     }
 }
 
@@ -393,8 +438,8 @@ areYouReallySurePopulateCalendar() {
  * @author James Holzer (1712-Steve)
  * Opens the modal with the id areYouSure
  */
-areYouSureDeleteCurr(isMaster) {
-    if (isMaster === 0) {
+areYouSureDeleteCurr(masterVersion) {
+    if (masterVersion === 0) {
         (<any>$('#areYouSure')).modal('show');
     } else {
         this.alertService.alert('danger', 'You Cannot Delete a Master Curriculum');
@@ -433,7 +478,7 @@ deleteVersions(selectedCurr) {
  */
 download() {
     let ourWeeks: WeeksExportDTO;
-    ourWeeks = new WeeksExportDTO((this.allWeeks), this.selectedCurr.curriculumName + ' v' + this.selectedCurr.curriculumVersion);
+    ourWeeks = new WeeksExportDTO((this.allWeeks), this.selectedCurr.name + ' v' + this.selectedCurr.version);
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ourWeeks.data);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });

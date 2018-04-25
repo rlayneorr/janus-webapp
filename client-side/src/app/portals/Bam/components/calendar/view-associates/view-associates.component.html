@@ -17,7 +17,7 @@
             <table class="table table-hover">
               <thead>
                 <tr class="associates-header">
-                  <th [class.active]="order === 'lName'" (click)="setOrder('lName')" class="head">Name
+                  <th [class.active]="order === 'lastName'" (click)="setOrder('lastName')" class="head">Name
                     <span [hidden]="reverse">▼</span>
                     <span [hidden]="!reverse">▲</span>
                   </th>
@@ -30,7 +30,7 @@
               </thead>
               <tbody>
                 <tr class="associates-row" *ngFor="let associate of associateList | orderBy: order:reverse:'case-insensitive'| search : 'all' : searchTerm | paginate: { itemsPerPage: 7, currentPage: p}">
-                  <td class="value lname">{{associate.lName}}, {{associate.fName}}</td>
+                  <td class="value lname">{{associate.lastName}}, {{associate.firstName}}</td>
                   <td class="value email">{{associate.email}}</td>
                   <td class="value batchId">{{associate.batch.id}}</td>
                   <td class="value mPhone">{{associate.phone}}</td>
