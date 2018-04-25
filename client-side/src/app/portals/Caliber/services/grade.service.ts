@@ -13,7 +13,6 @@ import { AlertsService } from './alerts.service';
 // entities
 import { Grade } from '../entities/Grade';
 import { CRUD } from '../interfaces/api.interface';
-import { urls } from './urls';
 import { stringifyDate } from '../util/utils';
 
 const context = environment.grade;

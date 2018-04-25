@@ -14,7 +14,6 @@ import { CRUD } from '../interfaces/api.interface';
 
 // entities
 import { Location } from '../entities/Location';
-import { urls } from './urls';
 import { environment } from '../../../../environments/environment';
 
 const context = environment.location;

@@ -12,7 +12,6 @@ import { Observable } from 'rxjs/Observable';
 
 // entities
 import { Panel } from '../entities/Panel';
-import { urls } from './urls';
 import { environment } from '../../../../environments/environment';
 
 // Interfaces

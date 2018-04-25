@@ -11,9 +11,9 @@ export class UrlService {
   skills = {
     findAll: () => `${this.context}/skill`,
     findAllActive: () => `${this.context}/skill/active`,
-    findById: (name: string) => `${this.context}/skill/${name}`,
+    findById: (id: number) => `${this.context}/skill/${id}`,
     save: () => `${this.context}/skill`,
-    update: (name: string) => `${this.context}/skill/${name}`,
+    update: () => `${this.context}/skill/`,
   };
 
   /**
