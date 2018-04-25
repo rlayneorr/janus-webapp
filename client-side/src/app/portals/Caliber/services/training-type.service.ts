@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { urls } from './urls';
 import { environment } from '../../../../environments/environment';
 
 // Interfaces

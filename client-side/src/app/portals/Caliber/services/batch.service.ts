@@ -16,7 +16,6 @@ import { environment } from '../../../../environments/environment';
 // entities
 import { Batch } from '../entities/Batch';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { urls } from './urls';
 import { stringifyDate } from '../util/utils';
 
 const context = environment.batch;

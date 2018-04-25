@@ -14,7 +14,6 @@ import { Observable } from 'rxjs/Observable';
 
 // entities
 import { Trainee } from '../entities/Trainee';
-import { urls } from './urls';
 import { environment } from '../../../../environments/environment';
 
 const context = environment.trainee;

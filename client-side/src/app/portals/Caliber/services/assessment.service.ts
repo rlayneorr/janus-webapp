@@ -5,16 +5,17 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/delay';
+
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+
 // services
 import { AlertsService } from './alerts.service';
-// import { environment } from '../../../environments/environment';
+
 // entities
 import { Assessment } from '../entities/Assessment';
 import { CRUD } from '../interfaces/api.interface';
-import { urls } from './urls';
 import { environment } from '../../../../environments/environment';
 
 const context = environment.assessment;

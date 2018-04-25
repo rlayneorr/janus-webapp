@@ -12,7 +12,6 @@ import { AlertsService } from './alerts.service';
 
 // entities
 import { Note } from '../entities/Note';
-import { urls } from './urls';
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
 import { environment } from '../../../../environments/environment';

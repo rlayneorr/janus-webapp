@@ -12,7 +12,6 @@ import { environment } from '../../../../environments/environment';
 
 // entities
 import { CRUD } from '../interfaces/api.interface';
-import { urls } from './urls';
 import { Skill } from '../../../entities/Skill';
 
 const context = environment.skill;
@@ -39,7 +38,6 @@ export class SkillService {
    * retrieves all categories
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-   *
    */
   public findAll(): Observable<Skill[]> {
     return this.httpClient.get<Skill[]>(context.findAll());
@@ -49,7 +47,6 @@ export class SkillService {
   * retrieves all ACTIVE categories
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-  *
   */
   public findAllActive(): Observable<Skill[]> {
     return this.httpClient.get<Skill[]>(context.findAllActive());
@@ -61,7 +58,6 @@ export class SkillService {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   *
   * @param id: number
-  *
   * @return Observable<Skill>
   */
   public findById(id: number): Observable<Skill> {
@@ -70,11 +66,10 @@ export class SkillService {
 
   /**
    * Retrieves a skill by its name.
-   * 
+   *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-   * 
+   *
    * @param name
-   * 
    * @return Observable<Skill>
    */
   public findByName(name: string): Observable<Skill> {
@@ -107,7 +102,7 @@ export class SkillService {
 
   /**
    * Transmits a Skill to be deleted from the database.
-   * 
+   *
    * @param skill: Skill
    */
   public delete(skill: Skill): Observable<boolean> {
