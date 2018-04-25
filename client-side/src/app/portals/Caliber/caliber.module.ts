@@ -29,7 +29,6 @@ import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
 import { GranularityService } from './reports/services/granularity.service';
-import { CategoryService } from './services/category.service';
 import { SkillService } from './services/skill.service';
 import { TrainingTypeService } from './services/training-type.service';
 import { ColorService } from './services/colors/color.service';
@@ -165,6 +164,7 @@ import { TagFilterPipe } from './settings/screening/question/question.filter';
 import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
+import { CategoryService } from './services/category.service';
 
 
 @NgModule({
@@ -310,7 +310,7 @@ import { ReportingService } from './services/reporting.service';
     VpHomeSelectorService,
     ColorService,
     LocationService,
-    CategoryService,
+    SkillService,
     CategoriesService,
     GranularityService,
     AlertsService,
@@ -345,7 +345,9 @@ import { ReportingService } from './services/reporting.service';
     BucketsService,
     TagsService,
     HttpErrorHandlerService,
-    SimpleTraineeService
+    SimpleTraineeService,
+    CategoriesService,
+    CategoryService
   ],
   bootstrap: [
     TrainersComponent

@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BatchService } from '../services/batch.service';
 import { AssessmentService } from '../services/assessment.service';
 import { GradeService } from '../services/grade.service';
-import { CategoryService } from '../services/category.service';
+import { SkillService } from '../services/skill.service';
 import { NoteService } from '../services/note.service';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -12,7 +12,6 @@ import { CategorySkillPipe } from '../pipes/category-skill.pipe';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlertsService } from '../services/alerts.service';
 import { Dependencies } from '../caliber.test.module';
-
 
 xdescribe('AssessComponent', () => {
   let component: AssessComponent;
