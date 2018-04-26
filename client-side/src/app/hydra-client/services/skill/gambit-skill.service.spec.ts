@@ -1,21 +1,21 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
-import { SkillService } from './skill.service';
+import { GambitSkillService } from './gambit-skill.service';
 
-xdescribe('SkillService', () => {
+xdescribe('GambitSkillService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule
       ],
       providers: [
-        SkillService,
+        GambitSkillService,
         HttpClient
       ]
     });
   });
 
-  it('should be created', inject([SkillService], (service: SkillService) => {
+  it('should be created', inject([GambitSkillService], (service: GambitSkillService) => {
     expect(service).toBeTruthy();
   }));
 });

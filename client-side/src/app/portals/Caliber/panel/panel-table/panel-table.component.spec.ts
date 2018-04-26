@@ -24,4 +24,19 @@ fdescribe('PanelTableComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have panellist', () => {
+    expect(component.panelList).toBeTruthy();
+  });
+  it('should have trainee', () => {
+    expect(component.trainee).toBeTruthy();
+  });
+  it('should have name', () => {
+    expect(component.name).toBeTruthy();
+  });
+  it('should have panelService', () => {
+    expect(component['panelService']).toBeTruthy();
+  });
+  it('should have traineeService', () => {
+    expect(component['traineeService']).toBeTruthy();
+  });
 });
