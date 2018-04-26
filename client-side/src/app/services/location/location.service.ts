@@ -14,12 +14,12 @@ export class LocationService {
     return this.httpClient.get<Location>(this.url);
   }
   newLocation(location: Location) {
-    return this.httpClient.post<Location>(this.url, location);
+    return this.httpClient.post<Location>(this.url, JSON.stringify(location));
   }
   updateLocation(location: Location) {
-    return this.httpClient.post<Location>(this.url, location);
+    return this.httpClient.post<Location>(this.url,  JSON.stringify(location));
   }
   deleteLocaiton(location: Location) {
-    return this.httpClient.post<Location>(this.url, location);
+    return this.httpClient.post<Location>(this.url,  JSON.stringify(location));
   }
 }
