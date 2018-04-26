@@ -26,7 +26,7 @@ getTestBed().initTestEnvironment(
 );
 // Then we find all the tests.
 // TEMPORARILY restrict to batch-details.component
-const context = require.context('./', true, /batch-details\.component\.spec\.ts$/);
+const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
 // Finally, start Karma to run the tests.
