@@ -4,7 +4,7 @@ import { TrainerService } from './trainer.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { UrlService } from '../urls/url.service';
-import { Trainer } from '../../entities/trainer';
+import { Trainer } from '../../entities/Trainer';
 import { environment } from '../../../../environments/environment';
 
 fdescribe('TrainerService', () => {
