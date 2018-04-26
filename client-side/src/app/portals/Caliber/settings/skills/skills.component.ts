@@ -13,41 +13,40 @@ import { environment } from '../../../../../environments/environment';
 // entities
 import { Category } from '../../entities/Category';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { HydraSkill } from '../../../../hydra-client/entities/HydraSkill';
-import { HydraSkillService } from '../../../../hydra-client/services/skill/hydra-skill.service';
-
+import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
+import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-skills',
+  templateUrl: './skills.component.html',
+  styleUrls: ['./skills.component.css']
 })
-export class CategoriesComponent implements OnInit {
-  newCategory: HydraSkill = {
+export class SkillsComponent implements OnInit {
+  newSkill: GambitSkill = {
     skillId: 0,
-    skill: '',
-    active: true
+    skillName: '',
+    isActive: true
   };
 
   addForm: FormGroup;
 
-  categories: HydraSkill[];
-  currentCategory: HydraSkill;
+  skills: GambitSkill[];
+  currentSkill: GambitSkill;
 
   columns;
   numColumns: number;
-  constructor(private modalService: NgbModal, private hydraSkillService: HydraSkillService, private fb: FormBuilder) {
+  constructor(private modalService: NgbModal, private skillService: GambitSkillService, private fb: FormBuilder) {
   }
 
   /**
-   * Loads all Categories
-   * @memberof CategoriesComponent
+   * Loads all Skills
+   * @memberof SkillsComponent
    */
   ngOnInit() {
     this.initFormControl();
-    this.hydraSkillService.findAll().subscribe((resp) => {
-      this.categories = resp;
-      this.numColumns = this.categories.length / 8 + 1;
+    this.skillService.findAll().subscribe((resp) => {
+      this.skills = resp;
+      this.numColumns = this.skills.length / 8 + 1;
       if (this.numColumns > 3) {
         this.numColumns = 3;
       }
@@ -62,20 +61,20 @@ export class CategoriesComponent implements OnInit {
   }
   initFormControl() {
     this.addForm = this.fb.group({
-      'name': [this.newCategory.skill, Validators.required]
+      'name': [this.newSkill.skillName, Validators.required]
     });
   }
 
   /**
-   * Adds a new Category
+   * Adds a new Skill
    * @param {any} value
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
-  addNewCategory(value) {
-    this.newCategory.skill = value.name;
-    this.newCategory.active = true;
-    this.hydraSkillService.save(this.newCategory).subscribe((succ) => {
-      this.categories.push(succ);
+  addNewSkill(value) {
+    this.newSkill.skillName = value.name;
+    this.newSkill.isActive = true;
+    this.skillService.create(this.newSkill).subscribe((succ) => {
+      this.skills.push(succ);
     });
     // may not need this statement without all of the inherited subjects
     this.resetFormControl();
@@ -84,11 +83,11 @@ export class CategoriesComponent implements OnInit {
   /**
    * Send call to update active status
    * @param {any} nameChange
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
-  editCurrentCategory(nameChange) {
-    this.hydraSkillService.update(this.currentCategory).subscribe((resp) => {
-      this.categories.some( cat => {
+  editCurrentSkill(nameChange) {
+    this.skillService.update(this.currentSkill).subscribe((resp) => {
+      this.skills.some( cat => {
         if (cat.skillId === resp.skillId) {
           cat = resp;
           return true;
@@ -99,24 +98,24 @@ export class CategoriesComponent implements OnInit {
   }
 
   /**
-   * Populates the Columns with Categories
+   * Populates the Columns with Skills
    * @param {any} column
    * @param {any} index
    * @returns
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
   nextColumn(column, index) {
     switch (column) {
       case 0:
-        if (index < this.categories.length / this.numColumns) {
+        if (index < this.skills.length / this.numColumns) {
           return true;
         }
         break;
       case 1:
-        if (index > this.categories.length / this.numColumns) {
-          // If the numbers of categories is 3 then this condition will activate
+        if (index > this.skills.length / this.numColumns) {
+          // If the numbers of skills is 3 then this condition will activate
           if (this.numColumns === 3) {
-            if (index < ((this.categories.length / this.numColumns) * 2)) {
+            if (index < ((this.skills.length / this.numColumns) * 2)) {
               return true;
             } else {
               return false;
@@ -127,7 +126,7 @@ export class CategoriesComponent implements OnInit {
         }
         break;
       case 2:
-        if (index > ((this.categories.length / this.numColumns) * 2)) {
+        if (index > ((this.skills.length / this.numColumns) * 2)) {
           return true;
         } break;
       default:
@@ -138,7 +137,7 @@ export class CategoriesComponent implements OnInit {
   /**
    * Opens a Modal
    * @param {any} content
-   * @memberof CategoriesComponent
+   * @memberof SkillsComponent
    */
   open(content) {
     this.modalService.open(content).result.then((result) => {
@@ -149,11 +148,11 @@ export class CategoriesComponent implements OnInit {
   /**
    * Open the edit modal
    * @param {any} content
-   * @param {Category} index
-   * @memberof CategoriesComponent
+   * @param {Skill} index
+   * @memberof SkillsComponent
    */
-  editopen(content, index: HydraSkill) {
-    this.currentCategory = JSON.parse(JSON.stringify(index)); // essentially clone the object, there may be a better way
+  editopen(content, index: GambitSkill) {
+    this.currentSkill = JSON.parse(JSON.stringify(index)); // essentially clone the object, there may be a better way
     this.modalService.open(content);
   }
 }
