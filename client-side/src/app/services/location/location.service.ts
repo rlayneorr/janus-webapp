@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Location } from '../../entities/Location';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
 export class LocationService {
-  location: Location;
+  private location = new BehaviorSubject<any>([]);
+  publicLocation = this.location.asObservable();
   url: string;
+
+
 
   constructor(private httpClient: HttpClient) { }
 
