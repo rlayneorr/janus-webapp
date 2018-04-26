@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 // rxjs
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import { Trainer } from '../../entities/Trainer';
+import { Trainer } from '../../../hydra-client/entities/Trainer';
 import { UrlService } from '../urls/url.service';
 import { UserRole } from '../../entities/UserRole';
 
@@ -86,7 +86,7 @@ export class TrainerService {
      */
 
   public fetchRoles(): Observable<UserRole[]> {
-    const url = this.urls.trainers.getRoles();
+    const url = this.urls.users.getAllUsersRoles();
     return this.httpClient.get<UserRole[]>(url);
   }
 

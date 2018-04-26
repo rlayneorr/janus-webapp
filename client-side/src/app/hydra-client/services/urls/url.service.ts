@@ -49,7 +49,6 @@ export class UrlService {
     update: () => `${this.context}/trainers`,
     promote: () => `${this.context}/trainers/promote`,
     getTitles: () => `${this.context}/trainers/titles`,
-    getRoles: () => `${this.context}/trainers/roles`,
     delete: () => `${this.context}/trainers`,
   };
 
@@ -63,6 +62,7 @@ export class UrlService {
   // BAM Endpoints
   users = {
     getUserByID: (userId: number) => `${this.context}/users/${userId}`,
+    getAllUsersRoles: () => `${this.context}/users/roles`,
     getAllUsersUrl: () => `${this.context}/users`,
     getAllTrainersUrl: () => `${this.context}/users/alltrainers`,
     getAllAssociatesUrl: () => `${this.context}/users/allassociates`,
