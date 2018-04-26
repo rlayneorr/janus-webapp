@@ -1,12 +1,12 @@
 export class Room {
-    id: number;
+    roomId: number;
     roomNumber: number;
     buildingId: number;
     unavailabilityId: number;
     capacity: number;
     batchId: number;
-    constructor( id: number, roomNumber: number, buildingId: number, unavailabilityId: number, capacity: number, batchId: number ) {
-        this.id = id;
+    constructor( roomId: number, roomNumber: number, buildingId: number, unavailabilityId: number, capacity: number, batchId: number ) {
+        this.roomId = roomId;
         this.roomNumber = roomNumber;
         this.buildingId = buildingId;
         this.unavailabilityId = unavailabilityId;
