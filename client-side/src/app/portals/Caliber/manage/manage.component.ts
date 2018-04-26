@@ -120,7 +120,6 @@ export class ManageComponent implements OnInit {
     this.batchListSub = this.hydraBatchService.fetchAll()
       .subscribe((batches) => this.setBatches(batches));
 
-    this.hydraBatchService.fetchAll();
   }
 
 
