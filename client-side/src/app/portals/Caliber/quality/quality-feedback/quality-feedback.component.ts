@@ -10,7 +10,6 @@ import { QCStatusService } from '../../services/qcstatus.service';
 // entities
 import { Note } from '../../entities/Note';
 import { ReportingService } from '../../services/reporting.service';
-import { urls } from '../../services/urls';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
