@@ -24,7 +24,6 @@ import { GambitSkillTypeService } from '../hydra-client/services/skillType/gambi
     TrainerService,
     UrlService,
     AlertService,
-    UrlService,
     GambitSkillTypeService,
     { provide: HTTP_INTERCEPTORS, useClass: HydraInterceptor, multi: true },  // interceptor for all HTTP requests
   ],
