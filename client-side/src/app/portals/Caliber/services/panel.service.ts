@@ -12,11 +12,13 @@ import { Observable } from 'rxjs/Observable';
 
 // entities
 import { Panel } from '../entities/Panel';
-import { urls } from './urls';
+import { environment } from '../../../../environments/environment';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+
+const context = environment.panel;
 
 /**
 * this service manages calls to the web services
@@ -43,7 +45,7 @@ export class PanelService implements CRUD<Panel> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public fetchAll(): Observable<Panel[]> {
-    this.http.get<any[]>(urls.panel.fetchAll()).subscribe((results) => this.listSubject.next(results));
+    this.http.get<any[]>(context.fetchAll()).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 
@@ -56,7 +58,7 @@ export class PanelService implements CRUD<Panel> {
    * @param trainee: Trainee
    */
   public fetchAllByTrainee(trainee: HydraTrainee): Observable<Panel[]> {
-    this.http.get<any[]>(urls.panel.fetchAllByTrainee(trainee.traineeId)).subscribe((results) => this.listSubject.next(results));
+    this.http.get<any[]>(context.fetchAllByTrainee(trainee.traineeId)).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 
@@ -71,7 +73,7 @@ export class PanelService implements CRUD<Panel> {
   public create(panel: Panel): Observable<Panel> {
     console.log(panel);
     panel.status = 'Pass';
-    return this.http.post<Panel>(urls.panel.save(), JSON.stringify(panel));
+    return this.http.post<Panel>(context.save(), JSON.stringify(panel));
   }
 
   /**
@@ -83,7 +85,7 @@ export class PanelService implements CRUD<Panel> {
   * @param panel: Panel
   */
   public update(panel: Panel): Observable<Panel> {
-    return this.http.put<any>(urls.panel.update(), JSON.stringify(this.prepareForApi(panel)));
+    return this.http.put<any>(context.update(), JSON.stringify(this.prepareForApi(panel)));
   }
 
   /**
@@ -95,7 +97,7 @@ export class PanelService implements CRUD<Panel> {
   * @param panel: Panel
   */
   public delete(panel: Panel): Observable<Panel> {
-    return this.http.delete<any>(urls.batch.delete(panel.panelId));
+    return this.http.delete<any>(context.delete(panel.panelId));
   }
 
   /**

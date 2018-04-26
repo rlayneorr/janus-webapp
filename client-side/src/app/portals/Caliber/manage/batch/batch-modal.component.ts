@@ -10,13 +10,13 @@ import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 // services
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
-import { SkillService } from '../../services/skill.service';
+import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
 import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
 import { ApiService } from '../../services/api.service';
-import { Skill } from '../../entities/Skill';
+import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
 
 
 @Component({
@@ -52,7 +52,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     private activeModal: NgbActiveModal,
     private batchService: HydraBatchService,
     private trainingTypeService: TrainingTypeService,
-    private skillService: SkillService,
+    private skillService: GambitSkillService,
     private locationService: LocationService,
     public trainerService: TrainerService
   ) {
@@ -63,7 +63,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     this.setSkills([]);
   }
 
-  public setSkills(skills: Skill[]): void {
+  public setSkills(skills: GambitSkill[]): void {
     this.skills = skills.map(skill => skill.skillName);
   }
 

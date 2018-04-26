@@ -21,8 +21,8 @@ import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-ba
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
-import { SkillService } from '../services/skill.service';
-import { Skill } from '../entities/Skill';
+import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
+import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
 
 @Component({
   selector: 'app-assess',
@@ -40,7 +40,7 @@ export class AssessComponent implements OnInit {
   grades: Grade[] = [];
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
-  skills: Array<Skill>;
+  skills: Array<GambitSkill>;
   notes: Note[] = [];
   rForm: FormGroup;
 
@@ -55,7 +55,7 @@ export class AssessComponent implements OnInit {
 
   pageOffsetValue;
   constructor(private modalService: NgbModal, private batchService: HydraBatchService, private assessmentService: AssessmentService,
-    private gradeService: GradeService, private skillService: SkillService, private noteService: NoteService,
+    private gradeService: GradeService, private skillService: GambitSkillService, private noteService: NoteService,
     private fb: FormBuilder, private datePipe: DatePipe, private batchUtil: HydraBatchUtilService) {}
 
   getPageOffsetHeight(event: ScrollEvent) {
@@ -84,7 +84,7 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    this.skillService.fetchAllActive();
+    this.skillService.findAllActive();
 
     this.noteService.getList().subscribe(notes => {
       this.notes = notes;
@@ -199,7 +199,7 @@ export class AssessComponent implements OnInit {
    * @param name The name of the skill to find.
    * @returns the skill within this.skills.
    */
-  findSkill(name: string): Skill {
+  findSkill(name: string): GambitSkill {
     return this.skills.find(skill => skill.skillName === name);
   }
 

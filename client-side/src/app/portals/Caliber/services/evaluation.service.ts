@@ -4,9 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../../../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
 import { PanelReview } from '../../Caliber/entities/PanelReview';
-import { urls } from './urls';
-
-
+import { environment } from '../../../../environments/environment';
 
 /**
  * Service handles API calls and tracks fetched data for caching.
@@ -44,7 +42,7 @@ export class EvaluationService {
    * @param weekId weekId filter value
    */
   FetchAllQCTraineeNotes(batchId: Number, weekId: Number) {
-    const endpoint = urls.apiFetchAllQCTraineeNotes(batchId, weekId);
+    const endpoint = environment.apiFetchAllQCTraineeNotes(batchId, weekId);
     const params = {
       batchId: batchId,
       weekId: weekId
@@ -59,7 +57,7 @@ export class EvaluationService {
   }
 
   FetchAllQCBatchNotes(batchId: Number, weekId: Number) {
-    const endpoint = urls.apiFetchAllQCBatchNotes(batchId, weekId);
+    const endpoint = environment.apiFetchAllQCBatchNotes(batchId, weekId);
     const params = {
       batchId: batchId,
       weekId: weekId
