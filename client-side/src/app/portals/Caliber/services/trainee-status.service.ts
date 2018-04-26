@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { urls } from './urls';
+import { environment } from '../../../../environments/environment';
 
 // Interfaces
 import { Fetch } from '../interfaces/api.interface';
@@ -46,8 +46,13 @@ export class TraineeStatusService implements Fetch<string> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
    */
   public fetchAll(): Observable<string[]> {
+<<<<<<< HEAD
     this.http.get<string[]>(urls.traineeStatus.fetchAll()).subscribe((data) => this.listSubject.next(data));
     return this.listSubject.asObservable();
+=======
+     this.http.get<string[]>(environment.traineeStatus.fetchAll()).subscribe((data) => this.listSubject.next(data));
+     return this.listSubject.asObservable();
+>>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
   }
 
 }

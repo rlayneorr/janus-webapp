@@ -9,13 +9,13 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 // entities
-import { Trainee } from '../../entities/Trainee';
-import { Batch } from '../../entities/Batch';
+import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
 // services
 import { TraineeService } from '../../services/trainee.service';
-import { BatchService } from '../../services/batch.service';
 import { PanelService } from '../../services/panel.service';
+import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+
 
 @Component({
   selector: 'app-panel-searchbar',
@@ -25,21 +25,21 @@ import { PanelService } from '../../services/panel.service';
 
 export class PanelSearchbarComponent implements OnInit, OnDestroy {
   name: string;
-  trainee: Trainee;
+  trainee: HydraTrainee;
   batchList;
   traineeList = [];
   traineeNameList: any = [];
   batchSubscription: Subscription;
   closeResult: string;
 
-  protected traineeSubject: BehaviorSubject<Trainee>;
+  protected traineeSubject: BehaviorSubject<HydraTrainee>;
 
   /**
   * Get the necessary services
   * @constructor
   * @param panelService - the PanelService
   */
-  constructor(private traineeService: TraineeService, private batchService: BatchService,
+  constructor(private traineeService: TraineeService, private batchService: HydraBatchService,
     private panelService: PanelService) {
     this.traineeSubject = new BehaviorSubject(this.trainee);
   }
@@ -57,7 +57,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
    * Retrieves all batches from the batch service.
    */
   setBatchList() {
-    this.batchSubscription = this.batchService.getList().subscribe(batchList => {
+    this.batchSubscription = this.batchService.fetchAll().subscribe(batchList => {
       this.batchList = batchList;
       if (!this.traineeList.length) {
         this.getTrainees(this.batchList);
@@ -90,12 +90,17 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
    *
    * @param trainee
    */
-  setTrainee(trainee) {
+  setTrainee(trainee: HydraTrainee) {
     this.trainee = trainee;
     this.panelService.fetchAllByTrainee(trainee);
     this.traineeSubject.next(this.trainee);
+<<<<<<< HEAD
     this.name = this.trainee.name;
     this.traineeService.pushToSaved(this.trainee);
+=======
+    this.name = this.trainee.traineeUserInfo.firstName;
+   // this.traineeService.pushToSaved(this.trainee);  // set selected trainee to savedSubject in traineeservice
+>>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
   }
 
   /**
@@ -111,7 +116,11 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
         this.trainee = this.traineeList[i];
         this.panelService.fetchAllByTrainee(this.trainee);
         this.traineeSubject.next(this.trainee);
+<<<<<<< HEAD
         this.traineeService.pushToSaved(this.trainee);
+=======
+    //    this.traineeService.pushToSaved(this.trainee); // set selected trainee to savedsubject in traineeservice
+>>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
       }
     }
   }
@@ -120,7 +129,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
    * @function getTraineeSubject
    * Retrieves the trainee currently set as the traineeSubject.
    */
-  public getTraineeSubject(): Observable<Trainee> {
+  public getTraineeSubject(): Observable<HydraTrainee> {
     return this.traineeSubject.asObservable();
   }
 

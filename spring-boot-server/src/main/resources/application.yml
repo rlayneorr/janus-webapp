@@ -1,0 +1,8 @@
+#Service configuration
+spring: 
+  application: 
+    name: janus-server
+
+#Server configuration
+server:
+  port: 8088

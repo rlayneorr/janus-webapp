@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // services
 import { BatchService } from '../services/batch.service';
 import { TrainingTypeService } from '../services/training-type.service';
-import { SkillService } from '../services/skill.service';
+import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
 import { LocationService } from '../services/location.service';
 import { TrainerService } from '../services/trainer.service';
 import { TraineeService } from '../services/trainee.service';
@@ -27,15 +27,10 @@ import { ManageComponent } from './manage.component';
 // import * as Dep from './manage.component';
 import { Dependencies } from '../caliber.test.module';
 
-<<<<<<< HEAD
 describe('ManageComponent', () => {
-<<<<<<< HEAD
-=======
-=======
-xdescribe('ManageComponent', () => {
 
->>>>>>> 1808-bam-dev
->>>>>>> master
+// xdescribe('ManageComponent', () => {
+
   let component: ManageComponent;
   let fixture: ComponentFixture<ManageComponent>;
 

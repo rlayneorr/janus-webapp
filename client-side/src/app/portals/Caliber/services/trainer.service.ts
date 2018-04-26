@@ -13,10 +13,11 @@ import { AlertsService } from './alerts.service';
 
 // entities
 import { Trainer } from '../entities/Trainer';
-import { urls } from './urls';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
+
+const context = environment.trainer;
 
 /**
  * This service manages calls to the web service
@@ -39,8 +40,8 @@ export class TrainerService implements CRUD<Trainer> {
   * bootstraps default responsive behavior with subscriptions.
   */
   public populateOnStart(): void {
-    this.httpClient.get<String[]>(urls.trainer.getTitles()).subscribe(x => this.titlesSubject.next(x));
-    this.httpClient.get<String[]>(urls.trainer.getTiers()).subscribe(x => this.tiersSubject.next(x));
+    this.httpClient.get<String[]>(context.getTitles()).subscribe(x => this.titlesSubject.next(x));
+    this.httpClient.get<String[]>(context.getTiers()).subscribe(x => this.tiersSubject.next(x));
     this.fetchAll();
   }
 
@@ -67,7 +68,7 @@ export class TrainerService implements CRUD<Trainer> {
   * @return Observable<Trainer>
   */
   public fetchByEmail(email: string): Observable<Trainer> {
-    this.httpClient.get<Trainer>(urls.trainer.fetchByEmail(email)).subscribe(x => this.currentTrainer.next(x));
+    this.httpClient.get<Trainer>(context.fetchByEmail(email)).subscribe(x => this.currentTrainer.next(x));
     return this.currentTrainer.asObservable();
   }
 
@@ -78,7 +79,7 @@ export class TrainerService implements CRUD<Trainer> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
   */
   public fetchAll(): Observable<Trainer[]> {
-    this.httpClient.get<Trainer[]>(urls.trainer.fetchAll()).subscribe(x => this.listSubject.next(x));
+    this.httpClient.get<Trainer[]>(context.fetchAll()).subscribe(x => this.listSubject.next(x));
     return this.listSubject.asObservable();
   }
 
@@ -90,7 +91,7 @@ export class TrainerService implements CRUD<Trainer> {
    * @param trainer: Trainer
    */
   public create(trainer: Trainer): Observable<Trainer> {
-    return this.httpClient.post<Trainer>(urls.trainer.save(), trainer);
+    return this.httpClient.post<Trainer>(context.save(), trainer);
   }
 
   /**
@@ -102,7 +103,7 @@ export class TrainerService implements CRUD<Trainer> {
    * @param trainer: Trainer
    */
   public update(trainer: Trainer): Observable<Trainer> {
-    return this.httpClient.put<Trainer>(urls.trainer.update(), trainer);
+    return this.httpClient.put<Trainer>(context.update(), trainer);
   }
 
   /**
@@ -163,7 +164,7 @@ export class TrainerService implements CRUD<Trainer> {
   public createTrainer(name: string, title: string, email: string, tier: string): void {
     const trainer = new Trainer();
 
-    trainer.name = name;
+    trainer.firstName = name;
     trainer.title = title;
     trainer.email = email;
     trainer.tier = tier;

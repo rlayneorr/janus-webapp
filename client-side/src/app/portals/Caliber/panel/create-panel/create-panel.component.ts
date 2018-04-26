@@ -13,6 +13,7 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 
 // services
 import { PanelService } from '../../services/panel.service';
+import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
 @Component({
   selector: 'app-create-panel',
@@ -23,7 +24,7 @@ import { PanelService } from '../../services/panel.service';
 
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
-  trainee: Trainee;
+  trainee: HydraTrainee;
   panelForm: FormGroup;
   panelObj: any;
   serializedPanel: any;

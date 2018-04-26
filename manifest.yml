@@ -1,0 +1,7 @@
+applications:
+- name: hydra-janus
+  memory: 700M
+  instances: 1
+  random-route: false
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  path: spring-boot-server/target/Janus-Server-0.0.1-SNAPSHOT.jar

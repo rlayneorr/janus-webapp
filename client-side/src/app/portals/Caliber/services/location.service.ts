@@ -14,8 +14,9 @@ import { CRUD } from '../interfaces/api.interface';
 
 // entities
 import { Location } from '../entities/Location';
-import { urls } from './urls';
+import { environment } from '../../../../environments/environment';
 
+const context = environment.location;
 
 /**
  * This service is used to make API calls
@@ -62,7 +63,7 @@ export class LocationService implements CRUD<Location> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
    */
   public fetchAll(): Observable<Location[]> {
-    this.http.get<any[]>(urls.location.fetchAll()).subscribe((results) => this.listSubject.next(results));
+    this.http.get<any[]>(context.fetchAll()).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 
@@ -76,7 +77,7 @@ export class LocationService implements CRUD<Location> {
    * @param location: Location
    */
   public create(location: Location): Observable<Location> {
-    return this.http.post<any>(urls.location.save(), JSON.stringify(location));
+    return this.http.post<any>(context.save(), JSON.stringify(location));
   }
 
   /**
@@ -89,7 +90,7 @@ export class LocationService implements CRUD<Location> {
    * @param location: Location
    */
   public update(location: Location): Observable<Location> {
-    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
+    return this.http.put<any>(context.update(), JSON.stringify(location));
   }
 
   /**
@@ -111,7 +112,7 @@ export class LocationService implements CRUD<Location> {
    */
   public delete(location: Location): Observable<Location> {
     location.active = false;
-    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
+    return this.http.put<any>(context.update(), JSON.stringify(location));
   }
 
   /**
@@ -130,7 +131,7 @@ export class LocationService implements CRUD<Location> {
    */
   public reactivate(location: Location): Observable<Location> {
     location.active = true;
-    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
+    return this.http.put<any>(context.update(), JSON.stringify(location));
   }
 
   /*

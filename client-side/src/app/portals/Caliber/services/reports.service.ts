@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http/';
-import { urls } from './urls';
+import { environment } from '../../../../environments/environment';
 
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -19,7 +19,7 @@ export class ReportsService {
    * @memberof ReportsService
    */
   public fetchReportsStackedBarCurrentWeek(): Observable<any[]> {
-    return this.http.get<any>(urls.reportsStackedBarCurrentWeek);
+    return this.http.get<any>(environment.reportsStackedBarCurrentWeek);
   }
 
   /**
@@ -28,7 +28,7 @@ export class ReportsService {
    * @memberof ReportsService
    */
   public fetchReportsDashboard(): Observable<any[]> {
-    return this.http.get<any>(urls.reportsDashBoard);
+    return this.http.get<any>(environment.reportsDashBoard);
   }
 
   /**
@@ -37,6 +37,6 @@ export class ReportsService {
    * @memberof ReportsService
    */
   public fetchReportsBiWeeklyPanel(): Observable<any[]> {
-    return this.http.get<any>(urls.reportsBiWeeklyPanel);
+    return this.http.get<any>(environment.reportsBiWeeklyPanel);
   }
 }
