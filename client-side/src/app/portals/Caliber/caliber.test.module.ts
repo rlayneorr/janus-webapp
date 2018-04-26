@@ -134,12 +134,13 @@ import { PassFailComponent } from './screening/components/pass-fail/pass-fail.co
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component';
-import { PaginationControlsComponent, PaginatePipe } from 'ngx-pagination';
+import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
 import { SearchPipe } from './screening/util/search.pipe';
 import { ViolationFlagComponent } from './screening/components/violation-flag/violation-flag.component';
 import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
+import { TagFilterPipe } from './settings/screening/question/question.filter';
 
 export const Dependencies = {
   imports: [
@@ -152,6 +153,7 @@ export const Dependencies = {
     ChartsModule,
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
+    NgxPaginationModule,
   ],
   declarations: [
     // pipes
@@ -176,9 +178,10 @@ export const Dependencies = {
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
-    PaginatePipe,
+    // PaginatePipe,
     SearchPipe,
     BucketFilterPipe,
+    TagFilterPipe,
 
     // components
     CaliberComponent,
@@ -241,7 +244,6 @@ export const Dependencies = {
     BucketComponent,
     SkillTypeBucketsComponent,
     TraineeLineChartComponent,
-    PaginationControlsComponent,
     ViolationFlagComponent,
     SkillTypesComponent,
     QuestionComponent,
@@ -294,7 +296,6 @@ export const Dependencies = {
   exports: [
     TraineeTechSkillsComponent,
     TraineeLineChartComponent,
-    PaginationControlsComponent,
     ViolationFlagComponent,
     PaginatePipe,
   ],
