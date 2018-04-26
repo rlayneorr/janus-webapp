@@ -8,7 +8,6 @@ import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-
 import { NoteService } from '../services/note.service';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { CategorySkillPipe } from '../pipes/category-skill.pipe';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlertsService } from '../services/alerts.service';
 import { Dependencies } from '../caliber.test.module';
