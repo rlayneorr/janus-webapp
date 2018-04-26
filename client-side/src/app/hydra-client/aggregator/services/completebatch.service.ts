@@ -64,7 +64,7 @@ export class BatchService implements CRUD<Batch> {
       this.http.get<any[]>(urls.batch.fetchAll())
         .subscribe((results) => {
           console.log(results);
-          for (let result of results) {
+          for (let result of results) { // will need to call skill servive instead of making our own http request
             this.http.get<any[]>(urls.skill.fetchById(result['skillTypeId'])).subscribe(res => {
               this.batches.push({
                 batchId: result['batchId'],
@@ -100,12 +100,35 @@ export class BatchService implements CRUD<Batch> {
      *
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
      */
-    // public fetchAllByTrainer() {
-    //   this.http.get<any[]>(urls.batch.fetchAllByTrainer())
-    //   .subscribe((results) => {
-    //     this.listSubject.next(results);
-    // });
-    // }
+    public fetchAllByTrainer(id: number) {
+      this.http.get<any[]>(urls.batch.fetchAllByTrainer(id))
+      .subscribe((results) => {
+        for (let result of results) { // will need to call skill servive instead of making our own http request
+          this.http.get<any[]>(urls.skill.fetchById(result['skillTypeId'])).subscribe(res => {
+            this.batches.push({
+              batchId: result['batchId'],
+              resourceId: result['resourceId'],
+              trainingName: result['trainingName'],
+              trainer: null,
+              coTrainer: null,
+              skill: null,
+              skillType: res['skillTypeName'],
+              trainingType: result['trainingType'],
+              startDate: result['startDate'],
+              endDate: result['endDate'],
+              location: result['location'],
+              address: null,
+              goodGradeThreshold: null,
+              borderlineGradeThreshold: null,
+              trainees: result['trainees'],
+              weeks: null
+            });
+          });
+        }
+        this.listSubject.next(results);
+      });
+      return this.listSubject.asObservable();
+    }
 
     /**
     * @overloade
@@ -123,7 +146,7 @@ export class BatchService implements CRUD<Batch> {
       this.http.post<any>(urls.batch.save(), JSON.stringify(this.prepareForApi(batch)))
       .subscribe((results) => {
         this.savedSubject.next(results);
-        });
+      });
       return this.savedSubject.asObservable();
     }
 
