@@ -79,6 +79,7 @@ export const environment = {
     save: () => `${context}all/trainee/create`,
     update: () => `${context}all/trainee/update`,
     delete: (traineeId: number) => `${context}all/trainee/delete/${traineeId}`,
+    fetchDroppedByBatch: (batchId: number) => `${context}all/trainee/`
   },
 
   trainer: {
