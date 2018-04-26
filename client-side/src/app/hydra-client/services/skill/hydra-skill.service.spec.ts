@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { HydraSkillService } from './hydra-skill.service';
+import { GambitSkillService } from './gambit-skill.service';
 
 xdescribe('HydraSkillService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HydraSkillService]
+      providers: [GambitSkillService]
     });
   });
 
-  it('should be created', inject([HydraSkillService], (service: HydraSkillService) => {
+  it('should be created', inject([GambitSkillService], (service: GambitSkillService) => {
     expect(service).toBeTruthy();
   }));
 });

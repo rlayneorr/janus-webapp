@@ -14,7 +14,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
 import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { ScrollEventModule } from 'ngx-scroll-event';
-import { NgxPaginationModule, PaginatePipe, PaginationControlsComponent } from 'ngx-pagination';
+// import { NgxPaginationModule, PaginatePipe, PaginationControlsComponent } from 'ngx-pagination';
+import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
 //import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
@@ -182,6 +183,7 @@ export const Dependencies = {
     ChartsModule,
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
+    NgxPaginationModule,
   ],
   declarations: [
   // pipes
@@ -209,10 +211,10 @@ export const Dependencies = {
         SearchPipe,
         TagFilterPipe,
         BucketFilterPipe,
-        PaginatePipe,
+        //PaginatePipe,
     
         // components
-        PaginationControlsComponent,
+        //PaginationControlsComponent,
         CaliberComponent,
         HomeComponent,
         AssessComponent,
@@ -233,6 +235,7 @@ export const Dependencies = {
         PanelComponent,
         QualityComponent,
         TraineeTechSkillsComponent,
+        SkillsComponent,
         ToolbarComponent,
         GraphComponent,
         TableComponent,
