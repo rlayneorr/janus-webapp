@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { urls } from './urls';
-
+import { environment } from '../../../../environments/environment';
 
 // Interfaces
 import { Fetch } from '../interfaces/api.interface';
@@ -12,6 +11,8 @@ import { Fetch } from '../interfaces/api.interface';
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+
+const context = environment.trainingType;
 
 /**
  * manages API calls for TrainingTypes
@@ -37,7 +38,7 @@ export class TrainingTypeService implements Fetch<String> {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */
   public fetchAll(): Observable<string[]> {
-    this.httpClient.get<string[]>(urls.trainingType.fetchAll()).subscribe(x => this.listSubject.next(x));
+    this.httpClient.get<string[]>(context.fetchAll()).subscribe(x => this.listSubject.next(x));
     return this.listSubject.asObservable();
   }
 

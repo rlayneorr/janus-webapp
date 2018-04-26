@@ -5,16 +5,20 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/delay';
+
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+
 // services
 import { AlertsService } from './alerts.service';
-// import { environment } from '../../../environments/environment';
+
 // entities
 import { Assessment } from '../entities/Assessment';
 import { CRUD } from '../interfaces/api.interface';
-import { urls } from './urls';
+import { environment } from '../../../../environments/environment';
+
+const context = environment.assessment;
 /**
  * this service manages calls to the web service
  * for Assessment objects
@@ -52,7 +56,7 @@ export class AssessmentService implements CRUD<Assessment> {
      */
   public fetchByBatchIdByWeek(batchId: number, week: number): Observable<Assessment[]> {
     this.listSubject.next([]);
-    this.http.get<any[]>(urls.assessment.fetchByBatchIdByWeek(batchId, week))
+    this.http.get<any[]>(context.fetchByBatchIdByWeek(batchId, week))
       .subscribe((results) => this.listSubject.next(results));
     return this.fetchAll();
   }
@@ -88,8 +92,8 @@ export class AssessmentService implements CRUD<Assessment> {
   * @param assessment: Assessment
   */
   public save(assessment: Assessment): void {
-    const url = urls.assessment.save();
-    const fetchUrl = urls.assessment.fetchByBatchIdByWeek(assessment.batch.batchId, assessment.week);
+    const url = context.save();
+    const fetchUrl = context.fetchByBatchIdByWeek(assessment.batch.batchId, assessment.week);
     const body = JSON.stringify(assessment);
     this.http.post(url, body, { responseType: 'text' }).subscribe(() => {
       this.http.get<any[]>(fetchUrl).subscribe((list) => {
@@ -130,7 +134,7 @@ export class AssessmentService implements CRUD<Assessment> {
    * @param assessment: Assessment
    */
   public update(assessment: Assessment): Observable<Assessment> {
-    this.http.put<Assessment>(urls.assessment.update(), JSON.stringify(assessment)).subscribe((data) => {
+    this.http.put<Assessment>(context.update(), JSON.stringify(assessment)).subscribe((data) => {
       this.updatedSubject.next(data);
     });
     return this.updatedSubject.asObservable();
@@ -144,7 +148,7 @@ export class AssessmentService implements CRUD<Assessment> {
    * @param assessment: Assessment
    */
   public delete(assessment: Assessment): Observable<any> {
-    const result = this.http.delete(urls.assessment.delete(assessment.assessmentId)).subscribe(res => {
+    const result = this.http.delete(context.delete(assessment.assessmentId)).subscribe(res => {
       this.deletedSubject.next(assessment);
     });
     return this.deletedSubject.asObservable();
