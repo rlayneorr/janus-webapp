@@ -1,13 +1,13 @@
 export class Location {
-    id: number;
+    locationId: number;
     street: string;
     city: string;
     state: string;
     zip: number;
     title: string;
     active: boolean;
-    constructor(id: number, street: string, city: string, state: string, zip: number, title: string, active: boolean) {
-        this.id = id;
+    constructor(locationId: number, street: string, city: string, state: string, zip: number, title: string, active: boolean) {
+        this.locationId = locationId;
         this.street = street;
         this.city = city;
         this.state = state;

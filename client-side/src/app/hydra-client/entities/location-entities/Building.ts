@@ -1,12 +1,12 @@
 export class Building {
-    id: number;
+    buildingId: number;
     streetAddress: string;
-    locId: number;
+    locationId: number;
     buildingNum: number;
-    constructor( id: number, streetAddress: string, locId: number, buildingNum: number ) {
-        this.id = id;
+    constructor( buildingId: number, streetAddress: string, locationId: number, buildingNum: number ) {
+        this.buildingId = buildingId;
         this.streetAddress = streetAddress;
-        this.locId = locId;
+        this.locationId = locationId;
         this.buildingNum = buildingNum;
     }
 
