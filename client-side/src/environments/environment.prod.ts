@@ -68,7 +68,14 @@ export const environment = {
   },
 
   skill: {
-    fetchAll: () => `${context}types/skill/all`,
+    findAll: () => `${context}/gambit-skills-service/skill`,
+    findByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
+    findById: (id) => `${context}/gambit-skills-service/skill/${id}`,
+    findAllActive: () => `${context}/gambit-skills-service/skill`,
+    save: () => `${context}/gambit-skills-service/skill`,
+    updateByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
+    updateById: (id) => `${context}/gambit-skills-service/skill/${id}`,
+    delete: (id) => `${context}/gambit-skills-service/skill/${id}`
   },
 
   trainee: {
@@ -76,6 +83,7 @@ export const environment = {
     save: () => `${context}vp/trainer/create`,
     update: () => `${context}all/trainee/update`,
     delete: (traineeId: number) => `${context}all/trainee/delete/${traineeId}`,
+    fetchDroppedByBatch: (batchId: number) => `${context}all/trainee/`
   },
 
   trainer: {
