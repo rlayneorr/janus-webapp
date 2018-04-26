@@ -10,6 +10,7 @@ import { ErrorAlertComponent } from './ui/error-alert/error-alert.component';
 import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { AlertService } from './services/alerts/alerts.service';
 import { GambitSkillTypeService } from '../hydra-client/services/skillType/gambit-skill-type.service';
+import { GambitSkillService } from './services/skill/gambit-skill.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { GambitSkillTypeService } from '../hydra-client/services/skillType/gambi
     UrlService,
     AlertService,
     UrlService,
+    GambitSkillService,
     GambitSkillTypeService,
     { provide: HTTP_INTERCEPTORS, useClass: HydraInterceptor, multi: true },  // interceptor for all HTTP requests
   ],
