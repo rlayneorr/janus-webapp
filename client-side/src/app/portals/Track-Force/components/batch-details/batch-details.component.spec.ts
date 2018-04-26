@@ -1,36 +1,24 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { BatchDetailsComponent } from './batch-details.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HomeComponent } from '../home/home.component';
+import { FooterComponent } from '../footer/footer/footer.component';
 
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { BatchService } from '../../services/batch-service/batch.service';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { Batch } from '../../models/batch.model';
 import { User } from '../../models/user.model';
-
-import { AssociateListComponent } from '../associate-list/associate-list.component';
-import { LoginComponent } from '../login/login.component';
-import { CreateUserComponent } from '../create-user/create-user.component';
-import { SearchFilterPipe } from '../../pipes/search-filter/search-filter.pipe';
-import { AssociateSearchByTextFilter } from '../../pipes/associate-search-by-text-filter/associate-search-by-text-filter.pipes';
-import { RootComponent } from '../root/root.component';
-import { FormComponent } from '../form-component/form.component';
-import { SkillsetComponent } from '../skillset/skillset.component';
-import { RequestService } from '../../services/request-service/request.service';
-
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { OrderByPipe } from '../../../Caliber/pipes/order-by.pipe'; // this doesn't seem quite right ...
-import { FooterComponent } from '../footer/footer/footer.component';
 import { Associate } from '../../models/associate.model';
+
+import { OrderByPipe } from '../../../Caliber/pipes/order-by.pipe'; // this doesn't seem quite right ...
 
 
 describe('BatchDetailsComponent', () => {
@@ -66,26 +54,15 @@ describe('BatchDetailsComponent', () => {
                 NavbarComponent,
                 FooterComponent,
                 OrderByPipe,
-                HomeComponent,
-                // AssociateListComponent,
-                // LoginComponent,
-                CreateUserComponent,
-                SearchFilterPipe,
-                AssociateSearchByTextFilter,
-                RootComponent,
-                FormComponent,
-                SkillsetComponent
+                HomeComponent
             ],
             providers: [
-                RequestService,
                 { provide: AuthenticationService, useValue: testAuthService },
                 { provide: BatchService, useValue: testBatchService },  // inject service
             ],
             imports: [
                 RouterTestingModule,
                 FormsModule,
-                BrowserModule,
-                HttpClientModule,
                 ChartsModule
             ]
         }).compileComponents();
