@@ -38,27 +38,35 @@ fdescribe('MyBatchesComponent', () => {
     const tempBatch = new Batch(0, '', null, null, tempUser, 7, 29);
     tempBatch.trainerID = 7;
 
-
-    // This is where you overwrite the base functionality of your services using a Spy.and chain.
-    // SpyOn(Service, 'Function').and.callFake(Function to use instead);
-    spyOn(sessionService, 'getUser').and.returnValue(tempUser);
-
-    spyOn(usersService, 'getUserByID').and.callFake( (userId: number) => {
+    const tempUserFunc = (userId: number) => {
       if (userId === 7) {
         return Observable.of(tempUser);
       } else {
         return Observable.throw(tempUser);
       }
-    }); // .returnValues(Observable.of(tempUser), Observable.throw('This is an Error'),
-     // Observable.throw('This is an Error'), Observable.throw('This is an Error'), Observable.throw('This is an Error'));
+    };
+
+    const tempBatchFunc = (userId: number) => {
+      if (userId === 7) {
+        return Observable.of([tempBatch]);
+      } else {
+        return Observable.throw([tempBatch]);
+      }
+    };
+
+    // This is where you overwrite the base functionality of your services using a Spy.and chain.
+    // SpyOn(Service, 'Function').and.callFake(Function to use instead);
+    spyOn(sessionService, 'getUser').and.returnValue(tempUser);
+
+    spyOn(usersService, 'getUserByID').and.callFake(tempUserFunc);
+
+    spyOn(batchService, 'getAllBatchesInProgress').and.callFake(tempBatchFunc);
+    spyOn(batchService, 'getPastBatches').and.callFake(tempBatchFunc);
+    spyOn(batchService, 'getFutureBatches').and.callFake(tempBatchFunc);
 
      // Or, if you only need it to return a spcific value
      // SpyOn(Service, 'Function').and.returnValue(Value that function should return when called);
     spyOn(curriculumService, 'getCurriculumById').and.returnValue(Observable.of(new Curriculum()));
-
-    spyOn(batchService, 'getAllBatchesInProgress').and.returnValue(Observable.of([tempBatch]));
-    spyOn(batchService, 'getPastBatches').and.returnValue(Observable.of([tempBatch]));
-    spyOn(batchService, 'getFutureBatches').and.returnValue(Observable.of([tempBatch]));
 
     // Then you can proceed as normal, and your mocked functionality will be used automatically.
     fixture = TestBed.createComponent(MyBatchesComponent);
@@ -223,6 +231,7 @@ fdescribe('MyBatchesComponent', () => {
    * Tests if loadCurrent sets batches to the array returned by the batchService
    */
   it('should set batches to an array with one batch in it', async( () => {
+    component.userId = 7;
     component.loadCurrent();
 
     const tempUser = new BamUser(2, 'TestF', 'TestM', 'TestL',
@@ -242,6 +251,7 @@ fdescribe('MyBatchesComponent', () => {
    * Tests if loadPast sets batches to the array returned by the batchService
    */
   it('should set batches to an array with one batch in it', async( () => {
+    component.userId = 7;
     component.loadPast();
 
     const tempUser = new BamUser(2, 'TestF', 'TestM', 'TestL',
@@ -261,6 +271,7 @@ fdescribe('MyBatchesComponent', () => {
    * Tests if loadFuture sets batches to the array returned by the batchService
    */
   it('should set batches to an array with one batch in it', async( () => {
+    component.userId = 7;
     component.loadFuture();
 
     const tempUser = new BamUser(2, 'TestF', 'TestM', 'TestL',
@@ -270,6 +281,51 @@ fdescribe('MyBatchesComponent', () => {
     const expected = [new Batch(0, '', null, null, tempUser, 7, 29)];
     expected[0].curriculum = undefined;
     expected[0].trainerID = 7;
+
+    console.log(component.batches);
+    console.log(expected);
+
+    expect(component.batches).toEqual(expected);
+  }));
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   * Tests if loadCurrent sets batches to the array returned by the batchService
+   */
+  it('should set batches to an empty array when loadCurrent receives an error observable', async( () => {
+    component.userId = 0;
+    component.loadCurrent();
+
+    const expected = [];
+
+    expect(component.batches).toEqual(expected);
+  }));
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   * Tests if loadPast sets batches to the array returned by the batchService
+   */
+  it('should set batches to an empty array when loadPast receives an error observable', async( () => {
+    component.userId = 0;
+    component.loadPast();
+
+    const expected = [];
+
+    expect(component.batches).toEqual(expected);
+  }));
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   * Tests if loadFuture sets batches to the array returned by the batchService
+   */
+  it('should set batches to an empty array when loadFuture receives an error observable', async( () => {
+    component.userId = 0;
+    component.loadFuture();
+
+    const expected = [];
 
     expect(component.batches).toEqual(expected);
   }));
