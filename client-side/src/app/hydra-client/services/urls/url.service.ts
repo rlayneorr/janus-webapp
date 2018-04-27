@@ -154,11 +154,12 @@ export class UrlService {
    * This section is being added for use in the location service
    */
   location = {
-    getLocationById: () => `${this.context}/location/{id}`,
+    // this method will be 
+    getLocationById: (locationId: number) => `${this.context}/location/{id}`,
     getAllLocations: () => `${this.context}/location`,
     postLocation: () => `${this.context}/location`,
-    putLocationById: () => `${this.context}/location/{id}`,
-    deleteLocationById: () => `${this.context}/location/{id}`
+    putLocationById: (locationId: number) => `${this.context}/location/{id}`,
+    deleteLocationById: (locationId: number) => `${this.context}/location/{id}`
   };
 
   constructor() {
