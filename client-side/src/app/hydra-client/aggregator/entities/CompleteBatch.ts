@@ -8,6 +8,7 @@ export class CompleteBatch {
   trainerId: number;    //TODO Refactor to Trainer type
   cotrainerId: number;  //TODO Refactor to Trainer type
   skillType: SkillType;
+  trainingType: string;
   addressId: number;    //TODO Refactor to Address type
   location: string;
   goodGradeThreshold: number;

@@ -14,12 +14,14 @@ import { ApiService } from '../util/api.service';
 import { environment } from '../../../../environments/environment';
 
 // entities
-import { Batch } from '../entities/Batch';
+import { CompleteBatch } from '../entities/CompleteBatch';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { urls } from './urls';
 import { stringifyDate } from '../util/utils';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { NullAstVisitor } from '@angular/compiler';
+import { SkillTypeService } from '../../../portals/Caliber/screening/services/skillType/skill-type.service';
+import { GambitSkillTypeService } from '../../services/skillType/gambit-skill-type.service';
 
 
 /**
@@ -27,15 +29,16 @@ import { NullAstVisitor } from '@angular/compiler';
  * for Batch objects
  */
 @Injectable()
-export class BatchService implements CRUD<Batch> {
+export class BatchService {
 
-    public listSubject: BehaviorSubject<Batch[]>;
-    public batches: Batch[] = [];
-    public savedSubject: Subject<Batch>;
-    public updatedSubject: Subject<Batch>;
-    public deletedSubject: Subject<Batch>;
+    public listSubject: BehaviorSubject<CompleteBatch[]>;
+    public batches: CompleteBatch[] = [];
+    public savedSubject: Subject<CompleteBatch>;
+    public updatedSubject: Subject<CompleteBatch>;
+    public deletedSubject: Subject<CompleteBatch>;
 
-    constructor(public http: HttpClient, public apiService: ApiService) {
+    constructor(public http: HttpClient, public apiService: ApiService, 
+      public gambitSkillTypeService: GambitSkillTypeService) {
       this.listSubject = new BehaviorSubject([]);
       this.savedSubject = new Subject();
       this.updatedSubject = new Subject();
@@ -59,30 +62,30 @@ export class BatchService implements CRUD<Batch> {
      *
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
      */
-    public fetchAll(): Observable<Batch[]> {
+    public fetchAll(): Observable<CompleteBatch[]> {
       if (this.batches.length == 0) {
       this.http.get<any[]>(urls.batch.fetchAll())
         .subscribe((results) => {
           console.log(results);
           for (let result of results) { // will need to call skill servive instead of making our own http request
-            this.http.get<any[]>(urls.skill.fetchById(result['skillTypeId'])).subscribe(res => {
+            this.gambitSkillTypeService.find(result['skillTypeId']).subscribe(res => {
               this.batches.push({
                 batchId: result['batchId'],
                 resourceId: result['resourceId'],
                 trainingName: result['trainingName'],
-                trainer: null,
-                coTrainer: null,
-                skill: null,
-                skillType: res['skillTypeName'],
+                trainerId: result['trainerId'],
+                cotrainerId: result['cotrainerId'],
+                skillType: res,
                 trainingType: result['trainingType'],
-                startDate: result['startDate'],
-                endDate: result['endDate'],
+                addressId: result['addressId'],
                 location: result['location'],
-                address: null,
                 goodGradeThreshold: null,
                 borderlineGradeThreshold: null,
-                trainees: result['trainees'],
-                weeks: null
+                startDate: result['startDate'],
+                endDate: result['endDate'],
+                week: null,
+                noteIds: result['trainees'],
+                traineeIds: result['trainees'],
               });
             });
           }
@@ -104,24 +107,24 @@ export class BatchService implements CRUD<Batch> {
       this.http.get<any[]>(urls.batch.fetchAllByTrainer(id))
       .subscribe((results) => {
         for (let result of results) { // will need to call skill servive instead of making our own http request
-          this.http.get<any[]>(urls.skill.fetchById(result['skillTypeId'])).subscribe(res => {
+          this.gambitSkillTypeService.find(result['skillTypeId']).subscribe(res => {
             this.batches.push({
               batchId: result['batchId'],
               resourceId: result['resourceId'],
               trainingName: result['trainingName'],
-              trainer: null,
-              coTrainer: null,
-              skill: null,
-              skillType: res['skillTypeName'],
+              trainerId: result['trainerId'],
+              cotrainerId: result['cotrainerId'],
+              skillType: res,
               trainingType: result['trainingType'],
-              startDate: result['startDate'],
-              endDate: result['endDate'],
+              addressId: result['addressId'],
               location: result['location'],
-              address: null,
               goodGradeThreshold: null,
               borderlineGradeThreshold: null,
-              trainees: result['trainees'],
-              weeks: null
+              startDate: result['startDate'],
+              endDate: result['endDate'],
+              week: null,
+              noteIds: result['trainees'],
+              traineeIds: result['trainees'],
             });
           });
         }

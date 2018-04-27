@@ -21,11 +21,12 @@ export const environment = {
   },
 
   batch: {
-    fetchAllByTrainer: () => `${context}trainer/batch/all`,
-    fetchAll: () => `${context}vp/batch/all`,
-    save: () => `${context}all/batch/create`,
-    update: () => `${context}all/batch/update`,
-    delete: (batchId) => `${context}all/batch/delete/${batchId}`,
+    fetchAllByTrainer: () => `${this.context}/batches/trainers`,
+    fetchAllByTrainerId: (id: number) => `${this.context}/batches/trainers/${id}`,
+    fetchAll: () => `${this.context}/batches`,
+    save: () => `${this.context}/batches`,
+    update: () => `${this.context}/batches`,
+    delete: (batchId) => `${this.context}/batches/${batchId}`
   },
 
   category: {
