@@ -71,6 +71,7 @@ export class UrlService {
     updateUserUrl: (userId: number) => `${this.context}/users/${userId}`,
     addUserUrl: () => `${this.context}/users`,
     removeUserUrl: (userId: number) => `${this.context}/users/${userId}`,
+    makeInactive: () => `${this.context}/users/inactivate`,
     addUserToBatchUrl: (batchId: number, userId: number) => `${this.context}/users/batches/${userId}/${batchId}`,
     getUsersNotInBatchUrl: () => `${this.context}/users/batches/none`,
     resetPasswordUrl: () => `${this.context}/user/reset`,
