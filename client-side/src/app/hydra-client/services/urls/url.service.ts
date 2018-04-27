@@ -149,6 +149,18 @@ export class UrlService {
     getAllInProgressUrl: () => `${this.context}/batches/current/`
   };
 
+  /**
+   * Endpoints for locations:
+   * This section is being added for use in the location service
+   */
+  location = {
+    getLocationById: () => `${this.context}/location/{id}`,
+    getAllLocations: () => `${this.context}/location`,
+    postLocation: () => `${this.context}/location`,
+    putLocationById: () => `${this.context}/location/{id}`,
+    deleteLocationById: () => `${this.context}/location/{id}`
+  };
+
   constructor() {
     this.context = environment.gambitContext;
   }

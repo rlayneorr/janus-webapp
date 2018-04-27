@@ -2,28 +2,29 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Location } from '../../entities/location-entities/Location';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { UrlService } from '../urls/url.service';
 
 
 @Injectable()
 export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
-  url: string;
+  urlLiteral: string;
 
-
-
-  constructor(private httpClient: HttpClient) { }
+  // Injecting UrlService and HttpClient into LocationService constructor //
+  constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
   getLocation(request: any) {
-    return this.httpClient.get<Location>(this.url);
+    return this.httpClient.get<Location>(this.urlLiteral);
   }
   newLocation(location: Location) {
-    return this.httpClient.post<Location>(this.url, JSON.stringify(location));
+    const url = '';
+    return this.httpClient.post<Location>(this.urlLiteral, JSON.stringify(location));
   }
   updateLocation(location: Location) {
-    return this.httpClient.post<Location>(this.url,  JSON.stringify(location));
+    return this.httpClient.post<Location>(this.urlLiteral,  JSON.stringify(location));
   }
   deleteLocaiton(location: Location) {
-    return this.httpClient.post<Location>(this.url,  JSON.stringify(location));
+    return this.httpClient.post<Location>(this.urlLiteral,  JSON.stringify(location));
   }
 }
