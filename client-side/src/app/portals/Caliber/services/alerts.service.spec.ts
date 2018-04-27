@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
  * Author: Jordan Young
  */
 
-fdescribe('AlertsService', () => {
+xdescribe('AlertsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AlertsService]

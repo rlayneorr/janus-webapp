@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../caliber.test.module';
 import { GeneralFeedbackComponent } from './general-feedback.component';
 
-fdescribe('GeneralFeedbackComponent', () => {
+xdescribe('GeneralFeedbackComponent', () => {
   let component: GeneralFeedbackComponent;
   let fixture: ComponentFixture<GeneralFeedbackComponent>;
 
