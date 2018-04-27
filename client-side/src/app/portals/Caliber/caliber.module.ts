@@ -74,7 +74,6 @@ import { ApiService } from './util/api.service';
 
 // pipes
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
-import { CategorySkillPipe } from './pipes/category-skill.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
 import { TrainerPipePipe } from './pipes/trainer-pipe.pipe';
@@ -199,7 +198,6 @@ import { CategoryService } from './services/category.service';
     GradeByTraineeByAssessmentPipe,
     DisplayBatchByYear,
     BatchByTrainerPipe,
-    CategorySkillPipe,
     NoteByTraineeByWeekPipe,
     TierPipe,
     TrainerPipePipe,
