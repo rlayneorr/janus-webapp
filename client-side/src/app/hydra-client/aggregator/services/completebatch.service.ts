@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-// Interfaces
-import { CRUD } from '../interfaces/api.interface';
-
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
@@ -12,9 +9,14 @@ import { Observable } from 'rxjs/Observable';
 // services
 import { ApiService } from '../util/api.service';
 import { environment } from '../../../../environments/environment';
+import { HydraBatchService } from '../../services/batch/hydra-batch.service';
 
 // entities
-import { Batch } from '../entities/Batch';
+import { GambitBatch } from '../../entities/GambitBatch';
+import { CompleteBatch } from '../entities/CompleteBatch';
+import { GambitSkillType } from '../../entities/GambitSkillType';
+import { HydraTrainee } from '../../entities/HydraTrainee';
+import { Trainer } from '../../entities/Trainer';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { urls } from './urls';
 import { stringifyDate } from '../util/utils';
@@ -23,11 +25,12 @@ import { NullAstVisitor } from '@angular/compiler';
 
 
 /**
- * this service manages calls to the web service
- * for Batch objects
+ * this service manages calls to and from the gambit-batch microservice,
+ *  aggregating the entity it uses with entities from other microservices
+ *  into the CompleteBatch entity and vice-versa
  */
 @Injectable()
-export class BatchService implements CRUD<Batch> {
+export class CompleteBatchService {
 
     public listSubject: BehaviorSubject<Batch[]>;
     public batches: Batch[] = [];
@@ -35,7 +38,7 @@ export class BatchService implements CRUD<Batch> {
     public updatedSubject: Subject<Batch>;
     public deletedSubject: Subject<Batch>;
 
-    constructor(public http: HttpClient, public apiService: ApiService) {
+    constructor(public http: HttpClient, public apiService: ApiService, public hydraBatchService: HydraBatchService) {
       this.listSubject = new BehaviorSubject([]);
       this.savedSubject = new Subject();
       this.updatedSubject = new Subject();
@@ -119,12 +122,38 @@ export class BatchService implements CRUD<Batch> {
     *
     * @param batch: Batch
     */
-    public create(batch: Batch): Observable<Batch> {
-      this.http.post<any>(urls.batch.save(), JSON.stringify(this.prepareForApi(batch)))
-      .subscribe((results) => {
-        this.savedSubject.next(results);
-        });
-      return this.savedSubject.asObservable();
+    public create(completeBatch: CompleteBatch): Observable<GambitBatch> {
+      let gambitBatch: GambitBatch = new GambitBatch();
+      gambitBatch.batchId = completeBatch.batchId;
+      gambitBatch.addressId = completeBatch.resourceId;
+      gambitBatch.trainingName = completeBatch.trainingName;
+      gambitBatch.trainerId = completeBatch.trainer.userId;
+
+      //TODO Verify that the logic for creating cotrainers in a batch as initially null
+      //       is valid. See aggregator/entities/CompleteBatch constructor for more details
+      if (completeBatch.cotrainer != null ) {
+        gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
+      } else {
+        gambitBatch.cotrainerId = 0;
+      }
+
+      gambitBatch.skillTypeId = completeBatch.skillType.skillTypeId;
+      gambitBatch.addressId = completeBatch.addressId;
+      gambitBatch.location = completeBatch.location;
+      gambitBatch.goodGradeThreshold = completeBatch.goodGradeThreshold;
+      gambitBatch.borderlineGradeThreshold = completeBatch.borderlineGradeThreshold;
+      gambitBatch.startDate = completeBatch.startDate;
+      gambitBatch.endDate = completeBatch.endDate;
+      gambitBatch.week = completeBatch.week;
+      gambitBatch.noteIds = completeBatch.noteIds;
+
+      // iterates over the HydraTrainee array in completeBatch to push ids to
+      //    the GambitBatch traineeId array
+      for (let trainee of completeBatch.trainees) {
+        gambitBatch.traineeIds.push(trainee.traineeId);
+      }
+
+      return this.hydraBatchService.create(gambitBatch);
     }
 
     /**
@@ -135,12 +164,39 @@ export class BatchService implements CRUD<Batch> {
      *
      * @param batch: Batch
      */
-    public update(batch: Batch): Observable<Batch> {
-      this.http.put<any>(urls.batch.update(), JSON.stringify(this.prepareForApi(batch)))
-      .subscribe((results) => {
-        this.savedSubject.next(results);
-        });
-      return this.savedSubject.asObservable();
+    public update(completeBatch: CompleteBatch): Observable<GambitBatch> {
+
+      let gambitBatch: GambitBatch = new GambitBatch();
+      gambitBatch.batchId = completeBatch.batchId;
+      gambitBatch.addressId = completeBatch.resourceId;
+      gambitBatch.trainingName = completeBatch.trainingName;
+      gambitBatch.trainerId = completeBatch.trainer.userId;
+
+      //TODO Verify that the logic for creating cotrainers in a batch as initially null
+      //       is valid. See aggregator/entities/CompleteBatch constructor for more details
+      if (completeBatch.cotrainer != null ) {
+        gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
+      } else {
+        gambitBatch.cotrainerId = 0;
+      }
+
+      gambitBatch.skillTypeId = completeBatch.skillType.skillTypeId;
+      gambitBatch.addressId = completeBatch.addressId;
+      gambitBatch.location = completeBatch.location;
+      gambitBatch.goodGradeThreshold = completeBatch.goodGradeThreshold;
+      gambitBatch.borderlineGradeThreshold = completeBatch.borderlineGradeThreshold;
+      gambitBatch.startDate = completeBatch.startDate;
+      gambitBatch.endDate = completeBatch.endDate;
+      gambitBatch.week = completeBatch.week;
+      gambitBatch.noteIds = completeBatch.noteIds;
+
+      // iterates over the HydraTrainee array in completeBatch to push ids to
+      //    the GambitBatch traineeId array
+      for (let trainee of completeBatch.trainees) {
+        gambitBatch.traineeIds.push(trainee.traineeId);
+      }
+
+      return this.hydraBatchService.update(gambitBatch);
     }
 
     /**
@@ -152,12 +208,39 @@ export class BatchService implements CRUD<Batch> {
      *
      * @param batch: Batch
      */
-    public delete(batch: Batch): Observable<Batch> {
-      this.http.delete(urls.batch.delete(batch.batchId))
-      .subscribe((results: any) => {
-        this.deletedSubject.next(results);
-        });
-      return this.deletedSubject.asObservable();
+    public delete(completeBatch: CompleteBatch): Observable<GambitBatch> {
+      let gambitBatch: GambitBatch = new GambitBatch();
+      gambitBatch.batchId = completeBatch.batchId;
+      gambitBatch.addressId = completeBatch.resourceId;
+      gambitBatch.trainingName = completeBatch.trainingName;
+      gambitBatch.trainerId = completeBatch.trainer.userId;
+
+      //TODO Verify that the logic for creating cotrainers in a batch as initially null
+      //       is valid. See aggregator/entities/CompleteBatch constructor for more details
+      if (completeBatch.cotrainer != null ) {
+        gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
+      } else {
+        gambitBatch.cotrainerId = 0;
+      }
+
+      gambitBatch.skillTypeId = completeBatch.skillType.skillTypeId;
+      gambitBatch.addressId = completeBatch.addressId;
+      gambitBatch.location = completeBatch.location;
+      gambitBatch.goodGradeThreshold = completeBatch.goodGradeThreshold;
+      gambitBatch.borderlineGradeThreshold = completeBatch.borderlineGradeThreshold;
+      gambitBatch.startDate = completeBatch.startDate;
+      gambitBatch.endDate = completeBatch.endDate;
+      gambitBatch.week = completeBatch.week;
+      gambitBatch.noteIds = completeBatch.noteIds;
+
+      // iterates over the HydraTrainee array in completeBatch to push ids to
+      //    the GambitBatch traineeId array
+      for (let trainee of completeBatch.trainees) {
+        gambitBatch.traineeIds.push(trainee.traineeId);
+      }
+
+      return this.hydraBatchService.delete(gambitBatch);
+
     }
 
     /**
@@ -170,7 +253,7 @@ export class BatchService implements CRUD<Batch> {
      * @return any
      */
     // We should find a way to make this have an explicit non-any type
-    protected prepareForApi(batch: Batch): any {
+    protected prepareForApi(batch: GambitBatch): any {
       let output: any = {};
       Object.assign(output, batch);
 
