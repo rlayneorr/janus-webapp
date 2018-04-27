@@ -182,7 +182,7 @@ export class UrlService {
     getAllRooms: () => `${this.context}/room`,
     postRoom: () => `${this.context}/room`,
     putRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
-    deleteBuildingById: (roomId: number) => `${this.context}/room/${roomId}`
+    deleteRoomById: (roomId: number) => `${this.context}/room/${roomId}`
   };
 
   /**

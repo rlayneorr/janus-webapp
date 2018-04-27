@@ -4,6 +4,7 @@ import { Location } from '../../entities/location-entities/Location';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UrlService } from '../urls/url.service';
 import { Building } from '../../entities/location-entities/Building';
+import { Room } from '../../entities/location-entities/Room';
 
 
 @Injectable()
@@ -50,5 +51,21 @@ export class LocationService {
   }
   deleteBuilding(building: Building) {
     return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
+  }
+
+  getAllrooms() {
+    return this.httpClient.get<Room>(this.urls.room.getAllRooms());
+  }
+  getOneroom(room: Room) {
+    return this.httpClient.get<Room>(this.urls.room.getRoomById(room.roomId));
+  }
+  newroom(room: Room) {
+    return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room));
+  }
+  updateroom(room: Room) {
+    return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room));
+  }
+  deleteroom(room: Room) {
+    return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId));
   }
 }
