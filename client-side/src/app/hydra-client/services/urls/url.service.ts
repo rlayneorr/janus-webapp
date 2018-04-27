@@ -154,12 +154,47 @@ export class UrlService {
    * This section is being added for use in the location service
    */
   location = {
-    // this method will be 
     getLocationById: (locationId: number) => `${this.context}/location/{id}`,
     getAllLocations: () => `${this.context}/location`,
     postLocation: () => `${this.context}/location`,
     putLocationById: (locationId: number) => `${this.context}/location/{id}`,
     deleteLocationById: (locationId: number) => `${this.context}/location/{id}`
+  };
+
+  /**
+   * Endpoints for buildings:
+   * This section is being added for use in the location service
+   */
+  building = {
+    getBuildingById: (buildingId: number) => `${this.context}/building/{id}`,
+    getAllBuildings: () => `${this.context}/building`,
+    postBuilding: () => `${this.context}/building`,
+    putBuildingById: (buildingId: number) => `${this.context}/building/{id}`,
+    deleteBuildingById: (buildingId: number) => `${this.context}/buidling/{id}`
+  };
+
+  /**
+   * Endpoints for rooms:
+   * This section is being added for use in the location service
+   */
+  room = {
+    getRoomById: (roomId: number) => `${this.context}/room/{id}`,
+    getAllRooms: () => `${this.context}/room`,
+    postRoom: () => `${this.context}/room`,
+    putRoomById: (roomId: number) => `${this.context}/room/{id}`,
+    deleteBuildingById: (roomId: number) => `${this.context}/room/{id}`
+  };
+
+  /**
+   * Endpoints for unavailabilities:
+   * This section is being added for use in the location service
+   */
+  unavailability = {
+    getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/{id}`,
+    getAllUnavailabilities: () => `${this.context}/unavailability`,
+    postUnavailabilities: () => `${this.context}/unavailability`,
+    putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/{id}`,
+    deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/{id}`
   };
 
   constructor() {

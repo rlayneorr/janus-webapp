@@ -18,8 +18,7 @@ export class LocationService {
     return this.httpClient.get<Location>(this.urlLiteral);
   }
   newLocation(location: Location) {
-    const url = '';
-    return this.httpClient.post<Location>(this.urlLiteral, JSON.stringify(location));
+    return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location));
   }
   updateLocation(location: Location) {
     return this.httpClient.post<Location>(this.urlLiteral,  JSON.stringify(location));
