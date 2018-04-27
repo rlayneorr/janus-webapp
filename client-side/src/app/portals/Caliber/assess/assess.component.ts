@@ -7,8 +7,6 @@ import { AssessmentService } from '../services/assessment.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GradeService } from '../services/grade.service';
 import { Grade } from '../entities/Grade';
-import { CategoryService } from '../services/category.service';
-import { Category } from '../entities/Category';
 import { Note } from '../entities/Note';
 import { NoteService } from '../services/note.service';
 import * as $ from 'jquery';
@@ -23,7 +21,8 @@ import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-ba
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
 import { Trainee } from '../../../hydra-client/entities/Trainee';
-
+import { SkillService } from '../services/skill.service';
+import { Skill } from '../entities/Skill';
 
 @Component({
   selector: 'app-assess',
@@ -41,7 +40,7 @@ export class AssessComponent implements OnInit {
   grades: Grade[] = [];
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
-  categories: Category[] = [];
+  skills: Array<Skill>;
   notes: Note[] = [];
   rForm: FormGroup;
 
@@ -56,7 +55,7 @@ export class AssessComponent implements OnInit {
 
   pageOffsetValue;
   constructor(private modalService: NgbModal, private batchService: HydraBatchService, private assessmentService: AssessmentService,
-    private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService,
+    private gradeService: GradeService, private skillService: SkillService, private noteService: NoteService,
     private fb: FormBuilder, private datePipe: DatePipe, private batchUtil: HydraBatchUtilService) {}
 
   getPageOffsetHeight(event: ScrollEvent) {
@@ -85,7 +84,7 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    this.categoryService.fetchAllActive();
+    this.skillService.fetchAllActive();
 
     this.noteService.getList().subscribe(notes => {
       this.notes = notes;
@@ -99,9 +98,9 @@ export class AssessComponent implements OnInit {
       this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     });
 
-    this.categoryService.listSubject.subscribe(categories => {
-      this.categories = categories;
-      this.newAssessment.category = this.findCategory('Java');
+    this.skillService.listSubject.subscribe(skills => {
+      this.skills = skills;
+      this.newAssessment.skill = this.findSkill('Java');
     });
 
     this.batchService.fetchAll().subscribe(batch => {
@@ -173,35 +172,36 @@ export class AssessComponent implements OnInit {
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
   }
 
-/****************************************************************************************
-                                      CATEGORIES
-*****************************************************************************************/
+  /****************************************************************************************
+                                        SKILL
+  *****************************************************************************************/
 
   /**
-   * This is garbage why are we using jquery??? - blake
+   * Called when a skill is changed. Sets the skill of the assessment being edited to the new skill.
+   * @param selectSkill The html element that was changed.
    */
-  editCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.editingAssessment.category = this.findCategory(newCategory);
+  editSkill(selectSkill: ElementRef) {
+    const newSkill = $(selectSkill).find(':selected').val();
+    this.editingAssessment.skill = this.findSkill(String(newSkill));
   }
 
-  changeCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.newAssessment.category = this.findCategory(newCategory);
+  /**
+   * Called when a skill is changed. Sets the skill of the new assessment to the new skill.
+   * @param skillSelect The html element that was changed.
+   */
+  changeSkill(skillSelect: ElementRef) {
+    const newSkill = $(skillSelect).find(':selected').val();
+    this.newAssessment.skill = this.findSkill(String(newSkill));
   }
 
-  findCategory(category: any): Category {
-    let matchingCat;
-    this.categories.forEach(element => {
-
-      if (element.skillCategory === category) {
-        matchingCat = element;
-      }
-    });
-
-    return matchingCat;
+  /**
+   * Finds the skill within this.skills.
+   * @param name The name of the skill to find.
+   * @returns the skill within this.skills.
+   */
+  findSkill(name: string): Skill {
+    return this.skills.find(skill => skill.skillName === name);
   }
-
 
 /****************************************************************************************
                                       GRADES
@@ -400,3 +400,4 @@ export class AssessComponent implements OnInit {
   }
 
 }
+
