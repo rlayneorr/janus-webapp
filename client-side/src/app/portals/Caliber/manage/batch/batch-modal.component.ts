@@ -17,7 +17,7 @@ import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
 import { ApiService } from '../../services/api.service';
 import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
-import { SkillType } from '../../../../hydra-client/entities/SkillType';
+import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillType';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   public batch: HydraBatch;
 
   public trainers: Trainer[];
-  public skillTypes: SkillType[];
+  public skillTypes: GambitSkillType[];
   public locations: Address[];
   public trainingTypes: string[];
   batchType: string;
