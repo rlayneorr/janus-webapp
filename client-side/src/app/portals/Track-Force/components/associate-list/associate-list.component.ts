@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AssociateService } from '../../services/associates-service/associates-service';
-import { Associate } from '../../models/associate.model';
 import { RequestService } from '../../services/request-service/request.service';
 import { Client } from '../../models/client.model';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
+import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
 /**
  * Component for the Associate List page
@@ -18,7 +18,7 @@ import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 
 export class AssociateListComponent implements OnInit {
   // our collection of associates and clients
-  associates: Associate[];
+  associates: HydraTrainee[];
   clients: Client[];
   curriculums: Set<string>; // stored unique curriculums
 
@@ -30,8 +30,8 @@ export class AssociateListComponent implements OnInit {
 
   // status/client to be updated
   updateShow = false;
-  updateStatus = '';
-  updateClient: number;
+  updateStatus = null;
+  updateClient = null;
   updated = false;
 
   // used for ordering of rows
@@ -42,7 +42,7 @@ export class AssociateListComponent implements OnInit {
 
   constructor(
     private associateService: AssociateService,
-    private rs: RequestService
+    private requestService: RequestService
   ) {
     this.curriculums = new Set<string>();
   }
@@ -68,20 +68,19 @@ export class AssociateListComponent implements OnInit {
    */
   getAllAssociates() {
     const self = this;
-    this.rs.getAssociates().subscribe(data => {
+    this.associateService.getAllAssociates().subscribe(data => {
       this.associates = data;
 
-      for (const associate of this.associates) { // get our curriculums
-        this.curriculums.add(associate.curriculumName);
+      // for (const associate of this.associates) { // get our curriculums
+      //   this.curriculums.add(associate.curriculumName);
 
-        if (associate.batchName === 'null') {
-          associate.batchName = 'None';
-        }
-      }
-      this.curriculums.delete('');
-      this.curriculums.delete('null');
-      self.sort('id');
-
+      //   if (associate.batches === 'null') {
+      //     associate.batchName = 'None';
+      //   }
+      // }
+      // this.curriculums.delete('');
+      // this.curriculums.delete('null');
+      this.sort('userId');
       console.log(data);
     });
   }
@@ -90,7 +89,7 @@ export class AssociateListComponent implements OnInit {
    * Fetch the client names
    */
   getClientNames() {
-    this.rs.getClients().subscribe(data => {
+    this.requestService.getClients().subscribe(data => {
       this.clients = data;
     });
   }
@@ -131,20 +130,31 @@ export class AssociateListComponent implements OnInit {
    * Bulk edit feature to update associate's statuses and clients.
    */
   updateAssociates() {
-    const ids: number[] = [];
-    let i = 1;
+    const trainees: HydraTrainee[] = [];
     const self = this;
 
-    for (i; i <= this.associates.length; i++) { // grab the checked ids
-      const check = <HTMLInputElement>document.getElementById('' + i);
+    for (let trainee of this.associates) { // grab the checked ids
+      const check = <HTMLInputElement>document.getElementById(trainee.userId.toString());
       if (check != null && check.checked) {
-        ids.push(i);
+        if (this.updateStatus !== null) {
+          trainee.marketingStatus = this.updateStatus;
+        }
+        if (this.updateClient !== null) {
+          trainee.client = this.updateClient;
+        }
+        trainees.push(trainee);
       }
     }
-    this.associateService.updateAssociates(ids, this.updateStatus, this.updateClient).subscribe(
-      data => {
-        self.getAllAssociates();
-        self.updated = true;
-      });
+    let count = 1;
+    for (let trainee of trainees) {
+      this.associateService.updateAssociate(trainee).subscribe(
+        data => {
+          if (count++ === trainees.length) {
+            self.getAllAssociates();
+            self.updated = true;
+          }
+        }
+      );
+    }
   }
 }

@@ -3,6 +3,7 @@ import { User } from './User';
 
 
 export class HydraTrainee {
+    userId: number;
     traineeId: number;
     resourceId: number;
     trainingStatus: string;

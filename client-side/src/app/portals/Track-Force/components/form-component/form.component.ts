@@ -42,14 +42,14 @@ export class FormComponent implements OnInit {
     updateAssociate() {
         if (this.selectedClient !== this.associate.client
             && this.selectedMarketingStatus !== this.associate.marketingStatus) {
-            this.associateService.updateAssociate(this.id, this.selectedMarketingStatus, this.selectedClient).subscribe(
-                data => {
-                    this.associateService.getAssociate(this.id).subscribe(
-                        associate => {
-                            this.associate = <Associate>associate;
-                        });
-                }
-            );
+            // this.associateService.updateAssociate(this.id, this.selectedMarketingStatus, this.selectedClient).subscribe(
+            //     data => {
+            //         this.associateService.getAssociate(this.id).subscribe(
+            //             associate => {
+            //                 this.associate = <Associate>associate;
+            //             });
+            //     }
+            // );
         }
     }
 }
