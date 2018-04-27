@@ -29,8 +29,8 @@ fdescribe('AlertsService', () => {
     service.getMessage().subscribe((s) => {
       type = s.type;
       msg = s.text;
-      expect(msg).toBe('error');
-      expect(msg).toBe('this is a test');
+      expect(type).toEqual('error');
+      expect(msg).toEqual('this is a test');
     });
   }));
 
@@ -42,8 +42,8 @@ fdescribe('AlertsService', () => {
     service.getMessage().subscribe((s) => {
       type = s.type;
       msg = s.text;
-      expect(msg).toBe('success1');
-      expect(msg).toBe('this is a test');
+      expect(type).toEqual('success');
+      expect(msg).toEqual('this is a test');
     });
   }));
 });
