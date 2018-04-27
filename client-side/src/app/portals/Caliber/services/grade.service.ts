@@ -13,8 +13,9 @@ import { AlertsService } from './alerts.service';
 // entities
 import { Grade } from '../entities/Grade';
 import { CRUD } from '../interfaces/api.interface';
-import { urls } from './urls';
 import { stringifyDate } from '../util/utils';
+
+const context = environment.grade;
 
 /**
 * this service manages calls to the web services
@@ -51,7 +52,7 @@ export class GradeService implements CRUD<Grade> {
   */
 
   public fetchByBatchIdByWeek(batchId: number, week: number): void {
-    this.httpClient.get<any>(urls.grade.fetchByBatchIdByWeek(batchId, week))
+    this.httpClient.get<any>(context.fetchByBatchIdByWeek(batchId, week))
       .subscribe(grades => {
         const extractedGrades: Grade[] = [];
         /*
@@ -106,7 +107,7 @@ export class GradeService implements CRUD<Grade> {
    * @param grade: Grade
    */
   public save(grade: Grade): Observable<Grade> {
-    this.httpClient.post<Grade>(urls.grade.save(), this.prepareForApi(grade)).subscribe(res => this.saveSubject.next(res));
+    this.httpClient.post<Grade>(context.save(), this.prepareForApi(grade)).subscribe(res => this.saveSubject.next(res));
     return this.saveSubject.asObservable();
   }
 
@@ -119,7 +120,7 @@ export class GradeService implements CRUD<Grade> {
    * @param grade: Grade
    */
   public update(grade: Grade): Observable<Grade> {
-    this.httpClient.post<Grade>(urls.grade.update(), this.prepareForApi(grade)).subscribe(data => this.saveSubject.next(data));
+    this.httpClient.post<Grade>(context.update(), this.prepareForApi(grade)).subscribe(data => this.saveSubject.next(data));
     return this.saveSubject.asObservable();
   }
 

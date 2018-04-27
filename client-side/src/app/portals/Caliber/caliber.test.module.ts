@@ -30,7 +30,6 @@ import { NoteService } from './services/note.service';
 import { GranularityService } from './reports/services/granularity.service';
 import { ReportingService } from './services/reporting.service';
 import { PDFService } from './services/pdf.service';
-import { SkillService } from './services/skill.service';
 import { TrainingTypeService } from './services/training-type.service';
 import { ColorService } from './services/colors/color.service';
 import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.service';
@@ -83,7 +82,7 @@ import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component'
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
 import { VpPanelGraphComponent } from './home/vp-panel-graph/vp-panel-graph.component';
 import { SettingsComponent } from './settings/settings.component';
-import { CategoriesComponent } from './settings/categories/categories.component';
+import { SkillsComponent } from './settings/skills/skills.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
@@ -173,7 +172,7 @@ export const Dependencies = {
     VpLineGraphComponent,
     VpPanelGraphComponent,
     SettingsComponent,
-    CategoriesComponent,
+    SkillsComponent,
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
@@ -237,13 +236,11 @@ export const Dependencies = {
     ColorService,
     TrainerService,
     LocationService,
-    SkillService,
     GranularityService,
     AlertsService,
     VpHomeBarGraphService,
     VpHomePanelGraphService,
     EvaluationService,
-    SkillService,
     TrainingTypeService,
     ReportsService,
     QCStatusService,

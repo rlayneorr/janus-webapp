@@ -2,14 +2,14 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'http://hydra-gateway-service-dev.cfapps.io/api/v2/';
+const context = 'http://localhost:8765';
 const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
 
-  gambitContext: 'http://localhost:10000',
+  gambitContext: 'http://localhost:8765',
 
-  context: context, // change for what the production environment would actually be
+  context: context,
   bam: bam,
   url: 'http://localhost:80/',
 
@@ -74,7 +74,14 @@ export const environment = {
   },
 
   skill: {
-    fetchAll: () => `${context}types/skill/all`,
+    findAll: () => `${context}/gambit-skills-service/skill`,
+    findByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
+    findById: (id) => `${context}/gambit-skills-service/skill/${id}`,
+    findAllActive: () => `${context}/gambit-skills-service/skill`,
+    save: () => `${context}/gambit-skills-service/skill`,
+    updateByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
+    updateById: (id) => `${context}/gambit-skills-service/skill/${id}`,
+    delete: (id) => `${context}/gambit-skills-service/skill/${id}`
   },
 
   trainee: {
@@ -82,6 +89,7 @@ export const environment = {
     save: () => `${context}all/trainee/create`,
     update: () => `${context}all/trainee/update`,
     delete: (traineeId: number) => `${context}all/trainee/delete/${traineeId}`,
+    fetchDroppedByBatch: (batchId: number) => `${context}all/trainee/`,
   },
 
   trainer: {
