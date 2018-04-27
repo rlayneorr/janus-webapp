@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Location } from '../../entities/location-entities/Location';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UrlService } from '../urls/url.service';
@@ -15,17 +15,26 @@ export class LocationService {
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
+  // Get all Locations.
   getAllLocations() {
     return this.httpClient.get<Location>(this.urls.location.getAllLocations());
   }
+  // Get Location by Id
+  getLocation(location: Location) {
+    return this.httpClient.get<Location>(this.urls.location.getLocationById(location.locationId));
+  }
+  // Set new Location
   newLocation(location: Location) {
+    const url = '';
     return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location));
   }
+  // Update the location.
   updateLocation(location: Location) {
-    return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId),  JSON.stringify(location));
+    return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location));
   }
-  deleteLocation(location: Location) {
-    return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId),  JSON.stringify(location));
+  // set location as inactive.
+  deleteLocaiton(location: Location) {
+    return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
   }
 
   getAllBuildings() {
@@ -43,5 +52,4 @@ export class LocationService {
   deleteBuilding(building: Building) {
     return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
   }
-
 }
