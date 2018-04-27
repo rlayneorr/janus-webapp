@@ -36,8 +36,6 @@ export class TrainersComponent implements OnInit {
   ngOnInit() {
     this.trainerService.fetchAll().subscribe((resp) => {
       this.trainers = resp;
-      console.log(this.trainers);
-      
       if (resp) {
         this.filteredTrainers = resp.filter(s => {
             return s.role.role !== 'INACTIVE';
@@ -73,14 +71,8 @@ export class TrainersComponent implements OnInit {
    * @param modal: modal from create trainer form
    */
   addTrainer(modal: NgForm) {
-    for (let index = 0; index < this.roles.length; index++) {
-      if(modal.value.role === this.roles[index].role) {
-        this.newTrainer = modal.value;
-        this.newTrainer.role = this.roles[index];
-        break;
-      }
-    }
-    console.log(this.newTrainer);
+    this.newTrainer = modal.value;
+    this.newTrainer.role = this.roleMapping(modal.value.role);
     this.trainerService.create(this.newTrainer).subscribe((resp) => {
       this.ngOnInit();
     });
@@ -144,6 +136,18 @@ export class TrainersComponent implements OnInit {
    */
   buttonChange(status: String) {
     this.activeStatus = status;
+  }
+
+  /**
+   * This helpper function mapps a role string into the correct UserRole object
+   * @param role
+   */
+  roleMapping(role: string) {
+    for (let index = 0; index < this.roles.length; index++) {
+      if (role === this.roles[index].role) {
+        return this.roles[index];
+      }
+    }
   }
 
   /**
