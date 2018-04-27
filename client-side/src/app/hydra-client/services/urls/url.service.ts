@@ -154,12 +154,47 @@ export class UrlService {
    * This section is being added for use in the location service
    */
   location = {
-    // this method will be 
     getLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
     getAllLocations: () => `${this.context}/location`,
     postLocation: () => `${this.context}/location`,
     putLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
     deleteLocationById: (locationId: number) => `${this.context}/location/${locationId}`
+  };
+
+  /**
+   * Endpoints for buildings:
+   * This section is being added for use in the location service
+   */
+  building = {
+    getBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
+    getAllBuildings: () => `${this.context}/building`,
+    postBuilding: () => `${this.context}/building`,
+    putBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
+    deleteBuildingById: (buildingId: number) => `${this.context}/buidling/${buildingId}`
+  };
+
+  /**
+   * Endpoints for rooms:
+   * This section is being added for use in the location service
+   */
+  room = {
+    getRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
+    getAllRooms: () => `${this.context}/room`,
+    postRoom: () => `${this.context}/room`,
+    putRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
+    deleteBuildingById: (roomId: number) => `${this.context}/room/${roomId}`
+  };
+
+  /**
+   * Endpoints for unavailabilities:
+   * This section is being added for use in the location service
+   */
+  unavailability = {
+    getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
+    getAllUnavailabilities: () => `${this.context}/unavailability`,
+    postUnavailabilities: () => `${this.context}/unavailability`,
+    putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
+    deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`
   };
 
   constructor() {

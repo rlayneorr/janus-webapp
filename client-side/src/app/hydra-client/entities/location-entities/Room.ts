@@ -1,6 +1,6 @@
 /**
- * @author Luis Munoz
  * @author Tanhim Ahmed
+ * @author Luis Munoz
  */
 export class Room {
     // primary key Id of the room object //
