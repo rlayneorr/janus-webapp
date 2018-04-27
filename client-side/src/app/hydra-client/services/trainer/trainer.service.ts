@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 // rxjs
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import { Trainer } from '../../../hydra-client/entities/Trainer';
+import { GambitTrainer } from '../../../hydra-client/entities/GambitTrainer';
 import { UrlService } from '../urls/url.service';
 import { UserRole } from '../../entities/UserRole';
 
@@ -16,7 +16,7 @@ import { UserRole } from '../../entities/UserRole';
 @Injectable()
 export class TrainerService {
 
-  public currentTrainer = new Trainer();
+  public currentTrainer = new GambitTrainer();
 
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
@@ -33,9 +33,9 @@ export class TrainerService {
   * @param trainer: HydraTrainer
   */
 
-  public changeCurrentTrainer(trainer: Trainer) {
+  public changeCurrentTrainer(trainer: GambitTrainer) {
     this.currentTrainer = trainer;
-    return this.httpClient.get<Trainer>(this.urls.trainers.fetchByEmail(trainer.email));
+    return this.httpClient.get<GambitTrainer>(this.urls.trainers.fetchByEmail(trainer.email));
   }
 
   /**
@@ -45,9 +45,9 @@ export class TrainerService {
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
      */
 
-  public fetchAll(): Observable<Trainer[]> {
+  public fetchAll(): Observable<GambitTrainer[]> {
     const url = this.urls.trainers.fetchAll();
-    return this.httpClient.get<Trainer[]>(url);
+    return this.httpClient.get<GambitTrainer[]>(url);
 
   }
   /**
@@ -61,7 +61,7 @@ export class TrainerService {
 
   public fetchByEmail(email: string) {
     const url = this.urls.trainers.fetchByEmail(email);
-    return this.httpClient.get<Trainer>(url);
+    return this.httpClient.get<GambitTrainer>(url);
   }
 
   /**
@@ -104,8 +104,8 @@ export class TrainerService {
      * @param trainer: HydraTrainer
      */
 
-  public create(trainer: Trainer): Observable<Trainer> {
-    return this.httpClient.post<Trainer>(this.urls.trainers.save(), trainer);
+  public create(trainer: GambitTrainer): Observable<GambitTrainer> {
+    return this.httpClient.post<GambitTrainer>(this.urls.trainers.save(), trainer);
   }
 
   /*
@@ -123,8 +123,8 @@ export class TrainerService {
      * @param trainer: HydraTrainer
      */
 
-  public update(trainer: Trainer): Observable<Trainer> {
-    return this.httpClient.put<Trainer>(this.urls.trainers.update(), trainer);
+  public update(trainer: GambitTrainer): Observable<GambitTrainer> {
+    return this.httpClient.put<GambitTrainer>(this.urls.trainers.update(), trainer);
   }
 
   /**
@@ -132,7 +132,7 @@ export class TrainerService {
    * to observable
    * @param trainer 
    */
-  public makeInactive(trainer: Trainer): Observable<Trainer> {
-    return this.httpClient.put<Trainer>(this.urls.users.makeInactive(), trainer);
+  public makeInactive(trainer: GambitTrainer): Observable<GambitTrainer> {
+    return this.httpClient.put<GambitTrainer>(this.urls.users.makeInactive(), trainer);
   }
 }

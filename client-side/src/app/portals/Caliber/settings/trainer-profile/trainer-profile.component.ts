@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { Trainer } from '../../../../hydra-client/entities/Trainer';
+import { GambitTrainer } from '../../../../hydra-client/entities/GambitTrainer';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
@@ -27,7 +27,7 @@ export class TrainerProfilesComponent implements OnInit {
   * create variables for all batches,
   * current trainer and their batch
   */
-  currentTrainer: Trainer;
+  currentTrainer: GambitTrainer;
   batches: Array<HydraBatch>;
   currentBatch: HydraBatch;
   currentBatchTrainees: Array<HydraTrainee>;
@@ -36,11 +36,11 @@ export class TrainerProfilesComponent implements OnInit {
   * create variables for subscribing and trainers
   * and storing form data
   */
-  trainers: Array<Trainer>;
+  trainers: Array<GambitTrainer>;
   titles: Array<any>;
   roles: Array<UserRole>;
-  model = new Trainer();
-  currEditTrainer: Trainer;
+  model = new GambitTrainer();
+  currEditTrainer: GambitTrainer;
   newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
@@ -136,7 +136,7 @@ export class TrainerProfilesComponent implements OnInit {
   * @param content: String
   * @param modalTrainer: Trainer
   */
-  editTrainer(content, modalTrainer: Trainer) {
+  editTrainer(content, modalTrainer: GambitTrainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
@@ -181,7 +181,7 @@ export class TrainerProfilesComponent implements OnInit {
   */
   updateTrainer(modal: NgForm) {
     // replacing the trainer's fields with the new ones
-    const temp : Trainer = modal.value;
+    const temp : GambitTrainer = modal.value;
     temp.userId = this.currEditTrainer.userId;
     temp.role = this.roleMapping(modal.value.role);
     console.log(temp);
