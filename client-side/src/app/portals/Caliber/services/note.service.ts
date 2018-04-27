@@ -14,7 +14,7 @@ import { AlertsService } from './alerts.service';
 import { Note } from '../entities/Note';
 import { urls } from './urls';
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../hydra-client/entities/Trainee';
 
 /**
 * this service manages calls to the web services
@@ -160,7 +160,7 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchByTrainee(trainee: HydraTrainee): void {
+  public fetchByTrainee(trainee: Trainee): void {
     const $trainingNotes = this.fetchTrainingNotesByTrainee(trainee);
     const $qcNotes = this.fetchQcNotesByTrainee(trainee);
     let results: Note[] = [];
@@ -183,8 +183,8 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchTrainingNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
-    const url = urls.note.fetchTrainingNotesByTrainee(trainee.traineeId);
+  public fetchTrainingNotesByTrainee(trainee: Trainee): Observable<Note[]> {
+    const url = urls.note.fetchTrainingNotesByTrainee(trainee.userId);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -197,8 +197,8 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchQcNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
-    const url = urls.note.fetchQcNotesByTrainee(trainee.traineeId);
+  public fetchQcNotesByTrainee(trainee: Trainee): Observable<Note[]> {
+    const url = urls.note.fetchQcNotesByTrainee(trainee.userId);
 
     return this.httpClient.get<Note[]>(url);
   }

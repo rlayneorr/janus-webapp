@@ -17,9 +17,8 @@ import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-ba
 import { LocationService } from '../services/location.service';
 import { TrainingTypeService } from '../services/training-type.service';
 import { SkillService } from '../services/skill.service';
-import { TraineeService } from '../services/trainee.service';
 import { TraineeStatusService } from '../services/trainee-status.service';
-import { HydraTraineeService } from '../../../hydra-client/services/trainee/hydra-trainee.service';
+import { TraineeService } from '../../../hydra-client/services/trainee/trainee.service';
 import { TrainerService } from '../../../hydra-client/services/trainer/trainer.service';
 
 
@@ -27,8 +26,7 @@ import { TrainerService } from '../../../hydra-client/services/trainer/trainer.s
 import { Location } from '../entities/Location';
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { Address } from '../entities/Address';
-import { Trainee } from '../entities/Trainee';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../hydra-client/entities/Trainee';
 import { Trainer } from '../../../hydra-client/entities/Trainer';
 
 
@@ -53,7 +51,7 @@ import { DeleteBatchModalComponent } from './delete-batch-modal/delete-batch-mod
 export class ManageComponent implements OnInit {
   closeResult: string;
   batches: HydraBatch[] = [];
-  trainees: HydraTrainee[] = [];
+  trainees: Trainee[] = [];
   batchModal: NgbModalRef;
   batchModalNested: NgbModalRef;
   batchByYear: Date[] = [];
@@ -70,11 +68,11 @@ export class ManageComponent implements OnInit {
   skills: string[] = [];
   statuses: string[] = [];
   selectStatus = 'Select Status';
-  createNewTrainee: HydraTrainee = new HydraTrainee;
+  createNewTrainee: Trainee = new Trainee;
   isNew: Boolean;
   currentTrainees: any;
   showDropped: Boolean = false;
-  droppedTrainees: HydraTrainee[] = [];
+  droppedTrainees: Trainee[] = [];
 
   /* Subscriptions */
   batchListSub: Subscription;
@@ -90,7 +88,7 @@ export class ManageComponent implements OnInit {
   deletedTraineeSub: Subscription;
   updatedTraineeSub: Subscription;
 
-  traineeToBeDeleted: HydraTrainee;
+  traineeToBeDeleted: Trainee;
 
   constructor(
     private trainerService: TrainerService,
@@ -103,7 +101,6 @@ export class ManageComponent implements OnInit {
     private fb: FormBuilder,
 
     private traineeStatusService: TraineeStatusService,
-    private hydraTraineeService: HydraTraineeService,
     private hydraBatchService: HydraBatchService
 
   ) {
@@ -111,9 +108,9 @@ export class ManageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hydraTraineeService.findAllByBatchAndStatus(2, 'Dropped').forEach(element => {
+    this.traineeService.findAllByBatchAndStatus(2, 'Dropped').forEach(element => {
       element.forEach(trainee => {
-        console.log(trainee.traineeUserInfo);
+        console.log(trainee);
       });
     });
 
@@ -240,7 +237,7 @@ export class ManageComponent implements OnInit {
    *
    * @param trainees
    */
-  private setBatchTrainees(trainees: HydraTrainee[]): void {
+  private setBatchTrainees(trainees: Trainee[]): void {
     this.trainees = trainees;
     this.currentBatch.trainees = trainees;
   }
@@ -291,7 +288,7 @@ export class ManageComponent implements OnInit {
   createNewTraineeFunction() {
     this.createNewTrainee.batch = this.currentBatch;
     console.log(this.createNewTrainee);
-    this.hydraTraineeService.create(this.createNewTrainee);
+    this.traineeService.create(this.createNewTrainee);
   }
 
   /** Updates the Trainee
@@ -306,7 +303,7 @@ export class ManageComponent implements OnInit {
     const emptyBatch = Object.assign({}, this.currentBatch);
     emptyBatch.trainees = [];
     this.createNewTrainee.batch = emptyBatch;
-    this.hydraTraineeService.update(this.createNewTrainee);
+    this.traineeService.update(this.createNewTrainee);
   }
 
   /**
@@ -355,7 +352,7 @@ export class ManageComponent implements OnInit {
 
     for (let i = 0; i < this.currentBatch.trainees.length; i++) {
       this.currentBatch.trainees[i].batch = null;
-      this.hydraTraineeService.delete(this.currentBatch.trainees[i].traineeId);
+      this.traineeService.delete(this.currentBatch.trainees[i].userId);
     }
   }
 
@@ -396,7 +393,7 @@ export class ManageComponent implements OnInit {
 
   openCreateTraineeModal(createTrainee) {
     this.isNew = true;
-    this.createNewTrainee = new HydraTrainee;
+    this.createNewTrainee = new Trainee;
     this.batchModalNested = this.modalService.open(createTrainee, { size: 'lg', container: '.batch-trainee-modal-container2' });
     this.batchModalNested.result.then(a => { }, b => this.closeCreateTraineeModal());
     this.batchModal.close();
@@ -461,7 +458,6 @@ export class ManageComponent implements OnInit {
     onSavedTrainee(trainee: Trainee): void {
       this.batchModalNested.close('Saved Successfully');
       this.hydraBatchService.fetchAll();
-      this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
       this.batchModal.close('Saved Successfully');
     }
 
@@ -473,7 +469,7 @@ export class ManageComponent implements OnInit {
      */
     onDeletedTrainee(trainee: Trainee): void {
       this.hydraBatchService.fetchAll();
-      this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
+      this.traineeService.findAllByBatch(this.currentBatch.batchId);
       this.batchModal.close();
     }
 
@@ -486,7 +482,7 @@ export class ManageComponent implements OnInit {
     onUpdatedTrainee(trainee: Trainee): void {
       this.batchModalNested.close('Saved Successfully');
       this.hydraBatchService.fetchAll();
-      this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
+      this.traineeService.findAllByBatch(this.currentBatch.batchId);
     }
 
     /** Modal functionality */
@@ -503,10 +499,11 @@ export class ManageComponent implements OnInit {
     /**
      * Switch trainee mode, set showDropped to !showDropped.
      */
-    switchTraineeView() {
-      this.showDropped = !this.showDropped;
-      if (this.showDropped) {
-        this.traineeService.fetchDroppedByBatch(this.currentBatch.batchId).subscribe(results => this.droppedTrainees = results);
-      }
-    }
+   // switchTraineeView() {
+     // this.showDropped = !this.showDropped;
+      //if (this.showDropped) {
+        //this.traineeService.fetchDroppedByBatch(this.currentBatch.batchId)
+        //.subscribe(results => this.droppedTrainees = results);
+      //}
+    //}
 }

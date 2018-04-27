@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 // entities
 import { Panel } from '../../entities/Panel';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 
 // services

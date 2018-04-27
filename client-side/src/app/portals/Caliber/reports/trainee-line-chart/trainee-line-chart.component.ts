@@ -94,8 +94,8 @@ export class TraineeLineChartComponent implements OnInit, OnDestroy {
         this.week = week;
         this.labels = [batch.trainingName];
 
-        if (trainee.traineeId === 0 ) { return; }
-        this.reportsService.fetchTraineeOverallLineChart(batch.batchId, trainee.traineeId);
+        if (trainee.userId === 0 ) { return; }
+        this.reportsService.fetchTraineeOverallLineChart(batch.batchId, trainee.userId);
       }
     );
 

@@ -22,7 +22,7 @@ import { HostListener } from '@angular/core/src/metadata/directives';
 import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../hydra-client/entities/Trainee';
 
 
 @Component({
@@ -52,7 +52,7 @@ export class AssessComponent implements OnInit {
   years: Set<any> = new Set<any>();
   currentYear = 0;
   yearBatches: HydraBatch[] = [];
-  selectedTrainees: HydraTrainee[] = [];
+  selectedTrainees: Trainee[] = [];
 
   pageOffsetValue;
   constructor(private modalService: NgbModal, private batchService: HydraBatchService, private assessmentService: AssessmentService,
@@ -207,7 +207,7 @@ export class AssessComponent implements OnInit {
                                       GRADES
 *****************************************************************************************/
 
-  updateGrade(trainee: HydraTrainee, assessment: Assessment, input) {
+  updateGrade(trainee: Trainee, assessment: Assessment, input) {
     const grade = this.getGrade(trainee, assessment);
     grade.score = Number(input.value);
     grade.dateReceived = '2000-01-01T01:01:01.000Z';
@@ -215,7 +215,7 @@ export class AssessComponent implements OnInit {
     this.gradeService.update(grade);
   }
 
-  getGrade(trainee: HydraTrainee, assessment: Assessment) {
+  getGrade(trainee: Trainee, assessment: Assessment) {
     const grade = new GradeByTraineeByAssessmentPipe().transform(this.grades, trainee, assessment)[0];
 
     if (grade != null) {
@@ -270,7 +270,7 @@ export class AssessComponent implements OnInit {
                                       NOTES
 *****************************************************************************************/
 
-  getNote(trainee: HydraTrainee) {
+  getNote(trainee: Trainee) {
     let note: Note;
     note = new NoteByTraineeByWeekPipe().transform(this.notes, trainee, this.selectedWeek);
     if (note.content === undefined) {
@@ -359,9 +359,9 @@ export class AssessComponent implements OnInit {
 
     this.selectedTrainees = this.selectedBatch.trainees;
     this.selectedTrainees.sort((a, b) => {
-      if (a.traineeUserInfo.firstName < b.traineeUserInfo.firstName) {
+      if (a.firstName < b.firstName) {
         return -1;
-      } else if (a.traineeUserInfo.firstName > b.traineeUserInfo.firstName) {
+      } else if (a.firstName > b.firstName) {
         return 1;
       } else {
         return 0;

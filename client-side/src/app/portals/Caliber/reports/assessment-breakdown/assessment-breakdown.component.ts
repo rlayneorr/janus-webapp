@@ -112,7 +112,7 @@ export class AssessmentBreakdownComponent implements OnInit, OnDestroy {
       ).subscribe( (res) => {
         this.batchId = res[0].batchId;
         this.week = res[1];
-        this.traineeId = res[2].traineeId;
+        this.traineeId = res[2].userId;
         this.tryFetch();
       });
 

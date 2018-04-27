@@ -13,7 +13,7 @@ import { GranularityService } from '../services/granularity.service';
 import { ReportingService } from '../../services/reporting.service';
 import { NoteService } from '../../services/note.service';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 
 /**
  * Creates a table of the weekly feedback of a given trainee
@@ -42,7 +42,7 @@ export class WeeklyFeedbackComponent implements OnInit, OnDestroy {
   private topicSubscription: Subscription;
 
   week = 1;
-  trainee: HydraTrainee;
+  trainee: Trainee;
   batch: HydraBatch;
 
   weekTopics: string;
@@ -78,15 +78,15 @@ export class WeeklyFeedbackComponent implements OnInit, OnDestroy {
         this.week = traineeWeekBatch[1];
         this.batch = traineeWeekBatch[2];
 
-        if (this.trainee.traineeId > 0 && this.week > 0) {
+        if (this.trainee.userId > 0 && this.week > 0) {
           this.noteService.fetchByTrainee(this.trainee);
           this.reportService.fetchTechnologiesForTheWeek(this.batch.batchId, this.week);
         }
     });
 
     this.noteSubscription = this.noteService.getTraineeList().subscribe((list) => {
-      this.trainerNote = this.findNote(list, 'TRAINEE', this.trainee.traineeId, this.week);
-      this.qcNote = this.findNote(list, 'QC_TRAINEE', this.trainee.traineeId, this.week);
+      this.trainerNote = this.findNote(list, 'TRAINEE', this.trainee.userId, this.week);
+      this.qcNote = this.findNote(list, 'QC_TRAINEE', this.trainee.userId, this.week);
     });
 
     this.topicSubscription = this.reportService.technologiesForTheWeek$.subscribe((tech) => {
@@ -109,7 +109,7 @@ export class WeeklyFeedbackComponent implements OnInit, OnDestroy {
    */
   findNote(arr: Array<Note>, type: String, traineeId: Number, week: Number): Note {
     for (const note of arr) {
-      if (note.type === type && note.week === week && note.trainee.traineeId === traineeId) {
+      if (note.type === type && note.week === week && note.trainee.userId === traineeId) {
         return note;
       }
     }

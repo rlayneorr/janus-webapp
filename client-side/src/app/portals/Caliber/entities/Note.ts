@@ -1,5 +1,5 @@
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../hydra-client/entities/Trainee';
 
 export class Note {
     public static TYPE_QCBATCH = 'QC_BATCH';
@@ -17,7 +17,7 @@ export class Note {
     content: string;
     week: number;
     batch: HydraBatch;
-    trainee: HydraTrainee;
+    trainee: Trainee;
     maxVisibility: string;
     type: string;
     qcFeedback: boolean;

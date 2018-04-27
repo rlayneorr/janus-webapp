@@ -5,7 +5,7 @@ import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@ang
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 // entities
-import { Trainee } from '../../entities/Trainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 import { Panel } from '../../entities/Panel';
 
 // components
@@ -13,7 +13,6 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 
 // services
 import { PanelService } from '../../services/panel.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
 
 
@@ -26,7 +25,7 @@ import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 })
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
-  trainee: HydraTrainee;
+  trainee: Trainee;
   panelForm: FormGroup;
   panelObj: any;
   serializedPanel: any;

@@ -15,7 +15,7 @@ import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra
 import { Note } from '../../entities/Note';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 
 /**
  * Creates a table of the overall feedback of a given trainee in a given batch.
@@ -43,7 +43,7 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
   traineeNotes: Array<Note> = null;
   weekTopics: Array<Array<string>>;
 
-  trainee: HydraTrainee;
+  trainee: Trainee;
   week = 1;
   batch: HydraBatch;
 
@@ -63,7 +63,7 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
         this.trainee = batchTraineeWeek[1];
         this.week = batchTraineeWeek[2];
 
-        if (this.trainee.traineeId > 0) {
+        if (this.trainee.userId > 0) {
           this.noteService.fetchByTrainee(this.trainee);
           this.reportService.fetchTechnologiesUpToWeek(this.batch.batchId, this.batchUtil.getWeek(this.batch));
         }

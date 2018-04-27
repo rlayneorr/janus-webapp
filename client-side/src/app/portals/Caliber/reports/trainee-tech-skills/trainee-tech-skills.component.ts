@@ -6,7 +6,7 @@ import { PDFService } from '../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GranularityService } from '../services/granularity.service';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 /**
  * @author John Hudson
 */
@@ -39,7 +39,7 @@ export class TraineeTechSkillsComponent implements OnInit {
   // current week
   public week: Number = 0;
   // current trainee
-  public trainee: HydraTrainee = new HydraTrainee();
+  public trainee: Trainee = new Trainee();
   // list of trainees (id) that could be displayed
   public traineesList: number[] = [];
   // this is where trainee radar data is stored until it needs to be displayed
@@ -84,7 +84,7 @@ export class TraineeTechSkillsComponent implements OnInit {
     this.traineeOverallRadar = this.reportsService.traineeOverallRadar$.subscribe((result) => {
       if (result) {
 
-        if (this.trainee.traineeId !== 0) {
+        if (this.trainee.userId !== 0) {
           if (!this.traineeDataFlag) {
             this.traineeDataFlag = true;
             this.chartData.push(result.data);
@@ -180,9 +180,9 @@ export class TraineeTechSkillsComponent implements OnInit {
       this.traineeDataFlag = false;
       this.dataSetLabels = [this.batch.trainingName];
       this.reportsService.fetchBatchOverallRadarChart(this.batch.batchId);
-      if (this.week === 0 && this.trainee.traineeId === 0) {
+      if (this.week === 0 && this.trainee.userId === 0) {
         this.overallSetup();
-      } else if (this.trainee.traineeId !== 0) {
+      } else if (this.trainee.userId !== 0) {
         this.weekSetup();
       }
     }
@@ -203,8 +203,8 @@ export class TraineeTechSkillsComponent implements OnInit {
   overallSetup() {
     this.radarReset();
     for (let i = 0; i < this.batch.trainees.length; i++) {
-      this.traineesList.push(this.batch.trainees[i].traineeId);
-      this.traineesNames[i] = this.batch.trainees[i].traineeUserInfo.firstName;
+      this.traineesList.push(this.batch.trainees[i].userId);
+      this.traineesNames[i] = this.batch.trainees[i].firstName;
     }
 
     this.reportsService.fetchBatchOverallRadarChart(this.batch.batchId);
@@ -220,12 +220,12 @@ export class TraineeTechSkillsComponent implements OnInit {
   weekSetup() {
     this.radarReset();
     if (this.batch.batchId) {
-      this.dataSetLabels.push(this.trainee.traineeUserInfo.firstName);
+      this.dataSetLabels.push(this.trainee.firstName);
 
       if (this.week === 0) {
-        this.reportsService.fetchTraineeOverallRadarChart(this.trainee.traineeId);
+        this.reportsService.fetchTraineeOverallRadarChart(this.trainee.userId);
       } else {
-        this.reportsService.fetchTraineeUpToWeekRadarChart(this.week, this.trainee.traineeId);
+        this.reportsService.fetchTraineeUpToWeekRadarChart(this.week, this.trainee.userId);
       }
     }
   }

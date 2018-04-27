@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UrlService } from '../urls/url.service';
 import { Trainee } from '../../entities/Trainee';
+import { Subject } from 'rxjs/Subject';
 
 /**
  * This service is used for consuming Hydra API resources dealing with trainees.
@@ -13,7 +14,9 @@ import { Trainee } from '../../entities/Trainee';
 @Injectable()
 export class TraineeService {
 
-  constructor(private httpClient: HttpClient, private urlService: UrlService) { }
+  public savedSubject: Subject<Trainee>;
+
+  constructor(private httpClient: HttpClient, private urlService: UrlService) {this.savedSubject = new Subject(); }
 
   /**
    * Requests all trainees with the input batch id and returns an observable.
@@ -30,6 +33,17 @@ export class TraineeService {
     return this.httpClient.get<Trainee[]>(url);
   }
 
+    /**
+   * Requests all trainees with the input batch id and returns an observable.
+   *
+   * @param batchId
+   *
+   * @returns {Observable<Trainee[]>}
+   */
+  public findAllByBatch(id: number): Observable<Trainee[]> {
+    const url = this.urlService.trainees.findAllByBatch(id);
+    return this.httpClient.get<Trainee[]>(url);
+  }
   /**
   * Saves the newly created trainee and returns the Observable.
   *

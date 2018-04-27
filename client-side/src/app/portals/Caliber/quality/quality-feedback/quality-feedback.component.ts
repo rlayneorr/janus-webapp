@@ -14,7 +14,7 @@ import { urls } from '../../services/urls';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 
 
 
@@ -199,9 +199,9 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   *
   * @return Note
   */
-  private getTraineeNote(trainee: HydraTrainee): Note {
+  private getTraineeNote(trainee: Trainee): Note {
     const notes = this.getTraineeNotes()
-      .filter((note) => (note.trainee.traineeId === trainee.traineeId));
+      .filter((note) => (note.trainee.userId === trainee.userId));
 
     switch (notes.length) {
       case 0:
@@ -216,7 +216,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
       case 1:
         return notes[0];
       default:
-        console.log(`EXCEPTION: multiple QC notes found on trainee [${trainee.traineeUserInfo.firstName}:${trainee.traineeId}]`);
+        console.log(`EXCEPTION: multiple QC notes found on trainee [${trainee.firstName}:${trainee.userId}]`);
         return notes[0];
     }
   }

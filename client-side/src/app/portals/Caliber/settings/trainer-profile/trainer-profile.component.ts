@@ -12,8 +12,8 @@ import { TrainerService } from '../../../../hydra-client/services/trainer/traine
 import { Trainer } from '../../../../hydra-client/entities/Trainer';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import { HydraTraineeService } from '../../../../hydra-client/services/trainee/hydra-trainee.service';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
+import { TraineeService } from '../../../../hydra-client/services/trainee/trainee.service';
 import { UserRole } from '../../../../hydra-client/entities/UserRole';
 
 @Component({
@@ -30,7 +30,7 @@ export class TrainerProfilesComponent implements OnInit {
   currentTrainer: Trainer;
   batches: Array<HydraBatch>;
   currentBatch: HydraBatch;
-  currentBatchTrainees: Array<HydraTrainee>;
+  currentBatchTrainees: Array<Trainee>;
 
   /**
   * create variables for subscribing and trainers
@@ -47,7 +47,7 @@ export class TrainerProfilesComponent implements OnInit {
 
   constructor(private trainerService: TrainerService, private modalService: NgbModal,
     private batchService: HydraBatchService, private router: Router,
-     private fb: FormBuilder, private traineeService: HydraTraineeService) { }
+     private fb: FormBuilder, private traineeService: TraineeService) { }
 
   ngOnInit() {
     /**

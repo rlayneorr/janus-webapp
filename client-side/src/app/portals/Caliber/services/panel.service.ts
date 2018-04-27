@@ -16,7 +16,7 @@ import { urls } from './urls';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../hydra-client/entities/Trainee';
 
 /**
 * this service manages calls to the web services
@@ -55,8 +55,8 @@ export class PanelService implements CRUD<Panel> {
    *
    * @param trainee: Trainee
    */
-  public fetchAllByTrainee(trainee: HydraTrainee): Observable<Panel[]> {
-    this.http.get<any[]>(urls.panel.fetchAllByTrainee(trainee.traineeId)).subscribe((results) => this.listSubject.next(results));
+  public fetchAllByTrainee(trainee: Trainee): Observable<Panel[]> {
+    this.http.get<any[]>(urls.panel.fetchAllByTrainee(trainee.userId)).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 

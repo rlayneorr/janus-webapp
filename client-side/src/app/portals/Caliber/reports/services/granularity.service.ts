@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 /**
  * Service that handles report granularity. Trainee and current batch
  * data is stored in their respective behavior subjects and read by
@@ -16,7 +16,7 @@ export class GranularityService {
 
   /* Subjects & Paired Observables */
   private currentBatch = new ReplaySubject<HydraBatch>(1);
-  private currentTrainee = new ReplaySubject<HydraTrainee>(1);
+  private currentTrainee = new ReplaySubject<Trainee>(1);
   private currentWeek = new ReplaySubject<number>(1);
   private ready = new ReplaySubject<boolean>(1);
 
@@ -186,7 +186,7 @@ export class GranularityService {
    * Pushes the specified trainee to the currentTrainee subject.
    * @param trainee - Trainee to push to the subject.
    */
-  pushTrainee(trainee: HydraTrainee) {
+  pushTrainee(trainee: Trainee) {
     this.currentTrainee.next(trainee);
   }
 

@@ -9,10 +9,10 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 // entities
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 
 // services
-import { TraineeService } from '../../services/trainee.service';
+import { TraineeService } from '../../../../hydra-client/services/trainee/trainee.service';
 import { PanelService } from '../../services/panel.service';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 
@@ -25,14 +25,14 @@ import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra
 
 export class PanelSearchbarComponent implements OnInit, OnDestroy {
   name: string;
-  trainee: HydraTrainee;
+  trainee: Trainee;
   batchList;
   traineeList = [];
   traineeNameList: any = [];
   batchSubscription: Subscription;
   closeResult: string;
 
-  protected traineeSubject: BehaviorSubject<HydraTrainee>;
+  protected traineeSubject: BehaviorSubject<Trainee>;
 
   /**
   * Get the necessary services
@@ -81,11 +81,11 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
    * @function setTrainee
    * @param trainee
    */
-  setTrainee(trainee: HydraTrainee) {
+  setTrainee(trainee: Trainee) {
     this.trainee = trainee;
     this.panelService.fetchAllByTrainee(trainee);
     this.traineeSubject.next(this.trainee);
-    this.name = this.trainee.traineeUserInfo.firstName;
+    this.name = this.trainee.firstName;
    // this.traineeService.pushToSaved(this.trainee);  // set selected trainee to savedSubject in traineeservice
   }
 
@@ -107,7 +107,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
   /**
    * @function getTraineeSubject
    */
-  public getTraineeSubject(): Observable<HydraTrainee> {
+  public getTraineeSubject(): Observable<Trainee> {
     return this.traineeSubject.asObservable();
   }
 

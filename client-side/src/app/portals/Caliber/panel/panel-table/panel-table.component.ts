@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core/';
 
 // entities
-import { Trainee } from '../../entities/Trainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 import { Panel } from '../../entities/Panel';
 
 // services
 import { PanelService } from '../../services/panel.service';
-import { TraineeService } from '../../services/trainee.service';
+import { TraineeService } from '../../../../hydra-client/services/trainee/trainee.service';
 
 @Component({
   selector: 'app-panel-table',
@@ -38,7 +38,7 @@ export class PanelTableComponent implements OnInit {
         });
     });
     if (typeof this.trainee !== 'undefined') {
-      this.name = this.trainee.name;
+      this.name = this.trainee.firstName + this.trainee.lastName;
     console.log('garbage');
     console.log(this.name);
     }

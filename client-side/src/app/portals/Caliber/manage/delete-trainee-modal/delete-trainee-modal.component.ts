@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Batch } from '../../entities/Batch';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Trainee } from '../../entities/Trainee';
+import { Trainee } from '../../../../hydra-client/entities/Trainee';
 
 @Component({
   selector: 'app-delete-trainee-modal',
