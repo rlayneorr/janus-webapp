@@ -155,11 +155,11 @@ export class UrlService {
    */
   location = {
     // this method will be 
-    getLocationById: (locationId: number) => `${this.context}/location/{id}`,
+    getLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
     getAllLocations: () => `${this.context}/location`,
     postLocation: () => `${this.context}/location`,
-    putLocationById: (locationId: number) => `${this.context}/location/{id}`,
-    deleteLocationById: (locationId: number) => `${this.context}/location/{id}`
+    putLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
+    deleteLocationById: (locationId: number) => `${this.context}/location/${locationId}`
   };
 
   constructor() {
