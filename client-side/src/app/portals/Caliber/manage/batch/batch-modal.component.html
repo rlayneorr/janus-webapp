@@ -37,7 +37,7 @@
       </label>
       <select [ngModel]="defaultValue2" [(ngModel)]="batch.skillType" class="form-control" id="skills">
         <option [disabled]="true">{{defaultValue2}}</option>
-        <option *ngFor="let skill of skills">{{skill}}</option>
+        <option *ngFor="let skillType of skillTypes">{{skillType.skillTypeName}}</option>
       </select>
     </div>
 

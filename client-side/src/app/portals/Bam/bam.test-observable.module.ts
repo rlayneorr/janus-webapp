@@ -69,6 +69,8 @@ import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertService } from './services/alert.service';
 import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
 import { UrlService } from '../../hydra-client/services/urls/url.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
 
 export const Dependencies = {
   imports: [
