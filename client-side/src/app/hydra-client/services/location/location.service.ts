@@ -11,19 +11,28 @@ export class LocationService {
   publicLocation = this.location.asObservable();
   urlLiteral: string;
 
-  // Injecting UrlService and HttpClient into LocationService constructor //
-  constructor(private httpClient: HttpClient, private urls: UrlService) { }
+    // Injecting UrlService and HttpClient into LocationService constructor //
+    constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
-  getLocation(request: any) {
-    return this.httpClient.get<Location>(this.urlLiteral);
-  }
-  newLocation(location: Location) {
-    return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location));
-  }
-  updateLocation(location: Location) {
-    return this.httpClient.post<Location>(this.urlLiteral,  JSON.stringify(location));
-  }
-  deleteLocaiton(location: Location) {
-    return this.httpClient.post<Location>(this.urlLiteral,  JSON.stringify(location));
-  }
+    // Get all Locations.
+    getAllLocations() {
+      return this.httpClient.get<Location>(this.urls.location.getAllLocations());
+    }
+    // Get Location by Id
+    getLocation(location: Location) {
+      return this.httpClient.get<Location>(this.urls.location.getLocationById(location.locationId));
+    }
+    // Set new Location
+    newLocation(location: Location) {
+      const url = '';
+      return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location));
+    }
+    // Update the location.
+    updateLocation(location: Location) {
+      return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId),  JSON.stringify(location));
+    }
+    // set location as inactive.
+    deleteLocaiton(location: Location) {
+      return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId),  JSON.stringify(location));
+    }
 }
