@@ -20,5 +20,12 @@ describe('InterviewDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('interviewDate field (in interviewForm) is valid and required.', () => {
+    let interviewData = component.interviewForm.controls['interviewData'];
+    expect(interviewData).toBeTruthy();
 
+    let errors = {};
+    errors = interviewData.errors || {};
+    expect(errors['required'].toBeFalsy()); 
+  });
 });
