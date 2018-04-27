@@ -6,11 +6,15 @@ import { MockBackend } from '@angular/http/testing';
 import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { Dependencies } from '../caliber.test.module';
 
+/**
+ * Author: Jordan Young
+ */
 
 fdescribe('AlertsComponent', () => {
   let component: AlertsComponent;
   let fixture: ComponentFixture<AlertsComponent>;
 
+  // set up
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AlertsComponent],
@@ -25,6 +29,9 @@ fdescribe('AlertsComponent', () => {
     fixture.detectChanges();
   });
 
+  // tests for showNotif()
+
+  // case 1: error alert
   it('should show error', inject([AlertsService, NotificationsService],
     (aService: AlertsService, nService: NotificationsService) => {
       aService.error('this is a test');
@@ -32,6 +39,7 @@ fdescribe('AlertsComponent', () => {
       expect(component.message.text).toBe('this is a test');
   }));
 
+  // case 2: success alert
   it('should show success', inject([AlertsService, NotificationsService],
     (aService: AlertsService, nService: NotificationsService) => {
       aService.success('this is a test');

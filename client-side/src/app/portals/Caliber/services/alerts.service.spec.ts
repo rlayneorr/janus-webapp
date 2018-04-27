@@ -7,16 +7,20 @@ import { Observable } from 'rxjs/Observable';
  */
 
 fdescribe('AlertsService', () => {
+
+  // set up
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AlertsService]
     });
   });
 
+  // default test
   it('should be created', inject([AlertsService], (service: AlertsService) => {
     expect(service).toBeTruthy();
   }));
 
+  // test the getMessage()
   it('has working getMessage', inject([AlertsService], (service: AlertsService) => {
     expect(service.getMessage()).toBeTruthy();
   }));
