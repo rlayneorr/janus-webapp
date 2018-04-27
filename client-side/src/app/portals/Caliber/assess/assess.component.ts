@@ -18,7 +18,7 @@ import { ScrollEvent } from 'ngx-scroll-event';
 import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
 import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../hydra-client/entities/CompleteBatch';
 import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
 import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
@@ -36,7 +36,7 @@ export class AssessComponent implements OnInit {
 
   batches: any[] = []; // this should not be of type any but whoever refactored it to HydraBatch did not do it right - blake
   assessments: Assessment[] = [];
-  selectedBatch: any = new HydraBatch();
+  selectedBatch: any = new CompleteBatch();
   grades: Grade[] = [];
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
@@ -50,7 +50,7 @@ export class AssessComponent implements OnInit {
 
   years: Set<any> = new Set<any>();
   currentYear = 0;
-  yearBatches: HydraBatch[] = [];
+  yearBatches: CompleteBatch[] = [];
   selectedTrainees: HydraTrainee[] = [];
 
   pageOffsetValue;
@@ -279,7 +279,7 @@ export class AssessComponent implements OnInit {
     return note;
   }
 
-  getWeekBatchNote(batch: HydraBatch): Note {
+  getWeekBatchNote(batch: CompleteBatch): Note {
     const n = this.notes.filter( (note) => {
       return (note.type === 'BATCH' && Number(note.week) === Number(this.selectedWeek));
     })[0];
@@ -348,7 +348,7 @@ export class AssessComponent implements OnInit {
     this.currentYear = Number(year);
   }
 
-  changeBatch(batch: HydraBatch) {
+  changeBatch(batch: CompleteBatch) {
       this.selectedWeek = this.batchUtil.getWeek(batch);
 
     this.selectedBatch = batch;
