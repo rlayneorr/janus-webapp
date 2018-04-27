@@ -53,19 +53,19 @@ export class LocationService {
     return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
   }
 
-  getAllrooms() {
+  getAllRooms() {
     return this.httpClient.get<Room>(this.urls.room.getAllRooms());
   }
-  getOneroom(room: Room) {
+  getOneRoom(room: Room) {
     return this.httpClient.get<Room>(this.urls.room.getRoomById(room.roomId));
   }
-  newroom(room: Room) {
+  newRoom(room: Room) {
     return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room));
   }
-  updateroom(room: Room) {
+  updateRoom(room: Room) {
     return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room));
   }
-  deleteroom(room: Room) {
+  deleteRoom(room: Room) {
     return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId));
   }
 }
