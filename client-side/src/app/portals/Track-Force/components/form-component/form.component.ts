@@ -7,6 +7,9 @@ import { element } from 'protractor';
 import { ActivatedRoute } from '@angular/router';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { RequestService } from '../../services/request-service/request.service';
+import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { DataScrollerModule } from 'primeng/primeng';
+import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 /**
  * Component for viewing an individual associate and editing as admin.
@@ -19,37 +22,45 @@ import { RequestService } from '../../services/request-service/request.service';
 
 @AutoUnsubscribe
 export class FormComponent implements OnInit {
-    associate: Associate = new Associate();
+    associate: HydraTrainee = new HydraTrainee();
     clients: Client[];
     message = '';
-    selectedMarketingStatus = '';
-    selectedClient = '';
+    selectedMarketingStatus = null;
+    selectedClient = null;
     id: number;
 
-    constructor(private associateService: AssociateService, private rs: RequestService) {
+    constructor(private associateService: AssociateService, private requestService: RequestService) {
         const id = window.location.href.split('form-comp/')[1];
         this.id = Number(id);
-        this.associateService.getAssociate(this.id).subscribe(data => { this.associate = <Associate>data; });
+        this.associateService.getAssociate(this.id).subscribe(
+            data => {
+                this.associate = data;
+            }
+        );
     }
 
     ngOnInit() {
-        this.rs.getClients().subscribe(data => { console.log(data); this.clients = data; });
+        this.requestService.getClients().subscribe(data => { console.log(data); this.clients = data; });
     }
 
     /**
      * Update the associate with the new client and/or status
      */
     updateAssociate() {
-        if (this.selectedClient !== this.associate.client
-            && this.selectedMarketingStatus !== this.associate.marketingStatus) {
-            // this.associateService.updateAssociate(this.id, this.selectedMarketingStatus, this.selectedClient).subscribe(
-            //     data => {
-            //         this.associateService.getAssociate(this.id).subscribe(
-            //             associate => {
-            //                 this.associate = <Associate>associate;
-            //             });
-            //     }
-            // );
+        if (this.selectedMarketingStatus !== null) {
+            this.associate.marketingStatus = this.selectedMarketingStatus;
         }
+        if (this.selectedClient !== null) {
+            this.associate.client = this.selectedClient;
+        }
+        this.associateService.updateAssociate(this.associate).subscribe(
+            data => {
+                this.associateService.getAssociate(this.id).subscribe(
+                    data => {
+                        this.associate = data;
+                    }
+                );
+            }
+        );
     }
 }

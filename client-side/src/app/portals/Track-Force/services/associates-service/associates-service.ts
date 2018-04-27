@@ -26,10 +26,8 @@ export class AssociateService {
         return this.http.get(environment.context + "/trainees");
     }
 
-    getAssociate(id: number) {
-        const url: string = environment.url + 'TrackForce/track/associates/' + id;
-
-        return this.http.get<Associate>(url);
+    getAssociate(id: number): Observable<any> {
+        return this.http.get(environment.context + "/trainees/" + id);
     }
 
     /**
