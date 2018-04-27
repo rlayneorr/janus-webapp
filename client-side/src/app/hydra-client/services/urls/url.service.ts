@@ -154,11 +154,11 @@ export class UrlService {
    * This section is being added for use in the location service
    */
   location = {
-    getLocationById: (locationId: number) => `${this.context}/location/{id}`,
+    getLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
     getAllLocations: () => `${this.context}/location`,
     postLocation: () => `${this.context}/location`,
-    putLocationById: (locationId: number) => `${this.context}/location/{id}`,
-    deleteLocationById: (locationId: number) => `${this.context}/location/{id}`
+    putLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
+    deleteLocationById: (locationId: number) => `${this.context}/location/${locationId}`
   };
 
   /**
@@ -166,11 +166,11 @@ export class UrlService {
    * This section is being added for use in the location service
    */
   building = {
-    getBuildingById: (buildingId: number) => `${this.context}/building/{id}`,
+    getBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
     getAllBuildings: () => `${this.context}/building`,
     postBuilding: () => `${this.context}/building`,
-    putBuildingById: (buildingId: number) => `${this.context}/building/{id}`,
-    deleteBuildingById: (buildingId: number) => `${this.context}/buidling/{id}`
+    putBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
+    deleteBuildingById: (buildingId: number) => `${this.context}/buidling/${buildingId}`
   };
 
   /**
@@ -178,11 +178,11 @@ export class UrlService {
    * This section is being added for use in the location service
    */
   room = {
-    getRoomById: (roomId: number) => `${this.context}/room/{id}`,
+    getRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
     getAllRooms: () => `${this.context}/room`,
     postRoom: () => `${this.context}/room`,
-    putRoomById: (roomId: number) => `${this.context}/room/{id}`,
-    deleteBuildingById: (roomId: number) => `${this.context}/room/{id}`
+    putRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
+    deleteBuildingById: (roomId: number) => `${this.context}/room/${roomId}`
   };
 
   /**
@@ -190,11 +190,11 @@ export class UrlService {
    * This section is being added for use in the location service
    */
   unavailability = {
-    getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/{id}`,
+    getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
     getAllUnavailabilities: () => `${this.context}/unavailability`,
     postUnavailabilities: () => `${this.context}/unavailability`,
-    putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/{id}`,
-    deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/{id}`
+    putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
+    deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`
   };
 
   constructor() {
