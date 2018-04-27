@@ -5,9 +5,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TopicWeek } from '../models/topicweek.model';
 import { TopicName } from '../models/topicname.model';
 import { CalendarEvent } from '../models/calendar-event.model';
-import { environment } from '../../../../environments/environment';
 import { of } from 'rxjs/observable/of';
 import { CalendarStatusService } from './calendar-status.service';
+import { UrlService } from '../../../hydra-client/services/urls/url.service';
+import { Schedule } from '../models/schedule.model';
+import { ScheduledSubtopic } from '../models/scheduledsubtopic.model';
+import { CALENDAR_VALUE_ACCESSOR } from 'primeng/primeng';
+import { Curriculum } from '../models/curriculum.model';
 
 
 const httpOptions = {
@@ -20,7 +24,7 @@ export class CalendarService {
   @Output()
   addCalendarEvent = new EventEmitter<CalendarEvent>();
 
-  constructor(private http: HttpClient, private statusService: CalendarStatusService) { }
+  constructor(private http: HttpClient, private statusService: CalendarStatusService, private urlService: UrlService) { }
 
   /**
    * Gets subtopics by batch and uses pagination to limit the results
@@ -31,13 +35,14 @@ export class CalendarService {
    * @param pageNumber: number
    * @param pageSize: number
    */
-  getSubtopicsByBatchPagination(batchId: number, pageNumber: number, pageSize: number): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize)).map(
-      data => {
-        return data;
-      }
-    );
-  }
+  // getSubtopicsByBatchPagination(batchId: number, pageNumber: number, pageSize: number): Observable<Subtopic[]> {
+  //   return this.http.get<Subtopic[]>(this.urlService.calendar.getSubtopicsByBatchPaginationUrl(batchId, pageNumber, pageSize)).map(
+  //     data => {
+  //       return data;
+  //     }
+  //   );
+  // }
+
 
   /**
    * Retrieves subtopic by batchId
@@ -46,12 +51,27 @@ export class CalendarService {
    * @param batchId number
    */
   getSubtopicsByBatch(batchId: number): Observable<Subtopic[]> {
-    return this.http.get<Subtopic[]>(environment.calendar.getSubtopicsByBatchUrl(batchId)).map(
+    return this.http.get<Subtopic[]>(this.urlService.calendar.getSubtopicsByBatchUrl(batchId)).map(
       data => {
         return data;
       }
     );
   }
+
+    /**
+   * Retrieves schedule by scheduleId
+   * @author Scott Bennett | Batch: 1802-feb12-Matt
+   * @returns Schedule
+   * @param batchId number
+   */
+  getScheduleByScheduleId(scheduleId: number): Observable<Schedule> {
+    return this.http.get<Schedule>(this.urlService.calendar.getScheduleById(scheduleId)).map(
+      data => {
+        return data;
+      }
+    );
+  }
+
 
   /**
    * Retrieves the number of subtopics by batchId
@@ -60,7 +80,7 @@ export class CalendarService {
    * @param batchId number
    */
   getNumberOfSubTopicsByBatch(batchId: number): Observable<number> {
-    return this.http.get<number>(environment.calendar.getNumberOfSubTopicsByBatchUrl(batchId)).map(
+    return this.http.get<number>(this.urlService.calendar.getNumberOfSubTopicsByBatchUrl(batchId)).map(
       data => {
         return data;
       }
@@ -74,7 +94,7 @@ export class CalendarService {
    * @param batchId number
    */
   getTopicsByBatchPag(batchId: number): Observable<TopicWeek> {
-    return this.http.get<TopicWeek>(environment.calendar.getTopicsByBatchPagUrl(batchId)).map(
+    return this.http.get<TopicWeek>(this.urlService.calendar.getTopicsByBatchPagUrl(batchId)).map(
       data => {
         return data;
       }
@@ -89,12 +109,8 @@ export class CalendarService {
    * @param batchId: number
    * @param status: number
    */
-  changeTopicDate(subtopicId: number, batchId: number, date: number) {
-    return this.http.post(environment.calendar.changeTopicDateUrl(subtopicId, batchId, date), null, httpOptions).map(
-      data => {
-        return data;
-      }
-    );
+  changeTopicDate(schedule: Schedule) {
+    return this.http.patch<Schedule>(this.urlService.calendar.changeTopicDateUrl, schedule);
   }
 
   /**
@@ -106,7 +122,7 @@ export class CalendarService {
    * @param status: number
    */
   updateTopicStatus(calendarEvent: CalendarEvent, batchId: number): Observable<any> {
-    return this.http.get(environment.calendar.updateTopicStatusUrl(calendarEvent.subtopicId, batchId, calendarEvent.status))
+    return this.http.get(this.urlService.calendar.updateTopicStatusUrl(calendarEvent.subtopicId, batchId, calendarEvent.status))
       .map(data => {
         return data;
       }
@@ -120,7 +136,7 @@ export class CalendarService {
    * @param topics: TopicName[]
    */
   addTopics(topics: TopicName[]) {
-    return this.http.post(environment.calendar.addTopicsUrl(), topics, httpOptions).map(
+    return this.http.post(this.urlService.calendar.addTopicsUrl(), topics, httpOptions).map(
       data => {
         return data;
       }
@@ -144,12 +160,12 @@ export class CalendarService {
    */
   mapSubtopicToEvent(subtopic: Subtopic): CalendarEvent {
     const calendarEvent = new CalendarEvent();
-    calendarEvent.subtopicNameId = subtopic.subtopicName.id;
+    calendarEvent.color = this.statusService.getStatusColor(subtopic.status);
+    calendarEvent.start = subtopic.startTime;
+    // calendarEvent.end = subtopic.endTime;
+    calendarEvent.status = subtopic.status;
     calendarEvent.subtopicId = subtopic.subtopicId;
-    calendarEvent.title = subtopic.subtopicName.name;
-    calendarEvent.start = new Date(subtopic.subtopicDate);
-    calendarEvent.status = subtopic.status.name;
-    calendarEvent.color = this.statusService.getStatusColor(calendarEvent.status);
+    calendarEvent.title = subtopic.subtopicName;
 
     return calendarEvent;
   }

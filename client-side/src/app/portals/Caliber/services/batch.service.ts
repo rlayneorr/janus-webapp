@@ -16,9 +16,9 @@ import { environment } from '../../../../environments/environment';
 // entities
 import { Batch } from '../entities/Batch';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { urls } from './urls';
 import { stringifyDate } from '../util/utils';
 
+const context = environment.batch;
 
 /**
  * this service manages calls to the web service
@@ -57,12 +57,9 @@ export class BatchService implements CRUD<Batch> {
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
      */
     public fetchAll() {
-      this.http.get<any[]>(urls.batch.fetchAll())
+      this.http.get<any[]>(context.fetchAll())
         .subscribe((results) => {
           this.listSubject.next(results);
-          this.http.get<any[]>('/skillType/batches/${Batch ID here}').subscribe(res => {
-            //return res;
-          });
         });
       return this.listSubject.asObservable();
     }
@@ -74,12 +71,12 @@ export class BatchService implements CRUD<Batch> {
      *
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
      */
-    // public fetchAllByTrainer() {
-    //   this.http.get<any[]>(urls.batch.fetchAllByTrainer())
-    //   .subscribe((results) => {
-    //     this.listSubject.next(results);
-    // });
-    // }
+    public fetchAllByTrainer() {
+      this.http.get<any[]>(context.fetchAllByTrainer())
+      .subscribe((results) => {
+        this.listSubject.next(results);
+    });
+    }
 
     /**
     * @overloade
@@ -94,7 +91,7 @@ export class BatchService implements CRUD<Batch> {
     * @param batch: Batch
     */
     public create(batch: Batch) {
-      this.http.post<any>(urls.batch.save(), JSON.stringify(this.prepareForApi(batch)))
+      this.http.post<any>(context.save(), JSON.stringify(this.prepareForApi(batch)))
       .subscribe((results) => {
         this.savedSubject.next(results);
         });
@@ -110,7 +107,7 @@ export class BatchService implements CRUD<Batch> {
      * @param batch: Batch
      */
     public update(batch: Batch) {
-      this.http.put<any>(urls.batch.update(), JSON.stringify(this.prepareForApi(batch)))
+      this.http.put<any>(context.update(), JSON.stringify(this.prepareForApi(batch)))
       .subscribe((results) => {
         this.savedSubject.next(results);
         });
@@ -127,7 +124,7 @@ export class BatchService implements CRUD<Batch> {
      * @param batch: Batch
      */
     public delete(batch: Batch) {
-      this.http.delete(urls.batch.delete(batch.batchId))
+      this.http.delete(context.delete(batch.batchId))
       .subscribe((results: any) => {
         this.deletedSubject.next(results);
         });

@@ -1,5 +1,6 @@
 import { BamUser } from './bamuser.model';
 import { BatchType } from './batchtype.model';
+import { Curriculum } from './curriculum.model';
 
 export class Batch {
     id: number;
@@ -7,14 +8,18 @@ export class Batch {
     startDate: Date;
     endDate: Date;
     trainer: BamUser;
-    type: BatchType;
+    trainerID: number;
+    curriculum: Curriculum;
+    curriculumID: number;
+    scheduleID: number;
 
-    constructor (id: number, name: string, startDate: Date, endDate: Date, trainer: BamUser, type: BatchType) {
+    constructor (id: number, name: string, startDate: Date, endDate: Date, trainer: BamUser, curriculumID: number, scheduleID: number) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.trainer = trainer;
-        this.type = type;
+        this.curriculumID = curriculumID;
+        this.scheduleID = scheduleID;
     }
 }

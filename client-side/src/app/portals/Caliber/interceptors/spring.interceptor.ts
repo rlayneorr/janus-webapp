@@ -17,7 +17,7 @@ export class SpringInterceptor implements HttpInterceptor {
     constructor() { }
 
     /*
-    * intercept each HTTP rquest and return a modified request
+    * intercept each HTTP request and return a modified request
     */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const modifiedRequest = request.clone({

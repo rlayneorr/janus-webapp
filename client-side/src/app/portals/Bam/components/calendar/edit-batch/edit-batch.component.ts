@@ -14,14 +14,13 @@ import { AlertService } from '../../../services/alert.service';
   styleUrls: ['./edit-batch.component.css']
 })
 
-/** TODO: Get User from session.
- * Class for edit the current batch.
+/**  Class for edit the current batch.
  * @author Patrick Kennedy | Batch: 1712-Steve
  * @author Shane Avery Sistoza | Batch: 1712-Steve
  */
 export class EditBatchComponent implements OnInit {
   // Specific to batch
-  @Input() batch: Batch = new Batch(null, null, null, null, null, new BatchType(null, null, null));
+  @Input() batch: Batch = new Batch(null, null, null, null, null, null, null);
   batchTypes: BatchType[];
 
   // Specific to associates that are apart of the batch.
@@ -42,11 +41,7 @@ export class EditBatchComponent implements OnInit {
    */
   submit(typeId) {
 
-    // Check dates
-    // if dates are not correct
-    // alert and return
     if (this.batch.startDate > this.batch.endDate) {
-      // alert
       this.batchAlert('danger', `Error: End date can't be earlier than start date.`);
       return;
     }
@@ -59,7 +54,7 @@ export class EditBatchComponent implements OnInit {
       }
     }
 
-    this.batch.type = selectedType;
+    // this.batch.type = selectedType;    //BATCH TYPE DOESN'T EXIST ANY MORE
     this.batchService.updateBatch(this.batch).subscribe( status => {
       this.batchAlert('success', `Updated:  ${this.batch.name} successfully! `);
       this.sessionService.putSelectedBatchIntoSession(this.batch);
@@ -80,7 +75,6 @@ export class EditBatchComponent implements OnInit {
 
   /**
    * Adds a timed notification whether or not adding or removing an associate was successful.
-   *
    * @param      {[string, string]}  assoc   Contains 2 string values type and messsage.
    */
   associateAlert(assoc) {

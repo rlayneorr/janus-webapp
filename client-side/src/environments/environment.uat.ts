@@ -2,11 +2,11 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'https://dev-caliber.revature.tech/';
+const context = 'https://dev-caliber.revature.tech';
 const bam = 'http://18.219.59.193:9001/api/v2';
 export const environment = {
   production: false,
-  hydraContext: 'https://virtserver.swaggerhub.com/blake2/Hydra/1.0.0/',
+  gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000',
   context: context, // change for what the production environment would actually be
   bam: bam,
   url: 'http://localhost:8085/',
@@ -71,7 +71,25 @@ export const environment = {
   },
 
   skill: {
-    fetchAll: () => `${context}types/skill/all`,
+    findAll: () => `${context}/gambit-skills-service/skill`,
+    findByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
+    findById: (id) => `${context}/gambit-skills-service/skill/${id}`,
+    findAllActive: () => `${context}/gambit-skills-service/skill`,
+    save: () => `${context}/gambit-skills-service/skill`,
+    updateByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
+    updateById: (id) => `${context}/gambit-skills-service/skill/${id}`,
+    delete: (id) => `${context}/gambit-skills-service/skill/${id}`
+  },
+
+  skillType: {
+    find: (id) => `${context}/gmabit-skills-service/skillType/${id}`,
+    findByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
+    findAll: () => `${context}/gambit-skills-service/skillType`,
+    save: () => `${context}/gambit-skills-service/skillType`,
+    update: (id) => `${context}/gambit-skills-service/skillType/${id}`,
+    updateByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
+    delete: (id) => `${context}/gambit-skills-service/skillType/${id}`,
+    deleteByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`
   },
 
   trainee: {
@@ -79,6 +97,7 @@ export const environment = {
     save: () => `${context}all/trainee/create`,
     update: () => `${context}all/trainee/update`,
     delete: (traineeId: number) => `${context}all/trainee/delete/${traineeId}`,
+    fetchDroppedByBatch: (batchId: number) => `${context}all/trainee/`
   },
 
   trainer: {

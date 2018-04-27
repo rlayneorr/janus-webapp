@@ -12,9 +12,11 @@ import { AlertsService } from './alerts.service';
 
 // entities
 import { Note } from '../entities/Note';
-import { Trainee } from '../entities/Trainee';
-import { Batch } from '../entities/Batch';
-import { urls } from './urls';
+import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { environment } from '../../../../environments/environment';
+
+const context = environment.note;
 
 /**
 * this service manages calls to the web services
@@ -99,7 +101,7 @@ export class NoteService {
   * @return Observable<Note[]>
   */
   public fetchQcBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = urls.note.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
+    const url = context.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -115,7 +117,7 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchQcTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = urls.note.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
+    const url = context.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -131,7 +133,7 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = urls.note.fetchBatchNotesByBatchIdByWeek(batchId, week);
+    const url = context.fetchBatchNotesByBatchIdByWeek(batchId, week);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -147,7 +149,7 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = urls.note.fetchTraineeNotesByBatchIdByWeek(batchId, week);
+    const url = context.fetchTraineeNotesByBatchIdByWeek(batchId, week);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -160,7 +162,7 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchByTrainee(trainee: Trainee): void {
+  public fetchByTrainee(trainee: HydraTrainee): void {
     const $trainingNotes = this.fetchTrainingNotesByTrainee(trainee);
     const $qcNotes = this.fetchQcNotesByTrainee(trainee);
     let results: Note[] = [];
@@ -183,8 +185,8 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchTrainingNotesByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = urls.note.fetchTrainingNotesByTrainee(trainee.traineeId);
+  public fetchTrainingNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
+    const url = context.fetchTrainingNotesByTrainee(trainee.traineeId);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -197,8 +199,8 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchQcNotesByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = urls.note.fetchQcNotesByTrainee(trainee.traineeId);
+  public fetchQcNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
+    const url = context.fetchQcNotesByTrainee(trainee.traineeId);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -213,7 +215,7 @@ export class NoteService {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public update(note: Note): void {
-    const url = urls.note.update();
+    const url = context.update();
     const messages = {
       success: 'Note updated successfully',
       error: 'Note update failed',
@@ -243,7 +245,7 @@ export class NoteService {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public save(note: Note): void {
-    const url = urls.note.save();
+    const url = context.save();
     const messages = {
       success: 'Note saved successfully',
 
@@ -259,8 +261,8 @@ export class NoteService {
 * @param batch: Batch
 * @param note: Note
 */
-  public getAllQCTraineeNotes(batch: Batch, note: Note): void {
-    const url = urls.note.getAllQCTraineeNotes(batch.batchId, note.week);
+  public getAllQCTraineeNotes(batch: HydraBatch, note: Note): void {
+    const url = context.getAllQCTraineeNotes(batch.batchId, note.week);
 
     this.listSubject.next([]);
 
@@ -276,8 +278,8 @@ export class NoteService {
   * @param note: Note
  */
 
-  public findQCBatchNotes(batch: Batch, note: Note): void {
-    const url = urls.note.findQCBatchNotes(batch.batchId, note.week);
+  public findQCBatchNotes(batch: HydraBatch, note: Note): void {
+    const url = context.findQCBatchNotes(batch.batchId, note.week);
 
     this.listSubject.next([]);
 

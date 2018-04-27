@@ -1,17 +1,12 @@
 import { Component, OnInit, NgModule, ViewEncapsulation, ElementRef} from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
-import { BatchService } from '../services/batch.service';
 import { HttpClientModule  } from '@angular/common/http';
-import { Batch } from '../entities/Batch';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Assessment } from '../entities/Assessment';
 import { AssessmentService } from '../services/assessment.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GradeService } from '../services/grade.service';
 import { Grade } from '../entities/Grade';
-import { Trainee } from '../entities/Trainee';
-import { CategoryService } from '../services/category.service';
-import { Category } from '../entities/Category';
 import { Note } from '../entities/Note';
 import { NoteService } from '../services/note.service';
 import * as $ from 'jquery';
@@ -22,7 +17,12 @@ import { DatePipe } from '@angular/common';
 import { ScrollEvent } from 'ngx-scroll-event';
 import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
-
+import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
+import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
+import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
+import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
 
 @Component({
   selector: 'app-assess',
@@ -34,13 +34,13 @@ import { HostListener } from '@angular/core/src/metadata/directives';
 export class AssessComponent implements OnInit {
   assessment: Assessment;
 
-  batches: Batch[] = [];
+  batches: any[] = []; // this should not be of type any but whoever refactored it to HydraBatch did not do it right - blake
   assessments: Assessment[] = [];
-  selectedBatch: Batch = new Batch();
+  selectedBatch: any = new HydraBatch();
   grades: Grade[] = [];
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
-  categories: Category[] = [];
+  skills: Array<GambitSkill>;
   notes: Note[] = [];
   rForm: FormGroup;
 
@@ -50,13 +50,13 @@ export class AssessComponent implements OnInit {
 
   years: Set<any> = new Set<any>();
   currentYear = 0;
-  yearBatches: Batch[] = [];
-  selectedTrainees: Trainee[] = [];
+  yearBatches: HydraBatch[] = [];
+  selectedTrainees: HydraTrainee[] = [];
 
   pageOffsetValue;
-  constructor(private modalService: NgbModal, private batchService: BatchService, private assessmentService: AssessmentService,
-    private gradeService: GradeService, private categoryService: CategoryService, private noteService: NoteService,
-    private fb: FormBuilder, private datePipe: DatePipe) {}
+  constructor(private modalService: NgbModal, private batchService: HydraBatchService, private assessmentService: AssessmentService,
+    private gradeService: GradeService, private skillService: GambitSkillService, private noteService: NoteService,
+    private fb: FormBuilder, private datePipe: DatePipe, private batchUtil: HydraBatchUtilService) {}
 
   getPageOffsetHeight(event: ScrollEvent) {
     this.pageOffsetValue = pageYOffset;
@@ -84,7 +84,7 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    this.categoryService.fetchAllActive();
+    this.skillService.findAllActive();
 
     this.noteService.getList().subscribe(notes => {
       this.notes = notes;
@@ -98,12 +98,12 @@ export class AssessComponent implements OnInit {
       this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     });
 
-    this.categoryService.listSubject.subscribe(categories => {
-      this.categories = categories;
-      this.newAssessment.category = this.findCategory('Java');
+    this.skillService.findAllActive().subscribe(skills => {
+      this.skills = skills;
+      this.newAssessment.skill = this.findSkill('Java');
     });
 
-    this.batchService.getList().subscribe(batch => {
+    this.batchService.fetchAll().subscribe(batch => {
       this.batches = batch;
 
       if (this.batches.length !== 0) {
@@ -119,7 +119,7 @@ export class AssessComponent implements OnInit {
 
         this.switchYear(this.currentYear);
         this.changeBatch(this.yearBatches[0]);
-        this.selectedWeek = this.selectedBatch.weeks;
+        this.selectedWeek = this.batchUtil.getWeek(this.selectedBatch);
       }
     });
 
@@ -172,38 +172,42 @@ export class AssessComponent implements OnInit {
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, week);
   }
 
-/****************************************************************************************
-                                      CATEGORIES
-*****************************************************************************************/
+  /****************************************************************************************
+                                        SKILL
+  *****************************************************************************************/
 
-  editCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.editingAssessment.category = this.findCategory(newCategory);
+  /**
+   * Called when a skill is changed. Sets the skill of the assessment being edited to the new skill.
+   * @param selectSkill The html element that was changed.
+   */
+  editSkill(selectSkill: ElementRef) {
+    const newSkill = $(selectSkill).find(':selected').val();
+    this.editingAssessment.skill = this.findSkill(String(newSkill));
   }
 
-  changeCategory(categorySelect: ElementRef) {
-    const newCategory = $(categorySelect).find(':selected').val();
-    this.newAssessment.category = this.findCategory(newCategory);
+  /**
+   * Called when a skill is changed. Sets the skill of the new assessment to the new skill.
+   * @param skillSelect The html element that was changed.
+   */
+  changeSkill(skillSelect: ElementRef) {
+    const newSkill = $(skillSelect).find(':selected').val();
+    this.newAssessment.skill = this.findSkill(String(newSkill));
   }
 
-  findCategory(category: any): Category {
-    let matchingCat;
-    this.categories.forEach(element => {
-
-      if (element.skillCategory === category) {
-        matchingCat = element;
-      }
-    });
-
-    return matchingCat;
+  /**
+   * Finds the skill within this.skills.
+   * @param name The name of the skill to find.
+   * @returns the skill within this.skills.
+   */
+  findSkill(name: string): GambitSkill {
+    return this.skills.find(skill => skill.skillName === name);
   }
-
 
 /****************************************************************************************
                                       GRADES
 *****************************************************************************************/
 
-  updateGrade(trainee: Trainee, assessment: Assessment, input) {
+  updateGrade(trainee: HydraTrainee, assessment: Assessment, input) {
     const grade = this.getGrade(trainee, assessment);
     grade.score = Number(input.value);
     grade.dateReceived = '2000-01-01T01:01:01.000Z';
@@ -211,7 +215,7 @@ export class AssessComponent implements OnInit {
     this.gradeService.update(grade);
   }
 
-  getGrade(trainee: Trainee, assessment: Assessment) {
+  getGrade(trainee: HydraTrainee, assessment: Assessment) {
     const grade = new GradeByTraineeByAssessmentPipe().transform(this.grades, trainee, assessment)[0];
 
     if (grade != null) {
@@ -266,7 +270,7 @@ export class AssessComponent implements OnInit {
                                       NOTES
 *****************************************************************************************/
 
-  getNote(trainee: Trainee) {
+  getNote(trainee: HydraTrainee) {
     let note: Note;
     note = new NoteByTraineeByWeekPipe().transform(this.notes, trainee, this.selectedWeek);
     if (note.content === undefined) {
@@ -275,7 +279,7 @@ export class AssessComponent implements OnInit {
     return note;
   }
 
-  getWeekBatchNote(batch: Batch): Note {
+  getWeekBatchNote(batch: HydraBatch): Note {
     const n = this.notes.filter( (note) => {
       return (note.type === 'BATCH' && Number(note.week) === Number(this.selectedWeek));
     })[0];
@@ -333,10 +337,8 @@ export class AssessComponent implements OnInit {
   }
 
   addWeek() {
-    this.selectedBatch.weeks += 1;
-    this.addWeekOfNotes(this.selectedBatch.weeks);
-    this.batchService.update(this.selectedBatch);
-    this.selectedWeek = this.selectedBatch.weeks;
+    this.addWeekOfNotes(this.selectedWeek);
+    this.selectedWeek = this.batchUtil.getWeek(this.selectedBatch);
     this.assessmentService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     this.noteService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
@@ -346,8 +348,8 @@ export class AssessComponent implements OnInit {
     this.currentYear = Number(year);
   }
 
-  changeBatch(batch: Batch) {
-      this.selectedWeek = batch.weeks;
+  changeBatch(batch: HydraBatch) {
+      this.selectedWeek = this.batchUtil.getWeek(batch);
 
     this.selectedBatch = batch;
 
@@ -357,9 +359,9 @@ export class AssessComponent implements OnInit {
 
     this.selectedTrainees = this.selectedBatch.trainees;
     this.selectedTrainees.sort((a, b) => {
-      if (a.name < b.name) {
+      if (a.traineeUserInfo.firstName < b.traineeUserInfo.firstName) {
         return -1;
-      } else if (a.name > b.name) {
+      } else if (a.traineeUserInfo.firstName > b.traineeUserInfo.firstName) {
         return 1;
       } else {
         return 0;
@@ -387,7 +389,7 @@ export class AssessComponent implements OnInit {
       }
     }
     if (this.yearBatches[0] != null) {
-      this.selectedWeek = this.yearBatches[0].weeks;
+      this.selectedWeek = this.batchUtil.getWeek(this.yearBatches[0]);
       this.switchBatch(this.yearBatches[0].batchId);
 
     }
@@ -398,3 +400,4 @@ export class AssessComponent implements OnInit {
   }
 
 }
+
