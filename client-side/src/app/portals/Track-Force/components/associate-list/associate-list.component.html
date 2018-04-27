@@ -66,10 +66,10 @@
               && (searchByClient === associate.client || searchByClient === '')
               && (searchByCurriculum === associate.name || searchByCurriculum === '')">
                 <td class="edit">
-                  <input type="checkbox" id={{associate.id}}>
+                  <input type="checkbox" id={{associate.userId}}>
                 </td>
                 <td>
-                  <a [routerLink]="['/TrackForce/form-comp', associate.id]" class="id">{{associate.id}}</a>
+                  <a [routerLink]="['/TrackForce/form-comp', associate.id]" class="id">{{associate.userId}}</a>
                 </td>
                 <td class="first">{{associate.firstName}}</td>
                 <td class="last">{{associate.lastName}}</td>
