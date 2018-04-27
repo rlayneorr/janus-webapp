@@ -1,31 +1,31 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 
-import { HydraTraineeService } from './hydra-trainee.service';
+import { GambitTraineeService } from './gambit-trainee.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HydraTrainee } from '../../entities/HydraTrainee';
+import { GambitTrainee } from '../../entities/GambitTrainee';
 import { UrlService } from '../urls/url.service';
 import { environment } from '../../../../environments/environment';
 
-fdescribe('HydraTraineeService', () => {
-  const trainee = new HydraTrainee();
+fdescribe('GambitTraineeService', () => {
+  const trainee = new GambitTrainee();
   this.context = environment.context;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HydraTraineeService, UrlService],
+      providers: [GambitTraineeService, UrlService],
       imports: [HttpClientModule,
         HttpClientTestingModule]
     });
   });
 
-  it('should be created', inject([HydraTraineeService], (service: HydraTraineeService) => {
+  it('should be created', inject([GambitTraineeService], (service: GambitTraineeService) => {
     expect(service).toBeTruthy();
   }));
 
   it(`should findAllByBatchAndStatus and verify the response`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.findAllByBatchAndStatus(1, trainee.trainingStatus).subscribe();
 
           backend.expectOne({
@@ -38,8 +38,8 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should findAllByBatchAndStatus and verify the observable`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.findAllByBatchAndStatus(1, trainee.trainingStatus).subscribe(next => {
             expect(next).toBeTruthy();
           });
@@ -51,8 +51,8 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should NOT fail when sending an unmatched request to findAllByBatchAndStatus`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.findAllByBatchAndStatus(1, 'Dropped').subscribe();
 
           backend.match(`${this.context}trainees`);
@@ -62,8 +62,8 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should create a new trainee`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.create(trainee).subscribe();
 
           backend.expectOne({
@@ -76,8 +76,8 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should create a new trainee and check the observable`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.create(trainee).subscribe(next => {
             expect(next).toBeTruthy();
           });
@@ -89,8 +89,8 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should NOT fail when sending an unmatched request to create`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.create(trainee).subscribe();
 
           backend.match(`${this.context}trainees`);
@@ -100,8 +100,8 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should update a trainee`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.update(trainee).subscribe();
 
           backend.expectOne({
@@ -114,8 +114,8 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should update the trainee and check the observable`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.update(trainee).subscribe(next => {
             expect(next).toBeTruthy();
           });
@@ -127,8 +127,8 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should NOT fail when sending an unmatched request to update`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.update(trainee).subscribe();
 
           backend.match(`${this.context}trainees`);
@@ -138,12 +138,12 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should delete a trainee`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
-          service.delete(trainee.traineeId).subscribe();
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
+          service.delete(trainee.userId).subscribe();
 
           backend.expectOne({
-            url: `${this.context}trainees/${trainee.traineeId}`,
+            url: `${this.context}trainees/${trainee.userId}`,
             method: 'DELETE'
           });
         })
@@ -152,24 +152,24 @@ fdescribe('HydraTraineeService', () => {
 
   it(`should delete the trainee and check the observable`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
-          service.delete(trainee.traineeId).subscribe(next => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
+          service.delete(trainee.userId).subscribe(next => {
             expect(next).toBeTruthy();
           });
 
-          backend.expectOne(`${this.context}trainees/${trainee.traineeId}`).flush({});
+          backend.expectOne(`${this.context}trainees/${trainee.userId}`).flush({});
         })
     )
   );
 
   it(`should NOT fail when sending an unmatched request to delete`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
-          service.delete(trainee.traineeId).subscribe();
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
+          service.delete(trainee.userId).subscribe();
 
-          backend.match(`${this.context}trainees/${trainee.traineeId}`);
+          backend.match(`${this.context}trainees/${trainee.userId}`);
         })
     )
   );
