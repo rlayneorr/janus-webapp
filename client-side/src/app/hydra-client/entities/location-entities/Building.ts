@@ -1,13 +1,23 @@
+/**
+ * @author Luis Munoz
+ * @author Tanhim Ahmed
+ */
 export class Building {
-    id: number;
+    // primary key Id of the building object //
+    buildingId: number;
+    // the street address of the building //
     streetAddress: string;
-    locId: number;
-    buildingNum: number;
-    constructor( id: number, streetAddress: string, locId: number, buildingNum: number ) {
-        this.id = id;
+    // foreign key | Id of the location this building is in //
+    locationId: number;
+    // the number of the building //
+    buildingNumber: number;
+
+    // this is a constructor //
+    constructor( buildingId: number, streetAddress: string, locationId: number, buildingNumber: number ) {
+        this.buildingId = buildingId;
         this.streetAddress = streetAddress;
-        this.locId = locId;
-        this.buildingNum = buildingNum;
+        this.locationId = locationId;
+        this.buildingNumber = buildingNumber;
     }
 
 }
