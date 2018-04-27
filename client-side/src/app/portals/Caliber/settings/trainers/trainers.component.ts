@@ -73,7 +73,7 @@ export class TrainersComponent implements OnInit {
   addTrainer(modal: Trainer) {
     this.newTrainer = modal;
     console.log(modal);
-    console.log(modal.firstName);
+    console.log(modal.role.toString());
     this.trainerService.create(this.newTrainer).subscribe((resp) => {
       this.ngOnInit();
     });
