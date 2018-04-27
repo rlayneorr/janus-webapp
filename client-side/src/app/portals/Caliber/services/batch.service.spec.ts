@@ -20,4 +20,8 @@ xdescribe('BatchService', () => {
   it('should be created', inject([BatchService], (service: BatchService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('should do something', inject([BatchService], (batchService: BatchService) =>{
+    console.log("asfdasfdlkasdflkasdflkasdf");
+  }))
 });
