@@ -286,9 +286,9 @@ export class ManageComponent implements OnInit {
   /* Creates a new trainee and assigns the current batch to its batch field
   Training status is assigned since there is no training status service yet in angular */
   createNewTraineeFunction() {
-    // this.createNewTrainee.batch = this.currentBatch;
-    // console.log(this.createNewTrainee);
-    // this.hydraTraineeService.create(this.createNewTrainee);
+    this.createNewTrainee.batch = this.currentBatch;
+    console.log(this.createNewTrainee);
+    this.hydraTraineeService.create(this.createNewTrainee);
   }
 
   /** Updates the Trainee
@@ -300,10 +300,10 @@ export class ManageComponent implements OnInit {
   so that there is no circular reference
   'Employed' is assigned since there is no training status service yet */
   updateTraineeFunction() {
-    // const emptyBatch = Object.assign({}, this.currentBatch);
-    // emptyBatch.trainees = [];
-    // this.createNewTrainee.batch = emptyBatch;
-    // this.hydraTraineeService.update(this.createNewTrainee);
+    const emptyBatch = Object.assign({}, this.currentBatch);
+    emptyBatch.trainees = [];
+    this.createNewTrainee.batch = emptyBatch;
+    this.hydraTraineeService.update(this.createNewTrainee);
   }
 
   /**

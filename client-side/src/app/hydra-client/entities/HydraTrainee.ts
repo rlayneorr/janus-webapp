@@ -1,4 +1,4 @@
-import { HydraBatch } from './HydraBatch';
+import { CompleteBatch } from './CompleteBatch';
 import { User } from './User';
 
 
@@ -6,7 +6,7 @@ export class HydraTrainee {
     traineeId: number;
     resourceId: number;
     trainingStatus: string;
-    batch: HydraBatch;
+    batch: CompleteBatch;
     phoneNumber: string;
     skypeId: string;
     profileUrl: string;

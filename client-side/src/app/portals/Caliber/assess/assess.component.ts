@@ -18,7 +18,7 @@ import { ScrollEvent } from 'ngx-scroll-event';
 import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
 import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../hydra-client/entities/HydraBatch';
 import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
 import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
