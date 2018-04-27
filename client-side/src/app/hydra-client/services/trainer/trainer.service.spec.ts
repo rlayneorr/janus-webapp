@@ -4,11 +4,11 @@ import { TrainerService } from './trainer.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { UrlService } from '../urls/url.service';
-import { Trainer } from '../../entities/Trainer';
+import { GambitTrainer } from '../../entities/GambitTrainer';
 import { environment } from '../../../../environments/environment';
 
 fdescribe('TrainerService', () => {
-  const trainer: Trainer = new Trainer();
+  const trainer: GambitTrainer = new GambitTrainer();
   trainer.email = 'hey@stop.it';
   this.context = environment.context;
   beforeEach(() => {
@@ -179,7 +179,7 @@ fdescribe('TrainerService', () => {
     async(
       inject([HttpClient, HttpTestingController, TrainerService],
         (http: HttpClient, backend: HttpTestingController, service: TrainerService) => {
-          service.create(new Trainer).subscribe();
+          service.create(new GambitTrainer).subscribe();
 
           backend.expectOne({
             url: `${this.context}trainers`,
