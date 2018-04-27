@@ -127,4 +127,12 @@ export class TrainerService {
     return this.httpClient.put<Trainer>(this.urls.trainers.update(), trainer);
   }
 
+  /**
+   * Makes a trainer inactive and pushes the inactivated trainer
+   * to observable
+   * @param trainer 
+   */
+  public makeInactive(trainer: Trainer): Observable<Trainer> {
+    return this.httpClient.put<Trainer>(this.urls.users.makeInactive(), trainer);
+  }
 }
