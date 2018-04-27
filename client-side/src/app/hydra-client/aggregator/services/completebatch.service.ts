@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // Interfaces
-import { CRUD } from '../interfaces/api.interface';
 
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -10,18 +9,19 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // services
-import { ApiService } from '../util/api.service';
+//import { ApiService } from '../util/api.service';
 import { environment } from '../../../../environments/environment';
 
 // entities
 import { CompleteBatch } from '../entities/CompleteBatch';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { urls } from './urls';
-import { stringifyDate } from '../util/utils';
+import { stringifyDate } from '../../../portals/Caliber/util/utils';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { NullAstVisitor } from '@angular/compiler';
 import { SkillTypeService } from '../../../portals/Caliber/screening/services/skillType/skill-type.service';
 import { GambitSkillTypeService } from '../../services/skillType/gambit-skill-type.service';
+import { HydraBatchService } from '../../services/batch/hydra-batch.service';
+import { GambitBatch } from '../../entities/GambitBatch';
 
 
 /**
@@ -37,7 +37,8 @@ export class BatchService {
     public updatedSubject: Subject<CompleteBatch>;
     public deletedSubject: Subject<CompleteBatch>;
 
-    constructor(public http: HttpClient, public apiService: ApiService, 
+    constructor(public http: HttpClient, 
+      public hydraBatchService: HydraBatchService,
       public gambitSkillTypeService: GambitSkillTypeService) {
       this.listSubject = new BehaviorSubject([]);
       this.savedSubject = new Subject();
@@ -64,7 +65,7 @@ export class BatchService {
      */
     public fetchAll(): Observable<CompleteBatch[]> {
       if (this.batches.length == 0) {
-      this.http.get<any[]>(urls.batch.fetchAll())
+      this.http.get<any[]>(environment.batch.fetchAll())
         .subscribe((results) => {
           console.log(results);
           for (let result of results) { // will need to call skill servive instead of making our own http request
@@ -73,11 +74,12 @@ export class BatchService {
                 batchId: result['batchId'],
                 resourceId: result['resourceId'],
                 trainingName: result['trainingName'],
-                trainerId: result['trainerId'],
-                cotrainerId: result['cotrainerId'],
+                trainer: result['trainerId'],
+                cotrainer: result['cotrainerId'],
                 skillType: res,
                 trainingType: result['trainingType'],
                 addressId: result['addressId'],
+                address: result['addressId'],
                 location: result['location'],
                 goodGradeThreshold: null,
                 borderlineGradeThreshold: null,
@@ -85,7 +87,7 @@ export class BatchService {
                 endDate: result['endDate'],
                 week: null,
                 noteIds: result['trainees'],
-                traineeIds: result['trainees'],
+                trainees: result['trainees'],
               });
             });
           }
@@ -103,8 +105,8 @@ export class BatchService {
      *
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
      */
-    public fetchAllByTrainer(id: number) {
-      this.http.get<any[]>(urls.batch.fetchAllByTrainer(id))
+    public fetchAllByTrainerId(id: number) {
+      this.http.get<any[]>(environment.batch.fetchAllByTrainerId(id))
       .subscribe((results) => {
         for (let result of results) { // will need to call skill servive instead of making our own http request
           this.gambitSkillTypeService.find(result['skillTypeId']).subscribe(res => {
@@ -112,11 +114,12 @@ export class BatchService {
               batchId: result['batchId'],
               resourceId: result['resourceId'],
               trainingName: result['trainingName'],
-              trainerId: result['trainerId'],
-              cotrainerId: result['cotrainerId'],
+              trainer: result['trainerId'],
+              cotrainer: result['cotrainerId'],
               skillType: res,
               trainingType: result['trainingType'],
               addressId: result['addressId'],
+              address: result['addressId'],
               location: result['location'],
               goodGradeThreshold: null,
               borderlineGradeThreshold: null,
@@ -124,7 +127,7 @@ export class BatchService {
               endDate: result['endDate'],
               week: null,
               noteIds: result['trainees'],
-              traineeIds: result['trainees'],
+              trainees: result['trainees'],
             });
           });
         }
@@ -145,8 +148,8 @@ export class BatchService {
     *
     * @param batch: Batch
     */
-    public create(batch: Batch): Observable<Batch> {
-      this.http.post<any>(urls.batch.save(), JSON.stringify(this.prepareForApi(batch)))
+    public create(batch: CompleteBatch): Observable<CompleteBatch> {
+      this.http.post<any>(environment.batch.save(), JSON.stringify(this.prepareForApi(batch)))
       .subscribe((results) => {
         this.savedSubject.next(results);
       });
@@ -161,12 +164,39 @@ export class BatchService {
      *
      * @param batch: Batch
      */
-    public update(batch: Batch): Observable<Batch> {
-      this.http.put<any>(urls.batch.update(), JSON.stringify(this.prepareForApi(batch)))
-      .subscribe((results) => {
-        this.savedSubject.next(results);
-        });
-      return this.savedSubject.asObservable();
+    public update(completeBatch: CompleteBatch): Observable<GambitBatch> {
+
+      let gambitBatch: GambitBatch = new GambitBatch();
+      gambitBatch.batchId = completeBatch.batchId;
+      gambitBatch.addressId = completeBatch.resourceId;
+      gambitBatch.trainingName = completeBatch.trainingName;
+      gambitBatch.trainerId = completeBatch.trainer.userId;
+
+      //TODO Verify that the logic for creating cotrainers in a batch as initially null
+      //       is valid. See aggregator/entities/CompleteBatch constructor for more details
+      if (completeBatch.cotrainer != null ) {
+        gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
+      } else {
+        gambitBatch.cotrainerId = 0;
+      }
+
+      gambitBatch.skillTypeId = completeBatch.skillType.skillTypeId;
+      gambitBatch.addressId = completeBatch.addressId;
+      gambitBatch.location = completeBatch.location;
+      gambitBatch.goodGradeThreshold = completeBatch.goodGradeThreshold;
+      gambitBatch.borderlineGradeThreshold = completeBatch.borderlineGradeThreshold;
+      gambitBatch.startDate = completeBatch.startDate;
+      gambitBatch.endDate = completeBatch.endDate;
+      gambitBatch.week = completeBatch.week;
+      gambitBatch.noteIds = completeBatch.noteIds;
+
+      // iterates over the HydraTrainee array in completeBatch to push ids to
+      //    the GambitBatch traineeId array
+      for (let trainee of completeBatch.trainees) {
+        gambitBatch.traineeIds.push(trainee.traineeId);
+      }
+
+      return this.hydraBatchService.update(gambitBatch);
     }
 
     /**
@@ -178,8 +208,8 @@ export class BatchService {
      *
      * @param batch: Batch
      */
-    public delete(batch: Batch): Observable<Batch> {
-      this.http.delete(urls.batch.delete(batch.batchId))
+    public delete(batch: CompleteBatch): Observable<CompleteBatch> {
+      this.http.delete(environment.batch.delete(batch.batchId))
       .subscribe((results: any) => {
         this.deletedSubject.next(results);
         });
@@ -196,7 +226,7 @@ export class BatchService {
      * @return any
      */
     // We should find a way to make this have an explicit non-any type
-    protected prepareForApi(batch: Batch): any {
+    protected prepareForApi(batch: CompleteBatch): any {
       let output: any = {};
       Object.assign(output, batch);
 

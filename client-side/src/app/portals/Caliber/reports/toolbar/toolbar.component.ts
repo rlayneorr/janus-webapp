@@ -59,7 +59,7 @@ export class ToolbarComponent implements OnInit {
     this.batchSubscription = this.batchService.fetchAll().subscribe(response => {
 
       if (response.length > 0) {
-        this.batchList = response;
+        //this.batchList = response;
 
         // Generate dropdown information for years
         this.createYearDropdown();

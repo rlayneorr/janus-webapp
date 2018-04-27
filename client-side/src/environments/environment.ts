@@ -2,7 +2,7 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'http://localhost:8765';
+const context = 'https://gateway-service-brash-lynx.cfapps.io';
 const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
@@ -27,6 +27,17 @@ export const environment = {
     save: () => `${this.context}/batches`,
     update: () => `${this.context}/batches`,
     delete: (batchId) => `${this.context}/batches/${batchId}`
+  },
+
+  skillType: {
+    find: (id) => `${context}/gmabit-skills-service/skillType/${id}`,
+    findByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
+    findAll: () => `${context}/gambit-skills-service/skillType`,
+    save: () => `${context}/gambit-skills-service/skillType`,
+    update: (id) => `${context}/gambit-skills-service/skillType/${id}`,
+    updateByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
+    delete: (id) => `${context}/gambit-skills-service/skillType/${id}`,
+    deleteByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`
   },
 
   category: {

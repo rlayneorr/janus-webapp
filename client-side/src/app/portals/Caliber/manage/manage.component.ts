@@ -13,7 +13,7 @@ import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 // services
 
-import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
+import { BatchService } from '../../../hydra-client/aggregator/services/completebatch.service';
 import { LocationService } from '../services/location.service';
 import { TrainingTypeService } from '../services/training-type.service';
 import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
@@ -25,12 +25,11 @@ import { TrainerService } from '../../../hydra-client/services/trainer/trainer.s
 
 // entities
 import { Location } from '../entities/Location';
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
 import { Address } from '../entities/Address';
 import { Trainee } from '../entities/Trainee';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
 import { Trainer } from '../../../hydra-client/entities/Trainer';
-
+import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
 
 // components
 import { BatchModalComponent } from './batch/batch-modal.component';
@@ -52,15 +51,15 @@ import { DeleteBatchModalComponent } from './delete-batch-modal/delete-batch-mod
 })
 export class ManageComponent implements OnInit {
   closeResult: string;
-  batches: HydraBatch[] = [];
+  batches: CompleteBatch[] = [];
   trainees: HydraTrainee[] = [];
   batchModal: NgbModalRef;
   batchModalNested: NgbModalRef;
   batchByYear: Date[] = [];
   currentYear: number;
-  currentBatch: HydraBatch = new HydraBatch;
-  createNewBatch: HydraBatch = new HydraBatch;
-  batchToUpdate: HydraBatch = new HydraBatch;
+  currentBatch: CompleteBatch = new CompleteBatch;
+  createNewBatch: CompleteBatch = new CompleteBatch;
+  batchToUpdate: CompleteBatch = new CompleteBatch;
   traineeProfileUrl: string;
   test: string;
   trainers: Trainer[] = [];
@@ -104,7 +103,7 @@ export class ManageComponent implements OnInit {
 
     private traineeStatusService: TraineeStatusService,
     private hydraTraineeService: HydraTraineeService,
-    private hydraBatchService: HydraBatchService
+    private batchService: BatchService
 
   ) {
     this.batches = [];
@@ -117,9 +116,8 @@ export class ManageComponent implements OnInit {
       });
     });
 
-    this.batchListSub = this.hydraBatchService.fetchAll()
+    this.batchListSub = this.batchService.fetchAll()
       .subscribe((batches) => this.setBatches(batches));
-
   }
 
 
@@ -130,11 +128,11 @@ export class ManageComponent implements OnInit {
   *
   * @param batch
   */
-  public saveBatch(batch: HydraBatch): void {
+  public saveBatch(batch: CompleteBatch): void {
     if (batch.batchId === 0) {
-      this.hydraBatchService.create(batch);
+      this.batchService.create(batch);
     } else {
-      this.hydraBatchService.update(batch);
+      this.batchService.update(batch);
     }
   }
 
@@ -145,7 +143,7 @@ export class ManageComponent implements OnInit {
    *
    * @param batches
    */
-  public getBatchListYears(batches: HydraBatch[]): number[] {
+  public getBatchListYears(batches: CompleteBatch[]): number[] {
     const yearsSet: Set<number> = new Set();
     const years: number[] = [];
 
@@ -171,9 +169,9 @@ export class ManageComponent implements OnInit {
    *
    * @param batch
    */
-  public openBatchModal(batch: HydraBatch): void {
+  public openBatchModal(batch: CompleteBatch): void {
     if (batch === null) {
-      batch = new HydraBatch();
+      batch = new CompleteBatch();
       batch.batchId = 0;
     }
     this.batchModal = this.modalService.open(BatchModalComponent, { size: 'lg' });
@@ -185,9 +183,9 @@ export class ManageComponent implements OnInit {
    *
    * @param batch
    */
-  public openUpdateBatchModal(batch: HydraBatch): void {
+  public openUpdateBatchModal(batch: CompleteBatch): void {
     if (batch === null) {
-      batch = new HydraBatch();
+      batch = new CompleteBatch();
       batch.batchId = 0;
     }
 
@@ -222,7 +220,7 @@ export class ManageComponent implements OnInit {
    *
    * @param batches
    */
-  private setBatches(batches: HydraBatch[]): void {
+  private setBatches(batches: CompleteBatch[]): void {
     const years = this.getBatchListYears(batches);
 
     this.batches = batches;
@@ -241,7 +239,7 @@ export class ManageComponent implements OnInit {
    */
   private setBatchTrainees(trainees: HydraTrainee[]): void {
     this.trainees = trainees;
-    this.currentBatch.trainees = trainees;
+    //this.currentBatch.traineeIds = trainees;
   }
 
   /**
@@ -288,9 +286,9 @@ export class ManageComponent implements OnInit {
   /* Creates a new trainee and assigns the current batch to its batch field
   Training status is assigned since there is no training status service yet in angular */
   createNewTraineeFunction() {
-    this.createNewTrainee.batch = this.currentBatch;
-    console.log(this.createNewTrainee);
-    this.hydraTraineeService.create(this.createNewTrainee);
+    // this.createNewTrainee.batch = this.currentBatch;
+    // console.log(this.createNewTrainee);
+    // this.hydraTraineeService.create(this.createNewTrainee);
   }
 
   /** Updates the Trainee
@@ -302,10 +300,10 @@ export class ManageComponent implements OnInit {
   so that there is no circular reference
   'Employed' is assigned since there is no training status service yet */
   updateTraineeFunction() {
-    const emptyBatch = Object.assign({}, this.currentBatch);
-    emptyBatch.trainees = [];
-    this.createNewTrainee.batch = emptyBatch;
-    this.hydraTraineeService.update(this.createNewTrainee);
+    // const emptyBatch = Object.assign({}, this.currentBatch);
+    // emptyBatch.trainees = [];
+    // this.createNewTrainee.batch = emptyBatch;
+    // this.hydraTraineeService.update(this.createNewTrainee);
   }
 
   /**
@@ -352,10 +350,10 @@ export class ManageComponent implements OnInit {
    */
   deleteAllTraineesFunction(batch) {
 
-    for (let i = 0; i < this.currentBatch.trainees.length; i++) {
-      this.currentBatch.trainees[i].batch = null;
-      this.hydraTraineeService.delete(this.currentBatch.trainees[i].traineeId);
-    }
+    // for (let i = 0; i < this.currentBatch.trainees.length; i++) {
+    //   this.currentBatch.trainees[i].batch = null;
+    //   this.hydraTraineeService.delete(this.currentBatch.trainees[i].traineeId);
+    // }
   }
 
   /**
@@ -422,8 +420,8 @@ export class ManageComponent implements OnInit {
      *
      * @param batch: Batch
      */
-    onSavedBatch(batch: HydraBatch): void {
-      this.hydraBatchService.fetchAll();
+    onSavedBatch(batch: CompleteBatch): void {
+      this.batchService.fetchAll();
     }
 
     /**
@@ -431,8 +429,8 @@ export class ManageComponent implements OnInit {
      *
      * @param batch: Batch
      */
-    onDeletedBatch(batch: HydraBatch): void {
-      this.hydraBatchService.fetchAll();
+    onDeletedBatch(batch: CompleteBatch): void {
+      this.batchService.fetchAll();
     }
 
     /**
@@ -445,7 +443,7 @@ export class ManageComponent implements OnInit {
       modalRef.componentInstance.batch = batch;
       modalRef.result.then(result => {
         if (result === 'Delete') {
-          this.hydraBatchService.delete(batch);
+          this.batchService.delete(batch);
           this.modalService.open(CannotDeleteModalComponent);
         }
       }, refused => { });
@@ -459,7 +457,7 @@ export class ManageComponent implements OnInit {
      */
     onSavedTrainee(trainee: Trainee): void {
       this.batchModalNested.close('Saved Successfully');
-      this.hydraBatchService.fetchAll();
+      this.batchService.fetchAll();
       this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
       this.batchModal.close('Saved Successfully');
     }
@@ -471,7 +469,7 @@ export class ManageComponent implements OnInit {
      * @param trainee
      */
     onDeletedTrainee(trainee: Trainee): void {
-      this.hydraBatchService.fetchAll();
+      this.batchService.fetchAll();
       this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
       this.batchModal.close();
     }
@@ -484,7 +482,7 @@ export class ManageComponent implements OnInit {
      */
     onUpdatedTrainee(trainee: Trainee): void {
       this.batchModalNested.close('Saved Successfully');
-      this.hydraBatchService.fetchAll();
+      this.batchService.fetchAll();
       this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
     }
 

@@ -119,13 +119,13 @@ export class HydraBatchService {
    * @return any
    */
   protected prepareForApi(batch: GambitBatch) {
-    let output: GambitBatch = {};
-    Object.assign(output, batch);
+    // let output: GambitBatch = {};
+    // Object.assign(output, batch);
 
-    output.startDate = stringifyDate(batch.startDate);
-    output.endDate = stringifyDate(batch.endDate);
+    // output.startDate = stringifyDate(batch.startDate);
+    // output.endDate = stringifyDate(batch.endDate);
 
-    return output;
+    // return output;
   }
 
 }
