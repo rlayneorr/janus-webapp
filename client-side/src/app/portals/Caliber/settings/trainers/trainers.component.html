@@ -104,7 +104,7 @@ add or edit a trainer-->
               <label class="col-sm-2 control-label text-nowrap" for="role">Role</label>
               <select class="form-control" formControlName="role" (ngModelChange)="roleChange($event)" name="role">
                 <option value="" disabled>Select role</option>
-                <option [value]="role" *ngFor="let role of roles">{{role}}</option>
+                <option [value]="role.role" *ngFor="let role of roles">{{role.role}}</option>
               </select>
             </div>
           </div>
@@ -113,7 +113,7 @@ add or edit a trainer-->
     </div>
     <div class="modal-footer">
 
-      <button type="submit" data-dismiss="modal" class="btn btn-update" [disabled]="!rForm.valid" (click)="updateTrainer(editTrainer.value); c('Close click')">Update</button>
+      <button type="submit" data-dismiss="modal" class="btn btn-update" [disabled]="!rForm.valid" (click)="updateTrainer(editTrainer); c('Close click')">Update</button>
 
       <button type="button" class="btn btn-default" (click)="c()">Close</button>
     </div>
