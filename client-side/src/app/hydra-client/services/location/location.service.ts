@@ -25,7 +25,6 @@ export class LocationService {
   }
   // Set new Location
   newLocation(location: Location) {
-    const url = '';
     return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location));
   }
   // Update the location.
@@ -33,7 +32,7 @@ export class LocationService {
     return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location));
   }
   // set location as inactive.
-  deleteLocaiton(location: Location) {
+  deleteLocation(location: Location) {
     return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
   }
 
