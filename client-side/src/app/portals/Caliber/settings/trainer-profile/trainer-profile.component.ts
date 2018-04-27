@@ -110,7 +110,7 @@ export class TrainerProfilesComponent implements OnInit {
   setCurrentBatch(batch) {
     this.currentBatch = batch;
     this.traineeService.findAllByBatchAndStatus(batch.batchId, 'Training').subscribe( res =>
-      this.currentBatch.traineeIds = res['traineeIds']
+      this.currentBatch.trainees = res['traineeIds']
     );
     console.log(batch);
   }

@@ -148,13 +148,39 @@ export class BatchService {
     *
     * @param batch: Batch
     */
-    public create(batch: CompleteBatch): Observable<CompleteBatch> {
-      this.http.post<any>(environment.batch.save(), JSON.stringify(this.prepareForApi(batch)))
-      .subscribe((results) => {
-        this.savedSubject.next(results);
-      });
-      return this.savedSubject.asObservable();
+   public create(completeBatch: CompleteBatch): Observable<GambitBatch> {
+    let gambitBatch: GambitBatch = new GambitBatch();
+    gambitBatch.batchId = completeBatch.batchId;
+    gambitBatch.addressId = completeBatch.resourceId;
+    gambitBatch.trainingName = completeBatch.trainingName;
+    gambitBatch.trainerId = completeBatch.trainer.userId;
+
+    //TODO Verify that the logic for creating cotrainers in a batch as initially null
+    //       is valid. See aggregator/entities/CompleteBatch constructor for more details
+    if (completeBatch.cotrainer != null ) {
+      gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
+    } else {
+      gambitBatch.cotrainerId = 0;
     }
+
+    gambitBatch.skillTypeId = completeBatch.skillType.skillTypeId;
+    gambitBatch.addressId = completeBatch.addressId;
+    gambitBatch.location = completeBatch.location;
+    gambitBatch.goodGradeThreshold = completeBatch.goodGradeThreshold;
+    gambitBatch.borderlineGradeThreshold = completeBatch.borderlineGradeThreshold;
+    gambitBatch.startDate = completeBatch.startDate;
+    gambitBatch.endDate = completeBatch.endDate;
+    gambitBatch.week = completeBatch.week;
+    gambitBatch.noteIds = completeBatch.noteIds;
+
+    // iterates over the HydraTrainee array in completeBatch to push ids to
+    //    the GambitBatch traineeId array
+    for (let trainee of completeBatch.trainees) {
+      gambitBatch.traineeIds.push(trainee.traineeId);
+    }
+
+    return this.hydraBatchService.create(gambitBatch);
+  }
 
     /**
      * transmits a Batch object to be updated and
@@ -200,21 +226,48 @@ export class BatchService {
     }
 
     /**
-     * transmits a batch object to be deleted and
-     * pushes the deleted object on the deleted
-     * subject
-     *
-     * spring-security: @PreAuthorize("hasAnyRole('VP')")
-     *
-     * @param batch: Batch
-     */
-    public delete(batch: CompleteBatch): Observable<CompleteBatch> {
-      this.http.delete(environment.batch.delete(batch.batchId))
-      .subscribe((results: any) => {
-        this.deletedSubject.next(results);
-        });
-      return this.deletedSubject.asObservable();
+    * transmits a batch object to be deleted and
+    * pushes the deleted object on the deleted
+    * subject
+    *
+    * spring-security: @PreAuthorize("hasAnyRole('VP')")
+    *
+    * @param batch: Batch
+    */
+   public delete(completeBatch: CompleteBatch): Observable<GambitBatch> {
+    let gambitBatch: GambitBatch = new GambitBatch();
+    gambitBatch.batchId = completeBatch.batchId;
+    gambitBatch.addressId = completeBatch.resourceId;
+    gambitBatch.trainingName = completeBatch.trainingName;
+    gambitBatch.trainerId = completeBatch.trainer.userId;
+
+    //TODO Verify that the logic for creating cotrainers in a batch as initially null
+    //       is valid. See aggregator/entities/CompleteBatch constructor for more details
+    if (completeBatch.cotrainer != null ) {
+      gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
+    } else {
+      gambitBatch.cotrainerId = 0;
     }
+
+    gambitBatch.skillTypeId = completeBatch.skillType.skillTypeId;
+    gambitBatch.addressId = completeBatch.addressId;
+    gambitBatch.location = completeBatch.location;
+    gambitBatch.goodGradeThreshold = completeBatch.goodGradeThreshold;
+    gambitBatch.borderlineGradeThreshold = completeBatch.borderlineGradeThreshold;
+    gambitBatch.startDate = completeBatch.startDate;
+    gambitBatch.endDate = completeBatch.endDate;
+    gambitBatch.week = completeBatch.week;
+    gambitBatch.noteIds = completeBatch.noteIds;
+
+    // iterates over the HydraTrainee array in completeBatch to push ids to
+    //    the GambitBatch traineeId array
+    for (let trainee of completeBatch.trainees) {
+      gambitBatch.traineeIds.push(trainee.traineeId);
+    }
+
+    return this.hydraBatchService.delete(gambitBatch);
+
+  }
 
     /**
      * produces a clone of the batch object that
