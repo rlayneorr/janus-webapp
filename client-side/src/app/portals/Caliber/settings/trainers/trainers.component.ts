@@ -36,6 +36,8 @@ export class TrainersComponent implements OnInit {
   ngOnInit() {
     this.trainerService.fetchAll().subscribe((resp) => {
       this.trainers = resp;
+      console.log(this.trainers);
+      
       if (resp) {
         this.filteredTrainers = resp.filter(s => {
             return s.role.role !== 'INACTIVE';
@@ -70,10 +72,15 @@ export class TrainersComponent implements OnInit {
    * adds a new trainer to the database
    * @param modal: modal from create trainer form
    */
-  addTrainer(modal: Trainer) {
-    this.newTrainer = modal;
-    console.log(modal);
-    console.log(modal.role.toString());
+  addTrainer(modal: NgForm) {
+    for (let index = 0; index < this.roles.length; index++) {
+      if(modal.value.role === this.roles[index].role) {
+        this.newTrainer = modal.value;
+        this.newTrainer.role = this.roles[index];
+        break;
+      }
+    }
+    console.log(this.newTrainer);
     this.trainerService.create(this.newTrainer).subscribe((resp) => {
       this.ngOnInit();
     });
