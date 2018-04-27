@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
 import { Trainer } from '../../../../hydra-client/entities/Trainer';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
@@ -179,18 +179,24 @@ export class TrainerProfilesComponent implements OnInit {
   *
   * @param modal: any
   */
-  updateTrainer(modal) {
+  updateTrainer(modal: NgForm) {
     // replacing the trainer's fields with the new ones
-    this.currEditTrainer.role = this.newRole;
-    this.currEditTrainer.title = this.newTitle;
-    this.currEditTrainer.firstName = modal.firstName;
-    this.currEditTrainer.lastName = modal.lastName;
-    this.currEditTrainer.email = modal.email;
+    const temp : Trainer = modal.value;
+    temp.userId = this.currEditTrainer.userId;
+    temp.role = this.roleMapping(modal.value.role);
+    console.log(temp);
     // call trainerService to update
-    this.trainerService.update(this.currEditTrainer).subscribe((resp) => {
-      const temp = this.currEditTrainer;
-      this.trainerService.fetchAll();
-    });
-  }
+    this.trainerService.update(temp).subscribe((resp) => {
+      this.currEditTrainer = temp;
+      this.ngOnInit();
+  });
 
+  }
+  roleMapping(role: string) {
+    for (let index = 0; index < this.roles.length; index++) {
+      if (role === this.roles[index].role) {
+        return this.roles[index];
+      }
+    }
+  }
 }
