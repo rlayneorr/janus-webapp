@@ -106,7 +106,6 @@ add or edit a trainer-->
                 <option value="" disabled>Select role</option>
                 <option [value]="role" *ngFor="let role of roles">{{role}}</option>
               </select>
-
             </div>
           </div>
         </div>
@@ -193,7 +192,7 @@ add or edit a trainer-->
                     </select> -->
                 <select class="form-control" formControlName="role" (ngModelChange)="newroleChange($event)" name="role" placeholder="Select Role">
                   <option value="" disabled>Select Role</option>
-                  <option [value]="role" *ngFor="let role of roles">{{role}}</option>
+                  <option [value]="role.role" *ngFor="let role of roles">{{role.role}}</option>
                 </select>
               </div>
             </div>
@@ -202,7 +201,7 @@ add or edit a trainer-->
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" data-dismiss="modal" [disabled]="!addForm.valid" (click)="addTrainer(addTrainerForm.value); c()" class="btn btn-add">Save</button>
+      <button type="button" data-dismiss="modal" [disabled]="!addForm.valid" (click)="addTrainer(addTrainerForm); c()" class="btn btn-add">Save</button>
       <button type="button" class="btn btn-default" (click)="c(); this.initFormControl();">Close</button>
     </div>
 

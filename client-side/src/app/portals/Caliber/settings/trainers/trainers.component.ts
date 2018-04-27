@@ -70,10 +70,9 @@ export class TrainersComponent implements OnInit {
    * adds a new trainer to the database
    * @param modal: modal from create trainer form
    */
-  addTrainer(modal: Trainer) {
-    this.newTrainer = modal;
-    console.log(modal);
-    console.log(modal.firstName);
+  addTrainer(modal: NgForm) {
+    this.newTrainer = modal.value;
+    this.newTrainer.role = this.roleMapping(modal.value.role);
     this.trainerService.create(this.newTrainer).subscribe((resp) => {
       this.ngOnInit();
     });
@@ -137,6 +136,18 @@ export class TrainersComponent implements OnInit {
    */
   buttonChange(status: String) {
     this.activeStatus = status;
+  }
+
+  /**
+   * This helpper function mapps a role string into the correct UserRole object
+   * @param role
+   */
+  roleMapping(role: string) {
+    for (let index = 0; index < this.roles.length; index++) {
+      if (role === this.roles[index].role) {
+        return this.roles[index];
+      }
+    }
   }
 
   /**
