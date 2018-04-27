@@ -98,7 +98,7 @@ export class AssessComponent implements OnInit {
       this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     });
 
-    this.skillService.listSubject.subscribe(skills => {
+    this.skillService.findAllActive().subscribe(skills => {
       this.skills = skills;
       this.newAssessment.skill = this.findSkill('Java');
     });
