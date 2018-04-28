@@ -84,7 +84,10 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    this.skillService.findAllActive();
+    this.skillService.findAllActive().subscribe(skills => {
+      this.skills = skills;
+      this.newAssessment.skill = this.findSkill('Java');
+    });
 
     this.noteService.getList().subscribe(notes => {
       this.notes = notes;
@@ -98,16 +101,10 @@ export class AssessComponent implements OnInit {
       this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     });
 
-    this.skillService.listSubject.subscribe(skills => {
-      this.skills = skills;
-      this.newAssessment.skill = this.findSkill('Java');
-    });
-
     this.batchService.fetchAll().subscribe(batch => {
       this.batches = batch;
 
       if (this.batches.length !== 0) {
-
         // Set the year dropdown.
         this.batches.forEach(b => {
           this.years.add(this.datePipe.transform(b.startDate, 'yyyy'));
@@ -125,7 +122,6 @@ export class AssessComponent implements OnInit {
 
     // Every time an assessment is created, a set of default grades is created.
     this.assessmentService.getSaved().subscribe(assessment => {
-
       this.selectedBatch.trainees.forEach(trainee => {
         const grade = new Grade();
         grade.trainee = trainee;
