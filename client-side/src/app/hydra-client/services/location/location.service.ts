@@ -11,7 +11,6 @@ import { Room } from '../../entities/location-entities/Room';
 export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
-  urlLiteral: string;
 
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
@@ -72,4 +71,6 @@ export class LocationService {
   deleteRoom(room: Room) {
     return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId));
   }
+
+
 }
