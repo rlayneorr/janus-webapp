@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../../entities/location-entities/Location';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UrlService } from '../urls/url.service';
@@ -34,12 +34,18 @@ export class LocationService {
       }
     );
   }
-  // set new Location //
-  newLocation(location: Location) {
-    return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location));
+  // Set new Location
+  newLocation(location: any) {
+    let header = new HttpHeaders();
+    header = header.set('Content-Type', 'application/json; charset=utf-8;' );
+    return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location), {headers: header}).subscribe(
+      (payload) => {
+        console.log(payload);
+      }
+    );
   }
-  // update the location //
-  updateLocation(location: Location) {
+  // Update the location.
+  updateLocation(location: any) {
     return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location));
   }
   // set location as inactive //
