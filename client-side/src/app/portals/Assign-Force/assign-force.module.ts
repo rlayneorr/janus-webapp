@@ -13,9 +13,6 @@ import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LocationService } from '../../hydra-client/services/location/location.service';
 
-// Location service. 1803 usf
-import { LocationService } from '../../hydra-client/services/location/location.service';
-
 
 
 @NgModule({
