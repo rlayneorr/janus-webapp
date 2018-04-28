@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ChuckNorrisService } from '../../../services/chuck-norris.service';
+import { LocationService } from '../../../hydra-client/services/location/location.service';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   private jokeSubscription: Subscription;
   joke;
 
-  constructor(private chuckNorrisService: ChuckNorrisService) { }
+  constructor(private chuckNorrisService: ChuckNorrisService, private locationService: LocationService) { }
 
   ngOnInit() {
     this.jokeSubscription = this.chuckNorrisService.joke$.subscribe( (resp) => {
       this.joke = resp;
     });
+    // this.locationService.getAllLocations(); This one currently works.
+    this.locationService.getLocation(1);
   }
 
   newJoke() {

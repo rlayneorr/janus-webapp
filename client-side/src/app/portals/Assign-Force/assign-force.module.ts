@@ -12,6 +12,9 @@ import { NavModule } from '../../nav/nav.module';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
 
+// Location service. 1803 usf
+import { LocationService } from '../../hydra-client/services/location/location.service';
+
 
 
 @NgModule({
@@ -27,6 +30,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     HomeComponent,
     CalendarComponent,
   ],
-  providers: []
+  providers: [
+    LocationService
+  ]
 })
 export class AssignForceModule { }

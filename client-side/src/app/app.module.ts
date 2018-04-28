@@ -31,6 +31,7 @@ import { HydraInterceptor } from './hydra-client/interceptors/hydra.interceptor'
 
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { ToastrOptions } from './hydra-client/ui/error-alert/toastr-options';
+import { LocationService } from './hydra-client/services/location/location.service';
 
 
 // loading routes from child modules this way will lazy load them
@@ -76,6 +77,7 @@ const routes: Routes = [
     CookieService,
     HydraBatchUtilService,
     ErrorAlertComponent,
+    LocationService,
     {provide: ToastOptions, useClass: ToastrOptions}
   ],
   bootstrap: [AppComponent]
