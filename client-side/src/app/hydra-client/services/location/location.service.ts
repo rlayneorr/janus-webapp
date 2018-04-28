@@ -17,7 +17,12 @@ export class LocationService {
 
   // get all Locations //
   getAllLocations() {
-    return this.httpClient.get<Location>(this.urls.location.getAllLocations());
+    return this.httpClient.get<Location>(this.urls.location.getAllLocations()).subscribe(
+      (payload) => {
+        this.location.next(payload);
+        console.log(payload);
+      }
+    );
   }
   // get Location by Id //
   getLocation(location: Location) {
