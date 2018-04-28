@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UrlService } from '../urls/url.service';
 import { Building } from '../../entities/location-entities/Building';
 import { Room } from '../../entities/location-entities/Room';
+import { Unavailability } from '../../entities/location-entities/Unavailability';
 
 
 @Injectable()
@@ -18,11 +19,21 @@ export class LocationService {
 
   // Get all Locations.
   getAllLocations() {
-    return this.httpClient.get<Location>(this.urls.location.getAllLocations());
+    return this.httpClient.get<Location>  (this.urls.location.getAllLocations()).subscribe(
+      (payload) => {
+        this.location.next(payload);
+        console.log(payload);
+      }
+    );
   }
   // Get Location by Id
-  getLocation(location: Location) {
-    return this.httpClient.get<Location>(this.urls.location.getLocationById(location.locationId));
+  getLocation(location: any) {
+    return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
+      (payload) => {
+        this.location.next(payload);
+        console.log(payload);
+      }
+    );
   }
   // Set new Location
   newLocation(location: Location) {
@@ -67,5 +78,10 @@ export class LocationService {
   }
   deleteRoom(room: Room) {
     return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId));
+  }
+
+  // Get all unavailabilities.
+  getUnavailabilities() {
+    return this.httpClient.get<Unavailability>(this.urls.unavailability.getAllUnavailabilities());
   }
 }
