@@ -152,6 +152,7 @@ export class UrlService {
   /**
    * Endpoints for locations:
    * This section is being added for use in the location service
+   * @author Tanhim Ahmed
    */
   location = {
     getLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
@@ -164,6 +165,7 @@ export class UrlService {
   /**
    * Endpoints for buildings:
    * This section is being added for use in the location service
+   * @author Tanhim Ahmed
    */
   building = {
     getBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
@@ -176,6 +178,7 @@ export class UrlService {
   /**
    * Endpoints for rooms:
    * This section is being added for use in the location service
+   * @author Tanhim Ahmed
    */
   room = {
     getRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
@@ -188,6 +191,7 @@ export class UrlService {
   /**
    * Endpoints for unavailabilities:
    * This section is being added for use in the location service
+   * @author Tanhim Ahmed
    */
   unavailability = {
     getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,

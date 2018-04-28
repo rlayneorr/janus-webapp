@@ -15,39 +15,43 @@ export class LocationService {
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
-  // Get all Locations.
+  // get all Locations //
   getAllLocations() {
     return this.httpClient.get<Location>(this.urls.location.getAllLocations());
   }
-  // Get Location by Id
+  // get Location by Id //
   getLocation(location: Location) {
     return this.httpClient.get<Location>(this.urls.location.getLocationById(location.locationId));
   }
-  // Set new Location
+  // set new Location //
   newLocation(location: Location) {
     return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location));
   }
-  // Update the location.
+  // update the location //
   updateLocation(location: Location) {
     return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location));
   }
-  // set location as inactive.
+  // set location as inactive //
   deleteLocation(location: Location) {
     return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
   }
-
+  // get all Buildings //
   getAllBuildings() {
     return this.httpClient.get<Building>(this.urls.building.getAllBuildings());
   }
+  // get Building by Id //
   getOneBuilding(building: Building) {
     return this.httpClient.get<Building>(this.urls.building.getBuildingById(building.buildingId));
   }
+  // set new Building //
   newBuilding(building: Building) {
     return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building));
   }
+  // update Building //
   updateBuilding(building: Building) {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId), JSON.stringify(building));
   }
+  // set Building as inactive //
   deleteBuilding(building: Building) {
     return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
   }
