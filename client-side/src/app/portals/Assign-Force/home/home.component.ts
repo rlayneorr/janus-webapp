@@ -19,13 +19,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.jokeSubscription = this.chuckNorrisService.joke$.subscribe( (resp) => {
       this.joke = resp;
     });
-    // this.locationService.getAllLocations(); This one currently works. get all locations
-    // this.locationService.getLocation(1); this one currently works. get a specific location.
+
+    this.locationService.getLocation(1); // this one currently works. get a specific location.
 
     // tslint:disable-next-line:max-line-length
-    // this.locationService.newLocation(new Location(null, 'eatmyshorts', 'Los Angeles', 'CA', 3252, 'usdfa', true)); this also works. create new location.
-
-
+    this.locationService.newLocation(new Location(null, 'thisistheplace', 'Pittsburgh', 'PA', 15213, 'usdfa', true)); // this also works. create new location.
+    this.locationService.getAllLocations(); // This one currently works. get all locations
   }
 
   newJoke() {

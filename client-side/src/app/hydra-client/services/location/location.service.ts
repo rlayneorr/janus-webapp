@@ -27,14 +27,14 @@ export class LocationService {
 
   // get all Locations //
   getAllLocations() {
-    return this.httpClient.get<Location>(this.urls.location.getAllLocations()).subscribe(
+    return this.httpClient.get<Location[]>(this.urls.location.getAllLocations()).subscribe(
       (payload) => {
         this.location.next(payload);
         console.log(payload);
       }
     );
   }
-  // Get Location by Id
+  // get Location by Id //
   getLocation(location: any) {
     return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
       (payload) => {
@@ -43,7 +43,7 @@ export class LocationService {
       }
     );
   }
-  // Set new Location
+  // set new Location //
   newLocation(location: any) {
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/json; charset=utf-8;' );
@@ -53,38 +53,38 @@ export class LocationService {
       }
     );
   }
-  // Update the location.
+  // update the location //
   updateLocation(location: any) {
     return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location));
   }
   // set location as inactive //
-  deleteLocation(location: Location) {
+  deleteLocation(location: any) {
     return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
   }
 
-
   // get all Buildings //
   getAllBuildings() {
-    return this.httpClient.get<Building>(this.urls.building.getAllBuildings());
+    return this.httpClient.get<Building[]>(this.urls.building.getAllBuildings());
   }
   // get Building by Id //
-  getOneBuilding(building: Building) {
+  getOneBuilding(building: any) {
     return this.httpClient.get<Building>(this.urls.building.getBuildingById(building.buildingId));
   }
   // set new Building //
-  newBuilding(building: Building) {
+  newBuilding(building: any) {
     return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building));
   }
   // update Building //
-  updateBuilding(building: Building) {
+  updateBuilding(building: any) {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId), JSON.stringify(building));
   }
   // set Building as inactive //
-  deleteBuilding(building: Building) {
+  deleteBuilding(building: any) {
     return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
   }
 
 
+  // get all Rooms //
   getAllRooms() {
     return this.httpClient.get<Array<Room>>(this.urls.room.getAllRooms()).subscribe(
       (payload) => {
@@ -92,6 +92,7 @@ export class LocationService {
       }
     );
   }
+  // get Room by Id //
   getOneRoom(room: Room) {
     return this.httpClient.get<Room>(this.urls.room.getRoomById(room.roomId)).subscribe(
       (payload) => {
@@ -99,6 +100,7 @@ export class LocationService {
       }
     );
   }
+  // set new Room //
   newRoom(room: Room) {
     return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room), {headers: this.header}).subscribe(
       (payload) => {
@@ -106,6 +108,7 @@ export class LocationService {
       }
     );
   }
+  // update Room //
   updateRoom(room: Room) {
     return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room), {headers: this.header}).subscribe(
       (payload) => {
@@ -113,6 +116,7 @@ export class LocationService {
       }
     );
   }
+  // set Room as inactive //
   deleteRoom(room: Room) {
     return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
       (payload) => {
@@ -121,8 +125,13 @@ export class LocationService {
     );
   }
 
-  // Get all unavailabilities.
-  getUnavailabilities() {
-    return this.httpClient.get<Unavailability>(this.urls.unavailability.getAllUnavailabilities());
+
+  // get all Unavailabilities //
+  getAllUnavailabilities() {
+    return this.httpClient.get<Unavailability[]>(this.urls.unavailability.getAllUnavailabilities());
+  }
+  // get Unavailability by Id //
+  getOneUnavailability(unavailability: any) {
+    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability));
   }
 }

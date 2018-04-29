@@ -17,8 +17,8 @@ export class UrlService {
   };
 
   /**
-    * Endpoints for batches
-    */
+   * Endpoints for batches
+   */
 
   batches = {
     fetchAllByTrainer: () => `${this.context}/batches/trainers`,
@@ -199,7 +199,7 @@ export class UrlService {
   unavailability = {
     // getUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`,
     getAllUnavailabilities: () => `${this.context}/location/unavailability`,
-    postUnavailabilities: () => `${this.context}/location/unavailability`,
+    postUnavailability: () => `${this.context}/location/unavailability`,
     // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`,
     // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`
   };
