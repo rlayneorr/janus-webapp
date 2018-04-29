@@ -40,6 +40,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     // this.locationService.getOneRoom(1);
     // this.locationService.getRoomsByBuildingId(1);
 
+
+
   }
 
   newJoke() {
