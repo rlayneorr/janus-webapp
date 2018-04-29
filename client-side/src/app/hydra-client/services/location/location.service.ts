@@ -13,6 +13,15 @@ export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
 
+  private room = new BehaviorSubject<any>([]);
+  publicRoom = this.room.asObservable();
+
+  private rooms = new BehaviorSubject<any>([]);
+  publicRooms = this.room.asObservable();
+
+  header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
+
+
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
@@ -73,8 +82,13 @@ export class LocationService {
     return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
   }
 
+
   getAllRooms() {
-    return this.httpClient.get<Room>(this.urls.room.getAllRooms());
+    return this.httpClient.get<Array<Room>>(this.urls.room.getAllRooms(), {headers: this.header}).subscribe(
+      (payload) => {
+        this.rooms.next(payload);
+      }
+    );
   }
   getOneRoom(room: Room) {
     return this.httpClient.get<Room>(this.urls.room.getRoomById(room.roomId));
