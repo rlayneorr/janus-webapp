@@ -112,7 +112,7 @@ export class LocationService {
     );
   }
   deleteRoom(room: Room) {
-    return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId), {headers: this.header}).subscribe(
+    return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
       (payload) => {
         this.room.next(payload);
       }
