@@ -131,8 +131,8 @@ export class LocationService {
     );
   }
   // get Room by Id //
-  getOneRoom(room: Room) {
-    return this.httpClient.get<Room>(this.urls.room.getRoomById(room.roomId)).subscribe(
+  getOneRoom(room: any) {
+    return this.httpClient.get<Room>(this.urls.room.getRoomById(room)).subscribe(
       (payload) => {
         this.room.next(payload);
         console.log(payload);
@@ -140,8 +140,23 @@ export class LocationService {
       }
     );
   }
+  getRoomsByLocationId(locationId: any) {
+    return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByLocationId(locationId))
+    .subscribe((payload) => {
+      this.rooms.next(payload);
+      console.log(payload);
+    });
+
+  }
+  getRoomsByBuildingId(buildingId: any) {
+      return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId))
+      .subscribe((payload) => {
+        this.rooms.next(payload);
+        console.log(payload);
+      });
+  }
   // set new Room //
-  newRoom(room: Room) {
+  newRoom(room: any) {
     return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room), {headers: this.header}).subscribe(
       (payload) => {
         this.room.next(payload);
