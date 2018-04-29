@@ -84,23 +84,39 @@ export class LocationService {
 
 
   getAllRooms() {
-    return this.httpClient.get<Array<Room>>(this.urls.room.getAllRooms(), {headers: this.header}).subscribe(
+    return this.httpClient.get<Array<Room>>(this.urls.room.getAllRooms()).subscribe(
       (payload) => {
         this.rooms.next(payload);
       }
     );
   }
   getOneRoom(room: Room) {
-    return this.httpClient.get<Room>(this.urls.room.getRoomById(room.roomId));
+    return this.httpClient.get<Room>(this.urls.room.getRoomById(room.roomId)).subscribe(
+      (payload) => {
+        this.room.next(payload);
+      }
+    );
   }
   newRoom(room: Room) {
-    return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room));
+    return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room), {headers: this.header}).subscribe(
+      (payload) => {
+        this.room.next(payload);
+      }
+    );
   }
   updateRoom(room: Room) {
-    return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room));
+    return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room), {headers: this.header}).subscribe(
+      (payload) => {
+        this.room.next(payload);
+      }
+    );
   }
   deleteRoom(room: Room) {
-    return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId));
+    return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId), {headers: this.header}).subscribe(
+      (payload) => {
+        this.room.next(payload);
+      }
+    );
   }
 
   // Get all unavailabilities.
