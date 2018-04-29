@@ -13,6 +13,9 @@ export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
 
+  private locations = new BehaviorSubject<any>([]);
+  publicLocations = this.locations.asObservable();
+
   private building = new BehaviorSubject<any>([]);
   publicBuilding = this.building.asObservable();
 
@@ -33,9 +36,9 @@ export class LocationService {
 
   // get all Locations //
   getAllLocations() {
-    return this.httpClient.get<Location[]>(this.urls.location.getAllLocations()).subscribe(
+    return this.httpClient.get<Array<Location>>(this.urls.location.getAllLocations()).subscribe(
       (payload) => {
-        this.location.next(payload);
+        this.locations.next(payload);
         console.log(payload);
       }
     );
@@ -61,11 +64,22 @@ export class LocationService {
   }
   // update the location //
   updateLocation(location: any) {
-    return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location));
+    return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId),
+    JSON.stringify(location)).subscribe(
+      (payload) => {
+        this.location.next(payload);
+        console.log(payload);
+      }
+    );
   }
   // set location as inactive //
   deleteLocation(location: any) {
-    return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
+    return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId),
+    JSON.stringify(location)).subscribe(
+      (payload) => {
+        this.location.next(payload);
+      }
+    );
   }
 
   // Get all Buildings. This one is independent from Locations.
@@ -92,9 +106,7 @@ export class LocationService {
 
   // Basic create building request.
   newBuilding(building: Building) {
-    let header = new HttpHeaders();
-    header = header.set('Content-Type', 'application/json; charset=utf-8;' );
-    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building), {headers: header})
+    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building), {headers: this.header})
     .subscribe((payload) => {
     console.log(payload);
     this.building.next(payload);
@@ -102,10 +114,8 @@ export class LocationService {
   }
   // update Building //
   updateBuilding(building: Building) {
-    let header = new HttpHeaders();
-    header = header.set('Content-Type', 'application/json; charset=utf-8;' );
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
-    JSON.stringify(building), {headers: header}).subscribe(
+    JSON.stringify(building), {headers: this.header}).subscribe(
       (payload) => {
         this.buildings.next(payload);
       }
