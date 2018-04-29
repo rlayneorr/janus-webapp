@@ -17,8 +17,8 @@ export class UrlService {
   };
 
   /**
-    * Endpoints for batches
-    */
+   * Endpoints for batches
+   */
 
   batches = {
     fetchAllByTrainer: () => `${this.context}/batches/trainers`,
@@ -152,6 +152,7 @@ export class UrlService {
   /**
    * Endpoints for locations:
    * This section is being added for use in the location service
+   * @author Tanhim Ahmed
    */
   location = {
     getLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
@@ -164,6 +165,7 @@ export class UrlService {
   /**
    * Endpoints for buildings:
    * This section is being added for use in the location service
+   * @author Tanhim Ahmed
    */
   building = {
     getBuildingsByLocationId: (locationId: number) => `${this.context}/location/${locationId}/building/`,
@@ -177,25 +179,29 @@ export class UrlService {
   /**
    * Endpoints for rooms:
    * This section is being added for use in the location service
+   * @author Tanhim Ahmed
    */
   room = {
-    getRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
-    getAllRooms: () => `${this.context}/room`,
-    postRoom: () => `${this.context}/room`,
-    putRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
-    deleteRoomById: (roomId: number) => `${this.context}/room/${roomId}`
+    getRoomById: (roomId: number) => `${this.context}/location/room/${roomId}`,
+    getAllRooms: () => `${this.context}/location/room`,
+    getRoomsByLocationId: (locationId: number) => `${this.context}/location/${locationId}/room`,
+    getRoomsByBuildingId: (buildingId: number) => `${this.context}/location/building/${buildingId}/room`,
+    postRoom: () => `${this.context}/location/room`,
+    putRoomById: (roomId: number) => `${this.context}/location/room/${roomId}`,
+    deleteRoomById: (roomId: number) => `${this.context}/location/room/${roomId}`
   };
 
   /**
    * Endpoints for unavailabilities:
    * This section is being added for use in the location service
+   * @author Tanhim Ahmed
    */
   unavailability = {
-    getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
-    getAllUnavailabilities: () => `${this.context}/unavailability`,
-    postUnavailabilities: () => `${this.context}/unavailability`,
-    putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
-    deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`
+    // getUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`,
+    getAllUnavailabilities: () => `${this.context}/location/unavailability`,
+    postUnavailability: () => `${this.context}/location/unavailability`,
+    // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`,
+    // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`
   };
 
   constructor() {
