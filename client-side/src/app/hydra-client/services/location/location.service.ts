@@ -13,11 +13,17 @@ export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
 
+  private building = new BehaviorSubject<any>([]);
+  publicBuilding = this.building.asObservable();
+
+  private buildings = new BehaviorSubject<any>([]);
+  publicBuildings = this.buildings.asObservable();
+
   private room = new BehaviorSubject<any>([]);
   publicRoom = this.room.asObservable();
 
   private rooms = new BehaviorSubject<any>([]);
-  publicRooms = this.room.asObservable();
+  publicRooms = this.rooms.asObservable();
 
   header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
 
@@ -62,25 +68,48 @@ export class LocationService {
     return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
   }
 
+
   // get all Buildings //
   getAllBuildings() {
-    return this.httpClient.get<Building[]>(this.urls.building.getAllBuildings());
+    return this.httpClient.get<Array<Building>>(this.urls.building.getAllBuildings()).subscribe(
+      (payload) => {
+        this.buildings.next(payload);
+      }
+    );
   }
   // get Building by Id //
-  getOneBuilding(building: any) {
-    return this.httpClient.get<Building>(this.urls.building.getBuildingById(building.buildingId));
+  getOneBuilding(building: Building) {
+    return this.httpClient.get<Building>(this.urls.building.getBuildingById(building.buildingId)).subscribe(
+      (payload) => {
+        this.building.next(payload);
+      }
+    );
   }
   // set new Building //
-  newBuilding(building: any) {
-    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building));
+  newBuilding(building: Building) {
+    return this.httpClient.post<Building>(this.urls.building.postBuilding(),
+    JSON.stringify(building), {headers: this.header}).subscribe(
+      (payload) => {
+        this.buildings.next(payload);
+      }
+    );
   }
   // update Building //
-  updateBuilding(building: any) {
-    return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId), JSON.stringify(building));
+  updateBuilding(building: Building) {
+    return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
+    JSON.stringify(building), {headers: this.header}).subscribe(
+      (payload) => {
+        this.buildings.next(payload);
+      }
+    );
   }
   // set Building as inactive //
-  deleteBuilding(building: any) {
-    return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
+  deleteBuilding(building: Building) {
+    return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
+      (payload) => {
+        this.building.next(payload);
+      }
+    );
   }
 
 
