@@ -12,6 +12,7 @@ import { Unavailability } from '../../entities/location-entities/Unavailability'
 export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
+  changeLocation: Location;
 
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
@@ -30,12 +31,13 @@ export class LocationService {
     return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
       (payload) => {
         this.location.next(payload);
+        this.changeLocation = payload;
         console.log(payload);
       }
     );
   }
   // set new Location //
-  newLocation(location: any) {
+  newLocation(location: Location) {
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/json; charset=utf-8;' );
     return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location), {headers: header}).subscribe(
@@ -45,8 +47,20 @@ export class LocationService {
     );
   }
   // update the location //
-  updateLocation(location: any) {
-    return this.httpClient.post<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location));
+  updateLocation(location: Location) {
+    let header = new HttpHeaders();
+    // getting the record from the database that should be updated //
+    this.getLocation(location.locationId);
+    console.log('From update service' + JSON.stringify(this.changeLocation));
+    // logging the retrieved record that should be updated //
+    header = header.set('Content-Type', 'application/json; charset=utf-8;');
+    return this.httpClient.put<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location),
+                                          {headers: header}).subscribe(
+                                            (payload) => {
+                                              console.log('this is payload');
+                                              console.log(payload);
+                                            }
+                                          ); // recompile
   }
   // set location as inactive //
   deleteLocation(location: any) {

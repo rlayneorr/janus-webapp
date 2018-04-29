@@ -19,12 +19,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.jokeSubscription = this.chuckNorrisService.joke$.subscribe( (resp) => {
       this.joke = resp;
     });
-
+    // test getLocationById
     this.locationService.getLocation(1); // this one currently works. get a specific location.
-
-    // tslint:disable-next-line:max-line-length
-    this.locationService.newLocation(new Location(null, 'thisistheplace', 'Pittsburgh', 'PA', 15213, 'usdfa', true)); // this also works. create new location.
+    // test getAllLocations
     this.locationService.getAllLocations(); // This one currently works. get all locations
+
+    // test save newLocation
+    // tslint:disable-next-line:max-line-length
+    const testLocation: Location = new Location(null, 'a new test', 'New York', 'NY', 11011, 'usdfa', true);
+    this.locationService.newLocation(testLocation); // this also works. create new location.
+
+    // testing updateLocation, changing state of testLocation here for checking update
+    testLocation.locationId = 8;
+    testLocation.zip = 99999;
+    console.log('Logging changes to testLocation:  ' + JSON.stringify(testLocation));
+    this.locationService.updateLocation(testLocation); // this one is still testing. updates an existing location
+
   }
 
   newJoke() {
