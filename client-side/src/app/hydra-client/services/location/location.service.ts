@@ -62,14 +62,14 @@ export class LocationService {
 
   // Get all Buildings. This one is independent from Locations.
   getAllBuildings() {
-    return this.httpClient.get<Building>(this.urls.building.getAllBuildings()).subscribe((payload) => {
+    return this.httpClient.get<Array<Building>>(this.urls.building.getAllBuildings()).subscribe((payload) => {
       console.log(payload);
       this.buildings.next(payload);
     });
   }
   // Get all buildings by Location ID. this one is dependent on a location's Id.
   getBuildingsByLocationId(locationId: any) {
-    return this.httpClient.get<Building>(this.urls.building.getBuildingsByLocationId(locationId)).subscribe((payload) => {
+    return this.httpClient.get<Array<Building>>(this.urls.building.getBuildingsByLocationId(locationId)).subscribe((payload) => {
       console.log(payload);
       this.buildings.next(payload);
     });
