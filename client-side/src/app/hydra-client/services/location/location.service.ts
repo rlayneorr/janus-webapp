@@ -61,6 +61,8 @@ export class LocationService {
   deleteLocation(location: Location) {
     return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
   }
+
+
   // get all Buildings //
   getAllBuildings() {
     return this.httpClient.get<Building>(this.urls.building.getAllBuildings());
