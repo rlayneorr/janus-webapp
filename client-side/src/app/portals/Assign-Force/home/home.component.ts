@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.locationService.newLocation(testLocation); // this also works. create new location.
 
     // testing updateLocation, changing state of testLocation here for checking update
-    testLocation.locationId = 8;
+    testLocation.locationId = 9;
     testLocation.zip = 99999;
     console.log('Logging changes to testLocation:  ' + JSON.stringify(testLocation));
     this.locationService.updateLocation(testLocation); // this one is still testing. updates an existing location

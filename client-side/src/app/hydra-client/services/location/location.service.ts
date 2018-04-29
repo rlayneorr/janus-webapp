@@ -60,7 +60,7 @@ export class LocationService {
                                               console.log('this is payload');
                                               console.log(payload);
                                             }
-                                          ); // recompile
+                                          );
   }
   // set location as inactive //
   deleteLocation(location: any) {
