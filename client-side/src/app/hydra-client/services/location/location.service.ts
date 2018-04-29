@@ -192,10 +192,17 @@ export class LocationService {
 
   // get all Unavailabilities //
   getAllUnavailabilities() {
-    return this.httpClient.get<Array<Unavailability>>(this.urls.unavailability.getAllUnavailabilities());
+    return this.httpClient.get<Array<Unavailability>>(this.urls.unavailability.getAllUnavailabilities())
+    .subscribe((payload) => {
+      this.unavailabilities.next(payload);
+      console.log(payload);
+    });
   }
   // get Unavailability by roomId //
   getOneUnavailability(unavailability: any) {
-    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability));
+    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability))
+    .subscribe((payload) => {
+      console.log(payload);
+    });
   }
 }
