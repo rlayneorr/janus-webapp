@@ -12,14 +12,19 @@ import { Unavailability } from '../../entities/location-entities/Unavailability'
 export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
-  urlLiteral: string;
+  changeLocation: Location;
+
+  private building = new BehaviorSubject<any>([]);
+  private buildings = new BehaviorSubject<any>([]);
+  public publicBuilding = this.building.asObservable();
+  public publicBuildings = this.buildings.asObservable();
 
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
   // Get all Locations.
   getAllLocations() {
-    return this.httpClient.get<Location>  (this.urls.location.getAllLocations()).subscribe(
+    return this.httpClient.get<Location[]>  (this.urls.location.getAllLocations()).subscribe(
       (payload) => {
         this.location.next(payload);
         console.log(payload);
@@ -31,6 +36,7 @@ export class LocationService {
     return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
       (payload) => {
         this.location.next(payload);
+        this.changeLocation = payload;
         console.log(payload);
       }
     );
@@ -55,13 +61,31 @@ export class LocationService {
   }
 
   getAllBuildings() {
-    return this.httpClient.get<Building>(this.urls.building.getAllBuildings());
+    return this.httpClient.get<Building>(this.urls.building.getAllBuildings()).subscribe((payload) => {
+      console.log(payload);
+      this.buildings.next(payload);
+    });
   }
-  getOneBuilding(building: Building) {
-    return this.httpClient.get<Building>(this.urls.building.getBuildingById(building.buildingId));
+  getBuildingsByLocationId(locationId: any) {
+    return this.httpClient.get<Building>(this.urls.building.getBuildingsByLocationId(locationId)).subscribe((payload) => {
+      console.log(payload);
+      this.buildings.next(payload);
+    });
+  }
+  getBuildingById(buildingId: any) {
+    return this.httpClient.get<Building>(this.urls.building.getBuildingById(buildingId)).subscribe((payload) => {
+      console.log(payload);
+      this.building.next(payload);
+    });
   }
   newBuilding(building: Building) {
-    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building));
+    let header = new HttpHeaders();
+    header = header.set('Content-Type', 'application/json; charset=utf-8;' );
+    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building), {headers: header})
+    .subscribe((payload) => {
+    console.log(payload);
+    this.building.next(payload);
+    });
   }
   updateBuilding(building: Building) {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId), JSON.stringify(building));

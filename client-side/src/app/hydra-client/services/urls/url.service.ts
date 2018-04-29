@@ -166,9 +166,10 @@ export class UrlService {
    * This section is being added for use in the location service
    */
   building = {
-    getBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
-    getAllBuildings: () => `${this.context}/building`,
-    postBuilding: () => `${this.context}/building`,
+    getBuildingsByLocationId: (locationId: number) => `${this.context}/location/${locationId}/building/`,
+    getBuildingById: (buildingId: number) => `${this.context}/location/building/${buildingId}`,
+    getAllBuildings: () => `${this.context}/location/building`,
+    postBuilding: () => `${this.context}/location/building`,
     putBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
     deleteBuildingById: (buildingId: number) => `${this.context}/buidling/${buildingId}`
   };

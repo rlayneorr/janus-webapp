@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ChuckNorrisService } from '../../../services/chuck-norris.service';
 import { LocationService } from '../../../hydra-client/services/location/location.service';
 import { Location } from '../../../hydra-client/entities/location-entities/Location';
+import { Building } from '../../../hydra-client/entities/location-entities/Building';
 
 @Component({
   selector: 'app-home',
@@ -11,20 +12,26 @@ import { Location } from '../../../hydra-client/entities/location-entities/Locat
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private jokeSubscription: Subscription;
+  private locations: Location[];
   joke;
 
+  subscription: any;
   constructor(private chuckNorrisService: ChuckNorrisService, private locationService: LocationService) { }
 
   ngOnInit() {
     this.jokeSubscription = this.chuckNorrisService.joke$.subscribe( (resp) => {
       this.joke = resp;
     });
-    // this.locationService.getAllLocations(); This one currently works. get all locations
+    // tslint:disable-next-line:max-line-length
+    // this.locationService.newLocation(new Location(null, 'eatmyshorts', 'Los Angeles', 'CA', 3252, 'company', true)); // this also works. create new location.
+    // this.locationService.getAllLocations(); // This one currently works. get all locations
     // this.locationService.getLocation(1); this one currently works. get a specific location.
 
-    // tslint:disable-next-line:max-line-length
-    // this.locationService.newLocation(new Location(null, 'eatmyshorts', 'Los Angeles', 'CA', 3252, 'usdfa', true)); this also works. create new location.
-
+    // buildsings
+    // this.locationService.getAllBuildings(); works get all buildings
+    //   this.locationService.getBuildingsByLocationId(1); works get all buildings by location id.
+    // this.locationService.getBuildingById(1); get one single building works.
+        this.locationService.newBuilding(new Building(null, 'new building', 1, 666));
 
   }
 
