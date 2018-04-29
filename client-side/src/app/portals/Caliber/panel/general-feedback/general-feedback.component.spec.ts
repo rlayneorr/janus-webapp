@@ -6,16 +6,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 fdescribe('GeneralFeedbackComponent', () => {
   let component: GeneralFeedbackComponent;
   let fixture: ComponentFixture<GeneralFeedbackComponent>;
+  let spy: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(GeneralFeedbackComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
   
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,6 +18,7 @@ fdescribe('GeneralFeedbackComponent', () => {
       declarations: [GeneralFeedbackComponent]
     })
 
+    //spy = spyOn(component, 'ngOnInit'); 
     fixture = TestBed.createComponent(GeneralFeedbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -31,6 +27,11 @@ fdescribe('GeneralFeedbackComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('constructor is called upon instantiation', () => {
+  //   let instance = new GeneralFeedbackComponent(); 
+  //   expect(instance).toBeTruthy();
+  // });
 
   it('general feedback form is valid', () => {
     expect(component.generalFeedback.valid).toBeTruthy();

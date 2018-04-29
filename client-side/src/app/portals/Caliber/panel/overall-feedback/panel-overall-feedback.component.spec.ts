@@ -7,6 +7,7 @@ import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.c
 fdescribe('PanelOverallFeedbackComponent', () => {
   let component: PanelOverallFeedbackComponent;
   let fixture: ComponentFixture<PanelOverallFeedbackComponent>;
+  let spy: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
@@ -15,9 +16,10 @@ fdescribe('PanelOverallFeedbackComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, FormsModule],
-      declarations: [GeneralFeedbackComponent]
+      declarations: [PanelOverallFeedbackComponent]
     })
 
+    //spy = spyOn(component, 'ngOnInit'); 
     fixture = TestBed.createComponent(PanelOverallFeedbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -26,6 +28,11 @@ fdescribe('PanelOverallFeedbackComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('constructor is called upon instantiation', () => {
+  //   let instance = new PanelOverallFeedbackComponent(); 
+  //   expect(instance).toBeTruthy();
+  // });
 
   it('overall feedback form is valid', () => {
     expect(component.overallFeedback.valid).toBeTruthy();
