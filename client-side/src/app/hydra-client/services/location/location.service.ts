@@ -60,24 +60,29 @@ export class LocationService {
     return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
   }
 
+  // Get all Buildings. This one is independent from Locations.
   getAllBuildings() {
     return this.httpClient.get<Building>(this.urls.building.getAllBuildings()).subscribe((payload) => {
       console.log(payload);
       this.buildings.next(payload);
     });
   }
+  // Get all buildings by Location ID. this one is dependent on a location's Id.
   getBuildingsByLocationId(locationId: any) {
     return this.httpClient.get<Building>(this.urls.building.getBuildingsByLocationId(locationId)).subscribe((payload) => {
       console.log(payload);
       this.buildings.next(payload);
     });
   }
+  // Returns a singular location by its ID. This has no corelation with locations.
   getBuildingById(buildingId: any) {
     return this.httpClient.get<Building>(this.urls.building.getBuildingById(buildingId)).subscribe((payload) => {
       console.log(payload);
       this.building.next(payload);
     });
   }
+
+  // Basic create building request.
   newBuilding(building: Building) {
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/json; charset=utf-8;' );
