@@ -4,6 +4,7 @@ import { ChuckNorrisService } from '../../../services/chuck-norris.service';
 import { LocationService } from '../../../hydra-client/services/location/location.service';
 import { Location } from '../../../hydra-client/entities/location-entities/Location';
 import { Building } from '../../../hydra-client/entities/location-entities/Building';
+import { Room } from '../../../hydra-client/entities/location-entities/Room';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     // this.locationService.getAllBuildings(); works get all buildings
     // this.locationService.getBuildingsByLocationId(1); works get all buildings by location id.
     // this.locationService.getBuildingById(1); get one single building works.
-    this.locationService.newBuilding(new Building(null, 'new building', 1, 666)); // works. Creates a simple new building.
+    // this.locationService.newBuilding(new Building(null, 'new building', 1, 666)); // works. Creates a simple new building.
+
+    // Rooms
+    // this.locationService.newRoom(new Room(null, 232, 1, null, 23));
+    // this.locationService.getAllRooms();
+    // this.locationService.getOneRoom(1);
+    // this.locationService.getRoomsByBuildingId(1);
+
+
 
   }
 

@@ -184,7 +184,7 @@ export class UrlService {
   room = {
     getRoomById: (roomId: number) => `${this.context}/location/room/${roomId}`,
     getAllRooms: () => `${this.context}/location/room`,
-    getRoomsByLocationId: (locationId: number) => `${this.context}/location/${locationId}/room`,
+    // getRoomsByLocationId: (locationId: number) => `${this.context}/location/${locationId}/room`,
     getRoomsByBuildingId: (buildingId: number) => `${this.context}/location/building/${buildingId}/room`,
     postRoom: () => `${this.context}/location/room`,
     putRoomById: (roomId: number) => `${this.context}/location/room/${roomId}`,

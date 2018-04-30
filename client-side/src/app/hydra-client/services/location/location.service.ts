@@ -28,6 +28,9 @@ export class LocationService {
   private rooms = new BehaviorSubject<any>([]);
   publicRooms = this.rooms.asObservable();
 
+  private unavailabilities = new BehaviorSubject<any>([]);
+  publicUnavailabilities = this.unavailabilities.asObservable();
+
   header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
 
 
@@ -141,16 +144,31 @@ export class LocationService {
     );
   }
   // get Room by Id //
-  getOneRoom(room: Room) {
-    return this.httpClient.get<Room>(this.urls.room.getRoomById(room.roomId)).subscribe(
+  getOneRoom(room: any) {
+    return this.httpClient.get<Room>(this.urls.room.getRoomById(room)).subscribe(
       (payload) => {
         this.room.next(payload);
         console.log(payload);
       }
     );
   }
+  // getRoomsByLocationId(locationId: any) {
+  //   return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByLocationId(locationId))
+  //   .subscribe((payload) => {
+  //     this.rooms.next(payload);
+  //     console.log(payload);
+  //   });
+
+  // }
+  getRoomsByBuildingId(buildingId: any) {
+      return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId))
+      .subscribe((payload) => {
+        this.rooms.next(payload);
+        console.log(payload);
+      });
+  }
   // set new Room //
-  newRoom(room: Room) {
+  newRoom(room: any) {
     return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room), {headers: this.header}).subscribe(
       (payload) => {
         this.room.next(payload);
@@ -180,10 +198,17 @@ export class LocationService {
 
   // get all Unavailabilities //
   getAllUnavailabilities() {
-    return this.httpClient.get<Unavailability[]>(this.urls.unavailability.getAllUnavailabilities());
+    return this.httpClient.get<Array<Unavailability>>(this.urls.unavailability.getAllUnavailabilities())
+    .subscribe((payload) => {
+      this.unavailabilities.next(payload);
+      console.log(payload);
+    });
   }
-  // get Unavailability by Id //
+  // get Unavailability by roomId //
   getOneUnavailability(unavailability: any) {
-    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability));
+    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability))
+    .subscribe((payload) => {
+      console.log(payload);
+    });
   }
 }
