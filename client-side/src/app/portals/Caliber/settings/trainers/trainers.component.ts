@@ -17,7 +17,7 @@ import { UserRole } from '../../../../hydra-client/entities/UserRole';
 
 export class TrainersComponent implements OnInit {
   trainers: HydraTrainer[] = [];
-  filteredTrainers:HydraTrainer[] = [];
+  filteredTrainers: HydraTrainer[] = [];
   titles: Array<any>;
   roles: Array<UserRole>;
   model = new HydraTrainer();
