@@ -146,7 +146,6 @@ export class LocationService {
       (payload) => {
         this.room.next(payload);
         console.log(payload);
-
       }
     );
   }
@@ -156,7 +155,6 @@ export class LocationService {
       (payload) => {
         this.room.next(payload);
         console.log(payload);
-
       }
     );
   }
@@ -166,7 +164,6 @@ export class LocationService {
       (payload) => {
         this.room.next(payload);
         console.log(payload);
-
       }
     );
   }
@@ -176,7 +173,6 @@ export class LocationService {
       (payload) => {
         this.room.next(payload);
         console.log(payload);
-
       }
     );
   }
