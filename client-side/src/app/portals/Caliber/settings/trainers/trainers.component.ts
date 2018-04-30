@@ -42,7 +42,7 @@ export class TrainersComponent implements OnInit {
               return s.role.role !== 'INACTIVE';
             }
             else {
-              console.log("Bad coding practice. Need Trainers with roles");
+              console.log('Bad coding practice. Need Trainers with roles');
             }
           }
         );
@@ -161,7 +161,7 @@ export class TrainersComponent implements OnInit {
    * @param modal: modal value with all the fields
    */
   updateTrainer(modal: NgForm) {
-    let updateTrainer: HydraTrainer = modal.value;
+    const updateTrainer: HydraTrainer = modal.value;
     updateTrainer.userId = this.currEditTrainer.userId;
     updateTrainer.role = this.roleMapping(modal.value.role);
     this.trainerService.update(updateTrainer).subscribe((resp) => {

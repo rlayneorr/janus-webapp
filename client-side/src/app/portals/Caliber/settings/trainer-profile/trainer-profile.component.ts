@@ -143,9 +143,9 @@ export class TrainerProfilesComponent implements OnInit {
     this.rForm = this.fb.group({
       'firstName': [this.currEditTrainer.firstName, Validators.required],
       'lastName': [this.currEditTrainer.lastName, Validators.required],
-      'email': [this.currEditTrainer.email, Validators.required],
-      'title': [this.newTitle],
-      'role': [this.newRole],
+      'email': [this.currEditTrainer.email, Validators.email],
+      'title': [this.newTitle, Validators.required],
+      'role': [this.newRole.role, Validators.required],
     });
     this.modalService.open(content, { size: 'lg' });
   }
