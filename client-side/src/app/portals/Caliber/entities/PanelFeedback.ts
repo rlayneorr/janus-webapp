@@ -1,8 +1,8 @@
-import { Technology } from './Technology';
+import { Skill } from './Technology';
 
 export class PanelFeedback {
     id: number;
-    technology: Technology;
+    skill: Skill;
     status: string;
     result: number;
     comment: string;
