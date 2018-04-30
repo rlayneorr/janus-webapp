@@ -85,7 +85,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
     this.trainee = trainee;
     this.panelService.fetchAllByTrainee(trainee);
     this.traineeSubject.next(this.trainee);
-    this.name = this.trainee.traineeUserInfo.firstName;
+    this.name = this.trainee.firstName;
    // this.traineeService.pushToSaved(this.trainee);  // set selected trainee to savedSubject in traineeservice
   }
 

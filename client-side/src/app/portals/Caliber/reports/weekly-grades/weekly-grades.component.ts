@@ -98,7 +98,7 @@ export class WeeklyGradesComponent implements OnInit, OnDestroy {
 
   noteContent(traineeId: Number): String {
     for (let i = 0; i < this.traineeNotes.length; i++) {
-      if (this.traineeNotes[i].trainee.traineeId === traineeId) {
+      if (this.traineeNotes[i].trainee.userId === traineeId) {
         return this.traineeNotes[i].content;
       }
     }
@@ -110,7 +110,7 @@ export class WeeklyGradesComponent implements OnInit, OnDestroy {
 
     if (this.assessments.length === 0) { return total; }
     const scores = this.grades.filter((grade) => {
-      return grade.trainee.traineeId === traineeId;
+      return grade.trainee.userId === traineeId;
     });
 
     for (let i = 0; i < scores.length; i++) {

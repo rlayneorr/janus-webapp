@@ -12,7 +12,7 @@ export class GradeByTraineeByAssessmentPipe implements PipeTransform {
 
   transform(value: Grade[], trainee: HydraTrainee, assessment: Assessment ): Grade[] {
     return value.filter( (grade) =>
-      ( grade.assessment.assessmentId === assessment.assessmentId && grade.trainee.traineeId === trainee.traineeId ) );
+      ( grade.assessment.assessmentId === assessment.assessmentId && grade.trainee.userId === trainee.userId ) );
   }
 
 }

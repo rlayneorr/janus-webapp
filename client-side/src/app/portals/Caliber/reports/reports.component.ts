@@ -44,7 +44,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     // subscribe to trainee and week data in order to filter subcomponents
     this.granularitySub = Observable.combineLatest(this.granularityService.currentTrainee$,
     this.granularityService.currentWeek$).subscribe((data) => {
-      this.allTrainees = data[0].traineeId === 0;
+      this.allTrainees = data[0].userId === 0;
       this.allWeeks = data[1] === 0;
     });
 

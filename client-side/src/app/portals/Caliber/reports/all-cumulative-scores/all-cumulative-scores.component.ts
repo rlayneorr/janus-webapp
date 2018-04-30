@@ -84,7 +84,7 @@ export class AllCumulativeScoresComponent implements OnInit {
 
     this.granularityService.currentTrainee$.subscribe(response => {
       if (response) {
-        this.traineeId = response.traineeId;
+        this.traineeId = response.userId;
       }
     });
   }

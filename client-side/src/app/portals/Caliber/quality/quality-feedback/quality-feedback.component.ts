@@ -200,7 +200,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   */
   private getTraineeNote(trainee: HydraTrainee): Note {
     const notes = this.getTraineeNotes()
-      .filter((note) => (note.trainee.traineeId === trainee.traineeId));
+      .filter((note) => (note.trainee.userId === trainee.userId));
 
     switch (notes.length) {
       case 0:
@@ -215,7 +215,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
       case 1:
         return notes[0];
       default:
-        console.log(`EXCEPTION: multiple QC notes found on trainee [${trainee.traineeUserInfo.firstName}:${trainee.traineeId}]`);
+        console.log(`EXCEPTION: multiple QC notes found on trainee [${trainee.firstName}:${trainee.userId}]`);
         return notes[0];
     }
   }

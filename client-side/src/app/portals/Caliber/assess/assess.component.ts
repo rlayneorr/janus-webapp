@@ -355,9 +355,9 @@ export class AssessComponent implements OnInit {
 
     this.selectedTrainees = this.selectedBatch.trainees;
     this.selectedTrainees.sort((a, b) => {
-      if (a.traineeUserInfo.firstName < b.traineeUserInfo.firstName) {
+      if (a.firstName < b.firstName) {
         return -1;
-      } else if (a.traineeUserInfo.firstName > b.traineeUserInfo.firstName) {
+      } else if (a.firstName > b.firstName) {
         return 1;
       } else {
         return 0;

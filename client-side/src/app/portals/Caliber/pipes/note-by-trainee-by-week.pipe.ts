@@ -12,7 +12,7 @@ export class NoteByTraineeByWeekPipe implements PipeTransform {
     const n = value.filter( (note) => {
 
         return (note.type === 'TRAINEE' && note.trainee != null &&
-          note.trainee.traineeId === trainee.traineeId && Number(note.week) === Number(week));
+          note.trainee.userId === trainee.userId && Number(note.week) === Number(week));
       })[0];
 
       if (n != null) {

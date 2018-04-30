@@ -113,7 +113,7 @@ export class ManageComponent implements OnInit {
   ngOnInit() {
     this.hydraTraineeService.findAllByBatchAndStatus(2, 'Dropped').forEach(element => {
       element.forEach(trainee => {
-        console.log(trainee.traineeUserInfo);
+        console.log(trainee);
       });
     });
 
@@ -355,7 +355,7 @@ export class ManageComponent implements OnInit {
 
     for (let i = 0; i < this.currentBatch.trainees.length; i++) {
       this.currentBatch.trainees[i].batch = null;
-      this.hydraTraineeService.delete(this.currentBatch.trainees[i].traineeId);
+      this.hydraTraineeService.delete(this.currentBatch.trainees[i].userId);
     }
   }
 

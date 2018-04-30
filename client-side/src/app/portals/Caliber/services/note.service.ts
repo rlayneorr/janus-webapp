@@ -186,7 +186,7 @@ export class NoteService {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public fetchTrainingNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
-    const url = context.fetchTrainingNotesByTrainee(trainee.traineeId);
+    const url = context.fetchTrainingNotesByTrainee(trainee.userId);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -200,7 +200,7 @@ export class NoteService {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public fetchQcNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
-    const url = context.fetchQcNotesByTrainee(trainee.traineeId);
+    const url = context.fetchQcNotesByTrainee(trainee.userId);
 
     return this.httpClient.get<Note[]>(url);
   }

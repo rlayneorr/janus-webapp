@@ -180,7 +180,7 @@ export class ToolbarComponent implements OnInit {
 
     for (let i = 0; i < this.currentBatch.trainees.length; i++) {
       this.traineesList.push(this.currentBatch.trainees[i]);
-      this.traineesListNames.push(this.currentBatch.trainees[i].traineeUserInfo.firstName);
+      this.traineesListNames.push(this.currentBatch.trainees[i].firstName);
     }
   });
 
@@ -261,8 +261,8 @@ export class ToolbarComponent implements OnInit {
   searchTrainees() {
     const input = (<HTMLInputElement>document.getElementById('searchTextBox')).value;
     for (const trainee of this.traineesList) {
-      if (trainee.traineeUserInfo.firstName || trainee.traineeUserInfo.lastName === input) {
-        this.traineeOnClick(trainee.traineeId);
+      if (trainee.firstName || trainee.lastName === input) {
+        this.traineeOnClick(trainee.userId);
         (<HTMLInputElement>document.getElementById('searchTextBox')).value = input;
       }
     }
@@ -289,7 +289,7 @@ export class ToolbarComponent implements OnInit {
    */
   getTraineeByIdFromSelection(traineeId: number): HydraTrainee {
     for (const trainee of this.traineesList) {
-      if (traineeId === trainee.traineeId) {
+      if (traineeId === trainee.userId) {
         return trainee;
       }
     }
@@ -300,8 +300,8 @@ export class ToolbarComponent implements OnInit {
    */
   sortTraineesByName() {
     this.traineesList.sort(function(a, b) {
-      const nameA = a.traineeUserInfo.firstName.toUpperCase();
-      const nameB = b.traineeUserInfo.firstName.toUpperCase();
+      const nameA = a.firstName.toUpperCase();
+      const nameB = b.firstName.toUpperCase();
       if (nameA < nameB) {
         return -1;
       }
@@ -326,7 +326,7 @@ export class ToolbarComponent implements OnInit {
    */
   createEmptyTrainee(): HydraTrainee {
     const emptyTrainee = new HydraTrainee();
-    emptyTrainee.traineeId = 0;
+    emptyTrainee.userId = 0;
     return emptyTrainee;
   }
 

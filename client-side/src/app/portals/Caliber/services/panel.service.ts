@@ -58,7 +58,7 @@ export class PanelService implements CRUD<Panel> {
    * @param trainee: Trainee
    */
   public fetchAllByTrainee(trainee: HydraTrainee): Observable<Panel[]> {
-    this.http.get<any[]>(context.fetchAllByTrainee(trainee.traineeId)).subscribe((results) => this.listSubject.next(results));
+    this.http.get<any[]>(context.fetchAllByTrainee(trainee.userId)).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 
