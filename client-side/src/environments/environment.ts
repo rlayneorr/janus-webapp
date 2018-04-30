@@ -30,7 +30,7 @@ export const environment = {
   },
 
   skillType: {
-    find: (id) => `${context}/gmabit-skills-service/skillType/${id}`,
+    find: (id) => `${context}/skills-service/skillType/${id}`,
     findByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
     findAll: () => `${context}/gambit-skills-service/skillType`,
     save: () => `${context}/gambit-skills-service/skillType`,
