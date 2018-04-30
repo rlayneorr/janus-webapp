@@ -5,7 +5,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Dependencies } from '../../bam.test-observable.module';
 import { BamUser } from '../../models/bamuser.model';
 import { SessionService } from '../../services/session.service';
-import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/Observable';
 import { HomeUtil } from './home-test.util';
 
 
@@ -21,7 +21,7 @@ fdescribe('HomeComponent', () => {
   beforeEach(() => {
     const sessionService: SessionService = TestBed.get(SessionService);
 
-    spyOn(sessionService, 'putUserInSession').and.returnValue(of(user));
+    spyOn(sessionService, 'putUserInSession').and.returnValue(Observable.of(user));
 
     TestBed.overrideProvider(SessionService, { useValue: sessionService });
 
@@ -34,8 +34,9 @@ fdescribe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('home should get get a BamUser', async(() => {
+  it('home should get get a BamUser', () => {
     component.ngOnInit();
+    fixture.detectChanges();
     expect(component.currentUser).toEqual(user);
-  }));
+  });
 });
