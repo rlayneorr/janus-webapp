@@ -16,7 +16,7 @@ import { Batch } from '../../../models/batch.model';
 
 
 
-fdescribe('WelcomeComponent', () => {
+describe('WelcomeComponent', () => {
   let component: WelcomeComponent;
   let fixture: ComponentFixture<WelcomeComponent>;
   let batchService: BatchService;
