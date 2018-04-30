@@ -26,15 +26,18 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     // test save newLocation
     // tslint:disable-next-line:max-line-length
-    const testLocation: Location = new Location(null, 'a new test', 'New York', 'NY', 11011, 'usdfa', true);
+    const testLocation: Location = new Location(null, '4.30 test', 'New York', 'NY', 11011, 'usdfa', true);
     this.locationService.newLocation(testLocation); // this also works. create new location.
 
     // testing updateLocation, changing state of testLocation here for checking update
-    testLocation.locationId = 9;
-    testLocation.zip = 99999;
+    testLocation.locationId = 5;
+    testLocation.zip = 66666;
     console.log('Logging changes to testLocation:  ' + JSON.stringify(testLocation));
-    this.locationService.updateLocation(testLocation); // this one is still testing. updates an existing location
+    this.locationService.updateLocation(testLocation); // this one is working now. updates an existing location
 
+    // testing deleteLocation, changes state of record x to inactive
+    testLocation.locationId = 8;
+    this.locationService.deleteLocation(testLocation); // this one works now too. sets a specified location to ACTIVE=FALSE
   }
 
   newJoke() {

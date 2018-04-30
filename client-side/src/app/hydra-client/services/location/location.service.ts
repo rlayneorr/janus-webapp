@@ -28,7 +28,7 @@ export class LocationService {
   private unavailabilities = new BehaviorSubject<any>([]);
   publicUnavailabilities = this.unavailabilities.asObservable();
 
-  // header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
+  header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
 
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
@@ -53,9 +53,7 @@ export class LocationService {
   }
   // set new Location //
   newLocation(location: Location) {
-    let header = new HttpHeaders();
-    header = header.set('Content-Type', 'application/json; charset=utf-8;' );
-    return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location), {headers: header}).subscribe(
+    return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location), {headers: this.header}).subscribe(
       (payload) => {
         this.location.next(payload);
         console.log(payload);
@@ -64,23 +62,23 @@ export class LocationService {
   }
   // update the location //
   updateLocation(location: Location) {
-    let header = new HttpHeaders();
-    // getting the record from the database that should be updated //
-    // this.getLocation(location.locationId);
-
     // logging the retrieved record that should be updated //
-    header = header.set('Content-Type', 'application/json; charset=utf-8;');
-    return this.httpClient.put<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location),
-                                          {headers: header}).subscribe(
-                                            (payload) => {
-                                              this.location.next(payload);
-                                              console.log(payload);
-                                            }
-                                          );
+    return this.httpClient.put<Location>(this.urls.location.putLocationById(location.locationId),
+      JSON.stringify(location), {headers: this.header}).subscribe(
+        (payload) => {
+          this.location.next(payload);
+          console.log('Logging update from service:  ' + JSON.stringify(payload));
+        }
+      );
   }
-  // set location as inactive: TO-DO //
-  deleteLocation(location: any) {
-    return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
+  // set location as inactive //
+  deleteLocation(location: Location) {
+    return this.httpClient.delete<Location>(this.urls.location.deleteLocationById(location.locationId)).subscribe(
+      (payload) => {
+        this.location.next(payload);
+        console.log('Logging deleteLocation from service:  ' + JSON.stringify(payload));
+      }
+    );
   }
 
   // get all Buildings //
@@ -106,30 +104,27 @@ export class LocationService {
   }
   // set new Building //
   newBuilding(building: Building) {
-    let header = new HttpHeaders();
-    header = header.set('Content-Type', 'application/json; charset=utf-8;' );
-    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building), {headers: header})
+    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building), {headers: this.header})
     .subscribe((payload) => {
     console.log(payload);
     this.building.next(payload);
     });
   }
-  // update Building: TO-DO //
+  // update Building //
   updateBuilding(building: Building) {
-    let header = new HttpHeaders();
-    header = header.set('Content-Type', 'application/json; charset=utf-8;' );
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
-    JSON.stringify(building), {headers: header}).subscribe(
-      (payload) => {
-        this.buildings.next(payload);
-      }
-    );
+      JSON.stringify(building), {headers: this.header}).subscribe(
+        (payload) => {
+          this.buildings.next(payload);
+        }
+      );
   }
-  // set Building as inactive: TO-DO //
+  // set Building as inactive //
   deleteBuilding(building: Building) {
     return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
       (payload) => {
-        this.building.next(payload);
+        this.location.next(payload);
+        console.log('Logging deleteLocation from service:  ' + JSON.stringify(payload));
       }
     );
   }
@@ -167,7 +162,7 @@ export class LocationService {
       this.rooms.next(payload);
       console.log(payload);
     });
-}
+  }
   // set new Room //
   newRoom(room: any) {
     return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room), {headers: this.header}).subscribe(
@@ -177,30 +172,32 @@ export class LocationService {
       }
     );
   }
-  // update Room: TO-DO //
+  // update Room //
   updateRoom(room: Room) {
-    return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room), {headers: this.header}).subscribe(
-      (payload) => {
-        this.room.next(payload);
-        console.log(payload);
-      }
-    );
+    return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room),
+      {headers: this.header}).subscribe(
+        (payload) => {
+          this.location.next(payload);
+          console.log('Logging update from service:  ' + JSON.stringify(payload));
+        }
+      );
   }
-  // set Room as inactive: TO-DO //
+  // set Room as inactive //
   deleteRoom(room: Room) {
     return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
       (payload) => {
-        this.room.next(payload);
-        console.log(payload);
+        this.location.next(payload);
+        console.log('Logging deleteLocation from service:  ' + JSON.stringify(payload));
       }
     );
   }
-  // get all Unavailabilities: TO-DO //
+
+  // get all Unavailabilities //
   getAllUnavailabilities() {
     return this.httpClient.get<Unavailability[]>(this.urls.unavailability.getAllUnavailabilities());
   }
-  // get Unavailability by Id: TO-DO //
-  getOneUnavailability(unavailability: any) {
+  // get Unavailability by Id //
+  postUnavailability(unavailability: any) {
     return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability));
   }
 }
