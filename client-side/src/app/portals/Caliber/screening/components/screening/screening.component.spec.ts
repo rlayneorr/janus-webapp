@@ -1,14 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScreeningComponent } from './screening.component';
+import { RouterOutlet, ChildrenOutletContexts } from '@angular/router';
 
-describe('ScreeningComponent', () => {
+fdescribe('ScreeningComponent', () => {
   let component: ScreeningComponent;
   let fixture: ComponentFixture<ScreeningComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScreeningComponent ]
+      declarations: [ ScreeningComponent, RouterOutlet ],
+      providers: [ ChildrenOutletContexts ]
     })
     .compileComponents();
   }));
