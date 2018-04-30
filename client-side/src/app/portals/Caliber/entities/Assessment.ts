@@ -1,5 +1,5 @@
-import { Category } from './Category';
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
 
 export class Assessment {
     assessmentId: number;
@@ -8,5 +8,5 @@ export class Assessment {
     rawScore: number;
     type: string;
     week: number;
-    category: Category;
+    skill: GambitSkill;
 }

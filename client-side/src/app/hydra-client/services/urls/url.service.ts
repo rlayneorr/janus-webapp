@@ -9,11 +9,11 @@ export class UrlService {
    * All urls associated with skills will come from this object
    */
   skills = {
-    findAll: () => `${this.context}/skills`,
-    findAllActive: () => `${this.context}/skills/active`,
-    findById: (id: number) => `${this.context}/skills/${id}`,
-    save: () => `${this.context}/skills`,
-    update: () => `${this.context}/skills`,
+    findAll: () => `${this.context}/skill`,
+    findAllActive: () => `${this.context}/skill/active`,
+    findById: (id: number) => `${this.context}/skill/${id}`,
+    save: () => `${this.context}/skill`,
+    update: () => `${this.context}/skill/`,
   };
 
   /**
