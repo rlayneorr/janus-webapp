@@ -7,7 +7,8 @@ import { environment } from '../../../../../environments/environment';
 @Injectable()
 export class RequestService {
 
-  host: string = environment.context;
+  host: string = environment.url;
+  context: string = environment.context;
   trackPath: string = this.host + 'TrackForce/track';
   dataPath: string = this.host + 'TrackForce/track/data/get';
 
@@ -38,7 +39,7 @@ export class RequestService {
   }
 
   public getAssociates(): Observable<any> {
-    return this.http.get(this.host + '/trainees');
+    return this.http.get(this.context + '/trainees');
   }
 
   public getBatchesSortedById(): Observable<any> {
