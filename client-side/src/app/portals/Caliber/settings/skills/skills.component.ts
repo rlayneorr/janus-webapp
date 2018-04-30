@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../../../../environments/environment';
 
 // entities
-import { Category } from '../../entities/Category';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
 import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
