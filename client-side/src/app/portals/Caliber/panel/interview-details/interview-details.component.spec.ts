@@ -5,6 +5,7 @@ import { InterviewDetailsComponent } from './interview-details.component';
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
 import { BatchService } from '../../../Bam/services/batch.service';
 import { PanelService } from '../../services/panel.service';
+import { Panel } from '../../entities/Panel';
 // import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
 fdescribe('InterviewDetailsComponent', () => {
@@ -43,19 +44,44 @@ fdescribe('InterviewDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('Batch Service is valid', () => {
+    expect(batchService).toBeTruthy();
+  });
+
+  it('Panel Service is valid', () => {
+    expect(panelService).toBeTruthy();
+  });
+  
+  it('interview details has the same panel list as panel service, upon instantiation', () => {
+    // get the panel list contained in panel service
+    let panelListInService : Panel[];
+    panelService.listSubject.asObservable().subscribe((panelList) => {
+      this.fromPanelService = panelList;
+    });
+
+    expect(panelListInService).toEqual(component.panelList);
+  });
+
   it('constructor works, and instantiates an interview form', () => {
-    let instance : InterviewDetailsComponent;
-    instance = new InterviewDetailsComponent(this.searchBar, this.batchService, this.panelService); 
-    const spy = spyOnProperty(instance, 'panelRound', 'get');
-    expect(instance.panelRound).toEqual(1);
+    fixture = TestBed.createComponent(InterviewDetailsComponent);
+    component = fixture.componentInstance;
+    component.panelList = [ new Panel() ];
+    const spy = spyOnProperty(component, 'panelRound', 'get');
+    fixture.detectChanges();
+
     expect(spy).toHaveBeenCalled();
+    expect(component.panelRound).toEqual(component.panelList.length + 1);
   });
 
   it('constructor works when passed-in panelService is null', () => {
-    let instance = new InterviewDetailsComponent(this.searchBar, this.batchService, null); 
-    const spy = spyOnProperty(instance, 'panelRound', 'get');
-    expect(instance.panelRound).toEqual(instance.panelList.length + 1);
+    fixture = TestBed.createComponent(InterviewDetailsComponent);
+    component = fixture.componentInstance;
+    component.panelList = null;
+    const spy = spyOnProperty(component, 'panelRound', 'get');
+    fixture.detectChanges();
+
     expect(spy).toHaveBeenCalled();
+    expect(component.panelRound).toEqual(1);
   });
 
   ////////////////////////////////////////////////////////////////////
