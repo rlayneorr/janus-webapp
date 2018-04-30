@@ -159,12 +159,12 @@ import { PassFailComponent } from './screening/components/pass-fail/pass-fail.co
 import { ViolationFlagComponent } from './screening/components/violation-flag/violation-flag.component';
 import { ScheduleScreeningService } from './screening/services/schedule-screening/schedule-screening.service';
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
-import {SkillTypesComponent} from './settings/screening/skillTypes/skillTypes.component';
+import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
-import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component' ;
-import { QuestionComponent} from './settings/screening/question/question.component';
+import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component';
+import { QuestionComponent } from './settings/screening/question/question.component';
 import { TagFilterPipe } from './settings/screening/question/question.filter';
-import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType-buckets.filter';
+import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
@@ -206,8 +206,13 @@ export const Dependencies = {
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
+    SearchPipe,
+    TagFilterPipe,
+    BucketFilterPipe,
+    // PaginatePipe,
 
     // components
+    // PaginationControlsComponent,
     CaliberComponent,
     HomeComponent,
     AssessComponent,
@@ -218,7 +223,7 @@ export const Dependencies = {
     VpLineGraphComponent,
     VpPanelGraphComponent,
     SettingsComponent,
-    SkillsComponent,
+    // CategoriesComponent,
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
@@ -228,6 +233,7 @@ export const Dependencies = {
     PanelComponent,
     QualityComponent,
     TraineeTechSkillsComponent,
+    SkillsComponent,
     ToolbarComponent,
     GraphComponent,
     TableComponent,
@@ -258,81 +264,27 @@ export const Dependencies = {
     PanelOverallFeedbackComponent,
     FeedbackIconComponent,
     QualityOverallFeedbackComponent,
-
-        // components
-        // PaginationControlsComponent,
-        CaliberComponent,
-        HomeComponent,
-        AssessComponent,
-        ManageComponent,
-        ReportsComponent,
-        AllCumulativeScoresComponent,
-        VpBarGraphComponent,
-        VpLineGraphComponent,
-        VpPanelGraphComponent,
-        SettingsComponent,
-        // CategoriesComponent,
-        TrainersComponent,
-        LocationsComponent,
-        DeactivateTrainerComponent,
-        DeactivateLocationComponent,
-        EditlocationComponent,
-        CreatelocationComponent,
-        PanelComponent,
-        QualityComponent,
-        TraineeTechSkillsComponent,
-        SkillsComponent,
-        ToolbarComponent,
-        GraphComponent,
-        TableComponent,
-        TrainerProfilesComponent,
-        PanelComponent,
-        OverallFeedbackComponent,
-        QualityFeedbackComponent,
-        PanelBatchAllTraineesComponent,
-        BatchOverallLineChartComponent,
-        AssessmentBreakdownComponent,
-        WeeklyFeedbackComponent,
-        WeeklyGradesComponent,
-        PanelFeedbackComponent,
-        WeeklyAuditComponent,
-        WeeklyCumulativeScoreComponent,
-        QcDoughnutComponent,
-        ReactivateLocationComponent,
-        AlertsComponent,
-        BarGraphModalComponent,
-        PanelBatchAllTraineesComponent,
-        PanelTableComponent,
-        PanelSearchbarComponent,
-        CreatePanelComponent,
-        InterviewDetailsComponent,
-        BatchModalComponent,
-        GeneralFeedbackComponent,
-        TechnicalFeedbackComponent,
-        PanelOverallFeedbackComponent,
-        FeedbackIconComponent,
-        QualityOverallFeedbackComponent,
-        GeneralFeedbackComponent,
-        TechnicalFeedbackComponent,
-        QcDoughnutComponent,
-        TraineeLineChartComponent,
-        DeleteBatchModalComponent,
-        CannotDeleteModalComponent,
-        DeleteTraineeModalComponent,
-        CannotDeleteTraineeModalComponent,
-        ScreeningConfigComponent,
-        CandidatesScreeningListComponent,
-        QuestionsTableComponent,
-        FinalReportComponent,
-        IntroductionComponent,
-        AnswerComponent,
-        PassFailComponent,
-        ViolationFlagComponent,
-        SkillTypesComponent,
-        BucketComponent,
-        SkillTypeBucketsComponent,
-        QuestionComponent,
-        ScreeningComponent
+    GeneralFeedbackComponent,
+    TechnicalFeedbackComponent,
+    QcDoughnutComponent,
+    TraineeLineChartComponent,
+    DeleteBatchModalComponent,
+    CannotDeleteModalComponent,
+    DeleteTraineeModalComponent,
+    CannotDeleteTraineeModalComponent,
+    ScreeningConfigComponent,
+    CandidatesScreeningListComponent,
+    QuestionsTableComponent,
+    FinalReportComponent,
+    IntroductionComponent,
+    AnswerComponent,
+    PassFailComponent,
+    ViolationFlagComponent,
+    SkillTypesComponent,
+    BucketComponent,
+    SkillTypeBucketsComponent,
+    QuestionComponent,
+    ScreeningComponent
 
   ],
   providers: [
@@ -366,7 +318,7 @@ export const Dependencies = {
     PDFService,
     PanelSearchbarComponent,
     NgbActiveModal,
-    {provide: Router, useValue: {}}
+    { provide: Router, useValue: {} }
   ],
   bootstrap: [
     // TrainersComponent

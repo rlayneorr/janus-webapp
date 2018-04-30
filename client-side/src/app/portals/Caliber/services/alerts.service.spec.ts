@@ -6,17 +6,21 @@ import { Observable } from 'rxjs/Observable';
  * Author: Jordan Young
  */
 
-xdescribe('AlertsService', () => {
+fdescribe('AlertsService', () => {
+
+  // set up
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AlertsService]
     });
   });
 
+  // default test
   it('should be created', inject([AlertsService], (service: AlertsService) => {
     expect(service).toBeTruthy();
   }));
 
+  // test the getMessage()
   it('has working getMessage', inject([AlertsService], (service: AlertsService) => {
     expect(service.getMessage()).toBeTruthy();
   }));
@@ -29,8 +33,8 @@ xdescribe('AlertsService', () => {
     service.getMessage().subscribe((s) => {
       type = s.type;
       msg = s.text;
-      expect(msg).toBe('error');
-      expect(msg).toBe('this is a test');
+      expect(type).toEqual('error');
+      expect(msg).toEqual('this is a test');
     });
   }));
 
@@ -42,8 +46,8 @@ xdescribe('AlertsService', () => {
     service.getMessage().subscribe((s) => {
       type = s.type;
       msg = s.text;
-      expect(msg).toBe('success1');
-      expect(msg).toBe('this is a test');
+      expect(type).toEqual('success');
+      expect(msg).toEqual('this is a test');
     });
   }));
 });
