@@ -12,7 +12,23 @@ import { Unavailability } from '../../entities/location-entities/Unavailability'
 export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
-  changeLocation: Location;
+
+  private building = new BehaviorSubject<any>([]);
+  publicBuilding = this.building.asObservable();
+
+  private buildings = new BehaviorSubject<any>([]);
+  publicBuildings = this.buildings.asObservable();
+
+  private room = new BehaviorSubject<any>([]);
+  publicRoom = this.room.asObservable();
+
+  private rooms = new BehaviorSubject<any>([]);
+  publicRooms = this.rooms.asObservable();
+
+  private unavailabilities = new BehaviorSubject<any>([]);
+  publicUnavailabilities = this.unavailabilities.asObservable();
+
+  // header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
 
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
@@ -31,7 +47,6 @@ export class LocationService {
     return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
       (payload) => {
         this.location.next(payload);
-        this.changeLocation = payload;
         console.log(payload);
       }
     );
@@ -42,6 +57,7 @@ export class LocationService {
     header = header.set('Content-Type', 'application/json; charset=utf-8;' );
     return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location), {headers: header}).subscribe(
       (payload) => {
+        this.location.next(payload);
         console.log(payload);
       }
     );
@@ -50,19 +66,19 @@ export class LocationService {
   updateLocation(location: Location) {
     let header = new HttpHeaders();
     // getting the record from the database that should be updated //
-    this.getLocation(location.locationId);
-    console.log('From update service' + JSON.stringify(this.changeLocation));
+    // this.getLocation(location.locationId);
+
     // logging the retrieved record that should be updated //
     header = header.set('Content-Type', 'application/json; charset=utf-8;');
     return this.httpClient.put<Location>(this.urls.location.putLocationById(location.locationId), JSON.stringify(location),
                                           {headers: header}).subscribe(
                                             (payload) => {
-                                              console.log('this is payload');
+                                              this.location.next(payload);
                                               console.log(payload);
                                             }
                                           );
   }
-  // set location as inactive //
+  // set location as inactive: TO-DO //
   deleteLocation(location: any) {
     return this.httpClient.post<Location>(this.urls.location.deleteLocationById(location.locationId), JSON.stringify(location));
   }
@@ -81,7 +97,7 @@ export class LocationService {
       this.buildings.next(payload);
     });
   }
-  // Returns a singular location by its ID. This has no corelation with locations.
+  // Returns a singular location by its ID. This has no corelation with locations //
   getBuildingById(buildingId: any) {
     return this.httpClient.get<Building>(this.urls.building.getBuildingById(buildingId)).subscribe((payload) => {
       console.log(payload);
@@ -98,7 +114,7 @@ export class LocationService {
     this.building.next(payload);
     });
   }
-  // update Building //
+  // update Building: TO-DO //
   updateBuilding(building: Building) {
     let header = new HttpHeaders();
     header = header.set('Content-Type', 'application/json; charset=utf-8;' );
@@ -109,7 +125,7 @@ export class LocationService {
       }
     );
   }
-  // set Building as inactive //
+  // set Building as inactive: TO-DO //
   deleteBuilding(building: Building) {
     return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
       (payload) => {
