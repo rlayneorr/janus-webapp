@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { Trainer } from '../../../../hydra-client/entities/Trainer';
+import { GambitTrainer } from '../../../../hydra-client/entities/GambitTrainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,14 +16,14 @@ import { UserRole } from '../../../../hydra-client/entities/UserRole';
 })
 
 export class TrainersComponent implements OnInit {
-  trainers: Trainer[] = [];
-  filteredTrainers: Trainer[] = [];
+  trainers: GambitTrainer[] = [];
+  filteredTrainers: GambitTrainer[] = [];
   titles: Array<any>;
   roles: Array<UserRole>;
-  model = new Trainer();
+  model = new GambitTrainer();
   activeStatus: String;
-  currEditTrainer: Trainer;
-  newTrainer: Trainer;
+  currEditTrainer: GambitTrainer;
+  newTrainer: GambitTrainer;
   newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
@@ -87,7 +87,7 @@ export class TrainersComponent implements OnInit {
    * @param content: modal form
    * @param modalTrainer: trainer belong to this modal
    */
-  editTrainer(content, modalTrainer: Trainer) {
+  editTrainer(content, modalTrainer: GambitTrainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
@@ -197,7 +197,7 @@ export class TrainersComponent implements OnInit {
    * @param {any} trainer
    * @memberof TrainersComponent
    */
-  goToProfile(trainer) {
+  goToProfile(trainer: GambitTrainer) {
     this.trainerService.changeCurrentTrainer(trainer);
     this.route.navigate(['Caliber/settings/trainer-profile']);
   }

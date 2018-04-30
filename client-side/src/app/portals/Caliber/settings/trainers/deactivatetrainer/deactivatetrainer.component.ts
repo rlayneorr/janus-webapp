@@ -4,7 +4,7 @@ import { Input } from '@angular/core/';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 import { TrainerService } from '../../../../../hydra-client/services/trainer/trainer.service';
 import { setInterval } from 'timers';
-import { Trainer } from '../../../../../hydra-client/entities/Trainer';
+import { GambitTrainer } from '../../../../../hydra-client/entities/GambitTrainer';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { Trainer } from '../../../../../hydra-client/entities/Trainer';
 })
 export class DeactivateTrainerComponent implements OnInit {
     @Input()
-    trainer: Trainer;
+    trainer: GambitTrainer;
 
     constructor(private modalService: NgbModal, private ts: TrainerService) {
     }

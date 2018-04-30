@@ -1,4 +1,4 @@
-import { Trainer } from './Trainer';
+import { GambitTrainer } from './GambitTrainer';
 import { HydraAddress } from './HydraAddress';
 import { HydraTrainee } from './HydraTrainee';
 
