@@ -85,23 +85,23 @@ fdescribe('WelcomeComponent', () => {
 
 
   // checks each function if active
-  it('checking NgOnit functiontion', () => {
+  it('checking NgOnit function', () => {
     expect(component.ngOnInit).toBeTruthy();
   });
 
-  it('checking getInProgressBatches functiontion', () => {
+  it('checking getInProgressBatches function', () => {
     expect(component.getInProgressBatches).toBeTruthy();
   });
 
-  it('checking setSelected functiontion', () => {
+  it('checking setSelected function', () => {
     expect(component.setSelected).toBeTruthy();
   });
 
-  it('checking setAllneededVars functiontion', () => {
+  it('checking setAllneededVars function', () => {
     expect(component.setAllneededVars).toBeTruthy();
   });
 
-  it('checking compareBatch functiontion', () => {
+  it('checking compareBatch function', () => {
     expect(component.compareBatch).toBeTruthy();
   });
 
