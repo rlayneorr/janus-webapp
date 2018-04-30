@@ -31,6 +31,17 @@ export class HydraTraineeService {
   }
 
   /**
+   * Requests all trainees with the input batch id and returns an observable.
+   *
+   * @param batchId
+   *
+   * @returns {Observable<HydraTrainee[]>}
+   */
+  public findAllByBatch(id: number): Observable<HydraTrainee[]> {
+    const url = this.urlService.trainees.findAllByBatch(id);
+    return this.httpClient.get<HydraTrainee[]>(url);
+  }
+  /**
   * Saves the newly created trainee and returns the Observable.
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")

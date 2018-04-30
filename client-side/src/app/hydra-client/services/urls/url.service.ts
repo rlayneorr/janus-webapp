@@ -34,6 +34,7 @@ export class UrlService {
    */
   trainees = {
     findAllByBatchAndStatus: (id: number, status: string) => `${this.context}/trainee/s/batch/${id}/status/${status}`,
+    findAllByBatch: (id: number) => `${this.context}/trainee/s/batch/${id}`,
     save: () => `${this.context}/trainees`,
     update: () => `${this.context}/trainees`,
     delete: (traineeId: number) => `${this.context}/trainees/${traineeId}`,
