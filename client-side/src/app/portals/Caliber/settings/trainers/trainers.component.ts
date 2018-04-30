@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { Trainer } from '../../../../hydra-client/entities/Trainer';
+import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,14 +16,14 @@ import { UserRole } from '../../../../hydra-client/entities/UserRole';
 })
 
 export class TrainersComponent implements OnInit {
-  trainers: Trainer[] = [];
-  filteredTrainers: Trainer[] = [];
+  trainers: HydraTrainer[] = [];
+  filteredTrainers: HydraTrainer[] = [];
   titles: Array<any>;
   roles: Array<UserRole>;
-  model = new Trainer();
+  model = new HydraTrainer();
   activeStatus: String;
-  currEditTrainer: Trainer;
-  newTrainer: Trainer;
+  currEditTrainer: HydraTrainer;
+  newTrainer: HydraTrainer;
   newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
@@ -87,7 +87,7 @@ export class TrainersComponent implements OnInit {
    * @param content: modal form
    * @param modalTrainer: trainer belong to this modal
    */
-  editTrainer(content, modalTrainer: Trainer) {
+  editTrainer(content, modalTrainer: HydraTrainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
@@ -157,7 +157,7 @@ export class TrainersComponent implements OnInit {
    */
   updateTrainer(modal: NgForm) {
     // replacing the trainer's fields with the new ones
-    const temp: Trainer = modal.value;
+    const temp: HydraTrainer = modal.value;
     temp.userId = this.currEditTrainer.userId;
     temp.role = this.roleMapping(modal.value.role);
     console.log(temp);
