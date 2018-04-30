@@ -90,7 +90,8 @@ export const environment = {
     findAllSkills: () => `${context}/gambit-skills-service/skillType/skill`,
     save: () => `${context}/gambit-skills-service/skillType`,
     saveSkill: (skillTypeId, skillId) => `${context}/gambit-skills-service/skillType/${skillTypeId}/skill/${skillId}`,
-    saveSkillByName: (skillTypeName, skillName) => `${context}/gambit-skills-service/skillType/${skillTypeName}/skill/${skillName}`,
+    saveSkillByName: (skillTypeName, skillName) =>
+    `${context}/gambit-skills-service/skillType/name/${skillTypeName}/skill/name/${skillName}`,
     update: (id) => `${context}/gambit-skills-service/skillType/${id}`,
     updateByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
     delete: (id) => `${context}/gambit-skills-service/skillType/${id}`,
