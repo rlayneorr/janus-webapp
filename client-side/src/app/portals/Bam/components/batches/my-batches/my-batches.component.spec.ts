@@ -15,7 +15,7 @@ import { CurriculumService } from '../../../services/curriculum.service';
 import { Observable } from 'rxjs/Observable';
 import { Curriculum } from '../../../models/curriculum.model';
 
-fdescribe('MyBatchesComponent', () => {
+describe('MyBatchesComponent', () => {
   let component: MyBatchesComponent;
   let fixture: ComponentFixture<MyBatchesComponent>;
 
