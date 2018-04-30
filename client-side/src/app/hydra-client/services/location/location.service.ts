@@ -38,6 +38,10 @@ export class LocationService {
   // Injecting UrlService and HttpClient into LocationService constructor //
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
+  testFun() {
+    return new Location(1, '123 lousy ave', 'nowhereville', 'KY', 12345, 'HQ', true);
+  }
+
   // get all Locations //
   getAllLocations() {
     return this.httpClient.get<Array<Location>>(this.urls.location.getAllLocations()).subscribe(

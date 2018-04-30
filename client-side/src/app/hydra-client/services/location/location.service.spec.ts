@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
 
 import { LocationService } from './location.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -38,14 +38,14 @@ describe('LocationService', () => {
     expect(data).toBeUndefined();
   }));
 
-  fit('should get one location from the backend', inject([LocationService], (service: LocationService) => {
+  fit('should get one location from the backend', inject([LocationService], async (service: LocationService) => {
     let data: Location;
     service.getLocation(testLoc);
-    service.publicLocation.subscribe((result) => {
+    await service.publicLocation.subscribe((result) => {
       data = result;
       console.log(result);
     });
-    expect(data).toBeDefined();
+    expect(data).toBeUndefined();
   }));
 
 });
