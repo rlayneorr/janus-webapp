@@ -2,7 +2,7 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'https://gateway-service-brash-lynx.cfapps.io';
+const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000';
 const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
@@ -21,16 +21,16 @@ export const environment = {
   },
 
   batch: {
-    fetchAllByTrainer: () => `${this.context}/batches/trainers`,
-    fetchAllByTrainerId: (id: number) => `${this.context}/batches/trainers/${id}`,
-    fetchAll: () => `${this.context}/batches`,
-    save: () => `${this.context}/batches`,
-    update: () => `${this.context}/batches`,
-    delete: (batchId) => `${this.context}/batches/${batchId}`
+    fetchAllByTrainer: () => `${context}/batches/trainers`,
+    fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
+    fetchAll: () => `${context}/batches`,
+    save: () => `${context}/batches`,
+    update: () => `${context}/batches`,
+    delete: (batchId) => `${context}/batches/${batchId}`
   },
 
   skillType: {
-    find: (id) => `${context}/gmabit-skills-service/skillType/${id}`,
+    find: (id) => `${context}/skills-service/skillType/${id}`,
     findByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
     findAll: () => `${context}/gambit-skills-service/skillType`,
     save: () => `${context}/gambit-skills-service/skillType`,
