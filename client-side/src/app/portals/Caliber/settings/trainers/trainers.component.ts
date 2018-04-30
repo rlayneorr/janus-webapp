@@ -38,7 +38,12 @@ export class TrainersComponent implements OnInit {
       this.trainers = resp;
       if (resp) {
         this.filteredTrainers = resp.filter(s => {
-            return s.role.role !== 'INACTIVE';
+            if (s.role !== null) {
+              return s.role.role !== 'INACTIVE';
+            }
+            else {
+              console.log("Bad coding practice. Need Trainers with roles");
+            }
           }
         );
       }
