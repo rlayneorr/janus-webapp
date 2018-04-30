@@ -15,8 +15,10 @@ import { ScheduledSubtopic } from '../../../models/scheduledsubtopic.model';
 import { Curriculum } from '../../../models/curriculum.model';
 import { Schedule } from '../../../models/schedule.model';
 import { Observable } from 'rxjs/Observable';
+import { Batch } from '../../../models/batch.model';
+import { ScheduledDate } from '../../../models/scheduleddate.model';
 
-fdescribe('AddSubtopicComponent', () => {
+describe('AddSubtopicComponent', () => {
   let component: AddSubtopicComponent;
   let fixture: ComponentFixture<AddSubtopicComponent>;
   let subtopic: Subtopic;
@@ -37,21 +39,42 @@ fdescribe('AddSubtopicComponent', () => {
 
     testTopic = new Topic();
     testTopic.topicID = 1;
-    testTopic.topicName = 'testTopic';
-    subtopic = new Subtopic(1, 'testName', null, null, '', testTopic);
+    testTopic.topicName = 'testName';
+    subtopic = new Subtopic(1, 'testName', new Date(), new Date(), '', testTopic);
     const subArr: Subtopic[] = [];
     subArr.push(subtopic);
     subtopic.parentTopic = testTopic;
-
+    const testschDate = new ScheduledDate(1, 1, 1, 1, 1);
+    const testsub = new ScheduledSubtopic(1, 1, testschDate);
+    const tsub: ScheduledSubtopic[] = [];
+    const tCurr = new Curriculum();
+    tsub.push(testsub);
+    const testBatch = new Batch(1, '', null, null, null, 2, 2);
+    const testSched = new Schedule(1, tsub , tCurr);
+    const jSched = JSON.stringify(testSched);
+    const t = JSON.stringify(testBatch);
+    const p = JSON.stringify(subArr);
     // spyOn(addSuptopicServie, 'getSubtopicPool').and.returnValue(null);
     // spyOn(subtopicService, 'getSubtopicByIDs').and.returnValue(null);
-    spyOn(sessionStorage, 'getItem').and.returnValue('{}');
+    // spyOn(sessionStorage, 'getItem').and.returnValue('{}');
+    spyOn(sessionStorage, 'getItem').and.callFake((batch) => {
+      if (batch === 'batch') {
+       return t;
+      }
+      if (batch === 'schedule') {
+        return jSched;
+      }
+      if (batch === 'subtopics') {
+        return p;
+      }
+    });
     const a: number[] = [1];
     spyOn(addSuptopicServie, 'getSubtopicPool').and.returnValues(Observable.of(a), Observable.throw('error'));
     spyOn(subtopicService, 'getSubtopicByIDs').and.returnValue(Observable.of(subArr));
 
     TestBed.overrideProvider(AddSubtopicService, {useValue: addSuptopicServie});
     TestBed.overrideProvider(SubtopicService, {useValue: subtopicService});
+    component.selectedTopic = 'test';
     fixture.detectChanges();
   });
 
@@ -95,15 +118,7 @@ fdescribe('AddSubtopicComponent', () => {
 
   });
   it('should call onChangeGetSubtopicInfo', () => {
-    // setting the array for subtop in first else
-    testTopic.topicName = 'testTopic';
-    component.topicMap.set('test', 'test');
-    component.selectedTopic = 'test';
-    component.subtopicNameList.push('test');
-    subtopic.parentTopic.topicName = 'test';
-    component.uniqueTopics.add('t');
-    const arr: Subtopic[] = [];
-    arr.push(subtopic);
+    component.selectedSubtopic = 'testName';
     component.onChangeGetSubtopicInfo();
   });
   it('should call saveSubtopic for if', () => {
@@ -112,23 +127,41 @@ fdescribe('AddSubtopicComponent', () => {
   });
   it('should call saveSubtopic for else', () => {
     component.selectedTopic = 'hello';
+    component.selectedSubtopic = 'hello';
     component.selectedDate = new Date('2017-12-17T03:24:00');
     component.saveSubtopic();
   });
   it('should call saveSubtopic for else and then the if inside', () => {
     component.selectedTopic = 'hello';
+    component.selectedSubtopic = 'hello';
     component.selectedDate = new Date('2020-12-17T03:24:00');
     component.saveSubtopic();
   });
   it('should call saveSubtopic for else if', () => {
     component.selectedTopic = 'hello';
+    component.selectedSubtopic = 'hello';
     component.selectedDate = 'a';
     component.saveSubtopic();
   });
   it('should call saveSubtopic for else if', () => {
     component.selectedTopic = 'hello';
+    component.selectedSubtopic = 'hello';
     component.selectedDate = 'a';
-    spyOn(component, 'setSubtopicObject').and.returnValue(null);
+    spyOn(component, 'setSubtopicObject').and.returnValue(true);
+    component.saveSubtopic();
+  });
+  it('should call saveSubtopic for else', () => {
+    component.selectedTopic = 'hello';
+    component.selectedSubtopic = 'hello';
+    component.selectedDate = new Date('2017-12-17T03:24:00');
+    spyOn(component, 'checkSubtopics').and.returnValue(true);
+    component.saveSubtopic();
+  });
+  it('should call saveSubtopic for else', () => {
+    component.selectedTopic = 'hello';
+    component.selectedSubtopic = 'hello';
+    component.selectedDate = new Date('2017-12-17T03:24:00');
+    spyOn(component, 'checkSubtopics').and.returnValue(false);
     component.saveSubtopic();
   });
   it('should call checkSubtopics', () => {
@@ -142,21 +175,15 @@ fdescribe('AddSubtopicComponent', () => {
   });
 
   it('should call setSuptopicObject', () => {
+    component.selectedSubtopic = 'testName';
     component.setSubtopicObject();
   });
   it('should call addSelectedSubtopic', () => {
     component.addSelectedSubtopic();
   });
   it('should call updateSelectedSubtopic', () => {
-    // let ssub: ScheduledSubtopic[] = [];
-    // const s = new ScheduledSubtopic(1, 1, null);
-    // const c: Curriculum = new Curriculum();
-    // ssub.push(s);
-    // const j = "{ 'id' : 1 , 'subtopics ': null, 'curriculum' :null}";
-    // sessionStorage.setItem('schedule', j);
-    // // console.log(sessionStorage.getItem('schedule'));
-    // const a: Schedule = JSON.parse(sessionStorage.getItem('schedule'));
-    // console.log(a);
+    component.currentBatch.startDate = new Date();
+    console.log(component.currentBatch.startDate);
     component.updateSelectedSubtopic();
   });
   it('should call open', () => {

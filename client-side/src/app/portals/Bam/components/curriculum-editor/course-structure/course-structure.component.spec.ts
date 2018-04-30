@@ -12,7 +12,7 @@ import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { SubtopicType } from '../../../models/subtopictype.model';
 import { TopicName } from '../../../models/topicname.model';
-fdescribe('CourseStructureComponent', () => {
+describe('CourseStructureComponent', () => {
   let component: CourseStructureComponent;
   let fixture: ComponentFixture<CourseStructureComponent>;
   let curTitle: string;
