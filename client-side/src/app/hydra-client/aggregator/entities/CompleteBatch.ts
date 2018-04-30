@@ -1,4 +1,4 @@
-import { SkillType } from '../../entities/SkillType';
+import { GambitSkillType } from '../../entities/GambitSkillType';
 import { Trainer } from '../../entities/Trainer';
 import { HydraTrainee } from '../../entities/HydraTrainee';
 import { HydraAddress } from '../../entities/HydraAddress';
@@ -10,7 +10,7 @@ export class CompleteBatch {
   trainingName: string;
   trainer: Trainer;
   cotrainer: Trainer;
-  skillType: SkillType;
+  skillType: GambitSkillType;
   trainingType: string;
   addressId: number;      //TODO Refactor to Address type
   address: HydraAddress;  //TODO Refactor HydraAddress to GambitAddress when the latter microservice is developed
