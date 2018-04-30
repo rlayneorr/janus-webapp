@@ -59,7 +59,7 @@ export class TrainersComponent implements OnInit {
     this.addForm = this.fb.group({
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required],
-      'email': ['', Validators.required],
+      'email': ['', Validators.email],
       'password': ['', Validators.required],
       'title': ['', Validators.required],
       'role': ['', Validators.required],
@@ -94,7 +94,7 @@ export class TrainersComponent implements OnInit {
     this.rForm = this.fb.group({
       'firstName': [this.currEditTrainer.firstName, Validators.required],
       'lastName': [this.currEditTrainer.lastName, Validators.required],
-      'email': [this.currEditTrainer.email, Validators.required],
+      'email': [this.currEditTrainer.email, Validators.email],
       'title': [this.newTitle, Validators.required],
       'role': [this.newRole.role, Validators.required],
     });
