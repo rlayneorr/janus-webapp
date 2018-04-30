@@ -23,11 +23,11 @@ export class AssociateService {
      * Get all of the associates
      */
     getAllAssociates(): Observable<any> {
-        return this.http.get(environment.context + "/trainees");
+        return this.http.get(environment.context + '/trainees');
     }
 
     getAssociate(id: number): Observable<any> {
-        return this.http.get(environment.context + "/trainees/" + id);
+        return this.http.get(environment.context + '/trainees/' + id);
     }
 
     /**

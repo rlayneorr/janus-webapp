@@ -70,18 +70,7 @@ export class AssociateListComponent implements OnInit {
     const self = this;
     this.associateService.getAllAssociates().subscribe(data => {
       this.associates = data;
-
-      // for (const associate of this.associates) { // get our curriculums
-      //   this.curriculums.add(associate.curriculumName);
-
-      //   if (associate.batches === 'null') {
-      //     associate.batchName = 'None';
-      //   }
-      // }
-      // this.curriculums.delete('');
-      // this.curriculums.delete('null');
       this.sort('userId');
-      console.log(data);
     });
   }
 
@@ -133,7 +122,7 @@ export class AssociateListComponent implements OnInit {
     const trainees: HydraTrainee[] = [];
     const self = this;
 
-    for (let trainee of this.associates) { // grab the checked ids
+    for (const trainee of this.associates) { // grab the checked ids
       const check = <HTMLInputElement>document.getElementById(trainee.userId.toString());
       if (check != null && check.checked) {
         if (this.updateStatus !== null) {
@@ -146,7 +135,7 @@ export class AssociateListComponent implements OnInit {
       }
     }
     let count = 1;
-    for (let trainee of trainees) {
+    for (const trainee of trainees) {
       this.associateService.updateAssociate(trainee).subscribe(
         data => {
           if (count++ === trainees.length) {

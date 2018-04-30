@@ -54,7 +54,7 @@ export class FormComponent implements OnInit {
             this.associate.client = this.selectedClient;
         }
         this.associateService.updateAssociate(this.associate).subscribe(
-            data => {
+            updated => {
                 this.associateService.getAssociate(this.id).subscribe(
                     data => {
                         this.associate = data;
