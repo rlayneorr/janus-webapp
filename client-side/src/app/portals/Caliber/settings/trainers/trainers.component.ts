@@ -96,7 +96,7 @@ export class TrainersComponent implements OnInit {
       'lastName': [this.currEditTrainer.lastName, Validators.required],
       'email': [this.currEditTrainer.email, Validators.required],
       'title': [this.newTitle, Validators.required],
-      'role': [this.newRole, Validators.required],
+      'role': [this.newRole.role, Validators.required],
     });
     this.modalService.open(content, { size: 'lg' });
   }
@@ -156,11 +156,9 @@ export class TrainersComponent implements OnInit {
    * @param modal: modal value with all the fields
    */
   updateTrainer(modal: NgForm) {
-    // replacing the trainer's fields with the new ones
     let updateTrainer: HydraTrainer = modal.value;
     updateTrainer.userId = this.currEditTrainer.userId;
     updateTrainer.role = this.roleMapping(modal.value.role);
-    // call trainerService to update
     this.trainerService.update(updateTrainer).subscribe((resp) => {
       this.currEditTrainer = updateTrainer;
       this.ngOnInit();

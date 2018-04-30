@@ -102,7 +102,7 @@ add or edit a trainer-->
             <div class="col-lg-6 col-md-6 col-sm-12">
               <!-- Dropdown for Trainer role/role -->
               <label class="col-sm-2 control-label text-nowrap" for="role">Role</label>
-              <select class="form-control" formControlName="role" (ngModelChange)="roleChange($event)" name="role">
+              <select class="form-control" formControlName="role" (ngModelChange)="roleChange($event)" name="role" placeholder="Select role">
                 <option value="" disabled>Select role</option>
                 <option [value]="userRole.role" *ngFor="let userRole of userRoles">{{userRole.role}}</option>
               </select>
