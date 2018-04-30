@@ -16,7 +16,6 @@ fdescribe('CourseStructureComponent', () => {
   let component: CourseStructureComponent;
   let fixture: ComponentFixture<CourseStructureComponent>;
   let curTitle: string;
-  const curriculumSub: SubtopicCurric[] = [];
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
@@ -26,12 +25,31 @@ fdescribe('CourseStructureComponent', () => {
     const subtopicService: SubtopicService = TestBed.get(SubtopicService);
     spyOn(curriculumService, 'getSchedualeByCurriculumId')
     .and
-    .returnValue(Observable.of(new Curriculum()));
-    spyOn(subtopicService, 'getSubtopicByIDz')
-    .and
-    .returnValue(Observable.of(curriculumSub));
+    .returnValue(Observable.of(new CurriculumSubtopic
+      (1, new SubtopicName
+        (1, 'testName', new TopicName
+        (1, 'topic') , new SubtopicType
+        (1, 'type')), 1, 1)));
+
+        const sub: SubtopicCurric = new SubtopicCurric();
+        const topic: Topic = new Topic();
+        topic.topicID = 1;
+        topic.topicName = 'topic';
+        sub.subtopicId = 1;
+        sub.parentTopic = topic;
+        sub.status = 'true';
+        sub.subtopicName = 'testName';
+        sub.date.day = 1;
+        sub.date.endTime = 1;
+        sub.date.startTime = 1;
+        sub.date.week = 1;
     TestBed.overrideProvider(CurriculumService, {useValue: curriculumService});
     TestBed.overrideProvider(SubtopicService, {useValue: subtopicService});
+    const subArr1: Array<SubtopicCurric> = new Array();
+    spyOn(subtopicService, 'getSubtopicByIDz')
+    .and
+    .returnValue(Observable.of(subArr1.push(sub)));
+
 
     spyOn(curriculumService, 'changeData')
     .and
@@ -70,11 +88,6 @@ it(
   it(
     'should update', () => {
 
-  //    const curriculumSubTest: CurriculumSubtopic[] = [new CurriculumSubtopic(1, new SubtopicCurric, 1, 1)];
-  // curriculumSubTest[0].curriculumSubtopicNameId.subtopicId = 1;
-  // curriculumSubTest[0].curriculumSubtopicNameId.subtopicName = 'test1';
-  // curriculumSubTest[0].curriculumSubtopicNameId.parentTopic.topicName = 'testTop';
-
   const subArr: Array<CurriculumSubtopic> = new Array();
   subArr.push(new CurriculumSubtopic
     (1, new SubtopicName
@@ -82,6 +95,7 @@ it(
       (1, 'topic') , new SubtopicType
       (1, 'type')), 1, 1));
   component.update(subArr);
+  console.log(subArr);
   expect(subArr[0].curriculumSubtopicNameId.name).toBe('testNameChanged');
 
 
