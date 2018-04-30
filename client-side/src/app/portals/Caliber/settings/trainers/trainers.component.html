@@ -192,7 +192,7 @@ add or edit a trainer-->
                     </select> -->
                 <select class="form-control" formControlName="role" (ngModelChange)="newroleChange($event)" name="role" placeholder="Select Role">
                   <option value="" disabled>Select Role</option>
-                  <option [value]="role.role" *ngFor="let role of roles">{{role.role}}</option>
+                  <option [value]="userRole.role" *ngFor="let userRole of userRoles">{{userRole.role}}</option>
                 </select>
               </div>
             </div>
