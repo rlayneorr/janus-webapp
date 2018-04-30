@@ -59,7 +59,7 @@ export class TrainersComponent implements OnInit {
     this.addForm = this.fb.group({
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required],
-      'email': ['', Validators.email],
+      'email': ['', Validators.required],
       'password': ['', Validators.required],
       'title': ['', Validators.required],
       'role': ['', Validators.required],
@@ -94,7 +94,7 @@ export class TrainersComponent implements OnInit {
     this.rForm = this.fb.group({
       'firstName': [this.currEditTrainer.firstName, Validators.required],
       'lastName': [this.currEditTrainer.lastName, Validators.required],
-      'email': [this.currEditTrainer.email, Validators.email],
+      'email': [this.currEditTrainer.email, Validators.required],
       'title': [this.newTitle, Validators.required],
       'role': [this.newRole, Validators.required],
     });
@@ -142,7 +142,7 @@ export class TrainersComponent implements OnInit {
    * This helpper function mapps a role string into the correct UserRole object
    * @param role
    */
-  roleMapping(role: string) {
+  roleMapping(role: string): UserRole {
     for (let index = 0; index < this.userRoles.length; index++) {
       if (role === this.userRoles[index].role) {
         return this.userRoles[index];
@@ -157,7 +157,7 @@ export class TrainersComponent implements OnInit {
    */
   updateTrainer(modal: NgForm) {
     // replacing the trainer's fields with the new ones
-    const updateTrainer: HydraTrainer = modal.value;
+    let updateTrainer: HydraTrainer = modal.value;
     updateTrainer.userId = this.currEditTrainer.userId;
     updateTrainer.role = this.roleMapping(modal.value.role);
     // call trainerService to update
