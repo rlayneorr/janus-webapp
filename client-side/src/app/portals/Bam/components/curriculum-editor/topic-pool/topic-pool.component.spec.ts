@@ -27,9 +27,9 @@ fdescribe('TopicPoolComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it ('should set the topics array to contain the same values as the subTopicName array', () => {
-    const Topics: Array<Topic> = [{topicID: 0, topicName: 'FirstTopic'},
-      {topicID: 1, topicName: 'SecondTopic'}, {topicID: 2, topicName: 'ThirdTopic'}];
+  it('should set the topics array to contain the same values as the subTopicName array', () => {
+    const Topics: Array<Topic> = [{ topicID: 0, topicName: 'FirstTopic' },
+    { topicID: 1, topicName: 'SecondTopic' }, { topicID: 2, topicName: 'ThirdTopic' }];
 
     component.subTopicName = Topics;
     component.initTopics();
@@ -41,35 +41,57 @@ fdescribe('TopicPoolComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it ('should return true if the specified Topic appears only once in the array', () => {
+  it('should return true if the specified Topic appears only once in the array', () => {
     const tempTopic: Topic = new Topic();
 
     tempTopic.topicName = 'ThirdTopic';
     tempTopic.topicID = 2;
 
-    const Topics: Array<Topic> = [{topicID: 0, topicName: 'FirstTopic'},
-      {topicID: 1, topicName: 'SecondTopic'}, tempTopic, {topicID: 3, topicName: 'FourthTopic'}];
+    const Topics: Array<Topic> = [{ topicID: 0, topicName: 'FirstTopic' },
+    { topicID: 1, topicName: 'SecondTopic' }, tempTopic, { topicID: 3, topicName: 'FourthTopic' }];
 
-      const boolean = component.onlyUnique(tempTopic, 2, Topics);
+    const boolean = component.onlyUnique(tempTopic, 2, Topics);
 
-      expect(boolean).toBeTruthy();
+    expect(boolean).toBeTruthy();
   });
 
   /**
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it ('should return false if the specified index is not the first time the specified Topic appears in the array', () => {
+  it('should return false if the specified index is not the first time the specified Topic appears in the array', () => {
     const tempTopic: Topic = new Topic();
 
     tempTopic.topicName = 'ThirdTopic';
     tempTopic.topicID = 2;
 
-    const Topics: Array<Topic> = [{topicID: 0, topicName: 'FirstTopic'},
-      {topicID: 1, topicName: 'SecondTopic'}, tempTopic, {topicID: 3, topicName: 'FourthTopic'}, tempTopic];
+    const Topics: Array<Topic> = [{ topicID: 0, topicName: 'FirstTopic' },
+    { topicID: 1, topicName: 'SecondTopic' }, tempTopic, { topicID: 3, topicName: 'FourthTopic' }, tempTopic];
 
-      const boolean = component.onlyUnique(tempTopic, 4, Topics);
+    const boolean = component.onlyUnique(tempTopic, 4, Topics);
 
-      expect(boolean).toBeFalsy();
+    expect(boolean).toBeFalsy();
+  });
+
+  /**
+  * @author Holden Olivier
+  * @batch 1803 usf
+  */
+  it('should return an array of unique Topics', () => {
+    const Topics: Array<string> = ['FirstTopic',
+      'SecondTopic',
+      'ThirdTopic',
+      'FourthTopic',
+      'ThirdTopic',
+      'SixthTopic'];
+
+    const filteredTopics = Topics.filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    });
+
+    component.topics = Topics;
+    component.uniqueTopics();
+
+    expect(component.uniqarrFiltered).toEqual(filteredTopics);
   });
 });
