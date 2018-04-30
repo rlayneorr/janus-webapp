@@ -38,7 +38,6 @@ export class RequestService {
   }
 
   public getAssociates(): Observable<any> {
-    console.log(this.host + '/trainees');
     return this.http.get(this.host + '/trainees');
   }
 
