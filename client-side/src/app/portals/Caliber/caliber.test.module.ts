@@ -211,7 +211,14 @@ export const Dependencies = {
         SearchPipe,
         TagFilterPipe,
         BucketFilterPipe,
+<<<<<<< HEAD
 
+=======
+        // PaginatePipe,
+
+        // components
+        // PaginationControlsComponent,
+>>>>>>> 3aea6fe23979c39cd493f536709f0e6febf6014d
         CaliberComponent,
         HomeComponent,
         AssessComponent,
