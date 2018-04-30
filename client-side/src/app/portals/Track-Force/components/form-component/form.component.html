@@ -27,8 +27,8 @@
                             </tr>
                             <tr>
                                 <th>Batch Name</th>
-                                <td>
-                                    <a [routerLink]="['/TrackForce/batch-details', associate.bid]">{{associate.batchName}}</a>
+                                <td *ngIf="associate.batch != null">
+                                    <a [routerLink]="['/TrackForce/batch-details', associate.batch.batchId]">{{associate.batch.batchId}}</a>
                                 </td>
                             </tr>
                             <tr>
