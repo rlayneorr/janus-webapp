@@ -157,7 +157,7 @@ export class TrainersComponent implements OnInit {
    */
   updateTrainer(modal: NgForm) {
     // replacing the trainer's fields with the new ones
-    const temp : Trainer = modal.value;
+    const temp: Trainer = modal.value;
     temp.userId = this.currEditTrainer.userId;
     temp.role = this.roleMapping(modal.value.role);
     console.log(temp);
