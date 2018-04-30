@@ -78,6 +78,17 @@ export const environment = {
     delete: (id) => `${context}/gambit-skills-service/skill/${id}`
   },
 
+  skillType: {
+    find: (id) => `${context}/gmabit-skills-service/skillType/${id}`,
+    findByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
+    findAll: () => `${context}/gambit-skills-service/skillType`,
+    save: () => `${context}/gambit-skills-service/skillType`,
+    update: (id) => `${context}/gambit-skills-service/skillType/${id}`,
+    updateByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
+    delete: (id) => `${context}/gambit-skills-service/skillType/${id}`,
+    deleteByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`
+  },
+
   trainee: {
     fetchAllByBatch: (batchId: number) => `${context}all/trainee?batchId=${batchId}`,
     save: () => `${context}vp/trainer/create`,

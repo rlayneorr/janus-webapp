@@ -10,13 +10,14 @@ import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 // services
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
-import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
+import { GambitSkillTypeService } from '../../../../hydra-client/services/skillType/gambit-skill-type.service';
 import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
 import { ApiService } from '../../services/api.service';
 import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
+import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillType';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   public batch: HydraBatch;
 
   public trainers: Trainer[];
-  public skills: string[];
+  public skillTypes: GambitSkillType[];
   public locations: Address[];
   public trainingTypes: string[];
   batchType: string;
@@ -44,7 +45,6 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   private savedBatchSubscription: Subscription;
   private trainingTypeListSubscription: Subscription;
-  private skillListSubscription: Subscription;
   private locationListSubscription: Subscription;
   private trainerListSubscription: Subscription;
 
@@ -52,7 +52,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     private activeModal: NgbActiveModal,
     private batchService: HydraBatchService,
     private trainingTypeService: TrainingTypeService,
-    private skillService: GambitSkillService,
+    private skillTypeService: GambitSkillTypeService,
     private locationService: LocationService,
     public trainerService: TrainerService
   ) {
@@ -60,11 +60,6 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     this.setLocations([]);
     this.setTrainers([]);
     this.setTrainingTypes([]);
-    this.setSkills([]);
-  }
-
-  public setSkills(skills: GambitSkill[]): void {
-    this.skills = skills.map(skill => skill.skillName);
   }
 
   public setLocations(locations: Address[]): void {
@@ -155,8 +150,9 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((types) => this.setTrainingTypes(types));
 
     /*fetches all skills */
-    this.skillListSubscription = this.skillService.listSubject
-      .subscribe((skills) => this.setSkills(skills));
+    this.skillTypeService.findAll().subscribe(skillTypes => {
+      this.skillTypes = skillTypes;
+    });
 
     /* fetches all batches */
     this.batchService.fetchAll();
@@ -192,7 +188,6 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     this.locationListSubscription.unsubscribe();
     this.trainerListSubscription.unsubscribe();
     this.trainingTypeListSubscription.unsubscribe();
-    this.skillListSubscription.unsubscribe();
   }
 
   ngOnChanges(): void {
