@@ -8,7 +8,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { Batch } from '../../../portals/Caliber/entities/Batch';
 import { environment } from '../../../../environments/environment';
 
-fdescribe('HydraBatchService', () => {
+xdescribe('HydraBatchService', () => {
   const batch = new HydraBatch();
   this.context = environment.context;
   batch.trainer = 100;

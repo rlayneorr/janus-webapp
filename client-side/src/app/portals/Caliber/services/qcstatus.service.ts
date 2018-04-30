@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { urls } from './urls';
+import { environment } from '../../../../environments/environment';
 
 // Interfaces
 import { Fetch } from '../interfaces/api.interface';
@@ -30,7 +30,7 @@ export class QCStatusService implements Fetch<string> {
    * retrieve all QCStatus types
    */
   public fetchAll(): Observable<string[]> {
-    this.http.get<string[]>(urls.qcStatus.fetchAll()).subscribe((data) => {
+    this.http.get<string[]>(environment.qcStatus.fetchAll()).subscribe((data) => {
       this.listSubject.next(data);
     });
     return this.listSubject.asObservable();
