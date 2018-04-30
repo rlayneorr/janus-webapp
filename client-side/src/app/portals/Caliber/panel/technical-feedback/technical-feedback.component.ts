@@ -19,15 +19,15 @@ export class TechnicalFeedbackComponent implements OnInit {
   techList: GambitSkill[];
   filteredTechList: GambitSkill[] = [];
 
-  @Input() technologyForm: FormGroup;
+  @Input() skillForm: FormGroup;
 
   /**
    *
    * @param skillService
    */
   constructor(private skillService: GambitSkillService) {
-    this.technologyForm = new FormGroup({
-       technology: new FormControl(),
+    this.skillForm = new FormGroup({
+       skill: new FormControl(),
        result: new FormControl(),
        status: new FormControl(),
        comment: new FormControl()
@@ -35,7 +35,7 @@ export class TechnicalFeedbackComponent implements OnInit {
   }
 
   /**
-   * gets technology list and filters out duplicates
+   * gets skill list and filters out duplicates
    */
   ngOnInit() {
     this.skillService.findAllActive().subscribe(skills => {
