@@ -317,7 +317,8 @@ export const Dependencies = {
     PDFService,
     PanelSearchbarComponent,
     NgbActiveModal,
-    {provide: Router, useValue: {}}
+    {provide: Router, useValue: {}},
+    GranularityService
   ],
   bootstrap: [
     // TrainersComponent

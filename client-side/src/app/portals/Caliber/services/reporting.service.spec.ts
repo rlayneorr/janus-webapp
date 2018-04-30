@@ -3,7 +3,10 @@ import { TestBed, inject } from '@angular/core/testing';
 import { ReportingService } from './reporting.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CacheData } from '../../../entities/CacheData.entity';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
+import { MockBackend } from '@angular/http/testing';
+import { XHRBackend, ResponseOptions, HttpModule, Response } from '@angular/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 /**
  * Tested by Mythoua Chang
@@ -11,7 +14,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 fdescribe('ReportingServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ReportingService, HttpClient, HttpHandler]
+      providers: [ReportingService, HttpClient, HttpHandler, MockBackend]
     });
   });
 
@@ -70,9 +73,52 @@ fdescribe('ReportingServiceService', () => {
     expect(service['BatchWeekSortedBarChart']).toEqual(data);
   }));
 
-  fit('fetchBatchComparisonAvg(java, java, 12/12/12) should return:',
-    inject([ReportingService], (service: ReportingService) => {
-      expect(service.fetchBatchComparisonAvg('java', 'java', '12/12/12'))
-        .toBe('http://localhost:8765/all/reports/compare/skill/java/training/java/date/12/12/12');
+});
+
+fdescribe('ReportingService test Http calls', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule],
+      providers: [
+        ReportingService,
+        {provide: XHRBackend, useClass: MockBackend},
+        HttpClientTestingModule
+      ]
+    });
+  });
+
+  it('fetchQcStatusDonutChart(1) testing:',
+    inject([ReportingService, XHRBackend, HttpClientTestingModule],
+      (service: ReportingService, mockBackend: MockBackend) => {
+
+      const mockResponse = {
+        data: [
+        { params: 'Jordan', data: 7},
+        { params: 'David', data: 1},
+        { params: 'Mythoua', data: 2},
+        { params: 'Chris', data: 4},
+        { params: 'William', data: 7},
+        { params: 'Jake', data: 10},
+      ]};
+
+      const mock = new BehaviorSubject<CacheData>({params: 4, data: 6});
+      service['qcStatusDoughnut'] = mock;
+      expect(service['qcStatusDoughnut']).toEqual(mock);
+      service.fetchQcStatusDoughnutChart(1);
+      // Should be undefined as this is making a call to an API that does not yet
+      // exist (to be expected if we're just working on front end testing)
+      expect(service['qcStatusDoughnut']).toBeUndefined();
+
+      mockBackend.connections.subscribe((connection) => {
+        connection.mockRespond(
+          new Response(new ResponseOptions({
+              body: JSON.stringify(mockResponse)
+          })
+        ));
+      });
+
+      // Cannot test mock data because we cannot subscribe to void methods (There is no return for this method)
+      // service.fetchQcStatusDoughnutChart(1).subscribe();
   }));
+
 });
