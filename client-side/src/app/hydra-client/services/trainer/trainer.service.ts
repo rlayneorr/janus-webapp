@@ -128,8 +128,8 @@ export class TrainerService {
   }
 
   /**
-   * Makes a trainer inactive and pushes the inactivated trainer
-   * to observable
+   * Makes a trainer inactive and pushes the updated trainer on the
+   * observable
    * @param trainer
    */
   public makeInactive(trainer: HydraTrainer): Observable<HydraTrainer> {

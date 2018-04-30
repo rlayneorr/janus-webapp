@@ -13,7 +13,7 @@
                     </div>
                     <div class="desc">{{ currentTrainer.title }}</div>
                     <div class="desc">{{ currentTrainer.email }}</div>
-                    <div class="desc">{{currentTrainer.role.role}}</div>
+                    <div class="desc">{{ currentTrainer.role.role }}</div>
                 </div>
                 <div class="bottom">
                     <i class="fa fa-pencil" style="color:#ff8e4d;" (click)="editTrainer(content, currentTrainer)"></i>
@@ -117,7 +117,7 @@
                         <!-- Dropdown for Trainer role/role -->
                         <label class="col-sm-2 control-label text-nowrap" for="role">Role</label>
                         <select class="form-control" formControlName="role" (ngModelChange)="roleChange($event)" name="role">
-                            <option [value]="role.role" *ngFor="let role of roles">{{role.role}}</option>
+                            <option [value]="userRole.role" *ngFor="let userRole of userRoles">{{userRole.role}}</option>
                         </select>
                     </div>
                 </div>

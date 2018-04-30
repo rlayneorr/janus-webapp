@@ -19,7 +19,7 @@ export class TrainersComponent implements OnInit {
   trainers: HydraTrainer[] = [];
   filteredTrainers: HydraTrainer[] = [];
   titles: Array<any>;
-  roles: Array<UserRole>;
+  userRoles: Array<UserRole>;
   model = new HydraTrainer();
   activeStatus: String;
   currEditTrainer: HydraTrainer;
@@ -45,7 +45,7 @@ export class TrainersComponent implements OnInit {
     });
     this.trainerService.fetchTitles().subscribe(res => this.titles = res);
     this.trainerService.fetchRoles().subscribe(res => {
-      this.roles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
+      this.userRoles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
     });
     this.initFormControl();
   }
@@ -143,9 +143,9 @@ export class TrainersComponent implements OnInit {
    * @param role
    */
   roleMapping(role: string) {
-    for (let index = 0; index < this.roles.length; index++) {
-      if (role === this.roles[index].role) {
-        return this.roles[index];
+    for (let index = 0; index < this.userRoles.length; index++) {
+      if (role === this.userRoles[index].role) {
+        return this.userRoles[index];
       }
     }
   }
@@ -157,13 +157,12 @@ export class TrainersComponent implements OnInit {
    */
   updateTrainer(modal: NgForm) {
     // replacing the trainer's fields with the new ones
-    const temp: HydraTrainer = modal.value;
-    temp.userId = this.currEditTrainer.userId;
-    temp.role = this.roleMapping(modal.value.role);
-    console.log(temp);
+    const updateTrainer: HydraTrainer = modal.value;
+    updateTrainer.userId = this.currEditTrainer.userId;
+    updateTrainer.role = this.roleMapping(modal.value.role);
     // call trainerService to update
-    this.trainerService.update(temp).subscribe((resp) => {
-      this.currEditTrainer = temp;
+    this.trainerService.update(updateTrainer).subscribe((resp) => {
+      this.currEditTrainer = updateTrainer;
       this.ngOnInit();
     });
 
