@@ -1,12 +1,12 @@
 
-    <div class="form-group" [formGroup]="technologyForm">
+    <div class="form-group" [formGroup]="skillForm">
   
       <div class="row justify-content-center">
   
         <div class="col-lg-3 col-md-3 col-sm-2">
           <div class="form-group">
-            <label for="technology"></label>
-            <select class="form-control" id="technology" formControlName="technology">
+            <label for="skill"></label>
+            <select class="form-control" id="skill" formControlName="skill">
               <option *ngFor="let technologies of techList" [ngValue]="technologies">{{technologies.skillName}}</option>
             </select>
           </div>
