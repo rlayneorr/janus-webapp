@@ -22,6 +22,7 @@ import { SkillTypeService } from '../../../portals/Caliber/screening/services/sk
 import { GambitSkillTypeService } from '../../services/skillType/gambit-skill-type.service';
 import { HydraBatchService } from '../../services/batch/hydra-batch.service';
 import { GambitBatch } from '../../entities/GambitBatch';
+import { Trainer } from '../../entities/Trainer';
 
 
 /**
@@ -33,6 +34,7 @@ export class BatchService {
 
     public listSubject: BehaviorSubject<CompleteBatch[]>;
     public batches: CompleteBatch[] = [];
+    public trainer: Trainer;
     public savedSubject: Subject<CompleteBatch>;
     public updatedSubject: Subject<CompleteBatch>;
     public deletedSubject: Subject<CompleteBatch>;
@@ -70,24 +72,26 @@ export class BatchService {
           console.log(results);
           for (let result of results) { // will need to call skill servive instead of making our own http request
             this.gambitSkillTypeService.find(result['skillTypeId']).subscribe(res => {
-              this.batches.push({
-                batchId: result['batchId'],
-                resourceId: result['resourceId'],
-                trainingName: result['trainingName'],
-                trainer: result['trainerId'],
-                cotrainer: result['cotrainerId'],
-                skillType: res,
-                trainingType: result['trainingType'],
-                addressId: result['addressId'],
-                address: result['addressId'],
-                location: result['location'],
-                goodGradeThreshold: null,
-                borderlineGradeThreshold: null,
-                startDate: result['startDate'],
-                endDate: result['endDate'],
-                week: null,
-                noteIds: result['trainees'],
-                trainees: result['trainees'],
+              this.getTrainer(result['trainerId']).subscribe((trainerRes) => {
+                this.batches.push({
+                  batchId: result['batchId'],
+                  resourceId: result['resourceId'],
+                  trainingName: result['trainingName'],
+                  trainer: trainerRes,
+                  cotrainer: result['cotrainerId'],
+                  skillType: res,
+                  trainingType: result['trainingType'],
+                  addressId: result['addressId'],
+                  address: result['addressId'],
+                  location: result['location'],
+                  goodGradeThreshold: null,
+                  borderlineGradeThreshold: null,
+                  startDate: result['startDate'],
+                  endDate: result['endDate'],
+                  week: null,
+                  noteIds: result['trainees'],
+                  trainees: result['trainees'],
+                });
               });
             });
           }
@@ -96,6 +100,10 @@ export class BatchService {
         });
       return this.listSubject.asObservable();
       }
+    }
+
+    getTrainer(trainerId: number) {
+      return this.http.get<Trainer>(environment.trainer.fetchById(trainerId));    
     }
 
     /**
