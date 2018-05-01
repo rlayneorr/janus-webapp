@@ -170,7 +170,7 @@ import { CategoryService } from './services/category.service';
 import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 
 import { settings } from 'cluster';
-import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
+// import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
 import { UrlService } from '../../hydra-client/services/urls/url.service';
 
 export const Dependencies = {
