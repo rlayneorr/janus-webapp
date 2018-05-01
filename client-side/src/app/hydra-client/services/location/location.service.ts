@@ -51,8 +51,8 @@ export class LocationService {
     );
   }
   // get Location by Id //
-  getLocation(location: any) {
-    return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
+  getLocation(locationId: number) {
+    return this.httpClient.get<Location>(this.urls.location.getLocationById(locationId)).subscribe(
       (payload) => {
         this.location.next(payload);
         console.log(payload);
