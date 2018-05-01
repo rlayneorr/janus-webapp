@@ -5,7 +5,7 @@ import { GambitSkill } from './GambitSkill';
  * PEGA, MicroServices, Appian, JTA, .NET, etc.
  */
 
-export class SkillType {
+export class GambitSkillType {
   skillTypeId: number;
   skillTypeName: string;
   skillTypeDesc: string;

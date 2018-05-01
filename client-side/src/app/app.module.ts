@@ -15,7 +15,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
-import { CategoriesService } from './portals/Caliber/services/categories.service';
 
 import { CaliberModule } from './portals/Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
@@ -32,6 +31,7 @@ import { HydraInterceptor } from './hydra-client/interceptors/hydra.interceptor'
 
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { ToastrOptions } from './hydra-client/ui/error-alert/toastr-options';
+import { GambitSkillService } from './hydra-client/services/skill/gambit-skill.service';
 
 
 // loading routes from child modules this way will lazy load them
