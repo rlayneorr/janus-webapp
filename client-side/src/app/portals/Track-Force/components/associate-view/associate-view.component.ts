@@ -40,9 +40,11 @@ export class AssociateViewComponent implements OnInit {
     private clientService: ClientListService) { }
 
   ngOnInit() {
+    console.log("init");
     //gets the associate id from the path
     //the '+' coerces the parameter into a number
     let id = +this.activated.snapshot.paramMap.get('id');
+    console.log("init: " + id);
     this.getAssociate(id);
     this.getInterviews(id);
     this.getClients();
@@ -69,6 +71,7 @@ export class AssociateViewComponent implements OnInit {
     this.clientService.getAllClients().subscribe(
       data => {
         this.clients = data;
+        console.log(data);
       },
       err => {
         console.log(err);

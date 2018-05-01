@@ -18,8 +18,9 @@ export class LoginComponent implements OnInit {
   //url to REST endpoint
   public username: string;
   public password: string;
-  backgroundImg = environment.assets + "23.jpg";
-  logo = environment.assets + "logo.png";
+  backgroundImg = environment.assets + '23.jpg';
+  logo = environment.assets + 'logo.png';
+  errMsg = '';
 
   /**
   *@constructor

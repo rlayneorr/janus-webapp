@@ -11,7 +11,7 @@
           <tbody>
             <tr>
               <td>Associate ID</td>
-              <td>{{associate.id}}</td>
+              <td>{{associate.userId}}</td>
             </tr>
             <tr>
               <td>First Name</td>
@@ -27,7 +27,7 @@
             </tr>
             <tr>
               <td>Batch Name</td>
-              <td><a [routerLink]="['/TrackForce/batch-details', associate.bid]">{{associate.batchName}}</a></td>
+              <td><a [routerLink]="['/TrackForce/batch-details', associate.batch.batchId]">{{associate.batch.batchId}}</a></td>
             </tr>
             <tr>
               <td>Client Name</td>
@@ -35,7 +35,7 @@
             </tr>
             <tr>
               <td>Start Date</td>
-              <td>{{associate.clientStartDate | date:'longDate'}}</td>
+              <!-- <td>{{associate.clientStartDate | date:'longDate'}}</td> -->
             </tr>
           </tbody>
         </table>

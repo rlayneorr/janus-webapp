@@ -8,7 +8,7 @@
             <tbody>
               <tr>
                 <td>Associate ID</td>
-                <td>{{associate.id}}</td>
+                <td>{{associate.userId}}</td>
               </tr>
               <tr>
                 <td>First Name</td>
@@ -23,8 +23,8 @@
                 <td>{{associate.marketingStatus}}</td>
               </tr>
               <tr>
-                <td>Batch Name</td>
-                <td>{{associate.batchName}}</td>
+                <td>Batch</td>
+                <td>{{associate.batch.batchId}}</td>
               </tr>
               <tr>
                 <td>Client Name</td>
@@ -32,7 +32,7 @@
               </tr>
               <tr>
                 <td>End Client Name</td>
-                <td>{{associate.endClientName}}</td>
+                <!-- <td>{{associate.endClientName}}</td> -->
               </tr>
             </tbody>
           </table>
@@ -96,7 +96,7 @@
                  <div class="col-sm-9">
                    <select class="form-control" name="newClient" [(ngModel)]="newInterview.client">
                        <option selected="selected">None</option>
-                       <option *ngFor="let client of clients" [value]="client.id">{{client.tfClientName}}</option>
+                       <option *ngFor="let client of clients" [value]="client.id">{{client.clientName}}</option>
                    </select>
                  </div>
               </div>
