@@ -5,10 +5,10 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { Subscription } from 'rxjs/Subscription';
 
 // entities
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 
 // services
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { BatchService } from '../../../../hydra-client/aggregator/services/completebatch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
 import { GambitSkillTypeService } from '../../../../hydra-client/services/skillType/gambit-skill-type.service';
 import { LocationService } from '../../services/location.service';
@@ -28,10 +28,10 @@ import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillTy
 export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input()
-  public initialBatch: HydraBatch;
+  public initialBatch: CompleteBatch;
 
   @Input()
-  public batch: HydraBatch;
+  public batch: CompleteBatch;
 
   public trainers: Trainer[];
   public skillTypes: GambitSkillType[];
@@ -50,13 +50,13 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private activeModal: NgbActiveModal,
-    private batchService: HydraBatchService,
+    private batchService: BatchService,
     private trainingTypeService: TrainingTypeService,
     private skillTypeService: GambitSkillTypeService,
     private locationService: LocationService,
     public trainerService: TrainerService
   ) {
-    this.batch = new HydraBatch();
+    this.batch = new CompleteBatch();
     this.setLocations([]);
     this.setTrainers([]);
     this.setTrainingTypes([]);
@@ -115,7 +115,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   onTrainerSelect(trainerId: number): void {
     for (const trainer of this.trainers) {
       if (Number(trainer.trainerId) === Number(trainerId)) {
-        this.batch.trainer = trainer.trainerId;
+        this.batch.trainer.userId = trainer.trainerId;
       }
     }
   }
@@ -127,7 +127,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   onCoTrainerSelect(trainerId: number): void {
     for (const trainer of this.trainers) {
       if (Number(trainer.trainerId) === Number(trainerId)) {
-        this.batch.cotrainer = trainer.trainerId;
+        this.batch.cotrainer.userId = trainer.trainerId;
       }
     }
   }
@@ -170,7 +170,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     isNewBatch is assigned so that the proper functions are called from the buttons
     This should be redesigned */
 
-    if (this.batch.trainer === 0) {
+    if (this.batch.trainer.userId === 0) {
       this.batchType = 'Create New Batch';
       this.isNewBatch = true;
     } else {

@@ -2,7 +2,7 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'http://localhost:10000';
+const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000';
 const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
@@ -21,11 +21,12 @@ export const environment = {
   },
 
   batch: {
-    fetchAllByTrainer: () => `${context}trainer/batch/all`,
-    fetchAll: () => `${context}vp/batch/all`,
-    save: () => `${context}all/batch/create`,
-    update: () => `${context}all/batch/update`,
-    delete: (batchId) => `${context}all/batch/delete/${batchId}`,
+    fetchAllByTrainer: () => `${context}/batches/trainers`,
+    fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
+    fetchAll: () => `${context}/batches`,
+    save: () => `${context}/batches`,
+    update: () => `${context}/batches`,
+    delete: (batchId) => `${context}/batches/${batchId}`
   },
 
   category: {
@@ -111,6 +112,7 @@ export const environment = {
 
   trainer: {
     fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
+    fetchById: (id: number) => `${context}/trainers/${id}`,
     fetchAll: () => `${context}all/trainer/all`,
     save: () => `${context}vp/trainer/create`,
     update: () => `${context}vp/trainer/update`,
