@@ -16,13 +16,14 @@ export const environment = {
     update: () => `${context}trainer/assessment/update`,
     delete: (assessmentId: number) => `${context}trainer/assessment/delete/${assessmentId}`,
   },
-
+  
   batch: {
-    fetchAllByTrainer: () => `${context}trainer/batch/all`,
-    fetchAll: () => `${context}vp/batch/all`,
-    save: () => `${context}all/batch/create`,
-    update: () => `${context}all/batch/update`,
-    delete: (batchId) => `${context}all/batch/delete/${batchId}`,
+    fetchAllByTrainer: () => `${context}/batches/trainers`,
+    fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
+    fetchAll: () => `${context}/batches`,
+    save: () => `${context}/batches`,
+    update: () => `${context}/batches`,
+    delete: (batchId) => `${context}/batches/${batchId}`
   },
 
   category: {
@@ -83,6 +84,7 @@ export const environment = {
   },
 
   skillType: {
+<<<<<<< HEAD
     find: (id) => `${context}/skillType/${id}`,
     findByName: (name) => `${context}/skillType/name/${name}`,
     findAll: () => `${context}/skillType`,
@@ -96,6 +98,21 @@ export const environment = {
     updateByName: (name) => `${context}/skillType/name/${name}`,
     delete: (id) => `${context}/skillType/${id}`,
     deleteByName: (name) => `${context}/skillType/name/${name}`
+=======
+    find: (id) => `${context}/skills-service/skillType/${id}`,
+    findByName: (name) => `${context}/skills-service/skillType/name/${name}`,
+    findAll: () => `${context}/skills-service/skillType`,
+    findAllActive: () => `${context}/skills-service/skillType/active`,
+    findAllSkills: () => `${context}/skills-service/skillType/skill`,
+    save: () => `${context}/skills-service/skillType`,
+    saveSkill: (skillTypeId, skillId) => `${context}/skills-service/skillType/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) =>
+    `${context}/skills-service/skillType/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id) => `${context}/skills-service/skillType/${id}`,
+    updateByName: (name) => `${context}/skills-service/skillType/name/${name}`,
+    delete: (id) => `${context}/skills-service/skillType/${id}`,
+    deleteByName: (name) => `${context}/skills-service/skillType/name/${name}`
+>>>>>>> 9ed9b73f3fbc1b7bf33d38643fbf766ab13514a4
   },
 
   trainee: {
@@ -108,6 +125,7 @@ export const environment = {
 
   trainer: {
     fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
+    fetchById: (id: number) => `${context}/trainers/${id}`,
     fetchAll: () => `${context}all/trainer/all`,
     save: () => `${context}vp/trainer/create`,
     update: () => `${context}vp/trainer/update`,
