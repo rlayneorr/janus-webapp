@@ -87,7 +87,7 @@ export class LocationService {
       this.buildings.next(payload);
     });
   }
-  // Get all buildings by Location ID. this one is dependent on a location's Id //
+  // Get all buildings by Location ID. This is dependent on a location's Id //
   getBuildingsByLocationId(locationId: any) {
     return this.httpClient.get<Array<Building>>(this.urls.building.getBuildingsByLocationId(locationId)).subscribe((payload) => {
       console.log(payload);
@@ -119,15 +119,15 @@ export class LocationService {
         }
       );
   }
-  // set Building as inactive //
-  deleteBuilding(building: Building) {
-    return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
-      (payload) => {
-        // console.log('Logging deleteBuilding from service:  ' + JSON.stringify(payload));
-        this.location.next(payload);
-      }
-    );
-  }
+  // // set Building as inactive //
+  // deleteBuilding(building: Building) {
+  //   return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
+  //     (payload) => {
+  //       // console.log('Logging deleteBuilding from service:  ' + JSON.stringify(payload));
+  //       this.location.next(payload);
+  //     }
+  //   );
+  // }
 
   // get all Rooms //
   getAllRooms() {
@@ -147,6 +147,7 @@ export class LocationService {
       }
     );
   }
+  // // get all Rooms in a Location //
   // getRoomsByLocationId(locationId: any) {
   //   return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByLocationId(locationId))
   //   .subscribe((payload) => {
@@ -182,15 +183,15 @@ export class LocationService {
         }
       );
   }
-  // set Room as inactive //
-  deleteRoom(room: Room) {
-    return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
-      (payload) => {
-        // console.log('Logging deleteRoom from service:  ' + JSON.stringify(payload));
-        this.location.next(payload);
-      }
-    );
-  }
+  // // set Room as inactive //
+  // deleteRoom(room: Room) {
+  //   return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
+  //     (payload) => {
+  //       // console.log('Logging deleteRoom from service:  ' + JSON.stringify(payload));
+  //       this.location.next(payload);
+  //     }
+  //   );
+  // }
 
   // get all Unavailabilities //
   getAllUnavailabilities() {
