@@ -228,7 +228,7 @@ import { CategoryService } from './services/category.service';
     VpLineGraphComponent,
     VpPanelGraphComponent,
     SettingsComponent,
-    //SkillsComponent,
+    SkillsComponent,
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
