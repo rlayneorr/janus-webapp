@@ -187,9 +187,9 @@ export class TrainerProfilesComponent implements OnInit {
     this.trainerService.update(updatedTrainer).subscribe((resp) => {
       this.currEditTrainer = updatedTrainer;
       this.ngOnInit();
-  });
-
+    });
   }
+
   roleMapping(role: string) {
     for (let index = 0; index < this.userRoles.length; index++) {
       if (role === this.userRoles[index].role) {

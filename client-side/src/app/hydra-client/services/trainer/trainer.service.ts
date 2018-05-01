@@ -124,6 +124,7 @@ export class TrainerService {
      */
 
   public update(trainer: HydraTrainer): Observable<HydraTrainer> {
+    this.currentTrainer = trainer;
     return this.httpClient.put<HydraTrainer>(this.urls.trainers.update(), trainer);
   }
 
@@ -133,6 +134,7 @@ export class TrainerService {
    * @param trainer
    */
   public makeInactive(trainer: HydraTrainer): Observable<HydraTrainer> {
+    this.currentTrainer = trainer;
     return this.httpClient.put<HydraTrainer>(this.urls.users.makeInactive(), trainer);
   }
 }
