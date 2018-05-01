@@ -88,7 +88,7 @@ it(
 
    });
 
-  it(
+  fit(
     'should update', async() => {
 
   const subArr: Array<CurriculumSubtopic> = new Array();
