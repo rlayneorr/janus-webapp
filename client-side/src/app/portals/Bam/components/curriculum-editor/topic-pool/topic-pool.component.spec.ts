@@ -8,8 +8,9 @@ import { SubtopicService } from '../../../services/subtopic.service';
 import { Observable } from 'rxjs/Observable';
 import { SubtopicCurric } from '../../../models/subtopicCurric.model';
 import { SearchTextService } from '../../../services/search-text.service';
+import { DragndropService } from '../../../services/dragndrop.service';
 
-fdescribe('TopicPoolComponent', () => {
+describe('TopicPoolComponent', () => {
   let component: TopicPoolComponent;
   let fixture: ComponentFixture<TopicPoolComponent>;
 
@@ -19,8 +20,9 @@ fdescribe('TopicPoolComponent', () => {
   // Used to tell the spy on searchTextService.getMessage() what it should return during a unit test.
   const typeReturn: string = null;
 
-  // A Spy for checkig if a function on the otherwise innacessible searchTextService has been called.
+  // Spies for checking if a function on an other inaccessible service has been called.
   let searchTextSendSpy: jasmine.Spy = null;
+  let dndSendSpy: jasmine.Spy = null;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
@@ -32,7 +34,8 @@ fdescribe('TopicPoolComponent', () => {
     notParentTopic = { topicID: 512, topicName: 'notParentTopic' };
 
     const subtopicService: SubtopicService = TestBed.get(SubtopicService);
-    const searchTextService = TestBed.get(SearchTextService);
+    const searchTextService: SearchTextService = TestBed.get(SearchTextService);
+    const dndService: DragndropService = TestBed.get(DragndropService);
 
     spyOn(subtopicService, 'getAllSubtopics').and.returnValue(Observable.of<SubtopicCurric[]>([
       {
@@ -57,8 +60,9 @@ fdescribe('TopicPoolComponent', () => {
         return Observable.of({ type: 'subtopic', text: 'sub' });
       }
     }).bind(this);
-
     searchTextSendSpy = spyOn(searchTextService, 'sendMessage');
+
+    dndSendSpy = spyOn(dndService, 'sendSubtopic');
 
     fixture = TestBed.createComponent(TopicPoolComponent);
     component = fixture.componentInstance;
@@ -223,6 +227,15 @@ fdescribe('TopicPoolComponent', () => {
   it('should call searchTextService.sendMessge()', () => {
     component.clearTopic();
     expect(searchTextSendSpy).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should call dndService.sendSubtopic()', () => {
+    component.sendCurrentlyDragged(null);
+    expect(dndSendSpy).toHaveBeenCalled();
   });
 });
 
