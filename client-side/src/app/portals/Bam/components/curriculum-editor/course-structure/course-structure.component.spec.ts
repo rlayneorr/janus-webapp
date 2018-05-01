@@ -12,7 +12,7 @@ import { CurriculumSubtopic } from '../../../models/curriculumSubtopic.model';
 import { SubtopicName } from '../../../models/subtopicname.model';
 import { SubtopicType } from '../../../models/subtopictype.model';
 import { TopicName } from '../../../models/topicname.model';
-describe('CourseStructureComponent', () => {
+fdescribe('CourseStructureComponent', () => {
   let component: CourseStructureComponent;
   let fixture: ComponentFixture<CourseStructureComponent>;
   let curTitle: string;
@@ -46,9 +46,12 @@ describe('CourseStructureComponent', () => {
     TestBed.overrideProvider(CurriculumService, {useValue: curriculumService});
     TestBed.overrideProvider(SubtopicService, {useValue: subtopicService});
     const subArr1: Array<SubtopicCurric> = new Array();
+    subArr1.push(sub);
+    // console.log('printing out the first one ');
+    // console.log(subArr1);
     spyOn(subtopicService, 'getSubtopicByIDz')
     .and
-    .returnValue(Observable.of(subArr1.push(sub)));
+    .callFake(function(){ return Observable.of(subArr1); });
 
 
     spyOn(curriculumService, 'changeData')
@@ -86,7 +89,7 @@ it(
    });
 
   it(
-    'should update', () => {
+    'should update', async() => {
 
   const subArr: Array<CurriculumSubtopic> = new Array();
   subArr.push(new CurriculumSubtopic
