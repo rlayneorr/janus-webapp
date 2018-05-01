@@ -150,7 +150,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((types) => this.setTrainingTypes(types));
 
     /*fetches all skills */
-    this.skillTypeService.findAll().subscribe(skillTypes => {
+    this.skillTypeService.findAllActive().subscribe(skillTypes => {
       this.skillTypes = skillTypes;
     });
 
