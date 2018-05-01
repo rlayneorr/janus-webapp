@@ -289,7 +289,8 @@ export const Dependencies = {
         BucketComponent,
         SkillTypeBucketsComponent,
         QuestionComponent,
-        ScreeningComponent
+        ScreeningComponent,
+        VpBarGraphComponent,
 
   ],
   providers: [
@@ -325,6 +326,7 @@ export const Dependencies = {
     NgbActiveModal,
     HydraBatchService,
     UrlService,
+    VpHomeBarGraphService,
     {provide: Router, useValue: {}}
   ],
   bootstrap: [

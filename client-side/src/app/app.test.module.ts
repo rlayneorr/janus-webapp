@@ -21,6 +21,7 @@ import { Trainer } from './entities/Trainer';
 import { CaliberModule } from './portals/Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorAlertComponent } from './hydra-client/ui/error-alert/error-alert.component';
 
 
 // loading routes from child modules this way will lazy load them
@@ -56,6 +57,7 @@ export const Dependencies = {
     LoginComponent,
     DashboardComponent,
     JanusComponent,
+    ErrorAlertComponent,
   ],
   providers: [
   ],
