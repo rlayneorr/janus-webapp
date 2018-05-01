@@ -1,5 +1,5 @@
 export class GambitSkill {
-  skillId: number;
+  skillID: number;
   skillName: string;
   isActive: boolean;
 }
