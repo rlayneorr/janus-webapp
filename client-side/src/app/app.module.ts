@@ -32,6 +32,12 @@ import { HydraInterceptor } from './hydra-client/interceptors/hydra.interceptor'
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { ToastrOptions } from './hydra-client/ui/error-alert/toastr-options';
 import { GambitSkillService } from './hydra-client/services/skill/gambit-skill.service';
+import {AuthenticationService} from "./portals/Caliber/services/authentication.service";
+import {RequestService} from "./portals/Track-Force/services/request-service/request.service";
+import { CurriculumService } from './portals/Track-Force/services/curriculum-service/curriculum.service';
+import {InterviewService} from "./portals/Track-Force/services/interview-service/interview-service";
+import {MarketStatusService} from "./portals/Track-Force/services/market-status/market-status.service";
+import {PlacementService} from "./portals/Track-Force/services/placement-service/placement.service";
 
 
 // loading routes from child modules this way will lazy load them
@@ -77,7 +83,13 @@ const routes: Routes = [
     CookieService,
     HydraBatchUtilService,
     ErrorAlertComponent,
-    {provide: ToastOptions, useClass: ToastrOptions}
+    {provide: ToastOptions, useClass: ToastrOptions},
+    AuthenticationService,
+    RequestService,
+    CurriculumService,
+    InterviewService,
+    MarketStatusService,
+    PlacementService
   ],
   bootstrap: [AppComponent]
 })
