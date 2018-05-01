@@ -40,6 +40,13 @@ export class GambitSkillTypeService {
   }
 
   /**
+   * Retrieves all the active SkillTypes.
+   */
+  findAllActive(): Observable<Array<GambitSkillType>> {
+    return this.http.get<Array<GambitSkillType>>(this.context.findAllActive());
+  }
+
+  /**
    * Transmits a new skillType to be created.
    * @param skillType The SkillType to be created.
    */
@@ -63,4 +70,21 @@ export class GambitSkillTypeService {
     return this.http.delete<boolean>(this.context.delete(skillType.skillTypeId));
   }
 
+  /**
+   * Adds a Skill to a SkillType.
+   * @param skillTypeId The id of the SkillType.
+   * @param skillId The id of the Skill.
+   */
+  addSkill(skillTypeId: number, skillId: number) {
+    return this.http.put<void>(this.context.saveSkill(skillTypeId, skillId), null);
+  }
+
+  /**
+   * Adds a Skill to a SkillType.
+   * @param skillTypeName The id of the SkillType.
+   * @param skillName The id of the Skill.
+   */
+  addSkillByname(skillTypeName: string, skillName: string) {
+    return this.http.put<void>(this.context.saveSkillByName(skillTypeName, skillName), null);
+  }
 }
