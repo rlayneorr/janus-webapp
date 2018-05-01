@@ -168,12 +168,12 @@ export class UrlService {
    * @author Tanhim Ahmed
    */
   building = {
-    getBuildingsByLocationId: (locationId: number) => `${this.context}/location/${locationId}/building/`,
-    getBuildingById: (buildingId: number) => `${this.context}/location/building/${buildingId}`,
-    getAllBuildings: () => `${this.context}/location/building`,
-    postBuilding: () => `${this.context}/location/building`,
+    getBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
+    getBuildingsByLocationId: (locationId: number) => `${this.context}/building/location/${locationId}`,
+    getAllBuildings: () => `${this.context}/building/`,
+    postBuilding: () => `${this.context}/building/`,
     putBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
-    deleteBuildingById: (buildingId: number) => `${this.context}/buidling/${buildingId}`
+    // deleteBuildingById: (buildingId: number) => `${this.context}/buidling/${buildingId}`
   };
 
   /**
@@ -182,13 +182,13 @@ export class UrlService {
    * @author Tanhim Ahmed
    */
   room = {
-    getRoomById: (roomId: number) => `${this.context}/location/room/${roomId}`,
-    getAllRooms: () => `${this.context}/location/room`,
-    // getRoomsByLocationId: (locationId: number) => `${this.context}/location/${locationId}/room`,
-    getRoomsByBuildingId: (buildingId: number) => `${this.context}/location/building/${buildingId}/room`,
-    postRoom: () => `${this.context}/location/room`,
-    putRoomById: (roomId: number) => `${this.context}/location/room/${roomId}`,
-    deleteRoomById: (roomId: number) => `${this.context}/location/room/${roomId}`
+    getRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
+    getAllRooms: () => `${this.context}/room/`,
+    // getRoomsByLocationId: (locationId: number) => `${this.context}/room/location/${locationId}`,
+    getRoomsByBuildingId: (buildingId: number) => `${this.context}/room/building/${buildingId}`,
+    postRoom: () => `${this.context}/room/`,
+    putRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
+    // deleteRoomById: (roomId: number) => `${this.context}/room/${roomId}`
   };
 
   /**
@@ -197,11 +197,11 @@ export class UrlService {
    * @author Tanhim Ahmed
    */
   unavailability = {
-    // getUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`,
-    getAllUnavailabilities: () => `${this.context}/location/unavailability`,
-    postUnavailability: () => `${this.context}/location/unavailability`,
-    // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`,
-    // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/location/unavailability/${unavailabilityId}`
+    // getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
+    getAllUnavailabilities: () => `${this.context}/unavailabilities/`,
+    postUnavailability: () => `${this.context}/unavailabilities/`,
+    // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
+    // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`
   };
 
   constructor() {
