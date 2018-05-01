@@ -112,14 +112,17 @@ export class SkillsetComponent implements OnInit {
     if (this.skillID === SkillsetComponent.NULL) {
       // we get it from the ActivatedRoute params
       this.skillID = Number(this.route.snapshot.paramMap.get('id'));
-      if (this.skillID < 6) this.skillID += 6;  // TODO: remove this
+      if (this.skillID < 6) {
+        this.skillID += 6;  // TODO: remove this
+      }
       // we now set selectedStatus
       SkillsetComponent.SKILL_INFO.forEach((value, key) => {
-        if (value === this.skillID) this.selectedStatus = key;
+        if (value === this.skillID) {
+          this.selectedStatus = key;
+        }
       });
       // if there is empty string, simply go home
-      if (!this.selectedStatus)
-      {
+      if (!this.selectedStatus) {
         this.router.navigate(['/root']);
       }
     }
@@ -129,8 +132,16 @@ export class SkillsetComponent implements OnInit {
       const skillsets: Array<any> = data;
       console.log(data);
       // map() that variable into skillsetData,skillsetLabels
-      this.skillsetData = skillsets.map((obj) => { if (obj.count) return obj.count; }).filter(this.isNotUndefined);
-      this.skillsetLabels = skillsets.map((obj) => { if (obj.count) return obj.name; }).filter(this.isNotUndefined);
+      this.skillsetData = skillsets.map((obj) => {
+        if (obj.count) {
+          return obj.count;
+        }
+      }).filter(this.isNotUndefined);
+      this.skillsetLabels = skillsets.map((obj) => {
+        if (obj.count) {
+          return obj.name;
+        }
+      }).filter(this.isNotUndefined);
       this.status = (((!this.skillsetLabels) || (!this.skillsetLabels.length)) &&
         ((!this.skillsetData) || (!this.skillsetData.length))) ?
         'There is no batch data on this status...' : 'Loaded!';
@@ -154,7 +165,9 @@ export class SkillsetComponent implements OnInit {
           position: 'right'
         };
         // ... and getting rid of the scales ...
-        if (this.chartOptions.scales) delete this.chartOptions.scales;
+        if (this.chartOptions.scales) {
+          delete this.chartOptions.scales;
+        }
         break;
       // otherwise, for BAR charts...
       case SkillsetComponent.chartTypes.BAR:
@@ -171,8 +184,10 @@ export class SkillsetComponent implements OnInit {
   }
 
   public goToAssociateList(event) {
-    if (event.active[0] != undefined) {
-      this.router.navigate([`/TrackForce/associate-listing/curriculum/${this.skillsetLabels[event.active[0]._index]}/unmapped/${this.selectedStatus}`]);
+    if (event.active[0] !== undefined) {
+      this.router.navigate([`/TrackForce/associate-listing/curriculum/
+          ${this.skillsetLabels[event.active[0]._index]}
+          /unmapped/${this.selectedStatus}`]);
     }
   }
 

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -6,8 +6,8 @@ import { Associate } from '../../models/associate.model';
 import { Response } from '@angular/http/';
 import { environment } from '../../../../../environments/environment';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import 'rxjs/add/operator/map'
-import { forEach } from "@angular/router/src/utils/collection";
+import 'rxjs/add/operator/map';
+import { forEach } from '@angular/router/src/utils/collection';
 
 /**
  * Service for retrieving and updating data relating to associates.
@@ -16,7 +16,7 @@ import { forEach } from "@angular/router/src/utils/collection";
 @Injectable()
 export class AssociateService {
 
-    private associatePath: string = "8091";
+    private associatePath = '8091';
 
     status: string;
     client: string;
@@ -43,8 +43,8 @@ export class AssociateService {
      * @param statusId Contains the marketing status id used to fetch data
      */
     getAssociatesByStatus(statusId: number) {
-        console.log("Inside Associate Service - getFilteredAssociates");
-        console.log("statusId: " + statusId);
+        console.log('Inside Associate Service - getFilteredAssociates');
+        console.log('statusId: ' + statusId);
         return this.http.get(environment.url + this.associatePath + '/all/associate/marketingStatus/' + statusId);
     }
 
@@ -55,8 +55,8 @@ export class AssociateService {
     * @param statusId Contains the marketing status id used to fetch data
     */
     getAssociatesByClient(statusId: number) {
-        console.log("Inside Associate Service - getFilteredAssociates");
-        console.log("statusId: " + statusId);
+        console.log('Inside Associate Service - getFilteredAssociates');
+        console.log('statusId: ' + statusId);
         return this.http.get(environment.url + this.associatePath + '/all/associate/client/' + statusId);
     }
 
@@ -67,8 +67,8 @@ export class AssociateService {
      * @param statusId Contains the marketing status id used to fetch data
      */
     getAssociatesByEndClient(statusId: number) {
-        console.log("Inside Associate Service - getFilteredAssociates");
-        console.log("statusId: " + statusId);
+        console.log('Inside Associate Service - getFilteredAssociates');
+        console.log('statusId: ' + statusId);
         return this.http.get(environment.url + this.associatePath + '/all/associate/endClient/' + statusId);
     }
 
@@ -79,8 +79,8 @@ export class AssociateService {
      * @param statusId Contains the marketing status id used to fetch data
      */
     getAssociatesByBatch(statusId: number) {
-        console.log("Inside Associate Service - getFilteredAssociates");
-        console.log("statusId: " + statusId);
+        console.log('Inside Associate Service - getFilteredAssociates');
+        console.log('statusId: ' + statusId);
         return this.http.get(environment.url + this.associatePath + '/all/associate/batch/' + statusId);
     }
 
@@ -93,12 +93,12 @@ export class AssociateService {
     }
 
     getInterviewsForAssociate(id: number): Observable<any> {
-        let url: string = environment.url + this.associatePath + "/" + id + "/interviews/";
+        const url: string = environment.url + this.associatePath + '/' + id + '/interviews/';
         return this.http.get(url);
     }
 
     addInterviewForAssociate(id: number, interview: any): Observable<any> {
-        let url: string = environment.url + this.associatePath + "/" + id + "/interviews/";
+        const url: string = environment.url + this.associatePath + '/' + id + '/interviews/';
         return this.http.post(url, interview);
     }
 }

@@ -33,14 +33,14 @@ export class CreateUserComponent implements OnInit {
      * Sends new user information to service
      *
      */
-    createUser(){
-      if (this.password !== this.password2){
+    createUser() {
+      if (this.password !== this.password2) {
         window.alert('Passwords do not match!');
       } else {
         this.userService.createUser(this.username, this.password, this.roleId).subscribe(
           data => {
             console.log(data);
-            //navigate to home page if return is valid
+            // navigate to home page if return is valid
             this.router.navigate(['root']);
           },
           err => {

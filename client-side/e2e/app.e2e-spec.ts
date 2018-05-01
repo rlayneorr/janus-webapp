@@ -3,7 +3,7 @@ import { browser } from 'protractor';
 
 describe('test-app App', () => {
   let page: AppPage;
-  
+
   beforeEach(() => {
     page = new AppPage();
   });
@@ -44,7 +44,7 @@ it('should go Client List Page', () => {
 it('should click first client', () => {
     page.clickFirstClient();
     expect(page.getClientListChartTitle()).toEqual('22nd Century Technologies');
-  });  
+  });
 
 it('should search for a client and click result', () => {
     page.searchClientList('FINRA');

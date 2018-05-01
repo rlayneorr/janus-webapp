@@ -9,7 +9,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // services
-//import { ApiService } from '../util/api.service';
+// import { ApiService } from '../util/api.service';
 import { environment } from '../../../../environments/environment';
 
 // entities
@@ -39,7 +39,7 @@ export class BatchService {
     public updatedSubject: Subject<CompleteBatch>;
     public deletedSubject: Subject<CompleteBatch>;
 
-    constructor(public http: HttpClient, 
+    constructor(public http: HttpClient,
       public hydraBatchService: HydraBatchService,
       public gambitSkillTypeService: GambitSkillTypeService) {
       this.listSubject = new BehaviorSubject([]);
@@ -66,11 +66,11 @@ export class BatchService {
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
      */
     public fetchAll(): Observable<CompleteBatch[]> {
-      if (this.batches.length == 0) {
+      if (this.batches.length === 0) {
       this.http.get<any[]>(environment.batch.fetchAll())
         .subscribe((results) => {
           console.log(results);
-          for (let result of results) { // will need to call skill servive instead of making our own http request
+          for (const result of results) { // will need to call skill servive instead of making our own http request
             this.gambitSkillTypeService.find(result['skillTypeId']).subscribe(res => {
               this.getTrainer(result['trainerId']).subscribe((trainerRes) => {
                 this.batches.push({
@@ -103,7 +103,7 @@ export class BatchService {
     }
 
     getTrainer(trainerId: number) {
-      return this.http.get<Trainer>(environment.trainer.fetchById(trainerId));    
+      return this.http.get<Trainer>(environment.trainer.fetchById(trainerId));
     }
 
     /**
@@ -116,7 +116,7 @@ export class BatchService {
     public fetchAllByTrainerId(id: number) {
       this.http.get<any[]>(environment.batch.fetchAllByTrainerId(id))
       .subscribe((results) => {
-        for (let result of results) { // will need to call skill servive instead of making our own http request
+        for (const result of results) { // will need to call skill servive instead of making our own http request
           this.gambitSkillTypeService.find(result['skillTypeId']).subscribe(res => {
             this.batches.push({
               batchId: result['batchId'],
@@ -157,13 +157,13 @@ export class BatchService {
     * @param batch: Batch
     */
    public create(completeBatch: CompleteBatch): Observable<GambitBatch> {
-    let gambitBatch: GambitBatch = new GambitBatch();
+    const gambitBatch: GambitBatch = new GambitBatch();
     gambitBatch.batchId = completeBatch.batchId;
     gambitBatch.addressId = completeBatch.resourceId;
     gambitBatch.trainingName = completeBatch.trainingName;
     gambitBatch.trainerId = completeBatch.trainer.userId;
 
-    //TODO Verify that the logic for creating cotrainers in a batch as initially null
+    // TODO Verify that the logic for creating cotrainers in a batch as initially null
     //       is valid. See aggregator/entities/CompleteBatch constructor for more details
     if (completeBatch.cotrainer != null ) {
       gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
@@ -183,7 +183,7 @@ export class BatchService {
 
     // iterates over the HydraTrainee array in completeBatch to push ids to
     //    the GambitBatch traineeId array
-    for (let trainee of completeBatch.trainees) {
+    for (const trainee of completeBatch.trainees) {
       gambitBatch.traineeIds.push(trainee.traineeId);
     }
 
@@ -200,13 +200,13 @@ export class BatchService {
      */
     public update(completeBatch: CompleteBatch): Observable<GambitBatch> {
 
-      let gambitBatch: GambitBatch = new GambitBatch();
+      const gambitBatch: GambitBatch = new GambitBatch();
       gambitBatch.batchId = completeBatch.batchId;
       gambitBatch.addressId = completeBatch.resourceId;
       gambitBatch.trainingName = completeBatch.trainingName;
       gambitBatch.trainerId = completeBatch.trainer.userId;
 
-      //TODO Verify that the logic for creating cotrainers in a batch as initially null
+      // TODO Verify that the logic for creating cotrainers in a batch as initially null
       //       is valid. See aggregator/entities/CompleteBatch constructor for more details
       if (completeBatch.cotrainer != null ) {
         gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
@@ -226,7 +226,7 @@ export class BatchService {
 
       // iterates over the HydraTrainee array in completeBatch to push ids to
       //    the GambitBatch traineeId array
-      for (let trainee of completeBatch.trainees) {
+      for (const trainee of completeBatch.trainees) {
         gambitBatch.traineeIds.push(trainee.traineeId);
       }
 
@@ -243,13 +243,13 @@ export class BatchService {
     * @param batch: Batch
     */
    public delete(completeBatch: CompleteBatch): Observable<GambitBatch> {
-    let gambitBatch: GambitBatch = new GambitBatch();
+    const gambitBatch: GambitBatch = new GambitBatch();
     gambitBatch.batchId = completeBatch.batchId;
     gambitBatch.addressId = completeBatch.resourceId;
     gambitBatch.trainingName = completeBatch.trainingName;
     gambitBatch.trainerId = completeBatch.trainer.userId;
 
-    //TODO Verify that the logic for creating cotrainers in a batch as initially null
+    // TODO Verify that the logic for creating cotrainers in a batch as initially null
     //       is valid. See aggregator/entities/CompleteBatch constructor for more details
     if (completeBatch.cotrainer != null ) {
       gambitBatch.cotrainerId = completeBatch.cotrainer.userId;
@@ -269,7 +269,7 @@ export class BatchService {
 
     // iterates over the HydraTrainee array in completeBatch to push ids to
     //    the GambitBatch traineeId array
-    for (let trainee of completeBatch.trainees) {
+    for (const trainee of completeBatch.trainees) {
       gambitBatch.traineeIds.push(trainee.traineeId);
     }
 
@@ -288,7 +288,7 @@ export class BatchService {
      */
     // We should find a way to make this have an explicit non-any type
     protected prepareForApi(batch: CompleteBatch): any {
-      let output: any = {};
+      const output: any = {};
       Object.assign(output, batch);
 
       output.startDate = stringifyDate(batch.startDate);

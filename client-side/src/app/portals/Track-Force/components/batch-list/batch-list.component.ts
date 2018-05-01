@@ -45,10 +45,10 @@ export class BatchListComponent implements OnInit {
 
 
   constructor(
-    private batchService: BatchService, 
+    private batchService: BatchService,
     private curriculumService: CurriculumService)  {
   }
- 
+
 
   /**
    * load default batches on initialization

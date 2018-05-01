@@ -5,7 +5,7 @@ import { environment } from '../../../../../environments/environment';
 
 @Injectable()
 export class PredictionService {
-  private predictionPath = "TrackForce/prediction/";
+  private predictionPath = 'TrackForce/prediction/';
 
     /**
     * @constructor
@@ -14,7 +14,7 @@ export class PredictionService {
     */
     constructor(private http: HttpClient) {}
 
-    public getPrediction(startTime: number,endTime: number, techs: any) {
-      return this.http.get<any>(environment.url + this.predictionPath + startTime + "/" + endTime);
+    public getPrediction(startTime: number, endTime: number, techs: any) {
+      return this.http.get<any>(environment.url + this.predictionPath + startTime + '/' + endTime);
     }
 }

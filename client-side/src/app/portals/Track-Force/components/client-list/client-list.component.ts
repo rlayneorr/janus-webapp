@@ -24,7 +24,7 @@ import {PlacementService} from '../../services/placement-service/placement.servi
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
-  public showNoData: boolean = false;
+  public showNoData = false;
   public selectedCompany: string;
   public clientInfo: Client[];
   public clientNames: object[] = [];
@@ -32,8 +32,8 @@ export class ClientListComponent implements OnInit {
   public searchName;
   // chart variable
   public barChartLabel: string[] = SelectedStatusConstants.CLIENT_LABELS;
-  public barChartType: string = 'bar';
-  public barChartLegend: boolean = true;
+  public barChartType = 'bar';
+  public barChartLegend = true;
   public barChartColors: Array<Color> = ThemeConstants.BAR_COLORS;
 
   public barChartOptions: any = {
@@ -59,7 +59,7 @@ export class ClientListComponent implements OnInit {
       mode: 'label',
       callbacks: {
         label: function (tooltipItem, data) {
-          return data.datasets[tooltipItem.datasetIndex].label + ": " + tooltipItem.yLabel;
+          return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel;
         }
       }
     }
@@ -73,7 +73,7 @@ export class ClientListComponent implements OnInit {
               private marketStatus: MarketStatusService,
               private associates: AssociateService,
               private interviews: InterviewService,
-              private placement: PlacementService,) {
+              private placement: PlacementService, ) {
   }
 
   ngOnInit() {
@@ -82,7 +82,7 @@ export class ClientListComponent implements OnInit {
 
   // get client names from data and push to clientNames string array
   getAllClients() {
-    let self = this;
+    const self = this;
     this.clientInfo = [];
     let i = 0;
     this.clientService.getAllClients().subscribe(clients => {
@@ -90,10 +90,10 @@ export class ClientListComponent implements OnInit {
         console.log(clients);
         console.log(associates);
 
-        for(let client of clients){
-          let id = client['clientId'];
-          let name = client['clientName'];
-          if(client['clientId']){
+        for (const client of clients){
+          const id = client['clientId'];
+          const name = client['clientName'];
+          if (client['clientId']) {
             const tempClient: Client = {
                   id: id,
                   name: name,
@@ -103,10 +103,10 @@ export class ClientListComponent implements OnInit {
                   interviews: null,
                   stats: null,
                 };
-            let associateList = associates.filter(items => items['clientId'] === id);
+            const associateList = associates.filter(items => items['clientId'] === id);
             this.clientNames.push({name: tempClient.tfClientName, id: id});
-            for(let associate of associateList){
-              this.marketStatus.getMarketingStatusById(associate['marketingStatusId']).subscribe(status=>{
+            for (const associate of associateList){
+              this.marketStatus.getMarketingStatusById(associate['marketingStatusId']).subscribe(status => {
                 tempClient.stats = status;
                 i++;
                 this.clientInfo.push(tempClient);
@@ -117,10 +117,10 @@ export class ClientListComponent implements OnInit {
               });
             }
           }
-          //console.log(client);
+          // console.log(client);
         }
       });
-     //this.initChartData();
+     // this.initChartData();
      // console.log(this.clientInfo);
     });
 
@@ -173,17 +173,17 @@ export class ClientListComponent implements OnInit {
   }
 
   initChartData() {
-    this.selectedCompany = "";
+    this.selectedCompany = '';
     // aggregate client info into overall statistics
     let trainingMapped = 0;
-    let reservedMapped = 0;
+    const reservedMapped = 0;
     let selectedMapped = 0;
-    let confirmedMapped = 0;
+    const confirmedMapped = 0;
     let trainingUnmapped = 0;
-    let openUnmapped = 0;
+    const openUnmapped = 0;
     let selectedUnmapped = 0;
-    let confirmedUnmapped = 0;
-    let terminatedUnmapped = 0;
+    const confirmedUnmapped = 0;
+    const terminatedUnmapped = 0;
     let terminatedMapped = 0;
     let deployedUnmapped = 0;
     let deployedMapped = 0;
@@ -203,54 +203,48 @@ export class ClientListComponent implements OnInit {
     // }
 
 
-    for(let i = 0; i < this.clientInfo.length; i++)
-    {
+    for (let i = 0; i < this.clientInfo.length; i++) {
 
 
-      //console.log(this.clientInfo[i]['stats']['marketingStatusName']);
-      let status = this.clientInfo[i]['stats']['marketingStatusName'].toLowerCase();
+      // console.log(this.clientInfo[i]['stats']['marketingStatusName']);
+      const status = this.clientInfo[i]['stats']['marketingStatusName'].toLowerCase();
      // console.log(status);
       let isMapped = true;
-      if(status.includes('unmapped')){
+      if (status.includes('unmapped')) {
           isMapped = false;
       }
 
-      if(status.includes('training')){
-        if(isMapped){
+      if (status.includes('training')) {
+        if (isMapped) {
           trainingMapped++;
-        }
-        else{
+        } else {
           trainingUnmapped++;
         }
-      }else if(status.includes('deployed')){
-        if(isMapped){
+      } else if (status.includes('deployed')) {
+        if (isMapped) {
           deployedMapped++;
-        }
-        else{
+        } else {
           deployedUnmapped++;
         }
-      }else if(status.includes('selected')){
-        if(isMapped){
+      } else if (status.includes('selected')) {
+        if (isMapped) {
           selectedMapped++;
-        }
-        else{
+        } else {
           selectedUnmapped++;
         }
-      }else if(status.includes('directly placed')){
-        if(isMapped){
+      }else if (status.includes('directly placed')) {
+        if (isMapped) {
           directlyPlacedMapped++;
-        }
-        else{
+        } else {
           directlyPlacedUnmapped++;
         }
-      }else if(status.includes('deployed')){
-        if(isMapped){
+      }else if (status.includes('deployed')) {
+        if (isMapped) {
           deployedMapped++;
-        }
-        else{
+        } else {
           deployedUnmapped++;
         }
-      }else if(status.includes('terminated')){
+      } else if (status.includes('terminated')) {
         terminatedMapped++;
       }
     }
@@ -265,7 +259,7 @@ export class ClientListComponent implements OnInit {
         directlyPlacedUnmapped],
         label: 'Unmapped',
       }
-    ]
+    ];
   }
 
 
@@ -273,14 +267,14 @@ export class ClientListComponent implements OnInit {
   // get client name and find id to request client information
   getOneClient(id) {
     let trainingMapped = 0;
-    let reservedMapped = 0;
+    const reservedMapped = 0;
     let selectedMapped = 0;
-    let confirmedMapped = 0;
+    const confirmedMapped = 0;
     let trainingUnmapped = 0;
-    let openUnmapped = 0;
+    const openUnmapped = 0;
     let selectedUnmapped = 0;
-    let confirmedUnmapped = 0;
-    let terminatedUnmapped = 0;
+    const confirmedUnmapped = 0;
+    const terminatedUnmapped = 0;
     let terminatedMapped = 0;
     let deployedUnmapped = 0;
     let deployedMapped = 0;
@@ -289,56 +283,51 @@ export class ClientListComponent implements OnInit {
 
     console.log(id);
 
-    let data = this.clientInfo.filter(item=> item['id']===id);
+    const data = this.clientInfo.filter(item => item['id'] === id);
     console.log(data);
 
-    for(let stats of data){
+    for (const stats of data) {
       console.log(stats);
-      let status = stats['stats']['marketingStatusName'].toLowerCase();
+      const status = stats['stats']['marketingStatusName'].toLowerCase();
       let isMapped = true;
-      if(status.includes('unmapped')){
+      if (status.includes('unmapped')) {
           isMapped = false;
       }
 
-      if(status.includes('training')){
-        if(isMapped){
+      if (status.includes('training')) {
+        if (isMapped) {
           trainingMapped++;
-        }
-        else{
+        } else {
           trainingUnmapped++;
         }
-      }else if(status.includes('deployed')){
-        if(isMapped){
+      } else if (status.includes('deployed')) {
+        if (isMapped) {
           deployedMapped++;
-        }
-        else{
+        } else {
           deployedUnmapped++;
         }
-      }else if(status.includes('selected')){
-        if(isMapped){
+      } else if (status.includes('selected')) {
+        if (isMapped) {
           selectedMapped++;
-        }
-        else{
+        } else {
           selectedUnmapped++;
         }
-      }else if(status.includes('directly placed')){
-        if(isMapped){
+      } else if (status.includes('directly placed')) {
+        if (isMapped) {
           directlyPlacedMapped++;
-        }
-        else{
+        } else {
           directlyPlacedUnmapped++;
         }
-      }else if(status.includes('deployed')){
-        if(isMapped){
+      } else if (status.includes('deployed')) {
+        if (isMapped) {
           deployedMapped++;
-        }
-        else{
+        } else {
           deployedUnmapped++;
         }
-      }else if(status.includes('terminated')){
+      } else if (status.includes('terminated')) {
         terminatedMapped++;
       }
-      }
+    }
 
 
     this.barChartData = [
@@ -351,8 +340,8 @@ export class ClientListComponent implements OnInit {
         directlyPlacedUnmapped],
         label: 'Unmapped',
       }
-    ]
-    
+    ];
+
 
 
     // let oneClient = this.clientInfo.find(item => item['id']===id);

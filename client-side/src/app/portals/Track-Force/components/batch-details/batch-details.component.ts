@@ -31,7 +31,7 @@ export class BarChartDataSet {
  */
 @AutoUnsubscribe
 export class BatchDetailsComponent implements OnInit {
-  chartType = "bar";
+  chartType = 'bar';
   public options: any = {
     display: true,
     position: 'right',
@@ -55,13 +55,13 @@ export class BatchDetailsComponent implements OnInit {
       mode: 'label',
       callbacks: {
         label: function (tooltipItem, data) {
-          return data.datasets[tooltipItem.datasetIndex].label + ": " + tooltipItem.yLabel;
+          return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel;
         }
       }
     }
   };
   associates: Associate[];
-  dataSets: any[] = [{ data: [0], label: 'Mapped' }, { data: [0], label: 'Unmapped' }, {data: [0], label: 'Other'}];;
+  dataSets: any[] = [{ data: [0], label: 'Mapped' }, { data: [0], label: 'Unmapped' }, {data: [0], label: 'Other'}];
   statusNames: string[];
   isDataReady = false;
   isDataEmpty = false;
@@ -87,7 +87,7 @@ export class BatchDetailsComponent implements OnInit {
             console.log(data);
             this.associates = data;
 
-            //initiialize statuses
+            // initiialize statuses
             const statusMap = new Map<number, number>();
             statusMap.set(1, 0);
             statusMap.set(2, 0);
@@ -109,10 +109,12 @@ export class BatchDetailsComponent implements OnInit {
               statusMap.set(assoc.marketingStatusId, statusCount + 1);
             }
 
-            let mappedCount: number = statusMap.get(1) + statusMap.get(2) + statusMap.get(3) + statusMap.get(4) + statusMap.get(5);
-            let unmappedCount: number  = statusMap.get(6) + statusMap.get(7) + statusMap.get(8) + statusMap.get(9) + statusMap.get(10);
+            const mappedCount: number = statusMap.get(1) + statusMap.get(2) + statusMap.get(3) + statusMap.get(4) + statusMap.get(5);
+            const unmappedCount: number  = statusMap.get(6) + statusMap.get(7) + statusMap.get(8) + statusMap.get(9) + statusMap.get(10);
 
-            const dataSets: BarChartDataSet[] = [new BarChartDataSet("Mapped"), new BarChartDataSet("Unmapped"), new BarChartDataSet("Other")];
+            const dataSets: BarChartDataSet[] = [new BarChartDataSet('Mapped'),
+                new BarChartDataSet('Unmapped'),
+                new BarChartDataSet('Other')];
 
 
                 this.dataSets = [{

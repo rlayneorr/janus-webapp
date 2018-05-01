@@ -15,7 +15,7 @@ export const environment = {
   msurl: 'http://34.227.178.103:',
 
   assets: 'http://52.87.205.55:8086/angular/assets/',
-  //assets: '../../../../../assets/', //url for local testing
+  // assets: '../../../../../assets/', //url for local testing
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,

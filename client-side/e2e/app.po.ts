@@ -22,7 +22,7 @@ export class AppPage {
   }
 
   clickTrackForceButton() {
-    let e = element(by.xpath('/html/body/div/app-root/app-janus/app-dashboard/div[2]/div[3]/div[2]/img'));
+    const e = element(by.xpath('/html/body/div/app-root/app-janus/app-dashboard/div[2]/div[3]/div[2]/img'));
     e.click();
   }
 
@@ -30,12 +30,12 @@ export class AppPage {
     return element(by.id('loginHeaderTrackForce')).getText();
   }
 
-  sendTrackForceLogin(){
-    let username = element(by.id('username'));
+  sendTrackForceLogin() {
+    const username = element(by.id('username'));
     username.sendKeys('TestAdmin');
-    let password = element(by.id('password'));
+    const password = element(by.id('password'));
     password.sendKeys('TestAdmin');
-    let submitButton = element(by.xpath('//*[@id="pwd-container"]/div[2]/section/form/button'));
+    const submitButton = element(by.xpath('//*[@id="pwd-container"]/div[2]/section/form/button'));
     submitButton.click();
   }
 
@@ -45,7 +45,7 @@ export class AppPage {
 
   goToClientListPage() {
     element(by.id('smallWindowNav')).click();
-    let e = element(by.id('clientListNav'));
+    const e = element(by.id('clientListNav'));
     e.click();
   }
 
@@ -53,11 +53,11 @@ export class AppPage {
     return element(by.id('clientTitle')).getText();
   }
 
-  clickFirstClient(){
+  clickFirstClient() {
     element(by.xpath('//*[@id="clients-list"]/li[1]/span')).click();
   }
-  
-  clickCharts(){
+
+  clickCharts() {
     browser.actions().
     mouseMove(element(by.tagName('canvas')[2])).
     mouseMove({x: 200, y: 100}).
@@ -65,12 +65,12 @@ export class AppPage {
     perform();
     browser.pause();
   }
-  
-  getFirstClientListName(){
+
+  getFirstClientListName() {
     return element(by.xpath('//*[@id="clients-list"]/li[1]/span')).getText();
   }
 
-  getClientListChartTitle(){
+  getClientListChartTitle() {
     return element(by.xpath('/html/body/div/app-root/app-janus/app-client-list/div/div[2]/div[2]/h1')).getText();
   }
 
@@ -102,16 +102,16 @@ export class AppPage {
       let data = element.all(by.xpath('//*[@id="clients-list"]/li')).count();
       resolve(data);
     });
-    
+
   }*/
 
   getClientNameAtIndex(index) {
-    let indexString = '//*[@id="clients-list"]/li[' + index + ']/span'
+    const indexString = '//*[@id="clients-list"]/li[' + index + ']/span';
     return element(by.xpath(indexString)).getText();
   }
 
   clickClientAtIndex(index) {
-    let indexString = '//*[@id="clients-list"]/li[' + index + ']/span'
+    const indexString = '//*[@id="clients-list"]/li[' + index + ']/span';
     return element(by.xpath(indexString)).click();
 
   }
@@ -122,7 +122,7 @@ export class AppPage {
 
   goToPredictionsPage() {
     element(by.id('smallWindowNav')).click();
-    element(by.id('predictionsNav')).click();    
+    element(by.id('predictionsNav')).click();
   }
 
   getPredictionsPageTitle() {

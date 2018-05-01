@@ -1,4 +1,4 @@
-import { Associate } from "./associate.model";
+import { Associate } from './associate.model';
 
 
 // export class Placement {
@@ -14,5 +14,5 @@ export class Placement {
     endClientId: string;
     startDate: Date;
     endDate: Date;
-    associateId:string;
+    associateId: string;
 }

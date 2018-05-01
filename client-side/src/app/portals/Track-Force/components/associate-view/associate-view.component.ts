@@ -20,18 +20,18 @@ import { ClientListService } from '../../services/client-list-service/client-lis
 export class AssociateViewComponent implements OnInit {
   public associate: HydraTrainee = new HydraTrainee();
   public interviews: Array<any> = [];
-  public messages: Array<string> = ["I cleared my interview with FINRA","Please update my status"];
-  public newMessage: string = "";
+  public messages: Array<string> = ['I cleared my interview with FINRA', 'Please update my status'];
+  public newMessage = '';
   public newInterview: any = {
     client: null,
     date: null,
     type: null,
     feedback: null
-  }
+  };
   public selectedMarketingStatus: string;
   public clients: Array<any> = [];
-  public selectedClient: string = "";
-  public formOpen: boolean = false;
+  public selectedClient = '';
+  public formOpen = false;
 
   constructor(
     private associateService: AssociateService,
@@ -40,9 +40,9 @@ export class AssociateViewComponent implements OnInit {
     private clientService: ClientListService) { }
 
   ngOnInit() {
-    //gets the associate id from the path
-    //the '+' coerces the parameter into a number
-    let id = +this.activated.snapshot.paramMap.get('id');
+    // gets the associate id from the path
+    // the '+' coerces the parameter into a number
+    const id = +this.activated.snapshot.paramMap.get('id');
     this.getAssociate(id);
     this.getInterviews(id);
     this.getClients();
@@ -54,7 +54,7 @@ export class AssociateViewComponent implements OnInit {
   * @param {number} id
   * the id number of the associate
   */
-  getAssociate(id: number){
+  getAssociate(id: number) {
     this.associateService.getAssociate(id).subscribe(
       data => {
         this.associate = data;
@@ -64,7 +64,7 @@ export class AssociateViewComponent implements OnInit {
     });
   }
 
-  getClients(){
+  getClients() {
     this.clientService.getAllClients().subscribe(
       data => {
         this.clients = data;
@@ -79,15 +79,15 @@ export class AssociateViewComponent implements OnInit {
   }
 
   sendMessage() {
-    let tempString = this.newMessage;
+    const tempString = this.newMessage;
     if (this.newMessage) {
       this.messages.push(tempString.toString());
     }
   }
 
-  addInterview(){
+  addInterview() {
     console.log(this.newInterview);
-    let interview = {
+    const interview = {
       associateId: this.associate.userId,
       clientId: this.newInterview.client,
       typeId: this.newInterview.type,
@@ -101,26 +101,26 @@ export class AssociateViewComponent implements OnInit {
       err => {
         console.log(err);
       }
-    )
+    );
   }
 
   getInterviews(id: number) {
     this.associateService.getInterviewsForAssociate(id).subscribe(
       data => {
-        let tempArr = [];
-        for (let i=0;i<data.length;i++) {
-          let interview = data[i];
-          let intObj = {
+        const tempArr = [];
+        for (let i = 0; i < data.length; i++) {
+          const interview = data[i];
+          const intObj = {
             id: interview.id,
             client: interview.tfClientName,
             date: new Date(interview.tfInterviewDate),
             type: interview.typeName,
             feedback: interview.tfInterviewFeedback
-          }
+          };
           tempArr.push(intObj);
         }
         this.interviews = tempArr;
       }
-    )
+    );
   }
 }

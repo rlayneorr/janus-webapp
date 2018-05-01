@@ -26,6 +26,6 @@ describe('BatchService', () => {
         expect(batches).toBeTruthy();
         expect(batches.length).toEqual(0);
       }
-    )
+    );
   }));
 });

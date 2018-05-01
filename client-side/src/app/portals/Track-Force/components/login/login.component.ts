@@ -15,7 +15,7 @@ import { environment } from '../../../../../environments/environment';
 })
 @AutoUnsubscribe
 export class LoginComponent implements OnInit {
-  //url to REST endpoint
+  // url to REST endpoint
   public username: string;
   public password: string;
   backgroundImg = environment.assets + '23.jpg';
@@ -62,17 +62,16 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.username, this.password).subscribe(
       data => {
-        //debugger;
+        // debugger;
         const user = this.authService.getUser();
-        //navigate to appropriate page if return is valid
-        if (user.tfRoleId === 4){
+        // navigate to appropriate page if return is valid
+        if (user.tfRoleId === 4) {
           this.router.navigate(['associate-view', user.userId]);
         } else {
           this.router.navigateByUrl('/TrackForce/home');
         }
       },
       err => {
-        debugger;
         this.authService.logout();
       }
     );

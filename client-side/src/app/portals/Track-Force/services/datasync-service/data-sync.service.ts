@@ -10,7 +10,7 @@ import { AssociateService } from '../associates-service/associates-service';
 import { ClientListService } from '../client-list-service/client-list.service';
 import { SkillsetService } from '../skill-set-service/skill-set.service';
 import { Observable } from 'rxjs';
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/Rx';
 
 /**
@@ -31,23 +31,23 @@ import 'rxjs/Rx';
  *
  */
 
-const ASSOC_TIMEOUT: number = 30000;
-const BATCH_TIMEOUT: number = 30000;
-const CLIENT_TIMEOUT: number = 30000;
-const CURRI_TIMEOUT: number = 30000;
-const MARKET_TIMEOUT: number = 30000;
+const ASSOC_TIMEOUT = 30000;
+const BATCH_TIMEOUT = 30000;
+const CLIENT_TIMEOUT = 30000;
+const CURRI_TIMEOUT = 30000;
+const MARKET_TIMEOUT = 30000;
 
-const ASSOC_INT: number = 2000;
-const BATCH_INT: number = 2000;
-const CLIENT_INT: number = 2000;
-const CURRI_INT: number = 2000;
-const MARKET_INT: number = 2000;
+const ASSOC_INT = 2000;
+const BATCH_INT = 2000;
+const CLIENT_INT = 2000;
+const CURRI_INT = 2000;
+const MARKET_INT = 2000;
 
 @Injectable()
 export class DataSyncService {
 
   // special auth token. This will only work as long as TestAdmin is a valid user
-  private token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0QWRtaW4iLCJleHAiOjE1MTU4ODA0NTB9.8n2K4gYpDCzIxgOASTI467f1HZtbIkGB16-eb0atSXI";
+  private token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0QWRtaW4iLCJleHAiOjE1MTU4ODA0NTB9.8n2K4gYpDCzIxgOASTI467f1HZtbIkGB16-eb0atSXI';
 
   // specify storage containers for Salesforce data
   private clientStorage: BehaviorSubject<Client[]>;
@@ -99,7 +99,7 @@ export class DataSyncService {
   //
 
   private setAssociateStorage(data: any) {
-    let newStorage = this.associateStorage = data;
+    const newStorage = this.associateStorage = data;
     // this.associateStorage.next(newSt orage);
   }
 
@@ -110,47 +110,47 @@ export class DataSyncService {
   }
 
   private setClientStorage(data: any) {
-    let newStorage = this.clientStorage = data;
+    const newStorage = this.clientStorage = data;
     // this.clientStorage.next(newStorage);
   }
 
   public fetchClientStorage() {
     this.cs.getAllClients().subscribe(data => {
       // this.setClientStorage(data);
-    })
+    });
   }
 
   private setBatchStorageSortedById(data: any) {
-    let newStorage = this.batchStorageById = data;
+    const newStorage = this.batchStorageById = data;
     // this.batchStorageById.next(newStorage);
   }
 
   public fetchBatchStorageSortedById() {
     this.bs.getAllBatchesMapped().subscribe(data => {
       // this.setBatchStorageSortedById(data);
-    })
+    });
   }
 
   private setBatchStorageSortedByDate(data: any) {
-    let newStorage = this.batchStorageByDate = data;
+    const newStorage = this.batchStorageByDate = data;
     // this.batchStorageByDate.next(newStorage);
   }
 
   public fetchBatchStorageSortedByDate() {
     this.bs.getAllBatchesOrdered().subscribe(data => {
       // this.setBatchStorageSortedByDate(data);
-    })
+    });
   }
 
   private setCurriculumStorage(data: any) {
-    let newStorage = this.curriculumStorage = data;
+    const newStorage = this.curriculumStorage = data;
     // this.curriculumStorage.next(newStorage);
   }
 
   public fetchCurriculumStorage() {
     this.ss.getAllCurricula().subscribe(data => {
       // this.setCurriculumStorage(data);
-    })
+    });
   }
 
   private setMarketingStorage(data: any) {
@@ -163,6 +163,6 @@ export class DataSyncService {
   public fetchMarketingStorage() {
     this.rs.getStatuses().subscribe(data => {
       // this.setMarketingStorage(data);
-    })
+    });
   }
 }

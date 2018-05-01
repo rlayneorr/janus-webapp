@@ -39,7 +39,7 @@ export class AuthenticationService {
   public login(username: string, password: string): Observable<User> {
     return this.http.post<User>(environment.url + 'TrackForce/users/login', { username: username, password: password }).map(
       user => {
-        if(user){
+        if (user) {
           localStorage.setItem(USER_KEY, JSON.stringify(user));
         }
         return user;
@@ -64,7 +64,7 @@ export class AuthenticationService {
   *
   *@param none
   */
-  logout(){
+  logout() {
     localStorage.removeItem(USER_KEY);
     this.router.navigate(['login']);
   }

@@ -13,8 +13,8 @@ import {ThemeConstants} from '../../constants/theme.constants';
 import {ChartOptions} from '../../models/ng2-charts-options.model';
 import '../../constants/selected-status.constants';
 import { SelectedStatusConstants } from '../../constants/selected-status.constants';
-import {User} from "../../models/user.model";
-import {AuthenticationService} from "../../services/authentication-service/authentication.service";
+import {User} from '../../models/user.model';
+import {AuthenticationService} from '../../services/authentication-service/authentication.service';
 import { MarketStatusService } from '../../services/market-status/market-status.service';
 import { MarketingStatus } from '../../models/marketing-status.model';
 
@@ -26,14 +26,14 @@ const MONTHS_3 = 788923800;
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   private associates: any;
 
   /**
  * http://usejsdoc.org/
  */
 
- //Message from the back-end
+ // Message from the back-end
   dbMessage: string;
   myStatus: string;
   username: string;
@@ -41,7 +41,7 @@ export class HomeComponent {
   data = [];
   amountType: any;
 
-  //Variables for chart settings
+  // Variables for chart settings
   undeployedLabels = SelectedStatusConstants.UNDEPLOYED_LABELS;
   mappedLabels = SelectedStatusConstants.MAPPED_LABELS;
   unmappedLabels = SelectedStatusConstants.UNMAPPED_LABELS;
@@ -51,10 +51,10 @@ export class HomeComponent {
   clientColors: Array<Color> = ThemeConstants.CLIENT_COLORS;
   skillColors: Array<Color> = ThemeConstants.SKILL_COLORS;
 
-  deployedChartType = "pie";
-  undeployedChartType = "pie";
-  mappedChartType = "pie";
-  unmappedChartType = "pie";
+  deployedChartType = 'pie';
+  undeployedChartType = 'pie';
+  mappedChartType = 'pie';
+  unmappedChartType = 'pie';
 
   private options = ChartOptions.createOptionsLegend('right');
 
@@ -62,14 +62,14 @@ export class HomeComponent {
   mappedOptions = ChartOptions.createOptionsTitle('Mapped', 24, '#121212', 'right');
   deployedOptions = ChartOptions.createOptionsTitle('Mapped vs. Unmapped (Deployed)', 24, '#121212', 'right');
   undeployedOptions = ChartOptions.createOptionsTitle('Mapped vs. Unmapped (Not Deployed)', 24, '#121212', 'right');
-  //end of chart settings
+  // end of chart settings
 
   // populate with dummy data to enable chart labels by default
   private undeployedData: number[] = [0, 0];
   private deployedData: number[] = [0, 0];
   private mappedData: number[] = [0, 0, 0, 0];
   private unmappedData: number[] = [0, 0, 0, 0];
-  private user:User;
+  private user: User;
 
 
   /**
@@ -94,17 +94,16 @@ export class HomeComponent {
     private as: AssociateService,
     private ms: MarketStatusService,
     private authenticationService: AuthenticationService
-  )
-  {
-    let user = this.authenticationService.getUser();
-    if(user){
+  ) {
+    const user = this.authenticationService.getUser();
+    if (user) {
       this.user = user;
     }
   }
 
   ngOnInit() {
-    let user = this.authenticationService.getUser();
-    if(user){
+    const user = this.authenticationService.getUser();
+    if (user) {
       this.user = user;
     }
     // if(!this.user){
@@ -115,7 +114,7 @@ export class HomeComponent {
 
   load() {
     this.as.getAllAssociates().subscribe(response => {
-      //console.log(response);
+      // console.log(response);
       this.associates = response;
       let trainingMapped = 0;
       let trainingUnmapped = 0;
@@ -128,11 +127,11 @@ export class HomeComponent {
       let deployedMapped = 0;
       let deployedUnmapped = 0;
 
-      for (let i=0;i<this.associates.length;i++) {
+      for (let i = 0; i < this.associates.length; i++) {
         // iterate over associates and aggregate totals
-        let marketingStatus : MarketingStatus;
-        let associate = this.associates[i];
-        switch(associate.marketingStatusId) {
+        let marketingStatus: MarketingStatus;
+        const associate = this.associates[i];
+        switch (associate.marketingStatusId) {
           case 1: trainingMapped++; break;
           case 2: reservedMapped++; break;
           case 3: selectedMapped++; break;
@@ -152,7 +151,7 @@ export class HomeComponent {
        * the mapped number is the sum of all mapped associates, the unmapped number
        * is the sum of all unmapped associates.
        */
-      let undeployedArr: number[] = [trainingMapped
+      const undeployedArr: number[] = [trainingMapped
         + reservedMapped + selectedMapped + confirmedMapped,
       trainingUnmapped + openUnmapped + selectedUnmapped + confirmedUnmapped];
 
@@ -168,7 +167,7 @@ export class HomeComponent {
        * selected mapped <br>
        * confirmed mapped<br>
        */
-      let mappedArr: number[] = [trainingMapped, reservedMapped, selectedMapped, confirmedMapped];
+      const mappedArr: number[] = [trainingMapped, reservedMapped, selectedMapped, confirmedMapped];
 
       this.mappedData = mappedArr;
 
@@ -182,7 +181,7 @@ export class HomeComponent {
        * selected unmapped <br>
        * confirmed unmapped<br>
        */
-      let unmappedArr: number[] = [trainingUnmapped, openUnmapped, selectedUnmapped, confirmedUnmapped];
+      const unmappedArr: number[] = [trainingUnmapped, openUnmapped, selectedUnmapped, confirmedUnmapped];
 
       this.unmappedData = unmappedArr;
 
@@ -193,7 +192,7 @@ export class HomeComponent {
        * the mapped number is the sum of all mapped associates, the unmapped number
        * is the sum of all unmapped associates. Both numbers contain only deployed associates.
        */
-      let deployedArr = [deployedMapped, deployedUnmapped];
+      const deployedArr = [deployedMapped, deployedUnmapped];
 
       this.deployedData = deployedArr;
     });
@@ -207,11 +206,11 @@ export class HomeComponent {
 * clicked.
 */
   mappedOnClick(evt: any) {
-    if (evt.active[0] != undefined) {
-      //navigate to client-mapped component
+    if (evt.active[0] !== undefined) {
+      // navigate to client-mapped component
       this.rout.navigate([`TrackForce/client-mapped/${evt.active[0]._index}`]);
     }
-  };
+  }
   /**
    * @function UnmappedOnClick
    * @description When the "Unmapped" chart is clicked
@@ -220,8 +219,8 @@ export class HomeComponent {
    * clicked.
    */
   unmappedOnClick(evt: any) {
-    if (evt.active[0] != undefined) {
-      //navigate to skillset component
+    if (evt.active[0] !== undefined) {
+      // navigate to skillset component
       this.rout.navigate([`TrackForce/skillset/${evt.active[0]._index}`]);
     }
   }
@@ -235,7 +234,7 @@ export class HomeComponent {
     this.rs.populateDB().subscribe(response => {
       this.load();
     }, err => {
-      console.log("err");
+      console.log('err');
     });
   }
 
@@ -247,8 +246,8 @@ export class HomeComponent {
     this.rs.deleteDB().subscribe(response => {
       this.load();
     }, err => {
-      console.log("err");
-    })
+      console.log('err');
+    });
   }
 
   /**
@@ -261,7 +260,7 @@ export class HomeComponent {
     this.rs.populateDBSF().subscribe(response => {
       this.load();
     }, err => {
-      console.log("err");
+      console.log('err');
     });
   }
 

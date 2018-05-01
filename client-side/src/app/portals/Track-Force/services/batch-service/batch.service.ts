@@ -102,19 +102,19 @@ export class BatchService {
     return this.http.get(this.url + '/all/batch/set');
   }
 
-  addBatch(batch:Batch): Observable<any> {
-    return this.http.post(this.url + '/add/batch', {batch:batch});
+  addBatch(batch: Batch): Observable<any> {
+    return this.http.post(this.url + '/add/batch', {batch: batch});
   }
 
-  updateBatchInfo(batch:Batch, id:number): Observable<any> {
-    return this.http.put(this.url + '/update/batch/'+ id, {batch:batch});
+  updateBatchInfo(batch: Batch, id: number): Observable<any> {
+    return this.http.put(this.url + '/update/batch/' + id, {batch: batch});
   }
 
-  deleteBatch(id:number): Observable<any> {
+  deleteBatch(id: number): Observable<any> {
     return this.http.delete(this.url + '/delete/batch/' + id);
   }
 
-  getBatchLocationById(id:number): Observable<any> {
+  getBatchLocationById(id: number): Observable<any> {
     return this.http.get(this.url + '/one/batchlocation/byid/' + id);
   }
 
@@ -131,7 +131,7 @@ export class BatchService {
     threeMonthsBefore.setMonth(threeMonthsBefore.getMonth() - monthRadius);
     const threeMonthsAfter = new Date(now.getFullYear(), now.getMonth(), 28);
     threeMonthsAfter.setMonth(threeMonthsAfter.getMonth() + monthRadius);
-  
+
     return this.getBatchesByDate(threeMonthsBefore, threeMonthsAfter);
   }
 
@@ -144,7 +144,7 @@ export class BatchService {
    * @returns {Observable<Batch[]>}
    */
   public getBatchesByDate(startDate: Date, endDate: Date): Observable<Batch[]> {
-    //const url = environment.url + this.batchPath+ `?start=${startDate.getTime()}&end=${endDate.getTime()}`;
+    // const url = environment.url + this.batchPath+ `?start=${startDate.getTime()}&end=${endDate.getTime()}`;
     const url = environment.msurl + this.url + '/all/batch/ordered';
     console.log(startDate.getTime());
     console.log(endDate.getTime());

@@ -1,4 +1,4 @@
 export class MarketingStatus {
-    marketingStatusId: number
-    marketingStatusName: string
+    marketingStatusId: number;
+    marketingStatusName: string;
 }

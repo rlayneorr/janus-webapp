@@ -10,7 +10,7 @@ import { environment } from '../../../../../environments/environment';
 
 @Injectable()
 export class CreateUserService {
-  private userPath = "TrackForce/users";
+  private userPath = 'TrackForce/users';
 
     /**
     * @constructor

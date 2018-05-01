@@ -1,4 +1,4 @@
-import { Associate } from "./associate.model";
+import { Associate } from './associate.model';
 import { EndClient } from './end-client.model';
 
 // old versions.
@@ -14,10 +14,10 @@ import { EndClient } from './end-client.model';
 
 export class Interview {
    id: number;
-   associateid:number;
-   interviewTypeId:number;
-   clientId:number;
-   endClientId:number;
+   associateid: number;
+   interviewTypeId: number;
+   clientId: number;
+   endClientId: number;
    associate?: Associate;
    endClient?: EndClient;
    typeId?: number;

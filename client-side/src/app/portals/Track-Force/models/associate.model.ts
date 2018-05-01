@@ -29,7 +29,7 @@
      associateId: number;
      associateFirstName: string;
      associateLastName: string;
-    batchId : number;
+    batchId: number;
     clientId: number;
     endClientId: number;
      marketingStatusId: number;

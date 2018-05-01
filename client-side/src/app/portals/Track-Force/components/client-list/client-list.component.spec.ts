@@ -11,7 +11,7 @@ import {RootComponent} from '../root/root.component';
 import {HomeComponent} from '../home/home.component';
 import {AuthenticationService} from '../../services/authentication-service/authentication.service';
 import {RequestService} from '../../services/request-service/request.service';
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 describe('ClientListComponent', () => {
   let component: ClientListComponent;

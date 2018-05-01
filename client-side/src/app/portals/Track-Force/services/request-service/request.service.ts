@@ -79,7 +79,7 @@ export class RequestService {
   //   return this.http.get<any>(this.host + 'TrackForce/track/batches/' + threeMonthsBefore + '/' + threeMonthsAfter);
   // }
 
-  //public getBatchPerType(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {
+  // public getBatchPerType(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {
   //   return this.http.get<any>(this.host + 'TrackForce/track/batches/' + threeMonthsBefore + '/' + threeMonthsAfter + '/type');
   // }
 
