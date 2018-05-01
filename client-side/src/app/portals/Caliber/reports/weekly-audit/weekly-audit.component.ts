@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 
 // entities
 import { Note } from '../../entities/Note';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 
 
 /**
@@ -31,7 +31,7 @@ export class WeeklyAuditComponent implements OnInit {
   private noteSub: Subscription;
   private reportSub: Subscription;
 
-  batch: HydraBatch;
+  batch: CompleteBatch;
   week: number;
   traineeNotes: Array<Note>;
   batchNote: Note;
