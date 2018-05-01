@@ -8,8 +8,9 @@ import { SubtopicService } from '../../../services/subtopic.service';
 import { Observable } from 'rxjs/Observable';
 import { SubtopicCurric } from '../../../models/subtopicCurric.model';
 import { SearchTextService } from '../../../services/search-text.service';
+import { DragndropService } from '../../../services/dragndrop.service';
 
-fdescribe('TopicPoolComponent', () => {
+describe('TopicPoolComponent', () => {
   let component: TopicPoolComponent;
   let fixture: ComponentFixture<TopicPoolComponent>;
 
@@ -19,35 +20,49 @@ fdescribe('TopicPoolComponent', () => {
   // Used to tell the spy on searchTextService.getMessage() what it should return during a unit test.
   const typeReturn: string = null;
 
+  // Spies for checking if a function on an other inaccessible service has been called.
+  let searchTextSendSpy: jasmine.Spy = null;
+  let dndSendSpy: jasmine.Spy = null;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
 
   beforeEach(() => {
 
-    parentTopic = {topicID: 256, topicName: 'Parent Topic'};
-    notParentTopic = {topicID: 512, topicName: 'notParentTopic'};
+    parentTopic = { topicID: 256, topicName: 'Parent Topic' };
+    notParentTopic = { topicID: 512, topicName: 'notParentTopic' };
 
     const subtopicService: SubtopicService = TestBed.get(SubtopicService);
-    const searchTextService = TestBed.get(SearchTextService);
+    const searchTextService: SearchTextService = TestBed.get(SearchTextService);
+    const dndService: DragndropService = TestBed.get(DragndropService);
 
     spyOn(subtopicService, 'getAllSubtopics').and.returnValue(Observable.of<SubtopicCurric[]>([
-      {date: {day: 0, endTime: 1, startTime: 0, week: 6}, parentTopic: parentTopic, status: 'inProgress',
-      subtopicId: 0, subtopicName: 'Subtopic 1'},
-      {date: {day: 1, endTime: 1, startTime: 0, week: 6}, parentTopic: parentTopic, status: 'complete',
-      subtopicId: 0, subtopicName: 'Subtopic 2'},
-      {date: {day: 2, endTime: 1, startTime: 0, week: 6}, parentTopic: parentTopic, status: 'upcoming',
-      subtopicId: 0, subtopicName: 'Subtopic 3'},
+      {
+        date: { day: 0, endTime: 1, startTime: 0, week: 6 }, parentTopic: parentTopic, status: 'inProgress',
+        subtopicId: 0, subtopicName: 'Subtopic 1'
+      },
+      {
+        date: { day: 1, endTime: 1, startTime: 0, week: 6 }, parentTopic: parentTopic, status: 'complete',
+        subtopicId: 0, subtopicName: 'Subtopic 2'
+      },
+      {
+        date: { day: 2, endTime: 1, startTime: 0, week: 6 }, parentTopic: parentTopic, status: 'upcoming',
+        subtopicId: 0, subtopicName: 'Subtopic 3'
+      },
     ]
     ));
 
     spyOn(searchTextService, 'getMessage').and.callFake(() => {
       if (this.typeReturn === 'topic') {
-        return Observable.of({type: 'topic', text: 'prim'});
+        return Observable.of({ type: 'topic', text: 'prim' });
       } else if (this.typeReturn === 'subtopic') {
-        return Observable.of({type: 'subtopic', text: 'sub'});
+        return Observable.of({ type: 'subtopic', text: 'sub' });
       }
     }).bind(this);
+    searchTextSendSpy = spyOn(searchTextService, 'sendMessage');
+
+    dndSendSpy = spyOn(dndService, 'sendSubtopic');
 
     fixture = TestBed.createComponent(TopicPoolComponent);
     component = fixture.componentInstance;
@@ -134,9 +149,9 @@ fdescribe('TopicPoolComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it ('should fill subTopicArray with arrays representing the subtopics of all topics represented within subTopicName', () => {
+  it('should fill subTopicArray with arrays representing the subtopics of all topics represented within subTopicName', () => {
     const Topics: Array<Topic> = [notParentTopic, { topicID: 0, topicName: 'FirstTopic' },
-    { topicID: 1, topicName: 'SecondTopic' }, parentTopic, { topicID: 2, topicName: 'ThirdTopic' }];
+      { topicID: 1, topicName: 'SecondTopic' }, parentTopic, { topicID: 2, topicName: 'ThirdTopic' }];
 
     component.subTopicName = Topics;
 
@@ -147,12 +162,18 @@ fdescribe('TopicPoolComponent', () => {
       [],
       [],
       [
-        {date: {day: 0, endTime: 1, startTime: 0, week: 6}, parentTopic: parentTopic, status: 'inProgress',
-        subtopicId: 0, subtopicName: 'Subtopic 1'},
-        {date: {day: 1, endTime: 1, startTime: 0, week: 6}, parentTopic: parentTopic, status: 'complete',
-        subtopicId: 0, subtopicName: 'Subtopic 2'},
-        {date: {day: 2, endTime: 1, startTime: 0, week: 6}, parentTopic: parentTopic, status: 'upcoming',
-        subtopicId: 0, subtopicName: 'Subtopic 3'}
+        {
+          date: { day: 0, endTime: 1, startTime: 0, week: 6 }, parentTopic: parentTopic, status: 'inProgress',
+          subtopicId: 0, subtopicName: 'Subtopic 1'
+        },
+        {
+          date: { day: 1, endTime: 1, startTime: 0, week: 6 }, parentTopic: parentTopic, status: 'complete',
+          subtopicId: 0, subtopicName: 'Subtopic 2'
+        },
+        {
+          date: { day: 2, endTime: 1, startTime: 0, week: 6 }, parentTopic: parentTopic, status: 'upcoming',
+          subtopicId: 0, subtopicName: 'Subtopic 3'
+        }
       ],
       []
     ];
@@ -165,7 +186,7 @@ fdescribe('TopicPoolComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it ('should set uniqarrFiltered to only contain values which include the provided text', () => {
+  it('should set uniqarrFiltered to only contain values which include the provided text', () => {
     // Configure the spy on searchTextService.getMessage to return the data type of 'topic'
     this.typeReturn = 'topic';
 
@@ -182,11 +203,39 @@ fdescribe('TopicPoolComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it ('should set searchText to provided text', () => {
+  it('should set searchText to provided text', () => {
     // Configure the spy on searchTextService.getMessage to return the data type of 'subtopic'
     this.typeReturn = 'subtopic';
     component.initFilterTopicListener();
     expect(component.searchText).toEqual('sub');
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should set searchText to empty string, and call searchTextService.sendMessage', () => {
+    component.clearSubtopicSearch();
+    expect(component.searchText).toEqual('');
+    expect(searchTextSendSpy).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should call searchTextService.sendMessge()', () => {
+    component.clearTopic();
+    expect(searchTextSendSpy).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should call dndService.sendSubtopic()', () => {
+    component.sendCurrentlyDragged(null);
+    expect(dndSendSpy).toHaveBeenCalled();
   });
 });
 

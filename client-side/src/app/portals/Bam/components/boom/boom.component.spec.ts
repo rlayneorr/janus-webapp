@@ -12,7 +12,7 @@ import { BoomUtil } from './boom.util';
 import { BamUser } from '../../models/bamuser.model';
 import { Batch } from '../../models/batch.model';
 
-fdescribe('BoomComponent', () => {
+describe('BoomComponent', () => {
   let component: BoomComponent;
   let fixture: ComponentFixture<BoomComponent>;
 
