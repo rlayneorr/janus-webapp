@@ -7,7 +7,7 @@ import { Dependencies } from '../../caliber.test.module';
 
 import { GraphComponent } from './graph.component';
 
-xdescribe('GraphComponent', () => {
+fdescribe('GraphComponent', () => {
   let component: GraphComponent;
   let fixture: ComponentFixture<GraphComponent>;
 
@@ -21,7 +21,7 @@ xdescribe('GraphComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  fit('should create', () => {
     expect(component).toBeTruthy();
   });
 });
