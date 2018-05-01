@@ -80,7 +80,6 @@ export const environment = {
   },
 
   skillType: {
-<<<<<<< HEAD
     find: (id) => `${context}/skillType/${id}`,
     findByName: (name) => `${context}/skillType/name/${name}`,
     findAll: () => `${context}/skillType`,
@@ -94,21 +93,6 @@ export const environment = {
     updateByName: (name) => `${context}/skillType/name/${name}`,
     delete: (id) => `${context}/skillType/${id}`,
     deleteByName: (name) => `${context}/skillType/name/${name}`
-=======
-    find: (id) => `${context}/skills-service/skillType/${id}`,
-    findByName: (name) => `${context}/skills-service/skillType/name/${name}`,
-    findAll: () => `${context}/skills-service/skillType`,
-    findAllActive: () => `${context}/skills-service/skillType/active`,
-    findAllSkills: () => `${context}/skills-service/skillType/skill`,
-    save: () => `${context}/skills-service/skillType`,
-    saveSkill: (skillTypeId, skillId) => `${context}/skills-service/skillType/${skillTypeId}/skill/${skillId}`,
-    saveSkillByName: (skillTypeName, skillName) =>
-    `${context}/skills-service/skillType/name/${skillTypeName}/skill/name/${skillName}`,
-    update: (id) => `${context}/skills-service/skillType/${id}`,
-    updateByName: (name) => `${context}/skills-service/skillType/name/${name}`,
-    delete: (id) => `${context}/skills-service/skillType/${id}`,
-    deleteByName: (name) => `${context}/skills-service/skillType/name/${name}`
->>>>>>> 9ed9b73f3fbc1b7bf33d38643fbf766ab13514a4
   },
 
   trainee: {
