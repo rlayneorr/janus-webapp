@@ -27,7 +27,7 @@
             </tr>
             <tr>
               <td>Batch Name</td>
-              <td><a [routerLink]="['/TrackForce/batch-details', associate.batch.batchId]">{{associate.batch.batchId}}</a></td>
+              <td><a [routerLink]="['/TrackForce/batch-details', associate.batch.batchId]" *ngIf="associate.batch != null">{{associate.batch.batchId}}</a></td>
             </tr>
             <tr>
               <td>Client Name</td>
@@ -35,7 +35,7 @@
             </tr>
             <tr>
               <td>Start Date</td>
-              <!-- <td>{{associate.clientStartDate | date:'longDate'}}</td> -->
+              <td><!--{{associate.clientStartDate | date:'longDate'}}--></td>
             </tr>
           </tbody>
         </table>
@@ -173,8 +173,9 @@
         </select>
         <label for="client">Assign Client:</label>
         <select class="form-control" name="selectedClient" [(ngModel)]="selectedClient">
+            <option label=""></option>
             <option selected="selected">None</option>
-            <option *ngFor="let client of clients" [value]="client.id">{{client.tfClientName}}</option>
+            <option *ngFor="let client of clients">{{client.clientName}}</option>
         </select>
         <label class="control-label">Apply Start Date to Associate</label>
         <input type="date" class="form-control" name="date" [(ngModel)] ="newStartDate" />

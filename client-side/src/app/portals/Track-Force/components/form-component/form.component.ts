@@ -14,6 +14,7 @@ import { DataScrollerModule } from 'primeng/primeng';
 import { ENGINE_METHOD_DIGESTS } from 'constants';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { PlacementService } from '../../services/placement-service/placement.service';
+import { User } from '../../models/user.model';
 
 /**
  * Component for viewing an individual associate and editing as admin.
@@ -28,6 +29,7 @@ import { PlacementService } from '../../services/placement-service/placement.ser
   */
 @AutoUnsubscribe
 export class FormComponent implements OnInit {
+	user: User = new User();
 	associate: HydraTrainee = new HydraTrainee();
 	clients: Client[];
 	interviews: any;
@@ -38,9 +40,9 @@ export class FormComponent implements OnInit {
 		feedback: null
 	};
 	newStartDate: Date;
-	message: string = "";
-	selectedMarketingStatus: any;
-	selectedClient: number;
+	message: string = '';
+	selectedMarketingStatus: string = '';
+	selectedClient: string = '';
 	id: number;
 	formOpen: boolean;
 	isVP: boolean;
@@ -64,43 +66,47 @@ export class FormComponent implements OnInit {
 		private clientService: ClientListService,
 		private authService: AuthenticationService,
 		private placementService: PlacementService
-	) {
+	) { }
+
+	ngOnInit() {
 		const id = window.location.href.split('form-comp/')[1];
 		this.id = Number(id);
+		this.user = this.authService.getUser();
+		// Role checks
+		if (this.user != null && this.user.tfRoleId === 3) {
+			this.isVP = true;
+		} else {
+			this.isVP = false;
+		}
+		this.getAssociate();
+		this.getClients();
+		this.getInterviews();
+	}
+
+	getAssociate() {
 		this.associateService.getAssociate(this.id).subscribe(
 			data => {
-				this.associate = data;
+				this.associate = <HydraTrainee>data;
+				this.placementService.getAllPlacementsByAssociateId(data.userId).subscribe(
+					cr => {
+						this.placementData = cr;
+						if (this.placementData.startDate != undefined && this.placementData.startDate.toString() == "0") {
+							this.placementData.startDate = null;
+						} else {
+							// this.placementData.startDate = this.adjustDate(Number(this.placementData.startDate)*1000);
+						}
+					}
+				);
 			}
 		);
 	}
 
-	ngOnInit() {
-		// this.user = this.authService.getUser();
-		// //Role checks
-		// if(this.user.tfRoleId === 3){
-		//   this.isVP = true;
-		// } else {
-		//   this.isVP = false;
-		// }
-		//
-		// this.associateService.getAssociate(this.id).subscribe(
-		//   data => {
-		//     console.log(data);
-		//    this.placementService.getAllPlacementsByAssociateId(data.associateId).subscribe ( cr => this.placementData = cr);
-		//     this.associate = <Associate>data;
-		//     console.log("FROM BACK-END: "+this.placementData.startDate);
-		//     if (this.placementData.startDate.toString() == "0")
-		//     this.placementData.startDate = null;
-		//     else
-		//     this.placementData.startDate = this.adjustDate(Number(this.placementData.startDate)*1000);
-		//     console.log("DATE STORED: "+this.placementData.startDate);
-		//   });
-		// this.clientService.getAllClients().subscribe(
-		//   data => {
-		//     console.log(data);
-		//     this.clients = data;
-		//   });
-		// this.getInterviews();
+	getClients() {
+		this.clientService.getAllClients().subscribe(
+			data => {
+				this.clients = data;
+			}
+		);
 	}
 
 	adjustDate(date: any) { // dates are off by 1 day - this corrects them
@@ -159,10 +165,10 @@ export class FormComponent implements OnInit {
 	 * Update the associate with the new client, status, and/or start date
 	 */
 	updateAssociate() {
-		if (this.selectedMarketingStatus !== null) {
+		if (this.selectedMarketingStatus !== '') {
 			this.associate.marketingStatus = this.selectedMarketingStatus;
 		}
-		if (this.selectedClient !== null) {
+		if (this.selectedClient !== '') {
 			this.associate.client = String(this.selectedClient);
 		}
 		this.associateService.updateAssociate(this.associate).subscribe(
