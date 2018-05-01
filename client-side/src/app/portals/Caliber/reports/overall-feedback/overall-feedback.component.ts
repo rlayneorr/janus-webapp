@@ -13,7 +13,7 @@ import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra
 
 // entities
 import { Note } from '../../entities/Note';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
@@ -45,7 +45,7 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
 
   trainee: HydraTrainee;
   week = 1;
-  batch: HydraBatch;
+  batch: CompleteBatch;
 
   constructor(private granularityService: GranularityService,
     private noteService: NoteService,
@@ -65,6 +65,7 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
 
         if (this.trainee.traineeId > 0) {
           this.noteService.fetchByTrainee(this.trainee);
+          //Change HydraBatchUtilService, so it accepts CompleteBatch objects
           this.reportService.fetchTechnologiesUpToWeek(this.batch.batchId, this.batchUtil.getWeek(this.batch));
         }
       });

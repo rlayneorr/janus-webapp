@@ -5,7 +5,7 @@ import { ReportingService } from '../../services/reporting.service';
 import { PDFService } from '../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GranularityService } from '../services/granularity.service';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 /**
  * @author John Hudson
@@ -35,7 +35,7 @@ export class TraineeTechSkillsComponent implements OnInit {
     private pdfService: PDFService, private modalService: NgbModal, private granularityService: GranularityService) { }
 
   // batch id of batch being viewed
-  public batch: HydraBatch;
+  public batch: CompleteBatch;
   // current week
   public week: Number = 0;
   // current trainee
