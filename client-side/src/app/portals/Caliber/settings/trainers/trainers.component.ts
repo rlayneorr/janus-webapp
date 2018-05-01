@@ -117,7 +117,7 @@ export class TrainersComponent implements OnInit {
    * Method to deactivate trainer. Set the role to INACTIVE.
    * Then call a put in http to update on the database.
    * see the inactivate then wait before refreshing the list.
-   * @param trainer 
+   * @param trainer
    */
   deactivateTrainer(trainer: HydraTrainer) {
     trainer.role.role = 'INACTIVE';
