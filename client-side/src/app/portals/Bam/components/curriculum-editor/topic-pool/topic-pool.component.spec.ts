@@ -1,12 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopicPoolComponent } from './topic-pool.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
 import { Dependencies } from '../../../bam.test.module';
 import { Topic } from '../../../models/topic.model';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { Observable } from 'rxjs/Observable';
 import { SubtopicCurric } from '../../../models/subtopicCurric.model';
+import { SearchTextService } from '../../../services/search-text.service';
 
 fdescribe('TopicPoolComponent', () => {
   let component: TopicPoolComponent;
@@ -14,6 +15,9 @@ fdescribe('TopicPoolComponent', () => {
 
   let parentTopic: Topic;
   let notParentTopic: Topic;
+
+  // Used to tell the spy on searchTextService.getMessage() what it should return during a unit test.
+  const typeReturn: string = null;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
@@ -25,6 +29,7 @@ fdescribe('TopicPoolComponent', () => {
     notParentTopic = {topicID: 512, topicName: 'notParentTopic'};
 
     const subtopicService: SubtopicService = TestBed.get(SubtopicService);
+    const searchTextService = TestBed.get(SearchTextService);
 
     spyOn(subtopicService, 'getAllSubtopics').and.returnValue(Observable.of<SubtopicCurric[]>([
       {date: {day: 0, endTime: 1, startTime: 0, week: 6}, parentTopic: parentTopic, status: 'inProgress',
@@ -35,6 +40,14 @@ fdescribe('TopicPoolComponent', () => {
       subtopicId: 0, subtopicName: 'Subtopic 3'},
     ]
     ));
+
+    spyOn(searchTextService, 'getMessage').and.callFake(() => {
+      if (this.typeReturn === 'topic') {
+        return Observable.of({type: 'topic', text: 'prim'});
+      } else if (this.typeReturn === 'subtopic') {
+        return Observable.of({type: 'subtopic', text: 'sub'});
+      }
+    }).bind(this);
 
     fixture = TestBed.createComponent(TopicPoolComponent);
     component = fixture.componentInstance;
@@ -147,4 +160,33 @@ fdescribe('TopicPoolComponent', () => {
     expect(component.subTopicArray.length === 1);
     expect(component.subTopicArray).toEqual(expected);
   });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should set uniqarrFiltered to only contain values which include the provided text', () => {
+    // Configure the spy on searchTextService.getMessage to return the data type of 'topic'
+    this.typeReturn = 'topic';
+
+    const inputArr: string[] = ['primary', 'salutation', 'prime', 'secondus', 'primate'];
+    const expected: string[] = ['primary', 'prime', 'primate'];
+    component.uniqarr = inputArr;
+
+    component.initFilterTopicListener();
+
+    expect(component.uniqarrFiltered).toEqual(expected);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should set searchText to provided text', () => {
+    // Configure the spy on searchTextService.getMessage to return the data type of 'subtopic'
+    this.typeReturn = 'subtopic';
+    component.initFilterTopicListener();
+    expect(component.searchText).toEqual('sub');
+  });
 });
+
