@@ -9,6 +9,7 @@ import { HydraInterceptor } from './interceptors/hydra.interceptor';
 import { ErrorAlertComponent } from './ui/error-alert/error-alert.component';
 import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { AlertService } from './services/alerts/alerts.service';
+import { BatchService } from './aggregator/services/completebatch.service';
 import { GambitSkillTypeService } from '../hydra-client/services/skillType/gambit-skill-type.service';
 import { GambitSkillService } from './services/skill/gambit-skill.service';
 
@@ -25,6 +26,7 @@ import { GambitSkillService } from './services/skill/gambit-skill.service';
     TrainerService,
     UrlService,
     AlertService,
+    BatchService,
     UrlService,
     GambitSkillService,
     GambitSkillTypeService,

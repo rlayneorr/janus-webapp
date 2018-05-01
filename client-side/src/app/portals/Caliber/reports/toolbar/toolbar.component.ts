@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
 import { GranularityService } from '../services/granularity.service';
 import { PDFService } from '../../services/pdf.service';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
@@ -32,14 +32,14 @@ export class ToolbarComponent implements OnInit {
   public traineeSelect: number;
 
   // Current batch and trainee Object based on selection
-  currentBatch: HydraBatch = new HydraBatch();
+  currentBatch: CompleteBatch = new CompleteBatch();
   currentTrainee: HydraTrainee;
   currentBatchTrainees: Array<HydraTrainee>;
 
   // Arrays
   public yearList: Array<number>;              // Contains list of all years from batches
-  public batchList: Array<HydraBatch>;              // Contains list of all batches
-  public batchYearList: Array<HydraBatch>;          // Contains list of all batches based on year selection
+  public batchList: Array<CompleteBatch>;              // Contains list of all batches
+  public batchYearList: Array<CompleteBatch>;          // Contains list of all batches based on year selection
   public weekList: Array<number>;              // Contains list of all weeks based on batch selection
   public traineesList: Array<HydraTrainee>;         // Contains list of all trainees based on batch selection
   public traineesListNames: Array<String>;     // Contains list of all trainees names based on batch selection
@@ -59,7 +59,7 @@ export class ToolbarComponent implements OnInit {
     this.batchSubscription = this.batchService.fetchAll().subscribe(response => {
 
       if (response.length > 0) {
-        this.batchList = response;
+        //this.batchList = response;
 
         // Generate dropdown information for years
         this.createYearDropdown();
@@ -137,7 +137,7 @@ export class ToolbarComponent implements OnInit {
   /**
    * Creates and returns an array of all batches based on year selection.
    */
-  createBatchDropdown(): Array<HydraBatch> {
+  createBatchDropdown(): Array<CompleteBatch> {
     this.batchYearList = [];
 
     for (const batch of this.batchList) {
@@ -155,8 +155,8 @@ export class ToolbarComponent implements OnInit {
    */
   createWeeksDropdown(): Array<number> {
     this.weekList = [];
-
-    for (let i = 0; i <= this.batchUtil.getWeek(this.currentBatch); i++) {
+   //--- we should refactor HydraBatchUtil Service
+    for (let i = 0; i <= this.batchUtil.getWeek(this.currentBatch); i++) { 
       this.weekList.push(i);
     }
 
@@ -275,7 +275,7 @@ export class ToolbarComponent implements OnInit {
    * Returns Batch object from ID based on batch selection.
    * @param batchId - Batch ID to search for.
    */
-  getBatchByIdFromSelection(batchId: number): HydraBatch {
+  getBatchByIdFromSelection(batchId: number): CompleteBatch {
     for (const batch of this.batchYearList) {
       if (batchId === batch.batchId) {
         return batch;
