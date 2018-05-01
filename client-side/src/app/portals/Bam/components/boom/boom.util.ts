@@ -12,16 +12,16 @@ export class BoomUtil {
         let date = 9000; // Type: number
         let startDate: Date = new Date(date);
 
-        newBatches.push(new Batch(id++, '', startDate, startDate, null, 0, 0));
+        newBatches.push(new Batch(id++, '', startDate, startDate, this.getUserById(1), 0, 0));
         startDate = new Date(++date);
 
-        newBatches.push(new Batch(id++, '', startDate, startDate, null, 0, 0));
+        newBatches.push(new Batch(id++, '', startDate, startDate, this.getUserById(1), 0, 0));
         startDate = new Date(++date);
 
-        newBatches.push(new Batch(id++, '', startDate, startDate, null, 0, 0));
+        newBatches.push(new Batch(id++, '', startDate, startDate, this.getUserById(1), 0, 0));
         startDate = new Date(++date);
 
-        newBatches.push(new Batch(id++, '', startDate, startDate, null, 0, 0));
+        newBatches.push(new Batch(id++, '', startDate, startDate, this.getUserById(1), 0, 0));
         startDate = new Date(++date);
 
         return newBatches;
