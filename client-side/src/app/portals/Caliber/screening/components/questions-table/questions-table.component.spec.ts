@@ -19,8 +19,42 @@ import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
 import { ScreeningService } from '../../services/screening/screening.service';
 import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
 import { Bucket } from '../../entities/bucket';
+import { Question } from '../../entities/question';
+import { AnswerComponent } from '../answer/answer.component';
+import { ViolationFlagComponent } from '../violation-flag/violation-flag.component';
+import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
+import { ViolationTypeService } from '../../services/violationType/violationType.service';
+import { AlertsService } from '../../../services/alerts.service';
 
 // Author: David Gustafson
+
+const QUESTION: Question = {
+  questionId: 1,
+  questionText: 'string',
+  sampleAnswer1: 'string',
+  sampleAnswer2: 'string',
+  sampleAnswer3: 'string',
+  sampleAnswer4: 'string',
+  sampleAnswer5: 'string',
+  isActive: true,
+  bucketId: 1
+};
+
+const BUCKETS: Bucket[] = [
+  {
+    bucketID: 1,
+    bucketCategory: 'Basic Java',
+    bucketDescription: 'OCA level Java questions',
+    isActive: true,
+    questions: null
+  },
+  {
+    bucketID: 2,
+    bucketCategory: 'SQL',
+    bucketDescription: 'SQL database questions',
+    isActive: true,
+    questions: null
+  }];
 
 fdescribe('QuestionsTableComponent', () => {
   let component: QuestionsTableComponent;
@@ -28,16 +62,16 @@ fdescribe('QuestionsTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow],
+      declarations: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow, AnswerComponent, ViolationFlagComponent],
       imports: [FormsModule],
       providers: [BucketService, HttpClient, HttpHandler, UrlUtilService, QuestionService, TagService, SimpleTraineeService,
         SkillTypeService, QuestionScoreService, QuestionsToBucketsUtil, NgbModal, NgbModalStack, ScreeningService,
-        SkillTypeBucketService]
+        SkillTypeBucketService, SoftSkillsViolationService, ViolationTypeService, AlertsService]
     });
 
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
-        entryComponents: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow]
+        entryComponents: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow, AnswerComponent, ViolationFlagComponent]
       }
     })
       .compileComponents();
@@ -63,22 +97,6 @@ fdescribe('QuestionsTableComponent', () => {
   });
 
   it('should set questionBuckets to [] true', () => {
-    const BUCKETS: Bucket[] = [
-      {
-        bucketID: 1,
-        bucketCategory: 'Basic Java',
-        bucketDescription: 'OCA level Java questions',
-        isActive: true,
-        questions: null
-      },
-      {
-        bucketID: 2,
-        bucketCategory: 'SQL',
-        bucketDescription: 'SQL database questions',
-        isActive: true,
-        questions: null
-      }];
-
     component.questionBuckets = BUCKETS;
     component.ngOnDestroy();
     if (component.questionBuckets !== undefined) {
@@ -89,26 +107,22 @@ fdescribe('QuestionsTableComponent', () => {
   });
 
   it('should set currentCategory to bucket', () => {
-    const BUCKETS: Bucket[] = [
-      {
-        bucketID: 1,
-        bucketCategory: 'Basic Java',
-        bucketDescription: 'OCA level Java questions',
-        isActive: true,
-        questions: null
-      },
-      {
-        bucketID: 2,
-        bucketCategory: 'SQL',
-        bucketDescription: 'SQL database questions',
-        isActive: true,
-        questions: null
-      }];
-
     component.questionBuckets = BUCKETS;
     component.questionBuckets[0].bucketID = 1;
     component.setBucket(1);
     expect(component.currentCategory.bucketID).toBe(1);
+  });
+
+  it('should set run open', () => {
+    const spy = spyOn(component, 'open');
+    component.open(QUESTION);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should set run open', () => {
+    const spy = spyOn(component, 'open');
+    component.open(QUESTION);
+    expect(spy).toHaveBeenCalled();
   });
 
 });

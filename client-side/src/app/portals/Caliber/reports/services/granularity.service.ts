@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 /**
  * Service that handles report granularity. Trainee and current batch
@@ -15,7 +15,7 @@ import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 export class GranularityService {
 
   /* Subjects & Paired Observables */
-  private currentBatch = new ReplaySubject<HydraBatch>(1);
+  private currentBatch = new ReplaySubject<CompleteBatch>(1);
   private currentTrainee = new ReplaySubject<HydraTrainee>(1);
   private currentWeek = new ReplaySubject<number>(1);
   private ready = new ReplaySubject<boolean>(1);
@@ -194,7 +194,7 @@ export class GranularityService {
    * Pushes the specified batch to the currentBatch subject.
    * @param batch - Batch to push to the subject.
    */
-  pushBatch(batch: HydraBatch) {
+  pushBatch(batch: CompleteBatch) {
     this.currentBatch.next(batch);
   }
 

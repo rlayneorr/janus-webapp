@@ -1,4 +1,4 @@
-import { HydraBatch } from './HydraBatch';
+import { CompleteBatch } from '../aggregator/entities/CompleteBatch';
 import { User } from './User';
 
 
@@ -6,7 +6,7 @@ export class HydraTrainee {
     traineeId: number;
     resourceId: number;
     trainingStatus: string;
-    batch: HydraBatch;
+    batch: CompleteBatch;
     phoneNumber: string;
     skypeId: string;
     profileUrl: string;
@@ -23,7 +23,7 @@ export class HydraTrainee {
     endClient: string;
     traineeUserInfo: User;
 
-    constructor(traineeId?: number, resourceId?: number, trainingStatus?: string, batch?: HydraBatch,
+    constructor(traineeId?: number, resourceId?: number, trainingStatus?: string, batch?: CompleteBatch,
         phoneNumber?: string, skypeId?: string, profileUrl?: string, recruiterName?: string,
         college?: string, degree?: string, major?: string, techScreenerName?: string,
         projectCompletion?: string, flagStatus?: string, flagNotes?: string, marketingStatus?: string,
