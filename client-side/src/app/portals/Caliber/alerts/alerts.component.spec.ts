@@ -1,44 +1,49 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlertsComponent } from './alerts.component';
-import { SimpleNotificationsModule } from 'angular2-notifications-lite/src/simple-notifications.module';
 import { AlertsService } from '../services/alerts.service';
-import { NotificationsService } from 'angular2-notifications-lite/src/notifications.service';
+import { XHRBackend } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
+import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifications-lite';
+import { Dependencies } from '../caliber.test.module';
 
-xdescribe('AlertsComponent', () => {
+/**
+ * Author: Jordan Young
+ */
+
+fdescribe('AlertsComponent', () => {
   let component: AlertsComponent;
   let fixture: ComponentFixture<AlertsComponent>;
-  // let alertService: ComponentFixture<AlertsComponent>;
-  // let notificationsService: ComponentFixture<AlertsComponent>;
 
-  const mockAlertServce = {};
-  const mockNotificationService = {};
-
-  beforeEach(async(() => {
+  // set up
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AlertsComponent],
       imports: [SimpleNotificationsModule],
-      // providers: [
-      //   { provide: AlertsService, useValue: mockAlertServce },
-      //   { provide: NotificationsService, useValue: mockNotificationService }
-      // ]
-      providers: [
-        AlertsService,
-        NotificationsService
-      ]
-    })
-      .compileComponents();
-  }));
+      providers: [AlertsService, NotificationsService]
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertsComponent);
     component = fixture.componentInstance;
-    this.alertService = fixture.debugElement.injector.get(AlertsService);
-    this.notificationsService = fixture.debugElement.injector.get(NotificationsService);
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // tests for showNotif()
+
+  // case 1: error alert
+  it('should show error', inject([AlertsService, NotificationsService],
+    (aService: AlertsService, nService: NotificationsService) => {
+      aService.error('this is a test');
+      component.showNotif();
+      expect(component.message.text).toBe('this is a test');
+  }));
+
+  // case 2: success alert
+  it('should show success', inject([AlertsService, NotificationsService],
+    (aService: AlertsService, nService: NotificationsService) => {
+      aService.success('this is a test');
+      component.showNotif();
+      expect(component.message.text).toBe('this is a test');
+  }));
 });
