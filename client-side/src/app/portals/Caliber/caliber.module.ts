@@ -66,7 +66,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './settings/screening/services/in-memory-data.service';
-import { TrainerService } from '../../hydra-client/services/trainer/trainer.service';
+import { TrainerService } from './services/trainer.service';
 import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
 
 // N.T.
@@ -228,7 +228,7 @@ import { CategoryService } from './services/category.service';
     VpLineGraphComponent,
     VpPanelGraphComponent,
     SettingsComponent,
-    //SkillsComponent,
+    // SkillsComponent,
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,

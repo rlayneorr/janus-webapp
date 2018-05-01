@@ -74,18 +74,24 @@ export const environment = {
     findAll: () => `${context}/gambit-skills-service/skill`,
     findByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
     findById: (id) => `${context}/gambit-skills-service/skill/${id}`,
-    findAllActive: () => `${context}/gambit-skills-service/skill`,
+    findAllActive: () => `${context}/gambit-skills-service/skill/active`,
     save: () => `${context}/gambit-skills-service/skill`,
     updateByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
     updateById: (id) => `${context}/gambit-skills-service/skill/${id}`,
-    delete: (id) => `${context}/gambit-skills-service/skill/${id}`
+    delete: (id) => `${context}/gambit-skills-service/skill/${id}`,
+    deleteByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`
   },
 
   skillType: {
-    find: (id) => `${context}/gmabit-skills-service/skillType/${id}`,
+    find: (id) => `${context}/gambit-skills-service/skillType/${id}`,
     findByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
     findAll: () => `${context}/gambit-skills-service/skillType`,
+    findAllActive: () => `${context}/gambit-skills-service/skillType/active`,
+    findAllSkills: () => `${context}/gambit-skills-service/skillType/skill`,
     save: () => `${context}/gambit-skills-service/skillType`,
+    saveSkill: (skillTypeId, skillId) => `${context}/gambit-skills-service/skillType/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) =>
+    `${context}/gambit-skills-service/skillType/name/${skillTypeName}/skill/name/${skillName}`,
     update: (id) => `${context}/gambit-skills-service/skillType/${id}`,
     updateByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
     delete: (id) => `${context}/gambit-skills-service/skillType/${id}`,
