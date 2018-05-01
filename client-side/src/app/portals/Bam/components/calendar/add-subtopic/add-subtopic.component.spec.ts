@@ -18,11 +18,12 @@ import { Observable } from 'rxjs/Observable';
 import { Batch } from '../../../models/batch.model';
 import { ScheduledDate } from '../../../models/scheduleddate.model';
 
-describe('AddSubtopicComponent', () => {
+fdescribe('AddSubtopicComponent', () => {
   let component: AddSubtopicComponent;
   let fixture: ComponentFixture<AddSubtopicComponent>;
   let subtopic: Subtopic;
   let testTopic: Topic;
+  let spy: any;
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440);
@@ -30,6 +31,8 @@ describe('AddSubtopicComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddSubtopicComponent);
     component = fixture.componentInstance;
+
+    // getting testbed services
     const addSuptopicServie: AddSubtopicService = TestBed.get(AddSubtopicService);
     const statusService: CalendarStatusService = TestBed.get(CalendarStatusService);
     const modalService: NgbModal = TestBed.get(NgbModal);
@@ -51,12 +54,13 @@ describe('AddSubtopicComponent', () => {
     tsub.push(testsub);
     const testBatch = new Batch(1, '', null, null, null, 2, 2);
     const testSched = new Schedule(1, tsub , tCurr);
+
+    // Making json for JSON parse
     const jSched = JSON.stringify(testSched);
     const t = JSON.stringify(testBatch);
     const p = JSON.stringify(subArr);
-    // spyOn(addSuptopicServie, 'getSubtopicPool').and.returnValue(null);
-    // spyOn(subtopicService, 'getSubtopicByIDs').and.returnValue(null);
-    // spyOn(sessionStorage, 'getItem').and.returnValue('{}');
+
+    // returning JSON when sessionStorage is called
     spyOn(sessionStorage, 'getItem').and.callFake((batch) => {
       if (batch === 'batch') {
        return t;
@@ -69,6 +73,8 @@ describe('AddSubtopicComponent', () => {
       }
     });
     const a: number[] = [1];
+
+    // spying on service to return mock values
     spyOn(addSuptopicServie, 'getSubtopicPool').and.returnValues(Observable.of(a), Observable.throw('error'));
     spyOn(subtopicService, 'getSubtopicByIDs').and.returnValue(Observable.of(subArr));
 
@@ -82,13 +88,14 @@ describe('AddSubtopicComponent', () => {
      expect(component).toBeTruthy();
   });
   it('should call ngOnInit', () => {
-    // sessionStorage.setItem('batch', null);
+    spy = spyOn(component, 'ngOnInit');
     component.ngOnInit();
-    component.ngOnInit();
+    expect(spy).toHaveBeenCalled();
   });
-
   it('should call onErrorLoadMessage', () => {
+    spy = spyOn(component, 'onErrorLoadErrorMessage');
     component.onErrorLoadErrorMessage();
+    expect(spy).toHaveBeenCalled();
   });
   it('should call onChangeLoadSubtopics', () => {
     component.topicMap.set('test', 'test');
@@ -196,5 +203,9 @@ describe('AddSubtopicComponent', () => {
   it('should call selectSubtopic', () => {
     component.selectedSubtopic = 'Select a Subtopic';
     component.selectSubtopic('t');
+  });
+  it('should call setDraggableOnSubtopic', () => {
+    component.selectedSubtopic = 'test';
+    component.setDraggableOnSubtopic(event, 'testName');
   });
 });
