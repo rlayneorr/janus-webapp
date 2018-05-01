@@ -3,6 +3,7 @@ import { Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
+import { BatchService } from '../../../../hydra-client/aggregator/services/completebatch.service';
 
 @Component({
   selector: 'app-delete-batch-modal',
@@ -12,7 +13,8 @@ import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/Comp
 export class DeleteBatchModalComponent implements OnInit {
 
   @Input() batch: CompleteBatch;
-  constructor(private activeModal: NgbActiveModal) {
+  constructor(private activeModal: NgbActiveModal,
+              private batchService: BatchService) {
     this.batch = new CompleteBatch();
   }
 
@@ -20,7 +22,9 @@ export class DeleteBatchModalComponent implements OnInit {
   }
 
   delete() {
-    this.activeModal.close('Delete');
+    this.batchService.delete(this.batch).subscribe(res => {
+      this.activeModal.close('Delete');
+    });
   }
 
   cancel() {
