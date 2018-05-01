@@ -13,76 +13,61 @@ import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra
 import { NoteService } from '../../services/note.service';
 import { ReportsService } from '../../services/reports.service';
 
-fdescribe('VpBarGraphComponent_otherTests', () => {
+fdescribe('VpLineGraphComponent', () => {
   let component: VpBarGraphComponent;
   let fixture: ComponentFixture<VpBarGraphComponent>;
-
-  let vpHomeBarGraphService: VpHomeBarGraphService;
-  let reportingService: ReportingService;
-  let evaluationService: EvaluationService;
-  let modalService: NgbModal;
-  let http: HttpClient;
-  let alertService: AlertsService;
-  let vpHomeSelectorService: VpHomeSelectorService;
-  let batchService: HydraBatchService;
-  let noteService: NoteService;
-  let reportsService: ReportsService;
-  
   beforeEach(async(() => {
-    TestBed.configureTestingModule(Dependencies)
-    .compileComponents();
+    TestBed.configureTestingModule(Dependencies).compileComponents(); 
+
+    // TestBed.configureTestingModule({
+    //   declarations: [
+    //     VpBarGraphComponent
+    //   ],
+    //   providers: [
+    //     VpHomeBarGraphService,
+    //     ReportingService,
+    //     EvaluationService,
+    //     NgbModal,
+    //     HttpClient,
+    //     AlertsService,
+    //     VpHomeSelectorService,
+    //     HydraBatchService,
+    //     NoteService,
+    //     ReportsService,
+    //   ],
+    // })
+    // .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(VpBarGraphComponent);
+    fixture.componentInstance = new VpBarGraphComponent(
+      this.VpHomeBarGraphService,
+      this.ReportingService,
+      this.EvaluationService,
+      this.NgbModal,
+      this.HttpClient,
+      this.AlertsService,
+      this.VpHomeSelectorService,
+      this.HydraBatchService,
+      this.NoteService,
+      this.ReportsService
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('ngOnInit works as expected', () => {
-    fixture = TestBed.createComponent(VpBarGraphComponent);
-    component = fixture.componentInstance;
-    const spyOnAlertService = spyOn(alertService, 'error'); 
-
-    component = new VpBarGraphComponent(
-      vpHomeBarGraphService,
-      reportingService,
-      evaluationService,
-      modalService,
-      http,
-      alertService,
-      vpHomeSelectorService,
-      batchService,
-      noteService,
-      reportsService,
-    );
-
-    fixture.detectChanges(); 
-
-    expect(spyOnAlertService).toHaveBeenCalled(); 
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
-  it('ngOnInit should throw an alert if batchService is null', () => {   
-    fixture = TestBed.createComponent(VpBarGraphComponent);
-    component = fixture.componentInstance;
+  it('should have same addresses as vpHomeSelectorService', () => {
+    let addressesInService : Array<any>;
+    this.vpHomeSelectorService.populateAddresses(this.results);
+    expect(addressesInService).toEqual(component.addresses);
+  });
 
-    const spyOnAlertService = spyOn(alertService, 'error');
-
-    component = new VpBarGraphComponent(
-      vpHomeBarGraphService,
-      reportingService,
-      evaluationService,
-      modalService,
-      http,
-      alertService,
-      vpHomeSelectorService,
-      null,
-      noteService,
-      reportsService,
-    );
-
-    fixture.detectChanges();
-
-    expect(spyOnAlertService).toHaveBeenCalled();
+  it('vpHomeSelectorService exists', () => {
+    expect(this.vpHomeSelectorService).toBeTruthy();
   });
 });

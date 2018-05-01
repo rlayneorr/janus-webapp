@@ -4,7 +4,7 @@ import { PanelOverallFeedbackComponent } from './panel-overall-feedback.componen
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
-fdescribe('PanelOverallFeedbackComponent', () => {
+describe('PanelOverallFeedbackComponent', () => {
   let component: PanelOverallFeedbackComponent;
   let fixture: ComponentFixture<PanelOverallFeedbackComponent>;
   let spy: any;

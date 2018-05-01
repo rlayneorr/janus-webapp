@@ -172,6 +172,7 @@ import { InterviewDetailsComponent } from './panel/interview-details/interview-d
 import { settings } from 'cluster';
 import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
 import { UrlService } from '../../hydra-client/services/urls/url.service';
+import { ErrorAlertComponent } from '../../hydra-client/ui/error-alert/error-alert.component';
 
 export const Dependencies = {
   imports: [
@@ -216,6 +217,7 @@ export const Dependencies = {
 
         // components
         // PaginationControlsComponent,
+        ErrorAlertComponent,
         CaliberComponent,
         HomeComponent,
         AssessComponent,
