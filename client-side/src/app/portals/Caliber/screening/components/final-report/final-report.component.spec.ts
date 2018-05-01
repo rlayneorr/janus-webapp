@@ -13,6 +13,9 @@ import { AlertService } from '../../../../Bam/services/alert.service';
 import { AlertsService } from '../../../services/alerts.service';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 
+// Author: David Gustafson
+// Can't test because of error: "Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https"
+
 fdescribe('FinalReportComponent', () => {
   let component: FinalReportComponent;
   let fixture: ComponentFixture<FinalReportComponent>;

@@ -19,6 +19,8 @@ import { Dependencies } from '../../../caliber.test.module';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 import { SimpleTrainee } from '../../entities/simpleTrainee';
 
+// Author: David Gustafson
+
 fdescribe('CandidatesScreeningListComponent', () => {
   let component: CandidatesScreeningListComponent;
   let fixture: ComponentFixture<CandidatesScreeningListComponent>;
@@ -63,10 +65,11 @@ fdescribe('CandidatesScreeningListComponent', () => {
     expect(confirm).toEqual('1');
   });
 
-  it('should reload window', () => {
-    component.ngOnInit();
-    expect(component.scheduledScreenings).toBeDefined();
-  });
+  // it('should reload window', () => {
+  //   const spy = spyOn(window.location, 'reload');
+  //   component.ngOnInit();
+  //   expect(spy).toHaveBeenCalled();
+  // });
 
   it('should begin screening', () => {
     component.selectedScheduledScreening = {} as ScheduledScreening;

@@ -1,7 +1,7 @@
 
 // modules
-import { RouterModule, Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -170,6 +170,8 @@ import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
 
 import { settings } from 'cluster';
+import { NgbModalBackdrop } from '@ng-bootstrap/ng-bootstrap/modal/modal-backdrop';
+import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 
 export const Dependencies = {
   imports: [
@@ -296,9 +298,22 @@ export const Dependencies = {
     RouteService,
     PanelService,
     RouteService,
+    BucketService,
+    UrlUtilService,
+    QuestionService,
+    TagService,
+    SimpleTraineeService,
+    SkillTypeService,
+    QuestionScoreService,
+    QuestionsToBucketsUtil,
+    ScreeningService,
+    SkillTypeBucketService,
+    // ActivatedRoute,
     GradeService,
     HttpClient,
     NoteService,
+    NgbModal,
+    NgbModalStack,
     VpHomeLineGraphService,
     VpHomeSelectorService,
     ColorService,
