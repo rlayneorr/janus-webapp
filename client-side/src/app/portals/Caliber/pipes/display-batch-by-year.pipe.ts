@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
 
 @Pipe({ name: 'DisplayBatchByYear' })
 export class DisplayBatchByYear implements PipeTransform {
-    transform(item: HydraBatch[], year: number): HydraBatch[] {
+    transform(item: CompleteBatch[], year: number): CompleteBatch[] {
         const output = item.filter(batch => {
             const selectedDate = new Date(batch.startDate);
             return (Number(selectedDate.getFullYear()) === Number(year));

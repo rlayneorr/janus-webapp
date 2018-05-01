@@ -5,18 +5,19 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { Subscription } from 'rxjs/Subscription';
 
 // entities
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 
 // services
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { BatchService } from '../../../../hydra-client/aggregator/services/completebatch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
-import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
+import { GambitSkillTypeService } from '../../../../hydra-client/services/skillType/gambit-skill-type.service';
 import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
 import { ApiService } from '../../services/api.service';
 import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
+import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillType';
 
 
 @Component({
@@ -27,13 +28,13 @@ import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
 export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input()
-  public initialBatch: HydraBatch;
+  public initialBatch: CompleteBatch;
 
   @Input()
-  public batch: HydraBatch;
+  public batch: CompleteBatch;
 
   public trainers: Trainer[];
-  public skills: string[];
+  public skillTypes: GambitSkillType[];
   public locations: Address[];
   public trainingTypes: string[];
   batchType: string;
@@ -44,27 +45,21 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   private savedBatchSubscription: Subscription;
   private trainingTypeListSubscription: Subscription;
-  private skillListSubscription: Subscription;
   private locationListSubscription: Subscription;
   private trainerListSubscription: Subscription;
 
   constructor(
     private activeModal: NgbActiveModal,
-    private batchService: HydraBatchService,
+    private batchService: BatchService,
     private trainingTypeService: TrainingTypeService,
-    private skillService: GambitSkillService,
+    private skillTypeService: GambitSkillTypeService,
     private locationService: LocationService,
     public trainerService: TrainerService
   ) {
-    this.batch = new HydraBatch();
+    this.batch = new CompleteBatch();
     this.setLocations([]);
     this.setTrainers([]);
     this.setTrainingTypes([]);
-    this.setSkills([]);
-  }
-
-  public setSkills(skills: GambitSkill[]): void {
-    this.skills = skills.map(skill => skill.skillName);
   }
 
   public setLocations(locations: Address[]): void {
@@ -120,7 +115,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   onTrainerSelect(trainerId: number): void {
     for (const trainer of this.trainers) {
       if (Number(trainer.trainerId) === Number(trainerId)) {
-        this.batch.trainer = trainer.trainerId;
+        this.batch.trainer.userId = trainer.trainerId;
       }
     }
   }
@@ -132,7 +127,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   onCoTrainerSelect(trainerId: number): void {
     for (const trainer of this.trainers) {
       if (Number(trainer.trainerId) === Number(trainerId)) {
-        this.batch.cotrainer = trainer.trainerId;
+        this.batch.cotrainer.userId = trainer.trainerId;
       }
     }
   }
@@ -155,8 +150,9 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((types) => this.setTrainingTypes(types));
 
     /*fetches all skills */
-    this.skillListSubscription = this.skillService.listSubject
-      .subscribe((skills) => this.setSkills(skills));
+    this.skillTypeService.findAllActive().subscribe(skillTypes => {
+      this.skillTypes = skillTypes;
+    });
 
     /* fetches all batches */
     this.batchService.fetchAll();
@@ -174,7 +170,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     isNewBatch is assigned so that the proper functions are called from the buttons
     This should be redesigned */
 
-    if (this.batch.trainer === 0) {
+    if (this.batch.trainer.userId === 0) {
       this.batchType = 'Create New Batch';
       this.isNewBatch = true;
     } else {
@@ -192,7 +188,6 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     this.locationListSubscription.unsubscribe();
     this.trainerListSubscription.unsubscribe();
     this.trainingTypeListSubscription.unsubscribe();
-    this.skillListSubscription.unsubscribe();
   }
 
   ngOnChanges(): void {
