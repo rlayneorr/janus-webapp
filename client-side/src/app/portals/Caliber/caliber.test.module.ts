@@ -206,6 +206,9 @@ export const Dependencies = {
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
+    SearchPipe,
+    BucketFilterPipe,
+    TagFilterPipe,
 
     // components
     CaliberComponent,

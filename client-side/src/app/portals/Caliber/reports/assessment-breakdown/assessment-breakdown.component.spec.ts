@@ -48,4 +48,11 @@ fdescribe('AssessmentBreakdownComponent', () => {
       // expect(component['labels']).toBeNaN();
       // expect(component['data']).toBeNaN();
     }));
+
+  fit('tryFetch()',
+    inject([ReportingService, PDFService, GranularityService], (service: ReportingService) => {
+      expect(component['batchId']).toBe(undefined);
+      expect(component['week']).toBe(undefined);
+      component.tryFetch();
+    }));
 });
