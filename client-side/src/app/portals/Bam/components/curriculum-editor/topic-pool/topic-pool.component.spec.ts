@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopicPoolComponent } from './topic-pool.component';
-import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Component, DebugElement } from '@angular/core';
 import { Dependencies } from '../../../bam.test.module';
 import { Topic } from '../../../models/topic.model';
 import { SubtopicService } from '../../../services/subtopic.service';
@@ -12,8 +12,9 @@ import { DragndropService } from '../../../services/dragndrop.service';
 import { TopicName } from '../../../models/topicname.model';
 import { TopicService } from '../../../services/topic.service';
 import { AlertService } from '../../../services/alert.service';
+import { By } from '@angular/platform-browser';
 
-describe('TopicPoolComponent', () => {
+fdescribe('TopicPoolComponent', () => {
   let component: TopicPoolComponent;
   let fixture: ComponentFixture<TopicPoolComponent>;
 
@@ -296,5 +297,25 @@ describe('TopicPoolComponent', () => {
 
     expect(component.getSubTopics).not.toHaveBeenCalled();
     expect(alertSpy).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   * This works except that I can't find a way to provide an event.
+   */
+  it ('should stop propogation of the triggering event, and set the selectedTopicId to the selected topic', () => {
+    component.uniqarrFiltered = ['One'];
+    component.subArray = [[{topicID: 1, topicName: 'One'}, {topicID: 2, topicName: 'Two'}],
+    [{topicID: 3, topicName: 'Three'}, {topicID: 4, topicName: 'Four'}]];
+
+    // This event is needed to ensure that it doesn't fail due to event being undefined.
+    // And it seems impossible to access the element that would normally call this function.
+    event = new Event('This is an event');
+
+    component.getNewSubTopicReady(0);
+
+    event = undefined;
+    expect(component.selectedTopicId).toEqual(1);
   });
 });
