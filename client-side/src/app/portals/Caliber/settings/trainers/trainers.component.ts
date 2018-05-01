@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
@@ -103,6 +103,27 @@ export class TrainersComponent implements OnInit {
       'role': [this.newRole.role, Validators.required],
     });
     this.modalService.open(content, { size: 'lg' });
+  }
+
+  /**
+   * Show modal for deactivating a trainer
+   * @param content
+   */
+  showModal(content) {
+    this.modalService.open(content);
+  }
+
+  /**
+   * Method to deactivate trainer. Set the role to INACTIVE.
+   * Then call a put in http to update on the database.
+   * see the inactivate then wait before refreshing the list.
+   * @param trainer 
+   */
+  deactivateTrainer(trainer: HydraTrainer) {
+    trainer.role.role = 'INACTIVE';
+    this.trainerService.makeInactive(trainer).subscribe((resp) => {
+      setTimeout(() => { this.ngOnInit(); }, 1000);
+    });
   }
 
   /**

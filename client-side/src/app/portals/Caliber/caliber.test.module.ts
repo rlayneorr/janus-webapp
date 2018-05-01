@@ -84,7 +84,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { SkillsComponent } from './settings/skills/skills.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
-import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
 import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { CreatelocationComponent } from './settings/locations/createlocation/createlocation.component';
@@ -173,7 +172,6 @@ export const Dependencies = {
     SkillsComponent,
     TrainersComponent,
     LocationsComponent,
-    DeactivateTrainerComponent,
     DeactivateLocationComponent,
     EditlocationComponent,
     CreatelocationComponent,
