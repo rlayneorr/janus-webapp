@@ -16,6 +16,7 @@ export const environment = {
 
   batch: {
     fetchAllByTrainer: () => `${context}trainer/batch/all`,
+    fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
     fetchAll: () => `${context}vp/batch/all`,
     save: () => `${context}all/batch/create`,
     update: () => `${context}all/batch/update`,
@@ -105,6 +106,7 @@ export const environment = {
 
   trainer: {
     fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
+    fetchById: (id: number) => `${context}/trainers/${id}`,
     fetchAll: () => `${context}all/trainer/all`,
     save: () => `${context}all/trainer/all`,
     update: () => `${context}vp/trainer/update`,
