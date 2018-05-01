@@ -76,60 +76,6 @@ fdescribe('VpBarGraphComponent', () => {
   // }));
 
   beforeEach(done => (async() => {
-    // TestBed.configureTestingModule(
-    //   {
-    //     imports: [
-    //       CommonModule,
-    //       BrowserModule,
-    //       HttpModule,
-    //       NgbModule.forRoot(),
-    //       FormsModule,
-    //       NavModule,
-    //       RouterModule.forRoot(routes, { useHash: true }),
-    //       ChartsModule,
-    //       HttpClientModule,
-    //       RouterModule.forChild(routes),
-    //     ],
-    //     declarations: [
-    //       VpBarGraphComponent,
-    //       AppComponent,
-    //       LoginComponent,
-    //       DashboardComponent,
-    //       JanusComponent,
-    //       ErrorAlertComponent,
-    //       CaliberComponent,
-    //       HomeComponent,
-    //       ManageComponent,
-    //       AssessComponent,
-    //       QualityComponent,
-    //       ReportsComponent,
-    //       PanelComponent,
-    //       ScreeningComponent,
-    //       CandidatesScreeningListComponent,
-    //       QuestionsTableComponent,
-    //       FinalReportComponent,
-    //       IntroductionComponent,
-    //       PassFailComponent,
-    //       SettingsComponent,
-    //       SkillsComponent,
-    //       LocationsComponent,
-    //       TrainersComponent,
-    //       TrainerProfilesComponent,
-    //       ScreeningConfigComponent,
-    //       BucketComponent,
-    //       SkillTypeBucketsComponent,
-    //       ErrorAlertComponent,
-    //       BarGraphModalComponent,
-    //       BatchModalComponent,
-    //     ],
-    //     providers: [
-    //       { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
-    //       UrlService,
-    //       {provide: Router, useValue: {}}
-    //     ],
-    //   }
-    // ).compileComponents();
-    
     TestBed.configureTestingModule( Dependencies);
     await TestBed.compileComponents();
   })().then(done).catch(done.fail));
@@ -154,20 +100,20 @@ fdescribe('VpBarGraphComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create bar graph component', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('ErrorAlertComponent (a dependency of vp-bar-graph) was created successfully', () => {
-  //   expect(ErrorAlertComponent.)
-  // });
-  // it('should have same addresses as vpHomeSelectorService', () => {
-  //   let addressesInService : Array<any>;
-  //   this.vpHomeSelectorService.populateAddresses(this.results);
-  //   expect(addressesInService).toEqual(component.addresses);
-  // });
+  it('')
 
-  // it('vpHomeSelectorService exists', () => {
-  //   expect(this.vpHomeSelectorService).toBeTruthy();
-  // });
+  it('should populate addresses using vpHomeSelectorService', () => {
+    let addressesInService : Array<any>;
+    this.vpHomeSelectorService.populateAddresses(this.results);
+    expect(addressesInService).toEqual(component.addresses);
+  });
+
+  it('populateBatchStatuses() should ', () => {
+    let currNoteService : NoteService;
+    const batch = component.allbatches.filter(i => i.batchId === component.results.id)[0];
+  });
 });
