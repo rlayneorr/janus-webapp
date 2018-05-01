@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, getTestBed } from '@angular/core/testing';
 
 import { Dependencies } from '../../caliber.test.module';
 import { VpBarGraphComponent } from './vp-bar-graph.component';
@@ -55,7 +55,20 @@ import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs';
-import { HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
+// fdescribe('#getAddresses', () => {
+//   it('should return an Observable<Addresses[]>', () => {
+//     const dummyAddresses = [
+//       //    addressId: number; street: string; city: string; state: string; zipcode: string; company: string; active: boolean;
+//       {addressId: 0, street: 'Maple Street', city: 'Kansas City', state: 'KS', zipcode: '75421', company: 'Bro Bros.', active: true},
+//       {addressId: 1, street: 'Empire Street', city: 'New York', state: 'NY', zipcode: '12345', company: 'Venture Industries', active: true},
+//       {addressId: 2, street: 'Bubba Street', city: 'N/A', state: 'WY', zipcode: '54321', company: 'Bubbas Taxidermy', active: true},
+//     ];
+
+//     vpHomeSelectorService.populateAddresses.getAddresses().subscribe()
+//   })
+// });
 
 fdescribe('VpBarGraphComponent', () => {
   let component: VpBarGraphComponent;
@@ -73,25 +86,14 @@ fdescribe('VpBarGraphComponent', () => {
   let batchService: HydraBatchService;
   let noteService: NoteService;
   let reportsService: ReportsService;
-  let httpMock : HttpTestingController;
 
-  let Observable1 : Observable<any>;
-  let Observable2 : Observable<any>;
+  let httpMock : HttpTestingController;
+  let injector : TestBed;
+
   let mergedObservableResults : Array<any>;
   let mergedObservablesSubscription : Subscription;
   let QCStatuses : any; // should be equal to "results" in the component
   let batchIDs : any; // should be equal to "allBatches" in the component
-
-  beforeAll(function() {
-    Observable1 = this.reportsService.fetchReportsStackedBarCurrentWeek();
-    Observable2 = this.batchService.fetchAll();
-    mergedObservablesSubscription = Observable1.merge(Observable2).subscribe(
-      (resp) => {
-        if (resp.length > 0) {
-          mergedObservableResults.push(resp); 
-        }
-      });
-  })
 
   beforeEach(done => (async() => {
     TestBed.configureTestingModule( Dependencies);
@@ -108,7 +110,7 @@ fdescribe('VpBarGraphComponent', () => {
     reportingService      = debugElement.injector.get(ReportingService);
     evaluationService     = debugElement.injector.get(EvaluationService);
     modalService          = debugElement.injector.get(NgbModal);
-    http                  = debugElement.injector.get(HttpClient);
+    http                  = debugElement.injector.get(HttpTestingController);
     alertService          = debugElement.injector.get(AlertsService);
     vpHomeSelectorService = debugElement.injector.get(VpHomeSelectorService);
     batchService          = debugElement.injector.get(HydraBatchService);
@@ -122,6 +124,41 @@ fdescribe('VpBarGraphComponent', () => {
     httpMock.verify();
   });
 
+  it('', () =>{
+    // create an array of ChartDataEntity objects
+    const mockChartData = [
+      { 
+
+      },
+    ];
+
+    this.reportsService.fetchReportsStackedBarCurrentWeek().subscribe(() => {
+      (reports) => {
+        QCStatuses = mockChartData;
+      }
+    });
+
+    const Observable1 = this.reportsService.fetchReportsStackedBarCurrentWeek();
+    const Observable2 = this.batchService.fetchAll();
+    this.mergedObservablesSubscription = Observable1.merge(Observable2).subscribe(
+      (resp) => {
+        if (resp.length > 0) {
+          this.mergedObservableResults.push(resp); 
+        }
+      });
+  })
+
+  // it('should return an Observable<Addresses[]>', () => {
+  //   const dummyAddresses = [
+  //     //    addressId: number; street: string; city: string; state: string; zipcode: string; company: string; active: boolean;
+  //     {addressId: 0, street: 'Maple Street', city: 'Kansas City', state: 'KS', zipcode: '75421', company: 'Bro Bros.', active: true},
+  //     {addressId: 1, street: 'Empire Street', city: 'New York', state: 'NY', zipcode: '12345', company: 'Venture Industries', active: true},
+  //     {addressId: 2, street: 'Bubba Street', city: 'N/A', state: 'WY', zipcode: '54321', company: 'Bubbas Taxidermy', active: true},
+  //   ];
+  //   vpHomeSelectorService.populateAddresses('1').su
+  //   batchService.fetchAll().subscribe()
+  // })
+
   it('should create bar graph component', () => {
     expect(component).toBeTruthy();
   });
@@ -130,16 +167,5 @@ fdescribe('VpBarGraphComponent', () => {
     let addressesInService : Array<any>;
     this.vpHomeSelectorService.populateAddresses(this.results);
     expect(addressesInService).toEqual(component.addresses);
-  });
-
-  it('Able to get list of QCStatuses from reports service ', () => {
-    // reportsService.
-    if(mergedObservableResults.length > 0){
-
-    }
-  });
-
-  it('populateBatchStatuses() should ', () => {
-
   });
 });
