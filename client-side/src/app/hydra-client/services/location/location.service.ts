@@ -13,6 +13,9 @@ export class LocationService {
   private location = new BehaviorSubject<any>([]);
   publicLocation = this.location.asObservable();
 
+  private locations = new BehaviorSubject<any>([]);
+  publicLocations = this.location.asObservable();
+
   private building = new BehaviorSubject<any>([]);
   publicBuilding = this.building.asObservable();
 
@@ -38,7 +41,7 @@ export class LocationService {
   getAllLocations() {
     return this.httpClient.get<Location[]>(this.urls.location.getAllLocations()).subscribe(
       (payload) => {
-        this.location.next(payload);
+        this.locations.next(payload);
         console.log(payload);
       }
     );
@@ -116,7 +119,7 @@ export class LocationService {
   }
   // set Building as inactive //
   deleteBuilding(building: Building) {
-    return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
+    return this.httpClient.delete<Building>(this.urls.building.putBuildingById(building.buildingId)).subscribe(
       (payload) => {
         this.building.next(payload);
       }
@@ -180,7 +183,7 @@ export class LocationService {
   }
   // set Room as inactive //
   deleteRoom(room: Room) {
-    return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
+    return this.httpClient.delete<Room>(this.urls.room.putRoomById(room.roomId)).subscribe(
       (payload) => {
         this.room.next(payload);
         console.log(payload);

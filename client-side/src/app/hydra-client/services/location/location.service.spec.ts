@@ -26,23 +26,25 @@ describe('LocationService', () => {
     expect(service).toBeTruthy();
   }));
 
-  xit('should get a list of locations from the backend', inject([LocationService], (service: LocationService) => {
-    // this doesn't work right now because the data is only available as the wrong data type
-    let data: Location;
+  it('should get a list of locations from the backend', inject([LocationService], async (service: LocationService) => {
+    let data: Location[];
     service.getAllLocations();
-    service.publicLocation.subscribe((result) => {
+    service.publicLocations.subscribe((result) => {
       data = result;
+      console.log(data);
     });
-    expect(data.locationId).toBeDefined();
+    expect(data[0].active).toBeFalsy();
   }));
 
-  it('should get one location from the backend', inject([LocationService], (service: LocationService) => {
+  xit('should get one location from the backend', inject([LocationService], async (service: LocationService, done) => {
     let data: Location;
-    service.getLocation(testLoc);
+    const i = 1;
+    service.getLocation(i);
     service.publicLocation.subscribe((result) => {
       data = result;
     });
-    expect(data.locationId).toBeDefined();
+    done();
+    expect(data.locationId).toBe(i);
   }));
 
 });
