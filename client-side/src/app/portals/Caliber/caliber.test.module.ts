@@ -173,6 +173,7 @@ import { settings } from 'cluster';
 import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
 import { UrlService } from '../../hydra-client/services/urls/url.service';
 import { ErrorAlertComponent } from '../../hydra-client/ui/error-alert/error-alert.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 export const Dependencies = {
   imports: [
@@ -186,6 +187,7 @@ export const Dependencies = {
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
     NgxPaginationModule,
+    HttpClientTestingModule,
   ],
   declarations: [
     // pipes

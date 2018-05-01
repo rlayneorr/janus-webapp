@@ -53,12 +53,15 @@ import { BatchModalComponent } from '../../manage/batch/batch-modal.component';
 import { SpringInterceptor } from '../../interceptors/spring.interceptor';
 import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs';
+import { HttpTestingController } from '@angular/common/http/testing';
 
 fdescribe('VpBarGraphComponent', () => {
   let component: VpBarGraphComponent;
   let fixture: ComponentFixture<VpBarGraphComponent>;
   let spy : any;
-  let de: DebugElement;
+  let debugElement: DebugElement;
 
   let vpHomeBarGraphService: VpHomeBarGraphService;
   let reportingService: ReportingService;
@@ -70,10 +73,25 @@ fdescribe('VpBarGraphComponent', () => {
   let batchService: HydraBatchService;
   let noteService: NoteService;
   let reportsService: ReportsService;
+  let httpMock : HttpTestingController;
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule(Dependencies).compileComponents(); 
-  // }));
+  let Observable1 : Observable<any>;
+  let Observable2 : Observable<any>;
+  let mergedObservableResults : Array<any>;
+  let mergedObservablesSubscription : Subscription;
+  let QCStatuses : any; // should be equal to "results" in the component
+  let batchIDs : any; // should be equal to "allBatches" in the component
+
+  beforeAll(function() {
+    Observable1 = this.reportsService.fetchReportsStackedBarCurrentWeek();
+    Observable2 = this.batchService.fetchAll();
+    mergedObservablesSubscription = Observable1.merge(Observable2).subscribe(
+      (resp) => {
+        if (resp.length > 0) {
+          mergedObservableResults.push(resp); 
+        }
+      });
+  })
 
   beforeEach(done => (async() => {
     TestBed.configureTestingModule( Dependencies);
@@ -84,27 +102,29 @@ fdescribe('VpBarGraphComponent', () => {
     fixture = TestBed.createComponent(VpBarGraphComponent);
     component = fixture.componentInstance;
     
-    de = fixture.debugElement;
+    debugElement = fixture.debugElement;
 
-    vpHomeBarGraphService = de.injector.get(VpHomeBarGraphService);
-    reportingService      = de.injector.get(ReportingService);
-    evaluationService     = de.injector.get(EvaluationService);
-    modalService          = de.injector.get(NgbModal);
-    http                  = de.injector.get(HttpClient);
-    alertService          = de.injector.get(AlertsService);
-    vpHomeSelectorService = de.injector.get(VpHomeSelectorService);
-    batchService          = de.injector.get(HydraBatchService);
-    noteService           = de.injector.get(NoteService);
-    reportsService        = de.injector.get(ReportsService);
+    vpHomeBarGraphService = debugElement.injector.get(VpHomeBarGraphService);
+    reportingService      = debugElement.injector.get(ReportingService);
+    evaluationService     = debugElement.injector.get(EvaluationService);
+    modalService          = debugElement.injector.get(NgbModal);
+    http                  = debugElement.injector.get(HttpClient);
+    alertService          = debugElement.injector.get(AlertsService);
+    vpHomeSelectorService = debugElement.injector.get(VpHomeSelectorService);
+    batchService          = debugElement.injector.get(HydraBatchService);
+    noteService           = debugElement.injector.get(NoteService);
+    reportsService        = debugElement.injector.get(ReportsService);
 
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 
   it('should create bar graph component', () => {
     expect(component).toBeTruthy();
   });
-
-  it('')
 
   it('should populate addresses using vpHomeSelectorService', () => {
     let addressesInService : Array<any>;
@@ -112,8 +132,14 @@ fdescribe('VpBarGraphComponent', () => {
     expect(addressesInService).toEqual(component.addresses);
   });
 
+  it('Able to get list of QCStatuses from reports service ', () => {
+    // reportsService.
+    if(mergedObservableResults.length > 0){
+
+    }
+  });
+
   it('populateBatchStatuses() should ', () => {
-    let currNoteService : NoteService;
-    const batch = component.allbatches.filter(i => i.batchId === component.results.id)[0];
+
   });
 });
