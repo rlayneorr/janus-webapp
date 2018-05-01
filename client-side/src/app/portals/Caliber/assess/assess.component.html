@@ -16,12 +16,12 @@
       </div>
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic2" ngbDropdownToggle>
-          <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
+          <strong>{{selectedBatch.trainer.firstname}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
         </button>
         <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic2" (click)="switchBatch(selectedBatch.batchId)">
           <div *ngFor="let  batch of yearBatches" class="custom-bold">
             <button class="dropdown-item c-pointer f-size" (click)="changeBatch(selectedBatch)">
-              <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
+              <strong>{{selectedBatch.trainer.firstname}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
             </button>
           </div>
         </div>

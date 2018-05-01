@@ -9,6 +9,8 @@ import { CurriculumService } from '../../services/curriculum.service';
 import { SubtopicService } from '../../services/subtopic.service';
 import { UsersService } from '../../services/users.service';
 import { BoomUtil } from './boom.util';
+import { BamUser } from '../../models/bamuser.model';
+import { Batch } from '../../models/batch.model';
 
 describe('BoomComponent', () => {
   let component: BoomComponent;
@@ -45,9 +47,10 @@ describe('BoomComponent', () => {
   });
 
   it('initialize the Batches', () => {
+    const batches: Batch[] = BoomUtil.makeBatches();
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.currentBatches).toEqual(BoomUtil.makeBatches());
+    expect(component.currentBatches).toEqual(batches);
   });
 
   it('get the week helper', () => {
