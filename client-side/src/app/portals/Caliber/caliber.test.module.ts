@@ -16,7 +16,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { ScrollEventModule } from 'ngx-scroll-event';
 // import { NgxPaginationModule, PaginatePipe, PaginationControlsComponent } from 'ngx-pagination';
 import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
-//import { NgxPaginationModule } from 'ngx-pagination';
+// import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 // routing
