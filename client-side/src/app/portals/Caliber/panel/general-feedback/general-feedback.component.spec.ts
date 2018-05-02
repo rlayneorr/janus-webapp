@@ -3,7 +3,7 @@ import { Dependencies } from '../../caliber.test.module';
 import { GeneralFeedbackComponent } from './general-feedback.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-fdescribe('GeneralFeedbackComponent', () => {
+xdescribe('GeneralFeedbackComponent', () => {
   let component: GeneralFeedbackComponent;
   let fixture: ComponentFixture<GeneralFeedbackComponent>;
   let spy: any;

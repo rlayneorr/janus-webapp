@@ -172,6 +172,8 @@ import { InterviewDetailsComponent } from './panel/interview-details/interview-d
 import { settings } from 'cluster';
 // import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
 import { UrlService } from '../../hydra-client/services/urls/url.service';
+import { ErrorAlertComponent } from '../../hydra-client/ui/error-alert/error-alert.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 export const Dependencies = {
   imports: [
@@ -185,6 +187,7 @@ export const Dependencies = {
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
     NgxPaginationModule,
+    HttpClientTestingModule,
   ],
   declarations: [
     // pipes
@@ -208,6 +211,10 @@ export const Dependencies = {
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
+
+    SearchPipe,
+    BucketFilterPipe,
+    TagFilterPipe,
 
     // components
     CaliberComponent,
@@ -263,6 +270,7 @@ export const Dependencies = {
 
         // components
         // PaginationControlsComponent,
+        ErrorAlertComponent,
         CaliberComponent,
         HomeComponent,
         AssessComponent,
@@ -334,7 +342,8 @@ export const Dependencies = {
         BucketComponent,
         SkillTypeBucketsComponent,
         QuestionComponent,
-        ScreeningComponent
+        ScreeningComponent,
+        VpBarGraphComponent,
 
   ],
   providers: [
@@ -369,7 +378,11 @@ export const Dependencies = {
     PanelSearchbarComponent,
     NgbActiveModal,
     {provide: Router, useValue: {}},
-    GranularityService
+    //GranularityService,
+    VpHomeBarGraphService,
+
+   // HydraBatchService,
+    UrlService,
   ],
   bootstrap: [
     // TrainersComponent

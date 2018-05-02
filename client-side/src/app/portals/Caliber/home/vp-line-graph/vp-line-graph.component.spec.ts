@@ -8,38 +8,128 @@ import { AlertsService } from '../../services/alerts.service';
 import { ReportsService } from '../../services/reports.service';
 import { ColorService } from '../../services/colors/color.service';
 import { VpLineGraphComponent } from './vp-line-graph.component';
+import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
+import { ReportingService } from '../../services/reporting.service';
+import { EvaluationService } from '../../services/evaluation.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { NoteService } from '../../services/note.service';
 
+import { Dependencies } from '../../caliber.test.module';
+import { DebugElement } from '@angular/core';
 
-xdescribe('VpLineGraphComponent', () => {
+fdescribe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;
   let fixture: ComponentFixture<VpLineGraphComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ VpLineGraphComponent ],
-      imports: [
-        ChartsModule,
-        HttpClientModule,
-        FormsModule
-      ],
-      providers: [
-        ColorService,
-        VpHomeLineGraphService,
-        VpHomeSelectorService,
-        AlertsService,
-        ReportsService
-      ]
-    })
-    .compileComponents();
-  }));
+  let vpHomeBarGraphService: VpHomeBarGraphService;
+  let reportingService: ReportingService;
+  let evaluationService: EvaluationService;
+  let modalService: NgbModal;
+  let http: HttpClient;
+  let alertService: AlertsService;
+  let vpHomeSelectorService: VpHomeSelectorService;
+  let batchService: HydraBatchService;
+  let noteService: NoteService;
+  let reportsService: ReportsService;
+
+  let debugElement: DebugElement; 
+
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     declarations: [ VpLineGraphComponent ],
+  //     imports: [
+  //       ChartsModule,
+  //       HttpClientModule,
+  //       FormsModule
+  //     ],
+  //     providers: [
+  //       ColorService,
+  //       VpHomeLineGraphService,
+  //       VpHomeSelectorService,
+  //       AlertsService,
+  //       ReportsService
+  //     ]
+  //   })
+  //   .compileComponents();
+  // }));
+
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(VpLineGraphComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
+
+  beforeEach(done => (async() => {
+    TestBed.configureTestingModule( Dependencies);
+    await TestBed.compileComponents();
+  })().then(done).catch(done.fail));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(VpLineGraphComponent);
     component = fixture.componentInstance;
+    
+    debugElement = fixture.debugElement;
+
+    vpHomeBarGraphService = debugElement.injector.get(VpHomeBarGraphService);
+    reportingService      = debugElement.injector.get(ReportingService);
+    evaluationService     = debugElement.injector.get(EvaluationService);
+    modalService          = debugElement.injector.get(NgbModal);
+    http                  = debugElement.injector.get(HttpClient);
+    alertService          = debugElement.injector.get(AlertsService);
+    vpHomeSelectorService = debugElement.injector.get(VpHomeSelectorService);
+    batchService          = debugElement.injector.get(HydraBatchService);
+    noteService           = debugElement.injector.get(NoteService);
+    reportsService        = debugElement.injector.get(ReportsService);
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('onClick should trigger reportingService.fetchTechnologiesForTheWeek', () => {
+    let fetchTechnologiesSpy = spyOn(reportingService, 'fetchTechnologiesForTheWeek').and.callThrough();
+
+    // trigger the chartClick event described in the html document (inside the 'canvas' tag)
+    $('#canvas').trigger('chartClick');
+  
+    expect(fetchTechnologiesSpy).toHaveBeenCalled();   
+  });
+
+  it('onClick should trigger evaluationService.FetchAllQCTraineeNotes', () => {
+    const spy = spyOn(evaluationService, 'FetchAllQCTraineeNotes').and.callThrough();
+
+    // trigger the chartClick event described in the html document (inside the 'canvas' tag)
+    $('#canvas').trigger('chartClick');
+  
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('onClick should trigger evaluationService.FetchAllQCBatchNotes', () => {
+    const spy = spyOn(evaluationService, 'FetchAllQCBatchNotes').and.callThrough();
+
+    // trigger the chartClick event described in the html document (inside the 'canvas' tag)
+    $('#canvas').trigger('chartClick');
+    
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('findCities should change hasBarChartData to true', () => {
+    component.findCities('bleh');
+    expect(component.hasData).toEqual(true);
+
+    // try findCities again, and pass in an actual string this time
+    TestBed.resetTestEnvironment();
+    component.findCities('');
+    expect(component.selectedState).toEqual(false);
+    expect(component.hasData).toEqual(true);
+  });
+
+  it('hasCity is valid', () => {
+    TestBed.resetTestEnvironment();
+    component.hasCity('bleh');
+    expect(component.hasData).toEqual(false);
   });
 });

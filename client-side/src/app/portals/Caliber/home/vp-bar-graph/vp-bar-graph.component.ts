@@ -45,7 +45,7 @@ export class VpBarGraphComponent implements OnInit, OnDestroy {
   public techSub: Subscription;
   public QCSub: Subscription;
   public batchSub: Subscription;
-  private mergedObservablesSubscription: Subscription;
+  private mergedObservablesSubscription: Subscription; 
   public allbatches: any;
   public hasBatchStatuses = false;
   public counter = 0;

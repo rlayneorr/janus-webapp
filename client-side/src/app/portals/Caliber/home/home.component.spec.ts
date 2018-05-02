@@ -5,7 +5,7 @@ import { iterateListLike } from '@angular/core/src/change_detection/change_detec
 import { Dependencies } from '../caliber.test.module';
 import { HomeComponent } from './home.component';
 
-xdescribe('CaliberHomeComponent', () => {
+fdescribe('CaliberHomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
@@ -26,9 +26,6 @@ xdescribe('CaliberHomeComponent', () => {
   // });
 
   it('should create', () => {
-    expect(5).toEqual(5);
-    console.log('YOOOOOOOOOOO');
-    console.log(component);
-    // expect(component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 });
