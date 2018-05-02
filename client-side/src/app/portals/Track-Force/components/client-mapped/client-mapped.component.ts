@@ -172,9 +172,7 @@ export class ClientMappedComponent implements OnInit {
       if (!this.chartOptions.legend.scales) {
         this.chartOptions.scales = { yAxes: [{ ticks: { min: 0 } }] };
       }
-    }
-    // For 'pie' or 'polarArea' charts
-    else if (selectedType === 'pie' || selectedType === 'polarArea') {
+    } else if (selectedType === 'pie' || selectedType === 'polarArea') {// For 'pie' or 'polarArea' charts
       // Display legend
       this.chartOptions.legend = {
         display: true,
