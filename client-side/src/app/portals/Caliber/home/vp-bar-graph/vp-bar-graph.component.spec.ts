@@ -57,7 +57,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-fdescribe('VpBarGraphComponent', () => {
+describe('VpBarGraphComponent', () => {
   let component: VpBarGraphComponent;
   let fixture: ComponentFixture<VpBarGraphComponent>;
 

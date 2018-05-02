@@ -53,6 +53,8 @@ fdescribe('InterviewDetailsComponent', () => {
   });
   
   it('interview details has the same panel list as panel service, upon instantiation', () => {
+
+    
     // get the panel list contained in panel service
     let panelListInService : Panel[];
     panelService.listSubject.asObservable().subscribe((panelList) => {

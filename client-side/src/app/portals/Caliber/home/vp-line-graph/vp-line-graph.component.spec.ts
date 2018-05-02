@@ -8,7 +8,6 @@ import { AlertsService } from '../../services/alerts.service';
 import { ReportsService } from '../../services/reports.service';
 import { ColorService } from '../../services/colors/color.service';
 import { VpLineGraphComponent } from './vp-line-graph.component';
-import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
 import { ReportingService } from '../../services/reporting.service';
 import { EvaluationService } from '../../services/evaluation.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,13 +18,13 @@ import { Dependencies } from '../../caliber.test.module';
 import { DebugElement } from '@angular/core';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { Address } from '../../entities/Address';
-import { ADDRESSES } from '../mock-data/mock-addresses';
+import { ADDRESSES } from '../../mock-data/mock-addresses';
 
-fdescribe('VpLineGraphComponent', () => {
+describe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;
   let fixture: ComponentFixture<VpLineGraphComponent>;
 
-  let vpHomeBarGraphService: VpHomeBarGraphService;
+  let vpHomeLineGraphService: VpHomeLineGraphService;
   let reportingService: ReportingService;
   let evaluationService: EvaluationService;
   let modalService: NgbModal;
@@ -74,7 +73,7 @@ fdescribe('VpLineGraphComponent', () => {
     
     debugElement = fixture.debugElement;
 
-    vpHomeBarGraphService = debugElement.injector.get(VpHomeBarGraphService);
+    vpHomeLineGraphService = debugElement.injector.get(VpHomeLineGraphService);
     reportingService      = debugElement.injector.get(ReportingService);
     evaluationService     = debugElement.injector.get(EvaluationService);
     modalService          = debugElement.injector.get(NgbModal);
@@ -119,7 +118,9 @@ fdescribe('VpLineGraphComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('findCities should change hasBarChartData to true', () => {
+  it('findCities should change hasData to true', () => {
+    TestBed.resetTestEnvironment();
+
     component.findCities('bleh');
     expect(component.hasData).toEqual(true);
 
@@ -132,10 +133,7 @@ fdescribe('VpLineGraphComponent', () => {
 
   it('hasCity works as expected', () => {
     //TestBed.resetTestEnvironment();
-
-    fixture = TestBed.createComponent(VpLineGraphComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.resetTestEnvironment();
     
     component.hasCity('bleh');
     expect(component.hasData).toBeFalsy();
