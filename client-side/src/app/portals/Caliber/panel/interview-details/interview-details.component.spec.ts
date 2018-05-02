@@ -8,7 +8,7 @@ import { PanelService } from '../../services/panel.service';
 import { Panel } from '../../entities/Panel';
 // import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
-describe('InterviewDetailsComponent', () => {
+fdescribe('InterviewDetailsComponent', () => {
   let component: InterviewDetailsComponent;
   let fixture: ComponentFixture<InterviewDetailsComponent>;
   let batchService: BatchService;
@@ -53,6 +53,8 @@ describe('InterviewDetailsComponent', () => {
   });
   
   it('interview details has the same panel list as panel service, upon instantiation', () => {
+
+    
     // get the panel list contained in panel service
     let panelListInService : Panel[];
     panelService.listSubject.asObservable().subscribe((panelList) => {

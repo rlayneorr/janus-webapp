@@ -1,4 +1,4 @@
-import { DataSet } from '../../../Caliber/entities/DataSet'
+import { DataSet } from '../entities/DataSet'
 
 export const DATASETS1: DataSet[] = [
     {
