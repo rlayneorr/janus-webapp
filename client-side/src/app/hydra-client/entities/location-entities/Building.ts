@@ -10,10 +10,10 @@ export class Building {
     // foreign key | Id of the location this building is in //
     locationId: number;
     // the number of the building //
-    buildingNumber: number;
+    buildingNumber: string;
 
     // this is a constructor //
-    constructor( buildingId: number, streetAddress: string, locationId: number, buildingNumber: number ) {
+    constructor( buildingId: number, streetAddress: string, locationId: number, buildingNumber: string ) {
         this.buildingId = buildingId;
         this.streetAddress = streetAddress;
         this.locationId = locationId;

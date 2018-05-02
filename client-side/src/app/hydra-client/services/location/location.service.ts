@@ -14,7 +14,7 @@ export class LocationService {
   publicLocation = this.location.asObservable();
 
   private locations = new BehaviorSubject<any>([]);
-  publicLocations = this.location.asObservable();
+  publicLocations = this.locations.asObservable();
 
   private building = new BehaviorSubject<any>([]);
   publicBuilding = this.building.asObservable();
@@ -41,7 +41,7 @@ export class LocationService {
     return this.httpClient.get<Location[]>(this.urls.location.getAllLocations()).toPromise();
   }
   // get Location by Id //
-  getLocation(location: any) {
+  getLocationById(location: any) {
     return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
       (payload) => {
         this.location.next(payload);
@@ -59,21 +59,16 @@ export class LocationService {
     );
   }
   // update the location //
-  /**
-   * this method currently has ONE known bug:
-   *  - If an update is made to an object that does not already exist in the database,
-   * instead of failing this method will create a new object holding updated data
-   */
   updateLocation(location: Location) {
     return this.httpClient.put<Location>(this.urls.location.putLocationById(location.locationId),
       JSON.stringify(location), {headers: this.header}).subscribe(
         (payload) => {
-          // console.log('Logging updateLocation from service:  ' + JSON.stringify(payload));
+          console.log('Logging updateLocation from service:  ' + JSON.stringify(payload));
           this.location.next(payload);
         }
       );
   }
-  // set location as inactive: TESTING THIS NOW //
+  // set location as inactive //
   deleteLocation(location: Location) {
     return this.httpClient.delete<Location>(this.urls.location.deleteLocationById(location.locationId)).subscribe(
       (payload) => {
@@ -143,7 +138,7 @@ export class LocationService {
     );
   }
   // get Room by Id //
-  getOneRoom(room: any) {
+  getRoomById(room: any) {
     return this.httpClient.get<Room>(this.urls.room.getRoomById(room)).subscribe(
       (payload) => {
         this.room.next(payload);
@@ -159,7 +154,6 @@ export class LocationService {
   //     console.log(payload);
   //   });
   // }
-
   // get all Rooms in a Building //
   getRoomsByBuildingId(buildingId: any) {
     return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId))
@@ -206,8 +200,11 @@ export class LocationService {
       console.log(payload);
     });
   }
-  // get Unavailability by Id //
-  postUnavailability(unavailability: any) {
-    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability));
+  // post Unavailability //
+  newUnavailability(unavailability: any) {
+    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability))
+    .subscribe((payload) => {
+      console.log(payload);
+    });
   }
 }

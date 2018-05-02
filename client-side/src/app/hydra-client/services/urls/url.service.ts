@@ -156,7 +156,7 @@ export class UrlService {
    */
   location = {
     getLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
-    getAllLocations: () => `${this.context}/location/`,
+    getAllLocations: () => `${this.context}/locations/`,
     postLocation: () => `${this.context}/locations/`,
     putLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
     deleteLocationById: (locationId: number) => `${this.context}/locations/${locationId}`
@@ -169,7 +169,7 @@ export class UrlService {
    */
   building = {
     getBuildingById: (buildingId: number) => `${this.context}/buildings/${buildingId}`,
-    getBuildingsByLocationId: (locationId: number) => `${this.context}/buildings/locations/${locationId}`,
+    getBuildingsByLocationId: (locationId: number) => `${this.context}/buildings/location/${locationId}`,
     getAllBuildings: () => `${this.context}/buildings/`,
     postBuilding: () => `${this.context}/buildings/`,
     putBuildingById: (buildingId: number) => `${this.context}/buildings/${buildingId}`,
@@ -185,7 +185,7 @@ export class UrlService {
     getRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
     getAllRooms: () => `${this.context}/rooms/`,
     // getRoomsByLocationId: (locationId: number) => `${this.context}/rooms/locations/${locationId}`,
-    getRoomsByBuildingId: (buildingId: number) => `${this.context}/rooms/buildings/${buildingId}`,
+    getRoomsByBuildingId: (buildingId: number) => `${this.context}/rooms/building/${buildingId}`,
     postRoom: () => `${this.context}/rooms/`,
     putRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
     // deleteRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`
