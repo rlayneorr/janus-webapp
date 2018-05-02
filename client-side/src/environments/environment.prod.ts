@@ -18,6 +18,7 @@ export const environment = {
 
   batch: {
     fetchAllByTrainer: () => `${context}trainer/batch/all`,
+    fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
     fetchAll: () => `${context}vp/batch/all`,
     save: () => `${context}all/batch/create`,
     update: () => `${context}all/batch/update`,
@@ -70,31 +71,31 @@ export const environment = {
   },
 
   skill: {
-    findAll: () => `${context}/gambit-skills-service/skill`,
-    findByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
-    findById: (id) => `${context}/gambit-skills-service/skill/${id}`,
-    findAllActive: () => `${context}/gambit-skills-service/skill/active`,
-    save: () => `${context}/gambit-skills-service/skill`,
-    updateByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
-    updateById: (id) => `${context}/gambit-skills-service/skill/${id}`,
-    delete: (id) => `${context}/gambit-skills-service/skill/${id}`,
-    deleteByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`
+    findAll: () => `${context}/skill`,
+    findByName: (name) => `${context}/skill/name/${name}`,
+    findById: (id) => `${context}/skill/${id}`,
+    findAllActive: () => `${context}/skill/active`,
+    save: () => `${context}/skill`,
+    updateByName: (name) => `${context}/skill/name/${name}`,
+    updateById: (id) => `${context}/skill/${id}`,
+    delete: (id) => `${context}/skill/${id}`,
+    deleteByName: (name) => `${context}/skill/name/${name}`
   },
 
   skillType: {
-    find: (id) => `${context}/gambit-skills-service/skillType/${id}`,
-    findByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
-    findAll: () => `${context}/gambit-skills-service/skillType`,
-    findAllActive: () => `${context}/gambit-skills-service/skillType/active`,
-    findAllSkills: () => `${context}/gambit-skills-service/skillType/skill`,
-    save: () => `${context}/gambit-skills-service/skillType`,
-    saveSkill: (skillTypeId, skillId) => `${context}/gambit-skills-service/skillType/${skillTypeId}/skill/${skillId}`,
+    find: (id) => `${context}/skillType/${id}`,
+    findByName: (name) => `${context}/skillType/name/${name}`,
+    findAll: () => `${context}/skillType`,
+    findAllActive: () => `${context}/skillType/active`,
+    findAllSkills: () => `${context}/skillType/skill`,
+    save: () => `${context}/skillType`,
+    saveSkill: (skillTypeId, skillId) => `${context}/skillType/${skillTypeId}/skill/${skillId}`,
     saveSkillByName: (skillTypeName, skillName) =>
-    `${context}/gambit-skills-service/skillType/name/${skillTypeName}/skill/name/${skillName}`,
-    update: (id) => `${context}/gambit-skills-service/skillType/${id}`,
-    updateByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
-    delete: (id) => `${context}/gambit-skills-service/skillType/${id}`,
-    deleteByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`
+      `${context}/skillType/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id) => `${context}/skillType/${id}`,
+    updateByName: (name) => `${context}/skillType/name/${name}`,
+    delete: (id) => `${context}/skillType/${id}`,
+    deleteByName: (name) => `${context}/skillType/name/${name}`
   },
 
   trainee: {
@@ -107,6 +108,7 @@ export const environment = {
 
   trainer: {
     fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
+    fetchById: (id: number) => `${context}/trainers/${id}`,
     fetchAll: () => `${context}all/trainer/all`,
     save: () => `${context}all/trainer/all`,
     update: () => `${context}vp/trainer/update`,
@@ -206,11 +208,11 @@ export const environment = {
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
 
-    /* Evaluation service API endpoints */
+  /* Evaluation service API endpoints */
   apiFetchAllQCTraineeNotes: (batchId: Number, weekId: Number) =>
-  environment.context + `qc/note/trainee/${batchId}/${weekId}`,
+    environment.context + `qc/note/trainee/${batchId}/${weekId}`,
 
-apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
-  environment.context + `qc/note/batch/${batchId}/${weekId}`
+  apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
+    environment.context + `qc/note/batch/${batchId}/${weekId}`
 
 };
