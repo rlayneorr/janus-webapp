@@ -3,38 +3,58 @@ import { Dependencies } from '../../caliber.test.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InterviewDetailsComponent } from './interview-details.component';
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
-import { BatchService } from '../../../Bam/services/batch.service';
+import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 import { PanelService } from '../../services/panel.service';
 import { Panel } from '../../entities/Panel';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreatePanelComponent } from '../create-panel/create-panel.component';
+import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
+import { TechnicalFeedbackComponent } from '../technical-feedback/technical-feedback.component';
+import { PanelOverallFeedbackComponent } from '../overall-feedback/panel-overall-feedback.component';
+import { TraineeService } from '../../services/trainee.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AlertsService } from '../../services/alerts.service';
+import { UrlService } from '../../../../hydra-client/services/urls/url.service';
+import { ApiService } from '../../util/api.service';
+import { BatchService } from '../../services/batch.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 // import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
 fdescribe('InterviewDetailsComponent', () => {
   let component: InterviewDetailsComponent;
   let fixture: ComponentFixture<InterviewDetailsComponent>;
-  const batchService = BatchService;
-  const panelService = PanelService;
-  const searchBar = PanelSearchbarComponent;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule(Dependencies).compileComponents();
-  }), 1440000);
-
-  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        FormsModule,
         ReactiveFormsModule,
-        FormsModule
+        NgbModule.forRoot(),
+        HttpClientModule,
+        HttpClientTestingModule,
       ],
       declarations: [
         InterviewDetailsComponent,
-        PanelSearchbarComponent
+        PanelSearchbarComponent,
+        CreatePanelComponent,
+        GeneralFeedbackComponent,
+        TechnicalFeedbackComponent,
+        PanelOverallFeedbackComponent,
       ],
       providers: [
-        BatchService,
         PanelService,
-      ]
-    });
+        HydraBatchService,
+        PanelSearchbarComponent,
+        TraineeService,
+        AlertsService,
+        UrlService,
+        ApiService,
+        BatchService,
+      ],
+    }).compileComponents();
+  }), 1440000);
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(InterviewDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -42,14 +62,6 @@ fdescribe('InterviewDetailsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('Batch Service is valid', () => {
-    expect(batchService).toBeTruthy();
-  });
-
-  it('Panel Service is valid', () => {
-    expect(panelService).toBeTruthy();
   });
 
   it('constructor works, and instantiates an interview form', () => {
@@ -77,55 +89,40 @@ fdescribe('InterviewDetailsComponent', () => {
   ////////////////////////////////////////////////////////////////////
   // ensure that all fields in this form exist
   it('interviewDate field (in interview details form) is valid.', () => {
-    const interviewDate = component.interviewForm.controls['interviewDate'];
-    expect(interviewDate).toBeTruthy();
-    expect(interviewDate.value).toEqual('');
+    expect(component.interviewForm.controls['interviewDate']).toBeTruthy();
   });
 
   it('interviewTime field (in interview details form) is valid.', () => {
-    const interviewTime = component.interviewForm.controls['interviewTime'];
-    expect(interviewTime).toBeTruthy();
-    expect(interviewTime.value).toEqual('');
+    expect(component.interviewForm.controls['interviewTime']).toBeTruthy();
   });
 
   it('internet field (in interview details form) is valid.', () => {
-    const internet = component.interviewForm.controls['internet'];
-    expect(internet).toBeTruthy();
-    expect(internet.value).toEqual('');
+    expect(component.interviewForm.controls['internet']).toBeTruthy();
   });
 
   it('panelRound field (in interview details form) is valid.', () => {
-    const panelRound = component.interviewForm.controls['panelRound'];
-    expect(panelRound).toBeTruthy();
-    expect(panelRound.value).toEqual('');
+    expect(component.interviewForm.controls['panelRound']).toBeTruthy();
   });
 
   it('format field (in interview details form) is valid.', () => {
-    const format = component.interviewForm.controls['format'];
-    expect(format).toBeTruthy();
-    expect(format.value).toEqual('');
+    expect(component.interviewForm.controls['format']).toBeTruthy();
   });
 
   it('recordingConsent field (in interview details form) is valid.', () => {
-    const recordingConsent = component.interviewForm.controls['recordingConsent'];
-    expect(recordingConsent).toBeTruthy();
-    expect(recordingConsent.value).toEqual('');
+    expect(component.interviewForm.controls['recordingConsent']).toBeTruthy();
   });
 
   ////////////////////////////////////////////////////////////////////
   /* ensure that panelRound, field, and recordingConsent are disabled */
   it('panelRound field should be disabled.', () => {
-    const panelRound = component.interviewForm.controls['panelRound'];
-    expect(panelRound.enabled).toBeFalsy();
+    expect(component.interviewForm.controls['panelRound']).toBeFalsy();
   });
 
   it('format field should be disabled.', () => {
-    const format = component.interviewForm.controls['format'];
-    expect(format.enabled).toBeFalsy();
+    expect(component.interviewForm.controls['format']).toBeFalsy();
   });
 
   it('recordingConsent field should be disabled.', () => {
-    const recordingConsent = component.interviewForm.controls['recordingConsent'];
-    expect(recordingConsent.enabled).toBeFalsy();
+    expect(component.interviewForm.controls['recordingConsent']).toBeFalsy();
   });
 });

@@ -160,10 +160,8 @@ describe('VpBarGraphComponent', () => {
     expect(component.hasBatchStatuses).toEqual(true);
 
     TestBed.resetTestEnvironment();
-    component.results = ['thing', 'thing', 'just want array to be larger than size 1', 'I\'m a professional'];
+    component.results = ['thing', 'thing', 'just want array to be larger than size 1'];
     component.populateBatchStatuses();
     expect(component.hasBatchStatuses).toEqual(true);
   });
-
-
 });
