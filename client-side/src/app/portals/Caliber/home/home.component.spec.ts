@@ -11,19 +11,11 @@ fdescribe('CaliberHomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies);
-    // .compileComponents();
-
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(HomeComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();

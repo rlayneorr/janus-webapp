@@ -35,32 +35,7 @@ describe('VpLineGraphComponent', () => {
   let noteService: NoteService;
   let reportsService: ReportsService;
 
-  let debugElement: DebugElement; 
-
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ VpLineGraphComponent ],
-  //     imports: [
-  //       ChartsModule,
-  //       HttpClientModule,
-  //       FormsModule
-  //     ],
-  //     providers: [
-  //       ColorService,
-  //       VpHomeLineGraphService,
-  //       VpHomeSelectorService,
-  //       AlertsService,
-  //       ReportsService
-  //     ]
-  //   })
-  //   .compileComponents();
-  // }));
-
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(VpLineGraphComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
+  let debugElement: DebugElement;
 
   beforeEach(done => (async() => {
     TestBed.configureTestingModule( Dependencies);
@@ -70,7 +45,7 @@ describe('VpLineGraphComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(VpLineGraphComponent);
     component = fixture.componentInstance;
-    
+
     debugElement = fixture.debugElement;
 
     vpHomeLineGraphService = debugElement.injector.get(VpHomeLineGraphService);
@@ -92,12 +67,12 @@ describe('VpLineGraphComponent', () => {
   });
 
   it('onClick should trigger reportingService.fetchTechnologiesForTheWeek', () => {
-    let fetchTechnologiesSpy = spyOn(reportingService, 'fetchTechnologiesForTheWeek').and.callThrough();
+    const fetchTechnologiesSpy = spyOn(reportingService, 'fetchTechnologiesForTheWeek').and.callThrough();
 
     // trigger the chartClick event described in the html document (inside the 'canvas' tag)
     $('#canvas').trigger('chartClick');
-  
-    expect(fetchTechnologiesSpy).toHaveBeenCalled();   
+
+    expect(fetchTechnologiesSpy).toHaveBeenCalled();
   });
 
   it('onClick should trigger evaluationService.FetchAllQCTraineeNotes', () => {
@@ -105,7 +80,7 @@ describe('VpLineGraphComponent', () => {
 
     // trigger the chartClick event described in the html document (inside the 'canvas' tag)
     $('#canvas').trigger('chartClick');
-  
+
     expect(spy).toHaveBeenCalled();
   });
 
@@ -114,7 +89,7 @@ describe('VpLineGraphComponent', () => {
 
     // trigger the chartClick event described in the html document (inside the 'canvas' tag)
     $('#canvas').trigger('chartClick');
-    
+
     expect(spy).toHaveBeenCalled();
   });
 
@@ -132,21 +107,19 @@ describe('VpLineGraphComponent', () => {
   });
 
   it('hasCity works as expected', () => {
-    //TestBed.resetTestEnvironment();
     TestBed.resetTestEnvironment();
-    
+
     component.hasCity('bleh');
     expect(component.hasData).toBeFalsy();
-    
+
     const spyOnFillChartData = spyOn(this.VpHomeLineGraphService, 'fillChartData');
-    
+
     // make a copy of component.lineChartData (a ChartDataEntity)
-    let chartDataBefore : ChartDataEntity;
-    chartDataBefore = component.lineChartData; 
-    component.cities.add(this.ADDRESSES[0]); 
-    component.cities.add(this.ADDRESSES[1]); 
-    component.cities.add(this.ADDRESSES[2]); 
-    component.hasCity('bleh'); 
+    const chartDataBefore = component.lineChartData;
+    component.cities.add(this.ADDRESSES[0]);
+    component.cities.add(this.ADDRESSES[1]);
+    component.cities.add(this.ADDRESSES[2]);
+    component.hasCity('bleh');
     expect(component.hasData).toBeTruthy();
     expect(spyOnFillChartData).toHaveBeenCalled();
 

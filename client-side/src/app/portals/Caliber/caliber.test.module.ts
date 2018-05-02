@@ -378,7 +378,6 @@ export const Dependencies = {
     PanelSearchbarComponent,
     NgbActiveModal,
     {provide: Router, useValue: {}},
-    //GranularityService,
     VpHomeBarGraphService,
 
    // HydraBatchService,

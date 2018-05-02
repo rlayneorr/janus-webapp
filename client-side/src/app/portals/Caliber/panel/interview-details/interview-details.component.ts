@@ -79,7 +79,7 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
       if (this.panelList == null) {
         this.panelRound = 1;
       } else {
-        this.panelRound = this.panelList.length + 1; 
+        this.panelRound = this.panelList.length + 1;
       }
     });
   }

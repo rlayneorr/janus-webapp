@@ -54,7 +54,7 @@ import { SpringInterceptor } from '../../interceptors/spring.interceptor';
 import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('VpBarGraphComponent', () => {
@@ -74,13 +74,8 @@ describe('VpBarGraphComponent', () => {
   let noteService: NoteService;
   let reportsService: ReportsService;
 
-  let httpMock : HttpTestingController;
-  let injector : TestBed;
-
-  let mergedObservableResults : Array<any>;
-  let mergedObservablesSubscription : Subscription;
-  let QCStatuses : any; // should be equal to "results" in the component
-  let batchIDs : any; // should be equal to "allBatches" in the component
+  const httpMock = HttpTestingController;
+  const injector = TestBed;
 
   beforeEach(done => (async() => {
     TestBed.configureTestingModule( Dependencies);
@@ -90,7 +85,7 @@ describe('VpBarGraphComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(VpBarGraphComponent);
     component = fixture.componentInstance;
-    
+
     debugElement = fixture.debugElement;
 
     vpHomeBarGraphService = debugElement.injector.get(VpHomeBarGraphService);
@@ -116,12 +111,12 @@ describe('VpBarGraphComponent', () => {
   });
 
   it('onClick should trigger reportingService.fetchTechnologiesForTheWeek', () => {
-    let fetchTechnologiesSpy = spyOn(reportingService, 'fetchTechnologiesForTheWeek').and.callThrough();
+    const fetchTechnologiesSpy = spyOn(reportingService, 'fetchTechnologiesForTheWeek').and.callThrough();
 
     // trigger the chartClick event described in the html document (inside the 'canvas' tag)
     $('#canvas').trigger('chartClick');
-  
-    expect(fetchTechnologiesSpy).toHaveBeenCalled();   
+
+    expect(fetchTechnologiesSpy).toHaveBeenCalled();
   });
 
   it('onClick should trigger evaluationService.FetchAllQCTraineeNotes', () => {
@@ -129,7 +124,7 @@ describe('VpBarGraphComponent', () => {
 
     // trigger the chartClick event described in the html document (inside the 'canvas' tag)
     $('#canvas').trigger('chartClick');
-  
+
     expect(spy).toHaveBeenCalled();
   });
 
@@ -138,7 +133,7 @@ describe('VpBarGraphComponent', () => {
 
     // trigger the chartClick event described in the html document (inside the 'canvas' tag)
     $('#canvas').trigger('chartClick');
-    
+
     expect(spy).toHaveBeenCalled();
   });
 
