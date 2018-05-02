@@ -49,7 +49,6 @@ export class UrlService {
     update: () => `${this.context}/trainers`,
     promote: () => `${this.context}/trainers/promote`,
     getTitles: () => `${this.context}/trainers/titles`,
-    getRoles: () => `${this.context}/trainers/roles`,
     delete: () => `${this.context}/trainers`,
   };
 
@@ -63,6 +62,7 @@ export class UrlService {
   // BAM Endpoints
   users = {
     getUserByID: (userId: number) => `${this.context}/users/${userId}`,
+    getAllUsersRoles: () => `${this.context}/users/roles`,
     getAllUsersUrl: () => `${this.context}/users`,
     getAllTrainersUrl: () => `${this.context}/users/alltrainers`,
     getAllAssociatesUrl: () => `${this.context}/users/allassociates`,
@@ -71,6 +71,7 @@ export class UrlService {
     updateUserUrl: (userId: number) => `${this.context}/users/${userId}`,
     addUserUrl: () => `${this.context}/users`,
     removeUserUrl: (userId: number) => `${this.context}/users/${userId}`,
+    makeInactive: () => `${this.context}/users/inactivate`,
     addUserToBatchUrl: (batchId: number, userId: number) => `${this.context}/users/batches/${userId}/${batchId}`,
     getUsersNotInBatchUrl: () => `${this.context}/users/batches/none`,
     resetPasswordUrl: () => `${this.context}/user/reset`,

@@ -28,8 +28,8 @@ import { Location } from '../entities/Location';
 import { Address } from '../entities/Address';
 import { Trainee } from '../entities/Trainee';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
-import { Trainer } from '../../../hydra-client/entities/Trainer';
 import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
+import { HydraTrainer } from '../../../hydra-client/entities/HydraTrainer';
 
 // components
 import { BatchModalComponent } from './batch/batch-modal.component';
@@ -62,7 +62,7 @@ export class ManageComponent implements OnInit {
   batchToUpdate: CompleteBatch = new CompleteBatch;
   traineeProfileUrl: string;
   test: string;
-  trainers: Trainer[] = [];
+  trainers: HydraTrainer[] = [];
   trainerNames: string[] = [];
   locations: Address[] = [];
   trainingTypes: string[] = [];
@@ -247,7 +247,7 @@ export class ManageComponent implements OnInit {
    *
    * @param trainers
    */
-  private setTrainers(trainers: Trainer[]): void {
+  private setTrainers(trainers: HydraTrainer[]): void {
     this.trainers = trainers;
   }
 

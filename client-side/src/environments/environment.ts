@@ -7,7 +7,7 @@ const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
 
-  gambitContext: 'http://localhost:8765',
+  gambitContext: 'http://localhost:10000',
 
   context: context,
   bam: bam,

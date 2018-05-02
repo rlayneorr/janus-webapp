@@ -7,11 +7,13 @@ import { Router } from '@angular/router';
 
 
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { Trainer } from '../../../../hydra-client/entities/Trainer';
 import { BatchService } from '../../../../hydra-client/aggregator/services/completebatch.service';
 import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
+import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
+import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 import { HydraTraineeService } from '../../../../hydra-client/services/trainee/hydra-trainee.service';
 import { UserRole } from '../../../../hydra-client/entities/UserRole';
@@ -27,7 +29,7 @@ export class TrainerProfilesComponent implements OnInit {
   * create variables for all batches,
   * current trainer and their batch
   */
-  currentTrainer: Trainer;
+  currentTrainer: HydraTrainer;
   batches: Array<CompleteBatch>;
   currentBatch: CompleteBatch;
   currentBatchTrainees: Array<HydraTrainee>;
@@ -36,11 +38,11 @@ export class TrainerProfilesComponent implements OnInit {
   * create variables for subscribing and trainers
   * and storing form data
   */
-  trainers: Array<Trainer>;
+  trainers: Array<HydraTrainer>;
   titles: Array<any>;
-  roles: Array<UserRole>;
-  model = new Trainer();
-  currEditTrainer: Trainer;
+  userRoles: Array<UserRole>;
+  model = new HydraTrainer();
+  currEditTrainer: HydraTrainer;
   newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
@@ -79,7 +81,7 @@ export class TrainerProfilesComponent implements OnInit {
     });
     this.trainerService.fetchTitles().subscribe(res => this.titles = res);
     this.trainerService.fetchRoles().subscribe(res => {
-      this.roles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
+      this.userRoles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
     });
   }
 
@@ -136,16 +138,16 @@ export class TrainerProfilesComponent implements OnInit {
   * @param content: String
   * @param modalTrainer: Trainer
   */
-  editTrainer(content, modalTrainer: Trainer) {
+  editTrainer(content, modalTrainer: HydraTrainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
     this.rForm = this.fb.group({
       'firstName': [this.currEditTrainer.firstName, Validators.required],
       'lastName': [this.currEditTrainer.lastName, Validators.required],
-      'email': [this.currEditTrainer.email, Validators.required],
-      'title': [this.newTitle],
-      'role': [this.newRole],
+      'email': [this.currEditTrainer.email, Validators.email],
+      'title': [this.newTitle, Validators.required],
+      'role': [this.newRole.role, Validators.required],
     });
     this.modalService.open(content, { size: 'lg' });
   }
@@ -179,18 +181,22 @@ export class TrainerProfilesComponent implements OnInit {
   *
   * @param modal: any
   */
-  updateTrainer(modal) {
-    // replacing the trainer's fields with the new ones
-    this.currEditTrainer.role = this.newRole;
-    this.currEditTrainer.title = this.newTitle;
-    this.currEditTrainer.firstName = modal.firstName;
-    this.currEditTrainer.lastName = modal.lastName;
-    this.currEditTrainer.email = modal.email;
-    // call trainerService to update
-    this.trainerService.update(this.currEditTrainer).subscribe((resp) => {
-      const temp = this.currEditTrainer;
-      this.trainerService.fetchAll();
-    });
-  }
+  updateTrainer(modal: NgForm) {
+    const updatedTrainer: HydraTrainer = modal.value;
+    updatedTrainer.userId = this.currEditTrainer.userId;
+    updatedTrainer.role = this.roleMapping(modal.value.role);
 
+    this.trainerService.update(updatedTrainer).subscribe((resp) => {
+      this.currEditTrainer = updatedTrainer;
+      this.ngOnInit();
+  });
+
+  }
+  roleMapping(role: string) {
+    for (let index = 0; index < this.userRoles.length; index++) {
+      if (role === this.userRoles[index].role) {
+        return this.userRoles[index];
+      }
+    }
+  }
 }

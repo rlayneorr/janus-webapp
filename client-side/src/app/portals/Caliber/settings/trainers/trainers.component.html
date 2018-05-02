@@ -42,8 +42,7 @@ add or edit a trainer-->
             {{trainer.email}}
           </td>
           <td>
-            {{trainer.role}}
-
+            {{trainer.role.role}}
           </td>
           <td>
             <i class="fa fa-user" style="color:#F26925;" (click)="goToProfile(trainer)"></i>
@@ -86,7 +85,7 @@ add or edit a trainer-->
             <div class="col-lg-6 col-md-6 col-sm-12">
               <!-- Field for email -->
               <label class="col-sm-2 control-label text-nowrap" for="email">Email:</label>
-              <input type="text" class="form-control" formControlName="email" id="email" name="email" placeholder="Email" />
+              <input type="text" class="form-control" formControlName="email" id="email" name="email" placeholder="Email" type="email" />
             </div>
           </div>
 
@@ -103,11 +102,10 @@ add or edit a trainer-->
             <div class="col-lg-6 col-md-6 col-sm-12">
               <!-- Dropdown for Trainer role/role -->
               <label class="col-sm-2 control-label text-nowrap" for="role">Role</label>
-              <select class="form-control" formControlName="role" (ngModelChange)="roleChange($event)" name="role">
+              <select class="form-control" formControlName="role" (ngModelChange)="roleChange($event)" name="role" placeholder="Select role">
                 <option value="" disabled>Select role</option>
-                <option [value]="role" *ngFor="let role of roles">{{role}}</option>
+                <option [value]="userRole.role" *ngFor="let userRole of userRoles">{{userRole.role}}</option>
               </select>
-
             </div>
           </div>
         </div>
@@ -115,7 +113,7 @@ add or edit a trainer-->
     </div>
     <div class="modal-footer">
 
-      <button type="submit" data-dismiss="modal" class="btn btn-update" [disabled]="!rForm.valid" (click)="updateTrainer(editTrainer.value); c('Close click')">Update</button>
+      <button type="submit" data-dismiss="modal" class="btn btn-update" [disabled]="!rForm.valid" (click)="updateTrainer(editTrainer); c('Close click')">Update</button>
 
       <button type="button" class="btn btn-default" (click)="c()">Close</button>
     </div>
@@ -194,7 +192,7 @@ add or edit a trainer-->
                     </select> -->
                 <select class="form-control" formControlName="role" (ngModelChange)="newroleChange($event)" name="role" placeholder="Select Role">
                   <option value="" disabled>Select Role</option>
-                  <option [value]="role" *ngFor="let role of roles">{{role}}</option>
+                  <option [value]="userRole.role" *ngFor="let userRole of userRoles">{{userRole.role}}</option>
                 </select>
               </div>
             </div>
@@ -203,7 +201,7 @@ add or edit a trainer-->
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" data-dismiss="modal" [disabled]="!addForm.valid" (click)="addTrainer(addTrainerForm.value); c()" class="btn btn-add">Save</button>
+      <button type="button" data-dismiss="modal" [disabled]="!addForm.valid" (click)="addTrainer(addTrainerForm); c()" class="btn btn-add">Save</button>
       <button type="button" class="btn btn-default" (click)="c(); this.initFormControl();">Close</button>
     </div>
 
