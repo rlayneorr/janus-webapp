@@ -15,8 +15,6 @@ export class ClientMappedService {
    * @param statusId Contains the marketing status id used to fetch data
    */
   getAssociatesByStatus(statusId) {
-    console.log('Inside ClientMappedService');
-    console.log('statudId: ' + statusId);
 
     // environment.url contains the url to the webservice. See the environment import, above.
     return this.http.get(environment.url + 'TrackForce/track/associates/client/' + statusId);

@@ -15,7 +15,7 @@ import { User } from '../../models/user.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-xdescribe('ClientMappedComponent', () => {
+fdescribe('ClientMappedComponent', () => {
   let component: ClientMappedComponent;
   let fixture: ComponentFixture<ClientMappedComponent>;
   const testClientMappedService: ClientMappedService = new ClientMappedService(null);
@@ -34,6 +34,7 @@ xdescribe('ClientMappedComponent', () => {
     client3.name = 'Client 3';
     client3.count = 40;
 
+
     // Mock the ClientMappedService
     spyOn(testClientMappedService, 'getAssociatesByStatus').and.returnValue(Observable.of([client1, client2, client3]));
 
@@ -43,6 +44,7 @@ xdescribe('ClientMappedComponent', () => {
     user.username = 'mockUser';
     user.tfRoleId = 1;
     spyOn(testAuthService, 'getUser').and.returnValue(user);
+    spyOn(console, 'log');
   });
 
   // Dependancies
@@ -97,4 +99,29 @@ xdescribe('ClientMappedComponent', () => {
     // Test the chartType in the DOM
     expect(the_graph.getAttribute('ng-reflect-chart-type')).toEqual(chart_type);
   });
+
+  it('checks a Select status is undefined', () => {
+    component.ngOnInit();
+    expect(component.selectedStatus).toEqual(undefined);
+  });
+
+  it('checks that if pie then the scale is gone', () => {
+    const selectType = 'pie';
+    component.changeChartType(selectType);
+    expect(component.chartOptions.scales).toBe(undefined);
+  });
+
+  it('checks that is bar then scale is there', () => {
+    const selectType = 'bar';
+    component.changeChartType(selectType);
+    expect(component.chartOptions.scales).toBeTruthy();
+  });
+
+  it('checks that if polarArea then the scale is gone', () => {
+    const selectType = 'polarArea';
+    component.changeChartType(selectType);
+    expect(component.chartOptions.scales).toBe(undefined);
+  });
+
+
 });
