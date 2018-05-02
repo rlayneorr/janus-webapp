@@ -19,7 +19,7 @@ export const environment = {
     update: () => `${context}trainer/assessment/update`,
     delete: (assessmentId: number) => `${context}trainer/assessment/delete/${assessmentId}`,
   },
-  
+
   batch: {
     fetchAllByTrainer: () => `${context}/batches/trainers`,
     fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,

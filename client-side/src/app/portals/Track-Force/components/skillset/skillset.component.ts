@@ -21,22 +21,16 @@ import { Router } from '@angular/router';
 export class SkillsetComponent implements OnInit {
 
   /**
-   * The selected status
-   */
-  @Input() selectedStatus = '';
-  /**
    * Map of selected status to skill id
    */
   // probably a bad idea...
   private static SKILL_INFO: Map<string, any>;
+
   /**
-   * The id of skill, probably to hit the API with
+   * The sentry id for a status that doesn't exist
    */
-  private skillID: number;
-  /**
-   * The flag that tells Angular, and the developer, whether or not ng2_chart dependency is actually being used
-   */
-  USE_NG2_CHART = true;
+  public static NULL = -1;
+
   /**
    * The types of charts
    */
@@ -45,26 +39,47 @@ export class SkillsetComponent implements OnInit {
     PIE: 'pie',
     POLAR_AREA: 'polarArea'
   };
+
+  /**
+   * The selected status
+   */
+  @Input() selectedStatus = '';
+
+  /**
+   * The id of skill, probably to hit the API with
+   */
+  private skillID: number;
+
+  /**
+   * The flag that tells Angular, and the developer, whether or not ng2_chart dependency is actually being used
+   */
+  USE_NG2_CHART = true;
+
   /**
    * The type of chart
    */
   chartType = SkillsetComponent.chartTypes.BAR;
+
   /**
    * The dummy data to compare against for our tests
    */
   DUMMY_DATA = [{ data: [1, 1, 1, 1, 1], label: 'Mapped' }, { data: [1, 1, 1, 1, 1], label: 'Unmapped' }];
+
   /**
    * The skillset data
    */
   skillsetData = [];
+
   /**
    * The skillset labels
    */
   skillsetLabels = [];
+
   /**
    * The status of the component
    */
   status = 'Loading...';
+
   /**
    * The chart options, as a JavaScript-style object, and pre-initialized so as to DRY up our code...
    */
@@ -82,14 +97,18 @@ export class SkillsetComponent implements OnInit {
     ],
     scales: new ChartScale()
   };
+
   /**
    * The color scheme for the charts of this component
    */
   batchColors = ThemeConstants.BATCH_COLORS;
+
   /**
-   * The sentry id for a status that doesn't exist
+   * Exposing SKILL_INFO in a safe way
    */
-  public static NULL = -1;
+  public static getSkillInfo() {
+    return SkillsetComponent.SKILL_INFO;
+  }
 
   constructor(private skillsetService: SkillsetService,
     private route: ActivatedRoute,
@@ -196,13 +215,6 @@ export class SkillsetComponent implements OnInit {
    * @param val The value to check for not undefined
    */
   public isNotUndefined(val): boolean { return val !== undefined; }
-
-  /**
-   * Exposing SKILL_INFO in a safe way
-   */
-  public static getSkillInfo() {
-    return SkillsetComponent.SKILL_INFO;
-  }
 
   /**
    * Exposing skillID in a safe way

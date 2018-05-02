@@ -75,9 +75,9 @@ export class ClientMappedComponent implements OnInit {
   ============================
   */
   constructor(
-    private ClientService: ClientListService,
+    private clientService: ClientListService,
     private rout: Router,
-    private AssociateService: AssociateService
+    private associateService: AssociateService
   ) {
     this.chartOptions = {
       xAxes: [{ ticks: { autoSkip: false } }], scales: { yAxes: [{ ticks: { min: 0 } }] },
@@ -119,7 +119,7 @@ export class ClientMappedComponent implements OnInit {
     this.changeChartType('bar');
 
     // HTTP request to fetch data. See client-service
-    this.AssociateService.getAssociatesByStatus(this.statusID).subscribe(data => {
+    this.associateService.getAssociatesByStatus(this.statusID).subscribe(data => {
       /*
       Store the data from the http request in temporary objects.
       In order for the2 property binding refresh on clientMappedData

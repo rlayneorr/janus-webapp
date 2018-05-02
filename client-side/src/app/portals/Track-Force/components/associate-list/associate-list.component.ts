@@ -53,6 +53,10 @@ export class AssociateListComponent implements OnInit {
   user: User;
   canUpdate = false;
 
+  tempCurrId: number;
+  newCurr: Curriculum;
+  tempMarket: MarketingStatus;
+
   /**
    * Inject our services
    * @param associateService
@@ -94,9 +98,7 @@ export class AssociateListComponent implements OnInit {
       this.searchByStatus = mapping.toUpperCase() + ': ' + status.toUpperCase();
     }
   }
-  tempCurrId: number;
-  newCurr: Curriculum;
-  tempMarket: MarketingStatus;
+
   /**
    * Set our array of all associates
    */

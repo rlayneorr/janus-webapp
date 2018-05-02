@@ -129,7 +129,6 @@ export class HomeComponent implements OnInit {
 
       for (let i = 0; i < this.associates.length; i++) {
         // iterate over associates and aggregate totals
-        let marketingStatus: MarketingStatus;
         const associate = this.associates[i];
         switch (associate.marketingStatusId) {
           case 1: trainingMapped++; break;
