@@ -404,11 +404,14 @@ export class ClientListComponent implements OnInit {
     //     this.client$ = client;
     //     this.barChartData = [
     //       {
-    //         data: [this.client$.stats.trainingMapped, this.client$.stats.reservedMapped, this.client$.stats.selectedMapped, this.client$.stats.confirmedMapped],
+    //         data: [this.client$.stats.trainingMapped,
+    //             this.client$.stats.reservedMapped, this.client$.stats.selectedMapped,
+    //             this.client$.stats.confirmedMapped],
     //         label: 'Mapped',
     //       },
     //       {
-    //         data: [this.client$.stats.trainingUnmapped, this.client$.stats.openUnmapped, this.client$.stats.selectedUnmapped, this.client$.stats.confirmedUnmapped],
+    //         data: [this.client$.stats.trainingUnmapped, this.client$.stats.openUnmapped,
+    //             this.client$.stats.selectedUnmapped, this.client$.stats.confirmedUnmapped],
     //         label: 'Unmapped',
     //       }
     //     ]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AssociateService } from '../../services/associates-service/associates-service';
-import { Batch} from '../../models/batch.model';
+import { Batch } from '../../models/batch.model';
 import { Curriculum } from '../../models/curriculum.model';
 import { RequestService } from '../../services/request-service/request.service';
 import { Client } from '../../models/client.model';
@@ -110,21 +110,19 @@ export class AssociateListComponent implements OnInit {
 
       this.marketService.getAllMarketingStatus().subscribe(marketData => {
         this.marketingStatuses = marketData;
-    });
-
-      this.marketingStatuses = [];
-
-      for (const associate of this.associates) {// get our curriculums from the associate
-        if (associate.batch !== null && associate.batch.batchId < 51 && associate.batch.batchId !== 26) {
-       this.batchService.getCurrIdById(associate.batch.batchId).subscribe(item => {
-        this.tempCurrId = item;
-          this.curriculumnService.getOneCurriculum(this.tempCurrId).subscribe(item2 => {
-            this.newCurr = item2;
-            this.curriculums.add(item2['curriculumName']);
-       });
       });
-    }
-    }
+      this.marketingStatuses = [];
+      for (const associate of this.associates) {// get our curriculums from the associate
+        // if (associate.batch !== null && associate.batch.batchId < 51 && associate.batch.batchId !== 26) {
+        //   this.batchService.getCurrIdById(associate.batch.batchId).subscribe(item => {
+        //     this.tempCurrId = item;
+        //     this.curriculumnService.getOneCurriculum(this.tempCurrId).subscribe(item2 => {
+        //       this.newCurr = item2;
+        //       this.curriculums.add(item2['curriculumName']);
+        //     });
+        //   });
+        // }
+      }
       this.curriculums.delete('');
       this.curriculums.delete('null');
       self.sort('userId'); // sort associates by ID
@@ -145,6 +143,7 @@ export class AssociateListComponent implements OnInit {
    * @param property to be sorted by
    */
   sort(property) {
+    console.log(property);
     this.desc = !this.desc;
     let direction;
     if (property !== this.sortedColumn || this.updated) {// if clicking on new column sort ascending always, otherwise descending
