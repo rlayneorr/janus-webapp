@@ -145,7 +145,6 @@ export class AssociateListComponent implements OnInit {
    * @param property to be sorted by
    */
   sort(property) {
-    console.log(property);
     this.desc = !this.desc;
     let direction;
     if (property !== this.sortedColumn || this.updated) {// if clicking on new column sort ascending always, otherwise descending

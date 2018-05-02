@@ -91,7 +91,7 @@
             </tr>
           </thead>
           <tr *ngFor="let associate of associates | filterByText:searchByText">
-            <ng-container *ngIf="(searchByStatus === associate.marketingStatus || searchByStatus === '')
+            <ng-container *ngIf="(searchByStatus == associate.marketingStatus || searchByStatus === '')
               && (searchByClient === associate.client || searchByClient === '')
               && (searchByCurriculum === associate.name || searchByCurriculum === '')">
               <td class="edit">
