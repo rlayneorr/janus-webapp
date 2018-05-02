@@ -46,7 +46,7 @@ export class LocationService {
     );
   }
   // get Location by Id //
-  getLocation(location: any) {
+  getLocationById(location: any) {
     return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
       (payload) => {
         this.location.next(payload);
@@ -142,7 +142,7 @@ export class LocationService {
     );
   }
   // get Room by Id //
-  getOneRoom(room: any) {
+  getRoomById(room: any) {
     return this.httpClient.get<Room>(this.urls.room.getRoomById(room)).subscribe(
       (payload) => {
         this.room.next(payload);
@@ -204,7 +204,7 @@ export class LocationService {
     });
   }
   // post Unavailability //
-  postUnavailability(unavailability: any) {
+  newUnavailability(unavailability: any) {
     return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability))
     .subscribe((payload) => {
       console.log(payload);
