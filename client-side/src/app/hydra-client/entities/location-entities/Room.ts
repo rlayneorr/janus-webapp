@@ -13,7 +13,7 @@ export class Room {
     capacity: number;
 
     // this is a constructor //
-    constructor( roomId: number, roomNumber: string, buildingId: number, unavailabilityId: number[], capacity: number ) {
+    constructor( roomId: number, roomNumber: string, buildingId: number, capacity: number ) {
         this.roomId = roomId;
         this.roomNumber = roomNumber;
         this.buildingId = buildingId;
