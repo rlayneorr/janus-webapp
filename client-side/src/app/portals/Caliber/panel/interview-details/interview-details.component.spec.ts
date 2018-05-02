@@ -8,7 +8,7 @@ import { PanelService } from '../../services/panel.service';
 import { Panel } from '../../entities/Panel';
 // import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
-describe('InterviewDetailsComponent', () => {
+fdescribe('InterviewDetailsComponent', () => {
   let component: InterviewDetailsComponent;
   let fixture: ComponentFixture<InterviewDetailsComponent>;
   let batchService: BatchService;

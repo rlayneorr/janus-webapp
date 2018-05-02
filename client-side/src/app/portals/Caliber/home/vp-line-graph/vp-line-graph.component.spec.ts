@@ -17,6 +17,9 @@ import { NoteService } from '../../services/note.service';
 
 import { Dependencies } from '../../caliber.test.module';
 import { DebugElement } from '@angular/core';
+import { ChartDataEntity } from '../../entities/ChartDataEntity';
+import { Address } from '../../entities/Address';
+import { ADDRESSES } from '../mock-data/mock-addresses';
 
 fdescribe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;
@@ -127,9 +130,29 @@ fdescribe('VpLineGraphComponent', () => {
     expect(component.hasData).toEqual(true);
   });
 
-  it('hasCity is valid', () => {
-    TestBed.resetTestEnvironment();
+  it('hasCity works as expected', () => {
+    //TestBed.resetTestEnvironment();
+
+    fixture = TestBed.createComponent(VpLineGraphComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    
     component.hasCity('bleh');
-    expect(component.hasData).toEqual(false);
+    expect(component.hasData).toBeFalsy();
+    
+    const spyOnFillChartData = spyOn(this.VpHomeLineGraphService, 'fillChartData');
+    
+    // make a copy of component.lineChartData (a ChartDataEntity)
+    let chartDataBefore : ChartDataEntity;
+    chartDataBefore = component.lineChartData; 
+    component.cities.add(this.ADDRESSES[0]); 
+    component.cities.add(this.ADDRESSES[1]); 
+    component.cities.add(this.ADDRESSES[2]); 
+    component.hasCity('bleh'); 
+    expect(component.hasData).toBeTruthy();
+    expect(spyOnFillChartData).toHaveBeenCalled();
+
+    // see if lineChartData has changed
+    expect(chartDataBefore).not.toEqual(component.lineChartData);
   });
 });
