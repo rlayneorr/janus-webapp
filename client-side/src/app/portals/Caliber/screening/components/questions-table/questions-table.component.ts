@@ -82,47 +82,47 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // use skillTypeBucketLookup that provides array of buckets and array of weights
-    // this.subscriptions.push(this.skillTypeBucketService.
-    //   getSkillTypeBuckets(this.simpleTraineeService.getSelectedCandidate().skillTypeID).subscribe(bucketsWithWeights => {
+    this.subscriptions.push(this.skillTypeBucketService.
+      getSkillTypeBuckets(this.simpleTraineeService.getSelectedCandidate().skillTypeID).subscribe(bucketsWithWeights => {
 
-    //   const myBuckets: Bucket[] = [];
-    //   for ( const e of bucketsWithWeights.bucket) {
-    //     myBuckets.push(
-    //       {
-    //         bucketID: e.bucketId,
-    //         bucketCategory: e.bucketCategory,
-    //         bucketDescription: e.bucketDescription,
-    //         isActive: e.isActive,
-    //         questions: [],
-    //       }
-    //     );
-    //   }
+      const myBuckets: Bucket[] = [];
+      for ( const e of bucketsWithWeights.bucket) {
+        myBuckets.push(
+          {
+            bucketID: e.bucketId,
+            bucketCategory: e.bucketCategory,
+            bucketDescription: e.bucketDescription,
+            isActive: e.isActive,
+            questions: [],
+          }
+        );
+      }
 
-    //   this.skillTypeBucketService.bucketsByWeight = {
-    //     skillTypeBucketLookupID: bucketsWithWeights.skillTypeBucketLookupID,
-    //     skillType: JSON.parse(JSON.stringify(bucketsWithWeights.skillType)),
-    //     buckets: myBuckets,
-    //     weights: JSON.parse(JSON.stringify(bucketsWithWeights.weight)),
-    //   };
+      this.skillTypeBucketService.bucketsByWeight = {
+        skillTypeBucketLookupID: bucketsWithWeights.skillTypeBucketLookupID,
+        skillType: JSON.parse(JSON.stringify(bucketsWithWeights.skillType)),
+        buckets: myBuckets,
+        weights: JSON.parse(JSON.stringify(bucketsWithWeights.weight)),
+      };
 
-    //   this.subscriptions.push(this.questionService.getQuestions().subscribe(allQuestions => {
-    //     this.questionBuckets = this.questionsToBucketsUtil.saveQuestions(allQuestions, this.skillTypeBucketService.bucketsByWeight);
-    //     this.skillTypeBucketService.bucketsByWeight.buckets = JSON.parse(JSON.stringify(this.questionBuckets));
+      this.subscriptions.push(this.questionService.getQuestions().subscribe(allQuestions => {
+        this.questionBuckets = this.questionsToBucketsUtil.saveQuestions(allQuestions, this.skillTypeBucketService.bucketsByWeight);
+        this.skillTypeBucketService.bucketsByWeight.buckets = JSON.parse(JSON.stringify(this.questionBuckets));
 
-    //     if (this.questionBuckets.length > 0) {
-    //       this.currentCategory = this.questionBuckets[0];
-    //     }
-    //   }));
-    // }));
+        if (this.questionBuckets.length > 0) {
+          this.currentCategory = this.questionBuckets[0];
+        }
+      }));
+    }));
 
-    // this.candidateName = this.simpleTraineeService.getSelectedCandidate().firstname + ' ' +
-    //                       this.simpleTraineeService.getSelectedCandidate().lastname;
+    this.candidateName = this.simpleTraineeService.getSelectedCandidate().firstname + ' ' +
+                          this.simpleTraineeService.getSelectedCandidate().lastname;
 
-    // // update the answeredQuestions variable in our service to track the
-    // // questions that have been given a score by the screener.
-    // this.subscriptions.push(this.questionScoreService.currentQuestionScores.subscribe(
-    //   questionScores => (this.questionScores = questionScores)
-    // ));
+    // update the answeredQuestions variable in our service to track the
+    // questions that have been given a score by the screener.
+    this.subscriptions.push(this.questionScoreService.currentQuestionScores.subscribe(
+      questionScores => (this.questionScores = questionScores)
+    ));
   }
 
   // Unsubscribe to prevent memory leaks when component is destroyed

@@ -18,11 +18,11 @@ fdescribe('ReportingServiceService', () => {
     });
   });
 
-  fit('should be created', inject([ReportingService], (service: ReportingService) => {
+  it('should be created', inject([ReportingService], (service: ReportingService) => {
     expect(service).toBeTruthy();
   }));
 
-  fit('refresh() should refresh the cached data',
+  it('refresh() should refresh the cached data',
   inject([ReportingService, HttpClient, HttpHandler], (service: ReportingService) => {
 
     // intializing the behaviorSubject
@@ -87,7 +87,7 @@ fdescribe('ReportingService test Http calls', () => {
     });
   });
 
-  it('fetchQcStatusDonutChart(1) testing:',
+  xit('fetchQcStatusDonutChart(1) testing:',
     inject([ReportingService, XHRBackend, HttpClientTestingModule],
       (service: ReportingService, mockBackend: MockBackend) => {
 
