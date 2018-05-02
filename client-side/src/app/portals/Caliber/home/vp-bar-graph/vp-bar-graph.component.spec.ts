@@ -57,23 +57,10 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-// fdescribe('#getAddresses', () => {
-//   it('should return an Observable<Addresses[]>', () => {
-//     const dummyAddresses = [
-//       //    addressId: number; street: string; city: string; state: string; zipcode: string; company: string; active: boolean;
-//       {addressId: 0, street: 'Maple Street', city: 'Kansas City', state: 'KS', zipcode: '75421', company: 'Bro Bros.', active: true},
-//       {addressId: 1, street: 'Empire Street', city: 'New York', state: 'NY', zipcode: '12345', company: 'Venture Industries', active: true},
-//       {addressId: 2, street: 'Bubba Street', city: 'N/A', state: 'WY', zipcode: '54321', company: 'Bubbas Taxidermy', active: true},
-//     ];
-
-//     vpHomeSelectorService.populateAddresses.getAddresses().subscribe()
-//   })
-// });
-
 fdescribe('VpBarGraphComponent', () => {
   let component: VpBarGraphComponent;
   let fixture: ComponentFixture<VpBarGraphComponent>;
-  let spy : any;
+
   let debugElement: DebugElement;
 
   let vpHomeBarGraphService: VpHomeBarGraphService;
@@ -110,7 +97,7 @@ fdescribe('VpBarGraphComponent', () => {
     reportingService      = debugElement.injector.get(ReportingService);
     evaluationService     = debugElement.injector.get(EvaluationService);
     modalService          = debugElement.injector.get(NgbModal);
-    http                  = debugElement.injector.get(HttpTestingController);
+    http                  = debugElement.injector.get(HttpClient);
     alertService          = debugElement.injector.get(AlertsService);
     vpHomeSelectorService = debugElement.injector.get(VpHomeSelectorService);
     batchService          = debugElement.injector.get(HydraBatchService);
@@ -120,52 +107,68 @@ fdescribe('VpBarGraphComponent', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
-    httpMock.verify();
-  });
-
-  it('', () =>{
-    // create an array of ChartDataEntity objects
-    const mockChartData = [
-      { 
-
-      },
-    ];
-
-    this.reportsService.fetchReportsStackedBarCurrentWeek().subscribe(() => {
-      (reports) => {
-        QCStatuses = mockChartData;
-      }
-    });
-
-    const Observable1 = this.reportsService.fetchReportsStackedBarCurrentWeek();
-    const Observable2 = this.batchService.fetchAll();
-    this.mergedObservablesSubscription = Observable1.merge(Observable2).subscribe(
-      (resp) => {
-        if (resp.length > 0) {
-          this.mergedObservableResults.push(resp); 
-        }
-      });
-  })
-
-  // it('should return an Observable<Addresses[]>', () => {
-  //   const dummyAddresses = [
-  //     //    addressId: number; street: string; city: string; state: string; zipcode: string; company: string; active: boolean;
-  //     {addressId: 0, street: 'Maple Street', city: 'Kansas City', state: 'KS', zipcode: '75421', company: 'Bro Bros.', active: true},
-  //     {addressId: 1, street: 'Empire Street', city: 'New York', state: 'NY', zipcode: '12345', company: 'Venture Industries', active: true},
-  //     {addressId: 2, street: 'Bubba Street', city: 'N/A', state: 'WY', zipcode: '54321', company: 'Bubbas Taxidermy', active: true},
-  //   ];
-  //   vpHomeSelectorService.populateAddresses('1').su
-  //   batchService.fetchAll().subscribe()
-  // })
+  // afterEach(() => {
+  //   httpMock.verify();
+  // });
 
   it('should create bar graph component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should populate addresses using vpHomeSelectorService', () => {
-    let addressesInService : Array<any>;
-    this.vpHomeSelectorService.populateAddresses(this.results);
-    expect(addressesInService).toEqual(component.addresses);
+  it('onClick should trigger reportingService.fetchTechnologiesForTheWeek', () => {
+    let fetchTechnologiesSpy = spyOn(reportingService, 'fetchTechnologiesForTheWeek').and.callThrough();
+
+    // trigger the chartClick event described in the html document (inside the 'canvas' tag)
+    $('#canvas').trigger('chartClick');
+  
+    expect(fetchTechnologiesSpy).toHaveBeenCalled();   
   });
+
+  it('onClick should trigger evaluationService.FetchAllQCTraineeNotes', () => {
+    const spy = spyOn(evaluationService, 'FetchAllQCTraineeNotes').and.callThrough();
+
+    // trigger the chartClick event described in the html document (inside the 'canvas' tag)
+    $('#canvas').trigger('chartClick');
+  
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('onClick should trigger evaluationService.FetchAllQCBatchNotes', () => {
+    const spy = spyOn(evaluationService, 'FetchAllQCBatchNotes').and.callThrough();
+
+    // trigger the chartClick event described in the html document (inside the 'canvas' tag)
+    $('#canvas').trigger('chartClick');
+    
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('findCities should change hasBarChartData to true', () => {
+    component.findCities('bleh');
+    expect(component.hasBarChartData).toEqual(true);
+
+    // try findCities again, and pass in an actual string this time
+    TestBed.resetTestEnvironment();
+    component.findCities('');
+    expect(component.selectedState).toEqual(false);
+    expect(component.hasBarChartData).toEqual(true);
+  });
+
+  it('hasCity is valid', () => {
+    TestBed.resetTestEnvironment();
+    component.hasCity('bleh');
+    expect(component.hasBarChartData).toEqual(false);
+  });
+
+  it('populateBatchStatuses does stuff', () => {
+    TestBed.resetTestEnvironment();
+    component.populateBatchStatuses();
+    expect(component.hasBatchStatuses).toEqual(true);
+
+    TestBed.resetTestEnvironment();
+    component.results = ['thing', 'thing', 'just want array to be larger than size 1', 'I\'m a professional'];
+    component.populateBatchStatuses();
+    expect(component.hasBatchStatuses).toEqual(true);
+  });
+
+
 });

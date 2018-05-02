@@ -212,6 +212,10 @@ export const Dependencies = {
     TraineeSearch,
     ArrToStringPipe,
 
+    SearchPipe,
+    BucketFilterPipe,
+    TagFilterPipe,
+
     // components
     CaliberComponent,
     HomeComponent,
@@ -374,8 +378,11 @@ export const Dependencies = {
     PanelSearchbarComponent,
     NgbActiveModal,
     {provide: Router, useValue: {}},
-    GranularityService,
+    //GranularityService,
     VpHomeBarGraphService,
+
+    HydraBatchService,
+    UrlService,
   ],
   bootstrap: [
     // TrainersComponent

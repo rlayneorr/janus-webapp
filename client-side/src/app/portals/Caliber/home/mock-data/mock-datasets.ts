@@ -1,5 +1,4 @@
 import { DataSet } from '../../../Caliber/entities/DataSet'
-import { ChartDataEntity } from '../../../Caliber/entities/ChartDataEntity'
 
 export const DATASETS1: DataSet[] = [
     {
