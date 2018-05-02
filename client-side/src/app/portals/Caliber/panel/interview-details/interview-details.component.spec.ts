@@ -17,16 +17,20 @@ import { AlertsService } from '../../services/alerts.service';
 import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 import { ApiService } from '../../util/api.service';
 import { BatchService } from '../../services/batch.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { environment } from '../../../../../environments/environment.uat';
+import { link } from 'fs';
 // import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
 fdescribe('InterviewDetailsComponent', () => {
+  const context = environment.trainee;
+
   let component: InterviewDetailsComponent;
   let fixture: ComponentFixture<InterviewDetailsComponent>;
   let injector: TestBed;
   let panelService: PanelService;
   let httpMock: HttpTestingController;
+  let mockReq: TestRequest;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -67,7 +71,7 @@ fdescribe('InterviewDetailsComponent', () => {
     panelService = injector.get(panelService);
     httpMock = injector.get(HttpTestingController);
 
-    // let req = httpMock.expectOne(`${environment.url}/users`);
+    mockReq = httpMock.expectOne(context.save());
   });
 
   afterEach(() => {
