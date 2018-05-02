@@ -5,7 +5,6 @@ import { LocationService } from '../../../hydra-client/services/location/locatio
 import { Location } from '../../../hydra-client/entities/location-entities/Location';
 import { Building } from '../../../hydra-client/entities/location-entities/Building';
 import { Room } from '../../../hydra-client/entities/location-entities/Room';
-import { Building } from '../../../hydra-client/entities/location-entities/Building';
 import { Unavailability } from '../../../hydra-client/entities/location-entities/Unavailability';
 
 
