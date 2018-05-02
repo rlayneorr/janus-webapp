@@ -1,4 +1,4 @@
-import { Address } from "../../entities/Address";
+import { Address } from "../entities/Address";
 
 
 export const ADDRESSES : Address[] = [
