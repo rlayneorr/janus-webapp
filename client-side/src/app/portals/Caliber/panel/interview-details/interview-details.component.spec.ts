@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, getTestBed } from '@angular/core/testing';
 import { Dependencies } from '../../caliber.test.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InterviewDetailsComponent } from './interview-details.component';
@@ -17,12 +17,16 @@ import { AlertsService } from '../../services/alerts.service';
 import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 import { ApiService } from '../../util/api.service';
 import { BatchService } from '../../services/batch.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from '../../../../../environments/environment.uat';
 // import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
 fdescribe('InterviewDetailsComponent', () => {
   let component: InterviewDetailsComponent;
   let fixture: ComponentFixture<InterviewDetailsComponent>;
+  let injector: TestBed;
+  let panelService: PanelService;
+  let httpMock: HttpTestingController;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -58,6 +62,16 @@ fdescribe('InterviewDetailsComponent', () => {
     fixture = TestBed.createComponent(InterviewDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    injector = getTestBed();
+    panelService = injector.get(panelService);
+    httpMock = injector.get(HttpTestingController);
+
+    // let req = httpMock.expectOne(`${environment.url}/users`);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 
   it('should create', () => {
