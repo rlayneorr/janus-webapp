@@ -51,8 +51,8 @@ add or edit a trainer-->
             <i class="fa fa-pencil" style="color:#F26925;" (click)="editTrainer(content, trainer)"></i>
           </td>
           <td>
-            <i class="fa fa-times" style="color:#F26925;" (click)="showModal(content)"></i>
-            <ng-template #content let-c="close" let-d="dismiss">
+            <i class="fa fa-times" style="color:#F26925;" (click)="showModal(deactivate)"></i>
+            <ng-template #deactivate let-c="close" let-d="dismiss">
               <div class="modal-header">
                 <h4 class="modal-title">Deactivate Trainer</h4>
                 <button type="button" class="close close2" aria-label="Close" (click)="d('Cross click')">
