@@ -18,7 +18,6 @@ import { Dependencies } from '../../caliber.test.module';
 import { DebugElement } from '@angular/core';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { Address } from '../../entities/Address';
-import { ADDRESSES } from '../../mock-data/mock-addresses';
 
 describe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;
