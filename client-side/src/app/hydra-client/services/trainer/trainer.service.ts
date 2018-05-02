@@ -47,7 +47,6 @@ export class TrainerService {
 
   public fetchAll(): Observable<HydraTrainer[]> {
     const url = this.urls.trainers.fetchAll();
-    console.log(url);
     return this.httpClient.get<HydraTrainer[]>(url);
 
   }
