@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { Associate } from '../../models/associate.model';
 import { Response } from '@angular/http/';
 import { environment } from '../../../../../environments/environment';
+import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
 /**
  * Service for retrieving and updating data relating to associates.
@@ -22,30 +23,18 @@ export class AssociateService {
      * Get all of the associates
      */
     getAllAssociates(): Observable<any> {
-        const url: string = environment.url + 'TrackForce/track/associates/all';
-
-        return this.http.get(url);
+        return this.http.get(environment.context + '/trainees');
     }
 
-    getAssociate(id: number) {
-        const url: string = environment.url + 'TrackForce/track/associates/' + id;
-
-        return this.http.get<Associate>(url);
+    getAssociate(id: number): Observable<any> {
+        return this.http.get(environment.context + '/trainees/' + id);
     }
 
     /**
      * Update the given associates statuses/clients
      * @param ids of associates to be updated
      */
-    updateAssociates(ids: number[], ustatus: string, uclient: number): Observable<any> {
-        const url: string = environment.url + 'TrackForce/track/associates/update/' + ustatus + '/' + uclient;
-
-        return this.http.put(url, ids);
-    }
-
-    updateAssociate(id: number, ustatus: string, uclient: string) {
-        const url: string = environment.url + 'TrackForce/track/associates/' + id + '/update/' + ustatus + '/' + uclient;
-
-        return this.http.put(url, null);
+    updateAssociate(trainee: HydraTrainee): Observable<any> {
+        return this.http.put(environment.context + '/trainees', trainee);
     }
 }

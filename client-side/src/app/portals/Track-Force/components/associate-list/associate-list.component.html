@@ -40,43 +40,40 @@
             <option *ngFor="let client of clients">{{client.tfClientName}}</option>
           </select>
         </div>
-
       </div>
     </div>
 
-
     <div class="well" style="position:relative;">
       <div class="table-responsive">
-        
         <div class="table-responsive pre-scrollable" id="info" style="overflow-x:none!important;">
           <table class="table table-striped table-hover table-bordered" border-width=2px>
-                <thead class="pointer">
-                    <tr>
-                      <th class="edit">Edit</th>
-                      <th class="id" (click)="sort('id')">Associate ID</th>
-                      <th class="first" (click)="sort('firstName')">First Name</th>
-                      <th class="last" (click)="sort('lastName')">Last Name</th>
-                      <th class="status" (click)="sort('marketingStatus')">Marketing Status</th>
-                      <th class="client" (click)="sort('client')">Client Name</th>
-                      <th class="batch" (click)="sort('batch')">Batch Name</th>
-                    </tr>
-                  </thead>
+            <thead class="pointer">
+              <tr>
+                <th class="edit">Edit</th>
+                <th class="id" (click)="sort('userId')">Associate ID</th>
+                <th class="first" (click)="sort('firstName')">First Name</th>
+                <th class="last" (click)="sort('lastName')">Last Name</th>
+                <th class="status" (click)="sort('marketingStatus')">Marketing Status</th>
+                <th class="client" (click)="sort('client')">Client Name</th>
+                <th class="batch" (click)="sort('batch')">Batch Name</th>
+              </tr>
+            </thead>
             <tr *ngFor="let associate of associates | filterByText:searchByText">
               <ng-container *ngIf="(searchByStatus === associate.marketingStatus || searchByStatus === '')
               && (searchByClient === associate.client || searchByClient === '')
               && (searchByCurriculum === associate.name || searchByCurriculum === '')">
                 <td class="edit">
-                  <input type="checkbox" id={{associate.id}}>
+                  <input type="checkbox" id={{associate.userId}}>
                 </td>
                 <td>
-                  <a [routerLink]="['/TrackForce/form-comp', associate.id]" class="id">{{associate.id}}</a>
+                  <a [routerLink]="['/TrackForce/form-comp', associate.userId]" class="id">{{associate.userId}}</a>
                 </td>
                 <td class="first">{{associate.firstName}}</td>
                 <td class="last">{{associate.lastName}}</td>
                 <td class="status">{{associate.marketingStatus}}</td>
                 <td class="client">{{associate.client}}</td>
                 <td class="batch">
-                  <a [routerLink]="['/TrackForce/batch-details', associate.bid]">{{associate.batchName}}</a>
+                  <a [routerLink]="['/TrackForce/batch-details', associate.bid]">{{associate.batches}}</a>
                 </td>
               </ng-container>
             </tr>

@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AssociateService } from '../../services/associates-service/associates-service';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
-import { Associate } from '../../models/associate.model';
 import { ActivatedRoute } from '@angular/router';
+import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 /**
-*@author Michael Tseng
+* @author Michael Tseng
 *
-*@description This is the view for associates only
+* @description This is the view for associates only
 *
 */
 @Component({
@@ -18,8 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 @AutoUnsubscribe
 export class AssociateViewComponent implements OnInit {
 
-  public associate: Associate = new Associate();
-
+  public associate: HydraTrainee = new HydraTrainee();
 
   constructor(private associateService: AssociateService,
     private authService: AuthenticationService,
@@ -33,10 +32,10 @@ export class AssociateViewComponent implements OnInit {
   }
 
   /**
-  *@description Wraps the associate service to get associate info
+  * @description Wraps the associate service to get associate info
   *
-  *@param {number} id
-  *the id number of the associate
+  * @param {number} id
+  * the id number of the associate
   */
   getAssociate(id: number) {
     this.associateService.getAssociate(id).subscribe(
@@ -49,12 +48,11 @@ export class AssociateViewComponent implements OnInit {
   }
 
   /**
-  *@description
+  * @description
   * for logging out the associates
   * clears the localStorage
   */
   logout() {
     this.authService.logout();
   }
-
 }
