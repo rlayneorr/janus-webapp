@@ -11,9 +11,9 @@ import { Panel } from '../../entities/Panel';
 fdescribe('InterviewDetailsComponent', () => {
   let component: InterviewDetailsComponent;
   let fixture: ComponentFixture<InterviewDetailsComponent>;
-  let batchService: BatchService;
-  let panelService: PanelService;
-  let searchBar: PanelSearchbarComponent;
+  const batchService = BatchService;
+  const panelService = PanelService;
+  const searchBar = PanelSearchbarComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
@@ -22,7 +22,7 @@ fdescribe('InterviewDetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
         FormsModule
       ],
       declarations: [
@@ -33,9 +33,9 @@ fdescribe('InterviewDetailsComponent', () => {
         BatchService,
         PanelService,
       ]
-    })
+    });
 
-    fixture = TestBed.createComponent(InterviewDetailsComponent); 
+    fixture = TestBed.createComponent(InterviewDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -50,18 +50,6 @@ fdescribe('InterviewDetailsComponent', () => {
 
   it('Panel Service is valid', () => {
     expect(panelService).toBeTruthy();
-  });
-  
-  it('interview details has the same panel list as panel service, upon instantiation', () => {
-
-    
-    // get the panel list contained in panel service
-    let panelListInService : Panel[];
-    panelService.listSubject.asObservable().subscribe((panelList) => {
-      this.fromPanelService = panelList;
-    });
-
-    expect(panelListInService).toEqual(component.panelList);
   });
 
   it('constructor works, and instantiates an interview form', () => {
@@ -89,37 +77,37 @@ fdescribe('InterviewDetailsComponent', () => {
   ////////////////////////////////////////////////////////////////////
   // ensure that all fields in this form exist
   it('interviewDate field (in interview details form) is valid.', () => {
-    let interviewDate = component.interviewForm.controls['interviewDate'];
+    const interviewDate = component.interviewForm.controls['interviewDate'];
     expect(interviewDate).toBeTruthy();
     expect(interviewDate.value).toEqual('');
   });
 
   it('interviewTime field (in interview details form) is valid.', () => {
-    let interviewTime = component.interviewForm.controls['interviewTime'];
+    const interviewTime = component.interviewForm.controls['interviewTime'];
     expect(interviewTime).toBeTruthy();
     expect(interviewTime.value).toEqual('');
   });
 
   it('internet field (in interview details form) is valid.', () => {
-    let internet = component.interviewForm.controls['internet'];
+    const internet = component.interviewForm.controls['internet'];
     expect(internet).toBeTruthy();
     expect(internet.value).toEqual('');
   });
 
   it('panelRound field (in interview details form) is valid.', () => {
-    let panelRound = component.interviewForm.controls['panelRound'];
+    const panelRound = component.interviewForm.controls['panelRound'];
     expect(panelRound).toBeTruthy();
     expect(panelRound.value).toEqual('');
   });
 
   it('format field (in interview details form) is valid.', () => {
-    let format = component.interviewForm.controls['format'];
+    const format = component.interviewForm.controls['format'];
     expect(format).toBeTruthy();
     expect(format.value).toEqual('');
   });
 
   it('recordingConsent field (in interview details form) is valid.', () => {
-    let recordingConsent = component.interviewForm.controls['recordingConsent'];
+    const recordingConsent = component.interviewForm.controls['recordingConsent'];
     expect(recordingConsent).toBeTruthy();
     expect(recordingConsent.value).toEqual('');
   });
@@ -127,17 +115,17 @@ fdescribe('InterviewDetailsComponent', () => {
   ////////////////////////////////////////////////////////////////////
   /* ensure that panelRound, field, and recordingConsent are disabled */
   it('panelRound field should be disabled.', () => {
-    let panelRound = component.interviewForm.controls['panelRound'];
+    const panelRound = component.interviewForm.controls['panelRound'];
     expect(panelRound.enabled).toBeFalsy();
   });
 
   it('format field should be disabled.', () => {
-    let format = component.interviewForm.controls['format'];
+    const format = component.interviewForm.controls['format'];
     expect(format.enabled).toBeFalsy();
   });
 
   it('recordingConsent field should be disabled.', () => {
-    let recordingConsent = component.interviewForm.controls['recordingConsent'];
+    const recordingConsent = component.interviewForm.controls['recordingConsent'];
     expect(recordingConsent.enabled).toBeFalsy();
   });
 });
