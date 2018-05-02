@@ -89,11 +89,11 @@ export class CreatePanelComponent implements OnInit {
   }
 
   /**
-   * creates a new technology feedback
+   * creates a new skill feedback
    */
   initFeedback() {
     return this.fb.group({
-      technology: [''],
+      skill: [''],
       result: [''],
       status: [''],
       comment: ['']
@@ -101,7 +101,7 @@ export class CreatePanelComponent implements OnInit {
   }
 
   /**
-   * deletes the technology feedback
+   * deletes the skill feedback
    * @param i
    */
   deleteFeedback(i) {
@@ -110,7 +110,7 @@ export class CreatePanelComponent implements OnInit {
   }
 
   /**
-   * adds new technology feedback to form array
+   * adds new skill feedback to form array
    */
   addFeedback() {
     const control = <FormArray>this.panelForm.controls['feedback'];

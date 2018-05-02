@@ -66,7 +66,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './settings/screening/services/in-memory-data.service';
-import { TrainerService } from '../../hydra-client/services/trainer/trainer.service';
+import { TrainerService } from './services/trainer.service';
 import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
 
 // N.T.
@@ -74,7 +74,6 @@ import { ApiService } from './util/api.service';
 
 // pipes
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
-import { CategorySkillPipe } from './pipes/category-skill.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
 import { TrainerPipePipe } from './pipes/trainer-pipe.pipe';
@@ -199,7 +198,6 @@ import { CategoryService } from './services/category.service';
     GradeByTraineeByAssessmentPipe,
     DisplayBatchByYear,
     BatchByTrainerPipe,
-    CategorySkillPipe,
     NoteByTraineeByWeekPipe,
     TierPipe,
     TrainerPipePipe,

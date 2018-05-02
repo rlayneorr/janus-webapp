@@ -12,7 +12,7 @@ import { Note } from '../../entities/Note';
 import { GranularityService } from '../services/granularity.service';
 import { ReportingService } from '../../services/reporting.service';
 import { NoteService } from '../../services/note.service';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
 /**
@@ -43,7 +43,7 @@ export class WeeklyFeedbackComponent implements OnInit, OnDestroy {
 
   week = 1;
   trainee: HydraTrainee;
-  batch: HydraBatch;
+  batch: CompleteBatch;
 
   weekTopics: string;
   qcNote: Note;

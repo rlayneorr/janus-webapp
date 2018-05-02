@@ -2,12 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
 // entities
 import { PanelFeedback } from '../../entities/PanelFeedback';
+import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
 
 // services
-import { CategoriesService } from '../../services/categories.service';
-import { Category } from '../../entities/Category';
+import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
+
 import { CreatePanelComponent } from '../create-panel/create-panel.component';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -16,12 +16,13 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./technical-feedback.component.css']
 })
 export class TechnicalFeedbackComponent implements OnInit {
-  techList: Category[];
-  filteredTechList: Category[] = [];
+  techList: GambitSkill[];
+  filteredTechList: GambitSkill[] = [];
 
-  @Input() technologyForm: FormGroup;
+  @Input() skillForm: FormGroup;
 
   /**
+<<<<<<< HEAD
    * @param categoryService
    */
   constructor(private categoryService: CategoriesService) {
@@ -31,14 +32,26 @@ export class TechnicalFeedbackComponent implements OnInit {
       status: new FormControl(),
       comment: new FormControl()
     });
+=======
+   *
+   * @param skillService
+   */
+  constructor(private skillService: GambitSkillService) {
+    this.skillForm = new FormGroup({
+       skill: new FormControl(),
+       result: new FormControl(),
+       status: new FormControl(),
+       comment: new FormControl()
+      });
+>>>>>>> a75eb6877589cf2ca0720eac1609d1725b5c3d02
   }
 
   /**
-   * gets technology list and filters out duplicates
+   * gets skill list and filters out duplicates
    */
   ngOnInit() {
-    this.categoryService.listSubject.asObservable().subscribe(cats => {
-      this.techList = cats;
+    this.skillService.findAllActive().subscribe(skills => {
+      this.techList = skills;
     });
   }
 }

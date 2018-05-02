@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../caliber.test.module';
 import { GeneralFeedbackComponent } from './general-feedback.component';
 
-xdescribe('GeneralFeedbackComponent', () => {
+fdescribe('GeneralFeedbackComponent', () => {
   let component: GeneralFeedbackComponent;
   let fixture: ComponentFixture<GeneralFeedbackComponent>;
 
@@ -18,5 +18,9 @@ xdescribe('GeneralFeedbackComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('bubba', () => {
+    expect(true).toBe(true);
   });
 });

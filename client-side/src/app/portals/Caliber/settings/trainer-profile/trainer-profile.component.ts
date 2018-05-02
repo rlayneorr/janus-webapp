@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
 import { Trainer } from '../../../../hydra-client/entities/Trainer';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { BatchService } from '../../../../hydra-client/aggregator/services/completebatch.service';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 import { HydraTraineeService } from '../../../../hydra-client/services/trainee/hydra-trainee.service';
 import { UserRole } from '../../../../hydra-client/entities/UserRole';
@@ -28,8 +28,8 @@ export class TrainerProfilesComponent implements OnInit {
   * current trainer and their batch
   */
   currentTrainer: Trainer;
-  batches: Array<HydraBatch>;
-  currentBatch: HydraBatch;
+  batches: Array<CompleteBatch>;
+  currentBatch: CompleteBatch;
   currentBatchTrainees: Array<HydraTrainee>;
 
   /**
@@ -46,7 +46,7 @@ export class TrainerProfilesComponent implements OnInit {
   rForm: FormGroup;
 
   constructor(private trainerService: TrainerService, private modalService: NgbModal,
-    private batchService: HydraBatchService, private router: Router,
+    private batchService: BatchService, private router: Router,
      private fb: FormBuilder, private traineeService: HydraTraineeService) { }
 
   ngOnInit() {
@@ -68,7 +68,7 @@ export class TrainerProfilesComponent implements OnInit {
     // );
 
     this.batchService.fetchAllByTrainerId(this.currentTrainer.userId).subscribe(
-      (batches: HydraBatch[]) => { this.batches = batches; }
+      (batches: CompleteBatch[]) => { this.batches = batches; }
     );
 
     /**
@@ -110,7 +110,7 @@ export class TrainerProfilesComponent implements OnInit {
   setCurrentBatch(batch) {
     this.currentBatch = batch;
     this.traineeService.findAllByBatchAndStatus(batch.batchId, 'Training').subscribe( res =>
-      this.currentBatch.trainees = res
+      this.currentBatch.trainees = res['traineeIds']
     );
     console.log(batch);
   }

@@ -117,15 +117,15 @@
             <table class="table table-sm">
               <thead>
                 <tr class="table-default">
-                  <th class="left">Technology</th>
+                  <th class="left">Skill</th>
                   <th>Result</th>
                   <th>Status</th>
                   <th>Comment</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let feed of (panel.feedback | orderBy:'technology.categoryId')">
-                  <td class="left">{{feed.technology.skillCategory}}</td>
+                <tr *ngFor="let feed of (panel.feedback | orderBy:'skill.categoryId')">
+                  <td class="left">{{feed.skill.skillCategory}}</td>
                   <td>{{feed.result}}</td>
                   <td>
                     <span *ngIf="feed.status === 'Pass'" class="panel-status-pass fa fa-check panel-glyph"></span>
