@@ -13,13 +13,16 @@ export class Unavailability {
     comments: string;
     // foreign key | Id of the batch that will be using the room
     batchId: number;
+    // foreign key | Id of the room that is associated with the unavailability
+    roomId: number;
 
     // this is a constructor //
-    constructor(unavailabilityId: number, startDate: string, endDate: string, comments: string, batchId: number) {
+    constructor(unavailabilityId: number, startDate: string, endDate: string, comments: string, batchId: number, roomId: number) {
         this.unavailabiltyId = unavailabilityId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.comments = comments;
         this.batchId = batchId;
+        this.roomId = roomId;
     }
 }

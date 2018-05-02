@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     // this.locationService.newRoom(testRoom);
 
     // test save with newUnavailability
-    // const testUnavailability: Unavailability = new Unavailability(null, '1525291551', '1525291551', 'closed for maintenance', 1803);
+    // const testUnavailability: Unavailability = new Unavailability(null, '1525291551', '1525291551', 'closed for maintenance', 1803, 4);
     // console.log('Initializing testUnavailability:  ' + JSON.stringify(testUnavailability));
     // this.locationService.newUnavailability(testUnavailability);
 
