@@ -9,6 +9,7 @@ import { GraphComponent } from './graph.component';
 
 /**
  * If you wish to run these test, you must comment out everything from OnInit from the .ts file
+ * Code Coverage is standing around 80 percent with the onInit commented out
  */
 describe('GraphComponent', () => {
   let component: GraphComponent;
