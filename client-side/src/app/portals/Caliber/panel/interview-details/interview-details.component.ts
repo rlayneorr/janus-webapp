@@ -46,7 +46,6 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
   constructor(private searchBar: PanelSearchbarComponent, private batchService: BatchService, private panelService: PanelService) {
     this.interviewForm = new FormGroup({
       interviewDate: new FormControl(),
-      interviewTime: new FormControl(),
       panelRound: new FormControl(),
       format: new FormControl(),
       recordingConsent: new FormControl(),
