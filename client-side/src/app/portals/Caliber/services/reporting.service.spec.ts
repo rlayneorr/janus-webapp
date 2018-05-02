@@ -11,7 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 /**
  * Tested by Mythoua Chang
  */
-fdescribe('ReportingServiceService', () => {
+describe('ReportingServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ReportingService, HttpClient, HttpHandler, MockBackend]
@@ -75,7 +75,7 @@ fdescribe('ReportingServiceService', () => {
 
 });
 
-fdescribe('ReportingService test Http calls', () => {
+describe('ReportingService test Http calls', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],

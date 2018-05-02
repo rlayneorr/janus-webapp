@@ -73,7 +73,7 @@ export class PanelService implements CRUD<Panel> {
   public create(panel: Panel): Observable<Panel> {
     console.log(panel);
     panel.status = 'Pass';
-    return this.http.post<Panel>(context.save(), JSON.stringify(panel));
+    return this.http.post<Panel>(context.save(), JSON.stringify(panel)); 
   }
 
   /**

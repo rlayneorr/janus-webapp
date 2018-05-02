@@ -107,7 +107,6 @@ import { OverallFeedbackComponent } from './reports/overall-feedback/overall-fee
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { PanelTableComponent } from './panel/panel-table/panel-table.component';
 import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
-import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
@@ -168,9 +167,13 @@ import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillTy
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
+import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 
 import { settings } from 'cluster';
-import { NgbModalBackdrop } from '@ng-bootstrap/ng-bootstrap/modal/modal-backdrop';
+// import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
+import { UrlService } from '../../hydra-client/services/urls/url.service';
+import { ErrorAlertComponent } from '../../hydra-client/ui/error-alert/error-alert.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 
 export const Dependencies = {
@@ -185,6 +188,7 @@ export const Dependencies = {
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
     NgxPaginationModule,
+    HttpClientTestingModule,
   ],
   declarations: [
     // pipes
@@ -212,6 +216,10 @@ export const Dependencies = {
     TagFilterPipe,
     BucketFilterPipe,
     // PaginatePipe,
+
+    SearchPipe,
+    BucketFilterPipe,
+    TagFilterPipe,
 
     // components
     // PaginationControlsComponent,
@@ -388,7 +396,11 @@ export const Dependencies = {
     PanelSearchbarComponent,
     NgbActiveModal,
     {provide: Router, useValue: {}},
-    GranularityService
+    // GranularityService,
+    VpHomeBarGraphService,
+
+   // HydraBatchService,
+    UrlService,
   ],
   bootstrap: [
     // TrainersComponent
