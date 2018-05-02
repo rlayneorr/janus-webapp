@@ -28,6 +28,9 @@ export class LocationService {
   private rooms = new BehaviorSubject<any>([]);
   publicRooms = this.rooms.asObservable();
 
+  private unavailability = new BehaviorSubject<any>([]);
+  publicUnavailability = this.unavailability.asObservable();
+
   private unavailabilities = new BehaviorSubject<any>([]);
   publicUnavailabilities = this.unavailabilities.asObservable();
 
@@ -202,9 +205,12 @@ export class LocationService {
   }
   // post Unavailability //
   newUnavailability(unavailability: any) {
-    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability))
-    .subscribe((payload) => {
-      console.log(payload);
-    });
+    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability), 
+      {headers: this.header}).subscribe(
+        (payload) => {
+          this.unavailability.next(payload);
+          console.log(payload);
+        }
+      );
   }
 }
