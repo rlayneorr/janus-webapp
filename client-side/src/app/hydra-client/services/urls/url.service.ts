@@ -155,11 +155,11 @@ export class UrlService {
    * @author Tanhim Ahmed
    */
   location = {
-    getLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
+    getLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
     getAllLocations: () => `${this.context}/location/`,
-    postLocation: () => `${this.context}/location/`,
-    putLocationById: (locationId: number) => `${this.context}/location/${locationId}`,
-    deleteLocationById: (locationId: number) => `${this.context}/location/${locationId}`
+    postLocation: () => `${this.context}/locations/`,
+    putLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
+    deleteLocationById: (locationId: number) => `${this.context}/locations/${locationId}`
   };
 
   /**
@@ -168,12 +168,12 @@ export class UrlService {
    * @author Tanhim Ahmed
    */
   building = {
-    getBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
-    getBuildingsByLocationId: (locationId: number) => `${this.context}/building/location/${locationId}`,
-    getAllBuildings: () => `${this.context}/building/`,
-    postBuilding: () => `${this.context}/building/`,
-    putBuildingById: (buildingId: number) => `${this.context}/building/${buildingId}`,
-    // deleteBuildingById: (buildingId: number) => `${this.context}/buidling/${buildingId}`
+    getBuildingById: (buildingId: number) => `${this.context}/buildings/${buildingId}`,
+    getBuildingsByLocationId: (locationId: number) => `${this.context}/buildings/locations/${locationId}`,
+    getAllBuildings: () => `${this.context}/buildings/`,
+    postBuilding: () => `${this.context}/buildings/`,
+    putBuildingById: (buildingId: number) => `${this.context}/buildings/${buildingId}`,
+    // deleteBuildingById: (buildingId: number) => `${this.context}/buidlings/${buildingId}`
   };
 
   /**
@@ -182,13 +182,13 @@ export class UrlService {
    * @author Tanhim Ahmed
    */
   room = {
-    getRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
-    getAllRooms: () => `${this.context}/room/`,
-    // getRoomsByLocationId: (locationId: number) => `${this.context}/room/location/${locationId}`,
-    getRoomsByBuildingId: (buildingId: number) => `${this.context}/room/building/${buildingId}`,
-    postRoom: () => `${this.context}/room/`,
-    putRoomById: (roomId: number) => `${this.context}/room/${roomId}`,
-    // deleteRoomById: (roomId: number) => `${this.context}/room/${roomId}`
+    getRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
+    getAllRooms: () => `${this.context}/rooms/`,
+    // getRoomsByLocationId: (locationId: number) => `${this.context}/rooms/locations/${locationId}`,
+    getRoomsByBuildingId: (buildingId: number) => `${this.context}/rooms/buildings/${buildingId}`,
+    postRoom: () => `${this.context}/rooms/`,
+    putRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
+    // deleteRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`
   };
 
   /**
@@ -197,11 +197,11 @@ export class UrlService {
    * @author Tanhim Ahmed
    */
   unavailability = {
-    // getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
+    // getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
     getAllUnavailabilities: () => `${this.context}/unavailabilities/`,
     postUnavailability: () => `${this.context}/unavailabilities/`,
-    // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`,
-    // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailability/${unavailabilityId}`
+    // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
+    // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
 
   constructor() {

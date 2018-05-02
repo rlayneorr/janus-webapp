@@ -4,13 +4,18 @@ import { LocationService } from './location.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UrlService } from '../urls/url.service';
 import { Location } from '../../entities/location-entities/Location';
+import { Subscription } from 'rxjs/Subscription';
 
 const testLoc = new Location(1, null, null, null, 0, null, false);
+
 
 describe('LocationService', () => {
 
   beforeAll(() => {
 
+  });
+  afterAll((done) => {
+    done();
   });
 
   beforeEach(() => {
@@ -27,24 +32,14 @@ describe('LocationService', () => {
   }));
 
   it('should get a list of locations from the backend', inject([LocationService], async (service: LocationService) => {
+    // tslint:disable-next-line:prefer-const
     let data: Location[];
-    service.getAllLocations();
-    service.publicLocations.subscribe((result) => {
-      data = result;
-      console.log(data);
-    });
-    expect(data[0].active).toBeFalsy();
-  }));
 
-  xit('should get one location from the backend', inject([LocationService], async (service: LocationService, done) => {
-    let data: Location;
-    const i = 1;
-    service.getLocation(i);
-    service.publicLocation.subscribe((result) => {
-      data = result;
-    });
-    done();
-    expect(data.locationId).toBe(i);
+    const get = await service.getAllLocations().then((results) => { console.log(results);
+      data = results;
+      expect(data).toBeFalsy();
+    }).catch((err) => console.log(err));
+    console.log(data[1]);
   }));
 
 });
