@@ -22,7 +22,7 @@ import { SkillTypeService } from '../../../portals/Caliber/screening/services/sk
 import { GambitSkillTypeService } from '../../services/skillType/gambit-skill-type.service';
 import { HydraBatchService } from '../../services/batch/hydra-batch.service';
 import { GambitBatch } from '../../entities/GambitBatch';
-import { Trainer } from '../../entities/Trainer';
+import { HydraTrainer } from '../../entities/HydraTrainer';
 
 
 /**
@@ -34,7 +34,7 @@ export class BatchService {
 
     public listSubject: BehaviorSubject<CompleteBatch[]>;
     public batches: CompleteBatch[] = [];
-    public trainer: Trainer;
+    public trainer: HydraTrainer;
     public savedSubject: Subject<CompleteBatch>;
     public updatedSubject: Subject<CompleteBatch>;
     public deletedSubject: Subject<CompleteBatch>;
@@ -103,7 +103,7 @@ export class BatchService {
     }
 
     getTrainer(trainerId: number) {
-      return this.http.get<Trainer>(environment.trainer.fetchById(trainerId));
+      return this.http.get<HydraTrainer>(environment.trainer.fetchById(trainerId));
     }
 
     /**

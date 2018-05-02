@@ -1,4 +1,4 @@
-import { Trainer } from './Trainer';
+import { HydraTrainer } from './HydraTrainer';
 import { HydraAddress } from './HydraAddress';
 import { HydraTrainee } from './HydraTrainee';
 
