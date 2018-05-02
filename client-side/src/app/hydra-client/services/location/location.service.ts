@@ -120,22 +120,20 @@ export class LocationService {
   // update Building //
   updateBuilding(building: Building) {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
-      JSON.stringify(building), {headers: this.header}).subscribe(
-        (payload) => {
-          // console.log('Logging updateBuilding from service: ' + JSON.stringify(payload));
-          this.buildings.next(payload);
-        }
-      );
+    JSON.stringify(building), {headers: header}).subscribe(
+      (payload) => {
+        this.buildings.next(payload);
+      }
+    );
   }
-  // // set Building as inactive //
-  // deleteBuilding(building: Building) {
-  //   return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
-  //     (payload) => {
-  //       // console.log('Logging deleteBuilding from service:  ' + JSON.stringify(payload));
-  //       this.location.next(payload);
-  //     }
-  //   );
-  // }
+  // set Building as inactive //
+  deleteBuilding(building: Building) {
+    return this.httpClient.delete<Building>(this.urls.building.putBuildingById(building.buildingId)).subscribe(
+      (payload) => {
+        this.building.next(payload);
+      }
+    );
+  }
 
 
   // get all Rooms //
@@ -184,23 +182,24 @@ export class LocationService {
   }
   // update Room //
   updateRoom(room: Room) {
-    return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room),
-      {headers: this.header}).subscribe(
-        (payload) => {
-          // console.log('Logging updateRoom from service:  ' + JSON.stringify(payload));
-          this.location.next(payload);
-        }
-      );
+    return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room), {headers: this.header}).subscribe(
+      (payload) => {
+        this.room.next(payload);
+        console.log(payload);
+
+      }
+    );
   }
-  // // set Room as inactive //
-  // deleteRoom(room: Room) {
-  //   return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
-  //     (payload) => {
-  //       // console.log('Logging deleteRoom from service:  ' + JSON.stringify(payload));
-  //       this.location.next(payload);
-  //     }
-  //   );
-  // }
+  // set Room as inactive //
+  deleteRoom(room: Room) {
+    return this.httpClient.delete<Room>(this.urls.room.putRoomById(room.roomId)).subscribe(
+      (payload) => {
+        this.room.next(payload);
+        console.log(payload);
+
+      }
+    );
+  }
 
 
   // get all Unavailabilities //

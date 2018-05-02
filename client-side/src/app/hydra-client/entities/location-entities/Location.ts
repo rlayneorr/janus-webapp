@@ -14,18 +14,18 @@ export class Location {
     // the zip code of the campus main office //
     zip: number;
     // the location title of the revature campus //
-    title: string;
+    company: string;
     // the active status of the campus //
     active: boolean;
 
     // this is a constructor //
-    constructor(locationId: number, street: string, city: string, state: string, zip: number, title: string, active: boolean) {
+    constructor(locationId: number, street: string, city: string, state: string, zip: number, company: string, active: boolean) {
         this.locationId = locationId;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.title = title;
+        this.company = company;
         this.active = active;
     }
 }

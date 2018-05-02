@@ -34,6 +34,7 @@ describe('LocationService', () => {
     service.getAllLocations();
     await service.publicLocations.subscribe((result) => {
       data = result;
+      console.log(data);
     });
     setTimeout(() => {
       console.log(data);
@@ -50,8 +51,8 @@ describe('LocationService', () => {
     service.publicLocation.subscribe((result) => {
       data = result;
     });
-    expect(data).toBeUndefined();
     done();
+    expect(data.locationId).toBe(i);
   }));
 
 });
