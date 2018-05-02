@@ -19,14 +19,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.jokeSubscription = this.chuckNorrisService.joke$.subscribe( (resp) => {
       this.joke = resp;
     });
-    // test getLocationById
+    // test getLocationById, getBuildingById, getRoomById, getRoomsByBuildingId
     // this.locationService.getLocation(1); // this one currently works. get a specific location.
-    // test getAllLocations
-    // this.locationService.getAllLocations(); // This one currently works. get all locations
+    // this.locationService.getBuilding(1);
+    // this.locationService.getBuildingsByLocationId(1);
+    // this.locationService.getOneRoom(1);
+    // this.locationService.getRoomsByBuildingId(2);
+
+    // test getAllLocations, getAllRooms, getAllBuildings, getAllUnavailabilities
+    this.locationService.getAllLocations(); // This one currently works. get all locations
+    this.locationService.getAllBuildings();
+    this.locationService.getAllRooms();
+    this.locationService.getAllUnavailabilities();
 
     // test save newLocation
     // tslint:disable-next-line:max-line-length
-    const testLocation: Location = new Location(null, '5.1 test', 'New York', 'NY', 11011, 'usdfa', true);
+    const testLocation: Location = new Location(null, '5.2 test', 'Tampa', 'FL', 33637, 'usdfa', true);
     this.locationService.newLocation(testLocation); // this also works. create new location.
 
     // testing updateLocation, changing state of testLocation here for checking update
@@ -36,6 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.locationService.updateLocation(testLocation); // this one is working now. updates an existing location
 
     // testing deleteLocation, changes state of record x to inactive
+    // testLocation.locationId = 72;
     // this.locationService.deleteLocation(testLocation); // this one works now too. sets a specified location to ACTIVE=FALSE
   }
 

@@ -202,7 +202,7 @@ export class LocationService {
   getAllUnavailabilities() {
     return this.httpClient.get<Unavailability[]>(this.urls.unavailability.getAllUnavailabilities());
   }
-  // get Unavailability by Id //
+  // post Unavailability //
   postUnavailability(unavailability: any) {
     return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability));
   }
