@@ -5,6 +5,7 @@ import { LocationService } from '../../../hydra-client/services/location/locatio
 import { Location } from '../../../hydra-client/entities/location-entities/Location';
 import { Room } from '../../../hydra-client/entities/location-entities/Room';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -36,20 +37,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     // test save newLocation
     // tslint:disable-next-line:max-line-length
     const testLocation: Location = new Location(null, '5.2 test', 'Tampa', 'FL', 33637, 'usdfa', true);
-    const testRoom: Room = new Room(null, '200B', 1, null, 30);
+    const testRoom: Room = new Room(null, '300B', 2, null, 50);
 
     // console.log('Initializing testLocation:  ' + JSON.stringify(testLocation));
     // this.locationService.newLocation(testLocation); // this also works. create new location.
-    console.log('Initializing testRoom:  ' + JSON.stringify(testRoom));
-    this.locationService.newRoom(testRoom);
+    // console.log('Initializing testRoom:  ' + JSON.stringify(testRoom));
+    // this.locationService.newRoom(testRoom);
 
     // testing updateLocation, updateRoom, updateBuilding
     // testLocation.locationId = 3;
     // testLocation.zip = 86754;
     // console.log('Logging changes to testLocation:  ' + JSON.stringify(testLocation));
     // this.locationService.updateLocation(testLocation); // this one is working now. updates an existing location
-
-    // testRoom.roomId
+    testRoom.roomId = 3;
+    testRoom.capacity = 666;
+    console.log('Logging changes to testRoom:  ' + JSON.stringify(testRoom));
 
     // testing deleteLocation, changes state of record x to inactive
     // testLocation.locationId = 72;

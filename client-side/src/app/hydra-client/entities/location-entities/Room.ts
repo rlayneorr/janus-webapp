@@ -9,8 +9,6 @@ export class Room {
     roomNumber: string;
     // foreign key | Id of the building this room belongs to //
     buildingId: number;
-    // foreign keys | Id's of the unavailability objects //
-    unavailabilityId: number[];
     // max capacity of the room //
     capacity: number;
 
@@ -19,7 +17,6 @@ export class Room {
         this.roomId = roomId;
         this.roomNumber = roomNumber;
         this.buildingId = buildingId;
-        this.unavailabilityId = unavailabilityId;
         this.capacity = capacity;
     }
 
