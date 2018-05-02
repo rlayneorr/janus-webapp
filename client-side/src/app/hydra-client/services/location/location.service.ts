@@ -69,6 +69,11 @@ export class LocationService {
     );
   }
   // update the location //
+  /**
+   * this method currently has ONE known bug:
+   *  - If an update is made to an object that does not already exist in the database,
+   * instead of failing this method will create a new object holding updated data
+   */
   updateLocation(location: Location) {
     return this.httpClient.put<Location>(this.urls.location.putLocationById(location.locationId),
       JSON.stringify(location), {headers: this.header}).subscribe(
