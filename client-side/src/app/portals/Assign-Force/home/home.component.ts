@@ -26,27 +26,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.jokeSubscription = this.chuckNorrisService.joke$.subscribe( (resp) => {
       this.joke = resp;
     });
-<<<<<<< HEAD
-    // tslint:disable-next-line:max-line-length
-    // this.locationService.newLocation(new Location(null, 'eatmyshorts', 'Los Angeles', 'CA', 3252, 'company', true)); // this also works. create new location.
-    // this.locationService.getAllLocations(); // This one currently works. get all locations
-    // this.locationService.getLocation(1); this one currently works. get a specific location.
-
-    // buildsings
-    // this.locationService.getAllBuildings(); works get all buildings
-    // this.locationService.getBuildingsByLocationId(1); works get all buildings by location id.
-    // this.locationService.getBuildingById(1); get one single building works.
-    // this.locationService.newBuilding(new Building(null, 'new building', 1, 666)); // works. Creates a simple new building.
-
-    // Rooms
-    // this.locationService.newRoom(new Room(null, 232, 1, null, 23));
-    // this.locationService.getAllRooms();
-    // this.locationService.getOneRoom(1);
-    // this.locationService.getRoomsByBuildingId(1);
-
-
-
-=======
     // test getLocationById, getBuildingById, getRoomById, getRoomsByBuildingId; these 5 currently work
     // this.locationService.getLocation(1);
     // this.locationService.getBuildingById(1);
@@ -98,7 +77,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     // testing deleteLocation; changes state of record x to inactive
     // testLocation.locationId = 72;
     // this.locationService.deleteLocation(testLocation); // this one works now too. sets a specified location to ACTIVE=FALSE
->>>>>>> 214c0fe6c79a0bf03ee1b0d50f6b1e0dbd36b324
   }
 
   newJoke() {
