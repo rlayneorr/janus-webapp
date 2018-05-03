@@ -94,4 +94,14 @@ fdescribe('EditBatchComponent', () => {
     component.associateAlert({type: null, message: null});
     expect(alertServiceAlertSpy).toHaveBeenCalled();
   });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should set batch\'s end date to a provided date', () => {
+    const newDate: Date = new Date();
+    component.endDateChanged(newDate);
+    expect(component.batch.endDate).toEqual(newDate);
+  });
 });
