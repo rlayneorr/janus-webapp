@@ -94,5 +94,5 @@ describe('LocationService', () => {
     });
     await expect(data).toBeUndefined();
   })));
-
+  
 });
