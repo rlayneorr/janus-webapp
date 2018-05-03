@@ -114,4 +114,28 @@ fdescribe('EditBatchComponent', () => {
     component.startDateChanged(newDate);
     expect(component.batch.startDate).toEqual(newDate);
   });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should set batch to batch received from sessionService, should set batchTypes to array received from batchService', () => {
+
+    const expectedBatch: Batch = new Batch(0, 'TestBatch', null, null, null, 0, 0);
+
+    const expectedArr: Array<BatchType> = [
+      new BatchType(0, 'Type 1', 1),
+      new BatchType(1, 'Type 1', 2),
+      new BatchType(2, 'Type 1', 3),
+      new BatchType(3, 'Type 1', 4),
+      new BatchType(4, 'Type 1', 5)
+    ];
+
+    component.ngOnInit();
+
+    fixture.whenStable().then( () => {
+      expect(component.batch).toEqual(expectedBatch);
+      expect(component.batchTypes).toEqual(expectedArr);
+    });
+  });
 });
