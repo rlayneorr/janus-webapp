@@ -33,6 +33,8 @@ fdescribe('EditBatchComponent', () => {
 
   // Service spies for testing if a function has been called
   let alertServiceAlertSpy: jasmine.Spy;
+  let batchServiceUpdateSpy: jasmine.Spy;
+  let sessionServicePutSpy: jasmine.Spy;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -55,6 +57,14 @@ fdescribe('EditBatchComponent', () => {
 
     // Set spies that need to be referenced later
     alertServiceAlertSpy = spyOn(alertService, 'alert');
+    batchServiceUpdateSpy = spyOn(batchService, 'updateBatch').and.callFake((batch: Batch) => {
+      if (batch.id === 0) {
+        return Observable.of('good');
+      } else {
+        return Observable.throw('bad');
+      }
+    });
+    sessionServicePutSpy = spyOn(sessionService, 'putSelectedBatchIntoSession');
 
     // Create other spies
     spyOn(sessionService, 'getSelectedBatch').and.returnValue(new Batch(0, 'TestBatch', null, null, null, 0, 0));
@@ -137,5 +147,56 @@ fdescribe('EditBatchComponent', () => {
       expect(component.batch).toEqual(expectedBatch);
       expect(component.batchTypes).toEqual(expectedArr);
     });
+  });
+
+  /**
+   * @author Holdn Olivier
+   * @batch 1803 usf
+   */
+  it ('should call batchAlert and exit early if startDate is later than endDate', () => {
+    spyOn(component, 'batchAlert');
+    component.batch.startDate = new Date(14);
+    component.batch.endDate = new Date(10);
+
+    component.submit(0);
+
+    expect(component.batchAlert).toHaveBeenCalled();
+    expect(batchServiceUpdateSpy).not.toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should alert user of success and put selected batch into the session', () => {
+    spyOn(component, 'batchAlert');
+
+    component.batch.id = 0;
+    component.batch.startDate = new Date(10);
+    component.batch.endDate = new Date(14);
+
+    component.submit(24);
+
+    expect(component.batchAlert).toHaveBeenCalled();
+    expect(batchServiceUpdateSpy).toHaveBeenCalled();
+    expect(sessionServicePutSpy).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should alert user of failure', () => {
+    spyOn(component, 'batchAlert');
+
+    component.batch.id = 1;
+    component.batch.startDate = new Date(10);
+    component.batch.endDate = new Date(14);
+
+    component.submit(2);
+
+    expect(component.batchAlert).toHaveBeenCalled();
+    expect(batchServiceUpdateSpy).toHaveBeenCalled();
+    expect(sessionServicePutSpy).not.toHaveBeenCalled();
   });
 });
