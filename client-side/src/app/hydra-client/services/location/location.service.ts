@@ -125,7 +125,7 @@ export class LocationService {
   // update Building //
   updateBuilding(building: Building) {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
-    JSON.stringify(building), {headers: header}).subscribe(
+    JSON.stringify(building), {headers: this.header}).subscribe(
       (payload) => {
         this.buildings.next(payload);
       }
