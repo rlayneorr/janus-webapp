@@ -85,4 +85,13 @@ fdescribe('EditBatchComponent', () => {
     component.batchAlert(null, null);
     expect(alertServiceAlertSpy).toHaveBeenCalled();
   });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should call alertService.alert', () => {
+    component.associateAlert({type: null, message: null});
+    expect(alertServiceAlertSpy).toHaveBeenCalled();
+  });
 });
