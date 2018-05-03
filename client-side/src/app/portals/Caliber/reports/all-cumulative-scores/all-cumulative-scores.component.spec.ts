@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 
 
-fdescribe('AllCumulativeScoresComponent', () => {
+describe('AllCumulativeScoresComponent', () => {
   let component: AllCumulativeScoresComponent;
   let fixture: ComponentFixture<AllCumulativeScoresComponent>;
 
@@ -26,23 +26,23 @@ fdescribe('AllCumulativeScoresComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should have a batchId', () => {
+  it('should have a batchId', () => {
     expect(component.batchId).toBeFalsy();
   });
 
-  fit('should have a traineeId', () => {
+  it('should have a traineeId', () => {
     expect(component.traineeId).toBeTruthy();
   });
 
-  fit('should have a chartData', () => {
+  it('should have a chartData', () => {
     expect(component.scoresAverage).toBeFalsy();
   });
 
-  fit('should have a batchArray', () => {
+  it('should have a batchArray', () => {
     expect(component.batch).toBeTruthy();
   });
 
