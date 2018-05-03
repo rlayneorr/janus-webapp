@@ -86,7 +86,7 @@ describe('LocationService', () => {
   it('should get a location from the backend', async(inject([LocationService], async (done, service: LocationService) => {
     let data: Location;
     const i = 1;
-    await service.getLocation(i);
+    await service.getLocationById(i);
     await service.publicLocation.elementAt(1).subscribe(async (result) => {
       data = result;
     }, (error) => {
