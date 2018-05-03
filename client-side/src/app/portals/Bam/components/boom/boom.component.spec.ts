@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 import { BoomComponent } from './boom.component';
 import { Dependencies } from '../../bam.test-observable.module';
@@ -8,11 +9,13 @@ import { CalendarService } from '../../services/calendar.service';
 import { CurriculumService } from '../../services/curriculum.service';
 import { SubtopicService } from '../../services/subtopic.service';
 import { UsersService } from '../../services/users.service';
-import { BoomUtil } from './boom.util';
+import { BoomUtil } from './boom-test.util';
 import { BamUser } from '../../models/bamuser.model';
 import { Batch } from '../../models/batch.model';
+import { Subtopic } from '../../models/subtopic.model';
+import { ScheduledSubtopic } from '../../models/scheduledsubtopic.model';
 
-describe('BoomComponent', () => {
+fdescribe('BoomComponent', () => {
   let component: BoomComponent;
   let fixture: ComponentFixture<BoomComponent>;
 
@@ -27,10 +30,12 @@ describe('BoomComponent', () => {
     const subtopicService: SubtopicService = TestBed.get(SubtopicService);
     const usersService: UsersService = TestBed.get(UsersService);
 
+    const subts: Array<Subtopic> = BoomUtil.getSubtopicByIds([1, 2, 3, 4]);
+
     spyOn(batchService, 'getAllInProgress').and.returnValue(Observable.of(BoomUtil.makeBatches()));
     spyOn(curriculumService, 'getScheduleById').and.returnValue(Observable.of(BoomUtil.getScheduleById(2)));
     spyOn(usersService, 'getUserByID').and.returnValue(Observable.of(BoomUtil.getUserById(1)));
-    spyOn(subtopicService, 'getSubtopicByIDs').and.returnValue(Observable.of(BoomUtil.getSubtopicById(3)));
+    spyOn(subtopicService, 'getSubtopicByIDs').and.returnValue(of(subts));
 
     TestBed.overrideProvider(BatchService, { useValue: batchService });
     TestBed.overrideProvider(CurriculumService, { useValue: curriculumService });
@@ -46,11 +51,52 @@ describe('BoomComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('initialize all subtopics', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    const subtopics: Subtopic[][] = component.allBatchSubtopics;
+    for (const sub in subtopics) {
+      if (subtopics.hasOwnProperty(sub)) {
+        expect(subtopics[sub]).toEqual(BoomUtil.getSubtopicByIds([1, 2, 3, 4]));
+      }
+    }
+  });
+
   it('initialize the Batches', () => {
     const batches: Batch[] = BoomUtil.makeBatches();
     component.ngOnInit();
     fixture.detectChanges();
     expect(component.currentBatches).toEqual(batches);
+  });
+
+  it('set the batch statistics', () => {
+    expect(component.batchSelectionList).toEqual(component.currentBatches);
+    expect(component.batches).toEqual(BoomUtil.makeBooms());
+  });
+
+  it('plot out the batch', () => {
+    expect(component.barChartLabels).toEqual(BoomUtil.makeBarChart().weekLable);
+    expect(component.barChartData).toEqual(BoomUtil.makeBarChart().barChart);
+  });
+
+  it('get the percentage', () => {
+    const data: any = BoomUtil.makePieLables();
+    expect(component.percent).toEqual(90);
+    expect(component.batchOverallArray).toEqual(data.batchOverallArray);
+    expect(component.pieChartData).toEqual(data.pieChartData);
+    expect(component.pieChartDatasets).toEqual(data.pieChartDatasets);
+  });
+
+  it('change the percentage', () => {
+    component.changePercent(new Event(''), 0);
+    fixture.detectChanges();
+    expect(component.pieChartHeight).toEqual(782.156);
+    expect(component.pieChartData).toEqual([]);
+    expect(component.pieChartLabels).toEqual([]);
+    expect(component.pieChartDatasets).toEqual([]);
+    component.changePercent(new Event(''), 0);
+    fixture.detectChanges();
+    expect(component.pieChartHeight).toEqual(215.156);
   });
 
   it('get the week helper', () => {
