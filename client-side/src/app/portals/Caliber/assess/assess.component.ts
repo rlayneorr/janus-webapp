@@ -18,7 +18,7 @@ import { ScrollEvent } from 'ngx-scroll-event';
 import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
 import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
 import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
 import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
 import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
@@ -36,7 +36,7 @@ export class AssessComponent implements OnInit {
 
   batches: any[] = []; // this should not be of type any but whoever refactored it to HydraBatch did not do it right - blake
   assessments: Assessment[] = [];
-  selectedBatch: any = new HydraBatch();
+  selectedBatch: any = new CompleteBatch();
   grades: Grade[] = [];
   updatingGrades: Set<Grade> = new Set<Grade>();
   selectedWeek: number;
@@ -50,7 +50,7 @@ export class AssessComponent implements OnInit {
 
   years: Set<any> = new Set<any>();
   currentYear = 0;
-  yearBatches: HydraBatch[] = [];
+  yearBatches: CompleteBatch[] = [];
   selectedTrainees: HydraTrainee[] = [];
 
   pageOffsetValue;
@@ -84,7 +84,10 @@ export class AssessComponent implements OnInit {
 
     this.batchService.fetchAll();
 
-    this.skillService.findAllActive();
+    this.skillService.findAllActive().subscribe(skills => {
+      this.skills = skills;
+      this.newAssessment.skill = this.findSkill('Java');
+    });
 
     this.noteService.getList().subscribe(notes => {
       this.notes = notes;
@@ -98,16 +101,10 @@ export class AssessComponent implements OnInit {
       this.gradeService.fetchByBatchIdByWeek(this.selectedBatch.batchId, this.selectedWeek);
     });
 
-    this.skillService.listSubject.subscribe(skills => {
-      this.skills = skills;
-      this.newAssessment.skill = this.findSkill('Java');
-    });
-
     this.batchService.fetchAll().subscribe(batch => {
       this.batches = batch;
 
       if (this.batches.length !== 0) {
-
         // Set the year dropdown.
         this.batches.forEach(b => {
           this.years.add(this.datePipe.transform(b.startDate, 'yyyy'));
@@ -125,7 +122,6 @@ export class AssessComponent implements OnInit {
 
     // Every time an assessment is created, a set of default grades is created.
     this.assessmentService.getSaved().subscribe(assessment => {
-
       this.selectedBatch.trainees.forEach(trainee => {
         const grade = new Grade();
         grade.trainee = trainee;
@@ -279,7 +275,7 @@ export class AssessComponent implements OnInit {
     return note;
   }
 
-  getWeekBatchNote(batch: HydraBatch): Note {
+  getWeekBatchNote(batch: CompleteBatch): Note {
     const n = this.notes.filter( (note) => {
       return (note.type === 'BATCH' && Number(note.week) === Number(this.selectedWeek));
     })[0];
@@ -348,7 +344,7 @@ export class AssessComponent implements OnInit {
     this.currentYear = Number(year);
   }
 
-  changeBatch(batch: HydraBatch) {
+  changeBatch(batch: CompleteBatch) {
       this.selectedWeek = this.batchUtil.getWeek(batch);
 
     this.selectedBatch = batch;

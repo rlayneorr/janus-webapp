@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // services
-import { AlertService } from '../alerts/alerts.service';
 import { environment } from '../../../../environments/environment';
 
 // entities
@@ -21,10 +18,7 @@ const context = environment.skill;
 @Injectable()
 export class GambitSkillService {
 
-  public listSubject = new BehaviorSubject<GambitSkill[]>([]);
-
-  constructor(public httpClient: HttpClient, public alertService: AlertService) {
-    this.listSubject = new BehaviorSubject([]);
+  constructor(public httpClient: HttpClient) {
   }
 
   /*
@@ -95,7 +89,7 @@ export class GambitSkillService {
    * @param skill: Skill
    */
   public update(skill: GambitSkill): Observable<GambitSkill> {
-    const url = environment.skill.updateById(skill.skillId);
+    const url = environment.skill.updateById(skill.skillID);
     return this.httpClient.put<GambitSkill>(url, JSON.stringify(skill));
   }
 
@@ -105,7 +99,6 @@ export class GambitSkillService {
    * @param skill: GambitSkill
    */
   public delete(skill: GambitSkill): Observable<boolean> {
-    // return Observable.of(skill);
-    return this.httpClient.delete<boolean>(context.delete(skill.skillId));
+    return this.httpClient.delete<boolean>(context.delete(skill.skillID));
   }
 }

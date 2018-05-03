@@ -50,11 +50,11 @@
     </div>
 </div>
 
-<!-- Add category modal -->
+<!-- Add skill modal -->
 <ng-template #addSkill let-c="close" let-d="dismiss">
     <form #myForm="ngForm" [formGroup]="addForm">
         <div class="modal-header">
-            <h4 class="modal-title" style="font-size: 18px;">Add Category</h4>
+            <h4 class="modal-title" style="font-size: 18px;">Add SKill</h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -75,7 +75,7 @@
     </form>
 </ng-template>
 
-<!-- Edit category modal -->
+<!-- Edit skill modal -->
 <ng-template #editSkill let-c="close" let-d="dismiss">
     <form #myForm="ngForm" class="form-control">
         <div class="modal-header" style="background-color: #f1f2f4;">
@@ -95,7 +95,7 @@
                 <div class="form-group col-sm-1 col-md-1">
                     <label for="skillName"><b>Active:</b></label>
                     <br />
-                    <input type="checkbox" name='active' style="text-align: left" (change)="currentSkill.active = !currentSkill.active" [checked]="true"/>
+                    <input type="checkbox" name='active' style="text-align: left" (change)="currentSkill.isActive = !currentSkill.isActive" [checked]="true"/>
                 </div>
             </div>
         </div>
