@@ -27,7 +27,7 @@ import { UrlService } from '../../../../../hydra-client/services/urls/url.servic
  * reflect here.
  *
  */
-fdescribe('EditBatchComponent', () => {
+describe('EditBatchComponent', () => {
   let component: EditBatchComponent;
   let fixture: ComponentFixture<EditBatchComponent>;
 
