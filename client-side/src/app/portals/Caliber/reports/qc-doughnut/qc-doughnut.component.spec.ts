@@ -22,7 +22,7 @@ describe('QcDoughnutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('ngOnInit() cannot verify data currently, but the variables should be true', () => {
+  fit('ngOnInit() (cannot verify data currently), but the variables should be true', () => {
     component.ngOnInit();
     expect(component['dataSubscription']).toBeTruthy();
     expect(component['batchSubscription']).toBeTruthy();
