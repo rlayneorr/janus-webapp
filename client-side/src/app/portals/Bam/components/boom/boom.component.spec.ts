@@ -15,6 +15,10 @@ import { Batch } from '../../models/batch.model';
 import { Subtopic } from '../../models/subtopic.model';
 import { ScheduledSubtopic } from '../../models/scheduledsubtopic.model';
 
+/**
+ * @author Craig Koepele | 1802-mar05-java-usf
+ * Spec testing component for Boom
+ */
 fdescribe('BoomComponent', () => {
   let component: BoomComponent;
   let fixture: ComponentFixture<BoomComponent>;
@@ -23,6 +27,13 @@ fdescribe('BoomComponent', () => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Before each test, set up mock values to return for each service.
+   *
+   * Use the test bed to inject the services. spyOn then sets up the appropriate mock
+   * observatle to return on a specified function
+   */
   beforeEach(() => {
     const batchService: BatchService = TestBed.get(BatchService);
     const calendarService: CalendarService = TestBed.get(CalendarService);
@@ -47,10 +58,18 @@ fdescribe('BoomComponent', () => {
     fixture.detectChanges();
   });
 
+  /**
+   * Pass if the component is created
+   */
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Specifically tests the ngOnInit function. NOTE: ngOnInit is called
+   * every time a component is created, so the first two lines are excessive.
+   */
   it('initialize all subtopics', () => {
     component.ngOnInit();
     fixture.detectChanges();
@@ -62,6 +81,10 @@ fdescribe('BoomComponent', () => {
     }
   });
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Tests the component function getBatchSubtopics()
+   */
   it('initialize the Batches', () => {
     const batches: Batch[] = BoomUtil.makeBatches();
     component.ngOnInit();
@@ -69,16 +92,30 @@ fdescribe('BoomComponent', () => {
     expect(component.currentBatches).toEqual(batches);
   });
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Test component function setBatchStats()
+   */
   it('set the batch statistics', () => {
     expect(component.batchSelectionList).toEqual(component.currentBatches);
     expect(component.batches).toEqual(BoomUtil.makeBooms());
   });
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Test component function plotBatch(id: Number)
+   */
   it('plot out the batch', () => {
-    expect(component.barChartLabels).toEqual(BoomUtil.makeBarChart().weekLable);
-    expect(component.barChartData).toEqual(BoomUtil.makeBarChart().barChart);
+    expect(component.barChartLabels).toEqual(BoomUtil.makeBarChart(
+      component.barChartLabels.length).weekLable);
+    expect(component.barChartData).toEqual(BoomUtil.makeBarChart(
+      component.barChartLabels.length).barChart);
   });
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Test component function pieCharPercent(percent)
+   */
   it('get the percentage', () => {
     const data: any = BoomUtil.makePieLables();
     expect(component.percent).toEqual(90);
@@ -87,6 +124,12 @@ fdescribe('BoomComponent', () => {
     expect(component.pieChartDatasets).toEqual(data.pieChartDatasets);
   });
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Test component function changePercent(event: any, percent: Number
+   * Tests two cases, when percent === component.percent, and when it
+   * does not
+   */
   it('change the percentage', () => {
     component.changePercent(new Event(''), 0);
     fixture.detectChanges();
@@ -94,11 +137,17 @@ fdescribe('BoomComponent', () => {
     expect(component.pieChartData).toEqual([]);
     expect(component.pieChartLabels).toEqual([]);
     expect(component.pieChartDatasets).toEqual([]);
-    component.changePercent(new Event(''), 0);
+    component.changePercent(new Event(''), 90);
     fixture.detectChanges();
-    expect(component.pieChartHeight).toEqual(215.156);
+    expect(component.pieChartHeight).toEqual(782.156);
   });
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Test component function getWeek(date)
+   * NOTE: This funtion is most lokely depreciated, as it isn't
+   * called during the component run time, nor in it's html file
+   */
   it('get the week helper', () => {
     let date: Date = new Date(`04/jan/2018`);
     expect(component.getWeek(date.getTime())).toEqual(1);
@@ -110,6 +159,10 @@ fdescribe('BoomComponent', () => {
     expect(component.getWeek(date.getTime())).toEqual(4);
   });
 
+  /**
+   * @author Craig Koepele | 1802-mar05-java-usf
+   * Test component function setBatchStats()
+   */
   it('change the batch', () => {
     component.ngOnInit();
     component.changeBatch(3);

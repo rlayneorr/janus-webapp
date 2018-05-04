@@ -9,7 +9,17 @@ import { ScheduledSubtopic } from '../../models/scheduledsubtopic.model';
 import { ScheduledDate } from '../../models/scheduleddate.model';
 import { Boom } from '../../models/boom.model';
 
+/**
+ * @author Craig Koepele | 1802-mar05-java-usf
+ * Utility helper class for the spec test component. Generates the
+ * necessary expected results for boom component
+ */
 export class BoomUtil {
+
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * Makes a list of batches. All values are hard coded
+     */
     static makeBatches(): Batch[] {
         const newBatches: Batch[] = [];
         let id = 0; // Type: number
@@ -31,6 +41,10 @@ export class BoomUtil {
         return newBatches;
       }
 
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * Makes a list of Boom objects. Bases this off the list of batches
+     */
     static makeBooms(): Boom[] {
         const batches: Boom[] = [];
         const bamBatches: Batch[] = this.makeBatches();
@@ -52,21 +66,34 @@ export class BoomUtil {
         return batches;
     }
 
-    static makeBarChart(): any {
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * @param length
+     * Returns an object that matches up with the various class fields
+     * modified in the barchart function in the boom component.
+     */
+    static makeBarChart(length: number): any {
         const booms: Boom[] = this.makeBooms();
         const weekLable: any[] = [];
         const missed = 0;
-        for (let i = 1; i < 2523; i++) {
-            const index = i - 1;
+        for (let i = 1; i < length + 1; i++) {
             weekLable.push('Week ' + (i));
         }
-        return { barChart: [{ data: this.populateData(2522, '100.00', 4), label: 'Completed',
+        return { barChart: [{ data: this.populateData(weekLable.length, '100.00', booms.length), label: 'Completed',
             fill: true, backgroundColor: '#ff9945'},
-            { data: this.populateData(2522, '0.00', 4), label: 'Missed',
+            { data: this.populateData(weekLable.length, '0.00', booms.length), label: 'Missed',
             fill: true, backgroundColor: '#b63e4f'}],
             weekLable: weekLable};
     }
 
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * @param length
+     * @param value
+     * @param elements
+     * Helper function for makeBarChart. Generates a list of strings based on the poportions of
+     * subtopics completed/missed
+     */
     private static populateData(length: number, value: string, elements: number): any[] {
         const data: any[] = [];
         for (let i = 0; i < length; i++) {
@@ -79,37 +106,61 @@ export class BoomUtil {
         return data;
     }
 
-      static getUserById(id: number): BamUser {
-            const user: BamUser = new BamUser(id, '', '', '', '',
-                '' , 0, null, '', '', '', '', 0);
-            return user;
-      }
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * @param id
+     * Generates a BamUser component with an id value passed in
+     */
+    static getUserById(id: number): BamUser {
+        const user: BamUser = new BamUser(id, '', '', '', '',
+            '' , 0, null, '', '', '', '', 0);
+        return user;
+    }
 
-      static getScheduleById(id: number): Schedule {
-          return new Schedule(id, this.makeSchSubList(), new Curriculum());
-      }
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * @param id
+     * Returns a new schedule object with an id that the user passes in
+     */
+    static getScheduleById(id: number): Schedule {
+        return new Schedule(id, this.makeSchSubList(), new Curriculum());
+    }
 
-      private static makeSchSubList(): ScheduledSubtopic[] {
-          let id = 0;
-          const schSubs: ScheduledSubtopic[] = [];
-          schSubs.push(new ScheduledSubtopic(id++, 0, new ScheduledDate(id++, 1, 1, 10000, 10000)));
-          schSubs.push(new ScheduledSubtopic(id++, 0, new ScheduledDate(id++, 2, 2, 20000, 20000)));
-          schSubs.push(new ScheduledSubtopic(id++, 0, new ScheduledDate(id++, 3, 3, 30000, 30000)));
-          schSubs.push(new ScheduledSubtopic(id++, 0, new ScheduledDate(id++, 4, 4, 40000, 40000)));
-          return schSubs;
-      }
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * Helper function to getScheduleById. Generates a SchedueldSbutopic list
+     */
+    private static makeSchSubList(): ScheduledSubtopic[] {
+        let id = 0;
+        const schSubs: ScheduledSubtopic[] = [];
+        schSubs.push(new ScheduledSubtopic(id++, 0, new ScheduledDate(id++, 1, 1, 10000, 10000)));
+        schSubs.push(new ScheduledSubtopic(id++, 0, new ScheduledDate(id++, 2, 2, 20000, 20000)));
+        schSubs.push(new ScheduledSubtopic(id++, 0, new ScheduledDate(id++, 3, 3, 30000, 30000)));
+        schSubs.push(new ScheduledSubtopic(id++, 0, new ScheduledDate(id++, 4, 4, 40000, 40000)));
+        return schSubs;
+    }
 
-      static getSubtopicByIds(ids: number[]): Array<Subtopic> {
-          const subtopics: Array<Subtopic> = new Array<Subtopic>();
-          for (const id in ids) {
-              if (ids.hasOwnProperty(id)) {
-                  subtopics.push(new Subtopic(ids[id], '',
-                    new Date('04/jan/2018'), new Date('05/jan/2018'), 'Completed', new Topic()));
-              }
-          }
-          return subtopics;
-      }
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * @param ids
+     * Return a list of subtopics with ids mapped from the passed in
+     * list of ids
+     */
+    static getSubtopicByIds(ids: number[]): Array<Subtopic> {
+        const subtopics: Array<Subtopic> = new Array<Subtopic>();
+        for (const id in ids) {
+            if (ids.hasOwnProperty(id)) {
+                subtopics.push(new Subtopic(ids[id], '',
+                new Date('04/jan/2018'), new Date('05/jan/2018'), 'Completed', new Topic()));
+            }
+        }
+        return subtopics;
+    }
 
+    /**
+     * @author Craig Koepele | 1802-mar05-java-usf
+     * Return an object that corresponds to the pieChart function in the Boom component
+     */
       static makePieLables(): any {
           const booms: Boom[] = this.makeBooms();
           const teachers: any[] = [];
