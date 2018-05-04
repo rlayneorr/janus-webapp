@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 // pipes
 import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
 import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
+import { BatchService } from '../../../hydra-client/aggregator/services/completebatch.service';
+import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
 
 
 @Component({
@@ -17,16 +18,16 @@ import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-ba
 
 export class QualityComponent implements OnInit, OnDestroy {
 
-  batches: HydraBatch[] = [];
+  batches: CompleteBatch[] = [];
 
-  currentBatch: HydraBatch;
+  currentBatch: CompleteBatch;
   currentYear: number;
 
   batchSubscription: Subscription;
 
 
   constructor(
-    private batchService: HydraBatchService,
+    private batchService: BatchService,
     private batchesByYearPipe: DisplayBatchByYear
   ) {
     this.setCurrentYear( this.getCalendarYear() );
@@ -50,13 +51,13 @@ export class QualityComponent implements OnInit, OnDestroy {
   *
   * @param batches: Batch[]
   */
-  private setBatches(batches: HydraBatch[]): void {
+  private setBatches(batches: CompleteBatch[]): void {
     this.batches = batches;
   }
 
 
   public onYearSelect(year: number) {
-    const currentYearBatches: HydraBatch[] = this.batchesByYearPipe.transform(this.batches, year);
+    const currentYearBatches: CompleteBatch[] = this.batchesByYearPipe.transform(this.batches, year);
     this.setCurrentYear(year);
 
     if (currentYearBatches.length > 0) {
@@ -87,7 +88,7 @@ export class QualityComponent implements OnInit, OnDestroy {
     // console.log(currentYear);
   }
 
-  public getBatchesOfCurrentYear(): HydraBatch[] {
+  public getBatchesOfCurrentYear(): CompleteBatch[] {
     return this.batchesByYearPipe.transform(this.batches, this.currentYear);
   }
 
@@ -117,9 +118,9 @@ export class QualityComponent implements OnInit, OnDestroy {
   *
   * @return Batch
   */
-  private createBatch(): HydraBatch {
+  private createBatch(): CompleteBatch {
 
-    return new HydraBatch();
+    return new CompleteBatch();
   //   return {
   //     batchId: 0,
   //     resourceId: 0,

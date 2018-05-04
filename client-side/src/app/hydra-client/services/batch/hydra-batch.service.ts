@@ -13,10 +13,12 @@ import { environment } from '../../../../environments/environment';
 
 // entities
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { UrlService } from '../urls/url.service';
+import { UrlService } from '../urls/url.service';           // TODO refactor reference to Environments?
 import { stringifyDate } from '../../../portals/Caliber/util/utils';
 import { HydraBatch } from '../../entities/HydraBatch';
 import { HydraCRUD } from '../../interfaces/api.interface';
+
+import { GambitBatch } from '../../entities/GambitBatch';
 
 
 
@@ -25,9 +27,7 @@ import { HydraCRUD } from '../../interfaces/api.interface';
  * for Batch objects
  */
 @Injectable()
-export class HydraBatchService implements HydraCRUD<HydraBatch> {
-
-
+export class HydraBatchService {
 
   constructor(public http: HttpClient, private urls: UrlService) {
 
@@ -48,7 +48,7 @@ export class HydraBatchService implements HydraCRUD<HydraBatch> {
    * @returns Observable
    */
   public fetchAll() {
-    return this.http.get<HydraBatch[]>(this.urls.batches.fetchAll());
+    return this.http.get<GambitBatch[]>(this.urls.batches.fetchAll());
   }
 
   /**
@@ -59,12 +59,8 @@ export class HydraBatchService implements HydraCRUD<HydraBatch> {
    *
    * @returns Observable
    */
-  public fetchAllByTrainer() {
-    return this.http.get<any[]>(this.urls.batches.fetchAllByTrainer());
-  }
-
   public fetchAllByTrainerId(id: number) {
-    return this.http.get<any[]>(this.urls.batches.fetchAllByTrainerId(id));
+    return this.http.get<GambitBatch[]>(this.urls.batches.fetchAllByTrainerId(id));
   }
 
   /**
@@ -78,9 +74,12 @@ export class HydraBatchService implements HydraCRUD<HydraBatch> {
   *
   * @param batch: Batch
   */
-  public create(batch: HydraBatch) {
-    return this.http.post<any>(this.urls.batches.save(), JSON.stringify(this.prepareForApi(batch)));
+  public create(batch: GambitBatch) {
+    return this.http.post<GambitBatch>(this.urls.batches.save(), JSON.stringify(this.prepareForApi(batch)));
   }
+
+
+
 
   /**
    * transmits a Batch object to be updated and
@@ -92,8 +91,8 @@ export class HydraBatchService implements HydraCRUD<HydraBatch> {
    *
    * @returns Observable
    */
-  public update(batch: HydraBatch) {
-    return this.http.put<any>(this.urls.batches.update(), JSON.stringify(this.prepareForApi(batch)));
+  public update(batch: GambitBatch) {
+    return this.http.put<GambitBatch>(this.urls.batches.update(), JSON.stringify(this.prepareForApi(batch)));
   }
 
   /**
@@ -106,8 +105,8 @@ export class HydraBatchService implements HydraCRUD<HydraBatch> {
    *
    * @returns Observable
    */
-  public delete(batch: HydraBatch) {
-    return this.http.delete<any>(this.urls.batches.delete(batch.batchId));
+  public delete(batch: GambitBatch) {
+    return this.http.delete<GambitBatch>(this.urls.batches.delete(batch.batchId));
   }
 
   /**
@@ -119,14 +118,14 @@ export class HydraBatchService implements HydraCRUD<HydraBatch> {
    *
    * @return any
    */
-  protected prepareForApi(batch: HydraBatch) {
-    const output: any = {};
-    Object.assign(output, batch);
+  protected prepareForApi(batch: GambitBatch) {
+    // let output: GambitBatch = {};
+    // Object.assign(output, batch);
 
-    output.startDate = stringifyDate(batch.startDate);
-    output.endDate = stringifyDate(batch.endDate);
+    // output.startDate = stringifyDate(batch.startDate);
+    // output.endDate = stringifyDate(batch.endDate);
 
-    return output;
+    // return output;
   }
 
 }
