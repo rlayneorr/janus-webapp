@@ -10,7 +10,7 @@ import { SubtopicService } from '../../services/subtopic.service';
 import { UsersService } from '../../services/users.service';
 import { BoomUtil } from './boom.util';
 
-fdescribe('BoomComponent', () => {
+describe('BoomComponent', () => {
   let component: BoomComponent;
   let fixture: ComponentFixture<BoomComponent>;
 
