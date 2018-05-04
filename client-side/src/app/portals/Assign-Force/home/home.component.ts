@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private jokeSubscription: Subscription;
   private locations: Location[];
   joke;
+  location: Location[];
 
   subscription: any;
   constructor(private chuckNorrisService: ChuckNorrisService, private locationService: LocationService) { }
