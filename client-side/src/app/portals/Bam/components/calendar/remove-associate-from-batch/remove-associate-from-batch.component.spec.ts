@@ -12,58 +12,12 @@ import { SessionService } from '../../../services/session.service';
 import { BatchType } from '../../../models/batchtype.model';
 import { Observable } from 'rxjs/Observable';
 
-/**
- * @author David Graves, Cristian Hermida
- * @batch 1712
- * Had to stub SessionService. It retrieved an object from sessionStorage,
- * which is not available during testing. Had to provide mock data.
- */
-
-// export class StubSessionService {
-//   bamUser: BamUser;
-//   stubBatch: Batch;
-
-//   constructor() {
-//       this.bamUser = {
-//         'userId': 3,
-//         'firstName': 'Ryan',
-//         'middleName': null,
-//         'lastName': 'Lessley',
-//         'email': 'rl@revature.com',
-//         'pwd': '1234',
-//         'role': 2,
-//         'batch': null,
-//         'phone': '1234567890',
-//         'phone2': '8675309',
-//         'skype': 'rl_skype',
-//         'pwd2': null,
-//         'assignForceID': 9
-//     };
-//   }
-
-//   getSelectedBatch(): Batch {
-
-//     this.stubBatch = new Batch(12, 'name', new Date(), new Date(),
-//     this.bamUser, 101, 302);
-
-//     return this.stubBatch;
-//   }
-
-// }
-
 describe('RemoveAssociateFromBatchComponent', () => {
   let component: RemoveAssociateFromBatchComponent;
   let fixture: ComponentFixture<RemoveAssociateFromBatchComponent>;
 
 
   beforeEach(async(() => {
-    // TestBed.configureTestingModule({
-    //   declarations: [RemoveAssociateFromBatchComponent, SearchPipe],
-    //   imports: [ HttpClientModule ],
-    //   providers: [UsersService, {provide: SessionService, useClass: StubSessionService}],
-    //   schemas: []
-    // }).compileComponents();
-
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }));
 

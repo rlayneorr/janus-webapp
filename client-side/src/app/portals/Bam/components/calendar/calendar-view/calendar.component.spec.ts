@@ -14,69 +14,34 @@ import { LocationStrategy } from '@angular/common';
 import { AlertService } from '../../../services/alert.service';
 import { CalendarService } from '../../../services/calendar.service';
 import { CalendarStatusService } from '../../../services/calendar-status.service';
-import { AddSubtopicService } from '../../../services/add-subtopic.service';
+import { AddSubtopicService, AddSubtopicService } from '../../../services/add-subtopic.service';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { BamUser } from '../../../models/bamuser.model';
 import { Subject } from 'rxjs/Subject';
 import { Batch } from '../../../models/batch.model';
 import { BatchType } from '../../../models/batchtype.model';
 
-/**
- * @author David Graves, Cristian Hermida
- * @batch 1712
- * Had to stub SessionService. It retrieved an object from sessionStorage,
- * which is not available during testing. Had to provide mock data.
- */
-
-export class StubSessionService {
-  bamUser: BamUser;
-  stubBatch: Batch;
-
-  constructor() {
-      this.bamUser = {
-        'userId': 3,
-        'firstName': 'Ryan',
-        'middleName': null,
-        'lastName': 'Lessley',
-        'email': 'rl@revature.com',
-        'pwd': '1234',
-        'role': 2,
-        'batch': null,
-        'phone': '1234567890',
-        'phone2': '8675309',
-        'skype': 'rl_skype',
-        'pwd2': null,
-        'assignForceID': 9
-    };
-  }
-
-  getSelectedBatch(): Batch {
-
-    this.stubBatch = new Batch(12, 'name', new Date(), new Date(),
-    this.bamUser, 101, 302);
-
-    return this.stubBatch;
-  }
-
-}
-
-describe('CalendarComponent', () => {
+fdescribe('CalendarComponent', () => {
   let component: CalendarComponent;
   let fixture: ComponentFixture<CalendarComponent>;
 
+  // Spies that need to be referenced later
+
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CalendarComponent ],
-      imports: [HttpClientModule, RouterModule, RouterTestingModule.withRoutes([]) ],
-      providers: [BatchService, { provide: SessionService, useClass: StubSessionService }, UsersService,
-        LocationStrategy, AlertService, CalendarService, CalendarStatusService,
-        AddSubtopicService, SubtopicService],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
+    TestBed.configureTestingModule(Dependencies).compileComponents();
   }));
 
   beforeEach(() => {
+
+    const calendarServce: CalendarService = TestBed.get(CalendarService);
+    const statusService: CalendarStatusService = TestBed.get(CalendarStatusService);
+    const addSubtopicService: AddSubtopicService = TestBed.get(AddSubtopicService);
+    const subtopicService: SubtopicService = TestBed.get(SubtopicService);
+    const sessionService: SessionService = TestBed.get(SessionService);
+
+    // Create spies that need to be referenced later
+
+    // Create other spies
 
     fixture = TestBed.createComponent(CalendarComponent);
     component = fixture.componentInstance;
