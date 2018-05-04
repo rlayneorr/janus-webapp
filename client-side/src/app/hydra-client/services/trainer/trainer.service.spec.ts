@@ -7,7 +7,7 @@ import { UrlService } from '../urls/url.service';
 import { Trainer } from '../../entities/Trainer';
 import { environment } from '../../../../environments/environment';
 
-fdescribe('TrainerService', () => {
+xdescribe('TrainerService', () => {
   const trainer: Trainer = new Trainer();
   trainer.email = 'hey@stop.it';
   this.context = environment.context;
