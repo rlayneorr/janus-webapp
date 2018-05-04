@@ -82,8 +82,8 @@ fdescribe('VpBarGraphComponent', () => {
     (httpMock: HttpTestingController, service: NoteService) => {
 
       // Call the service
-      // service.fetchQcBatchNotesByBatchIdByWeek(1, 2).subscribe(data => {
-      // });
+      service.fetchQcBatchNotesByBatchIdByWeek(1, 2).subscribe(data => {
+      });
       component.results = 'Pass';
       component.populateBatchStatuses();
 
