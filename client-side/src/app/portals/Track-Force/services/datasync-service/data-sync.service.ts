@@ -57,7 +57,7 @@ export class DataSyncService {
   constructor(private rs: RequestService) {
 
     // fetch data on initialization
-    this.fetchData();
+   // this.fetchData();
   }
 
   private checkFetchData() {

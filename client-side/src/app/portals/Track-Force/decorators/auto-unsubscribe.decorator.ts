@@ -16,7 +16,7 @@ export function AutoUnsubscribe( constructor ) {
     constructor.prototype.ngOnDestroy = function () {
       // ...iterate thru its properties...
       for (const prop in this) {
-      const property = this[ prop ];
+        const property = this[ prop ];
         // if property exists and has-a unsubscribe...
         if ( property && (typeof property.unsubscribe === 'function') ) {
           // ...call it

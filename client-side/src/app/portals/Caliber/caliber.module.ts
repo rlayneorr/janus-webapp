@@ -29,7 +29,6 @@ import { PanelService } from './services/panel.service';
 import { GradeService } from './services/grade.service';
 import { NoteService } from './services/note.service';
 import { GranularityService } from './reports/services/granularity.service';
-import { SkillService } from './services/skill.service';
 import { TrainingTypeService } from './services/training-type.service';
 import { ColorService } from './services/colors/color.service';
 import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.service';
@@ -67,7 +66,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './settings/screening/services/in-memory-data.service';
-import { TrainerService } from '../../hydra-client/services/trainer/trainer.service';
+import { TrainerService } from './services/trainer.service';
 import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
 
 // N.T.
@@ -75,7 +74,6 @@ import { ApiService } from './util/api.service';
 
 // pipes
 import { GradeByTraineeByAssessmentPipe } from './pipes/grade-by-trainee-by-assessment.pipe';
-import { CategorySkillPipe } from './pipes/category-skill.pipe';
 import { GraphDataPipe } from './pipes/graph-data.pipe';
 import { TierPipe } from './pipes/tier-pipe';
 import { TrainerPipePipe } from './pipes/trainer-pipe.pipe';
@@ -110,7 +108,7 @@ import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component'
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
 import { VpPanelGraphComponent } from './home/vp-panel-graph/vp-panel-graph.component';
 import { SettingsComponent } from './settings/settings.component';
-import { CategoriesComponent } from './settings/categories/categories.component';
+import { SkillsComponent } from './settings/skills/skills.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
 import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
@@ -200,7 +198,6 @@ import { CategoryService } from './services/category.service';
     GradeByTraineeByAssessmentPipe,
     DisplayBatchByYear,
     BatchByTrainerPipe,
-    CategorySkillPipe,
     NoteByTraineeByWeekPipe,
     TierPipe,
     TrainerPipePipe,
@@ -231,7 +228,7 @@ import { CategoryService } from './services/category.service';
     VpLineGraphComponent,
     VpPanelGraphComponent,
     SettingsComponent,
-    CategoriesComponent,
+    SkillsComponent,
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
@@ -310,14 +307,12 @@ import { CategoryService } from './services/category.service';
     VpHomeSelectorService,
     ColorService,
     LocationService,
-    SkillService,
     CategoriesService,
     GranularityService,
     AlertsService,
     VpHomeBarGraphService,
     VpHomePanelGraphService,
     EvaluationService,
-    SkillService,
     TrainingTypeService,
     ReportsService,
     QCStatusService,

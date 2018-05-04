@@ -14,7 +14,9 @@ import { Observable } from 'rxjs/Observable';
 
 // entities
 import { Trainee } from '../entities/Trainee';
-import { urls } from './urls';
+import { environment } from '../../../../environments/environment';
+
+const context = environment.trainee;
 
 
 /**
@@ -58,13 +60,13 @@ export class TraineeService implements CRUD<Trainee> {
 
 
    public fetchAll(batchId: number) {
-    this.http.get<any[]>(urls.trainee.fetchAllByBatch(batchId))
+    this.http.get<any[]>(context.fetchAllByBatch(batchId))
        .subscribe((results) => this.listSubject.next(results));
      return this.listSubject.asObservable();
   }
 
   fetchDroppedByBatch(batchId: number) {
-    return this.http.get<any[]>(urls.trainee.fetchDroppedByBatch(batchId));
+    return this.http.get<any[]>(context.fetchDroppedByBatch(batchId));
   }
 
   /**
@@ -76,7 +78,7 @@ export class TraineeService implements CRUD<Trainee> {
   * @param trainee: Trainee
   */
   public create(trainee: Trainee) {
-    this.http.post<any>(urls.trainee.save(), JSON.stringify(trainee))
+    this.http.post<any>(context.save(), JSON.stringify(trainee))
       .subscribe((results) => this.savedSubject.next(results));
     return this.savedSubject.asObservable();
   }
@@ -98,7 +100,7 @@ export class TraineeService implements CRUD<Trainee> {
    * @param trainee: Trainee
    */
   public update(trainee: Trainee) {
-    this.http.put<any>(urls.trainee.update(), JSON.stringify(trainee))
+    this.http.put<any>(context.update(), JSON.stringify(trainee))
       .subscribe((results) => this.savedSubject.next(results));
     return this.savedSubject.asObservable();
   }
@@ -112,7 +114,7 @@ export class TraineeService implements CRUD<Trainee> {
    * @param trainee: Trainee
    */
   public delete(trainee: Trainee) {
-    this.http.delete(urls.batch.delete(trainee.traineeId))
+    this.http.delete(environment.batch.delete(trainee.traineeId))
       .subscribe((results: any) => this.deletedSubject.next(results));
     return this.deletedSubject.asObservable();
   }
