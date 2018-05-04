@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">53.33% </span>
+        <span class="strong">52.17% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>24/45</span>
+        <span class='fraction'>24/46</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">66.67% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>1/19</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">51.16% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>22/43</span>
+        <span class='fraction'>22/44</span>
       </div>
     </div>
     <p class="quiet">
@@ -131,7 +131,11 @@
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,17 +146,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -172,6 +170,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -226,6 +234,8 @@ import { environment } from '../../../../../environments/environment';
 export class RequestService {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  host: string = environment.url;</span>
+<span class="cstat-no" title="statement not covered" >  context: string = environment.context;</span>
+  hostms: string; // = environment.msurl;
 <span class="cstat-no" title="statement not covered" >  trackPath: string = this.host + 'TrackForce/track';</span>
 <span class="cstat-no" title="statement not covered" >  dataPath: string = this.host + 'TrackForce/track/data/get';</span>
 &nbsp;
@@ -243,6 +253,10 @@ export class RequestService {
 <span class="cstat-no" title="statement not covered" >    return this.http.delete(this.host + 'TrackForce/track/database/deleteFromDB');</span>
   }
 &nbsp;
+<span class="fstat-no" title="function not covered" >  public getAssociates(): Observable&lt;any&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return this.http.get(this.dataPath + '/associate');</span>
+  }
+&nbsp;
 <span class="fstat-no" title="function not covered" >  public login(</span>username: string, password: string): Observable&lt;User&gt; {
 <span class="cstat-no" title="statement not covered" >    return this.http.post&lt;User&gt;(this.host + 'TrackForce/track/user/submit', { username: username, password: password });</span>
   }
@@ -251,13 +265,11 @@ export class RequestService {
 <span class="cstat-no" title="statement not covered" >    return this.http.get&lt;any&gt;(this.host + 'TrackForce/track/user/name');</span>
   }
 &nbsp;
+&nbsp;
 <span class="fstat-no" title="function not covered" >  public updateAssociates(): Observable&lt;any&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    return this.http.post&lt;any&gt;(this.trackPath + '/data/update/associate', {});</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  public getAssociates(): Observable&lt;any&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return this.http.get(this.dataPath + '/associate');</span>
-  }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  public getBatchesSortedById(): Observable&lt;any&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    return this.http.get(this.dataPath + '/batch');</span>
@@ -307,7 +319,7 @@ export class RequestService {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri May 04 2018 10:49:31 GMT-0400 (Eastern Daylight Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri May 04 2018 11:28:25 GMT-0400 (Eastern Daylight Time)
 </div>
 </div>
 <script src="..\..\..\..\..\..\prettify.js"></script>
