@@ -22,7 +22,7 @@ import { environment } from '../../../../../environments/environment.uat';
 import { link } from 'fs';
 // import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
-fdescribe('InterviewDetailsComponent', () => {
+describe('InterviewDetailsComponent', () => {
   const context = environment.trainee;
 
   let component: InterviewDetailsComponent;
