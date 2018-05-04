@@ -8,6 +8,8 @@ import { environment } from '../../../../../environments/environment';
 export class RequestService {
 
   host: string = environment.url;
+  context: string = environment.context;
+  hostms: string; // = environment.msurl;
   trackPath: string = this.host + 'TrackForce/track';
   dataPath: string = this.host + 'TrackForce/track/data/get';
 
@@ -25,6 +27,10 @@ export class RequestService {
     return this.http.delete(this.host + 'TrackForce/track/database/deleteFromDB');
   }
 
+  public getAssociates(): Observable<any> {
+    return this.http.get(this.dataPath + '/associate');
+  }
+
   public login(username: string, password: string): Observable<User> {
     return this.http.post<User>(this.host + 'TrackForce/track/user/submit', { username: username, password: password });
   }
@@ -33,13 +39,11 @@ export class RequestService {
     return this.http.get<any>(this.host + 'TrackForce/track/user/name');
   }
 
+
   public updateAssociates(): Observable<any> {
     return this.http.post<any>(this.trackPath + '/data/update/associate', {});
   }
 
-  public getAssociates(): Observable<any> {
-    return this.http.get(this.dataPath + '/associate');
-  }
 
   public getBatchesSortedById(): Observable<any> {
     return this.http.get(this.dataPath + '/batch');
