@@ -8,7 +8,7 @@ import { BamUser } from '../../../models/bamuser.model';
 import { Batch } from '../../../models/batch.model';
 import { Observable } from 'rxjs/Observable';
 
-fdescribe('ViewAssociatesComponent', () => {
+describe('ViewAssociatesComponent', () => {
   let component: ViewAssociatesComponent = null;
   let fixture: ComponentFixture<ViewAssociatesComponent>;
 

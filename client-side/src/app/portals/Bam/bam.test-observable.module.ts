@@ -64,7 +64,7 @@ import { AssignforcesyncService } from './services/assignforcesync.service';
 import { BoomComponent } from './components/boom/boom.component';
 // import { OrderByPipe } from '../Caliber/pipes/order-by.pipe';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2OrderModule, Ng2OrderPipe } from 'ng2-order-pipe';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertService } from './services/alert.service';
 import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
@@ -150,6 +150,7 @@ export const Dependencies = {
     AssignforcesyncService,
     AlertService,
     UrlService,
+    Ng2OrderPipe
   ],
   exports: [
     SearchPipe,
