@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../caliber.test.module';
 import { QcDoughnutComponent } from './qc-doughnut.component';
 
-xdescribe('QcDoughnutComponent', () => {
+describe('QcDoughnutComponent', () => {
   let component: QcDoughnutComponent;
   let fixture: ComponentFixture<QcDoughnutComponent>;
 
@@ -18,7 +18,18 @@ xdescribe('QcDoughnutComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  fit('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  fit('ngOnInit() (cannot verify data currently), but the variables should be true', () => {
+    component.ngOnInit();
+    expect(component['dataSubscription']).toBeTruthy();
+    expect(component['batchSubscription']).toBeTruthy();
+  });
+
+  // Having trouble with the download pdf
+  // fit('downloadPDF()', () => {
+  //   component.downloadPDF();
+  // });
 });
