@@ -3,7 +3,7 @@ import { Dependencies } from '../../caliber.test.module';
 import { PanelComponent } from './panel.component';
 
 
-xdescribe('PanelComponent', () => {
+describe('PanelComponent', () => {
   let component: PanelComponent;
   let fixture: ComponentFixture<PanelComponent>;
 
