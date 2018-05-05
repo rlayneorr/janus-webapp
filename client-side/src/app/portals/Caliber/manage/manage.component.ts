@@ -239,7 +239,7 @@ export class ManageComponent implements OnInit {
    */
   private setBatchTrainees(trainees: HydraTrainee[]): void {
     this.trainees = trainees;
-    // this.currentBatch.traineeIds = trainees;
+    //this.currentBatch.traineeIds = trainees;
   }
 
   /**
