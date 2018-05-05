@@ -7,7 +7,7 @@ import { GranularityService } from '../services/granularity.service';
 import { CacheData } from '../../../../entities/CacheData.entity';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-describe('AssessmentBreakdownComponent', () => {
+fdescribe('AssessmentBreakdownComponent', () => {
   let component: AssessmentBreakdownComponent;
   let fixture: ComponentFixture<AssessmentBreakdownComponent>;
 
@@ -21,12 +21,12 @@ describe('AssessmentBreakdownComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  fit('should create', () => {
     expect(component).toBeTruthy();
   });
 
   // Data Coverage is not touching the for loop within this method because of no data verfication
-  it('setupBatch()',
+  fit('setupBatch()',
     inject([ReportingService, PDFService, GranularityService],
       (service: ReportingService) => {
         const data = new CacheData();
@@ -38,7 +38,7 @@ describe('AssessmentBreakdownComponent', () => {
         // expect(component['data']).toBeNaN();
   }));
 
-  it('setupTrainee()',
+  fit('setupTrainee()',
     inject([ReportingService, PDFService, GranularityService], (service: ReportingService) => {
       const data = new CacheData();
       data.params = 4;
