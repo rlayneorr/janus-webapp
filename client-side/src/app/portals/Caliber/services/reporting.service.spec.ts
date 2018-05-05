@@ -75,7 +75,7 @@ fdescribe('ReportingServiceService', () => {
 
 });
 
-fdescribe('ReportingService test Http calls', () => {
+xdescribe('ReportingService test Http calls', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
