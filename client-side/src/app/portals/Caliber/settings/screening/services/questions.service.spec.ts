@@ -8,11 +8,11 @@ const QUESTIONS: Question[] = [
       questionId: 0,
       bucketId: 0,
       questionText: 'whuts yr favorite color',
-      sampleAnswer1: 'bloo',
-      sampleAnswer2: 'yella',
-      sampleAnswer3: 'red',
-      sampleAnswer4: 'purpa',
-      sampleAnswer5: 'gree'
+      sampleAnswer1: 'answer1',
+      sampleAnswer2: 'answer2',
+      sampleAnswer3: 'answer3',
+      sampleAnswer4: 'answer4',
+      sampleAnswer5: 'answer5'
   },
   {
       questionId: 1,
@@ -36,7 +36,7 @@ const QUESTIONS: Question[] = [
 },
 ];
 
-fdescribe('QuestionsService', () => {
+describe('QuestionsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [QuestionsService]
