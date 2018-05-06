@@ -2,8 +2,9 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { ApiService } from '../util/api.service';
 import { PanelService } from './panel.service';
+import { Injectable } from '@angular/core';
 
-xdescribe('PanelService', () => {
+describe('PanelService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientModule ],
@@ -15,7 +16,25 @@ xdescribe('PanelService', () => {
     });
   });
 
+  it('API should be accessible', inject([PanelService], (service: PanelService) => {
+  }));
+
   it('should be created', inject([PanelService], (service: PanelService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('create should save an array of panels to the database', inject([PanelService], (service: PanelService) => {
+    }));
+
+  it('fetchAll should retrieve all panels stored on the database', inject([PanelService], (service: PanelService) => {
+    }));
+
+  it('fetchAllByTrainee should retrieve panels by trainee name', inject([PanelService], (service: PanelService) => {
+    }));
+
+  it('update should alter the panels we pushed up during create', inject([PanelService], (service: PanelService) => {
+    }));
+
+  it('delete remove the panels we pushed up during create', inject([PanelService], (service: PanelService) => {
+    }));
 });

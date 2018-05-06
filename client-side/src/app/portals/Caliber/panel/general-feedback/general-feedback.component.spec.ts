@@ -2,22 +2,26 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../caliber.test.module';
 import { GeneralFeedbackComponent } from './general-feedback.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-xdescribe('GeneralFeedbackComponent', () => {
+describe('GeneralFeedbackComponent', () => {
   let component: GeneralFeedbackComponent;
   let fixture: ComponentFixture<GeneralFeedbackComponent>;
   const spy = null;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule(Dependencies).compileComponents();
+    TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+      ],
+      declarations: [
+        GeneralFeedbackComponent,
+      ],
+    }).compileComponents();
   }), 1440000);
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FormsModule],
-      declarations: [GeneralFeedbackComponent]
-    });
-
     fixture = TestBed.createComponent(GeneralFeedbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

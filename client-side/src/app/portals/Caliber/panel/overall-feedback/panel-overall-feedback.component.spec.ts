@@ -10,15 +10,17 @@ describe('PanelOverallFeedbackComponent', () => {
   const spy = null;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule(Dependencies).compileComponents();
+    TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule, FormsModule
+      ],
+      declarations: [
+        PanelOverallFeedbackComponent
+      ],
+    }).compileComponents();
   }), 1440000);
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FormsModule],
-      declarations: [PanelOverallFeedbackComponent]
-    });
-
     fixture = TestBed.createComponent(PanelOverallFeedbackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
