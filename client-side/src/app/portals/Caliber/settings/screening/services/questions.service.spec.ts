@@ -3,6 +3,47 @@ import { TestBed, inject } from '@angular/core/testing';
 import { QuestionsService } from './questions.service';
 import { Question } from '../entities/Question';
 
+describe('QuestionsService', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [QuestionsService]
+    });
+  });
+
+  it('should be created', inject([QuestionsService], (service: QuestionsService) => {
+    expect(service).toBeTruthy();
+  }));
+
+  it('createNewQuestion should put a new question on the database', inject([QuestionsService], (service: QuestionsService) => {
+    service.createNewQuestion(1, QUESTIONS[0], [1, 1, 1]);
+    service.createNewQuestion(1, QUESTIONS[1], [1, 1, 1]);
+    service.createNewQuestion(1, QUESTIONS[2], [1, 1, 1]);
+
+    const parametersAsArray: any[] = [
+      1,
+      QUESTIONS[0],
+      [1, 1, 1]
+    ];
+
+    const parametersAsJSON: string = JSON.stringify(parametersAsArray);
+    console.log(parametersAsJSON);
+    expect(service.getBucketQuestions(0));
+  }));
+
+  it('updateQuestion should update our question on the database', inject([QuestionsService], (service: QuestionsService) => {
+
+  }));
+
+  it('activateQuestion should activate our question', inject([QuestionsService], (service: QuestionsService) => {
+  }));
+
+  it('getBucketQuestions should return our questions', inject([QuestionsService], (service: QuestionsService) => {
+  }));
+
+  it('deactivateQuestion should remove our question', inject([QuestionsService], (service: QuestionsService) => {
+  }));
+});
+
 const QUESTIONS: Question[] = [
   {
       questionId: 0,
@@ -35,35 +76,3 @@ const QUESTIONS: Question[] = [
       sampleAnswer5: 'poiu'
 },
 ];
-
-describe('QuestionsService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [QuestionsService]
-    });
-  });
-
-  it('should be created', inject([QuestionsService], (service: QuestionsService) => {
-    expect(service).toBeTruthy();
-  }));
-
-  it('createNewQuestion should put a new question on the database', inject([QuestionsService], (service: QuestionsService) => {
-    service.createNewQuestion(-1, QUESTIONS[0], [1, 1, 1]);
-    service.createNewQuestion(-1, QUESTIONS[1], [1, 1, 1]);
-    service.createNewQuestion(-1, QUESTIONS[2], [1, 1, 1]);
-    expect(service.getBucketQuestions(0));
-  }));
-
-  it('updateQuestion should update our question on the database', inject([QuestionsService], (service: QuestionsService) => {
-
-  }));
-
-  it('activateQuestion should activate our question', inject([QuestionsService], (service: QuestionsService) => {
-  }));
-
-  it('getBucketQuestions should return our questions', inject([QuestionsService], (service: QuestionsService) => {
-  }));
-
-  it('deactivateQuestion should remove our question', inject([QuestionsService], (service: QuestionsService) => {
-  }));
-});
