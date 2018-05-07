@@ -1,7 +1,7 @@
-import { PanelPage } from './panel-e2e.po';
+const PanelPage = require('./panel.po');
 
 describe('test-app App', () => {
-  let page: PanelPage;
+  let page = new PanelPage();
 
   beforeEach(() => {
     page = new PanelPage();
