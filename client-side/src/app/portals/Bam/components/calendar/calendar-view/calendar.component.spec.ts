@@ -260,7 +260,7 @@ fdescribe('CalendarComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it('should call updateSchedule', () => {
+  it('should update the startTime of a specific subtopic', () => {
     component.subtopics = [
       new Subtopic(777, 'TestSubtopic', new Date(2018, 1), new Date(2019, 1), 'Test Status', new Topic()), 
       new Subtopic(778, 'TestSubtopic', new Date(2020, 2), new Date(2019, 1), 'Test Status', new Topic())
@@ -291,5 +291,30 @@ fdescribe('CalendarComponent', () => {
   //   component.handleDrop('test');
   //   expect(spy).toHaveBeenCalled();
   // });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should set tooltip display to none', () => {
+    component.tooltip.nativeElement.style.display = 'Test';
+
+    component.handleEventMouseout('');
+
+    expect(component.tooltip.nativeElement.style.display).toEqual('none');
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should set the gotoDateValue', () => {
+    const expectedDate: Date = new Date(component.fc.getDate().stripTime().format() + 'T09:00:00-05:00');
+    component.gotoDateValue = new Date(2017, 1);
+
+    component.handleViewRender('');
+
+    expect(component.gotoDateValue).toEqual(expectedDate);
+  });
 
 });
