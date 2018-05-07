@@ -2,7 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarComponent } from './calendar.component';
-import { NO_ERRORS_SCHEMA, Injectable } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Injectable, DebugElement } from '@angular/core';
 import { Dependencies } from '../../../bam.test-observable.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
@@ -37,6 +37,7 @@ fdescribe('CalendarComponent', () => {
 
   // Spies that need to be referenced later
   let sessionStorageSetItemSpy: jasmine.Spy;
+  let calendarServiceUpdateTopicSpy: jasmine.Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
@@ -52,6 +53,8 @@ fdescribe('CalendarComponent', () => {
 
     // Create spies that need to be referenced later
     sessionStorageSetItemSpy = spyOn(sessionStorage, 'setItem');
+    calendarServiceUpdateTopicSpy = spyOn(calendarService, 'updateTopicStatus').and.returnValue(
+      Observable.of('Test string: updateTopicStatus'));
 
     // Create other spies
     spyOn(calendarService, 'getScheduleByScheduleId').and.returnValue(
@@ -72,7 +75,6 @@ fdescribe('CalendarComponent', () => {
       func(1);
       return new Subscription(() => {});
     });
-    spyOn(calendarService, 'updateTopicStatus').and.returnValue(Observable.of('Test string: updateTopicStatus'));
     spyOn(calendarService, 'changeTopicDate').and.returnValue(Observable.of(new Schedule(0, [], new Curriculum())));
 
     spyOn(statusService, 'updateNextStatus').and.returnValue('Test string: updateNextStatus');
@@ -171,23 +173,63 @@ fdescribe('CalendarComponent', () => {
     }
   });
 
-  // it('should call jumpToDate', () => {
-  //   spyOn(component, 'jumpToDate').and.callThrough();
-  //   component.jumpToDate(new Date());
-  //   expect(spy).toHaveBeenCalled();
-  // });
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should call fc.gotoDate and fc.changeView', () => {
+    spyOn(component.fc, 'gotoDate');
+    spyOn(component.fc, 'changeView');
 
-  // it('should call handleEventClick', () => {
-  //   spyOn(component, 'handleEventClick').and.callThrough();
-  //   component.handleEventClick('test');
-  //   expect(spy).toHaveBeenCalled();
-  // });
+    component.jumpToDate('Test');
 
-  // it('should call handleEventDragStart', () => {
-  //   spyOn(component, 'handleEventDragStart').and.callThrough();
-  //   component.handleEventDragStart('test');
-  //   expect(spy).toHaveBeenCalled();
-  // });
+    expect(component.fc.gotoDate).toHaveBeenCalled();
+    expect(component.fc.changeView).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should call handleEventClick', () => {
+    const expectedEvent = new CalendarEvent();
+    expectedEvent.title = 'Test Event: handleEventDragStart';
+    expectedEvent.subtopicName = 'STopic1';
+    expectedEvent.subtopicId = 0;
+    expectedEvent.status = 'Test String: updateNextStatus';
+    expectedEvent.start = new Date();
+    expectedEvent.color = 'Test String: getStatusColor';
+    const paramObject = {calEvent: expectedEvent};
+
+    spyOn(component, 'mapSubtopicFromEvent').and.returnValue(expectedEvent);
+    spyOn(component, 'updateEvent');
+    spyOn(component.fc, 'updateEvent');
+
+    component.handleEventClick(paramObject);
+
+    expect(calendarServiceUpdateTopicSpy).toHaveBeenCalledWith(expectedEvent, 0);
+    expect(component.updateEvent).toHaveBeenCalledWith(expectedEvent);
+    expect(component.fc.updateEvent).toHaveBeenCalledWith(expectedEvent);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should call handleEventDragStart', () => {
+    const expectedEvent = new CalendarEvent();
+    expectedEvent.title = 'Test Event: handleEventDragStart';
+    expectedEvent.subtopicName = 'STopic1';
+    expectedEvent.subtopicId = 0;
+    expectedEvent.status = 'Test';
+    expectedEvent.start = new Date();
+    expectedEvent.color = 'Test Color Please Ignore';
+    const paramObject = {event: expectedEvent};
+
+    component.handleEventDragStart(paramObject);
+
+    expect(component.draggedCalendarEvent).toEqual(expectedEvent);
+  });
 
   // it('should call handleEventDrop', () => {
   //   spyOn(component, 'handleEventDrop').and.callThrough();
