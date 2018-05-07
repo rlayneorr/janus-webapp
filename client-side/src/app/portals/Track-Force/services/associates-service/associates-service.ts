@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Associate } from '../../models/associate.model';
 import { Response } from '@angular/http/';
 import { environment } from '../../../../../environments/environment';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import 'rxjs/add/operator/map';
 import { forEach } from '@angular/router/src/utils/collection';
+import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 
 /**
  * Service for retrieving and updating data relating to associates.
@@ -21,19 +20,19 @@ export class AssociateService {
     status: string;
     client: string;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private urlService: UrlService) { }
 
     /** Get specific associate by id
      * @param id - the id of the associate to retrieve
      */
     getAssociate(id: number): Observable<any> {
-        return this.http.get(environment.context + '/trainees/' + id);
+        return this.http.get(this.urlService.trainees.findById(id));
     }
     /**
      * Get all of the associates
      */
     getAllAssociates(): Observable<any> {
-        return this.http.get(environment.context + '/trainees');
+        return this.http.get(this.urlService.trainees.findAll());
     }
 
     /**
@@ -89,7 +88,7 @@ export class AssociateService {
      * @param ids of associates to be updated
      */
     updateAssociate(trainee: HydraTrainee): Observable<any> {
-        return this.http.put(environment.context + '/trainees', trainee);
+        return this.http.put(this.urlService.trainees.update(), trainee);
     }
 
     getInterviewsForAssociate(id: number): Observable<any> {

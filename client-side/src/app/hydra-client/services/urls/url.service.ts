@@ -33,10 +33,13 @@ export class UrlService {
    * Endpoints for trainees
    */
   trainees = {
+    findAll: () => `${this.context}/trainees`,
+    findById: (id: number) => `${this.context}/trainees/${id}`,
+    findByEmail: (email: string) => `${this.context}/trainees/email?=${email}`,
     findAllByBatchAndStatus: (id: number, status: string) => `${this.context}/trainee/s/batch/${id}/status/${status}`,
     save: () => `${this.context}/trainees`,
     update: () => `${this.context}/trainees`,
-    delete: (traineeId: number) => `${this.context}/trainees/${traineeId}`,
+    delete: (traineeId: number) => `${this.context}/trainees/${traineeId}`
   };
 
   /**

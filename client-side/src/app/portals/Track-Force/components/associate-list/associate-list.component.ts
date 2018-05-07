@@ -60,15 +60,17 @@ export class AssociateListComponent implements OnInit {
   /**
    * Inject our services
    * @param associateService
-   * @param rs
+   * @param clientService
+   * @param batchService
+   * @param marketService
+   * @param activated
    */
   constructor(
-    private associateService: AssociateService, // TfAssociate,
+    private associateService: AssociateService,
     private clientService: ClientListService,
     private curriculumnService: CurriculumService,
     private batchService: BatchService,
     private marketService: MarketStatusService,
-    private rs: RequestService,
     private activated: ActivatedRoute
   ) {
     this.curriculums = new Set<string>();
