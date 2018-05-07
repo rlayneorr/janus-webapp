@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
  * Author: Jordan Young
  */
 
-describe('AlertsService', () => {
+fdescribe('AlertsService', () => {
 
   // set up
   beforeEach(() => {

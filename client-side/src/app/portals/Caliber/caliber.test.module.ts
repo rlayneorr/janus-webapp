@@ -1,4 +1,3 @@
-
 // modules
 import { RouterModule, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -73,6 +72,9 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './settings/screening/services/in-memory-data.service';
 import { TrainerService } from '../../hydra-client/services/trainer/trainer.service';
 import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
+import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
+import { UrlService } from '../../hydra-client/services/urls/url.service';
+import { HydraBatchUtilService } from '../../services/hydra-batch-util.service';
 
 // N.T.
 import { ApiService } from './util/api.service';
@@ -107,6 +109,7 @@ import { OverallFeedbackComponent } from './reports/overall-feedback/overall-fee
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
 import { PanelTableComponent } from './panel/panel-table/panel-table.component';
 import { PanelSearchbarComponent } from './panel/panel-searchbar/panel-searchbar.component';
+import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 import { CreatePanelComponent } from './panel/create-panel/create-panel.component';
 import { VpBarGraphComponent } from './home/vp-bar-graph/vp-bar-graph.component';
 import { VpLineGraphComponent } from './home/vp-line-graph/vp-line-graph.component';
@@ -143,14 +146,14 @@ import { PanelOverallFeedbackComponent } from './panel/overall-feedback/panel-ov
 import { FeedbackIconComponent } from './quality/feedback-icon/feedback-icon.component';
 import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedback/quality-overall-feedback.component';
 import { TraineeLineChartComponent } from './reports/trainee-line-chart/trainee-line-chart.component';
+import { ScreeningComponent } from './screening/components/screening/screening.component';
+import { CandidatesScreeningListComponent } from './screening/components/candidates-screening-list/candidates-screening-list.component';
+import { QuestionsTableComponent } from './screening/components/questions-table/questions-table.component';
 import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
 import { DeleteBatchModalComponent } from './manage/delete-batch-modal/delete-batch-modal.component';
 import { CannotDeleteModalComponent } from './manage/cannot-delete-modal/cannot-delete-modal.component';
 import { DeleteTraineeModalComponent } from './manage/delete-trainee-modal/delete-trainee-modal.component';
 import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
-import { ScreeningComponent } from './screening/components/screening/screening.component';
-import { CandidatesScreeningListComponent } from './screening/components/candidates-screening-list/candidates-screening-list.component';
-import { QuestionsTableComponent } from './screening/components/questions-table/questions-table.component';
 import { FinalReportComponent } from './screening/components/final-report/final-report.component';
 import { IntroductionComponent } from './screening/components/introduction/introduction.component';
 import { AnswerComponent } from './screening/components/answer/answer.component';
@@ -167,13 +170,7 @@ import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
-import { InterviewDetailsComponent } from './panel/interview-details/interview-details.component';
 
-import { settings } from 'cluster';
-// import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
-import { UrlService } from '../../hydra-client/services/urls/url.service';
-import { ErrorAlertComponent } from '../../hydra-client/ui/error-alert/error-alert.component';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 export const Dependencies = {
   imports: [
@@ -187,7 +184,6 @@ export const Dependencies = {
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
     NgxPaginationModule,
-    HttpClientTestingModule,
   ],
   declarations: [
     // pipes
@@ -211,7 +207,6 @@ export const Dependencies = {
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
-
     SearchPipe,
     BucketFilterPipe,
     TagFilterPipe,
@@ -227,7 +222,6 @@ export const Dependencies = {
     VpLineGraphComponent,
     VpPanelGraphComponent,
     SettingsComponent,
-    SkillsComponent,
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
@@ -270,7 +264,6 @@ export const Dependencies = {
 
         // components
         // PaginationControlsComponent,
-        ErrorAlertComponent,
         CaliberComponent,
         HomeComponent,
         AssessComponent,
@@ -342,8 +335,7 @@ export const Dependencies = {
         BucketComponent,
         SkillTypeBucketsComponent,
         QuestionComponent,
-        ScreeningComponent,
-        VpBarGraphComponent,
+        ScreeningComponent
 
   ],
   providers: [
@@ -378,10 +370,10 @@ export const Dependencies = {
     PanelSearchbarComponent,
     NgbActiveModal,
     {provide: Router, useValue: {}},
-    VpHomeBarGraphService,
-
-   // HydraBatchService,
-    UrlService,
+    GranularityService,
+    HydraBatchService,
+    HydraBatchUtilService,
+    UrlService
   ],
   bootstrap: [
     // TrainersComponent
@@ -389,6 +381,9 @@ export const Dependencies = {
   ],
   exports: [
     TraineeTechSkillsComponent,
+    TraineeLineChartComponent,
+    ViolationFlagComponent,
+    PaginatePipe,
   ],
   entryComponents: [
     BarGraphModalComponent,

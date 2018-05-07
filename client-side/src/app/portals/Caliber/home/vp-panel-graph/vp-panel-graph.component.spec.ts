@@ -55,8 +55,4 @@ xdescribe('VpPanelGraphComponent', () => {
 
       expect(component).toBeTruthy();
   });
-
-  it('ngOnInit completed successfully', () => {
-    expect(component.hasPanelGraphData).toEqual(true);
-  });
 });
