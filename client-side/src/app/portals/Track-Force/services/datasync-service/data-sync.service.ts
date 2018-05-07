@@ -9,7 +9,7 @@ import { BatchService } from '../batch-service/batch.service';
 import { AssociateService } from '../associates-service/associates-service';
 import { ClientListService } from '../client-list-service/client-list.service';
 import { SkillsetService } from '../skill-set-service/skill-set.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/Rx';
 
