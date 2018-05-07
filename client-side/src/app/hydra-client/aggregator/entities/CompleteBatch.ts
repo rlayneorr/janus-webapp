@@ -12,8 +12,8 @@ export class CompleteBatch {
   cotrainer: Trainer;
   skillType: GambitSkillType;
   trainingType: string;
-  addressId: number;      //TODO Refactor to Address type
-  address: HydraAddress;  //TODO Refactor HydraAddress to GambitAddress when the latter microservice is developed
+  addressId: number;      // TODO Refactor to Address type
+  address: HydraAddress;  // TODO Refactor HydraAddress to GambitAddress when the latter microservice is developed
   location: string;
   goodGradeThreshold: number;
   borderlineGradeThreshold: number;
@@ -24,7 +24,7 @@ export class CompleteBatch {
   trainees: HydraTrainee[];
 
 
-  //TODO currently this constructor assumes that Trainer and (co)Trainer objects will be
+  // TODO currently this constructor assumes that Trainer and (co)Trainer objects will be
   //      passed into the constructor if they exist. Trainer must exist (or be initialized by
   //      constructor) in order for de-aggregation from CompleteBatch to GambitBatch, but
   //      (co)Trainer can be null. CompleteBatchService provides the aggregation/de-aggregation

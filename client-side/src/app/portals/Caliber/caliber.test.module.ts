@@ -1,4 +1,3 @@
-
 // modules
 import { RouterModule, Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -73,6 +72,9 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './settings/screening/services/in-memory-data.service';
 import { TrainerService } from '../../hydra-client/services/trainer/trainer.service';
 import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
+import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
+import { UrlService } from '../../hydra-client/services/urls/url.service';
+import { HydraBatchUtilService } from '../../services/hydra-batch-util.service';
 
 // N.T.
 import { ApiService } from './util/api.service';
@@ -169,9 +171,12 @@ import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
 
+
 import { settings } from 'cluster';
 import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
 import { UrlService } from '../../hydra-client/services/urls/url.service';
+
+
 
 
 export const Dependencies = {
@@ -210,7 +215,6 @@ export const Dependencies = {
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
-    // PaginatePipe,
     SearchPipe,
     BucketFilterPipe,
     TagFilterPipe,
@@ -373,10 +377,11 @@ export const Dependencies = {
     PDFService,
     PanelSearchbarComponent,
     NgbActiveModal,
+    {provide: Router, useValue: {}},
+    GranularityService,
     HydraBatchService,
-    UrlService,
-    {provide: Router, useValue: {}}
-    GranularityService
+    HydraBatchUtilService,
+    UrlService
   ],
   bootstrap: [
     // TrainersComponent
