@@ -10,11 +10,7 @@ import { Dependencies } from '../caliber.test.module';
  * Author: Jordan Young
  */
 
-<<<<<<< HEAD
-xdescribe('AlertsComponent', () => {
-=======
 fdescribe('AlertsComponent', () => {
->>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
   let component: AlertsComponent;
   let fixture: ComponentFixture<AlertsComponent>;
 
