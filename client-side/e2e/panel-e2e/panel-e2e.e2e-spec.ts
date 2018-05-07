@@ -7,8 +7,8 @@ describe('test-app App', () => {
     page = new PanelPage();
   });
 
-  it('should display welcome message', () => {
+  it('should have a create panel button', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getCreatePanelButton()).toEqual('Create Panel');
   });
 });
