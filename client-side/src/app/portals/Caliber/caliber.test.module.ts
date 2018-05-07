@@ -172,12 +172,6 @@ import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
 
 
-import { settings } from 'cluster';
-import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
-
-
-
-
 export const Dependencies = {
   imports: [
     CommonModule,

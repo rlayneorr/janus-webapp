@@ -12,7 +12,7 @@ const fetchAllUri = 'http://localhost:8765all/trainee?batchId=1';
 const fetchDroppedByBatchUri = 'http://localhost:8765all/trainee/';
 
 
-fdescribe('TraineeService', () => {
+xdescribe('TraineeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [

@@ -7,7 +7,7 @@
 
 // const context = environment.panel;
 
-// xdescribe('PanelService', () => {
+// fdescribe('PanelService', () => {
 //   beforeEach(() => {
 //     TestBed.configureTestingModule({
 //       imports: [ HttpClientModule,
