@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CandidatesScreeningListComponent } from './candidates-screening-list.component';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 import { SimpleTrainee } from '../../entities/simpleTrainee';
+import { Dependencies } from '../../../caliber.test.module';
 
 // Author: David Gustafson
 
@@ -11,9 +12,7 @@ fdescribe('CandidatesScreeningListComponent', () => {
   let fixture: ComponentFixture<CandidatesScreeningListComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CandidatesScreeningListComponent ]
-    })
+    TestBed.configureTestingModule(Dependencies)
     .compileComponents();
   }));
 
