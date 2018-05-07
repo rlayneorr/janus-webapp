@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../caliber.test.module';
+<<<<<<< HEAD
 import { ReactiveFormsModule, FormsModule, NgForm } from '@angular/forms';
 import { InterviewDetailsComponent } from './interview-details.component';
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
@@ -17,10 +18,16 @@ xdescribe('InterviewDetailsComponent', () => {
   // let panelService: PanelService;
   // let searchBar: PanelSearchbarComponent;
 
+=======
+import { InterviewDetailsComponent } from './interview-details.component';
+
+xdescribe('InterviewDetailsComponent', () => {
+>>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
   let component: InterviewDetailsComponent;
   let fixture: ComponentFixture<InterviewDetailsComponent>;
 
   beforeEach(async(() => {
+<<<<<<< HEAD
     TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
@@ -41,6 +48,10 @@ xdescribe('InterviewDetailsComponent', () => {
       ]
     }).compileComponents();
   }));
+=======
+    TestBed.configureTestingModule(Dependencies).compileComponents();
+  }), 1440000);
+>>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InterviewDetailsComponent);
@@ -52,6 +63,7 @@ xdescribe('InterviewDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
+<<<<<<< HEAD
   // it('Batch Service is valid', () => {
   //   expect(batchService).toBeTruthy();
   // });
@@ -148,4 +160,7 @@ xdescribe('InterviewDetailsComponent', () => {
   //   expect(recordingConsent.enabled).toBeFalsy();
   // });
 
+=======
+
+>>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
 });
