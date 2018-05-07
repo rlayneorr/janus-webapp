@@ -52,10 +52,12 @@ fdescribe('EditlocationComponent', () => {
   it('should call update', () => {
     const myLocation = new Location;
 
+    component.currEditLocation = new Location;
+
     myLocation.company = '';
     myLocation.city = '';
     myLocation.street = '';
-    myLocation.state = '';
+    component.newState = '';
     myLocation.zipcode = '123';
     component.updateLocation(myLocation);
 

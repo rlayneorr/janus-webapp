@@ -170,6 +170,7 @@ import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillTy
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
+import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 
 
 export const Dependencies = {
@@ -359,6 +360,7 @@ export const Dependencies = {
     QuestionsToBucketsUtil,
     ScreeningService,
     SkillTypeBucketService,
+    ScheduleScreeningService,
     // ActivatedRoute,
     GradeService,
     HttpClient,
