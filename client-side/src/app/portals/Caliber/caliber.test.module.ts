@@ -172,13 +172,6 @@ import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
 
 
-import { settings } from 'cluster';
-import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
-import { UrlService } from '../../hydra-client/services/urls/url.service';
-
-
-
-
 export const Dependencies = {
   imports: [
     CommonModule,
@@ -199,7 +192,6 @@ export const Dependencies = {
     GradeByTraineeByAssessmentPipe,
     DisplayBatchByYear,
     BatchByTrainerPipe,
-    CategorySkillPipe,
     NoteByTraineeByWeekPipe,
     TierPipe,
     TrainerPipePipe,
