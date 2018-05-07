@@ -5,8 +5,12 @@ import { Batch } from '../../models/batch.model';
 import { Curriculum } from '../../models/curriculum.model';
 import { MarketingStatus } from '../../models/marketing-status.model';
 import { RequestService } from '../request-service/request.service';
+import { BatchService } from '../batch-service/batch.service';
+import { AssociateService } from '../associates-service/associates-service';
+import { ClientListService } from '../client-list-service/client-list.service';
+import { SkillsetService } from '../skill-set-service/skill-set.service';
 import { Observable } from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/Rx';
 
 /**
@@ -54,8 +58,13 @@ export class DataSyncService {
   private marketingStorage: BehaviorSubject<MarketingStatus[]>;
 
   // inject RequestService for handling requests to the server
-  constructor(private rs: RequestService) {
-
+  constructor(
+    private rs: RequestService,
+    private bs: BatchService,
+    private cs: ClientListService,
+    private as: AssociateService,
+    private ss: SkillsetService
+  ) {
     // fetch data on initialization
     this.fetchData();
   }
@@ -71,12 +80,6 @@ export class DataSyncService {
    * and begins the data monitoring observables
    */
   private fetchData() {
-    // Initialize behaviors to empty arrays
-    // this.associateStorage = new BehaviorSubject<Associate[]>([]);
-    // this.clientStorage = new BehaviorSubject<Client[]>([]);
-    // this.batchStorageById = new BehaviorSubject<Batch[]>([]);
-    // this.batchStorageByDate = new BehaviorSubject<Batch[]>([]);
-    // this.curriculumStorage = new BehaviorSubject<Curriculum[]>([]);
 
     // get data on load
     this.fetchAssociateStorage();
@@ -101,7 +104,7 @@ export class DataSyncService {
   }
 
   public fetchAssociateStorage() {
-    this.rs.getAssociates().subscribe(data => {
+    this.as.getAllAssociates().subscribe(data => {
       // this.setAssociateStorage(data);
     });
   }
@@ -112,7 +115,7 @@ export class DataSyncService {
   }
 
   public fetchClientStorage() {
-    this.rs.getClients().subscribe(data => {
+    this.cs.getAllClients().subscribe(data => {
       // this.setClientStorage(data);
     });
   }
@@ -123,7 +126,7 @@ export class DataSyncService {
   }
 
   public fetchBatchStorageSortedById() {
-    this.rs.getBatchesSortedById().subscribe(data => {
+    this.bs.getAllBatchesMapped().subscribe(data => {
       // this.setBatchStorageSortedById(data);
     });
   }
@@ -134,7 +137,7 @@ export class DataSyncService {
   }
 
   public fetchBatchStorageSortedByDate() {
-    this.rs.getBatchesSortedByDate().subscribe(data => {
+    this.bs.getAllBatchesOrdered().subscribe(data => {
       // this.setBatchStorageSortedByDate(data);
     });
   }
@@ -145,7 +148,7 @@ export class DataSyncService {
   }
 
   public fetchCurriculumStorage() {
-    this.rs.getSkills().subscribe(data => {
+    this.ss.getAllCurricula().subscribe(data => {
       // this.setCurriculumStorage(data);
     });
   }
@@ -153,12 +156,12 @@ export class DataSyncService {
   private setMarketingStorage(data: any) {
     this.marketingStorage = data;
     this.marketingStorage.subscribe(() => {
+
     });
   }
 
   public fetchMarketingStorage() {
     this.rs.getStatuses().subscribe(data => {
-      console.log('Fetched');
       // this.setMarketingStorage(data);
     });
   }

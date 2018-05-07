@@ -27,6 +27,11 @@ export class SkillsetComponent implements OnInit {
   private static SKILL_INFO: Map<string, any>;
 
   /**
+   * The sentry id for a status that doesn't exist
+   */
+  public static NULL = -1;
+
+  /**
    * The types of charts
    */
   public static readonly chartTypes = {
@@ -36,20 +41,15 @@ export class SkillsetComponent implements OnInit {
   };
 
   /**
-   * The sentry id for a status that doesn't exist
-   */
-  public static NULL = -1;
-
-  /**
    * The selected status
    */
   @Input() selectedStatus = '';
-
 
   /**
    * The id of skill, probably to hit the API with
    */
   private skillID: number;
+
   /**
    * The flag that tells Angular, and the developer, whether or not ng2_chart dependency is actually being used
    */
@@ -59,22 +59,27 @@ export class SkillsetComponent implements OnInit {
    * The type of chart
    */
   chartType = SkillsetComponent.chartTypes.BAR;
+
   /**
    * The dummy data to compare against for our tests
    */
   DUMMY_DATA = [{ data: [1, 1, 1, 1, 1], label: 'Mapped' }, { data: [1, 1, 1, 1, 1], label: 'Unmapped' }];
+
   /**
    * The skillset data
    */
   skillsetData = [];
+
   /**
    * The skillset labels
    */
   skillsetLabels = [];
+
   /**
    * The status of the component
    */
   status = 'Loading...';
+
   /**
    * The chart options, as a JavaScript-style object, and pre-initialized so as to DRY up our code...
    */
@@ -92,10 +97,18 @@ export class SkillsetComponent implements OnInit {
     ],
     scales: new ChartScale()
   };
+
   /**
    * The color scheme for the charts of this component
    */
   batchColors = ThemeConstants.BATCH_COLORS;
+
+  /**
+   * Exposing SKILL_INFO in a safe way
+   */
+  public static getSkillInfo() {
+    return SkillsetComponent.SKILL_INFO;
+  }
 
   constructor(private skillsetService: SkillsetService,
     private route: ActivatedRoute,
@@ -111,13 +124,6 @@ export class SkillsetComponent implements OnInit {
     }
   }
 
-  /**
-   * Exposing SKILL_INFO in a safe way
-   */
-  public static getSkillInfo() {
-    return SkillsetComponent.SKILL_INFO;
-  }
-
   ngOnInit(): void {
     // get skillID
     this.skillID = SkillsetComponent.SKILL_INFO.get(this.selectedStatus) || SkillsetComponent.NULL;
@@ -128,7 +134,6 @@ export class SkillsetComponent implements OnInit {
       if (this.skillID < 6) {
         this.skillID += 6;  // TODO: remove this
       }
-
       // we now set selectedStatus
       SkillsetComponent.SKILL_INFO.forEach((value, key) => {
         if (value === this.skillID) {
@@ -179,7 +184,6 @@ export class SkillsetComponent implements OnInit {
           position: 'right'
         };
         // ... and getting rid of the scales ...
-        // ... why are we using delete instead of assigning that field to null or undefined?????????
         if (this.chartOptions.scales) {
           delete this.chartOptions.scales;
         }
@@ -200,7 +204,9 @@ export class SkillsetComponent implements OnInit {
 
   public goToAssociateList(event) {
     if (event.active[0] !== undefined) {
-      this.router.navigate([`associate-listing/curriculum/${this.skillsetLabels[event.active[0]._index]}/unmapped/${this.selectedStatus}`]);
+      this.router.navigate([`/TrackForce/associate-listing/curriculum/
+          ${this.skillsetLabels[event.active[0]._index]}
+          /unmapped/${this.selectedStatus}`]);
     }
   }
 
