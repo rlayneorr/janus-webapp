@@ -20,7 +20,7 @@ import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { Address } from '../../entities/Address';
 import { ADDRESSES } from '../../mock-data/mock-addresses';
 
-describe('VpLineGraphComponent', () => {
+xdescribe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;
   let fixture: ComponentFixture<VpLineGraphComponent>;
 

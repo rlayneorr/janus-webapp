@@ -175,6 +175,7 @@ import { UrlService } from '../../hydra-client/services/urls/url.service';
 import { ErrorAlertComponent } from '../../hydra-client/ui/error-alert/error-alert.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
+import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
 
 export const Dependencies = {
   imports: [
@@ -399,7 +400,7 @@ export const Dependencies = {
     // GranularityService,
     VpHomeBarGraphService,
 
-   // HydraBatchService,
+    HydraBatchService,
     UrlService,
   ],
   bootstrap: [

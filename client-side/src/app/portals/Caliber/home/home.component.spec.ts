@@ -5,7 +5,7 @@ import { iterateListLike } from '@angular/core/src/change_detection/change_detec
 import { Dependencies } from '../caliber.test.module';
 import { HomeComponent } from './home.component';
 
-fdescribe('CaliberHomeComponent', () => {
+xdescribe('CaliberHomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
