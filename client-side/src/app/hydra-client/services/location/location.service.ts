@@ -116,7 +116,7 @@ export class LocationService {
   }
   // post Unavailability //
   newUnavailability(unavailability: any) {
-    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability), 
+    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability),
       {headers: this.header});
   }
 }

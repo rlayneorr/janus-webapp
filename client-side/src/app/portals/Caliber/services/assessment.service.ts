@@ -101,7 +101,7 @@ export class AssessmentService implements CRUD<Assessment> {
           switch (true) {
             case (value.rawScore !== assessment.rawScore):
             case (value.type !== assessment.type):
-            case (value.skill.skillId !== assessment.skill.skillId):
+            case (value.skill.skillId !== assessment.skill.skillID):
               return false;
             default:
               return true;

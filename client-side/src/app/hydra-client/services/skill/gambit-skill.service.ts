@@ -89,7 +89,7 @@ export class GambitSkillService {
    * @param skill: Skill
    */
   public update(skill: GambitSkill): Observable<GambitSkill> {
-    const url = environment.skill.updateById(skill.skillId);
+    const url = environment.skill.updateById(skill.skillID);
     return this.httpClient.put<GambitSkill>(url, JSON.stringify(skill));
   }
 
@@ -99,6 +99,6 @@ export class GambitSkillService {
    * @param skill: GambitSkill
    */
   public delete(skill: GambitSkill): Observable<boolean> {
-    return this.httpClient.delete<boolean>(context.delete(skill.skillId));
+    return this.httpClient.delete<boolean>(context.delete(skill.skillID));
   }
 }
