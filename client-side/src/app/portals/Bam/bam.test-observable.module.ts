@@ -9,6 +9,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
@@ -70,7 +71,6 @@ import { AlertService } from './services/alert.service';
 import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
 import { UrlService } from '../../hydra-client/services/urls/url.service';
 
-
 export const Dependencies = {
   imports: [
     CommonModule,
@@ -86,7 +86,7 @@ export const Dependencies = {
     HttpClientModule,
     ChartsModule,
     Ng2OrderModule,
-
+    BrowserAnimationsModule,
   ],
   declarations: [
     BamComponent,
