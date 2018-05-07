@@ -3,10 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../../../app.test.module';
 import { VpBarGraphComponent } from './vp-bar-graph.component';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
 xdescribe('VpBarGraphComponent', () => {
   let component: VpBarGraphComponent;
   let fixture: ComponentFixture<VpBarGraphComponent>;
