@@ -146,14 +146,14 @@ import { PanelOverallFeedbackComponent } from './panel/overall-feedback/panel-ov
 import { FeedbackIconComponent } from './quality/feedback-icon/feedback-icon.component';
 import { QualityOverallFeedbackComponent } from './quality/quality-overall-feedback/quality-overall-feedback.component';
 import { TraineeLineChartComponent } from './reports/trainee-line-chart/trainee-line-chart.component';
+import { ScreeningComponent } from './screening/components/screening/screening.component';
+import { CandidatesScreeningListComponent } from './screening/components/candidates-screening-list/candidates-screening-list.component';
+import { QuestionsTableComponent } from './screening/components/questions-table/questions-table.component';
 import { ArrToStringPipe } from './pipes/arr-to-string.pipe';
 import { DeleteBatchModalComponent } from './manage/delete-batch-modal/delete-batch-modal.component';
 import { CannotDeleteModalComponent } from './manage/cannot-delete-modal/cannot-delete-modal.component';
 import { DeleteTraineeModalComponent } from './manage/delete-trainee-modal/delete-trainee-modal.component';
 import { CannotDeleteTraineeModalComponent } from './manage/cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
-import { ScreeningComponent } from './screening/components/screening/screening.component';
-import { CandidatesScreeningListComponent } from './screening/components/candidates-screening-list/candidates-screening-list.component';
-import { QuestionsTableComponent } from './screening/components/questions-table/questions-table.component';
 import { FinalReportComponent } from './screening/components/final-report/final-report.component';
 import { IntroductionComponent } from './screening/components/introduction/introduction.component';
 import { AnswerComponent } from './screening/components/answer/answer.component';
@@ -174,6 +174,9 @@ import { CategoryService } from './services/category.service';
 
 import { settings } from 'cluster';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
+
+
+
 
 export const Dependencies = {
   imports: [
@@ -226,7 +229,6 @@ export const Dependencies = {
     VpLineGraphComponent,
     VpPanelGraphComponent,
     SettingsComponent,
-    // CategoriesComponent,
     TrainersComponent,
     LocationsComponent,
     DeactivateTrainerComponent,
@@ -400,6 +402,9 @@ export const Dependencies = {
   ],
   exports: [
     TraineeTechSkillsComponent,
+    TraineeLineChartComponent,
+    ViolationFlagComponent,
+    PaginatePipe,
   ],
   entryComponents: [
     BarGraphModalComponent,
