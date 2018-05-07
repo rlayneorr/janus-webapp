@@ -191,9 +191,9 @@ fdescribe('CalendarComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it('should call handleEventClick', () => {
+  it('should call updateEvent, fc.updateEvent, and calendarService.updateTopicStatus', () => {
     const expectedEvent = new CalendarEvent();
-    expectedEvent.title = 'Test Event: handleEventDragStart';
+    expectedEvent.title = 'Test Event: handleEventClickStart';
     expectedEvent.subtopicName = 'STopic1';
     expectedEvent.subtopicId = 0;
     expectedEvent.status = 'Test String: updateNextStatus';
@@ -216,7 +216,7 @@ fdescribe('CalendarComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
-  it('should call handleEventDragStart', () => {
+  it('should set draggedCalendarEvent equal to provided event ', () => {
     const expectedEvent = new CalendarEvent();
     expectedEvent.title = 'Test Event: handleEventDragStart';
     expectedEvent.subtopicName = 'STopic1';
@@ -231,11 +231,30 @@ fdescribe('CalendarComponent', () => {
     expect(component.draggedCalendarEvent).toEqual(expectedEvent);
   });
 
-  // it('should call handleEventDrop', () => {
-  //   spyOn(component, 'handleEventDrop').and.callThrough();
-  //   component.handleEventDrop('test');
-  //   expect(spy).toHaveBeenCalled();
-  // });
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should call updateSchedule, updateEvent, and fc.updateEvent', () => {
+    const expectedEvent = new CalendarEvent();
+    expectedEvent.title = 'Test Event: handleEventDropStart';
+    expectedEvent.subtopicName = 'STopic1';
+    expectedEvent.subtopicId = 0;
+    expectedEvent.status = 'Test string: updateMovedStatus';
+    expectedEvent.start = new Date();
+    expectedEvent.color = 'Test String: getStatusColor';
+    const paramObject = {event: expectedEvent};
+
+    spyOn(component, 'updateSchedule');
+    spyOn(component, 'updateEvent');
+    spyOn(component.fc, 'updateEvent');
+
+    component.handleEventDrop(paramObject);
+
+    expect(component.updateSchedule).toHaveBeenCalled();
+    expect(component.updateEvent).toHaveBeenCalledWith(expectedEvent);
+    expect(component.fc.updateEvent).toHaveBeenCalledWith(expectedEvent);
+  });
 
   // it('should call updateSchedule', () => {
   //   spyOn(component, 'updateSchedule').and.callThrough();
