@@ -6,11 +6,12 @@ import {Observable} from 'rxjs/Observable';
 import {Batch} from '../../models/batch.model';
 import {Associate} from '../../models/associate.model';
 import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 
 @Injectable()
 export class BatchService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private us: UrlService) {
   }
 
   /**
@@ -22,8 +23,8 @@ export class BatchService {
    * @returns {Observable<Batch[]>}
    */
   public getBatchesByDate(startDate: Date, endDate: Date): Observable<Batch[]> {
-    const url = environment.url + `TrackForce/track/batches/${startDate.getTime()}/${endDate.getTime()}`;
-    return this.http.get<Batch[]>(url, {withCredentials: true});
+    const url = environment.url + `batches`;
+    return this.http.get<Batch[]>(this.us.batches.fetchAll());
   }
 
   /**

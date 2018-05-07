@@ -90,7 +90,7 @@ export class AssociateListComponent implements OnInit {
    * Fetch the client names
    */
   getClientNames() {
-    this.rs.getClients().subscribe(data => {
+    this.rs.getAssociates().subscribe(data => {
       this.clients = data;
     });
   }
