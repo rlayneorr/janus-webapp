@@ -236,14 +236,14 @@ fdescribe('CalendarComponent', () => {
    * @batch 1803 usf
    */
   it('should call updateSchedule, updateEvent, and fc.updateEvent', () => {
-    const expectedEvent = new CalendarEvent();
-    expectedEvent.title = 'Test Event: handleEventDropStart';
-    expectedEvent.subtopicName = 'STopic1';
-    expectedEvent.subtopicId = 0;
-    expectedEvent.status = 'Test string: updateMovedStatus';
-    expectedEvent.start = new Date();
-    expectedEvent.color = 'Test String: getStatusColor';
-    const paramObject = {event: expectedEvent};
+    const paramEvent = new CalendarEvent();
+    paramEvent.title = 'Test Event: handleEventDropStart';
+    paramEvent.subtopicName = 'STopic1';
+    paramEvent.subtopicId = 0;
+    paramEvent.status = 'Test string: updateMovedStatus';
+    paramEvent.start = new Date();
+    paramEvent.color = 'Test String: getStatusColor';
+    const paramObject = {event: paramEvent};
 
     spyOn(component, 'updateSchedule');
     spyOn(component, 'updateEvent');
@@ -252,8 +252,8 @@ fdescribe('CalendarComponent', () => {
     component.handleEventDrop(paramObject);
 
     expect(component.updateSchedule).toHaveBeenCalled();
-    expect(component.updateEvent).toHaveBeenCalledWith(expectedEvent);
-    expect(component.fc.updateEvent).toHaveBeenCalledWith(expectedEvent);
+    expect(component.updateEvent).toHaveBeenCalledWith(paramEvent);
+    expect(component.fc.updateEvent).toHaveBeenCalledWith(paramEvent);
   });
 
   /**
@@ -262,28 +262,52 @@ fdescribe('CalendarComponent', () => {
    */
   it('should update the startTime of a specific subtopic', () => {
     component.subtopics = [
-      new Subtopic(777, 'TestSubtopic', new Date(2018, 1), new Date(2019, 1), 'Test Status', new Topic()), 
+      new Subtopic(777, 'TestSubtopic', new Date(2044, 1), new Date(2077, 1), 'Test Status', new Topic()),
       new Subtopic(778, 'TestSubtopic', new Date(2020, 2), new Date(2019, 1), 'Test Status', new Topic())
     ];
     component.schedule = new Schedule(
       0,
       [
-        new ScheduledSubtopic(0, 777, new ScheduledDate(0, 0, 1, 1, 1)),
-        new ScheduledSubtopic(1, 778, new ScheduledDate(0, 0, 1, 1, 1))
+        new ScheduledSubtopic(1, 778, new ScheduledDate(0, 0, 1, 1, 1)),
+        new ScheduledSubtopic(0, 777, new ScheduledDate(0, 0, 1, 1, 1))
       ],
       new Curriculum()
     );
-    const expectedEvent = new CalendarEvent();
-    expectedEvent.title = 'Test Event: handleEventDropStart';
-    expectedEvent.subtopicName = 'STopic1';
-    expectedEvent.subtopicId = 0;
-    expectedEvent.status = 'TestStatus';
-    expectedEvent.start = new Date(2022, 3);
-    expectedEvent.color = 'TestColor';
+    const paramEvent = new CalendarEvent();
+    paramEvent.title = 'Test Event: handleEventDropStart';
+    paramEvent.subtopicName = 'STopic1';
+    paramEvent.subtopicId = 777;
+    paramEvent.status = 'TestStatus';
+    paramEvent.start = new Date(2022, 3);
+    paramEvent.color = 'TestColor';
 
-    component.updateSchedule(expectedEvent);
+    component.updateSchedule(paramEvent);
 
-    expect(component.subtopics[0].startTime).toEqual(new Date(2018, 1));
+    expect(component.subtopics[0].startTime).toEqual(new Date(2044, 1));
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should create a new scheduled subtopic, add it to the schedule, then return it', () => {
+    const paramDate = new Date();
+    component.selectedBatch.startDate = paramDate;
+    const paramEvent = new CalendarEvent();
+    paramEvent.title = 'Test Event: handleEventDropStart';
+    paramEvent.subtopicName = 'STopic1';
+    paramEvent.subtopicId = 0;
+    paramEvent.status = 'TestStatus';
+    paramEvent.start = paramDate;
+    paramEvent.color = 'TestColor';
+
+    const expectedSubtopic = new ScheduledSubtopic(0, 0, new ScheduledDate(
+      0, paramDate.getDay(), 1, paramDate.getTime(), paramDate.getTime() + 1));
+
+    const returnedSubtopic = component.addSubtopicToSchedule(paramEvent);
+
+    expect(component.schedule.subtopics).toContain(expectedSubtopic);
+    expect(component.schedule.subtopics).toContain(returnedSubtopic);
   });
 
   // it('should call handleDrop', () => {
