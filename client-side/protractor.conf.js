@@ -14,6 +14,7 @@ exports.config = {
   },
   directConnect: true,
   baseUrl: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com',
+  // baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
