@@ -256,11 +256,35 @@ fdescribe('CalendarComponent', () => {
     expect(component.fc.updateEvent).toHaveBeenCalledWith(expectedEvent);
   });
 
-  // it('should call updateSchedule', () => {
-  //   spyOn(component, 'updateSchedule').and.callThrough();
-  //   component.updateSchedule('test');
-  //   expect(spy).toHaveBeenCalled();
-  // });
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should call updateSchedule', () => {
+    component.subtopics = [
+      new Subtopic(777, 'TestSubtopic', new Date(2018, 1), new Date(2019, 1), 'Test Status', new Topic()), 
+      new Subtopic(778, 'TestSubtopic', new Date(2020, 2), new Date(2019, 1), 'Test Status', new Topic())
+    ];
+    component.schedule = new Schedule(
+      0,
+      [
+        new ScheduledSubtopic(0, 777, new ScheduledDate(0, 0, 1, 1, 1)),
+        new ScheduledSubtopic(1, 778, new ScheduledDate(0, 0, 1, 1, 1))
+      ],
+      new Curriculum()
+    );
+    const expectedEvent = new CalendarEvent();
+    expectedEvent.title = 'Test Event: handleEventDropStart';
+    expectedEvent.subtopicName = 'STopic1';
+    expectedEvent.subtopicId = 0;
+    expectedEvent.status = 'TestStatus';
+    expectedEvent.start = new Date(2022, 3);
+    expectedEvent.color = 'TestColor';
+
+    component.updateSchedule(expectedEvent);
+
+    expect(component.subtopics[0].startTime).toEqual(new Date(2018, 1));
+  });
 
   // it('should call handleDrop', () => {
   //   spyOn(component, 'handleDrop').and.callThrough();
