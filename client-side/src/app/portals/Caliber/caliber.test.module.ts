@@ -173,17 +173,7 @@ import { CategoryService } from './services/category.service';
 
 
 import { settings } from 'cluster';
-<<<<<<< HEAD
-// import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
-import { UrlService } from '../../hydra-client/services/urls/url.service';
-import { ErrorAlertComponent } from '../../hydra-client/ui/error-alert/error-alert.component';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
-import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
-=======
-
-
->>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
 
 export const Dependencies = {
   imports: [
@@ -220,14 +210,6 @@ export const Dependencies = {
     ToolbarFilterPipe,
     TraineeSearch,
     ArrToStringPipe,
-<<<<<<< HEAD
-    SearchPipe,
-    TagFilterPipe,
-    BucketFilterPipe,
-    // PaginatePipe,
-
-=======
->>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
     SearchPipe,
     BucketFilterPipe,
     TagFilterPipe,
@@ -286,7 +268,6 @@ export const Dependencies = {
     FeedbackIconComponent,
     QualityOverallFeedbackComponent,
 
-<<<<<<< HEAD
     // components
     // PaginationControlsComponent,
     CaliberComponent,
@@ -361,82 +342,6 @@ export const Dependencies = {
     SkillTypeBucketsComponent,
     QuestionComponent,
     ScreeningComponent
-=======
-        // components
-        // PaginationControlsComponent,
-        CaliberComponent,
-        HomeComponent,
-        AssessComponent,
-        ManageComponent,
-        ReportsComponent,
-        AllCumulativeScoresComponent,
-        VpBarGraphComponent,
-        VpLineGraphComponent,
-        VpPanelGraphComponent,
-        SettingsComponent,
-        // CategoriesComponent,
-        TrainersComponent,
-        LocationsComponent,
-        DeactivateTrainerComponent,
-        DeactivateLocationComponent,
-        EditlocationComponent,
-        CreatelocationComponent,
-        PanelComponent,
-        QualityComponent,
-        TraineeTechSkillsComponent,
-        SkillsComponent,
-        ToolbarComponent,
-        GraphComponent,
-        TableComponent,
-        TrainerProfilesComponent,
-        PanelComponent,
-        OverallFeedbackComponent,
-        QualityFeedbackComponent,
-        PanelBatchAllTraineesComponent,
-        BatchOverallLineChartComponent,
-        AssessmentBreakdownComponent,
-        WeeklyFeedbackComponent,
-        WeeklyGradesComponent,
-        PanelFeedbackComponent,
-        WeeklyAuditComponent,
-        WeeklyCumulativeScoreComponent,
-        QcDoughnutComponent,
-        ReactivateLocationComponent,
-        AlertsComponent,
-        BarGraphModalComponent,
-        PanelBatchAllTraineesComponent,
-        PanelTableComponent,
-        PanelSearchbarComponent,
-        CreatePanelComponent,
-        InterviewDetailsComponent,
-        BatchModalComponent,
-        GeneralFeedbackComponent,
-        TechnicalFeedbackComponent,
-        PanelOverallFeedbackComponent,
-        FeedbackIconComponent,
-        QualityOverallFeedbackComponent,
-        GeneralFeedbackComponent,
-        TechnicalFeedbackComponent,
-        QcDoughnutComponent,
-        TraineeLineChartComponent,
-        DeleteBatchModalComponent,
-        CannotDeleteModalComponent,
-        DeleteTraineeModalComponent,
-        CannotDeleteTraineeModalComponent,
-        ScreeningConfigComponent,
-        CandidatesScreeningListComponent,
-        QuestionsTableComponent,
-        FinalReportComponent,
-        IntroductionComponent,
-        AnswerComponent,
-        PassFailComponent,
-        ViolationFlagComponent,
-        SkillTypesComponent,
-        BucketComponent,
-        SkillTypeBucketsComponent,
-        QuestionComponent,
-        ScreeningComponent
->>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
 
   ],
   providers: [
@@ -483,19 +388,11 @@ export const Dependencies = {
     PDFService,
     PanelSearchbarComponent,
     NgbActiveModal,
-    {provide: Router, useValue: {}},
-<<<<<<< HEAD
-    // GranularityService,
-    VpHomeBarGraphService,
-
-    HydraBatchService,
-    UrlService,
-=======
+    { provide: Router, useValue: {} },
     GranularityService,
     HydraBatchService,
     HydraBatchUtilService,
     UrlService
->>>>>>> 20272bad03e711af2210f6dbb13319b40db62ff2
   ],
   bootstrap: [
     // TrainersComponent
