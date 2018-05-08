@@ -28,17 +28,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    customLaunchers: {
-      ChromeHeadless: {
-        base: 'Chrome',
-        flags: [
-          '--headless',
-          '--remote-debugging-port=9222',
-        ]
-      }
-    },
-    browsers: ['ChromeHeadless'],
-    singleRun: true,
+    browsers: ['Chrome'],
     /** * maximum number of tries a browser will attempt in the case of a disconnection */ 
     browserDisconnectTolerance: 2,
     /** * How long will Karma wait for a message from a browser before disconnecting from it (in ms). */ 
