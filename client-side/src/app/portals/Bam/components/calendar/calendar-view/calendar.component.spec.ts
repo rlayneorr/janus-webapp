@@ -554,6 +554,64 @@ fdescribe('CalendarComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
+  it ('should add a new calendarEvent to the end of the list of events and return the index', () => {
+    const expectedDate: Date = new Date();
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      new CalendarEvent(),
+    ];
+
+    spyOn(component, 'eventExists').and.returnValue(-1);
+
+    const returnedIndex = component.addEvent(expectedEvent);
+
+    expect(component.events[2]).toEqual(expectedEvent);
+    expect(returnedIndex).toEqual(2);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should replace the event at index 2 of the events list with the provided event, and return the index', () => {
+    const expectedDate: Date = new Date();
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+    ];
+
+    spyOn(component, 'eventExists').and.returnValue(2);
+
+    const returnedIndex = component.addEvent(expectedEvent);
+
+    expect(component.events[2]).toEqual(expectedEvent);
+    expect(returnedIndex).toEqual(2);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
   it ('should set the gotoDateValue', () => {
     const expectedDate: Date = new Date(component.fc.getDate().stripTime().format() + 'T09:00:00-05:00');
     component.gotoDateValue = new Date(2017, 1);
