@@ -68,6 +68,8 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertService } from './services/alert.service';
 import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
+import { UrlService } from '../../hydra-client/services/urls/url.service';
+
 
 import { UrlService } from '../../hydra-client/services/urls/url.service';
 
@@ -151,7 +153,11 @@ export const Dependencies = {
     ChildrenOutletContexts,
     AssignforcesyncService,
     AlertService,
+<<<<<<< HEAD
+    UrlService
+=======
     UrlService,
+>>>>>>> 6fc46840031355e3ecc87cff0f0edd4de09d3e28
   ],
   exports: [
     SearchPipe,
