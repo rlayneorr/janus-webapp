@@ -2,154 +2,157 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { QuestionsService } from './questions.service';
 import { Question } from '../../entities/Question';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-// import { HttpInterceptorHandler } from '@angular/common/http/src/interceptor';
+import { HttpClient, HttpHandler, HttpBackend, HttpErrorResponse } from '@angular/common/http';
+import { QUESTIONS, replacementQuestion, expectedQuestion } from './mock-questions';
+import { HttpTestingController } from '@angular/common/http/testing';
+import { Observable } from 'rxjs/Observable';
+import { defer } from 'rxjs/observable/defer';
 
-fdescribe('QuestionsService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        QuestionsService,
-        HttpClient,
-        HttpHandler,
-      ]
-    });
+export function asyncData<T>(data: T) {
+  return defer(() => Promise.resolve(data));
+}
+
+export function asyncError<T>(errorObject: any) {
+  return defer(() => Promise.reject(errorObject));
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * This describe block is actually using mock data. It uses the same approach as this example:
+ * https://angular.io/guide/testing#testing-http-services
+ */
+fdescribe('QuestionsService ', () => {
+  const testBucket = -1;
+  let httpClientSpyOnGet: { get: jasmine.Spy };
+  let httpClientSpyOnPost: { post: jasmine.Spy };
+  let httpClientSpyOnPut: {put: jasmine.Spy };
+  let questionsService: QuestionsService;
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+  // test actual functions
+  it('should return expected questions from bucket #' + testBucket + ' (HttpClient called once)', () => {
+    httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
+    questionsService = new QuestionsService(<any> httpClientSpyOnGet);
+
+    const expectedQuestions: Question[] = [expectedQuestion];
+
+    httpClientSpyOnGet.get.and.returnValue(asyncData(expectedQuestions));
+
+    questionsService.getBucketQuestions(testBucket).subscribe(
+      questions => expect(questions).toEqual(expectedQuestions, 'expected questions'),
+      fail
+    );
+    expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   });
 
-  it('should be created', inject([QuestionsService], (service: QuestionsService) => {
-      expect(service).toBeTruthy();
-  }));
+  it('createNewQuestion should call HttpClient.post, and return the new question', () => {
+    httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
+    questionsService = new QuestionsService(<any> httpClientSpyOnPost);
 
-  it('createNewQuestion should put new questions into the test bucket', inject([QuestionsService], (service: QuestionsService) => {
-    const returnValue: Question = new Question();
+    httpClientSpyOnPost.post.and.returnValue(asyncData(QUESTIONS[0]));
 
-    service.createNewQuestion(-1, QUESTIONS[0], [1, 1, 1]).subscribe(
-      (data: Question) => QUESTIONS[0] = {
-        bucketId: data['bucketId'],
-        questionId: data['question']['questionId'],
-        questionText: data['question']['questionText'],
-        sampleAnswer1: data['question']['sampleAnswer1'],
-        sampleAnswer2: data['question']['sampleAnswer2'],
-        sampleAnswer3: data['question']['sampleAnswer3'],
-        sampleAnswer4: data['question']['sampleAnswer4'],
-        sampleAnswer5: data['question']['sampleAnswer5'],
-      });
-    expect(returnValue).toEqual(QUESTIONS[0]);
+    questionsService.createNewQuestion(testBucket, QUESTIONS[0], [-1, -1, -1]).subscribe(
+      questions => expect(questions).toEqual(QUESTIONS[0]),
+      fail
+    );
 
-    service.createNewQuestion(-1, QUESTIONS[1], [1, 1, 1]).subscribe(
-      (data: Question) => QUESTIONS[1] = {
-        bucketId: data['bucketId'],
-        questionId: data['question']['questionId'],
-        questionText: data['question']['questionText'],
-        sampleAnswer1: data['question']['sampleAnswer1'],
-        sampleAnswer2: data['question']['sampleAnswer2'],
-        sampleAnswer3: data['question']['sampleAnswer3'],
-        sampleAnswer4: data['question']['sampleAnswer4'],
-        sampleAnswer5: data['question']['sampleAnswer5'],
-      });
-    expect(returnValue).toEqual(QUESTIONS[1]);
+    expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
+  });
 
-    service.createNewQuestion(-1, QUESTIONS[2], [1, 1, 1]).subscribe(
-      (data: Question) => QUESTIONS[2] = {
-        bucketId: data['bucketId'],
-        questionId: data['question']['questionId'],
-        questionText: data['question']['questionText'],
-        sampleAnswer1: data['question']['sampleAnswer1'],
-        sampleAnswer2: data['question']['sampleAnswer2'],
-        sampleAnswer3: data['question']['sampleAnswer3'],
-        sampleAnswer4: data['question']['sampleAnswer4'],
-        sampleAnswer5: data['question']['sampleAnswer5'],
-      });
-    expect(returnValue).toEqual(QUESTIONS[2]);
-  }));
+  it('updateQuestion should call HttpClient.post, and return the altered question', () => {
+    httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
+    questionsService = new QuestionsService(<any> httpClientSpyOnPost);
 
-  it('getBucketQuestions should return any questions stored in bucket -1 (the testing bucket)',
-  inject([QuestionsService], (service: QuestionsService) => {
-    let questionsFromTestBucket: Question[];
+    httpClientSpyOnPost.post.and.returnValue(asyncData(QUESTIONS[0]));
 
-    // see what's currently in bucket -1
-    service.getBucketQuestions(-1).subscribe(data => {
-      questionsFromTestBucket = (data as Question[]);
-    });
+    questionsService.updateQuestion(testBucket, QUESTIONS[0], [-1, 1, -1]).subscribe(
+      questions => expect(questions).toEqual(QUESTIONS[0]),
+      fail
+    );
 
-    // If QUESTIONS[0] is already in the test bucket, great. If not, put it there.
-    if (questionsFromTestBucket.includes(QUESTIONS[0]) === false) {
-      service.createNewQuestion(-1, QUESTIONS[0], [-1, -1, -1]);
-    }
+    expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
+  });
 
-    expect(questionsFromTestBucket).toContain(QUESTIONS[0]);
-    expect(questionsFromTestBucket).toContain(QUESTIONS[1]);
-    expect(questionsFromTestBucket).toContain(QUESTIONS[2]);
-  }));
+  it('activateQuestion should call HttpClient.put, and return the activated question', () => {
+    httpClientSpyOnPut = jasmine.createSpyObj('http', ['put']);
+    questionsService = new QuestionsService(<any> httpClientSpyOnPut);
 
-  it('updateQuestion should update our question on the database', inject([QuestionsService], (service: QuestionsService) => {
-    let questionsFromTestBucket: any[];
+    httpClientSpyOnPut.put.and.returnValue(asyncData(QUESTIONS[0]));
 
-    // see what's currently in bucket -1, so we can get the ids of the questions in there
-    service.getBucketQuestions(-1).subscribe(data => {
-      questionsFromTestBucket = (data as Question[]);
-    });
+    questionsService.activateQuestion(1).subscribe(
+      questions => expect(questions).toEqual(QUESTIONS[0]),
+      fail
+    );
 
-    // use the ids we got from getBucketQuestions, to target a question for updating
-    service.updateQuestion(questionsFromTestBucket[0].questionId,
-      replacementQuestion, [-1, -1, -1]);
+    expect(httpClientSpyOnPut.put.calls.count()).toBe(1, 'one call');
+  });
 
-    // pull the questions again, to see if our update worked
-    service.getBucketQuestions(-1).subscribe(data => {
-      questionsFromTestBucket = (data as Question[]);
-    });
+  it('dectivateQuestion should call HttpClient.put, and return the activated question', () => {
+    httpClientSpyOnPut = jasmine.createSpyObj('http', ['put']);
+    questionsService = new QuestionsService(<any> httpClientSpyOnPut);
 
-    expect(questionsFromTestBucket).toContain(replacementQuestion);
-  }));
+    httpClientSpyOnPut.put.and.returnValue(asyncData(QUESTIONS[0]));
 
-  it('activateQuestion should activate our question', inject([QuestionsService], (service: QuestionsService) => {
-  }));
+    questionsService.deactivateQuestion(1).subscribe(
+      questions => expect(questions).toEqual(QUESTIONS[0]),
+      fail
+    );
 
-  it('deactivateQuestion should remove our question', inject([QuestionsService], (service: QuestionsService) => {
-  }));
+    expect(httpClientSpyOnPut.put.calls.count()).toBe(1, 'one call');
+  });
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  // test error responses
+  const errorResponse = new HttpErrorResponse({
+    error: 'test 404 error',
+    status: 404, statusText: 'Not Found'
+  });
+
+  it('getBucketQuestions should return an error when the server returns a 404', () => {
+    httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
+    questionsService = new QuestionsService(<any> httpClientSpyOnGet);
+
+    httpClientSpyOnGet.get.and.returnValue(asyncError(errorResponse));
+
+    questionsService.getBucketQuestions(testBucket).subscribe(
+      questions => fail('expected an error, not questions'),
+      error  => expect(error.message).toContain('404')
+    );
+  });
+  it('createNewQuestion should return an error when the server returns a 404', () => {
+    httpClientSpyOnPost.post.and.returnValue(asyncError(errorResponse));
+    questionsService = new QuestionsService(<any> httpClientSpyOnPost);
+
+    questionsService.createNewQuestion(testBucket, QUESTIONS[0], [-1, -1, -1]).subscribe(
+      questions => fail('expected an error, not questions'),
+      error  => expect(error.message).toContain('404')
+    );
+  });
+  it('updateQuestion should return an error when the server returns a 404', () => {
+    httpClientSpyOnPost.post.and.returnValue(asyncError(errorResponse));
+    questionsService = new QuestionsService(<any> httpClientSpyOnPost);
+
+    questionsService.updateQuestion(testBucket, QUESTIONS[0], [-1, -1, -1]).subscribe(
+      questions => fail('expected an error, not questions'),
+      error  => expect(error.message).toContain('404')
+    );
+  });
+  it('activateQuestion should return an error when the server returns a 404', () => {
+    httpClientSpyOnPut.put.and.returnValue(asyncError(errorResponse));
+    questionsService = new QuestionsService(<any> httpClientSpyOnPut);
+
+    questionsService.activateQuestion(1).subscribe(
+      questions => fail('expected an error, not questions'),
+      error  => expect(error.message).toContain('404')
+    );
+  });
+  it('deactivateQuestion should return an error when the server returns a 404', () => {
+    httpClientSpyOnPut.put.and.returnValue(asyncError(errorResponse));
+    questionsService = new QuestionsService(<any> httpClientSpyOnPut);
+
+    questionsService.deactivateQuestion(1).subscribe(
+      questions => fail('expected an error, not questions'),
+      error  => expect(error.message).toContain('404')
+    );
+  });
 });
-
-const QUESTIONS: Question[] = [
-  {
-      questionId: 0,
-      bucketId: 0,
-      questionText: 'whuts yr favorite color',
-      sampleAnswer1: 'answer1',
-      sampleAnswer2: 'answer2',
-      sampleAnswer3: 'answer3',
-      sampleAnswer4: 'answer4',
-      sampleAnswer5: 'answer5'
-  },
-  {
-      questionId: 1,
-      bucketId: 0,
-      questionText: 'bleh',
-      sampleAnswer1: 'bhahfha',
-      sampleAnswer2: 'dsflkj',
-      sampleAnswer3: 'eiei',
-      sampleAnswer4: 'qq',
-      sampleAnswer5: 'rew'
-  },
-  {
-      questionId: 2,
-      bucketId: 0,
-      questionText: '000000',
-      sampleAnswer1: 'asdf',
-      sampleAnswer2: 'mnbb',
-      sampleAnswer3: 'rewq',
-      sampleAnswer4: 'hjkl',
-      sampleAnswer5: 'poiu'
-},
-];
-
-const replacementQuestion: Question = {
-  questionId: 2,
-  bucketId: 0,
-  questionText: 'This is what the question should say after being replaced',
-  sampleAnswer1: 'bubba',
-  sampleAnswer2: 'buck',
-  sampleAnswer3: 'scooter',
-  sampleAnswer4: 'lou anne',
-  sampleAnswer5: 'idk man'
-};
-
