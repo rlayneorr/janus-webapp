@@ -2,7 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarComponent } from './calendar.component';
-import { NO_ERRORS_SCHEMA, Injectable, DebugElement } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Injectable, DebugElement, ElementRef } from '@angular/core';
 import { Dependencies } from '../../../bam.test-observable.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
@@ -30,6 +30,7 @@ import { Curriculum } from '../../../models/curriculum.model';
 import { ScheduledDate } from '../../../models/scheduleddate.model';
 import { CalendarEvent } from '../../../models/calendar-event.model';
 import { Subscription } from 'rxjs/Subscription';
+import { By } from '@angular/platform-browser';
 
 fdescribe('CalendarComponent', () => {
   let component: CalendarComponent;
@@ -70,7 +71,14 @@ fdescribe('CalendarComponent', () => {
           ],
           new Curriculum()
       )));
-    spyOn(calendarService, 'mapSubtopicToEvent').and.returnValue(new CalendarEvent());
+      const retEvent = new CalendarEvent();
+      retEvent.color = 'TestColor';
+      retEvent.start = new Date(2018, 1);
+      retEvent.status = 'TestStatus';
+      retEvent.subtopicId = 0;
+      retEvent.subtopicName = 'STopic1';
+      retEvent.title = 'TestEvent';
+    spyOn(calendarService, 'mapSubtopicToEvent').and.returnValue(retEvent);
     spyOn(calendarService.addCalendarEvent, 'subscribe').and.callFake((func: (value: any) => void) => {
       func(1);
       return new Subscription(() => {});
@@ -78,7 +86,7 @@ fdescribe('CalendarComponent', () => {
     spyOn(calendarService, 'changeTopicDate').and.returnValue(Observable.of(new Schedule(0, [], new Curriculum())));
 
     spyOn(statusService, 'updateNextStatus').and.returnValue('Test string: updateNextStatus');
-    spyOn(statusService, 'getStatusColor').and.returnValue('Test string: getStatusColor');
+    spyOn(statusService, 'getStatusColor').and.returnValue('purple');
     spyOn(statusService, 'updateMovedStatus').and.returnValue('Test string: updateMovedStatus');
 
     spyOn(addSubtopicService, 'addNewScheduledSubtopic').and.returnValue(Observable.of(
@@ -198,7 +206,7 @@ fdescribe('CalendarComponent', () => {
     expectedEvent.subtopicId = 0;
     expectedEvent.status = 'Test String: updateNextStatus';
     expectedEvent.start = new Date();
-    expectedEvent.color = 'Test String: getStatusColor';
+    expectedEvent.color = 'purple';
     const paramObject = {calEvent: expectedEvent};
 
     spyOn(component, 'mapSubtopicFromEvent').and.returnValue(expectedEvent);
@@ -242,7 +250,7 @@ fdescribe('CalendarComponent', () => {
     paramEvent.subtopicId = 0;
     paramEvent.status = 'Test string: updateMovedStatus';
     paramEvent.start = new Date();
-    paramEvent.color = 'Test String: getStatusColor';
+    paramEvent.color = 'purple';
     const paramObject = {event: paramEvent};
 
     spyOn(component, 'updateSchedule');
@@ -310,11 +318,73 @@ fdescribe('CalendarComponent', () => {
     expect(component.schedule.subtopics).toContain(returnedSubtopic);
   });
 
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   * I'll come back to this. jQuery, and the lack of knowledge of jQuery, is presenting issues with testing
+   */
   // it('should call handleDrop', () => {
-  //   spyOn(component, 'handleDrop').and.callThrough();
-  //   component.handleDrop('test');
-  //   expect(spy).toHaveBeenCalled();
+  //   const expectedEvent = new CalendarEvent();
+  //   expectedEvent.title = 'Test Event: handleEventDropStart';
+  //   expectedEvent.subtopicName = 'STopic1';
+  //   expectedEvent.subtopicId = 0;
+  //   expectedEvent.status = 'TestStatus';
+  //   expectedEvent.start = new Date(2022, 1);
+  //   expectedEvent.color = 'TestColor';
+
+  //   const expectedSubtopic: any = new Subtopic(0, 'STopic1', new Date(2018, 1, 1), new Date(2019, 1, 1), 'Started',
+  //     {topicID: 1, topicName: 'Topic1'});
+  //   expectedSubtopic.color = 4;
+
+  //   const expectedScheduledSubtopic = new ScheduledSubtopic(0, 0, new ScheduledDate(0, 0, 0, 0, 0));
+
+  //   spyOn($(), 'data').and.returnValue(new Subtopic(0, 'TestSubtopic', new Date(2044, 1), new Date(2077, 1),
+  //    'Test Status', new Topic()));
+  //   spyOn(component, 'updateEvent');
+  //   spyOn(component.fc, 'updateEvent');
+  //   spyOn(component, 'eventExists').and.returnValue(-1);
+
+  //   component.handleDrop({jsEvent: {target: 'STopic1'}, resourceId: {name: 'month'}, date: new Date(2022, 1),
+  //    start: new Date(2022, 1), color: 'TestColor'});
+
+  //   expect(component.updateEvent).toHaveBeenCalled();
+  //   expect(component.fc.updateEvent).toHaveBeenCalled();
+  //   expect(component.schedule.subtopics[component.schedule.subtopics.length - 1]).toEqual(expectedScheduledSubtopic);
   // });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should set properties related to tooltips', () => {
+    const paramEvent = {
+      view: {name: 'month'},
+      calEvent: new CalendarEvent(),
+      jsEvent: {target: {getBoundingClientRect() {return {top: 0}; }}, clientX: 0}
+    };
+    paramEvent.calEvent.color = 'TestColor';
+    paramEvent.calEvent.start = new Date(0, 0, 0, 3, 44, 0, 0);
+    paramEvent.calEvent.status = 'TestStatus';
+    paramEvent.calEvent.subtopicId = 0;
+    paramEvent.calEvent.subtopicName = 'STopic1';
+    paramEvent.calEvent.title = 'TestTitle';
+
+    component.handleEventMouseover(paramEvent);
+
+    // handleEventMouseover seems to call the non-existant function of Date.format()
+    // spyOn(paramEvent.calEvent.start, 'format').and.returnValue('3:44 0');
+
+    expect(component.subtopicTooltip).toEqual('TestTitle');
+    expect(component.statusTooltip).toEqual('TestStatus');
+    expect(component.timeTooltip).toEqual('3:44 0');
+
+    expect(component.status.nativeElement.style.background).toEqual('purple');
+    expect(component.tooltip.nativeElement.style.display).toEqual('inline');
+    expect(component.tooltip.nativeElement.style.top).toEqual((0 - component.body.nativeElement.getBoundingClientRect().top + 120) +
+     'px');
+    expect(component.tooltip.nativeElement.style.left).toEqual('0px');
+    expect(component.tooltip.nativeElement.style.pointerEvents).toEqual('none');
+  });
 
   /**
    * @author Holden Olivier
@@ -327,6 +397,8 @@ fdescribe('CalendarComponent', () => {
 
     expect(component.tooltip.nativeElement.style.display).toEqual('none');
   });
+
+
 
   /**
    * @author Holden Olivier
