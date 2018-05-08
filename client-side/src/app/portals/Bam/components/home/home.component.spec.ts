@@ -18,6 +18,11 @@ fdescribe('HomeComponent', () => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
   }), 1440000);
 
+  /**
+   * @author Craig Koepele | 1803-mar05-usf-java
+   * Initialize the spies, using the util class to create mock data. The services should return
+   * the mockdata provided when the specified function is called
+   */
   beforeEach(() => {
     const sessionService: SessionService = TestBed.get(SessionService);
 
@@ -30,10 +35,17 @@ fdescribe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
+  /**
+   * Tests if the component is created
+   */
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  /**
+   * Tests if the user component will return a BamUser observable when the
+   * "putUserInSession" function is called.
+   */
   it('home should get get a BamUser', () => {
     component.ngOnInit();
     fixture.detectChanges();

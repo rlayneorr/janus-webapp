@@ -10,14 +10,14 @@ import { ScheduledDate } from '../../models/scheduleddate.model';
 import { Boom } from '../../models/boom.model';
 
 /**
- * @author Craig Koepele | 1802-mar05-java-usf
+ * @author Craig Koepele | 1803-mar05-java-usf
  * Utility helper class for the spec test component. Generates the
  * necessary expected results for boom component
  */
 export class BoomUtil {
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * Makes a list of batches. All values are hard coded
      */
     static makeBatches(): Batch[] {
@@ -42,7 +42,7 @@ export class BoomUtil {
       }
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * Makes a list of Boom objects. Bases this off the list of batches
      */
     static makeBooms(): Boom[] {
@@ -67,7 +67,7 @@ export class BoomUtil {
     }
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * @param length
      * Returns an object that matches up with the various class fields
      * modified in the barchart function in the boom component.
@@ -87,7 +87,7 @@ export class BoomUtil {
     }
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * @param length
      * @param value
      * @param elements
@@ -107,7 +107,7 @@ export class BoomUtil {
     }
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * @param id
      * Generates a BamUser component with an id value passed in
      */
@@ -118,7 +118,7 @@ export class BoomUtil {
     }
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * @param id
      * Returns a new schedule object with an id that the user passes in
      */
@@ -127,7 +127,7 @@ export class BoomUtil {
     }
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * Helper function to getScheduleById. Generates a SchedueldSbutopic list
      */
     private static makeSchSubList(): ScheduledSubtopic[] {
@@ -141,7 +141,7 @@ export class BoomUtil {
     }
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * @param ids
      * Return a list of subtopics with ids mapped from the passed in
      * list of ids
@@ -158,7 +158,7 @@ export class BoomUtil {
     }
 
     /**
-     * @author Craig Koepele | 1802-mar05-java-usf
+     * @author Craig Koepele | 1803-mar05-java-usf
      * Return an object that corresponds to the pieChart function in the Boom component
      */
       static makePieLables(): any {

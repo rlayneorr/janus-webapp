@@ -15,7 +15,11 @@ import { Batch } from '../../models/batch.model';
 import { Subtopic } from '../../models/subtopic.model';
 import { ScheduledSubtopic } from '../../models/scheduledsubtopic.model';
 
-describe('BoomComponent', () => {
+/**
+ * @author Craig Koepele | 1803-mar05-java-usf
+ * Spec testing component for Boom
+ */
+fdescribe('BoomComponent', () => {
   let component: BoomComponent;
   let fixture: ComponentFixture<BoomComponent>;
 
@@ -24,7 +28,7 @@ describe('BoomComponent', () => {
   }), 1440000);
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Before each test, set up mock values to return for each service.
    *
    * Use the test bed to inject the services. spyOn then sets up the appropriate mock
@@ -62,7 +66,7 @@ describe('BoomComponent', () => {
   });
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Specifically tests the ngOnInit function. NOTE: ngOnInit is called
    * every time a component is created, so the first two lines are excessive.
    */
@@ -78,7 +82,7 @@ describe('BoomComponent', () => {
   });
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Tests the component function getBatchSubtopics()
    */
   it('initialize the Batches', () => {
@@ -89,7 +93,7 @@ describe('BoomComponent', () => {
   });
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Test component function setBatchStats()
    */
   it('set the batch statistics', () => {
@@ -98,7 +102,7 @@ describe('BoomComponent', () => {
   });
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Test component function plotBatch(id: Number)
    */
   it('plot out the batch', () => {
@@ -109,7 +113,7 @@ describe('BoomComponent', () => {
   });
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Test component function pieCharPercent(percent)
    */
   it('get the percentage', () => {
@@ -121,7 +125,7 @@ describe('BoomComponent', () => {
   });
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Test component function changePercent(event: any, percent: Number
    * Tests two cases, when percent === component.percent, and when it
    * does not
@@ -139,7 +143,7 @@ describe('BoomComponent', () => {
   });
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Test component function getWeek(date)
    * NOTE: This funtion is most lokely depreciated, as it isn't
    * called during the component run time, nor in it's html file
@@ -156,7 +160,7 @@ describe('BoomComponent', () => {
   });
 
   /**
-   * @author Craig Koepele | 1802-mar05-java-usf
+   * @author Craig Koepele | 1803-mar05-java-usf
    * Test component function setBatchStats()
    */
   it('change the batch', () => {
