@@ -323,34 +323,36 @@ fdescribe('CalendarComponent', () => {
    * @batch 1803 usf
    * I'll come back to this. jQuery, and the lack of knowledge of jQuery, is presenting issues with testing
    */
-  // it('should call handleDrop', () => {
-  //   const expectedEvent = new CalendarEvent();
-  //   expectedEvent.title = 'Test Event: handleEventDropStart';
-  //   expectedEvent.subtopicName = 'STopic1';
-  //   expectedEvent.subtopicId = 0;
-  //   expectedEvent.status = 'TestStatus';
-  //   expectedEvent.start = new Date(2022, 1);
-  //   expectedEvent.color = 'TestColor';
+  /*
+    it('should call handleDrop', () => {
+      const expectedEvent = new CalendarEvent();
+      expectedEvent.title = 'Test Event: handleEventDropStart';
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.start = new Date(2022, 1);
+      expectedEvent.color = 'TestColor';
 
-  //   const expectedSubtopic: any = new Subtopic(0, 'STopic1', new Date(2018, 1, 1), new Date(2019, 1, 1), 'Started',
-  //     {topicID: 1, topicName: 'Topic1'});
-  //   expectedSubtopic.color = 4;
+      const expectedSubtopic: any = new Subtopic(0, 'STopic1', new Date(2018, 1, 1), new Date(2019, 1, 1), 'Started',
+        {topicID: 1, topicName: 'Topic1'});
+      expectedSubtopic.color = 4;
 
-  //   const expectedScheduledSubtopic = new ScheduledSubtopic(0, 0, new ScheduledDate(0, 0, 0, 0, 0));
+      const expectedScheduledSubtopic = new ScheduledSubtopic(0, 0, new ScheduledDate(0, 0, 0, 0, 0));
 
-  //   spyOn($(), 'data').and.returnValue(new Subtopic(0, 'TestSubtopic', new Date(2044, 1), new Date(2077, 1),
-  //    'Test Status', new Topic()));
-  //   spyOn(component, 'updateEvent');
-  //   spyOn(component.fc, 'updateEvent');
-  //   spyOn(component, 'eventExists').and.returnValue(-1);
+      spyOn($(), 'data').and.returnValue(new Subtopic(0, 'TestSubtopic', new Date(2044, 1), new Date(2077, 1),
+       'Test Status', new Topic()));
+      spyOn(component, 'updateEvent');
+      spyOn(component.fc, 'updateEvent');
+      spyOn(component, 'eventExists').and.returnValue(-1);
 
-  //   component.handleDrop({jsEvent: {target: 'STopic1'}, resourceId: {name: 'month'}, date: new Date(2022, 1),
-  //    start: new Date(2022, 1), color: 'TestColor'});
+      component.handleDrop({jsEvent: {target: 'STopic1'}, resourceId: {name: 'month'}, date: new Date(2022, 1),
+       start: new Date(2022, 1), color: 'TestColor'});
 
-  //   expect(component.updateEvent).toHaveBeenCalled();
-  //   expect(component.fc.updateEvent).toHaveBeenCalled();
-  //   expect(component.schedule.subtopics[component.schedule.subtopics.length - 1]).toEqual(expectedScheduledSubtopic);
-  // });
+      expect(component.updateEvent).toHaveBeenCalled();
+      expect(component.fc.updateEvent).toHaveBeenCalled();
+      expect(component.schedule.subtopics[component.schedule.subtopics.length - 1]).toEqual(expectedScheduledSubtopic);
+    });
+  */
 
   /**
    * @author Holden Olivier
@@ -398,7 +400,32 @@ fdescribe('CalendarComponent', () => {
     expect(component.tooltip.nativeElement.style.display).toEqual('none');
   });
 
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should return a CalendarEvent with values matching a supplied event', () => {
+    const expectedDate: Date = new Date();
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+    const paramEvent = {
+      color: 'purple',
+      start: expectedDate,
+      status: 'TestStatus',
+      subtopicId: 0,
+      subtopicName: 'STopic1',
+      title: 'TestTitle'
+    };
 
+    const returnedEvent: CalendarEvent = component.mapSubtopicFromEvent(paramEvent);
+
+    expect(returnedEvent).toEqual(expectedEvent);
+  });
 
   /**
    * @author Holden Olivier
