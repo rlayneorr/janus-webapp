@@ -71,6 +71,7 @@ import { ExistingSubtopicModalComponent } from './components/calendar/existing-s
 import { UrlService } from '../../hydra-client/services/urls/url.service';
 
 
+import { UrlService } from '../../hydra-client/services/urls/url.service';
 
 export const Dependencies = {
   imports: [
@@ -152,7 +153,11 @@ export const Dependencies = {
     ChildrenOutletContexts,
     AssignforcesyncService,
     AlertService,
+<<<<<<< HEAD
     UrlService
+=======
+    UrlService,
+>>>>>>> 6fc46840031355e3ecc87cff0f0edd4de09d3e28
   ],
   exports: [
     SearchPipe,

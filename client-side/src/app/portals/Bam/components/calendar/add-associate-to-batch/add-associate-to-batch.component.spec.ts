@@ -13,7 +13,9 @@ import { Observable } from 'rxjs/Observable';
 import { GenerateObservable } from 'rxjs/observable/GenerateObservable';
 import { SessionService } from '../../../services/session.service';
 import { error } from 'util';
-
+/*
+  test for AddAssociateToBatchComponent
+*/
 describe('AddAssociateToBatchComponent', () => {
   let component: AddAssociateToBatchComponent;
   let fixture: ComponentFixture<AddAssociateToBatchComponent>;
@@ -38,9 +40,10 @@ describe('AddAssociateToBatchComponent', () => {
     spyOn(userService, 'getUsersNotInBatch' ).and.returnValue(Observable.of( arrUs));
     spyOn(userService, 'addUserToBatch').and.returnValues(Observable.throw(' '), Observable.of(arrUs));
     spyOn(sessionService, 'getSelectedBatch').and.returnValue(testBatch);
-    // spyOn(userService, 'addUserToBatch').and.returnValue(Observable.throw(error));
+
     TestBed.overrideProvider(UsersService, {useValue: userService});
     TestBed.overrideProvider(SessionService, {useValue: sessionService});
+
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -51,16 +54,10 @@ describe('AddAssociateToBatchComponent', () => {
   it('should call ngOnInit', () => {
     spy = spyOn(component, 'ngOnInit');
     component.ngOnInit();
-    // userService.getUsersNotInBatch().subscribe(u => {
-    //   u = testUser2;
-    // });
     expect(spy).toHaveBeenCalled();
   });
   it('should initialize users', () => {
     expect(component.associates).toBeDefined();
-  });
-  it('should be 2 + 2', () => {
-    expect(2 + 2).toEqual(4);
   });
   it('should add new User', () => {
     component.addUser(testUser);

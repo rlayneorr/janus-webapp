@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../../../../environments/environment';
 
 // entities
-import { Category } from '../../entities/Category';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
 import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
@@ -23,7 +22,7 @@ import { GambitSkillService } from '../../../../hydra-client/services/skill/gamb
 })
 export class SkillsComponent implements OnInit {
   newSkill: GambitSkill = {
-    skillId: 0,
+    skillID: 0,
     skillName: '',
     isActive: true
   };
@@ -87,12 +86,8 @@ export class SkillsComponent implements OnInit {
    */
   editCurrentSkill(nameChange) {
     this.skillService.update(this.currentSkill).subscribe((resp) => {
-      this.skills.some( cat => {
-        if (cat.skillId === resp.skillId) {
-          cat = resp;
-          return true;
-        }
-      });
+      const idx = this.skills.findIndex(skill => skill.skillID === resp.skillID);
+      this.skills[idx] = resp;
     });
 
   }

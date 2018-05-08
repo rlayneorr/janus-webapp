@@ -41,6 +41,7 @@
               <span class="input-tag">Type:</span>
 
               <select #inputGroupSelectType class="custom-select form-control">
+                <!-- batch.type no longer exists -->
                 <option selected [value]="batch.type.id"> {{ batch.type.name }}</option>
                 <ng-container *ngFor="let type of batchTypes">
                   <option *ngIf="batch.type.name != type.name" [value]="type.id"> {{ type.name}} </option>
