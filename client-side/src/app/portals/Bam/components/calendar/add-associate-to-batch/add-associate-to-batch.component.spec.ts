@@ -16,7 +16,7 @@ import { error } from 'util';
 /*
   test for AddAssociateToBatchComponent
 */
-describe('AddAssociateToBatchComponent', () => {
+fdescribe('AddAssociateToBatchComponent', () => {
   let component: AddAssociateToBatchComponent;
   let fixture: ComponentFixture<AddAssociateToBatchComponent>;
   let testUser: BamUser;

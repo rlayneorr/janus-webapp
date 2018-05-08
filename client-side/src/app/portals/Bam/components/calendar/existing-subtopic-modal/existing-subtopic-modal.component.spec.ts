@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ExistingSubtopicModalComponent } from './existing-subtopic-modal.component';
 import { Dependencies } from '../../../bam.test.module';
 
-describe('ExistingSubtopicModalComponent', () => {
+fdescribe('ExistingSubtopicModalComponent', () => {
   let component: ExistingSubtopicModalComponent;
   let fixture: ComponentFixture<ExistingSubtopicModalComponent>;
   let spy: any;
