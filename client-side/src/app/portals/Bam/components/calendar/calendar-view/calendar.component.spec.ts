@@ -32,7 +32,7 @@ import { CalendarEvent } from '../../../models/calendar-event.model';
 import { Subscription } from 'rxjs/Subscription';
 import { By } from '@angular/platform-browser';
 
-describe('CalendarComponent', () => {
+fdescribe('CalendarComponent', () => {
   let component: CalendarComponent;
   let fixture: ComponentFixture<CalendarComponent>;
 
@@ -723,6 +723,62 @@ describe('CalendarComponent', () => {
     const returnedIndex = component.eventExists(paramEvent);
 
     expect(returnedIndex).toEqual(-1);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should remove the provided calendarEvent from the event list, then remove a corresponding scheduled subtopic', () => {
+    const expectedDate: Date = new Date(2018, 1, 1, 0, 0, 0, 0);
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 2;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      expectedEvent,
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+    ];
+
+    const expectedScheduledSubtopic = new ScheduledSubtopic(2, 3, new ScheduledDate(2, 0, 1, 0, 0));
+
+    component.scheduledSubtopics = [
+      new ScheduledSubtopic(0, 1, new ScheduledDate(0, 0, 1, 0, 0)),
+      new ScheduledSubtopic(1, 2, new ScheduledDate(1, 0, 1, 0, 0)),
+      expectedScheduledSubtopic,
+      new ScheduledSubtopic(3, 4, new ScheduledDate(3, 0, 1, 0, 0)),
+      new ScheduledSubtopic(4, 5, new ScheduledDate(4, 0, 1, 0, 0))
+    ];
+
+    component.schedule.subtopics = [
+      new ScheduledSubtopic(0, 1, new ScheduledDate(0, 0, 1, 0, 0)),
+      new ScheduledSubtopic(1, 2, new ScheduledDate(1, 0, 1, 0, 0)),
+      expectedScheduledSubtopic,
+      new ScheduledSubtopic(3, 4, new ScheduledDate(3, 0, 1, 0, 0)),
+      new ScheduledSubtopic(4, 5, new ScheduledDate(4, 0, 1, 0, 0))
+    ];
+
+    const paramEvent = {target: {style: {opacity: 0}}};
+
+    spyOn(component, 'removeEvent').and.callFake((index: number) => {
+      component.events.splice(index, 1);
+    });
+    spyOn(component, 'eventExists').and.returnValue(1);
+
+
+    component.trashDropEvent(paramEvent, 'ui', expectedEvent);
+
+    expect(paramEvent.target.style.opacity).toEqual(1);
+    expect(component.events[1]).not.toEqual(expectedEvent);
+    expect(component.schedule.subtopics).not.toContain(expectedScheduledSubtopic);
   });
 
   /**
