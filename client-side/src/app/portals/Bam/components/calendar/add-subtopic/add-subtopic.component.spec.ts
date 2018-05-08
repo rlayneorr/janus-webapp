@@ -23,7 +23,7 @@ import { User } from '../../../../../hydra-client/entities/User';
   test for addSubtopicComponent
 
 */
-fdescribe('AddSubtopicComponent', () => {
+describe('AddSubtopicComponent', () => {
   let component: AddSubtopicComponent;
   let fixture: ComponentFixture<AddSubtopicComponent>;
   let subtopic: Subtopic;
