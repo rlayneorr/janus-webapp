@@ -56,6 +56,7 @@ export class DashboardInfoComponent implements OnInit {
     this.currentBatchStart1 = batch1.startDate;
     this.currentBatchEnd1 = batch1.endDate;
     let timePassed = 0;
+    this.weekNum = 0;
     if (new Date() < this.currentBatchEnd1) {
       timePassed = (new Date().getTime()
       - new Date(this.currentBatchStart1).getTime());

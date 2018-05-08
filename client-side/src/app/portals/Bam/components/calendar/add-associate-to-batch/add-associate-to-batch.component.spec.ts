@@ -14,7 +14,7 @@ import { GenerateObservable } from 'rxjs/observable/GenerateObservable';
 import { SessionService } from '../../../services/session.service';
 import { error } from 'util';
 
-fdescribe('AddAssociateToBatchComponent', () => {
+describe('AddAssociateToBatchComponent', () => {
   let component: AddAssociateToBatchComponent;
   let fixture: ComponentFixture<AddAssociateToBatchComponent>;
   let testUser: BamUser;

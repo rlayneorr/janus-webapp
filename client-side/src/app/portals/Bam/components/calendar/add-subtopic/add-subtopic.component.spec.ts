@@ -16,7 +16,7 @@ import { Curriculum } from '../../../models/curriculum.model';
 import { Schedule } from '../../../models/schedule.model';
 import { Observable } from 'rxjs/Observable';
 
-fdescribe('AddSubtopicComponent', () => {
+describe('AddSubtopicComponent', () => {
   let component: AddSubtopicComponent;
   let fixture: ComponentFixture<AddSubtopicComponent>;
   let subtopic: Subtopic;
