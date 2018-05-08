@@ -1,11 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BatchService} from '../../services/batch-service/batch.service';
+import {AssociateService} from '../../services/associates-service/associates-service';
 import {Associate} from '../../models/associate.model';
 import {AutoUnsubscribe} from '../../decorators/auto-unsubscribe.decorator';
 import { ThemeConstants } from '../../constants/theme.constants';
 import { ChartsModule, Color } from 'ng2-charts';
 
+/**
+ * Data relating to Batch details chart.
+ */
 export class BarChartDataSet {
   data: number[];
   label: string;
@@ -21,6 +25,10 @@ export class BarChartDataSet {
   templateUrl: './batch-details.component.html',
   styleUrls: ['./batch-details.component.css']
 })
+
+/**
+ * Initialize chart details.
+ */
 @AutoUnsubscribe
 export class BatchDetailsComponent implements OnInit {
   chartType = 'bar';
@@ -63,7 +71,7 @@ export class BatchDetailsComponent implements OnInit {
     this.getMapStatusBatch();
   }
 
-  constructor(private route: ActivatedRoute, private batchService: BatchService) {
+  constructor(private route: ActivatedRoute, private batchService: BatchService,  private associateService: AssociateService) {
   }
 
   /**
@@ -72,14 +80,14 @@ export class BatchDetailsComponent implements OnInit {
   getMapStatusBatch() {
     this.route.params.subscribe(params => {
       const batchId: number = +params['id'];
-      console.log(batchId);
       this.isDataReady = false;
 
-      this.batchService.getAssociatesForBatch(batchId)
+      this.associateService.getAssociatesByBatch(batchId)
         .subscribe((data: Associate[]) => {
+            console.log(data);
             this.associates = data;
-            console.log('associates', this.associates);
 
+            // initiialize statuses
             const statusMap = new Map<number, number>();
             statusMap.set(1, 0);
             statusMap.set(2, 0);
@@ -94,21 +102,19 @@ export class BatchDetailsComponent implements OnInit {
             statusMap.set(11, 0);
             statusMap.set(12, 0);
             for (const assoc of this.associates) {
-              let statusCount = statusMap.get(assoc.msid);
+              let statusCount = statusMap.get(assoc.marketingStatusId);
               if (statusCount === undefined) {
                 statusCount = -1;
               }
-              statusMap.set(assoc.msid, statusCount + 1);
+              statusMap.set(assoc.marketingStatusId, statusCount + 1);
             }
 
             const mappedCount: number = statusMap.get(1) + statusMap.get(2) + statusMap.get(3) + statusMap.get(4) + statusMap.get(5);
             const unmappedCount: number  = statusMap.get(6) + statusMap.get(7) + statusMap.get(8) + statusMap.get(9) + statusMap.get(10);
 
-            const dataSets: BarChartDataSet[] = [
-              new BarChartDataSet('Mapped'),
-              new BarChartDataSet('Unmapped'),
-              new BarChartDataSet('Other')
-            ];
+            const dataSets: BarChartDataSet[] = [new BarChartDataSet('Mapped'),
+                new BarChartDataSet('Unmapped'),
+                new BarChartDataSet('Other')];
 
 
                 this.dataSets = [{
@@ -124,14 +130,9 @@ export class BatchDetailsComponent implements OnInit {
                   label: 'Other'
                 }
               ];
-
-            console.log(this.dataSets);
             this.isDataEmpty = this.associates.length === 0;
             this.isDataReady = true;
-
-            console.log(statusMap);
           },
-          console.log
         );
     });
   }

@@ -2,7 +2,9 @@
 
 import {Component, OnInit} from '@angular/core';
 import {Batch} from '../../models/batch.model';
+import {Curriculum} from '../../models/curriculum.model';
 import {BatchService} from '../../services/batch-service/batch.service';
+import {CurriculumService} from '../../services/curriculum-service/curriculum.service';
 import {ThemeConstants} from '../../constants/theme.constants';
 import {AutoUnsubscribe} from '../../decorators/auto-unsubscribe.decorator';
 import {ChartOptions, SideValues} from '../../models/ng2-charts-options.model';
@@ -27,11 +29,13 @@ export class BatchListComponent implements OnInit {
   startDate: Date;
   endDate: Date;
   batches: Batch[];
+  batchCirculumName: Curriculum;
   curriculumNames: string[];
   curriculumCounts: number[];
   dataReady = false;
   dataEmpty = false;
   batchColors: Array<Color> = ThemeConstants.BATCH_COLORS;
+  batchCirculum: Curriculum;
 
   chartOptions: ChartOptions = ChartOptions.createOptionsSpacing(
     new SideValues(-100, 0, 0, 0),
@@ -40,8 +44,11 @@ export class BatchListComponent implements OnInit {
   );
 
 
-  constructor(private batchService: BatchService) {
+  constructor(
+    private batchService: BatchService,
+    private curriculumService: CurriculumService)  {
   }
+
 
   /**
    * load default batches on initialization
@@ -51,6 +58,7 @@ export class BatchListComponent implements OnInit {
     this.dataReady = false;
     this.batchService.getDefaultBatches().subscribe(
       (batches) => {
+        console.log(batches);
         this.batches = batches;
         this.updateCountPerCurriculum();
         this.dataReady = true;
@@ -114,11 +122,14 @@ export class BatchListComponent implements OnInit {
     this.dataEmpty = this.batches.length === 0;
 
     for (const batch of this.batches) {
-      let count = curriculumCountsMap.get(batch.curriculumName);
+      this.curriculumService.getOneCurriculum(batch.curriculumId).subscribe(cr => this.batchCirculum = cr);
+
+
+      let count = curriculumCountsMap.get(this.batchCirculum.name);
       if (count === undefined) {
         count = 0;
       }
-      curriculumCountsMap.set(batch.curriculumName, count + 1);
+      curriculumCountsMap.set(this.batchCirculum.name, count + 1);
     }
 
     // note: for angular/ng2-charts to recognize the changes to chart data, the object reference has to change

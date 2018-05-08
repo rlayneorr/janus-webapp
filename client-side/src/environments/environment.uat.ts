@@ -2,7 +2,7 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'https://dev-caliber.revature.tech';
+const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000';
 const bam = 'http://18.219.59.193:9001/api/v2';
 export const environment = {
   production: false,
@@ -10,13 +10,16 @@ export const environment = {
   context: context, // change for what the production environment would actually be
   bam: bam,
   url: 'http://localhost:8085/',
+  msurl: 'http://34.227.178.103:',
+  assets: 'http://52.87.205.55:8086/angular/assets/',
+
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
     save: () => `${context}trainer/assessment/create`,
     update: () => `${context}trainer/assessment/update`,
     delete: (assessmentId: number) => `${context}trainer/assessment/delete/${assessmentId}`,
   },
-  
+
   batch: {
     fetchAllByTrainer: () => `${context}/batches/trainers`,
     fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
