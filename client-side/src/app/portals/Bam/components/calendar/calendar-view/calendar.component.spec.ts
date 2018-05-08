@@ -672,6 +672,63 @@ describe('CalendarComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
+  it ('should return the index of an existing event within the event list', () => {
+    const expectedDate: Date = new Date(2018, 1, 1, 0, 0, 0, 0);
+    const paramEvent: CalendarEvent = new CalendarEvent();
+      paramEvent.color = 'purple';
+      paramEvent.start = expectedDate;
+      paramEvent.status = 'TestStatus';
+      paramEvent.subtopicId = 0;
+      paramEvent.subtopicName = 'STopic1';
+      paramEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      new CalendarEvent(),
+      paramEvent,
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+    ];
+
+    const returnedIndex = component.eventExists(paramEvent);
+
+    expect(returnedIndex).toEqual(2);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should return -1 when an event is not found within the event list', () => {
+    const expectedDate: Date = new Date(2018, 1, 1, 0, 0, 0, 0);
+    const paramEvent: CalendarEvent = new CalendarEvent();
+      paramEvent.color = 'purple';
+      paramEvent.start = expectedDate;
+      paramEvent.status = 'TestStatus';
+      paramEvent.subtopicId = 0;
+      paramEvent.subtopicName = 'STopic1';
+      paramEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+    ];
+
+    const returnedIndex = component.eventExists(paramEvent);
+
+    expect(returnedIndex).toEqual(-1);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
   it ('should set the gotoDateValue', () => {
     const expectedDate: Date = new Date(component.fc.getDate().stripTime().format() + 'T09:00:00-05:00');
     component.gotoDateValue = new Date(2017, 1);
