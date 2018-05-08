@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Trainer } from '../../../hydra-client/entities/Trainer';
+import { HydraTrainer } from '../../../hydra-client/entities/HydraTrainer';
 
 
 @Pipe({
@@ -13,7 +13,7 @@ export class TrainerPipePipe implements PipeTransform {
    * @returns {*}
    * @memberof TrainerPipePipe
    */
-  transform(trainers: Trainer[], status: String): Trainer[] {
+  transform(trainers: HydraTrainer[], status: String): HydraTrainer[] {
     if (status === 'ROLE_INACTIVE') {
       return trainers.filter(trainer => trainer.role.role === status);
     } else {
