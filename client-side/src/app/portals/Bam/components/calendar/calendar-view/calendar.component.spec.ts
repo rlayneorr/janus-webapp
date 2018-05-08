@@ -32,7 +32,7 @@ import { CalendarEvent } from '../../../models/calendar-event.model';
 import { Subscription } from 'rxjs/Subscription';
 import { By } from '@angular/platform-browser';
 
-fdescribe('CalendarComponent', () => {
+describe('CalendarComponent', () => {
   let component: CalendarComponent;
   let fixture: ComponentFixture<CalendarComponent>;
 
@@ -606,6 +606,66 @@ fdescribe('CalendarComponent', () => {
 
     expect(component.events[2]).toEqual(expectedEvent);
     expect(returnedIndex).toEqual(2);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should remove the event at index 2 from the list of events', () => {
+    const expectedDate: Date = new Date();
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      new CalendarEvent(),
+      expectedEvent,
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+    ];
+
+    component.removeEvent(2);
+
+    expect(component.events[2]).toEqual(new CalendarEvent());
+    expect(component.events.length).toEqual(5);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should remove the event at index 2 from the list of events', () => {
+    const expectedDate: Date = new Date(2018, 1, 1, 0, 0, 0, 0);
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      expectedEvent,
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+    ];
+    component.overridenDate = new Date(1970, 1, 1, 0, 0, 0, 0);
+
+    component.removeEvent(0);
+
+    expect(component.events[0]).toEqual(expectedEvent);
+    expect(component.events.length).toEqual(5);
+    expect(component.overridenDate).toEqual(expectedDate);
   });
 
   /**
