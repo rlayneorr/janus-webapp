@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { assertNotNull } from '@angular/compiler/src/output/output_ast';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 
  describe('AssociateService', () => {
     // tslint:disable:prefer-const
@@ -14,7 +15,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
     let assoList = new Array<Associate>();
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [AssociateService, HttpClient, HttpHandler],
+            providers: [AssociateService, HttpClient, HttpHandler, UrlService],
             imports: [HttpClientModule, HttpClientTestingModule]
 
         });
@@ -63,24 +64,19 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
     }));
 
-    // testing update associate
-    // fix this, works with hyddratrainee do not know if i should fix this or not
-//     it('Should update associate with id 2', inject([AssociateService], (serv: AssociateService) => {
-//         let asso = new Associate();
-//         asso.associateId = 2;
-//         asso.associateFirstName = 'First';
-//         asso.associateLastName = 'Last';
-//         asso.batchId = 1;
-//         asso.clientId = 2;
-//         asso.endClientId = 2;
-//         asso.marketingStatusId = 1;
-//         console.log(asso);
-//         console.log(asso2);
-//          spyOn(serv, 'updateAssociate').and.returnValue(Observable.of(asso));
-//          console.log(Observable.of(asso));
-//          serv.updateAssociate(asso2.id, 'mocks', 'rev').subscribe(data => expect(data).toEqual(asso));
-//          expect(serv.updateAssociate).toHaveBeenCalled();
-//   }));
-    // No need for testing multiple associates being updated at the same time.
+    it('should get associates with  marketing status id 1', inject([AssociateService], (serv: AssociateService) => {
+        // console.log(assoList);
+        spyOn( serv, 'getAssociatesByStatus').and.returnValue(Observable.of(assoList));
+        serv.getAssociatesByStatus(1).subscribe(data => expect(data).toContain(asso2, associate));
+        expect(serv.getAssociatesByStatus).toHaveBeenCalled();
+    }));
+
+    it('should get associates with client id 2', inject([AssociateService], (serv: AssociateService) => {
+        // console.log(assoList);
+        spyOn( serv, 'getAssociatesByClient').and.returnValue(Observable.of(assoList));
+        serv.getAssociatesByClient(2).subscribe(data => expect(data).toContain(asso2));
+        expect(serv.getAssociatesByClient).toHaveBeenCalled();
+    }));
+
 
 });
