@@ -392,6 +392,40 @@ fdescribe('CalendarComponent', () => {
    * @author Holden Olivier
    * @batch 1803 usf
    */
+  it ('should also set properties related to tooltips, but without entering the if statement', () => {
+    const paramEvent = {
+      view: {name: 'notMonth'},
+      calEvent: new CalendarEvent(),
+      jsEvent: {target: {getBoundingClientRect() {return {top: 0}; }}, clientX: 0}
+    };
+    paramEvent.calEvent.color = 'TestColor';
+    paramEvent.calEvent.start = new Date(0, 0, 0, 3, 44, 0, 0);
+    paramEvent.calEvent.status = 'TestStatus';
+    paramEvent.calEvent.subtopicId = 0;
+    paramEvent.calEvent.subtopicName = 'STopic1';
+    paramEvent.calEvent.title = 'TestTitle';
+
+    component.handleEventMouseover(paramEvent);
+
+    // handleEventMouseover seems to call the non-existant function of Date.format()
+    // spyOn(paramEvent.calEvent.start, 'format').and.returnValue('3:44 0');
+
+    expect(component.subtopicTooltip).toEqual('TestTitle');
+    expect(component.statusTooltip).toEqual('TestStatus');
+    expect(component.timeTooltip).toEqual('3:44 0');
+
+    expect(component.status.nativeElement.style.background).toEqual('purple');
+    expect(component.tooltip.nativeElement.style.display).toEqual('inline');
+    expect(component.tooltip.nativeElement.style.top).toEqual((0 - component.body.nativeElement.getBoundingClientRect().top + 120) +
+     'px');
+    expect(component.tooltip.nativeElement.style.left).toEqual('0px');
+    expect(component.tooltip.nativeElement.style.pointerEvents).toEqual('none');
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
   it ('should set tooltip display to none', () => {
     component.tooltip.nativeElement.style.display = 'Test';
 
@@ -425,6 +459,95 @@ fdescribe('CalendarComponent', () => {
     const returnedEvent: CalendarEvent = component.mapSubtopicFromEvent(paramEvent);
 
     expect(returnedEvent).toEqual(expectedEvent);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should update the calendarEvent at index 2 with data from the provided calendarEvent', () => {
+    const expectedDate: Date = new Date();
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent()
+    ];
+
+    spyOn(component, 'eventExists').and.returnValue(2);
+
+    component.updateEvent(expectedEvent);
+
+    expect(component.events[2].start).toEqual(expectedEvent.start);
+    expect(component.events[2].status).toEqual(expectedEvent.status);
+    expect(component.events[2].color).toEqual(expectedEvent.color);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should update the calendarEvent at index 0 with data from the provided calendarEvent, and ', () => {
+    const expectedDate: Date = new Date();
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent(),
+      new CalendarEvent()
+    ];
+
+    spyOn(component, 'eventExists').and.returnValue(0);
+
+    component.updateEvent(expectedEvent);
+
+    expect(component.events[0].start).toEqual(expectedEvent.start);
+    expect(component.overridenDate).toEqual(expectedEvent.start);
+    expect(component.events[0].status).toEqual(expectedEvent.status);
+    expect(component.events[0].color).toEqual(expectedEvent.color);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should add the provided calendarEvent to the list of events', () => {
+    const expectedDate: Date = new Date();
+    const expectedEvent: CalendarEvent = new CalendarEvent();
+      expectedEvent.color = 'purple';
+      expectedEvent.start = expectedDate;
+      expectedEvent.status = 'TestStatus';
+      expectedEvent.subtopicId = 0;
+      expectedEvent.subtopicName = 'STopic1';
+      expectedEvent.title = 'TestTitle';
+
+    component.events = [
+      new CalendarEvent(),
+      new CalendarEvent(),
+    ];
+
+    spyOn(component, 'eventExists').and.returnValue(-1);
+
+    component.updateEvent(expectedEvent);
+
+    expect(component.events[2]).toEqual(expectedEvent);
   });
 
   /**
