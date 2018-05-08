@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Question } from '../entities/Question';
+import { Question } from '../../entities/Question';
 
 const httpOptions = {
 headers: new HttpHeaders({

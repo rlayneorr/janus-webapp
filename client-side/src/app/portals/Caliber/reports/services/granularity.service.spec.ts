@@ -14,16 +14,16 @@ import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillTy
 /**
  * Tested by Mythoua Chang
  */
-fdescribe('GranularityService', () => {
+describe('GranularityService', () => {
     beforeEach(() => {
       TestBed.configureTestingModule(Dependencies);
     });
 
-    fit('should be created', inject([GranularityService], (service: GranularityService) => {
+    it('should be created', inject([GranularityService], (service: GranularityService) => {
       expect(service).toBeTruthy();
     }));
 
-    fit('pushTrainee(mythoua) should set the currentTrainee to true (it`s not null)',
+    it('pushTrainee(mythoua) should set the currentTrainee to true (it`s not null)',
         inject([GranularityService], (service: GranularityService) => {
         const mythoua = new HydraTrainee;
         mythoua.resourceId = 1;
@@ -35,7 +35,7 @@ fdescribe('GranularityService', () => {
         expect(service['currentTrainee'].last()).toBeTruthy();
     }));
 
-    fit('pushBatch(batch) should set the the currentBatch to true (it`s not null anymore)',
+    it('pushBatch(batch) should set the the currentBatch to true (it`s not null anymore)',
         inject([GranularityService], (service: GranularityService) => {
         const batch = new CompleteBatch;
         const john = new Trainer;
@@ -54,14 +54,14 @@ fdescribe('GranularityService', () => {
         expect(service['currentBatch'].last()).toBeTruthy();
     }));
 
-    fit('pushWeek(week) should set the the week to true, (it`s not null anymore)',
+    it('pushWeek(week) should set the the week to true, (it`s not null anymore)',
         inject([GranularityService], (service: GranularityService) => {
         service['currentWeek'].next(null);
         service.pushWeek(1);
         expect(service['currentWeek'].last()).toBeTruthy();
     }));
 
-    fit('pushReady(true) should set the ready to be true, (it`s not null anymore)',
+    it('pushReady(true) should set the ready to be true, (it`s not null anymore)',
         inject([GranularityService], (service: GranularityService) => {
         service['ready'].next(null);
         service.pushReady(true);
