@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import {User} from '../../models/user.model';
 import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 
 @Injectable()
 export class RequestService {
@@ -13,7 +14,7 @@ export class RequestService {
   trackPath: string = this.host + 'TrackForce/track';
   dataPath: string = this.host + 'TrackForce/track/data/get';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private us: UrlService) { }
 
   public populateDB(): Observable<any> {
     return this.http.get(this.host + 'TrackForce/track/database/populateDB');
@@ -28,7 +29,7 @@ export class RequestService {
   }
 
   public getAssociates(): Observable<any> {
-    return this.http.get(this.dataPath + '/associate');
+    return this.http.get(this.us.users.getAllUsersUrl());
   }
 
   public login(username: string, password: string): Observable<User> {
@@ -46,7 +47,7 @@ export class RequestService {
 
 
   public getBatchesSortedById(): Observable<any> {
-    return this.http.get(this.dataPath + '/batch');
+    return this.http.get(this.us.batches.fetchAll());
   }
 
   public getBatchesSortedByDate(): Observable<any> {
@@ -70,7 +71,7 @@ export class RequestService {
   }
 
   public getBatches(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {
-    return this.http.get<any>(this.host + 'TrackForce/track/batches/' + threeMonthsBefore + '/' + threeMonthsAfter);
+    return this.http.get<any>(this.host + '/batches');
   }
 
   public getBatchPerType(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {

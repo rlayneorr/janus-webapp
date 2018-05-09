@@ -11,7 +11,7 @@ export const environment = {
 
   context: context,
   bam: bam,
-  url: 'http://localhost:80/',
+  url: 'http://localhost:10000',
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,

@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ClientMappedService } from './client-mapped-service';
 
-xdescribe('ClientMappedServiceService', () => {
+fdescribe('ClientMappedServiceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ClientMappedService],
@@ -15,4 +15,9 @@ xdescribe('ClientMappedServiceService', () => {
   it('should be created', inject([ClientMappedService], (service: ClientMappedService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('Should check that it exists',  inject([ClientMappedService], (service: ClientMappedService) => {
+    expect(service.getAssociatesByStatus).toBeTruthy();
+  }));
+
 });
