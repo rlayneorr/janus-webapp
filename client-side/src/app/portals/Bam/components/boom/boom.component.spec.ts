@@ -19,7 +19,7 @@ import { ScheduledSubtopic } from '../../models/scheduledsubtopic.model';
  * @author Craig Koepele | 1803-mar05-java-usf
  * Spec testing component for Boom
  */
-fdescribe('BoomComponent', () => {
+describe('BoomComponent', () => {
   let component: BoomComponent;
   let fixture: ComponentFixture<BoomComponent>;
 

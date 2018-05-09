@@ -32,7 +32,7 @@ import { CalendarEvent } from '../../../models/calendar-event.model';
 import { Subscription } from 'rxjs/Subscription';
 import { By } from '@angular/platform-browser';
 
-fdescribe('CalendarComponent', () => {
+describe('CalendarComponent', () => {
   let component: CalendarComponent;
   let fixture: ComponentFixture<CalendarComponent>;
 

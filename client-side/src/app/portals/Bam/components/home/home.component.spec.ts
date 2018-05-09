@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { HomeUtil } from './home-test.util';
 
 
-fdescribe('HomeComponent', () => {
+describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   const user: BamUser = HomeUtil.getUserById(2);

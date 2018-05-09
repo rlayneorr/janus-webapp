@@ -81,14 +81,14 @@ it(
    fixture.debugElement.triggerEventHandler('messageEvent', <Event>{});
  });
 
- it(
+ xit(
    'should view the curriculum schedule', async() => {
 
 
 
    });
 
-  fit(
+  xit(
     'should update', async() => {
 
   const subArr: Array<CurriculumSubtopic> = new Array();
