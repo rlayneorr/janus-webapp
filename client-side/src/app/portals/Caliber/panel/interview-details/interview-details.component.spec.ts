@@ -20,5 +20,4 @@ xdescribe('InterviewDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-
 });
