@@ -2,16 +2,20 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000';
+const context = 'http://localhost:10000';
 const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
 
-  gambitContext: 'http://localhost:8080',
+  gambitContext: 'http://localhost:10000',
 
   context: context,
   bam: bam,
-  url: 'http://localhost:80/',
+  url: 'http://54.166.255.85:8085/',
+  msurl: 'http://34.227.178.103:',
+
+  assets: 'http://52.87.205.55:8086/angular/assets/',
+  // assets: '../../../../../assets/', //url for local testing
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
