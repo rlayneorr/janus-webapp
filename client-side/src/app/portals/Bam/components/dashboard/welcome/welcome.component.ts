@@ -23,8 +23,8 @@ export class WelcomeComponent implements OnInit {
   public currentUser: BamUser;
   public message: String;
   public batchCount: number;
-  private batches: Batch [];
-  private selectedBatch: Batch;
+  public batches: Batch [];
+  public selectedBatch: Batch;
 
   constructor(private batchService: BatchService,
               private sessionService: SessionService,
@@ -94,9 +94,4 @@ export class WelcomeComponent implements OnInit {
   compareBatch(b1: Batch, b2: Batch): boolean {
     return b1 && b2 ? b1.id === b2.id : b1 === b2;
  }
-
- add(a, b) {
-   return a + b;
- }
-
 }

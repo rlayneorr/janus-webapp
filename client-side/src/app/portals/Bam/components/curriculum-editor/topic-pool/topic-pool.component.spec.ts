@@ -13,21 +13,27 @@ import { TopicName } from '../../../models/topicname.model';
 import { TopicService } from '../../../services/topic.service';
 import { AlertService } from '../../../services/alert.service';
 import { By } from '@angular/platform-browser';
+import { CurriculumService } from '../../../services/curriculum.service';
 
-fdescribe('TopicPoolComponent', () => {
+describe('TopicPoolComponent', () => {
   let component: TopicPoolComponent;
   let fixture: ComponentFixture<TopicPoolComponent>;
 
   let parentTopic: Topic;
   let notParentTopic: Topic;
 
+  let curricService: CurriculumService = null;
+
   // Used to tell the spy on searchTextService.getMessage() what it should return during a unit test.
-  const typeReturn: string = null;
+  let typeReturn: string = null;
+  // Used to tell curriculumService.getAllTopicPool what type of observable to return
+  let getTopicErrorObserv = false;
 
   // Spies for checking if a function on an other inaccessible service has been called.
   let searchTextSendSpy: jasmine.Spy = null;
   let dndSendSpy: jasmine.Spy = null;
   let alertSpy: jasmine.Spy = null;
+  let subtopicAddSubtopicSpy: jasmine.Spy = null;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
@@ -43,6 +49,7 @@ fdescribe('TopicPoolComponent', () => {
     const searchTextService: SearchTextService = TestBed.get(SearchTextService);
     const dndService: DragndropService = TestBed.get(DragndropService);
     const alertService: AlertService = TestBed.get(AlertService);
+    const curriculumService: CurriculumService = TestBed.get(CurriculumService);
 
     spyOn(topicService, 'addTopicName').and.callFake((value: string) => {
       const ret: TopicName = { id: 1, name: value };
@@ -65,7 +72,7 @@ fdescribe('TopicPoolComponent', () => {
     ]
     ));
 
-    spyOn(subtopicService, 'addSubTopicName').and.callFake((stName: string, topicId: number, typeId: number) => {
+    subtopicAddSubtopicSpy = spyOn(subtopicService, 'addSubTopicName').and.callFake((stName: string, topicId: number, typeId: number) => {
       const topic: Topic = { topicID: topicId, topicName: stName };
 
       if (topic.topicName === 'John') {
@@ -77,10 +84,12 @@ fdescribe('TopicPoolComponent', () => {
     });
 
     spyOn(searchTextService, 'getMessage').and.callFake(() => {
-      if (this.typeReturn === 'topic') {
+      if (typeReturn === 'topic') {
         return Observable.of({ type: 'topic', text: 'prim' });
-      } else if (this.typeReturn === 'subtopic') {
+      } else if (typeReturn === 'subtopic') {
         return Observable.of({ type: 'subtopic', text: 'sub' });
+      } else {
+        return Observable.of({ type: 'nothing', text: 'tert' });
       }
     }).bind(this);
     searchTextSendSpy = spyOn(searchTextService, 'sendMessage');
@@ -88,6 +97,16 @@ fdescribe('TopicPoolComponent', () => {
     alertSpy = spyOn(alertService, 'alert');
 
     dndSendSpy = spyOn(dndService, 'sendSubtopic');
+
+    curricService = curriculumService;
+    spyOn(curriculumService, 'getAllTopicPool').and.callFake(() => {
+      if (getTopicErrorObserv) {
+        return Observable.throw({status: 'This is a message that should be seen \
+        when an error observable is returned by curriculumService.getAllTopicPool()'});
+      } else {
+        return Observable.of([]);
+      }
+    });
 
     fixture = TestBed.createComponent(TopicPoolComponent);
     component = fixture.componentInstance;
@@ -213,7 +232,7 @@ fdescribe('TopicPoolComponent', () => {
    */
   it('should set uniqarrFiltered to only contain values which include the provided text', () => {
     // Configure the spy on searchTextService.getMessage to return the data type of 'topic'
-    this.typeReturn = 'topic';
+    typeReturn = 'topic';
 
     const inputArr: string[] = ['primary', 'salutation', 'prime', 'secondus', 'primate'];
     const expected: string[] = ['primary', 'prime', 'primate'];
@@ -230,9 +249,27 @@ fdescribe('TopicPoolComponent', () => {
    */
   it('should set searchText to provided text', () => {
     // Configure the spy on searchTextService.getMessage to return the data type of 'subtopic'
-    this.typeReturn = 'subtopic';
+    typeReturn = 'subtopic';
     component.initFilterTopicListener();
     expect(component.searchText).toEqual('sub');
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should do absolutely nothing', () => {
+    typeReturn = 'nothing';
+    component.searchText = 'Testing';
+    component.uniqarrFiltered = null;
+
+    spyOn(component, 'getSubTopics');
+
+    component.initFilterTopicListener();
+
+    expect(component.searchText).toEqual('Testing');
+    expect(component.uniqarrFiltered).toEqual(null);
+    expect(component.getSubTopics).not.toHaveBeenCalled();
   });
 
   /**
@@ -317,5 +354,156 @@ fdescribe('TopicPoolComponent', () => {
 
     event = undefined;
     expect(component.selectedTopicId).toEqual(1);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it('should add subtopic to topicPoolCacheData, topic name to uniqarrFiltered, and alert user', () => {
+    spyOn(component, 'getSubTopics');
+
+    const subTopic: Topic = { topicID: 1, topicName: 'John' };
+
+    component.selectedTopicId = 1;
+    component.createSubTopic(subTopic.topicName);
+
+    expect(component.topicPoolCacheData).toContain(subTopic);
+    expect(component.getSubTopics).toHaveBeenCalled();
+    expect(alertSpy).toHaveBeenCalled();
+    expect(component.selectedTopicId).toEqual(0);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should alert user an error occured if addSubTopicName returns an error observable', () => {
+    spyOn(component, 'getSubTopics');
+
+    const subTopic: Topic = { topicID: 1, topicName: 'Jayn' };
+
+    component.selectedTopicId = 1;
+    component.createSubTopic(subTopic.topicName);
+
+    expect(component.getSubTopics).not.toHaveBeenCalled();
+    expect(alertSpy).toHaveBeenCalled();
+    expect(component.selectedTopicId).toEqual(0);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should do nothing if newSubTopic.length is less than 2', () => {
+    component.selectedTopicId = 500;
+    component.createSubTopic('K');
+
+    expect(component.selectedTopicId).toEqual(500);
+    expect(subtopicAddSubtopicSpy).not.toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should call getTopics()', () => {
+    spyOn(component, 'getTopics');
+    component.ngOnInit();
+    expect(component.getTopics).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should go through all the steps to get all topics', () => {
+    // Set up for topicPoolCacheData to be what we need it to be.
+    const tempArr: Array<Topic> = new Array<Topic>();
+    curricService.currentTopicPoolData = Observable.of(tempArr);
+
+    // We're testing a successful observable, not an error.
+    getTopicErrorObserv = false;
+
+    // Setting up the spies
+    spyOn(console, 'log');
+    spyOn(component, 'initTopics');
+    spyOn(component, 'uniqueTopics');
+    spyOn(component, 'getSubTopics');
+    spyOn(component, 'initFilterTopicListener');
+    spyOn(component, 'clearTopic');
+
+    // Call the function
+    component.getTopics();
+
+    // Test for expected results
+    expect(component.topicPoolCacheData).toEqual(tempArr);
+    expect(console.log).not.toHaveBeenCalled();
+    expect(component.initTopics).toHaveBeenCalled();
+    expect(component.uniqueTopics).toHaveBeenCalled();
+    expect(component.getSubTopics).toHaveBeenCalled();
+    expect(component.initFilterTopicListener).toHaveBeenCalled();
+    expect(component.clearTopic).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should enter the if statement and receive an error observable', () => {
+    // Set up for topicPoolCacheData to be what we need it to be.
+    const tempArr: Array<Topic> = new Array<Topic>();
+    curricService.currentTopicPoolData = Observable.of(tempArr);
+
+    // Set getAllTopicPool to return an eror observable
+    getTopicErrorObserv = true;
+
+    // Setting up the spies
+    spyOn(console, 'log');
+
+    // Call the function
+    component.getTopics();
+
+    // Test for expected results
+    expect(component.topicPoolCacheData).toEqual(tempArr);
+    expect(console.log).toHaveBeenCalled();
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should go into the else statement and set subTopicName to the provided array', () => {
+    // Set up for topicPoolCacheData to be what we need it to be.
+    const tempArr: Array<Topic> = new Array<Topic>();
+    const arrayLength = 5;
+    for (let index = 0; index < arrayLength; index++) {
+      const element: Topic = new Topic();
+      element.topicID = index;
+      element.topicName = 'Topic: ' + index;
+
+      tempArr.push(element);
+    }
+    curricService.currentTopicPoolData = Observable.of(tempArr);
+
+    // We're testing a successful observable, not an error.
+    getTopicErrorObserv = false;
+
+    // Setting up the spies
+    spyOn(component, 'initTopics');
+    spyOn(component, 'uniqueTopics');
+    spyOn(component, 'getSubTopics');
+    spyOn(component, 'initFilterTopicListener');
+
+    // Call the function
+    component.getTopics();
+
+    // Test for expected results
+    expect(component.topicPoolCacheData).toEqual(tempArr);
+    expect(component.subTopicName).toEqual(tempArr);
+    expect(component.initTopics).toHaveBeenCalled();
+    expect(component.uniqueTopics).toHaveBeenCalled();
+    expect(component.getSubTopics).toHaveBeenCalled();
+    expect(component.initFilterTopicListener).toHaveBeenCalled();
   });
 });
