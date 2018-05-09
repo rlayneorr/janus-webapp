@@ -6,118 +6,160 @@ import { UrlService } from '../urls/url.service';
 import { Building } from '../../entities/location-entities/Building';
 import { Room } from '../../entities/location-entities/Room';
 import { Unavailability } from '../../entities/location-entities/Unavailability';
+import { ColdObservable } from 'rxjs/testing/ColdObservable';
+import { from } from 'rxjs/observable/from';
 
 
 @Injectable()
+/**
+ * The Location Service provides methods for other elements to access data related
+ * to the geographical locations used by trainers and batches -- locations,
+ * buildings, and rooms.
+ * @author Luis Muñoz
+ * @author Lex Gospodinoff
+ * @author Tanhim Ahmed
+ */
 export class LocationService {
 
   header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
 
-  // Injecting UrlService and HttpClient into LocationService constructor //
+  // Injecting UrlService and HttpClient into LocationService constructor
   constructor(private httpClient: HttpClient, private urls: UrlService) { }
 
-  // get all Locations //
-  getAllLocations() {
-    return this.httpClient.get<Location[]>(this.urls.location.getAllLocations());
-  }
 
-  // get Location by Id //
+
+  // Methods for locations
+  /**Sends an HTTP request to the location service backend, and returns an observable
+   * of an array of all locations. */
+  getAllLocations() {
+    return this.httpClient.get<Array<Location>>(this.urls.location.getAllLocations());
+  }
+  /**Takes a locationId (number) and returns an observable of that location object
+   * from the database. */
   getLocationById(location: any) {
     return this.httpClient.get<Location>(this.urls.location.getLocationById(location));
   }
-  // set new Location //
+  /**Takes a location object and creates a new location in the database using that data.
+   * Returns an observable of the new location returned from the database. */
   newLocation(location: Location) {
     return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location), {headers: this.header});
   }
-  // update the location //
+  /**Takes a location object, including the locationId field, and updates the database
+   * location with that ID with the data in the location object. Returns an observable
+   * of the updated location object from the database. */
   updateLocation(location: Location) {
     return this.httpClient.put<Location>(this.urls.location.putLocationById(location.locationId),
       JSON.stringify(location), {headers: this.header});
   }
-  // set location as inactive //
+  /**Takes a location object, including a locationId. Sets the location corresponding to
+   * that ID to be inactive in the database, such that it will no longer be returned
+   * in searches. Returns an observable of the deactivated location object from the database. */
   deleteLocation(location: Location) {
     return this.httpClient.delete<Location>(this.urls.location.deleteLocationById(location.locationId));
   }
 
-  // Get all Buildings. This one is independent from Locations.
+
+
+  // Methods for buildings
+  /**Sends an HTTP request to the backend, and returns an observable of an array of all
+   * buildings in the database, regardless of location. */
   getAllBuildings() {
     return this.httpClient.get<Array<Building>>(this.urls.building.getAllBuildings());
   }
-  // Get all buildings by Location ID. This is dependent on a location's Id //
+  /**Takes a locationId (number) and returns an observable of an array of all buildings present
+   * at that location. */
   getBuildingsByLocationId(locationId: any) {
     return this.httpClient.get<Array<Building>>(this.urls.building.getBuildingsByLocationId(locationId));
   }
-  // Returns a singular location by its ID. This has no corelation with locations //
+  /**Takes a buildingId (number) and returns an observable of that building from the database. */
   getBuildingById(buildingId: any) {
     return this.httpClient.get<Building>(this.urls.building.getBuildingById(buildingId));
   }
-  // set new Building //
+  /**Takes a building object and creates a new building in the database using that data.
+   * Returns an observable of the new building from the database. */
   newBuilding(building: Building) {
     return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building), {headers: this.header});
   }
-  // update Building //
+  /**Takes a building object, including the buildingId field, and updates the database
+   * building with that ID with the data in the building object. Returns an observable
+   * of the updated building object from the database. */
   updateBuilding(building: Building) {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
       JSON.stringify(building), {headers: this.header});
   }
-  // // set Building as inactive //
+  // // Deactivate a building
   // deleteBuilding(building: Building) {
-  //   return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
-  //     (payload) => {
-  //       // console.log('Logging deleteBuilding from service:  ' + JSON.stringify(payload));
-  //       this.location.next(payload);
-  //     }
-  //   );
+  //   return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
   // }
 
 
-  // get all Rooms //
+
+  // Methods for rooms
+  /**Sends an HTTP request to the backend, and returns an observable of an array of
+   * all rooms, regardless of building or location. */
   getAllRooms() {
     return this.httpClient.get<Array<Room>>(this.urls.room.getAllRooms());
   }
-  // get Room by Id //
-  getRoomById(room: any) {
-    return this.httpClient.get<Room>(this.urls.room.getRoomById(room));
-  }
-  // // get all Rooms in a Location //
-  // getRoomsByLocationId(locationId: any) {
-  //   return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByLocationId(locationId))
-  //   .subscribe((payload) => {
-  //     this.rooms.next(payload);
-  //     console.log(payload);
-  //   });
-  // }
-  // get all Rooms in a Building //
+  /**Takes a buildingId (number) and returns an observable of an array of all rooms
+   * belonging to that building. */
   getRoomsByBuildingId(buildingId: any) {
     return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId));
   }
-  // set new Room //
+  /**Takes a roomId (number) and returns an observable of that room object from the database. */
+  getRoomById(roomId: any) {
+    return this.httpClient.get<Room>(this.urls.room.getRoomById(roomId));
+  }
+  // /**Temporary function for getting all rooms in a given location using multiple AJAX calls.
+  //  * Inefficient but can be used until comparable functionality is implemented in the
+  //  * location microservice. */
+  // getRoomsByLocationId(locationId: number) {
+  //   const observeBuildings = this.getBuildingsByLocationId(locationId);
+  //   const observeRooms = observeBuildings.flatMap((buildingArray: Building[]) => {
+  //     return this.getRoomsFromBuildings(buildingArray);
+  //   });
+  //   return observeRooms;
+  // }
+  // /**Helper method for the above. */
+  // private getRoomsFromBuildings(buildsArray: Array<Building>) {
+  //   let roomsObserve = from(new Array<Array<Room>>());
+  //   buildsArray.forEach((building) => {
+  //     roomsObserve = roomsObserve.merge(this.getRoomsByBuildingId(building.buildingId));
+  //   });
+  //   return roomsObserve;
+  // }
+  // /**This method can be swapped in for the above when the location microservice is able
+  //  * to provide the appropriate data. */
+  // getRoomsByLocationId(locationId: any) {
+  //   return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByLocationId(locationId));
+  // }
+  /**Takes a room object and creates a new room in the database using that data. Returns an
+   * observable of the new room from the database. */
   newRoom(room: Room) {
     return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room), {headers: this.header});
   }
-  // update Room //
+  /**Takes a room object, including the roomId, and updates the database object with that
+   * roomId using the information in the room object. Returns an observable of the updated
+   * room from the database. */
   updateRoom(room: Room) {
     return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room),
       {headers: this.header});
   }
-  // // set Room as inactive //
+  // // Deactivate a room
   // deleteRoom(room: Room) {
-  //   return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
-  //     (payload) => {
-  //       // console.log('Logging deleteRoom from service:  ' + JSON.stringify(payload));
-  //       this.location.next(payload);
-  //     }
-  //   );
+  //   return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId));
   // }
 
 
-  // get all Unavailabilities //
+
+  /**Makes an HTTP request to the location service backend, returning an observable of an
+   * array of all unavailabilities in the database. */
   getAllUnavailabilities() {
     return this.httpClient.get<Array<Unavailability>>(this.urls.unavailability.getAllUnavailabilities());
   }
-  // post Unavailability //
+  /**Takes an unavailability object and creates a new unavailability in the database using
+   * that data. Returns an observable of the new unavailability from the database. */
   newUnavailability(unavailability: any) {
-    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability),
-      {headers: this.header});
+    return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(),
+      JSON.stringify(unavailability), {headers: this.header});
   }
 }
