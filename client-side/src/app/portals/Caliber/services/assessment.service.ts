@@ -157,11 +157,7 @@ export class AssessmentService implements CRUD<Assessment> {
    * @param assessment: Assessment
    */
   public delete(assessment: Assessment): Observable<any> {
-<<<<<<< HEAD
-    const result = this.http.delete(urls.assessment.delete(assessment.assessmentId)).subscribe(res => {
-=======
     const result = this.http.delete(context.delete(assessment.assessmentId)).subscribe(res => {
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
       this.deletedSubject.next(assessment);
     });
     return this.deletedSubject.asObservable();

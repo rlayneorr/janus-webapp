@@ -10,23 +10,13 @@ import { Subscription } from 'rxjs/Subscription';
 
 // entities
 import { Panel } from '../../entities/Panel';
-<<<<<<< HEAD
-import { Batch } from '../../entities/Batch';
-=======
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
 
 // services
 import { BatchService } from '../../services/batch.service';
 import { PanelService } from '../../services/panel.service';
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
 @Component({
   selector: 'app-interview-details',
   templateUrl: './interview-details.component.html',
@@ -69,17 +59,6 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
     this.traineeSubscription = this.searchBar.getTraineeSubject().subscribe((trainee) => {
       this.trainee = trainee;
     });
-
-    // this.batchSubscription = this.batchService.getList().subscribe((batchList) => {
-    //   this.batchList = batchList;
-    //   for (let i = 0; i < this.batchList.length; i++) {
-    //     for (let j = 0; j < this.batchList[i].trainees.length; j++) {
-    //       if (this.batchList[i].trainees[j].name === this.trainee.name) {
-    //         this.trainingTrack = this.batchList[i].skillType;
-    //       }
-    //     }
-    //   }
-    // });
 
     this.panelService.listSubject.asObservable().subscribe((panelList) => {
       this.panelList = panelList;

@@ -94,13 +94,8 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
     this.trainee = trainee;
     this.panelService.fetchAllByTrainee(trainee);
     this.traineeSubject.next(this.trainee);
-<<<<<<< HEAD
-    this.name = this.trainee.name;
-    this.traineeService.pushToSaved(this.trainee);
-=======
     this.name = this.trainee.traineeUserInfo.firstName;
    // this.traineeService.pushToSaved(this.trainee);  // set selected trainee to savedSubject in traineeservice
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
   }
 
   /**
@@ -116,11 +111,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
         this.trainee = this.traineeList[i];
         this.panelService.fetchAllByTrainee(this.trainee);
         this.traineeSubject.next(this.trainee);
-<<<<<<< HEAD
-        this.traineeService.pushToSaved(this.trainee);
-=======
     //    this.traineeService.pushToSaved(this.trainee); // set selected trainee to savedsubject in traineeservice
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
       }
     }
   }

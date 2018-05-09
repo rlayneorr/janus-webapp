@@ -56,17 +56,10 @@ export class TraineeService implements CRUD<Trainee> {
     this.fetchAll(batchId);
   }
 
-<<<<<<< HEAD
-  public fetchAll(batchId: number) {
-    this.http.get<any[]>(urls.trainee.fetchAllByBatch(batchId))
-      .subscribe((results) => this.listSubject.next(results));
-    return this.listSubject.asObservable();
-=======
    public fetchAll(batchId: number) {
     this.http.get<any[]>(context.fetchAllByBatch(batchId))
        .subscribe((results) => this.listSubject.next(results));
      return this.listSubject.asObservable();
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
   }
 
   fetchDroppedByBatch(batchId: number) {

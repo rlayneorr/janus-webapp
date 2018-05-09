@@ -33,45 +33,6 @@ export class CategoryService implements CRUD<Category> {
     =====================
   */
 
-<<<<<<< HEAD
-  /**
-   * Retrieves all categories
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-   *
-   */
-  public fetchAll(): Observable<Category[]> {
-    this.httpClient.get<Category[]>(urls.category.fetchAll()).subscribe(res => this.listSubject.next(res));
-    return this.listSubject.asObservable();
-  }
-
-  /**
-   * Retrieves all ACTIVE categories
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-   *
-   */
-  public fetchAllActive(): Observable<Category[]> {
-    const url = urls.category.fetchAllActive();
-    this.httpClient.get<Category[]>(url)
-      .subscribe((results) => this.listSubject.next(results));
-    return this.listSubject.asObservable();
-  }
-
-  /**
-   * Retrieves a category by its ID
-   *
-   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-   *
-   * @param id: number
-   *
-   * @return Observable<Category>
-   */
-  public fetchById(id: number): Observable<Category> {
-    const url = urls.category.fetchById(id);
-    return this.httpClient.get<Category>(url);
-  }
-=======
 /**
  * retrieves all categories
  *
@@ -109,7 +70,6 @@ export class CategoryService implements CRUD<Category> {
    const url = environment.category.fetchById(id);
    return this.httpClient.get<Category>(url);
  }
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
 
   /**
   * Transmits a new Category to be created.

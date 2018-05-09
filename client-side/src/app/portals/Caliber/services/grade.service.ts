@@ -106,12 +106,7 @@ export class GradeService implements CRUD<Grade> {
    * @param grade: Grade
    */
   public save(grade: Grade): Observable<Grade> {
-<<<<<<< HEAD
-    this.httpClient.post<Grade>(urls.grade.save(), this.prepareForApi(grade)).subscribe(
-      res => this.saveSubject.next(res));
-=======
     this.httpClient.post<Grade>(context.save(), this.prepareForApi(grade)).subscribe(res => this.saveSubject.next(res));
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
     return this.saveSubject.asObservable();
   }
 
@@ -124,12 +119,7 @@ export class GradeService implements CRUD<Grade> {
    * @param grade: Grade
    */
   public update(grade: Grade): Observable<Grade> {
-<<<<<<< HEAD
-    this.httpClient.post<Grade>(urls.grade.update(), this.prepareForApi(grade)).subscribe(
-      data => this.saveSubject.next(data));
-=======
     this.httpClient.post<Grade>(context.update(), this.prepareForApi(grade)).subscribe(data => this.saveSubject.next(data));
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
     return this.saveSubject.asObservable();
   }
 

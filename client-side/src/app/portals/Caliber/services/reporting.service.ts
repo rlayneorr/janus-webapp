@@ -4,11 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../../../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
 import { PanelReview } from '../entities/PanelReview';
-<<<<<<< HEAD
-import { urls } from './urls';
-=======
 import { environment } from '../../../../environments/environment';
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
 
 /**
  * Service handles API calls and tracks fetched data for caching.
@@ -107,12 +103,8 @@ export class ReportingService {
    * @returns Number - batch average for comparison
    */
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
-<<<<<<< HEAD
-    const endpoint = urls.apiBatchComparisonAvgEndpoint(skill, training, startDate);
-=======
     const endpoint = environment.apiBatchComparisonAvgEndpoint(skill, training, startDate);
 
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
   }
 
 

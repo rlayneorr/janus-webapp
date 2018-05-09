@@ -16,7 +16,6 @@ export class SpringInterceptor implements HttpInterceptor {
 
   constructor() { }
 
-<<<<<<< HEAD
   /**
   * Intercept each HTTP rquest and return a modified request
   */
@@ -28,19 +27,6 @@ export class SpringInterceptor implements HttpInterceptor {
         'Accept': 'application/json, text/*'
       }
     });
-=======
-    /*
-    * intercept each HTTP request and return a modified request
-    */
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const modifiedRequest = request.clone({
-            withCredentials: true,
-            setHeaders: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json, text/*',
-            },
-        });
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
 
     return <any>next.handle(modifiedRequest)
       .catch( (error) => {  // universal error handler

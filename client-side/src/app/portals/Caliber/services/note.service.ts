@@ -96,12 +96,8 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchQcBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-<<<<<<< HEAD
-    const url = urls.note.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
-=======
     const url = context.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
 
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
     return this.httpClient.get<Note[]>(url);
   }
 
@@ -116,12 +112,8 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchQcTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-<<<<<<< HEAD
-    const url = urls.note.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
-=======
     const url = context.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
 
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
     return this.httpClient.get<Note[]>(url);
   }
 
@@ -136,12 +128,8 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-<<<<<<< HEAD
-    const url = urls.note.fetchBatchNotesByBatchIdByWeek(batchId, week);
-=======
     const url = context.fetchBatchNotesByBatchIdByWeek(batchId, week);
 
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
     return this.httpClient.get<Note[]>(url);
   }
 
@@ -156,12 +144,8 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-<<<<<<< HEAD
-    const url = urls.note.fetchTraineeNotesByBatchIdByWeek(batchId, week);
-=======
     const url = context.fetchTraineeNotesByBatchIdByWeek(batchId, week);
 
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
     return this.httpClient.get<Note[]>(url);
   }
 
@@ -192,14 +176,9 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-<<<<<<< HEAD
-  public fetchTrainingNotesByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = urls.note.fetchTrainingNotesByTrainee(trainee.traineeId);
-=======
   public fetchTrainingNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
     const url = context.fetchTrainingNotesByTrainee(trainee.traineeId);
 
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
     return this.httpClient.get<Note[]>(url);
   }
 
@@ -211,14 +190,9 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-<<<<<<< HEAD
-  public fetchQcNotesByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = urls.note.fetchQcNotesByTrainee(trainee.traineeId);
-=======
   public fetchQcNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
     const url = context.fetchQcNotesByTrainee(trainee.traineeId);
 
->>>>>>> d8c3d5c1937a9c819ceb5d99385bbaa28fd6c589
     return this.httpClient.get<Note[]>(url);
   }
 

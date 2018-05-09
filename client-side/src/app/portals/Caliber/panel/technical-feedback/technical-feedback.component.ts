@@ -22,17 +22,6 @@ export class TechnicalFeedbackComponent implements OnInit {
   @Input() skillForm: FormGroup;
 
   /**
-<<<<<<< HEAD
-   * @param categoryService
-   */
-  constructor(private categoryService: CategoriesService) {
-    this.technologyForm = new FormGroup({
-      technology: new FormControl(),
-      result: new FormControl(),
-      status: new FormControl(),
-      comment: new FormControl()
-    });
-=======
    *
    * @param skillService
    */
@@ -43,7 +32,6 @@ export class TechnicalFeedbackComponent implements OnInit {
        status: new FormControl(),
        comment: new FormControl()
       });
->>>>>>> a75eb6877589cf2ca0720eac1609d1725b5c3d02
   }
 
   /**
