@@ -5,7 +5,9 @@ export const environment = {
   gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000',
   context: context, // change for what the production environment would actually be
   bam: bam,
-  url: 'http://localhost:8085/',
+  url: 'http://54.166.255.85:8085/',
+  msurl: 'http://34.227.178.103:',
+  assets: 'http://52.87.205.55:8086/angular/assets/',
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,

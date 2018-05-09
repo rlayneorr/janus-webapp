@@ -1,8 +1,7 @@
 import { User } from './User';
 import { UserRole } from './UserRole';
 
-export class Trainer extends User {
-   // public static ROLE_INACTIVE = 'ROLE_INACTIVE';
+export class HydraTrainer extends User {
    title: string;
 
    constructor(userId?: number, firstName?: string, middleName?: string, lastName?: string,

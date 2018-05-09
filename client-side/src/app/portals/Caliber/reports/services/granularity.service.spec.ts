@@ -8,8 +8,8 @@ import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { Dependencies } from '../../caliber.test.module';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { Trainer } from '../../../../hydra-client/entities/Trainer';
 import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillType';
+import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
 
 /**
  * Tested by Mythoua Chang
@@ -38,7 +38,7 @@ fdescribe('GranularityService', () => {
     fit('pushBatch(batch) should set the the currentBatch to true (it`s not null anymore)',
         inject([GranularityService], (service: GranularityService) => {
         const batch = new CompleteBatch;
-        const john = new Trainer;
+        const john = new HydraTrainer;
         const skill = new GambitSkillType;
         john.userId = 1;
         john.firstName = 'john';
