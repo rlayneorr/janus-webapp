@@ -23,7 +23,7 @@ describe('FormComponent', () => {
     let component: FormComponent;
     let fixture: ComponentFixture<FormComponent>;
     const testAssoService: AssociateService = new AssociateService(null);
-    const testReqService: RequestService = new RequestService(null);
+    const testReqService: RequestService = new RequestService(null, null);
     const testAuthService: AuthenticationService = new AuthenticationService(null, null);
     const asso: Associate = new Associate();
     const fakeAsso: Associate = new Associate();

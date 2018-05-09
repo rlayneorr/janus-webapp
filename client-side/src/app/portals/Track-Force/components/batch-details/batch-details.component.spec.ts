@@ -19,12 +19,14 @@ import { User } from '../../models/user.model';
 import { Associate } from '../../models/associate.model';
 
 import { OrderByPipe } from '../../../Caliber/pipes/order-by.pipe'; // this doesn't seem quite right ...
+import { HttpClient } from '@angular/common/http';
+import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 
 
 describe('BatchDetailsComponent', () => {
     let component: BatchDetailsComponent;
     let fixture: ComponentFixture<BatchDetailsComponent>;
-    const testBatchService: BatchService = new BatchService(null);
+    const testBatchService = new BatchService(new HttpClient(null), new UrlService());
     const testAuthService: AuthenticationService = new AuthenticationService(null, null);
 
     // setup service mocks
