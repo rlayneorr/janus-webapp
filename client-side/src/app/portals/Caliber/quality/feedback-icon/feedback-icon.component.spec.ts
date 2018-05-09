@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FeedbackIconComponent } from './feedback-icon.component';
 import { Dependencies } from '../../caliber.test.module';
-fdescribe('FeedbackIconComponent', () => {
+describe('FeedbackIconComponent', () => {
   let component: FeedbackIconComponent;
   let fixture: ComponentFixture<FeedbackIconComponent>;
 
@@ -24,7 +24,7 @@ fdescribe('FeedbackIconComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('getStatusIconClass', () => {
+  it('getStatusIconClass', () => {
     const STATUS_SUPERSTAR = 'Superstar';
     const STATUS_GOOD = 'Good';
     const STATUS_AVERAGE = 'Average';
@@ -46,7 +46,7 @@ fdescribe('FeedbackIconComponent', () => {
     });
   });
 
-  fit('getStatusIconClassStatusGood', () => {
+  it('getStatusIconClassStatusGood', () => {
     const STATUS_SUPERSTAR = 'Superstar';
     const STATUS_GOOD = 'Good';
     const STATUS_AVERAGE = 'Average';
@@ -68,7 +68,7 @@ fdescribe('FeedbackIconComponent', () => {
     });
  });
 
-  fit('getStatusIconClassStatusAverage', () => {
+  it('getStatusIconClassStatusAverage', () => {
     const STATUS_SUPERSTAR = 'Superstar';
     const STATUS_GOOD = 'Good';
     const STATUS_AVERAGE = 'Average';
@@ -90,7 +90,7 @@ fdescribe('FeedbackIconComponent', () => {
     });
    });
 
-  fit('getStatusIconClassStatusPoor', () => {
+  it('getStatusIconClassStatusPoor', () => {
     const STATUS_SUPERSTAR = 'Superstar';
     const STATUS_GOOD = 'Good';
     const STATUS_AVERAGE = 'Average';
@@ -112,7 +112,7 @@ fdescribe('FeedbackIconComponent', () => {
     });
 });
 
-  fit('getStatusIconClassStatusUndefined', () => {
+  it('getStatusIconClassStatusUndefined', () => {
     const STATUS_SUPERSTAR = 'Superstar';
     const STATUS_GOOD = 'Good';
     const STATUS_AVERAGE = 'Average';
@@ -134,7 +134,7 @@ fdescribe('FeedbackIconComponent', () => {
     });
 });
 
-  fit('getStatusIconClasscsstrue', () => {
+  it('getStatusIconClasscsstrue', () => {
     const STATUS_SUPERSTAR = 'Superstar';
     const STATUS_GOOD = 'Good';
     const STATUS_AVERAGE = 'Average';
