@@ -4,7 +4,7 @@ import { GeneralFeedbackComponent } from './general-feedback.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-describe('GeneralFeedbackComponent', () => {
+fdescribe('GeneralFeedbackComponent', () => {
   let component: GeneralFeedbackComponent;
   let fixture: ComponentFixture<GeneralFeedbackComponent>;
 

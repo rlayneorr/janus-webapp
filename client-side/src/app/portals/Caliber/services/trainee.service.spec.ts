@@ -4,15 +4,16 @@ import { AlertsService } from './alerts.service';
 import { TraineeService } from './trainee.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from '../../../../environments/environment';
 
-const saveUri = 'http://localhost:8765all/trainee/create';
-const updateUri = 'http://localhost:8765all/trainee/update';
-const deleteUri = 'http://localhost:8765all/trainee/delete/1';
-const fetchAllUri = 'http://localhost:8765all/trainee?batchId=1';
-const fetchDroppedByBatchUri = 'http://localhost:8765all/trainee/';
+const context = environment.trainee;
+
+const saveUri = context.save();
+const updateUri = context.update();
 
 
-xdescribe('TraineeService', () => {
+
+fdescribe('TraineeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -172,7 +173,7 @@ xdescribe('TraineeService', () => {
           // expect(myTrainee).toEqual(mockTrainee);
         });
 
-        const mockReq = httpMock.expectOne(deleteUri);
+        const mockReq = httpMock.expectOne(context.delete(mockTrainee.traineeId));
 
         mockReq.flush(mockTrainee);
 
@@ -211,7 +212,7 @@ xdescribe('TraineeService', () => {
           expect(myTrainee).toEqual(mockTrainee);
         });
 
-        const mockReq = httpMock.expectOne(deleteUri);
+        const mockReq = httpMock.expectOne(context.delete(mockTrainee.traineeId));
 
         mockReq.flush(mockTrainee);
 
@@ -250,7 +251,7 @@ xdescribe('TraineeService', () => {
           expect(myTrainees).toEqual(mockTrainees);
         });
 
-        const mockReq = httpMock.expectOne(fetchAllUri);
+        const mockReq = httpMock.expectOne(context.fetchAllByBatch(1));
 
         mockReq.flush(mockTrainees);
 
@@ -289,7 +290,7 @@ xdescribe('TraineeService', () => {
           expect(myTrainees).toEqual(mockTrainees);
         });
 
-        const mockReq = httpMock.expectOne(fetchDroppedByBatchUri);
+        const mockReq = httpMock.expectOne(context.fetchDroppedByBatch(1));
 
         mockReq.flush(mockTrainees);
 
@@ -330,7 +331,7 @@ xdescribe('TraineeService', () => {
           expect(myTrainees).toEqual(mockTrainees);
         });
 
-        const mockReq = httpMock.expectOne(fetchAllUri);
+        const mockReq = httpMock.expectOne(context.fetchAllByBatch(1));
 
         mockReq.flush(mockTrainees);
 
