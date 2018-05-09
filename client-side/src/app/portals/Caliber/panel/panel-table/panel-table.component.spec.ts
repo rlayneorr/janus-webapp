@@ -7,7 +7,7 @@ import { FeedbackIconComponent } from '../../quality/feedback-icon/feedback-icon
 import { HttpClientModule } from '@angular/common/http';
 import { AlertsService } from '../../services/alerts.service';
 
-xdescribe('PanelTableComponent', () => {
+fdescribe('PanelTableComponent', () => {
   let component: PanelTableComponent;
   let fixture: ComponentFixture<PanelTableComponent>;
 
