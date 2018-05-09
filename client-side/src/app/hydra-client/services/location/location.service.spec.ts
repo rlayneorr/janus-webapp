@@ -11,8 +11,6 @@ import { Unavailability } from '../../entities/location-entities/Unavailability'
 
 
 
-
-
 describe('LocationService', () => {
 
   beforeAll(() => {
