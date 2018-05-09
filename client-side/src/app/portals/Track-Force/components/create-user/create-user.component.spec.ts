@@ -18,7 +18,7 @@ import { userInfo } from 'os';
 describe('CreateUserComponent', () => {
   let component: CreateUserComponent;
   let fixture: ComponentFixture<CreateUserComponent>;
-  const testAuthService: AuthenticationService = new AuthenticationService(null, null);
+  const testAuthService: AuthenticationService = new AuthenticationService(null, null, null);
 
   // setup service mocks
   beforeAll(() => {
