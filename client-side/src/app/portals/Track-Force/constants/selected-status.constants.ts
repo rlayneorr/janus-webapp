@@ -8,6 +8,8 @@ export class SelectedStatusConstants {
     public static readonly UNMAPPED = 'Unmapped';
     public static readonly RESERVED_OPEN = 'Reserved/Open';
     public static readonly DEPLOYED = 'Deployed';
+    public static readonly TERMINATED = 'Terminated';
+    public static readonly DIRECTLY_PLACED = 'Directly Placed';
 
     public static readonly TRAINING_JSON = { id: 0, name: SelectedStatusConstants.TRAINING };
     public static readonly OPEN_JSON = { id: 1, name: SelectedStatusConstants.OPEN };
@@ -18,29 +20,23 @@ export class SelectedStatusConstants {
     public static readonly UNMAPPED_JSON = { id: 1, name: SelectedStatusConstants.UNMAPPED };
     public static readonly RESERVED_OPEN_JSON = { id: 1, name: SelectedStatusConstants.RESERVED_OPEN };
 
-    public static readonly MAPPED_LABELS: string[] = [
-        SelectedStatusConstants.TRAINING,
+    public static readonly MAPPED_LABELS: string[] = [SelectedStatusConstants.TRAINING,
         SelectedStatusConstants.RESERVED,
         SelectedStatusConstants.SELECTED,
-        SelectedStatusConstants.CONFIRMED
-    ];
-    public static readonly UNMAPPED_LABELS: string[] = [
-        SelectedStatusConstants.TRAINING,
+        SelectedStatusConstants.CONFIRMED];
+    public static readonly UNMAPPED_LABELS: string[] = [SelectedStatusConstants.TRAINING,
         SelectedStatusConstants.OPEN,
         SelectedStatusConstants.SELECTED,
-        SelectedStatusConstants.CONFIRMED
-    ];
-    public static readonly DEPLOYED_LABELS: string[] = [
-        SelectedStatusConstants.MAPPED,
+        SelectedStatusConstants.CONFIRMED];
+    public static readonly DEPLOYED_LABELS: string[] = [SelectedStatusConstants.MAPPED,
         SelectedStatusConstants.UNMAPPED];
-    public static readonly UNDEPLOYED_LABELS: string[] = [
-        SelectedStatusConstants.MAPPED,
-        SelectedStatusConstants.UNMAPPED
-    ];
-    public static readonly CLIENT_LABELS: string[] = [
-        SelectedStatusConstants.TRAINING,
+    public static readonly UNDEPLOYED_LABELS: string[] = [SelectedStatusConstants.MAPPED,
+        SelectedStatusConstants.UNMAPPED];
+    public static readonly CLIENT_LABELS: string[] = [SelectedStatusConstants.TRAINING,
         SelectedStatusConstants.RESERVED_OPEN,
         SelectedStatusConstants.SELECTED,
-        SelectedStatusConstants.CONFIRMED
-    ];
+        SelectedStatusConstants.CONFIRMED,
+        SelectedStatusConstants.DEPLOYED,
+        SelectedStatusConstants.TERMINATED,
+        SelectedStatusConstants.DIRECTLY_PLACED];
 }

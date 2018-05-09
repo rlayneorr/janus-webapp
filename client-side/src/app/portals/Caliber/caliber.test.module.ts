@@ -13,9 +13,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { HttpClient } from '@angular/common/http';
 import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { ScrollEventModule } from 'ngx-scroll-event';
-// import { NgxPaginationModule, PaginatePipe, PaginationControlsComponent } from 'ngx-pagination';
 import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
-// import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 // routing
@@ -60,7 +58,7 @@ import { ScreeningService } from './screening/services/screening/screening.servi
 import { ScreenerBucketsService } from './screening/services/screener-buckets/screener-buckets.service';
 import { SkillTypeBucketService } from './screening/services/skillTypeBucketLookup/skill-type-bucket.service';
 import { UrlUtilService } from './screening/services/UrlUtil/url-util.service';
-import { QuestionsService } from './settings/screening/services/questions.service';
+import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
 import { TagsService } from './settings/screening/services/tags.service';
@@ -118,7 +116,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { SkillsComponent } from './settings/skills/skills.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
-import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { DeactivateLocationComponent } from './settings/locations/deactivatelocation/deactivatelocation.component';
 import { EditlocationComponent } from './settings/locations/editlocation/editlocation.component';
 import { CreatelocationComponent } from './settings/locations/createlocation/createlocation.component';
@@ -171,7 +168,6 @@ import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category.service';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
-
 
 export const Dependencies = {
   imports: [
@@ -226,7 +222,6 @@ export const Dependencies = {
     SettingsComponent,
     TrainersComponent,
     LocationsComponent,
-    DeactivateTrainerComponent,
     DeactivateLocationComponent,
     EditlocationComponent,
     CreatelocationComponent,
@@ -264,82 +259,80 @@ export const Dependencies = {
     PanelOverallFeedbackComponent,
     FeedbackIconComponent,
     QualityOverallFeedbackComponent,
-
-    // components
-    // PaginationControlsComponent,
-    CaliberComponent,
-    HomeComponent,
-    AssessComponent,
-    ManageComponent,
-    ReportsComponent,
-    AllCumulativeScoresComponent,
-    VpBarGraphComponent,
-    VpLineGraphComponent,
-    VpPanelGraphComponent,
-    SettingsComponent,
-    // CategoriesComponent,
-    TrainersComponent,
-    LocationsComponent,
-    DeactivateTrainerComponent,
-    DeactivateLocationComponent,
-    EditlocationComponent,
-    CreatelocationComponent,
-    PanelComponent,
-    QualityComponent,
-    TraineeTechSkillsComponent,
-    SkillsComponent,
-    ToolbarComponent,
-    GraphComponent,
-    TableComponent,
-    TrainerProfilesComponent,
-    PanelComponent,
-    OverallFeedbackComponent,
-    QualityFeedbackComponent,
-    PanelBatchAllTraineesComponent,
-    BatchOverallLineChartComponent,
-    AssessmentBreakdownComponent,
-    WeeklyFeedbackComponent,
-    WeeklyGradesComponent,
-    PanelFeedbackComponent,
-    WeeklyAuditComponent,
-    WeeklyCumulativeScoreComponent,
-    QcDoughnutComponent,
-    ReactivateLocationComponent,
-    AlertsComponent,
-    BarGraphModalComponent,
-    PanelBatchAllTraineesComponent,
-    PanelTableComponent,
-    PanelSearchbarComponent,
-    CreatePanelComponent,
-    InterviewDetailsComponent,
-    BatchModalComponent,
-    GeneralFeedbackComponent,
-    TechnicalFeedbackComponent,
-    PanelOverallFeedbackComponent,
-    FeedbackIconComponent,
-    QualityOverallFeedbackComponent,
-    GeneralFeedbackComponent,
-    TechnicalFeedbackComponent,
-    QcDoughnutComponent,
-    TraineeLineChartComponent,
-    DeleteBatchModalComponent,
-    CannotDeleteModalComponent,
-    DeleteTraineeModalComponent,
-    CannotDeleteTraineeModalComponent,
-    ScreeningConfigComponent,
-    CandidatesScreeningListComponent,
-    QuestionsTableComponent,
-    FinalReportComponent,
-    IntroductionComponent,
-    AnswerComponent,
-    PassFailComponent,
-    ViolationFlagComponent,
-    SkillTypesComponent,
-    BucketComponent,
-    SkillTypeBucketsComponent,
-    QuestionComponent,
-    ScreeningComponent
-
+    
+        // components
+        // PaginationControlsComponent,
+        CaliberComponent,
+        HomeComponent,
+        AssessComponent,
+        ManageComponent,
+        ReportsComponent,
+        AllCumulativeScoresComponent,
+        VpBarGraphComponent,
+        VpLineGraphComponent,
+        VpPanelGraphComponent,
+        SettingsComponent,
+        // CategoriesComponent,
+        TrainersComponent,
+        LocationsComponent,
+        DeactivateLocationComponent,
+        EditlocationComponent,
+        CreatelocationComponent,
+        PanelComponent,
+        QualityComponent,
+        TraineeTechSkillsComponent,
+        SkillsComponent,
+        ToolbarComponent,
+        GraphComponent,
+        TableComponent,
+        TrainerProfilesComponent,
+        PanelComponent,
+        OverallFeedbackComponent,
+        QualityFeedbackComponent,
+        PanelBatchAllTraineesComponent,
+        BatchOverallLineChartComponent,
+        AssessmentBreakdownComponent,
+        WeeklyFeedbackComponent,
+        WeeklyGradesComponent,
+        PanelFeedbackComponent,
+        WeeklyAuditComponent,
+        WeeklyCumulativeScoreComponent,
+        QcDoughnutComponent,
+        ReactivateLocationComponent,
+        AlertsComponent,
+        BarGraphModalComponent,
+        PanelBatchAllTraineesComponent,
+        PanelTableComponent,
+        PanelSearchbarComponent,
+        CreatePanelComponent,
+        InterviewDetailsComponent,
+        BatchModalComponent,
+        GeneralFeedbackComponent,
+        TechnicalFeedbackComponent,
+        PanelOverallFeedbackComponent,
+        FeedbackIconComponent,
+        QualityOverallFeedbackComponent,
+        GeneralFeedbackComponent,
+        TechnicalFeedbackComponent,
+        QcDoughnutComponent,
+        TraineeLineChartComponent,
+        DeleteBatchModalComponent,
+        CannotDeleteModalComponent,
+        DeleteTraineeModalComponent,
+        CannotDeleteTraineeModalComponent,
+        ScreeningConfigComponent,
+        CandidatesScreeningListComponent,
+        QuestionsTableComponent,
+        FinalReportComponent,
+        IntroductionComponent,
+        AnswerComponent,
+        PassFailComponent,
+        ViolationFlagComponent,
+        SkillTypesComponent,
+        BucketComponent,
+        SkillTypeBucketsComponent,
+        QuestionComponent,
+        ScreeningComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests

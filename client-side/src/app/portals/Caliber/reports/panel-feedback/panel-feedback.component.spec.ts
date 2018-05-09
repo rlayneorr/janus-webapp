@@ -21,18 +21,18 @@ describe('PanelFeedbackComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('ngOnInit() cannot verify data currently, but the variables should be true', () => {
+  it('ngOnInit() cannot verify data currently, but the variables should be true', () => {
     component.ngOnInit();
     expect(component.panelList).toBeTruthy();
     expect(component['traineeSubscription']).toBeTruthy();
     expect(component['panelSubscription']).toBeTruthy();
   });
 
-  fit('ngOnDestroy()', () => {
+  it('ngOnDestroy()', () => {
     component.ngOnDestroy();
   });
 });
