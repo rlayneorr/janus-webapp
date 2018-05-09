@@ -4,6 +4,8 @@ import { ApiService } from '../util/api.service';
 import { PanelService } from './panel.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from '../../../../environments/environment';
+import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { User } from '../../../hydra-client/entities/User';
 
 const context = environment.panel;
 
@@ -32,15 +34,14 @@ const mockHydraAddress = {addressId: 1, street: '123 Fake st.', city: 'Springfie
 
         const mockUserRole = {roleId: 1, role: 'Associate'};
 
-        const mockUser = {userId: 1, firstName: 'Confused', middleName: 'ish', lastName: 'Userman', email: 'confused@website.com',
+        const mockUser: User = {userId: 1, firstName: 'Confused', middleName: 'ish', lastName: 'Userman', email: 'confused@website.com',
         password: 'hello', backupPassword: 'world', role: mockUserRole, mobilePhone: '555-555-5555', homePhone: '555-555-5555',
         token: 'asghahrgr'};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBatch, phoneNumber: '555-555-5555',
-        skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
-        college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
-        projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',
-        endClient: 'Super Revature', traineeUserInfo: mockUser};
+        const mockHydraTrainee = new HydraTrainee(1, 'Will', 'Joseph', 'Davies', 'wjdavies123@gmail.com', 'hello', 'world',
+        mockUserRole, '555-555-5555', '444-444-4444', 'character', 1, 4, 'complete', mockBatch, '444-444-4444', 'wjdavies123',
+        'www.revature.com/william', 'Edward Hulse', 'Oregon State University', 'Bachelor of Science', 'Computer Science', 'John', 'yes',
+        'patriotic', 'super patriotic', 'very', 'Apple', 'Revature', mockUser);
 
         const mockPanel = {panelId: 1, trainee: mockHydraTrainee, panelist: 'Jeffery', interviewDate: new Date('March 5, 2018 08:35:00'),
         duration: 'seven', format: 'Interview', internet: 'functional', panelRound: 1, recordingConsent: 'Yes',
@@ -213,7 +214,7 @@ fdescribe('PanelService', () => {
         httpMock.verify();
   }));
   it(
-    'should fetch all with fetchAll function',
+    'should fetch all with trainee using fetchAllByTrainee function',
     inject(
       [PanelService, HttpTestingController],
       (
