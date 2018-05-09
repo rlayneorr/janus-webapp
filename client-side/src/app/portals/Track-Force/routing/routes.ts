@@ -16,6 +16,7 @@ import {RootComponent} from '../components/root/root.component';
 import {SkillsetComponent} from '../components/skillset/skillset.component';
 import {BatchDetailsComponent} from '../components/batch-details/batch-details.component';
 import { AssociateViewComponent } from '../components/associate-view/associate-view.component';
+import { PredictionsComponent } from '../components/predictions/predictions.component';
 
 /**
  * Place paths here
@@ -66,6 +67,10 @@ export const routes: Routes = [
   {
     path: 'create-user',
     component: CreateUserComponent
+  },
+  {
+    path: 'predictions',
+    component: PredictionsComponent
   },
   {
     path: 'root',

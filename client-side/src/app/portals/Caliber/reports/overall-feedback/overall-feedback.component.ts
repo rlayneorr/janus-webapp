@@ -65,6 +65,7 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
 
         if (this.trainee.traineeId > 0) {
           this.noteService.fetchByTrainee(this.trainee);
+          // Change HydraBatchUtilService, so it accepts CompleteBatch objects
           this.reportService.fetchTechnologiesUpToWeek(this.batch.batchId, this.batchUtil.getWeek(this.batch));
         }
       });
