@@ -39,6 +39,7 @@ fdescribe('CalendarComponent', () => {
   // Spies that need to be referenced later
   let sessionStorageSetItemSpy: jasmine.Spy;
   let calendarServiceUpdateTopicSpy: jasmine.Spy;
+  let calendarChangeTopicDateSpy: jasmine.Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
@@ -56,6 +57,8 @@ fdescribe('CalendarComponent', () => {
     sessionStorageSetItemSpy = spyOn(sessionStorage, 'setItem');
     calendarServiceUpdateTopicSpy = spyOn(calendarService, 'updateTopicStatus').and.returnValue(
       Observable.of('Test string: updateTopicStatus'));
+    calendarChangeTopicDateSpy = spyOn(calendarService, 'changeTopicDate').and.returnValue(
+      Observable.of(new Schedule(0, [], new Curriculum())));
 
     // Create other spies
     spyOn(calendarService, 'getScheduleByScheduleId').and.returnValue(
@@ -83,7 +86,6 @@ fdescribe('CalendarComponent', () => {
       func(1);
       return new Subscription(() => {});
     });
-    spyOn(calendarService, 'changeTopicDate').and.returnValue(Observable.of(new Schedule(0, [], new Curriculum())));
 
     spyOn(statusService, 'updateNextStatus').and.returnValue('Test string: updateNextStatus');
     spyOn(statusService, 'getStatusColor').and.returnValue('purple');
@@ -735,7 +737,7 @@ fdescribe('CalendarComponent', () => {
       expectedEvent.color = 'purple';
       expectedEvent.start = expectedDate;
       expectedEvent.status = 'TestStatus';
-      expectedEvent.subtopicId = 2;
+      expectedEvent.subtopicId = 3;
       expectedEvent.subtopicName = 'STopic1';
       expectedEvent.title = 'TestTitle';
 
@@ -779,6 +781,22 @@ fdescribe('CalendarComponent', () => {
     expect(paramEvent.target.style.opacity).toEqual(1);
     expect(component.events[1]).not.toEqual(expectedEvent);
     expect(component.schedule.subtopics).not.toContain(expectedScheduledSubtopic);
+  });
+
+  /**
+   * @author Holden Olivier
+   * @batch 1803 usf
+   */
+  it ('should add the subtopic provided to the event list, then update it\'s date', () => {
+
+    spyOn(component, 'addEvent').and.returnValue(0);
+
+    const paramSubtopic = new Subtopic(0, 'STopic1', new Date(2018, 1), new Date(2019, 1), 'TestStatus', new Topic());
+
+    component.handleAddExistingSubtopic(paramSubtopic);
+
+    expect(component.addEvent).toHaveBeenCalled();
+    expect(calendarChangeTopicDateSpy).toHaveBeenCalled();
   });
 
   /**
