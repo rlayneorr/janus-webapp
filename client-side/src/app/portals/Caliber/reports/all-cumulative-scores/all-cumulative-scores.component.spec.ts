@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 
 
-xdescribe('AllCumulativeScoresComponent', () => {
+fdescribe('AllCumulativeScoresComponent', () => {
   let component: AllCumulativeScoresComponent;
   let fixture: ComponentFixture<AllCumulativeScoresComponent>;
 
@@ -26,23 +26,23 @@ xdescribe('AllCumulativeScoresComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  fit('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a batchId', () => {
+  fit('should have a batchId', () => {
     expect(component.batchId).toBeFalsy();
   });
 
-  it('should have a traineeId', () => {
+  fit('should have a traineeId', () => {
     expect(component.traineeId).toBeTruthy();
   });
 
-  it('should have a chartData', () => {
+  fit('should have a chartData', () => {
     expect(component.scoresAverage).toBeFalsy();
   });
 
-  it('should have a batchArray', () => {
+  fit('should have a batchArray', () => {
     expect(component.batch).toBeTruthy();
   });
 
@@ -80,25 +80,3 @@ xdescribe('AllCumulativeScoresComponent', () => {
     expect(component.sortByHighestScore(component.batch)).toBe('');
   });
 });
-
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [
-  //       AllCumulativeScoresComponent,
-  //       GraphComponent,
-  //       TableComponent,
-  //       GraphDataPipe
-  //     ],
-  //     imports: [
-  //       HttpClientModule,
-  //       ChartsModule
-  //     ],
-  //     providers: [
-  //       ReportingService,
-  //       PDFService,
-  //       GranularityService
-  //     ]
-  //   })
-  //   .compileComponents();
-  // }));
-

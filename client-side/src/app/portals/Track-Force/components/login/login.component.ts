@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { Router } from '@angular/router';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,9 @@ export class LoginComponent implements OnInit {
   // url to REST endpoint
   public username: string;
   public password: string;
+  backgroundImg = environment.assets + '23.jpg';
+  logo = environment.assets + 'logo.png';
+  errMsg = '';
 
   /**
   *@constructor
@@ -45,7 +49,6 @@ export class LoginComponent implements OnInit {
       }
       this.router.navigate(['root']);
     }
-
   }
 
   /**
@@ -59,12 +62,13 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.username, this.password).subscribe(
       data => {
+        // debugger;
         const user = this.authService.getUser();
         // navigate to appropriate page if return is valid
         if (user.tfRoleId === 4) {
           this.router.navigate(['associate-view', user.userId]);
         } else {
-          this.router.navigate(['root']);
+          this.router.navigateByUrl('/TrackForce/home');
         }
       },
       err => {

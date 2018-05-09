@@ -10,6 +10,7 @@ import { Pipe, PipeTransform } from '@angular/core';
  */
 export class AssociateSearchByTextFilter implements PipeTransform {
     transform(items: any[], searchText: string): any[] {
+
         if (!items) {
             return [];
         }
@@ -20,11 +21,13 @@ export class AssociateSearchByTextFilter implements PipeTransform {
 
         // return results that contain firstname, lastname, status, client, ic
         return items.filter(associate => {
-            return associate.firstName.toLowerCase().includes(searchText)
+            return (associate.firstName.toLowerCase().includes(searchText)
             || associate.lastName.toLowerCase().includes(searchText)
-            || associate.marketingStatus.toLowerCase().includes(searchText)
-            || associate.client.toLowerCase().includes(searchText)
-            || associate.id.toString().toLowerCase().includes(searchText);
+            || (associate.marketingStatus !== null
+                && String(associate.marketingStatus).toLowerCase().includes(searchText))
+            || (associate.client !== null
+                && associate.client.toLowerCase().includes(searchText))
+            || String(associate.userId).toLowerCase().includes(searchText));
         });
     }
 }
