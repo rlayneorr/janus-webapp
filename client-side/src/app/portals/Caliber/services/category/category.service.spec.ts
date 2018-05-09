@@ -21,7 +21,7 @@ export function asyncError<T>(errorObject: any) {
 // note - as of 5/9/2018, category service's methods return objects,
 // instead of categories. These tests will continue to fail until this issue
 // is resolved.
-fdescribe('CategoryService', () => {
+describe('CategoryService', () => {
   let httpClientSpyOnGet: { get: jasmine.Spy };
   let httpClientSpyOnPost: { post: jasmine.Spy };
   let httpClientSpyOnPut: {put: jasmine.Spy };
