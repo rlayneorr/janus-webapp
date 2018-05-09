@@ -8,6 +8,7 @@ import { assertNotNull } from '@angular/compiler/src/output/output_ast';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 
+
  describe('AssociateService', () => {
     // tslint:disable:prefer-const
     let associate = new Associate();
@@ -17,7 +18,6 @@ import { UrlService } from '../../../../hydra-client/services/urls/url.service';
         TestBed.configureTestingModule({
             providers: [AssociateService, HttpClient, HttpHandler, UrlService],
             imports: [HttpClientModule, HttpClientTestingModule]
-
         });
     });
 
@@ -39,7 +39,6 @@ import { UrlService } from '../../../../hydra-client/services/urls/url.service';
         asso2.clientId = 2;
         asso2.endClientId = 2;
         asso2.marketingStatusId = 1;
-
 
         assoList.push(asso2);
     });
@@ -77,6 +76,5 @@ import { UrlService } from '../../../../hydra-client/services/urls/url.service';
         serv.getAssociatesByClient(2).subscribe(data => expect(data).toContain(asso2));
         expect(serv.getAssociatesByClient).toHaveBeenCalled();
     }));
-
 
 });

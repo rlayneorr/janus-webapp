@@ -154,6 +154,6 @@ export class UrlService {
   };
 
   constructor() {
-    this.context = environment.gambitContext;
+    this.context = environment.url;
   }
 }
