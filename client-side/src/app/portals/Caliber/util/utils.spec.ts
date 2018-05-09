@@ -1,6 +1,6 @@
 import { stringifyDate } from './utils';
 
-fdescribe('utils', () => {
+describe('utils', () => {
     // this is the only method that's actually used in this service
     it('stringifyDate converts dates successfully, when they\'re passed in as string arrays',
         () => {

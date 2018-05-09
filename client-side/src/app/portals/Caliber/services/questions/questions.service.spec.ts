@@ -28,9 +28,10 @@ describe('QuestionsService ', () => {
   let httpClientSpyOnPut: {put: jasmine.Spy };
   let questionsService: QuestionsService;
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-  // test actual functions
-  it('should return expected questions from bucket #' + testBucket + ' (HttpClient called once)', () => {
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // see if getBucketQuestions makes an http request
+  it('getBucketQuestions should return expected questions from bucket #' + testBucket + ' (HttpClient called once)', () => {
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     questionsService = new QuestionsService(<any> httpClientSpyOnGet);
 
@@ -45,6 +46,7 @@ describe('QuestionsService ', () => {
     expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   });
 
+    // see if createNewQuestion makes an http request
   it('createNewQuestion should call HttpClient.post, and return the new question', () => {
     httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
     questionsService = new QuestionsService(<any> httpClientSpyOnPost);
@@ -59,6 +61,7 @@ describe('QuestionsService ', () => {
     expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
   });
 
+  // see if updateQuestion makes an http request
   it('updateQuestion should call HttpClient.post, and return the altered question', () => {
     httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
     questionsService = new QuestionsService(<any> httpClientSpyOnPost);
@@ -73,6 +76,7 @@ describe('QuestionsService ', () => {
     expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
   });
 
+    // see if updateQuestion makes an http request
   it('activateQuestion should call HttpClient.put, and return the activated question', () => {
     httpClientSpyOnPut = jasmine.createSpyObj('http', ['put']);
     questionsService = new QuestionsService(<any> httpClientSpyOnPut);

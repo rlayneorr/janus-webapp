@@ -12,7 +12,7 @@ export function asyncError<T>(errorObject: any) {
     return defer(() => Promise.reject(errorObject));
 }
 
-fdescribe('ApiService', () => {
+describe('ApiService', () => {
     let httpClientSpyOnGet: { get: jasmine.Spy };
     let httpClientSpyOnPost: { post: jasmine.Spy };
     let httpClientSpyOnPut: { put: jasmine.Spy };
