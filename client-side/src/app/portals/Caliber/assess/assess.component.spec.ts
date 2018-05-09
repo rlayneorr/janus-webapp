@@ -12,7 +12,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlertsService } from '../services/alerts.service';
 import { Dependencies } from '../caliber.test.module';
 
-xdescribe('AssessComponent', () => {
+fdescribe('AssessComponent', () => {
   let component: AssessComponent;
 
   let fixture: ComponentFixture<AssessComponent>;

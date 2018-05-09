@@ -7,7 +7,7 @@ import { GranularityService } from '../services/granularity.service';
 import { CacheData } from '../../../../entities/CacheData.entity';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-describe('AssessmentBreakdownComponent', () => {
+fdescribe('AssessmentBreakdownComponent', () => {
   let component: AssessmentBreakdownComponent;
   let fixture: ComponentFixture<AssessmentBreakdownComponent>;
 

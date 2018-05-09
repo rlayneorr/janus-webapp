@@ -192,7 +192,7 @@ fdescribe('PanelService', () => {
         // expect(changedPanel.interviewDate).not.toEqual(mockPanel.interviewDate);
         expect(changedPanel.interviewDate).toEqual(apiService.stringifyDate(mockPanel.interviewDate));
   }));
-  it(
+  xit(
     'should fetch all with fetchAll function',
     inject(
       [PanelService, HttpTestingController],
@@ -213,7 +213,7 @@ fdescribe('PanelService', () => {
 
         httpMock.verify();
   }));
-  it(
+  xit(
     'should fetch all with trainee using fetchAllByTrainee function',
     inject(
       [PanelService, HttpTestingController],
