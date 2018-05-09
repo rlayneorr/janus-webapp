@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 /** component, service imports */
 import { Bucket } from '../entities/Bucket';
 import { BucketsService } from '../services/buckets.service';
-import { QuestionsService } from '../services/questions.service';
+import { QuestionsService } from '../../../services/questions/questions.service';
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import {AlertsService} from '../../../services/alerts.service';

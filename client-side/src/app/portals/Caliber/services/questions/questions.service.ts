@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Question } from '../entities/Question';
+import { Question } from '../../entities/Question';
 
 const httpOptions = {
 headers: new HttpHeaders({
@@ -29,7 +29,7 @@ export class QuestionsService {
     const theAnswers: string[] = [question.sampleAnswer1, question.sampleAnswer2,
         question.sampleAnswer3, question.sampleAnswer4, question.sampleAnswer5];
     return this.http.post(this.url + 'updateQuestion', {question : question, tagIds: newTagIds}, httpOptions);
-}
+  }
 
   deactivateQuestion(questionId: number) {
     return this.http.put(this.url + 'deactivateQuestion/' + questionId, httpOptions);
