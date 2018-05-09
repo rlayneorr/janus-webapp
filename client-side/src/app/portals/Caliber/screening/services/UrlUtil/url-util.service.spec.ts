@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { UrlUtilService } from './url-util.service';
 
-fdescribe('UrlUtilService', () => {
+describe('UrlUtilService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [UrlUtilService]
