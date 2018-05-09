@@ -7,7 +7,7 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
     './e2e/**/*.e2e-spec.ts',
-    'panel-e2e/panel.e2e-spec.ts'
+    'manage-batches-e2e/manage-batches.e2e-spec.ts',
   ],
   capabilities: {
     'browserName': 'chrome',
