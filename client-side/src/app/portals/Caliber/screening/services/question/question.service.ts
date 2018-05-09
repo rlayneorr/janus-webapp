@@ -12,7 +12,7 @@ import { QUESTIONS } from '../../mock-data/mock-questions';
 import { TagsAndSkill } from '../../wrappers/tagsAndSkill';
 
 // Services
-import { TagService } from '../../services/tag/tag.service';
+import { TagService } from '../../../services/tag/tag.service';
 import { SimpleTraineeService } from '../simpleTrainee/simple-trainee.service';
 import { UrlUtilService } from '../UrlUtil/url-util.service';
 /*
