@@ -56,7 +56,7 @@ import { ScreeningService } from './screening/services/screening/screening.servi
 import { ScreenerBucketsService } from './screening/services/screener-buckets/screener-buckets.service';
 import { SkillTypeBucketService } from './screening/services/skillTypeBucketLookup/skill-type-bucket.service';
 import { UrlUtilService } from './screening/services/UrlUtil/url-util.service';
-import { QuestionsService } from './settings/screening/services/questions.service';
+import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
 import { TagsService } from './settings/screening/services/tags.service';
@@ -161,7 +161,7 @@ import { TagFilterPipe } from './settings/screening/question/question.filter';
 import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
-import { CategoryService } from './services/category.service';
+import { CategoryService } from '../Caliber/services/category/category.service';
 
 
 @NgModule({

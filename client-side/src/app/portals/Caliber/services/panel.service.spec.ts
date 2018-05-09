@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { ApiService } from '../util/api.service';
@@ -234,3 +236,4 @@ fdescribe('PanelService', () => {
         httpMock.verify();
   }));
 });
+>>>>>>> 4da8f3f409da8ea13cf0800acb581b7e1945c7a7
