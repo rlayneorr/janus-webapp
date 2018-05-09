@@ -31,6 +31,7 @@ import { HydraInterceptor } from './hydra-client/interceptors/hydra.interceptor'
 
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { ToastrOptions } from './hydra-client/ui/error-alert/toastr-options';
+import { LocationService } from './hydra-client/services/location/location.service';
 import { GambitSkillService } from './hydra-client/services/skill/gambit-skill.service';
 import {AuthenticationService} from './portals/Caliber/services/authentication.service';
 import {RequestService} from './portals/Track-Force/services/request-service/request.service';
@@ -83,6 +84,7 @@ const routes: Routes = [
     CookieService,
     HydraBatchUtilService,
     ErrorAlertComponent,
+    LocationService,
     {provide: ToastOptions, useClass: ToastrOptions},
     AuthenticationService,
     RequestService,
