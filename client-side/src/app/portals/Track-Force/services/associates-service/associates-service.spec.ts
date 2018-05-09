@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { assertNotNull } from '@angular/compiler/src/output/output_ast';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { UrlService } from '../../../../hydra-client/services/urls/url.service';
+
 
  describe('AssociateService', () => {
     // tslint:disable:prefer-const
@@ -14,44 +16,29 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
     let assoList = new Array<Associate>();
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [AssociateService, HttpClient, HttpHandler],
+            providers: [AssociateService, HttpClient, HttpHandler, UrlService],
             imports: [HttpClientModule, HttpClientTestingModule]
-
         });
     });
 
     beforeAll(() => {
-        associate.id = 1;
-        associate.firstName = 'John';
-        associate.lastName = 'Doe';
-        associate.msid = 2;
-        associate.marketingStatus = 'mock';
-        associate.clid = 3;
-        associate.client = 'mockClient';
-        associate.bid = 4;
-        associate.curid = 5;
-        associate.curriculumName = 'mockCurr';
-        associate.ecid = 6;
-        associate.endClientName = 'mockEndClient';
-        associate.batchName = 'mockBatch';
-        associate.batchId = '7';
+        associate.associateId = 1;
+        associate.associateFirstName = 'John';
+        associate.associateLastName = 'Doe';
+        associate.batchId = 1;
+        associate.clientId = 1;
+        associate.endClientId = 1;
+        associate.marketingStatusId = 1;
 
         assoList.push(associate);
 
-        asso2.id = 8;
-        asso2.firstName = 'First';
-        asso2.lastName = 'Last';
-        asso2.msid = 9;
-        asso2.marketingStatus = 'mock';
-        asso2.clid = 10;
-        asso2.client = 'mockClient';
-        asso2.bid = 11;
-        asso2.curid = 12;
-        asso2.curriculumName = 'mockCurr';
-        asso2.ecid = 13;
-        asso2.endClientName = 'mockEndClient';
-        asso2.batchName = 'mockBatch';
-        asso2.batchId = '14';
+        asso2.associateId = 2;
+        asso2.associateFirstName = 'First';
+        asso2.associateLastName = 'Last';
+        asso2.batchId = 1;
+        asso2.clientId = 2;
+        asso2.endClientId = 2;
+        asso2.marketingStatusId = 1;
 
         assoList.push(asso2);
     });
@@ -76,31 +63,18 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
     }));
 
-    // testing update associate
-   //  tslint:disable-next-line:max-line-length
-    it('Should update associate', inject([AssociateService], (serv: AssociateService) => {
-        let asso = new Associate();
-        asso.id = 8;
-        asso.firstName = 'First';
-        asso.lastName = 'Last';
-        asso.msid = 9;
-        asso.marketingStatus = 'mocks';
-        asso.clid = 10;
-        asso.client = 'rev';
-        asso.bid = 11;
-        asso.curid = 12;
-        asso.curriculumName = 'mockCurr';
-        asso.ecid = 13;
-        asso.endClientName = 'mockEndClient';
-        asso.batchName = 'mockBatch';
-        asso.batchId = '14';
-        console.log(asso);
-        console.log(asso2);
-         spyOn(serv, 'updateAssociate').and.returnValue(Observable.of(asso));
-         console.log(Observable.of(asso));
-         serv.updateAssociate(asso2.id, 'mocks', 'rev').subscribe(data => expect(data).toEqual(asso));
-         expect(serv.updateAssociate).toHaveBeenCalled();
-  }));
-    // No need for testing multiple associates being updated at the same time.
+    it('should get associates with  marketing status id 1', inject([AssociateService], (serv: AssociateService) => {
+        // console.log(assoList);
+        spyOn( serv, 'getAssociatesByStatus').and.returnValue(Observable.of(assoList));
+        serv.getAssociatesByStatus(1).subscribe(data => expect(data).toContain(asso2, associate));
+        expect(serv.getAssociatesByStatus).toHaveBeenCalled();
+    }));
+
+    it('should get associates with client id 2', inject([AssociateService], (serv: AssociateService) => {
+        // console.log(assoList);
+        spyOn( serv, 'getAssociatesByClient').and.returnValue(Observable.of(assoList));
+        serv.getAssociatesByClient(2).subscribe(data => expect(data).toContain(asso2));
+        expect(serv.getAssociatesByClient).toHaveBeenCalled();
+    }));
 
 });
