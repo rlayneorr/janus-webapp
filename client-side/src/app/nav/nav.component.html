@@ -1,7 +1,12 @@
 <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-light bg-light display-front nav-pad">
-  <div class="navbar-header c-pointer shift-left">
-    <img  class="img-adjust-position" routerLink="/dashboard" class="rev-logo" src="assets/rev-logo.png" alt="revature">
-  </div>
+    <div class="navbar-header c-pointer shift-left">
+      <img  class="img-adjust-position" routerLink="/dashboard" class="rev-logo" src="assets/rev-logo.png" alt="revature">
+    </div>
+
+    <button class="navbar-toggler c-pointer shift-right" (click)="toggleCollapse()" aria-label="Toggle navigation">
+      <span class="current-app-position" id="smallWindowNav">{{currentApp}}</span>
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
   <button class="navbar-toggler c-pointer shift-right" (click)="toggleCollapse()" aria-label="Toggle navigation">
     <span class="current-app-position">{{currentApp}}</span>
