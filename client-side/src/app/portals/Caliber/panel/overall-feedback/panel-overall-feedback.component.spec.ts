@@ -7,7 +7,14 @@ xdescribe('PanelOverallFeedbackComponent', () => {
   let fixture: ComponentFixture<PanelOverallFeedbackComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule(Dependencies).compileComponents();
+    TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule, FormsModule
+      ],
+      declarations: [
+        PanelOverallFeedbackComponent
+      ],
+    }).compileComponents();
   }), 1440000);
 
   beforeEach(() => {
