@@ -10,29 +10,6 @@ import { Unavailability } from '../../entities/location-entities/Unavailability'
 
 @Injectable()
 export class LocationService {
-  private location = new BehaviorSubject<any>([]);
-  publicLocation = this.location.asObservable();
-
-  private locations = new BehaviorSubject<any>([]);
-  publicLocations = this.locations.asObservable();
-
-  private building = new BehaviorSubject<any>([]);
-  publicBuilding = this.building.asObservable();
-
-  private buildings = new BehaviorSubject<any>([]);
-  publicBuildings = this.buildings.asObservable();
-
-  private room = new BehaviorSubject<any>([]);
-  publicRoom = this.room.asObservable();
-
-  private rooms = new BehaviorSubject<any>([]);
-  publicRooms = this.rooms.asObservable();
-
-  private unavailability = new BehaviorSubject<any>([]);
-  publicUnavailability = this.unavailability.asObservable();
-
-  private unavailabilities = new BehaviorSubject<any>([]);
-  publicUnavailabilities = this.unavailabilities.asObservable();
 
   header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
 
@@ -45,90 +22,47 @@ export class LocationService {
 
   // get all Locations //
   getAllLocations() {
-    return this.httpClient.get<Array<Location>>(this.urls.location.getAllLocations()).subscribe(
-      (payload) => {
-        this.locations.next(payload);
-        console.log(payload);
-      }
-    );
+    return this.httpClient.get<Location[]>(this.urls.location.getAllLocations());
   }
 
   // get Location by Id //
   getLocationById(location: any) {
-    return this.httpClient.get<Location>(this.urls.location.getLocationById(location)).subscribe(
-      (payload) => {
-        this.location.next(payload);
-        console.log(payload);
-      }
-    );
+    return this.httpClient.get<Location>(this.urls.location.getLocationById(location));
   }
   // set new Location //
   newLocation(location: Location) {
-    return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location), {headers: this.header}).subscribe(
-      (payload) => {
-        this.location.next(payload);
-        console.log(payload);
-      }
-    );
+    return this.httpClient.post<Location>(this.urls.location.postLocation(), JSON.stringify(location), {headers: this.header});
   }
   // update the location //
   updateLocation(location: Location) {
     return this.httpClient.put<Location>(this.urls.location.putLocationById(location.locationId),
-      JSON.stringify(location), {headers: this.header}).subscribe(
-        (payload) => {
-          console.log('Logging updateLocation from service:  ' + JSON.stringify(payload));
-          this.location.next(payload);
-        }
-      );
+      JSON.stringify(location), {headers: this.header});
   }
   // set location as inactive //
   deleteLocation(location: Location) {
-    return this.httpClient.delete<Location>(this.urls.location.deleteLocationById(location.locationId)).subscribe(
-      (payload) => {
-                console.log('Logging deleteLocation from service:  ' + JSON.stringify(payload));
-                this.location.next(payload);
-      }
-    );
+    return this.httpClient.delete<Location>(this.urls.location.deleteLocationById(location.locationId));
   }
 
   // Get all Buildings. This one is independent from Locations.
   getAllBuildings() {
-    return this.httpClient.get<Array<Building>>(this.urls.building.getAllBuildings()).subscribe((payload) => {
-      console.log(payload);
-      this.buildings.next(payload);
-    });
+    return this.httpClient.get<Array<Building>>(this.urls.building.getAllBuildings());
   }
   // Get all buildings by Location ID. This is dependent on a location's Id //
   getBuildingsByLocationId(locationId: any) {
-    return this.httpClient.get<Array<Building>>(this.urls.building.getBuildingsByLocationId(locationId)).subscribe((payload) => {
-      console.log(payload);
-      this.buildings.next(payload);
-    });
+    return this.httpClient.get<Array<Building>>(this.urls.building.getBuildingsByLocationId(locationId));
   }
   // Returns a singular location by its ID. This has no corelation with locations //
   getBuildingById(buildingId: any) {
-    return this.httpClient.get<Building>(this.urls.building.getBuildingById(buildingId)).subscribe((payload) => {
-      console.log(payload);
-      this.building.next(payload);
-    });
+    return this.httpClient.get<Building>(this.urls.building.getBuildingById(buildingId));
   }
   // set new Building //
   newBuilding(building: Building) {
-    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building), {headers: this.header})
-    .subscribe((payload) => {
-    console.log(payload);
-    this.building.next(payload);
-    });
+    return this.httpClient.post<Building>(this.urls.building.postBuilding(), JSON.stringify(building), {headers: this.header});
   }
   // update Building //
   updateBuilding(building: Building) {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
-      JSON.stringify(building), {headers: this.header}).subscribe(
-        (payload) => {
-          // console.log('Logging updateBuilding from service: ' + JSON.stringify(payload));
-          this.buildings.next(payload);
-        }
-      );
+      JSON.stringify(building), {headers: this.header});
   }
   // // set Building as inactive //
   // deleteBuilding(building: Building) {
@@ -143,21 +77,11 @@ export class LocationService {
 
   // get all Rooms //
   getAllRooms() {
-    return this.httpClient.get<Array<Room>>(this.urls.room.getAllRooms()).subscribe(
-      (payload) => {
-        this.rooms.next(payload);
-        console.log(payload);
-      }
-    );
+    return this.httpClient.get<Array<Room>>(this.urls.room.getAllRooms());
   }
   // get Room by Id //
   getRoomById(room: any) {
-    return this.httpClient.get<Room>(this.urls.room.getRoomById(room)).subscribe(
-      (payload) => {
-        this.room.next(payload);
-        console.log(payload);
-      }
-    );
+    return this.httpClient.get<Room>(this.urls.room.getRoomById(room));
   }
   // // get all Rooms in a Location //
   // getRoomsByLocationId(locationId: any) {
@@ -169,30 +93,16 @@ export class LocationService {
   // }
   // get all Rooms in a Building //
   getRoomsByBuildingId(buildingId: any) {
-    return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId))
-    .subscribe((payload) => {
-      this.rooms.next(payload);
-      console.log(payload);
-    });
+    return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId));
   }
   // set new Room //
-  newRoom(room: any) {
-    return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room), {headers: this.header}).subscribe(
-      (payload) => {
-        this.room.next(payload);
-        console.log(payload);
-      }
-    );
+  newRoom(room: Room) {
+    return this.httpClient.post<Room>(this.urls.room.postRoom(), JSON.stringify(room), {headers: this.header});
   }
   // update Room //
   updateRoom(room: Room) {
     return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room),
-      {headers: this.header}).subscribe(
-        (payload) => {
-          // console.log('Logging updateRoom from service:  ' + JSON.stringify(payload));
-          this.location.next(payload);
-        }
-      );
+      {headers: this.header});
   }
   // // set Room as inactive //
   // deleteRoom(room: Room) {
@@ -207,20 +117,11 @@ export class LocationService {
 
   // get all Unavailabilities //
   getAllUnavailabilities() {
-    return this.httpClient.get<Array<Unavailability>>(this.urls.unavailability.getAllUnavailabilities())
-    .subscribe((payload) => {
-      this.unavailabilities.next(payload);
-      console.log(payload);
-    });
+    return this.httpClient.get<Array<Unavailability>>(this.urls.unavailability.getAllUnavailabilities());
   }
   // post Unavailability //
   newUnavailability(unavailability: any) {
     return this.httpClient.post<Unavailability>(this.urls.unavailability.postUnavailability(), JSON.stringify(unavailability),
-      {headers: this.header}).subscribe(
-        (payload) => {
-          this.unavailability.next(payload);
-          console.log(payload);
-        }
-      );
+      {headers: this.header});
   }
 }
