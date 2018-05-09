@@ -59,7 +59,7 @@ export class ToolbarComponent implements OnInit {
     this.batchSubscription = this.batchService.fetchAll().subscribe(response => {
 
       if (response.length > 0) {
-        //this.batchList = response;
+        // this.batchList = response;
 
         // Generate dropdown information for years
         this.createYearDropdown();
@@ -155,8 +155,8 @@ export class ToolbarComponent implements OnInit {
    */
   createWeeksDropdown(): Array<number> {
     this.weekList = [];
-   //--- we should refactor HydraBatchUtil Service
-    for (let i = 0; i <= this.batchUtil.getWeek(this.currentBatch); i++) { 
+   // --- we should refactor HydraBatchUtil Service
+    for (let i = 0; i <= this.batchUtil.getWeek(this.currentBatch); i++) {
       this.weekList.push(i);
     }
 

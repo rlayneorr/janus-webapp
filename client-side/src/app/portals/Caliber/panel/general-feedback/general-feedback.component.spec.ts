@@ -19,8 +19,4 @@ fdescribe('GeneralFeedbackComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('bubba', () => {
-    expect(true).toBe(true);
-  });
 });

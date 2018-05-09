@@ -7,6 +7,9 @@ import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { Dependencies } from '../../caliber.test.module';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
+import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillType';
+import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
 
 /**
  * Tested by Mythoua Chang
@@ -34,11 +37,18 @@ fdescribe('GranularityService', () => {
 
     fit('pushBatch(batch) should set the the currentBatch to true (it`s not null anymore)',
         inject([GranularityService], (service: GranularityService) => {
-        const batch = new HydraBatch;
+        const batch = new CompleteBatch;
+        const john = new HydraTrainer;
+        const skill = new GambitSkillType;
+        john.userId = 1;
+        john.firstName = 'john';
+
+        skill.skillTypeName = 'java';
+
         batch.resourceId = 1;
         batch.trainingName = 'trainee';
-        batch.trainer = 1;
-        batch.skillType = 'Java';
+        batch.trainer = john;
+        batch.skillType = skill;
         service['currentBatch'].next(null);
         service.pushBatch(batch);
         expect(service['currentBatch'].last()).toBeTruthy();
