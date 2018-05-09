@@ -137,11 +137,7 @@ export class AssociateListComponent implements OnInit {
    * Fetch the client names
    */
   getClientNames() {
-<<<<<<< HEAD
-    this.rs.getAssociates().subscribe(data => {
-=======
     this.clientService.getAllClients().subscribe(data => {
->>>>>>> c5facf515d1184a0579d0019c4a10c49222e3055
       this.clients = data;
     });
   }

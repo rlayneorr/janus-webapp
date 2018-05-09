@@ -9,6 +9,7 @@ import { FooterComponent } from '../footer/footer/footer.component';
 
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { BatchService } from '../../services/batch-service/batch.service';
+import { AssociateService } from '../../services/associates-service/associates-service';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
@@ -26,8 +27,9 @@ import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 describe('BatchDetailsComponent', () => {
     let component: BatchDetailsComponent;
     let fixture: ComponentFixture<BatchDetailsComponent>;
-    const testBatchService = new BatchService(null);
+    const testBatchService: BatchService = new BatchService(null);
     const testAuthService: AuthenticationService = new AuthenticationService(null, null, null);
+    const testAssocService: AssociateService = new AssociateService(null, null);
 
     // setup service mocks
     beforeAll(() => {
@@ -40,7 +42,7 @@ describe('BatchDetailsComponent', () => {
         spyOn(testBatchService, 'getBatchesByDate').and.returnValue(Observable.of([batch1, batch2]));
 
         const assoc: Associate = new Associate();
-        spyOn(testBatchService, 'getAssociatesForBatch').and.returnValue(Observable.of([assoc]));
+        spyOn(testAssocService, 'getAssociatesByBatch').and.returnValue(Observable.of([assoc]));
 
         const user: User = new User();
         user.token = 'mockToken';
@@ -60,7 +62,8 @@ describe('BatchDetailsComponent', () => {
             ],
             providers: [
                 { provide: AuthenticationService, useValue: testAuthService },
-                { provide: BatchService, useValue: testBatchService },  // inject service
+                { provide: BatchService, useValue: testBatchService },
+                { provide: AssociateService, useValue: testAssocService } // inject service
             ],
             imports: [
                 RouterTestingModule,
