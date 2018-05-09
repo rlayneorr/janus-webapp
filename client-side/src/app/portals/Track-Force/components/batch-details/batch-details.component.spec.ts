@@ -26,15 +26,15 @@ import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 describe('BatchDetailsComponent', () => {
     let component: BatchDetailsComponent;
     let fixture: ComponentFixture<BatchDetailsComponent>;
-    const testBatchService = new BatchService(new HttpClient(null), new UrlService());
-    const testAuthService: AuthenticationService = new AuthenticationService(null, null);
+    const testBatchService = new BatchService(null);
+    const testAuthService: AuthenticationService = new AuthenticationService(null, null, null);
 
     // setup service mocks
     beforeAll(() => {
         const batch1: Batch = new Batch();
-        batch1.curriculumName = 'Test-Curriculum-1';
+        batch1.batchName = 'Test-Curriculum-1';
         const batch2: Batch = new Batch();
-        batch2.curriculumName = 'Test-Curriculum-2';
+        batch2.batchName = 'Test-Curriculum-2';
         // mock batch service
         spyOn(testBatchService, 'getDefaultBatches').and.returnValue(Observable.of([batch1]));
         spyOn(testBatchService, 'getBatchesByDate').and.returnValue(Observable.of([batch1, batch2]));
