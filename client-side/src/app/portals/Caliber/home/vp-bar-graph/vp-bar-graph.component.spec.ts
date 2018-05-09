@@ -11,7 +11,7 @@ import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import { appendFile } from 'fs';
 
-describe('VpBarGraphComponent', () => {
+xdescribe('VpBarGraphComponent', () => {
   let component: VpBarGraphComponent;
   let fixture: ComponentFixture<VpBarGraphComponent>;
 
