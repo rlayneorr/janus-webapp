@@ -80,25 +80,3 @@ describe('AllCumulativeScoresComponent', () => {
     expect(component.sortByHighestScore(component.batch)).toBe('');
   });
 });
-
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [
-  //       AllCumulativeScoresComponent,
-  //       GraphComponent,
-  //       TableComponent,
-  //       GraphDataPipe
-  //     ],
-  //     imports: [
-  //       HttpClientModule,
-  //       ChartsModule
-  //     ],
-  //     providers: [
-  //       ReportingService,
-  //       PDFService,
-  //       GranularityService
-  //     ]
-  //   })
-  //   .compileComponents();
-  // }));
-

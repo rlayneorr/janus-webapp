@@ -17,8 +17,8 @@ export class UrlService {
   };
 
   /**
-    * Endpoints for batches
-    */
+   * Endpoints for batches
+   */
 
   batches = {
     fetchAllByTrainer: () => `${this.context}/batches/trainers`,
@@ -151,6 +151,61 @@ export class UrlService {
     getAllBatchTypesUrl: () => `${this.context}/batches/types`,
     removeSubtopicFromBatchUrl: (subtopicId: number) => `${this.context}/batch/${subtopicId}`,
     getAllInProgressUrl: () => `${this.context}/batches/current/`
+  };
+
+  /**
+   * Endpoints for locations:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
+  location = {
+    getLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
+    getAllLocations: () => `${this.context}/locations/`,
+    postLocation: () => `${this.context}/locations/`,
+    putLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
+    deleteLocationById: (locationId: number) => `${this.context}/locations/${locationId}`
+  };
+
+  /**
+   * Endpoints for buildings:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
+  building = {
+    getBuildingById: (buildingId: number) => `${this.context}/buildings/${buildingId}`,
+    getBuildingsByLocationId: (locationId: number) => `${this.context}/buildings/location/${locationId}`,
+    getAllBuildings: () => `${this.context}/buildings/`,
+    postBuilding: () => `${this.context}/buildings/`,
+    putBuildingById: (buildingId: number) => `${this.context}/buildings/${buildingId}`,
+    // deleteBuildingById: (buildingId: number) => `${this.context}/buidlings/${buildingId}`
+  };
+
+  /**
+   * Endpoints for rooms:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
+  room = {
+    getRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
+    getAllRooms: () => `${this.context}/rooms/`,
+    // getRoomsByLocationId: (locationId: number) => `${this.context}/rooms/locations/${locationId}`,
+    getRoomsByBuildingId: (buildingId: number) => `${this.context}/rooms/building/${buildingId}`,
+    postRoom: () => `${this.context}/rooms/`,
+    putRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
+    // deleteRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`
+  };
+
+  /**
+   * Endpoints for unavailabilities:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
+  unavailability = {
+    // getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
+    getAllUnavailabilities: () => `${this.context}/unavailabilities/`,
+    postUnavailability: () => `${this.context}/unavailabilities/`,
+    // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
+    // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
 
   constructor() {

@@ -75,7 +75,7 @@ describe('ReportingServiceService', () => {
 
 });
 
-describe('ReportingService test Http calls', () => {
+xdescribe('ReportingService test Http calls', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
@@ -87,7 +87,7 @@ describe('ReportingService test Http calls', () => {
     });
   });
 
-  it('fetchQcStatusDonutChart(1) testing:',
+  xit('fetchQcStatusDonutChart(1) testing:',
     inject([ReportingService, XHRBackend, HttpClientTestingModule],
       (service: ReportingService, mockBackend: MockBackend) => {
 

@@ -86,7 +86,10 @@ export class CourseStructureComponent implements OnInit {
     this.subtopicService.getSubtopicByIDz(subtopicIDs).subscribe(
       result => {
         for (let i = 0; i < weeks.length; i++) {
+         // console.log('printing out the result subtopic id')
+          // console.log(result[0].subtopicId);
           for (let j = 0; j < result.length; j++) {
+
             if (weeks[i].curriculumSubtopicNameId.id === result[j].subtopicId) {
               weeks[i].curriculumSubtopicNameId.name = result[j].subtopicName;
               weeks[i].curriculumSubtopicNameId.topic.name = result[j].parentTopic.topicName;

@@ -8,7 +8,6 @@ export class HydraTrainer extends User {
     email?: string, password?: string, backupPassword?: string, role?: UserRole,
     mobilePhone?: string, homePhone?: string, token?: string, title?: string) {
         super(userId, firstName, middleName, lastName, email, password,
-            backupPassword, role, mobilePhone, homePhone, token);
-        this.title = title;
+            backupPassword, role, mobilePhone, homePhone, token); this.title = title;
     }
 }

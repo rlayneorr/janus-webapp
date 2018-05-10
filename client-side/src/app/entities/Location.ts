@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 export class Location {
-        addressId: number;
+        id: number;
         street: String;
         city: String;
         state: String;
