@@ -152,19 +152,16 @@ describe('LocationService', () => {
       expect(data).toBeDefined();
     });
   })));
-  // xit('should get rooms by location id', async( inject([LocationService], (service: LocationService) => {
-  //   // tslint:disable-next-line:prefer-const
-  //   let data: Room[];
-  //   service.getRoomsByLocationId(1).subscribe((results) => {
+  it('should get rooms by location id', async( inject([LocationService], (service: LocationService) => {
+    // tslint:disable-next-line:prefer-const
+    let data: Room[];
+    service.getRoomsByLocationId(1).subscribe((results) => {
 
-  //     data = results;
-  //     console.log(data);
-  //     data.forEach((room) => {
-  //       console.log(room);
-  //     });
-  //     expect(data).toBeDefined();
-  //   });
-  // })));
+      data = results;
+      console.log(data);
+      expect(data).toBeDefined();
+    });
+  })));
   it('should get room by id', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Room;

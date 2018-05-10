@@ -6,8 +6,9 @@ import { UrlService } from '../urls/url.service';
 import { Building } from '../../entities/location-entities/Building';
 import { Room } from '../../entities/location-entities/Room';
 import { Unavailability } from '../../entities/location-entities/Unavailability';
-import { ColdObservable } from 'rxjs/testing/ColdObservable';
 import { from } from 'rxjs/observable/from';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/merge';
 
 
 @Injectable()
@@ -109,26 +110,24 @@ export class LocationService {
   getRoomById(roomId: any) {
     return this.httpClient.get<Room>(this.urls.room.getRoomById(roomId));
   }
-  // /**Temporary function for getting all rooms in a given location using multiple AJAX calls.
-  //  * Inefficient but can be used until comparable functionality is implemented in the
-  //  * location microservice. */
-  // getRoomsByLocationId(locationId: number) {
-  //   const observeBuildings = this.getBuildingsByLocationId(locationId);
-  //   const observeRooms = observeBuildings.flatMap((buildingArray: Building[]) => {
-  //     return this.getRoomsFromBuildings(buildingArray);
-  //   });
-  //   return observeRooms;
-  // }
-  // /**Helper method for the above. */
-  // private getRoomsFromBuildings(buildsArray: Array<Building>) {
-  //   let roomsObserve = from(new Array<Array<Room>>());
-  //   buildsArray.forEach((building) => {
-  //     roomsObserve = roomsObserve.merge(this.getRoomsByBuildingId(building.buildingId));
-  //   });
-  //   return roomsObserve;
-  // }
-  // /**This method can be swapped in for the above when the location microservice is able
-  //  * to provide the appropriate data. */
+  /**Function for getting all rooms in a given location using multiple AJAX calls.
+   * Takes in a locationId (number) and returns an observable of an array of rooms. */
+  getRoomsByLocationId(locationId: number) {
+    const observeRooms = this.getBuildingsByLocationId(locationId).mergeMap((buildingArray: Building[]) => {
+      return this.getRoomsFromBuildings(buildingArray);
+    });
+    return observeRooms;
+  }
+  /**Helper method for the above. */
+  private getRoomsFromBuildings(buildsArray: Array<Building>) {
+    let roomsObserve = from(new Array<Array<Room>>());
+    buildsArray.forEach((building) => {
+      roomsObserve = roomsObserve.merge(this.getRoomsByBuildingId(building.buildingId));
+    });
+    return roomsObserve;
+  }
+  // /**This method can be swapped in for the above in conjunction with backend functionality
+  //  * in order to provide an alternate implementation that uses fewer AJAX calls. */
   // getRoomsByLocationId(locationId: any) {
   //   return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByLocationId(locationId));
   // }
