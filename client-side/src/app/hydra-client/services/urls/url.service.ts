@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class UrlService {
-  private context: string;
+  private context = 'http://localhost:8080';
 
   /**
    * All urls associated with skills will come from this object
@@ -33,10 +33,13 @@ export class UrlService {
    * Endpoints for trainees
    */
   trainees = {
+    findAll: () => `${this.context}/trainees`,
+    findById: (id: number) => `${this.context}/trainees/${id}`,
+    findByEmail: (email: string) => `${this.context}/trainees/email?=${email}`,
     findAllByBatchAndStatus: (id: number, status: string) => `${this.context}/trainee/s/batch/${id}/status/${status}`,
     save: () => `${this.context}/trainees`,
     update: () => `${this.context}/trainees`,
-    delete: (traineeId: number) => `${this.context}/trainees/${traineeId}`,
+    delete: (traineeId: number) => `${this.context}/trainees/${traineeId}`
   };
 
   /**
@@ -49,7 +52,6 @@ export class UrlService {
     update: () => `${this.context}/trainers`,
     promote: () => `${this.context}/trainers/promote`,
     getTitles: () => `${this.context}/trainers/titles`,
-    getRoles: () => `${this.context}/trainers/roles`,
     delete: () => `${this.context}/trainers`,
   };
 
@@ -63,6 +65,7 @@ export class UrlService {
   // BAM Endpoints
   users = {
     getUserByID: (userId: number) => `${this.context}/users/${userId}`,
+    getAllUsersRoles: () => `${this.context}/users/roles`,
     getAllUsersUrl: () => `${this.context}/users`,
     getAllTrainersUrl: () => `${this.context}/users/alltrainers`,
     getAllAssociatesUrl: () => `${this.context}/users/allassociates`,
@@ -71,6 +74,7 @@ export class UrlService {
     updateUserUrl: (userId: number) => `${this.context}/users/${userId}`,
     addUserUrl: () => `${this.context}/users`,
     removeUserUrl: (userId: number) => `${this.context}/users/${userId}`,
+    makeInactive: () => `${this.context}/users/inactivate`,
     addUserToBatchUrl: (batchId: number, userId: number) => `${this.context}/users/batches/${userId}/${batchId}`,
     getUsersNotInBatchUrl: () => `${this.context}/users/batches/none`,
     resetPasswordUrl: () => `${this.context}/user/reset`,

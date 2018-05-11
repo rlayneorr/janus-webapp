@@ -2,7 +2,7 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'http://localhost:8765';
+const context = 'http://localhost:10000';
 const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
@@ -11,7 +11,11 @@ export const environment = {
 
   context: context,
   bam: bam,
-  url: 'http://localhost:80/',
+  url: 'http://54.166.255.85:8085/',
+  msurl: 'http://34.227.178.103:',
+
+  assets: 'http://52.87.205.55:8086/angular/assets/',
+  // assets: '../../../../../assets/', //url for local testing
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
@@ -21,11 +25,12 @@ export const environment = {
   },
 
   batch: {
-    fetchAllByTrainer: () => `${context}trainer/batch/all`,
-    fetchAll: () => `${context}vp/batch/all`,
-    save: () => `${context}all/batch/create`,
-    update: () => `${context}all/batch/update`,
-    delete: (batchId) => `${context}all/batch/delete/${batchId}`,
+    fetchAllByTrainer: () => `${context}/batches/trainers`,
+    fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
+    fetchAll: () => `${context}/batches`,
+    save: () => `${context}/batches`,
+    update: () => `${context}/batches`,
+    delete: (batchId) => `${context}/batches/${batchId}`
   },
 
   category: {
@@ -74,25 +79,31 @@ export const environment = {
   },
 
   skill: {
-    findAll: () => `${context}/gambit-skills-service/skill`,
-    findByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
-    findById: (id) => `${context}/gambit-skills-service/skill/${id}`,
-    findAllActive: () => `${context}/gambit-skills-service/skill`,
-    save: () => `${context}/gambit-skills-service/skill`,
-    updateByName: (name) => `${context}/gambit-skills-service/skill/name/${name}`,
-    updateById: (id) => `${context}/gambit-skills-service/skill/${id}`,
-    delete: (id) => `${context}/gambit-skills-service/skill/${id}`
+    findAll: () => `${context}/skill`,
+    findByName: (name) => `${context}/skill/name/${name}`,
+    findById: (id) => `${context}/skill/${id}`,
+    findAllActive: () => `${context}/skill/active`,
+    save: () => `${context}/skill`,
+    updateByName: (name) => `${context}/skill/name/${name}`,
+    updateById: (id) => `${context}/skill/${id}`,
+    delete: (id) => `${context}/skill/${id}`,
+    deleteByName: (name) => `${context}/skill/name/${name}`
   },
 
   skillType: {
-    find: (id) => `${context}/gmabit-skills-service/skillType/${id}`,
-    findByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
-    findAll: () => `${context}/gambit-skills-service/skillType`,
-    save: () => `${context}/gambit-skills-service/skillType`,
-    update: (id) => `${context}/gambit-skills-service/skillType/${id}`,
-    updateByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`,
-    delete: (id) => `${context}/gambit-skills-service/skillType/${id}`,
-    deleteByName: (name) => `${context}/gambit-skills-service/skillType/name/${name}`
+    find: (id) => `${context}/skillType/${id}`,
+    findByName: (name) => `${context}/skillType/name/${name}`,
+    findAll: () => `${context}/skillType`,
+    findAllActive: () => `${context}/skillType/active`,
+    findAllSkills: () => `${context}/skillType/skill`,
+    save: () => `${context}/skillType`,
+    saveSkill: (skillTypeId, skillId) => `${context}/skillType/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) =>
+    `${context}/skillType/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id) => `${context}/skillType/${id}`,
+    updateByName: (name) => `${context}/skillType/name/${name}`,
+    delete: (id) => `${context}/skillType/${id}`,
+    deleteByName: (name) => `${context}/skillType/name/${name}`
   },
 
   trainee: {
@@ -105,6 +116,7 @@ export const environment = {
 
   trainer: {
     fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
+    fetchById: (id: number) => `${context}/trainers/${id}`,
     fetchAll: () => `${context}all/trainer/all`,
     save: () => `${context}vp/trainer/create`,
     update: () => `${context}vp/trainer/update`,

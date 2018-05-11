@@ -4,7 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
 
-xdescribe('SkillsetService', () => {
+describe('SkillsetService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers : [SkillsetService],

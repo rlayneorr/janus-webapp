@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AssociateService } from '../../services/associates-service/associates-service';
-import { Associate } from '../../models/associate.model';
+import { Batch } from '../../models/batch.model';
+import { Curriculum } from '../../models/curriculum.model';
 import { RequestService } from '../../services/request-service/request.service';
 import { Client } from '../../models/client.model';
+import { ClientListService } from '../../services/client-list-service/client-list.service';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
+import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { User } from '../../models/user.model';
+import { ActivatedRoute } from '@angular/router';
+import { CurriculumService } from '../../services/curriculum-service/curriculum.service';
+import { MarketStatusService } from '../../services/market-status/market-status.service';
+import { BatchService } from '../../services/batch-service/batch.service';
+import { MarketingStatus } from '../../models/marketing-status.model';
 
 /**
  * Component for the Associate List page
@@ -18,9 +27,11 @@ import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 
 export class AssociateListComponent implements OnInit {
   // our collection of associates and clients
-  associates: Associate[];
+  associates: HydraTrainee[];
   clients: Client[];
+  marketingStatuses: MarketingStatus[];
   curriculums: Set<string>; // stored unique curriculums
+  index: 0;
 
   // used for filtering
   searchByStatus = '';
@@ -31,35 +42,62 @@ export class AssociateListComponent implements OnInit {
   // status/client to be updated
   updateShow = false;
   updateStatus = '';
-  updateClient: number;
+  updateClient = '';
   updated = false;
 
   // used for ordering of rows
   desc = false;
   sortedColumn = '';
 
-  public test: number[];
+  // user access data - controls what they can do in the app
+  user: User;
+  canUpdate = false;
 
+  tempCurrId: number;
+  newCurr: Curriculum;
+  tempMarket: MarketingStatus;
+
+  /**
+   * Inject our services
+   * @param associateService
+   * @param clientService
+   * @param batchService
+   * @param marketService
+   * @param activated
+   */
   constructor(
     private associateService: AssociateService,
-    private rs: RequestService
+    private clientService: ClientListService,
+    private curriculumnService: CurriculumService,
+    private batchService: BatchService,
+    private marketService: MarketStatusService,
+    private activated: ActivatedRoute
   ) {
     this.curriculums = new Set<string>();
   }
 
   ngOnInit() {
-    // get current url
-    this.getAllAssociates();
-    this.getClientNames();
-
-    const url = window.location.href.split('/');
-    if (url.length === 8) { // if values passed in, search by values
-      if (url[4] === 'client') {
-        this.searchByClient = url[5];
-      } else if (url[4] === 'curriculum') {
-        this.searchByCurriculum = url[5];
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.user != null) {
+      if (this.user.tfRoleId === 1 || this.user.tfRoleId === 2) {
+        this.canUpdate = true; // let the user update data if user is admin or manager
       }
-       this.searchByStatus = url[6].toUpperCase() + ',  ' + url[7].toUpperCase();
+    }
+    this.getAllAssociates(); // grab associates and clients from back end
+    this.getClientNames();
+    // if navigating to this page from clicking on a chart of a different page, set default filters
+    const paramMap = this.activated.snapshot.paramMap;
+    const CliOrCur = paramMap.get('CliOrCur');
+    const name = paramMap.get('name');
+    const mapping = paramMap.get('mapping');
+    const status = paramMap.get('status');
+    if (CliOrCur) {// if values passed in, search by values
+      if (CliOrCur === 'client') {
+        this.searchByClient = name;
+      } else if (CliOrCur === 'curriculum') {
+        this.searchByCurriculum = name;
+      }
+      this.searchByStatus = mapping.toUpperCase() + ': ' + status.toUpperCase();
     }
   }
 
@@ -68,21 +106,30 @@ export class AssociateListComponent implements OnInit {
    */
   getAllAssociates() {
     const self = this;
-    this.rs.getAssociates().subscribe(data => {
+    this.curriculumnService.getAllCurriculums().subscribe(items => {
+    });
+
+    this.associateService.getAllAssociates().subscribe(data => {
       this.associates = data;
 
-      for (const associate of this.associates) { // get our curriculums
-        this.curriculums.add(associate.curriculumName);
-
-        if (associate.batchName === 'null') {
-          associate.batchName = 'None';
-        }
+      this.marketService.getAllMarketingStatus().subscribe(marketData => {
+        this.marketingStatuses = marketData;
+      });
+      this.marketingStatuses = [];
+      for (const associate of this.associates) {// get our curriculums from the associate
+        // if (associate.batch !== null && associate.batch.batchId < 51 && associate.batch.batchId !== 26) {
+        //   this.batchService.getCurrIdById(associate.batch.batchId).subscribe(item => {
+        //     this.tempCurrId = item;
+        //     this.curriculumnService.getOneCurriculum(this.tempCurrId).subscribe(item2 => {
+        //       this.newCurr = item2;
+        //       this.curriculums.add(item2['curriculumName']);
+        //     });
+        //   });
+        // }
       }
       this.curriculums.delete('');
       this.curriculums.delete('null');
-      self.sort('id');
-
-      console.log(data);
+      self.sort('userId'); // sort associates by ID
     });
   }
 
@@ -90,7 +137,7 @@ export class AssociateListComponent implements OnInit {
    * Fetch the client names
    */
   getClientNames() {
-    this.rs.getClients().subscribe(data => {
+    this.clientService.getAllClients().subscribe(data => {
       this.clients = data;
     });
   }
@@ -102,19 +149,16 @@ export class AssociateListComponent implements OnInit {
   sort(property) {
     this.desc = !this.desc;
     let direction;
-    if (property !== this.sortedColumn || this.updated) {
-      // set ascending or descending
+    if (property !== this.sortedColumn || this.updated) {// if clicking on new column sort ascending always, otherwise descending
       direction = 1;
     } else {
       direction = this.desc ? 1 : -1;
     }
 
-    this.sortedColumn = property;
-
+    this.sortedColumn = property; // current column being sorted
     if (this.updated) {
       this.updated = false;
     }
-
     // sort the elements
     this.associates.sort(function (a, b) {
       if (a[property] < b[property]) {
@@ -131,20 +175,33 @@ export class AssociateListComponent implements OnInit {
    * Bulk edit feature to update associate's statuses and clients.
    */
   updateAssociates() {
-    const ids: number[] = [];
-    let i = 1;
+    const trainees: HydraTrainee[] = [];
     const self = this;
 
-    for (i; i <= this.associates.length; i++) { // grab the checked ids
-      const check = <HTMLInputElement>document.getElementById('' + i);
+    for (const trainee of this.associates) { // grab the checked ids
+      const check = <HTMLInputElement>document.getElementById(trainee.userId.toString());
       if (check != null && check.checked) {
-        ids.push(i);
+        if (this.updateStatus !== '') {
+          trainee.marketingStatus = this.updateStatus;
+        }
+        if (this.updateClient !== '') {
+          trainee.client = this.updateClient;
+        }
+        trainees.push(trainee);
       }
     }
-    this.associateService.updateAssociates(ids, this.updateStatus, this.updateClient).subscribe(
-      data => {
-        self.getAllAssociates();
-        self.updated = true;
-      });
+    let count = 1;
+    for (const trainee of trainees) {
+      this.associateService.updateAssociate(trainee).subscribe(
+        data => {
+          if (count++ === trainees.length) {
+            self.getAllAssociates();
+            self.updated = true;
+            this.updateStatus = '';
+            this.updateClient = '';
+          }
+        }
+      );
+    }
   }
 }

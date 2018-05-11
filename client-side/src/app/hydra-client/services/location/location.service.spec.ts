@@ -69,7 +69,7 @@ describe('LocationService', () => {
   it('should update a location', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Location;
-    service.updateLocation(new Location(3, 'update', 'houston', 'tx', 77066, 'Revature', true)).subscribe((results) => {
+    service.updateLocation(new Location(1, 'update', 'houston', 'tx', 77066, 'Revature', true)).subscribe((results) => {
 
       data = results;
       console.log(data);
@@ -79,7 +79,7 @@ describe('LocationService', () => {
   it('should set a location as false', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Location;
-    service.deleteLocation(new Location(4, 'update', 'houston', 'tx', 77066, 'Revature', false)).subscribe((results) => {
+    service.deleteLocation(new Location(2, 'update', 'houston', 'tx', 77066, 'Revature', false)).subscribe((results) => {
 
       data = results;
       console.log(data);

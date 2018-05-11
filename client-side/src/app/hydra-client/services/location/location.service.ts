@@ -6,6 +6,7 @@ import { UrlService } from '../urls/url.service';
 import { Building } from '../../entities/location-entities/Building';
 import { Room } from '../../entities/location-entities/Room';
 import { Unavailability } from '../../entities/location-entities/Unavailability';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -13,11 +14,20 @@ export class LocationService {
 
   header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
 
+  listSubject: BehaviorSubject<Location[]>;
+
   // Injecting UrlService and HttpClient into LocationService constructor //
-  constructor(private httpClient: HttpClient, private urls: UrlService) { }
+  constructor(private httpClient: HttpClient, private urls: UrlService) {
+    this.listSubject = new BehaviorSubject([]);
+    this.initializeSubscriptions();
+
+  }
+  private initializeSubscriptions(): void {
+
+  }
 
   // get all Locations //
-  getAllLocations() {
+  getAllLocations(): Observable<Location[]> {
     return this.httpClient.get<Location[]>(this.urls.location.getAllLocations());
   }
   // get Location by Id //
@@ -59,16 +69,6 @@ export class LocationService {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
       JSON.stringify(building), {headers: this.header});
   }
-  // // set Building as inactive //
-  // deleteBuilding(building: Building) {
-  //   return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId)).subscribe(
-  //     (payload) => {
-  //       // console.log('Logging deleteBuilding from service:  ' + JSON.stringify(payload));
-  //       this.location.next(payload);
-  //     }
-  //   );
-  // }
-
 
   // get all Rooms //
   getAllRooms() {
@@ -78,14 +78,6 @@ export class LocationService {
   getRoomById(room: any) {
     return this.httpClient.get<Room>(this.urls.room.getRoomById(room));
   }
-  // // get all Rooms in a Location //
-  // getRoomsByLocationId(locationId: any) {
-  //   return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByLocationId(locationId))
-  //   .subscribe((payload) => {
-  //     this.rooms.next(payload);
-  //     console.log(payload);
-  //   });
-  // }
   // get all Rooms in a Building //
   getRoomsByBuildingId(buildingId: any) {
     return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId));
@@ -99,16 +91,6 @@ export class LocationService {
     return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room),
       {headers: this.header});
   }
-  // // set Room as inactive //
-  // deleteRoom(room: Room) {
-  //   return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId)).subscribe(
-  //     (payload) => {
-  //       // console.log('Logging deleteRoom from service:  ' + JSON.stringify(payload));
-  //       this.location.next(payload);
-  //     }
-  //   );
-  // }
-
 
   // get all Unavailabilities //
   getAllUnavailabilities() {

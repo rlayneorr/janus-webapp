@@ -10,7 +10,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { SkillsComponent } from './settings/skills/skills.component';
 import { LocationsComponent } from './settings/locations/locations.component';
 import { TrainersComponent } from './settings/trainers/trainers.component';
-import { DeactivateTrainerComponent } from './settings/trainers/deactivatetrainer/deactivatetrainer.component';
 import { QualityComponent } from './quality/quality.component';
 import { PanelComponent } from './panel/panel/panel.component';
 import { TrainerProfilesComponent } from './settings/trainer-profile/trainer-profile.component';
