@@ -49,7 +49,7 @@ describe('AssessmentBreakdownComponent', () => {
       // expect(component['data']).toBeNaN();
     }));
 
-  fit('tryFetch()',
+  it('tryFetch()',
     inject([ReportingService, PDFService, GranularityService], (service: ReportingService) => {
 
       // Without Initialzation the batchId and week should be undefined.

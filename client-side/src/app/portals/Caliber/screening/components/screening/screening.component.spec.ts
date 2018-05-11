@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScreeningComponent } from './screening.component';
+import { RouterOutlet, ChildrenOutletContexts } from '@angular/router';
+
+// Author: David Gustafson
 
 describe('ScreeningComponent', () => {
   let component: ScreeningComponent;
@@ -8,7 +11,8 @@ describe('ScreeningComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScreeningComponent ]
+      declarations: [ ScreeningComponent, RouterOutlet ],
+      providers: [ ChildrenOutletContexts ]
     })
     .compileComponents();
   }));

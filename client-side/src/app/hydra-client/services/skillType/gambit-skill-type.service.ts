@@ -8,20 +8,21 @@ import { environment } from '../../../../environments/environment';
 
 // Entities
 import { GambitSkillType } from '../../entities/GambitSkillType';
+import { UrlService } from '../urls/url.service';
 
 @Injectable()
 export class GambitSkillTypeService {
 
   private context = environment.skillType;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private urls: UrlService) { }
 
   /**
    * Retrieves a skillType by its id.
    * @param id The id of the skillType
    */
   find(id: number): Observable<GambitSkillType> {
-    return this.http.get<GambitSkillType>(this.context.find(id));
+    return this.http.get<GambitSkillType>(this.urls.skillTypes.findById(id));
   }
 
   /**
@@ -29,21 +30,21 @@ export class GambitSkillTypeService {
    * @param name The name of the skillType
    */
   findByName(name: string): Observable<GambitSkillType> {
-    return this.http.get<GambitSkillType>(this.context.findByName(name));
+    return this.http.get<GambitSkillType>(this.urls.skillTypes.findByName(name));
   }
 
   /**
    * Retrieves all skillTypes.
    */
   findAll(): Observable<Array<GambitSkillType>> {
-    return this.http.get<Array<GambitSkillType>>(this.context.findAll());
+    return this.http.get<Array<GambitSkillType>>(this.urls.skillTypes.findAll());
   }
 
   /**
    * Retrieves all the active SkillTypes.
    */
   findAllActive(): Observable<Array<GambitSkillType>> {
-    return this.http.get<Array<GambitSkillType>>(this.context.findAllActive());
+    return this.http.get<Array<GambitSkillType>>(this.urls.skillTypes.findAllActive());
   }
 
   /**
@@ -51,7 +52,7 @@ export class GambitSkillTypeService {
    * @param skillType The SkillType to be created.
    */
   create(skillType: GambitSkillType): Observable<GambitSkillType> {
-    return this.http.post<GambitSkillType>(this.context.save(), JSON.stringify(skillType));
+    return this.http.post<GambitSkillType>(this.urls.skillTypes.save(), JSON.stringify(skillType));
   }
 
   /**
@@ -59,7 +60,7 @@ export class GambitSkillTypeService {
    * @param skillType The skillType to be updated.
    */
   update(skillType: GambitSkillType): Observable<GambitSkillType> {
-    return this.http.put<GambitSkillType>(this.context.update(skillType.skillTypeId), JSON.stringify(skillType));
+    return this.http.put<GambitSkillType>(this.urls.skillTypes.update(skillType.skillTypeId), JSON.stringify(skillType));
   }
 
   /**
@@ -67,7 +68,7 @@ export class GambitSkillTypeService {
    * @param skillType The skillType to be deleted.
    */
   delete(skillType: GambitSkillType): Observable<boolean> {
-    return this.http.delete<boolean>(this.context.delete(skillType.skillTypeId));
+    return this.http.delete<boolean>(this.urls.skillTypes.delete(skillType.skillTypeId));
   }
 
   /**
