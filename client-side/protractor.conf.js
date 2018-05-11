@@ -6,7 +6,9 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    './e2e/**/*.e2e-spec.ts'
+    // './e2e/**/*.e2e-spec.ts',
+    // './caliber-related/panel-e2e/panel.e2e-spec.ts',
+    './e2e/caliber-related/manage-batches-e2e/manage-batches.e2e-spec.ts',
   ],
   capabilities: {
     'browserName': 'chrome',
@@ -15,7 +17,8 @@ exports.config = {
     }
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com',
+  // baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

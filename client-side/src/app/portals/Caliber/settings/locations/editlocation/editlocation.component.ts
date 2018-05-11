@@ -36,7 +36,7 @@ export class EditlocationComponent implements OnInit {
    * @memberof EditlocationComponent
    */
   ngOnInit() {
-    this.popTemp();
+    // this.popTemp();
 
     this.initFormControl();
   }

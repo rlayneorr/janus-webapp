@@ -65,6 +65,10 @@ export class MyBatchesComponent implements OnInit {
   setbatches(batches) {
     this.batches = batches;
 
+    if (!batches) {
+      this.batches = [];
+    }
+
     for (let i = 0; i < this.batches.length; i++) {
 
       const userID = this.batches[i].trainerID;
@@ -80,9 +84,6 @@ export class MyBatchesComponent implements OnInit {
 
     }
 
-    if (!batches) {
-      this.batches = [];
-    }
   }
 
   /**

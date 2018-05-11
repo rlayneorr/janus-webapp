@@ -1,12 +1,12 @@
 // modules
-import { RouterModule, Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NavModule } from '../../nav/nav.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
@@ -50,7 +50,7 @@ import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-import { TagService } from './screening/services/tag/tag.service';
+import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';
@@ -58,7 +58,7 @@ import { ScreeningService } from './screening/services/screening/screening.servi
 import { ScreenerBucketsService } from './screening/services/screener-buckets/screener-buckets.service';
 import { SkillTypeBucketService } from './screening/services/skillTypeBucketLookup/skill-type-bucket.service';
 import { UrlUtilService } from './screening/services/UrlUtil/url-util.service';
-import { QuestionsService } from './settings/screening/services/questions.service';
+import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
 import { TagsService } from './settings/screening/services/tags.service';
@@ -67,7 +67,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './settings/screening/services/in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
 import { TrainerService } from '../../hydra-client/services/trainer/trainer.service';
 import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
 import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
@@ -158,16 +158,16 @@ import { PassFailComponent } from './screening/components/pass-fail/pass-fail.co
 import { ViolationFlagComponent } from './screening/components/violation-flag/violation-flag.component';
 import { ScheduleScreeningService } from './screening/services/schedule-screening/schedule-screening.service';
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
-import {SkillTypesComponent} from './settings/screening/skillTypes/skillTypes.component';
+import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
-import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component' ;
-import { QuestionComponent} from './settings/screening/question/question.component';
+import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component';
+import { QuestionComponent } from './settings/screening/question/question.component';
 import { TagFilterPipe } from './settings/screening/question/question.filter';
-import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType-buckets.filter';
+import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
-import { CategoryService } from './services/category.service';
-
+import { CategoryService } from './services/category/category.service';
+import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 
 export const Dependencies = {
   imports: [
@@ -209,6 +209,7 @@ export const Dependencies = {
     TagFilterPipe,
 
     // components
+    // PaginationControlsComponent,
     CaliberComponent,
     HomeComponent,
     AssessComponent,
@@ -227,6 +228,7 @@ export const Dependencies = {
     PanelComponent,
     QualityComponent,
     TraineeTechSkillsComponent,
+    SkillsComponent,
     ToolbarComponent,
     GraphComponent,
     TableComponent,
@@ -331,7 +333,6 @@ export const Dependencies = {
         SkillTypeBucketsComponent,
         QuestionComponent,
         ScreeningComponent
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -342,9 +343,23 @@ export const Dependencies = {
     RouteService,
     PanelService,
     RouteService,
+    BucketService,
+    UrlUtilService,
+    QuestionService,
+    TagService,
+    SimpleTraineeService,
+    SkillTypeService,
+    QuestionScoreService,
+    QuestionsToBucketsUtil,
+    ScreeningService,
+    SkillTypeBucketService,
+    ScheduleScreeningService,
+    // ActivatedRoute,
     GradeService,
     HttpClient,
     NoteService,
+    NgbModal,
+    NgbModalStack,
     VpHomeLineGraphService,
     VpHomeSelectorService,
     ColorService,
@@ -364,11 +379,12 @@ export const Dependencies = {
     PDFService,
     PanelSearchbarComponent,
     NgbActiveModal,
-    {provide: Router, useValue: {}},
+    { provide: Router, useValue: {} },
     GranularityService,
     HydraBatchService,
     HydraBatchUtilService,
-    UrlService
+    UrlService,
+    CategoryService
   ],
   bootstrap: [
     // TrainersComponent
