@@ -12,6 +12,6 @@ Location service now contains four main entities.
 - Unavailability Entity
 These entities can be found through this filepath -> janus-webapp\client-side\src\app\hydra-client\entities\location-entities.
 
-Location service also contain new methods to retrieve information from the backend Location Service from Gambit Microservice Ecosystem.
+Location service also contain new methods to retrieve information from the backend Location Service from the Gambit Microservice Ecosystem.
 
 
