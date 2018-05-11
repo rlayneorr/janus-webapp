@@ -22,5 +22,7 @@ The methods use hydra-client's url service to further organizse all endpoints us
 - janus-webapp\client-side\src\app\hydra-client\services\urls\urls.service.ts
 
 
-
+#### Location service Testing
+The new Location Service has its own spec file in which it has tests to make sure that you are obtaining data from the back end. If you wish to change or modify the tests in the spec file you will have to modify locaiton.service.spec.ts file in the path below.
+- 
 
