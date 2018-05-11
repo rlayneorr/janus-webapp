@@ -50,7 +50,7 @@ const mockHydraAddress = {addressId: 1, street: '123 Fake st.', city: 'Springfie
         communicationSkills: 'Good', overall: 'promising', feedback: ['Blink less', 'I\'m a potato']};
 
 
-fdescribe('PanelService', () => {
+describe('PanelService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientModule,

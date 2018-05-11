@@ -13,7 +13,7 @@ const updateUri = context.update();
 
 
 
-fdescribe('TraineeService', () => {
+describe('TraineeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [

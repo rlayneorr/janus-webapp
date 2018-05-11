@@ -6,7 +6,7 @@ import { ComponentFactoryResolver, Injector } from '@angular/core';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 import { Location } from '../../../entities/Location';
 
-fdescribe('EditlocationComponent', () => {
+describe('EditlocationComponent', () => {
   let component: EditlocationComponent;
   let fixture: ComponentFixture<EditlocationComponent>;
 

@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 
 
-fdescribe('AllCumulativeScoresComponent', () => {
+describe('AllCumulativeScoresComponent', () => {
   let component: AllCumulativeScoresComponent;
   let fixture: ComponentFixture<AllCumulativeScoresComponent>;
 

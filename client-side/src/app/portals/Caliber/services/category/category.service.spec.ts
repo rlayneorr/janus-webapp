@@ -22,7 +22,7 @@ export function asyncError<T>(errorObject: any) {
 // instead of categories. These tests will continue to fail until this issue
 // is resolved.
 
-fdescribe('CategoryService', () => {
+describe('CategoryService', () => {
   let httpClientSpyOnGet: { get: jasmine.Spy };
   let httpClientSpyOnPost: { post: jasmine.Spy };
   let httpClientSpyOnPut: {put: jasmine.Spy };

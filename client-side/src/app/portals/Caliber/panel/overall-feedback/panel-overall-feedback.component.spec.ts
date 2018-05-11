@@ -3,7 +3,7 @@ import { Dependencies } from '../../caliber.test.module';
 import { PanelOverallFeedbackComponent } from './panel-overall-feedback.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-fdescribe('PanelOverallFeedbackComponent', () => {
+describe('PanelOverallFeedbackComponent', () => {
   let component: PanelOverallFeedbackComponent;
   let fixture: ComponentFixture<PanelOverallFeedbackComponent>;
 

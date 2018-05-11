@@ -27,7 +27,7 @@ import { ApiService } from '../../util/api.service';
 import { Dependencies } from '../../caliber.test.module';
 import { CaliberComponent } from '../../caliber.component';
 
-fdescribe('PanelComponent', () => {
+describe('PanelComponent', () => {
   let component: PanelComponent;
   let fixture: ComponentFixture<PanelComponent>;
 

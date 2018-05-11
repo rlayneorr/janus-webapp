@@ -7,7 +7,7 @@
 // import { HttpClientModule } from '@angular/common/http';
 // import { AlertsService } from '../../services/alerts.service';
 
-// fdescribe('PanelTableComponent', () => {
+// describe('PanelTableComponent', () => {
 //   let component: PanelTableComponent;
 //   let fixture: ComponentFixture<PanelTableComponent>;
 

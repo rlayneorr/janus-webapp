@@ -9,7 +9,7 @@ import { Subscriber } from 'rxjs/Subscriber';
 import { Subscription } from 'rxjs/Subscription';
 
 // Can't test private methods
-fdescribe('BatchOverallLineChartComponent', () => {
+describe('BatchOverallLineChartComponent', () => {
   let component: BatchOverallLineChartComponent;
   let fixture: ComponentFixture<BatchOverallLineChartComponent>;
 

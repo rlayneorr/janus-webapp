@@ -12,7 +12,7 @@ import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/Comp
 import { User } from '../../../../hydra-client/entities/User';
 import { UserRole } from '../../../../hydra-client/entities/UserRole';
 
-fdescribe('CreatePanelComponent', () => {
+describe('CreatePanelComponent', () => {
   let component: CreatePanelComponent;
   let fixture: ComponentFixture<CreatePanelComponent>;
 
