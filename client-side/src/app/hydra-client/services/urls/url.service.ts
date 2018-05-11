@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class UrlService {
-  private context: string;
+  private context = 'http://localhost:8080';
 
   /**
    * All urls associated with skills will come from this object
