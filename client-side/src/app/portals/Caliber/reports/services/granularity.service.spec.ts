@@ -11,9 +11,9 @@ import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/Comp
 import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillType';
 import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
 
-/**
- * Tested by Mythoua Chang
- */
+// /**
+//  * Tested by Mythoua Chang
+//  */
 fdescribe('GranularityService', () => {
     beforeEach(() => {
       TestBed.configureTestingModule(Dependencies);
