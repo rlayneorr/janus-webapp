@@ -6,7 +6,7 @@ The new location service is meant to replace all other existing location service
 (The current portal that contains the new Location Service implemented is Caliber. Every other portal needs to have their location entity or information changed to the new Location Service.)
 
 #### Location service now contains four main entities.
-- Location Entitiy
+- Location Entity
 - Building Entity
 - Room Entity
 - Unavailability Entity
