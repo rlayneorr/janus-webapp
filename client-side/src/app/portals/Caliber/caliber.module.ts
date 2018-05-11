@@ -48,7 +48,7 @@ import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-import { TagService } from './screening/services/tag/tag.service';
+import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';

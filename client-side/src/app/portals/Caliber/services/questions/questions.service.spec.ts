@@ -31,7 +31,7 @@ describe('QuestionsService ', () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
   // see if getBucketQuestions makes an http request
-  it('getBucketQuestions should make an http get request, and return all questions from bucket #' + testBucket, () => {
+  it('getBucketQuestions should return expected questions from bucket #' + testBucket + ' (HttpClient called once)', () => {
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     questionsService = new QuestionsService(<any> httpClientSpyOnGet);
 
