@@ -65,7 +65,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './settings/screening/services/in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
 import { TrainerService } from './services/trainer.service';
 import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
 
