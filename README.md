@@ -11,7 +11,8 @@ The new location service is meant to replace all other existing location service
 - Room Entity
 - Unavailability Entity
 
-These entities can be found through this filepath -> janus-webapp\client-side\src\app\hydra-client\entities\location-entities.
+These entities can be found through the filepath below
+- janus-webapp\client-side\src\app\hydra-client\entities\location-entities.
 
 #### Location service Methods
 Location service also contain new methods to retrieve information from the backend Location Service from the Gambit Microservice Ecosystem. These methods can be found through the filepath below.
