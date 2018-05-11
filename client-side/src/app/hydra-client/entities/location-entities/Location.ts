@@ -19,17 +19,13 @@ export class Location {
     active: boolean;
 
     // this is a constructor //
-    // constructor(locationId: number, street: string, city: string, state: string, zip: number, company: string, active: boolean) {
-    //     this.locationId = locationId;
-    //     this.street = street;
-    //     this.city = city;
-    //     this.state = state;
-    //     this.zip = zip;
-    //     this.company = company;
-    //     this.active = active;
-    // }
-
-    constructor() {
-
+    constructor(locationId: number, street: string, city: string, state: string, zip: string, company: string, active: boolean) {
+        this.locationId = locationId;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.company = company;
+        this.active = active;
     }
 }
