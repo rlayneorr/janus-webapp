@@ -57,7 +57,7 @@ describe('BatchOverallLineChartComponent', () => {
   });
 
   // Method is void, and it's not setting anything in the component, so can't really test this.
-  // fit('downloadPDF()', inject([ReportingService, PDFService, GranularityService], () => {
+  // it('downloadPDF()', inject([ReportingService, PDFService, GranularityService], () => {
   //   component.downloadPDF();
   // }));
 });

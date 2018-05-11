@@ -98,7 +98,7 @@ describe('AssessmentBreakdownComponent', () => {
     }));
 
     // Method is void, and it's not setting anything in the component, so can't really test this.
-    // fit('downloadPDF()',
+    // it('downloadPDF()',
     //   inject([PDFService], (service: PDFService) => {
     //     component.downloadPDF();
     // }));
