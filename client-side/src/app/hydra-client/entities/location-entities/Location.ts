@@ -12,20 +12,24 @@ export class Location {
     // the state of the campus main office //
     state: string;
     // the zip code of the campus main office //
-    zip: number;
+    zip: string;
     // the location title of the revature campus //
     company: string;
     // the active status of the campus //
     active: boolean;
 
     // this is a constructor //
-    constructor(locationId: number, street: string, city: string, state: string, zip: number, company: string, active: boolean) {
-        this.locationId = locationId;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.company = company;
-        this.active = active;
+    // constructor(locationId: number, street: string, city: string, state: string, zip: number, company: string, active: boolean) {
+    //     this.locationId = locationId;
+    //     this.street = street;
+    //     this.city = city;
+    //     this.state = state;
+    //     this.zip = zip;
+    //     this.company = company;
+    //     this.active = active;
+    // }
+
+    constructor() {
+
     }
 }
