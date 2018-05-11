@@ -9,8 +9,8 @@ import { environment } from '../../../../environments/environment';
 
 // entities
 import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
+import { UrlService } from '../urls/url.service';
 
-const context = environment.skill;
 /**
 * this service manages calls to the web services
 * for Skill objects
@@ -18,7 +18,7 @@ const context = environment.skill;
 @Injectable()
 export class GambitSkillService {
 
-  constructor(public httpClient: HttpClient) {
+  constructor(public httpClient: HttpClient, private urls: UrlService) {
   }
 
   /*
@@ -33,7 +33,7 @@ export class GambitSkillService {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
    */
   public findAll(): Observable<GambitSkill[]> {
-    return this.httpClient.get<GambitSkill[]>(context.findAll());
+    return this.httpClient.get<GambitSkill[]>(this.urls.skills.findAll());
   }
 
   /**
@@ -42,7 +42,7 @@ export class GambitSkillService {
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public findAllActive(): Observable<GambitSkill[]> {
-    return this.httpClient.get<GambitSkill[]>(context.findAllActive());
+    return this.httpClient.get<GambitSkill[]>(this.urls.skills.findAllActive());
   }
 
   /**
@@ -54,7 +54,7 @@ export class GambitSkillService {
   * @return Observable<GambitSkill>
   */
   public findById(id: number): Observable<GambitSkill> {
-    return this.httpClient.get<GambitSkill>(context.findById(id));
+    return this.httpClient.get<GambitSkill>(this.urls.skills.findById(id));
   }
 
   /**
@@ -66,7 +66,7 @@ export class GambitSkillService {
    * @return Observable<GambitSkill>
    */
   public findByName(name: string): Observable<GambitSkill> {
-    return this.httpClient.get<GambitSkill>(context.findByName(name));
+    return this.httpClient.get<GambitSkill>(this.urls.skills.findByName(name));
   }
 
   /**
@@ -77,8 +77,8 @@ export class GambitSkillService {
   * @param skill: Skill
   */
   public create(skill: GambitSkill): Observable<GambitSkill> {
-    const url = environment.skill.save();
-    return this.httpClient.post<GambitSkill>(url, JSON.stringify(skill));
+    // const url = environment.skill.save();
+    return this.httpClient.post<GambitSkill>(this.urls.skills.save(), JSON.stringify(skill));
   }
 
   /**
@@ -89,8 +89,8 @@ export class GambitSkillService {
    * @param skill: Skill
    */
   public update(skill: GambitSkill): Observable<GambitSkill> {
-    const url = environment.skill.updateById(skill.skillID);
-    return this.httpClient.put<GambitSkill>(url, JSON.stringify(skill));
+    // const url = environment.skill.updateById(skill.skillID);
+    return this.httpClient.put<GambitSkill>(this.urls.skills.update(), JSON.stringify(skill));
   }
 
   /**
@@ -99,6 +99,6 @@ export class GambitSkillService {
    * @param skill: GambitSkill
    */
   public delete(skill: GambitSkill): Observable<boolean> {
-    return this.httpClient.delete<boolean>(context.delete(skill.skillID));
+    return this.httpClient.delete<boolean>(this.urls.skills.delete(skill.skillID));
   }
 }

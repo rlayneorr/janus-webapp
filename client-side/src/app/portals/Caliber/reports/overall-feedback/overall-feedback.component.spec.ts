@@ -5,7 +5,7 @@ import { Note } from '../../entities/Note';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 
 
-xdescribe('OverallFeedbackComponent439y298743', () => {
+describe('OverallFeedbackComponent439y298743', () => {
   let component: OverallFeedbackComponent;
   let fixture: ComponentFixture<OverallFeedbackComponent>;
 

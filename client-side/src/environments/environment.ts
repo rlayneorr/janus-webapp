@@ -7,11 +7,11 @@ const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
 
-  gambitContext: 'http://localhost:10000',
+  gambitContext: 'http://localhost:8080',
 
   context: context,
   bam: bam,
-  url: 'http://54.166.255.85:8085/',
+  url: 'http://54.166.255.85:8085',
   msurl: 'http://34.227.178.103:',
 
   assets: 'http://52.87.205.55:8086/angular/assets/',
