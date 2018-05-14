@@ -9,7 +9,7 @@ import { Building } from '../../entities/location-entities/Building';
 import { Room } from '../../entities/location-entities/Room';
 import { Unavailability } from '../../entities/location-entities/Unavailability';
 
-const testLoc = new Location(1, null, null, null, 0, null, false);
+const testLoc = new Location(1, null, null, null, '0', null, false);
 
 
 describe('LocationService', () => {
@@ -59,7 +59,7 @@ describe('LocationService', () => {
   it('should create a new location', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Location;
-    service.newLocation(new Location(null, 'new street', 'houston', 'tx', 77066, 'Revature', true)).subscribe((results) => {
+    service.newLocation(new Location(null, 'new street', 'houston', 'tx', '77066', 'Revature', true)).subscribe((results) => {
 
       data = results;
       console.log(data);
@@ -69,7 +69,7 @@ describe('LocationService', () => {
   it('should update a location', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Location;
-    service.updateLocation(new Location(1, 'update', 'houston', 'tx', 77066, 'Revature', true)).subscribe((results) => {
+    service.updateLocation(new Location(1, 'update', 'houston', 'tx', '77066', 'Revature', true)).subscribe((results) => {
 
       data = results;
       console.log(data);
@@ -79,7 +79,7 @@ describe('LocationService', () => {
   it('should set a location as false', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Location;
-    service.deleteLocation(new Location(2, 'update', 'houston', 'tx', 77066, 'Revature', false)).subscribe((results) => {
+    service.deleteLocation(new Location(2, 'update', 'houston', 'tx', '77066', 'Revature', false)).subscribe((results) => {
 
       data = results;
       console.log(data);
