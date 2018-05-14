@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class UrlService {
-  private context = 'http://localhost:8080';
+  private context: string;
 
   /**
    * All urls associated with skills will come from this object
@@ -224,6 +224,6 @@ export class UrlService {
   };
 
   constructor() {
-    this.context = environment.url;
+    this.context = environment.gambitContext;
   }
 }
