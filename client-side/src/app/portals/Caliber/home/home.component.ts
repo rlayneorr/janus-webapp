@@ -10,7 +10,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private trainerService: TrainerService, private completeBatchService: BatchService) { }
 
-
   ngOnInit() {
     this.trainerService.fetchAll().subscribe(x => {
       console.log(x);

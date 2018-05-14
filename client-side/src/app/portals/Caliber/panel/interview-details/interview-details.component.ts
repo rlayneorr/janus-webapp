@@ -17,9 +17,6 @@ import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
 import { BatchService } from '../../services/batch.service';
 import { PanelService } from '../../services/panel.service';
 
-
-
-
 @Component({
   selector: 'app-interview-details',
   templateUrl: './interview-details.component.html',
@@ -62,17 +59,6 @@ export class InterviewDetailsComponent implements OnInit, OnDestroy {
     this.traineeSubscription = this.searchBar.getTraineeSubject().subscribe((trainee) => {
       this.trainee = trainee;
     });
-
-    // this.batchSubscription = this.batchService.getList().subscribe((batchList) => {
-    //   this.batchList = batchList;
-    //   for (let i = 0; i < this.batchList.length; i++) {
-    //     for (let j = 0; j < this.batchList[i].trainees.length; j++) {
-    //       if (this.batchList[i].trainees[j].name === this.trainee.name) {
-    //         this.trainingTrack = this.batchList[i].skillType;
-    //       }
-    //     }
-    //   }
-    // });
 
     this.panelService.listSubject.asObservable().subscribe((panelList) => {
       this.panelList = panelList;
