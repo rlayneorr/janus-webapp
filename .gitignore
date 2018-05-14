@@ -59,3 +59,6 @@ spring-boot-server/src/main/resources/static/
 
 #Mac
 .DS_Store
+
+#Code Coverage folder from Karma and Jasmine
+coverage/
