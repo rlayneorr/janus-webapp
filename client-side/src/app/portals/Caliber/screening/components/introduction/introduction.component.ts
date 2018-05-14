@@ -6,12 +6,12 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
+import { TagService } from '../../../services/tag/tag.service';
 import { BucketService } from '../../services/bucket/bucket.service';
 import { ScreeningService } from '../../services/screening/screening.service';
 
 import { Tag } from '../../entities/tag';
 import { SkillType } from '../../entities/skillType';
-import { TagService } from '../../../services/tag/tag.service';
 
 @Component({
   selector: 'app-introduction',
