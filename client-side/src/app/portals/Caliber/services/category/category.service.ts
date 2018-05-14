@@ -15,9 +15,9 @@ import { Category } from '../../entities/Category';
 import { CRUD } from '../../interfaces/api.interface';
 
 /**
-* this service manages calls to the web services
-* for Category objects
-*/
+ * this service manages calls to the web services
+ * for Category objects
+ */
 @Injectable()
 export class CategoryService implements CRUD<Category> {
 
@@ -27,11 +27,11 @@ export class CategoryService implements CRUD<Category> {
     this.listSubject = new BehaviorSubject([]);
   }
 
- /*
-   =====================
-   BEGIN: API calls
-   =====================
- */
+  /*
+    =====================
+    BEGIN: API calls
+    =====================
+  */
 
 /**
  * retrieves all categories
@@ -72,7 +72,7 @@ export class CategoryService implements CRUD<Category> {
  }
 
   /**
-  * transmits a new Category to be created.
+  * Transmits a new Category to be created.
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP')")
   *
@@ -84,7 +84,7 @@ export class CategoryService implements CRUD<Category> {
   }
 
   /**
-   * transmits a Category to be updated.
+   * Transmits a Category to be updated.
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP')")
    *

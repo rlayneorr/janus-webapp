@@ -22,7 +22,7 @@ export class AuthenticationService {
     this.http = httpClient;
 
     this.userSubject = new BehaviorSubject(null);
-   }
+  }
 
    /**
     * returns the observable that contains the currently
@@ -30,15 +30,15 @@ export class AuthenticationService {
     *
     * @return Observable<User>
     */
-   public getAuthenticatedUser(): Observable<User> {
+    public getAuthenticatedUser(): Observable<User> {
       return this.userSubject.asObservable();
-   }
+    }
 
-   /*
+    /*
     =====================
     BEGIN: API calls
     =====================
-  */
+    */
     /**
      * retrieves the currently authenticated user from the
      * service and pushes it on the userSubject
@@ -48,9 +48,8 @@ export class AuthenticationService {
 
       this.http.get<User>(url).subscribe( (user) => {
           this.userSubject.next(user);
-        }, (error) => {
+      }, (error) => {
           this.userSubject.next(null);
-        });
+      });
     }
-
 }

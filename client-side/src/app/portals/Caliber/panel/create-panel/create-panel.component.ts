@@ -15,15 +15,13 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 import { PanelService } from '../../services/panel.service';
 import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
-
-
 @Component({
   selector: 'app-create-panel',
   templateUrl: './create-panel.component.html',
   styleUrls: ['./create-panel.component.css'],
   encapsulation: ViewEncapsulation.None,  // Use the native Shadow DOM to encapsulate our CSS
-
 })
+
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
   trainee: HydraTrainee;
@@ -37,7 +35,6 @@ export class CreatePanelComponent implements OnInit {
   modalRef: NgbModalRef;
 
   /**
-   *
    * @param modalService
    * @param searchBar
    * @param fb
@@ -70,14 +67,14 @@ export class CreatePanelComponent implements OnInit {
         format: [''],
         recordingConsent: [''],
         internet: [''],
-        panelRound: [''],
+        panelRound: ['']
       }),
       generalFeedback: this.fb.group({
         associateIntro: [''],
         projectOneDescription: [''],
         projectTwoDescription: [''],
         projectThreeDescription: [''],
-        communicationSkills: [''],
+        communicationSkills: ['']
       }),
       feedback: this.fb.array([]),
       overallFeedback: this.fb.group({

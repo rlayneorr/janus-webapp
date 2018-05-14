@@ -226,8 +226,10 @@ export class ManageComponent implements OnInit {
     this.batches = batches;
     console.log(this.batches);
 
-    /** set the initial year to the latest year of
-    * the batches */
+    /**
+    * set the initial year to the latest year of
+    * the batches
+    */
     this.setCurrentYear(years[years.length - 1]);
   }
 

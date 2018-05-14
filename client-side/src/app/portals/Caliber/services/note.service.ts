@@ -19,28 +19,27 @@ import { environment } from '../../../../environments/environment';
 const context = environment.note;
 
 /**
-* this service manages calls to the web services
-* for Note objects
-*/
+ * This service manages calls to the web services
+ * for Note objects
+ */
 @Injectable()
 export class NoteService {
 
   /*
-  * holds list of notes for one trainee
-  */
+   * Holds list of notes for one trainee
+   */
   private listSubject = new BehaviorSubject<Note[]>([]);
   private traineeListSubject: BehaviorSubject<Note[]>;
 
   constructor(private httpClient: HttpClient, alertService: AlertsService) {
-
     this.traineeListSubject = new BehaviorSubject([]);
   }
 
   /**
-  * returns the Trainee specific list of notes
-  * in an observable
-  * @return Observalbe<Note[]>
-  */
+   * Returns the Trainee specific list of notes
+   * in an observable
+   * @return Observalbe<Note[]>
+   */
   public getTraineeList(): Observable<Note[]> {
     return this.traineeListSubject.asObservable();
   }
@@ -52,14 +51,14 @@ export class NoteService {
    =====================
    BEGIN: API calls
    =====================
- */
+   */
 
   /**
-   * retrieves all notes associated with the passed
+   * Retrieves all notes associated with the passed
    * batch ID and week number and pushes the results
    * on the listSubject
    *
-   * delegates the call to 4 separate Note API hooks for:
+   * Delegates the call to 4 separate Note API hooks for:
    * -> batch notes entered by trainer
    * -> trainee notes enetered by trainer
    * -> batch notes enetered by quality control
@@ -78,28 +77,24 @@ export class NoteService {
     let results: Note[] = [];
 
     Observable.merge($nonQcbatchNotes, $nonQctraineeNotes, $qcBatchNotes, $qcTraineeNotes)
-      .subscribe((notes) => {
-        results = results.concat(notes); // merge all results into one array
-      },
-      (error) => {
-      }, // errors are already sent to the console in the SpringInterceptor
-      () => {
-        this.listSubject.next(results); // send the merged results
-      }
+      .subscribe(
+        (notes) => {results = results.concat(notes); }, // merge all results into one array
+        (error) => {}, // errors are already sent to the console in the SpringInterceptor
+        () => {this.listSubject.next(results); } // send the merged results
       );
   }
 
 
   /**
-  * retrieves all quality control Batch notes associated with
-  * the passed batch ID and week number and returns an observable
-  * which holds the array of notes found
-  *
-  * @param batchId: number
-  * @param week: number
-  *
-  * @return Observable<Note[]>
-  */
+   * Retrieves all quality control Batch notes associated with
+   * the passed batch ID and week number and returns an observable
+   * which holds the array of notes found
+   *
+   * @param batchId: number
+   * @param week: number
+   *
+   * @return Observable<Note[]>
+   */
   public fetchQcBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
     const url = context.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
 
@@ -107,7 +102,7 @@ export class NoteService {
   }
 
   /**
-   * retrieves all quality control Trainee notes associated with
+   * Retrieves all quality control Trainee notes associated with
    * the passed batch ID and week number and returns an observable
    * which holds the array of notes found
    *
@@ -123,7 +118,7 @@ export class NoteService {
   }
 
   /**
-   * retrieves all trainer entered Batch notes associated with
+   * Retrieves all trainer entered Batch notes associated with
    * the passed batch ID and week number and returns an observable
    * which holds the array of notes found
    *
@@ -139,7 +134,7 @@ export class NoteService {
   }
 
   /**
-   * retrieves all trainer entered Trainee notes associated with
+   * Retrieves all trainer entered Trainee notes associated with
    * the passed batch ID and week number and returns an observable
    * which holds the array of notes found
    *
@@ -155,7 +150,7 @@ export class NoteService {
   }
 
   /**
-  * retrieves all notes associated with the passed
+  * Retrieves all notes associated with the passed
   * trainee and pushes the results on the listSubject
   *
   * @param trainee: Trainee
@@ -166,15 +161,11 @@ export class NoteService {
     const $trainingNotes = this.fetchTrainingNotesByTrainee(trainee);
     const $qcNotes = this.fetchQcNotesByTrainee(trainee);
     let results: Note[] = [];
-
-    Observable.merge($trainingNotes, $qcNotes)
-      .subscribe((notes) => {
-        results = results.concat(notes);
-      }, (error) => {
-      }, // errors are already sent to the console in the SpringInterceptor
-      () => {
-        this.traineeListSubject.next(results); // send the merged results
-      });
+    Observable.merge($trainingNotes, $qcNotes).subscribe(
+      (notes) => {results = results.concat(notes); },
+      (error) => {}, // errors are already sent to the console in the SpringInterceptor
+      () => {this.traineeListSubject.next(results); } // send the merged results
+    );
   }
 
   /**
@@ -218,9 +209,8 @@ export class NoteService {
     const url = context.update();
     const messages = {
       success: 'Note updated successfully',
-      error: 'Note update failed',
+      error: 'Note update failed'
     };
-
     this.httpClient.post(url, note).subscribe(); // yes, the API implemented this as a POST method: @see EvaluationController
   }
 
@@ -237,7 +227,7 @@ export class NoteService {
   }
 
   /**
-   * transmits a note to be saved and pushes the
+   * Transmits a note to be saved and pushes the
    * saved note on the savedSubject
    *
    * @param note: Note
@@ -248,10 +238,8 @@ export class NoteService {
     const url = context.save();
     const messages = {
       success: 'Note saved successfully',
-
-      error: 'Note save failed',
+      error: 'Note save failed'
     };
-
     this.httpClient.post(url, note).subscribe();
   }
 

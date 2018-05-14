@@ -20,8 +20,8 @@ import { CRUD } from '../interfaces/api.interface';
 const context = environment.trainer;
 
 /**
- * this service manages calls to the web service
- * for Trainer objects
+ * This service manages calls to the web service
+ * for Trainer objects.
  */
 @Injectable()
 export class TrainerService implements CRUD<Trainer> {
@@ -35,10 +35,9 @@ export class TrainerService implements CRUD<Trainer> {
     this.populateOnStart();
   }
 
-    /**
-  *
-  * fetches the data of the service initially and
-  * bootstraps default responsive behavior with subscriptons
+  /**
+  * Fetches the data of the service initially and
+  * bootstraps default responsive behavior with subscriptions.
   */
   public populateOnStart(): void {
     this.httpClient.get<String[]>(context.getTitles()).subscribe(x => this.titlesSubject.next(x));
@@ -47,8 +46,7 @@ export class TrainerService implements CRUD<Trainer> {
   }
 
   /**
-  *
-  * sets current trainer
+  * Sets current trainer
   */
   public changeCurrentTrainer(trainer: Trainer) {
     this.currentTrainer.next(trainer);
@@ -61,34 +59,32 @@ export class TrainerService implements CRUD<Trainer> {
   */
 
   /**
-   * makes a single api call to retrieve a trainer by
-   * email
-   *
-   * sprint-security: @PreAuthorize("permitAll")
-   *
-   * @param email: string
-   *
-   * @return Observable<Trainer>
-   */
+  * Makes a single api call to retrieve a trainer by email
+  *
+  * sprint-security: @PreAuthorize("permitAll")
+  *
+  * @param email: string
+  *
+  * @return Observable<Trainer>
+  */
   public fetchByEmail(email: string): Observable<Trainer> {
     this.httpClient.get<Trainer>(context.fetchByEmail(email)).subscribe(x => this.currentTrainer.next(x));
     return this.currentTrainer.asObservable();
   }
 
   /**
-    * retrieves all trainers and pushes them on the
-    * list subject
-    *
-    * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
-    */
+  * Retrieves all trainers and pushes them on the
+  * list subject
+  *
+  * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
+  */
   public fetchAll(): Observable<Trainer[]> {
     this.httpClient.get<Trainer[]>(context.fetchAll()).subscribe(x => this.listSubject.next(x));
     return this.listSubject.asObservable();
   }
 
   /**
-   * creates a trainer and pushes the created trainer on the
-   * savedSubject
+   * Given a trainer object, posts it to the database and returns the created object.
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP')")
    *
@@ -99,8 +95,8 @@ export class TrainerService implements CRUD<Trainer> {
   }
 
   /**
-   * updates a trainer and pushes the updated trainer on the
-   * savedSubject
+   * Given a trainer object, updates the given trainer in the database
+   * and returns the updated trainer object.
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP')")
    *
@@ -115,8 +111,9 @@ export class TrainerService implements CRUD<Trainer> {
   * the Trainer passed as inactive
   *
   * HttpClient adheres to RESTful conventions and does not
-  * allow a delete mehthod call to pass a body
+  * allow a delete method call to pass a body
   *
+  * yeah, what the hell
   * spring-security: @PreAuthorize("hasAnyRole('VP')")
   *
   * @param trainer: Trainer

@@ -99,8 +99,8 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   /** Dynamically updates the createBatch location selected inside the
-    * create batch modal whenever a location is selected from the dropdown
-    */
+  * create batch modal whenever a location is selected from the dropdown
+  */
   onLocationSelect(addressId: number): void {
     for (const location of this.locations) {
       if (Number(location.addressId) === Number(addressId)) {
@@ -109,9 +109,10 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  /** Dynamically updates the createBatch trainer selected inside the
- * create batch modal whenever a trainer is selected from the dropdown
- */
+  /**
+  * Dynamically updates the createBatch trainer selected inside the
+  * create batch modal whenever a trainer is selected from the dropdown
+  */
   onTrainerSelect(trainerId: number): void {
     for (const trainer of this.trainers) {
       if (Number(trainer.trainerId) === Number(trainerId)) {
@@ -121,9 +122,10 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   }
 
 
-  /** Dynamically updates the createBatch coTrainer selected inside the
-   * create batch modal whenever a trainer is selected from the dropdown
-   */
+  /**
+  * Dynamically updates the createBatch coTrainer selected inside the
+  * create batch modal whenever a trainer is selected from the dropdown
+  */
   onCoTrainerSelect(trainerId: number): void {
     for (const trainer of this.trainers) {
       if (Number(trainer.trainerId) === Number(trainerId)) {
@@ -134,9 +136,9 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {
 
-    /*
-   * keep an updated list of trainers
-   */
+  /**
+  * keep an updated list of trainers
+  */
     this.trainerListSubscription = this.trainerService.listSubject
       .subscribe((trainers) => this.setTrainers(trainers));
 
