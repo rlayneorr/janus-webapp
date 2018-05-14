@@ -49,19 +49,4 @@ describe('EditlocationComponent', () => {
   //   expect(component.close('')).toBeTruthy();
   // });
 
-  it('should call update', () => {
-    const myLocation = new Location;
-
-    component.currEditLocation = new Location;
-
-    myLocation.company = '';
-    myLocation.city = '';
-    myLocation.street = '';
-    component.newState = '';
-    myLocation.zipcode = '123';
-    component.updateLocation(myLocation);
-
-    expect(component.currEditLocation.zipcode).toEqual('123');
-  });
-
 });

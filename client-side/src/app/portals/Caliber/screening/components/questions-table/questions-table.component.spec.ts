@@ -6,7 +6,7 @@ import { BucketService } from '../../services/bucket/bucket.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { UrlUtilService } from '../../services/UrlUtil/url-util.service';
 import { QuestionService } from '../../services/question/question.service';
-import { TagService } from '../../services/tag/tag.service';
+import { TagService } from '../../../services/tag/tag.service';
 import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
