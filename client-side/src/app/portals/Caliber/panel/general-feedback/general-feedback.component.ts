@@ -18,9 +18,8 @@ export class GeneralFeedbackComponent implements OnInit {
       projectThreeDescription: new FormControl(),
       communicationSkills: new FormControl()
     });
-   }
-
-  ngOnInit() {
   }
+
+  ngOnInit() {}
 
 }
