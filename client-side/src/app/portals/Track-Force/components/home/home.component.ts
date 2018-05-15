@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../services/request-service/request.service';
-import { DataSyncService } from '../../services/datasync-service/data-sync.service';
 import { ChartsModule, Color } from 'ng2-charts';
 import { CreateUserService } from '../../services/create-user-service/create-user.service';
 import { AssociateService } from '../../services/associates-service/associates-service';
@@ -76,17 +75,11 @@ export class HomeComponent implements OnInit {
     *@param {RequestService} rs
     * Service for handling requests to the back-end
     *
-    *@param {DataSyncService} ds
-    * Experimental service with BehaviorSubject
-    * BehaviorSubject allows for real-time update of charts
-    * Not fully implemented, so it is un-used
-    *
     *@param {Router} rout
     * Allows for re-direction to other components
     */
   constructor(
     private rs: RequestService,
-    private ds: DataSyncService,
     private rout: Router,
     private us: CreateUserService,
     private cs: ClientListService,

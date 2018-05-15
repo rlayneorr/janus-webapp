@@ -66,7 +66,7 @@ export class DataSyncService {
     private ss: SkillsetService
   ) {
     // fetch data on initialization
-   // this.fetchData();
+    this.fetchData();
   }
 
   private checkFetchData() {

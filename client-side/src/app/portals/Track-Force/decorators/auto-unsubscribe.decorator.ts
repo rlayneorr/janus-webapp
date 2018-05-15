@@ -22,9 +22,6 @@ export function AutoUnsubscribe(constructor) {
         property.unsubscribe();
       }
     }
-    // if the callback we copied was function, we invoke it now with any arguments that were passed in
-    //  via constructor
-    // original && typeof original === 'function' && original.apply(this, arguments);
   };
 
 }
