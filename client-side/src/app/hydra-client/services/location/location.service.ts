@@ -101,22 +101,24 @@ export class LocationService {
   getAllRooms() {
     return this.httpClient.get<Array<Room>>(this.urls.room.getAllRooms());
   }
-  /**Takes a buildingId (number) and returns an observable of an array of all rooms
-   * belonging to that building. */
-  getRoomsByBuildingId(buildingId: any) {
-    return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId));
+  /**Takes a buildingId (number) and returns an observable of
+   * an array of all rooms belonging to that building. */
+  getRoomsByBuildingId(buildingId: number) {
+    return this.httpClient.get<Array<Room>>(
+      this.urls.room.getRoomsByBuildingId(buildingId));
   }
   /**Takes a roomId (number) and returns an observable of that room object from the database. */
   getRoomById(roomId: any) {
     return this.httpClient.get<Room>(this.urls.room.getRoomById(roomId));
   }
-  /**Function for getting all rooms in a given location using multiple AJAX calls.
-   * Takes in a locationId (number) and returns an observable of an array of rooms. */
+  /**Function for getting all rooms in a given location
+   * using multiple AJAX calls. Takes in a locationId (number)
+   * and returns an observable of an array of rooms. */
   getRoomsByLocationId(locationId: number) {
-    const observeRooms = this.getBuildingsByLocationId(locationId).mergeMap((buildingArray: Building[]) => {
-      return this.getRoomsFromBuildings(buildingArray);
+    return this.getBuildingsByLocationId(locationId)
+      .mergeMap((buildingArray: Building[]) => {
+        return this.getRoomsFromBuildings(buildingArray);
     });
-    return observeRooms;
   }
   /**Helper method for the above. */
   private getRoomsFromBuildings(buildsArray: Array<Building>) {
