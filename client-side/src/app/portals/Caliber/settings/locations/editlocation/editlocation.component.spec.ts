@@ -41,12 +41,4 @@ describe('EditlocationComponent', () => {
     expect(component['getDismissReason']('yes')).toBeTruthy();
   });
 
-  // it('should set state', () => {
-  //   const modalService = new NgbModal({} as ComponentFactoryResolver, {} as Injector, {} as NgbModalStack);
-  //   const modalService: NgbModal = {} as NgbModal;
-  //   component['modalRef'] = modalService.open('', { size: 'lg' });
-  //   expect(component.close(component['modalRef'])).toBeTruthy();
-  //   expect(component.close('')).toBeTruthy();
-  // });
-
 });
