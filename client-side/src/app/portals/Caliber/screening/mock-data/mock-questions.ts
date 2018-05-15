@@ -108,7 +108,7 @@ export const QUESTIONS: Question[] = [
   },
   { questionId: 21,
     questionText: '"Contract First" web services are:',
-    sampleAnswer1: 'The binding and support classes are automatically generated with a ' + 
+    sampleAnswer1: 'The binding and support classes are automatically generated with a ' +
     'SOAP tool instead of manually written by the developer.',
     sampleAnswer2: 'Made with the JAX-RS API',
     sampleAnswer3: 'Dependent on a WSDL being written before the Java classes. ',
