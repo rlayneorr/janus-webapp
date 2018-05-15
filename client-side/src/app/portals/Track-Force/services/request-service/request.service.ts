@@ -35,29 +35,6 @@ export class RequestService {
     return this.http.get(this.context + '/trainees');
   }
 
-  //  public login(username: string, password: string): Observable<User> {
-  //    return this.http.post<User>(this.host + 'TrackForce/track/user/submit', { username: username, password: password });
-  //  }
-
-  //  public getUsername(): Observable<any> {
-  //    return this.http.get<any>(this.host + 'TrackForce/track/user/name');
-  // }
-
-  //  public updateAssociates(): Observable<any>{
-  //    return this.http.post<any>(this.trackPath + '/data/update/associate', {});
-  // }
-
-  //  public getAssociates(): Observable<any> {
-  //    return this.http.get(this.dataPath + '/associate');
-  // }
-
-  //  public getBatchesSortedById(): Observable<any> {
-  //    return this.http.get(this.dataPath + '/batch');
-  // }
-
-  // public getBatchesSortedByDate(): Observable<any> {
-  //   return this.http.get(this.dataPath + '/batch/date');
-  // }
 
   public getClients(): Observable<any> {
     return this.http.get(this.dataPath + '/client');
@@ -67,25 +44,9 @@ export class RequestService {
     return this.http.get(this.dataPath + '/summary');
   }
 
-  // public getSkills(): Observable<any> {
-  //   return this.http.get(this.dataPath + '/skills');
-  // }
-
   public getStatuses(): Observable<any> {
     return this.http.get(this.hostms + '8094/all/marketingstatus');
   }
-
-  // public getBatches(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {
-  //   return this.http.get<any>(this.host + 'TrackForce/track/batches/' + threeMonthsBefore + '/' + threeMonthsAfter);
-  // }
-
-  // public getBatchPerType(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {
-  //   return this.http.get<any>(this.host + 'TrackForce/track/batches/' + threeMonthsBefore + '/' + threeMonthsAfter + '/type');
-  // }
-
-  // public createUser(username: string, password: string, roleId: number): Observable<any> {
-  //   return this.http.post<any>(this.host + 'TrackForce/track/create/user', {username: username, password: password, role: roleId});
-  // }
 
   // get first match of Client Object
   getOneClient(clientId: number): Observable<any> {

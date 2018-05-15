@@ -133,7 +133,7 @@ export class ClientMappedComponent implements OnInit {
       console.log(data);
 
       // Loop over 'data' and extract fetched information
-      // tslint:disable-next-line:forin
+
       for (const d in data) {
         const temp_name = data[d].name;
         const temp_count = data[d].count;
