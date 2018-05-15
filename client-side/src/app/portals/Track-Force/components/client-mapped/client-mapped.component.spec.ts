@@ -16,7 +16,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
-xdescribe('ClientMappedComponent', () => {
+describe('ClientMappedComponent', () => {
   let component: ClientMappedComponent;
   let fixture: ComponentFixture<ClientMappedComponent>;
   const testClientService: ClientListService = new ClientListService(null);
@@ -100,4 +100,29 @@ xdescribe('ClientMappedComponent', () => {
     // Test the chartType in the DOM
     expect(the_graph.getAttribute('ng-reflect-chart-type')).toEqual(chart_type);
   });
+
+  it('checks a Select status is undefined', () => {
+    component.ngOnInit();
+    expect(component.selectedStatus).toEqual(undefined);
+  });
+
+  it('checks that if pie then the scale is gone', () => {
+    const selectType = 'pie';
+    component.changeChartType(selectType);
+    expect(component.chartOptions.scales).toBe(undefined);
+  });
+
+  it('checks that is bar then scale is there', () => {
+    const selectType = 'bar';
+    component.changeChartType(selectType);
+    expect(component.chartOptions.scales).toBeTruthy();
+  });
+
+  it('checks that if polarArea then the scale is gone', () => {
+    const selectType = 'polarArea';
+    component.changeChartType(selectType);
+    expect(component.chartOptions.scales).toBe(undefined);
+  });
+
+
 });

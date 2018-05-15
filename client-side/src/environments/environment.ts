@@ -11,7 +11,7 @@ export const environment = {
 
   context: context,
   bam: bam,
-  url: 'http://54.166.255.85:8085/',
+  url: 'http://54.166.255.85:8085',
   msurl: 'http://34.227.178.103:',
 
   assets: 'http://52.87.205.55:8086/angular/assets/',

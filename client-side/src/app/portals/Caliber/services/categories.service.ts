@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 import { environment } from '../../../../environments/environment';
-import { CategoryService } from './category.service';
+import { CategoryService } from './category/category.service';
 
 
 // entities

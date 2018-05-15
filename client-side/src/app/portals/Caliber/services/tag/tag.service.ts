@@ -4,9 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { Tag } from '../../entities/tag';
-import { TAGS } from '../../mock-data/mock-tags';
-import { UrlUtilService } from '../UrlUtil/url-util.service';
+import { Tag } from '../../screening/entities/tag';
+import { TAGS } from '../../screening/mock-data/mock-tags';
+import { UrlUtilService } from '../../screening/services/UrlUtil/url-util.service';
+// C:\Users\clay5\Project 3\janus-webapp\client-side\src\app\portals\Caliber\screening\services\UrlUtil\url-util.service.ts
 
 /*
 Used to get the Tags that are shown to the screener

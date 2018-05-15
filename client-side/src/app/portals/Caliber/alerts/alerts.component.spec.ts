@@ -10,7 +10,7 @@ import { Dependencies } from '../caliber.test.module';
  * Author: Jordan Young
  */
 
-fdescribe('AlertsComponent', () => {
+describe('AlertsComponent', () => {
   let component: AlertsComponent;
   let fixture: ComponentFixture<AlertsComponent>;
 

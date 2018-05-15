@@ -7,12 +7,12 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // services
-import { AlertsService } from './alerts.service';
-import { environment } from '../../../../environments/environment';
+import { AlertsService } from '../../services/alerts.service';
+import { environment } from '../../../../../environments/environment';
 
 // entities
-import { Category } from '../entities/Category';
-import { CRUD } from '../interfaces/api.interface';
+import { Category } from '../../entities/Category';
+import { CRUD } from '../../interfaces/api.interface';
 
 /**
  * this service manages calls to the web services

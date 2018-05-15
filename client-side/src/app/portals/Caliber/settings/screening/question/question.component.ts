@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { Question } from '../entities/Question';
+import { Question } from '../../../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { Tag } from '../entities/Tag';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {QuestionsService} from '../services/questions.service';
+import {QuestionsService} from '../../../services/questions/questions.service';
 import {TagsService} from '../services/tags.service';
 import {trigger, state, style, transition, animate, keyframes} from '@angular/animations';
 import {BucketsService} from '../services/buckets.service';
