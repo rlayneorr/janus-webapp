@@ -37,10 +37,10 @@ export class PanelService implements CRUD<Panel> {
    =====================
    BEGIN: API calls
    =====================
- */
+  */
 
  /**
-  * retrievs all panels and pushed them on the listSubject
+  * Retrieves all panels and pushed them on the listSubject
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
@@ -50,7 +50,7 @@ export class PanelService implements CRUD<Panel> {
   }
 
   /**
-   * retrieves all panels by trainee ID and pushes them on the
+   * Retrieves all panels by trainee ID and pushes them on the
    * list subject
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
@@ -63,7 +63,7 @@ export class PanelService implements CRUD<Panel> {
   }
 
   /**
-  * creates a panel and pushes the created panel on the
+  * Creates a panel and pushes the created panel on the
   * savedSubject
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP' , 'PANEL')")
@@ -71,7 +71,6 @@ export class PanelService implements CRUD<Panel> {
   * @param panel: Panel
   */
   public create(panel: Panel): Observable<Panel> {
-    console.log(panel);
     panel.status = 'Pass';
     return this.http.post<Panel>(context.save(), JSON.stringify(panel));
   }
@@ -89,7 +88,7 @@ export class PanelService implements CRUD<Panel> {
   }
 
   /**
-  * deletes a panel and pushes the deleted panel on the
+  * Deletes a panel and pushes the deleted panel on the
   * deletedSubject
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'PANEL')")
@@ -101,14 +100,14 @@ export class PanelService implements CRUD<Panel> {
   }
 
   /**
- * produces a clone of the Panel object that
- * has changes required for the API in order
- * to be processed
- *
- * @param batch: Batch
- *
- * @return any
- */
+  * Produces a clone of the Panel object that
+  * has changes required for the API in order
+  * to be processed
+  *
+  * @param batch: Batch
+  *
+  * @return any
+  */
   protected prepareForApi(panel: Panel) {
     const output: any = {};
 

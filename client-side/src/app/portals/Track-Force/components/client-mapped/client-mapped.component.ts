@@ -133,17 +133,20 @@ export class ClientMappedComponent implements OnInit {
       console.log(data);
 
       // Loop over 'data' and extract fetched information
+
       for (const d in data) {
-        const temp_name = data[d].name;
-        const temp_count = data[d].count;
-        if (temp_count > 0) {
-          // Check if the fetched name is empty
-          if (data[d].name === '') {
-            temp_clientMappedLabels.push('Empty Name');
-          } else {
-            temp_clientMappedLabels.push(data[d].name);
+        if (data.hasOwnProperty(d)) {
+          const temp_name = data[d].name;
+          const temp_count = data[d].count;
+          if (temp_count > 0) {
+            // Check if the fetched name is empty
+            if (data[d].name === '') {
+              temp_clientMappedLabels.push('Empty Name');
+            } else {
+              temp_clientMappedLabels.push(data[d].name);
+            }
+            temp_clientMappedData.push(data[d].count);
           }
-          temp_clientMappedData.push(data[d].count);
         }
       }
 

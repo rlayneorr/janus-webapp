@@ -12,8 +12,23 @@ export class UrlService {
     findAll: () => `${this.context}/skill`,
     findAllActive: () => `${this.context}/skill/active`,
     findById: (id: number) => `${this.context}/skill/${id}`,
+    findByName: (name: string) => `${this.context}/skill/${name}`,
     save: () => `${this.context}/skill`,
     update: () => `${this.context}/skill/`,
+    delete: (id: number) => `${this.context}/skill`
+  };
+
+  /**
+   * Endpoints for skillType
+   */
+  skillTypes = {
+    findAll: () => `${this.context}/skillType`,
+    findAllActive: () => `${this.context}/skillType/active`,
+    findById: (id: number) => `${this.context}/skillType/${id}`,
+    findByName: (name: string) => `${this.context}/skillType/${name}`,
+    save: () => `${this.context}/skillType`,
+    update: (id: number) => `${this.context}/skillType/${id}`,
+    delete: (id: number) => `${this.context}/skilltype/${id}` // note lowercase t in type, this is to match the request mapping
   };
 
   /**
@@ -36,7 +51,7 @@ export class UrlService {
     findAll: () => `${this.context}/trainees`,
     findById: (id: number) => `${this.context}/trainees/${id}`,
     findByEmail: (email: string) => `${this.context}/trainees/email?=${email}`,
-    findAllByBatchAndStatus: (id: number, status: string) => `${this.context}/trainee/s/batch/${id}/status/${status}`,
+    findAllByBatchAndStatus: (id: number, status: string) => `${this.context}/trainees/batch/${id}/status/${status}`,
     save: () => `${this.context}/trainees`,
     update: () => `${this.context}/trainees`,
     delete: (traineeId: number) => `${this.context}/trainees/${traineeId}`

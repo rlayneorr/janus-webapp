@@ -9,6 +9,7 @@ import { Unavailability } from '../../entities/location-entities/Unavailability'
 import { from } from 'rxjs/observable/from';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/merge';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -24,16 +25,23 @@ export class LocationService {
 
   header = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8;');
 
-  // Injecting UrlService and HttpClient into LocationService constructor
-  constructor(private httpClient: HttpClient, private urls: UrlService) { }
+  listSubject: BehaviorSubject<Location[]>;
 
+  // Injecting UrlService and HttpClient into LocationService constructor //
+  constructor(private httpClient: HttpClient, private urls: UrlService) {
+    this.listSubject = new BehaviorSubject([]);
+    this.initializeSubscriptions();
 
+  }
+  private initializeSubscriptions(): void {
+
+  }
 
   // Methods for locations
   /**Sends an HTTP request to the location service backend, and returns an observable
    * of an array of all locations. */
-  getAllLocations() {
-    return this.httpClient.get<Array<Location>>(this.urls.location.getAllLocations());
+  getAllLocations(): Observable<Location[]> {
+    return this.httpClient.get<Location[]>(this.urls.location.getAllLocations());
   }
   /**Takes a locationId (number) and returns an observable of that location object
    * from the database. */
@@ -88,11 +96,6 @@ export class LocationService {
     return this.httpClient.put<Building>(this.urls.building.putBuildingById(building.buildingId),
       JSON.stringify(building), {headers: this.header});
   }
-  // // Deactivate a building
-  // deleteBuilding(building: Building) {
-  //   return this.httpClient.delete<Building>(this.urls.building.deleteBuildingById(building.buildingId));
-  // }
-
 
 
   // Methods for rooms
@@ -103,13 +106,12 @@ export class LocationService {
   }
   /**Takes a buildingId (number) and returns an observable of
    * an array of all rooms belonging to that building. */
-  getRoomsByBuildingId(buildingId: number) {
-    return this.httpClient.get<Array<Room>>(
-      this.urls.room.getRoomsByBuildingId(buildingId));
+  getRoomsByBuildingId(buildingId: any) {
+    return this.httpClient.get<Array<Room>>(this.urls.room.getRoomsByBuildingId(buildingId));
   }
   /**Takes a roomId (number) and returns an observable of that room object from the database. */
-  getRoomById(roomId: any) {
-    return this.httpClient.get<Room>(this.urls.room.getRoomById(roomId));
+  getRoomById(room: any) {
+    return this.httpClient.get<Room>(this.urls.room.getRoomById(room));
   }
   /**Function for getting all rooms in a given location
    * using multiple AJAX calls. Takes in a locationId (number)
@@ -145,11 +147,6 @@ export class LocationService {
     return this.httpClient.put<Room>(this.urls.room.putRoomById(room.roomId), JSON.stringify(room),
       {headers: this.header});
   }
-  // // Deactivate a room
-  // deleteRoom(room: Room) {
-  //   return this.httpClient.delete<Room>(this.urls.room.deleteRoomById(room.roomId));
-  // }
-
 
 
   /**Makes an HTTP request to the location service backend, returning an observable of an

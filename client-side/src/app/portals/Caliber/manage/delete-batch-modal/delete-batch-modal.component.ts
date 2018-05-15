@@ -16,8 +16,7 @@ export class DeleteBatchModalComponent implements OnInit {
     this.batch = new CompleteBatch();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   delete() {
     this.activeModal.close('Delete');

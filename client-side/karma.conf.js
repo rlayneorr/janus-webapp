@@ -29,6 +29,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
+    singleRun: false,
     /** * maximum number of tries a browser will attempt in the case of a disconnection */ 
     browserDisconnectTolerance: 2,
     /** * How long will Karma wait for a message from a browser before disconnecting from it (in ms). */ 

@@ -5,7 +5,7 @@ import { Note } from '../../entities/Note';
 import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
 
 
-xdescribe('OverallFeedbackComponent439y298743', () => {
+describe('OverallFeedbackComponent439y298743', () => {
   let component: OverallFeedbackComponent;
   let fixture: ComponentFixture<OverallFeedbackComponent>;
 
@@ -19,11 +19,11 @@ xdescribe('OverallFeedbackComponent439y298743', () => {
     fixture.detectChanges();
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('getNoteByWeek(data, 7) should return note1', () => {
+  it('getNoteByWeek(data, 7) should return note1', () => {
     const note1 = new Note();
     note1.noteId = 1;
     note1.content = 'java';
@@ -41,7 +41,7 @@ xdescribe('OverallFeedbackComponent439y298743', () => {
     expect(component.getNoteByWeek(data, 7)).toEqual(note1);
   });
 
-  fit('qcWeek(7) should return note1', () => {
+  it('qcWeek(7) should return note1', () => {
     const note1 = new Note();
     note1.noteId = 1;
     note1.content = 'java';
@@ -58,7 +58,7 @@ xdescribe('OverallFeedbackComponent439y298743', () => {
     expect(component.qcWeek(7)).toEqual(note1);
   });
 
-  fit('traineeWeek(7) should return note1', () => {
+  it('traineeWeek(7) should return note1', () => {
     const note1 = new Note();
     note1.noteId = 1;
     note1.content = 'java';
@@ -76,7 +76,7 @@ xdescribe('OverallFeedbackComponent439y298743', () => {
   });
 
   // Cannot touch some of the code due to the API calls.
-  fit('ngOnit() test with no backend', () => {
+  it('ngOnit() test with no backend', () => {
     component.ngOnInit();
   });
 
