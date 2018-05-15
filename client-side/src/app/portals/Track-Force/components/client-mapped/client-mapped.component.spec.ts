@@ -44,7 +44,6 @@ describe('ClientMappedComponent', () => {
     user.username = 'mockUser';
     user.tfRoleId = 1;
     spyOn(testAuthService, 'getUser').and.returnValue(user);
-    spyOn(console, 'log');
   });
 
   beforeEach(async(() => {
