@@ -35,13 +35,4 @@ describe('FinalReportComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
-
-  // it('should be checked', () => {
-  //   component.copyToClipboard();
-  //   expect(component.checked).toBeTruthy();
-  // });
-
 });
