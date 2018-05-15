@@ -8,8 +8,8 @@
       <div class="input-group mb-3" class="pull-right">
         <div class="input-group">
   
-          <input list="dropdown-item" id="typeahead-basic" placeholder="Search for Trainee" type="text" value={{name}} class="form-control"
-            (input)="setTraineeBySearch($event)" />
+          <input list="dropdown-item" id="typeahead-basic" placeholder="Search for Trainee" 
+            type="text" value={{name}} class="form-control" (input)="setTraineeBySearch($event)" />
   
           <datalist id="dropdown-item">
             <option [value]="trainees.name" *ngFor="let trainees of traineeList">

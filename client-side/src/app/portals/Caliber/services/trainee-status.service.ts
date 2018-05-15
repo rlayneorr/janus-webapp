@@ -13,9 +13,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
-
 /**
- * manages API calls for TraineeStatuses
+ * Manages API calls for TraineeStatuses
  */
 @Injectable()
 export class TraineeStatusService implements Fetch<string> {
@@ -29,7 +28,7 @@ export class TraineeStatusService implements Fetch<string> {
   }
 
   /**
-   * perform initialization processes
+   * Perform initialization processes
    */
   private initialize(): void {
     this.fetchAll();
@@ -42,10 +41,10 @@ export class TraineeStatusService implements Fetch<string> {
   */
 
   /**
-  * retrieves all skills and pushes them on the listSubject
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
-  */
+   * Retrieves all skills and pushes them on the listSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
+   */
   public fetchAll(): Observable<string[]> {
      this.http.get<string[]>(environment.traineeStatus.fetchAll()).subscribe((data) => this.listSubject.next(data));
      return this.listSubject.asObservable();

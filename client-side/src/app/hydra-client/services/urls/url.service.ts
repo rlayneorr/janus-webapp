@@ -12,13 +12,28 @@ export class UrlService {
     findAll: () => `${this.context}/skill`,
     findAllActive: () => `${this.context}/skill/active`,
     findById: (id: number) => `${this.context}/skill/${id}`,
+    findByName: (name: string) => `${this.context}/skill/${name}`,
     save: () => `${this.context}/skill`,
     update: () => `${this.context}/skill/`,
+    delete: (id: number) => `${this.context}/skill`
   };
 
   /**
-    * Endpoints for batches
-    */
+   * Endpoints for skillType
+   */
+  skillTypes = {
+    findAll: () => `${this.context}/skillType`,
+    findAllActive: () => `${this.context}/skillType/active`,
+    findById: (id: number) => `${this.context}/skillType/${id}`,
+    findByName: (name: string) => `${this.context}/skillType/${name}`,
+    save: () => `${this.context}/skillType`,
+    update: (id: number) => `${this.context}/skillType/${id}`,
+    delete: (id: number) => `${this.context}/skilltype/${id}` // note lowercase t in type, this is to match the request mapping
+  };
+
+  /**
+   * Endpoints for batches
+   */
 
   batches = {
     fetchAllByTrainer: () => `${this.context}/batches/trainers`,
@@ -36,7 +51,7 @@ export class UrlService {
     findAll: () => `${this.context}/trainees`,
     findById: (id: number) => `${this.context}/trainees/${id}`,
     findByEmail: (email: string) => `${this.context}/trainees/email?=${email}`,
-    findAllByBatchAndStatus: (id: number, status: string) => `${this.context}/trainee/s/batch/${id}/status/${status}`,
+    findAllByBatchAndStatus: (id: number, status: string) => `${this.context}/trainees/batch/${id}/status/${status}`,
     save: () => `${this.context}/trainees`,
     update: () => `${this.context}/trainees`,
     delete: (traineeId: number) => `${this.context}/trainees/${traineeId}`
@@ -151,6 +166,61 @@ export class UrlService {
     getAllBatchTypesUrl: () => `${this.context}/batches/types`,
     removeSubtopicFromBatchUrl: (subtopicId: number) => `${this.context}/batch/${subtopicId}`,
     getAllInProgressUrl: () => `${this.context}/batches/current/`
+  };
+
+  /**
+   * Endpoints for locations:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
+  location = {
+    getLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
+    getAllLocations: () => `${this.context}/locations/`,
+    postLocation: () => `${this.context}/locations/`,
+    putLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
+    deleteLocationById: (locationId: number) => `${this.context}/locations/${locationId}`
+  };
+
+  /**
+   * Endpoints for buildings:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
+  building = {
+    getBuildingById: (buildingId: number) => `${this.context}/buildings/${buildingId}`,
+    getBuildingsByLocationId: (locationId: number) => `${this.context}/buildings/location/${locationId}`,
+    getAllBuildings: () => `${this.context}/buildings/`,
+    postBuilding: () => `${this.context}/buildings/`,
+    putBuildingById: (buildingId: number) => `${this.context}/buildings/${buildingId}`,
+    // deleteBuildingById: (buildingId: number) => `${this.context}/buidlings/${buildingId}`
+  };
+
+  /**
+   * Endpoints for rooms:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
+  room = {
+    getRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
+    getAllRooms: () => `${this.context}/rooms/`,
+    // getRoomsByLocationId: (locationId: number) => `${this.context}/rooms/locations/${locationId}`,
+    getRoomsByBuildingId: (buildingId: number) => `${this.context}/rooms/building/${buildingId}`,
+    postRoom: () => `${this.context}/rooms/`,
+    putRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
+    // deleteRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`
+  };
+
+  /**
+   * Endpoints for unavailabilities:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
+  unavailability = {
+    // getUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
+    getAllUnavailabilities: () => `${this.context}/unavailabilities/`,
+    postUnavailability: () => `${this.context}/unavailabilities/`,
+    // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
+    // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
 
   constructor() {

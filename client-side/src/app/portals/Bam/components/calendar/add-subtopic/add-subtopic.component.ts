@@ -82,7 +82,7 @@ export class AddSubtopicComponent implements OnInit {
     private sessionService: SessionService,
     private subtopicService: SubtopicService) { }
 
-  ngOnInit() {
+   ngOnInit() {
     this.selectedTopic = 'Select a Topic';
     this.selectedSubtopic = 'Select a Subtopic';
     this._alert.subscribe((message) => this.alertMessage = message);
@@ -116,7 +116,7 @@ export class AddSubtopicComponent implements OnInit {
         this.loadingSuccess = false;
       }
     );
-  }
+   }
 
 /**
  * Method called when getSubtopicPool throws an error. This will generate an
@@ -206,11 +206,11 @@ export class AddSubtopicComponent implements OnInit {
 
     if (this.selectedTopic === 'Select a Topic' || this.selectedSubtopic === 'Select a Subtopic') {
       this.changeAlertMessage(`Select topic and subtopic`);
-    } else if (isNaN(this.selectedDateMiliseconds)) {
+    } else if (isNaN(this.selectedDate)) {
       this.changeAlertMessage(`Date input error.`);
     } else {
       const today = new Date().setHours(0, 0, 0, 0);
-      if (this.selectedDateMiliseconds >= today) {
+      if (this.selectedDate >= today) {
         this.status = 'Pending';
       } else {
         this.status = 'Missed';

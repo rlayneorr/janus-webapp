@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dependencies } from '../../../../app.test.module';
 import { VpBarGraphComponent } from './vp-bar-graph.component';
 
-
 // other
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

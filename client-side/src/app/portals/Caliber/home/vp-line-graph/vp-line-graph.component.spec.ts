@@ -27,18 +27,6 @@ import { UrlService } from '../../../../hydra-client/services/urls/url.service';
 xdescribe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;
   let fixture: ComponentFixture<VpLineGraphComponent>;
-  let vpHomeLineGraphService: VpHomeLineGraphService;
-  let reportingService: ReportingService;
-  let evaluationService: EvaluationService;
-  let modalService: NgbModal;
-  let http: HttpClient;
-  let alertService: AlertsService;
-  let vpHomeSelectorService: VpHomeSelectorService;
-  let batchService: HydraBatchService;
-  let noteService: NoteService;
-  let reportsService: ReportsService;
-
-  let debugElement: DebugElement;
 
   beforeEach(done => (async() => {
     // TestBed.configureTestingModule( Dependencies);

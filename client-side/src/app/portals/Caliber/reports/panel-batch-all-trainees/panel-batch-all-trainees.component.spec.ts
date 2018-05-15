@@ -17,17 +17,17 @@ describe('PanelBatchAllTraineesComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('ngOnInit() cannot verify data (due to API calls), but should be truthy()', () => {
+  it('ngOnInit() cannot verify data (due to API calls), but should be truthy()', () => {
     component.ngOnInit();
     expect(component['dataSubscription']).toBeTruthy();
     expect(component['batchIdSub']).toBeTruthy();
   });
 
-  fit('ngOnDestroy()', () => {
+  it('ngOnDestroy()', () => {
     component.ngOnDestroy();
   });
 });

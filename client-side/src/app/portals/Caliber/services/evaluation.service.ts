@@ -52,7 +52,8 @@ export class EvaluationService {
       this.httpClient.get(endpoint).subscribe(
         success => {
           this.allQCTraineeNotes.next({params: params, data: success});
-        });
+        }
+      );
     }
   }
 
@@ -67,7 +68,8 @@ export class EvaluationService {
       this.httpClient.get(endpoint).subscribe(
         success => {
           this.allQCBatchNotes.next({params: params, data: success});
-        });
+        }
+      );
     }
   }
 }

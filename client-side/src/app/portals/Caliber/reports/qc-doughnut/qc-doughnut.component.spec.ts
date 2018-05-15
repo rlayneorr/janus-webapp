@@ -29,7 +29,7 @@ xdescribe('QcDoughnutComponent', () => {
   });
 
   // Having trouble with the download pdf
-  // fit('downloadPDF()', () => {
+  // it('downloadPDF()', () => {
   //   component.downloadPDF();
   // });
 });

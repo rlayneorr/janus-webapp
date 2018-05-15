@@ -58,6 +58,7 @@ const mockPanel = {panelId: 1, trainee: mockHydraTrainee, panelist: 'Jeffery', i
       communicationSkills: 'Good', overall: 'promising', feedback: ['Blink less', 'I\'m a potato']};
 
 
+
 fdescribe('PanelService', () => {
   beforeEach(() => {                      // Before each test, enumerate modules under imports and services under providers
     TestBed.configureTestingModule({
@@ -196,7 +197,7 @@ fdescribe('PanelService', () => {
         // interviewDate of changed object should equal stringified version of value from original object
         expect(changedPanel.interviewDate).toEqual(apiService.stringifyDate(mockPanel.interviewDate));
   }));
-  it(                                                                 // fetchAll should return all panels
+  xit(  // test fetchAll
     'should fetch all with fetchAll function',
     inject(
       [PanelService, HttpTestingController],
@@ -217,7 +218,7 @@ fdescribe('PanelService', () => {
 
         httpMock.verify();                                         // verify there are no more requests
   }));
-  it(                                                              // test function that fetches panels by trainee that's in them
+  xit(
     'should fetch all with trainee using fetchAllByTrainee function',
     inject(
       [PanelService, HttpTestingController],

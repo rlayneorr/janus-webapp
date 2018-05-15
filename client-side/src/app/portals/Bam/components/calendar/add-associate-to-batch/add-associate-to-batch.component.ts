@@ -37,7 +37,6 @@ export class AddAssociateToBatchComponent implements OnInit {
    * @param      {BamUser}  user    The user being added to the batch.
    */
   addUser(user: BamUser) {
-    let i = 0;
     this.currentBatch = this.sessionService.getSelectedBatch();
     for (const associate of this.associates) {
       if (associate.userId === user.userId) {
@@ -49,7 +48,6 @@ export class AddAssociateToBatchComponent implements OnInit {
         });
         break;
       }
-      i++;
     }
   }
 

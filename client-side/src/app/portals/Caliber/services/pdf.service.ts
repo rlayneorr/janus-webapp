@@ -38,9 +38,9 @@ export class PDFService {
    */
   public downloadPDF(chartToDownload): void {
     html2canvas(document.getElementById(chartToDownload)).then(canvas => {
-        const pdf = new jsPDF();
-        pdf.addImage(canvas, 'JPEG', 10, 10, 190, 0);
-        pdf.save('report.pdf');
+      const pdf = new jsPDF();
+      pdf.addImage(canvas, 'JPEG', 10, 10, 190, 0);
+      pdf.save('report.pdf');
     });
   }
 
@@ -52,9 +52,9 @@ export class PDFService {
    */
   public downloadPDFwithFilename(chartToDownload, filename): void {
     html2canvas(document.getElementById(chartToDownload)).then(canvas => {
-        const pdf = new jsPDF();
-        pdf.addImage(canvas, 'JPEG', 10, 10, 190, 0);
-        pdf.save(filename);
+      const pdf = new jsPDF();
+      pdf.addImage(canvas, 'JPEG', 10, 10, 190, 0);
+      pdf.save(filename);
     });
   }
 
@@ -111,14 +111,9 @@ export class PDFService {
    */
   public downloadPDFwithFeedback() {
     const html = '';
-    this.http.post(environment.context + 'report/generate', html).subscribe(response => {
-      // console.log(response);
-    },
-
-    err => {
-      // console.log('Error generating PDF!');
-      // console.log(err);
-    });
+    this.http.post(environment.context + 'report/generate', html).subscribe(response => {},
+      err => {}
+    );
   }
 
 }
