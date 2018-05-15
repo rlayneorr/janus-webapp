@@ -41,8 +41,6 @@ describe('LocationService', () => {
      service.getAllLocations().subscribe((results) => {
 
       data = results;
-      console.log(data);
-      console.log(data[1].locationId);
       expect(data).toBeDefined();
     });
   })));
@@ -52,7 +50,7 @@ describe('LocationService', () => {
     service.getLocationById(1).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -62,7 +60,7 @@ describe('LocationService', () => {
     service.newLocation(new Location(null, 'new street', 'houston', 'tx', '77066', 'Revature', true)).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -72,7 +70,7 @@ describe('LocationService', () => {
     service.updateLocation(new Location(1, 'update', 'houston', 'tx', '77066', 'Revature', true)).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -82,7 +80,7 @@ describe('LocationService', () => {
     service.deleteLocation(new Location(2, 'update', 'houston', 'tx', '77066', 'Revature', false)).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data.active).toBeFalsy();
     });
   })));
@@ -92,7 +90,7 @@ describe('LocationService', () => {
     service.getAllBuildings().subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -102,7 +100,7 @@ describe('LocationService', () => {
     service.getBuildingsByLocationId(1).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -112,7 +110,7 @@ describe('LocationService', () => {
     service.getBuildingById(1).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -122,7 +120,7 @@ describe('LocationService', () => {
     service.newBuilding(new Building(null, 'new Building', 2, '200B')).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -132,7 +130,7 @@ describe('LocationService', () => {
     service.updateBuilding(new Building(1, 'new Building', 1, '200B')).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -142,7 +140,7 @@ describe('LocationService', () => {
     service.getAllRooms().subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -152,7 +150,7 @@ describe('LocationService', () => {
     service.getRoomsByBuildingId(1).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -162,7 +160,7 @@ describe('LocationService', () => {
     service.getRoomById(1).subscribe((results) => {
 
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -171,7 +169,7 @@ describe('LocationService', () => {
     let data: Room;
     service.newRoom(new Room(null, '2352BA', 1, 50)).subscribe((results) => {
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -180,7 +178,7 @@ describe('LocationService', () => {
     let data: Room;
     service.updateRoom(new Room(2, '101-A/G-Mitch Room', 1, 100)).subscribe((results) => {
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -189,7 +187,7 @@ describe('LocationService', () => {
     let data: Unavailability[];
     service.getAllUnavailabilities().subscribe((results) => {
       data = results;
-      console.log(data);
+
       expect(data).toBeDefined();
     });
   })));
@@ -198,7 +196,6 @@ describe('LocationService', () => {
     let data: Unavailability;
     service.newUnavailability(new Unavailability(null, 1525406400000, 1525406400000, 'replacing things', 2, 1)).subscribe((results) => {
       data = results;
-      console.log(data);
       expect(data).toBeDefined();
     });
   })));
