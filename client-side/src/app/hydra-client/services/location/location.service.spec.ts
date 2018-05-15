@@ -9,25 +9,21 @@ import { Building } from '../../entities/location-entities/Building';
 import { Room } from '../../entities/location-entities/Room';
 import { Unavailability } from '../../entities/location-entities/Unavailability';
 
-const testLoc = new Location(1, null, null, null, '0', null, false);
 
 
 describe('LocationService', () => {
 
   beforeAll(() => {
-
-  });
-  afterAll((done) => {
-    done();
   });
 
-  beforeEach(() => {
+  beforeEach((done) => {
     TestBed.configureTestingModule({
       providers: [
         LocationService,
         UrlService],
       imports: [HttpClientModule]
     });
+    done();
   });
 
   it('should be created', inject([LocationService], (service: LocationService) => {
@@ -151,6 +147,16 @@ describe('LocationService', () => {
 
       data = results;
 
+      expect(data).toBeDefined();
+    });
+  })));
+  it('should get rooms by location id', async( inject([LocationService], (service: LocationService) => {
+    // tslint:disable-next-line:prefer-const
+    let data: Room[];
+    service.getRoomsByLocationId(1).subscribe((results) => {
+
+      data = results;
+      console.log(data);
       expect(data).toBeDefined();
     });
   })));
