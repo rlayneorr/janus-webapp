@@ -9,13 +9,13 @@ import { Observable } from 'rxjs/Observable';
 import { ReportingService } from '../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
 import { NoteService } from '../../services/note.service';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
 
 // entities
 import { Note } from '../../entities/Note';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 
 /**
  * Creates a table of the overall feedback of a given trainee in a given batch.

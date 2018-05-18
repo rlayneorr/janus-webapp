@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { SubtopicName } from '../models/subtopicname.model';
-import { UrlService } from '../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 import { Observable } from 'rxjs/Observable';
 import { Subtopic } from '../models/subtopic.model';
 import { Topic } from '../models/topic.model';

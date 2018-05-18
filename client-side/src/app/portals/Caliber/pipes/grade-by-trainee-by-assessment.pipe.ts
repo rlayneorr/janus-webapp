@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { Grade } from '../entities/Grade';
 import { Assessment } from '../entities/Assessment';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
 
 @Pipe({
   name: 'gradeByTraineeByAssessment'

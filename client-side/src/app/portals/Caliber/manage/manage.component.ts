@@ -13,23 +13,23 @@ import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 // services
 
-import { BatchService } from '../../../hydra-client/aggregator/services/completebatch.service';
+import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
 import { LocationService } from '../services/location.service';
 import { TrainingTypeService } from '../services/training-type.service';
-import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
+import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
 import { TraineeService } from '../services/trainee.service';
 import { TraineeStatusService } from '../services/trainee-status.service';
-import { HydraTraineeService } from '../../../hydra-client/services/trainee/hydra-trainee.service';
-import { TrainerService } from '../../../hydra-client/services/trainer/trainer.service';
+import { HydraTraineeService } from '../../../gambit-client/services/trainee/hydra-trainee.service';
+import { TrainerService } from '../../../gambit-client/services/trainer/trainer.service';
 
 
 // entities
 import { Location } from '../entities/Location';
 import { Address } from '../entities/Address';
 import { Trainee } from '../entities/Trainee';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
-import { HydraTrainer } from '../../../hydra-client/entities/HydraTrainer';
-import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
+import { HydraTrainer } from '../../../gambit-client/entities/HydraTrainer';
+import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
 
 // components
 import { BatchModalComponent } from './batch/batch-modal.component';

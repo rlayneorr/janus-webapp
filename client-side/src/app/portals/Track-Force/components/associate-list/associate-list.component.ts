@@ -6,7 +6,7 @@ import { RequestService } from '../../services/request-service/request.service';
 import { Client } from '../../models/client.model';
 import { ClientListService } from '../../services/client-list-service/client-list.service';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 import { User } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { CurriculumService } from '../../services/curriculum-service/curriculum.service';

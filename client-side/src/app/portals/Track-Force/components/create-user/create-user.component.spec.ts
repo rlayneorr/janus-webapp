@@ -1,4 +1,4 @@
-import { UserRole } from './../../../../hydra-client/entities/UserRole';
+import { UserRole } from './../../../../gambit-client/entities/UserRole';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {CreateUserComponent} from './create-user.component';
 import {NavbarComponent} from '../navbar/navbar.component';

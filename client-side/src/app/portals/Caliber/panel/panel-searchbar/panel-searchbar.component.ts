@@ -9,12 +9,12 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 // entities
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 
 // services
 import { TraineeService } from '../../services/trainee.service';
 import { PanelService } from '../../services/panel.service';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
 
 
 @Component({

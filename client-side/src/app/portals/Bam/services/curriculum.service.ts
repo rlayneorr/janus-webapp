@@ -8,7 +8,7 @@ import { Subtopic } from '../models/subtopic.model';
 import { CurriculumSubtopicDTO } from '../models/curriculumSubtopicDTO.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { UrlService } from '../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 import { Schedule } from '../models/schedule.model';
 import { Topic } from '../models/topic.model';
 import { Schedulez } from '../models/scheduleZ.model';

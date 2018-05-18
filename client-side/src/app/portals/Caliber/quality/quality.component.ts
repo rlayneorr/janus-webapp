@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs/Subscription';
 
 // pipes
 import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { BatchService } from '../../../hydra-client/aggregator/services/completebatch.service';
-import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
+import { HydraBatch } from '../../../gambit-client/entities/HydraBatch';
+import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
+import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
 
 
 @Component({

@@ -3,13 +3,13 @@ import { TestBed, inject } from '@angular/core/testing';
 import { GranularityService } from './granularity.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
+import { HydraBatch } from '../../../../gambit-client/entities/HydraBatch';
 import { Dependencies } from '../../caliber.test.module';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { GambitSkillType } from '../../../../hydra-client/entities/GambitSkillType';
-import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { GambitSkillType } from '../../../../gambit-client/entities/GambitSkillType';
+import { HydraTrainer } from '../../../../gambit-client/entities/HydraTrainer';
 
 /**
  * Tested by Mythoua Chang

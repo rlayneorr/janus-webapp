@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { HydraTrainer } from '../../../hydra-client/entities/HydraTrainer';
+import { HydraTrainer } from '../../../gambit-client/entities/HydraTrainer';
 
 
 @Pipe({

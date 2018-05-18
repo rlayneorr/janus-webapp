@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 /**
  * Service that handles report granularity. Trainee and current batch
  * data is stored in their respective behavior subjects and read by

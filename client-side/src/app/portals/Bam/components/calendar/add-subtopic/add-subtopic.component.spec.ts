@@ -18,7 +18,7 @@ import { Observable } from 'rxjs/Observable';
 import { Batch } from '../../../models/batch.model';
 import { ScheduledDate } from '../../../models/scheduleddate.model';
 import { BamUser } from '../../../models/bamuser.model';
-import { User } from '../../../../../hydra-client/entities/User';
+import { User } from '../../../../../gambit-client/entities/User';
 /*
   test for addSubtopicComponent
 

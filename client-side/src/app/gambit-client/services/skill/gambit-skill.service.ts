@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../../environments/environment';
 
 // entities
-import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
+import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
 import { UrlService } from '../urls/url.service';
 
 /**

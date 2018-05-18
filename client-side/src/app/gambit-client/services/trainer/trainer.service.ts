@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 // rxjs
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import { HydraTrainer } from '../../../hydra-client/entities/HydraTrainer';
+import { HydraTrainer } from '../../../gambit-client/entities/HydraTrainer';
 import { UrlService } from '../urls/url.service';
 import { UserRole } from '../../entities/UserRole';
 

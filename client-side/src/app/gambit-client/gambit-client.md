@@ -11,7 +11,7 @@ You can find the documentation for the Hydra API directly here: [Hydra Documenta
 
 ## Services
 
-[Skill Service](https://github.com/revaturelabs/janus-webapp/wiki/hydra-client/skill)
+[Skill Service](https://github.com/revaturelabs/janus-webapp/wiki/gambit-client/skill)
 
 
 

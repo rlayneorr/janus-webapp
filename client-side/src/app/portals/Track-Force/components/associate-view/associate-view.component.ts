@@ -3,7 +3,7 @@ import { AssociateService } from '../../services/associates-service/associates-s
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { ActivatedRoute } from '@angular/router';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 import { ClientListService } from '../../services/client-list-service/client-list.service';
 /**
 * @author Michael Tseng

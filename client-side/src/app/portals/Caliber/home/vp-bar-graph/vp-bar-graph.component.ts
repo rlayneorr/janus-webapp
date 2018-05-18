@@ -18,7 +18,7 @@ import { AlertsService } from '../../services/alerts.service';
 import { NoteService } from '../../services/note.service';
 import { ReportsService } from '../../services/reports.service';
 import { Observable } from 'rxjs/Observable';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
 
 @Component({
   selector: 'app-vp-bar-graph',

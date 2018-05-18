@@ -10,8 +10,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 // entities
 import { Panel } from '../../entities/Panel';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
+import { HydraBatch } from '../../../../gambit-client/entities/HydraBatch';
 
 // services
 import { BatchService } from '../../services/batch.service';

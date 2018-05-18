@@ -13,7 +13,7 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 
 // services
 import { PanelService } from '../../services/panel.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 
 @Component({
   selector: 'app-create-panel',

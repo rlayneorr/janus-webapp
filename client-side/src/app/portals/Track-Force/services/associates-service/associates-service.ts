@@ -4,9 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Response } from '@angular/http/';
 import { environment } from '../../../../../environments/environment';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 import { forEach } from '@angular/router/src/utils/collection';
-import { UrlService } from '../../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 /**
  * Service for retrieving and updating data relating to associates.

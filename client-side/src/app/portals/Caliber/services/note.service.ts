@@ -12,8 +12,8 @@ import { AlertsService } from './alerts.service';
 
 // entities
 import { Note } from '../entities/Note';
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { HydraBatch } from '../../../gambit-client/entities/HydraBatch';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
 import { environment } from '../../../../environments/environment';
 
 const context = environment.note;

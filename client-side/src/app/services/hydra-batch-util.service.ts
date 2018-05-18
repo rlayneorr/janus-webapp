@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CompleteBatch } from '../hydra-client/aggregator/entities/CompleteBatch';
+import { CompleteBatch } from '../gambit-client/aggregator/entities/CompleteBatch';
 
 @Injectable()
 export class HydraBatchUtilService {

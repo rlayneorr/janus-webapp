@@ -9,7 +9,7 @@ import { element } from 'protractor';
 import { ActivatedRoute } from '@angular/router';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { RequestService } from '../../services/request-service/request.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 import { DataScrollerModule } from 'primeng/primeng';
 import { ENGINE_METHOD_DIGESTS } from 'constants';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';

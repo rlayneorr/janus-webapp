@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
+import { HydraBatch } from '../../../../gambit-client/entities/HydraBatch';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 
 @Component({
   selector: 'app-delete-batch-modal',

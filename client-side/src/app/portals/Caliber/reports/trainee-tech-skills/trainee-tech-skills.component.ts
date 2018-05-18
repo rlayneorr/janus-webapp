@@ -5,8 +5,8 @@ import { ReportingService } from '../../services/reporting.service';
 import { PDFService } from '../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GranularityService } from '../services/granularity.service';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 /**
  * @author John Hudson
 */

@@ -30,7 +30,7 @@ export class CompleteBatch {
   //      (co)Trainer can be null. CompleteBatchService provides the aggregation/de-aggregation
   //      functionality in its CRUD methods
   //
-  //      see hydra-client/aggregator/services/completebatch.service
+  //      see gambit-client/aggregator/services/completebatch.service
   constructor(batchId: number = 0, resourceId: number = 0, trainingName: string = '',
               trainer: HydraTrainer = null, cotrainer: HydraTrainer = null,
               addressId: number = 0, address: HydraAddress = new HydraAddress(),
