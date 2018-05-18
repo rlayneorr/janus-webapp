@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { HydraBatchUtilService } from './hydra-batch-util.service';
+import { HydraBatchUtilService } from './gambit-batch-util.service';
 
 describe('HydraBatchUtilService', () => {
   beforeEach(() => {

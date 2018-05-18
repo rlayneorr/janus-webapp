@@ -12,7 +12,7 @@ import { Note } from '../../entities/Note';
 import { ReportingService } from '../../services/reporting.service';
 import { HydraBatch } from '../../../../gambit-client/entities/HydraBatch';
 import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
-import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
+import { HydraBatchUtilService } from '../../../../services/gambit-batch-util.service';
 import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 
 

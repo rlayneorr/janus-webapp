@@ -14,7 +14,7 @@ import { HydraBatchService } from '../../../../gambit-client/services/batch/hydr
 // entities
 import { Note } from '../../entities/Note';
 import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
+import { HydraBatchUtilService } from '../../../../services/gambit-batch-util.service';
 import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 
 /**

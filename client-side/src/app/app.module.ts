@@ -23,7 +23,7 @@ import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
 import { HydraClientModule } from './gambit-client/gambit-client.module';
 import { environment } from '../environments/environment';
-import { HydraBatchUtilService } from './services/hydra-batch-util.service';
+import { HydraBatchUtilService } from './services/gambit-batch-util.service';
 
 // Error Alert
 import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';

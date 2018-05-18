@@ -19,7 +19,7 @@ import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
 import { HydraBatchService } from '../../../gambit-client/services/batch/hydra-batch.service';
 import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
-import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
+import { HydraBatchUtilService } from '../../../services/gambit-batch-util.service';
 import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
 import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
 import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
