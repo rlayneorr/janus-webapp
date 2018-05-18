@@ -35,10 +35,10 @@ export class SoftSkillsViolationService {
   currentSoftSkillViolations = this.softSkillViolationSource.asObservable();
 
   // readonly because why wouldn't they be?
-  readonly getViolationTypeURL: string = this.urlUtilService.getBase() + '/violation/all';
-  readonly getViolationURL: string = this.urlUtilService.getBase() + '/screening-service/screening/violation/';
-  readonly addViolationURL: string = this.urlUtilService.getBase() + '/screening-service/violation/flag';
-  readonly deleteViolationURL: string = this.urlUtilService.getBase() + '/screening-service/violation/delete/';
+  readonly getViolationTypeURL: string = this.urlUtilService.getBase() + 'violation/all';
+  readonly getViolationURL: string = this.urlUtilService.getBase() + 'screening-service/screening/violation/';
+  readonly addViolationURL: string = this.urlUtilService.getBase() + 'screening-service/violation/flag';
+  readonly deleteViolationURL: string = this.urlUtilService.getBase() + 'screening-service/violation/delete/';
 
   /*
   // Real endpoint for future use
