@@ -67,7 +67,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
 import { TrainerService } from './services/trainer.service';
-import { HydraTraineeService } from '../../gambit-client/services/trainee/hydra-trainee.service';
+import { HydraTraineeService } from '../../gambit-client/services/trainee/gambit-trainee.service';
 
 // N.T.
 import { ApiService } from './util/api.service';

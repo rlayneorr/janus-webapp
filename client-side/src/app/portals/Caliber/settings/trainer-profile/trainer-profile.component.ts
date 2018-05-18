@@ -13,7 +13,7 @@ import { HydraTrainer } from '../../../../gambit-client/entities/HydraTrainer';
 import { BatchService } from '../../../../gambit-client/aggregator/services/completebatch.service';
 import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
-import { HydraTraineeService } from '../../../../gambit-client/services/trainee/hydra-trainee.service';
+import { HydraTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
 import { UserRole } from '../../../../gambit-client/entities/UserRole';
 
 @Component({

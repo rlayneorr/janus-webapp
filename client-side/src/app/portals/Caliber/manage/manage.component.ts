@@ -19,7 +19,7 @@ import { TrainingTypeService } from '../services/training-type.service';
 import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
 import { TraineeService } from '../services/trainee.service';
 import { TraineeStatusService } from '../services/trainee-status.service';
-import { HydraTraineeService } from '../../../gambit-client/services/trainee/hydra-trainee.service';
+import { HydraTraineeService } from '../../../gambit-client/services/trainee/gambit-trainee.service';
 import { TrainerService } from '../../../gambit-client/services/trainer/trainer.service';
 
 

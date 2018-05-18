@@ -1,6 +1,6 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 
-import { HydraTraineeService } from './hydra-trainee.service';
+import { HydraTraineeService } from './gambit-trainee.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HydraTrainee } from '../../entities/HydraTrainee';

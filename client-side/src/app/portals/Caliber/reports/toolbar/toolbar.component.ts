@@ -16,7 +16,7 @@ import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/Com
 import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
 import { HydraBatchUtilService } from '../../../../services/gambit-batch-util.service';
 import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
-import { HydraTraineeService } from '../../../../gambit-client/services/trainee/hydra-trainee.service';
+import { HydraTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
 
 @Component({
   selector: 'app-toolbar',
