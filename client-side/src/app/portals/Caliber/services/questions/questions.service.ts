@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Question } from '../../entities/Question';
 
 const httpOptions = {
-headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-    })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
 };
 
 @Injectable()
@@ -18,17 +18,21 @@ export class QuestionsService {
   url = 'https://hydra-gateway-service.cfapps.io/question-service/question/';
   questions: Question[];
 
-  createNewQuestion(bucketId: number, question: Question, tagIds: number[]) {
-    const theAnswers: string[] = [question.sampleAnswer1, question.sampleAnswer2,
-        question.sampleAnswer3, question.sampleAnswer4, question.sampleAnswer5];
-    return this.http.post(this.url + 'createQuestion', {bucketId: bucketId, text: question.questionText,
-        answers: theAnswers, tagIds: tagIds}, httpOptions);
+  /**
+   * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   */
+  createNewQuestion(question: Question, tagIds: number[]) {
+    return this.http.post(this.url + 'createQuestion', { question: question, tagIds: tagIds }, httpOptions);
   }
 
-  updateQuestion(bucketId: number, question: Question, newTagIds: number[]) {
-    const theAnswers: string[] = [question.sampleAnswer1, question.sampleAnswer2,
-        question.sampleAnswer3, question.sampleAnswer4, question.sampleAnswer5];
-    return this.http.post(this.url + 'updateQuestion', {question : question, tagIds: newTagIds}, httpOptions);
+  updateQuestion(question: Question, newTagIds: number[]) {
+    return this.http.post(this.url + 'updateQuestion', { question: question, tagIds: newTagIds }, httpOptions);
   }
 
   deactivateQuestion(questionId: number) {
