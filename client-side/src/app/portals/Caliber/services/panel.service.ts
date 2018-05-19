@@ -16,7 +16,7 @@ import { environment } from '../../../../environments/environment';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
 
 const context = environment.panel;
 

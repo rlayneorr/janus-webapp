@@ -1,4 +1,4 @@
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
 
 
 // When making merges, please use the version presented by the Revaturions group.

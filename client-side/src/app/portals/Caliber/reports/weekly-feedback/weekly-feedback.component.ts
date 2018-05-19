@@ -12,8 +12,8 @@ import { Note } from '../../entities/Note';
 import { GranularityService } from '../services/granularity.service';
 import { ReportingService } from '../../services/reporting.service';
 import { NoteService } from '../../services/note.service';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 
 /**
  * Creates a table of the weekly feedback of a given trainee

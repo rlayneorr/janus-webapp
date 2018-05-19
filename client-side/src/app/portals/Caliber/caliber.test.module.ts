@@ -68,11 +68,11 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
-import { TrainerService } from '../../hydra-client/services/trainer/trainer.service';
-import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
-import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
-import { UrlService } from '../../hydra-client/services/urls/url.service';
-import { HydraBatchUtilService } from '../../services/hydra-batch-util.service';
+import { TrainerService } from '../../gambit-client/services/trainer/trainer.service';
+import { HydraTraineeService } from '../../gambit-client/services/trainee/gambit-trainee.service';
+import { HydraBatchService } from '../../gambit-client/services/batch/hydra-batch.service';
+import { UrlService } from '../../gambit-client/services/urls/url.service';
+import { HydraBatchUtilService } from '../../services/gambit-batch-util.service';
 
 // N.T.
 import { ApiService } from './util/api.service';

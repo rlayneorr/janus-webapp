@@ -15,7 +15,7 @@ tags to interview on upon reviewing the candidate's introduction.
 @Injectable()
 export class BucketService {
 
-  private ROOT_URL: string = this.urlUtilService.getBase() + '/bucket';
+  private ROOT_URL: string = this.urlUtilService.getBase() + 'bucket/';
   // buckets necessary for conducting screening interview
   // the buckets contained in filteredBuckets are based on the
   // skills selected from the candidates skills.

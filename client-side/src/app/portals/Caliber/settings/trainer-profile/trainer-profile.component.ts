@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 
 
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
-import { BatchService } from '../../../../hydra-client/aggregator/services/completebatch.service';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import { HydraTraineeService } from '../../../../hydra-client/services/trainee/hydra-trainee.service';
-import { UserRole } from '../../../../hydra-client/entities/UserRole';
+import { TrainerService } from '../../../../gambit-client/services/trainer/trainer.service';
+import { HydraTrainer } from '../../../../gambit-client/entities/HydraTrainer';
+import { BatchService } from '../../../../gambit-client/aggregator/services/completebatch.service';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
+import { HydraTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
+import { UserRole } from '../../../../gambit-client/entities/UserRole';
 
 @Component({
   selector: 'app-trainer-profile',

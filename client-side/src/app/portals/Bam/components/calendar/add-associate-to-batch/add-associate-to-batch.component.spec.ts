@@ -7,7 +7,7 @@ import { BamUser } from '../../../models/bamuser.model';
 import { Batch } from '../../../models/batch.model';
 import { UsersService } from '../../../services/users.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { UrlService } from '../../../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 import { IfObservable } from 'rxjs/observable/IfObservable';
 import { Observable } from 'rxjs/Observable';
 import { GenerateObservable } from 'rxjs/observable/GenerateObservable';

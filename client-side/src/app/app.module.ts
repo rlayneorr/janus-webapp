@@ -21,24 +21,24 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
-import { HydraClientModule } from './hydra-client/hydra-client.module';
+import { HydraClientModule } from './gambit-client/gambit-client.module';
 import { environment } from '../environments/environment';
-import { HydraBatchUtilService } from './services/hydra-batch-util.service';
+import { HydraBatchUtilService } from './services/gambit-batch-util.service';
 
 // Error Alert
-import { ErrorAlertComponent } from './hydra-client/ui/error-alert/error-alert.component';
-import { HydraInterceptor } from './hydra-client/interceptors/hydra.interceptor';
+import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';
+import { HydraInterceptor } from './gambit-client/interceptors/hydra.interceptor';
 
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
-import { ToastrOptions } from './hydra-client/ui/error-alert/toastr-options';
-import { LocationService } from './hydra-client/services/location/location.service';
-import { GambitSkillService } from './hydra-client/services/skill/gambit-skill.service';
-import {AuthenticationService} from './portals/Caliber/services/authentication.service';
-import {RequestService} from './portals/Track-Force/services/request-service/request.service';
+import { ToastrOptions } from './gambit-client/ui/error-alert/toastr-options';
+import { LocationService } from './gambit-client/services/location/location.service';
+import { GambitSkillService } from './gambit-client/services/skill/gambit-skill.service';
+import { AuthenticationService } from './portals/Caliber/services/authentication.service';
+import { RequestService } from './portals/Track-Force/services/request-service/request.service';
 import { CurriculumService } from './portals/Track-Force/services/curriculum-service/curriculum.service';
-import {InterviewService} from './portals/Track-Force/services/interview-service/interview-service';
-import {MarketStatusService} from './portals/Track-Force/services/market-status/market-status.service';
-import {PlacementService} from './portals/Track-Force/services/placement-service/placement.service';
+import { InterviewService } from './portals/Track-Force/services/interview-service/interview-service';
+import { MarketStatusService } from './portals/Track-Force/services/market-status/market-status.service';
+import { PlacementService } from './portals/Track-Force/services/placement-service/placement.service';
 
 
 // loading routes from child modules this way will lazy load them

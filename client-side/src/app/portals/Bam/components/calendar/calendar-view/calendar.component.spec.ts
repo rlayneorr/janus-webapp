@@ -23,7 +23,7 @@ import { BatchType } from '../../../models/batchtype.model';
 import { Observable } from 'rxjs/Observable';
 import { Subtopic } from '../../../models/subtopic.model';
 import { Topic } from '../../../models/topic.model';
-import { UrlService } from '../../../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 import { Schedule } from '../../../models/schedule.model';
 import { ScheduledSubtopic } from '../../../models/scheduledsubtopic.model';
 import { Curriculum } from '../../../models/curriculum.model';

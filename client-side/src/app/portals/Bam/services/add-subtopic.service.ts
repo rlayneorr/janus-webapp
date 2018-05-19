@@ -4,7 +4,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subtopic } from '../models/subtopic.model';
 import { Batch } from '../models/batch.model';
-import { UrlService } from '../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 import { ScheduledSubtopic } from '../models/scheduledsubtopic.model';
 import { Schedule } from '../models/schedule.model';
 

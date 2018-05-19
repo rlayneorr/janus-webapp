@@ -6,7 +6,23 @@ import { of } from 'rxjs/observable/of';
 import { UrlUtilService } from '../UrlUtil/url-util.service';
 import { HttpClient } from '@angular/common/http';
 
-// Service that contains methods related to ViolationType entities
+/**
+* Service that contains methods related to ViolationType entities
+*
+* last modified by the Avengers
+*
+* Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+*
+* Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+*
+* Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+*
+* Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+*
+* removed forward slash at the start of the screening-service
+* i.e. '/avengers' to 'avengers'
+*/
+
 @Injectable()
 export class ViolationTypeService {
 
@@ -25,12 +41,12 @@ export class ViolationTypeService {
 
   // Get an array of all violation types, returning it as an observable
   getViolationTypes(): Observable<ViolationType[]> {
-    return this.http.get<ViolationType[]>(this.ROOT_URL + '/screening-service/violation/all', {});
+    return this.http.get<ViolationType[]>(this.ROOT_URL + 'screening-service/violation/all', {});
   }
 
   // Get an array of all violation types. Differs from the previous because it returns
   // an Observable<any[]>
   getAllViolationTypes(): Observable<any[]> {
-    return this.http.get<any[]>(this.ROOT_URL + '/screening-service/violation/all', {});
+    return this.http.get<any[]>(this.ROOT_URL + 'screening-service/violation/all', {});
   }
 }

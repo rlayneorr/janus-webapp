@@ -11,7 +11,7 @@ import { VpLineGraphComponent } from './vp-line-graph.component';
 import { ReportingService } from '../../services/reporting.service';
 import { EvaluationService } from '../../services/evaluation.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
 import { NoteService } from '../../services/note.service';
 
 import { Dependencies } from '../../caliber.test.module';
@@ -21,8 +21,8 @@ import { Address } from '../../entities/Address';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
 import { BatchService } from '../../../Bam/services/batch.service';
-import { AlertService } from '../../../../hydra-client/services/alerts/alerts.service';
-import { UrlService } from '../../../../hydra-client/services/urls/url.service';
+import { AlertService } from '../../../../gambit-client/services/alerts/alerts.service';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 xdescribe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;

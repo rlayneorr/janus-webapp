@@ -1,5 +1,5 @@
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
+import { HydraBatch } from '../../../gambit-client/entities/HydraBatch';
+import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
 
 export class Assessment {
     assessmentId: number;

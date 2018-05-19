@@ -12,11 +12,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
 import { GranularityService } from '../services/granularity.service';
 import { PDFService } from '../../services/pdf.service';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
-import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import { HydraTraineeService } from '../../../../hydra-client/services/trainee/hydra-trainee.service';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
+import { HydraBatchUtilService } from '../../../../services/gambit-batch-util.service';
+import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
+import { HydraTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
 
 @Component({
   selector: 'app-toolbar',

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Note } from '../entities/Note';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
 
 @Pipe({
   name: 'noteByTraineeByWeek'

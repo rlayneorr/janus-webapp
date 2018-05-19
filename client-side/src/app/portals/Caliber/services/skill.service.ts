@@ -6,7 +6,7 @@ import { AlertsService } from './alerts.service';
 import { environment } from '../../../../environments/environment';
 import { Fetch } from '../interfaces/api.interface';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { UrlService } from '../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 /**
  * Manages API calls for skills

@@ -4,8 +4,8 @@ import { ApiService } from '../util/api.service';
 import { PanelService } from './panel.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from '../../../../environments/environment';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
-import { User } from '../../../hydra-client/entities/User';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
+import { User } from '../../../gambit-client/entities/User';
 
 const context = environment.panel;  // base of the url is at environment.panel
 
@@ -59,7 +59,7 @@ const mockPanel = {panelId: 1, trainee: mockHydraTrainee, panelist: 'Jeffery', i
 
 
 
-fdescribe('PanelService', () => {
+xdescribe('PanelService', () => {
   beforeEach(() => {                      // Before each test, enumerate modules under imports and services under providers
     TestBed.configureTestingModule({
       imports: [ HttpClientModule,

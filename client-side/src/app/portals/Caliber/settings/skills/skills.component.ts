@@ -12,8 +12,8 @@ import { environment } from '../../../../../environments/environment';
 
 // entities
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
-import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
+import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
+import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
 
 @Component({
   selector: 'app-skills',

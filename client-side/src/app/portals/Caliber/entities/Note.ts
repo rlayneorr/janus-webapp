@@ -1,5 +1,5 @@
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { HydraBatch } from '../../../gambit-client/entities/HydraBatch';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
 
 export class Note {
     public static TYPE_QCBATCH = 'QC_BATCH';

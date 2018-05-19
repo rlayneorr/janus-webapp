@@ -17,12 +17,12 @@ import { DatePipe } from '@angular/common';
 import { ScrollEvent } from 'ngx-scroll-event';
 import { window } from 'rxjs/operators/window';
 import { HostListener } from '@angular/core/src/metadata/directives';
-import { HydraBatchService } from '../../../hydra-client/services/batch/hydra-batch.service';
-import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
-import { HydraBatchUtilService } from '../../../services/hydra-batch-util.service';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
-import { GambitSkillService } from '../../../hydra-client/services/skill/gambit-skill.service';
-import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
+import { HydraBatchService } from '../../../gambit-client/services/batch/hydra-batch.service';
+import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
+import { HydraBatchUtilService } from '../../../services/gambit-batch-util.service';
+import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
+import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
+import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
 
 @Component({
   selector: 'app-assess',

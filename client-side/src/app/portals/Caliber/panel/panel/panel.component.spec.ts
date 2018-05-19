@@ -14,14 +14,14 @@ import { PanelOverallFeedbackComponent } from '../overall-feedback/panel-overall
 import { ArrToStringPipe } from '../../pipes/arr-to-string.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsComponent } from '../../alerts/alerts.component';
-import { ErrorAlertComponent } from '../../../../hydra-client/ui/error-alert/error-alert.component';
+import { ErrorAlertComponent } from '../../../../gambit-client/ui/error-alert/error-alert.component';
 import { AlertsService } from '../../services/alerts.service';
 import { NotificationsService } from 'angular2-notifications-lite';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TraineeService } from '../../services/trainee.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
-import { UrlService } from '../../../../hydra-client/services/urls/url.service';
+import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 import { PanelService } from '../../services/panel.service';
 import { ApiService } from '../../util/api.service';
 import { Dependencies } from '../../caliber.test.module';

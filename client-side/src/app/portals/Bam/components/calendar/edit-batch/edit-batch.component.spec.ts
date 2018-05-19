@@ -16,7 +16,7 @@ import { AlertService } from '../../../services/alert.service';
 import { Batch } from '../../../models/batch.model';
 import { Observable } from 'rxjs/Observable';
 import { BatchType } from '../../../models/batchtype.model';
-import { UrlService } from '../../../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 /**
  * @author David Graves

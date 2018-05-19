@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
+import { TrainerService } from '../../../../gambit-client/services/trainer/trainer.service';
+import { HydraTrainer } from '../../../../gambit-client/entities/HydraTrainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRole } from '../../../../hydra-client/entities/UserRole';
+import { UserRole } from '../../../../gambit-client/entities/UserRole';
 
 
 @Component({

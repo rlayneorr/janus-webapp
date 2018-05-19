@@ -1,4 +1,4 @@
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { HydraBatch } from '../../../gambit-client/entities/HydraBatch';
 
 export class Trainee {
     traineeId: number;

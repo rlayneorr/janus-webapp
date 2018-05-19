@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Location } from '../../../../../hydra-client/entities/location-entities/Location';
+import { Location } from '../../../../../gambit-client/entities/location-entities/Location';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { LocationService } from '../../../../../hydra-client/services/location/location.service';
+import { LocationService } from '../../../../../gambit-client/services/location/location.service';
 
 @Component({
   selector: 'app-editlocation',
