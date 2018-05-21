@@ -6,6 +6,9 @@ import { environment } from '../../../../environments/environment';
  */
 @Injectable()
 export class AlertService {
+  success(): any {
+    throw new Error('Method not implemented.');
+  }
   private alerts = new ReplaySubject<string>(3);
   public alerts$ = this.alerts.asObservable();
 
