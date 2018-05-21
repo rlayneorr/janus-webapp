@@ -1,10 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { QuestionComponent } from './question.component';
 import { Dependencies } from '../../../caliber.test.module';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { Question } from '../../../entities/Question';
+import { AlertsService } from '../../../services/alerts.service';
+
 import { Tag } from '../entities/Tag';
 import {QUESTIONS} from '../../../services/questions/mock-questions';
 
@@ -38,9 +40,12 @@ fdescribe('QuestionComponent', () => {
     fixture.detectChanges();
   });
 
+  // test if the components is created
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // test if the question is set to null after a save
   it('should set question to null', () => {
     component.setQuestionNull();
     expect(component.question).toEqual(new Question());
@@ -48,6 +53,20 @@ fdescribe('QuestionComponent', () => {
     expect(component.currentTags.length).toBe(0);
   });
 
+  // test if it saves successfully
+  it('should save successfully',
+  inject([AlertsService], (service: AlertsService) => {
+    service.success('Saved successfully');
+    let msg = '';
+    let ty = '';
+    service.getMessage().subscribe((s) => {
+      ty = s.type;
+      msg = s.text;
+      component.savedSuccessfully();
+      expect(ty).toEqual('success');
+      expect(msg).toEqual('Saved successfully');
+    });
+  }));
   it('should add new tags', () => {
     component.addNewTag(t0);
     let lastTagIndex = component.currentTags.length - 1;
