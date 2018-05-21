@@ -20,9 +20,9 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { NullAstVisitor } from '@angular/compiler';
 import { SkillTypeService } from '../../../portals/Caliber/screening/services/skillType/skill-type.service';
 import { GambitSkillTypeService } from '../../services/skillType/gambit-skill-type.service';
-import { HydraBatchService } from '../../services/batch/hydra-batch.service';
+import { GambitBatchService } from '../../services/batch/gambit-batch.service';
 import { GambitBatch } from '../../entities/GambitBatch';
-import { HydraTrainer } from '../../entities/HydraTrainer';
+import { GambitTrainer } from '../../entities/GambitTrainer';
 
 
 /**
@@ -34,13 +34,13 @@ export class BatchService {
 
     public listSubject: BehaviorSubject<CompleteBatch[]>;
     public batches: CompleteBatch[] = [];
-    public trainer: HydraTrainer;
+    public trainer: GambitTrainer;
     public savedSubject: Subject<CompleteBatch>;
     public updatedSubject: Subject<CompleteBatch>;
     public deletedSubject: Subject<CompleteBatch>;
 
     constructor(public http: HttpClient,
-      public hydraBatchService: HydraBatchService,
+      public gambitBatchService: GambitBatchService,
       public gambitSkillTypeService: GambitSkillTypeService) {
       this.listSubject = new BehaviorSubject([]);
       this.savedSubject = new Subject();
@@ -103,7 +103,7 @@ export class BatchService {
     }
 
     getTrainer(trainerId: number) {
-      return this.http.get<HydraTrainer>(environment.trainer.fetchById(trainerId));
+      return this.http.get<GambitTrainer>(environment.trainer.fetchById(trainerId));
     }
 
     /**
@@ -181,13 +181,13 @@ export class BatchService {
     gambitBatch.week = completeBatch.week;
     gambitBatch.noteIds = completeBatch.noteIds;
 
-    // iterates over the HydraTrainee array in completeBatch to push ids to
+    // iterates over the GambitTrainee array in completeBatch to push ids to
     //    the GambitBatch traineeId array
     for (const trainee of completeBatch.trainees) {
       gambitBatch.traineeIds.push(trainee.traineeId);
     }
 
-    return this.hydraBatchService.create(gambitBatch);
+    return this.gambitBatchService.create(gambitBatch);
   }
 
     /**
@@ -224,13 +224,13 @@ export class BatchService {
       gambitBatch.week = completeBatch.week;
       gambitBatch.noteIds = completeBatch.noteIds;
 
-      // iterates over the HydraTrainee array in completeBatch to push ids to
+      // iterates over the GambitTrainee array in completeBatch to push ids to
       //    the GambitBatch traineeId array
       for (const trainee of completeBatch.trainees) {
         gambitBatch.traineeIds.push(trainee.traineeId);
       }
 
-      return this.hydraBatchService.update(gambitBatch);
+      return this.gambitBatchService.update(gambitBatch);
     }
 
     /**
@@ -267,13 +267,13 @@ export class BatchService {
     gambitBatch.week = completeBatch.week;
     gambitBatch.noteIds = completeBatch.noteIds;
 
-    // iterates over the HydraTrainee array in completeBatch to push ids to
+    // iterates over the GambitTrainee array in completeBatch to push ids to
     //    the GambitBatch traineeId array
     for (const trainee of completeBatch.trainees) {
       gambitBatch.traineeIds.push(trainee.traineeId);
     }
 
-    return this.hydraBatchService.delete(gambitBatch);
+    return this.gambitBatchService.delete(gambitBatch);
 
   }
 

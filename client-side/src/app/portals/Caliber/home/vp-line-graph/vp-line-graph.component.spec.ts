@@ -11,7 +11,7 @@ import { VpLineGraphComponent } from './vp-line-graph.component';
 import { ReportingService } from '../../services/reporting.service';
 import { EvaluationService } from '../../services/evaluation.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
 import { NoteService } from '../../services/note.service';
 
 import { Dependencies } from '../../caliber.test.module';
@@ -58,7 +58,7 @@ xdescribe('VpLineGraphComponent', () => {
         VpHomeSelectorService,
         ColorService,
         AlertsService,
-        HydraBatchService,
+        GambitBatchService,
         UrlService,
       ],
     });

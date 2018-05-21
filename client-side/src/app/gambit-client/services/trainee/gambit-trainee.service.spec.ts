@@ -1,31 +1,31 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 
-import { HydraTraineeService } from './gambit-trainee.service';
+import { GambitTraineeService } from './gambit-trainee.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HydraTrainee } from '../../entities/HydraTrainee';
+import { GambitTrainee } from '../../entities/GambitTrainee';
 import { UrlService } from '../urls/url.service';
 import { environment } from '../../../../environments/environment';
 
-xdescribe('HydraTraineeService', () => {
-  const trainee = new HydraTrainee();
+xdescribe('GambitTraineeService', () => {
+  const trainee = new GambitTrainee();
   this.context = environment.context;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HydraTraineeService, UrlService],
+      providers: [GambitTraineeService, UrlService],
       imports: [HttpClientModule,
         HttpClientTestingModule]
     });
   });
 
-  it('should be created', inject([HydraTraineeService], (service: HydraTraineeService) => {
+  it('should be created', inject([GambitTraineeService], (service: GambitTraineeService) => {
     expect(service).toBeTruthy();
   }));
 
   it(`should findAllByBatchAndStatus and verify the response`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.findAllByBatchAndStatus(1, trainee.trainingStatus).subscribe();
 
           backend.expectOne({
@@ -38,8 +38,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should findAllByBatchAndStatus and verify the observable`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.findAllByBatchAndStatus(1, trainee.trainingStatus).subscribe(next => {
             expect(next).toBeTruthy();
           });
@@ -51,8 +51,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should NOT fail when sending an unmatched request to findAllByBatchAndStatus`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.findAllByBatchAndStatus(1, 'Dropped').subscribe();
 
           backend.match(`${this.context}trainees`);
@@ -62,8 +62,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should create a new trainee`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.create(trainee).subscribe();
 
           backend.expectOne({
@@ -76,8 +76,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should create a new trainee and check the observable`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.create(trainee).subscribe(next => {
             expect(next).toBeTruthy();
           });
@@ -89,8 +89,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should NOT fail when sending an unmatched request to create`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.create(trainee).subscribe();
 
           backend.match(`${this.context}trainees`);
@@ -100,8 +100,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should update a trainee`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.update(trainee).subscribe();
 
           backend.expectOne({
@@ -114,8 +114,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should update the trainee and check the observable`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.update(trainee).subscribe(next => {
             expect(next).toBeTruthy();
           });
@@ -127,8 +127,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should NOT fail when sending an unmatched request to update`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.update(trainee).subscribe();
 
           backend.match(`${this.context}trainees`);
@@ -138,8 +138,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should delete a trainee`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.delete(trainee.traineeId).subscribe();
 
           backend.expectOne({
@@ -152,8 +152,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should delete the trainee and check the observable`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.delete(trainee.traineeId).subscribe(next => {
             expect(next).toBeTruthy();
           });
@@ -165,8 +165,8 @@ xdescribe('HydraTraineeService', () => {
 
   it(`should NOT fail when sending an unmatched request to delete`,
     async(
-      inject([HttpClient, HttpTestingController, HydraTraineeService],
-        (http: HttpClient, backend: HttpTestingController, service: HydraTraineeService) => {
+      inject([HttpClient, HttpTestingController, GambitTraineeService],
+        (http: HttpClient, backend: HttpTestingController, service: GambitTraineeService) => {
           service.delete(trainee.traineeId).subscribe();
 
           backend.match(`${this.context}trainees/${trainee.traineeId}`);

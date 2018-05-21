@@ -1,19 +1,19 @@
 import { GambitSkillType } from '../../entities/GambitSkillType';
-import { HydraTrainer } from '../../entities/HydraTrainer';
-import { HydraTrainee } from '../../entities/HydraTrainee';
-import { HydraAddress } from '../../entities/HydraAddress';
+import { GambitTrainer } from '../../entities/GambitTrainer';
+import { GambitTrainee } from '../../entities/GambitTrainee';
+import { GambitAddress } from '../../entities/GambitAddress';
 
 export class CompleteBatch {
 
   batchId: number;
   resourceId: number;
   trainingName: string;
-  trainer: HydraTrainer;
-  cotrainer: HydraTrainer;
+  trainer: GambitTrainer;
+  cotrainer: GambitTrainer;
   skillType: GambitSkillType;
   trainingType: string;
   addressId: number;      // TODO Refactor to Address type
-  address: HydraAddress;  // TODO Refactor HydraAddress to GambitAddress when the latter microservice is developed
+  address: GambitAddress;  // TODO Refactor GambitAddress to GambitAddress when the latter microservice is developed
   location: string;
   goodGradeThreshold: number;
   borderlineGradeThreshold: number;
@@ -21,7 +21,7 @@ export class CompleteBatch {
   endDate: Date;
   week: number;
   noteIds: number[];
-  trainees: HydraTrainee[];
+  trainees: GambitTrainee[];
 
 
   // TODO currently this constructor assumes that Trainer and (co)Trainer objects will be
@@ -32,12 +32,12 @@ export class CompleteBatch {
   //
   //      see gambit-client/aggregator/services/completebatch.service
   constructor(batchId: number = 0, resourceId: number = 0, trainingName: string = '',
-              trainer: HydraTrainer = null, cotrainer: HydraTrainer = null,
-              addressId: number = 0, address: HydraAddress = new HydraAddress(),
+              trainer: GambitTrainer = null, cotrainer: GambitTrainer = null,
+              addressId: number = 0, address: GambitAddress = new GambitAddress(),
               location: string = '', goodGradeThreshold: number = 0,
               borderlineGradeThreshold: number = 0, startDate: Date = new Date(),
               endDate: Date = new Date(), week: number = 0, noteIds: number[] = [],
-              trainees: HydraTrainee[] = []) {
+              trainees: GambitTrainee[] = []) {
 
   }
 }

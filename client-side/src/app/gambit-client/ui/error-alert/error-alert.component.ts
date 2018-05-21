@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewContainerRef, OnChanges, Injectable } from '@angular/core';
 import { animate, state, transition, trigger, style, keyframes } from '@angular/animations';
-import { HydraInterceptor } from '../../interceptors/hydra.interceptor';
+import { GambitInterceptor } from '../../interceptors/Gambit.interceptor';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';

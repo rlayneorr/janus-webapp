@@ -3,7 +3,7 @@ import { User } from './User';
 import { UserRole } from './UserRole';
 
 
-export class HydraTrainee extends User {
+export class GambitTrainee extends User {
     traineeId: number;
     resourceId: number;
     trainingStatus: string;

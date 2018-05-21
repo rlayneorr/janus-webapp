@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UrlService } from '../urls/url.service';
-import { HydraTrainee } from '../../entities/HydraTrainee';
+import { GambitTrainee } from '../../entities/GambitTrainee';
 
 /**
- * This service is used for consuming Hydra API resources dealing with trainees.
+ * This service is used for consuming Gambit API resources dealing with trainees.
  *
  * @export
- * @class HydraTraineeService
+ * @class GambitTraineeService
  */
 @Injectable()
-export class HydraTraineeService {
+export class GambitTraineeService {
 
   constructor(private httpClient: HttpClient, private urlService: UrlService) { }
 
@@ -23,11 +23,11 @@ export class HydraTraineeService {
    * @param batchId
    * @param status
    *
-   * @returns {Observable<HydraTrainee[]>}
+   * @returns {Observable<GambitTrainee[]>}
    */
-  public findAllByBatchAndStatus(id: number, status: string): Observable<HydraTrainee[]> {
+  public findAllByBatchAndStatus(id: number, status: string): Observable<GambitTrainee[]> {
     const url = this.urlService.trainees.findAllByBatchAndStatus(id, status);
-    return this.httpClient.get<HydraTrainee[]>(url);
+    return this.httpClient.get<GambitTrainee[]>(url);
   }
 
   /**
@@ -35,12 +35,12 @@ export class HydraTraineeService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
   *
-  * @param trainee: HydraTrainee
-  * @returns {Observable<HydraTrainee>}
+  * @param trainee: GambitTrainee
+  * @returns {Observable<GambitTrainee>}
   */
-  public create(trainee: HydraTrainee): Observable<HydraTrainee> {
+  public create(trainee: GambitTrainee): Observable<GambitTrainee> {
     const url = this.urlService.trainees.save();
-    return this.httpClient.post<HydraTrainee>(url, trainee);
+    return this.httpClient.post<GambitTrainee>(url, trainee);
   }
 
   /**
@@ -48,12 +48,12 @@ export class HydraTraineeService {
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    *
-   * @param trainee: HydraTrainee
-   * @returns {Observable<HydraTrainee>}
+   * @param trainee: GambitTrainee
+   * @returns {Observable<GambitTrainee>}
    */
-  public update(trainee: HydraTrainee): Observable<HydraTrainee> {
+  public update(trainee: GambitTrainee): Observable<GambitTrainee> {
     const url = this.urlService.trainees.update();
-    return this.httpClient.put<HydraTrainee>(url, trainee);
+    return this.httpClient.put<GambitTrainee>(url, trainee);
   }
 
   /**
@@ -61,11 +61,11 @@ export class HydraTraineeService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
   *
-  * @param trainee: HydraTrainee
-  * @returns {Observable<HydraTrainee>}
+  * @param trainee: GambitTrainee
+  * @returns {Observable<GambitTrainee>}
   */
-  public delete(traineeId: number): Observable<HydraTrainee> {
+  public delete(traineeId: number): Observable<GambitTrainee> {
     const url = this.urlService.trainees.delete(traineeId);
-    return this.httpClient.delete<HydraTrainee>(url);
+    return this.httpClient.delete<GambitTrainee>(url);
   }
 }

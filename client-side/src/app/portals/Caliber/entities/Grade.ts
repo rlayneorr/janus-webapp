@@ -1,10 +1,10 @@
 import { Assessment } from './Assessment';
-import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
 
 export class Grade {
     gradeId: number;
     assessment: Assessment;
-    trainee: HydraTrainee;
+    trainee: GambitTrainee;
     dateReceived: any;
     score: number;
 }

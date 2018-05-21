@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { HydraBatchUtilService } from './gambit-batch-util.service';
+import { GambitBatchUtilService } from './gambit-batch-util.service';
 
-describe('HydraBatchUtilService', () => {
+describe('GambitBatchUtilService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HydraBatchUtilService]
+      providers: [GambitBatchUtilService]
     });
   });
 
-  it('should be created', inject([HydraBatchUtilService], (service: HydraBatchUtilService) => {
+  it('should be created', inject([GambitBatchUtilService], (service: GambitBatchUtilService) => {
     expect(service).toBeTruthy();
   }));
 });

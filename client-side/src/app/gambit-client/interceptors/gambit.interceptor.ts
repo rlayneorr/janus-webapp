@@ -16,7 +16,7 @@ import { AlertService } from '../services/alerts/alerts.service';
  * AJAX request
  */
 @Injectable()
-export class HydraInterceptor implements HttpInterceptor {
+export class GambitInterceptor implements HttpInterceptor {
 
     constructor(private alertServ: AlertService) {
 

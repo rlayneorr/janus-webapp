@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CompleteBatch } from '../gambit-client/aggregator/entities/CompleteBatch';
 
 @Injectable()
-export class HydraBatchUtilService {
+export class GambitBatchUtilService {
 
   constructor() { }
   /**

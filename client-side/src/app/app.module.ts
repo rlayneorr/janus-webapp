@@ -21,13 +21,13 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
-import { HydraClientModule } from './gambit-client/gambit-client.module';
+import { GambitClientModule } from './gambit-client/gambit-client.module';
 import { environment } from '../environments/environment';
-import { HydraBatchUtilService } from './services/gambit-batch-util.service';
+import { GambitBatchUtilService } from './services/gambit-batch-util.service';
 
 // Error Alert
 import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';
-import { HydraInterceptor } from './gambit-client/interceptors/hydra.interceptor';
+import { GambitInterceptor } from './gambit-client/interceptors/gambit.interceptor';
 
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { ToastrOptions } from './gambit-client/ui/error-alert/toastr-options';
@@ -69,7 +69,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
     HttpClientModule,
-    HydraClientModule,
+    GambitClientModule,
     ToastModule.forRoot()
   ],
   declarations: [
@@ -82,7 +82,7 @@ const routes: Routes = [
     ChuckNorrisService,
     RoleGuard,
     CookieService,
-    HydraBatchUtilService,
+    GambitBatchUtilService,
     ErrorAlertComponent,
     LocationService,
     {provide: ToastOptions, useClass: ToastrOptions},

@@ -1,7 +1,7 @@
 import { User } from './User';
 import { UserRole } from './UserRole';
 
-export class HydraTrainer extends User {
+export class GambitTrainer extends User {
    title: string;
 
    constructor(userId?: number, firstName?: string, middleName?: string, lastName?: string,

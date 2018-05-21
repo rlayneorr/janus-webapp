@@ -9,11 +9,29 @@ import { UrlUtilService } from '../UrlUtil/url-util.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 
 /*
-Used to obtain the collection of
-candidates waiting to be screened,
-set the candidate being screened,
-and get the candidate being screened
+
 */
+
+/**
+ * Used to obtain the collection of
+ * candidates waiting to be screened,
+ * set the candidate being screened,
+ * and get the candidate being screened
+ *
+ * Last modified by the Avengers
+ *
+ * Modified from made endpoints more consistent with
+ * the rest of the application.
+ *
+ * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+ */
+
 @Injectable()
 export class SimpleTraineeService {
 
@@ -43,7 +61,7 @@ export class SimpleTraineeService {
     const allSimpleTrainees: SimpleTrainee[] = [];
     // Get array of skillTypeIds, apply random skillTypeId's to each new SimpleTrainee
     this.skillTypeService.getSkillTypes().subscribe(allSkillTypes => {
-      // Get array of HYDRA simpleTrainees, use info to build array of simpleTrainees
+      // Get array of GAMBIT simpleTrainees, use info to build array of simpleTrainees
       this.httpClient.get<any[]>(this.ROOT_URL + 'all/trainee/getAll/').subscribe(allCandidates => {
         console.log(allCandidates);
         for (const e of allCandidates) {

@@ -1,33 +1,33 @@
 // import { TestBed, inject, async } from '@angular/core/testing';
 
-// import { HydraBatchService } from './hydra-batch.service';
+// import { GambitBatchService } from './gam-batch.service';
 // import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
-// import { HydraBatch } from '../../entities/HydraBatch';
+// import { GambitBatch } from '../../entities/GambitBatch';
 // import { UrlService } from '../urls/url.service';
 // import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 // import { Batch } from '../../../portals/Caliber/entities/Batch';
 // import { environment } from '../../../../environments/environment';
 
-// xdescribe('HydraBatchService', () => {
-//   const batch = new HydraBatch();
+// xdescribe('GambitBatchService', () => {
+//   const batch = new GambitBatch();
 //   this.context = environment.context;
 //   batch.trainer = 100;
 //   beforeEach(() => {
 //     TestBed.configureTestingModule({
-//       providers: [UrlService, HydraBatchService],
+//       providers: [UrlService, GambitBatchService],
 //       imports: [HttpClientModule,
 //         HttpClientTestingModule]
 //     });
 //   });
 
-//   it('batch should be created', inject([HydraBatchService], (service: HydraBatchService) => {
+//   it('batch should be created', inject([GambitBatchService], (service: GambitBatchService) => {
 //     expect(service).toBeTruthy();
 //   }));
 
 //   it(`should fetchAll batches and verify the response`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAll().subscribe();
 
 //           backend.expectOne({
@@ -40,8 +40,8 @@
 
 //   it(`should fetchAll batches and verify the observable`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAll().subscribe(next => {
 //             expect(next).toBeTruthy();
 //           });
@@ -53,8 +53,8 @@
 
 //   it(`should NOT fail when sending an unmatched request to fetchAll`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAll().subscribe();
 
 //           backend.match(`${this.context}batches`);
@@ -64,8 +64,8 @@
 
 //   it(`should fetchAllByTrainer and verify the response`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAllByTrainer().subscribe();
 
 //           backend.expectOne({
@@ -78,8 +78,8 @@
 
 //   it(`should fetchAllByTrainer and verify the observable`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAllByTrainer().subscribe(next => {
 //             expect(next).toBeTruthy();
 //           });
@@ -91,8 +91,8 @@
 
 //   it(`should NOT fail when sending an unmatched request to fetchAllByTrainer`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAllByTrainer().subscribe();
 
 //           backend.match(`${this.context}batches/trainers`);
@@ -102,8 +102,8 @@
 
 //   it(`should fetchAllByTrainerId and verify the response`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAllByTrainerId(batch.trainer).subscribe();
 
 //           backend.expectOne({
@@ -116,8 +116,8 @@
 
 //   it(`should fetchAllByTrainerId and verify the observable`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAllByTrainerId(batch.trainer).subscribe(next => {
 //             expect(next).toBeTruthy();
 //           });
@@ -129,8 +129,8 @@
 
 //   it(`should NOT fail when sending an unmatched request to fetchAllByTrainerId`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.fetchAllByTrainerId(batch.trainer).subscribe();
 
 //           backend.match(`${this.context}batches/trainers/${batch.trainer}`);
@@ -140,8 +140,8 @@
 
 //   it(`should create a batch and verify the response`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.create(batch).subscribe();
 
 //           backend.expectOne({
@@ -154,8 +154,8 @@
 
 //   it(`should create a batch and verify the observable`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.create(batch).subscribe(next => {
 //             expect(next).toBeTruthy();
 //           });
@@ -167,8 +167,8 @@
 
 //   it(`should NOT fail when sending an unmatched request to create a batch`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.create(batch).subscribe();
 
 //           backend.match(`${this.context}batches`);
@@ -178,8 +178,8 @@
 
 //   it(`should update a batch and verify the response`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.update(batch).subscribe();
 
 //           backend.expectOne({
@@ -192,8 +192,8 @@
 
 //   it(`should update a batch and verify the observable`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.update(batch).subscribe(next => {
 //             expect(next).toBeTruthy();
 //           });
@@ -205,8 +205,8 @@
 
 //   it(`should NOT fail when sending an unmatched request to update a batch`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.update(batch).subscribe();
 
 //           backend.match(`${this.context}batches`);
@@ -216,8 +216,8 @@
 
 //   it(`should delete a batch and verify the response`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.delete(batch).subscribe();
 
 //           backend.expectOne({
@@ -230,8 +230,8 @@
 
 //   it(`should delete a batch and verify the observable`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.delete(batch).subscribe(next => {
 //             expect(next).toBeTruthy();
 //           });
@@ -243,8 +243,8 @@
 
 //   it(`should NOT fail when sending an unmatched request to delete a batch`,
 //     async(
-//       inject([HttpClient, HttpTestingController, HydraBatchService],
-//         (http: HttpClient, backend: HttpTestingController, service: HydraBatchService) => {
+//       inject([HttpClient, HttpTestingController, GambitBatchService],
+//         (http: HttpClient, backend: HttpTestingController, service: GambitBatchService) => {
 //           service.delete(batch).subscribe();
 
 //           backend.match(`${this.context}batches/${batch.batchId}`);

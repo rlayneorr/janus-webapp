@@ -19,7 +19,7 @@ import { TrainingTypeService } from '../services/training-type.service';
 import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
 import { TraineeService } from '../services/trainee.service';
 import { TraineeStatusService } from '../services/trainee-status.service';
-import { HydraTraineeService } from '../../../gambit-client/services/trainee/gambit-trainee.service';
+import { GambitTraineeService } from '../../../gambit-client/services/trainee/gambit-trainee.service';
 import { TrainerService } from '../../../gambit-client/services/trainer/trainer.service';
 
 
@@ -27,8 +27,8 @@ import { TrainerService } from '../../../gambit-client/services/trainer/trainer.
 import { Location } from '../entities/Location';
 import { Address } from '../entities/Address';
 import { Trainee } from '../entities/Trainee';
-import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
-import { HydraTrainer } from '../../../gambit-client/entities/HydraTrainer';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainer } from '../../../gambit-client/entities/GambitTrainer';
 import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
 
 // components
@@ -52,7 +52,7 @@ import { DeleteBatchModalComponent } from './delete-batch-modal/delete-batch-mod
 export class ManageComponent implements OnInit {
   closeResult: string;
   batches: CompleteBatch[] = [];
-  trainees: HydraTrainee[] = [];
+  trainees: GambitTrainee[] = [];
   batchModal: NgbModalRef;
   batchModalNested: NgbModalRef;
   batchByYear: Date[] = [];
@@ -62,18 +62,18 @@ export class ManageComponent implements OnInit {
   batchToUpdate: CompleteBatch = new CompleteBatch;
   traineeProfileUrl: string;
   test: string;
-  trainers: HydraTrainer[] = [];
+  trainers: GambitTrainer[] = [];
   trainerNames: string[] = [];
   locations: Address[] = [];
   trainingTypes: string[] = [];
   skills: string[] = [];
   statuses: string[] = [];
   selectStatus = 'Select Status';
-  createNewTrainee: HydraTrainee = new HydraTrainee;
+  createNewTrainee: GambitTrainee = new GambitTrainee;
   isNew: Boolean;
   currentTrainees: any;
   showDropped: Boolean = false;
-  droppedTrainees: HydraTrainee[] = [];
+  droppedTrainees: GambitTrainee[] = [];
 
   /* Subscriptions */
   batchListSub: Subscription;
@@ -89,7 +89,7 @@ export class ManageComponent implements OnInit {
   deletedTraineeSub: Subscription;
   updatedTraineeSub: Subscription;
 
-  traineeToBeDeleted: HydraTrainee;
+  traineeToBeDeleted: GambitTrainee;
 
   constructor(
     private trainerService: TrainerService,
@@ -102,7 +102,7 @@ export class ManageComponent implements OnInit {
     private fb: FormBuilder,
 
     private traineeStatusService: TraineeStatusService,
-    private hydraTraineeService: HydraTraineeService,
+    private gamTraineeService: GambitTraineeService,
     private batchService: BatchService
 
   ) {
@@ -110,7 +110,7 @@ export class ManageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hydraTraineeService.findAllByBatchAndStatus(2, 'Dropped').forEach(element => {
+    this.gamTraineeService.findAllByBatchAndStatus(2, 'Dropped').forEach(element => {
       element.forEach(trainee => {
         console.log(trainee.traineeUserInfo);
       });
@@ -239,7 +239,7 @@ export class ManageComponent implements OnInit {
    *
    * @param trainees
    */
-  private setBatchTrainees(trainees: HydraTrainee[]): void {
+  private setBatchTrainees(trainees: GambitTrainee[]): void {
     this.trainees = trainees;
     // this.currentBatch.traineeIds = trainees;
   }
@@ -249,7 +249,7 @@ export class ManageComponent implements OnInit {
    *
    * @param trainers
    */
-  private setTrainers(trainers: HydraTrainer[]): void {
+  private setTrainers(trainers: GambitTrainer[]): void {
     this.trainers = trainers;
   }
 
@@ -290,7 +290,7 @@ export class ManageComponent implements OnInit {
   createNewTraineeFunction() {
     this.createNewTrainee.batch = this.currentBatch;
     console.log(this.createNewTrainee);
-    this.hydraTraineeService.create(this.createNewTrainee);
+    this.gamTraineeService.create(this.createNewTrainee);
   }
 
   /** Updates the Trainee
@@ -305,7 +305,7 @@ export class ManageComponent implements OnInit {
     const emptyBatch = Object.assign({}, this.currentBatch);
     emptyBatch.trainees = [];
     this.createNewTrainee.batch = emptyBatch;
-    this.hydraTraineeService.update(this.createNewTrainee);
+    this.gamTraineeService.update(this.createNewTrainee);
   }
 
   /**
@@ -354,7 +354,7 @@ export class ManageComponent implements OnInit {
 
     // for (let i = 0; i < this.currentBatch.trainees.length; i++) {
     //   this.currentBatch.trainees[i].batch = null;
-    //   this.hydraTraineeService.delete(this.currentBatch.trainees[i].traineeId);
+    //   this.gamTraineeService.delete(this.currentBatch.trainees[i].traineeId);
     // }
   }
 
@@ -395,7 +395,7 @@ export class ManageComponent implements OnInit {
 
   openCreateTraineeModal(createTrainee) {
     this.isNew = true;
-    this.createNewTrainee = new HydraTrainee;
+    this.createNewTrainee = new GambitTrainee;
     this.batchModalNested = this.modalService.open(createTrainee, { size: 'lg', container: '.batch-trainee-modal-container2' });
     this.batchModalNested.result.then(a => { }, b => this.closeCreateTraineeModal());
     this.batchModal.close();

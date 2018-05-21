@@ -39,13 +39,13 @@ export class ViolationTypeService {
     private urlUtilService: UrlUtilService
   ) { }
 
-  // Get an array of all violation types, returning it as an observable
+  /** Get an array of all violation types, returning it as an observable */
   getViolationTypes(): Observable<ViolationType[]> {
     return this.http.get<ViolationType[]>(this.ROOT_URL + 'screening-service/violation/all', {});
   }
 
-  // Get an array of all violation types. Differs from the previous because it returns
-  // an Observable<any[]>
+  /** Get an array of all violation types. Differs from the previous because it returns
+  an Observable<any[]> */
   getAllViolationTypes(): Observable<any[]> {
     return this.http.get<any[]>(this.ROOT_URL + 'screening-service/violation/all', {});
   }

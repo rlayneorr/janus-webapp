@@ -15,11 +15,23 @@ import { environment } from '../../../../environments/environment';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { UrlService } from '../urls/url.service';           // TODO refactor reference to Environments?
 import { stringifyDate } from '../../../portals/Caliber/util/utils';
-import { HydraBatch } from '../../entities/HydraBatch';
-import { HydraCRUD } from '../../interfaces/api.interface';
+import { GambitCRUD } from '../../interfaces/api.interface';
 
 import { GambitBatch } from '../../entities/GambitBatch';
 
+  /**
+   * Last modified by the Avengers
+   *
+   * finishing the conversion from HydraBatch to GambitBatch
+   *
+   * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   */
 
 
 /**
@@ -27,7 +39,7 @@ import { GambitBatch } from '../../entities/GambitBatch';
  * for Batch objects
  */
 @Injectable()
-export class HydraBatchService {
+export class GambitBatchService {
 
   constructor(public http: HttpClient, private urls: UrlService) {
 

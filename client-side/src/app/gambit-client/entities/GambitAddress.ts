@@ -1,4 +1,4 @@
-export class HydraAddress {
+export class GambitAddress {
     addressId: number;
     street: string;
     city: string;
