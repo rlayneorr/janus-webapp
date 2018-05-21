@@ -17,11 +17,21 @@ export function asyncError<T>(errorObject: any) {
   return defer(() => Promise.reject(errorObject));
 }
 
+/**
+   * Last modified by the Avengers
+   *
+   * Byron Hall | 1803-USF-MAR26 | Wezley Singleton
+   * 
+   * Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
+   *
+   */
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * This describe block is actually using mock data. It uses the same approach as this example:
  * https://angular.io/guide/testing#testing-http-services
  */
+
 fdescribe('QuestionsService ', () => {
   const testBucket = -1;
   let httpClientSpyOnGet: { get: jasmine.Spy };
