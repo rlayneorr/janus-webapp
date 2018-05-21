@@ -5,6 +5,8 @@ import { QuestionComponent } from './question.component';
 import { Dependencies } from '../../../caliber.test.module';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { Question } from '../../../entities/Question';
+import { Tag } from '../entities/Tag';
+import {QUESTIONS} from '../../../services/questions/mock-questions';
 
 /**
    * Last modified by the Avengers
@@ -18,6 +20,12 @@ import { Question } from '../../../entities/Question';
 fdescribe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
+  const t0: Tag = new Tag();
+  t0.tagId = 1;
+  t0.tagName = 'Java';
+  const t1: Tag = new Tag();
+  t1.tagId = 2;
+  t1.tagName = 'HTML';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies)
@@ -38,5 +46,24 @@ fdescribe('QuestionComponent', () => {
     expect(component.question).toEqual(new Question());
     expect(component.sampleAnswers.length).toBe(0);
     expect(component.currentTags.length).toBe(0);
+  });
+
+  it('should add new tags', () => {
+    component.addNewTag(t0);
+    let lastTagIndex = component.currentTags.length - 1;
+    expect(component.currentTags[lastTagIndex]).toEqual(t0);
+
+
+    component.addNewTag(t1);
+    lastTagIndex = component.currentTags.length - 1;
+
+    expect(component.currentTags[lastTagIndex]).toEqual(t1);
+    expect(component.currentTags[lastTagIndex - 1]).toEqual(t0);
+  });
+
+  it('should return all tags in the tag array', () => {
+      expect(component.getTagIds().length).toBe(0);
+      component.addNewTag(t0);
+      expect(component.getTagIds().length).toBe(1);
   });
 });
