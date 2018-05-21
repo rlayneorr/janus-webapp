@@ -2,7 +2,7 @@
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // routing
 import { routes } from './caliber.routes';
@@ -181,6 +182,7 @@ export const Dependencies = {
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
     NgxPaginationModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     // pipes
@@ -346,7 +348,10 @@ export const Dependencies = {
     BucketService,
     UrlUtilService,
     QuestionService,
+    QuestionsService,
+    BucketsService,
     TagService,
+    TagsService,
     SimpleTraineeService,
     SkillTypeService,
     QuestionScoreService,
