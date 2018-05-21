@@ -10,14 +10,14 @@ import { Question } from '../../../entities/Question';
    * Last modified by the Avengers
    *
    * Byron Hall | 1803-USF-MAR26 | Wezley Singleton
-   * 
+   *
    * Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
    *
    */
 
 fdescribe('QuestionComponent', () => {
-  let component: QuestionComponent; 
-  let fixture: ComponentFixture<QuestionComponent>;  
+  let component: QuestionComponent;
+  let fixture: ComponentFixture<QuestionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies)
