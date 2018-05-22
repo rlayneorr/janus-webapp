@@ -53,7 +53,7 @@ fdescribe('QuestionComponent', () => {
     expect(component.currentTags.length).toBe(0);
   });
 
-  // test if it saves successfully
+  // test if it displays Saved successfully
   it('should save successfully',
   inject([AlertsService], (service: AlertsService) => {
     service.success('Saved successfully');
@@ -67,11 +67,41 @@ fdescribe('QuestionComponent', () => {
       expect(msg).toEqual('Saved successfully');
     });
   }));
+
+  // test if it display update successfully successfully
+  it('should update successfully',
+  inject([AlertsService], (srv: AlertsService) => {
+    srv.success('Updated successfully');
+    let msgUpdate = '';
+    let tyUpdate = '';
+    srv.getMessage().subscribe((s) => {
+      tyUpdate = s.type;
+      msgUpdate = s.text;
+      component.updatedSuccessfully();
+      expect(tyUpdate).toEqual('success');
+      expect(msgUpdate).toEqual('Updated successfully');
+    });
+  }));
+
+  // test if it displays unsuccessful message as an error
+  it('should display save unsuccessfull error message',
+  inject([AlertsService], (srv: AlertsService) => {
+    srv.success('All Fields Must be Filled');
+    let msgUpdate = '';
+    let tyUpdate = '';
+    srv.getMessage().subscribe((s) => {
+      tyUpdate = s.type;
+      msgUpdate = s.text;
+      component.savedUnsuccessfull();
+      expect(tyUpdate).toEqual('error');
+      expect(msgUpdate).toEqual('All Fields Must be Filled');
+    });
+  }));
+
   it('should add new tags', () => {
     component.addNewTag(t0);
     let lastTagIndex = component.currentTags.length - 1;
     expect(component.currentTags[lastTagIndex]).toEqual(t0);
-
 
     component.addNewTag(t1);
     lastTagIndex = component.currentTags.length - 1;
