@@ -32,7 +32,7 @@
 
               <div *ngIf="panel.status == 'Repanel'; else minus_sign">
                 <ng-container *ngFor="let feedback of panel.feedback">
-                  <tr class="strong" *ngIf="feedback.status == 'Repanel'">{{feedback.technology.skillCategory}}</tr>
+                  <tr class="strong" *ngIf="feedback.status == 'Repanel'">{{feedback.skill.skillCategory}}</tr>
                 </ng-container>
               </div>
 

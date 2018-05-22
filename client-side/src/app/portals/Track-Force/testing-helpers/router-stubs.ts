@@ -14,8 +14,9 @@
    }
  })
  export class RouterLinkStubDirective {
-   @Input() linkParams: string;
+   @Input('routerLink') linkParams: any;
    navigatedTo: any = null;
+
    onClick() {
      this.navigatedTo = this.linkParams;
    }
@@ -48,6 +49,7 @@
      this._testParamMap = convertToParamMap(params);
      this.subject.next(this._testParamMap);
    }
+
    // ActivatedRoute.snapshot.paramMap
    get snapshot() {
      return { paramMap: this.testParamMap };

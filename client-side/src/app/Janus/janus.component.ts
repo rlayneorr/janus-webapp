@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
+import { ErrorAlertComponent } from '../hydra-client/ui/error-alert/error-alert.component';
+import { HydraInterceptor } from '../hydra-client/interceptors/hydra.interceptor';
 
 @Component({
   selector: 'app-janus',
@@ -7,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JanusComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
   }

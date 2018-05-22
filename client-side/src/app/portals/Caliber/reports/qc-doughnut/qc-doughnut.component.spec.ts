@@ -21,4 +21,15 @@ xdescribe('QcDoughnutComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit() (cannot verify data currently), but the variables should be true', () => {
+    component.ngOnInit();
+    expect(component['dataSubscription']).toBeTruthy();
+    expect(component['batchSubscription']).toBeTruthy();
+  });
+
+  // Having trouble with the download pdf
+  // it('downloadPDF()', () => {
+  //   component.downloadPDF();
+  // });
 });

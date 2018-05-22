@@ -3,7 +3,7 @@ import { Dependencies } from '../../caliber.test.module';
 import { PanelBatchAllTraineesComponent } from './panel-batch-all-trainees.component';
 
 
-xdescribe('PanelBatchAllTraineesComponent', () => {
+describe('PanelBatchAllTraineesComponent', () => {
   let component: PanelBatchAllTraineesComponent;
   let fixture: ComponentFixture<PanelBatchAllTraineesComponent>;
 
@@ -19,5 +19,15 @@ xdescribe('PanelBatchAllTraineesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('ngOnInit() cannot verify data (due to API calls), but should be truthy()', () => {
+    component.ngOnInit();
+    expect(component['dataSubscription']).toBeTruthy();
+    expect(component['batchIdSub']).toBeTruthy();
+  });
+
+  it('ngOnDestroy()', () => {
+    component.ngOnDestroy();
   });
 });

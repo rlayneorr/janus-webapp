@@ -14,13 +14,13 @@ import { CRUD } from '../interfaces/api.interface';
 
 // entities
 import { Location } from '../entities/Location';
-import { urls } from './urls';
+import { environment } from '../../../../environments/environment';
 
+const context = environment.location;
 
 /**
- * this service is used to make API calls
- * to for the location component
- *
+ * This service is used to make API calls
+ * for the location component
  */
 @Injectable()
 export class LocationService implements CRUD<Location> {
@@ -30,7 +30,7 @@ export class LocationService implements CRUD<Location> {
   /*
   * @deprecated
   *
-  * initial way used for components to access the returned
+  * Initial way used for components to access the returned
   * list BehaviorSubject as an obsevable
   *
   * -> retained for backwards compatibility
@@ -45,95 +45,93 @@ export class LocationService implements CRUD<Location> {
   }
 
   /**
-  * bootstrap any subscriptions
+  * Bootstrap any subscriptions
   */
-  private initializeSubscriptions(): void {
-
-  }
+  private initializeSubscriptions(): void {}
 
 
   /*
-   =====================
-   BEGIN: API calls
-   =====================
- */
+  =====================
+  BEGIN: API calls
+  =====================
+   */
 
   /**
-  * retrieves all Locations from the API
-  * and pushed them on the listSubject
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
-  */
+   * Retrieves all Locations from the API
+   * and pushed them on the listSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
+   */
   public fetchAll(): Observable<Location[]> {
-    this.http.get<any[]>(urls.location.fetchAll()).subscribe((results) => this.listSubject.next(results));
+    this.http.get<any[]>(context.fetchAll()).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 
   /**
-  * transmits a Location to be saved to
-  * the API and pushes the saved Location
-  * on the savedSubject
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP')")
-  *
-  * @param location: Location
-  */
+   * Transmits a Location to be saved to
+   * the API and pushes the saved Location
+   * on the savedSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param location: Location
+   */
   public create(location: Location): Observable<Location> {
-    return this.http.post<any>(urls.location.save(), JSON.stringify(location));
+    return this.http.post<any>(context.save(), JSON.stringify(location));
   }
 
   /**
-  * transmits a Location to be updated to
-  * the API and pushes the updated Location
-  * on the savedSubject
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP')")
-  *
-  * @param location: Location
-  */
+   * transmits a Location to be updated to
+   * the API and pushes the updated Location
+   * on the savedSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param location: Location
+   */
   public update(location: Location): Observable<Location> {
-    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
+    return this.http.put<any>(context.update(), JSON.stringify(location));
   }
 
   /**
-  * transmits a Location to be deactivated
-  * to the API and pushes the deactivated
-  * location on the deletedSubject
-  *
-  * NOTE: there is no literal DELETE on the API
-  *       it simply updates the object requiring the
-  *       client to know to set the active flag to false
-  *       in advance
-  *
-  *       this approach does the same thing while consuming
-  *       the currently implemented methods
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP')")
-  *
-  * @param location: Location
-  */
+   * Transmits a Location to be deactivated
+   * to the API and pushes the deactivated
+   * location on the deletedSubject
+   *
+   * NOTE: there is no literal DELETE on the API
+   *       it simply updates the object requiring the
+   *       client to know to set the active flag to false
+   *       in advance
+   *
+   *       this approach does the same thing while consuming
+   *       the currently implemented methods
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param location: Location
+   */
   public delete(location: Location): Observable<Location> {
     location.active = false;
-    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
+    return this.http.put<any>(context.update(), JSON.stringify(location));
   }
 
   /**
-  * transmits a Location to be reactivated
-  * to the API and pushes the reactivated
-  * location on the updatedSubject
-  *
-  * NOTE: there is no literal DELETE on the API
-  *       it simply updates the object requiring the
-  *       client to know to set the active flag to false
-  *       in advance
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP')")
-  *
-  * @param location: Location
-  */
+   * Transmits a Location to be reactivated
+   * to the API and pushes the reactivated
+   * location on the updatedSubject
+   *
+   * NOTE: there is no literal DELETE on the API
+   *       it simply updates the object requiring the
+   *       client to know to set the active flag to false
+   *       in advance
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param location: Location
+   */
   public reactivate(location: Location): Observable<Location> {
     location.active = true;
-    return this.http.put<any>(urls.location.update(), JSON.stringify(location));
+    return this.http.put<any>(context.update(), JSON.stringify(location));
   }
 
   /*

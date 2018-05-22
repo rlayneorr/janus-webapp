@@ -44,9 +44,9 @@ export class RemoveAssociateFromBatchComponent implements OnInit {
       if (associate.userId === user.userId) {
         this.usersService.removeUserFromBatch(associate.userId).subscribe(users => {
           this.associates = users;
-          this.associateAlert('success', `Successfully removed ${user.fName} ${user.lName} from current batch.`);
+          this.associateAlert('success', `Successfully removed ${user.firstName} ${user.lastName} from current batch.`);
         }, error => {
-          this.associateAlert('danger', `Error: couldn't remove ${user.fName} ${user.lName} from current batch.`);
+          this.associateAlert('danger', `Error: couldn't remove ${user.firstName} ${user.lastName} from current batch.`);
         });
         break;
       }

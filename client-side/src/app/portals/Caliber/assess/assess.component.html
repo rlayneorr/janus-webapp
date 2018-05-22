@@ -1,20 +1,11 @@
 <!-- TABS **START** -->
-<!-- <div id="main-container"> -->
 <div class="container pad-container f-size">
-
   <div class="row">
     <div class="col col-xs-5">
-
-      <!-- <select class="align-on-mobile" #yearSelect class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchYear(yearSelect.value)">
-        <option [value]="year" *ngFor="let year of years">{{year}}</option>
-      </select> -->
-
       <div ngbDropdown class="d-inline-block">
-
         <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic1" ngbDropdownToggle>
           <strong>{{currentYear}}</strong>
         </button>
-
         <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic1" (click)="switchYear(currentYear)">
           <div *ngFor="let year of years" class="custom-bold">
             <button class="dropdown-item c-pointer f-size" (click)="changeYear(year)">
@@ -22,29 +13,19 @@
             </button>
           </div>
         </div>
-
       </div>
-
       <div ngbDropdown class="d-inline-block">
-
-        <!-- <select #bat class="form-control batch-select clickable inline b-top-radius btn-custom" (change)="switchBatch(bat.value)">
-          <option [value]="batch.batchId" *ngFor="let batch of yearBatches">{{batch.trainer.name}} - {{batch.startDate | date: 'shortDate'}}</option>
-        </select> -->
-
         <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic2" ngbDropdownToggle>
-          <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
+          <strong>{{selectedBatch.trainer.firstname}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
         </button>
-
         <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic2" (click)="switchBatch(selectedBatch.batchId)">
           <div *ngFor="let  batch of yearBatches" class="custom-bold">
             <button class="dropdown-item c-pointer f-size" (click)="changeBatch(selectedBatch)">
-              <strong>{{selectedBatch.trainer.name}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
+              <strong>{{selectedBatch.trainer.firstname}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
             </button>
           </div>
         </div>
-
       </div>
-
     </div>
     <div class="col col-xs-7 rightHeaderTab">
       <button class="btn btn-secondary b-top-radius f-size" (click)="open(addAssessmentContent)">
@@ -89,7 +70,7 @@
               <div class="trainee-header">Trainee</div>
             </th>
             <th class="clickable assessment-header" *ngFor="let assessment of this.assessments" (click)="editAssessment(editAssessmentContent, assessment);">
-              <div class="assessment-header">{{assessment.category.skillCategory}} {{assessment.type}} ({{getPercentage(assessment)}}%)</div>
+              <div class="assessment-header">{{assessment.skill.skillName}} {{assessment.type}} ({{getPercentage(assessment)}}%)</div>
             </th>
             <th class="note">
               Notes
@@ -124,7 +105,6 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-10">
-      <!-- <textarea class='form-control' placeholder="Enter your overall feedback on the batch"></textarea> -->
       <textarea #inputBatchNote *ngIf="this.batches" class='form-control' placeholder="Enter your overall feedback on the batch" [value]="getWeekBatchNote(this.selectedBatch).content" (change)="updateNote(getWeekBatchNote(this.selectedBatch), inputBatchNote)"></textarea>
     </div>
   </div>
@@ -137,7 +117,6 @@
   </div>
 </div>
 <br>
-<!-- </div> -->
 
 <!--ADD WEEK MODAL **START** -->
 <ng-template #addWeekContent let-c="close" let-d="dismiss" id="addWeek">
@@ -166,11 +145,11 @@
   <div class="modal-body">
     <div class="form-group f-size">
       <label>
-        <strong>Assessment Category:</strong>
+        <strong>Assessment Skill:</strong>
       </label>
-      <select #cat class="form-control f-size" id="categorySelect" (change)="changeCategory(cat)">
-        <option value="" disabled>Select Assessment Category</option>
-        <option *ngFor="let category of this.categories">{{category | categorySkill}}</option>
+      <select #skill class="form-control f-size" id="skillSelect" (change)="changeSkill(skill)">
+        <option value="" disabled>Select Assessment Skill</option>
+        <option *ngFor="let skill of this.skill">{{skill.skillName}}</option>
       </select>
     </div>
     <div class="container f-size" style="padding: 0px">
@@ -213,9 +192,9 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label>Assessment Category:</label>
-      <select #cat class="form-control" id="categorySelect" (change)="editCategory(cat)" [value]="editingAssessment.category.skillCategory">
-        <option *ngFor="let category of this.categories">{{category | categorySkill}}</option>
+      <label>Assessment Skill:</label>
+      <select #skill class="form-control" id="skillSelect" (change)="editSkill(skill)" [value]="editingAssessment.skill.skillName">
+        <option *ngFor="let skill of this.skills">{{skill.skillName}}</option>
       </select>
     </div>
     <div class="container">

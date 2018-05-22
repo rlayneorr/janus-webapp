@@ -118,6 +118,7 @@ import { SearchPipe } from './pipes/search.pipe';
     ExistingSubtopicModalComponent
   ],
   providers: [
+    BatchProgressBarComponent,
     CurriculumWeekComponent,
     DragndropService,
     CourseStructureComponent,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientMappedService } from '../../services/client-mapped-service/client-mapped-service';
+import { ClientListService } from '../../services/client-list-service/client-list.service';
+import { AssociateService } from '../../services/associates-service/associates-service';
 import { ThemeConstants } from '../../constants/theme.constants'; // Used for colors in charts
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { ChartsModule, Color } from 'ng2-charts';
@@ -34,7 +35,7 @@ export class ClientMappedComponent implements OnInit {
   /**
    * @description chartType determines the type of chart displayed to the user: bar, pie, or polarArea charts
    */
-  public chartType: String;
+  public chartType: string;
 
   /**
    * @description clientMappedLabels holds the client names fetched from the database
@@ -73,9 +74,13 @@ export class ClientMappedComponent implements OnInit {
   Methods
   ============================
   */
-  constructor(private clientMappedService: ClientMappedService, private rout: Router) {
+  constructor(
+    private clientService: ClientListService,
+    private rout: Router,
+    private associateService: AssociateService
+  ) {
     this.chartOptions = {
-      xAxes: [{ticks: {autoSkip: false}}], scales: {yAxes: [{ticks: {min: 0}}]},
+      xAxes: [{ ticks: { autoSkip: false } }], scales: { yAxes: [{ ticks: { min: 0 } }] },
       legend: {
         display: false
       },
@@ -113,8 +118,8 @@ export class ClientMappedComponent implements OnInit {
     // Initialize the chart to type 'bar'
     this.changeChartType('bar');
 
-    // HTTP request to fetch data. See client-mapped-service
-    this.clientMappedService.getAssociatesByStatus(this.statusID).subscribe( data => {
+    // HTTP request to fetch data. See client-service
+    this.associateService.getAssociatesByStatus(this.statusID).subscribe(data => {
       /*
       Store the data from the http request in temporary objects.
       In order for the2 property binding refresh on clientMappedData
@@ -128,6 +133,7 @@ export class ClientMappedComponent implements OnInit {
       console.log(data);
 
       // Loop over 'data' and extract fetched information
+
       for (const d in data) {
         if (data.hasOwnProperty(d)) {
           const temp_name = data[d].name;
@@ -151,11 +157,11 @@ export class ClientMappedComponent implements OnInit {
   }
 
   /**
-	 * @function changeChartType
-	 * @description Handles changing the chart type when the buttons are clicked.
-	 * Removes the chart legend for charts that don't utilize it.
+   * @function changeChartType
+   * @description Handles changing the chart type when the buttons are clicked.
+   * Removes the chart legend for charts that don't utilize it.
    * @param selectedType string containing the type of chart to display. Should contain 'bar', 'pie', or 'polarArea'
-	 */
+   */
   public changeChartType(selectedType) {
     this.chartType = selectedType;
 
@@ -167,9 +173,9 @@ export class ClientMappedComponent implements OnInit {
 
       // Add scales to options if it doesn't exist
       if (!this.chartOptions.legend.scales) {
-        this.chartOptions.scales = {yAxes: [{ticks: {min: 0}}]};
+        this.chartOptions.scales = { yAxes: [{ ticks: { min: 0 } }] };
       }
-    } else if (selectedType === 'pie' || selectedType === 'polarArea') { // For 'pie' or 'polarArea' charts
+    } else if (selectedType === 'pie' || selectedType === 'polarArea') {// For 'pie' or 'polarArea' charts
       // Display legend
       this.chartOptions.legend = {
         display: true,
@@ -186,7 +192,9 @@ export class ClientMappedComponent implements OnInit {
   // Placeholder for events. Current application specifications does not dictate any actions
   public chartClicked(e: any): void {
     console.log(e);
-    this.rout.navigate([`associate-listing/client/${this.clientMappedLabels[e.active[0]._index]}/mapped/${this.chartOptions.title.text}`]);
+    this.rout.navigate([`/TrackForce/associate-listing/client/
+${this.clientMappedLabels[e.active[0]._index]}/mapped/
+${this.chartOptions.title.text}`]);
   }
 
   public chartHovered(e: any): void {

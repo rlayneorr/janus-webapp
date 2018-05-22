@@ -2,17 +2,20 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-
-const context = 'http://ec2-18-216-169-252.us-east-2.compute.amazonaws.com:8080/';
-const bam = 'http://ec2-18-217-13-6.us-east-2.compute.amazonaws.com:8800/api/v2';
+const context = 'http://localhost:10000';
+const bam = 'http://localhost:9001/api/v2';
 export const environment = {
   production: false,
 
-  hydraContext: 'https://virtserver.swaggerhub.com/blake2/Hydra/1.0.0/',
+  gambitContext: 'http://localhost:10000',
 
-  context: context, // change for what the production environment would actually be
+  context: context,
   bam: bam,
-  url: 'http://localhost:8085/',
+  url: 'http://54.166.255.85:8085',
+  msurl: 'http://34.227.178.103:',
+
+  assets: 'http://52.87.205.55:8086/angular/assets/',
+  // assets: '../../../../../assets/', //url for local testing
 
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
@@ -22,11 +25,12 @@ export const environment = {
   },
 
   batch: {
-    fetchAllByTrainer: () => `${context}trainer/batch/all`,
-    fetchAll: () => `${context}vp/batch/all`,
-    save: () => `${context}all/batch/create`,
-    update: () => `${context}all/batch/update`,
-    delete: (batchId) => `${context}all/batch/delete/${batchId}`,
+    fetchAllByTrainer: () => `${context}/batches/trainers`,
+    fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
+    fetchAll: () => `${context}/batches`,
+    save: () => `${context}/batches`,
+    update: () => `${context}/batches`,
+    delete: (batchId) => `${context}/batches/${batchId}`
   },
 
   category: {
@@ -75,7 +79,31 @@ export const environment = {
   },
 
   skill: {
-    fetchAll: () => `${context}types/skill/all`,
+    findAll: () => `${context}/skill`,
+    findByName: (name) => `${context}/skill/name/${name}`,
+    findById: (id) => `${context}/skill/${id}`,
+    findAllActive: () => `${context}/skill/active`,
+    save: () => `${context}/skill`,
+    updateByName: (name) => `${context}/skill/name/${name}`,
+    updateById: (id) => `${context}/skill/${id}`,
+    delete: (id) => `${context}/skill/${id}`,
+    deleteByName: (name) => `${context}/skill/name/${name}`
+  },
+
+  skillType: {
+    find: (id) => `${context}/skillType/${id}`,
+    findByName: (name) => `${context}/skillType/name/${name}`,
+    findAll: () => `${context}/skillType`,
+    findAllActive: () => `${context}/skillType/active`,
+    findAllSkills: () => `${context}/skillType/skill`,
+    save: () => `${context}/skillType`,
+    saveSkill: (skillTypeId, skillId) => `${context}/skillType/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) =>
+    `${context}/skillType/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id) => `${context}/skillType/${id}`,
+    updateByName: (name) => `${context}/skillType/name/${name}`,
+    delete: (id) => `${context}/skillType/${id}`,
+    deleteByName: (name) => `${context}/skillType/name/${name}`
   },
 
   trainee: {
@@ -83,10 +111,12 @@ export const environment = {
     save: () => `${context}all/trainee/create`,
     update: () => `${context}all/trainee/update`,
     delete: (traineeId: number) => `${context}all/trainee/delete/${traineeId}`,
+    fetchDroppedByBatch: (batchId: number) => `${context}all/trainee/`,
   },
 
   trainer: {
     fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
+    fetchById: (id: number) => `${context}/trainers/${id}`,
     fetchAll: () => `${context}all/trainer/all`,
     save: () => `${context}vp/trainer/create`,
     update: () => `${context}vp/trainer/update`,
@@ -195,83 +225,4 @@ export const environment = {
   apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
   environment.context + `qc/note/batch/${batchId}/${weekId}`,
 
-  /** BAM Specific Endpoints */
-  bambatch: {
-        getBatchAllUrl: () => `${bam}/batch/all`,
-        getPastBatchesUrl: (email: string) => `${bam}/batch/past/${email}/`,
-        getFutureBatchesUrl: (email: string) => `${bam}/batch/future/${email}/`,
-        getBatchInProgressUrl: (email: string) => `${bam}/batch/inprogress/${email}/`,
-        getAllBatchesInProgressUrl: (email: string) => `${bam}/batch/allinprogress/${email}/`,
-        getBatchByIdURL: (batchId: number) => `${bam}/batch/byid/${batchId}/`,
-        updateBatchUrl: () => `${bam}/batch/updatebatch`,
-        getAllBatchTypesUrl: () => `${bam}/batch/batchtypes`,
-        removeSubtopicFromBatchUrl: (subtopicId: number) => `${bam}/batch/${subtopicId}`,
-        getAllInProgressUrl: () => `${bam}/batch/currentbatches`
-    },
-
-    curriculum: {
-        getCurriculumAllUrl: () => `${bam}/curriculum/all`,
-        getCurriculumByIdUrl: (id: number) => `${bam}/curriculum/getcurriculum/${id}`,
-        getSchedulesByCurriculumIdUrl: (id: number) => `${bam}/curriculum/schedule/${id}`,
-        getTopicPoolAllUrl: () => `${bam}/curriculum/topicpool`,
-        getSubtopicPoolAllUrl: () => `${bam}/curriculum/subtopicpool`,
-        addCurriculumUrl: () => `${bam}/curriculum/addcurriculum`,
-        makeCurriculumMasterByIdUrl: (id: number) => `${bam}/curriculum/makemaster/${id}`,
-        syncBatchByIdUrl: (id: number) => `${bam}/curriculum/syncbatch/${id}`,
-        deleteCurriculumVersionUrl: () => `${bam}/curriculum/deleteversion`
-    },
-
-    calendar: {
-        getSubtopicsByBatchPaginationUrl: (batchId: number, pageNumber: number, pageSize: number) =>
-            `${bam}/calendar/subtopicspagination/${batchId}/${pageNumber}/${pageSize}/`,
-        getSubtopicsByBatchUrl: (batchId: number) => `${bam}/calendar/subtopics/${batchId}`,
-        getNumberOfSubTopicsByBatchUrl: (batchId: number) => `${bam}/calendar/getnumberofsubtopics/${batchId}`,
-        getTopicsByBatchPagUrl: (batchId: number) => `${bam}/calendar/topics/${batchId}`,
-        changeTopicDateUrl: (subtopicId: number, batchId: number, date: number) =>
-            `${bam}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`,
-        updateTopicStatusUrl: (subtopicId: number, batchId: number, status: string) =>
-            `${bam}/calendar/statusupdate/${subtopicId}/${batchId}/${status}`,
-        addTopicsUrl: () => `${bam}/calendar/addtopics`,
-    },
-
-    assignForce: {
-        refreshBatches: () => `${bam}/refreshbatches`
-    },
-
-    users: {
-        getAllUsersUrl: () => `${bam}/user/all`,
-        getAllTrainersUrl: () => `${bam}/user/alltrainers`,
-        getAllAssociatesUrl: () => `${bam}/user/allassociates`,
-        getUsersInBatchUrl: (batchId: number) => `${bam}/user/inbatch/${batchId}`,
-        dropUserFromBatchUrl: (userId: number) => `${bam}/user/drop/${userId}`,
-        updateUserUrl: () => `${bam}/user/update`,
-        addUserUrl: () => `${bam}/user/register`,
-        resetPasswordUrl: () => `${bam}/user/reset`,
-        removeUserUrl: (userId: number) => `${bam}/user/remove/${userId}`,
-        addUserToBatchUrl: (batchId: number, userId: number) => `${bam}/user/add/${userId}/${batchId}`,
-        getUsersNotInBatchUrl: () => `${bam}/user/notinabatch`,
-        recoverPasswordUrl: () => `${bam}/user/recovery`
-    },
-
-    topic: {
-        addTopicName: (name: string) => `${bam}/topic/add/${name}`,
-    },
-
-    subtopic: {
-       addSubTopicName: (subtopicName: string, topicId: number, typeId: number) =>
-        `${bam}/subtopic/add/${typeId}/${topicId}/${subtopicName}`,
-       removeSubtopic: (subtopicId: number) => `${bam}/subtopic/remove/${subtopicId}`,
-       removeAllSubtopics: (batchId: number) => `${bam}/subtopic/removebybatch/${batchId}/`,
-       isPopulated: (batchId: number) => `${bam}/subtopic/ispopulated/${batchId}/`
-    },
-
-    addsubtopics: {
-      getBatchSubtopicsUrl: (batchId: number, pageNumber: number, pageSize: number) =>
-                      `${bam}/calendar/subtopicspagination/${batchId}/${pageSize}/${pageNumber}`,
-      getBatchIdUrl: (batchId: number) => `${bam}/batches/byid/${batchId}`,
-      addSubtopicUrl: () => `${bam}/subtopic/addsubtopic`,
-      getSubtopicPoolUrl: () => `${bam}/curriculum/topicpool`,
-      updateDateUrl: (subtopicId: number, batchId: number, date: number) =>
-                      `${bam}/calendar/dateupdate/${subtopicId}/${batchId}/${date}`
-  }
 };

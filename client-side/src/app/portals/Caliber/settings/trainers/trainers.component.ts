@@ -1,11 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { TrainerService } from '../../services/trainer.service';
-import { Trainer } from '../../entities/Trainer';
+import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
+import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserRole } from '../../../../hydra-client/entities/UserRole';
+
 
 @Component({
   selector: 'app-trainers',
@@ -13,41 +15,41 @@ import { Router } from '@angular/router';
   styleUrls: ['./trainers.component.css']
 })
 
-export class TrainersComponent implements OnInit, OnDestroy {
-  private trainerSubscription: Subscription;
-  trainers: Trainer[] = [];
-  filteredTrainers: Trainer[] = [];
+export class TrainersComponent implements OnInit {
+  trainers: HydraTrainer[] = [];
+  filteredTrainers: HydraTrainer[] = [];
   titles: Array<any>;
-  tiers: Array<any>;
-  model = new Trainer();
+  userRoles: Array<UserRole>;
+  model = new HydraTrainer();
   activeStatus: String;
-  currEditTrainer: Trainer;
-  newTrainer: Trainer;
-  newTier: string;
+  currEditTrainer: HydraTrainer;
+  newTrainer: HydraTrainer;
+  newRole: UserRole;
   newTitle: string;
-
   rForm: FormGroup;
   addForm: FormGroup;
+
+
   constructor(private trainerService: TrainerService,
     private modalService: NgbModal, private fb: FormBuilder, private route: Router) { }
 
   ngOnInit() {
-    this.trainerService.populateOnStart();
-    this.trainerSubscription = this.trainerService.listSubject.subscribe((resp) => {
+    this.trainerService.fetchAll().subscribe((resp) => {
       this.trainers = resp;
       if (resp) {
         this.filteredTrainers = resp.filter(s => {
-          if (this.activeStatus === 'ROLE_INACTIVE') {
-            return s.tier === this.activeStatus;
-          } else {
-            return s.tier !== 'ROLE_INACTIVE';
+            if (s.role !== null) {
+              return s.role.role !== 'INACTIVE';
+            } else {
+              console.log('Bad coding practice. Need Trainers with roles');
+            }
           }
-        });
+        );
       }
     });
-    this.trainerService.titlesSubject.subscribe(res => this.titles = res);
-    this.trainerService.tiersSubject.subscribe(res => {
-      this.tiers = (res.filter(tier => tier !== 'ROLE_INACTIVE')); // filter out ROLE_INACTIVE
+    this.trainerService.fetchTitles().subscribe(res => this.titles = res);
+    this.trainerService.fetchRoles().subscribe(res => {
+      this.userRoles = (res.filter(role => role.role !== 'INACTIVE')); // filter out INACTIVE role
     });
     this.initFormControl();
   }
@@ -59,10 +61,12 @@ export class TrainersComponent implements OnInit, OnDestroy {
    */
   initFormControl() {
     this.addForm = this.fb.group({
-      'name': ['', Validators.required],
+      'firstName': ['', Validators.required],
+      'lastName': ['', Validators.required],
       'email': ['', Validators.email],
+      'password': ['', Validators.required],
       'title': ['', Validators.required],
-      'tier': ['', Validators.required],
+      'role': ['', Validators.required],
     });
   }
 
@@ -70,15 +74,12 @@ export class TrainersComponent implements OnInit, OnDestroy {
    * adds a new trainer to the database
    * @param modal: modal from create trainer form
    */
-  addTrainer(modal: Trainer) {
-    this.newTrainer = modal;
-    console.log(modal);
-    console.log(modal.name);
+  addTrainer(modal: NgForm) {
+    this.newTrainer = modal.value;
+    this.newTrainer.role = this.roleMapping(modal.value.role);
     this.trainerService.create(this.newTrainer).subscribe((resp) => {
-      this.trainerService.fetchAll();
+      this.ngOnInit();
     });
-    // this.trainers.push(this.newTrainer);
-    this.initFormControl();
   }
 
   open(content) {
@@ -90,25 +91,47 @@ export class TrainersComponent implements OnInit, OnDestroy {
    * @param content: modal form
    * @param modalTrainer: trainer belong to this modal
    */
-  editTrainer(content, modalTrainer: Trainer) {
+  editTrainer(content, modalTrainer: HydraTrainer) {
     this.currEditTrainer = modalTrainer;
-    this.newTier = modalTrainer.tier;
+    this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
     this.rForm = this.fb.group({
-      'name': [this.currEditTrainer.name, Validators.required],
+      'firstName': [this.currEditTrainer.firstName, Validators.required],
+      'lastName': [this.currEditTrainer.lastName, Validators.required],
       'email': [this.currEditTrainer.email, Validators.email],
       'title': [this.newTitle, Validators.required],
-      'tier': [this.newTier, Validators.required],
+      'role': [this.newRole.role, Validators.required],
     });
     this.modalService.open(content, { size: 'lg' });
   }
 
   /**
-   * Tier was changed, update with new value
-   * @param newTier: tier string
+   * Show modal for deactivating a trainer
+   * @param content
    */
-  tierChange(newTier) {
-    this.newTier = newTier;
+  showModal(content) {
+    this.modalService.open(content);
+  }
+
+  /**
+   * Method to deactivate trainer. Set the role to INACTIVE.
+   * Then call a put in http to update on the database.
+   * see the inactivate then wait before refreshing the list.
+   * @param trainer
+   */
+  deactivateTrainer(trainer: HydraTrainer) {
+    trainer.role.role = 'INACTIVE';
+    this.trainerService.makeInactive(trainer).subscribe((resp) => {
+      setTimeout(() => { this.ngOnInit(); }, 1000);
+    });
+  }
+
+  /**
+   * Role was changed, update with new value
+   * @param newRole: Role string
+   */
+  roleChange(newRole) {
+    this.newRole = newRole;
   }
 
   /**
@@ -124,8 +147,8 @@ export class TrainersComponent implements OnInit, OnDestroy {
     }
   }
 
-  newTierChange(newTier) {
-    this.model.tier = newTier;
+  newRoleChange(newRole) {
+    this.model.role = newRole;
   }
 
   newTitleChange(newTitle) {
@@ -141,23 +164,31 @@ export class TrainersComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * This helpper function mapps a role string into the correct UserRole object
+   * @param role
+   */
+  roleMapping(role: string): UserRole {
+    for (let index = 0; index < this.userRoles.length; index++) {
+      if (role === this.userRoles[index].role) {
+        return this.userRoles[index];
+      }
+    }
+  }
+
+  /**
    * update the fields in currently edited trainer
    * and send update request
    * @param modal: modal value with all the fields
    */
-  updateTrainer(modal) {
-    // replacing the trainer's fields with the new ones
-    const temp = new Trainer();
-    temp.trainerId = this.currEditTrainer.trainerId;
-    temp.tier = this.newTier;
-    temp.title = this.newTitle;
-    temp.name = modal.name;
-    temp.email = modal.email;
-    // call trainerService to update
-    this.trainerService.update(temp).subscribe((resp) => {
-      this.currEditTrainer = temp;
-      this.trainerService.fetchAll();
+  updateTrainer(modal: NgForm) {
+    const updateTrainer: HydraTrainer = modal.value;
+    updateTrainer.userId = this.currEditTrainer.userId;
+    updateTrainer.role = this.roleMapping(modal.value.role);
+    this.trainerService.update(updateTrainer).subscribe((resp) => {
+      this.currEditTrainer = updateTrainer;
+      this.ngOnInit();
     });
+
   }
   /**
    * get the cause for modal dismissal
@@ -181,9 +212,6 @@ export class TrainersComponent implements OnInit, OnDestroy {
    *
    * @memberof TrainersComponent
    */
-  ngOnDestroy() {
-    this.trainerSubscription.unsubscribe();
-  }
 
   /**
    * set current trainer to clicked  trainer and navigates to trainer profile page

@@ -2,14 +2,17 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-const context = 'https://dev-caliber.revature.tech/';
+const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000';
 const bam = 'http://18.219.59.193:9001/api/v2';
 export const environment = {
   production: false,
-  hydraContext: 'https://virtserver.swaggerhub.com/blake2/Hydra/1.0.0/',
+  gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000',
   context: context, // change for what the production environment would actually be
   bam: bam,
   url: 'http://localhost:8085/',
+  msurl: 'http://34.227.178.103:',
+  assets: 'http://52.87.205.55:8086/angular/assets/',
+
   assessment: {
     fetchByBatchIdByWeek: (batchId: number, week: number) => `${context}trainer/assessment/${batchId}/${week}`,
     save: () => `${context}trainer/assessment/create`,
@@ -18,11 +21,12 @@ export const environment = {
   },
 
   batch: {
-    fetchAllByTrainer: () => `${context}trainer/batch/all`,
-    fetchAll: () => `${context}vp/batch/all`,
-    save: () => `${context}all/batch/create`,
-    update: () => `${context}all/batch/update`,
-    delete: (batchId) => `${context}all/batch/delete/${batchId}`,
+    fetchAllByTrainer: () => `${context}/batches/trainers`,
+    fetchAllByTrainerId: (id: number) => `${context}/batches/trainers/${id}`,
+    fetchAll: () => `${context}/batches`,
+    save: () => `${context}/batches`,
+    update: () => `${context}/batches`,
+    delete: (batchId) => `${context}/batches/${batchId}`
   },
 
   category: {
@@ -71,7 +75,31 @@ export const environment = {
   },
 
   skill: {
-    fetchAll: () => `${context}types/skill/all`,
+    findAll: () => `${context}/skill`,
+    findByName: (name) => `${context}/skill/name/${name}`,
+    findById: (id) => `${context}/skill/${id}`,
+    findAllActive: () => `${context}/skill/active`,
+    save: () => `${context}/skill`,
+    updateByName: (name) => `${context}/skill/name/${name}`,
+    updateById: (id) => `${context}/skill/${id}`,
+    delete: (id) => `${context}/skill/${id}`,
+    deleteByName: (name) => `${context}/skill/name/${name}`
+  },
+
+  skillType: {
+    find: (id) => `${context}/skillType/${id}`,
+    findByName: (name) => `${context}/skillType/name/${name}`,
+    findAll: () => `${context}/skillType`,
+    findAllActive: () => `${context}/skillType/active`,
+    findAllSkills: () => `${context}/skillType/skill`,
+    save: () => `${context}/skillType`,
+    saveSkill: (skillTypeId, skillId) => `${context}/skillType/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) =>
+    `${context}/skillType/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id) => `${context}/skillType/${id}`,
+    updateByName: (name) => `${context}/skillType/name/${name}`,
+    delete: (id) => `${context}/skillType/${id}`,
+    deleteByName: (name) => `${context}/skillType/name/${name}`
   },
 
   trainee: {
@@ -79,10 +107,12 @@ export const environment = {
     save: () => `${context}all/trainee/create`,
     update: () => `${context}all/trainee/update`,
     delete: (traineeId: number) => `${context}all/trainee/delete/${traineeId}`,
+    fetchDroppedByBatch: (batchId: number) => `${context}all/trainee/`
   },
 
   trainer: {
     fetchByEmail: (email: string) => `${context}training/trainer/byemail/${email}`,
+    fetchById: (id: number) => `${context}/trainers/${id}`,
     fetchAll: () => `${context}all/trainer/all`,
     save: () => `${context}vp/trainer/create`,
     update: () => `${context}vp/trainer/update`,

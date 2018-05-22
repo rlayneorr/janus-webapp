@@ -9,6 +9,7 @@ import { AssignForceComponent } from './assign-force.component';
 import { NavComponent } from '../../nav/nav.component';
 import { NavModule } from '../../nav/nav.module';
 import { CommonModule } from '@angular/common';
+import { LocationService } from '../../hydra-client/services/location/location.service';
 
 
 
@@ -23,6 +24,8 @@ import { CommonModule } from '@angular/common';
   declarations: [
     AssignForceComponent,
   ],
-  providers: []
+  providers: [
+    LocationService
+  ]
 })
 export class AssignForceModule { }

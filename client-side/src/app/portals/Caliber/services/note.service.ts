@@ -12,33 +12,34 @@ import { AlertsService } from './alerts.service';
 
 // entities
 import { Note } from '../entities/Note';
-import { Trainee } from '../entities/Trainee';
-import { Batch } from '../entities/Batch';
-import { urls } from './urls';
+import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { environment } from '../../../../environments/environment';
+
+const context = environment.note;
 
 /**
-* this service manages calls to the web services
-* for Note objects
-*/
+ * This service manages calls to the web services
+ * for Note objects
+ */
 @Injectable()
 export class NoteService {
 
   /*
-  * holds list of notes for one trainee
-  */
+   * Holds list of notes for one trainee
+   */
   private listSubject = new BehaviorSubject<Note[]>([]);
   private traineeListSubject: BehaviorSubject<Note[]>;
 
   constructor(private httpClient: HttpClient, alertService: AlertsService) {
-
     this.traineeListSubject = new BehaviorSubject([]);
   }
 
   /**
-  * returns the Trainee specific list of notes
-  * in an observable
-  * @return Observalbe<Note[]>
-  */
+   * Returns the Trainee specific list of notes
+   * in an observable
+   * @return Observalbe<Note[]>
+   */
   public getTraineeList(): Observable<Note[]> {
     return this.traineeListSubject.asObservable();
   }
@@ -50,14 +51,14 @@ export class NoteService {
    =====================
    BEGIN: API calls
    =====================
- */
+   */
 
   /**
-   * retrieves all notes associated with the passed
+   * Retrieves all notes associated with the passed
    * batch ID and week number and pushes the results
    * on the listSubject
    *
-   * delegates the call to 4 separate Note API hooks for:
+   * Delegates the call to 4 separate Note API hooks for:
    * -> batch notes entered by trainer
    * -> trainee notes enetered by trainer
    * -> batch notes enetered by quality control
@@ -76,36 +77,32 @@ export class NoteService {
     let results: Note[] = [];
 
     Observable.merge($nonQcbatchNotes, $nonQctraineeNotes, $qcBatchNotes, $qcTraineeNotes)
-      .subscribe((notes) => {
-        results = results.concat(notes); // merge all results into one array
-      },
-      (error) => {
-      }, // errors are already sent to the console in the SpringInterceptor
-      () => {
-        this.listSubject.next(results); // send the merged results
-      }
+      .subscribe(
+        (notes) => {results = results.concat(notes); }, // merge all results into one array
+        (error) => {}, // errors are already sent to the console in the SpringInterceptor
+        () => {this.listSubject.next(results); } // send the merged results
       );
   }
 
 
   /**
-  * retrieves all quality control Batch notes associated with
-  * the passed batch ID and week number and returns an observable
-  * which holds the array of notes found
-  *
-  * @param batchId: number
-  * @param week: number
-  *
-  * @return Observable<Note[]>
-  */
+   * Retrieves all quality control Batch notes associated with
+   * the passed batch ID and week number and returns an observable
+   * which holds the array of notes found
+   *
+   * @param batchId: number
+   * @param week: number
+   *
+   * @return Observable<Note[]>
+   */
   public fetchQcBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = urls.note.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
+    const url = context.fetchQcBatchNotesByBatchIdByWeek(batchId, week);
 
     return this.httpClient.get<Note[]>(url);
   }
 
   /**
-   * retrieves all quality control Trainee notes associated with
+   * Retrieves all quality control Trainee notes associated with
    * the passed batch ID and week number and returns an observable
    * which holds the array of notes found
    *
@@ -115,13 +112,13 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchQcTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = urls.note.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
+    const url = context.fetchQcTraineeNotesByBatchIdByWeek(batchId, week);
 
     return this.httpClient.get<Note[]>(url);
   }
 
   /**
-   * retrieves all trainer entered Batch notes associated with
+   * Retrieves all trainer entered Batch notes associated with
    * the passed batch ID and week number and returns an observable
    * which holds the array of notes found
    *
@@ -131,13 +128,13 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchBatchNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = urls.note.fetchBatchNotesByBatchIdByWeek(batchId, week);
+    const url = context.fetchBatchNotesByBatchIdByWeek(batchId, week);
 
     return this.httpClient.get<Note[]>(url);
   }
 
   /**
-   * retrieves all trainer entered Trainee notes associated with
+   * Retrieves all trainer entered Trainee notes associated with
    * the passed batch ID and week number and returns an observable
    * which holds the array of notes found
    *
@@ -147,32 +144,28 @@ export class NoteService {
    * @return Observable<Note[]>
    */
   public fetchTraineeNotesByBatchIdByWeek(batchId: number, week: number): Observable<Note[]> {
-    const url = urls.note.fetchTraineeNotesByBatchIdByWeek(batchId, week);
+    const url = context.fetchTraineeNotesByBatchIdByWeek(batchId, week);
 
     return this.httpClient.get<Note[]>(url);
   }
 
   /**
-  * retrieves all notes associated with the passed
+  * Retrieves all notes associated with the passed
   * trainee and pushes the results on the listSubject
   *
   * @param trainee: Trainee
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchByTrainee(trainee: Trainee): void {
+  public fetchByTrainee(trainee: HydraTrainee): void {
     const $trainingNotes = this.fetchTrainingNotesByTrainee(trainee);
     const $qcNotes = this.fetchQcNotesByTrainee(trainee);
     let results: Note[] = [];
-
-    Observable.merge($trainingNotes, $qcNotes)
-      .subscribe((notes) => {
-        results = results.concat(notes);
-      }, (error) => {
-      }, // errors are already sent to the console in the SpringInterceptor
-      () => {
-        this.traineeListSubject.next(results); // send the merged results
-      });
+    Observable.merge($trainingNotes, $qcNotes).subscribe(
+      (notes) => {results = results.concat(notes); },
+      (error) => {}, // errors are already sent to the console in the SpringInterceptor
+      () => {this.traineeListSubject.next(results); } // send the merged results
+    );
   }
 
   /**
@@ -183,8 +176,8 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchTrainingNotesByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = urls.note.fetchTrainingNotesByTrainee(trainee.traineeId);
+  public fetchTrainingNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
+    const url = context.fetchTrainingNotesByTrainee(trainee.traineeId);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -197,8 +190,8 @@ export class NoteService {
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
-  public fetchQcNotesByTrainee(trainee: Trainee): Observable<Note[]> {
-    const url = urls.note.fetchQcNotesByTrainee(trainee.traineeId);
+  public fetchQcNotesByTrainee(trainee: HydraTrainee): Observable<Note[]> {
+    const url = context.fetchQcNotesByTrainee(trainee.traineeId);
 
     return this.httpClient.get<Note[]>(url);
   }
@@ -213,12 +206,11 @@ export class NoteService {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public update(note: Note): void {
-    const url = urls.note.update();
+    const url = context.update();
     const messages = {
       success: 'Note updated successfully',
-      error: 'Note update failed',
+      error: 'Note update failed'
     };
-
     this.httpClient.post(url, note).subscribe(); // yes, the API implemented this as a POST method: @see EvaluationController
   }
 
@@ -235,7 +227,7 @@ export class NoteService {
   }
 
   /**
-   * transmits a note to be saved and pushes the
+   * Transmits a note to be saved and pushes the
    * saved note on the savedSubject
    *
    * @param note: Note
@@ -243,13 +235,11 @@ export class NoteService {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
    */
   public save(note: Note): void {
-    const url = urls.note.save();
+    const url = context.save();
     const messages = {
       success: 'Note saved successfully',
-
-      error: 'Note save failed',
+      error: 'Note save failed'
     };
-
     this.httpClient.post(url, note).subscribe();
   }
 
@@ -259,8 +249,8 @@ export class NoteService {
 * @param batch: Batch
 * @param note: Note
 */
-  public getAllQCTraineeNotes(batch: Batch, note: Note): void {
-    const url = urls.note.getAllQCTraineeNotes(batch.batchId, note.week);
+  public getAllQCTraineeNotes(batch: HydraBatch, note: Note): void {
+    const url = context.getAllQCTraineeNotes(batch.batchId, note.week);
 
     this.listSubject.next([]);
 
@@ -276,8 +266,8 @@ export class NoteService {
   * @param note: Note
  */
 
-  public findQCBatchNotes(batch: Batch, note: Note): void {
-    const url = urls.note.findQCBatchNotes(batch.batchId, note.week);
+  public findQCBatchNotes(batch: HydraBatch, note: Note): void {
+    const url = context.findQCBatchNotes(batch.batchId, note.week);
 
     this.listSubject.next([]);
 

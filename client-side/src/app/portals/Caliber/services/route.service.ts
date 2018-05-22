@@ -9,9 +9,8 @@ import { Observable } from 'rxjs/Observable';
 // components
 import { CaliberComponent } from '../caliber.component';
 
-
 /**
- * this class converts the contents of the Routes array
+ * This class converts the contents of the Routes array
  * into a stack of observables that can be subscribed to
  * in order to recieve routes from various percepctives
  *
@@ -33,11 +32,10 @@ export class RouteService {
   private rootNode: string;
 
   /**
-   * delegates bootstraping to the initialize function
+   * Delegates bootstrapping to the initialize function
    */
   constructor() {
     this.rootNode = '/Caliber';
-
     this.initialize();
   }
 
@@ -61,8 +59,8 @@ export class RouteService {
     return this.allWithData.asObservable();
   }
 
-   /**
-   * returns a BehaviorObservable of all
+  /**
+   * Returns a BehaviorObservable of all
    * defined routes with a "data.title" property
    *
    * @return Observable<Routes>
@@ -71,8 +69,8 @@ export class RouteService {
     return this.allWithTitles.asObservable();
   }
 
-   /**
-   * returns a BehaviorObservable of all
+  /**
+   * Returns a BehaviorObservable of all
    * defined routes with a "data.title" property
    * AND a "data.position" property
    *
@@ -83,7 +81,7 @@ export class RouteService {
   }
 
   /**
-   * returns a BehaviorObservable of all
+   * Returns a BehaviorObservable of all
    * defined routes with the following properties:
    * - data
    * - data.title
@@ -96,17 +94,15 @@ export class RouteService {
   }
 
   /**
-   * retrieves all defined children routes of the
+   * Retrieves all defined children routes of the
    * CaliberComponent and pushed them on the "all" subject
    */
   private fetchAll(): void {
     const root = routes.find((route) => route.component === CaliberComponent);
     const nodes = root.children;
-
     nodes.forEach( (node) => {
       node.path = [ this.rootNode, node.path].join('/');
     });
-
     this.all.next( nodes );
   }
 
@@ -150,14 +146,14 @@ export class RouteService {
     this.initializeSubjects();
     this.initializeSubscriptions();
 
-    /*
-    * begin daisy chain of subscriptions
-    */
+  /*
+   * begin daisy chain of subscriptions
+   */
     this.fetchAll();
   }
 
   /**
-   * initializes Behavior subjects
+   * Initializes Behavior subjects
    */
   private initializeSubjects(): void {
     this.all = new BehaviorSubject([]);
@@ -168,7 +164,7 @@ export class RouteService {
   }
 
   /**
-   * sets up a daisy-chain for subscriptions to
+   * Sets up a daisy-chain for subscriptions to
    * call the "fetch.." functions to populate each
    * subject with it's view of the routes array
    */
@@ -189,5 +185,4 @@ export class RouteService {
       // fetch some other nav
     });
   }
-
 }

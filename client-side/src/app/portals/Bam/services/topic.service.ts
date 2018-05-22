@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
 import { TopicName } from '../models/topicname.model';
+import { UrlService } from '../../../hydra-client/services/urls/url.service';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-type': 'application/json'}),
@@ -11,7 +11,7 @@ const httpOptions = {
 
 @Injectable()
 export class TopicService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private urlService: UrlService) { }
 
   /**
    * Adds a topic to the database.
@@ -19,7 +19,7 @@ export class TopicService {
    * @param name string
    */
   addTopicName(name: string) {
-    return this.http.post<TopicName>(environment.topic.addTopicName(name), httpOptions).map(
+    return this.http.post<TopicName>(this.urlService.topic.addTopicName(name), httpOptions).map(
       data => {
         return data;
       }

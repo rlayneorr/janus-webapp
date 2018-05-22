@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { urls } from './urls';
-
+import { environment } from '../../../../environments/environment';
 
 // Interfaces
 import { Fetch } from '../interfaces/api.interface';
@@ -13,8 +12,10 @@ import { Fetch } from '../interfaces/api.interface';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
+const context = environment.trainingType;
+
 /**
- * manages API calls for TrainingTypes
+ * Manages API calls for TrainingTypes
  */
 @Injectable()
 export class TrainingTypeService implements Fetch<String> {
@@ -32,12 +33,12 @@ export class TrainingTypeService implements Fetch<String> {
   */
 
   /**
-  * retrieves all skills and pushes them on the listSubject
+  * Retrieves all skills and pushes them on the listSubject.
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
   */
   public fetchAll(): Observable<string[]> {
-    this.httpClient.get<string[]>(urls.trainingType.fetchAll()).subscribe(x => this.listSubject.next(x));
+    this.httpClient.get<string[]>(context.fetchAll()).subscribe(x => this.listSubject.next(x));
     return this.listSubject.asObservable();
   }
 

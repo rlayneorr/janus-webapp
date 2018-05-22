@@ -13,19 +13,18 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 
 // services
 import { PanelService } from '../../services/panel.service';
-
-
+import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
 @Component({
   selector: 'app-create-panel',
   templateUrl: './create-panel.component.html',
   styleUrls: ['./create-panel.component.css'],
   encapsulation: ViewEncapsulation.None,  // Use the native Shadow DOM to encapsulate our CSS
-
 })
+
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
-  trainee: Trainee;
+  trainee: HydraTrainee;
   panelForm: FormGroup;
   panelObj: any;
   serializedPanel: any;
@@ -36,7 +35,6 @@ export class CreatePanelComponent implements OnInit {
   modalRef: NgbModalRef;
 
   /**
-   *
    * @param modalService
    * @param searchBar
    * @param fb
@@ -69,14 +67,14 @@ export class CreatePanelComponent implements OnInit {
         format: [''],
         recordingConsent: [''],
         internet: [''],
-        panelRound: [''],
+        panelRound: ['']
       }),
       generalFeedback: this.fb.group({
         associateIntro: [''],
         projectOneDescription: [''],
         projectTwoDescription: [''],
         projectThreeDescription: [''],
-        communicationSkills: [''],
+        communicationSkills: ['']
       }),
       feedback: this.fb.array([]),
       overallFeedback: this.fb.group({
@@ -91,11 +89,11 @@ export class CreatePanelComponent implements OnInit {
   }
 
   /**
-   * creates a new technology feedback
+   * creates a new skill feedback
    */
   initFeedback() {
     return this.fb.group({
-      technology: [''],
+      skill: [''],
       result: [''],
       status: [''],
       comment: ['']
@@ -103,7 +101,7 @@ export class CreatePanelComponent implements OnInit {
   }
 
   /**
-   * deletes the technology feedback
+   * deletes the skill feedback
    * @param i
    */
   deleteFeedback(i) {
@@ -112,7 +110,7 @@ export class CreatePanelComponent implements OnInit {
   }
 
   /**
-   * adds new technology feedback to form array
+   * adds new skill feedback to form array
    */
   addFeedback() {
     const control = <FormArray>this.panelForm.controls['feedback'];

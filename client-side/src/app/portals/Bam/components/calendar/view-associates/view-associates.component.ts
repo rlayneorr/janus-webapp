@@ -23,7 +23,7 @@ export class ViewAssociatesComponent implements OnInit {
   p = 1;
   associateList: BamUser[] = [] ;
   searchTerm: string;
-  order = 'lName';
+  order = 'lastName';
   reverse = false;
   sessionUser: BamUser;
   currentBatch: Batch;
@@ -41,7 +41,6 @@ export class ViewAssociatesComponent implements OnInit {
     this.currentBatch = this.sessionService.getSelectedBatch();
     if (this.currentBatch != null) {
       this.usersService.getUsersInBatch(this.currentBatch.id).subscribe(data => {
-        console.log(data);
         this.associateList = data;
       });
     }

@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Batch } from '../entities/Batch';
 import { NoteService } from '../services/note.service';
-import { BatchService } from '../services/batch.service';
 import { Subscription } from 'rxjs/Subscription';
 
 // pipes
 import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
+import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
+import { BatchService } from '../../../hydra-client/aggregator/services/completebatch.service';
+import { CompleteBatch } from '../../../hydra-client/aggregator/entities/CompleteBatch';
 
 
 @Component({
@@ -17,9 +18,9 @@ import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
 
 export class QualityComponent implements OnInit, OnDestroy {
 
-  batches: Batch[];
+  batches: CompleteBatch[] = [];
 
-  currentBatch: Batch;
+  currentBatch: CompleteBatch;
   currentYear: number;
 
   batchSubscription: Subscription;
@@ -35,7 +36,7 @@ export class QualityComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.batchSubscription = this.batchService.getList()
+    this.batchSubscription = this.batchService.fetchAll()
       .subscribe( (batches) => this.setBatches(batches) );
 
     this.batchService.fetchAll();
@@ -50,13 +51,13 @@ export class QualityComponent implements OnInit, OnDestroy {
   *
   * @param batches: Batch[]
   */
-  private setBatches(batches: Batch[]): void {
+  private setBatches(batches: CompleteBatch[]): void {
     this.batches = batches;
   }
 
 
   public onYearSelect(year: number) {
-    const currentYearBatches: Batch[] = this.batchesByYearPipe.transform(this.batches, year);
+    const currentYearBatches: CompleteBatch[] = this.batchesByYearPipe.transform(this.batches, year);
     this.setCurrentYear(year);
 
     if (currentYearBatches.length > 0) {
@@ -87,7 +88,7 @@ export class QualityComponent implements OnInit, OnDestroy {
     // console.log(currentYear);
   }
 
-  public getBatchesOfCurrentYear(): Batch[] {
+  public getBatchesOfCurrentYear(): CompleteBatch[] {
     return this.batchesByYearPipe.transform(this.batches, this.currentYear);
   }
 
@@ -117,26 +118,27 @@ export class QualityComponent implements OnInit, OnDestroy {
   *
   * @return Batch
   */
-  private createBatch(): Batch {
+  private createBatch(): CompleteBatch {
 
-    return {
-      batchId: 0,
-      resourceId: 0,
-      trainingName: '',
-      trainer: null,
-      coTrainer: null,
-      skillType: '',
-      trainingType: '',
-      startDate: null,
-      endDate: null,
-      location: '',
-      address: null,
-      goodGradeThreshold: 0,
-      borderlineGradeThreshold: 0,
-      trainees: [],
-      weeks: 1,
-      gradedWeeks: 1,
-    };
+    return new CompleteBatch();
+  //   return {
+  //     batchId: 0,
+  //     resourceId: 0,
+  //     trainingName: '',
+  //     trainer: null,
+  //     coTrainer: null,
+  //     skillType: '',
+  //     trainingType: '',
+  //     startDate: null,
+  //     endDate: null,
+  //     location: '',
+  //     address: null,
+  //     goodGradeThreshold: 0,
+  //     borderlineGradeThreshold: 0,
+  //     trainees: [],
+  //     weeks: 1,
+  //     gradedWeeks: 1,
+  //   };
   }
 
 }
