@@ -118,4 +118,9 @@ fdescribe('QuestionComponent', () => {
     component.changeQuesitonStatus(QUESTIONS[0]);
     expect(QUESTIONS[0].isActive).toBe(true);
   });
+
+  it('should edit a question', () => {
+    component.editQuestion(QUESTIONS[0]);
+    expect(component.question).toEqual(QUESTIONS[0]);
+  });
 });
