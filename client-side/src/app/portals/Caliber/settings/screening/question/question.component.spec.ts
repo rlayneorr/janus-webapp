@@ -8,7 +8,7 @@ import { Question } from '../../../entities/Question';
 import { AlertsService } from '../../../services/alerts.service';
 
 import { Tag } from '../entities/Tag';
-import {QUESTIONS} from '../../../services/questions/mock-questions';
+import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 
 /**
    * Last modified by the Avengers
@@ -56,13 +56,12 @@ fdescribe('QuestionComponent', () => {
   // test if it displays Saved successfully
   it('should save successfully',
   inject([AlertsService], (service: AlertsService) => {
-    service.success('Saved successfully');
+    component.savedSuccessfully();
     let msg = '';
     let ty = '';
     service.getMessage().subscribe((s) => {
       ty = s.type;
       msg = s.text;
-      component.savedSuccessfully();
       expect(ty).toEqual('success');
       expect(msg).toEqual('Saved successfully');
     });
@@ -71,28 +70,25 @@ fdescribe('QuestionComponent', () => {
   // test if it display update successfully successfully
   it('should update successfully',
   inject([AlertsService], (srv: AlertsService) => {
-    srv.success('Updated successfully');
+    component.updatedSuccessfully();
     let msgUpdate = '';
     let tyUpdate = '';
     srv.getMessage().subscribe((s) => {
       tyUpdate = s.type;
       msgUpdate = s.text;
-      component.updatedSuccessfully();
       expect(tyUpdate).toEqual('success');
       expect(msgUpdate).toEqual('Updated successfully');
     });
   }));
 
-  // test if it displays unsuccessful message as an error
   it('should display save unsuccessfull error message',
   inject([AlertsService], (srv: AlertsService) => {
-    srv.success('All Fields Must be Filled');
+    component.savedUnsuccessfull();
     let msgUpdate = '';
     let tyUpdate = '';
     srv.getMessage().subscribe((s) => {
       tyUpdate = s.type;
       msgUpdate = s.text;
-      component.savedUnsuccessfull();
       expect(tyUpdate).toEqual('error');
       expect(msgUpdate).toEqual('All Fields Must be Filled');
     });
@@ -114,5 +110,12 @@ fdescribe('QuestionComponent', () => {
       expect(component.getTagIds().length).toBe(0);
       component.addNewTag(t0);
       expect(component.getTagIds().length).toBe(1);
+  });
+
+  it('should change question status', () => {
+    component.changeQuesitonStatus(QUESTIONS[0]);
+    expect(QUESTIONS[0].isActive).toBe(false);
+    component.changeQuesitonStatus(QUESTIONS[0]);
+    expect(QUESTIONS[0].isActive).toBe(true);
   });
 });
