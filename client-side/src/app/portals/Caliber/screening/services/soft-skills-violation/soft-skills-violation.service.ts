@@ -9,10 +9,23 @@ import { MOCK_VIOLATIONS } from '../../mock-data/mock-violations';
 import { UrlUtilService } from '../UrlUtil/url-util.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-/*
-Separate from but related to the Soft Skills service,
-this is used to create / read / delete flags for soft skill violations.
-Each time the screener flags a violation, this service is invoked
+/**
+* Separate from but related to the Soft Skills service,
+* this is used to create / read / delete flags for soft skill violations.
+* Each time the screener flags a violation, this service is invoked
+*
+* Last modified by the Avengers
+*
+* Modified from made endpoints more consistent with
+* the rest of the application.
+*
+* Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+*
+* Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+*
+* Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+*
+* Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
 */
 @Injectable()
 export class SoftSkillsViolationService {
@@ -48,22 +61,22 @@ export class SoftSkillsViolationService {
   }
   */
 
-  // Fake local data for temp use
+  /** Fake local data for temp use */
   getPreviousViolations(screeningID: number): Observable<SoftSkillViolation[]> {
     return this.http.get<SoftSkillViolation[]>(this.getViolationURL + screeningID);
   }
 
 
+  /**
+  * Screener can use a UI element to select multiple types of violation in the same element
+  * (like using checkboxes or toggle switches). In this UI element, there is a single comment box.
+  * Each of these checkboxes / toggle switches are stored in the DB as separate rows, and every time
+  * the method is called, the string within the comment box is duplicated into each row.
+  *
+  * This is why the comment is a single string, but the ViolationType is an array - the comment
+  * will be duplicated across the array.
+  */
   addViolations(newViolations: ViolationType[], comment: string) {
-    /*
-      Screener can use a UI element to select multiple types of violation in the same element
-      (like using checkboxes or toggle switches). In this UI element, there is a single comment box.
-      Each of these checkboxes / toggle switches are stored in the DB as separate rows, and every time
-      the method is called, the string within the comment box is duplicated into each row.
-
-      This is why the comment is a single string, but the ViolationType is an array - the comment
-      will be duplicated across the array.
-    */
     const violationIdArray: number[] = new Array<number>();
     for (let i = 0; i < newViolations.length; i++) {
       violationIdArray[i] = newViolations[i].violationTypeId;
@@ -79,7 +92,7 @@ export class SoftSkillsViolationService {
   }
 
   // Submit a violation with the appropriate comment, screening ID and timestamp.
-  submitViolation(typeID: number, comment: string, screeningID: number ): Observable<SoftSkillViolation[]> {
+  submitViolation(typeID: number, comment: string, screeningID: number): Observable<SoftSkillViolation[]> {
     return this.http.post<any[]>(
       this.addViolationURL,
       {
@@ -92,17 +105,17 @@ export class SoftSkillsViolationService {
     );
   }
 
+  /**
+  * Once the screener has completed the question-asking portion, they are directed
+  * to a new component that allows them to view all flagged violation, add a new violation,
+  * and delete a violation that is listed.
+  *
+  * This method sends the delete request, and it returns an observable because the relevant
+  * template (the html file) uses the async pipe to display the violations. The use of the async
+  * pipe requires the binding of an observable in the template, but allows the template to be changed
+  * in response to a change in the observable. Hence, deleteViolation returns an Observable.
+  */
   deleteViolation(violationID: number): Observable<any[]> {
-    /*
-      Once the screener has completed the question-asking portion, they are directed
-      to a new component that allows them to view all flagged violation, add a new violation,
-      and delete a violation that is listed.
-
-      This method sends the delete request, and it returns an observable because the relevant
-      template (the html file) uses the async pipe to display the violations. The use of the async
-      pipe requires the binding of an observable in the template, but allows the template to be changed
-      in response to a change in the observable. Hence, deleteViolation returns an Observable.
-    */
     return this.http.get<any[]>(this.deleteViolationURL + violationID);
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { HydraBatch } from '../../../../gambit-client/entities/HydraBatch';
+import { BatchGambit } from '../../../../gambit-client/entities/BatchGambit';
 import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 
 @Component({

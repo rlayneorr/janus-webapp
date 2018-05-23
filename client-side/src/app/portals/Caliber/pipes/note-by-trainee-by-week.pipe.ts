@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Note } from '../entities/Note';
-import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
 
 @Pipe({
   name: 'noteByTraineeByWeek'
 })
 export class NoteByTraineeByWeekPipe implements PipeTransform {
 
-  transform(value: Note[], trainee: HydraTrainee, week: number ): Note {
+  transform(value: Note[], trainee: GambitTrainee, week: number ): Note {
 
     const n = value.filter( (note) => {
 

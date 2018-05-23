@@ -3,7 +3,7 @@ import { Dependencies } from '../../caliber.test.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InterviewDetailsComponent } from './interview-details.component';
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
-import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
+import { HydraBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
 import { PanelService } from '../../services/panel.service';
 import { Panel } from '../../entities/Panel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

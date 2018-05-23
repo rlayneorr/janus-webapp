@@ -10,10 +10,10 @@ import { QCStatusService } from '../../services/qcstatus.service';
 // entities
 import { Note } from '../../entities/Note';
 import { ReportingService } from '../../services/reporting.service';
-import { HydraBatch } from '../../../../gambit-client/entities/HydraBatch';
-import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
-import { HydraBatchUtilService } from '../../../../services/gambit-batch-util.service';
-import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
+import { BatchGambit } from '../../../../gambit-client/entities/BatchGambit';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 
 
 
@@ -25,7 +25,7 @@ import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
 
 export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
 
-  @Input() batch: HydraBatch;
+  @Input() batch: BatchGambit;
   @ViewChild('tabSet') tabs: NgbTabset;
 
   public statusList: string[];
@@ -48,9 +48,9 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   constructor(
     private noteService: NoteService,
     private qcStatusService: QCStatusService,
-    private batchService: HydraBatchService,
+    private batchService: GambitBatchService,
     private reportingService: ReportingService,
-    private batchUtil: HydraBatchUtilService
+    private batchUtil: GambitBatchUtilService
 
   ) {
     this.setWeek(1);
@@ -198,7 +198,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   *
   * @return Note
   */
-  private getTraineeNote(trainee: HydraTrainee): Note {
+  private getTraineeNote(trainee: GambitTrainee): Note {
     const notes = this.getTraineeNotes()
       .filter((note) => (note.trainee.traineeId === trainee.traineeId));
 
@@ -338,7 +338,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   * @param batch: Batch
   *
   */
-  private copyBatch(batch: HydraBatch): void {
+  private copyBatch(batch: BatchGambit): void {
     if (this.batch) {
       if (this.batch.batchId === batch.batchId) {
         Object.assign(this.batch, batch);

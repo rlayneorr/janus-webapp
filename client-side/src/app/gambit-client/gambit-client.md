@@ -1,13 +1,13 @@
 ![Revature](https://github.com/pjw6193/caliber/blob/master/images/rev-brand.png)
 ## Janus
 
-What is the Hydra Client?
+What is the Gambit Client?
 
-Hydra Client is an angular module that is used for consuming the Hydra API. Each service is used for consuming resources of a specific type from Hydra.
+Gambit Client is an angular module that is used for consuming the Gambit API. Each service is used for consuming resources of a specific type from Gambit.
 
 ## API Documentation 
 
-You can find the documentation for the Hydra API directly here: [Hydra Documentation](https://github.com/revaturelabs/janus-webapp/wiki/About)
+You can find the documentation for the Gambit API directly here: [Gambit Documentation](https://github.com/revaturelabs/janus-webapp/wiki/About)
 
 ## Services
 

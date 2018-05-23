@@ -16,7 +16,7 @@ import { environment } from '../../../../environments/environment';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
-import { HydraTrainee } from '../../../gambit-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
 
 const context = environment.panel;
 
@@ -57,7 +57,7 @@ export class PanelService implements CRUD<Panel> {
    *
    * @param trainee: Trainee
    */
-  public fetchAllByTrainee(trainee: HydraTrainee): Observable<Panel[]> {
+  public fetchAllByTrainee(trainee: GambitTrainee): Observable<Panel[]> {
     this.http.get<any[]>(context.fetchAllByTrainee(trainee.traineeId)).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }

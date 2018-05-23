@@ -1,4 +1,4 @@
-import { HydraBatch } from '../../../gambit-client/entities/HydraBatch';
+import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
 
 export class Trainee {
     traineeId: number;
@@ -15,5 +15,5 @@ export class Trainee {
     major: string;
     techScreenerName: string;
     projectCompletion: string;
-    batch: HydraBatch;
+    batch: BatchGambit;
 }

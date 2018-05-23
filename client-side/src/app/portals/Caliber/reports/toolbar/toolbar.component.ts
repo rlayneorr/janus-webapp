@@ -13,10 +13,10 @@ import { TrainerService } from '../../services/trainer.service';
 import { GranularityService } from '../services/granularity.service';
 import { PDFService } from '../../services/pdf.service';
 import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { HydraBatchService } from '../../../../gambit-client/services/batch/hydra-batch.service';
-import { HydraBatchUtilService } from '../../../../services/gambit-batch-util.service';
-import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
-import { HydraTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -33,24 +33,24 @@ export class ToolbarComponent implements OnInit {
 
   // Current batch and trainee Object based on selection
   currentBatch: CompleteBatch = new CompleteBatch();
-  currentTrainee: HydraTrainee;
-  currentBatchTrainees: Array<HydraTrainee>;
+  currentTrainee: GambitTrainee;
+  currentBatchTrainees: Array<GambitTrainee>;
 
   // Arrays
   public yearList: Array<number>;              // Contains list of all years from batches
   public batchList: Array<CompleteBatch>;              // Contains list of all batches
   public batchYearList: Array<CompleteBatch>;          // Contains list of all batches based on year selection
   public weekList: Array<number>;              // Contains list of all weeks based on batch selection
-  public traineesList: Array<HydraTrainee>;         // Contains list of all trainees based on batch selection
+  public traineesList: Array<GambitTrainee>;         // Contains list of all trainees based on batch selection
   public traineesListNames: Array<String>;     // Contains list of all trainees names based on batch selection
 
   // Subscriptions
   private batchSubscription: Subscription;
   private trainerSubscription: Subscription;
 
-  constructor(private batchService: HydraBatchService, private traineeService: HydraTraineeService,
+  constructor(private batchService: GambitBatchService, private traineeService: GambitTraineeService,
               private granularityService: GranularityService,
-              private pdfService: PDFService, private batchUtil: HydraBatchUtilService) {
+              private pdfService: PDFService, private batchUtil: GambitBatchUtilService) {
   }
 
   ngOnInit() {
@@ -155,7 +155,7 @@ export class ToolbarComponent implements OnInit {
    */
   createWeeksDropdown(): Array<number> {
     this.weekList = [];
-   // --- we should refactor HydraBatchUtil Service
+   // --- we should refactor GambitBatchUtil Service
     for (let i = 0; i <= this.batchUtil.getWeek(this.currentBatch); i++) {
       this.weekList.push(i);
     }
@@ -167,7 +167,7 @@ export class ToolbarComponent implements OnInit {
   /**
    * Creates and returns an array of all trainees based on batchselection.
    */
-  createTraineesDropdown(): Array<HydraTrainee> {
+  createTraineesDropdown(): Array<GambitTrainee> {
     this.traineesList = [];
     this.traineesListNames = [];
 
@@ -287,7 +287,7 @@ export class ToolbarComponent implements OnInit {
    * Returns Trainee object from ID based on trainee selection.
    * @param traineeId - Trainee ID to search for.
    */
-  getTraineeByIdFromSelection(traineeId: number): HydraTrainee {
+  getTraineeByIdFromSelection(traineeId: number): GambitTrainee {
     for (const trainee of this.traineesList) {
       if (traineeId === trainee.traineeId) {
         return trainee;
@@ -324,8 +324,8 @@ export class ToolbarComponent implements OnInit {
   /**
    * Creates and returns an empty Trainee object with ID of 0.
    */
-  createEmptyTrainee(): HydraTrainee {
-    const emptyTrainee = new HydraTrainee();
+  createEmptyTrainee(): GambitTrainee {
+    const emptyTrainee = new GambitTrainee();
     emptyTrainee.traineeId = 0;
     return emptyTrainee;
   }

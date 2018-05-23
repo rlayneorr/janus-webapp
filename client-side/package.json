@@ -11,7 +11,7 @@
     "test": "ng test --single-run",
     "ciDevBuild": "ng test --single-run --code-coverage --browsers ChromeHeadless && ng build --dev --env=prod --progress --verbose",
     "ciProdBuild": "ng test --single-run --code-coverage -=browsers ChromeHeadless && ng build --prod --env=prod --progress",
-    "hydra-test": "ng test --config.file=hydra.karma.conf.ts",
+    "gambit-test": "ng test --config.file=gambit.karma.conf.ts",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json"
