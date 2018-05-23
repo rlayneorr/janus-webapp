@@ -9,8 +9,7 @@ import { AlertsService } from '../../../services/alerts.service';
 
 import { Tag } from '../entities/Tag';
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
-import { BUCKETS } from '../../../screening/mock-data/mock-buckets';
-import { Bucket } from '../entities/Bucket';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 /**
    * Last modified by the Avengers
@@ -47,6 +46,14 @@ fdescribe('QuestionComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // Test if it opens an modal given a modal id
+  it('should open modal-content', () => {
+    const content = document.querySelector('.modal-content');
+    component.open(content);
+    console.log(document.querySelector('.modal-content'));
+    expect(content).toBeDefined('defined');
+
+  });
   // Test if the question status changes from active to deactive.
   it('should change question status', () => {
     component.changeQuesitonStatus(QUESTIONS[0]);
