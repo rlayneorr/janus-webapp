@@ -34,6 +34,7 @@ module.exports = function (config) {
     browserDisconnectTolerance: 2,
     /** * How long will Karma wait for a message from a browser before disconnecting from it (in ms). */ 
     browserNoActivityTimeout: 50000,
+    webpack: { node: { fs: "empty", } }
   });
   
 };

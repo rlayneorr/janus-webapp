@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { routes } from './assign-force.routes';
@@ -10,6 +9,15 @@ import { NavComponent } from '../../nav/nav.component';
 import { NavModule } from '../../nav/nav.module';
 import { CommonModule } from '@angular/common';
 import { LocationService } from '../../hydra-client/services/location/location.service';
+import { OverviewComponent } from './components/overview/overview.component';
+
+// primeng
+import { PanelModule, GrowlModule } from 'primeng/primeng';
+import { DataTableModule } from 'primeng/primeng';
+import { ProgressBarModule } from 'primeng/primeng';
+import { SplitButtonModule, ButtonModule } from 'primeng/primeng';
+
+import { Ng2CsvModule } from 'ng2csv';
 
 
 
@@ -17,15 +25,23 @@ import { LocationService } from '../../hydra-client/services/location/location.s
   imports: [
     CommonModule,
     HttpModule,
-    NgbModule.forRoot(),
     FormsModule,
     RouterModule.forChild(routes),
+    PanelModule,
+    DataTableModule,
+    ProgressBarModule,
+    SplitButtonModule,
+    ButtonModule,
+    GrowlModule,
+    Ng2CsvModule
   ],
   declarations: [
     AssignForceComponent,
+    OverviewComponent,
   ],
   providers: [
     LocationService
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AssignForceModule { }

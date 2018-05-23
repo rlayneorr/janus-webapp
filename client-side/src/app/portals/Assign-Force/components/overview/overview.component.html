@@ -1,0 +1,37 @@
+<p-growl [(value)]="msgsQ" [immutable]="false" [sticky]="false" [life]="2000"></p-growl>
+<p-panel>
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title">Batch Overview</span>
+      <span [style.float]="'right'">
+          <p-splitButton icon="fa-download" label="Export" [model]="exportOptions"
+          styleClass="ui-button-warning"></p-splitButton>
+          <p-splitButton icon="fa-dot-circle-o" label="All" [model]="filterOptions" (onClick)="filter('all')"
+          styleClass="ui-button-warning"></p-splitButton>
+      </span>
+    </div>
+  </p-header>
+  <p-dataTable [value]="filteredBatches">
+    <p-column field="name" header="Name"></p-column>
+    <p-column field="curriculum" header="Curriculum"></p-column>
+    <p-column field="trainer" header="Trainer"></p-column>
+    <p-column field="cotrainer" header="Cotrainer"></p-column>
+    <p-column field="address" header="Location"></p-column>
+    <p-column field="room" header="Room"></p-column>
+    <p-column header="Start">
+      <ng-template let-batch="rowData" pTemplate="body">
+        {{ batch.startDate | date: 'yyyy-MMM-dd'}}
+      </ng-template>
+    </p-column>
+    <p-column header="End">
+      <ng-template let-batch="rowData" pTemplate="body">
+        {{ batch.endDate | date: 'yyyy-MMM-dd'}}
+      </ng-template>
+    </p-column>
+    <p-column header="Progress">
+        <ng-template let-batch="rowData" pTemplate="body">
+          <p-progressBar [value]="calculateBatchProgress(batch)" [showValue]="false"></p-progressBar>
+        </ng-template>
+      </p-column>
+  </p-dataTable>
+</p-panel>

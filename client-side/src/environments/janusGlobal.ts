@@ -5,7 +5,7 @@ export const janusGlobal = {
   apps: [
     {
       name: 'Assign Force',
-      homeUrl: '/AssignForce/home',
+      homeUrl: '/AssignForce/overview',
       baseUrl: '/AssignForce',
       imgUrl: '../assets/assign-force.png'
     },

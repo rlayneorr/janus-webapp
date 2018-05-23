@@ -39,6 +39,7 @@ import { CurriculumService } from './portals/Track-Force/services/curriculum-ser
 import {InterviewService} from './portals/Track-Force/services/interview-service/interview-service';
 import {MarketStatusService} from './portals/Track-Force/services/market-status/market-status.service';
 import {PlacementService} from './portals/Track-Force/services/placement-service/placement.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 // loading routes from child modules this way will lazy load them
@@ -62,6 +63,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     NgbModule.forRoot(),
     FormsModule,

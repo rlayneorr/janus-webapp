@@ -8,7 +8,6 @@ import { ReportsService } from '../../services/reports.service';
 import { ColorService } from '../../services/colors/color.service';
 
 import { VpPanelGraphComponent } from './vp-panel-graph.component';
-import { HomeComponent } from '../../../Assign-Force/home/home.component';
 
 xdescribe('VpPanelGraphComponent', () => {
   let component: VpPanelGraphComponent;
