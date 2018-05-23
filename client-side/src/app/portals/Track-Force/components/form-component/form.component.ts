@@ -20,7 +20,7 @@ import { User } from '../../models/user.model';
  * Component for viewing an individual associate and editing as admin.
  */
 @Component({
-  selector: 'form-comp',
+  selector: 'app-form-comp',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
