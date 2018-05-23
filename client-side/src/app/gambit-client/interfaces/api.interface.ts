@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-export interface HydraCRUD<T> {
+export interface GambitCRUD<T> {
     fetchAll(object?: any): Observable<T[]>;
     create(object: T): Observable<T>;
     update(object: T): Observable<T>;

@@ -5,10 +5,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { UrlService } from '../urls/url.service';
 import { environment } from '../../../../environments/environment';
-import { HydraTrainer } from '../../entities/HydraTrainer';
+import { GambitTrainer } from '../../entities/GambitTrainer';
 
 xdescribe('TrainerService', () => {
-  const trainer: HydraTrainer = new HydraTrainer();
+  const trainer: GambitTrainer = new GambitTrainer();
   trainer.email = 'hey@stop.it';
   this.context = environment.context;
   beforeEach(() => {
@@ -179,7 +179,7 @@ xdescribe('TrainerService', () => {
     async(
       inject([HttpClient, HttpTestingController, TrainerService],
         (http: HttpClient, backend: HttpTestingController, service: TrainerService) => {
-          service.create(new HydraTrainer).subscribe();
+          service.create(new GambitTrainer).subscribe();
 
           backend.expectOne({
             url: `${this.context}trainers`,

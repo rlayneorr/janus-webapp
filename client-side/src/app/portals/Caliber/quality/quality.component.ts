@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 // pipes
 import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
-import { HydraBatch } from '../../../gambit-client/entities/HydraBatch';
+// import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
 import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
 import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
 

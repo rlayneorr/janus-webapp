@@ -3,13 +3,13 @@ import { TestBed, inject } from '@angular/core/testing';
 import { GranularityService } from './granularity.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
-import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
-import { HydraBatch } from '../../../../gambit-client/entities/HydraBatch';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitBatch } from '../../../../gambit-client/entities/GambitBatch';
 import { Dependencies } from '../../caliber.test.module';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 import { GambitSkillType } from '../../../../gambit-client/entities/GambitSkillType';
-import { HydraTrainer } from '../../../../gambit-client/entities/HydraTrainer';
+import { GambitTrainer } from '../../../../gambit-client/entities/GambitTrainer';
 
 /**
  * Tested by Mythoua Chang
@@ -25,7 +25,7 @@ describe('GranularityService', () => {
 
     it('pushTrainee(mythoua) should set the currentTrainee to true (it`s not null)',
         inject([GranularityService], (service: GranularityService) => {
-        const mythoua = new HydraTrainee;
+        const mythoua = new GambitTrainee;
         mythoua.resourceId = 1;
         mythoua.trainingStatus = 'trainee';
         mythoua.college = 'Augsburg University';
@@ -38,7 +38,7 @@ describe('GranularityService', () => {
     it('pushBatch(batch) should set the the currentBatch to true (it`s not null anymore)',
         inject([GranularityService], (service: GranularityService) => {
         const batch = new CompleteBatch;
-        const john = new HydraTrainer;
+        const john = new GambitTrainer;
         const skill = new GambitSkillType;
         john.userId = 1;
         john.firstName = 'john';

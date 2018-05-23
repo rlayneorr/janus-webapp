@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 /**
  * Utility service that holds the base url for the Zuul gateway.
  * Any component or service that needs to communicate with anything else
- * in the Hydra ecosystem must access Zuul
+ * in the Gambit ecosystem must access Zuul
  * through the URL provided by this service.
  *
  * The primary benefit is that if the Zuul gateway changes,

@@ -9,7 +9,7 @@ import { element } from 'protractor';
 import { ActivatedRoute } from '@angular/router';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { RequestService } from '../../services/request-service/request.service';
-import { HydraTrainee } from '../../../../gambit-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 import { DataScrollerModule } from 'primeng/primeng';
 import { ENGINE_METHOD_DIGESTS } from 'constants';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
@@ -30,7 +30,7 @@ import { User } from '../../models/user.model';
 @AutoUnsubscribe
 export class FormComponent implements OnInit {
   user: User = new User();
-  associate: HydraTrainee = new HydraTrainee();
+  associate: GambitTrainee = new GambitTrainee();
   clients: Client[];
   interviews: any;
   newInterview: any = {
@@ -86,7 +86,7 @@ export class FormComponent implements OnInit {
   getAssociate() {
     this.associateService.getAssociate(this.id).subscribe(
       data => {
-        this.associate = <HydraTrainee>data;
+        this.associate = <GambitTrainee>data;
         this.placementService.getAllPlacementsByAssociateId(data.userId).subscribe(
           cr => {
             this.placementData = cr;
