@@ -9,6 +9,7 @@ import { AlertsService } from '../../../services/alerts.service';
 
 import { Tag } from '../entities/Tag';
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 /**
    * Last modified by the Avengers
