@@ -40,12 +40,20 @@ fdescribe('QuestionComponent', () => {
     fixture.detectChanges();
   });
 
-  // test if the components is created
+  // Test if the components is created.
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // test if the question is set to null after a save
+  // Test if the question status changes from active to deactive.
+  it('should change question status', () => {
+    component.changeQuesitonStatus(QUESTIONS[0]);
+    expect(QUESTIONS[0].isActive).toBe(false);
+    component.changeQuesitonStatus(QUESTIONS[0]);
+    expect(QUESTIONS[0].isActive).toBe(true);
+  });
+
+  // Test if the question is set to null after a save.
   it('should set question to null', () => {
     component.setQuestionNull();
     expect(component.question).toEqual(new Question());
@@ -53,7 +61,31 @@ fdescribe('QuestionComponent', () => {
     expect(component.currentTags.length).toBe(0);
   });
 
-  // test if it displays Saved successfully
+  // Test if the question gets edited or not.
+  it('should edit a question', () => {
+    component.editQuestion(QUESTIONS[0]);
+    expect(component.question).toEqual(QUESTIONS[0]);
+  });
+
+  // Test to check if it adds new tags to the questions
+  it('should add new tags', () => {
+    component.addNewTag(t0);
+    let lastTagIndex = component.currentTags.length - 1;
+    expect(component.currentTags[lastTagIndex]).toEqual(t0);
+    component.addNewTag(t1);
+    lastTagIndex = component.currentTags.length - 1;
+    expect(component.currentTags[lastTagIndex]).toEqual(t1);
+    expect(component.currentTags[lastTagIndex - 1]).toEqual(t0);
+  });
+
+  // Test if gets all the tags in the tag array.
+  it('should return all tags in the tag array', () => {
+    expect(component.getTagIds().length).toBe(0);
+    component.addNewTag(t0);
+    expect(component.getTagIds().length).toBe(1);
+  });
+
+  // Test if it displays Saved successfully.
   it('should save successfully',
   inject([AlertsService], (service: AlertsService) => {
     component.savedSuccessfully();
@@ -67,7 +99,7 @@ fdescribe('QuestionComponent', () => {
     });
   }));
 
-  // test if it display update successfully successfully
+  // Test if it display update successfully successfully.
   it('should update successfully',
   inject([AlertsService], (srv: AlertsService) => {
     component.updatedSuccessfully();
@@ -81,6 +113,7 @@ fdescribe('QuestionComponent', () => {
     });
   }));
 
+  // Test if an error message is sent to the alert service to display.
   it('should display save unsuccessfull error message',
   inject([AlertsService], (srv: AlertsService) => {
     component.savedUnsuccessfull();
@@ -93,34 +126,4 @@ fdescribe('QuestionComponent', () => {
       expect(msgUpdate).toEqual('All Fields Must be Filled');
     });
   }));
-
-  it('should add new tags', () => {
-    component.addNewTag(t0);
-    let lastTagIndex = component.currentTags.length - 1;
-    expect(component.currentTags[lastTagIndex]).toEqual(t0);
-
-    component.addNewTag(t1);
-    lastTagIndex = component.currentTags.length - 1;
-
-    expect(component.currentTags[lastTagIndex]).toEqual(t1);
-    expect(component.currentTags[lastTagIndex - 1]).toEqual(t0);
-  });
-
-  it('should return all tags in the tag array', () => {
-      expect(component.getTagIds().length).toBe(0);
-      component.addNewTag(t0);
-      expect(component.getTagIds().length).toBe(1);
-  });
-
-  it('should change question status', () => {
-    component.changeQuesitonStatus(QUESTIONS[0]);
-    expect(QUESTIONS[0].isActive).toBe(false);
-    component.changeQuesitonStatus(QUESTIONS[0]);
-    expect(QUESTIONS[0].isActive).toBe(true);
-  });
-
-  it('should edit a question', () => {
-    component.editQuestion(QUESTIONS[0]);
-    expect(component.question).toEqual(QUESTIONS[0]);
-  });
 });
