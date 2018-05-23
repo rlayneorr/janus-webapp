@@ -34,7 +34,9 @@ module.exports = function (config) {
     browserDisconnectTolerance: 2,
     /** * How long will Karma wait for a message from a browser before disconnecting from it (in ms). */ 
     browserNoActivityTimeout: 50000,
-    // Fix issue with Cannot resolve 'fs' error when running Karma.
+    /* Fix issue with Cannot resolve 'fs' error when running Karma.
+    * 1803-March-26 Antonio Marrero Bonilla 
+    * Trainer: Wezley Singleton */    
     webpack: { node: { fs: 'empty', } }
   });
   
