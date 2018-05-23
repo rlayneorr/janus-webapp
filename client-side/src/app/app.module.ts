@@ -73,7 +73,6 @@ const routes: Routes = [
     HydraClientModule,
     ToastModule.forRoot(),
     BrowserAnimationsModule
-    
   ],
   declarations: [
     AppComponent,
