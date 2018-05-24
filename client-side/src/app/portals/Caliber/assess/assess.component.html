@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div ngbDropdown class="d-inline-block">
+      <div *ngIf="selectedBatch.trainer" ngbDropdown class="d-inline-block">
         <button class="btn btn-secondary btn-custom b-top-radius f-size" id="dropdownBasic2" ngbDropdownToggle>
           <strong>{{selectedBatch.trainer.firstname}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
         </button>
