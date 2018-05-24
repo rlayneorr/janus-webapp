@@ -1,0 +1,105 @@
+<p-panel>
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title">Settings</span>
+    </div>
+  </p-header>
+  <form [formGroup]="settingsForm" (ngSubmit)="saveSettings(settingsForm.value, settingsForm.valid)" novalidate class="ui-g ui-fluid">
+    <div class="ui-g-6 ui-g-offset-3">
+      <div class="ui-g">
+        <input type="hidden" formControlName="id">
+        <input type="hidden" formControlName="alias">
+        <div class="ui-g-6">
+          <label>Trainers Per Page</label>
+        </div>
+        <div class="ui-g-4">
+          <label class="ui-g-2" [style.textAlign]="'right'">
+            {{ settingsForm.controls.trainersPerPage.value }}
+          </label>
+          <p-slider class="ui-g-10" formControlName="trainersPerPage" [min]="1" [max]="15"></p-slider>
+        </div>
+        <div class="ui-g-6">
+          <label>Trainers Break Days</label>
+        </div>
+        <div class="ui-g-4">
+          <label class="ui-g-2" [style.textAlign]="'right'">
+            {{ settingsForm.controls.trainerBreakDays.value }}
+          </label>
+          <p-slider class="ui-g-10" formControlName="trainerBreakDays" [min]="1" [max]="14"></p-slider>
+        </div>
+        <div class="ui-g-6">
+          <label>Minimum Batch Size</label>
+        </div>
+        <div class="ui-g-4">
+          <label class="ui-g-2" [style.textAlign]="'right'">
+            {{ settingsForm.controls.minBatchSize.value }}
+          </label>
+          <p-slider class="ui-g-10" formControlName="minBatchSize" [min]="15" [max]="25"></p-slider>
+        </div>
+        <div class="ui-g-6">
+          <label>Maximum Batch Size</label>
+        </div>
+        <div class="ui-g-4">
+          <label class="ui-g-2" [style.textAlign]="'right'">
+            {{ settingsForm.controls.maxBatchSize.value }}
+          </label>
+          <p-slider class="ui-g-10" formControlName="maxBatchSize" [min]="25" [max]="35"></p-slider>
+        </div>
+        <div class="ui-g-6">
+          <label>Est. Outgoing Grads</label>
+        </div>
+        <div class="ui-g-4">
+          <label class="ui-g-2" [style.textAlign]="'right'">
+            {{ settingsForm.controls.reportGrads.value }}
+          </label>
+          <p-slider class="ui-g-10" formControlName="reportGrads" [min]="15" [max]="25"></p-slider>
+        </div>
+        <div class="ui-g-6">
+          <label>Est. Incoming Grads</label>
+        </div>
+        <div class="ui-g-4">
+          <label class="ui-g-2" [style.textAlign]="'right'">
+            {{ settingsForm.controls.reportIncomingGrads.value }}
+          </label>
+          <p-slider class="ui-g-10" formControlName="reportIncomingGrads" [min]="25" [max]="35"></p-slider>
+        </div>
+        <div class="ui-g-6">
+          <label>Batch Length in Weeks</label>
+        </div>
+        <div class="ui-g-4">
+          <label class="ui-g-2" [style.textAlign]="'right'">
+            {{ settingsForm.controls.batchLength.value }}
+          </label>
+          <p-slider class="ui-g-10" formControlName="batchLength" [min]="4" [max]="12"></p-slider>
+        </div>
+        <div class="ui-g-6">
+          <label>Default Location</label>
+        </div>
+        <div class="ui-g-4">
+          <p-dropdown [options]="selectItemLocations" placeholder="Select a location" formControlName="defaultLocation"></p-dropdown>
+        </div>
+        <div class="ui-g-6">
+          <label>Default Building</label>
+        </div>
+        <div class="ui-g-4">
+          <p-dropdown [disabled]="!settingsForm.controls.defaultLocation.value" [options]="selectItemBuildings" placeholder="Select a building"
+            formControlName="defaultBuilding"></p-dropdown>
+        </div>
+        <div class="ui-g-6">
+          <label>Default Name Pattern</label>
+        </div>
+        <div class="ui-g-4">
+          <input formControlName="defaultNamePattern" type="text" pInputText>
+        </div>
+      </div>
+      <div class="ui-g ui-g-offset-3">
+        <span class="ui-g-3">
+          <button type="submit" pButton label="Save" icon="fa fa-save" class="ui-button-warning"></button>
+        </span>
+        <span class="ui-g-3">
+          <button type="button" pButton label="Revert" icon="fa fa-undo" class="ui-button-danger" (click)="resetForm()"></button>
+        </span>
+      </div>
+    </div>
+  </form>
+</p-panel>
