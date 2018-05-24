@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Question } from '../../entities/Question';
 import { UrlUtilService } from '../../../Caliber/screening/services/UrlUtil/url-util.service';
+import { environment } from '../../../../../environments/environment';
 
   /**
    * Last modified by the Avengers
@@ -27,7 +28,7 @@ const httpOptions = {
 @Injectable()
 export class QuestionsService {
 
-  constructor(private http: HttpClient, private urlUtilService: UrlUtilService) { }
+  constructor(private http: HttpClient) { }
 
   // Test URL for mock data.
   // url: string="/question/"
@@ -36,7 +37,7 @@ export class QuestionsService {
    *  end point for zuul gateway servie pulled from urlUtilService and question endpoint is appended to it
    *  1803-USF-MAR26
    */
-  private readonly questionEndPoint: string = this.urlUtilService.getBase() + 'question-service/question/';
+  private readonly questionEndPoint: string = environment.gambitContext + 'question-service/question/';
   questions: Question[];
 
   /**

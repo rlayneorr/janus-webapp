@@ -25,7 +25,7 @@ import { Injectable } from '@angular/core';
 export class UrlUtilService {
 
   // base url to get to the zuul gateway
-  readonly zuulEndpoint = 'https://hydra-gateway-service.cfapps.io/';
+  readonly zuulEndpoint = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000/';
 
   constructor() { }
 

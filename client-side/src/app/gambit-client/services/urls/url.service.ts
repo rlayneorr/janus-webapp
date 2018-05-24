@@ -5,6 +5,10 @@ import { environment } from '../../../../environments/environment';
 export class UrlService {
   private context: string;
 
+  constructor() {
+    this.context = environment.gambitContext;
+  }
+
   /**
    * All urls associated with skills will come from this object
    */
@@ -223,7 +227,5 @@ export class UrlService {
     // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
 
-  constructor() {
-    this.context = environment.gambitContext;
-  }
+
 }
