@@ -10,6 +10,7 @@ import { AlertsService } from '../../../services/alerts.service';
 import { Tag } from '../entities/Tag';
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { TagsService } from '../services/tags.service';
 
 /**
    * Last modified by the Avengers
@@ -50,7 +51,6 @@ fdescribe('QuestionComponent', () => {
   it('should open modal-content', () => {
     const content = document.querySelector('.modal-content');
     component.open(content);
-    console.log(document.querySelector('.modal-content'));
     expect(content).toBeDefined('defined');
 
   });
@@ -74,6 +74,12 @@ fdescribe('QuestionComponent', () => {
   it('should edit a question', () => {
     component.editQuestion(QUESTIONS[0]);
     expect(component.question).toEqual(QUESTIONS[0]);
+    inject([TagsService], (ts: TagsService) => {
+      ts.getAllTags().subscribe((s) => {
+        console.log('output to tags service.');
+        console.log(s);
+      });
+    });
   });
 
   // Test to check if it adds new tags to the questions
