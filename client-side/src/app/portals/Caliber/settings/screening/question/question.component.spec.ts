@@ -77,8 +77,8 @@ fdescribe('QuestionComponent', () => {
     expect(component.question).toEqual(QUESTIONS[0]);
     inject([TagsService], (ts: TagsService) => {
       ts.getAllTags().subscribe((s) => {
-        console.log('output to tags service.');
-        console.log(s);
+        // console.log('output to tags service.');
+        // console.log(s);
       });
     });
   });
@@ -142,4 +142,41 @@ fdescribe('QuestionComponent', () => {
       expect(msgUpdate).toEqual('All Fields Must be Filled');
     });
   }));
+
+  // removeTagFromQuestion(Tag)
+  it('should add the selected tag to the all tags array and remove it from the current tags array', () => {
+    component.allTags = [];
+
+    component.currentTags = [];
+    component.currentTags[0] = t0;
+    component.currentTags[1] = t1;
+
+    expect(component.allTags.length).toBe(0);
+    expect(component.currentTags.length).toBe(2);
+
+    component.removeTagFromQuestion(t0);
+
+    expect(component.allTags).toContain(t0);
+    expect(component.currentTags).toContain(t1);
+    expect(component.currentTags.length).toBe(1);
+  });
+
+  // addTagToQuestion(Tag)
+  it('should add the selected tag to the current tags array and remove it from the all tags array', () => {
+    component.allTags = [];
+    component.allTags[0] = t0;
+    component.allTags[1] = t1;
+
+    component.currentTags = [];
+
+    expect(component.currentTags.length).toBe(0);
+    expect(component.allTags.length).toBe(2);
+
+    component.addTagToQuestion(t0);
+
+    expect(component.currentTags).toContain(t0);
+    expect(component.allTags).toContain(t1);
+    expect(component.allTags.length).toBe(1);
+
+  });
 });
