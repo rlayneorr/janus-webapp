@@ -11,6 +11,7 @@ import { Tag } from '../entities/Tag';
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TagsService } from '../services/tags.service';
+import { TAGS } from '../../../screening/mock-data/mock-tags';
 
 /**
    * Last modified by the Avengers
@@ -178,5 +179,24 @@ fdescribe('QuestionComponent', () => {
     expect(component.allTags).toContain(t1);
     expect(component.allTags.length).toBe(1);
 
+  });
+
+  /* resets the current tags array and add new tags to the
+  current tags array */
+  it('should remove tags from all', () => {
+    component.currentTags = [];
+    component.currentTags = TAGS;
+
+    component.newTags = [];
+    component.newTags[0] = t0;
+    component.newTags[1] = t1;
+
+    component.allTags = [];
+
+    expect(component.currentTags.length).toBe(4);
+    component.removeTagsFromAll();
+    expect(component.currentTags.length).toBe(2);
+    expect(component.currentTags).toContain(t0);
+    expect(component.currentTags).toContain(t1);
   });
 });
