@@ -50,7 +50,7 @@ fdescribe('QuestionComponent', () => {
   it('should open modal-content', () => {
     const content = document.querySelector('.modal-content');
     component.open(content);
-    console.log(document.querySelector('.modal-content'));
+    document.querySelector('.modal-content');
     expect(content).toBeDefined('defined');
 
   });
