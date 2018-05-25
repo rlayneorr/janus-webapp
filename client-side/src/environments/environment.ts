@@ -9,13 +9,13 @@
    * cleaned up the mess
    * removed smelly code
    *
-   * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
    *
-   * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+   * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
    *
-   * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
    *
-   * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
 
 const context = 'http://localhost:10000';

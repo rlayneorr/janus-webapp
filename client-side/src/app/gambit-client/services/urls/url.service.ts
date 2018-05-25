@@ -9,6 +9,19 @@ export class UrlService {
     this.context = environment.gambitContext;
   }
 
+  /**
+   * In Alphabatical order MUST continue to keep in Alphabatical order
+   * to make it easier to find what you are looking for.
+   *
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   */
+
   addsubtopics = {
     // getBatchSubtopicsUrl: (batchId: number, pageNumber: number, pageSize: number) =>
     //   `${this.context}/calendar/subtopicspagination/${batchId}/${pageSize}/${pageNumber}`,
@@ -110,6 +123,26 @@ export class UrlService {
     postLocation: () => `${this.context}/locations/`,
     putLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
     deleteLocationById: (locationId: number) => `${this.context}/locations/${locationId}`
+  };
+
+  /**
+   * Endpoints for questions service
+   *
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   */
+  private questionEndPoint = 'question-service/question';
+  question = {
+    postQuestion: () => `${this.context + this.questionEndPoint}/createQuestion`,
+    putQuestion: () => `${this.context + this.questionEndPoint}/updateQuestion`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.context + this.questionEndPoint}/bucketQuestions/${bucketId}`,
+    deactivateQuestion: (questionId: number) => `${this.context + this.questionEndPoint}/deactivateQuestion/${questionId}`,
+    activateQuestion: (questionId: number) => `${this.context + this.questionEndPoint}/activateQuestion/${questionId}`,
   };
 
   /**
@@ -226,6 +259,4 @@ export class UrlService {
     // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
     // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
-
-
 }
