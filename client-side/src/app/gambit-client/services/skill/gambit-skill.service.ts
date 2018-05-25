@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-// rxjs
 import { Observable } from 'rxjs/Observable';
-
-// services
 import { environment } from '../../../../environments/environment';
 
-// entities
 import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
 import { UrlService } from '../urls/url.service';
 
@@ -82,9 +77,9 @@ export class GambitSkillService {
   }
 
   /**
-   * transmits a Skill to be updated.
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
    *
-   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   * Rewrote to map to correct endpoint
    *
    * @param skill: Skill
    */

@@ -75,7 +75,10 @@
     </form>
 </ng-template>
 
-<!-- Edit skill modal -->
+<!-- Edit skill modal 
+     Introduced two way binding for the active checkbox to properly implement two way binding with ngModel
+     @fixer Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+-->
 <ng-template #editSkill let-c="close" let-d="dismiss">
     <form #myForm="ngForm" class="form-control">
         <div class="modal-header" style="background-color: #f1f2f4;">
@@ -100,7 +103,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="editCurrentSkill(myForm); c()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button (click)="editCurrentSkill(); c()" type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
             <button type="button" class="btn btn-default" (click)="c('Close click')">Close</button>
         </div>
     </form>
