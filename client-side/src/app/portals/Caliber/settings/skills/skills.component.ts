@@ -150,4 +150,3 @@ export class SkillsComponent implements OnInit {
     this.modalService.open(content);
   }
 }
-// a comment

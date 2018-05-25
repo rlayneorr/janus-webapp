@@ -130,7 +130,15 @@ export class UrlService {
   /**
    * Endpoints for questions service
    *
-   * @author Avengers
+   * Last modified by the Avengers
+   *
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
   private questionEndPoint = 'question-service/question';
   question = {
@@ -142,10 +150,10 @@ export class UrlService {
   };
 
   /**
- * Endpoints for rooms:
- * This section is being added for use in the location service
- * @author Tanhim Ahmed
- */
+   * Endpoints for rooms:
+   * This section is being added for use in the location service
+   * @author Tanhim Ahmed
+   */
   room = {
     getRoomById: (roomId: number) => `${this.context}/rooms/${roomId}`,
     getAllRooms: () => `${this.context}/rooms/`,
