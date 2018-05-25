@@ -85,7 +85,9 @@ export class SkillsComponent implements OnInit {
    * @memberof SkillsComponent
    */
   editCurrentSkill(nameChange) {
+    console.log(this.currentSkill.isActive + 'current');
     this.skillService.update(this.currentSkill).subscribe((resp) => {
+      console.log(resp.isActive + 'response');
       const idx = this.skills.findIndex(skill => skill.skillID === resp.skillID);
       this.skills[idx] = resp;
     });

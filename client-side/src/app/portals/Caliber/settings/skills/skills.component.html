@@ -95,7 +95,7 @@
                 <div class="form-group col-sm-1 col-md-1">
                     <label for="skillName"><b>Active:</b></label>
                     <br />
-                    <input type="checkbox" name='active' style="text-align: left" (change)="currentSkill.isActive = !currentSkill.isActive" [checked]="true"/>
+                    <input type="checkbox" name='active' style="text-align: left" [(ngModel)]="currentSkill.isActive"/>
                 </div>
             </div>
         </div>
