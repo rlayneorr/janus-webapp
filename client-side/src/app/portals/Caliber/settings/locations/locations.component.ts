@@ -38,7 +38,9 @@ export class LocationsComponent implements OnInit, OnDestroy, OnChanges {
    * clean up subscription
    */
   ngOnDestroy() {
+    if (this.locationSubscription) {
     this.locationSubscription.unsubscribe();
+    }
   }
 
 }
