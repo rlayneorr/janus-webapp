@@ -10,10 +10,11 @@ import { Bucket } from '../entities/Bucket';
   templateUrl: './bucket.component.html',
   styleUrls: ['./bucket.component.css']
 })
-/*
- Bucket component displays and controls interactions with
-an individual bucket, and displays the question list for that bucket.
- Bucket component also contains route to the question component.
+
+/**
+ * Bucket component displays and controls interactions with
+ * an individual bucket, and displays the question list for that bucket.
+ * Bucket component also contains route to the question component.
  */
 export class BucketComponent implements OnInit {
 
@@ -26,26 +27,22 @@ export class BucketComponent implements OnInit {
   }
 
   ngOnInit() {
-
-  this.setBucket();
+    this.setBucket();
   }
 
-  /*
-  setBucket sets bucket in component to bucket passed by bucketService method.
-
+  /**
+   * setBucket sets bucket in component to bucket passed by bucketService method.
    */
   setBucket() {
     this.theBucket = this.bucketService.getCurrentBucket();
   }
 
-  /*
-  routeToBuckets() sends user back to the tabbed page showing Skill Types and Buckets tabs.
-
+  /**
+   * routeToBuckets() sends user back to the tabbed page showing Skill Types and Buckets tabs.
    */
   routeToAllBuckets() {
     this.bucketService.routingToAllBuckets = true;
     this.router.navigate(['Caliber/settings/screening']);
   }
-
 
 }

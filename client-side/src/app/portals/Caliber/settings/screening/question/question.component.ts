@@ -31,21 +31,20 @@ import { AlertsService } from '../../../services/alerts.service';
   ]
 })
 
-
-  /**
-   * Last modified by the Avengers
-   *
-   * unified create and update question so that it sends the
-   * same objects
-   *
-   * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
-   */
+/**
+ * Last modified by the Avengers
+ *
+ * unified create and update question so that it sends the
+ * same objects
+ *
+ * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+ */
 export class QuestionComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private fb: FormBuilder,
@@ -68,8 +67,6 @@ export class QuestionComponent implements OnInit {
   public answersCollapsed = true;
   public tagsCollapsed = true;
   state;
-
-
 
   ngOnInit() {
     this.currentBucket = this.bucketService.getCurrentBucket();
