@@ -12,6 +12,7 @@ import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TagsService } from '../services/tags.service';
 import { TAGS } from '../../../screening/mock-data/mock-tags';
+import { COMMON_DEPRECATED_DIRECTIVES } from '@angular/common/src/directives';
 
 /**
    * Last modified by the Avengers
@@ -83,6 +84,21 @@ fdescribe('QuestionComponent', () => {
       });
     });
   });
+
+  // test for a newTag method to assigned a newTag to the newTagString and resets the new string.
+  it('should make a new tag and reset newTagString', inject([TagsService], (tgs: TagsService) => {
+  component.newTagString = 'test';
+  component.newTag();
+  let newTag = new Tag();
+  newTag.tagName = component.newTagString;
+  if (component.newTagString) {
+  tgs.createNewTag(component.newTagString).subscribe(d => {
+    newTag = (d as Tag);
+    component.currentTags.push(newTag);
+  });
+  }
+  expect(component.newTagString).toBe('');
+}));
 
   // Test to check if it adds new tags to the questions
   it('should add new tags', () => {
