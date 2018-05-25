@@ -31,7 +31,7 @@ export class QualityComponent implements OnInit, OnDestroy {
     private batchesByYearPipe: DisplayBatchByYear
   ) {
     this.setCurrentYear( this.getCalendarYear() );
-    this.currentBatch = this.createBatch();
+    this.currentBatch = new CompleteBatch();
   }
 
   ngOnInit() {
@@ -111,34 +111,6 @@ export class QualityComponent implements OnInit, OnDestroy {
       this.currentBatch = selectedBatches[0];
     }
 
-  }
-
-  /**
-  * creates an empty batch instance
-  *
-  * @return Batch
-  */
-  private createBatch(): CompleteBatch {
-
-    return new CompleteBatch();
-  //   return {
-  //     batchId: 0,
-  //     resourceId: 0,
-  //     trainingName: '',
-  //     trainer: null,
-  //     coTrainer: null,
-  //     skillType: '',
-  //     trainingType: '',
-  //     startDate: null,
-  //     endDate: null,
-  //     location: '',
-  //     address: null,
-  //     goodGradeThreshold: 0,
-  //     borderlineGradeThreshold: 0,
-  //     trainees: [],
-  //     weeks: 1,
-  //     gradedWeeks: 1,
-  //   };
   }
 
 }

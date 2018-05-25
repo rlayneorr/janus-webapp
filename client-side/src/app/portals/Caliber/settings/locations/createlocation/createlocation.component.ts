@@ -13,7 +13,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 })
 export class CreatelocationComponent implements OnInit {
 
-  currNewLocation: Location;
+  currNewLocation: Location = new Location();
   newState: string;
   show: boolean;
   rForm: FormGroup;

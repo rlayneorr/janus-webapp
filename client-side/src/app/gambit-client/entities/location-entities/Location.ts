@@ -19,6 +19,7 @@ export class Location {
     active: boolean;
 
     // this is a constructor //
+    /*
     constructor(locationId: number, street: string, city: string, state: string, zip: string, company: string, active: boolean) {
         this.locationId = locationId;
         this.street = street;
@@ -27,5 +28,5 @@ export class Location {
         this.zip = zip;
         this.company = company;
         this.active = active;
-    }
+    }*/
 }

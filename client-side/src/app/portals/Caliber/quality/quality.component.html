@@ -33,7 +33,7 @@
                             </option>
                         </select> -->
 
-                        <button *ngIf="getBatchesOfCurrentYear().length > 0" (change)="onBatchSelect(currentBatch)" class="btn btn-secondary  btn-custom b-top-radius"
+                        <button *ngIf="(getBatchesOfCurrentYear().length > 0)" (change)="onBatchSelect(currentBatch)" class="btn btn-secondary  btn-custom b-top-radius"
                             id="dropdownBasic2" ngbDropdownToggle>
                             <strong>{{ currentBatch.trainer.name }} - {{ currentBatch.startDate | date:"MM/dd/yy" }}</strong>
                         </button>
@@ -58,8 +58,8 @@
 
     </div>
 
-    <div class="row mt-3">
-        <div class="col">
+    <div *ngIf="currentBatch.trainees" class="row mt-3">
+        <div  class="col">
             <app-quality-feedback *ngIf="currentBatch.trainees.length > 0" [batch]="currentBatch"></app-quality-feedback>
         </div>
     </div>

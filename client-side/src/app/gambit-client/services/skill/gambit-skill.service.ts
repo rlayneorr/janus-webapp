@@ -89,8 +89,7 @@ export class GambitSkillService {
    * @param skill: Skill
    */
   public update(skill: GambitSkill): Observable<GambitSkill> {
-    // const url = environment.skill.updateById(skill.skillID);
-    return this.httpClient.put<GambitSkill>(this.urls.skills.update(), JSON.stringify(skill));
+    return this.httpClient.put<GambitSkill>(this.urls.skills.update() + '/' + skill.skillID, JSON.stringify(skill));
   }
 
   /**

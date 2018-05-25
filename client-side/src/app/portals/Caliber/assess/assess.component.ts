@@ -54,9 +54,11 @@ export class AssessComponent implements OnInit {
   selectedTrainees: GambitTrainee[] = [];
 
   pageOffsetValue;
+
   constructor(private modalService: NgbModal, private batchService: GambitBatchService, private assessmentService: AssessmentService,
     private gradeService: GradeService, private skillService: GambitSkillService, private noteService: NoteService,
-    private fb: FormBuilder, private datePipe: DatePipe, private batchUtil: GambitBatchUtilService) {}
+    private fb: FormBuilder, private datePipe: DatePipe, private batchUtil: GambitBatchUtilService) {
+    }
 
   getPageOffsetHeight(event: ScrollEvent) {
     this.pageOffsetValue = pageYOffset;
