@@ -37,13 +37,13 @@ import { AlertsService } from '../../../services/alerts.service';
  * unified create and update question so that it sends the
  * same objects
  *
- * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+ * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
  *
- * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
  *
- * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+ * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
  *
- * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+ * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
  */
 export class QuestionComponent implements OnInit {
 
