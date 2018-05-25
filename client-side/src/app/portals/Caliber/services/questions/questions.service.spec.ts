@@ -1,13 +1,19 @@
+// Test imports modules
 import { TestBed, inject } from '@angular/core/testing';
+import { HttpTestingController } from '@angular/common/http/testing';
 
-import { QuestionsService } from './questions.service';
+// Entities
 import { Question } from '../../entities/Question';
+
+// Services
+import { QuestionsService } from './questions.service';
+import { UrlUtilService } from '../../screening/services/UrlUtil/url-util.service';
+
+// Modules
 import { HttpClient, HttpHandler, HttpBackend, HttpErrorResponse } from '@angular/common/http';
 import { QUESTIONS, replacementQuestion, expectedQuestion } from './mock-questions';
-import { HttpTestingController } from '@angular/common/http/testing';
 import { Observable } from 'rxjs/Observable';
 import { defer } from 'rxjs/observable/defer';
-import { UrlUtilService } from '../../screening/services/UrlUtil/url-util.service';
 
 export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -18,30 +24,29 @@ export function asyncError<T>(errorObject: any) {
 }
 
 /**
-   * Last modified by the Avengers
-   *
-   * Byron Hall | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
-   *
-   */
+ * Test for methods on the question service.
+ *
+ * @author Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Byron Hall | 1803-USF-MAR26 | Wezley Singleton
+ */
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * This describe block is actually using mock data. It uses the same approach as this example:
  * https://angular.io/guide/testing#testing-http-services
  */
-
-fdescribe('QuestionsService ', () => {
+describe('QuestionsService ', () => {
   const testBucket = -1;
   let httpClientSpyOnGet: { get: jasmine.Spy };
   let httpClientSpyOnPost: { post: jasmine.Spy };
   let httpClientSpyOnPut: {put: jasmine.Spy };
   let questionsService: QuestionsService;
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // see if getBucketQuestions makes an http request
+  /**
+   * See if getBucketQuestions makes an http request
+   *
+   * Function tested: getBucketQuestions()
+   */
   it('getBucketQuestions should return expected questions from bucket #' + testBucket + ' (HttpClient called once)', () => {
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     questionsService = new QuestionsService(<any> httpClientSpyOnGet);
@@ -54,10 +59,15 @@ fdescribe('QuestionsService ', () => {
       questions => expect(questions).toEqual(expectedQuestions, 'expected questions'),
       fail
     );
+
     expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   });
 
-    // see if createNewQuestion makes an http request
+  /**
+   * See if createNewQuestion makes an http request.
+   *
+   * Function tested: createNewQuestion()
+   **/
   it('createNewQuestion should call HttpClient.post, and return the new question', () => {
     httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
     questionsService = new QuestionsService(<any> httpClientSpyOnPost);
@@ -72,7 +82,11 @@ fdescribe('QuestionsService ', () => {
     expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
   });
 
-  // see if updateQuestion makes an http request
+  /**
+   * See if updateQuestion makes an http request.
+   *
+   * Function tested: updatedQuestion()
+   **/
   it('updateQuestion should call HttpClient.post, and return the altered question', () => {
     httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
     questionsService = new QuestionsService(<any> httpClientSpyOnPost);
@@ -87,7 +101,11 @@ fdescribe('QuestionsService ', () => {
     expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
   });
 
-    // see if updateQuestion makes an http request
+  /**
+   * See if updateQuestion makes an http request.
+   *
+   * Function tested: activateQuestion()
+   **/
   it('activateQuestion should call HttpClient.put, and return the activated question', () => {
     httpClientSpyOnPut = jasmine.createSpyObj('http', ['put']);
     questionsService = new QuestionsService(<any> httpClientSpyOnPut);
@@ -102,7 +120,12 @@ fdescribe('QuestionsService ', () => {
     expect(httpClientSpyOnPut.put.calls.count()).toBe(1, 'one call');
   });
 
-  it('dectivateQuestion should call HttpClient.put, and return the activated question', () => {
+  /**
+   * See if deactivateQuestion makes an http request.
+   *
+   * Function tested: deactivateQuestion()
+   */
+  it('deactivateQuestion should call HttpClient.put, and return the activated question', () => {
     httpClientSpyOnPut = jasmine.createSpyObj('http', ['put']);
     questionsService = new QuestionsService(<any> httpClientSpyOnPut);
 
@@ -116,13 +139,21 @@ fdescribe('QuestionsService ', () => {
     expect(httpClientSpyOnPut.put.calls.count()).toBe(1, 'one call');
   });
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  // test error responses
+  /**
+   * Test error responses.
+   *
+   * Function tested: None, just check if it gets an 404 status code error.
+   **/
   const errorResponse = new HttpErrorResponse({
     error: 'test 404 error',
     status: 404, statusText: 'Not Found'
   });
 
+  /**
+   * Test if getBucketQuestions returns an error 404 as a return value.
+   *
+   * Function tested: getBucketQuestions()
+   */
   it('getBucketQuestions should return an error when the server returns a 404', () => {
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     questionsService = new QuestionsService(<any> httpClientSpyOnGet);
@@ -134,6 +165,12 @@ fdescribe('QuestionsService ', () => {
       error  => expect(error.message).toContain('404')
     );
   });
+
+  /**
+   * Check if createNewQuestion return an error when server gives an 404 status code.
+   *
+   * Function tested: createNewQuestion()
+   */
   it('createNewQuestion should return an error when the server returns a 404', () => {
     httpClientSpyOnPost.post.and.returnValue(asyncError(errorResponse));
     questionsService = new QuestionsService(<any> httpClientSpyOnPost);
@@ -143,6 +180,12 @@ fdescribe('QuestionsService ', () => {
       error  => expect(error.message).toContain('404')
     );
   });
+
+  /**
+   * Check if updateQuestion returns error when gets an 404 status code.
+   *
+   * Function tested: updateQuestion()
+   */
   it('updateQuestion should return an error when the server returns a 404', () => {
     httpClientSpyOnPost.post.and.returnValue(asyncError(errorResponse));
     questionsService = new QuestionsService(<any> httpClientSpyOnPost);
@@ -152,6 +195,12 @@ fdescribe('QuestionsService ', () => {
       error  => expect(error.message).toContain('404')
     );
   });
+
+  /**
+   * Check if activateQuestion returns an error when gets an 404 status code.
+   *
+   * Function tested: activateQuestion()
+   */
   it('activateQuestion should return an error when the server returns a 404', () => {
     httpClientSpyOnPut.put.and.returnValue(asyncError(errorResponse));
     questionsService = new QuestionsService(<any> httpClientSpyOnPut);
@@ -161,6 +210,12 @@ fdescribe('QuestionsService ', () => {
       error  => expect(error.message).toContain('404')
     );
   });
+
+  /**
+   * Check if deactivateQuestion returns an error when gets an status code 404.
+   *
+   * Function tested: deactivateQuestion()
+   */
   it('deactivateQuestion should return an error when the server returns a 404', () => {
     httpClientSpyOnPut.put.and.returnValue(asyncError(errorResponse));
     questionsService = new QuestionsService(<any> httpClientSpyOnPut);
