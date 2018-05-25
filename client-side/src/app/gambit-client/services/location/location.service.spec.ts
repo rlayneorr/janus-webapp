@@ -9,6 +9,14 @@ import { Building } from '../../entities/location-entities/Building';
 import { Room } from '../../entities/location-entities/Room';
 import { Unavailability } from '../../entities/location-entities/Unavailability';
 
+/**
+   * Last modified by the Avengers
+   *
+   * Byron Hall | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
+   *
+   */
 
 
 describe('LocationService', () => {
@@ -53,7 +61,7 @@ describe('LocationService', () => {
   it('should create a new location', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Location;
-    service.newLocation(new Location(null, 'new street', 'houston', 'tx', '77066', 'Revature', true)).subscribe((results) => {
+    service.newLocation(new Location()).subscribe((results) => {
 
       data = results;
 
@@ -63,7 +71,7 @@ describe('LocationService', () => {
   it('should update a location', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Location;
-    service.updateLocation(new Location(1, 'update', 'houston', 'tx', '77066', 'Revature', true)).subscribe((results) => {
+    service.updateLocation(new Location()).subscribe((results) => {
 
       data = results;
 
@@ -73,7 +81,7 @@ describe('LocationService', () => {
   it('should set a location as false', async( inject([LocationService], (service: LocationService) => {
     // tslint:disable-next-line:prefer-const
     let data: Location;
-    service.deleteLocation(new Location(2, 'update', 'houston', 'tx', '77066', 'Revature', false)).subscribe((results) => {
+    service.deleteLocation(new Location()).subscribe((results) => {
 
       data = results;
 
