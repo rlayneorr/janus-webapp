@@ -13,6 +13,8 @@ export class UrlService {
    * In Alphabatical order MUST continue to keep in Alphabatical order
    * to make it easier to find what you are looking for.
    *
+   * Last Modified by the Avengers
+   *
    * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
    *
    * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
@@ -128,13 +130,7 @@ export class UrlService {
   /**
    * Endpoints for questions service
    *
-   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   * @author Avengers
    */
   private questionEndPoint = 'question-service/question';
   question = {
