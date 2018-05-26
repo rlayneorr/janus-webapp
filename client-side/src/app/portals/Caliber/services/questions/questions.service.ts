@@ -4,20 +4,18 @@ import { Question } from '../../entities/Question';
 import { UrlUtilService } from '../../../Caliber/screening/services/UrlUtil/url-util.service';
 import { environment } from '../../../../../environments/environment';
 
-  /**
-   * Last modified by the Avengers
-   *
-   * unified create and update question so that it sends the
-   * same objects
-   *
-   * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
-   */
+/**
+  * unified create and update question so that it sends the
+  * same objects
+  *
+  * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+  *
+  * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+  *
+  * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+  *
+  * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+  */
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -30,12 +28,8 @@ export class QuestionsService {
 
   constructor(private http: HttpClient) { }
 
-  // Test URL for mock data.
-  // url: string="/question/"
-
   /**
-   *  end point for zuul gateway servie pulled from urlUtilService and question endpoint is appended to it
-   *  1803-USF-MAR26
+   * refactored to not depend on urlUtil Service
    */
   private readonly questionEndPoint: string = environment.gambitContext + 'question-service/question/';
   questions: Question[];
@@ -61,15 +55,27 @@ export class QuestionsService {
   updateQuestion(question: Question, newTagIds: number[]) {
     return this.http.post(this.questionEndPoint + 'updateQuestion', { question: question, tagIds: newTagIds }, httpOptions);
   }
-  /** deactivates question */
+
+  /**
+   * deactivates question
+   * @param questionId
+  */
   deactivateQuestion(questionId: number) {
     return this.http.put(this.questionEndPoint + 'deactivateQuestion/' + questionId, httpOptions);
   }
-  /** activates question */
+
+  /**
+   * activates question
+   * @param questionId
+  */
   activateQuestion(questionId: number) {
     return this.http.put(this.questionEndPoint + 'activateQuestion/' + questionId, httpOptions);
   }
-  /** gets all questions from bucket */
+
+  /**
+   * gets all questions from bucket
+   * @param buckerId
+  */
   getBucketQuestions(bucketId: number) {
     return this.http.get(this.questionEndPoint + 'bucketQuestions/' + bucketId);
   }

@@ -1,28 +1,40 @@
+// Testing modules
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+
+// Modules
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import { QuestionComponent } from './question.component';
 import { Dependencies } from '../../../caliber.test.module';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-import { Question } from '../../../entities/Question';
-import { AlertsService } from '../../../services/alerts.service';
-
-import { Tag } from '../entities/Tag';
-import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { COMMON_DEPRECATED_DIRECTIVES } from '@angular/common/src/directives';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+
+// Components
+import { QuestionComponent } from './question.component';
+
+// Entities
+import { Question } from '../../../entities/Question';
+import { Tag } from '../entities/Tag';
+
+// Services
+import { AlertsService } from '../../../services/alerts.service';
 import { TagsService } from '../services/tags.service';
+
+// Mock Data
+import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 import { TAGS } from '../../../screening/mock-data/mock-tags';
 
 /**
-   * Last modified by the Avengers
-   *
-   * Byron Hall | 1803-USF-MAR26 | Wezley Singleton
-   *
-   * Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
-   *
-   */
+ * Test for methods on the question component.
+ *
+ * @author Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Byron Hall | 1803-USF-MAR26 | Wezley Singleton
+ **/
 
-fdescribe('QuestionComponent', () => {
+/**
+ * Setting up the testing environment for question component.
+ **/
+describe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
   const t0: Tag = new Tag();
@@ -32,31 +44,50 @@ fdescribe('QuestionComponent', () => {
   t1.tagId = 2;
   t1.tagName = 'HTML';
 
+  /**
+   * Import dependencies and set the TestBed to configure the testing module.
+   **/
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies)
     .compileComponents();
   }), 1440000);
 
+  /**
+   * Set up a fixture to use instead of using testbed. This allows us to use
+   * the question component as an instace of the question component for testing.
+   **/
   beforeEach(() => {
     fixture = TestBed.createComponent(QuestionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  // Test if the components is created.
+  /**
+   * Test if the components is created.
+   *
+   * Function tested: None, just check if the component gets created.
+   **/
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // Test if it opens an modal given a modal id
+  /**
+  * Test if it opens an modal given a modal id.
+  *
+  * Function tested: open()
+  **/
   it('should open modal-content', () => {
     const content = document.querySelector('.modal-content');
     component.open(content);
     document.querySelector('.modal-content');
     expect(content).toBeDefined('defined');
-
   });
-  // Test if the question status changes from active to deactive.
+
+  /**
+  * Test if the question status changes from active to deactive.
+  *
+  * Function tested: changeQuestionStatus()
+  **/
   it('should change question status', () => {
     component.changeQuesitonStatus(QUESTIONS[0]);
     expect(QUESTIONS[0].isActive).toBe(false);
@@ -64,7 +95,11 @@ fdescribe('QuestionComponent', () => {
     expect(QUESTIONS[0].isActive).toBe(true);
   });
 
-  // Test if the question is set to null after a save.
+  /**
+   * Test if the question is set to null after a save.
+   *
+   * Function tested: setQuestionNull()
+   **/
   it('should set question to null', () => {
     component.setQuestionNull();
     expect(component.question).toEqual(new Question());
@@ -72,7 +107,11 @@ fdescribe('QuestionComponent', () => {
     expect(component.currentTags.length).toBe(0);
   });
 
-  // Test if the question gets edited or not.
+  /**
+   * Test if the question gets edited or not.
+   *
+   * Function Tested: editQuestion()
+   **/
   it('should edit a question', () => {
     component.editQuestion(QUESTIONS[0]);
     expect(component.question).toEqual(QUESTIONS[0]);
@@ -84,7 +123,30 @@ fdescribe('QuestionComponent', () => {
     });
   });
 
-  // Test to check if it adds new tags to the questions
+  /**
+   * Test for a newTag method to assigned a newTag to the newTagString and resets the new string.
+   *
+   * Function tested: newTag()
+   **/
+  it('should make a new tag and reset newTagString', inject([TagsService], (tgs: TagsService) => {
+  component.newTagString = 'test';
+  component.newTag();
+  let newTag = new Tag();
+  newTag.tagName = component.newTagString;
+  if (component.newTagString) {
+    tgs.createNewTag(component.newTagString).subscribe(d => {
+      newTag = (d as Tag);
+      component.currentTags.push(newTag);
+    });
+  }
+  expect(component.newTagString).toBe('');
+}));
+
+  /**
+   * Test to check if it adds new tags to the questions.
+   *
+   * Function tested: addNewTag()
+   **/
   it('should add new tags', () => {
     component.addNewTag(t0);
     let lastTagIndex = component.currentTags.length - 1;
@@ -95,14 +157,22 @@ fdescribe('QuestionComponent', () => {
     expect(component.currentTags[lastTagIndex - 1]).toEqual(t0);
   });
 
-  // Test if gets all the tags in the tag array.
+  /**
+   * Test if gets all the tags in the tag array.
+   *
+   * Function tested: getTagIds()
+   **/
   it('should return all tags in the tag array', () => {
     expect(component.getTagIds().length).toBe(0);
     component.addNewTag(t0);
     expect(component.getTagIds().length).toBe(1);
   });
 
-  // Test if it displays Saved successfully.
+  /**
+   * Test if it displays Saved successfully.
+   *
+   * Function tested: savedSuccessfully();
+   **/
   it('should save successfully',
   inject([AlertsService], (service: AlertsService) => {
     component.savedSuccessfully();
@@ -116,7 +186,11 @@ fdescribe('QuestionComponent', () => {
     });
   }));
 
-  // Test if it display update successfully successfully.
+  /**
+   * Test if it display update successfully successfully.
+   *
+   * Function tested: updatedSuccessfully()
+   **/
   it('should update successfully',
   inject([AlertsService], (srv: AlertsService) => {
     component.updatedSuccessfully();
@@ -130,7 +204,11 @@ fdescribe('QuestionComponent', () => {
     });
   }));
 
-  // Test if an error message is sent to the alert service to display.
+  /**
+   * Test if an error message is sent to the alert service to display.
+   *
+   * Function tested: savedUnsuccessfull()
+   **/
   it('should display save unsuccessfull error message',
   inject([AlertsService], (srv: AlertsService) => {
     component.savedUnsuccessfull();
@@ -144,10 +222,13 @@ fdescribe('QuestionComponent', () => {
     });
   }));
 
-  // removeTagFromQuestion(Tag)
+  /**
+   * Test if it adds the selected tag to the tag array and remove it from the current tag array.
+   *
+   * Function tested: RemoveTagFromQuestion(Tag)
+   **/
   it('should add the selected tag to the all tags array and remove it from the current tags array', () => {
     component.allTags = [];
-
     component.currentTags = [];
     component.currentTags[0] = t0;
     component.currentTags[1] = t1;
@@ -162,12 +243,15 @@ fdescribe('QuestionComponent', () => {
     expect(component.currentTags.length).toBe(1);
   });
 
-  // addTagToQuestion(Tag)
+  /**
+   * Check if it adds a tag to the current tag array.
+   *
+   * Function tested: addTagToQuestion(Tag)
+   **/
   it('should add the selected tag to the current tags array and remove it from the all tags array', () => {
     component.allTags = [];
     component.allTags[0] = t0;
     component.allTags[1] = t1;
-
     component.currentTags = [];
 
     expect(component.currentTags.length).toBe(0);
@@ -178,19 +262,20 @@ fdescribe('QuestionComponent', () => {
     expect(component.currentTags).toContain(t0);
     expect(component.allTags).toContain(t1);
     expect(component.allTags.length).toBe(1);
-
   });
 
-  /* resets the current tags array and add new tags to the
-  current tags array */
+  /**
+   * Resets the current tags array and add new tags to the
+   * current tags array.
+   *
+   * Function tested: removeTagsFromAll()
+   **/
   it('should remove tags from all', () => {
     component.currentTags = [];
     component.currentTags = TAGS;
-
     component.newTags = [];
     component.newTags[0] = t0;
     component.newTags[1] = t1;
-
     component.allTags = [];
 
     expect(component.currentTags.length).toBe(4);
@@ -200,3 +285,4 @@ fdescribe('QuestionComponent', () => {
     expect(component.currentTags).toContain(t1);
   });
 });
+

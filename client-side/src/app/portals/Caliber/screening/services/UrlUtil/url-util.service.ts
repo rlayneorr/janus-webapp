@@ -9,15 +9,13 @@ import { Injectable } from '@angular/core';
  * The primary benefit is that if the Zuul gateway changes,
  * only a single line of code needs to be changed in response
  *
- * Last modified by the Avengers
+ * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
  *
- * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+ * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
  *
- * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
  *
- * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
- *
- * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+ * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
  *
  * For consistency added a forward slash to the end of zullEndpoint
  */

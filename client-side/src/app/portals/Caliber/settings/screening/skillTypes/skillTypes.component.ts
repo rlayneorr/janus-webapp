@@ -6,9 +6,8 @@ import { SkillType } from '../entities/SkillType';
 import { SkillTypesService } from '../services/skillTypes.service';
 import { Bucket } from '../entities/Bucket';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
-import {BucketsService} from '../services/buckets.service';
-import {AlertsService} from '../../../services/alerts.service';
-
+import { BucketsService } from '../services/buckets.service';
+import { AlertsService } from '../../../services/alerts.service';
 
 @Component({
   selector: 'app-skill-types',
@@ -22,7 +21,6 @@ import {AlertsService} from '../../../services/alerts.service';
 *
 * @author chanconan
 */
-
 export class SkillTypesComponent implements OnInit {
 
   public skillTypes: any[]= [];

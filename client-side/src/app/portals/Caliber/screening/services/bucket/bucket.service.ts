@@ -13,15 +13,15 @@ import { UrlUtilService } from '../UrlUtil/url-util.service';
  * tags to interview on upon reviewing the candidate's introduction.
  * Last modified by the Avengers
  *
- * Modified from Hydra -> Gambit
+ * Last Modified from Hydra -> Gambit
  *
- * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+ * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
  *
- * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
  *
- * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+ * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
  *
- * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+ * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
  */
 @Injectable()
 export class BucketService {
@@ -32,9 +32,12 @@ export class BucketService {
    * of bucket.
    */
   private ROOT_URL: string = this.urlUtilService.getBase() + 'bucket/';
-  // buckets necessary for conducting screening interview
-  // the buckets contained in filteredBuckets are based on the
-  // skills selected from the candidates skills.
+
+  /**
+   * buckets necessary for conducting screening interview
+   * the buckets contained in filteredBuckets are based on the
+   * skills selected from the candidates skills.
+   */
   private filteredBuckets: Bucket[];
   private allBuckets: Bucket[];
   headers = new HttpHeaders({
@@ -44,13 +47,17 @@ export class BucketService {
   constructor(private httpClient: HttpClient,
     private urlUtilService: UrlUtilService) { }
 
-
-  // Return a mock observable array of buckets (categories)
+  /**
+   * Return a mock observable array of buckets (categories)
+   */
   getBuckets(): Observable<Bucket[]> {
     return of(BUCKETS);
   }
 
-  // Set the filteredBuckets array to the input
+  /**
+   * Set the filteredBuckets array to the input
+   * @param buckets
+   */
   setBuckets(buckets: Bucket[]): void {
     this.filteredBuckets = buckets;
   }
