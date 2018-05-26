@@ -199,9 +199,18 @@ export class QuestionComponent implements OnInit {
    * refactored poorly written by creators from hydra. Future sprint
    * please refactor to seperate into two diffrent methods.
    *
-   * Last Modifed by the Avengers set the bucketId in the question model
+   * Last Modifed to set the bucketId in the question model
    * so that it did not need to be passed individually to the question
    * service.
+   * 
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   * 
    **/
   addNewQuestion() {
     this.tagsService.getAllTags().subscribe(data => {
