@@ -9,15 +9,13 @@ import { HttpClient } from '@angular/common/http';
 /**
 * Service that contains methods related to ViolationType entities
 *
-* last modified by the Avengers
+* @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
 *
-* Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+* @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
 *
-* Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+* @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
 *
-* Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
-*
-* Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+* @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
 *
 * removed forward slash at the start of the screening-service
 * i.e. '/avengers' to 'avengers'

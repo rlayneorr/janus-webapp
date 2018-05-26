@@ -32,8 +32,6 @@ import { AlertsService } from '../../../services/alerts.service';
 })
 
 /**
- * Last modified by the Avengers
- *
  * unified create and update question so that it sends the
  * same objects
  *

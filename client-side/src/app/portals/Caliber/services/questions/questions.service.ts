@@ -5,8 +5,6 @@ import { UrlUtilService } from '../../../Caliber/screening/services/UrlUtil/url-
 import { environment } from '../../../../../environments/environment';
 
 /**
-  * Last modified by the Avengers
-  *
   * unified create and update question so that it sends the
   * same objects
   *
