@@ -9,7 +9,7 @@
  *
  * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
  *
- * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
  *
  * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
  *
