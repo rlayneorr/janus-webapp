@@ -12,13 +12,13 @@ import { ScheduledScreening } from '../../entities/scheduleScreening';
 * A service that contains all functions used for overall screening management
 * and comment submission.
 *
-* Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+* @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
 *
-* Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+* @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
 *
-* Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+* @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
 *
-* Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+* @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
 *
 * removed forward slash at the start of the screening-service
 * i.e. '/avengers' to 'avengers'
