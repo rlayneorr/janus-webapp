@@ -34,7 +34,7 @@ import { TAGS } from '../../../screening/mock-data/mock-tags';
 /**
  * Setting up the testing environment for question component.
  **/
-describe('QuestionComponent', () => {
+fdescribe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
   const t0: Tag = new Tag();
