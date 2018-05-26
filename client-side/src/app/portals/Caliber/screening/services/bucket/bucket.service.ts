@@ -11,8 +11,6 @@ import { UrlUtilService } from '../UrlUtil/url-util.service';
  * Gets / Sets the buckets necessary for conducting the interview.
  * The buckets are chosen when the screener selects
  * tags to interview on upon reviewing the candidate's introduction.
- * Last modified by the Avengers
- *
  * Last Modified from Hydra -> Gambit
  *
  * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
@@ -27,7 +25,7 @@ import { UrlUtilService } from '../UrlUtil/url-util.service';
 export class BucketService {
 
   /**
-   * Last Modified by the Avengers to make endpoint more consistent
+   * Last Modified to make endpoint more consistent
    * through out application by adding a forward slash to the end
    * of bucket.
    */

@@ -4,8 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 /**
- * Last modified by the Avengers
- *
  * cleaned up the mess
  * removed smelly code
  *

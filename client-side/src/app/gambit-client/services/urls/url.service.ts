@@ -128,8 +128,6 @@ export class UrlService {
   /**
    * Endpoints for questions service
    *
-   * Last modified by the Avengers
-   *
    * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
    *
    * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
