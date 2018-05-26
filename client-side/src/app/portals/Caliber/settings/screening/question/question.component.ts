@@ -24,7 +24,6 @@ import { AlertsService } from '../../../services/alerts.service';
       })),
       state('left', style({
         transform: 'translateX(-28%) scaleX(1)'
-
       })),
       transition('center =>left', animate('300ms ease-in')),
     ]),
@@ -113,7 +112,7 @@ export class QuestionComponent implements OnInit {
    * Switches the question sent in as an argument from active to deactive
    * or from deactive to active based on it's current status
    **/
-  changeQuesitonStatus(question) {
+  changeQuestionStatus(question) {
     if (question.isActive) {
       question.isActive = false;
       this.questionService.deactivateQuestion(question.questionId).subscribe();
@@ -315,13 +314,17 @@ export class QuestionComponent implements OnInit {
   addNewTag(newTag: Tag) {
     this.currentTags.push(newTag);
   }
+
   savedSuccessfully() {
     this.alertsService.success('Saved successfully');
   }
+
   updatedSuccessfully() {
     this.alertsService.success('Updated successfully');
   }
+
   savedUnsuccessfull() {
     this.alertsService.error('All Fields Must be Filled');
   }
+
 }
