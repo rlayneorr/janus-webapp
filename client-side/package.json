@@ -77,6 +77,7 @@
     "@types/jquery": "^3.3.1",
     "@types/node": "^6.0.104",
     "codelyzer": "~3.2.0",
+    "compodoc": "0.0.41",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "^1.7.1",

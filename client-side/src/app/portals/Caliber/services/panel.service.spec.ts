@@ -59,7 +59,7 @@ const mockPanel = {panelId: 1, trainee: mockGambitTrainee, panelist: 'Jeffery', 
 
 
 
-fdescribe('PanelService', () => {
+xdescribe('PanelService', () => {
   beforeEach(() => {                      // Before each test, enumerate modules under imports and services under providers
     TestBed.configureTestingModule({
       imports: [ HttpClientModule,
