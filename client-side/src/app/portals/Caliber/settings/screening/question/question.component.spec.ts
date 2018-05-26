@@ -6,11 +6,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Dependencies } from '../../../caliber.test.module';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { COMMON_DEPRECATED_DIRECTIVES } from '@angular/common/src/directives';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 // Components
 import { QuestionComponent } from './question.component';
-
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 // Entities
 import { Question } from '../../../entities/Question';
