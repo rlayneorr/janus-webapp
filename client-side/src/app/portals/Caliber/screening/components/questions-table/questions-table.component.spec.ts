@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QuestionsTableComponent } from './questions-table.component';
 import { FormsModule } from '@angular/forms';
-import { BucketService } from '../../services/bucket/bucket.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { UrlUtilService } from '../../services/UrlUtil/url-util.service';
 import { QuestionService } from '../../services/question/question.service';
