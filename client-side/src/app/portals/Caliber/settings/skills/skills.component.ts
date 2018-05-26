@@ -4,22 +4,20 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-// rxjs
 import { Subscription } from 'rxjs/Subscription';
 
-// services
 import { environment } from '../../../../../environments/environment';
 
-// entities
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { GambitSkill } from '../../../../hydra-client/entities/GambitSkill';
-import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
+import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
+import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
 
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.css']
 })
+
 export class SkillsComponent implements OnInit {
   newSkill: GambitSkill = {
     skillID: 0,
@@ -80,11 +78,12 @@ export class SkillsComponent implements OnInit {
   }
 
   /**
-   * Send call to update active status
-   * @param {any} nameChange
-   * @memberof SkillsComponent
+   * Rewrote to actual work and send correct information.
+   * Responsible for updating a skill on name change or active change
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
    */
-  editCurrentSkill(nameChange) {
+  editCurrentSkill() {
     this.skillService.update(this.currentSkill).subscribe((resp) => {
       const idx = this.skills.findIndex(skill => skill.skillID === resp.skillID);
       this.skills[idx] = resp;
@@ -151,4 +150,3 @@ export class SkillsComponent implements OnInit {
     this.modalService.open(content);
   }
 }
-// a comment

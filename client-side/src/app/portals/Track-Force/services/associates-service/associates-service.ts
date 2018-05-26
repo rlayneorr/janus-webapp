@@ -4,9 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Response } from '@angular/http/';
 import { environment } from '../../../../../environments/environment';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 import { forEach } from '@angular/router/src/utils/collection';
-import { UrlService } from '../../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 /**
  * Service for retrieving and updating data relating to associates.
@@ -87,7 +87,7 @@ export class AssociateService {
      * Update the given associate's status/client
      * @param ids of associates to be updated
      */
-    updateAssociate(trainee: HydraTrainee): Observable<any> {
+    updateAssociate(trainee: GambitTrainee): Observable<any> {
         return this.http.put(this.urlService.trainees.update(), trainee);
     }
 

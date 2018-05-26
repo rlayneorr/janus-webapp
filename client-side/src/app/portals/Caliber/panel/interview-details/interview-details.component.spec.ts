@@ -3,7 +3,7 @@ import { Dependencies } from '../../caliber.test.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InterviewDetailsComponent } from './interview-details.component';
 import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
 import { PanelService } from '../../services/panel.service';
 import { Panel } from '../../entities/Panel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +14,7 @@ import { PanelOverallFeedbackComponent } from '../overall-feedback/panel-overall
 import { TraineeService } from '../../services/trainee.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertsService } from '../../services/alerts.service';
-import { UrlService } from '../../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 import { ApiService } from '../../util/api.service';
 import { BatchService } from '../../services/batch.service';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
@@ -51,7 +51,7 @@ describe('InterviewDetailsComponent', () => {
       ],
       providers: [
         PanelService,
-        HydraBatchService,
+        GambitBatchService,
         PanelSearchbarComponent,
         TraineeService,
         AlertsService,

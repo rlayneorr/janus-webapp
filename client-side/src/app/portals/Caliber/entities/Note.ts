@@ -1,5 +1,5 @@
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
 
 export class Note {
     public static TYPE_QCBATCH = 'QC_BATCH';
@@ -16,8 +16,8 @@ export class Note {
     noteId: number;
     content: string;
     week: number;
-    batch: HydraBatch;
-    trainee: HydraTrainee;
+    batch: BatchGambit;
+    trainee: GambitTrainee;
     maxVisibility: string;
     type: string;
     qcFeedback: boolean;

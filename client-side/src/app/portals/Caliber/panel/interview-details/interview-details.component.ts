@@ -10,8 +10,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 // entities
 import { Panel } from '../../entities/Panel';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import { HydraBatch } from '../../../../hydra-client/entities/HydraBatch';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { BatchGambit } from '../../../../gambit-client/entities/BatchGambit';
 
 // services
 import { BatchService } from '../../services/batch.service';
@@ -25,8 +25,8 @@ import { PanelService } from '../../services/panel.service';
 export class InterviewDetailsComponent implements OnInit, OnDestroy {
 
   traineeSubscription: Subscription;
-  trainee: any; // this should be GambitTrainee/HydraTrainee but the code that was refactored to here was not correct - blake
-  batchList: HydraBatch[];
+  trainee: any; // this should be GambitTrainee/GambitTrainee but the code that was refactored to here was not correct - blake
+  batchList: BatchGambit[];
   panelList: Panel[];
   batchSubscription: Subscription;
   trainingTrack: string;

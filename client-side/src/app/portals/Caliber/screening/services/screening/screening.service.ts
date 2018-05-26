@@ -7,14 +7,26 @@ import { Screening } from '../../entities/screening';
 import { UrlUtilService } from '../UrlUtil/url-util.service';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 
-/*
- * A service that contains all functions used for overall screening management
- * and comment submission.
- */
+
+/**
+* A service that contains all functions used for overall screening management
+* and comment submission.
+*
+* @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+*
+* @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+*
+* @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+*
+* @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+*
+* removed forward slash at the start of the screening-service
+* i.e. '/avengers' to 'avengers'
+*/
 @Injectable()
 export class ScreeningService {
   constructor(private httpClient: HttpClient,
-    private urlUtilService: UrlUtilService) {}
+    private urlUtilService: UrlUtilService) { }
 
   // Need to change to match the backend
   private ROOT_URL: string = this.urlUtilService.getBase();
@@ -43,14 +55,14 @@ export class ScreeningService {
   ): Observable<Number> {
     return this.httpClient
       .post<Number>(
-        this.ROOT_URL + '/screening-service/screening/start',
-        {
-          'scheduledScreening': scheduledScreening.scheduledScreeningId,
-          'beginTime' : beginTime,
-          'trainerId' : trainerId,
-          'skillTypeId' : skillTypeId
-        },
-        { headers: this.headers }
+      this.ROOT_URL + 'screening-service/screening/start',
+      {
+        'scheduledScreening': scheduledScreening.scheduledScreeningId,
+        'beginTime': beginTime,
+        'trainerId': trainerId,
+        'skillTypeId': skillTypeId
+      },
+      { headers: this.headers }
       );
   }
 
@@ -68,15 +80,15 @@ export class ScreeningService {
     } else if (this.softSkillsResult === 'Fail') {
       verdict = 0;
     }
-    this.httpClient.post(this.ROOT_URL + '/screening-service/screening/end',
+    this.httpClient.post(this.ROOT_URL + 'screening-service/screening/end',
       {
-        'status' : 'Completed',
-        'softSkillVerdict' : verdict,
-        'softSkillCommentary' : this.finalSoftSkillComment,
-        'endDateTime' : new Date(),
-        'screeningId' : localStorage.getItem('screeningID'),
-        'scheduledScreeningId' : localStorage.getItem('scheduledScreeningID'),
-        'compositeScore' : this.compositeScore
+        'status': 'Completed',
+        'softSkillVerdict': verdict,
+        'softSkillCommentary': this.finalSoftSkillComment,
+        'endDateTime': new Date(),
+        'screeningId': localStorage.getItem('screeningID'),
+        'scheduledScreeningId': localStorage.getItem('scheduledScreeningID'),
+        'compositeScore': this.compositeScore
       }
     ).subscribe();
   }
@@ -84,9 +96,9 @@ export class ScreeningService {
   // Helper method that converts an input string to a boolean
   convertToBoolean(input: string): boolean | undefined {
     try {
-        return JSON.parse(input);
+      return JSON.parse(input);
     } catch (e) {
-        return undefined;
+      return undefined;
     }
   }
 
@@ -95,8 +107,8 @@ export class ScreeningService {
   // comment - the screener's comment
   submitIntroComment(comment: string) {
     this.httpClient.post<String>(
-      this.ROOT_URL + '/screening-service/screening/introcomment',
-      { traineeId : localStorage.getItem('screeningID'), softSkillCommentary : comment }
+      this.ROOT_URL + 'screening-service/screening/introcomment',
+      { traineeId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
     ).subscribe();
   }
 
@@ -104,8 +116,8 @@ export class ScreeningService {
   // through the Q&A portion.
   submitGeneralComment() {
     this.httpClient.post<String>(
-      this.ROOT_URL + '/screening-service/screening/generalcomment',
-      { comment : this.generalComments, screeningId : localStorage.getItem('screeningID')}
+      this.ROOT_URL + 'screening-service/screening/generalcomment',
+      { comment: this.generalComments, screeningId: localStorage.getItem('screeningID') }
     ).subscribe();
   }
 }

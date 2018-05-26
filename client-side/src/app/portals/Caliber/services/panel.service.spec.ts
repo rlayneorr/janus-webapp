@@ -4,13 +4,13 @@ import { ApiService } from '../util/api.service';
 import { PanelService } from './panel.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from '../../../../environments/environment';
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
-import { User } from '../../../hydra-client/entities/User';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+import { User } from '../../../gambit-client/entities/User';
 
 const context = environment.panel;  // base of the url is at environment.panel
 
-// A HydraAddress is needed for a batch
-const mockHydraAddress = {addressId: 1, street: '123 Fake st.', city: 'Springfield', state: 'Unclear', zipcode: '97070',
+// A GambitAddress is needed for a batch
+const mockGambitAddress = {addressId: 1, street: '123 Fake st.', city: 'Springfield', state: 'Unclear', zipcode: '97070',
       company: 'Revature', active: true};
 
 // A GambitSkillType is needed for a Batch
@@ -30,9 +30,9 @@ const mockTrainerTwo = {userId: 3, firstName: 'John', middleName: 'Unknown', las
       password: 'teh smith', backupPassword: 'the smith', role: mockTrainerRole, mobilePhone: '444-444-4444',
       homePhone: '333-333-3333', token: 'rozencrantz', title: 'Lieutenant'};
 
-// A Batch is needed for a HydraTrainee
+// A Batch is needed for a GambitTrainee
 const mockBatch = {batchId: 1803, resourceId: 2, trainingName: 'cool kids', trainer: mockTrainer, cotrainer: mockTrainerTwo,
-      skillType: mockGambitSkillType, trainingType: 'Lecture', addressId: 1, address: mockHydraAddress, location: 'Springfield',
+      skillType: mockGambitSkillType, trainingType: 'Lecture', addressId: 1, address: mockGambitAddress, location: 'Springfield',
       goodGradeThreshold: 90, borderlineGradeThreshold: 80, startDate: new Date('March 5, 2018 08:35:00'),
       endDate: new Date('May 18, 2018 05:00:00'), week: 10, noteIds: [1, 2], trainees: []};
 
@@ -44,14 +44,14 @@ const mockUser: User = {userId: 1, firstName: 'Confused', middleName: 'ish', las
       password: 'hello', backupPassword: 'world', role: mockUserRole, mobilePhone: '555-555-5555', homePhone: '555-555-5555',
       token: 'asghahrgr'};
 
-// A HydraTrainee is needed for a panel
-const mockHydraTrainee = new HydraTrainee(1, 'Will', 'Joseph', 'Davies', 'wjdavies123@gmail.com', 'hello', 'world',
+// A GambitTrainee is needed for a panel
+const mockGambitTrainee = new GambitTrainee(1, 'Will', 'Joseph', 'Davies', 'wjdavies123@gmail.com', 'hello', 'world',
       mockUserRole, '555-555-5555', '444-444-4444', 'character', 1, 4, 'complete', mockBatch, '444-444-4444', 'wjdavies123',
       'www.revature.com/william', 'Edward Hulse', 'Oregon State University', 'Bachelor of Science', 'Computer Science', 'John', 'yes',
       'patriotic', 'super patriotic', 'very', 'Apple', 'Revature', mockUser);
 
 // A mock panel is needed for each test
-const mockPanel = {panelId: 1, trainee: mockHydraTrainee, panelist: 'Jeffery', interviewDate: new Date('March 5, 2018 08:35:00'),
+const mockPanel = {panelId: 1, trainee: mockGambitTrainee, panelist: 'Jeffery', interviewDate: new Date('March 5, 2018 08:35:00'),
       duration: 'seven', format: 'Interview', internet: 'functional', panelRound: 1, recordingConsent: 'Yes',
       recordingLink: 'record.com/userman', status: 'In Progress', associateIntro: 'Prepare to be amazed',
       projectOneDescription: 'A thing', projectTwoDescription: 'Another Thing', projectThreeDescription: 'A Third Thing',
@@ -59,7 +59,7 @@ const mockPanel = {panelId: 1, trainee: mockHydraTrainee, panelist: 'Jeffery', i
 
 
 
-fdescribe('PanelService', () => {
+xdescribe('PanelService', () => {
   beforeEach(() => {                      // Before each test, enumerate modules under imports and services under providers
     TestBed.configureTestingModule({
       imports: [ HttpClientModule,
@@ -229,11 +229,11 @@ fdescribe('PanelService', () => {
 
 
         const mockPanels = [mockPanel];                                             // Array to be returned in mock response
-        panelService.fetchAllByTrainee(mockHydraTrainee).subscribe((myPanels) => {  // Use function
+        panelService.fetchAllByTrainee(mockGambitTrainee).subscribe((myPanels) => {  // Use function
           expect(myPanels).toEqual(mockPanels);                                     // expect returned value to be the value flushed through
         });
 
-        const mockReq = httpMock.expectOne(context.fetchAllByTrainee(mockHydraTrainee.traineeId)); // initialize mock request
+        const mockReq = httpMock.expectOne(context.fetchAllByTrainee(mockGambitTrainee.traineeId)); // initialize mock request
 
         mockReq.flush(mockPanels);                                                  // mockPanels should be the array returned be response
 

@@ -5,7 +5,7 @@ import { ReportingService } from '../../services/reporting.service';
 import { PDFService } from '../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GranularityService } from '../services/granularity.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 
 
 
@@ -31,7 +31,7 @@ export class WeeklyCumulativeScoreComponent implements OnInit, OnDestroy {
 
 
     public week: number;
-    public trainee: HydraTrainee;
+    public trainee: GambitTrainee;
     public batchId: number;
 
     public chartData: any[] = [];

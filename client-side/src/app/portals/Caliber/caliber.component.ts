@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class CaliberComponent {
   title = 'apps';
+
+  constructor() {}
 }

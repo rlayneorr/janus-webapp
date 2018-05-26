@@ -1,10 +1,10 @@
-import { HydraBatch } from '../../../hydra-client/entities/HydraBatch';
-import { GambitSkill } from '../../../hydra-client/entities/GambitSkill';
+import { GambitBatch } from '../../../gambit-client/entities/GambitBatch';
+import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
 
 export class Assessment {
     assessmentId: number;
     title: string;
-    batch: HydraBatch;
+    batch: GambitBatch;
     rawScore: number;
     type: string;
     week: number;

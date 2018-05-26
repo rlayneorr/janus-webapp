@@ -9,12 +9,12 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 // entities
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 
 // services
 import { TraineeService } from '../../services/trainee.service';
 import { PanelService } from '../../services/panel.service';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
 
 
 @Component({
@@ -25,21 +25,21 @@ import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra
 
 export class PanelSearchbarComponent implements OnInit, OnDestroy {
   name: string;
-  trainee: HydraTrainee;
+  trainee: GambitTrainee;
   batchList;
   traineeList = [];
   traineeNameList: any = [];
   batchSubscription: Subscription;
   closeResult: string;
 
-  protected traineeSubject: BehaviorSubject<HydraTrainee>;
+  protected traineeSubject: BehaviorSubject<GambitTrainee>;
 
   /**
   * Get the necessary services
   * @constructor
   * @param panelService - the PanelService
   */
-  constructor(private traineeService: TraineeService, private batchService: HydraBatchService,
+  constructor(private traineeService: TraineeService, private batchService: GambitBatchService,
     private panelService: PanelService) {
     this.traineeSubject = new BehaviorSubject(this.trainee);
   }
@@ -90,7 +90,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
    *
    * @param trainee
    */
-  setTrainee(trainee: HydraTrainee) {
+  setTrainee(trainee: GambitTrainee) {
     this.trainee = trainee;
     this.panelService.fetchAllByTrainee(trainee);
     this.traineeSubject.next(this.trainee);
@@ -120,7 +120,7 @@ export class PanelSearchbarComponent implements OnInit, OnDestroy {
    * @function getTraineeSubject
    * Retrieves the trainee currently set as the traineeSubject.
    */
-  public getTraineeSubject(): Observable<HydraTrainee> {
+  public getTraineeSubject(): Observable<GambitTrainee> {
     return this.traineeSubject.asObservable();
   }
 

@@ -9,7 +9,7 @@ import { TrainerService } from '../../services/trainer.service';
 import { Observable } from 'rxjs/Observable';
 import { Dependencies } from '../../caliber.test.module';
 import { BatchModalComponent } from './batch-modal.component';
-import { GambitSkillService } from '../../../../hydra-client/services/skill/gambit-skill.service';
+import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
 
 xdescribe('BatchModalComponent', () => {
   let component: BatchModalComponent;

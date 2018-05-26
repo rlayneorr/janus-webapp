@@ -1,13 +1,32 @@
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
+
+/**
+ * Last modified by the Avengers
+ *
+ * cleaned up the mess
+ * removed smelly code
+ *
+ * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+ */
+
 const context = 'http://localhost:10000';
-const bam = 'http://localhost:9001/api/v2';
+
+const bam = '';
+
 export const environment = {
   production: false,
 
-  gambitContext: 'http://localhost:10000',
+  /** Zuul endpoint  */
+  gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000/',
 
   context: context,
   bam: bam,
@@ -99,7 +118,7 @@ export const environment = {
     save: () => `${context}/skillType`,
     saveSkill: (skillTypeId, skillId) => `${context}/skillType/${skillTypeId}/skill/${skillId}`,
     saveSkillByName: (skillTypeName, skillName) =>
-    `${context}/skillType/name/${skillTypeName}/skill/name/${skillName}`,
+      `${context}/skillType/name/${skillTypeName}/skill/name/${skillName}`,
     update: (id) => `${context}/skillType/${id}`,
     updateByName: (name) => `${context}/skillType/name/${name}`,
     delete: (id) => `${context}/skillType/${id}`,
@@ -218,11 +237,11 @@ export const environment = {
   apiPanelBatchAllTrainees: (batchId: Number) =>
     environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`,
 
-    /* Evaluation service API endpoints */
+  /* Evaluation service API endpoints */
   apiFetchAllQCTraineeNotes: (batchId: Number, weekId: Number) =>
-  environment.context + `qc/note/trainee/${batchId}/${weekId}`,
+    environment.context + `qc/note/trainee/${batchId}/${weekId}`,
 
   apiFetchAllQCBatchNotes: (batchId: Number, weekId: Number) =>
-  environment.context + `qc/note/batch/${batchId}/${weekId}`,
+    environment.context + `qc/note/batch/${batchId}/${weekId}`,
 
 };

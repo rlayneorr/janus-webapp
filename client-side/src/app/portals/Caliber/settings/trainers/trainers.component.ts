@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
+import { TrainerService } from '../../../../gambit-client/services/trainer/trainer.service';
+import { GambitTrainer } from '../../../../gambit-client/entities/GambitTrainer';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRole } from '../../../../hydra-client/entities/UserRole';
+import { UserRole } from '../../../../gambit-client/entities/UserRole';
 
 
 @Component({
@@ -16,14 +16,14 @@ import { UserRole } from '../../../../hydra-client/entities/UserRole';
 })
 
 export class TrainersComponent implements OnInit {
-  trainers: HydraTrainer[] = [];
-  filteredTrainers: HydraTrainer[] = [];
+  trainers: GambitTrainer[] = [];
+  filteredTrainers: GambitTrainer[] = [];
   titles: Array<any>;
   userRoles: Array<UserRole>;
-  model = new HydraTrainer();
+  model = new GambitTrainer();
   activeStatus: String;
-  currEditTrainer: HydraTrainer;
-  newTrainer: HydraTrainer;
+  currEditTrainer: GambitTrainer;
+  newTrainer: GambitTrainer;
   newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
@@ -91,7 +91,7 @@ export class TrainersComponent implements OnInit {
    * @param content: modal form
    * @param modalTrainer: trainer belong to this modal
    */
-  editTrainer(content, modalTrainer: HydraTrainer) {
+  editTrainer(content, modalTrainer: GambitTrainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
@@ -119,7 +119,7 @@ export class TrainersComponent implements OnInit {
    * see the inactivate then wait before refreshing the list.
    * @param trainer
    */
-  deactivateTrainer(trainer: HydraTrainer) {
+  deactivateTrainer(trainer: GambitTrainer) {
     trainer.role.role = 'INACTIVE';
     this.trainerService.makeInactive(trainer).subscribe((resp) => {
       setTimeout(() => { this.ngOnInit(); }, 1000);
@@ -181,7 +181,7 @@ export class TrainersComponent implements OnInit {
    * @param modal: modal value with all the fields
    */
   updateTrainer(modal: NgForm) {
-    const updateTrainer: HydraTrainer = modal.value;
+    const updateTrainer: GambitTrainer = modal.value;
     updateTrainer.userId = this.currEditTrainer.userId;
     updateTrainer.role = this.roleMapping(modal.value.role);
     this.trainerService.update(updateTrainer).subscribe((resp) => {

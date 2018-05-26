@@ -1,11 +1,11 @@
-import { HydraTrainee } from '../../../hydra-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
 
 
 // When making merges, please use the version presented by the Revaturions group.
 
 export class Panel {
     panelId: number;
-    trainee: HydraTrainee;
+    trainee: GambitTrainee;
     panelist: any;
     interviewDate: any;
     duration: string;

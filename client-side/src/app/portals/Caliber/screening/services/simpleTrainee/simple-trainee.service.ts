@@ -9,11 +9,27 @@ import { UrlUtilService } from '../UrlUtil/url-util.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 
 /*
-Used to obtain the collection of
-candidates waiting to be screened,
-set the candidate being screened,
-and get the candidate being screened
+
 */
+
+/**
+ * Used to obtain the collection of
+ * candidates waiting to be screened,
+ * set the candidate being screened,
+ * and get the candidate being screened
+ *
+ * Modified from made endpoints more consistent with
+ * the rest of the application.
+ *
+ * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+ */
+
 @Injectable()
 export class SimpleTraineeService {
 
@@ -24,7 +40,7 @@ export class SimpleTraineeService {
   ) { }
 
   // Need to change to match the backend
-  private ROOT_URL: string = this.urlUtilService.getBase() + '/trainee-service';
+  private ROOT_URL: string = this.urlUtilService.getBase() + 'trainee-service/';
 
   selectedCandidate: SimpleTrainee;
 
@@ -43,8 +59,8 @@ export class SimpleTraineeService {
     const allSimpleTrainees: SimpleTrainee[] = [];
     // Get array of skillTypeIds, apply random skillTypeId's to each new SimpleTrainee
     this.skillTypeService.getSkillTypes().subscribe(allSkillTypes => {
-      // Get array of HYDRA simpleTrainees, use info to build array of simpleTrainees
-      this.httpClient.get<any[]>(this.ROOT_URL + '/all/trainee/getAll/').subscribe(allCandidates => {
+      // Get array of GAMBIT simpleTrainees, use info to build array of simpleTrainees
+      this.httpClient.get<any[]>(this.ROOT_URL + 'all/trainee/getAll/').subscribe(allCandidates => {
         console.log(allCandidates);
         for (const e of allCandidates) {
           // Each simpleTrainee get random skillType

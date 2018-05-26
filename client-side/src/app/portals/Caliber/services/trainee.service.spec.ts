@@ -46,7 +46,7 @@ describe('TraineeService', () => {
         location: 'USF', curriculum: 'Microservices', skills: 4,
         trainees: [], notes: 'The Good Ones', batchId: 1803};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
+        const mockGambitTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
         skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
         college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
         projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',
@@ -85,7 +85,7 @@ describe('TraineeService', () => {
         location: 'USF', curriculum: 'Microservices', skills: 4,
         trainees: [], notes: 'The Good Ones', batchId: 1803};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
+        const mockGambitTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
         skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
         college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
         projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',
@@ -119,7 +119,7 @@ describe('TraineeService', () => {
         location: 'USF', curriculum: 'Microservices', skills: 4,
         trainees: [], notes: 'The Good Ones', batchId: 1803};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
+        const mockGambitTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
         skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
         college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
         projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',
@@ -158,7 +158,7 @@ describe('TraineeService', () => {
         location: 'USF', curriculum: 'Microservices', skills: 4,
         trainees: [], notes: 'The Good Ones', batchId: 1803};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
+        const mockGambitTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
         skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
         college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
         projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',
@@ -197,7 +197,7 @@ describe('TraineeService', () => {
         location: 'USF', curriculum: 'Microservices', skills: 4,
         trainees: [], notes: 'The Good Ones', batchId: 1803};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
+        const mockGambitTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
         skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
         college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
         projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',
@@ -236,7 +236,7 @@ describe('TraineeService', () => {
         location: 'USF', curriculum: 'Microservices', skills: 4,
         trainees: [], notes: 'The Good Ones', batchId: 1803};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
+        const mockGambitTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
         skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
         college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
         projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',
@@ -275,7 +275,7 @@ describe('TraineeService', () => {
         location: 'USF', curriculum: 'Microservices', skills: 4,
         trainees: [], notes: 'The Good Ones', batchId: 1803};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
+        const mockGambitTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
         skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
         college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
         projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',
@@ -314,7 +314,7 @@ describe('TraineeService', () => {
         location: 'USF', curriculum: 'Microservices', skills: 4,
         trainees: [], notes: 'The Good Ones', batchId: 1803};
 
-        const mockHydraTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
+        const mockGambitTrainee = {traineeId: 1, resourceId: 1, trainingStatus: 'Good', batch: mockBranch, phoneNumber: '555-555-5555',
         skypeId: 'ConfusedMan', profileUrl: 'http://www.revature.com/confused', recruiterName: 'Edward Hulse',
         college: 'University of Place', degree: 'Bachelor of Science', major: 'Computer Science', techScreenerName: 'hard to pronounce',
         projectCompletion: 'yes', flagStatus: 'yes', flagNotes: 'none', marketingStatus: 'marketable', client: 'JP Morgan Chase',

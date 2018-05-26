@@ -34,6 +34,17 @@ module.exports = function (config) {
     browserDisconnectTolerance: 2,
     /** * How long will Karma wait for a message from a browser before disconnecting from it (in ms). */ 
     browserNoActivityTimeout: 50000,
+    /**
+   * Last modified by the Avengers
+   *
+   * Byron Hall | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
+   * 
+   * Fix issue with Cannot resolve 'fs' error when running Karma
+   *
+   */   
+    webpack: { node: { fs: 'empty', } }
   });
   
 };

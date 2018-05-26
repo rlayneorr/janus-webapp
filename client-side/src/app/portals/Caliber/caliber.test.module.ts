@@ -2,7 +2,7 @@
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // routing
 import { routes } from './caliber.routes';
@@ -68,11 +69,11 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
-import { TrainerService } from '../../hydra-client/services/trainer/trainer.service';
-import { HydraTraineeService } from '../../hydra-client/services/trainee/hydra-trainee.service';
-import { HydraBatchService } from '../../hydra-client/services/batch/hydra-batch.service';
-import { UrlService } from '../../hydra-client/services/urls/url.service';
-import { HydraBatchUtilService } from '../../services/hydra-batch-util.service';
+import { TrainerService } from '../../gambit-client/services/trainer/trainer.service';
+import { GambitTraineeService } from '../../gambit-client/services/trainee/gambit-trainee.service';
+import { GambitBatchService } from '../../gambit-client/services/batch/gambit-batch.service';
+import { UrlService } from '../../gambit-client/services/urls/url.service';
+import { GambitBatchUtilService } from '../../services/gambit-batch-util.service';
 
 // N.T.
 import { ApiService } from './util/api.service';
@@ -181,6 +182,7 @@ export const Dependencies = {
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
     NgxPaginationModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     // pipes
@@ -346,7 +348,10 @@ export const Dependencies = {
     BucketService,
     UrlUtilService,
     QuestionService,
+    QuestionsService,
+    BucketsService,
     TagService,
+    TagsService,
     SimpleTraineeService,
     SkillTypeService,
     QuestionScoreService,
@@ -381,8 +386,8 @@ export const Dependencies = {
     NgbActiveModal,
     { provide: Router, useValue: {} },
     GranularityService,
-    HydraBatchService,
-    HydraBatchUtilService,
+    GambitBatchService,
+    GambitBatchUtilService,
     UrlService,
     CategoryService
   ],

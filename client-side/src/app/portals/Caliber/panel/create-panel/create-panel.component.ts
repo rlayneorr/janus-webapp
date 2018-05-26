@@ -13,7 +13,7 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 
 // services
 import { PanelService } from '../../services/panel.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 
 @Component({
   selector: 'app-create-panel',
@@ -24,7 +24,7 @@ import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
 
 export class CreatePanelComponent implements OnInit {
   closeResult: string;
-  trainee: HydraTrainee;
+  trainee: GambitTrainee;
   panelForm: FormGroup;
   panelObj: any;
   serializedPanel: any;

@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -21,24 +22,24 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
-import { HydraClientModule } from './hydra-client/hydra-client.module';
+import { GambitClientModule } from './gambit-client/gambit-client.module';
 import { environment } from '../environments/environment';
-import { HydraBatchUtilService } from './services/hydra-batch-util.service';
+import { GambitBatchUtilService } from './services/gambit-batch-util.service';
 
 // Error Alert
-import { ErrorAlertComponent } from './hydra-client/ui/error-alert/error-alert.component';
-import { HydraInterceptor } from './hydra-client/interceptors/hydra.interceptor';
+import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';
+import { GambitInterceptor } from './gambit-client/interceptors/gambit.interceptor';
 
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
-import { ToastrOptions } from './hydra-client/ui/error-alert/toastr-options';
-import { LocationService } from './hydra-client/services/location/location.service';
-import { GambitSkillService } from './hydra-client/services/skill/gambit-skill.service';
-import {AuthenticationService} from './portals/Caliber/services/authentication.service';
-import {RequestService} from './portals/Track-Force/services/request-service/request.service';
+import { ToastrOptions } from './gambit-client/ui/error-alert/toastr-options';
+import { LocationService } from './gambit-client/services/location/location.service';
+import { GambitSkillService } from './gambit-client/services/skill/gambit-skill.service';
+import { AuthenticationService } from './portals/Caliber/services/authentication.service';
+import { RequestService } from './portals/Track-Force/services/request-service/request.service';
 import { CurriculumService } from './portals/Track-Force/services/curriculum-service/curriculum.service';
-import {InterviewService} from './portals/Track-Force/services/interview-service/interview-service';
-import {MarketStatusService} from './portals/Track-Force/services/market-status/market-status.service';
-import {PlacementService} from './portals/Track-Force/services/placement-service/placement.service';
+import { InterviewService } from './portals/Track-Force/services/interview-service/interview-service';
+import { MarketStatusService } from './portals/Track-Force/services/market-status/market-status.service';
+import { PlacementService } from './portals/Track-Force/services/placement-service/placement.service';
 
 
 // loading routes from child modules this way will lazy load them
@@ -69,7 +70,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
     HttpClientModule,
-    HydraClientModule,
+    GambitClientModule,
     ToastModule.forRoot()
   ],
   declarations: [
@@ -82,7 +83,7 @@ const routes: Routes = [
     ChuckNorrisService,
     RoleGuard,
     CookieService,
-    HydraBatchUtilService,
+    GambitBatchUtilService,
     ErrorAlertComponent,
     LocationService,
     {provide: ToastOptions, useClass: ToastrOptions},

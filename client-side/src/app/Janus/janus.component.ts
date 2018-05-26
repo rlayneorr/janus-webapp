@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import { ErrorAlertComponent } from '../hydra-client/ui/error-alert/error-alert.component';
-import { HydraInterceptor } from '../hydra-client/interceptors/hydra.interceptor';
+import { ErrorAlertComponent } from '../gambit-client/ui/error-alert/error-alert.component';
+import { GambitInterceptor } from '../gambit-client/interceptors/gambit.interceptor';
 
 @Component({
   selector: 'app-janus',

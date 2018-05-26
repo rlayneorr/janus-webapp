@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 
 
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { TrainerService } from '../../../../hydra-client/services/trainer/trainer.service';
-import { HydraTrainer } from '../../../../hydra-client/entities/HydraTrainer';
-import { BatchService } from '../../../../hydra-client/aggregator/services/completebatch.service';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
-import { HydraTraineeService } from '../../../../hydra-client/services/trainee/hydra-trainee.service';
-import { UserRole } from '../../../../hydra-client/entities/UserRole';
+import { TrainerService } from '../../../../gambit-client/services/trainer/trainer.service';
+import { GambitTrainer } from '../../../../gambit-client/entities/GambitTrainer';
+import { BatchService } from '../../../../gambit-client/aggregator/services/completebatch.service';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
+import { UserRole } from '../../../../gambit-client/entities/UserRole';
 
 @Component({
   selector: 'app-trainer-profile',
@@ -27,27 +27,27 @@ export class TrainerProfilesComponent implements OnInit {
   * create variables for all batches,
   * current trainer and their batch
   */
-  currentTrainer: HydraTrainer;
+  currentTrainer: GambitTrainer;
   batches: Array<CompleteBatch>;
   currentBatch: CompleteBatch;
-  currentBatchTrainees: Array<HydraTrainee>;
+  currentBatchTrainees: Array<GambitTrainee>;
 
   /**
   * create variables for subscribing and trainers
   * and storing form data
   */
-  trainers: Array<HydraTrainer>;
+  trainers: Array<GambitTrainer>;
   titles: Array<any>;
   userRoles: Array<UserRole>;
-  model = new HydraTrainer();
-  currEditTrainer: HydraTrainer;
+  model = new GambitTrainer();
+  currEditTrainer: GambitTrainer;
   newRole: UserRole;
   newTitle: string;
   rForm: FormGroup;
 
   constructor(private trainerService: TrainerService, private modalService: NgbModal,
     private batchService: BatchService, private router: Router,
-     private fb: FormBuilder, private traineeService: HydraTraineeService) { }
+     private fb: FormBuilder, private traineeService: GambitTraineeService) { }
 
   ngOnInit() {
     /**
@@ -136,7 +136,7 @@ export class TrainerProfilesComponent implements OnInit {
   * @param content: String
   * @param modalTrainer: Trainer
   */
-  editTrainer(content, modalTrainer: HydraTrainer) {
+  editTrainer(content, modalTrainer: GambitTrainer) {
     this.currEditTrainer = modalTrainer;
     this.newRole = modalTrainer.role;
     this.newTitle = modalTrainer.title;
@@ -180,7 +180,7 @@ export class TrainerProfilesComponent implements OnInit {
   * @param modal: any
   */
   updateTrainer(modal: NgForm) {
-    const updatedTrainer: HydraTrainer = modal.value;
+    const updatedTrainer: GambitTrainer = modal.value;
     updatedTrainer.userId = this.currEditTrainer.userId;
     updatedTrainer.role = this.roleMapping(modal.value.role);
 

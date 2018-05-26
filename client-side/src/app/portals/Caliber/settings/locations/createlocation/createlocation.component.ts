@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Location } from '../../../../../hydra-client/entities/location-entities/Location';
+import { Location } from '../../../../../gambit-client/entities/location-entities/Location';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { LocationService } from '../../../../../hydra-client/services/location/location.service';
+import { LocationService } from '../../../../../gambit-client/services/location/location.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
@@ -13,7 +13,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 })
 export class CreatelocationComponent implements OnInit {
 
-  currNewLocation: Location;
+  currNewLocation: Location = new Location();
   newState: string;
   show: boolean;
   rForm: FormGroup;

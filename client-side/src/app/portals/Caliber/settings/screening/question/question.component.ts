@@ -1,17 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Router} from '@angular/router';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../../../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { Tag } from '../entities/Tag';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {QuestionsService} from '../../../services/questions/questions.service';
-import {TagsService} from '../services/tags.service';
-import {trigger, state, style, transition, animate, keyframes} from '@angular/animations';
-import {BucketsService} from '../services/buckets.service';
+import { QuestionsService } from '../../../services/questions/questions.service';
+import { TagsService } from '../services/tags.service';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { BucketsService } from '../services/buckets.service';
 import { SkillType } from '../entities/SkillType';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
-import {AlertsService} from '../../../services/alerts.service';
+import { AlertsService } from '../../../services/alerts.service';
+
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -29,6 +30,19 @@ import {AlertsService} from '../../../services/alerts.service';
     ]),
   ]
 })
+
+/**
+ * unified create and update question so that it sends the
+ * same objects
+ *
+ * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+ *
+ * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+ */
 export class QuestionComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private fb: FormBuilder,
@@ -51,8 +65,6 @@ export class QuestionComponent implements OnInit {
   public answersCollapsed = true;
   public tagsCollapsed = true;
   state;
-
-
 
   ngOnInit() {
     this.currentBucket = this.bucketService.getCurrentBucket();
@@ -93,7 +105,7 @@ export class QuestionComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
@@ -105,10 +117,10 @@ export class QuestionComponent implements OnInit {
     if (question.isActive) {
       question.isActive = false;
       this.questionService.deactivateQuestion(question.questionId).subscribe();
-   } else {
+    } else {
       question.isActive = true;
       this.questionService.activateQuestion(question.questionId).subscribe();
-   }
+    }
   }
 
   /**
@@ -182,6 +194,14 @@ export class QuestionComponent implements OnInit {
    * and to see if the question has an Id already to decide whether
    * to alert the user, add a new question, or to update a current
    * question.
+   *
+   * incharge of updating and adding new question probably needs to be
+   * refactored poorly written by creators from hydra. Future sprint
+   * please refactor to seperate into two diffrent methods.
+   *
+   * Last Modifed by the Avengers set the bucketId in the question model
+   * so that it did not need to be passed individually to the question
+   * service.
    **/
   addNewQuestion() {
     this.tagsService.getAllTags().subscribe(data => {
@@ -193,7 +213,7 @@ export class QuestionComponent implements OnInit {
       for (i; i < this.currentTags.length; i++) {
         newCurrentTagIds.push(this.currentTags[i].tagId);
       }
-   } else {
+    } else {
       this.currentTags = [];
     }
     if (this.sampleAnswers.length === 5 && this.question.questionText) {
@@ -203,7 +223,7 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer3 = this.sampleAnswers[2];
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
-        this.questionService.updateQuestion(this.currentBucket.bucketId, this.question, this.getTagIds()).subscribe(data => {
+        this.questionService.updateQuestion(this.question, this.getTagIds()).subscribe(data => {
           this.updateQuestions();
         });
         this.updatedSuccessfully();
@@ -213,8 +233,9 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer3 = this.sampleAnswers[2];
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
-        this.questionService.createNewQuestion(this.currentBucket.bucketId, this.question, this.getTagIds()).subscribe(data => {
-          this.updateQuestions();
+        this.question.bucketId = this.currentBucket.bucketId;
+        this.questionService.createNewQuestion(this.question, this.getTagIds()).subscribe(data => {
+          this.questions.unshift(this.question);
         });
         this.savedSuccessfully();
       }
@@ -245,9 +266,9 @@ export class QuestionComponent implements OnInit {
     this.currentTags.push(tag);
   }
 
-   /**
-    * Adds the selected tag to the all tags array and removes it from the current tags array
-    **/
+  /**
+   * Adds the selected tag to the all tags array and removes it from the current tags array
+   **/
   removeTagFromQuestion(tag) {
     let currentTag: any;
     const newCurrentTags: Tag[] = [];

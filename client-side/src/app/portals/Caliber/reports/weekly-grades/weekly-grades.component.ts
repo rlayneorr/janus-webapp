@@ -16,7 +16,7 @@ import { ReportingService } from '../../services/reporting.service';
 import { Assessment } from '../../entities/Assessment';
 import { Grade } from '../../entities/Grade';
 import { Note } from '../../entities/Note';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 
 
 @Component({

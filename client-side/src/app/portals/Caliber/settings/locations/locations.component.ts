@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import { Location } from '../../../../hydra-client/entities/location-entities/Location';
+import { Location } from '../../../../gambit-client/entities/location-entities/Location';
 
 import { Subscription } from 'rxjs/Subscription';
-import { LocationService } from '../../../../hydra-client/services/location/location.service';
+import { LocationService } from '../../../../gambit-client/services/location/location.service';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
@@ -38,7 +38,9 @@ export class LocationsComponent implements OnInit, OnDestroy, OnChanges {
    * clean up subscription
    */
   ngOnDestroy() {
+    if (this.locationSubscription) {
     this.locationSubscription.unsubscribe();
+    }
   }
 
 }

@@ -21,7 +21,7 @@ import { Associate } from '../../models/associate.model';
 
 import { OrderByPipe } from '../../../Caliber/pipes/order-by.pipe'; // this doesn't seem quite right ...
 import { HttpClient } from '@angular/common/http';
-import { UrlService } from '../../../../hydra-client/services/urls/url.service';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 
 describe('BatchDetailsComponent', () => {

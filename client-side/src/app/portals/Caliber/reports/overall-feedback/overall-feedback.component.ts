@@ -9,13 +9,13 @@ import { Observable } from 'rxjs/Observable';
 import { ReportingService } from '../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
 import { NoteService } from '../../services/note.service';
-import { HydraBatchService } from '../../../../hydra-client/services/batch/hydra-batch.service';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
 
 // entities
 import { Note } from '../../entities/Note';
-import { CompleteBatch } from '../../../../hydra-client/aggregator/entities/CompleteBatch';
-import { HydraBatchUtilService } from '../../../../services/hydra-batch-util.service';
-import { HydraTrainee } from '../../../../hydra-client/entities/HydraTrainee';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 
 /**
  * Creates a table of the overall feedback of a given trainee in a given batch.
@@ -43,15 +43,15 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
   traineeNotes: Array<Note> = null;
   weekTopics: Array<Array<string>>;
 
-  trainee: HydraTrainee;
+  trainee: GambitTrainee;
   week = 1;
   batch: CompleteBatch;
 
   constructor(private granularityService: GranularityService,
     private noteService: NoteService,
     private reportService: ReportingService,
-    private batchService: HydraBatchService,
-    private batchUtil: HydraBatchUtilService) { }
+    private batchService: GambitBatchService,
+    private batchUtil: GambitBatchUtilService) { }
 
   ngOnInit() {
 
@@ -65,7 +65,7 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
 
         if (this.trainee.traineeId > 0) {
           this.noteService.fetchByTrainee(this.trainee);
-          // Change HydraBatchUtilService, so it accepts CompleteBatch objects
+          // Change GambitBatchUtilService, so it accepts CompleteBatch objects
           this.reportService.fetchTechnologiesUpToWeek(this.batch.batchId, this.batchUtil.getWeek(this.batch));
         }
       });

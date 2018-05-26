@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserRole } from '../hydra-client/entities/UserRole';
+import { UserRole } from '../gambit-client/entities/UserRole';
 
 export class Trainer {
     userId: number;
