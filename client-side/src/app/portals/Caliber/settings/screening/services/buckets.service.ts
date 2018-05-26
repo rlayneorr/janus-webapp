@@ -21,7 +21,7 @@ export class BucketsService {
 
   /** This is our base URL endpoint */
   // url: string = "/bucket/";
-  url = 'https://hydra-gateway-service.cfapps.io/bucket-service/bucket/';
+  url = 'https://gambit-gateway-service.cfapps.io/bucket-service/bucket/';
   /** Making an Observable */
   bucketSubject = new Subject();
   routingToAllBuckets = false;
