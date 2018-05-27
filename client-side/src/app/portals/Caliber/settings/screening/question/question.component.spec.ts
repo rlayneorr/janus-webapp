@@ -36,7 +36,7 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 /**
  * Setting up the testing environment for question component.
  **/
-describe('QuestionComponent', () => {
+fdescribe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
   const t0: Tag = new Tag();

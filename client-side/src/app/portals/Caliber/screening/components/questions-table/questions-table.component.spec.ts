@@ -66,7 +66,7 @@ xdescribe('QuestionsTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow, AnswerComponent, ViolationFlagComponent],
       imports: [FormsModule],
-      providers: [BucketService, HttpClient, HttpHandler, UrlUtilService, QuestionService, TagService, SimpleTraineeService,
+      providers: [HttpClient, HttpHandler, UrlUtilService, QuestionService, TagService, SimpleTraineeService,
         SkillTypeService, QuestionScoreService, QuestionsToBucketsUtil, NgbModal, NgbModalStack, ScreeningService,
         SkillTypeBucketService, SoftSkillsViolationService, ViolationTypeService, AlertsService]
     });

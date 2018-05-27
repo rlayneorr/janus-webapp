@@ -18,7 +18,7 @@ import { Tag } from '../entities/Tag';
 /**
 * Setting up the testing environment for question filters.
 **/
-describe('QuestionFilter', () => {
+fdescribe('QuestionFilter', () => {
     const pipe = new TagFilterPipe();
     const fauxTag = new Tag();
     fauxTag.tagId = 1;
