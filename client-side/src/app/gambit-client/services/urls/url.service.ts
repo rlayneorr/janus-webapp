@@ -292,6 +292,7 @@ export class UrlService {
   trainers = {
     fetchByEmail: (email: string) => `${this.context}/trainers/email/${email}/`,
     fetchAll: () => `${this.context}/trainers`,
+    fetchById:(trainerId: number) => `${this.context}/trainers/${trainerId}`,
     save: () => `${this.context}/trainers`,
     update: () => `${this.context}/trainers`,
     promote: () => `${this.context}/trainers/promote`,
