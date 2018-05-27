@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
 import { SimpleTrainee } from '../../entities/simpleTrainee';
 import { TRAINEES } from '../../mock-data/mock-simpleTrainees';
-import { UrlUtilService } from '../UrlUtil/url-util.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 /*
 
@@ -35,12 +35,9 @@ export class SimpleTraineeService {
 
   constructor(
     private httpClient: HttpClient,
-    private urlUtilService: UrlUtilService,
+    private urlService: UrlService,
     private skillTypeService: SkillTypeService,
   ) { }
-
-  // Need to change to match the backend
-  private ROOT_URL: string = this.urlUtilService.getBase() + 'trainee-service/';
 
   selectedCandidate: SimpleTrainee;
 
@@ -60,7 +57,7 @@ export class SimpleTraineeService {
     // Get array of skillTypeIds, apply random skillTypeId's to each new SimpleTrainee
     this.skillTypeService.getSkillTypes().subscribe(allSkillTypes => {
       // Get array of GAMBIT simpleTrainees, use info to build array of simpleTrainees
-      this.httpClient.get<any[]>(this.ROOT_URL + 'all/trainee/getAll/').subscribe(allCandidates => {
+      this.httpClient.get<any[]>(this.urlService.simpleTrainee.getAllTrainee()).subscribe(allCandidates => {
         console.log(allCandidates);
         for (const e of allCandidates) {
           // Each simpleTrainee get random skillType

@@ -4,8 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { QuestionScore } from '../../entities/questionScore';
 import { HttpClient, HttpParams } from '@angular/common/http';
-
-import { UrlUtilService } from '../UrlUtil/url-util.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 /*
 Exchanges data between QuestionBank (the table) and Question (the modal) components.
@@ -13,8 +12,10 @@ Exchanges data between QuestionBank (the table) and Question (the modal) compone
 @Injectable()
 export class QuestionScoreService {
 
-  constructor(private httpClient: HttpClient,
-              private urlUtil: UrlUtilService) { }
+  constructor(
+    private httpClient: HttpClient,
+    private urlService: UrlService
+    ) { }
 
   // Used for sharing data between question table and answer modal
   questionScores: QuestionScore[] = [];
@@ -34,9 +35,8 @@ export class QuestionScoreService {
 
   // save the question to the database
   postQuestionScore(question: QuestionScore): void {
-    const url = this.urlUtil.getBase() + '/question-score-service/question/score';
 
-    this.httpClient.post<QuestionScore>(url, {
+    this.httpClient.post<QuestionScore>(this.urlService.questionScoring.scoringQuestion(), {
       Score: question.score,
       Comment: question.commentary,
       QuestionID: question.questionId,
