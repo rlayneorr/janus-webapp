@@ -22,6 +22,8 @@ import { TagsService } from '../services/tags.service';
 // Mock Data
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 import { TAGS } from '../../../screening/mock-data/mock-tags';
+import { QuestionService } from '../../../screening/services/question/question.service';
+import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 /**
  * Test for methods on the question component.
@@ -84,6 +86,17 @@ describe('QuestionComponent', () => {
   });
 
   /**
+   *  Used to validate the create/update question form.
+   *
+   * Function tested: initFormControl()
+   */
+  it('should create a form group element name', () => {
+    component.initFormControl();
+    component.createQuestion.controls['name'].setValue('test');
+    expect(component.createQuestion.valid).toBeTruthy();
+  });
+
+  /**
   * Test if the question status changes from active to deactive.
   *
   * Function tested: changeQuestionStatus()
@@ -142,6 +155,71 @@ describe('QuestionComponent', () => {
   expect(component.newTagString).toBe('');
 }));
 
+/**
+   * Test if gets all the tags in the tag array.
+   *
+   * Function tested: getTagIds()
+   **/
+  it('should return all tags in the tag array', () => {
+    expect(component.getTagIds().length).toBe(0);
+    component.addNewTag(t0);
+    expect(component.getTagIds().length).toBe(1);
+  });
+
+   /**
+   * Check if it adds a tag to the current tag array.
+   *
+   * Function tested: addTagToQuestion(Tag)
+   **/
+  it('should add the selected tag to the current tags array and remove it from the all tags array', () => {
+    component.allTags = [];
+    component.allTags[0] = t0;
+    component.allTags[1] = t1;
+    component.currentTags = [];
+
+    expect(component.currentTags.length).toBe(0);
+    expect(component.allTags.length).toBe(2);
+
+    component.addTagToQuestion(t0);
+
+    expect(component.currentTags).toContain(t0);
+    expect(component.allTags).toContain(t1);
+    expect(component.allTags.length).toBe(1);
+  });
+
+  /**
+   * Test if it adds the selected tag to the tag array and remove it from the current tag array.
+   *
+   * Function tested: RemoveTagFromQuestion(Tag)
+   **/
+  it('should add the selected tag to the all tags array and remove it from the current tags array', () => {
+    component.allTags = [];
+    component.currentTags = [];
+    component.currentTags[0] = t0;
+    component.currentTags[1] = t1;
+
+    expect(component.allTags.length).toBe(0);
+    expect(component.currentTags.length).toBe(2);
+
+    component.removeTagFromQuestion(t0);
+
+    expect(component.allTags).toContain(t0);
+    expect(component.currentTags).toContain(t1);
+    expect(component.currentTags.length).toBe(1);
+  });
+
+  /**
+   * populate the current question and the current tags with the selected question.
+   *
+   * Function tested: updateQuestions()
+   **/
+  it('shoud update questions from the bucket', () => {
+    this.currentBucket = true;
+    component.questions = Question['test'];
+    component.updateQuestions();
+    expect(component.questions).toBe(Question['test']);
+  });
+
   /**
    * Test to check if it adds new tags to the questions.
    *
@@ -155,17 +233,6 @@ describe('QuestionComponent', () => {
     lastTagIndex = component.currentTags.length - 1;
     expect(component.currentTags[lastTagIndex]).toEqual(t1);
     expect(component.currentTags[lastTagIndex - 1]).toEqual(t0);
-  });
-
-  /**
-   * Test if gets all the tags in the tag array.
-   *
-   * Function tested: getTagIds()
-   **/
-  it('should return all tags in the tag array', () => {
-    expect(component.getTagIds().length).toBe(0);
-    component.addNewTag(t0);
-    expect(component.getTagIds().length).toBe(1);
   });
 
   /**
@@ -221,48 +288,6 @@ describe('QuestionComponent', () => {
       expect(msgUpdate).toEqual('All Fields Must be Filled');
     });
   }));
-
-  /**
-   * Test if it adds the selected tag to the tag array and remove it from the current tag array.
-   *
-   * Function tested: RemoveTagFromQuestion(Tag)
-   **/
-  it('should add the selected tag to the all tags array and remove it from the current tags array', () => {
-    component.allTags = [];
-    component.currentTags = [];
-    component.currentTags[0] = t0;
-    component.currentTags[1] = t1;
-
-    expect(component.allTags.length).toBe(0);
-    expect(component.currentTags.length).toBe(2);
-
-    component.removeTagFromQuestion(t0);
-
-    expect(component.allTags).toContain(t0);
-    expect(component.currentTags).toContain(t1);
-    expect(component.currentTags.length).toBe(1);
-  });
-
-  /**
-   * Check if it adds a tag to the current tag array.
-   *
-   * Function tested: addTagToQuestion(Tag)
-   **/
-  it('should add the selected tag to the current tags array and remove it from the all tags array', () => {
-    component.allTags = [];
-    component.allTags[0] = t0;
-    component.allTags[1] = t1;
-    component.currentTags = [];
-
-    expect(component.currentTags.length).toBe(0);
-    expect(component.allTags.length).toBe(2);
-
-    component.addTagToQuestion(t0);
-
-    expect(component.currentTags).toContain(t0);
-    expect(component.allTags).toContain(t1);
-    expect(component.allTags.length).toBe(1);
-  });
 
   /**
    * Resets the current tags array and add new tags to the
