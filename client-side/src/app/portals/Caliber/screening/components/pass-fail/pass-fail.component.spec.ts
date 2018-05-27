@@ -4,7 +4,6 @@ import { PassFailComponent } from './pass-fail.component';
 import { ViolationFlagComponent } from '../violation-flag/violation-flag.component';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { UrlUtilService } from '../../services/UrlUtil/url-util.service';
 import { ScreeningService } from '../../services/screening/screening.service';
 import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';

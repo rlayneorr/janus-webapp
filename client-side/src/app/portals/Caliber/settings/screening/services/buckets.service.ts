@@ -9,6 +9,19 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 
 import { Bucket } from '../entities/Bucket';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+
+/**
+   * Imported urlservice to replace hardcoded endpoints
+   *
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   */
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -19,32 +32,31 @@ const httpOptions = {
 @Injectable()
 export class BucketsService {
 
-  /** This is our base URL endpoint */
-  // url: string = "/bucket/";
-  url = 'https://gambit-gateway-service.cfapps.io/bucket-service/bucket/';
   /** Making an Observable */
   bucketSubject = new Subject();
   routingToAllBuckets = false;
-  /** For development only */
 
   private currentBucket: Bucket;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private urlService: UrlService
+    ) {}
 
   getAllBuckets(): Observable<Bucket[]> {
-      return this.http.get<Bucket[]>(this.url + 'getBuckets');
+      return this.http.get<Bucket[]>(this.urlService.bucket.getAllBuckets());
   }
 
   getBucketById(bucketId: number) {
-      return this.http.get(this.url + bucketId);
+      return this.http.get<Bucket>(this.urlService.bucket.getBucketById(bucketId));
   }
 
   updateBucket (bucket: Bucket) {
-    return this.http.post(this.url + 'updateBucket', bucket, httpOptions).toPromise();
+    return this.http.post(this.urlService.bucket.updateBucket(), bucket, httpOptions).toPromise();
   }
 
   createNewBucket(bucket: Bucket): Observable<Bucket> {
-      return this.http.post<Bucket>(this.url + 'createBucket', bucket, httpOptions);
+      return this.http.post<Bucket>(this.urlService.bucket.createNewBucket(), bucket, httpOptions);
   }
 
   setBucket(bucket: Bucket) {

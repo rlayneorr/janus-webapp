@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { environment } from '../../../../environments/environment';
+import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 
 @Injectable()
 export class UrlService {
@@ -72,6 +73,25 @@ export class UrlService {
   };
 
   /**
+   * Endpoints for bucket service
+   *
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   */
+  private bucketEndpoint = '/bucket-service/bucket';
+  bucket = {
+    getAllBuckets: () => `${this.context + this.bucketEndpoint}/getBuckets`,
+    getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
+    updateBucket: () => `${this.context + this.bucketEndpoint}/updateBucket`,
+    createNewBucket: () => `${this.context + this.bucketEndpoint}/createBucket`
+  };
+
+  /**
    * Endpoints for buildings:
    * This section is being added for use in the location service
    * @author Tanhim Ahmed
@@ -136,13 +156,19 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private questionEndPoint = 'question-service/question';
+  private questionEndpoint = 'question-service/question';
   question = {
-    postQuestion: () => `${this.context + this.questionEndPoint}/createQuestion`,
-    putQuestion: () => `${this.context + this.questionEndPoint}/updateQuestion`,
-    getQuestionsByBucketId: (bucketId: number) => `${this.context + this.questionEndPoint}/bucketQuestions/${bucketId}`,
-    deactivateQuestion: (questionId: number) => `${this.context + this.questionEndPoint}/deactivateQuestion/${questionId}`,
-    activateQuestion: (questionId: number) => `${this.context + this.questionEndPoint}/activateQuestion/${questionId}`,
+    postQuestion: () => `${this.context + this.questionEndpoint}/createQuestion`,
+    putQuestion: () => `${this.context + this.questionEndpoint}/updateQuestion`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.context + this.questionEndpoint}/bucketQuestions/${bucketId}`,
+    deactivateQuestion: (questionId: number) => `${this.context + this.questionEndpoint}/deactivateQuestion/${questionId}`,
+    activateQuestion: (questionId: number) => `${this.context + this.questionEndpoint}/activateQuestion/${questionId}`,
+    filteredQuestions: () => `${this.context + this.questionEndpoint}/filtered`,
+  };
+
+  private questionScoringEndpoint = 'question-score-service/question';
+  questionScoring = {
+    scoringQuestion: () => `${this.context + this.questionScoringEndpoint}/score`,
   };
 
   /**
@@ -161,6 +187,42 @@ export class UrlService {
   };
 
   /**
+   * Endpoints for screen services
+   *
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   */
+  screeningEndpoint = 'screening-service/screening';
+  screening = {
+    scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduledScreenings`,
+    startScreening: () => `${this.context + this.screening}/start`,
+    endScreening: () => `${this.context + this.screening}/end`,
+    introComment: () => `${this.context + this.screeningEndpoint}/introcomment`,
+    generalComment: () => `${this.context + this.screeningEndpoint}/generalcomment`,
+  };
+
+  /**
+   * Endpoints for simple-trainee service
+   *
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   */
+  simpleTraineeEndpoint = this.context + 'trainee-service';
+  simpleTrainee = {
+    getAllTrainee: () => `${this.simpleTraineeEndpoint}/all/trainee/getAll/`,
+  };
+
+  /**
    * All urls associated with skills will come from this object
    */
   skills = {
@@ -176,6 +238,7 @@ export class UrlService {
   /**
    * Endpoints for skillType
    */
+  skillTypesServiceEndpoint = this.context + 'skilltype-service/skillType';
   skillTypes = {
     findAll: () => `${this.context}/skillType`,
     findAllActive: () => `${this.context}/skillType/active`,
@@ -183,7 +246,15 @@ export class UrlService {
     findByName: (name: string) => `${this.context}/skillType/${name}`,
     save: () => `${this.context}/skillType`,
     update: (id: number) => `${this.context}/skillType/${id}`,
-    delete: (id: number) => `${this.context}/skilltype/${id}` // note lowercase t in type, this is to match the request mapping
+    delete: (id: number) => `${this.context}/skilltype/${id}`, // note lowercase t in type, this is to match the request mapping
+    getSkillTypes: () => `${this.skillTypesServiceEndpoint}/getSkillTypes/`,
+    createSkillType: () => `${this.skillTypesServiceEndpoint}/createSkillType`,
+    deactiveSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/deactiveSkillType/${skillTypeId}`,
+    activeSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/activeSkillType/${skillTypeId}`,
+    updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
+    setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillType/${skillTypeId}`,
+    getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
   };
 
   subtopic = {

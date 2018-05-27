@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { SkillType } from '../../entities/skillType';
 import { SKILLTYPES } from '../../mock-data/mock-skillTypes';
-import { UrlUtilService } from '../UrlUtil/url-util.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 
 /**
@@ -25,11 +25,10 @@ import { UrlUtilService } from '../UrlUtil/url-util.service';
 */
 @Injectable()
 export class SkillTypeService {
-  private ROOT_URL: string = this.urlUtilService.getBase();
   private candidateSkillType: Observable<SkillType>;
   constructor(
     private httpClient: HttpClient,
-    private urlUtilService: UrlUtilService,
+    private urlService: UrlService
   ) { }
 
   /*
@@ -40,7 +39,7 @@ export class SkillTypeService {
 
   /** Returns an observable array of all skill types */
   getSkillTypes(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.ROOT_URL + 'skilltype-service/skillType/getSkillTypes/');
+    return this.httpClient.get<any[]>(this.urlService.skillTypes.getSkillTypes());
   }
 
   // getSkillTypes(): Observable<SkillType[]> {

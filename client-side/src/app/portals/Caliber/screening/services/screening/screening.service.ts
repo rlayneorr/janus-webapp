@@ -4,8 +4,8 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/Rx';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Screening } from '../../entities/screening';
-import { UrlUtilService } from '../UrlUtil/url-util.service';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 
 /**
@@ -25,11 +25,12 @@ import { ScheduledScreening } from '../../entities/scheduleScreening';
 */
 @Injectable()
 export class ScreeningService {
-  constructor(private httpClient: HttpClient,
-    private urlUtilService: UrlUtilService) { }
+  constructor(
+    private httpClient: HttpClient,
+    private urlService: UrlService
+  ) { }
 
   // Need to change to match the backend
-  private ROOT_URL: string = this.urlUtilService.getBase();
   headers = new HttpHeaders({
     'Content-type': 'application/json'
   });
@@ -55,7 +56,7 @@ export class ScreeningService {
   ): Observable<Number> {
     return this.httpClient
       .post<Number>(
-      this.ROOT_URL + 'screening-service/screening/start',
+      this.urlService.screening.startScreening(),
       {
         'scheduledScreening': scheduledScreening.scheduledScreeningId,
         'beginTime': beginTime,
@@ -80,7 +81,7 @@ export class ScreeningService {
     } else if (this.softSkillsResult === 'Fail') {
       verdict = 0;
     }
-    this.httpClient.post(this.ROOT_URL + 'screening-service/screening/end',
+    this.httpClient.post(this.urlService.screening.endScreening(),
       {
         'status': 'Completed',
         'softSkillVerdict': verdict,
@@ -107,7 +108,7 @@ export class ScreeningService {
   // comment - the screener's comment
   submitIntroComment(comment: string) {
     this.httpClient.post<String>(
-      this.ROOT_URL + 'screening-service/screening/introcomment',
+      this.urlService.screening.introComment(),
       { traineeId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
     ).subscribe();
   }
@@ -116,7 +117,7 @@ export class ScreeningService {
   // through the Q&A portion.
   submitGeneralComment() {
     this.httpClient.post<String>(
-      this.ROOT_URL + 'screening-service/screening/generalcomment',
+      this.urlService.screening.generalComment(),
       { comment: this.generalComments, screeningId: localStorage.getItem('screeningID') }
     ).subscribe();
   }
