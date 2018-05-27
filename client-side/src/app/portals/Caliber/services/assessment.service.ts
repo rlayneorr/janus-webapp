@@ -12,13 +12,13 @@ import { Subject } from 'rxjs/Subject';
 
 // services
 import { AlertsService } from './alerts.service';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // entities
 import { Assessment } from '../entities/Assessment';
 import { CRUD } from '../interfaces/api.interface';
-import { environment } from '../../../../environments/environment';
 
-const context = environment.assessment;
+const context = (new UrlService).assessment;
 /**
  * this service manages calls to the web service
  * for Assessment objects
@@ -29,7 +29,7 @@ export class AssessmentService implements CRUD<Assessment> {
   public savedSubject: Subject<Assessment>;
   public updatedSubject: Subject<Assessment>;
   public deletedSubject: Subject<Assessment>;
-  constructor(public http: HttpClient, public alertService: AlertsService) {
+  constructor(public http: HttpClient, public alertService: AlertsService, private urlService: UrlService) {
     // super(httpClient, alertService);
     this.listSubject = new BehaviorSubject([]);
     this.savedSubject = new Subject();

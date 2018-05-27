@@ -6,10 +6,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { RequestService } from '../request-service/request.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 @Injectable()
 export class CreateUserService {
+  private url = (new UrlService).context;
   private userPath = 'TrackForce/users';
 
     /**
@@ -33,15 +34,15 @@ export class CreateUserService {
      */
 
     public createUser(username: string, password: string, roleId: number): Observable<any> {
-      return this.http.post<any>(environment.url + this.userPath, {username: username, password: password, role: roleId});
+      return this.http.post<any>(this.url + this.userPath, {username: username, password: password, role: roleId});
     }
 
     public getUser(): Observable<any> {
-      return this.http.get<any>(environment.url + this.userPath);
+      return this.http.get<any>(this.url + this.userPath);
     }
 
     public getUsername(): Observable<any> {
-      return this.http.get<any>(environment.url + this.userPath + '/name');
+      return this.http.get<any>(this.url + this.userPath + '/name');
     }
 
 }

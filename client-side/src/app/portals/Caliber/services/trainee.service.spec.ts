@@ -4,9 +4,10 @@ import { AlertsService } from './alerts.service';
 import { TraineeService } from './trainee.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
-const context = environment.trainee;
+
+const context = (new UrlService).trainee;
 
 const saveUri = context.save();
 const updateUri = context.update();

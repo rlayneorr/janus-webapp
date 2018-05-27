@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // Interfaces
 import { Fetch } from '../interfaces/api.interface';
@@ -20,7 +20,7 @@ import { Observable } from 'rxjs/Observable';
 export class TraineeStatusService implements Fetch<string> {
 
   public listSubject: BehaviorSubject<any[]>;
-
+  private urlService = new UrlService();
   constructor(public http: HttpClient, alertService: AlertsService) {
     // super(httpClient, alertService);
     this.listSubject = new BehaviorSubject([]);
@@ -46,7 +46,7 @@ export class TraineeStatusService implements Fetch<string> {
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'STAGING','TRAINER','QC','PANEL')")
    */
   public fetchAll(): Observable<string[]> {
-     this.http.get<string[]>(environment.traineeStatus.fetchAll()).subscribe((data) => this.listSubject.next(data));
+     this.http.get<string[]>(this.urlService.traineeStatus.fetchAll()).subscribe((data) => this.listSubject.next(data));
      return this.listSubject.asObservable();
   }
 

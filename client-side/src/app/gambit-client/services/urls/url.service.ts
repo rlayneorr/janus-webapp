@@ -4,7 +4,11 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 
 @Injectable()
 export class UrlService {
-  private context: string;
+  public readonly context: string;
+
+  apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
+
+  apiCurrentPanelsLineChart = this.context + 'all/reports/biweeklyPanelResults';
 
   constructor() {
     this.context = environment.gambitContext;
@@ -118,6 +122,14 @@ export class UrlService {
     addTopicsUrl: () => `${this.context}/calendar/addtopics`
   };
 
+  category = {
+    fetchAll: () => `${this.context}vp/category`,
+    fetchAllActive: () => `${this.context}category/all`,
+    fetchById: (id: number) => `${this.context}category/${id}`,
+    save: () => `${this.context}vp/category`,
+    update: () => `${this.context}vp/category/update`,
+  };
+
   curriculum = {
     getCurriculumAllUrl: () => `${this.context}/curricula/all`,
     getCurriculumByIdUrl: (id: number) => `${this.context}/curricula?ids=${id}`,
@@ -132,6 +144,12 @@ export class UrlService {
     addSchedule: () => `${this.context}/curricula/schedules`
   };
 
+  grade = {
+    fetchByBatchIdByWeek: (batchId, week) => `${this.context}all/grades/batch/${batchId}/week/${week}`,
+    save: () => `${this.context}trainer/grade/create`,
+    update: () => `${this.context}trainer/grade/update`,
+  };
+
   /**
    * Endpoints for locations:
    * This section is being added for use in the location service
@@ -142,7 +160,36 @@ export class UrlService {
     getAllLocations: () => `${this.context}/locations/`,
     postLocation: () => `${this.context}/locations/`,
     putLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
-    deleteLocationById: (locationId: number) => `${this.context}/locations/${locationId}`
+    deleteLocationById: (locationId: number) => `${this.context}/locations/${locationId}`,
+    /**Migrated location from old environment.ts diifrent from above */
+    fetchAll: () => `${this.context}all/location/all`,
+    save: () => `${this.context}vp/location/create`,
+    update: () => `${this.context}vp/location/update`,
+  };
+
+  note = {
+    fetchQcBatchNotesByBatchIdByWeek: (batchId: number, week: number) => `${this.context}qc/note/batch/${batchId}/${week}`,
+    fetchQcTraineeNotesByBatchIdByWeek: (batchId: number, week: number) => `${this.context}qc/note/trainee/${batchId}/${week}`,
+    fetchBatchNotesByBatchIdByWeek: (batchId: number, week: number) => `${this.context}trainer/note/batch/${batchId}/${week}`,
+    fetchTraineeNotesByBatchIdByWeek: (batchId: number, week: number) => `${this.context}trainer/note/trainee/${batchId}/${week}`,
+    fetchTrainingNotesByTrainee: (traineeId: number) => `${this.context}all/notes/trainee/${traineeId}`,
+    fetchQcNotesByTrainee: (traineeId: number) => `${this.context}qc/note/trainee/${traineeId}`,
+    update: () => `${this.context}note/update`,
+    save: () => `${this.context}note/create`,
+    getAllQCTraineeNotes: (batchId: number, week: number) => `${this.context}qc/note/trainee/${batchId}/${week}`,
+    findQCBatchNotes: (batchId: number, week: number) => `${this.context}qc/note/batch/${batchId}/${week}`,
+  };
+
+  panel = {
+    fetchAll: () => `${this.context}panel/all`,
+    fetchAllByTrainee: (traineeId) => `${this.context}panel/trainee/${traineeId}`,
+    save: () => `${this.context}panel/create`,
+    update: () => `${this.context}panel/update`,
+    delete: (panelId: number) => `${this.context}panel/delete/${panelId}`,
+  };
+
+  qcStatus = {
+    fetchAll: () => `${this.context}types/qcstatus/all`,
   };
 
   /**
@@ -170,6 +217,11 @@ export class UrlService {
   questionScoring = {
     scoringQuestion: () => `${this.context + this.questionScoringEndpoint}/score`,
   };
+
+    // Reports Service API endpoints
+    reportsStackedBarCurrentWeek = this.context + 'all/reports/batch/week/stacked-bar-current-week';
+    reportsDashBoard = this.context + 'all/reports/dashboard';
+    reportsBiWeeklyPanel = this.context + 'all/reports/biweeklyPanelResults';
 
   /**
    * Endpoints for rooms:
@@ -245,6 +297,9 @@ export class UrlService {
     findById: (id: number) => `${this.context}/skillType/${id}`,
     findByName: (name: string) => `${this.context}/skillType/${name}`,
     save: () => `${this.context}/skillType`,
+    saveSkill: (skillTypeId, skillId) => `${this.context}/skillType/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) =>
+      `${this.context}/skillType/name/${skillTypeName}/skill/name/${skillName}`,
     update: (id: number) => `${this.context}/skillType/${id}`,
     delete: (id: number) => `${this.context}/skilltype/${id}`, // note lowercase t in type, this is to match the request mapping
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}/getSkillTypes/`,
@@ -285,6 +340,14 @@ export class UrlService {
     changeTopicName: (name: string) => `${this.context}/topics/topic`
   };
 
+  trainee = {
+    fetchAllByBatch: (batchId: number) => `${this.context}all/trainee?batchId=${batchId}`,
+    save: () => `${this.context}all/trainee/create`,
+    update: () => `${this.context}all/trainee/update`,
+    delete: (traineeId: number) => `${this.context}all/trainee/delete/${traineeId}`,
+    fetchDroppedByBatch: (batchId: number) => `${this.context}all/trainee/`,
+  };
+
   /**
    * Endpoints for trainees
    */
@@ -294,22 +357,31 @@ export class UrlService {
     findByEmail: (email: string) => `${this.context}/trainees/email?=${email}`,
     findAllByBatchAndStatus: (id: number, status: string) => `${this.context}/trainees/batch/${id}/status/${status}`,
     save: () => `${this.context}/trainees`,
+    create: () => `${this.context}all/trainee/create`,
     update: () => `${this.context}/trainees`,
     delete: (traineeId: number) => `${this.context}/trainees/${traineeId}`
   };
 
+  traineeStatus = {
+    fetchAll: () => `${this.context}types/trainingstatus/all`,
+  };
   /**
    * Endpoints for trainers
    */
   trainers = {
     fetchByEmail: (email: string) => `${this.context}/trainers/email/${email}/`,
     fetchAll: () => `${this.context}/trainers`,
-    fetchById:(trainerId: number) => `${this.context}/trainers/${trainerId}`,
+    fetchById: (trainerId: number) => `${this.context}/trainers/${trainerId}`,
     save: () => `${this.context}/trainers`,
     update: () => `${this.context}/trainers`,
     promote: () => `${this.context}/trainers/promote`,
     getTitles: () => `${this.context}/trainers/titles`,
+    getTiers: () => `${this.context}types/trainer/role/all`,
     delete: () => `${this.context}/trainers`,
+  };
+
+  trainingType = {
+    fetchAll: () => `${this.context}types/training/all`,
   };
 
   // BAM Endpoints
@@ -343,4 +415,69 @@ export class UrlService {
     // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
     // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
+
+  /* Reporting service API endpoints */
+  apiBatchComparisonAvgEndpoint = (skill: string, training: string, startDate) =>
+    environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`
+
+  apifetchBatchWeekPieChart = (batchId: Number, weekId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/pie`
+
+  apiPieChartCurrentWeekQCStatus = (batchId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/pie`
+
+  apiAllBatchesCurrentWeekQCStackedBarChart = (batchId: Number, week: Number) =>
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`
+
+  apiBatchWeekAvgBarChart = (batchId: Number, week: Number) =>
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`
+
+  apiBatchWeekSortedBarChart = (batchId: Number, week: Number) =>
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-weekly-sorted`
+
+  apiBatchOverallTraineeBarChart = (batchId: Number, traineeId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/bar-batch-overall-trainee`
+
+  apiBatchOverallBarChart = (batchId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/overall/bar-batch-overall`
+
+  apiBatchWeekTraineeBarChart = (batchId: Number, weekId: Number, traineeId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/bar-batch-week-trainee`
+
+  apiTraineeUpToWeekLineChart = (batchId: Number, weekId: Number, traineeId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/line-trainee-up-to-week`
+
+  apiTraineeOverallLineChart = (batchId: Number, traineeId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/line-trainee-overall`
+
+  apiBatchOverallLineChart = (batchId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/overall/line-batch-overall`
+
+  apiTraineeUpToWeekRadarChart = (week: Number, traineeId: Number) =>
+    environment.context + `all/reports/week/${week}/trainee/${traineeId}/radar-trainee-up-to-week`
+
+  apiTraineeOverallRadarChart =  (traineeId: Number) =>
+    environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`
+
+  apiBatchOverallRadarChart = (batchId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`
+
+  apiBatchAllTraineesRadarChart = (batchId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/radar-batch-all-trainees`
+
+  apiBatchWeekAverageValue = (batchId: Number, weekId: Number) =>
+    environment.context + `all/assessments/average/${batchId}/${weekId}`
+
+  apiTechnologiesForTheWeek = (batchId: Number, weekId: Number) =>
+    environment.context + `all/assessments/categories/batch/${batchId}/week/${weekId}`
+
+  apiPanelBatchAllTrainees = (batchId: Number) =>
+    environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`
+
+  /* Evaluation service API endpoints */
+  apiFetchAllQCTraineeNotes = (batchId: Number, weekId: Number) =>
+    environment.context + `qc/note/trainee/${batchId}/${weekId}`
+
+  apiFetchAllQCBatchNotes = (batchId: Number, weekId: Number) =>
+    environment.context + `qc/note/batch/${batchId}/${weekId}`
 }
