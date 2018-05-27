@@ -201,7 +201,7 @@ export class QuestionComponent implements OnInit {
    * Last Modifed to set the bucketId in the question model
    * so that it did not need to be passed individually to the question
    * service.
-   * 
+   *
    * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
    *
    * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
@@ -209,7 +209,7 @@ export class QuestionComponent implements OnInit {
    * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
-   * 
+   *
    **/
   addNewQuestion() {
     this.tagsService.getAllTags().subscribe(data => {
