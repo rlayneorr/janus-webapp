@@ -56,6 +56,7 @@ export class SkillsComponent implements OnInit {
       'name': ['', Validators.required]
     });
   }
+
   initFormControl() {
     this.addForm = this.fb.group({
       'name': [this.newSkill.skillName, Validators.required]
@@ -88,7 +89,6 @@ export class SkillsComponent implements OnInit {
       const idx = this.skills.findIndex(skill => skill.skillID === resp.skillID);
       this.skills[idx] = resp;
     });
-
   }
 
   /**

@@ -24,7 +24,6 @@ import { AlertsService } from '../../../services/alerts.service';
       })),
       state('left', style({
         transform: 'translateX(-28%) scaleX(1)'
-
       })),
       transition('center =>left', animate('300ms ease-in')),
     ]),
@@ -37,7 +36,7 @@ import { AlertsService } from '../../../services/alerts.service';
  *
  * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
  *
- * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
  *
  * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
  *
@@ -113,7 +112,7 @@ export class QuestionComponent implements OnInit {
    * Switches the question sent in as an argument from active to deactive
    * or from deactive to active based on it's current status
    **/
-  changeQuesitonStatus(question) {
+  changeQuestionStatus(question) {
     if (question.isActive) {
       question.isActive = false;
       this.questionService.deactivateQuestion(question.questionId).subscribe();
@@ -199,9 +198,18 @@ export class QuestionComponent implements OnInit {
    * refactored poorly written by creators from hydra. Future sprint
    * please refactor to seperate into two diffrent methods.
    *
-   * Last Modifed by the Avengers set the bucketId in the question model
+   * Last Modifed to set the bucketId in the question model
    * so that it did not need to be passed individually to the question
    * service.
+   * 
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   *
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   * 
    **/
   addNewQuestion() {
     this.tagsService.getAllTags().subscribe(data => {
@@ -315,13 +323,17 @@ export class QuestionComponent implements OnInit {
   addNewTag(newTag: Tag) {
     this.currentTags.push(newTag);
   }
+
   savedSuccessfully() {
     this.alertsService.success('Saved successfully');
   }
+
   updatedSuccessfully() {
     this.alertsService.success('Updated successfully');
   }
+
   savedUnsuccessfull() {
     this.alertsService.error('All Fields Must be Filled');
   }
+
 }

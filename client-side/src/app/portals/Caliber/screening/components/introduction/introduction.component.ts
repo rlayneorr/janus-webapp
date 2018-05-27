@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { TagService } from '../../../services/tag/tag.service';
-import { BucketService } from '../../services/bucket/bucket.service';
 import { ScreeningService } from '../../services/screening/screening.service';
 
 import { Tag } from '../../entities/tag';
@@ -28,8 +27,10 @@ import { SkillType } from '../../entities/skillType';
 */
 export class IntroductionComponent implements OnInit {
 
-  constructor(public tagService: TagService, private simpleTraineeService: SimpleTraineeService,
-    private skillTypeService: SkillTypeService, private bucketService: BucketService,
+  constructor(
+    public tagService: TagService,
+    private simpleTraineeService: SimpleTraineeService,
+    private skillTypeService: SkillTypeService,
     private screeningService: ScreeningService) { }
 
 

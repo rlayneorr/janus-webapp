@@ -45,7 +45,6 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
-import { BucketService } from './screening/services/bucket/bucket.service';
 import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
@@ -345,7 +344,6 @@ export const Dependencies = {
     RouteService,
     PanelService,
     RouteService,
-    BucketService,
     UrlUtilService,
     QuestionService,
     QuestionsService,

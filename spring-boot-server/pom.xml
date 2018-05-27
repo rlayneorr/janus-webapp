@@ -55,7 +55,7 @@
 					<dockerCertPath>${env.DOCKER_CERT_PATH}</dockerCertPath>
 					
 					<!-- All images are dependent on Java 8 -->
-					<baseImage>java:8</baseImage>
+					<baseImage>openjdk:8-jre-alpine</baseImage>
 					
 					<!-- When we do "docker run imageName" within the docker instance -->
 					<!-- It will run this as a command -->

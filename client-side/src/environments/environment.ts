@@ -4,14 +4,12 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 /**
- * Last modified by the Avengers
- *
  * cleaned up the mess
  * removed smelly code
  *
  * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
  *
- * @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+ * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
  *
  * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
  *
