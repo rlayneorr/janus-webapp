@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 // import { ApiService } from '../util/api.service';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../services/urls/url.service';
 
 // entities
 import { CompleteBatch } from '../entities/CompleteBatch';
@@ -41,7 +41,8 @@ export class BatchService {
 
     constructor(public http: HttpClient,
       public gambitBatchService: GambitBatchService,
-      public gambitSkillTypeService: GambitSkillTypeService) {
+      public gambitSkillTypeService: GambitSkillTypeService,
+      private urlService: UrlService) {
       this.listSubject = new BehaviorSubject([]);
       this.savedSubject = new Subject();
       this.updatedSubject = new Subject();
@@ -67,7 +68,7 @@ export class BatchService {
      */
     public fetchAll(): Observable<CompleteBatch[]> {
       if (this.batches.length === 0) {
-      this.http.get<any[]>(environment.batch.fetchAll())
+      this.http.get<any[]>(this.urlService.batches.fetchAll())
         .subscribe((results) => {
           console.log(results);
           for (const result of results) { // will need to call skill servive instead of making our own http request
@@ -103,7 +104,7 @@ export class BatchService {
     }
 
     getTrainer(trainerId: number) {
-      return this.http.get<GambitTrainer>(environment.trainer.fetchById(trainerId));
+      return this.http.get<GambitTrainer>(this.urlService.trainers.fetchById(trainerId));
     }
 
     /**
@@ -114,7 +115,7 @@ export class BatchService {
      * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
      */
     public fetchAllByTrainerId(id: number) {
-      this.http.get<any[]>(environment.batch.fetchAllByTrainerId(id))
+      this.http.get<any[]>(this.urlService.batches.fetchAllByTrainerId(id))
       .subscribe((results) => {
         for (const result of results) { // will need to call skill servive instead of making our own http request
           this.gambitSkillTypeService.find(result['skillTypeId']).subscribe(res => {

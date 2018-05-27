@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { SkillTypeBucketLookUp } from '../../entities/skillTypeBucketLookup';
 import { SKILL_TYPE_BUCKET_LOOKUP } from '../../mock-data/mock-skillTypeBucketLookup';
-import { UrlUtilService } from '../UrlUtil/url-util.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 /*
 
@@ -29,9 +29,10 @@ import { UrlUtilService } from '../UrlUtil/url-util.service';
 */
 @Injectable()
 export class SkillTypeBucketService {
-  private ROOT_URL: string = this.urlUtilService.getBase() + 'skilltype-service/';
-  constructor(private httpClient: HttpClient,
-    private urlUtilService: UrlUtilService) { }
+  constructor(
+    private httpClient: HttpClient,
+    private urlService: UrlService
+  ) { }
 
   bucketsByWeight: SkillTypeBucketLookUp;
 
@@ -45,7 +46,7 @@ export class SkillTypeBucketService {
 
   // Returns an observable array of buckets (categories) with assigned weights
   getSkillTypeBuckets(skillTypeID: number): Observable<any> {
-    return this.httpClient.get<any>(this.ROOT_URL + `skillType/getSkillTypeBucketsWithWeights/${skillTypeID}`);
+    return this.httpClient.get<any>(`${this.urlService.skillTypes.getBucketBySkillType(skillTypeID)}`);
   }
 
 /*
