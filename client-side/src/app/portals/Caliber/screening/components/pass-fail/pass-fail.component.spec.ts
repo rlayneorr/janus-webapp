@@ -21,7 +21,7 @@ xdescribe('PassFailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PassFailComponent, ViolationFlagComponent ],
-      providers: [ SoftSkillsViolationService, HttpClient, HttpHandler, UrlUtilService, ScreeningService, SimpleTraineeService,
+      providers: [ SoftSkillsViolationService, HttpClient, HttpHandler, ScreeningService, SimpleTraineeService,
       SkillTypeService, ViolationTypeService, AlertsService ]
     })
     .compileComponents();
