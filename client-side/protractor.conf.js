@@ -4,19 +4,25 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 22000,
   specs: [
-    './e2e/caliber-related/manage-batches-e2e/manage-batches.e2e-spec.ts',
+    './e2e/caliber-e2e/home-e2e/home.e2e-spec.ts',
+   /* './e2e/caliber-e2e/manage-batches-e2e/manage-batches.e2e-spec.ts',
+    './e2e/caliber-e2e/assess-batches-e2e/assess-batches.e2e-spec.ts',
+    './e2e/caliber-e2e/panel-e2e/panel.e2e-spec.ts',*/
+    './e2e/caliber-e2e/settings-e2e/settings.e2e-spec.ts',
+    
+
   ],
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
-      args: [ "--headless", "--disable-gpu", "--window-size=800x600" ]
+      args: ["--disable-gpu", "--window-size=1980x1024" ]
     }
   },
   directConnect: true,
-  baseUrl: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com',
-  // baseUrl: 'http://localhost:4200/',
+ // baseUrl: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com',
+   baseUrl: 'http://localhost:4200',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
