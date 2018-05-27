@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // Interfaces
 
@@ -31,6 +31,11 @@ import { GambitBatch } from '../../entities/GambitBatch';
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
 
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  };
 
 /**
  * this service manages calls to the web service
@@ -70,7 +75,7 @@ export class GambitBatchService {
    * @returns Observable
    */
   public fetchAllByTrainerId(id: number) {
-    return this.http.get<GambitBatch[]>(this.urls.batches.fetchAllByTrainerId(id));
+    return this.http.get<GambitBatch[]>(this.urls.batches.fetchAllByTrainerId(id), httpOptions);
   }
 
   /**
@@ -85,7 +90,7 @@ export class GambitBatchService {
   * @param batch: Batch
   */
   public create(batch: GambitBatch) {
-    return this.http.post<GambitBatch>(this.urls.batches.save(), JSON.stringify(this.prepareForApi(batch)));
+    return this.http.post<GambitBatch>(this.urls.batches.save(), JSON.stringify(this.prepareForApi(batch)), httpOptions);
   }
 
 
@@ -102,7 +107,7 @@ export class GambitBatchService {
    * @returns Observable
    */
   public update(batch: GambitBatch) {
-    return this.http.put<GambitBatch>(this.urls.batches.update(), JSON.stringify(this.prepareForApi(batch)));
+    return this.http.put<GambitBatch>(this.urls.batches.update(), JSON.stringify(this.prepareForApi(batch)), httpOptions);
   }
 
   /**
@@ -116,7 +121,7 @@ export class GambitBatchService {
    * @returns Observable
    */
   public delete(batch: GambitBatch) {
-    return this.http.delete<GambitBatch>(this.urls.batches.delete(batch.batchId));
+    return this.http.delete<GambitBatch>(this.urls.batches.delete(batch.batchId), httpOptions);
   }
 
   /**
