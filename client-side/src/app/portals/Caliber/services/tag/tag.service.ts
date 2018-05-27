@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Tag } from '../../screening/entities/tag';
 import { TAGS } from '../../screening/mock-data/mock-tags';
-import { UrlUtilService } from '../../screening/services/UrlUtil/url-util.service';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 /**
 * Used to get the Tags that are shown to the screener
@@ -26,25 +26,23 @@ import { UrlUtilService } from '../../screening/services/UrlUtil/url-util.servic
 *
 * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
 *
-* removed forward slash at the start of the screening-service
-* i.e. '/avengers' to 'avengers'
+* Removed UrlUtilService and replaced with UrlService for better
+* formatted endpoints
 */
 
 @Injectable()
 export class TagService {
 
-  constructor(private http: HttpClient,
-    private urlUtilService: UrlUtilService) { }
-
-  private ROOT_URL: string = this.urlUtilService.getBase();
+  constructor(
+    private http: HttpClient,
+    private urlService: UrlService
+  ) { }
 
   public tagListChecked: Tag[] = [];
 
-
-
   getAllTags(): Observable<Tag[]> {
     return this.http.get<Tag[]>(
-      this.urlUtilService.getBase() + 'question-service/tag/getAllTags', {}
+      this.urlService.tags.getAllTags(), {}
     );
   }
   // Fake local data for temp use

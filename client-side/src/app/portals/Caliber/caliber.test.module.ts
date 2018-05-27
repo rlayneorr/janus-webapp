@@ -57,7 +57,6 @@ import { ViolationTypeService } from './screening/services/violationType/violati
 import { ScreeningService } from './screening/services/screening/screening.service';
 import { ScreenerBucketsService } from './screening/services/screener-buckets/screener-buckets.service';
 import { SkillTypeBucketService } from './screening/services/skillTypeBucketLookup/skill-type-bucket.service';
-import { UrlUtilService } from './screening/services/UrlUtil/url-util.service';
 import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
@@ -344,7 +343,6 @@ export const Dependencies = {
     RouteService,
     PanelService,
     RouteService,
-    UrlUtilService,
     QuestionService,
     QuestionsService,
     BucketsService,

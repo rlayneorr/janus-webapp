@@ -7,7 +7,6 @@ import { Question } from '../../entities/Question';
 
 // Services
 import { QuestionsService } from './questions.service';
-import { UrlUtilService } from '../../screening/services/UrlUtil/url-util.service';
 
 // Modules
 import { HttpClient, HttpHandler, HttpBackend, HttpErrorResponse } from '@angular/common/http';

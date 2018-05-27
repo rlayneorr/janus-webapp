@@ -257,6 +257,13 @@ export class UrlService {
     getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
   };
 
+  softSkillsViolation = {
+    getViolationTypeURL: () => `${this.context}screening-service/violation/all`,
+    getViolationURL: (screeningID: number) => `${this.context}screening-service/screening/violation/${screeningID}`,
+    addViolationURL: () => `${this.context}screening-service/violation/flag/`,
+    deleteViolationURL: (violationID: number) => `${this.context}screening-service/violation/delete/${violationID}`,
+  };
+
   subtopic = {
     getSubtopicByIDs: (subtopicIdList: number[]) => `${this.context}/topics/subtopics?ids=${subtopicIdList}`,
     getSubtopicByID: (subtopicId: number) => `${this.context}/topics/subtopics/${subtopicId}`,
@@ -266,6 +273,11 @@ export class UrlService {
     removeSubtopic: (subtopicId: number) => `${this.context}/subtopics/${subtopicId}`,
     removeAllSubtopics: (batchId: number) => `${this.context}/subtopics/${batchId}/`,
     isPopulated: (batchId: number) => `${this.context}/subtopics/ispopulated/${batchId}/`
+  };
+
+  tagEndpoint = this.context + 'question-service/tag';
+  tags = {
+    getAllTags: () => `${this.tagEndpoint}/getAllTags`,
   };
 
   topic = {

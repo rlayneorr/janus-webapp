@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Question } from '../../entities/Question';
-import { UrlUtilService } from '../../../Caliber/screening/services/UrlUtil/url-util.service';
 import { environment } from '../../../../../environments/environment';
 import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
