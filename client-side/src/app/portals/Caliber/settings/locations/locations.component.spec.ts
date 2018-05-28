@@ -31,7 +31,7 @@ import { LocationService } from '../../../../gambit-client/services/location/loc
  * Uncomment this: import { LocationService } from '../../gambit-client/services/location/location.service';
  * Comment this: import { LocationService } from './services/location.service';
  **/
-fdescribe('LocationsComponent', () => {
+describe('LocationsComponent', () => {
   let component: LocationsComponent;
   let fixture: ComponentFixture<LocationsComponent>;
 
