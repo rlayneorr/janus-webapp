@@ -1,11 +1,10 @@
 /** @Author Princewill Ibe */
 
-import {Injectable} from '@angular/core';
-import {environment} from '../../../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {Batch} from '../../models/batch.model';
-import {Associate} from '../../models/associate.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Batch } from '../../models/batch.model';
+import { Associate } from '../../models/associate.model';
 
 @Injectable()
 export class BatchService {
@@ -76,7 +75,7 @@ export class BatchService {
   //   return this.http.get<any>(this.batchPath + '?start=' + threeMonthsBefore + '&end=' + threeMonthsAfter + '&type='+type);
   // }
 
-  private url: string = environment.msurl + '8095';
+  private url: 'http://34.227.178.103:8095';
 
   constructor(private http: HttpClient) { }
 
@@ -145,7 +144,7 @@ export class BatchService {
    */
   public getBatchesByDate(startDate: Date, endDate: Date): Observable<Batch[]> {
     // const url = environment.url + this.batchPath+ `?start=${startDate.getTime()}&end=${endDate.getTime()}`;
-    const url = environment.msurl + this.url + '/all/batch/ordered';
+    const url = this.url + '/all/batch/ordered';
     console.log(startDate.getTime());
     console.log(endDate.getTime());
     return this.http.get<Batch[]>(url);

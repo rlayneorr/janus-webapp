@@ -10,7 +10,6 @@ import { BarGraphModalComponent } from './bar-graph-modal/bargraphmodal.componen
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ReportingService } from '../../services/reporting.service';
 import { Subscription } from 'rxjs/Subscription';
-import { environment } from '../../../../../environments/environment';
 import { EvaluationService } from '../../services/evaluation.service';
 import { Note } from '../../entities/Note';
 import { DataSet } from '../../entities/DataSet';

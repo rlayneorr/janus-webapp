@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 import { User } from '../../models/user.model';
 
 @Injectable()
 export class RequestService {
-
-  host: string = environment.url;
-  context: string = environment.context;
-  hostms: string = environment.msurl;
-  trackPath: string = this.host + 'TrackForce/track';
-  dataPath: string = this.host + 'TrackForce/track/data/get';
+  url = (new UrlService).context;
+  trackPath: string = this.url + 'TrackForce/track';
+  dataPath: string = this.url + 'TrackForce/track/data/get';
   /**
    * @param {HttpClient} http
    * Need to create a connection to REST endpoint
@@ -20,19 +17,19 @@ export class RequestService {
   constructor(private http: HttpClient) { }
 
   public populateDB(): Observable<any> {
-    return this.http.get(this.host + 'TrackForce/track/database/populateDB');
+    return this.http.get(this.url + 'TrackForce/track/database/populateDB');
   }
 
   public populateDBSF(): Observable<any> {
-    return this.http.get(this.host + 'TrackForce/track/database/populateDBSF');
+    return this.http.get(this.url + 'TrackForce/track/database/populateDBSF');
   }
 
   public deleteDB(): Observable<any> {
-    return this.http.delete(this.host + 'TrackForce/track/database/deleteFromDB');
+    return this.http.delete(this.url + 'TrackForce/track/database/deleteFromDB');
   }
 
   public getAssociates(): Observable<any> {
-    return this.http.get(this.context + '/trainees');
+    return this.http.get(this.url + '/trainees');
   }
 
 
@@ -45,7 +42,7 @@ export class RequestService {
   }
 
   public getStatuses(): Observable<any> {
-    return this.http.get(this.hostms + '8094/all/marketingstatus');
+    return this.http.get(this.url + '8094/all/marketingstatus');
   }
 
   // get first match of Client Object

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../../../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
 import { PanelReview } from '../../Caliber/entities/PanelReview';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 /**
  * Service handles API calls and tracks fetched data for caching.
@@ -24,7 +24,7 @@ export class EvaluationService {
   private allQCBatchNotes = new BehaviorSubject<CacheData>(null);
   public allQCBatchNotes$ = this.allQCBatchNotes.asObservable();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private urlService: UrlService) { }
 
   private needsRefresh(sub: BehaviorSubject<CacheData>, params: any): boolean {
     return !sub.getValue() || sub.getValue().params !== params;
@@ -42,7 +42,7 @@ export class EvaluationService {
    * @param weekId weekId filter value
    */
   FetchAllQCTraineeNotes(batchId: Number, weekId: Number) {
-    const endpoint = environment.apiFetchAllQCTraineeNotes(batchId, weekId);
+    const endpoint = this.urlService.apiFetchAllQCTraineeNotes(batchId, weekId);
     const params = {
       batchId: batchId,
       weekId: weekId
@@ -58,7 +58,7 @@ export class EvaluationService {
   }
 
   FetchAllQCBatchNotes(batchId: Number, weekId: Number) {
-    const endpoint = environment.apiFetchAllQCBatchNotes(batchId, weekId);
+    const endpoint = this.urlService.apiFetchAllQCBatchNotes(batchId, weekId);
     const params = {
       batchId: batchId,
       weekId: weekId
