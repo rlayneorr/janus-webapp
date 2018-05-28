@@ -5,7 +5,6 @@ import { VpHomeLineGraphService } from '../../services/graph/vp-home-line-graph.
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
-import { environment } from '../../../../../environments/environment';
 import { AlertsService } from '../../services/alerts.service';
 import { ReportsService } from '../../services/reports.service';
 

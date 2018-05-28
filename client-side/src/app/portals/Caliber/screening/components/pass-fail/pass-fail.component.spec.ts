@@ -14,14 +14,14 @@ import { AlertsService } from '../../../services/alerts.service';
 
 // Cannot test: Appears to be error on component side
 
-xdescribe('PassFailComponent', () => {
+describe('PassFailComponent', () => {
   let component: PassFailComponent;
   let fixture: ComponentFixture<PassFailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PassFailComponent, ViolationFlagComponent ],
-      providers: [ SoftSkillsViolationService, HttpClient, HttpHandler, UrlUtilService, ScreeningService, SimpleTraineeService,
+      providers: [ SoftSkillsViolationService, HttpClient, HttpHandler, ScreeningService, SimpleTraineeService,
       SkillTypeService, ViolationTypeService, AlertsService ]
     })
     .compileComponents();

@@ -1,14 +1,15 @@
-import { AppPage } from './manage-batches.po';
+import { HomePage } from './home.po';
 import { browser } from 'protractor';
 
-describe('test-app Batch Management', () => {
-  let page: AppPage;
+describe('test-app Home Screen', () => {
+  let page: HomePage;
   const baseUrl: String = browser.baseUrl + '/#/';
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new HomePage();
   });
 
+//check for Janus Homepage rendering
   it('should display welcome message', () => {
     page.navigateTo();
     expect(page.getTitleText()).toEqual('Please Select One Of the Following Applications :');
@@ -23,8 +24,5 @@ describe('test-app Batch Management', () => {
     expect(browser.getCurrentUrl()).toContain(baseUrl + 'Caliber/home');
   });
 
-  it('should click Manage Batches button and go to Batch overview page', () => {
-    page.clickManageBatches();
-    expect(browser.getCurrentUrl()).toContain(baseUrl + 'Caliber/manage');
-  });
+
 });

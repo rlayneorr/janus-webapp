@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
 // services
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 import { AlertsService } from './alerts.service';
 
 // entities
@@ -17,7 +17,7 @@ import { Trainer } from '../entities/Trainer';
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
 
-const context = environment.trainer;
+const context = (new UrlService).trainers;
 
 /**
  * This service manages calls to the web service

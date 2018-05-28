@@ -23,7 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
 import { GambitClientModule } from './gambit-client/gambit-client.module';
-import { environment } from '../environments/environment';
 import { GambitBatchUtilService } from './services/gambit-batch-util.service';
 
 // Error Alert

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as jsPDF from 'jspdf';
-import { environment } from '../../../../../environments/environment';
 // import { Http } from '@angular/http';
 import { PDFService } from '../../services/pdf.service';
 import { ReportingService } from '../../services/reporting.service';

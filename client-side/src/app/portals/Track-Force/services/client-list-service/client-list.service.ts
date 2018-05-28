@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+
 
 /**
  * @author Han Jung
@@ -10,8 +11,8 @@ import { environment } from '../../../../../environments/environment';
 
 @Injectable()
 export class ClientListService {
-  // private url: string = environment.url + 'TrackForce/';
-  private url: string = environment.msurl + '8090';
+  private url: string = (new UrlService).context + 'TrackForce/';
+  // private url: string = environment.msurl + '8090';  import environment if your goingt to do what ever this weird thing does
 
   constructor(private http: HttpClient) { }
 

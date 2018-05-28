@@ -9,13 +9,13 @@ import { RequestService } from '../request-service/request.service';
 import {User} from '../../models/user.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 const USER_KEY = 'currentUser';
 
 @Injectable()
 export class AuthenticationService {
-
+  private url = (new UrlService).context;
   /**
   * @constructor
   *
@@ -37,7 +37,7 @@ export class AuthenticationService {
     * If credentials are wrong, 400 is returned
     */
   public login(username: string, password: string): Observable<User> {
-    return this.http.post<User>(environment.url + 'TrackForce/users/login', { username: username, password: password }).map(
+    return this.http.post<User>(this.url + 'TrackForce/users/login', { username: username, password: password }).map(
       user => {
         if (user) {
           localStorage.setItem(USER_KEY, JSON.stringify(user));

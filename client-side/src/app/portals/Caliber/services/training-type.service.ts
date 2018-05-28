@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // Interfaces
 import { Fetch } from '../interfaces/api.interface';
@@ -12,7 +12,7 @@ import { Fetch } from '../interfaces/api.interface';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
-const context = environment.trainingType;
+const context = (new UrlService).trainingType;
 
 /**
  * Manages API calls for TrainingTypes

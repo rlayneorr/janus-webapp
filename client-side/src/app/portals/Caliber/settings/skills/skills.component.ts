@@ -6,8 +6,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { environment } from '../../../../../environments/environment';
-
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
 import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
