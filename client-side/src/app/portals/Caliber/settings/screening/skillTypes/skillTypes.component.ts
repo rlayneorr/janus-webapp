@@ -23,7 +23,7 @@ import { AlertsService } from '../../../services/alerts.service';
 */
 export class SkillTypesComponent implements OnInit {
 
-  public skillTypes: any[]= [];
+  public skillTypes: SkillType[]= [];
   public inactiveSkillTypes: any[]= [];
   public allSkillTypes: SkillType[]= [];
   public allBuckets: Bucket[] = [];
@@ -74,6 +74,13 @@ export class SkillTypesComponent implements OnInit {
     }
   }
 
+  skillTypeUpdate(skillType: SkillType) {
+    console.log('this is the id ' + skillType.skillTypeName);
+    this.skillTypeService.updateSkillType(skillType).subscribe(results => {
+        console.log(results);
+    });
+  }
+
     /**
     * Opens the modal for creating and editing skill SkillType
     * Resets fields clears the data within set fields
@@ -99,23 +106,23 @@ export class SkillTypesComponent implements OnInit {
         this.singleSkillType = {
             skillTypeName: skillType.skillTypeName,
             skillTypeId: skillType.skillTypeId,
-            skillTypeDescription: skillType.skillTypeDescription,
+            skillTypeDesc: skillType.skillTypeDesc,
             isActive: true,
-            buckets: [],
-            weights: [],
+            isCore: true,
+            skills: []
         };
-        this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
-            let skillTypeBucketAndWeights;
-            skillTypeBucketAndWeights = results;
-            if (skillTypeBucketAndWeights.bucket.length !== 0) {
-                this.singleSkillType.buckets = skillTypeBucketAndWeights.bucket;
-                this.singleSkillType.weights = skillTypeBucketAndWeights.weight;
-            }
-            this.combineBucketsAndWeights();
-            for (const index of this.singleSkillType.buckets){
-                this.singleSkillTypeBucketIds.push(index.bucketId);
-            }
-        });
+        // this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
+        //     let skillTypeBucketAndWeights;
+        //     skillTypeBucketAndWeights = results;
+        //     if (skillTypeBucketAndWeights.bucket.length !== 0) {
+        //         this.singleSkillType.buckets = skillTypeBucketAndWeights.bucket;
+        //         this.singleSkillType.weights = skillTypeBucketAndWeights.weight;
+        //     }
+        //     this.combineBucketsAndWeights();
+        //     for (const index of this.singleSkillType.buckets){
+        //         this.singleSkillTypeBucketIds.push(index.bucketId);
+        //     }
+        // });
 
     }
 
@@ -140,12 +147,12 @@ export class SkillTypesComponent implements OnInit {
     * @param bucket: bucket object needed to be added to skill types.
     */
     addToSkillTypeBuckets(bucket) {
-        if (this.singleSkillType) {
-            this.singleSkillType.buckets.push(bucket);
-            this.singleSkillType.weights.push(0);
-            this.singleSkillTypeBucketIds.push(bucket.bucketId);
-            this.combineBucketsAndWeights();
-        }
+        // if (this.singleSkillType) {
+        //     this.singleSkillType.buckets.push(bucket);
+        //     this.singleSkillType.weights.push(0);
+        //     this.singleSkillTypeBucketIds.push(bucket.bucketId);
+        //     this.combineBucketsAndWeights();
+        // }
     }
 
     /**
@@ -153,17 +160,17 @@ export class SkillTypesComponent implements OnInit {
     * @param bucket: bucket object to be removed from all associates to the skill type
     */
     removeFromSkillTypeBuckets(bucket) {
-        if (this.singleSkillType) {
-            for (const singleBucketIndex in this.singleSkillType.buckets) {
-                if (this.singleSkillType.buckets[singleBucketIndex].bucketCategory === bucket) {
-                    this.singleSkillType.weights.splice(Number(singleBucketIndex), 1);
-                    this.singleSkillTypeBucketIds.splice(Number(singleBucketIndex), 1);
-                    this.bucketsAndWeights.splice(Number(singleBucketIndex), 1);
-                    this.singleSkillType.buckets.splice(Number(singleBucketIndex), 1);
-                }
-            }
-            this.combineBucketsAndWeights();
-        }
+        // if (this.singleSkillType) {
+        //     for (const singleBucketIndex in this.singleSkillType.buckets) {
+        //         if (this.singleSkillType.buckets[singleBucketIndex].bucketCategory === bucket) {
+        //             this.singleSkillType.weights.splice(Number(singleBucketIndex), 1);
+        //             this.singleSkillTypeBucketIds.splice(Number(singleBucketIndex), 1);
+        //             this.bucketsAndWeights.splice(Number(singleBucketIndex), 1);
+        //             this.singleSkillType.buckets.splice(Number(singleBucketIndex), 1);
+        //         }
+        //     }
+        //     this.combineBucketsAndWeights();
+        // }
     }
 
     /**
@@ -173,16 +180,16 @@ export class SkillTypesComponent implements OnInit {
     * Combines the buckets and weights field of the selected skill types
     */
     combineBucketsAndWeights() {
-        if (this.bucketsAndWeights.length !== 0) {
-            for (const index of this.bucketsAndWeights) {
-                this.singleSkillType.weights[index] = this.bucketsAndWeights[index].weights;
-            }
-        }
-        this.bucketsAndWeights = [];
-        for (const bucket of this.singleSkillType.buckets) {
-            this.bucketsAndWeights.push({'bucketCategory': bucket.bucketCategory,
-                'weights': this.singleSkillType.weights});
-        }
+        // if (this.bucketsAndWeights.length !== 0) {
+        //     for (const index of this.bucketsAndWeights) {
+        //         this.singleSkillType.weights[index] = this.bucketsAndWeights[index].weights;
+        //     }
+        // }
+        // this.bucketsAndWeights = [];
+        // for (const bucket of this.singleSkillType.buckets) {
+        //     this.bucketsAndWeights.push({'bucketCategory': bucket.bucketCategory,
+        //         'weights': this.singleSkillType.weights});
+        // }
     }
 
     /**
@@ -268,7 +275,7 @@ export class SkillTypesComponent implements OnInit {
     * Grabs all skill types and stores the information into a variable
     */
     grabAllSkillTypes() {
-        this.skillTypeService.getSkillTypes().subscribe(results => {
+        this.skillTypeService.getSkillTypes().subscribe((results) => {
             this.allSkillTypes = results;
             this.setSkillTypes();
         });

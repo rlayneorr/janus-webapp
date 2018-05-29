@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 
 import { Bucket } from '../entities/Bucket';
@@ -52,7 +52,8 @@ export class BucketsService {
   }
 
   updateBucket (bucket: Bucket) {
-    return this.http.post(this.urlService.bucket.updateBucket(), bucket, httpOptions).toPromise();
+      console.log('Before ' + bucket.name);
+    return this.http.put<Bucket>(this.urlService.bucket.updateBucket(), bucket, httpOptions);
   }
 
   createNewBucket(bucket: Bucket): Observable<Bucket> {
@@ -70,19 +71,19 @@ export class BucketsService {
   }
 
   setName(name: string) {
-      this.currentBucket.bucketCategory = name;
+      this.currentBucket.name = name;
   }
 
   getName(id: number) {
-      return this.currentBucket.bucketCategory;
+      return this.currentBucket.name;
   }
 
   setDescription(desc: string) {
-      this.currentBucket.bucketDescription = desc;
+      this.currentBucket.description = desc;
   }
 
   getDescription() {
-      return this.currentBucket.bucketDescription;
+      return this.currentBucket.description;
   }
 
 }

@@ -31,26 +31,30 @@ export class SkillTypesService {
         return this.http.post(this.urlService.skillTypes.createSkillType(), skillType, httpOptions);
     }
 
-    deactivateSkillType(skillTypeId: number) {
-        return this.http.get(this.urlService.skillTypes.deactiveSkillType(skillTypeId), httpOptions);
+    activateSkillType(skillType: SkillType) {
+        return this.http.put(this.urlService.skillTypes.putSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
-    activateSkillType(skillTypeId: number) {
-        return this.http.get(this.urlService.skillTypes.activeSkillType(skillTypeId), httpOptions);
+    deactivateSkillType(skillType: SkillType) {
+        return this.http.put(this.urlService.skillTypes.putSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
-    getSkillTypes(): Observable<SkillType[]> {
-        return this.http.get<SkillType[]>(this.urlService.skillTypes.getSkillTypes());
+    updateSkillType(skillType: SkillType) {
+        return this.http.put(this.urlService.skillTypes.putSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
-    updateSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
-        return this.http.post(this.urlService.skillTypes.updateSkillTypeBuckets(), { skillTypeName: skillType.skillTypeName,
-            skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
+    getSkillTypes() {
+        return this.http.get<any[]>(this.urlService.skillTypes.getSkillTypes());
     }
 
     setSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
         return this.http.post(this.urlService.skillTypes.setSkillTypeBuckets(), { skillTypeName: skillType.skillTypeName, skillTypeId:
             skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
+    }
+
+    updateSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
+        return this.http.put(this.urlService.skillTypes.updateSkillTypeBuckets(), { skillTypeName: skillType.skillTypeName,
+            skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
     }
 
     getSkillTypeById(skillTypeId: number) {

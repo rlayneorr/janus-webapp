@@ -4,14 +4,13 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 
 @Injectable()
 export class UrlService {
-  public readonly context: string;
+  public readonly context: string =  environment.gambitContext;
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
   apiCurrentPanelsLineChart = this.context + 'all/reports/biweeklyPanelResults';
 
   constructor() {
-    this.context = environment.gambitContext;
   }
 
   /**
@@ -87,12 +86,12 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private bucketEndpoint = '/bucket-service/bucket';
+  private bucketEndpoint = 'question-bucket-service/buckets';
   bucket = {
-    getAllBuckets: () => `${this.context + this.bucketEndpoint}/getBuckets`,
+    getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
     getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
-    updateBucket: () => `${this.context + this.bucketEndpoint}/updateBucket`,
-    createNewBucket: () => `${this.context + this.bucketEndpoint}/createBucket`
+    updateBucket: () => `${this.context + this.bucketEndpoint}`,
+    createNewBucket: () => `${this.context + this.bucketEndpoint}`
   };
 
   /**
@@ -290,26 +289,33 @@ export class UrlService {
   /**
    * Endpoints for skillType
    */
-  skillTypesServiceEndpoint = this.context + 'skilltype-service/skillType';
+  skillTypesServiceEndpoint = this.context + 'skillType';
   skillTypes = {
-    findAll: () => `${this.context}/skillType`,
-    findAllActive: () => `${this.context}/skillType/active`,
-    findById: (id: number) => `${this.context}/skillType/${id}`,
-    findByName: (name: string) => `${this.context}/skillType/${name}`,
-    save: () => `${this.context}/skillType`,
-    saveSkill: (skillTypeId, skillId) => `${this.context}/skillType/${skillTypeId}/skill/${skillId}`,
+    findAll: () => `${this.context}`,
+    findAllActive: () => `${this.context}/active`,
+    findById: (id: number) => `${this.context}/${id}`,
+    findByName: (name: string) => `${this.context}/${name}`,
+    save: () => `${this.context}`,
+    saveSkill: (skillTypeId, skillId) => `${this.context}/${skillTypeId}/skill/${skillId}`,
     saveSkillByName: (skillTypeName, skillName) =>
-      `${this.context}/skillType/name/${skillTypeName}/skill/name/${skillName}`,
+      `${this.context}/name/${skillTypeName}/skill/name/${skillName}`,
     update: (id: number) => `${this.context}/skillType/${id}`,
-    delete: (id: number) => `${this.context}/skilltype/${id}`, // note lowercase t in type, this is to match the request mapping
-    getSkillTypes: () => `${this.skillTypesServiceEndpoint}/getSkillTypes/`,
-    createSkillType: () => `${this.skillTypesServiceEndpoint}/createSkillType`,
-    deactiveSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/deactiveSkillType/${skillTypeId}`,
-    activeSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/activeSkillType/${skillTypeId}`,
+    delete: (id: number) => `${this.context}/${id}`, // note lowercase t in type, this is to match the request mapping
+
+
+
+
+
+    getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
+
+    createSkillType: () => `${this.skillTypesServiceEndpoint}`,
+    putSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
+    getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillType/${skillTypeId}`,
-    getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
+
+
   };
 
   softSkillsViolation = {

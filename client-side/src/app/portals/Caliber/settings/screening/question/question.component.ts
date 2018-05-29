@@ -201,7 +201,7 @@ export class QuestionComponent implements OnInit {
    * Last Modifed to set the bucketId in the question model
    * so that it did not need to be passed individually to the question
    * service.
-   * 
+   *
    * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
    *
    * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
@@ -209,7 +209,7 @@ export class QuestionComponent implements OnInit {
    * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
-   * 
+   *
    **/
   addNewQuestion() {
     this.tagsService.getAllTags().subscribe(data => {
@@ -241,7 +241,7 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer3 = this.sampleAnswers[2];
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
-        this.question.bucketId = this.currentBucket.bucketId;
+        this.question.bucketId = this.currentBucket.id;
         this.questionService.createNewQuestion(this.question, this.getTagIds()).subscribe(data => {
           this.questions.unshift(this.question);
         });
@@ -311,7 +311,7 @@ export class QuestionComponent implements OnInit {
    **/
   updateQuestions() {
     if (this.currentBucket) {
-      this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data => {
+      this.questionService.getBucketQuestions(this.currentBucket.id).subscribe(data => {
         this.questions = (data as Question[]);
       });
       this.tagsService.getAllTags().subscribe(data => {

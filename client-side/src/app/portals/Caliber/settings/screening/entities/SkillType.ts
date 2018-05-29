@@ -1,27 +1,11 @@
 import { Bucket } from './Bucket';
+import { Skill } from '../../../../Caliber/entities/Skill';
 
 export class SkillType {
     skillTypeId: number;
     skillTypeName: string;
-    skillTypeDescription: string;
+    skillTypeDesc: string;
     isActive: boolean;
-    buckets: Bucket[];
-    weights: number[];
+    isCore: boolean;
+    skills: Skill[];
 }
-
-
-/** Suggested backend format */
-// interface SkillType{
-//     id: number,
-//     bucket: Bucket[],
-//     weights: number[]
-// }
-
-/** after changes */
-// export class SkillType {
-//   id: number;
-//   name: string;
-//   isActive: boolean;
-//   buckets: Bucket[];
-//   weights: number[];
-// }
