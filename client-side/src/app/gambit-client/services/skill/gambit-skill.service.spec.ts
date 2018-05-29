@@ -12,10 +12,9 @@ export function asyncData<T>(data: T) {
 /**
    * Test for methods on the gambit-skill service.
    *
-   * Byron Hall | 1803-USF-MAR26 | Wezley Singleton
+   * @author Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
    *
-   * Antonio Marrero Bonilla | 1803-USF-MAR26 | Wezley Singleton
-   *
+   * @author Byron Hall | 1803-USF-MAR26 | Wezley Singleton
    */
 
 describe('GambitSkillService', () => {

@@ -4,7 +4,7 @@ import { Dependencies } from '../../caliber.test.module';
 
 
 
-xdescribe('QualityOverallFeedbackComponent', () => {
+describe('QualityOverallFeedbackComponent', () => {
   let component: QualityOverallFeedbackComponent;
   let fixture: ComponentFixture<QualityOverallFeedbackComponent>;
 
