@@ -19,7 +19,7 @@ import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
  *
  **/
 
-fdescribe('QualityComponent', () => {
+describe('QualityComponent', () => {
   const component: QualityComponent = new QualityComponent(new BatchService(<any> HttpClient,
   new GambitBatchService(<any> HttpClient, new UrlService),
   new GambitSkillTypeService(<any> HttpClient, new UrlService), new UrlService),

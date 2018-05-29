@@ -42,7 +42,7 @@ export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
 }
 
-fdescribe('LocationsComponent', () => {
+describe('LocationsComponent', () => {
   let component: LocationsComponent;
   let fixture: ComponentFixture<LocationsComponent>;
   let locationService: LocationService;
@@ -90,5 +90,4 @@ fdescribe('LocationsComponent', () => {
       (resp) => expect(tempArray).toContain(tempLocation)
     );
   });
-
 });
