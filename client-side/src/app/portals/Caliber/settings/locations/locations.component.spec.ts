@@ -69,25 +69,26 @@ fdescribe('LocationsComponent', () => {
 
   /**
    * Should create a locations component.
+   *
+   * Function tested: None, test if the location component gets created.
    */
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   /**
-   * ngOnInit()
+   * Test if the component initialize by subscribing to the location service.
+   *
+   * Function tested: None, just testing the subscribe to location services.
    */
   it('should initialize and subscribe to location service', () => {
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     locationService = new LocationService(<any> httpClientSpyOnGet, new UrlService);
-
     const tempArray: Location[] = [tempLocation];
-
     httpClientSpyOnGet.get.and.returnValue(asyncData(tempArray));
-
-    // component.ngOnInit();
     locationService.getAllLocations().subscribe(
       (resp) => expect(tempArray).toContain(tempLocation)
     );
   });
+
 });
