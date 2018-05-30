@@ -14,9 +14,9 @@ import { AlertsService } from './alerts.service';
 import { Note } from '../entities/Note';
 import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
 import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
-const context = environment.note;
+const context = (new UrlService).note;
 
 /**
  * This service manages calls to the web services

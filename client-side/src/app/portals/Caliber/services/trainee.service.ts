@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
@@ -14,9 +15,8 @@ import { Observable } from 'rxjs/Observable';
 
 // entities
 import { Trainee } from '../entities/Trainee';
-import { environment } from '../../../../environments/environment';
 
-const context = environment.trainee;
+const context = (new UrlService).trainee;
 
 /**
  * This service manages calls to the web service
@@ -109,7 +109,7 @@ export class TraineeService implements CRUD<Trainee> {
    * @param trainee: Trainee
    */
   public delete(trainee: Trainee) {
-    this.http.delete(environment.batch.delete(trainee.traineeId))
+    this.http.delete((new UrlService).batches.delete(trainee.traineeId))
       .subscribe((results: any) => this.deletedSubject.next(results));
     return this.deletedSubject.asObservable();
   }

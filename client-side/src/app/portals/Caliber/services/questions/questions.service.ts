@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Question } from '../../entities/Question';
-import { environment } from '../../../../../environments/environment';
 import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 /**
@@ -29,10 +28,6 @@ export class QuestionsService {
 
   constructor(private http: HttpClient, private urlService: UrlService) { }
 
-  /**
-   * refactored to not depend on urlUtil Service
-   */
-  private readonly questionEndPoint: string = environment.gambitContext + 'question-service/question/';
   questions: Question[];
 
   /**

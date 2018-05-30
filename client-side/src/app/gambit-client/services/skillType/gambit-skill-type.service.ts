@@ -3,17 +3,12 @@ import { HttpClient } from '@angular/common/http';
 // rxjs
 import { Observable } from 'rxjs/Observable';
 
-// Services
-import { environment } from '../../../../environments/environment';
-
 // Entities
 import { GambitSkillType } from '../../entities/GambitSkillType';
 import { UrlService } from '../urls/url.service';
 
 @Injectable()
 export class GambitSkillTypeService {
-
-  private context = environment.skillType;
 
   constructor(private http: HttpClient, private urls: UrlService) { }
 
@@ -77,7 +72,7 @@ export class GambitSkillTypeService {
    * @param skillId The id of the Skill.
    */
   addSkill(skillTypeId: number, skillId: number) {
-    return this.http.put<void>(this.context.saveSkill(skillTypeId, skillId), null);
+    return this.http.put<void>(this.urls.skillTypes.saveSkill(skillTypeId, skillId), null);
   }
 
   /**
@@ -86,6 +81,6 @@ export class GambitSkillTypeService {
    * @param skillName The id of the Skill.
    */
   addSkillByname(skillTypeName: string, skillName: string) {
-    return this.http.put<void>(this.context.saveSkillByName(skillTypeName, skillName), null);
+    return this.http.put<void>(this.urls.skillTypes.saveSkillByName(skillTypeName, skillName), null);
   }
 }

@@ -30,14 +30,13 @@ export class QualityComponent implements OnInit, OnDestroy {
     private batchService: BatchService,
     private batchesByYearPipe: DisplayBatchByYear
   ) {
-    this.setCurrentYear( this.getCalendarYear() );
+    this.setCurrentYear(this.getCalendarYear());
     this.currentBatch = new CompleteBatch();
   }
 
   ngOnInit() {
-
     this.batchSubscription = this.batchService.fetchAll()
-      .subscribe( (batches) => this.setBatches(batches) );
+      .subscribe((batches) => this.setBatches(batches));
 
     this.batchService.fetchAll();
   }

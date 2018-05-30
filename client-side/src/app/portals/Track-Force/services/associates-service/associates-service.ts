@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Response } from '@angular/http/';
-import { environment } from '../../../../../environments/environment';
 import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 import { forEach } from '@angular/router/src/utils/collection';
 import { UrlService } from '../../../../gambit-client/services/urls/url.service';
@@ -16,7 +15,7 @@ import { UrlService } from '../../../../gambit-client/services/urls/url.service'
 export class AssociateService {
 
     private associatePath = '8091';
-
+    private url = (new UrlService).context;
     status: string;
     client: string;
 
@@ -44,7 +43,7 @@ export class AssociateService {
     getAssociatesByStatus(statusId: number) {
         console.log('Inside Associate Service - getFilteredAssociates');
         console.log('statusId: ' + statusId);
-        return this.http.get(environment.url + this.associatePath + '/all/associate/marketingStatus/' + statusId);
+        return this.http.get(this.url + this.associatePath + '/all/associate/marketingStatus/' + statusId);
     }
 
     /**
@@ -56,7 +55,7 @@ export class AssociateService {
     getAssociatesByClient(statusId: number) {
         console.log('Inside Associate Service - getFilteredAssociates');
         console.log('statusId: ' + statusId);
-        return this.http.get(environment.url + this.associatePath + '/all/associate/client/' + statusId);
+        return this.http.get(this.url + this.associatePath + '/all/associate/client/' + statusId);
     }
 
     /**
@@ -68,7 +67,7 @@ export class AssociateService {
     getAssociatesByEndClient(statusId: number) {
         console.log('Inside Associate Service - getFilteredAssociates');
         console.log('statusId: ' + statusId);
-        return this.http.get(environment.url + this.associatePath + '/all/associate/endClient/' + statusId);
+        return this.http.get(this.url + this.associatePath + '/all/associate/endClient/' + statusId);
     }
 
     /**
@@ -80,7 +79,7 @@ export class AssociateService {
     getAssociatesByBatch(statusId: number) {
         console.log('Inside Associate Service - getFilteredAssociates');
         console.log('statusId: ' + statusId);
-        return this.http.get(environment.url + this.associatePath + '/all/associate/batch/' + statusId);
+        return this.http.get(this.url + this.associatePath + '/all/associate/batch/' + statusId);
     }
 
     /**
@@ -92,12 +91,12 @@ export class AssociateService {
     }
 
     getInterviewsForAssociate(id: number): Observable<any> {
-        const url: string = environment.url + this.associatePath + '/' + id + '/interviews/';
+        const url: string = this.url + this.associatePath + '/' + id + '/interviews/';
         return this.http.get(url);
     }
 
     addInterviewForAssociate(id: number, interview: any): Observable<any> {
-        const url: string = environment.url + this.associatePath + '/' + id + '/interviews/';
+        const url: string = this.url + this.associatePath + '/' + id + '/interviews/';
         return this.http.post(url, interview);
     }
 }

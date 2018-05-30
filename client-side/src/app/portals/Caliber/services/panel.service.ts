@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // services
 import { AlertsService } from './alerts.service';
 import { ApiService } from '../util/api.service';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -12,13 +13,12 @@ import { Observable } from 'rxjs/Observable';
 
 // entities
 import { Panel } from '../entities/Panel';
-import { environment } from '../../../../environments/environment';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
 import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
 
-const context = environment.panel;
+const context = (new UrlService).panel;
 
 /**
 * this service manages calls to the web services

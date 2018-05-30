@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
 // services
-import { environment } from '../../../../environments/environment';
 import { CategoryService } from './category/category.service';
 
 

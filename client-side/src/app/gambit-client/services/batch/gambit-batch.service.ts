@@ -8,12 +8,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
-// services
-import { environment } from '../../../../environments/environment';
-
 // entities
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { UrlService } from '../urls/url.service';           // TODO refactor reference to Environments?
+import { UrlService } from '../urls/url.service';
 import { stringifyDate } from '../../../portals/Caliber/util/utils';
 import { GambitCRUD } from '../../interfaces/api.interface';
 
@@ -75,7 +72,7 @@ export class GambitBatchService {
    * @returns Observable
    */
   public fetchAllByTrainerId(id: number) {
-    return this.http.get<GambitBatch[]>(this.urls.batches.fetchAllByTrainerId(id), httpOptions);
+    return this.http.get<GambitBatch[]>(this.urls.batches.fetchAllByTrainerId(id));
   }
 
   /**

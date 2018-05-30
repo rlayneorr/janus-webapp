@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 import { AlertsService } from '../../services/alerts.service';
-import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 // entities
 import { Category } from '../../entities/Category';
@@ -22,7 +22,7 @@ import { CRUD } from '../../interfaces/api.interface';
 export class CategoryService implements CRUD<Category> {
 
   public listSubject = new BehaviorSubject<Category[]>([]);
-
+  private urlService = new UrlService();
   constructor(public httpClient: HttpClient, public alertService: AlertsService) {
     this.listSubject = new BehaviorSubject([]);
   }
@@ -40,7 +40,7 @@ export class CategoryService implements CRUD<Category> {
  *
  */
  public fetchAll(): Observable<Category[]> {
-   this.httpClient.get<Category[]>(environment.category.fetchAll()).subscribe(res => this.listSubject.next(res));
+   this.httpClient.get<Category[]>(this.urlService.category.fetchAll()).subscribe(res => this.listSubject.next(res));
    return this.listSubject.asObservable();
  }
 
@@ -51,7 +51,7 @@ export class CategoryService implements CRUD<Category> {
  *
  */
  public fetchAllActive(): Observable<Category[]> {
-   const url = environment.category.fetchAllActive();
+   const url = this.urlService.category.fetchAllActive();
    this.httpClient.get<Category[]>(url)
    .subscribe((results) => this.listSubject.next(results));
    return this.listSubject.asObservable();
@@ -67,7 +67,7 @@ export class CategoryService implements CRUD<Category> {
  * @return Observable<Category>
  */
  public fetchById(id: number): Observable<Category> {
-   const url = environment.category.fetchById(id);
+   const url = this.urlService.category.fetchById(id);
    return this.httpClient.get<Category>(url);
  }
 
@@ -79,7 +79,7 @@ export class CategoryService implements CRUD<Category> {
   * @param category: Category
   */
   public create(category: Category): Observable<Category> {
-    const url = environment.category.save();
+    const url = this.urlService.category.save();
     return this.httpClient.post<Category>(url, JSON.stringify(category));
   }
 
@@ -91,7 +91,7 @@ export class CategoryService implements CRUD<Category> {
    * @param category: Category
    */
   public update(category: Category): Observable<Category> {
-    const url = environment.category.update();
+    const url = this.urlService.category.update();
     return this.httpClient.put<Category>(url, JSON.stringify(category));
   }
 

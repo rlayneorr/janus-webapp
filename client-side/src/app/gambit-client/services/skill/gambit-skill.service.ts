@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../../environments/environment';
 
 import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
 import { UrlService } from '../urls/url.service';
@@ -72,7 +71,6 @@ export class GambitSkillService {
   * @param skill: Skill
   */
   public create(skill: GambitSkill): Observable<GambitSkill> {
-    // const url = environment.skill.save();
     return this.httpClient.post<GambitSkill>(this.urls.skills.save(), JSON.stringify(skill));
   }
 

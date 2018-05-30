@@ -19,7 +19,7 @@
           <strong>{{selectedBatch.trainer.firstname}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
         </button>
         <div class="dropdown-year" ngbDropdownMenu aria-labelledby="dropdownBasic2" (click)="switchBatch(selectedBatch.batchId)">
-          <div *ngFor="let  batch of yearBatches" class="custom-bold">
+          <div *ngFor="let batch of yearBatches" class="custom-bold">
             <button class="dropdown-item c-pointer f-size" (click)="changeBatch(selectedBatch)">
               <strong>{{selectedBatch.trainer.firstname}} - {{selectedBatch.startDate | date: 'shortDate'}}</strong>
             </button>
