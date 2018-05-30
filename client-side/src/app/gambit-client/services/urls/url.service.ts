@@ -202,14 +202,17 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private questionEndpoint = 'question-service/question';
+  private questionEndpoint = (this.context + '/questions');
   question = {
-    postQuestion: () => `${this.context + this.questionEndpoint}/createQuestion`,
-    putQuestion: () => `${this.context + this.questionEndpoint}/updateQuestion`,
-    getQuestionsByBucketId: (bucketId: number) => `${this.context + this.questionEndpoint}/bucketQuestions/${bucketId}`,
-    deactivateQuestion: (questionId: number) => `${this.context + this.questionEndpoint}/deactivateQuestion/${questionId}`,
-    activateQuestion: (questionId: number) => `${this.context + this.questionEndpoint}/activateQuestion/${questionId}`,
-    filteredQuestions: () => `${this.context + this.questionEndpoint}/filtered`,
+    postQuestion: () => `${this.questionEndpoint}`,
+    putQuestion: () => `${this.questionEndpoint}`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.questionEndpoint}/bucket/${bucketId}`,
+    deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
+    activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
+    filteredQuestions: () => `${this.questionEndpoint}/filter`,
+    getAllTags: () => `${this.questionEndpoint}/questions/tags`,
+    createNewTag: () => `${this.questionEndpoint}/questions/tags`,
+    getTagsByQuestionId: (questionId: number) => `${this.questionEndpoint}/questions/tags/question/${questionId}`
   };
 
   private questionScoringEndpoint = 'question-score-service/question';
