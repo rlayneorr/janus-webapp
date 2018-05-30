@@ -79,6 +79,7 @@ export class SkillTypesComponent implements OnInit {
     this.skillTypeService.updateSkillType(skillType).subscribe(results => {
         console.log(results);
     });
+    this.grabAllSkillTypes();
   }
 
     /**
