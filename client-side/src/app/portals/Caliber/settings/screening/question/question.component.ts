@@ -10,7 +10,6 @@ import { TagsService } from '../services/tags.service';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { BucketsService } from '../services/buckets.service';
 import { SkillType } from '../entities/SkillType';
-import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import { AlertsService } from '../../../services/alerts.service';
 
 @Component({

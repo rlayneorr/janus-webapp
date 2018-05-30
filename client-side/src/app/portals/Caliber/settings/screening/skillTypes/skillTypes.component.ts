@@ -16,9 +16,23 @@ import { AlertsService } from '../../../services/alerts.service';
 })
 
 /**
+ * This component should probably be rewitten because it is a mess right now
+ *
+ * You will need to see implementation in the skills service relating to the
+ * skillType controler.
+ * Whats working:
+ * Creating a skill type and editing a skill
+ *
+ * Whats not working:
+ * assigning buckets to skill types is not working.
+ * adding weights needs to be added functionality does not exist
+ */
+
+/**
 * Skill Type Component displays a template containing all the skill types from the database
 * It also has access to modals that can create or edit a skill types
 *
+* 
 * @author chanconan
 */
 export class SkillTypesComponent implements OnInit {
@@ -31,9 +45,12 @@ export class SkillTypesComponent implements OnInit {
   public bucketsAndWeights = [];
   public skillType: SkillType;
   public singleSkillType: SkillType;
+  public singleSkillTypeBuckets: Bucket[];
   public error: boolean;
   public modalServiceRef;
   public singleSkillTypeBucketIds: number[] = [];
+
+  public skillTypeBucket: SkillTypeBucket;
 
   constructor(
     private modalService: NgbModal,
@@ -113,16 +130,9 @@ export class SkillTypesComponent implements OnInit {
             skills: []
         };
         this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
-            let skillTypeBucketAndWeights;
-            skillTypeBucketAndWeights = results;
-            // if (skillTypeBucketAndWeights.bucket.length !== 0) {
-            //     this.singleSkillType.buckets = skillTypeBucketAndWeights.bucket;
-            //     this.singleSkillType.weights = skillTypeBucketAndWeights.weight;
-            // }
-            // this.combineBucketsAndWeights();
-            // for (const index of this.singleSkillType.buckets){
-            //     this.singleSkillTypeBucketIds.push(index.bucketId);
-            // }
+            for (let i = 0; i < results.length; i++) {
+                this.singleSkillTypeBucketIds.push(results[i].bucketId);
+            }
         });
 
     }
@@ -147,9 +157,10 @@ export class SkillTypesComponent implements OnInit {
     * Add the bucketId to the array of Ids of selected skill type
     * @param bucket: bucket object needed to be added to skill types.
     */
-    addToSkillTypeBuckets(bucket) {
+    addToSkillTypeBuckets(bucket: Bucket) {
         // if (this.singleSkillType) {
         //     this.singleSkillType.buckets.push(bucket);
+        //     // this auto sets weights for all buckets assigned to zero.
         //     this.singleSkillType.weights.push(0);
         //     this.singleSkillTypeBucketIds.push(bucket.bucketId);
         //     this.combineBucketsAndWeights();
