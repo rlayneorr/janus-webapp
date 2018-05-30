@@ -111,18 +111,18 @@ export class SkillTypesComponent implements OnInit {
             isCore: true,
             skills: []
         };
-        // this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
-        //     let skillTypeBucketAndWeights;
-        //     skillTypeBucketAndWeights = results;
-        //     if (skillTypeBucketAndWeights.bucket.length !== 0) {
-        //         this.singleSkillType.buckets = skillTypeBucketAndWeights.bucket;
-        //         this.singleSkillType.weights = skillTypeBucketAndWeights.weight;
-        //     }
-        //     this.combineBucketsAndWeights();
-        //     for (const index of this.singleSkillType.buckets){
-        //         this.singleSkillTypeBucketIds.push(index.bucketId);
-        //     }
-        // });
+        this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
+            let skillTypeBucketAndWeights;
+            skillTypeBucketAndWeights = results;
+            // if (skillTypeBucketAndWeights.bucket.length !== 0) {
+            //     this.singleSkillType.buckets = skillTypeBucketAndWeights.bucket;
+            //     this.singleSkillType.weights = skillTypeBucketAndWeights.weight;
+            // }
+            // this.combineBucketsAndWeights();
+            // for (const index of this.singleSkillType.buckets){
+            //     this.singleSkillTypeBucketIds.push(index.bucketId);
+            // }
+        });
 
     }
 
@@ -278,6 +278,7 @@ export class SkillTypesComponent implements OnInit {
         this.skillTypeService.getSkillTypes().subscribe((results) => {
             this.allSkillTypes = results;
             this.setSkillTypes();
+            console.log(this.allSkillTypes);
         });
     }
 

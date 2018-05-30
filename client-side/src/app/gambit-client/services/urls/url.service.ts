@@ -210,9 +210,9 @@ export class UrlService {
     deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
     activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
     filteredQuestions: () => `${this.questionEndpoint}/filter`,
-    getAllTags: () => `${this.questionEndpoint}/questions/tags`,
-    createNewTag: () => `${this.questionEndpoint}/questions/tags`,
-    getTagsByQuestionId: (questionId: number) => `${this.questionEndpoint}/questions/tags/question/${questionId}`
+    getAllTags: () => `${this.questionEndpoint}/tags`,
+    createNewTag: () => `${this.questionEndpoint}/tags`,
+    getTagsByQuestionId: (questionId: number) => `${this.questionEndpoint}/tags/question/${questionId}`
   };
 
   private questionScoringEndpoint = 'question-score-service/question';

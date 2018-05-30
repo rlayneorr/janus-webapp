@@ -243,7 +243,7 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.question.bucketId = this.currentBucket.bucketId;
         this.questionService.createNewQuestion(this.question, this.getTagIds()).subscribe(data => {
-          this.questions.unshift(this.question);
+          this.updateQuestions();
         });
         this.savedSuccessfully();
       }

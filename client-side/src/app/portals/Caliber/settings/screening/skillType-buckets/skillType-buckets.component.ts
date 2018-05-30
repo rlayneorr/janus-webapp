@@ -6,7 +6,7 @@ import { BucketsService } from '../services/buckets.service';
 import { QuestionsService } from '../../../services/questions/questions.service';
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import {AlertsService} from '../../../services/alerts.service';
+import { AlertsService } from '../../../services/alerts.service';
 
 
 @Component({
@@ -32,19 +32,22 @@ export class SkillTypeBucketsComponent implements OnInit {
     private bucketService: BucketsService,
     private questionService: QuestionsService,
     private modalService: NgbModal,
-    private alertsService: AlertsService, ) {}
+    private alertsService: AlertsService, ) { }
 
-    filter: Bucket= new Bucket();
+  filter: Bucket = new Bucket();
   ngOnInit() {
     this.getBuckets();
   }
 
   getBuckets(): void {
-      this.bucketService.getAllBuckets().subscribe(buckets => {
-            console.log(buckets);
-            this.buckets = buckets;
+    this.bucketService.getAllBuckets().subscribe(buckets => {
+      console.log('this is the one');
+      console.log(buckets);
+      this.buckets = buckets;
+      console.log('this.buckets');
+      console.log(this.buckets);
 
-       });
+    });
   }
 
 
@@ -68,9 +71,9 @@ export class SkillTypeBucketsComponent implements OnInit {
   updateBucket() {
     if (this.currBucket) {
       this.bucketService.updateBucket(this.currBucket).subscribe(bucket => {
-          console.log('bucket when it comes back ' + bucket.bucketCategory);
-          this.getBuckets();
-        });
+        console.log('bucket when it comes back ' + bucket.bucketCategory);
+        this.getBuckets();
+      });
       this.savedSuccessfully();
     }
   }
@@ -80,7 +83,7 @@ export class SkillTypeBucketsComponent implements OnInit {
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket => {
-          this.buckets.push(bucket);
+        this.buckets.push(bucket);
       });
   }
 
@@ -106,7 +109,7 @@ export class SkillTypeBucketsComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 }

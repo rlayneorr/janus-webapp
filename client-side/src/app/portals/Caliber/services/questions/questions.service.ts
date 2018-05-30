@@ -20,6 +20,7 @@ import { UrlService } from '../../../../gambit-client/services/urls/url.service'
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
   })
 };
 
@@ -51,7 +52,7 @@ export class QuestionsService {
    * @param newTagIds
    */
   updateQuestion(question: Question, newTagIds: number[]) {
-    return this.http.post(this.urlService.question.putQuestion(), { question: question, tagIds: newTagIds }, httpOptions);
+    return this.http.put(this.urlService.question.putQuestion(), { question: question, tagIds: newTagIds }, httpOptions);
   }
 
   /**
