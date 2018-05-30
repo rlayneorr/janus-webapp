@@ -86,7 +86,7 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private bucketEndpoint = 'question-bucket-service/buckets';
+  private bucketEndpoint = '/buckets';
   bucket = {
     getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
     getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
@@ -292,7 +292,7 @@ export class UrlService {
   /**
    * Endpoints for skillType
    */
-  skillTypesServiceEndpoint = this.context + 'skillType';
+  skillTypesServiceEndpoint = this.context + '/skillType';
   skillTypes = {
     findAll: () => `${this.context}`,
     findAllActive: () => `${this.context}/active`,
@@ -317,7 +317,6 @@ export class UrlService {
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
     getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
-
 
   };
 

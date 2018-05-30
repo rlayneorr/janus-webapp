@@ -241,7 +241,7 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer3 = this.sampleAnswers[2];
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
-        this.question.bucketId = this.currentBucket.id;
+        this.question.bucketId = this.currentBucket.bucketId;
         this.questionService.createNewQuestion(this.question, this.getTagIds()).subscribe(data => {
           this.questions.unshift(this.question);
         });
@@ -311,7 +311,7 @@ export class QuestionComponent implements OnInit {
    **/
   updateQuestions() {
     if (this.currentBucket) {
-      this.questionService.getBucketQuestions(this.currentBucket.id).subscribe(data => {
+      this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data => {
         this.questions = (data as Question[]);
       });
       this.tagsService.getAllTags().subscribe(data => {

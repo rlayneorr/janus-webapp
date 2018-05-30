@@ -43,7 +43,7 @@ export class SkillTypeBucketsComponent implements OnInit {
       this.bucketService.getAllBuckets().subscribe(buckets => {
             console.log(buckets);
             this.buckets = buckets;
-            console.log(this.buckets[0].name);
+
        });
   }
 
@@ -58,17 +58,17 @@ export class SkillTypeBucketsComponent implements OnInit {
   }
 
   /** Stores the value of selected bucket to a 'currBucket' */
-  editBucket(bucket) {
+  editBucket(bucket: Bucket) {
     this.currBucket = new Bucket();
-    this.currBucket.id = bucket.id;
-    this.currBucket.name = bucket.name;
-    this.currBucket.description = bucket.description;
+    this.currBucket.bucketId = bucket.bucketId;
+    this.currBucket.bucketCategory = bucket.bucketCategory;
+    this.currBucket.bucketDescription = bucket.bucketDescription;
   }
 
   updateBucket() {
     if (this.currBucket) {
       this.bucketService.updateBucket(this.currBucket).subscribe(bucket => {
-          console.log('bucket when it comes back ' + bucket.name);
+          console.log('bucket when it comes back ' + bucket.bucketCategory);
           this.getBuckets();
         });
       this.savedSuccessfully();
@@ -93,8 +93,8 @@ export class SkillTypeBucketsComponent implements OnInit {
       this.newBucket = new Bucket();
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.newBucket.name = '';
-      this.newBucket.description = '';
+      this.newBucket.bucketCategory = '';
+      this.newBucket.bucketDescription = '';
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();

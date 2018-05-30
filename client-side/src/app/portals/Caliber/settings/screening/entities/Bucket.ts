@@ -1,6 +1,6 @@
 export class Bucket {
-    id: number;
-    name: string;
-    description: string;
+    bucketId: number;
+    bucketCategory: string;
+    bucketDescription: string;
     isActive = true;
 }

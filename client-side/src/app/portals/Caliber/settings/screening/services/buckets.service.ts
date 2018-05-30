@@ -52,7 +52,7 @@ export class BucketsService {
   }
 
   updateBucket (bucket: Bucket) {
-      console.log('Before ' + bucket.name);
+      console.log('Before ' + bucket.bucketCategory);
     return this.http.put<Bucket>(this.urlService.bucket.updateBucket(), bucket, httpOptions);
   }
 
@@ -71,19 +71,19 @@ export class BucketsService {
   }
 
   setName(name: string) {
-      this.currentBucket.name = name;
+      this.currentBucket.bucketCategory = name;
   }
 
   getName(id: number) {
-      return this.currentBucket.name;
+      return this.currentBucket.bucketCategory;
   }
 
   setDescription(desc: string) {
-      this.currentBucket.description = desc;
+      this.currentBucket.bucketDescription = desc;
   }
 
   getDescription() {
-      return this.currentBucket.description;
+      return this.currentBucket.bucketDescription;
   }
 
 }
