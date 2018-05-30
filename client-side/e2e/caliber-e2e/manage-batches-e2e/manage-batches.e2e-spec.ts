@@ -1,3 +1,6 @@
+/**@author Dennis Park | 1803-USF-MAR26 | Wezley Singleton */
+
+
 import { AppPage } from './manage-batches.po';
 import { browser } from 'protractor';
 
@@ -9,45 +12,44 @@ describe('test-app Batch Management', () => {
     page = new AppPage();
   });
 
-  it('should land on management page', () => {
+  it('should display management page', () => {
     page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain(page.util.getBaseUrl());
+    expect(browser.getCurrentUrl()).toContain(browser.baseUrl+'/#/Caliber/manage');
   });
 
-  it('should navigate to batch overview page on click', () => {
+  it('should navigate to sane page page on click', () => {
 
     page.clickManageBatches();
-    expect(browser.getCurrentUrl()).toContain(page.util.getBaseUrl()+'Caliber/manage');
+    expect(browser.getCurrentUrl()).toContain(browser.baseUrl+'/#/Caliber/manage');
   });
 
   it('should open modal on "Create Batch" button press', () => {
 
     page.clickCreateBatch();
-
-    expect(page.util.get('//strong[contains(text(), "Training Name")]','xpath','text'));
-
+    
+ 
+expect(page.getModal().isDisplayed()).toBeTruthy();
   });
 
   it('should not update without required information', () => {
     page.clickUpdate();
-    expect(page.util.get('//strong[contains(text(), "Training Name")]','xpath','text'));
+    expect(page.getModal().isDisplayed()).toBeTruthy();
   });
 
   it('should close on X press', () => {
     page.clickExit();
-    expect(page.util.get('//strong[contains(text(), "Training Name")]','xpath','isPresent')).toBeFalsy();
+    expect(page.getModal().isPresent()).toBeFalsy();
   });
 
   it('should have an import batch button', () => {
-
     page.clickImport();
-    expect(page.util.get('//strong[contains(text(),"Create New Batch")]','xpath','isPresent'));
+    expect(page.getModal().isDisplayed()).toBeTruthy();
 
   });
 
   it('should also close on eXit', () => {
     page.clickExit();
-    expect(page.util.get('//strong[contains(text(),"Create New Batch")]','xpath','isPresent')).toBeFalsy();
+    expect(page.getModal().isPresent()).toBeFalsy();
   });
 
 

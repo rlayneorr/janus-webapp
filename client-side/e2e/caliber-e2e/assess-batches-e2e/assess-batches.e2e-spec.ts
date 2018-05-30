@@ -1,5 +1,8 @@
+/**@author Dennis Park | 1803-USF-MAR26 | Wezley Singleton */
+
+
 import { AssessPage } from './assess-batches.po';
-import { browser } from 'protractor';
+import { browser,element,by } from 'protractor';
 
 describe('test-app Batch Assessment', () => {
   let page: AssessPage;
@@ -12,46 +15,29 @@ describe('test-app Batch Assessment', () => {
 it('should navigate to assessment page', () => {
 
     page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain(page.util.getBaseUrl()+'Caliber/assess');
+    expect(browser.getCurrentUrl()).toContain(browser.baseUrl+'/#/Caliber/assess');
 
 });
 
 it('should have a "create assessment" button', () => {
 
     page.clickCreateAssessment();
-
-    expect(page.util.get('.modal-title', 'css' ,'text'));
+    expect(element(by.css('.modal-content')).isDisplayed()).toBeTruthy();
 
 });
 
-it('should not save bogus test', () =>{
 
-    //page.clickSaveButton();
-
-    expect(page.util.get('.modal-title', 'css' ,'text'));
-});
 
 
 it('should close on "close" button', () => {
 
     page.clickCloseButton();
 
-    expect(page.util.get('.modal-title', 'css' ,'isPresent')).toBeFalsy();
+    expect(element(by.css('.modal-content')).isPresent()).toBeFalsy();
 });
 
 
-/*
-it('should save valid info', () => {
 
-    page.clickCreateAssessment();
-    page.enterText();
-    //some more stuff
-    page.clickSaveButton();
-    expect(page.util.get('.modal-title', 'css' ,'isPresent')).toBeFalsy();
-
-});
-
-*/
 
 
 

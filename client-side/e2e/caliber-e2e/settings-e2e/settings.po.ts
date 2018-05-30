@@ -1,22 +1,31 @@
 /**@author Dennis Park | 1803-USF-MAR26 | Wezley Singleton */
 
 import { browser, by, element, ElementHelper } from 'protractor';
-import { Util } from '../../e2e-util';
 
 export class SettingsPage{
 
-    util : Util = new Util();
-    constructor(){
-      this.util.addToBase('/#/');
-    }
+
 
     navigateTo(){
-        this.util.navigateTo('Caliber/home');
+        browser.get(browser.baseUrl+'/#/Caliber/home');
     }
 
-    clickSettings(){
+    settingsMenu(){
+       return element(by.xpath('//*[@id="settingsMenu"]'));
 
-        this.util.get('//*[@id="settingsMenu"]','xpath','click');
+    }
+
+    trainersButton(){
+        return element(by.buttonText('Trainers'));
+    }
+    locationsButton(){
+        return element(by.buttonText('Locations'));
+    }
+    skillsButton(){
+        return element(by.buttonText('Skills'));
+    }
+    screeningButton(){
+        return element(by.buttonText('Screening'));
     }
     
 }

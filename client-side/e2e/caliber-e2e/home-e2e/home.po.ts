@@ -11,21 +11,22 @@ export class HomePage {
   }
 
   navigateTo() {
-    return this.util.navigateTo('/');
+   browser.get(browser.baseUrl+'/');
   }
 
 getTitleText() {
-   return this.util.get('app-root h2','css','text');
+
+  return element(by.css('app-root h2')).getText();
   }
 
   getCaliberTitleText() {
-    let xpath = '/html/body/div/app-root/app-janus/app-dashboard/div[2]/div[2]/div[1]/h1';
-    return this.util.get(xpath,'xpath','text');
+
+    return element(by.xpath('//h1[text()="Caliber"]')).getText();
   }
 
   clickCaliberButton() {
-    let xpath = '/html/body/div/app-root/app-janus/app-dashboard/div[2]/div[2]/div[1]/h1';
-    return this.util.get(xpath,'xpath','click');
+    let e = element(by.css('img[src="../assets/caliber.png"]'));
+    e.click();
   }
 
 }

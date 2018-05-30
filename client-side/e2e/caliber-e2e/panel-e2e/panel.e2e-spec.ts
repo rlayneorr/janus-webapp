@@ -13,7 +13,7 @@ describe('test-app Panel page', () => {
 
   it('should land on panel page', () => {
     page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain(page.util.getBaseUrl());
+    expect(browser.getCurrentUrl()).toContain(baseUrl+'Caliber/panel');
   });
 
   it('should have a create panel button', () => {
