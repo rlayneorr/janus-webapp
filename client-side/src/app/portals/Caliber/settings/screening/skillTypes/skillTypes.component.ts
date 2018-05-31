@@ -32,7 +32,7 @@ import { AlertsService } from '../../../services/alerts.service';
 * Skill Type Component displays a template containing all the skill types from the database
 * It also has access to modals that can create or edit a skill types
 *
-* 
+*
 * @author chanconan
 */
 export class SkillTypesComponent implements OnInit {

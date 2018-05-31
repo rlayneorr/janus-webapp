@@ -16,7 +16,7 @@
  * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
  */
 
- const context = 'http://10.226.195.197:10000/';
+ const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000/';
 
 const bam = '';
 
@@ -24,7 +24,7 @@ export const environment = {
   production: false,
 
   /** Zuul endpoint  */
-  gambitContext: 'http://10.226.195.197:10000/',
+  gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000/',
   /** Assets endpoints for like pictures  */
   assets: 'http://52.87.205.55:8086/angular/assets/',
 
