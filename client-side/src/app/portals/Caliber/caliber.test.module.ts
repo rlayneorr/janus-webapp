@@ -38,6 +38,7 @@ import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.serv
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
 import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
+// import { LocationService } from '../../gambit-client/services/location/location.service';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { AlertsService } from './services/alerts.service';

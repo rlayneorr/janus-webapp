@@ -57,7 +57,7 @@ const BUCKETS: Bucket[] = [
     questions: null
   }];
 
-xdescribe('QuestionsTableComponent', () => {
+describe('QuestionsTableComponent', () => {
   let component: QuestionsTableComponent;
   let fixture: ComponentFixture<QuestionsTableComponent>;
 
