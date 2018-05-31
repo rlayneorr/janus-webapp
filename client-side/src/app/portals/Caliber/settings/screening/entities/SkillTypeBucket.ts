@@ -1,5 +1,7 @@
+import { Bucket } from './Bucket';
+
 export class SkillTypeBucket {
     skillTypeId: number;
-    bucketId: number;
-    weight: number;
+    buckets: Bucket[];
+    weights: number[];
 }

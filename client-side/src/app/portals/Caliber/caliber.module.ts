@@ -1,6 +1,6 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -43,7 +43,6 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
-import { BucketService } from './screening/services/bucket/bucket.service';
 import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
@@ -56,7 +55,6 @@ import { ViolationTypeService } from './screening/services/violationType/violati
 import { ScreeningService } from './screening/services/screening/screening.service';
 import { ScreenerBucketsService } from './screening/services/screener-buckets/screener-buckets.service';
 import { SkillTypeBucketService } from './screening/services/skillTypeBucketLookup/skill-type-bucket.service';
-import { UrlUtilService } from './screening/services/UrlUtil/url-util.service';
 import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
@@ -154,12 +152,12 @@ import { PassFailComponent } from './screening/components/pass-fail/pass-fail.co
 import { ViolationFlagComponent } from './screening/components/violation-flag/violation-flag.component';
 import { ScheduleScreeningService } from './screening/services/schedule-screening/schedule-screening.service';
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
-import {SkillTypesComponent} from './settings/screening/skillTypes/skillTypes.component';
+import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
-import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component' ;
-import { QuestionComponent} from './settings/screening/question/question.component';
+import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component';
+import { QuestionComponent } from './settings/screening/question/question.component';
 import { TagFilterPipe } from './settings/screening/question/question.filter';
-import {BucketFilterPipe} from './settings/screening/skillType-buckets/skillType-buckets.filter';
+import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from '../Caliber/services/category/category.service';
@@ -183,13 +181,13 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {
-        dataEncapsulation: false,
-        passThruUnknownUrl: true,
-        put204: false // return entity after PUT/update
-      }
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, {
+    //     dataEncapsulation: false,
+    //     passThruUnknownUrl: true,
+    //     put204: false // return entity after PUT/update
+    //   }
+    // )
   ],
   declarations: [
     // pipes
@@ -319,7 +317,6 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     ApiService,
     PDFService,
     ReportingService,
-    BucketService,
     QuestionService,
     QuestionsToBucketsUtil,
     ScoresToBucketsUtil,
@@ -332,7 +329,6 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     ScreeningService,
     SkillTypeBucketService,
     ScreenerBucketsService,
-    UrlUtilService,
     ScheduleScreeningService,
     QuestionsService,
     SkillTypesService,

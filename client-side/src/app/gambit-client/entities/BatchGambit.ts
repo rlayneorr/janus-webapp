@@ -3,19 +3,17 @@ import { GambitAddress } from './GambitAddress';
 import { GambitTrainee } from './GambitTrainee';
 
   /**
-   * Last modified by the Avengers
-   *
    * formelly named HydraBatch converted it to BatchGambit
    * beause a newer version which was named GambitBatch was
    * aready created but this file still has dependencies
    *
-   * Alex Pich | 1803-USF-MAR26 | Wezley Singleton
+   * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
    *
-   * Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+   * @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
    *
-   * Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
+   * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
    *
-   * Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
+   * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
 export class BatchGambit {
     resourceId: number;

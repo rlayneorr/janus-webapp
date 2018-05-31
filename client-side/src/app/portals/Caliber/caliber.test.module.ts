@@ -38,6 +38,7 @@ import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.serv
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
 import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
+// import { LocationService } from '../../gambit-client/services/location/location.service';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { AlertsService } from './services/alerts.service';
@@ -45,7 +46,6 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
-import { BucketService } from './screening/services/bucket/bucket.service';
 import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
@@ -58,7 +58,6 @@ import { ViolationTypeService } from './screening/services/violationType/violati
 import { ScreeningService } from './screening/services/screening/screening.service';
 import { ScreenerBucketsService } from './screening/services/screener-buckets/screener-buckets.service';
 import { SkillTypeBucketService } from './screening/services/skillTypeBucketLookup/skill-type-bucket.service';
-import { UrlUtilService } from './screening/services/UrlUtil/url-util.service';
 import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
@@ -345,8 +344,6 @@ export const Dependencies = {
     RouteService,
     PanelService,
     RouteService,
-    BucketService,
-    UrlUtilService,
     QuestionService,
     QuestionsService,
     BucketsService,

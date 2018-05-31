@@ -72,7 +72,7 @@ describe('ApiService', () => {
 
         httpClientSpyOnGet.get.and.returnValue(asyncData(expectedString));
 
-        apiService.doGet(`https://hydra-gateway-service.cfapps.io/question-service/question/bucketQuestions/-1`).subscribe(
+        apiService.doGet(``).subscribe(
           questions => expect(questions).toEqual(expectedString),
           fail
         );

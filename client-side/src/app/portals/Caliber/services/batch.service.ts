@@ -11,15 +11,14 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 import { ApiService } from '../util/api.service';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // entities
 import { Batch } from '../entities/Batch';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { stringifyDate } from '../util/utils';
 
-const context = environment.batch;
-
+const context = (new UrlService).batches;
 /**
  * this service manages calls to the web service
  * for Batch objects
@@ -32,7 +31,7 @@ export class BatchService implements CRUD<Batch> {
   public updatedSubject: Subject<Batch>;
   public deletedSubject: Subject<Batch>;
 
-  constructor(public http: HttpClient, public apiService: ApiService) {
+  constructor(public http: HttpClient, public apiService: ApiService, private urlService: UrlService) {
     this.listSubject = new BehaviorSubject([]);
     this.savedSubject = new Subject();
     this.updatedSubject = new Subject();

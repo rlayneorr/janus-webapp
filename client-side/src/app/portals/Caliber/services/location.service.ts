@@ -14,10 +14,9 @@ import { CRUD } from '../interfaces/api.interface';
 
 // entities
 import { Location } from '../entities/Location';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
-const context = environment.location;
-
+const context = (new UrlService).location;
 /**
  * This service is used to make API calls
  * for the location component

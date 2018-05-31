@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 import { MarketingStatus } from '../../models/marketing-status.model';
 
 /**
@@ -11,7 +11,7 @@ import { MarketingStatus } from '../../models/marketing-status.model';
 
 @Injectable()
 export class MarketStatusService {
-  private url: string = environment.msurl + '8094';
+  private url: string = (new UrlService).context;
 
   constructor(private http: HttpClient) { }
 

@@ -6,20 +6,19 @@ import { of } from 'rxjs/observable/of';
 import { SoftSkillViolation } from '../../entities/softSkillViolation';
 import { ViolationType } from '../../entities/violationType';
 import { MOCK_VIOLATIONS } from '../../mock-data/mock-violations';
-import { UrlUtilService } from '../UrlUtil/url-util.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 /**
 * Separate from but related to the Soft Skills service,
 * this is used to create / read / delete flags for soft skill violations.
 * Each time the screener flags a violation, this service is invoked
 *
-* Modified from made endpoints more consistent with
-* the rest of the application.
+* Removed UrlUtilService and replaced with UrlService for endpoints
 *
 * @author Alex Pich | 1803-USF-MAR26 | Wezley Singleton
 *
-* @author Danny S Chhunn | 1803-USF-MAR26 | Wezley Singleton
+* @author Danny S Chhun | 1803-USF-MAR26 | Wezley Singleton
 *
 * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
 *
@@ -30,7 +29,7 @@ export class SoftSkillsViolationService {
 
   constructor(
     private http: HttpClient,
-    private urlUtilService: UrlUtilService
+    private urlService: UrlService
   ) { }
 
   headers = new HttpHeaders({
@@ -45,11 +44,6 @@ export class SoftSkillsViolationService {
   // and answer modal component
   currentSoftSkillViolations = this.softSkillViolationSource.asObservable();
 
-  // readonly because why wouldn't they be?
-  readonly getViolationTypeURL: string = this.urlUtilService.getBase() + 'violation/all';
-  readonly getViolationURL: string = this.urlUtilService.getBase() + 'screening-service/screening/violation/';
-  readonly addViolationURL: string = this.urlUtilService.getBase() + 'screening-service/violation/flag';
-  readonly deleteViolationURL: string = this.urlUtilService.getBase() + 'screening-service/violation/delete/';
 
   /*
   // Real endpoint for future use
@@ -61,7 +55,7 @@ export class SoftSkillsViolationService {
 
   /** Fake local data for temp use */
   getPreviousViolations(screeningID: number): Observable<SoftSkillViolation[]> {
-    return this.http.get<SoftSkillViolation[]>(this.getViolationURL + screeningID);
+    return this.http.get<SoftSkillViolation[]>(this.urlService.softSkillsViolation.getViolationURL(screeningID));
   }
 
 
@@ -86,13 +80,13 @@ export class SoftSkillsViolationService {
     params.append('date', new Date().toDateString());
 
     // send post request
-    this.http.post(this.addViolationURL, { params });
+    this.http.post(this.urlService.softSkillsViolation.addViolationURL(), { params });
   }
 
   // Submit a violation with the appropriate comment, screening ID and timestamp.
   submitViolation(typeID: number, comment: string, screeningID: number): Observable<SoftSkillViolation[]> {
     return this.http.post<any[]>(
-      this.addViolationURL,
+      this.urlService.softSkillsViolation.addViolationURL(),
       {
         'violationTypeId': [typeID],
         'softSkillComment': comment,
@@ -114,7 +108,7 @@ export class SoftSkillsViolationService {
   * in response to a change in the observable. Hence, deleteViolation returns an Observable.
   */
   deleteViolation(violationID: number): Observable<any[]> {
-    return this.http.get<any[]>(this.deleteViolationURL + violationID);
+    return this.http.get<any[]>(this.urlService.softSkillsViolation.deleteViolationURL(violationID));
   }
 
   updateSoftSkillViolations(softSkillviolations: any[]) {

@@ -14,7 +14,7 @@ import { TagsAndSkill } from '../../wrappers/tagsAndSkill';
 // Services
 import { TagService } from '../../../services/tag/tag.service';
 import { SimpleTraineeService } from '../simpleTrainee/simple-trainee.service';
-import { UrlUtilService } from '../UrlUtil/url-util.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 /*
 Provides an observable of Questions through the getQuestions() method.
 */
@@ -25,10 +25,9 @@ export class QuestionService {
     private httpClient: HttpClient,
     private tagService: TagService,
     private simpleTraineeService: SimpleTraineeService,
-    private urlUtilService: UrlUtilService
+    private urlService: UrlService
   ) {}
 
-  private ROOT_URL: string = this.urlUtilService.getBase();
   headers = new HttpHeaders({
     'Content-type': 'application/json'
   });
@@ -45,7 +44,7 @@ export class QuestionService {
     // let currSkillTypeID = this.simpleTraineeService.getSelectedCandidate().skillTypeID;
     const tagsAndSkill: TagsAndSkill = { tagList : tagArray, skillTypeId : currSkillTypeID };
     return this.httpClient.post<Question[]>(
-      this.ROOT_URL + '/question-service/question/filtered',
+      this.urlService.question.filteredQuestions(),
       tagsAndSkill
     );
   }

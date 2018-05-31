@@ -3,11 +3,11 @@ import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { ApiService } from '../util/api.service';
 import { PanelService } from './panel.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from '../../../../environments/environment';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
 import { User } from '../../../gambit-client/entities/User';
 
-const context = environment.panel;  // base of the url is at environment.panel
+const context = (new UrlService).panel;  // base of the url is at UrlService.panel
 
 // A GambitAddress is needed for a batch
 const mockGambitAddress = {addressId: 1, street: '123 Fake st.', city: 'Springfield', state: 'Unclear', zipcode: '97070',

@@ -2,9 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QuestionsTableComponent } from './questions-table.component';
 import { FormsModule } from '@angular/forms';
-import { BucketService } from '../../services/bucket/bucket.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { UrlUtilService } from '../../services/UrlUtil/url-util.service';
 import { QuestionService } from '../../services/question/question.service';
 import { TagService } from '../../../services/tag/tag.service';
 import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
@@ -59,7 +57,7 @@ const BUCKETS: Bucket[] = [
     questions: null
   }];
 
-xdescribe('QuestionsTableComponent', () => {
+describe('QuestionsTableComponent', () => {
   let component: QuestionsTableComponent;
   let fixture: ComponentFixture<QuestionsTableComponent>;
 
@@ -67,7 +65,7 @@ xdescribe('QuestionsTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow, AnswerComponent, ViolationFlagComponent],
       imports: [FormsModule],
-      providers: [BucketService, HttpClient, HttpHandler, UrlUtilService, QuestionService, TagService, SimpleTraineeService,
+      providers: [HttpClient, HttpHandler, QuestionService, TagService, SimpleTraineeService,
         SkillTypeService, QuestionScoreService, QuestionsToBucketsUtil, NgbModal, NgbModalStack, ScreeningService,
         SkillTypeBucketService, SoftSkillsViolationService, ViolationTypeService, AlertsService]
     });

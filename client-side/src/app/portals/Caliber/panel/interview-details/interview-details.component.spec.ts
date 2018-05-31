@@ -18,13 +18,11 @@ import { UrlService } from '../../../../gambit-client/services/urls/url.service'
 import { ApiService } from '../../util/api.service';
 import { BatchService } from '../../services/batch.service';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
-import { environment } from '../../../../../environments/environment.uat';
 import { link } from 'fs';
 // import { GeneralFeedbackComponent } from '../general-feedback/general-feedback.component';
 
 describe('InterviewDetailsComponent', () => {
-  const context = environment.trainee;
-
+  const context = (new UrlService).trainees;
   let component: InterviewDetailsComponent;
   let fixture: ComponentFixture<InterviewDetailsComponent>;
   let injector: TestBed;

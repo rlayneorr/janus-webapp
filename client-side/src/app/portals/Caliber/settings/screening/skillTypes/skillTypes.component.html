@@ -11,8 +11,8 @@
                         {{skillType.skillTypeName}}
                         <i id="xIcon">
                             <label class="switch">
-                                <input type="checkbox" [checked]= skillType.isActive (change)="removeElement(skillType)" >
-                                <span class="slider round"placement="top" ngbTooltip="deactivate"></span>
+                                <input type="checkbox" [(ngModel)]="skillType.isActive" (change)="skillTypeUpdate(skillType)" >
+                                <span class="slider round" placement="top" ngbTooltip="deactivate"></span>
                             </label>
                         </i>
                         <i id="penIcon" class="fa fa-pencil pull-right" (click)="editSkillType(skillType); open(content)" placement="top" ngbTooltip="edit">
@@ -23,7 +23,7 @@
                         {{skillType.skillTypeName}}
                         <i id="xIcon">
                             <label class="switch">
-                                <input type="checkbox" [checked]= skillType.isActive (change)="removeElement(skillType)">
+                                <input type="checkbox" [(ngModel)]="skillType.isActive" (change)="skillTypeUpdate(skillType)">
                                 <span class="slider round" placement="top" ngbTooltip="activate"></span>
                             </label>
                         </i>
@@ -38,7 +38,7 @@
 
     </div>
 </div>
-<!-- Modal for creating a new SkillType -->
+<!-- Modal for creating and editting a new SkillType -->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
       <!-- If a skillType got clicked, Title is Edit -->
@@ -51,17 +51,17 @@
   <div class="modal-body">
       <form  #addSkillTypeForm="ngForm">
           <div class="form-group row">
-              <label for="name" class="col-sm-2 col-form-label">Name:</label>
+              <label for="name" class="col-sm-2 col-form-label">Name:&nbsp;</label>
               <div class="col-sm-10">
                   <input type="text" id="skillTypeName" name=skillTypeName class="form-control" *ngIf="singleSkillType" required #skillTypeName="ngModel" [(ngModel)]="singleSkillType.skillTypeName" disabled>
-                  <input type="text" id="skillTypeName" name="skillTypeName" placeholder="SkillType Name" class="form-control" *ngIf="!singleSkillType" required ngModel>
+                  <input type="text" id="skillTypeName" name="skillTypeName" placeholder="Skill type name" class="form-control" *ngIf="!singleSkillType" required ngModel>
               </div>
 
-              <!-- <label for="description" class="col-sm-2 col-form-label">Description:</label>
+              <label for="name" class="col-sm-2 col-form-label">Description:&nbsp;</label>
               <div class="col-sm-10">
-                  <input type="text" id="skillTypeDescription" name=skillTypeDescription class="form-control" *ngIf="singleSkillType" required #skillTypeName="ngModel" [(ngModel)]="singleSkillType.skillTypeDescription">
-                  <input type="text" id="skillTypeDescription" name="skillTypeDescription" placeholder="Skill Type Description" class="form-control" *ngIf="!singleSkillType" required ngModel>
-              </div> -->
+                  <input type="text" id="skillTypeDesc" name=skillTypeDesc class="form-control" *ngIf="singleSkillType" required #skillTypeName="ngModel" [(ngModel)]="singleSkillType.skillTypeDesc">
+                  <input type="text" id="skillTypeDesc" name="skillTypeDesc" placeholder="Skill type description" class="form-control" *ngIf="!singleSkillType" required ngModel>
+              </div> 
           </div>
           <div *ngIf="singleSkillType">
               <div class="form-group row">
@@ -94,7 +94,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="updateSkillType(addSkillTypeForm.value); savedSuccessfully()" [disabled]="error" *ngIf="singleSkillType">Save</button>
+        <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="updateSkillType(addSkillTypeForm.value); savedSuccessfully(); skillTypeUpdate(singleSkillType)" [disabled]="error" *ngIf="singleSkillType">Save</button>
         <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="c('Close click'); createNewSkillType(addSkillTypeForm.value)" *ngIf="!singleSkillType" [disabled]="!addSkillTypeForm.valid">Create</button>
     </div>
 </ng-template>
