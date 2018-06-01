@@ -3,32 +3,30 @@
 import { browser, by, element, ElementHelper } from 'protractor';
 
 
-export class LocationsPage{
+export class LocationsPage {
 
-    navigateTo(){
-        browser.get(browser.baseUrl+'/#/Caliber/home');
+    navigateTo() {
+        browser.get(browser.baseUrl + '/#/Caliber/home');
     }
 
 
-    clickSettings(){
-        let e = element(by.xpath('//*[@id="settingsMenu"]'));
+    clickSettings() {
+        const e = element(by.xpath('//*[@id="settingsMenu"]'));
         e.click();
     }
 
-    clickLocationsButton(){
-        let e = element(by.buttonText('Locations'));
+    clickLocationsButton() {
+        const e = element(by.buttonText('Locations'));
         e.click();
     }
 
-    clickCreateLocation(){
-        let e = element(by.buttonText('Create Location'));
+    clickCreateLocation() {
+        const e = element(by.buttonText('Create Location'));
         e.click();
     }
 
-    getModal(){
-
+    getModal() {
         return element(by.css('.modal-body'));
-
     }
 
 }

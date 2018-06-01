@@ -2,102 +2,80 @@
 
 import { browser, by, element, ElementHelper } from 'protractor';
 
-export class ScreeningPage{
+export class ScreeningPage {
 
-  
-
-    navigateTo(){
-        browser.get(browser.baseUrl+'/#/Caliber/settings/screening');
-        //this.util.navigateTo('/Caliber/home');
+    navigateTo() {
+        browser.get(browser.baseUrl + '/#/Caliber/settings/screening');
     }
 
-    clickCreateSkillType(){
-
-        let e = element(by.buttonText('Create Skill Type'));
+    clickCreateSkillType() {
+        const e = element(by.buttonText('Create Skill Type'));
         e.click();
     }
 
-    clickCreateButton(){
-        let e = element(by.buttonText('Create'));
+    clickCreateButton() {
+        const e = element(by.buttonText('Create'));
         e.click();
     }
 
-    clickCloseButton(){
-
-        let e = element(by.buttonText('Close'));
+    clickCloseButton() {
+        const e = element(by.buttonText('Close'));
         e.click();
-  
     }
 
-    clickScreeningButton(){
-
-        let e = element(by.buttonText('Screening'));
+    clickScreeningButton() {
+        const e = element(by.buttonText('Screening'));
         e.click();
-
     }
 
-    clickSettings(){
-
-        let e = element(by.linkText('Settings'));
+    clickSettings() {
+        const e = element(by.linkText('Settings'));
         e.click();
-
     }
 
-    clickSkillField(){
-        let e = element(by.xpath('//*[@id="skillTypeName"]'));
+    clickSkillField() {
+        const e = element(by.xpath('//*[@id="skillTypeName"]'));
         e.click();
-        e.sendKeys("Java");
+        e.sendKeys('Java');
     }
 
-    getBucketHeader(){
+    getBucketHeader() {
         return element(by.xpath('//h6[text()="All Buckets"]'));
-
     }
 
-    getHeader(){
+    getHeader() {
         return element(by.xpath('//h6[text()="Skill Types"]'));
     }
 
-    highlightButtons(e){
-        let before = e.getCssValue('background-color');
+    highlightButtons(e) {
+        const before = e.getCssValue('background-color');
         browser.actions().mouseMove(e).perform();
-        let after = e.getCssValue('background-color');
-        return (before===after);
+        const after = e.getCssValue('background-color');
+        return (before === after);
     }
 
 
 
-    clickAllBuckets(){
-        let e = element(by.linkText('All Buckets'));
+    clickAllBuckets() {
+        const e = element(by.linkText('All Buckets'));
         e.click();
-
     }
 
-
-
-    clickExitButton(){
-       let e = element(by.css('.close'));
+    clickExitButton() {
+        const e = element(by.css('.close'));
         e.click();
-
     }
 
-    clickCreateBucket(){
-
-        let e = element(by.buttonText('Create Bucket'));
+    clickCreateBucket() {
+        const e = element(by.buttonText('Create Bucket'));
         e.click();
-
     }
 
-    modalView(){
-
+    modalView() {
         return element(by.css('.modal-content'));
     }
 
-    searchBucketField(){
+    searchBucketField() {
         return element(by.xpath('//*[@id="allSkillTypesDiv"]/div[1]/div/input'));
     }
-
-    
-
-
 }

@@ -8,38 +8,35 @@ export class AppPage {
 
 
   navigateTo() {
-    browser.get(browser.baseUrl+'/#/Caliber/manage');
+    browser.get(browser.baseUrl + '/#/Caliber/manage');
   }
 
   clickManageBatches() {
-    let e = element(by.linkText('Manage Batch'));
-      e.click();
-  }
-
-  clickCreateBatch(){
-    let e = element(by.buttonText('Create Batch'));
+    const e = element(by.linkText('Manage Batch'));
     e.click();
   }
 
-  clickUpdate(){
-    let e = element(by.buttonText('Update'));
+  clickCreateBatch() {
+    const e = element(by.buttonText('Create Batch'));
     e.click();
   }
 
-  clickExit(){
-    let e = element(by.css('.close'));
+  clickUpdate() {
+    const e = element(by.buttonText('Update'));
     e.click();
   }
 
-  clickImport(){
-    let e = element(by.buttonText('Import Batch'));
+  clickExit() {
+    const e = element(by.css('.close'));
     e.click();
   }
 
-  getModal(){
+  clickImport() {
+    const e = element(by.buttonText('Import Batch'));
+    e.click();
+  }
+
+  getModal() {
     return element(by.css('.modal-content'));
   }
-
-
-
 }

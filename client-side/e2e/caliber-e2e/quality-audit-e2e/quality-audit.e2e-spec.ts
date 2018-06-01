@@ -3,7 +3,7 @@
  */
 
 import { AppPage } from './quality-audit.po';
-import { browser, element, by} from 'protractor';
+import { browser, element, by } from 'protractor';
 
 describe('test-app Quality Audit', () => {
   let page: AppPage;
@@ -27,5 +27,5 @@ describe('test-app Quality Audit', () => {
     page.clickQualityAuditNav();
     expect(browser.getCurrentUrl()).toContain(baseUrl + 'Caliber/quality');
   });
-  
+
 });

@@ -6,7 +6,6 @@ import { browser } from 'protractor';
 
 describe('test-app Batch Management', () => {
   let page: AppPage;
- 
 
   beforeEach(() => {
     page = new AppPage();
@@ -14,21 +13,20 @@ describe('test-app Batch Management', () => {
 
   it('should display management page', () => {
     page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain(browser.baseUrl+'/#/Caliber/manage');
+    expect(browser.getCurrentUrl()).toContain(browser.baseUrl + '/#/Caliber/manage');
   });
 
   it('should navigate to sane page page on click', () => {
 
     page.clickManageBatches();
-    expect(browser.getCurrentUrl()).toContain(browser.baseUrl+'/#/Caliber/manage');
+    expect(browser.getCurrentUrl()).toContain(browser.baseUrl + '/#/Caliber/manage');
   });
 
   it('should open modal on "Create Batch" button press', () => {
 
     page.clickCreateBatch();
-    
- 
-expect(page.getModal().isDisplayed()).toBeTruthy();
+
+    expect(page.getModal().isDisplayed()).toBeTruthy();
   });
 
   it('should not update without required information', () => {
@@ -51,6 +49,5 @@ expect(page.getModal().isDisplayed()).toBeTruthy();
     page.clickExit();
     expect(page.getModal().isPresent()).toBeFalsy();
   });
-
 
 });

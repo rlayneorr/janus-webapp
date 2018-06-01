@@ -1,7 +1,7 @@
 /**@author Dennis Park | 1803-USF-MAR26 | Wezley Singleton */
 /**@author Bryce Charydczak | 1803-USF-MAR26 | Wezley Singleton */
-import {ScreeningPage} from './screening.po';
-import { browser,by, element, ElementHelper  } from 'protractor';
+import { ScreeningPage } from './screening.po';
+import { browser, by, element, ElementHelper } from 'protractor';
 
 
 describe('test-app Screening page test', () => {
@@ -16,7 +16,7 @@ describe('test-app Screening page test', () => {
     page.navigateTo();
     page.clickSettings();
     page.clickScreeningButton();
-    expect(browser.getCurrentUrl()).toContain(browser.baseUrl+'/#/Caliber/settings/screening');
+    expect(browser.getCurrentUrl()).toContain(browser.baseUrl + '/#/Caliber/settings/screening');
 
   });
 
@@ -26,14 +26,14 @@ describe('test-app Screening page test', () => {
 
   it('should highlight "Skill Types" on hover', () => {
 
-    let e = element(by.linkText('Skill Types'));
+    const e = element(by.linkText('Skill Types'));
     expect(page.highlightButtons(e)).toBeFalsy();
 
   });
 
   it('should display Skill Types', () => {
 
-    
+
     expect(page.getHeader()).toBeTruthy();
 
   });
@@ -41,8 +41,8 @@ describe('test-app Screening page test', () => {
   it('should have a "Create Skill Type" button', () => {
 
     page.clickCreateSkillType();
-    expect(page.modalView().isDisplayed()).toBeTruthy();    
-});
+    expect(page.modalView().isDisplayed()).toBeTruthy();
+  });
 
   it('should not allow empty submit', () => {
 
@@ -70,29 +70,29 @@ describe('test-app Screening page test', () => {
   it('should allow data entry', () => {
     page.clickCreateSkillType();
     page.clickSkillField();
-    
+
     expect(element(by.xpath('//*[@id="skillTypeName"]')).getAttribute('value')).toContain('Java');
   });
 
   it('should submit valid data', () => {
 
-  page.clickCreateButton();
-   expect(page.modalView().isPresent()).toBeFalsy();
-});
+    page.clickCreateButton();
+    expect(page.modalView().isPresent()).toBeFalsy();
+  });
 
   it('should have an "All Buckets" tab', () => {
-   
+
     expect(element(by.linkText('All Buckets'))).toBeTruthy();
   });
 
   it('should highlight "All Buckets" on hover', () => {
 
-    let e = element(by.linkText('All Buckets'));
+    const e = element(by.linkText('All Buckets'));
     expect(page.highlightButtons(e)).toBeFalsy();
 
   });
 
-  it('should switch to "All Buckets" tab on click' , () => {
+  it('should switch to "All Buckets" tab on click', () => {
 
     page.clickAllBuckets();
     expect(page.getBucketHeader()).toBeTruthy();
@@ -115,53 +115,53 @@ describe('test-app Screening page test', () => {
   it('should have working Create Bucket button', () => {
 
     page.clickCreateBucket();
-    
+
     expect(page.modalView().isDisplayed()).toBeTruthy();
 
   });
 
-  it('should have name field', () => { 
+  it('should have name field', () => {
 
     expect(element(by.xpath('//label[text()="Name:"]')).isDisplayed()).toBeTruthy();
-});
+  });
 
-it('should allow for name input', () => {
+  it('should allow for name input', () => {
 
-   let e =  page.modalView().element(by.tagName('input'));
-   e.sendKeys('Bob Marley');
+    const e = page.modalView().element(by.tagName('input'));
+    e.sendKeys('Bob Marley');
     expect(e.getAttribute('value')).toContain('Bob Marley');
 
-});
+  });
 
-it('should have description field', () => {
+  it('should have description field', () => {
 
     expect(element(by.xpath('//label[text()="Description:"]')).isDisplayed()).toBeTruthy();
-});
+  });
 
-it('should allow description input', () => {
+  it('should allow description input', () => {
 
-    let e  = page.modalView().element(by.tagName('textarea'));
+    const e = page.modalView().element(by.tagName('textarea'));
     e.sendKeys('a Reggae musician');
-expect(e.getAttribute('value')).toBeTruthy();
-});
+    expect(e.getAttribute('value')).toBeTruthy();
+  });
 
-it('should submit on create', () => {
+  it('should submit on create', () => {
     page.clickCreateButton();
     expect(page.modalView().isPresent()).toBeFalsy();
-});
+  });
 
-it('should close on Close button', () => {
+  it('should close on Close button', () => {
 
-page.clickCreateBucket();
-page.clickCloseButton();
-expect(page.modalView().isPresent()).toBeFalsy();
-});
+    page.clickCreateBucket();
+    page.clickCloseButton();
+    expect(page.modalView().isPresent()).toBeFalsy();
+  });
 
-it('should close on X button', () => {
+  it('should close on X button', () => {
 
     page.clickCreateBucket();
     page.clickExitButton();
     expect(page.modalView().isPresent()).toBeFalsy();
-});
+  });
 
 });

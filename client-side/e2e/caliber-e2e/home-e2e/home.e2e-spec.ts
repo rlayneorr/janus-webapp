@@ -12,7 +12,7 @@ describe('test-app Home Screen', () => {
     page = new HomePage();
   });
 
-//check for Janus Homepage rendering
+/** check for Janus Homepage rendering */
   it('should display welcome message', () => {
     page.navigateTo();
     expect(page.getTitleText()).toEqual('Please Select One Of the Following Applications :');

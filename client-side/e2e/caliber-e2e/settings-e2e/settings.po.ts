@@ -2,30 +2,30 @@
 
 import { browser, by, element, ElementHelper } from 'protractor';
 
-export class SettingsPage{
+export class SettingsPage {
 
-
-
-    navigateTo(){
-        browser.get(browser.baseUrl+'/#/Caliber/home');
+    navigateTo() {
+        browser.get(browser.baseUrl + '/#/Caliber/home');
     }
 
-    settingsMenu(){
-       return element(by.xpath('//*[@id="settingsMenu"]'));
-
+    settingsMenu() {
+        return element(by.xpath('//*[@id="settingsMenu"]'));
     }
 
-    trainersButton(){
+    trainersButton() {
         return element(by.buttonText('Trainers'));
     }
-    locationsButton(){
+
+    locationsButton() {
         return element(by.buttonText('Locations'));
     }
-    skillsButton(){
+
+    skillsButton() {
         return element(by.buttonText('Skills'));
     }
-    screeningButton(){
+
+    screeningButton() {
         return element(by.buttonText('Screening'));
     }
-    
+
 }

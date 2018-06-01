@@ -4,45 +4,45 @@
 import { browser, by, element, ElementHelper } from 'protractor';
 
 
-export class AssessPage{
+export class AssessPage {
 
 
-  
+
     navigateTo() {
-     browser.get(browser.baseUrl+'/#/Caliber/assess');
+        browser.get(browser.baseUrl + '/#/Caliber/assess');
     }
 
     getWeeklyBatchText() {
-        return element(by.xpath('/html/body/div/app-root/app-janus/app-caliber/app-assess[2]/div[1]/div[3]/div/table/tbody/tr/td[2]/strong')).getText();
-      }
-    
-      getAverageText() {
-        return element(by.xpath('/html/body/div/app-root/app-janus/app-caliber/app-assess[2]/div[1]/div[3]/div/table/tbody/tr/td[1]/strong')).getText();
-      }
-    
+        return element(by.xpath(`/html/body/div/app-root/app-janus
+        /app-caliber/app-assess[2]/div[1]/div[3]/div/table/tbody/tr/td[2]/strong`)).getText();
+    }
 
-    clickCreateAssessment(){
+    getAverageText() {
+        return element(by.xpath(`/html/body/div/app-root/app-janus
+        /app-caliber/app-assess[2]/div[1]/div[3]/div/table/tbody/tr/td[1]/strong`)).getText();
+    }
 
-       let e = element(by.buttonText('Create Assessment'));
-       e.click();
+
+    clickCreateAssessment() {
+
+        const e = element(by.buttonText('Create Assessment'));
+        e.click();
 
     }
 
-    clickSaveButton(){
-        let e = element(by.buttonText('Save'));
-       e.click();
-    }
-
-    clickCloseButton(){
-        let e = element(by.buttonText('Close'));
+    clickSaveButton() {
+        const e = element(by.buttonText('Save'));
         e.click();
     }
 
-    enterText(){
-        let e = element(by.css('input[type="number"]'));
+    clickCloseButton() {
+        const e = element(by.buttonText('Close'));
         e.click();
-        e.sendKeys("44");
     }
 
-
+    enterText() {
+        const e = element(by.css('input[type="number"]'));
+        e.click();
+        e.sendKeys('44');
+    }
 }
