@@ -67,19 +67,12 @@
         <br>
         <textarea class="form-control" type="text" [(ngModel)]="currBucket.bucketDescription" [ngModelOptions]="{standalone: true}"></textarea>
       </div>
-      <i id="xIcon">
-        <label class="switch">
-          <input type="checkbox" [(ngModel)]="currBucket.isActive" [ngModelOptions]="{standalone: true}">
-          <span class="slider round" placement="top" ngbTooltip="active"></span>
-        </label>
-      </i>
     </form>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
     <!--* updateBucket(), updates the selected bucket to update database -->
-    <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="updateBucket(); c('Close click')">Save</button>
+    <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="updateBucket(); c('Close click')">Close</button>
   </div>
 </ng-template>
 
