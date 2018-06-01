@@ -27,5 +27,5 @@ describe('test-app Reports', () => {
     page.clickReportsNav();
     expect(browser.getCurrentUrl()).toContain(baseUrl + 'Caliber/reports');
   });
-  
+
 });

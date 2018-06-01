@@ -6,13 +6,13 @@ import { Util } from '../../e2e-util';
 
 export class HomePage {
 
-  util : Util;
-  constructor(){
+  util: Util;
+  constructor() {
    this.util = new Util();
   }
 
   navigateTo() {
-   browser.get(browser.baseUrl+'/');
+   browser.get(browser.baseUrl + '/');
   }
 
 getTitleText() {
@@ -26,7 +26,7 @@ getTitleText() {
   }
 
   clickCaliberButton() {
-    let e = element(by.css('img[src="../assets/caliber.png"]'));
+    const e = element(by.css('img[src="../assets/caliber.png"]'));
     e.click();
   }
 

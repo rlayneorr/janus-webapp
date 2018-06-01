@@ -15,7 +15,7 @@ describe('test-app Batch Assessment', () => {
 it('should navigate to assessment page', () => {
 
     page.navigateTo();
-    expect(browser.getCurrentUrl()).toContain(browser.baseUrl+'/#/Caliber/assess');
+    expect(browser.getCurrentUrl()).toContain(browser.baseUrl + '/#/Caliber/assess');
 
 });
 
@@ -34,19 +34,11 @@ it('should have a "create assessment" button', () => {
 
 });
 
-
-
-
 it('should close on "close" button', () => {
 
     page.clickCloseButton();
 
     expect(element(by.css('.modal-content')).isPresent()).toBeFalsy();
 });
-
-
-
-
-
 
 });
