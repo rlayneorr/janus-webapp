@@ -2,10 +2,10 @@
 <div id="ABcontent" class="container">
   <div class="row justify-content-center">
     <div class="card w-50">
-      <h6 class="card-header">All Buckets</h6>
-      <div class="card-body" id="allSkillTypesDiv">
 
-        <!--* Search bar, maybe -->
+      <h6 class="card-header">All Buckets</h6>
+
+      <div class="card-body" id="allSkillTypesDiv">
         <div class="form-group row">
           <div class="col-sm-12">
             <!--A search bar to help sift through the unadded tags for when the amount of tags is increased-->
@@ -17,12 +17,24 @@
         <div class="list-group">
           <!-- clickable to route to Bucket -->
           <!--* routeToBucket() -->
-          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets| bucketFilter:filter" (click)="routeToBucket(bucket)">
-            <div>{{bucket.bucketCategory}}</div>
+          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets| bucketFilter:filter" (click)="routeToBucket(bucket);">
+              <b>{{bucket.bucketCategory}}</b>
+              <br>
             <small>{{bucket.bucketDescription}}</small>
+
             <!--* editBucket(bucket), passes the bucket selected to component side.
                 * open(edit), calls modal to open. -->
-            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editBucket(bucket); open(edit)" placement="top" ngbTooltip="edit"></i>
+            <div class="col-sm" (click)="$event.cancelBubble=true; ">
+              <i id="xIcon">
+                <label class="switch">
+                  <input type="checkbox" [(ngModel)]="bucket.isActive" (change)="updateBucket(bucket);">
+                  <span class="slider round" placement="top" ngbTooltip="active"></span>
+                </label>
+              </i>
+            </div>
+            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editBucket(bucket); open(edit)" placement="top" ngbTooltip="edit">
+            </i>
+
           </a>
         </div>
 
@@ -55,6 +67,12 @@
         <br>
         <textarea class="form-control" type="text" [(ngModel)]="currBucket.bucketDescription" [ngModelOptions]="{standalone: true}"></textarea>
       </div>
+      <i id="xIcon">
+        <label class="switch">
+          <input type="checkbox" [(ngModel)]="currBucket.isActive" [ngModelOptions]="{standalone: true}">
+          <span class="slider round" placement="top" ngbTooltip="active"></span>
+        </label>
+      </i>
     </form>
   </div>
 

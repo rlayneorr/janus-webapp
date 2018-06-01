@@ -52,7 +52,6 @@ export class BucketsService {
   }
 
   updateBucket (bucket: Bucket) {
-      console.log('Before ' + bucket.bucketCategory);
     return this.http.put<Bucket>(this.urlService.bucket.updateBucket(), bucket, httpOptions);
   }
 

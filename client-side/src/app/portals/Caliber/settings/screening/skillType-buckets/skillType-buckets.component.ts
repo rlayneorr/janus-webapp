@@ -41,15 +41,19 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   getBuckets(): void {
     this.bucketService.getAllBuckets().subscribe(buckets => {
-      console.log('this is the one');
-      console.log(buckets);
       this.buckets = buckets;
-      console.log('this.buckets');
-      console.log(this.buckets);
-
+      this.buckets.sort(this.compare);
     });
   }
 
+  /** used to compare buckets Array to sort it based on status */
+  compare(a: Bucket, b: Bucket) {
+    if (a.isActive) {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
 
   /** Save the selected 'bucket' in 'bucket.service' to be used in
     * 'bucket.component'.
@@ -62,21 +66,28 @@ export class SkillTypeBucketsComponent implements OnInit {
 
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket: Bucket) {
-    this.currBucket = new Bucket();
-    this.currBucket.bucketId = bucket.bucketId;
-    this.currBucket.bucketCategory = bucket.bucketCategory;
-    this.currBucket.bucketDescription = bucket.bucketDescription;
+    this.currBucket = bucket;
   }
 
-  updateBucket() {
-    if (this.currBucket) {
-      this.bucketService.updateBucket(this.currBucket).subscribe(bucket => {
-        console.log('bucket when it comes back ' + bucket.bucketCategory);
+  /**
+   * resposible for making call for updatating a bucket
+   * when editted or activity toggled
+   * @param bucketParam
+   */
+  updateBucket(bucketParam: Bucket) {
+    if (!bucketParam) { bucketParam = this.currBucket; }
+    if (bucketParam) {
+      console.log(bucketParam.isActive);
+      this.bucketService.updateBucket(bucketParam).subscribe(bucket => {
         this.getBuckets();
       });
       this.savedSuccessfully();
     }
   }
+
+
+
+
 
   /** Creates new bucket */
   createBucket() {
