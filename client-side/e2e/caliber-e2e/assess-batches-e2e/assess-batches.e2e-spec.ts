@@ -1,12 +1,12 @@
-/**@author Dennis Park ❀ヅ❤♫| 1803-USF-MAR26 | Wezley Singleton */
+/**@author Dennis Park | 1803-USF-MAR26 | Wezley Singleton */
 /**@author Bryce Charydczak | 1803-USF-MAR26 | Wezley Singleton */
 
 import { AssessPage } from './assess-batches.po';
-import { browser,element,by } from 'protractor';
+import { browser, element, by } from 'protractor';
 
 describe('test-app Batch Assessment', () => {
   let page: AssessPage;
- 
+
 
   beforeEach(() => {
     page = new AssessPage();

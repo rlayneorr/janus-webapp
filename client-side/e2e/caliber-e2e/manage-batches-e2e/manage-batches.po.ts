@@ -1,4 +1,4 @@
-/**@author Dennis Park ❀ヅ❤♫| 1803-USF-MAR26 | Wezley Singleton */
+/**@author Dennis Park | 1803-USF-MAR26 | Wezley Singleton */
 /**@author Bryce Charydczak | 1803-USF-MAR26 | Wezley Singleton */
 
 import { browser, by, element, ElementHelper } from 'protractor';
