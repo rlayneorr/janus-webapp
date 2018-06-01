@@ -1,5 +1,5 @@
-/**@author Dennis Park | 1803-USF-MAR26 | Wezley Singleton */
-
+/**@author Dennis Park ❀ヅ❤♫| 1803-USF-MAR26 | Wezley Singleton */
+/**@author Bryce Charydczak | 1803-USF-MAR26 | Wezley Singleton */
 
 import { AssessPage } from './assess-batches.po';
 import { browser,element,by } from 'protractor';
@@ -18,6 +18,14 @@ it('should navigate to assessment page', () => {
     expect(browser.getCurrentUrl()).toContain(browser.baseUrl+'/#/Caliber/assess');
 
 });
+
+it('should display Average score', () => {
+    expect(page.getAverageText()).toContain('Average');
+  });
+
+  it('should display Weekly Batch Average', () => {
+    expect(page.getWeeklyBatchText()).toContain('Weekly Batch Average:');
+  });
 
 it('should have a "create assessment" button', () => {
 

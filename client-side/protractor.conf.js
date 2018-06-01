@@ -17,6 +17,7 @@ exports.config = {
     './e2e/caliber-e2e/trainers-e2e/trainers.e2e-spec.ts',
     './e2e/caliber-e2e/screening-e2e/screening.e2e-spec.ts',
     './e2e/caliber-e2e/locations-e2e/locations.e2e-spec.ts',
+    './e2e/caliber-e2e/reports-e2e-/reports.e2e-spec.ts'
     //'./e2e/caliber-e2e/skills-e2e/skills.e2e-spec.ts',
 
 
