@@ -102,15 +102,18 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
         buckets: myBuckets,
         weights: JSON.parse(JSON.stringify(bucketsWithWeights.weight)),
       };
+      /**
+       * Disabled because relationship between question and skill microservice relationship
+       * needs to be reworked on the serverside
+       */
+      // this.subscriptions.push(this.questionService.getQuestions().subscribe(allQuestions => {
+      //   this.questionBuckets = this.questionsToBucketsUtil.saveQuestions(allQuestions, this.skillTypeBucketService.bucketsByWeight);
+      //   this.skillTypeBucketService.bucketsByWeight.buckets = JSON.parse(JSON.stringify(this.questionBuckets));
 
-      this.subscriptions.push(this.questionService.getQuestions().subscribe(allQuestions => {
-        this.questionBuckets = this.questionsToBucketsUtil.saveQuestions(allQuestions, this.skillTypeBucketService.bucketsByWeight);
-        this.skillTypeBucketService.bucketsByWeight.buckets = JSON.parse(JSON.stringify(this.questionBuckets));
-
-        if (this.questionBuckets.length > 0) {
-          this.currentCategory = this.questionBuckets[0];
-        }
-      }));
+      //   if (this.questionBuckets.length > 0) {
+      //     this.currentCategory = this.questionBuckets[0];
+      //   }
+      // }));
     }));
 
     this.candidateName = this.simpleTraineeService.getSelectedCandidate().firstname + ' ' +

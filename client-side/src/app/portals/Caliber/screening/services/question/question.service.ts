@@ -32,20 +32,23 @@ export class QuestionService {
     'Content-type': 'application/json'
   });
 
-
+  /**
+       * Disabled because relationship between question and skill microservice relationship
+       * needs to be reworked on the serverside
+       */
   // Returns an observable array of questions, filtered by the selected tags and
   // candidate's skillTypeID
-  getQuestions(): Observable<Question[]> {
-    const tagArray: number[] = [];
-    for (const tag of this.tagService.getCheckedTags()){
-      tagArray.push(tag.tagId);
-    }
-    const currSkillTypeID = this.simpleTraineeService.getSelectedCandidate().skillTypeID;
-    // let currSkillTypeID = this.simpleTraineeService.getSelectedCandidate().skillTypeID;
-    const tagsAndSkill: TagsAndSkill = { tagList : tagArray, skillTypeId : currSkillTypeID };
-    return this.httpClient.post<Question[]>(
-      this.urlService.question.filteredQuestions(),
-      tagsAndSkill
-    );
-  }
+  // getQuestions(): Observable<Question[]> {
+  //   const tagArray: number[] = [];
+  //   for (const tag of this.tagService.getCheckedTags()){
+  //     tagArray.push(tag.tagId);
+  //   }
+  //   const currSkillTypeID = this.simpleTraineeService.getSelectedCandidate().skillTypeID;
+  //   // let currSkillTypeID = this.simpleTraineeService.getSelectedCandidate().skillTypeID;
+  //   const tagsAndSkill: TagsAndSkill = { tagList : tagArray, skillTypeId : currSkillTypeID };
+  //   return this.httpClient.post<Question[]>(
+  //     this.urlService.question.filteredQuestions(),
+  //     tagsAndSkill
+  //   );
+  // }
 }
