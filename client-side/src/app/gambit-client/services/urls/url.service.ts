@@ -127,6 +127,9 @@ export class UrlService {
     fetchById: (id: number) => `${this.context}category/${id}`,
     save: () => `${this.context}vp/category`,
     update: () => `${this.context}vp/category/update`,
+    //Create and Delete are placeholder endpoints for testing **Tye and Brumles**
+    create: () => `${this.context}vp/category/create`, 
+    delete: () => `${this.context}vp/category/delete`,
   };
 
   curriculum = {
