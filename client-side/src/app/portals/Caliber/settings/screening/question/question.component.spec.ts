@@ -120,6 +120,9 @@ describe('QuestionComponent', () => {
     expect(component.currentTags.length).toBe(0);
   });
 
+  it('should remove question'),() => {
+
+  };
   /**
    * Test if the question gets edited or not.
    *
