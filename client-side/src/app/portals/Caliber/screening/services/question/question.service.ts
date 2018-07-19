@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // Entities
 import { Question } from '../../entities/question';
-import { Tag } from '../../entities/tag';
+// import { Tag } from '../../entities/tag';
 import { QUESTIONS } from '../../mock-data/mock-questions';
 import { TagsAndSkill } from '../../wrappers/tagsAndSkill';
 
@@ -23,8 +23,8 @@ export class QuestionService {
 
   constructor(
     private httpClient: HttpClient,
-    private tagService: TagService,
-    private candidateService: CandidateService,
+    // private tagService: TagService,
+    private simpleTraineeService: SimpleTraineeService,
     private urlService: UrlService
   ) {}
 
