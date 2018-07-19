@@ -68,6 +68,11 @@ i {
   float: right;
 }
 
+#delIcon {
+  color: #F26925;
+  float: right;
+}
+
 .revatureOrange{
   background-color: #F26925;
   color: white;
