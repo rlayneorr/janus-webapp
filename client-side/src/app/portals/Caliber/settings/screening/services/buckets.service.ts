@@ -44,6 +44,7 @@ export class BucketsService {
     ) {}
 
   getAllBuckets(): Observable<Bucket[]> {
+    console.log(this.urlService.bucket.getAllBuckets());
       return this.http.get<Bucket[]>(this.urlService.bucket.getAllBuckets());
   }
 
@@ -58,6 +59,11 @@ export class BucketsService {
   createNewBucket(bucket: Bucket): Observable<Bucket> {
       return this.http.post<Bucket>(this.urlService.bucket.createNewBucket(), bucket, httpOptions);
   }
+
+ deleteBucket(bucketId: number) {
+    return console.log(this.urlService.bucket.getBucketById(bucketId) + " @deleting Bucket" + bucketId);
+    // return this.http.delete<Bucket[]>(this.urlService.bucket.getBucketById(bucketId));
+}
 
   setBucket(bucket: Bucket) {
      this.currentBucket = bucket;
