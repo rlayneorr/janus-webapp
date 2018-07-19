@@ -140,7 +140,7 @@ export const routes: Routes = [
             ]
           },
           {
-           path: 'screening/category',
+           path: 'screening/bucket',
             component: BucketComponent
           },
           {
