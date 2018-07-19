@@ -61,7 +61,7 @@ export class SkillTypeBucketsComponent implements OnInit {
     */
   routeToBucket(item: Bucket) {
     this.bucketService.setBucket(item);
-    this.router.navigate(['Caliber/settings/screening/category']);
+    this.router.navigate(['Caliber/settings/screening/bucket']);
   }
 
   /** Stores the value of selected bucket to a 'currBucket' */
@@ -85,9 +85,20 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 
+  confirmDelete(bucket: Bucket){
+    this.currBucket = bucket;
+  }
 
-
-
+  deleteBucket(bucketParam: Bucket){
+    if (!bucketParam) { bucketParam = this.currBucket; }
+    if (bucketParam) {
+      console.log(bucketParam.isActive);
+      this.bucketService.deleteBucket(bucketParam.bucketId);
+      //   this.getBuckets();
+      // });
+      // this.savedSuccessfully();
+    }
+  }
 
   /** Creates new bucket */
   createBucket() {
