@@ -21,10 +21,10 @@ import { CRUD } from '../../interfaces/api.interface';
 @Injectable()
 export class CategoryService implements CRUD<Category> {
 
-  public listSubject = new BehaviorSubject<Category[]>([]);
+  // public listSubject = new BehaviorSubject<Category[]>([]);
   private urlService = new UrlService();
   constructor(public httpClient: HttpClient, public alertService: AlertsService) {
-    this.listSubject = new BehaviorSubject([]);
+    // this.listSubject = new BehaviorSubject([]);
   }
 
   /*
@@ -39,10 +39,20 @@ export class CategoryService implements CRUD<Category> {
  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
  *
  */
- public fetchAll(): Observable<Category[]> {
-   this.httpClient.get<Category[]>(this.urlService.category.fetchAll()).subscribe(res => this.listSubject.next(res));
-   return this.listSubject.asObservable();
- }
+//  public fetchAll(): Observable<Category[]> {
+//    this.httpClient.get<Category[]>(this.urlService.category.fetchAll()).subscribe(res => this.listSubject.next(res));
+//    console.log(this.listSubject);
+//    for(let item of this.listSubject)
+//    {
+//       console.log(item);
+//    }
+//    return this.listSubject.asObservable();
+//  }
+
+public fetchAll(): Observable<Category[]> {
+  const url = this.urlService.category.fetchAll();
+  return this.httpClient.get<Category[]>(url);
+}
 
  /**
  * retrieves all ACTIVE categories
@@ -50,12 +60,17 @@ export class CategoryService implements CRUD<Category> {
  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
  *
  */
- public fetchAllActive(): Observable<Category[]> {
-   const url = this.urlService.category.fetchAllActive();
-   this.httpClient.get<Category[]>(url)
-   .subscribe((results) => this.listSubject.next(results));
-   return this.listSubject.asObservable();
- }
+//  public fetchAllActive(): Observable<Category[]> {
+//    const url = this.urlService.category.fetchAllActive();
+//    this.httpClient.get<Category[]>(url)
+//    .subscribe((results) => this.listSubject.next(results));
+//    return this.listSubject.asObservable();
+//  }
+
+public fetchAllActive(): Observable<Category[]> {
+  const url = this.urlService.category.fetchAllActive();
+  return this.httpClient.get<Category[]>(url);
+}
 
  /**
  * retrieves a category by its ID
@@ -78,10 +93,16 @@ export class CategoryService implements CRUD<Category> {
   *
   * @param category: Category
   */
+  // public create(category: Category): Observable<Category> {
+  //   const url = this.urlService.category.save();
+  //   return this.httpClient.post<Category>(url, JSON.stringify(category));
+  // }
+
   public create(category: Category): Observable<Category> {
-    const url = this.urlService.category.save();
-    return this.httpClient.post<Category>(url, JSON.stringify(category));
-  }
+      const url = this.urlService.category.create();
+      return this.httpClient.post<Category>(url, JSON.stringify(category));
+    }
+
 
   /**
    * Transmits a Category to be updated.
@@ -95,7 +116,12 @@ export class CategoryService implements CRUD<Category> {
     return this.httpClient.put<Category>(url, JSON.stringify(category));
   }
 
+  // public delete(category: Category): Observable<Category> {
+  //   return Observable.of(category);
+  // }
+
   public delete(category: Category): Observable<Category> {
-    return Observable.of(category);
+    const url = this.urlService.category.delete();
+    return this.httpClient.delete<Category>(url);
   }
 }
