@@ -85,9 +85,20 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 
+  confirmDelete(bucket: Bucket){
+    this.currBucket = bucket;
+  }
 
-
-
+  deleteBucket(bucketParam: Bucket){
+    if (!bucketParam) { bucketParam = this.currBucket; }
+    if (bucketParam) {
+      console.log(bucketParam.isActive);
+      this.bucketService.deleteBucket(bucketParam.bucketId);
+      //   this.getBuckets();
+      // });
+      // this.savedSuccessfully();
+    }
+  }
 
   /** Creates new bucket */
   createBucket() {
