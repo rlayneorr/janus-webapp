@@ -1,6 +1,7 @@
 export class Bucket {
     bucketId: number;
-    bucketCategory: string;
-    bucketDescription: string;
-    isActive = true;
+    skillTypeId: number;
+    category: string;
+    description: string;
+    isActive: boolean;
 }

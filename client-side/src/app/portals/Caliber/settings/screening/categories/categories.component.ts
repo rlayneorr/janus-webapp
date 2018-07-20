@@ -10,12 +10,12 @@ import { AlertsService } from '../../../services/alerts.service';
 
 
 @Component({
-  selector: 'app-skill-type-buckets',
-  templateUrl: './skillType-buckets.component.html',
-  styleUrls: ['./skillType-buckets.component.css']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css']
 })
 
-export class SkillTypeBucketsComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
 
   /** variable to hold an array of 'Bucket' entities */
   buckets: Bucket[];
@@ -118,8 +118,8 @@ export class SkillTypeBucketsComponent implements OnInit {
       this.newBucket = new Bucket();
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.newBucket.bucketCategory = '';
-      this.newBucket.bucketDescription = '';
+      this.newBucket.category = '';
+      this.newBucket.description = '';
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();

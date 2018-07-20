@@ -47,7 +47,7 @@
       <div class="form-group row">
         <label for = "questionText" class="col-sm-3 col-form-label" min="0" max="100" align = "right">Question:</label>
         <div class="col-sm-9">
-          <input name="question" [(ngModel)]="question.questionText" type = "text" id = "questionText" placeholder="Question" class="form-control bucketWeight" min="0" max="100">
+          <input name="question" [(ngModel)]="question.questionText" type = "text" id = "questionText" placeholder="Question" class="form-control" min="0" max="100">
         </div>
       </div>
       <!---Answers/Tags Tabbing Start-->
@@ -92,24 +92,24 @@
           </ngb-tab>
           <!--Answers Tab End-->
           <!--Tags Tab Start-->
-          <ngb-tab title="Tags" (click) = "removeTagsFromAll()">
+          <!-- <ngb-tab title="Tags" (click) = "removeTagsFromAll()">
             <ng-template ngbTabContent>
               <div ngbPanelContent class = "tabContent">
                 <br>
                 <div class="row">
                   <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
-                  <!--Add new tag section-->
+                  <!--Add new tag section
                   <div class="col-sm-9 col-form-label"  align = "center">
                     <input #Tag (keyup.enter)="newTag()" [(ngModel)]="newTagString" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
                   </div>
                 </div>
-                <!--Uses the same styling as the all tags, but this section is to display the currently added tags in the question editor-->
+                <!--Uses the same styling as the all tags, but this section is to display the currently added tags in the question editor
                 <div id = "allTagsDiv" data-spy="scroll" data-offset="50">
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col-sm-11 col-8">
                         <div class="form-group row">
-                          <!--Corresponding to an array in the backend that removes a tag when one is clicked and adds that tag back to the all tags array-->
+                          <!--Corresponding to an array in the backend that removes a tag when one is clicked and adds that tag back to the all tags array
                           <span *ngFor="let tag of currentTags">
                             <span *ngIf = "tag" class="input-group-addon revatureOrange badge badge-pill" (click)="removeTagFromQuestion(tag)" [innerHTML]="tag.tagName"></span>
                           </span>
@@ -118,11 +118,11 @@
                     </div>
                   </div>
                 </div>
-                <!--Add tags section-->
+                <!--Add tags section
                 <div class="form-group row">
                   <label for="allTags" class="col-sm-3 col-form-label">All Tags:</label>
                   <div class="col-sm-9">
-                    <!--A search bar to help sift through the unadded tags for when the amount of tags is increased-->
+                    <!--A search bar to help sift through the unadded tags for when the amount of tags is increased
                     <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100" class = "form-control">
                   </div>
               </div>
@@ -131,7 +131,7 @@
                   <div class="row">
                     <div class="col-sm-11 col-8">
                       <div class="form-group row">
-                        <!--Custome filter that checks all of the tags against the string in the search bar above-->
+                        <!--Custome filter that checks all of the tags against the string in the search bar above
                         <span *ngFor="let tag of allTags| tagfilter:filter">
                           <span *ngIf = "tag" class="input-group-addon revatureGray badge badge-pill" (click)="addTagToQuestion(tag)">{{tag.tagName}}</span>
                         </span>
@@ -141,8 +141,8 @@
                 </div>
               </div>
             </div>
-          </ng-template>
-        </ngb-tab>
+          </ng-template> -->
+        <!-- </ngb-tab> -->
         <!--Tags Tab End-->
         </ngb-tabset>
         <!---Answers/Tags Tabbing End-->

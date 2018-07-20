@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Bucket } from '../entities/Bucket';
 
 @Pipe({
-    name: 'bucketFilter',
+    name: 'categoryFilter',
     pure: false
 })
 
@@ -11,7 +11,7 @@ import { Bucket } from '../entities/Bucket';
 BucketFilterPipe filters Buckets based on Bucket.bucketCategory (name)
 Used in skillTypes-bucket
 */
-export class BucketFilterPipe implements PipeTransform {
+export class CategoryFilterPipe implements PipeTransform {
     transform(items: Bucket[], filter: Bucket): Bucket[] {
         if (!items || !filter) {
             return items;
@@ -26,7 +26,7 @@ applies filter based on bucketName field.
         for (const field in filter) {
             if (filter[field]) {
                 if (typeof filter[field] === 'string') {
-                    if (bucket.bucketCategory.toLowerCase().indexOf(filter[field].toLowerCase()) === -1) {
+                    if (bucket.category.toLowerCase().indexOf(filter[field].toLowerCase()) === -1) {
                         return false;
                     }
                 } else if (typeof filter[field] === 'number') {
