@@ -6,7 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 
 import { SkillType } from '../entities/SkillType';
-import { SkillTypeBucket } from '../entities/SkillTypeBucket';
+import { Category } from '../entities/Category';
 import { Bucket } from '../entities/Bucket';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 

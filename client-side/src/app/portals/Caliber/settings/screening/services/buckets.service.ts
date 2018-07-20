@@ -76,19 +76,19 @@ export class BucketsService {
   }
 
   setName(name: string) {
-      this.currentBucket.bucketCategory = name;
+      this.currentBucket.category = name;
   }
 
   getName(id: number) {
-      return this.currentBucket.bucketCategory;
+      return this.currentBucket.category;
   }
 
   setDescription(desc: string) {
-      this.currentBucket.bucketDescription = desc;
+      this.currentBucket.description = desc;
   }
 
   getDescription() {
-      return this.currentBucket.bucketDescription;
+      return this.currentBucket.description;
   }
 
 }

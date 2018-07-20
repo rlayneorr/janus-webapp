@@ -20,21 +20,21 @@ import { BUCKETS } from '../mock-data/mock-buckets';
 import { QuestionService } from '../../../screening/services/question/question.service';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
-import { SkillTypeBucketsComponent } from './skillType-buckets.component';
-import { Question } from '../../../entities/Question';
+import { CategoriesComponent } from './categories.component';
 
-
-fdescribe('SkillTypeBucketsComponent', () => {
-  let component: SkillTypeBucketsComponent;
-  let fixture: ComponentFixture<SkillTypeBucketsComponent>;
+describe('CategoriesComponent', () => {
+  let component: CategoriesComponent;
+  let fixture: ComponentFixture<CategoriesComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule(Dependencies)
+    TestBed.configureTestingModule({
+      declarations: [ CategoriesComponent ]
+    })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SkillTypeBucketsComponent);
+    fixture = TestBed.createComponent(CategoriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     require('jasmine-ajax')
