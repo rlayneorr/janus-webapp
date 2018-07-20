@@ -9,22 +9,40 @@ import { COMMON_DEPRECATED_DIRECTIVES } from '@angular/common/src/directives';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 // Entities
+import { Bucket } from '../entities/Bucket';
 import { SkillTypeBucket } from '../entities/SkillTypeBucket';
 import { BucketFilterPipe } from './skillType-buckets.filter';
+import { SkillTypeBucketsComponent } from './skillType-buckets.component';
+import { Question } from '../../../entities/Question';
 
 // Services
-import { AlertsService } from '../../../services/alerts.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { BucketsService } from '../services/buckets.service';
 
 // Mock Data
 import { BUCKETS } from '../mock-data/mock-buckets';
 import { QuestionService } from '../../../screening/services/question/question.service';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
-import { CategoriesComponent } from './categories.component';
+//Observables
+import { defer } from 'rxjs/observable/defer';
 
-describe('CategoriesComponent', () => {
-  let component: CategoriesComponent;
-  let fixture: ComponentFixture<CategoriesComponent>;
+export function asyncData<T>(data: T) {
+  return defer(() => Promise.resolve(data));
+}
+
+export function asyncError<T>(errorObject: any) {
+  return defer(() => Promise.reject(errorObject));
+}
+
+
+fdescribe('SkillTypeBucketsComponent', () => {
+  let httpClientSpyOnPost: { post: jasmine.Spy };
+  let httpClientSpyOnPut: {put: jasmine.Spy };
+  let bucketService: BucketsService;
+  let component: SkillTypeBucketsComponent;
+  let fixture: ComponentFixture<SkillTypeBucketsComponent>;
+  const urlService: UrlService = new UrlService();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -75,8 +93,18 @@ describe('CategoriesComponent', () => {
    * Test if a bucket gets updated.
    * 
    * Function Tested: update(bucketParam: bucket)
+   * Presently update appears to be untestable.
    */
-  fit('should update a bucket', ()=>{
-    expect(true).toBe(false);
-  })
+  /*fit('update() should make Http put request', () => {
+    httpClientSpyOnPut = jasmine.createSpyObj('http', ['put']);
+    bucketService = new BucketsService(<any> httpClientSpyOnPut, urlService);
+    const expected: Bucket = BUCKETS[4];
+    httpClientSpyOnPut.put.and.returnValue(asyncData(expected));
+    //component.updateBucket(expected);
+    bucketService.updateBucket(BUCKETS[4]).subscribe(
+      bucket => expect(bucket).toEqual(expected, 'expected category'),
+      fail
+    );
+    expect(httpClientSpyOnPut.put.calls.count()).toBe(1, 'one call');
+  });*/
 });
