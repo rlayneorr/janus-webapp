@@ -4,7 +4,7 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 
 @Injectable()
 export class UrlService {
-  public readonly context: string =  environment.gambitContext;
+  public readonly context: string =  environment.localhostContext;
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
