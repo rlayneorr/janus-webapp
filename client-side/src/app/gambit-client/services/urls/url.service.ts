@@ -4,11 +4,15 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 
 @Injectable()
 export class UrlService {
+<<<<<<< HEAD
   //public readonly context: string =  environment.gambitContext;
 
   public readonly context: string =  environment.localHostContext;
 
   // public readonly context: string = environment.caliberContext;
+=======
+  public readonly context: string =  environment.localhostContext;
+>>>>>>> rebasing branch
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 

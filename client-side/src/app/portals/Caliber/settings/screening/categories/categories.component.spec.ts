@@ -10,9 +10,9 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 
 // Entities
 import { Bucket } from '../entities/Bucket';
-import { SkillTypeBucket } from '../entities/SkillTypeBucket';
-import { BucketFilterPipe } from './skillType-buckets.filter';
-import { SkillTypeBucketsComponent } from './skillType-buckets.component';
+import { Category } from '../entities/category';
+import { CategoryFilterPipe } from './categories.filter';
+import { CategoriesComponent } from './categories.component';
 import { Question } from '../../../entities/Question';
 
 // Services
@@ -36,18 +36,16 @@ export function asyncError<T>(errorObject: any) {
 }
 
 
-fdescribe('SkillTypeBucketsComponent', () => {
+describe('CategoriesComponent', () => {
   let httpClientSpyOnPost: { post: jasmine.Spy };
   let httpClientSpyOnPut: {put: jasmine.Spy };
   let bucketService: BucketsService;
-  let component: SkillTypeBucketsComponent;
-  let fixture: ComponentFixture<SkillTypeBucketsComponent>;
+  let component: CategoriesComponent;
+  let fixture: ComponentFixture<CategoriesComponent>;
   const urlService: UrlService = new UrlService();
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CategoriesComponent ]
-    })
+    TestBed.configureTestingModule(Dependencies)
     .compileComponents();
   }));
 
@@ -73,7 +71,7 @@ fdescribe('SkillTypeBucketsComponent', () => {
    *
    * Function Tested: editBucket()
    **/
-  fit('should edit a bucket', () => {
+  it('should edit a bucket', () => {
     component.editBucket(BUCKETS[0]);
     expect(component.currBucket).toEqual(BUCKETS[0]);
   });
@@ -83,7 +81,7 @@ fdescribe('SkillTypeBucketsComponent', () => {
    * 
    * Function Tested: compare(a: Bucket, b:Bucket)
    */
-  fit('should sort 2 buckets', ()=>{
+  it('should sort 2 buckets', ()=>{
     let tempBucket = BUCKETS[0];
     tempBucket.isActive = false;
     expect(component.compare(tempBucket, BUCKETS[1])).toEqual(1);

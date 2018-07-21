@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "buckets": [
     {
       "bucketID": 1,
@@ -170,3 +171,297 @@
     }
   ]
 }
+=======
+
+    "buckets": [
+  
+      { "bucketID": 1,
+  
+        "bucketCategory": "Basic Java",
+  
+        "bucketDescription": "OCA level Java questions",
+  
+        "isActive": true,
+  
+        "questions": null
+  
+      },
+  
+      { "bucketID": 2,
+  
+        "bucketCategory": "SQL",
+  
+        "bucketDescription": "SQL database questions",
+  
+        "isActive": true,
+  
+        "questions": null
+  
+      },
+  
+      { "bucketID": 3,
+  
+        "bucketCategory": "JavaScript",
+  
+        "bucketDescription": "JavaScript questions",
+  
+        "isActive": true,
+  
+        "questions": null
+  
+      },
+  
+      { "bucketID": 4,
+  
+        "bucketCategory": "HTML",
+  
+        "bucketDescription": "JavaScript questions",
+  
+        "isActive": true,
+  
+        "questions": null
+  
+      },
+  
+      { "bucketID": 5,
+  
+        "bucketCategory": "CSS",
+  
+        "bucketDescription": "JavaScript questions",
+  
+        "isActive": true,
+  
+        "questions": null
+  
+      },
+  
+      { "bucketID": 6,
+  
+        "bucketCategory": "Spring",
+  
+        "bucketDescription": "JavaScript questions",
+  
+        "isActive": true,
+  
+        "questions": null
+  
+      },
+  
+      { "bucketID": 7,
+  
+        "bucketCategory": "Angular",
+  
+        "bucketDescription": "JavaScript questions",
+  
+        "isActive": true,
+  
+        "questions": null
+  
+      }
+  
+    ],
+  
+    "categories": [
+  
+      {
+  
+        "categoryId": 0,
+  
+        "skillCategory": "skill0",
+  
+        "active": true
+  
+      },
+  
+      {
+  
+        "categoryId": 1,
+  
+        "skillCategory": "skill1",
+  
+        "active": false
+  
+      },
+  
+      {
+  
+        "categoryId": 2,
+  
+        "skillCategory": "skill2",
+  
+        "active": false
+  
+      },
+  
+      {
+  
+        "categoryId": 3,
+  
+        "skillCategory": "skill3",
+  
+        "active": true
+  
+      },
+  
+      {
+  
+        "categoryId": 4,
+  
+        "skillCategory": "skill4",
+  
+        "active": false
+  
+      },
+  
+      {
+  
+        "categoryId": 5,
+  
+        "skillCategory": "skill5",
+  
+        "active": false
+  
+      }
+  
+    ],
+  
+    "questions": [
+  
+      {
+  
+        "questionId": 0,
+  
+        "bucketId": 2,
+  
+        "questionText": "whuts yr favorite color",
+  
+        "sampleAnswer1": "answer1",
+  
+        "sampleAnswer2": "answer2",
+  
+        "sampleAnswer3": "answer3",
+  
+        "sampleAnswer4": "answer4",
+  
+        "sampleAnswer5": "answer5"
+  
+      },
+  
+      {
+  
+        "questionId": 1,
+  
+        "bucketId": 2,
+  
+        "questionText": "bleh",
+  
+        "sampleAnswer1": "bhahfha",
+  
+        "sampleAnswer2": "dsflkj",
+  
+        "sampleAnswer3": "eiei",
+  
+        "sampleAnswer4": "qq",
+  
+        "sampleAnswer5": "rew"
+  
+      },
+  
+      {
+  
+        "questionId": 2,
+  
+        "bucketId": 1,
+  
+        "questionText": "000000",
+  
+        "sampleAnswer1": "asdf",
+  
+        "sampleAnswer2": "mnbb",
+  
+        "sampleAnswer3": "rewq",
+  
+        "sampleAnswer4": "hjkl",
+  
+        "sampleAnswer5": "poiu"
+  
+      }
+  
+    ],
+  
+    "skillTypes": [
+  
+      {
+  
+        "skillTypeID": 52,
+  
+        "skillTypeName": "Java EE/Microservices",
+  
+        "isActive": true
+  
+      },
+  
+      {
+  
+        "skillTypeID": 53,
+  
+        "skillTypeName": "PEGA",
+  
+        "isActive": true
+  
+      },
+  
+      {
+  
+        "skillTypeID": 54,
+  
+        "skillTypeName": "Selenium",
+  
+        "isActive": true
+  
+      },
+  
+      {
+  
+        "skillTypeID": 55,
+  
+        "skillTypeName": "Business Analysts",
+  
+        "isActive": true
+  
+      },
+  
+      {
+  
+        "skillTypeID": 56,
+  
+        "skillTypeName": ".NET",
+  
+        "isActive": true
+  
+      },
+  
+      {
+  
+        "skillTypeID": 57,
+  
+        "skillTypeName": "C++",
+  
+        "isActive": true
+  
+      },
+  
+      {
+  
+        "skillTypeID": 58,
+  
+        "skillTypeName": "Other",
+  
+        "isActive": true
+  
+      }
+  
+    ]
+  
+  }
+>>>>>>> rebasing branch
