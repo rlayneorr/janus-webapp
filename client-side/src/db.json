@@ -52,31 +52,31 @@
   ],
   "category": [
     {
-      "id": 1,
+      "categoryId": 1,
       "categoryName": "category1"
     },
     {
-      "id": 2,
+      "categoryId": 2,
       "categoryName": "category2"
     },
     {
-      "id": 3,
+      "categoryId": 3,
       "categoryName": "category3"
     },
     {
-      "id": 4,
+      "categoryId": 4,
       "categoryName": "category4"
     },
     {
-      "id": 5,
+      "categoryId": 5,
       "categoryName": "category5"
     },
     {
-      "id": 6,
+      "categoryId": 6,
       "categoryName": "category6"
     },
     {
-      "id": 7,
+      "categoryId": 7,
       "categoryName": "category7"
     }
   ],
