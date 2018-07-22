@@ -17,7 +17,8 @@
 </div>
 <!-- Display all assessment skills -->
 <!-- <div class="container centered" id="trainer-assess-table" *ngIf="skills[0]"> -->
-<div class="container centered" id="trainer-assess-table" *ngIf="skills[0]">
+<!--changed this to model categories and take in a category to loop over-->
+<div class="container centered" id="trainer-assess-table" *ngIf="categories">
     <div class="row">
         <!-- Col Start -->
         <div class="col top5" *ngFor='let column of columns;let c=index;'>
@@ -31,9 +32,10 @@
                 </thead>
                 <tbody>
                     <!-- Load all skills -->
-                    <tr *ngFor="let skill of skills; let i=index;">
-                        <td *ngIf='nextColumn(c,i)' (click)='editopen(editSkill,skill);' class='pointer'>
-                            {{skill.skillName}}
+                    <!--changed this to reference an alias category of array categories-->
+                    <tr *ngFor="let category of categories; let i=index;">
+                        <td *ngIf='nextColumn(c,i)' (click)='editopen(editSkill,category);' class='pointer'>
+                            {{category.categoryName}}
                         </td>
                         <!-- Display active condition -->
                         <!-- <td class='text-center' *ngIf='!skill.isActive && nextColumn(c,i)'>
@@ -62,8 +64,8 @@
         <div class="modal-body">
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
-                    <label for="skillName"><b>Category:</b></label>
-                    <input formControlName= "name" name="skill" type="text" class="form-control" id="skillName" placeholder="Title"
+                    <label for="categoryName"><b>Category:</b></label>
+                    <input formControlName= "name" name="category" type="text" class="form-control" id="categoryName" placeholder="Title"
                         required/>
                 </div>
             </div>
@@ -90,8 +92,8 @@
         <div class="modal-body">
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
-                    <label for="skillName"><b>Category:</b></label>
-                    <input name="skillName" type="text" class="form-control" #name='ngModel' [(ngModel)]="currentSkill.skillName" id="editSkill"
+                    <label for="categoryName"><b>Category:</b></label>
+                    <input name="categoryName" type="text" class="form-control" #name='ngModel' [(ngModel)]="currentCategory.categoryName" id="editSkill"
                         placeholder="Category" required>
                 </div>
             
