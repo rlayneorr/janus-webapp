@@ -5,15 +5,8 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 @Injectable()
 export class UrlService {
   //public readonly context: string =  environment.gambitContext;
-  //public readonly caliberContext: string = environment.caliberContext;
-  public readonly context : string = environment.localhostcontext;
 
-
-  public readonly bucketContext : string = environment.bucketContext;
-  public readonly categoryContext : string = environment.categoryContext;
-  public readonly skillTypeContext : string = environment.skillTypeContext;
-  public readonly weightContext : string = environment.weightContext;
-  public readonly questionContext : string = environment.questionsContext;
+  public readonly context: string =  environment.localhostcontext;
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
@@ -145,20 +138,20 @@ export class UrlService {
   };
 
   category = {
+    // fetchAll: () => `${this.context}vp/category`,
     fetchAll: () => `${this.context}category/`,
-    // fetchAll: () => `${this.context}screening-admin/category/`,
-    // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
+    // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
+    // fetchById: (id: number) => `${this.context}category/${id}`,
     fetchById: (id: number) => `${this.context}category/${id}`,
-    // fetchById: (id: number) => `${this.context}screening-admin/category/`,
+    // save: () => `${this.context}vp/category`,
     save: () => `${this.context}category`,
-    // save: () => `${this.context}screening-admin/category/`,
+    // update: () => `${this.context}vp/category/update`,
     update: (id: number) => `${this.context}category/${id}`,
-    // update: (id: number) => `${this.context}screening-admin/category/${id}`,
-    // // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
+    // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
+    // create: () => `${this.context}vp/category/create`, 
     create: () => `${this.context}category`,
-    // create: () => `${this.context}screening-admin/category`,
+    // delete: () => `${this.context}vp/category/delete`,
     delete: (id: number) => `${this.context}category/${id}`,
-    // delete: (id: number) => `${this.context}screening-admin/category/${id}`,
   };
 
   curriculum = {

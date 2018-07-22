@@ -10,7 +10,11 @@ import { GambitTrainer } from '../../entities/GambitTrainer';
 xdescribe('TrainerService', () => {
   const trainer: GambitTrainer = new GambitTrainer();
   trainer.email = 'hey@stop.it';
+<<<<<<< HEAD
   //this.context = environment.localhostcontext;
+=======
+  //this.context = environment.gambitContext;
+>>>>>>> Commented out all lines that referenced gambitContext (the ec2); Created a localHostContext for JSON server usage
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [TrainerService, UrlService],
