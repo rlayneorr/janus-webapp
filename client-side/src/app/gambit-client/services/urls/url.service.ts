@@ -5,8 +5,8 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 @Injectable()
 export class UrlService {
   //public readonly context: string =  environment.gambitContext;
-  public readonly caliberContext: string = environment.caliberContext;
-  public readonly context : string = environment.localhostContext;
+
+  public readonly context: string =  environment.localhostContext;
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
@@ -125,14 +125,20 @@ export class UrlService {
   };
 
   category = {
-    fetchAll: () => `${this.context}vp/category`,
-    fetchAllActive: () => `${this.context}category/all`,
+    // fetchAll: () => `${this.context}vp/category`,
+    fetchAll: () => `${this.context}category/`,
+    // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
+    // fetchById: (id: number) => `${this.context}category/${id}`,
     fetchById: (id: number) => `${this.context}category/${id}`,
-    save: () => `${this.context}vp/category`,
-    update: () => `${this.context}vp/category/update`,
-    //Create and Delete are placeholder endpoints for testing **Tye and Brumles**
-    create: () => `${this.context}vp/category/create`, 
-    delete: () => `${this.context}vp/category/delete`,
+    // save: () => `${this.context}vp/category`,
+    save: () => `${this.context}category`,
+    // update: () => `${this.context}vp/category/update`,
+    update: (id: number) => `${this.context}category/${id}`,
+    // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
+    // create: () => `${this.context}vp/category/create`, 
+    create: () => `${this.context}category`,
+    // delete: () => `${this.context}vp/category/delete`,
+    delete: (id: number) => `${this.context}category/${id}`,
   };
 
   curriculum = {
@@ -213,6 +219,8 @@ export class UrlService {
     postQuestion: () => `${this.questionEndpoint}`,
     putQuestion: () => `${this.questionEndpoint}`,
     getQuestionsByBucketId: (bucketId: number) => `${this.questionEndpoint}/bucket/${bucketId}`,
+    // Tyerra Smith added a url to get ALL questions
+    getQuestions: () => `${this.questionEndpoint}/questions`,
     deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
     activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
     filteredQuestions: () => `${this.questionEndpoint}/filter`,
@@ -282,6 +290,7 @@ export class UrlService {
 
   /**
    * All urls associated with skills will come from this object
+   * These are CATEGORIES.
    */
   skills = {
     findAll: () => `${this.context}/skill`,

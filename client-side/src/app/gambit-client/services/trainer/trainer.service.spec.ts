@@ -10,7 +10,8 @@ import { GambitTrainer } from '../../entities/GambitTrainer';
 xdescribe('TrainerService', () => {
   const trainer: GambitTrainer = new GambitTrainer();
   trainer.email = 'hey@stop.it';
-  this.context = environment.localhostcontext;
+  this.context = environment.localhostContext;
+  //this.context = environment.gambitContext;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [TrainerService, UrlService],
