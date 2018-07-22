@@ -113,6 +113,7 @@ export class SkillsComponent implements OnInit {
   }
 
   deleteSkill() {
+<<<<<<< HEAD
     console.log("We made it!");
     console.log(this.currentCategory);
     console.log(this.currentCategory.categoryId);
@@ -121,6 +122,12 @@ export class SkillsComponent implements OnInit {
     this.resetFormControl();
 
     this.ngOnInit();
+=======
+    this.skillService.delete(this.currentSkill);
+    //This should work once implemented by the back-end -Tyerra Smith
+    // may not need this statement without all of the inherited subjects
+    this.resetFormControl();
+>>>>>>> Added a deleteSkill method to enable deleting a category on the front-end.
   }
 
 
