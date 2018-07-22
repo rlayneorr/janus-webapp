@@ -109,10 +109,14 @@ public fetchAll(): Observable<Category[]> {
    */
   public update(category: Category): Observable<Category> {
 <<<<<<< HEAD
+<<<<<<< HEAD
     const url = this.urlService.category.update(category.categoryId);
 =======
     const url = this.urlService.category.update(category.id);
 >>>>>>> Removed the fetchAllActive method because categories no longer have an active attribute; also removed the expected failures
+=======
+    const url = this.urlService.category.update(category.categoryId);
+>>>>>>> Changed id to categoryId and fixed the delete method - Tyerra Smith and Michael Brumley
     return this.httpClient.put<Category>(url, JSON.stringify(category));
   }
 
@@ -121,14 +125,20 @@ public fetchAll(): Observable<Category[]> {
   // }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Changed id to categoryId and fixed the delete method - Tyerra Smith and Michael Brumley
   public delete(category: Category) {
     console.log("We made it to the SERVICE!");
     console.log(category);
     const url = this.urlService.category.delete(category.categoryId);
+<<<<<<< HEAD
 =======
   public delete(category: Category): Observable<Category> {
     const url = this.urlService.category.delete(category.id);
 >>>>>>> Removed the fetchAllActive method because categories no longer have an active attribute; also removed the expected failures
+=======
+>>>>>>> Changed id to categoryId and fixed the delete method - Tyerra Smith and Michael Brumley
     return this.httpClient.delete<Category>(url);
   }
 }
