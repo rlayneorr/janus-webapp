@@ -34,7 +34,11 @@
                     <!-- Load all skills -->
                     <!--changed this to reference an alias category of array categories-->
                     <tr *ngFor="let category of categories; let i=index;">
+<<<<<<< HEAD
                         <td *ngIf='nextColumn(c,i);' (click)='editopen(editSkill,category);' class='pointer'>
+=======
+                        <td *ngIf='nextColumn(c,i)' (click)='editopen(editSkill,category);' class='pointer'>
+>>>>>>> Refactored the Skill stuff to reflect the Category mock data on the JSON server. - Tyerra Smith and Michael Brumley
                             {{category.categoryName}}
                         </td>
                         <!-- Display active condition -->
@@ -104,12 +108,17 @@
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <label for="categoryName"><b>Category:</b></label>
                     <input formControlName= "name" name="category" type="text" class="form-control" id="categoryName" placeholder="Title"
 =======
                     <label for="skillName"><b>Category:</b></label>
                     <input formControlName= "name" name="skill" type="text" class="form-control" id="skillName" placeholder="Title"
 >>>>>>> Change the Skills files to show 'Category/Categories' instead  of 'Skill/Skills'
+=======
+                    <label for="categoryName"><b>Category:</b></label>
+                    <input formControlName= "name" name="category" type="text" class="form-control" id="categoryName" placeholder="Title"
+>>>>>>> Refactored the Skill stuff to reflect the Category mock data on the JSON server. - Tyerra Smith and Michael Brumley
                         required/>
                 </div>
             </div>
@@ -137,12 +146,17 @@
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6">
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <label for="categoryName"><b>Category:</b></label>
                     <input name="categoryName" type="text" class="form-control" #name='ngModel' [(ngModel)]="currentCategory.categoryName" id="editSkill"
 =======
                     <label for="skillName"><b>Category:</b></label>
                     <input name="skillName" type="text" class="form-control" #name='ngModel' [(ngModel)]="currentSkill.skillName" id="editSkill"
 >>>>>>> Change the Skills files to show 'Category/Categories' instead  of 'Skill/Skills'
+=======
+                    <label for="categoryName"><b>Category:</b></label>
+                    <input name="categoryName" type="text" class="form-control" #name='ngModel' [(ngModel)]="currentCategory.categoryName" id="editSkill"
+>>>>>>> Refactored the Skill stuff to reflect the Category mock data on the JSON server. - Tyerra Smith and Michael Brumley
                         placeholder="Category" required>
                 </div>
             
