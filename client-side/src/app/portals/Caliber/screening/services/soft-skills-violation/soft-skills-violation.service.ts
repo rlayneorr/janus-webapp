@@ -69,7 +69,7 @@ export class SoftSkillsViolationService {
   * will be duplicated across the array.
   */
   addViolations(newViolations: ViolationType[], comment: string) {
-    const violationIdArray: number[] = new Array<number>();
+    const violationIdArray: number[] = [];
     for (let i = 0; i < newViolations.length; i++) {
       violationIdArray[i] = newViolations[i].violationTypeId;
     }

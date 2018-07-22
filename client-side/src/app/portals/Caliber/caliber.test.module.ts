@@ -344,7 +344,6 @@ export const Dependencies = {
     QuestionService,
     QuestionsService,
     BucketsService,
-    TagService,
     SimpleTraineeService,
     SkillTypeService,
     QuestionScoreService,

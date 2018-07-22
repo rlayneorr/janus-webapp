@@ -16,14 +16,17 @@
  * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
  */
 
- const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000/';
+ //const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000';
+  const context = 'http://localhost:3000';
 
-const bam = '';
+  const bam = '';
 
 export const environment = {
   production: false,
   /** Zuul endpoint  */
-  gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000/',
+  gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000',
+  caliberContext: 'http://ec2-54-86-6-122.compute-1.amazonaws.com:8761',
+  localhostContext: 'http://localhost:3000',
   /** Assets endpoints for like pictures  */
   assets: 'http://52.87.205.55:8086/angular/assets/',
 

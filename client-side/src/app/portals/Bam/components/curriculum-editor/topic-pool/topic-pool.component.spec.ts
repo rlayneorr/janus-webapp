@@ -310,7 +310,7 @@ describe('TopicPoolComponent', () => {
     const topic: TopicName = { id: 1, name: 'Jean' };
     const subTopic: Topic = { topicID: 1, topicName: 'John' };
 
-    component.uniqarrFiltered = new Array<string>();
+    component.uniqarrFiltered = [];
     component.createTopic(topic.name, subTopic.topicName);
 
 
@@ -419,7 +419,7 @@ describe('TopicPoolComponent', () => {
    */
   it ('should go through all the steps to get all topics', () => {
     // Set up for topicPoolCacheData to be what we need it to be.
-    const tempArr: Array<Topic> = new Array<Topic>();
+    const tempArr: Array<Topic> = [];
     curricService.currentTopicPoolData = Observable.of(tempArr);
 
     // We're testing a successful observable, not an error.
@@ -452,7 +452,7 @@ describe('TopicPoolComponent', () => {
    */
   it ('should enter the if statement and receive an error observable', () => {
     // Set up for topicPoolCacheData to be what we need it to be.
-    const tempArr: Array<Topic> = new Array<Topic>();
+    const tempArr: Array<Topic> = [];
     curricService.currentTopicPoolData = Observable.of(tempArr);
 
     // Set getAllTopicPool to return an eror observable
@@ -475,7 +475,7 @@ describe('TopicPoolComponent', () => {
    */
   it ('should go into the else statement and set subTopicName to the provided array', () => {
     // Set up for topicPoolCacheData to be what we need it to be.
-    const tempArr: Array<Topic> = new Array<Topic>();
+    const tempArr: Array<Topic> = [];
     const arrayLength = 5;
     for (let index = 0; index < arrayLength; index++) {
       const element: Topic = new Topic();
