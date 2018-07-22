@@ -124,7 +124,7 @@ export class LocationService {
   }
   /**Helper method for the above. */
   private getRoomsFromBuildings(buildsArray: Array<Building>) {
-    let roomsObserve = from(new Array<Array<Room>>());
+    let roomsObserve = from([]);
     buildsArray.forEach((building) => {
       roomsObserve = roomsObserve.merge(this.getRoomsByBuildingId(building.buildingId));
     });

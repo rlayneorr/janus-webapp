@@ -34,7 +34,7 @@ describe('OverallFeedbackComponent439y298743', () => {
     note2.content = 'Angular';
     note2.week = 5;
 
-    const data = new Array<Note>();
+    const data = [];
     data.push(note1);
     data.push(note2);
 

@@ -1,0 +1,6 @@
+{
+  "/questions?questionId=:questionId": "/questions/:questionId",
+  "/questions/create": "/questions",
+  "/questions/update/:questionId": "/questions/:questionId",
+  "/questions/delete/:questionId": "/questions/:questionId"
+}
