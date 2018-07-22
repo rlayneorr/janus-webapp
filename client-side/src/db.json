@@ -99,6 +99,36 @@
       "active": false
     }
   ],
+  "category": [
+    {
+      "categoryId": 1,
+      "categoryName": "category1"
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "category2"
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "category3"
+    },
+    {
+      "categoryId": 4,
+      "categoryName": "category4"
+    },
+    {
+      "categoryId": 5,
+      "categoryName": "category5"
+    },
+    {
+      "categoryId": 6,
+      "categoryName": "category6"
+    },
+    {
+      "categoryId": 7,
+      "categoryName": "category7"
+    }
+  ],
   "questions": [
     {
       "questionId": 2,
