@@ -76,6 +76,14 @@ export class SkillsComponent implements OnInit {
     this.resetFormControl();
   }
 
+  deleteSkill() {
+    this.skillService.delete(this.currentSkill);
+    //This should work once implemented by the back-end -Tyerra Smith
+    // may not need this statement without all of the inherited subjects
+    this.resetFormControl();
+  }
+
+
   /**
    * Rewrote to actual work and send correct information.
    * Responsible for updating a skill on name change or active change
