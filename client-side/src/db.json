@@ -52,12 +52,21 @@
   ],
   "category": [
     {
+<<<<<<< HEAD
       "categoryId": 0,
       "categoryName": "category0"
     },
     {
       "categoryId": 1,
       "categoryName": "category1"
+=======
+      "categoryId": 1,
+      "categoryName": "category1"
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "category2"
+>>>>>>> Changed id to categoryId in the entity and the mock data - Tyerra Smith and Michael Brumley
     },
     {
       "categoryId": 3,
