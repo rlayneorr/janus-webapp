@@ -54,6 +54,7 @@ public fetchAll(): Observable<Category[]> {
   return this.httpClient.get<Category[]>(url);
 }
 
+// Removed this method because a Category no longer has an active attribute. *Tyerra Smith*
  /**
  * retrieves all ACTIVE categories
  *
@@ -66,11 +67,6 @@ public fetchAll(): Observable<Category[]> {
 //    .subscribe((results) => this.listSubject.next(results));
 //    return this.listSubject.asObservable();
 //  }
-
-public fetchAllActive(): Observable<Category[]> {
-  const url = this.urlService.category.fetchAllActive();
-  return this.httpClient.get<Category[]>(url);
-}
 
  /**
  * retrieves a category by its ID
@@ -112,7 +108,7 @@ public fetchAllActive(): Observable<Category[]> {
    * @param category: Category
    */
   public update(category: Category): Observable<Category> {
-    const url = this.urlService.category.update();
+    const url = this.urlService.category.update(category.id);
     return this.httpClient.put<Category>(url, JSON.stringify(category));
   }
 
@@ -121,7 +117,7 @@ public fetchAllActive(): Observable<Category[]> {
   // }
 
   public delete(category: Category): Observable<Category> {
-    const url = this.urlService.category.delete();
+    const url = this.urlService.category.delete(category.id);
     return this.httpClient.delete<Category>(url);
   }
 }
