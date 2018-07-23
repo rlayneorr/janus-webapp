@@ -19,7 +19,7 @@ import { AlertsService } from '../../../services/alerts.service';
 
 // Mock Data
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
-import { TAGS } from '../../../screening/mock-data/mock-tags';
+// import { TAGS } from '../../../screening/mock-data/mock-tags';
 import { QuestionService } from '../../../screening/services/question/question.service';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -34,9 +34,10 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 /**
  * Setting up the testing environment for question component.
  **/
-describe('QuestionComponent', () => {
+fdescribe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
+  
 
   /**
    * Import dependencies and set the TestBed to configure the testing module.
@@ -111,9 +112,10 @@ describe('QuestionComponent', () => {
     expect(component.sampleAnswers.length).toBe(0);
   });
 
-  it('should remove question'),() => {
-
-  };
+  it('should remove question',() => {
+    component.deleteQuestion(QUESTIONS[0]);
+    expect(component.question).toEqual(null);
+  });
   /**
    * Test if the question gets edited or not.
    *

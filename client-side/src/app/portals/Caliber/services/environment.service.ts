@@ -23,7 +23,7 @@ export class EnvironmentService {
    */
   public buildUrl(url: string, parameters = {} ): string {
     //let rootUrl = [ environment.gambitContext, url ].join('');
-    let rootUrl = [ environment.localHostContext, url ].join('');
+    let rootUrl = [ environment.localhostContext, url ].join('');
     if ( this.isEmptyObject(parameters) === false ) {
       rootUrl += '/?';
 

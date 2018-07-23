@@ -5,6 +5,7 @@ import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuestionService } from '../services/question.service';
+import { QuestionsService } from '../../../services/questions/questions.service';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { BucketsService } from '../services/buckets.service';
 import { SkillType } from '../entities/SkillType';
@@ -43,10 +44,10 @@ export class QuestionComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private fb: FormBuilder,
     private questionService: QuestionService,
+    private questionsService: QuestionsService,
     private bucketService: BucketsService,
     private alertsService: AlertsService) { }
 
-  newTagString: string;
   createQuestion: FormGroup;
   newQuestion: Question;
   question: Question;
@@ -192,6 +193,14 @@ export class QuestionComponent implements OnInit {
     }
   }
 
+
+
+
+  deleteQuestion(question):void {
+    this.questionService.deleteQuestion(this.question.questionId);
+    console.log("delete")
+  }
+ 
   /**
    * Used to populate the current question and the current tags with a selected question to be
    * edited.
@@ -201,9 +210,12 @@ export class QuestionComponent implements OnInit {
       this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data => {
         this.questions = (data as Question[]);
       });
+      
     }
   }
 
+  
+  
   savedSuccessfully() {
     this.alertsService.success('Saved successfully');
   }

@@ -7,7 +7,7 @@ import { Bucket } from '../../entities/bucket';
 import { QuestionScore } from '../../entities/questionScore';
 
 // Services
-import { QuestionService } from '../../services/question/question.service';
+// import { QuestionService } from '../../services/question/question.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
 import { SkillTypeBucketLookUp } from '../../entities/skillTypeBucketLookup';
@@ -69,7 +69,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   constructor(
-    private questionService: QuestionService,
+    // private questionService: QuestionService,
     private questionScoreService: QuestionScoreService,
     private questionsToBucketsUtil: QuestionsToBucketsUtil,
     private modalService: NgbModal,

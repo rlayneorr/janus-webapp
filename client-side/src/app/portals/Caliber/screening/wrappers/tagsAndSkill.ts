@@ -1,4 +1,4 @@
-export interface TagsAndSkill {
-    tagList: number[];
-    skillTypeId: number;
-}
+// export interface TagsAndSkill {
+//     tagList: number[];
+//     skillTypeId: number;
+// }
