@@ -1,6 +1,7 @@
 {
-  "/questions?questionId=:questionId": "/questions/:questionId",
-  "/questions/create": "/questions",
-  "/questions/update/:questionId": "/questions/:questionId",
-  "/questions/delete/:questionId": "/questions/:questionId"
+  "/questions/:questionId/active": "/questions/:questionId",
+  "/questions/:questionId/deactivate": "/questions/:questionId",
+  "/questions": "/questions",
+  "/questions/delete/:questionId": "/questions?questionId=:questionId",
+  "/questions/bucket/:questionId": "/questions?bucketId=:questionId"
 }
