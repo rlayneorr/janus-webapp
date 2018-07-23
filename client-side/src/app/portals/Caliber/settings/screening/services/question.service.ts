@@ -19,7 +19,9 @@ const httpOptions = {
 @Injectable()
 export class QuestionService {
 
-  constructor(private http: HttpClient, private urlService: UrlService) { }
+  private urlService : UrlService;
+
+  constructor(private http: HttpClient, /*private urlService: UrlService*/) { }
 
   questions: Question[];
 
