@@ -141,7 +141,7 @@ export class SkillTypesComponent implements OnInit {
         // if (this.skillType) {
         //     return this.categoryIds.includes(bucketId);
         // }
-        // return false;
+        //return false;
         console.log("checkContains");
     }
 
@@ -285,6 +285,7 @@ export class SkillTypesComponent implements OnInit {
             this.setSkillTypes();
             // this.allSkillTypes.sort(this.compare);
         });
+        console.log(this.allSkillTypes);
     }
 
     /** used to compare SkillType Array to sort it based on status */
@@ -303,6 +304,7 @@ export class SkillTypesComponent implements OnInit {
         this.bucketsService.getAllBuckets().subscribe(results => {
             this.allBuckets = results;
         });
+        console.log(this.allBuckets);
     }
 
     /**

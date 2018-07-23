@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NavModule } from '../../nav/nav.module';
@@ -347,6 +347,7 @@ export const Dependencies = {
     TagService,
     SimpleTraineeService,
     SkillTypeService,
+    SkillTypesService,
     QuestionScoreService,
     QuestionsToBucketsUtil,
     ScreeningService,
@@ -358,6 +359,7 @@ export const Dependencies = {
     NoteService,
     NgbModal,
     NgbModalStack,
+    NgbTabset,
     VpHomeLineGraphService,
     VpHomeSelectorService,
     ColorService,
