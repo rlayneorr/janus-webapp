@@ -5,42 +5,59 @@
       "bucketCategory": "Basic Java",
       "bucketDescription": "OCA level Java questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1
+      ]
     },
     {
       "bucketId": 2,
       "bucketCategory": "SQL",
       "bucketDescription": "SQL database questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
       "bucketId": 3,
       "bucketCategory": "JavaScript",
       "bucketDescription": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
       "bucketId": 4,
       "bucketCategory": "HTML",
       "bucketDescription": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
       "bucketId": 5,
       "bucketCategory": "CSS",
       "bucketDescription": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
       "bucketId": 6,
       "bucketCategory": "Spring",
       "bucketDescription": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
       "bucketId": 7,
@@ -84,28 +101,9 @@
   ],
   "questions": [
     {
-      "questionId": 0,
-      "bucketId": 2,
-      "questionText": "whuts yr favorite color",
-      "sampleAnswer1": "answer1",
-      "sampleAnswer2": "answer2",
-      "sampleAnswer3": "answer3",
-      "sampleAnswer4": "answer4",
-      "sampleAnswer5": "answer5"
-    },
-    {
-      "questionId": 1,
-      "bucketId": 2,
-      "questionText": "bleh",
-      "sampleAnswer1": "bhahfha",
-      "sampleAnswer2": "dsflkj",
-      "sampleAnswer3": "eiei",
-      "sampleAnswer4": "qq",
-      "sampleAnswer5": "rew"
-    },
-    {
       "questionId": 2,
       "bucketId": 1,
+      "isActive": true,
       "questionText": "000000",
       "sampleAnswer1": "asdf",
       "sampleAnswer2": "mnbb",
@@ -115,6 +113,7 @@
     },
     {
       "questionId": 3,
+      "isActive": true,
       "questionText": "This is from Postman",
       "sampleAnswer1": "hello21",
       "sampleAnswer2": "there",
@@ -122,6 +121,50 @@
       "sampleAnswer4": "222",
       "sampleAnswer5": "2222",
       "bucketId": 2
+    },
+    {
+      "questionId": 4,
+      "bucketId": 2,
+      "isActive": true,
+      "questionText": "bleh",
+      "sampleAnswer1": "testing 1112 new document",
+      "sampleAnswer2": "dsflkj",
+      "sampleAnswer3": "eiei",
+      "sampleAnswer4": "qq",
+      "sampleAnswer5": "rew"
+    },
+    {
+      "questionId": 5,
+      "bucketId": 2,
+      "isActive": true,
+      "questionText": "bleh",
+      "sampleAnswer1": "testing james",
+      "sampleAnswer2": "dsflkj",
+      "sampleAnswer3": "eiei",
+      "sampleAnswer4": "qq",
+      "sampleAnswer5": "rew"
+    },
+    {
+      "questionId": 7,
+      "bucketId": 2,
+      "isActive": true,
+      "questionText": "bleh",
+      "sampleAnswer1": "testing james",
+      "sampleAnswer2": "dsflkj",
+      "sampleAnswer3": "eiei",
+      "sampleAnswer4": "qq",
+      "sampleAnswer5": "rew"
+    },
+    {
+      "questionId": 8,
+      "isActive": true,
+      "bucketId": 2,
+      "questionText": "bleh",
+      "sampleAnswer1": "testing is james here? update status",
+      "sampleAnswer2": "dsflkj",
+      "sampleAnswer3": "eiei",
+      "sampleAnswer4": "qq",
+      "sampleAnswer5": "rew"
     }
   ],
   "skillType": [
