@@ -4,7 +4,7 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 
 @Injectable()
 export class UrlService {
-  public readonly context: string =  environment.gambitContext;
+  public readonly context: string =  environment.localhostcontext;
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
@@ -210,9 +210,7 @@ export class UrlService {
     deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
     activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
     filteredQuestions: () => `${this.questionEndpoint}/filter`,
-    getAllTags: () => `${this.questionEndpoint}/tags`,
-    createNewTag: () => `${this.questionEndpoint}/tags`,
-    getTagsByQuestionId: (questionId: number) => `${this.questionEndpoint}/tags/question/${questionId}`
+    deleteQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/delete`,
   };
 
   private questionScoringEndpoint = 'question-score-service/question';
@@ -338,10 +336,10 @@ export class UrlService {
     isPopulated: (batchId: number) => `${this.context}/subtopics/ispopulated/${batchId}/`
   };
 
-  tagEndpoint = this.context + 'question-service/tag';
-  tags = {
-    getAllTags: () => `${this.tagEndpoint}/getAllTags`,
-  };
+  // tagEndpoint = this.context + 'question-service/tag';
+  // tags = {
+  //   getAllTags: () => `${this.tagEndpoint}/getAllTags`,
+  // };
 
   topic = {
     addTopicName: (name: string) => `${this.context}/topics/${name}`,

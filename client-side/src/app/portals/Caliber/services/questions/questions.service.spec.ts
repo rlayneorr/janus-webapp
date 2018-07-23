@@ -74,7 +74,7 @@ describe('QuestionsService ', () => {
 
     httpClientSpyOnPost.post.and.returnValue(asyncData(QUESTIONS[0]));
 
-    questionsService.createNewQuestion(QUESTIONS[0], [1]).subscribe(
+    questionsService.createNewQuestion(QUESTIONS[0]).subscribe(
       questions => expect(questions).toEqual(QUESTIONS[0]),
       fail
     );
@@ -93,7 +93,7 @@ describe('QuestionsService ', () => {
 
     httpClientSpyOnPost.post.and.returnValue(asyncData(QUESTIONS[0]));
 
-    questionsService.updateQuestion(QUESTIONS[0], [1]).subscribe(
+    questionsService.updateQuestion(QUESTIONS[0]).subscribe(
       questions => expect(questions).toEqual(QUESTIONS[0]),
       fail
     );
@@ -175,7 +175,7 @@ describe('QuestionsService ', () => {
     httpClientSpyOnPost.post.and.returnValue(asyncError(errorResponse));
     questionsService = new QuestionsService(<any> httpClientSpyOnPost, new UrlService);
 
-    questionsService.createNewQuestion(QUESTIONS[0], [1]).subscribe(
+    questionsService.createNewQuestion(QUESTIONS[0]).subscribe(
       questions => fail('expected an error, not questions'),
       error  => expect(error.message).toContain('404')
     );
@@ -190,7 +190,7 @@ describe('QuestionsService ', () => {
     httpClientSpyOnPost.post.and.returnValue(asyncError(errorResponse));
     questionsService = new QuestionsService(<any> httpClientSpyOnPost, new UrlService);
 
-    questionsService.updateQuestion(QUESTIONS[0], [1]).subscribe(
+    questionsService.updateQuestion(QUESTIONS[0]).subscribe(
       questions => fail('expected an error, not questions'),
       error  => expect(error.message).toContain('404')
     );

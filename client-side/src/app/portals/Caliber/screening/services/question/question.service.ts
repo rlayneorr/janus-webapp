@@ -9,10 +9,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Question } from '../../entities/question';
 // import { Tag } from '../../entities/tag';
 import { QUESTIONS } from '../../mock-data/mock-questions';
-import { TagsAndSkill } from '../../wrappers/tagsAndSkill';
+// import { TagsAndSkill } from '../../wrappers/tagsAndSkill';
 
 // Services
-import { TagService } from '../../../services/tag/tag.service';
+// import { TagService } from '../../../services/tag/tag.service';
 import { SimpleTraineeService } from '../simpleTrainee/simple-trainee.service';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 /*

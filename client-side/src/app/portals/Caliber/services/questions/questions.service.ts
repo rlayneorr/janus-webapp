@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Question } from '../../entities/Question';
 import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { FnParam } from '../../../../../../node_modules/@angular/compiler/src/output/output_ast';
 
 /**
   * Used url Service to input endpoints to our services
@@ -37,10 +38,12 @@ export class QuestionsService {
    * updated to be in sync with new Gambit question service modifications
    * used urlService to get endpoint for posting new questions
    * @param question - question model
-   * @param tagIds - array of tag ids
+   * 
    */
-  createNewQuestion(question: Question, tagIds: number[]) {
-    return this.http.post(this.urlService.question.postQuestion(), { question: question, tagIds: tagIds }, httpOptions);
+
+   // pulled tags out every location now have 500 error 
+  createNewQuestion(question: Question) {
+    return this.http.post(this.urlService.question.postQuestion(), { question: question }, httpOptions);
   }
 
   /**
@@ -49,11 +52,19 @@ export class QuestionsService {
    * updated to be in sync with new Gambit question service modifications
    * used urlService to get endpoint for updating new quetions with put method
    * @param question
-   * @param newTagIds
+   * 
    */
-  updateQuestion(question: Question, newTagIds: number[]) {
-    return this.http.put(this.urlService.question.putQuestion(), { question: question, tagIds: newTagIds }, httpOptions);
+  updateQuestion(question: Question) {
+    return this.http.put(this.urlService.question.putQuestion(), { question: question}, httpOptions);
   }
+   /**
+   * deactivates question
+   * add urlService to get endpoint for deactivating a question
+   * @param questionId
+  */
+  deleteQuestion(questionId: number) {
+    return this.http.put(this.urlService.question.deleteQuestion(questionId), { question: questionId}, httpOptions);
+  }  
 
   /**
    * deactivates question

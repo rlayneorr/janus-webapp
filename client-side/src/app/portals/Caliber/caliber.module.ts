@@ -43,12 +43,12 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
-import { QuestionService } from './screening/services/question/question.service';
+// import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-import { TagService } from './services/tag/tag.service';
+// import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';
@@ -58,7 +58,6 @@ import { SkillTypeBucketService } from './screening/services/skillTypeBucketLook
 import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
-import { TagsService } from './settings/screening/services/tags.service';
 import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
 /** for in memory data service
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
@@ -156,7 +155,6 @@ import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
-import { TagFilterPipe } from './settings/screening/question/question.filter';
 import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
@@ -212,7 +210,6 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
-    TagFilterPipe,
     BucketFilterPipe,
 
     // components
@@ -317,10 +314,10 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     ApiService,
     PDFService,
     ReportingService,
-    QuestionService,
+    // QuestionService,
     QuestionsToBucketsUtil,
     ScoresToBucketsUtil,
-    TagService,
+    // TagService,
     QuestionScoreService,
     SkillTypeService,
     SoftSkillsService,
@@ -333,7 +330,6 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     QuestionsService,
     SkillTypesService,
     BucketsService,
-    TagsService,
     HttpErrorHandlerService,
     SimpleTraineeService,
     CategoriesService,
