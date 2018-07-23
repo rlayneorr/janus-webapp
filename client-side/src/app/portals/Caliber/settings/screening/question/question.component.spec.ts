@@ -12,7 +12,7 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 import { QuestionComponent } from './question.component';
 
 // Entities
-import { Question } from '../../../entities/Question';
+import { Question } from '../entities/Question';
 
 // Services
 import { AlertsService } from '../../../services/alerts.service';
