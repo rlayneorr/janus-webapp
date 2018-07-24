@@ -161,8 +161,7 @@ import { CategoryFilterPipe } from './settings/screening/categories/categories.f
 //import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
-import { CategoryService } from '../Caliber/services/category/category.service';
-
+import {CategoryService} from "./services/category/category.service";
 
 @NgModule({
   imports: [
@@ -177,7 +176,7 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     SimpleNotificationsModule.forRoot(),
     ScrollEventModule,
     Ng2PageScrollModule,
-    NgxPaginationModule
+    NgxPaginationModule,
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -213,10 +212,6 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
-<<<<<<< HEAD
-=======
-    //BucketFilterPipe,
->>>>>>> - imported QuestionService to the modules
     CategoryFilterPipe,
 
     // components
@@ -322,11 +317,7 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     ApiService,
     PDFService,
     ReportingService,
-<<<<<<< HEAD
-    // QuestionService,
-=======
     QuestionService,
->>>>>>> - imported QuestionService to the modules
     QuestionsToBucketsUtil,
     ScoresToBucketsUtil,
     // TagService,
@@ -345,7 +336,6 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     SettingsCategoriesService,
     HttpErrorHandlerService,
     CandidateService,
-    CategoriesService,
     CategoryService
   ],
   bootstrap: [
