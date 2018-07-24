@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RouteService } from '../../portals/Caliber/services/route.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Routes } from '@angular/router/src/config';
-import { OnDestroy } from '@angular/core/';
+import { OnDestroy } from '@angular/core';
 import { routes } from '../../portals/Caliber/caliber.routes';
 import { CookieService } from 'ngx-cookie-service';
 

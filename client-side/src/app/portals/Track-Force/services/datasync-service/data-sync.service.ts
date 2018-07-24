@@ -11,7 +11,7 @@ import { ClientListService } from '../client-list-service/client-list.service';
 import { SkillsetService } from '../skill-set-service/skill-set.service';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/Rx';
+import 'rxjs';
 
 /**
  * @author Seán Vaeth

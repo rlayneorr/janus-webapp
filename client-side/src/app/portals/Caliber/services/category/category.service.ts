@@ -7,7 +7,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // services
-import { AlertsService } from '../../services/alerts.service';
+import { AlertsService } from '../alerts.service';
 import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 // entities

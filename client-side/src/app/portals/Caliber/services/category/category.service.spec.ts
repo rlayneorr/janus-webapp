@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
-import { AlertsService } from '../../services/alerts.service';
-import { CategoryService } from '../../services/category/category.service';
-import { Category } from '../../../Caliber/entities/Category';
+import { AlertsService } from '../alerts.service';
+import { CategoryService } from './category.service';
+import { Category } from '../../entities/Category';
 import { CATEGORIES, replacementCategory} from './mock-categories';
 import { defer } from 'rxjs/observable/defer';
 import { CategoriesService } from '../categories.service';
