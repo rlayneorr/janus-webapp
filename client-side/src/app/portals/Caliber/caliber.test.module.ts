@@ -331,7 +331,6 @@ export const Dependencies = {
         ViolationFlagComponent,
         SkillTypesComponent,
         BucketComponent,
-        CategoriesComponent,
         QuestionComponent,
         ScreeningComponent
   ],

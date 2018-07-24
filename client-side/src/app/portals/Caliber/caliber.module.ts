@@ -159,10 +159,7 @@ import { CategoryFilterPipe } from './settings/screening/categories/categories.f
 //import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
-import { CategoryService } from '../Caliber/services/category/category.service';
-import {QuestionService} from "./settings/screening/services/question.service";
-import { CategoryService } from './services/category/category.service';
-
+import {CategoryService} from "./services/category/category.service";
 
 @NgModule({
   imports: [
@@ -177,7 +174,7 @@ import { CategoryService } from './services/category/category.service';
     SimpleNotificationsModule.forRoot(),
     ScrollEventModule,
     Ng2PageScrollModule,
-    NgxPaginationModule
+    NgxPaginationModule,
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -336,7 +333,6 @@ import { CategoryService } from './services/category/category.service';
     BucketsService,
     HttpErrorHandlerService,
     CandidateService,
-    CategoriesService,
     CategoryService
   ],
   bootstrap: [
