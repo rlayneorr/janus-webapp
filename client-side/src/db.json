@@ -1,109 +1,141 @@
 {
   "buckets": [
     {
-      "bucketID": 1,
-      "bucketCategory": "Basic Java",
-      "bucketDescription": "OCA level Java questions",
+      "bucketId": 1,
+      "category": "Basic Java",
+      "description": "OCA level Java questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        {
+          "questionId": 0,
+          "bucketId": 1,
+          "questionText": "whuts yr favorite color",
+          "sampleAnswer1": "answer1",
+          "sampleAnswer2": "answer2",
+          "sampleAnswer3": "answer3",
+          "sampleAnswer4": "answer4",
+          "sampleAnswer5": "answer5"
+        }
+      ]
     },
     {
-      "bucketID": 2,
-      "bucketCategory": "SQL",
-      "bucketDescription": "SQL database questions",
+      "bucketId": 2,
+      "category": "SQL",
+      "description": "SQL database questions",
       "isActive": true,
-      "questions": null
+      "questions": []
     },
     {
-      "bucketID": 3,
-      "bucketCategory": "JavaScript",
-      "bucketDescription": "JavaScript questions",
+      "bucketId": 3,
+      "category": "JavaScript",
+      "description": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": []
     },
     {
-      "bucketID": 4,
-      "bucketCategory": "HTML",
-      "bucketDescription": "JavaScript questions",
+      "bucketId": 4,
+      "category": "HTML",
+      "description": "HTML questions",
       "isActive": true,
-      "questions": null
+      "questions": []
     },
     {
-      "bucketID": 5,
-      "bucketCategory": "CSS",
-      "bucketDescription": "JavaScript questions",
+      "bucketId": 5,
+      "category": "CSS",
+      "description": "CSS questions",
       "isActive": true,
-      "questions": null
+      "questions": []
     },
     {
-      "bucketID": 6,
-      "bucketCategory": "Spring",
-      "bucketDescription": "JavaScript questions",
+      "bucketId": 6,
+      "category": "Spring",
+      "description": "Spring questions",
       "isActive": true,
-      "questions": null
+      "questions": []
     },
     {
-      "bucketID": 7,
-      "bucketCategory": "Angular",
-      "bucketDescription": "JavaScript questions",
+      "bucketId": 7,
+      "category": "Angular",
+      "description": "Angular questions",
       "isActive": true,
-      "questions": null
+      "questions": []
     }
   ],
-  "category": [
+  "categories": [
     {
       "categoryId": 0,
-      "categoryName": "category0"
+      "categoryName": "Java",
+      "buckets": [
+        {
+          "bucketId": 1,
+          "category": "Basic Java",
+          "description": "OCA level Java questions",
+          "isActive": true,
+          "questions": [
+            {
+              "questionId": 0,
+              "bucketId": 1,
+              "questionText": "whuts yr favorite color",
+              "sampleAnswer1": "answer1",
+              "sampleAnswer2": "answer2",
+              "sampleAnswer3": "answer3",
+              "sampleAnswer4": "answer4",
+              "sampleAnswer5": "answer5"
+            }
+          ]
+        }
+      ]
     },
     {
       "categoryId": 1,
-      "categoryName": "category1"
+      "categoryName": "SQL",
+      "buckets": []
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "JavaScript",
+      "buckets": []
     },
     {
       "categoryId": 3,
-      "categoryName": "category3"
+      "categoryName": "HTML",
+      "buckets": []
     },
     {
       "categoryId": 4,
-      "categoryName": "category4"
+      "categoryName": "CSS",
+      "buckets": []
     },
     {
       "categoryId": 5,
-      "categoryName": "category5"
+      "categoryName": "Spring",
+      "buckets": []
+    }
+  ],
+  "weights": [
+    {
+      "weightId": 0,
+      "skillTypeId": 52,
+      "categoryId": 0,
+      "weight": 100
     },
     {
-      "categoryId": 6,
-      "categoryName": "category6"
+      "weightId": 1,
+      "skillTypeId": 52,
+      "categoryId": 1,
+      "weight": 100
     },
     {
-      "categoryId": 7,
-      "categoryName": "category7"
-    },
-    {
-      "categoryId": 8,
-      "categoryName": "category8"
-    },
-    {
-      "categoryId": 9,
-      "categoryName": "category9"
-    },
-    {
-      "categoryId": 10,
-      "categoryName": "category10"
-    },
-    {
-      "categoryId": 11,
-      "categoryName": "category11"
-    },
-    {
-      "categoryId": 12,
-      "categoryName": "category12"
+      "weightId": 2,
+      "skillTypeId": 52,
+      "categoryId": 2,
+      "weight": 100
     }
   ],
   "questions": [
     {
       "questionId": 0,
-      "bucketId": 2,
+      "bucketId": 0,
       "questionText": "whuts yr favorite color",
       "sampleAnswer1": "answer1",
       "sampleAnswer2": "answer2",
@@ -113,7 +145,7 @@
     },
     {
       "questionId": 1,
-      "bucketId": 2,
+      "bucketId": 1,
       "questionText": "bleh",
       "sampleAnswer1": "bhahfha",
       "sampleAnswer2": "dsflkj",
@@ -123,7 +155,7 @@
     },
     {
       "questionId": 2,
-      "bucketId": 1,
+      "bucketId": 2,
       "questionText": "000000",
       "sampleAnswer1": "asdf",
       "sampleAnswer2": "mnbb",
@@ -132,41 +164,27 @@
       "sampleAnswer5": "poiu"
     }
   ],
-  "skillTypes": [
+  "skillType": [
     {
-      "skillTypeID": 52,
-      "skillTypeName": "Java EE/Microservices",
-      "isActive": true
+      "skillTypeName": "Java",
+      "skillTypeId": 52,
+      "categories": [
+        {
+          "categoryId": 2,
+          "categoryName": "JavaScript",
+          "buckets": []
+        },
+        {
+          "categoryId": 4,
+          "categoryName": "CSS",
+          "buckets": []
+        }
+      ]
     },
     {
-      "skillTypeID": 53,
-      "skillTypeName": "PEGA",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 54,
-      "skillTypeName": "Selenium",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 55,
-      "skillTypeName": "Business Analysts",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 56,
-      "skillTypeName": ".NET",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 57,
-      "skillTypeName": "C++",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 58,
-      "skillTypeName": "Other",
-      "isActive": true
+      "skillTypeName": "Hi",
+      "categoryWeight": 1,
+      "skillTypeId": 53
     }
   ]
 }
