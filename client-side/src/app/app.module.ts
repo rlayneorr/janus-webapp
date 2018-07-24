@@ -70,7 +70,8 @@ const routes: Routes = [
     ChartsModule,
     HttpClientModule,
     GambitClientModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
