@@ -70,11 +70,14 @@
       "categoryName": "category1"
     },
     {
+<<<<<<< HEAD
       "categoryId": 2,
       "categoryName": "category2"
 >>>>>>> Changed id to categoryId in the entity and the mock data - Tyerra Smith and Michael Brumley
     },
     {
+=======
+>>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
       "categoryId": 3,
       "categoryName": "category3"
     },

@@ -43,7 +43,11 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 import { CandidateService } from './screening/services/candidate/candidate.service';
+<<<<<<< HEAD
 // import { QuestionService } from './screening/services/question/question.service';
+=======
+import { QuestionService } from './screening/services/question/question.service';
+>>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
@@ -159,8 +163,11 @@ import { CategoryFilterPipe } from './settings/screening/categories/categories.f
 //import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
+<<<<<<< HEAD
 // import { CategoryService } from '../Caliber/services/category/category.service';
 import {QuestionService} from "./settings/screening/services/question.service";
+=======
+>>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
 import { CategoryService } from './services/category/category.service';
 
 

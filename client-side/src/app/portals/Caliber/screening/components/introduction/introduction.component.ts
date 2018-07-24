@@ -28,7 +28,11 @@ import { SkillType } from '../../entities/skillType';
 export class IntroductionComponent implements OnInit {
 
   constructor(
+<<<<<<< HEAD
     //public tagService: TagService,
+=======
+    public tagService: TagService,
+>>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
     private candidateService: CandidateService,
     private skillTypeService: SkillTypeService,
     private screeningService: ScreeningService) { }
@@ -46,11 +50,19 @@ export class IntroductionComponent implements OnInit {
   });
 
   ngOnInit() {
+<<<<<<< HEAD
     // this.tagService.tagListChecked = [];
     //this.traineeName = this.candidateService.getSelectedCandidate().firstname + ' ' +
      // this.candidateService.getSelectedCandidate().lastname;
     //this.traineeTrack = this.candidateService.getSelectedCandidate().skillTypeName;
     // this.getTags();
+=======
+    this.tagService.tagListChecked = [];
+    //this.traineeName = this.candidateService.getSelectedCandidate().firstname + ' ' +
+     // this.candidateService.getSelectedCandidate().lastname;
+    //this.traineeTrack = this.candidateService.getSelectedCandidate().skillTypeName;
+    this.getTags();
+>>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
   }
 
   // Get an array of all tags and assign it to tagList
