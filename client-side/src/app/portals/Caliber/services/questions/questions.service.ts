@@ -63,7 +63,7 @@ export class QuestionsService {
    * @param questionId
   */
   deleteQuestion(questionId: number) {
-    return this.http.put(this.urlService.question.deleteQuestion(questionId), { question: questionId}, httpOptions);
+    return this.http.delete(this.urlService.question.deleteQuestion(questionId), httpOptions);
   }  
 
   /**
