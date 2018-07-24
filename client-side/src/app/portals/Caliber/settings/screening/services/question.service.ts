@@ -19,9 +19,7 @@ const httpOptions = {
 @Injectable()
 export class QuestionService {
 
-  private urlService : UrlService;
-
-  constructor(private http: HttpClient, /*private urlService: UrlService*/) { }
+  constructor(private http: HttpClient, private urlService: UrlService) { }
 
   questions: Question[];
 
@@ -31,7 +29,6 @@ export class QuestionService {
    * updated to be in sync with new Gambit question service modifications
    * used urlService to get endpoint for posting new questions
    * @param question - question model
-   * @param tagIds - array of tag ids
    */
   createNewQuestion(question: Question) {
     return this.http.post(this.urlService.question.postQuestion(), { question: question }, httpOptions);
@@ -43,7 +40,6 @@ export class QuestionService {
    * updated to be in sync with new Gambit question service modifications
    * used urlService to get endpoint for updating new quetions with put method
    * @param question
-   * @param newTagIds
    */
   updateQuestion(question: Question) {
     return this.http.put(this.urlService.question.putQuestion(), { question: question }, httpOptions);
@@ -70,7 +66,7 @@ export class QuestionService {
   /**
    * gets all questions from bucket
    * add urlService to get endpoint for getting Bucket Questions
-   * @param buckerId
+   * @param bucketId
   */
   getBucketQuestions(bucketId: number) {
     return this.http.get(this.urlService.question.getQuestionsByBucketId(bucketId));

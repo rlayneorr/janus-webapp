@@ -18,7 +18,7 @@ describe('QuestionService', () => {
 
   it('createNewQuestion() should make Http post request, and return the question that it created', () => {
     httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
-    questionService = new QuestionService(<any> httpClientSpyOnPost);
+    //questionService = new QuestionService(<any> httpClientSpyOnPost);
 
     const expected : Question = QUESTIONS[1];
 
