@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/Rx';
+import 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SkillType } from '../../entities/skillType';
 import { SKILLTYPES } from '../../mock-data/mock-skillTypes';

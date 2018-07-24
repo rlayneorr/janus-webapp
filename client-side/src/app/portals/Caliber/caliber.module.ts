@@ -42,7 +42,8 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
-import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from './screening/services/candidate/candidate.service';
+import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
@@ -160,6 +161,7 @@ import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from '../Caliber/services/category/category.service';
 import {QuestionService} from "./settings/screening/services/question.service";
+import { CategoryService } from './services/category/category.service';
 
 
 @NgModule({
@@ -333,7 +335,7 @@ import {QuestionService} from "./settings/screening/services/question.service";
     SkillTypesService,
     BucketsService,
     HttpErrorHandlerService,
-    SimpleTraineeService,
+    CandidateService,
     CategoriesService,
     CategoryService
   ],

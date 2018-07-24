@@ -136,17 +136,29 @@ export class UrlService {
     addTopicsUrl: () => `${this.context}/calendar/addtopics`
   };
 
+  candidate = {
+    getAll: () => `${this.context}/candidate/`,
+    getById: (id : number) => `${this.context}/candidate/${id}`,
+    update: (id : number) => `${this.context}/candidate/${id}`,
+    create: () => `${this.context}/candidate/`,
+    delete: (id: number) => `${this.context}candidate/${id}`,
+  };
+
   category = {
-    fetchAll: () => `${this.categoryContext}/category`,
-    // fetchAll: () => `${this.context}/category`,
-    fetchAllActive: () => `${this.categoryContext}category/all`,
-    // fetchAllActive: () => `${this.context}category/all`,
-    fetchById: (id: number) => `${this.categoryContext}category/${id}`,
-    // fetchById: (id: number) => `${this.context}category/${id}`,
-    save: () => `${this.categoryContext}vp/category`,
-    // save: () => `${this.context}vp/category`,
-    update: () => `${this.categoryContext}vp/category/update`,
-    // update: () => `${this.context}vp/category/update`,
+    fetchAll: () => `${this.context}category/`,
+    // fetchAll: () => `${this.context}screening-admin/category/`,
+    // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
+    fetchById: (id: number) => `${this.context}category/${id}`,
+    // fetchById: (id: number) => `${this.context}screening-admin/category/`,
+    save: () => `${this.context}category`,
+    // save: () => `${this.context}screening-admin/category/`,
+    update: (id: number) => `${this.context}category/${id}`,
+    // update: (id: number) => `${this.context}screening-admin/category/${id}`,
+    // // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
+    create: () => `${this.context}category`,
+    // create: () => `${this.context}screening-admin/category`,
+    delete: (id: number) => `${this.context}category/${id}`,
+    // delete: (id: number) => `${this.context}screening-admin/category/${id}`,
   };
 
   curriculum = {
@@ -228,6 +240,8 @@ export class UrlService {
     postQuestion: () => `${this.questionEndpoint}`,
     putQuestion: () => `${this.questionEndpoint}`,
     getQuestionsByBucketId: (bucketId: number) => `${this.questionEndpoint}/bucket/${bucketId}`,
+    // Tyerra Smith added a url to get ALL questions
+    getQuestions: () => `${this.questionEndpoint}`,
     deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
     activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
     filteredQuestions: () => `${this.questionEndpoint}/filter`,
@@ -290,13 +304,14 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  simpleTraineeEndpoint = this.context + 'trainee-service';
-  simpleTrainee = {
-    getAllTrainee: () => `${this.simpleTraineeEndpoint}/all/trainee/getAll/`,
-  };
+  // simpleTraineeEndpoint = this.context + 'trainee-service';
+  // simpleTrainee = {
+  //   getAllTrainee: () => `${this.simpleTraineeEndpoint}/all/trainee/getAll/`,
+  // };
 
   /**
    * All urls associated with skills will come from this object
+   * These are CATEGORIES.
    */
   skills = {
     findAll: () => `${this.context}/skill`,

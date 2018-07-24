@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../../../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
-import { PanelReview } from '../../Caliber/entities/PanelReview';
+import { PanelReview } from '../entities/PanelReview';
 import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 /**

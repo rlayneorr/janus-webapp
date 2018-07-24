@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/Rx';
+import 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SkillTypeBucketLookUp } from '../../entities/skillTypeBucketLookup';
 import { SKILL_TYPE_BUCKET_LOOKUP } from '../../mock-data/mock-skillTypeBucketLookup';
