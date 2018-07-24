@@ -1,8 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// Testing modules
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
+// Entities
 import { IntroductionComponent } from './introduction.component';
 
-xdescribe('IntroductionComponent', () => {
+describe('SkillTypeBucketsComponent', () => {
   let component: IntroductionComponent;
   let fixture: ComponentFixture<IntroductionComponent>;
 
