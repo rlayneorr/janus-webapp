@@ -22,13 +22,8 @@ export class EnvironmentService {
    * @return string
    */
   public buildUrl(url: string, parameters = {} ): string {
-<<<<<<< HEAD
-    let rootUrl = [ environment.localhostcontext, url ].join('');
-
-=======
     //let rootUrl = [ environment.gambitContext, url ].join('');
     let rootUrl = [ environment.localHostContext, url ].join('');
->>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
     if ( this.isEmptyObject(parameters) === false ) {
       rootUrl += '/?';
 

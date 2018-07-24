@@ -42,13 +42,8 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
-<<<<<<< HEAD
-import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
-// import { QuestionService } from './screening/services/question/question.service';
-=======
 import { CandidateService } from './screening/services/candidate/candidate.service';
 import { QuestionService } from './screening/services/question/question.service';
->>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
@@ -161,7 +156,7 @@ import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
-import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
+//import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category/category.service';
@@ -216,7 +211,7 @@ import { CategoryService } from './services/category/category.service';
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
-    BucketFilterPipe,
+    //BucketFilterPipe,
     CategoryFilterPipe,
 
     // components

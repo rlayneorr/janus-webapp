@@ -110,17 +110,10 @@ export class PDFService {
    * @ignore Implementation not completed.
    */
   public downloadPDFwithFeedback() {
-<<<<<<< HEAD
-    const html = '';
-    this.http.post(environment.localhostcontext + 'report/generate', html).subscribe(response => {},
-      err => {}
-    );
-=======
     // const html = '';
     // this.http.post(environment.gambitContext + 'report/generate', html).subscribe(response => {},
     //   err => {}
     // );
->>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
   }
 
 }

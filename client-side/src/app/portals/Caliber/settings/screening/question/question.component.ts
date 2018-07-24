@@ -195,7 +195,7 @@ export class QuestionComponent implements OnInit {
 
 
   deleteQuestion(question):void {
-    this.questionService.deleteQuestion(this.question.questionId);
+    // this.questionService.deleteQuestion(this.question.questionId);
     console.log("delete")
   }
 

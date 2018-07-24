@@ -347,13 +347,9 @@ export const Dependencies = {
     QuestionService,
     QuestionsService,
     BucketsService,
-<<<<<<< HEAD
-    SimpleTraineeService,
-=======
-    TagService,
-    TagsService,
+    // TagService,
+    // TagsService,
     CandidateService,
->>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
     SkillTypeService,
     QuestionScoreService,
     QuestionsToBucketsUtil,

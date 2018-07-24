@@ -4,13 +4,8 @@ import { QuestionsTableComponent } from './questions-table.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { QuestionService } from '../../services/question/question.service';
-<<<<<<< HEAD
-// import { TagService } from '../../../services/tag/tag.service';
-import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
-=======
-import { TagService } from '../../../services/tag/tag.service';
+//import { TagService } from '../../../services/tag/tag.service';
 import { CandidateService } from '../../services/candidate/candidate.service';
->>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
@@ -70,13 +65,7 @@ describe('QuestionsTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow, AnswerComponent, ViolationFlagComponent],
       imports: [FormsModule],
-<<<<<<< HEAD
-      providers: [HttpClient, HttpHandler, QuestionService, 
-        // TagService,
-         SimpleTraineeService,
-=======
-      providers: [HttpClient, HttpHandler, QuestionService, TagService, CandidateService,
->>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
+      providers: [HttpClient, HttpHandler, QuestionService, /*TagService,*/ CandidateService,
         SkillTypeService, QuestionScoreService, QuestionsToBucketsUtil, NgbModal, NgbModalStack, ScreeningService,
         SkillTypeBucketService, SoftSkillsViolationService, ViolationTypeService, AlertsService]
     });
