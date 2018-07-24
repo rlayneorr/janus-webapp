@@ -29,7 +29,7 @@ import { GambitBatchUtilService } from './services/gambit-batch-util.service';
 import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';
 import { GambitInterceptor } from './gambit-client/interceptors/gambit.interceptor';
 
-import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { ToastModule, ToastOptions } from 'ng2-toastr';
 import { ToastrOptions } from './gambit-client/ui/error-alert/toastr-options';
 import { LocationService } from './gambit-client/services/location/location.service';
 import { GambitSkillService } from './gambit-client/services/skill/gambit-skill.service';
