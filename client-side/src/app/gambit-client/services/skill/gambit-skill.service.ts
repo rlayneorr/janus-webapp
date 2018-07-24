@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
+import { GambitSkill } from '../../entities/GambitSkill';
 import { UrlService } from '../urls/url.service';
 
 /**

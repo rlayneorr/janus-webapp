@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
+<<<<<<< HEAD
     this.http.post(environment.localhostcontext + 'users/login', this.credential, {withCredentials: true})
       .subscribe( (succResp) => {
         if (succResp.text() !== '') {
@@ -28,6 +29,16 @@ export class LoginComponent implements OnInit {
           alert('failed to login');
         }
       });
+=======
+    // this.http.post(environment.gambitContext + 'users/login', this.credential, {withCredentials: true})
+    //   .subscribe( (succResp) => {
+    //     if (succResp.text() !== '') {
+    //       this.router.navigateByUrl('/user/home');
+    //     } else {
+    //       alert('failed to login');
+    //     }
+    //   });
+>>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
   }
 
 }

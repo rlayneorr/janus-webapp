@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
 import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
+import { Category } from '../../entities/Category';
+import { CategoryService } from '../../services/category/category.service';
 
 @Component({
   selector: 'app-skills',
@@ -17,20 +19,29 @@ import { GambitSkillService } from '../../../../gambit-client/services/skill/gam
 })
 
 export class SkillsComponent implements OnInit {
-  newSkill: GambitSkill = {
-    skillID: 0,
-    skillName: '',
-    isActive: true
+  newCategory: Category = {
+    categoryId: 0,
+    categoryName: ''
   };
 
   addForm: FormGroup;
 
-  skills: GambitSkill[];
-  currentSkill: GambitSkill;
+  // skills: GambitSkill[];
+  // currentSkill: GambitSkill;
+
+  categories: Category[];
+  currentCategory: Category;
+  //these are going to be the 4 index parts
+  div1;
+  div2;
+  div3;
+  div4;
+
 
   columns;
   numColumns: number;
-  constructor(private modalService: NgbModal, private skillService: GambitSkillService, private fb: FormBuilder) {
+  // private skillService: GambitSkillService
+  constructor(private modalService: NgbModal, private categoryService : CategoryService , private fb: FormBuilder) {
   }
 
   /**
@@ -39,14 +50,39 @@ export class SkillsComponent implements OnInit {
    */
   ngOnInit() {
     this.initFormControl();
-    this.skillService.findAll().subscribe((resp) => {
-      this.skills = resp;
-      this.numColumns = this.skills.length / 8 + 1;
-      if (this.numColumns > 3) {
-        this.numColumns = 3;
+    this.categoryService.fetchAll().subscribe((resp) => {
+      this.categories = resp;
+      console.log(this.categories);
+      //If all categories are not shown, edit the divisor
+      this.numColumns = this.categories.length / 10 + 1; //this is the original
+      //this.numColumns = Math.ceil(this.categories.length / 4);
+      if (this.numColumns >= 4) {
+        this.numColumns = 4;
       }
+      
       this.columns = Array.apply(null, { length: this.numColumns }).map(Number.call, Number);
+      console.log(this.columns);
+      console.log(this.numColumns);
+
+      //this denotes the index for the for loop for the ngfor
+      // this.div1= Math.ceil(this.categories.length/4);
+      // this.div2= this.div1 + this.div1;
+      // this.div3= this.div1 +this.div1 +this.div1;
+      // this.div4= this.div1 +this.div1 +this.div1 +this.div1;
+
+      //these are the logs to make sure im getting the right numbers when i making my divisions for my indexed for loops
+
+      // console.log(this.div1);
+      // console.log("1");
+      // console.log(this.div2);
+      // console.log("2");
+      // console.log(this.div3);
+      // console.log("3");
+      // console.log(this.div4);
+      // console.log("4");
+     
     });
+    
   }
 
   resetFormControl() {
@@ -57,7 +93,7 @@ export class SkillsComponent implements OnInit {
 
   initFormControl() {
     this.addForm = this.fb.group({
-      'name': [this.newSkill.skillName, Validators.required]
+      'name': [this.newCategory.categoryName, Validators.required]
     });
   }
 
@@ -67,14 +103,26 @@ export class SkillsComponent implements OnInit {
    * @memberof SkillsComponent
    */
   addNewSkill(value) {
-    this.newSkill.skillName = value.name;
-    this.newSkill.isActive = true;
-    this.skillService.create(this.newSkill).subscribe((succ) => {
-      this.skills.push(succ);
+    this.newCategory.categoryName = value.name;
+    this.categoryService.create(this.newCategory).subscribe((succ) => {
+      this.categories.push(succ);
+      console.log(this.newCategory);
     });
     // may not need this statement without all of the inherited subjects
     this.resetFormControl();
   }
+
+  deleteSkill() {
+    console.log("We made it!");
+    console.log(this.currentCategory);
+    console.log(this.currentCategory.categoryId);
+    this.categoryService.delete(this.currentCategory).subscribe();
+
+    this.resetFormControl();
+
+    this.ngOnInit();
+  }
+
 
   /**
    * Rewrote to actual work and send correct information.
@@ -83,9 +131,9 @@ export class SkillsComponent implements OnInit {
    * @author Michael Adedigba | 1803-USF-MAR26 | Wezley Singleton
    */
   editCurrentSkill() {
-    this.skillService.update(this.currentSkill).subscribe((resp) => {
-      const idx = this.skills.findIndex(skill => skill.skillID === resp.skillID);
-      this.skills[idx] = resp;
+    this.categoryService.update(this.currentCategory).subscribe((resp) => {
+      const idx = this.categories.findIndex(category => category.categoryId === resp.categoryId);
+      this.categories[idx] = resp;
     });
   }
 
@@ -97,19 +145,25 @@ export class SkillsComponent implements OnInit {
    * @memberof SkillsComponent
    */
   nextColumn(column, index) {
+    console.log("in nextColumn");
+    console.log("Column : " + column);
+    console.log("Index : " + index);
+    console.log("Categories[" + index + "] --> " + this.categories[index].categoryId + " : " + this.categories[index].categoryName);
+
     switch (column) {
       case 0:
-        if (index < this.skills.length / this.numColumns) {
+        if (index < this.categories.length / this.numColumns) {
           return true;
         }
         break;
       case 1:
-        if (index > this.skills.length / this.numColumns) {
+        if (index > this.categories.length / this.numColumns) {
           // If the numbers of skills is 3 then this condition will activate
           if (this.numColumns === 3) {
-            if (index < ((this.skills.length / this.numColumns) * 2)) {
+            if (index < ((this.categories.length / this.numColumns) * 2)) {
               return true;
-            } else {
+             } else {
+               console.log("False");
               return false;
             }
           } else {
@@ -118,13 +172,27 @@ export class SkillsComponent implements OnInit {
         }
         break;
       case 2:
-        if (index > ((this.skills.length / this.numColumns) * 2)) {
+        if (index > ((this.categories.length / this.numColumns) * 2)) {
           return true;
         } break;
       default:
         break;
-    }
-  }
+      }
+    // switch(index % 4)
+    // {
+    //   case 0: 
+    //     column = 0;
+    //   case 1:
+    //     column = 1;
+    //   case 2:
+    //     column = 2;
+    //   default:
+    //     column = 3;
+    // }
+    // console.log(index % 4);
+    // return true;
+     }
+  
 
   /**
    * Opens a Modal
@@ -144,7 +212,7 @@ export class SkillsComponent implements OnInit {
    * @memberof SkillsComponent
    */
   editopen(content, index: GambitSkill) {
-    this.currentSkill = JSON.parse(JSON.stringify(index)); // essentially clone the object, there may be a better way
+    this.currentCategory = JSON.parse(JSON.stringify(index)); // essentially clone the object, there may be a better way
     this.modalService.open(content);
   }
-}
+ }

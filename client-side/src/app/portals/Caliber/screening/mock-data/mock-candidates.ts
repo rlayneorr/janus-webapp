@@ -1,99 +1,99 @@
-import { SimpleTrainee } from '../entities/simpleTrainee';
+import { Candidate } from '../entities/Candidate';
 
 const tempDate: Date = new Date();
-export const TRAINEES: SimpleTrainee[] = [
+export const CANDIDATES: Candidate[] = [
     {
-        traineeID: 1,
-        firstname: 'Jimmy',
-        lastname: 'John',
+        candidateId: 1,
+        firstName: 'Jimmy',
+        lastName: 'John',
         skillTypeID: 52,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 21, 9)
     },
     {
-        traineeID: 2,
-        firstname: 'Isabella',
-        lastname: 'Dougherty',
+        candidateId: 2,
+        firstName: 'Isabella',
+        lastName: 'Dougherty',
         skillTypeID: 52,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 21, 11)
     },
     {
-        traineeID: 3,
-        firstname: 'Clarissa',
-        lastname: 'Gonzales',
+        candidateId: 3,
+        firstName: 'Clarissa',
+        lastName: 'Gonzales',
         skillTypeID: 53,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 21, 13)
     },
     {
-        traineeID: 5,
-        firstname: 'Catherine',
-        lastname: 'Mahzareh',
+        candidateId: 5,
+        firstName: 'Catherine',
+        lastName: 'Mahzareh',
         skillTypeID: 52,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 21, 14)
     },
     {
-        traineeID: 6,
-        firstname: 'Pietro',
-        lastname: 'Vietre',
+        candidateId: 6,
+        firstName: 'Pietro',
+        lastName: 'Vietre',
         skillTypeID: 56,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 21, 16)
     },
     {
-        traineeID: 7,
-        firstname: 'John',
-        lastname: 'Doe',
+        candidateId: 7,
+        firstName: 'John',
+        lastName: 'Doe',
         skillTypeID: 55,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 22, 7)
     },
     {
-        traineeID: 8,
-        firstname: 'Lana',
-        lastname: 'Yea',
+        candidateId: 8,
+        firstName: 'Lana',
+        lastName: 'Yea',
         skillTypeID: 55,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 22, 8)
     },
     {
-        traineeID: 9,
-        firstname: 'Kevin',
-        lastname: 'Brainer',
+        candidateId: 9,
+        firstName: 'Kevin',
+        lastName: 'Brainer',
         skillTypeID: 54,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 22, 9)
     },
     {
-        traineeID: 10,
-        firstname: 'Lucy',
-        lastname: 'Sgod',
+        candidateId: 10,
+        firstName: 'Lucy',
+        lastName: 'Sgod',
         skillTypeID: 56,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 22, 11)
     },
     {
-        traineeID: 11,
-        firstname: 'Luis',
-        lastname: 'Lana',
+        candidateId: 11,
+        firstName: 'Luis',
+        lastName: 'Lana',
         skillTypeID: 54,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 22, 13)
     },
     {
-        traineeID: 12,
-        firstname: 'Michael',
-        lastname: 'Nevermore',
+        candidateId: 12,
+        firstName: 'Michael',
+        lastName: 'Nevermore',
         skillTypeID: 56,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0, 22, 15)
     },
     {
-        traineeID: 13,
-        firstname: 'Chad',
-        lastname: 'Aldritch',
+        candidateId: 13,
+        firstName: 'Chad',
+        lastName: 'Aldritch',
         skillTypeID: 51,
         skillTypeName: 'Java',
         schedule: new Date(2018, 0 , 22, 16)

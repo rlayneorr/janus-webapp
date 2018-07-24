@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/Rx';
+import 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // Entities
@@ -12,8 +12,13 @@ import { QUESTIONS } from '../../mock-data/mock-questions';
 // import { TagsAndSkill } from '../../wrappers/tagsAndSkill';
 
 // Services
+<<<<<<< HEAD
 // import { TagService } from '../../../services/tag/tag.service';
 import { SimpleTraineeService } from '../simpleTrainee/simple-trainee.service';
+=======
+import { TagService } from '../../../services/tag/tag.service';
+import { CandidateService } from '../candidate/candidate.service';
+>>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 /*
 Provides an observable of Questions through the getQuestions() method.
@@ -23,8 +28,13 @@ export class QuestionService {
 
   constructor(
     private httpClient: HttpClient,
+<<<<<<< HEAD
     // private tagService: TagService,
     private simpleTraineeService: SimpleTraineeService,
+=======
+    private tagService: TagService,
+    private candidateService: CandidateService,
+>>>>>>> 256fa418cfdcc716366b81eb1b38302bde4d1773
     private urlService: UrlService
   ) {}
 

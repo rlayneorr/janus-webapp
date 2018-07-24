@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ScreeningService } from '../../services/screening/screening.service';
-import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 import { QuestionScore } from '../../entities/questionScore';
@@ -39,7 +39,7 @@ subscriptions: Subscription[] = [];
 
   constructor(
     private screeningService: ScreeningService,
-    private simpleTraineeService: SimpleTraineeService,
+    private candidateService: CandidateService,
     private skillTypeBucketService: SkillTypeBucketService,
     private questionScoreService: QuestionScoreService,
     private scoresToBucketsUtil: ScoresToBucketsUtil,
@@ -49,8 +49,8 @@ subscriptions: Subscription[] = [];
 
   ngOnInit() {
     this.checked = 'false';
-    this.candidateName = this.simpleTraineeService.getSelectedCandidate().firstname + ' ' +
-                          this.simpleTraineeService.getSelectedCandidate().lastname;
+    // this.candidateName = this.candidateService.getSelectedCandidate().firstname + ' ' +
+    //                       this.candidateService.getSelectedCandidate().lastname;
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
     this.allTextString = this.softSkillString + '\n';
     this.questionScoreService.currentQuestionScores.subscribe(
