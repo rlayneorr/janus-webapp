@@ -8,6 +8,8 @@ export class UrlService {
 
   public readonly context: string =  environment.localHostContext;
 
+  // public readonly context: string = environment.caliberContext;
+
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
   apiCurrentPanelsLineChart = this.context + 'all/reports/biweeklyPanelResults';
@@ -123,21 +125,29 @@ export class UrlService {
     addTopicsUrl: () => `${this.context}/calendar/addtopics`
   };
 
+  candidate = {
+    getAll: () => `${this.context}/candidate/`,
+    getById: (id : number) => `${this.context}/candidate/${id}`,
+    update: (id : number) => `${this.context}/candidate/${id}`,
+    create: () => `${this.context}/candidate/`,
+    delete: (id: number) => `${this.context}candidate/${id}`,
+  };
+
   category = {
-    // fetchAll: () => `${this.context}vp/category`,
     fetchAll: () => `${this.context}category/`,
-    // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
-    // fetchById: (id: number) => `${this.context}category/${id}`,
+    // fetchAll: () => `${this.context}screening-admin/category/`,
+    // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
     fetchById: (id: number) => `${this.context}category/${id}`,
-    // save: () => `${this.context}vp/category`,
+    // fetchById: (id: number) => `${this.context}screening-admin/category/`,
     save: () => `${this.context}category`,
-    // update: () => `${this.context}vp/category/update`,
+    // save: () => `${this.context}screening-admin/category/`,
     update: (id: number) => `${this.context}category/${id}`,
-    // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
-    // create: () => `${this.context}vp/category/create`, 
+    // update: (id: number) => `${this.context}screening-admin/category/${id}`,
+    // // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
     create: () => `${this.context}category`,
-    // delete: () => `${this.context}vp/category/delete`,
+    // create: () => `${this.context}screening-admin/category`,
     delete: (id: number) => `${this.context}category/${id}`,
+    // delete: (id: number) => `${this.context}screening-admin/category/${id}`,
   };
 
   curriculum = {
@@ -284,10 +294,10 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  simpleTraineeEndpoint = this.context + 'trainee-service';
-  simpleTrainee = {
-    getAllTrainee: () => `${this.simpleTraineeEndpoint}/all/trainee/getAll/`,
-  };
+  // simpleTraineeEndpoint = this.context + 'trainee-service';
+  // simpleTrainee = {
+  //   getAllTrainee: () => `${this.simpleTraineeEndpoint}/all/trainee/getAll/`,
+  // };
 
   /**
    * All urls associated with skills will come from this object

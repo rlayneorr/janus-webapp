@@ -25,6 +25,7 @@ export const environment = {
   /** Zuul endpoint  */
   //gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000/',
   localHostContext : 'http://localhost:3000/',
+  // caliberContext : 'http://ec2-18-216-205-109.us-east-2.compute.amazonaws.com:9999/',
   /** Assets endpoints for like pictures  */
   assets: 'http://52.87.205.55:8086/angular/assets/',
 
