@@ -77,4 +77,42 @@
    ####DELETE /skillTypes/{skillTypeId}
     delete skill type by id
 
-# Screening
+### Screening
+
+  #### GET /screening/violation/{screeningID}
+    Returns a list of softSkillViolation objects by ScreeningID
+
+  #### GET /violation/all
+    Returns a list of all ViolationType
+
+  #### GET /violation/delete/{softSkillViolationID}
+    Deletes a soft skill violation by its unique id
+
+  #### POST screening/introcomment
+    Update the AboutMeComment variable of a Screening object
+
+  #### POST /violation/flag
+    Create a SoftSkillViolation for each ViolationID in the RequestBody, and associates it with the given Screening
+
+  #### POST /screening/start
+    Starts a screening by putting the screening into the database and returning the screeningId
+
+  #### POST /screening/generalcomment
+    Persists general comment to a Screening by its unique id
+
+  #### POST /screening/end
+    End a Screening and update the information by screeningId
+
+  #### GET /screening/getScreening/status/{status}
+    Get screenings based on the status provided
+
+  #### GET /screening/scheduledScreenings
+    Gets all scheduled screeenings
+
+### Question Score
+
+  #### POST /question/score
+    Create a new Question Score and persist it in the database.
+
+  #### GET question/viewScoresByScreening/{screeningId}
+    Gets scores of given screening by id
