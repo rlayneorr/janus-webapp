@@ -21,7 +21,7 @@ import { AnswerComponent } from '../answer/answer.component';
 // ngbootstrap modal
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScreeningService } from '../../services/screening/screening.service';
-import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from '../../services/candidate/candidate.service';
 
 @Component({
   selector: 'app-questions-table',
@@ -74,34 +74,34 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     private questionsToBucketsUtil: QuestionsToBucketsUtil,
     private modalService: NgbModal,
     private screeningService: ScreeningService,
-    private simpleTraineeService: SimpleTraineeService,
+    private candidateService: CandidateService,
     private skillTypeBucketService: SkillTypeBucketService,
   ) {}
 
   ngOnInit() {
     // use skillTypeBucketLookup that provides array of buckets and array of weights
-    this.subscriptions.push(this.skillTypeBucketService.
-      getSkillTypeBuckets(this.simpleTraineeService.getSelectedCandidate().skillTypeID).subscribe(bucketsWithWeights => {
+    // this.subscriptions.push(this.skillTypeBucketService.
+    //   getSkillTypeBuckets(this.candidateService.getSelectedCandidate().skillTypeID).subscribe(bucketsWithWeights => {
 
-      const myBuckets: Bucket[] = [];
-      for ( const e of bucketsWithWeights.bucket) {
-        myBuckets.push(
-          {
-            bucketID: e.bucketId,
-            bucketCategory: e.bucketCategory,
-            bucketDescription: e.bucketDescription,
-            isActive: e.isActive,
-            questions: [],
-          }
-        );
-      }
+    //   const myBuckets: Bucket[] = [];
+    //   for ( const e of bucketsWithWeights.bucket) {
+    //     myBuckets.push(
+    //       {
+    //         bucketID: e.bucketId,
+    //         bucketCategory: e.bucketCategory,
+    //         bucketDescription: e.bucketDescription,
+    //         isActive: e.isActive,
+    //         questions: [],
+    //       }
+    //     );
+    //   }
 
-      this.skillTypeBucketService.bucketsByWeight = {
-        skillTypeBucketLookupID: bucketsWithWeights.skillTypeBucketLookupID,
-        skillType: JSON.parse(JSON.stringify(bucketsWithWeights.skillType)),
-        buckets: myBuckets,
-        weights: JSON.parse(JSON.stringify(bucketsWithWeights.weight)),
-      };
+      // this.skillTypeBucketService.bucketsByWeight = {
+      //   skillTypeBucketLookupID: bucketsWithWeights.skillTypeBucketLookupID,
+      //   skillType: JSON.parse(JSON.stringify(bucketsWithWeights.skillType)),
+      //   buckets: myBuckets,
+      //   weights: JSON.parse(JSON.stringify(bucketsWithWeights.weight)),
+      // };
       /**
        * Disabled because relationship between question and skill microservice relationship
        * needs to be reworked on the serverside
@@ -114,10 +114,10 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
       //     this.currentCategory = this.questionBuckets[0];
       //   }
       // }));
-    }));
+    // }));
 
-    this.candidateName = this.simpleTraineeService.getSelectedCandidate().firstname + ' ' +
-                          this.simpleTraineeService.getSelectedCandidate().lastname;
+    // this.candidateName = this.CandidateService.getSelectedCandidate().firstname + ' ' +
+    //                       this.CandidateService.getSelectedCandidate().lastname;
 
     // update the answeredQuestions variable in our service to track the
     // questions that have been given a score by the screener.

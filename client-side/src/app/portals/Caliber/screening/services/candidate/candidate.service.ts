@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
-import { SimpleTrainee } from '../../entities/simpleTrainee';
-import { TRAINEES } from '../../mock-data/mock-simpleTrainees';
-import { SkillTypeService } from '../../services/skillType/skill-type.service';
+import { Candidate } from '../../entities/Candidate';
+import { CANDIDATES } from '../../mock-data/mock-candidates';
+import { SkillTypeService } from '../skillType/skill-type.service';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 /*
@@ -31,7 +31,7 @@ import { UrlService } from '../../../../../gambit-client/services/urls/url.servi
  */
 
 @Injectable()
-export class SimpleTraineeService {
+export class CandidateService {
 
   constructor(
     private httpClient: HttpClient,
@@ -39,25 +39,25 @@ export class SimpleTraineeService {
     private skillTypeService: SkillTypeService,
   ) { }
 
-  selectedCandidate: SimpleTrainee;
+  selectedCandidate: Candidate;
 
   // Set the current selected candidate to the candidate input
-  setSelectedCandidate(candidate: SimpleTrainee): void {
-    this.selectedCandidate = candidate;
-  }
+  // setSelectedCandidate(candidate: Candidate): void {
+  //   this.selectedCandidate = candidate;
+  // }
 
   // Return the current selected candidate
-  getSelectedCandidate(): SimpleTrainee {
-    return this.selectedCandidate;
-  }
+  // getSelectedCandidate(): Candidate {
+  //   return this.selectedCandidate;
+  // }
 
   // Get an Observable array of all simple trainees.
-  getSimpleTrainees(): Observable<SimpleTrainee[]> {
-    const allSimpleTrainees: SimpleTrainee[] = [];
+  getCandidates(): Observable<Candidate[]> {
+    const allCandidates: Candidate[] = [];
     // Get array of skillTypeIds, apply random skillTypeId's to each new SimpleTrainee
     this.skillTypeService.getSkillTypes().subscribe(allSkillTypes => {
       // Get array of GAMBIT simpleTrainees, use info to build array of simpleTrainees
-      this.httpClient.get<any[]>(this.urlService.simpleTrainee.getAllTrainee()).subscribe(allCandidates => {
+      this.httpClient.get<any[]>(this.urlService.candidate.getAll()).subscribe(allCandidates => {
         console.log(allCandidates);
         for (const e of allCandidates) {
           // Each simpleTrainee get random skillType
@@ -95,7 +95,7 @@ export class SimpleTraineeService {
             thisLastName = thisLastName.trim();
           }
 
-          allSimpleTrainees.push({
+          allCandidates.push({
             traineeID: e.traineeId,
             firstname: thisFirstName,
             lastname: thisLastName,
@@ -107,7 +107,21 @@ export class SimpleTraineeService {
       });
     });
 
-    return of(allSimpleTrainees);
+    return of(allCandidates);
+  }
+
+
+  getCandidate(candidate: Candidate): string  {
+    return this.urlService.candidate.getById(candidate.candidateId);
+  }
+
+  createCandidate(candidate : Candidate): string
+  {
+    return this.urlService.candidate.create();
+  }
+
+  deleteCandidate(candidate : Candidate){
+    return this.urlService.candidate.delete(candidate.candidateId);
   }
 
 }

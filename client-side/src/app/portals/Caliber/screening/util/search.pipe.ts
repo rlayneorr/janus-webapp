@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SimpleTrainee } from '../entities/simpleTrainee';
+import { Candidate } from '../entities/Candidate';
 import { ScheduledScreening } from '../entities/scheduleScreening';
 
 @Pipe({
@@ -23,8 +23,8 @@ export class SearchPipe implements PipeTransform {
     return items.filter(it => {
       // return only the screenings whose firstname includes the search text
       // or last name includes the search text.
-      return it.trainee.firstname.toLowerCase().includes(searchText) || it.trainee.lastname.toLowerCase().includes(searchText)
-      || (it.trainee.firstname.toLowerCase() + ' ' + it.trainee.lastname.toLowerCase()).includes(searchText);
+      return it.candidate.firstName.toLowerCase().includes(searchText) || it.candidate.lastName.toLowerCase().includes(searchText)
+      || (it.candidate.firstName.toLowerCase() + ' ' + it.candidate.lastName.toLowerCase()).includes(searchText);
     });
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ViolationType } from '../../entities/violationType';
 import { ViolationTypeService } from '../../services/violationType/violationType.service';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from '../../services/candidate/candidate.service';
 import { AlertsService } from '../../../services/alerts.service';
 import { SoftSkillViolation } from '../../entities/softSkillViolation';
 import { ScreeningService } from '../../services/screening/screening.service';
@@ -39,15 +39,15 @@ export class ViolationFlagComponent implements OnInit {
 
   constructor(
     private violationService: SoftSkillsViolationService,
-    private simpleTraineeService: SimpleTraineeService,
+    private candidateService: CandidateService,
     private violationTypeService: ViolationTypeService,
     private alertsService: AlertsService,
   ) { }
 
   ngOnInit() {
     this.getViolationTypes();
-    this.candidateName = this.simpleTraineeService.getSelectedCandidate().firstname + ' ' +
-      this.simpleTraineeService.getSelectedCandidate().lastname;
+    // this.candidateName = this.candidateService.getSelectedCandidate().firstname + ' ' +
+    //   this.candidateService.getSelectedCandidate().lastname;
   }
 
   getViolationTypes(): void {

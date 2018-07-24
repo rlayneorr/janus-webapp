@@ -45,7 +45,7 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
-import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from './screening/services/candidate/candidate.service';
 import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
@@ -349,7 +349,7 @@ export const Dependencies = {
     BucketsService,
     TagService,
     TagsService,
-    SimpleTraineeService,
+    CandidateService,
     SkillTypeService,
     QuestionScoreService,
     QuestionsToBucketsUtil,

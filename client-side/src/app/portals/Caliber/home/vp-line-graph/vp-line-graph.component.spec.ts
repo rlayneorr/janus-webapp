@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule, HttpClient } from '@angular/common/http/';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VpHomeLineGraphService } from '../../services/graph/vp-home-line-graph.service';
 import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';

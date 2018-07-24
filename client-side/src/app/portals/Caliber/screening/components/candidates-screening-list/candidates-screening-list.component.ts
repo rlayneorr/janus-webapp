@@ -6,15 +6,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { SearchPipe } from '../../util/search.pipe';
 
 // Classes
-import { SimpleTrainee } from '../../entities/simpleTrainee';
+import { Candidate } from '../../entities/Candidate';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 
 // Services
-import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from '../../services/candidate/candidate.service';
 import { ScreeningService } from '../../services/screening/screening.service';
 import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
+
+import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
 
 // Installed Modules
 // npm install ngx-pagination --save
@@ -41,7 +43,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   // when a screener (user) clicks on a screening,
   // save the candidate and scheduled screening
   // to their respective services.
-  selectedCandidate: SimpleTrainee;
+  selectedCandidate: Candidate;
   selectedScheduledScreening: ScheduledScreening;
   // Flag for displaying the "Begin Interview" prompt
   showBeginScreeningPrompt = false;
@@ -49,13 +51,13 @@ export class CandidatesScreeningListComponent implements OnInit {
   // Do not delete
   searchText; // text in search bar
   p; // current page
-
+  allCandidates : Candidate[];
   /* ###########################
        CONSTRUCTOR and INIT
   ########################### */
   constructor(
     private http: HttpClientModule,
-    private simpleTraineeService: SimpleTraineeService,
+    private candidateService: CandidateService,
     private screeningService: ScreeningService,
     private scheduleScreeningService: ScheduleScreeningService,
     private softSkillsViolationService: SoftSkillsViolationService,
@@ -73,10 +75,12 @@ export class CandidatesScreeningListComponent implements OnInit {
       window.location.reload(true);
     }
 
-    // retrieve all scheduled interviews and populate the table of screenings.
-    this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
-      this.scheduledScreenings = data;
-    });
+    // // retrieve all scheduled interviews and populate the table of screenings.
+    // this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
+    //   this.scheduledScreenings = data;
+    // });
+    this.allCandidates = CANDIDATES; 
+    console.log(this.allCandidates);
   }
 
   /* ###########################
@@ -94,7 +98,7 @@ export class CandidatesScreeningListComponent implements OnInit {
 
   // clicking "Begin Interview" will save the candidate for later use
   confirmSelectedCandidate(): void {
-    this.simpleTraineeService.setSelectedCandidate(this.selectedCandidate);
+    // this.candidateService.setSelectedCandidate(this.selectedCandidate);
     localStorage.setItem('scheduledScreeningID', this.selectedScheduledScreening.scheduledScreeningId.toString());
   }
 

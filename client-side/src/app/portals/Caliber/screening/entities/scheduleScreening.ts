@@ -1,4 +1,4 @@
-import { SimpleTrainee } from './simpleTrainee';
+import { Candidate } from './Candidate';
 import { SkillType } from './skillType';
 
 /*
@@ -8,7 +8,7 @@ import { SkillType } from './skillType';
 */
 export interface ScheduledScreening {
   scheduledScreeningId: number;
-  trainee: SimpleTrainee;
+  candidate: Candidate;
   track: SkillType;
   status: string;
   trainer: number;

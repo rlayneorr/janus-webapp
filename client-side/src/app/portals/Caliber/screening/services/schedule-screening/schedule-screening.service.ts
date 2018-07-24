@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/Rx';
+import 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
-import { SkillTypeService } from '../../services/skillType/skill-type.service';
+import { SkillTypeService } from '../skillType/skill-type.service';
 import { SkillType } from '../../entities/skillType';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
@@ -88,10 +88,10 @@ export class ScheduleScreeningService {
           }
           scheduledScreenings.push({
             scheduledScreeningId: e.scheduledScreeningId,
-            trainee: {
-              traineeID: e.trainee.traineeId,
-              firstname: thisFirstName,
-              lastname: thisLastName,
+            candidate: {
+              candidateId: e.candidate.candidateId,
+              firstName: thisFirstName,
+              lastName: thisLastName,
               skillTypeID: e.skillTypeId,
               skillTypeName: skillType.skillTypeName,
               schedule: e.scheduledDate,
