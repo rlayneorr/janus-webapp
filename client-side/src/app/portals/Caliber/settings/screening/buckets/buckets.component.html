@@ -2,15 +2,28 @@
 <div id="ABcontent" class="container">
   <div class="row justify-content-center">
     <div class="card w-50">
-      <h6 class="card-header">Buckets</h6>
+
+      <h6 class="card-header">All Buckets</h6>
+
       <div class="card-body" id="allSkillTypesDiv">
+        <!-- <div class="form-group row">
+          <div class="col-sm-12">
+            <!--A search bar to help sift through the unadded tags for when the amount of tags is increased
+            <input type="text" name="bucket" [(ngModel)]="filter.bucketCategory" placeholder="Search Buckets" min="0" max="100" class="form-control">
+          </div>
+        </div> -->
+
         <!-- List of all buckets -->
         <div class="list-group">
           <!-- clickable to route to Bucket -->
           <!--* routeToBucket() -->
-          <div class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(bucket);">
-            <b>{{bucket.category}}</b><br>
+          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(bucket);">
+              <b>{{bucket.category}}</b>
+              <br>
             <small>{{bucket.description}}</small>
+
+            <!--* editBucket(bucket), passes the bucket selected to component side.
+                * open(edit), calls modal to open. -->
             <div class="col-sm" (click)="$event.cancelBubble=true; ">
               <i id="xIcon">
                 <label class="switch">
@@ -20,10 +33,14 @@
               </i>
             </div>
             <i id="delIcon" class="fa fa-trash pull-right" (click)="confirmDelete(bucket); open(delete)" placement="top" ngbTooltip="delete"></i>
-            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editBucket(bucket); open(edit)" placement="top" ngbTooltip="edit"></i>            
-          </div>
+            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editBucket(bucket); open(edit)" placement="top" ngbTooltip="edit">
+            </i>
+
+          </a>
         </div>
+
       </div>
+
       <!--* 'open(create)' -->
       <button type="button" class="btn btn-primary btn-sm" (click)="open(create)">Create Bucket</button>
     </div>

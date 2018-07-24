@@ -11,6 +11,8 @@ import { Subject } from 'rxjs/Subject';
 import { Bucket } from '../entities/Bucket';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
+import { BUCKETS } from '../mock-data/mock-buckets'
+
 /**
    * Imported urlservice to replace hardcoded endpoints
    *

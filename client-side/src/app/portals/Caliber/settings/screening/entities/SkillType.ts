@@ -3,6 +3,6 @@ import { Category } from "./Category";
 export class SkillType {
     skillTypeId: number;
     skillTypeName: string;
-    categories: Category[]
+    categories: Category[];
     isActive: boolean;
 }
