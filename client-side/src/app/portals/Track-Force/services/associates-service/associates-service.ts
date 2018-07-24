@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Response } from '@angular/http/';
+import { Response } from '@angular/http';
 import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 import { forEach } from '@angular/router/src/utils/collection';
 import { UrlService } from '../../../../gambit-client/services/urls/url.service';

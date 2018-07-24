@@ -1,5 +1,5 @@
 import { Bucket } from './Bucket';
-import { Skill } from '../../../../Caliber/entities/Skill';
+import { Skill } from '../../../entities/Skill';
 
 export class SkillType {
     skillTypeId: number;
