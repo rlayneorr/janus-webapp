@@ -43,7 +43,6 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
-// import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
@@ -156,10 +155,11 @@ import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
-import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
+//import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from '../Caliber/services/category/category.service';
+import {QuestionService} from "./settings/screening/services/question.service";
 
 
 @NgModule({
@@ -175,7 +175,7 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     SimpleNotificationsModule.forRoot(),
     ScrollEventModule,
     Ng2PageScrollModule,
-    NgxPaginationModule,
+    NgxPaginationModule
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -211,7 +211,7 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
-    BucketFilterPipe,
+    //BucketFilterPipe,
     CategoryFilterPipe,
 
     // components
@@ -316,7 +316,7 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     ApiService,
     PDFService,
     ReportingService,
-    //QuestionService,
+    QuestionService,
     QuestionsToBucketsUtil,
     ScoresToBucketsUtil,
     // TagService,
