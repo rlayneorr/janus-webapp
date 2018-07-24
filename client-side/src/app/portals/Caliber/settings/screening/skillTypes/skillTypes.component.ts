@@ -190,11 +190,12 @@ export class SkillTypesComponent implements OnInit {
     * array of bucket ids to utilize the includes method.
     * @param bucketId: Id of single bucket
     */
-    checkContains(category) {
-        if (this.skillType) {
-            return this.skillType.categories.includes(category);
-        }
-        return false;
+    checkContains(bucketId) {
+        // if (this.skillType) {
+        //     return this.categoryIds.includes(bucketId);
+        // }
+        //return false;
+        console.log("checkContains");
     }
 
     /**
