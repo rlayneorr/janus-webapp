@@ -5,8 +5,15 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 @Injectable()
 export class UrlService {
   //public readonly context: string =  environment.gambitContext;
-  public readonly caliberContext: string = environment.caliberContext;
-  public readonly context : string = environment.localhostContext;
+  //public readonly caliberContext: string = environment.caliberContext;
+  public readonly context : string = environment.localhostcontext;
+
+
+  public readonly bucketContext : string = environment.bucketContext;
+  public readonly categoryContext : string = environment.categoryContext;
+  public readonly skillTypeContext : string = environment.skillTypeContext;
+  public readonly weightContext : string = environment.weightContext;
+  public readonly questionContext : string = environment.questionsContext;
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
@@ -90,11 +97,16 @@ export class UrlService {
    */
   private bucketEndpoint = '/buckets';
   bucket = {
-    getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
-    getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
-    updateBucket: () => `${this.context + this.bucketEndpoint}`,
-    createNewBucket: () => `${this.context + this.bucketEndpoint}`,
-    deleteBucket: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`
+    getAllBuckets: () => `${this.bucketContext + this.bucketEndpoint}`,
+    //getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
+    getBucketById: (bucketId: number) => `${this.bucketContext + this.bucketEndpoint}/${bucketId}`,
+    //getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
+    updateBucket: () => `${this.bucketContext + this.bucketEndpoint}`,
+    //updateBucket: () => `${this.context + this.bucketEndpoint}`,
+    createNewBucket: () => `${this.bucketContext + this.bucketEndpoint}`,
+    //createNewBucket: () => `${this.context + this.bucketEndpoint}`,
+    deleteBucket: (bucketId: number) => `${this.bucketContext + this.bucketEndpoint}/${bucketId}`
+    //deleteBucket: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`
   };
 
   /**
@@ -125,11 +137,16 @@ export class UrlService {
   };
 
   category = {
-    fetchAll: () => `${this.context}vp/category`,
-    fetchAllActive: () => `${this.context}category/all`,
-    fetchById: (id: number) => `${this.context}category/${id}`,
-    save: () => `${this.context}vp/category`,
-    update: () => `${this.context}vp/category/update`,
+    fetchAll: () => `${this.categoryContext}/category`,
+    // fetchAll: () => `${this.context}/category`,
+    fetchAllActive: () => `${this.categoryContext}category/all`,
+    // fetchAllActive: () => `${this.context}category/all`,
+    fetchById: (id: number) => `${this.categoryContext}category/${id}`,
+    // fetchById: (id: number) => `${this.context}category/${id}`,
+    save: () => `${this.categoryContext}vp/category`,
+    // save: () => `${this.context}vp/category`,
+    update: () => `${this.categoryContext}vp/category/update`,
+    // update: () => `${this.context}vp/category/update`,
   };
 
   curriculum = {
@@ -205,7 +222,8 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private questionEndpoint = (this.context + '/questions');
+  //private questionEndpoint = (this.context + '/questions');
+  private questionEndpoint = (this.questionContext + '/questions');
   question = {
     postQuestion: () => `${this.questionEndpoint}`,
     putQuestion: () => `${this.questionEndpoint}`,
@@ -293,18 +311,27 @@ export class UrlService {
   /**
    * Endpoints for skillType
    */
-  skillTypesServiceEndpoint = this.context + '/skillType';
+  //skillTypesServiceEndpoint = this.context + '/skillType';
+  skillTypesServiceEndpoint = this.skillTypeContext + '/skillType';
   skillTypes = {
-    findAll: () => `${this.context}`,
-    findAllActive: () => `${this.context}/active`,
-    findById: (id: number) => `${this.context}/${id}`,
-    findByName: (name: string) => `${this.context}/${name}`,
-    save: () => `${this.context}`,
-    saveSkill: (skillTypeId, skillId) => `${this.context}/${skillTypeId}/skill/${skillId}`,
-    saveSkillByName: (skillTypeName, skillName) =>
-      `${this.context}/name/${skillTypeName}/skill/name/${skillName}`,
-    update: (id: number) => `${this.context}/skillType/${id}`,
-    delete: (id: number) => `${this.context}/${id}`, // note lowercase t in type, this is to match the request mapping
+    findAll: () => `${this.skillTypesServiceEndpoint}`,
+    //findAll: () => `${this.context}`,
+    findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
+    // findAllActive: () => `${this.context}/active`,
+    findById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    // findById: (id: number) => `${this.context}/${id}`,
+    findByName: (name: string) => `${this.skillTypesServiceEndpoint}/${name}`,
+    // findByName: (name: string) => `${this.context}/${name}`,
+    save: () => `${this.skillTypesServiceEndpoint}`,
+    // save: () => `${this.context}`,
+    saveSkill: (skillTypeId, skillId) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/skill/${skillId}`,
+    // saveSkill: (skillTypeId, skillId) => `${this.context}/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) => `${this.skillTypesServiceEndpoint}/name/${skillTypeName}/skill/name/${skillName}`,
+    // saveSkillByName: (skillTypeName, skillName) => `${this.context}/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id: number) => `${this.skillTypesServiceEndpoint}/skillType/${id}`,
+    // update: (id: number) => `${this.context}/skillType/${id}`,
+    delete: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`, // note lowercase t in type, this is to match the request mapping
+    //delete: (id: number) => `${this.context}/${id}`, // note lowercase t in type, this is to match the request mapping
 
 
 
