@@ -35,10 +35,14 @@
                     <!--changed this to reference an alias category of array categories-->
                     <tr *ngFor="let category of categories; let i=index;">
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <td *ngIf='nextColumn(c,i);' (click)='editopen(editSkill,category);' class='pointer'>
 =======
                         <td *ngIf='nextColumn(c,i)' (click)='editopen(editSkill,category);' class='pointer'>
 >>>>>>> Refactored the Skill stuff to reflect the Category mock data on the JSON server. - Tyerra Smith and Michael Brumley
+=======
+                        <td *ngIf='nextColumn(c,i);' (click)='editopen(editSkill,category);' class='pointer'>
+>>>>>>> Refactored Skills as Categories; Has View, Create, Edit, and Delete functionality -Tyerra Smith and Michael Brumley
                             {{category.categoryName}}
                         </td>
                         <!-- Display active condition -->
