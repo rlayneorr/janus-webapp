@@ -10,16 +10,16 @@ import { SessionService } from '../../../services/session.service';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { AlertService } from '../../../services/alert.service';
 import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
-import * as XLSXStyle from 'xlsx-style';
+// import * as XLSX from 'xlsx/types';
+// import * as XLSXStyle from 'xlsx-style';
 import { WeeksExportDTO } from '../../../models/weeksExportDTO';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { Schedulez } from '../../../models/scheduleZ.model';
 import { SubtopicCurric } from '../../../models/subtopicCurric.model';
 import { Topic } from '../../../models/topic.model';
 
-const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-const EXCEL_EXTENSION = '.xlsx';
+// const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+// const EXCEL_EXTENSION = '.xlsx';
 
 /**
  * @author Daniel Robinson
@@ -478,11 +478,11 @@ deleteVersions(selectedCurr) {
  */
 download() {
     let ourWeeks: WeeksExportDTO;
-    ourWeeks = new WeeksExportDTO((this.allWeeks), this.selectedCurr.name + ' v' + this.selectedCurr.version);
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ourWeeks.data);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, 'excelFileName');
+    // ourWeeks = new WeeksExportDTO((this.allWeeks), this.selectedCurr.name + ' v' + this.selectedCurr.version);
+    // const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ourWeeks.data);
+    // const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    // const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    // this.saveAsExcelFile(excelBuffer, 'excelFileName');
 }
 
     /**
@@ -493,8 +493,8 @@ download() {
      */
     private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
+        // type: EXCEL_TYPE
     });
-    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    // FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 }
 }

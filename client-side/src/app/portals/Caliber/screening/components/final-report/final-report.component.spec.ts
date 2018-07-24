@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FinalReportComponent } from './final-report.component';
 import { ScreeningService } from '../../services/screening/screening.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
@@ -22,7 +22,7 @@ describe('FinalReportComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FinalReportComponent ],
-      providers: [ ScreeningService, HttpClient, HttpHandler, SimpleTraineeService, SkillTypeService,
+      providers: [ ScreeningService, HttpClient, HttpHandler, CandidateService, SkillTypeService,
         SkillTypeBucketService, QuestionScoreService, ScoresToBucketsUtil, AlertsService, SoftSkillsViolationService ]
     })
     .compileComponents();

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms/';
+import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 // entities

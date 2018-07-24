@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http/';
+import { HttpClient } from '@angular/common/http';
 import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // rxjs
