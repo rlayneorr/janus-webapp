@@ -1,8 +1,8 @@
 <!--
   This Template is connected to the question component and displayed within the bucket template in caliber.
-  It gets the currently selected bucket Id from the bucket service, displays all of the buckets questions and 
-  allows you to add questions to that bucket. 
-  The template starts with the table that is displayed and ends with the quesiton editor modal, which is displayed 
+  It gets the currently selected bucket Id from the bucket service, displays all of the buckets questions and
+  allows you to add questions to that bucket.
+  The template starts with the table that is displayed and ends with the quesiton editor modal, which is displayed
   for adding and editing questions.
 -->
 <!--Questions Table Start-->
@@ -22,6 +22,7 @@
                     <span class="slider round" placement="top" ngbTooltip="activate" *ngIf="!question.isActive"></span>
                 </label>
               </i>
+              <i id="delIcon" class="fa fa-trash pull-right" (click)="deleteQuestion(question)" placement="top" ngbTooltip="delete"></i>
               <i id="penIcon" class="fa fa-pencil pull-right" (click)="editQuestion(question); open(content)" placement="top" ngbTooltip="edit"></i>
             </a>
           </div>

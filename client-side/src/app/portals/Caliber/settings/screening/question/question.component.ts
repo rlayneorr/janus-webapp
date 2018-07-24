@@ -46,7 +46,6 @@ export class QuestionComponent implements OnInit {
     private bucketService: BucketsService,
     private alertsService: AlertsService) { }
 
-  newTagString: string;
   createQuestion: FormGroup;
   newQuestion: Question;
   question: Question;
@@ -192,6 +191,14 @@ export class QuestionComponent implements OnInit {
     }
   }
 
+
+
+
+  deleteQuestion(question):void {
+    this.questionService.deleteQuestion(this.question.questionId);
+    console.log("delete")
+  }
+
   /**
    * Used to populate the current question and the current tags with a selected question to be
    * edited.
@@ -201,6 +208,7 @@ export class QuestionComponent implements OnInit {
       this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data => {
         this.questions = (data as Question[]);
       });
+
     }
   }
 

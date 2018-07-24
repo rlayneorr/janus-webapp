@@ -51,7 +51,7 @@ import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-import { TagService } from './services/tag/tag.service';
+// import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';
@@ -161,6 +161,8 @@ import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
+// import { TagFilterPipe } from './settings/screening/question/question.filter';
+//import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
@@ -205,6 +207,7 @@ export const Dependencies = {
     ArrToStringPipe,
     SearchPipe,
     CategoryFilterPipe,
+    // TagFilterPipe,
 
     // components
     // PaginationControlsComponent,

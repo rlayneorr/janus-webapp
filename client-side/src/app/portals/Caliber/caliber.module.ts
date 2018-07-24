@@ -43,12 +43,12 @@ import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
 import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
-import { QuestionService } from './screening/services/question/question.service';
+// import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-import { TagService } from './services/tag/tag.service';
+// import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';
@@ -156,6 +156,7 @@ import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
+import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from '../Caliber/services/category/category.service';
@@ -210,6 +211,7 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
+    BucketFilterPipe,
     CategoryFilterPipe,
 
     // components
@@ -314,10 +316,10 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     ApiService,
     PDFService,
     ReportingService,
-    QuestionService,
+    //QuestionService,
     QuestionsToBucketsUtil,
     ScoresToBucketsUtil,
-    TagService,
+    // TagService,
     QuestionScoreService,
     SkillTypeService,
     SoftSkillsService,

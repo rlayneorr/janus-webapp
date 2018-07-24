@@ -213,9 +213,7 @@ export class UrlService {
     deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
     activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
     filteredQuestions: () => `${this.questionEndpoint}/filter`,
-    getAllTags: () => `${this.questionEndpoint}/tags`,
-    createNewTag: () => `${this.questionEndpoint}/tags`,
-    getTagsByQuestionId: (questionId: number) => `${this.questionEndpoint}/tags/question/${questionId}`
+    deleteQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}`,
   };
 
   private questionScoringEndpoint = 'question-score-service/question';
@@ -341,10 +339,10 @@ export class UrlService {
     isPopulated: (batchId: number) => `${this.context}/subtopics/ispopulated/${batchId}/`
   };
 
-  tagEndpoint = this.context + 'question-service/tag';
-  tags = {
-    getAllTags: () => `${this.tagEndpoint}/getAllTags`,
-  };
+  // tagEndpoint = this.context + 'question-service/tag';
+  // tags = {
+  //   getAllTags: () => `${this.tagEndpoint}/getAllTags`,
+  // };
 
   topic = {
     addTopicName: (name: string) => `${this.context}/topics/${name}`,
@@ -429,65 +427,65 @@ export class UrlService {
 
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint = (skill: string, training: string, startDate) =>
-    environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`;
+    environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`
 
   apifetchBatchWeekPieChart = (batchId: Number, weekId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${weekId}/pie`;
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/pie`
 
   apiPieChartCurrentWeekQCStatus = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/pie`;
+    environment.context + `all/reports/batch/${batchId}/pie`
 
   apiAllBatchesCurrentWeekQCStackedBarChart = (batchId: Number, week: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`;
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`
 
   apiBatchWeekAvgBarChart = (batchId: Number, week: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`;
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`
 
   apiBatchWeekSortedBarChart = (batchId: Number, week: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-weekly-sorted`;
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-weekly-sorted`
 
   apiBatchOverallTraineeBarChart = (batchId: Number, traineeId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/bar-batch-overall-trainee`;
+    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/bar-batch-overall-trainee`
 
   apiBatchOverallBarChart = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/bar-batch-overall`;
+    environment.context + `all/reports/batch/${batchId}/overall/bar-batch-overall`
 
   apiBatchWeekTraineeBarChart = (batchId: Number, weekId: Number, traineeId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/bar-batch-week-trainee`;
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/bar-batch-week-trainee`
 
   apiTraineeUpToWeekLineChart = (batchId: Number, weekId: Number, traineeId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/line-trainee-up-to-week`;
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/line-trainee-up-to-week`
 
   apiTraineeOverallLineChart = (batchId: Number, traineeId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/line-trainee-overall`;
+    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/line-trainee-overall`
 
   apiBatchOverallLineChart = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/line-batch-overall`;
+    environment.context + `all/reports/batch/${batchId}/overall/line-batch-overall`
 
   apiTraineeUpToWeekRadarChart = (week: Number, traineeId: Number) =>
-    environment.context + `all/reports/week/${week}/trainee/${traineeId}/radar-trainee-up-to-week`;
+    environment.context + `all/reports/week/${week}/trainee/${traineeId}/radar-trainee-up-to-week`
 
   apiTraineeOverallRadarChart =  (traineeId: Number) =>
-    environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`;
+    environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`
 
   apiBatchOverallRadarChart = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`;
+    environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`
 
   apiBatchAllTraineesRadarChart = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/radar-batch-all-trainees`;
+    environment.context + `all/reports/batch/${batchId}/radar-batch-all-trainees`
 
   apiBatchWeekAverageValue = (batchId: Number, weekId: Number) =>
-    environment.context + `all/assessments/average/${batchId}/${weekId}`;
+    environment.context + `all/assessments/average/${batchId}/${weekId}`
 
   apiTechnologiesForTheWeek = (batchId: Number, weekId: Number) =>
-    environment.context + `all/assessments/categories/batch/${batchId}/week/${weekId}`;
+    environment.context + `all/assessments/categories/batch/${batchId}/week/${weekId}`
 
   apiPanelBatchAllTrainees = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`;
+    environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`
 
   /* Evaluation service API endpoints */
   apiFetchAllQCTraineeNotes = (batchId: Number, weekId: Number) =>
-    environment.context + `qc/note/trainee/${batchId}/${weekId}`;
+    environment.context + `qc/note/trainee/${batchId}/${weekId}`
 
   apiFetchAllQCBatchNotes = (batchId: Number, weekId: Number) =>
     environment.context + `qc/note/batch/${batchId}/${weekId}`

@@ -13,12 +13,17 @@ import { QuestionComponent } from './question.component';
 
 // Entities
 import { Question } from '../../../entities/Question';
+//import { Tag } from '../entities/Tag';
 
 // Services
 import { AlertsService } from '../../../services/alerts.service';
 
+
 // Mock Data
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
+// import { TAGS } from '../../../screening/mock-data/mock-tags';
+import { QuestionService } from '../../../screening/services/question/question.service';
+import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 /**
  * Test for methods on the question component.
@@ -31,9 +36,10 @@ import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 /**
  * Setting up the testing environment for question component.
  **/
-describe('QuestionComponent', () => {
+fdescribe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
+
 
   /**
    * Import dependencies and set the TestBed to configure the testing module.
@@ -108,6 +114,10 @@ describe('QuestionComponent', () => {
     expect(component.sampleAnswers.length).toBe(0);
   });
 
+  it('should remove question',() => {
+    component.deleteQuestion(QUESTIONS[0]);
+    expect(component.question).toEqual(null);
+  });
   /**
    * Test if the question gets edited or not.
    *
@@ -135,6 +145,21 @@ describe('QuestionComponent', () => {
     component.updateQuestions();
     expect(component.questions).toBe(Question['test']);
   });
+
+  /**
+   * Test to check if it adds new tags to the questions.
+   *
+   * Function tested: addNewTag()
+   **/
+  // it('should add new tags', () => {
+  //   component.addNewTag(t0);
+  //   let lastTagIndex = component.currentTags.length - 1;
+  //   expect(component.currentTags[lastTagIndex]).toEqual(t0);
+  //   component.addNewTag(t1);
+  //   lastTagIndex = component.currentTags.length - 1;
+  //   expect(component.currentTags[lastTagIndex]).toEqual(t1);
+  //   expect(component.currentTags[lastTagIndex - 1]).toEqual(t0);
+  // });
 
   /**
    * Test if it displays Saved successfully.
@@ -190,6 +215,25 @@ describe('QuestionComponent', () => {
     });
   }));
 
+  /**
+   * Resets the current tags array and add new tags to the
+   * current tags array.
+   *
+   * Function tested: removeTagsFromAll()
+   **/
+  // it('should remove tags from all', () => {
+  //   component.currentTags = [];
+  //   component.currentTags = TAGS;
+  //   component.newTags = [];
+  //   component.newTags[0] = t0;
+  //   component.newTags[1] = t1;
+  //   component.allTags = [];
 
+  //   expect(component.currentTags.length).toBe(4);
+  //   component.removeTagsFromAll();
+  //   expect(component.currentTags.length).toBe(2);
+  //   expect(component.currentTags).toContain(t0);
+  //   expect(component.currentTags).toContain(t1);
+  // });
 });
 
