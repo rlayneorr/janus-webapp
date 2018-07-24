@@ -158,10 +158,10 @@ import { BucketsComponent } from './settings/screening/buckets/buckets.component
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
-import { BucketFilterPipe } from './settings/screening/buckets/buckets.filter';
+//import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
-import { CategoryService } from './services/category/category.service';
+import { CategoryService } from '../Caliber/services/category/category.service';
 
 
 @NgModule({
@@ -177,7 +177,7 @@ import { CategoryService } from './services/category/category.service';
     SimpleNotificationsModule.forRoot(),
     ScrollEventModule,
     Ng2PageScrollModule,
-    NgxPaginationModule,
+    NgxPaginationModule
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -213,6 +213,10 @@ import { CategoryService } from './services/category/category.service';
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
+<<<<<<< HEAD
+=======
+    //BucketFilterPipe,
+>>>>>>> - imported QuestionService to the modules
     CategoryFilterPipe,
 
     // components
@@ -318,7 +322,11 @@ import { CategoryService } from './services/category/category.service';
     ApiService,
     PDFService,
     ReportingService,
+<<<<<<< HEAD
     // QuestionService,
+=======
+    QuestionService,
+>>>>>>> - imported QuestionService to the modules
     QuestionsToBucketsUtil,
     ScoresToBucketsUtil,
     // TagService,
