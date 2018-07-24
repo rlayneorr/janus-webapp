@@ -123,11 +123,16 @@ export class UrlService {
   };
 
   category = {
-    fetchAll: () => `${this.context}vp/category`,
+    fetchAll: () => `${this.context}/categories`,
     fetchAllActive: () => `${this.context}category/all`,
     fetchById: (id: number) => `${this.context}category/${id}`,
-    save: () => `${this.context}vp/category`,
-    update: () => `${this.context}vp/category/update`,
+    save: () => `${this.context}/category`,
+    update: () => `${this.context}/category/update`,
+    
+    getCategories: () => `${this.context}/categories`,
+    getCategoryById: (id: number) => `${this.context}/categories/${id}`,
+    createCategory: () => `${this.context}/categories`,
+    putCategory: (id:number) => `${this.context}/categories/${id}`,
   };
 
   curriculum = {

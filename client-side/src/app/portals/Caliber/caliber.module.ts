@@ -58,6 +58,7 @@ import { SkillTypeBucketService } from './screening/services/skillTypeBucketLook
 import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
+import { SettingsCategoriesService } from './settings/screening/services/categories.service';
 import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
 /** for in memory data service
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
@@ -153,9 +154,11 @@ import { ScheduleScreeningService } from './screening/services/schedule-screenin
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
 import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
+import { BucketsComponent } from './settings/screening/buckets/buckets.component';
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
+import { BucketFilterPipe } from './settings/screening/buckets/buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from '../Caliber/services/category/category.service';
@@ -280,6 +283,7 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     ViolationFlagComponent,
     SkillTypesComponent,
     BucketComponent,
+    BucketsComponent,
     CategoriesComponent,
     QuestionComponent,
     ScreeningComponent
@@ -330,6 +334,7 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     QuestionsService,
     SkillTypesService,
     BucketsService,
+    SettingsCategoriesService,
     HttpErrorHandlerService,
     SimpleTraineeService,
     CategoriesService,
