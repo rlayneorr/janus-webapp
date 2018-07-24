@@ -34,7 +34,7 @@
                     <!-- Load all skills -->
                     <!--changed this to reference an alias category of array categories-->
                     <tr *ngFor="let category of categories; let i=index;">
-                        <td *ngIf='nextColumn(c,i)' (click)='editopen(editSkill,category);' class='pointer'>
+                        <td *ngIf='nextColumn(c,i);' (click)='editopen(editSkill,category);' class='pointer'>
                             {{category.categoryName}}
                         </td>
                         <!-- Display active condition -->
@@ -52,6 +52,45 @@
     </div>
 </div>
 
+<!--this is a test div to make sure my logic works-->
+<!-- Div1 -->
+<!-- <div>
+<table class="table-bordered">
+<tr>
+<th>Div1</th>
+</tr>
+<tr *ngFor="let c of categories; let ca = index;">
+    <td *ngIf="(ca < div1)">{{c.categoryName}}</td>
+</tr>
+</table> -->
+
+<!-- <table class="table-bordered">
+    <tr>
+    <th>Div2</th>
+    </tr>
+    <tr *ngFor="let c of categories; let ca = index;">
+        <td *ngIf="((ca < div2) && (ca >= div1))">{{c.categoryName}}</td> 
+    </tr>
+    </table>
+    <table class="table-bordered">
+        <tr>
+        <th>Div3</th>
+        </tr>
+        <tr *ngFor="let c of categories; let ca = index;">
+            <td *ngIf="((ca < div3) && (ca >= div2))">{{c.categoryName}}</td>
+        </tr>
+        </table> -->
+
+        <!-- div4 -->
+        <!-- <table class="table-bordered">
+            <tr>
+            <th>Div4</th>
+            </tr>
+            <tr *ngFor="let c of categories; let ca = index;">
+                <td *ngIf="((ca < div4) && (ca >= div3))">{{c.categoryName}}</td> 
+            </tr>
+            </table> 
+        </div>  -->
 <!-- Add skill modal -->
 <ng-template #addSkill let-c="close" let-d="dismiss">
     <form #myForm="ngForm" [formGroup]="addForm">

@@ -31,6 +31,11 @@ export class SkillsComponent implements OnInit {
 
   categories: Category[];
   currentCategory: Category;
+  //these are going to be the 4 index parts
+  div1;
+  div2;
+  div3;
+  div4;
 
 
   columns;
@@ -49,13 +54,35 @@ export class SkillsComponent implements OnInit {
       this.categories = resp;
       console.log(this.categories);
       //If all categories are not shown, edit the divisor
-      //this.numColumns = this.categories.length / 8 + 1; this is the original
-      this.numColumns = this.categories.length;
-      if (this.numColumns > 3) {
-        this.numColumns = 3;
+      this.numColumns = this.categories.length / 10 + 1; //this is the original
+      //this.numColumns = Math.ceil(this.categories.length / 4);
+      if (this.numColumns >= 4) {
+        this.numColumns = 4;
       }
+      
       this.columns = Array.apply(null, { length: this.numColumns }).map(Number.call, Number);
+      console.log(this.columns);
+      console.log(this.numColumns);
+
+      //this denotes the index for the for loop for the ngfor
+      // this.div1= Math.ceil(this.categories.length/4);
+      // this.div2= this.div1 + this.div1;
+      // this.div3= this.div1 +this.div1 +this.div1;
+      // this.div4= this.div1 +this.div1 +this.div1 +this.div1;
+
+      //these are the logs to make sure im getting the right numbers when i making my divisions for my indexed for loops
+
+      // console.log(this.div1);
+      // console.log("1");
+      // console.log(this.div2);
+      // console.log("2");
+      // console.log(this.div3);
+      // console.log("3");
+      // console.log(this.div4);
+      // console.log("4");
+     
     });
+    
   }
 
   resetFormControl() {
@@ -91,9 +118,9 @@ export class SkillsComponent implements OnInit {
     console.log(this.currentCategory.categoryId);
     this.categoryService.delete(this.currentCategory).subscribe();
 
-    //This should work once implemented by the back-end -Tyerra Smith
-    // may not need this statement without all of the inherited subjects
     this.resetFormControl();
+
+    this.ngOnInit();
   }
 
 
@@ -118,6 +145,11 @@ export class SkillsComponent implements OnInit {
    * @memberof SkillsComponent
    */
   nextColumn(column, index) {
+    console.log("in nextColumn");
+    console.log("Column : " + column);
+    console.log("Index : " + index);
+    console.log("Categories[" + index + "] --> " + this.categories[index].categoryId + " : " + this.categories[index].categoryName);
+
     switch (column) {
       case 0:
         if (index < this.categories.length / this.numColumns) {
@@ -130,7 +162,8 @@ export class SkillsComponent implements OnInit {
           if (this.numColumns === 3) {
             if (index < ((this.categories.length / this.numColumns) * 2)) {
               return true;
-            } else {
+             } else {
+               console.log("False");
               return false;
             }
           } else {
@@ -144,8 +177,22 @@ export class SkillsComponent implements OnInit {
         } break;
       default:
         break;
-    }
-  }
+      }
+    // switch(index % 4)
+    // {
+    //   case 0: 
+    //     column = 0;
+    //   case 1:
+    //     column = 1;
+    //   case 2:
+    //     column = 2;
+    //   default:
+    //     column = 3;
+    // }
+    // console.log(index % 4);
+    // return true;
+     }
+  
 
   /**
    * Opens a Modal

@@ -73,6 +73,10 @@
     padding-bottom: 0;
 }
 
+.table-bordered {
+    display: inline-block;
+}
+
 .close {
     font-size: 21px;
     font-weight: 700;
