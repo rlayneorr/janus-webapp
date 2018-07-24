@@ -1,4 +1,7 @@
+import { Bucket } from "./Bucket";
+
 export class Category {
-    id: number;
+    categoryId: number;
     categoryName: string;
+    buckets: Bucket[];
 }

@@ -133,20 +133,16 @@ export class UrlService {
   };
 
   category = {
-    fetchAll: () => `${this.context}category/`,
-    // fetchAll: () => `${this.context}screening-admin/category/`,
-    // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
+    fetchAll: () => `${this.context}/categories`,
+    fetchAllActive: () => `${this.context}category/all`,
     fetchById: (id: number) => `${this.context}category/${id}`,
-    // fetchById: (id: number) => `${this.context}screening-admin/category/`,
-    save: () => `${this.context}category`,
-    // save: () => `${this.context}screening-admin/category/`,
-    update: (id: number) => `${this.context}category/${id}`,
-    // update: (id: number) => `${this.context}screening-admin/category/${id}`,
-    // // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
-    create: () => `${this.context}category`,
-    // create: () => `${this.context}screening-admin/category`,
-    delete: (id: number) => `${this.context}category/${id}`,
-    // delete: (id: number) => `${this.context}screening-admin/category/${id}`,
+    save: () => `${this.context}/category`,
+    update: () => `${this.context}/category/update`,
+    
+    getCategories: () => `${this.context}/categories`,
+    getCategoryById: (id: number) => `${this.context}/categories/${id}`,
+    createCategory: () => `${this.context}/categories`,
+    putCategory: (id:number) => `${this.context}/categories/${id}`,
   };
 
   curriculum = {

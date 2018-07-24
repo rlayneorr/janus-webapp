@@ -1,5 +1,7 @@
+import { Category } from "./Category";
+
 export class SkillType {
     skillTypeId: number;
     skillTypeName: string;
-    isActive: boolean;
+    categories: Category[]
 }

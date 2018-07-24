@@ -1,355 +1,190 @@
 {
-
   "buckets": [
     {
       "bucketId": 1,
-      "bucketCategory": "Basic Java",
-      "bucketDescription": "OCA level Java questions",
+      "category": "Basic Java",
+      "description": "OCA level Java questions",
       "isActive": true,
       "questions": [
-        1
+        {
+          "questionId": 0,
+          "bucketId": 1,
+          "questionText": "whuts yr favorite color",
+          "sampleAnswer1": "answer1",
+          "sampleAnswer2": "answer2",
+          "sampleAnswer3": "answer3",
+          "sampleAnswer4": "answer4",
+          "sampleAnswer5": "answer5"
+        }
       ]
     },
     {
       "bucketId": 2,
-      "bucketCategory": "SQL",
-      "bucketDescription": "SQL database questions",
+      "category": "SQL",
+      "description": "SQL database questions",
       "isActive": true,
-      "questions": [
-        1,
-        2
-      ]
+      "questions": []
     },
     {
       "bucketId": 3,
-      "bucketCategory": "JavaScript",
-      "bucketDescription": "JavaScript questions",
+      "category": "JavaScript",
+      "description": "JavaScript questions",
       "isActive": true,
-      "questions": [
-        1,
-        2
-      ]
+      "questions": []
     },
     {
       "bucketId": 4,
-      "bucketCategory": "HTML",
-      "bucketDescription": "JavaScript questions",
+      "category": "HTML",
+      "description": "HTML questions",
       "isActive": true,
-      "questions": [
-        1,
-        2
-      ]
+      "questions": []
     },
     {
       "bucketId": 5,
-      "bucketCategory": "CSS",
-      "bucketDescription": "JavaScript questions",
+      "category": "CSS",
+      "description": "CSS questions",
       "isActive": true,
-      "questions": [
-        1,
-        2
-      ]
+      "questions": []
     },
     {
       "bucketId": 6,
-      "bucketCategory": "Spring",
-      "bucketDescription": "JavaScript questions",
+      "category": "Spring",
+      "description": "Spring questions",
       "isActive": true,
-      "questions": [
-        1,
-        2
-      ]
+      "questions": []
     },
     {
       "bucketId": 7,
-      "bucketCategory": "Angular",
-      "bucketDescription": "JavaScript questions",
+      "category": "Angular",
+      "description": "Angular questions",
       "isActive": true,
-      "questions": null
+      "questions": []
     }
   ],
   "categories": [
     {
       "categoryId": 0,
-      "skillCategory": "skill0",
-      "active": true
+      "categoryName": "Java",
+      "buckets": [
+        {
+          "bucketId": 1,
+          "category": "Basic Java",
+          "description": "OCA level Java questions",
+          "isActive": true,
+          "questions": [
+            {
+              "questionId": 0,
+              "bucketId": 1,
+              "questionText": "whuts yr favorite color",
+              "sampleAnswer1": "answer1",
+              "sampleAnswer2": "answer2",
+              "sampleAnswer3": "answer3",
+              "sampleAnswer4": "answer4",
+              "sampleAnswer5": "answer5"
+            }
+          ]
+        }
+      ]
     },
     {
       "categoryId": 1,
-      "skillCategory": "skill1",
-      "active": false
+      "categoryName": "SQL",
+      "buckets": []
     },
     {
       "categoryId": 2,
-      "skillCategory": "skill2",
-      "active": false
+      "categoryName": "JavaScript",
+      "buckets": []
     },
     {
       "categoryId": 3,
-      "skillCategory": "skill3",
-      "active": true
+      "categoryName": "HTML",
+      "buckets": []
     },
     {
       "categoryId": 4,
-      "skillCategory": "skill4",
-      "active": false
+      "categoryName": "CSS",
+      "buckets": []
     },
     {
       "categoryId": 5,
-      "skillCategory": "skill5",
-      "active": false
+      "categoryName": "Spring",
+      "buckets": []
+    }
+  ],
+  "weights": [
+    {
+      "weightId": 0,
+      "skillTypeId": 52,
+      "categoryId": 0,
+      "weight": 100
+    },
+    {
+      "weightId": 1,
+      "skillTypeId": 52,
+      "categoryId": 1,
+      "weight": 100
+    },
+    {
+      "weightId": 2,
+      "skillTypeId": 52,
+      "categoryId": 2,
+      "weight": 100
     }
   ],
   "questions": [
     {
-      "questionId": 2,
+      "questionId": 0,
+      "bucketId": 0,
+      "questionText": "whuts yr favorite color",
+      "sampleAnswer1": "answer1",
+      "sampleAnswer2": "answer2",
+      "sampleAnswer3": "answer3",
+      "sampleAnswer4": "answer4",
+      "sampleAnswer5": "answer5"
+    },
+    {
+      "questionId": 1,
       "bucketId": 1,
-      "isActive": true,
+      "questionText": "bleh",
+      "sampleAnswer1": "bhahfha",
+      "sampleAnswer2": "dsflkj",
+      "sampleAnswer3": "eiei",
+      "sampleAnswer4": "qq",
+      "sampleAnswer5": "rew"
+    },
+    {
+      "questionId": 2,
+      "bucketId": 2,
       "questionText": "000000",
       "sampleAnswer1": "asdf",
       "sampleAnswer2": "mnbb",
       "sampleAnswer3": "rewq",
       "sampleAnswer4": "hjkl",
       "sampleAnswer5": "poiu"
-    },
-    {
-      "questionId": 3,
-      "isActive": true,
-      "questionText": "This is from Postman",
-      "sampleAnswer1": "hello21",
-      "sampleAnswer2": "there",
-      "sampleAnswer3": "2",
-      "sampleAnswer4": "222",
-      "sampleAnswer5": "2222",
-      "bucketId": 2
-    },
-    {
-      "questionId": 4,
-      "bucketId": 2,
-      "isActive": true,
-      "questionText": "bleh",
-      "sampleAnswer1": "testing 1112 new document",
-      "sampleAnswer2": "dsflkj",
-      "sampleAnswer3": "eiei",
-      "sampleAnswer4": "qq",
-      "sampleAnswer5": "rew"
-    },
-    {
-      "questionId": 5,
-      "bucketId": 2,
-      "isActive": true,
-      "questionText": "bleh",
-      "sampleAnswer1": "testing james",
-      "sampleAnswer2": "dsflkj",
-      "sampleAnswer3": "eiei",
-      "sampleAnswer4": "qq",
-      "sampleAnswer5": "rew"
-    },
-    {
-      "questionId": 7,
-      "bucketId": 2,
-      "isActive": true,
-      "questionText": "bleh",
-      "sampleAnswer1": "testing james",
-      "sampleAnswer2": "dsflkj",
-      "sampleAnswer3": "eiei",
-      "sampleAnswer4": "qq",
-      "sampleAnswer5": "rew"
-    },
-    {
-      "questionId": 8,
-      "isActive": true,
-      "bucketId": 2,
-      "questionText": "bleh",
-      "sampleAnswer1": "testing is james here? update status",
-      "sampleAnswer2": "dsflkj",
-      "sampleAnswer3": "eiei",
-      "sampleAnswer4": "qq",
-      "sampleAnswer5": "rew"
     }
   ],
   "skillType": [
     {
-      "skillTypeID": 52,
-      "skillTypeName": "Java EE/Microservices",
-      "isActive": true
+      "skillTypeName": "Java",
+      "skillTypeId": 52,
+      "categories": [
+        {
+          "categoryId": 2,
+          "categoryName": "JavaScript",
+          "buckets": []
+        },
+        {
+          "categoryId": 4,
+          "categoryName": "CSS",
+          "buckets": []
+        }
+      ]
     },
     {
-      "skillTypeID": 53,
-      "skillTypeName": "PEGA",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 54,
-      "skillTypeName": "Selenium",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 55,
-      "skillTypeName": "Business Analysts",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 56,
-      "skillTypeName": ".NET",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 57,
-      "skillTypeName": "C++",
-      "isActive": true
-    },
-    {
-      "skillTypeID": 58,
-      "skillTypeName": "Other",
-      "isActive": true
+      "skillTypeName": "Hi",
+      "categoryWeight": 1,
+      "skillTypeId": 53
     }
-  ],
-    "buckets": [
-      { "bucketID": 1,
-        "bucketCategory": "Basic Java",
-        "bucketDescription": "OCA level Java questions",
-        "isActive": true,
-        "questions": null
-      },
-      { "bucketID": 2,
-        "bucketCategory": "SQL",
-        "bucketDescription": "SQL database questions",
-        "isActive": true,
-        "questions": null
-      },
-      { "bucketID": 3,
-        "bucketCategory": "JavaScript",
-        "bucketDescription": "JavaScript questions",
-        "isActive": true,
-        "questions": null
-      },
-      { "bucketID": 4,
-        "bucketCategory": "HTML",
-        "bucketDescription": "JavaScript questions",
-        "isActive": true,
-        "questions": null
-      },
-      { "bucketID": 5,
-        "bucketCategory": "CSS",
-        "bucketDescription": "JavaScript questions",
-        "isActive": true,
-        "questions": null
-      },
-      { "bucketID": 6,
-        "bucketCategory": "Spring",
-        "bucketDescription": "JavaScript questions",
-        "isActive": true,
-        "questions": null
-      },
-      { "bucketID": 7,
-        "bucketCategory": "Angular",
-        "bucketDescription": "JavaScript questions",
-        "isActive": true,
-        "questions": null
-      }
-    ],
-    "categories": [
-      {
-        "categoryId": 0,
-        "skillCategory": "skill0",
-        "active": true
-      },
-      {
-        "categoryId": 1,
-        "skillCategory": "skill1",
-        "active": false
-      },
-      {
-        "categoryId": 2,
-        "skillCategory": "skill2",
-        "active": false
-      },
-      {
-        "categoryId": 3,
-        "skillCategory": "skill3",
-        "active": true
-      },
-      {
-        "categoryId": 4,
-        "skillCategory": "skill4",
-        "active": false
-      },
-      {
-        "categoryId": 5,
-        "skillCategory": "skill5",
-        "active": false
-      }
-    ],
-    "questions": [
-      {
-        "questionId": 0,
-        "bucketId": 2,
-        "questionText": "whuts yr favorite color",
-        "sampleAnswer1": "answer1",
-        "sampleAnswer2": "answer2",
-        "sampleAnswer3": "answer3",
-        "sampleAnswer4": "answer4",
-        "sampleAnswer5": "answer5"
-      },
-      {
-        "questionId": 1,
-        "bucketId": 2,
-        "questionText": "bleh",
-        "sampleAnswer1": "bhahfha",
-        "sampleAnswer2": "dsflkj",
-        "sampleAnswer3": "eiei",
-        "sampleAnswer4": "qq",
-        "sampleAnswer5": "rew"
-      },
-      {
-        "questionId": 2,
-        "bucketId": 1,
-        "questionText": "000000",
-        "sampleAnswer1": "asdf",
-        "sampleAnswer2": "mnbb",
-        "sampleAnswer3": "rewq",
-        "sampleAnswer4": "hjkl",
-        "sampleAnswer5": "poiu"
-      }
-    ],
-    "skillTypes": [
-      {
-        "skillTypeID": 52,
-        "skillTypeName": "Java EE/Microservices",
-        "isActive": true
-      },
-      {
-        "skillTypeID": 53,
-        "skillTypeName": "PEGA",
-        "isActive": true
-      },
-      {
-        "skillTypeID": 54,
-        "skillTypeName": "Selenium",
-        "isActive": true
-      },
-      {
-        "skillTypeID": 55,
-        "skillTypeName": "Business Analysts",
-        "isActive": true
-      },
-      {
-        "skillTypeID": 56,
-        "skillTypeName": ".NET",
-        "isActive": true
-      },
-      {
-        "skillTypeID": 57,
-        "skillTypeName": "C++",
-        "isActive": true
-      },
-      {
-        "skillTypeID": 58,
-        "skillTypeName": "Other",
-        "isActive": true
-      }
-    ]
-  }
-
-
+  ]
+}

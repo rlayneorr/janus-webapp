@@ -11,6 +11,8 @@ import { Subject } from 'rxjs/Subject';
 import { Bucket } from '../entities/Bucket';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
+import { BUCKETS } from '../mock-data/mock-buckets'
+
 /**
    * Imported urlservice to replace hardcoded endpoints
    *
@@ -64,6 +66,20 @@ export class BucketsService {
     return console.log(this.urlService.bucket.getBucketById(bucketId) + " @deleting Bucket" + bucketId);
     // return this.http.delete<Bucket[]>(this.urlService.bucket.getBucketById(bucketId));
 }
+
+// getAllBuckets(): any {
+//     return BUCKETS;
+// }
+
+// getBucketById(bucketId: number) {
+//     BUCKETS.forEach(bucket => {
+//         if(bucket.bucketId == bucketId){
+//             return bucket;
+//         }        
+//         else
+//             return null;
+//     });
+// }
 
   setBucket(bucket: Bucket) {
      this.currentBucket = bucket;
