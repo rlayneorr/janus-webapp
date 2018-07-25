@@ -108,11 +108,11 @@ fdescribe('QuestionComponent', () => {
    *
    * Function tested: setQuestionNull()
    **/
-  it('should set question to null', () => {
-    component.setQuestionNull();
-    expect(component.question).toEqual(new Question());
-    expect(component.sampleAnswers.length).toBe(0);
-  });
+  // it('should set question to null', () => {
+  //   component.setQuestionNull();
+  //   expect(component.question).toEqual(new Question());
+  //   expect(component.sampleAnswers.length).toBe(0);
+  // });
 
   it('should remove question',() => {
     component.deleteQuestion(QUESTIONS[0]);

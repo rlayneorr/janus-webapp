@@ -11,6 +11,10 @@ import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Routes } from '@angular/router';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+import 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
