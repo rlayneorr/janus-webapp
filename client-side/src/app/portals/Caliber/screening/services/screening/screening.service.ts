@@ -78,14 +78,14 @@ export class ScreeningService {
     let verdict;
     if (this.softSkillsResult === 'Pass') {
       verdict = 1;
-    } else if (this.softSkillsResult === 'Fail') {
+    } else {
       verdict = 0;
     }
     this.httpClient.post(this.urlService.screening.endScreening(),
       {
         'status': 'Completed',
         'softSkillVerdict': verdict,
-        'softSkillCommentary': this.finalSoftSkillComment,
+        'softSkillCommentary': softSkillComment,
         'endDateTime': new Date(),
         'screeningId': localStorage.getItem('screeningID'),
         'scheduledScreeningId': localStorage.getItem('scheduledScreeningID'),

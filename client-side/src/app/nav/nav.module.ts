@@ -12,6 +12,7 @@ import { AssignForceNavComponent } from './assign-force-nav/assign-force-nav.com
 import { TracknForceNavComponent } from './track-force-nav/track-force-nav.component';
 import { BamNavComponent } from './bam-nav/bam-nav.component';
 import { BatchService } from '../portals/Bam/services/batch.service';
+import 'rxjs/add/operator/do';
 
 
 @NgModule({
