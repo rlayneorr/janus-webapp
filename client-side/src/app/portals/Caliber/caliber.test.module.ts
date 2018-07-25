@@ -347,11 +347,6 @@ export const Dependencies = {
     QuestionService,
     QuestionsService,
     BucketsService,
-<<<<<<< HEAD
-=======
-    TagService,
-    TagsService,
->>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
     CandidateService,
     SkillTypeService,
     SkillTypesService,

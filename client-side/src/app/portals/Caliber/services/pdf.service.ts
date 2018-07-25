@@ -110,17 +110,10 @@ export class PDFService {
    * @ignore Implementation not completed.
    */
   public downloadPDFwithFeedback() {
-<<<<<<< HEAD
     const html = '';
     this.http.post(environment.localhostcontext + 'report/generate', html).subscribe(response => {},
       err => {}
     );
-=======
-    // const html = '';
-    // this.http.post(environment.gambitContext + 'report/generate', html).subscribe(response => {},
-    //   err => {}
-    // );
->>>>>>> Commented out all lines that referenced gambitContext (the ec2); Created a localHostContext for JSON server usage
   }
 
 }

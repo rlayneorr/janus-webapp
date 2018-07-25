@@ -4,15 +4,8 @@ import { QuestionsTableComponent } from './questions-table.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { QuestionService } from '../../services/question/question.service';
-<<<<<<< HEAD
 // import { TagService } from '../../../services/tag/tag.service';
 // import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
-<<<<<<< HEAD
-=======
-import { TagService } from '../../../services/tag/tag.service';
->>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
-=======
->>>>>>>  getting jasmine running again
 import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
@@ -73,11 +66,7 @@ describe('QuestionsTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow, AnswerComponent, ViolationFlagComponent],
       imports: [FormsModule],
-<<<<<<< HEAD
       providers: [HttpClient, HttpHandler, QuestionService, //TagService, CandidateService,
-=======
-      providers: [HttpClient, HttpHandler, QuestionService, TagService, CandidateService,
->>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
         SkillTypeService, QuestionScoreService, QuestionsToBucketsUtil, NgbModal, NgbModalStack, ScreeningService,
         SkillTypeBucketService, SoftSkillsViolationService, ViolationTypeService, AlertsService]
     });

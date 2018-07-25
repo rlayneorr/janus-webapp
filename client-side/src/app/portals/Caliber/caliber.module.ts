@@ -42,20 +42,8 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
-<<<<<<< HEAD
 import { CandidateService } from './screening/services/candidate/candidate.service';
-<<<<<<< HEAD
-<<<<<<< HEAD
 // import { QuestionService } from './screening/services/question/question.service';
-=======
-import { QuestionService } from './screening/services/question/question.service';
->>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
-=======
-import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
->>>>>>> - imported QuestionService to the modules
-=======
-// import { QuestionService } from './screening/services/question/question.service';
->>>>>>>  getting jasmine running again
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
@@ -171,20 +159,9 @@ import { CategoryFilterPipe } from './settings/screening/categories/categories.f
 //import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>>  getting jasmine running again
 // import { CategoryService } from '../Caliber/services/category/category.service';
 import {QuestionService} from "./settings/screening/services/question.service";
-=======
->>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
 import { CategoryService } from './services/category/category.service';
-=======
-import { CategoryService } from '../Caliber/services/category/category.service';
-import {QuestionService} from "./settings/screening/services/question.service";
->>>>>>> - imported QuestionService to the modules
 
 
 @NgModule({

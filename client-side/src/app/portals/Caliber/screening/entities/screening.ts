@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 // import { Tag } from './tag';
-=======
-import { Tag } from './tag';
->>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
 import { Candidate } from './Candidate';
 import { CaliberTrainer } from './caliberTrainer';
 import { SkillType } from './skillType';

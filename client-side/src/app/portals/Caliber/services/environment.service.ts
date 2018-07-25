@@ -22,13 +22,8 @@ export class EnvironmentService {
    * @return string
    */
   public buildUrl(url: string, parameters = {} ): string {
-<<<<<<< HEAD
     let rootUrl = [ environment.localhostcontext, url ].join('');
 
-=======
-    //let rootUrl = [ environment.gambitContext, url ].join('');
-    let rootUrl = [ environment.localHostContext, url ].join('');
->>>>>>> Commented out all lines that referenced gambitContext (the ec2); Created a localHostContext for JSON server usage
     if ( this.isEmptyObject(parameters) === false ) {
       rootUrl += '/?';
 

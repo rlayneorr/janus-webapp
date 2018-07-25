@@ -31,20 +31,11 @@ export class SkillsComponent implements OnInit {
 
   categories: Category[];
   currentCategory: Category;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Refactored Skills as Categories; Has View, Create, Edit, and Delete functionality -Tyerra Smith and Michael Brumley
   //these are going to be the 4 index parts
   div1;
   div2;
   div3;
   div4;
-<<<<<<< HEAD
-=======
->>>>>>> Refactored the Skill stuff to reflect the Category mock data on the JSON server. - Tyerra Smith and Michael Brumley
-=======
->>>>>>> Refactored Skills as Categories; Has View, Create, Edit, and Delete functionality -Tyerra Smith and Michael Brumley
 
 
   columns;
@@ -63,23 +54,10 @@ export class SkillsComponent implements OnInit {
       this.categories = resp;
       console.log(this.categories);
       //If all categories are not shown, edit the divisor
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Refactored Skills as Categories; Has View, Create, Edit, and Delete functionality -Tyerra Smith and Michael Brumley
       this.numColumns = this.categories.length / 10 + 1; //this is the original
       //this.numColumns = Math.ceil(this.categories.length / 4);
       if (this.numColumns >= 4) {
         this.numColumns = 4;
-<<<<<<< HEAD
-=======
-      //this.numColumns = this.categories.length / 8 + 1; this is the original
-      this.numColumns = this.categories.length;
-      if (this.numColumns > 3) {
-        this.numColumns = 3;
->>>>>>> Refactored the Skill stuff to reflect the Category mock data on the JSON server. - Tyerra Smith and Michael Brumley
-=======
->>>>>>> Refactored Skills as Categories; Has View, Create, Edit, and Delete functionality -Tyerra Smith and Michael Brumley
       }
       
       this.columns = Array.apply(null, { length: this.numColumns }).map(Number.call, Number);
@@ -135,33 +113,10 @@ export class SkillsComponent implements OnInit {
   }
 
   deleteSkill() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Refactored the Skill stuff to reflect the Category mock data on the JSON server. - Tyerra Smith and Michael Brumley
-    console.log("We made it!");
-    console.log(this.currentCategory);
-    console.log(this.currentCategory.categoryId);
-    this.categoryService.delete(this.currentCategory).subscribe();
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-    this.resetFormControl();
-
-    this.ngOnInit();
-=======
     this.skillService.delete(this.currentSkill);
-=======
->>>>>>> Refactored the Skill stuff to reflect the Category mock data on the JSON server. - Tyerra Smith and Michael Brumley
     //This should work once implemented by the back-end -Tyerra Smith
     // may not need this statement without all of the inherited subjects
     this.resetFormControl();
->>>>>>> Added a deleteSkill method to enable deleting a category on the front-end.
-=======
-    this.resetFormControl();
-
-    this.ngOnInit();
->>>>>>> Refactored Skills as Categories; Has View, Create, Edit, and Delete functionality -Tyerra Smith and Michael Brumley
   }
 
 

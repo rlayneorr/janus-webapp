@@ -5,12 +5,6 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 @Injectable()
 export class UrlService {
   //public readonly context: string =  environment.gambitContext;
-<<<<<<< HEAD
-
-  public readonly context: string =  environment.localhostcontext;
-
-  // public readonly context: string = environment.caliberContext;
-=======
   //public readonly caliberContext: string = environment.caliberContext;
   public readonly context : string = environment.localhostcontext;
 
@@ -20,7 +14,6 @@ export class UrlService {
   public readonly skillTypeContext : string = environment.skillTypeContext;
   public readonly weightContext : string = environment.weightContext;
   public readonly questionContext : string = environment.questionsContext;
->>>>>>> - added multiple ports to json server
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
@@ -152,22 +145,6 @@ export class UrlService {
   };
 
   category = {
-<<<<<<< HEAD
-    fetchAll: () => `${this.context}category/`,
-    // fetchAll: () => `${this.context}screening-admin/category/`,
-    // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
-    fetchById: (id: number) => `${this.context}category/${id}`,
-    // fetchById: (id: number) => `${this.context}screening-admin/category/`,
-    save: () => `${this.context}category`,
-    // save: () => `${this.context}screening-admin/category/`,
-    update: (id: number) => `${this.context}category/${id}`,
-    // update: (id: number) => `${this.context}screening-admin/category/${id}`,
-    // // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
-    create: () => `${this.context}category`,
-    // create: () => `${this.context}screening-admin/category`,
-    delete: (id: number) => `${this.context}category/${id}`,
-    // delete: (id: number) => `${this.context}screening-admin/category/${id}`,
-=======
     fetchAll: () => `${this.categoryContext}/category`,
     // fetchAll: () => `${this.context}/category`,
     fetchAllActive: () => `${this.categoryContext}category/all`,
@@ -178,7 +155,6 @@ export class UrlService {
     // save: () => `${this.context}vp/category`,
     update: () => `${this.categoryContext}vp/category/update`,
     // update: () => `${this.context}vp/category/update`,
->>>>>>> - added multiple ports to json server
   };
 
   curriculum = {
