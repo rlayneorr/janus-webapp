@@ -67,7 +67,7 @@
       "questions": null
     }
   ],
-  "categories": [
+  "category": [
     {
       "categoryId": 0,
       "skillCategory": "skill0",
