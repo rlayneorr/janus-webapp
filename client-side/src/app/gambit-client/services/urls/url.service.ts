@@ -5,15 +5,17 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 @Injectable()
 export class UrlService {
   //public readonly context: string =  environment.gambitContext;
-  //public readonly caliberContext: string = environment.caliberContext;
+  //public readonly context: string = environment.caliberContext; --> main
+  //public readonly context : string = environment.localhostcontext;
   public readonly context : string = environment.localhostcontext;
 
+  public readonly adminService : string = "/screening-admin";
 
-  public readonly bucketContext : string = environment.bucketContext;
-  public readonly categoryContext : string = environment.categoryContext;
-  public readonly skillTypeContext : string = environment.skillTypeContext;
-  public readonly weightContext : string = environment.weightContext;
-  public readonly questionContext : string = environment.questionsContext;
+  // public readonly bucketContext : string = environment.bucketContext;
+  // public readonly categoryContext : string = environment.categoryContext;
+  // public readonly skillTypeContext : string = environment.skillTypeContext;
+  // public readonly weightContext : string = environment.weightContext;
+  // public readonly questionContext : string = environment.questionsContext;
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
@@ -95,18 +97,19 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private bucketEndpoint = '/buckets';
+
+  private bucketEndpoint = '/screening-admin/buckets';
   bucket = {
-    getAllBuckets: () => `${this.bucketContext + this.bucketEndpoint}`,
-    //getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
-    getBucketById: (bucketId: number) => `${this.bucketContext + this.bucketEndpoint}/${bucketId}`,
-    //getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
-    updateBucket: () => `${this.bucketContext + this.bucketEndpoint}`,
-    //updateBucket: () => `${this.context + this.bucketEndpoint}`,
-    createNewBucket: () => `${this.bucketContext + this.bucketEndpoint}`,
-    //createNewBucket: () => `${this.context + this.bucketEndpoint}`,
-    deleteBucket: (bucketId: number) => `${this.bucketContext + this.bucketEndpoint}/${bucketId}`
-    //deleteBucket: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`
+    //getAllBuckets: () => `${this.bucketContext + this.bucketEndpoint}`,
+    getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
+    //getBucketById: (bucketId: number) => `${this.bucketContext + this.bucketEndpoint}/${bucketId}`,
+    getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
+    //updateBucket: () => `${this.bucketContext + this.bucketEndpoint}`,
+    updateBucket: () => `${this.context + this.bucketEndpoint}`,
+    //createNewBucket: () => `${this.bucketContext + this.bucketEndpoint}`,
+    createNewBucket: () => `${this.context + this.bucketEndpoint}`,
+    //deleteBucket: (bucketId: number) => `${this.bucketContext + this.bucketEndpoint}/${bucketId}`
+    deleteBucket: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`
   };
 
   /**
@@ -144,21 +147,23 @@ export class UrlService {
     delete: (id: number) => `${this.context}candidate/${id}`,
   };
 
+  //private categoryEndpoint = '/screening-admin/category';
+  private categoryEndpoint = '/category';
   category = {
-    fetchAll: () => `${this.context}category/`,
-    // fetchAll: () => `${this.context}screening-admin/category/`,
+    //fetchAll: () => `${this.context}/category`,
+    fetchAll: () => `${this.context} + ${this.categoryEndpoint}`,
     // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
-    fetchById: (id: number) => `${this.context}category/${id}`,
-    // fetchById: (id: number) => `${this.context}screening-admin/category/`,
-    save: () => `${this.context}category`,
-    // save: () => `${this.context}screening-admin/category/`,
-    update: (id: number) => `${this.context}category/${id}`,
-    // update: (id: number) => `${this.context}screening-admin/category/${id}`,
+    //fetchById: (id: number) => `${this.context}/category/${id}`,
+    fetchById: (id: number) => `${this.context} + ${this.categoryEndpoint} + /${id}`,
+    //save: () => `${this.context}/category`,
+    save: () => `${this.context} + ${this.categoryEndpoint}`,
+    //update: (id: number) => `${this.context}/category/${id}`,
+    update: (id: number) => `${this.context} + ${this.categoryEndpoint} + /${id}`,
     // // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
-    create: () => `${this.context}category`,
-    // create: () => `${this.context}screening-admin/category`,
-    delete: (id: number) => `${this.context}category/${id}`,
-    // delete: (id: number) => `${this.context}screening-admin/category/${id}`,
+    //create: () => `${this.context}/category`,
+    create: () => `${this.context} + ${this.categoryEndpoint}`,
+    //delete: (id: number) => `${this.context}/category/${id}`,
+    delete: (id: number) => `${this.context} + ${this.categoryEndpoint} + /${id}`,
   };
 
   curriculum = {
@@ -234,18 +239,18 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  //private questionEndpoint = (this.context + '/questions');
-  private questionEndpoint = (this.questionContext + '/questions');
+  private questionEndpoint = (this.context + '/screening-admin/questions');
+  //private questionEndpoint = (this.questionContext + this.adminService + '/questions');
   question = {
-    postQuestion: () => `${this.questionEndpoint}`,
-    putQuestion: () => `${this.questionEndpoint}`,
-    getQuestionsByBucketId: (bucketId: number) => `${this.questionEndpoint}/bucket/${bucketId}`,
+    postQuestion: () => `${this.context}`,
+    putQuestion: () => `${this.context}`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.context}/bucket/${bucketId}`,
     // Tyerra Smith added a url to get ALL questions
-    getQuestions: () => `${this.questionEndpoint}`,
-    deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
-    activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
-    filteredQuestions: () => `${this.questionEndpoint}/filter`,
-    deleteQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}`,
+    getQuestions: () => `${this.context}`,
+    deactivateQuestion: (questionId: number) => `${this.context}/${questionId}/deactivate`,
+    activateQuestion: (questionId: number) => `${this.context}/${questionId}/activate`,
+    filteredQuestions: () => `${this.context}/filter`,
+    deleteQuestion: (questionId: number) => `${this.context}/${questionId}`,
   };
 
   private questionScoringEndpoint = 'question-score-service/question';
@@ -326,27 +331,27 @@ export class UrlService {
   /**
    * Endpoints for skillType
    */
-  //skillTypesServiceEndpoint = this.context + '/skillType';
-  skillTypesServiceEndpoint = this.skillTypeContext + '/skillType';
+  skillTypesServiceEndpoint = this.context + '/skillType';
+  //skillTypesServiceEndpoint = this.skillTypeContext + '/skillType';
   skillTypes = {
-    findAll: () => `${this.skillTypesServiceEndpoint}`,
-    //findAll: () => `${this.context}`,
-    findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
-    // findAllActive: () => `${this.context}/active`,
-    findById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
-    // findById: (id: number) => `${this.context}/${id}`,
-    findByName: (name: string) => `${this.skillTypesServiceEndpoint}/${name}`,
-    // findByName: (name: string) => `${this.context}/${name}`,
-    save: () => `${this.skillTypesServiceEndpoint}`,
-    // save: () => `${this.context}`,
-    saveSkill: (skillTypeId, skillId) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/skill/${skillId}`,
-    // saveSkill: (skillTypeId, skillId) => `${this.context}/${skillTypeId}/skill/${skillId}`,
-    saveSkillByName: (skillTypeName, skillName) => `${this.skillTypesServiceEndpoint}/name/${skillTypeName}/skill/name/${skillName}`,
-    // saveSkillByName: (skillTypeName, skillName) => `${this.context}/name/${skillTypeName}/skill/name/${skillName}`,
-    update: (id: number) => `${this.skillTypesServiceEndpoint}/skillType/${id}`,
-    // update: (id: number) => `${this.context}/skillType/${id}`,
-    delete: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`, // note lowercase t in type, this is to match the request mapping
-    //delete: (id: number) => `${this.context}/${id}`, // note lowercase t in type, this is to match the request mapping
+    //findAll: () => `${this.skillTypesServiceEndpoint}`,
+    findAll: () => `${this.context}`,
+    //findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
+    findAllActive: () => `${this.context}/active`,
+    //findById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    findById: (id: number) => `${this.context}/${id}`,
+    //findByName: (name: string) => `${this.skillTypesServiceEndpoint}/${name}`,
+    findByName: (name: string) => `${this.context}/${name}`,
+    //save: () => `${this.skillTypesServiceEndpoint}`,
+    save: () => `${this.context}`,
+    //saveSkill: (skillTypeId, skillId) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/skill/${skillId}`,
+    saveSkill: (skillTypeId, skillId) => `${this.context}/${skillTypeId}/skill/${skillId}`,
+    //saveSkillByName: (skillTypeName, skillName) => `${this.skillTypesServiceEndpoint}/name/${skillTypeName}/skill/name/${skillName}`,
+    saveSkillByName: (skillTypeName, skillName) => `${this.context}/name/${skillTypeName}/skill/name/${skillName}`,
+    //update: (id: number) => `${this.skillTypesServiceEndpoint}/skillType/${id}`,
+    update: (id: number) => `${this.context}/skillType/${id}`,
+    //delete: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`, // note lowercase t in type, this is to match the request mapping
+    delete: (id: number) => `${this.context}/${id}`, // note lowercase t in type, this is to match the request mapping
 
 
 
