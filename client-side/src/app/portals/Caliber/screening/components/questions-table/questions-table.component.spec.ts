@@ -7,9 +7,12 @@ import { QuestionService } from '../../services/question/question.service';
 <<<<<<< HEAD
 // import { TagService } from '../../../services/tag/tag.service';
 // import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
+<<<<<<< HEAD
 =======
 import { TagService } from '../../../services/tag/tag.service';
 >>>>>>> Refactoring SimpleTrainee as Candidate; mostly renaming -Tyerra Smith
+=======
+>>>>>>>  getting jasmine running again
 import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
