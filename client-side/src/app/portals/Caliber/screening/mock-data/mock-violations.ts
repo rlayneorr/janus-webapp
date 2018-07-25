@@ -2,40 +2,27 @@ import { SoftSkillViolation } from '../entities/softSkillViolation';
 import { Screening } from '../entities/screening';
 
 export const MOCK_VIOLATIONS: SoftSkillViolation[] = [
-  { violationID: 11,
-    screeningID: 1,
-    violationType: {
-      violationTypeId: 1,
-      violationType: 'Profanity'
-    },
+  { violationId: 11,
+    screeningId: 1,
+    violationTypeId: 1,
     Time: new Date(),
     Comment: 'Cursed.'
   },
-  { violationID: 12,
-    screeningID: 1,
-    violationType: {
-      violationTypeId: 2,
-      violationType: 'Dress'
-    },
+  { violationId: 12,
+    screeningId: 1,
+    violationTypeId: 2,
     Time: new Date(),
     Comment: 'Wearing white after labor day. Ghastly.'
   },
-  { violationID: 13,
-    screeningID: 1,
-    violationType: {
-      violationTypeId: 3,
-      violationType: 'Speech'
-    },
+  { violationId: 13,
+    screeningId: 1,
+    violationTypeId: 3,
     Time: new Date(),
     Comment: 'Mumbled incoherently'
-
   },
-  { violationID: 14,
-    screeningID: 1,
-    violationType: {
-      violationTypeId: 4,
-      violationType: 'Misc'
-    },
+  { violationId: 14,
+    screeningId: 1,
+    violationTypeId: 4,
     Time: new Date(),
     Comment: 'Children constantly interrupted the screening.'
   }
