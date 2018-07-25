@@ -6,9 +6,15 @@
 //export interface SimpleTrainee {
 export class Candidate {
     candidateId: number;
-    firstName: string;
-    lastName: string;
-    skillTypeID: number;
-    skillTypeName: string;
-    schedule: Date;
+    resourceId: number;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    skypeId: string;
+    profileUrl: string;
+    recruiterName: string;
+    college: string;
+    degree: string;
+    major: string;
+    techScreenerName: string;
 }

@@ -116,7 +116,7 @@ export class CandidatesScreeningListComponent implements OnInit {
         // between the interviewer and the person who screened them.
         this.selectedScheduledScreening.trainer,
         // provide the track of the selected candidate for later use.
-        this.selectedCandidate.skillTypeID
+        //this.selectedCandidate.skillTypeID
       )
       .subscribe(
         // take the data from the response from the database
