@@ -16,7 +16,7 @@ import { ScheduleScreeningService } from '../../services/schedule-screening/sche
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 
-import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
+//import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
 
 // Installed Modules
 // npm install ngx-pagination --save
@@ -79,7 +79,7 @@ export class CandidatesScreeningListComponent implements OnInit {
     // this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
     //   this.scheduledScreenings = data;
     // });
-    this.allCandidates = CANDIDATES; 
+    //this.allCandidates = CANDIDATES;
     console.log(this.allCandidates);
   }
 
