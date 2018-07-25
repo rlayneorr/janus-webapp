@@ -8,8 +8,8 @@ import { SkillType } from './skillType';
 */
 export interface Screening {
   screeningID: number;
-  candidateID: number;
-  screenerID: number;
+  candidate: Candidate;
+  trainer: number;
   skillTypeID: number;
   compositeScore: number;
   aboutMeCommentary: string;
