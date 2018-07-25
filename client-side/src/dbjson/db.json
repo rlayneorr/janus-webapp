@@ -61,7 +61,7 @@
       "questions": []
     }
   ],
-  "categories": [
+  "category": [
     {
       "categoryId": 0,
       "categoryName": "Java",
