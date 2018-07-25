@@ -49,8 +49,8 @@ subscriptions: Subscription[] = [];
 
   ngOnInit() {
     this.checked = 'false';
-    // this.candidateName = this.candidateService.getSelectedCandidate().firstname + ' ' +
-    //                       this.candidateService.getSelectedCandidate().lastname;
+    //this.candidateName = this.candidateService.getSelectedCandidate().name;
+    this.candidateName = 'First Last';
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
     this.allTextString = this.softSkillString + '\n';
     this.questionScoreService.currentQuestionScores.subscribe(
@@ -69,11 +69,12 @@ subscriptions: Subscription[] = [];
         this.bucketStringArray.forEach(bucketString => {
           this.allTextString += bucketString + '\n';
         });
+        this.overallScoreString = "Overall: 71%";
         this.allTextString += this.overallScoreString + '\n';
       });
-    // this.overallScoreString = "Overall: 71%";
-    this.generalNotesString = this.screeningService.generalComments;
-    this.allTextString += '"' + this.generalNotesString + '"';
+    //this.generalNotesString = this.screeningService.generalComments;
+    this.generalNotesString = "General Notes";
+    this.allTextString += '"some' + this.generalNotesString + 'thing"';
 
     this.screeningService.endScreening(this.generalNotesString);
     this.subscriptions.push(this.softSkillsViolationService.currentSoftSkillViolations.subscribe(

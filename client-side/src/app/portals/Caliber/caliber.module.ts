@@ -15,7 +15,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import 'rxjs/add/operator/do';
 
 // routing
 import { routes } from './caliber.routes';
