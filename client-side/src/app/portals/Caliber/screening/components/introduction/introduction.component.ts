@@ -36,7 +36,7 @@ export class IntroductionComponent implements OnInit {
   public candidateName: string;
   public candidateTrack: string;
 
-  // public tagList: Tag[];
+  //public tagList: Tag[];
 
   public comment: string;
 

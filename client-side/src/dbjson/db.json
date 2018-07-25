@@ -64,52 +64,27 @@
   "category": [
     {
       "categoryId": 0,
-      "categoryName": "Java",
-      "buckets": [
-        {
-          "bucketId": 1,
-          "category": "Basic Java",
-          "description": "OCA level Java questions",
-          "isActive": true,
-          "questions": [
-            {
-              "questionId": 0,
-              "bucketId": 1,
-              "questionText": "whuts yr favorite color",
-              "sampleAnswer1": "answer1",
-              "sampleAnswer2": "answer2",
-              "sampleAnswer3": "answer3",
-              "sampleAnswer4": "answer4",
-              "sampleAnswer5": "answer5"
-            }
-          ]
-        }
-      ]
+      "skillCategory": "skill0"
     },
     {
       "categoryId": 1,
-      "categoryName": "SQL",
-      "buckets": []
+      "skillCategory": "skill1"
     },
     {
       "categoryId": 2,
-      "categoryName": "JavaScript",
-      "buckets": []
+      "skillCategory": "skill2"
     },
     {
       "categoryId": 3,
-      "categoryName": "HTML",
-      "buckets": []
+      "skillCategory": "skill3"
     },
     {
       "categoryId": 4,
-      "categoryName": "CSS",
-      "buckets": []
+      "skillCategory": "skill4"
     },
     {
       "categoryId": 5,
-      "categoryName": "Spring",
-      "buckets": []
+      "skillCategory": "skill5"
     }
   ],
   "weights": [
