@@ -1,4 +1,6 @@
-.pointer {cursor: pointer;}
+.pointer {cursor: pointer;
+    border: hidden !important;            
+}
 
 .col {
     padding-right: 1%;
@@ -60,10 +62,6 @@
 }
 
 /* End New CSS */
-.table th {
-    border-top: 0px;
-    border-bottom: 2px solid #ddd;
-}
 
 .table td {
     text-align: left;
@@ -73,9 +71,7 @@
     padding-bottom: 0;
 }
 
-.table-bordered {
-    display: inline-block;
-}
+
 
 .close {
     font-size: 21px;
@@ -155,3 +151,20 @@ a {
     outline: none !important;
     box-shadow: none;
 }
+
+.table-bordered {
+    display: inline-block;
+    border: hidden !important;
+    border-color: white;
+}
+
+.table-head {
+    border: hidden !important;
+    border-color: white;
+}
+
+.th {
+    border: hidden;
+    border-color: white;
+}
+

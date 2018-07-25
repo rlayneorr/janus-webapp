@@ -18,79 +18,44 @@
 <!-- Display all assessment skills -->
 <!-- <div class="container centered" id="trainer-assess-table" *ngIf="skills[0]"> -->
 <!--changed this to model categories and take in a category to loop over-->
-<div class="container centered" id="trainer-assess-table" *ngIf="categories">
-    <div class="row">
-        <!-- Col Start -->
-        <div class="col top5" *ngFor='let column of columns;let c=index;'>
-            <!-- Accordian table -->
-            <table class="table table-responsive table-hover" style="border-collapse: collapse;">
-                <thead>
-                    <tr>
-                        <th style="padding-top: 0;"><b>Category</b></th>
-                        <!-- <th class='text-right'><b>Active</b></th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Load all skills -->
-                    <!--changed this to reference an alias category of array categories-->
-                    <tr *ngFor="let category of categories; let i=index;">
-                        <td *ngIf='nextColumn(c,i);' (click)='editopen(editSkill,category);' class='pointer'>
-                            {{category.categoryName}}
-                        </td>
-                        <!-- Display active condition -->
-                        <!-- <td class='text-center' *ngIf='!skill.isActive && nextColumn(c,i)'>
-                            <span style="color: #ff7575" class="fa fa-times fa-2x" aria-hidden="true"></span>
-                        </td>
-                        <td class='text-center' *ngIf='skill.isActive && nextColumn(c,i)'>
-                            <span style="color: #81f575" class="fa fa-check fa-2x" aria-hidden="true"></span>
-                        </td> -->
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <!-- End row -->
-    </div>
-</div>
+ 
 
 <!--this is a test div to make sure my logic works-->
 <!-- Div1 -->
-<!-- <div>
+<!-- If theres time spacing these out will make them look better -->
+
 <table class="table-bordered">
-<tr>
-<th>Div1</th>
+<tr class = "tablehead">
+<th class = "tablehead">Categories</th>
 </tr>
 <tr *ngFor="let c of categories; let ca = index;">
-    <td *ngIf="(ca < div1)">{{c.categoryName}}</td>
+    <!-- this checks the index against the index divisions -->
+    <td *ngIf="(ca < div1);" (click)='editopen(editSkill,c);' class='pointer'>{{c.categoryName}}</td>
 </tr>
-</table> -->
-
-<!-- <table class="table-bordered">
-    <tr>
-    <th>Div2</th>
-    </tr>
+</table> 
+<!-- div2 -->
+ <table class="table-bordered">
+    
     <tr *ngFor="let c of categories; let ca = index;">
-        <td *ngIf="((ca < div2) && (ca >= div1))">{{c.categoryName}}</td> 
+        <td *ngIf="((ca < div2) && (ca >= div1))" (click)='editopen(editSkill,c);' class='pointer'>{{c.categoryName}}</td> 
     </tr>
     </table>
+    <!-- div3 -->
     <table class="table-bordered">
-        <tr>
-        <th>Div3</th>
-        </tr>
+        
         <tr *ngFor="let c of categories; let ca = index;">
-            <td *ngIf="((ca < div3) && (ca >= div2))">{{c.categoryName}}</td>
+            <td *ngIf="((ca < div3) && (ca >= div2))" (click)='editopen(editSkill,c);' class='pointer'>{{c.categoryName}}</td>
         </tr>
-        </table> -->
+        </table>
 
         <!-- div4 -->
-        <!-- <table class="table-bordered">
-            <tr>
-            <th>Div4</th>
-            </tr>
+         <table class="table-bordered">
+            
             <tr *ngFor="let c of categories; let ca = index;">
-                <td *ngIf="((ca < div4) && (ca >= div3))">{{c.categoryName}}</td> 
+                <td *ngIf="((ca < div4) && (ca >= div3))" (click)='editopen(editSkill,c);' class='pointer'>{{c.categoryName}}</td> 
             </tr>
             </table> 
-        </div>  -->
+          
 <!-- Add skill modal -->
 <ng-template #addSkill let-c="close" let-d="dismiss">
     <form #myForm="ngForm" [formGroup]="addForm">
