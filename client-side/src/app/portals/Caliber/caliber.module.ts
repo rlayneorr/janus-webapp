@@ -160,9 +160,8 @@ import { CategoryFilterPipe } from './settings/screening/categories/categories.f
 //import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
+import {CategoryService} from "./services/category/category.service";
 import {QuestionService} from "./settings/screening/services/question.service";
-import { CategoryService } from './services/category/category.service';
-
 
 @NgModule({
   imports: [
