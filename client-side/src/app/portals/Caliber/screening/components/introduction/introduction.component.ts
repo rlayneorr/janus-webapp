@@ -34,8 +34,8 @@ export class IntroductionComponent implements OnInit {
     private screeningService: ScreeningService) { }
 
 
-  public traineeName: string;
-  public traineeTrack: string;
+  public candidateName: string;
+  public candidateTrack: string;
 
   // public tagList: Tag[];
 
@@ -47,9 +47,9 @@ export class IntroductionComponent implements OnInit {
 
   ngOnInit() {
     //this.tagService.tagListChecked = [];
-    //this.traineeName = this.candidateService.getSelectedCandidate().firstname + ' ' +
-     // this.candidateService.getSelectedCandidate().lastname;
-    //this.traineeTrack = this.candidateService.getSelectedCandidate().skillTypeName;
+    this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
+    this.candidateService.getSelectedCandidate().lastName;
+    this.candidateTrack = this.candidateService.getSelectedCandidate().skillTypeName;
     //this.getTags();
   }
 
