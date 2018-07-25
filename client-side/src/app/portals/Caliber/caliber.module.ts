@@ -161,6 +161,8 @@ import { ReportingService } from './services/reporting.service';
 import {CategoryService} from "./services/category/category.service";
 import {QuestionService} from "./settings/screening/services/question.service";
 
+import 'rxjs/add/operator/do';
+
 @NgModule({
   imports: [
     CommonModule,
