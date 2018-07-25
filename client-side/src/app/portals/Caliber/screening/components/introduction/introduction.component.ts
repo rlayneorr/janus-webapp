@@ -33,8 +33,8 @@ export class IntroductionComponent implements OnInit {
     private screeningService: ScreeningService) { }
 
 
-  public traineeName: string;
-  public traineeTrack: string;
+  public candidateName: string;
+  public candidateTrack: string;
 
   // public tagList: Tag[];
 
@@ -45,11 +45,11 @@ export class IntroductionComponent implements OnInit {
   });
 
   ngOnInit() {
-    
-    //this.traineeName = this.candidateService.getSelectedCandidate().firstname + ' ' +
-     // this.candidateService.getSelectedCandidate().lastname;
-    //this.traineeTrack = this.candidateService.getSelectedCandidate().skillTypeName;
-    
+    //this.tagService.tagListChecked = [];
+    this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
+    this.candidateService.getSelectedCandidate().lastName;
+    this.candidateTrack = this.candidateService.getSelectedCandidate().skillTypeName;
+    //this.getTags();
   }
 
   // Get an array of all tags and assign it to tagList
