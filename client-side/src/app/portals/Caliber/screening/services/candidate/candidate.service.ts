@@ -41,14 +41,14 @@ export class CandidateService {
   selectedCandidate: Candidate;
 
   // Set the current selected candidate to the candidate input
-  // setSelectedCandidate(candidate: Candidate): void {
-  //   this.selectedCandidate = candidate;
-  // }
+  setSelectedCandidate(candidate: Candidate): void {
+    this.selectedCandidate = candidate;
+  }
 
   // Return the current selected candidate
-  // getSelectedCandidate(): Candidate {
-  //   return this.selectedCandidate;
-  // }
+  getSelectedCandidate(): Candidate {
+    return this.selectedCandidate;
+  }
 
   // Get an Observable array of all simple trainees. 
   //  getCandidates(): Observable<Candidate[]>  {
