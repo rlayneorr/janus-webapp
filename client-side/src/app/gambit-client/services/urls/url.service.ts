@@ -6,8 +6,8 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 export class UrlService {
   //public readonly context: string =  environment.gambitContext;
   //public readonly context: string = environment.caliberContext; --> main
-  //public readonly context : string = environment.localhostcontext;
   public readonly context : string = environment.localhostcontext;
+  //public readonly context : string = environment.demoContext;
 
   public readonly adminService : string = "/screening-admin";
 
@@ -147,11 +147,12 @@ export class UrlService {
     delete: (id: number) => `${this.context}candidate/${id}`,
   };
 
-  //private categoryEndpoint = '/screening-admin/category';
   private categoryEndpoint = '/category';
+  //private categoryEndpoint = '/screening-admin/category';
   category = {
     //fetchAll: () => `${this.context}/category`,
-    fetchAll: () => `${this.context} + ${this.categoryEndpoint}`,
+    //fetchAll: () => `${this.context} + ${this.categoryEndpoint}`,
+    fetchAll: () => `${this.context}/category`,
     // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
     //fetchById: (id: number) => `${this.context}/category/${id}`,
     fetchById: (id: number) => `${this.context} + ${this.categoryEndpoint} + /${id}`,
