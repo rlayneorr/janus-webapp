@@ -17,6 +17,8 @@
  */
 
   //const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000';
+  //const context = 'http://ec2-18-216-205-109.us-east-2.compute.amazonaws.com:9999';//screening-admin
+  //const context = 'http://ec2-18-216-205-109.us-east-2.compute.amazonaws.com:9999';//screening-admin
   const context = 'http://localhost:3000';
 
   const bam = '';
@@ -25,14 +27,9 @@ export const environment = {
   production: false,
   /** Zuul endpoint  */
   gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000',
-  caliberContext: 'http://ec2-54-86-6-122.compute-1.amazonaws.com:8761',
+  caliberContext: 'http://ec2-18-216-205-109.us-east-2.compute.amazonaws.com:9999',
   localhostcontext: 'http://localhost:3000',
-
-  categoryContext: 'http://localhost:3001',
-  weightContext: 'http://localhost:3003',
-  bucketContext: 'http://localhost:3000',
-  skillTypeContext: 'http://localhost:3002',
-  questionsContext: 'http://localhost:3004',
+  demoContext: 'http://ec2-18-216-205-109.us-east-2.compute.amazonaws.com:8181',
 
   /** Assets endpoints for like pictures  */
   assets: 'http://52.87.205.55:8086/angular/assets/',
