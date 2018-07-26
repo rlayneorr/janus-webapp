@@ -65,7 +65,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   /** Stores the value of selected bucket to a 'currBucket' */
-  editBucket(bucket: Bucket) {
+  editBucket(bucket) {
     this.currBucket = bucket;
   }
 
