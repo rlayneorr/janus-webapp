@@ -37,7 +37,7 @@ routingToAllCategories = false;
     }
 
     updateCategory(category: Category) {
-        return this.http.put(this.urlService.category.putCategory(category.categoryId), category, httpOptions);
+        return this.http.put(this.urlService.category.updateCategory(category.categoryId), category, httpOptions);
     }
 
     getCategories() {
@@ -47,13 +47,8 @@ routingToAllCategories = false;
     getCategoryById(categoryId: number) {
         return this.http.get(this.urlService.category.getCategoryById(categoryId));
     }
-    // setSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
-    //     return this.http.post(this.urlService.skillTypes.setSkillTypeBuckets(), { skillTypeName: skillType.skillTypeName, skillTypeId:
-    //         skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
-    // }
 
-    // updateSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
-    //     return this.http.put(this.urlService.skillTypes.updateSkillTypeBuckets(), { skillTypeName: skillType.skillTypeName,
-    //         skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
-    // }
+    deleteCategory(categoryId: number) {
+        return this.http.delete(this.urlService.category.deleteCategory(categoryId), httpOptions);
+    }
 }

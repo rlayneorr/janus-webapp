@@ -25,22 +25,22 @@ export class SkillTypesService {
         private http: HttpClient,
         private urlService: UrlService
     ) { }
-    public skillTypeBuckets: Observable<SkillType[]>;
+    public skillTypes: Observable<SkillType[]>;
 
     createSkillType(skillType: SkillType) {
         return this.http.post(this.urlService.skillTypes.createSkillType(), skillType, httpOptions);
     }
 
     activateSkillType(skillType: SkillType) {
-        return this.http.put(this.urlService.skillTypes.putSkillType(skillType.skillTypeId), skillType, httpOptions);
+        return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
     deactivateSkillType(skillType: SkillType) {
-        return this.http.put(this.urlService.skillTypes.putSkillType(skillType.skillTypeId), skillType, httpOptions);
+        return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
     updateSkillType(skillType: SkillType) {
-        return this.http.put(this.urlService.skillTypes.putSkillType(skillType.skillTypeId), skillType, httpOptions);
+        return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
     getSkillTypes() {
@@ -59,6 +59,10 @@ export class SkillTypesService {
 
     getSkillTypeById(skillTypeId: number) {
         return this.http.get(this.urlService.skillTypes.getSkillTypeById(skillTypeId));
+    }
+
+    deleteSkillType(skillTypeId: number) {
+        return this.http.delete(this.urlService.skillTypes.deleteSkillType(skillTypeId));
     }
 
     /** Temporary solution for this func, need to double check with back-end **/

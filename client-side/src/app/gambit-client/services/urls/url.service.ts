@@ -149,21 +149,17 @@ export class UrlService {
   private categoryEndpoint = '/category';
   //private categoryEndpoint = '/screening-admin/category';
   category = {
-    //fetchAll: () => `${this.context}/category`,
-    //fetchAll: () => `${this.context} + ${this.categoryEndpoint}`,
-    fetchAll: () => `${this.context}/category`,
-    // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
-    //fetchById: (id: number) => `${this.context}/category/${id}`,
-    fetchById: (id: number) => `${this.context} + ${this.categoryEndpoint} + /${id}`,
-    //save: () => `${this.context}/category`,
-    save: () => `${this.context} + ${this.categoryEndpoint}`,
-    //update: (id: number) => `${this.context}/category/${id}`,
-    update: (id: number) => `${this.context} + ${this.categoryEndpoint} + /${id}`,
-    // // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
-    //create: () => `${this.context}/category`,
-    create: () => `${this.context} + ${this.categoryEndpoint}`,
-    //delete: (id: number) => `${this.context}/category/${id}`,
-    delete: (id: number) => `${this.context} + ${this.categoryEndpoint} + /${id}`,
+    fetchAll: () => `${this.context}/categories`,
+    fetchAllActive: () => `${this.context}category/all`,
+    fetchById: (id: number) => `${this.context}category/${id}`,
+    save: () => `${this.context}/category`,
+    update: () => `${this.context}/category/update`,
+    
+    createCategory: () => `${this.context}/categories`,
+    getCategories: () => `${this.context}/categories`,
+    getCategoryById: (id: number) => `${this.context}/categories/${id}`,
+    updateCategory: (id:number) => `${this.context}/categories/${id}`,
+    deleteCategory: (id: number) => `${this.context}/categories/${id}`,
   };
 
   curriculum = {
@@ -360,12 +356,13 @@ export class UrlService {
     getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
 
     createSkillType: () => `${this.skillTypesServiceEndpoint}`,
-    putSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
+    updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
+    deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
     getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
-
   };
 
   softSkillsViolation = {
@@ -471,6 +468,19 @@ export class UrlService {
     // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
     // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
+
+  /**
+   * Endpoints for category weights:
+   * This section is being added for use in the setting screening weight service
+   * @author John Lacap
+   */
+  weight={
+    createWeight: () => `${this.context}/weights/`,
+    getWeights: () => `${this.context}/weights/`,
+    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.context}/weights/${skillTypeId}/${categoryId}`,
+    updateWeight: (id: number) => `${this.context}/weights/${id}`,
+    deleteWeight: (id: number) => `${this.context}/weights/${id}`,
+  }
 
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint = (skill: string, training: string, startDate) =>
