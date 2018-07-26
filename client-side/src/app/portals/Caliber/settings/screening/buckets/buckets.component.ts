@@ -89,15 +89,10 @@ export class BucketsComponent implements OnInit {
     this.currBucket = bucket;
   }
 
-  deleteBucket(bucketParam: Bucket){
-    if (!bucketParam) { bucketParam = this.currBucket; }
-    if (bucketParam) {
-      console.log(bucketParam.isActive);
-      this.bucketService.deleteBucket(bucketParam.bucketId);
-      //   this.getBuckets();
-      // });
-      // this.savedSuccessfully();
-    }
+  deleteBucket(){
+    this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe( result => {
+      this.getBuckets();
+    });
   }
 
   /** Creates new bucket */

@@ -129,10 +129,11 @@ export class UrlService {
     save: () => `${this.context}/category`,
     update: () => `${this.context}/category/update`,
     
+    createCategory: () => `${this.context}/categories`,
     getCategories: () => `${this.context}/categories`,
     getCategoryById: (id: number) => `${this.context}/categories/${id}`,
-    createCategory: () => `${this.context}/categories`,
-    putCategory: (id:number) => `${this.context}/categories/${id}`,
+    updateCategory: (id:number) => `${this.context}/categories/${id}`,
+    deleteCategory: (id: number) => `${this.context}/categories/${id}`,
   };
 
   curriculum = {
@@ -318,12 +319,13 @@ export class UrlService {
     getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
 
     createSkillType: () => `${this.skillTypesServiceEndpoint}`,
-    putSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
+    updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
+    deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
     getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
-
   };
 
   softSkillsViolation = {
@@ -429,6 +431,19 @@ export class UrlService {
     // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
     // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
+
+  /**
+   * Endpoints for category weights:
+   * This section is being added for use in the setting screening weight service
+   * @author John Lacap
+   */
+  weight={
+    createWeight: () => `${this.context}/weights/`,
+    getWeights: () => `${this.context}/weights/`,
+    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.context}/weights/${skillTypeId}/${categoryId}`,
+    updateWeight: (id: number) => `${this.context}/weights/${id}`,
+    deleteWeight: (id: number) => `${this.context}/weights/${id}`,
+  }
 
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint = (skill: string, training: string, startDate) =>

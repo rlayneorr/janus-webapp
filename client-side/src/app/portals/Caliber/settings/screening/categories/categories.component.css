@@ -12,7 +12,7 @@ h6 {
   background-color: #F26925;
 }
 
-#allSkillTypesDiv{
+#allCategoriesDiv{
   overflow : auto;
   height: 420px;
 }
@@ -39,11 +39,6 @@ h6 {
 #penIcon {
 	color: #F26925;
 	margin-right: 10px;
-}
-
-a {
-  cursor: pointer;
-  cursor: hand;
 }
 
 i {

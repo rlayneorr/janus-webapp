@@ -59,6 +59,11 @@
       "description": "Angular questions",
       "isActive": true,
       "questions": []
+    },
+    {
+      "category": "Tset",
+      "description": "Tste",
+      "bucketId": 8
     }
   ],
   "categories": [
@@ -110,26 +115,41 @@
       "categoryId": 5,
       "categoryName": "Spring",
       "buckets": []
+    },
+    {
+      "categoryName": "Blah",
+      "buckets": [
+        {
+          "bucketId": 2,
+          "category": "SQL",
+          "description": "SQL database questions",
+          "isActive": true,
+          "questions": []
+        },
+        {
+          "bucketId": 4,
+          "category": "HTML",
+          "description": "HTML questions",
+          "isActive": true,
+          "questions": []
+        }
+      ],
+      "weight": {},
+      "categoryId": 7
     }
   ],
   "weights": [
     {
-      "weightId": 0,
-      "skillTypeId": 52,
-      "categoryId": 0,
-      "weight": 100
-    },
-    {
       "weightId": 1,
-      "skillTypeId": 52,
-      "categoryId": 1,
-      "weight": 100
+      "skillTypeId": 1,
+      "categoryId": 0,
+      "weight": 75
     },
     {
       "weightId": 2,
-      "skillTypeId": 52,
-      "categoryId": 2,
-      "weight": 100
+      "skillTypeId": 1,
+      "categoryId": 5,
+      "weight": 25
     }
   ],
   "questions": [
@@ -167,24 +187,105 @@
   "skillType": [
     {
       "skillTypeName": "Java",
-      "skillTypeId": 52,
+      "skillTypeId": 1,
       "categories": [
         {
-          "categoryId": 2,
-          "categoryName": "JavaScript",
-          "buckets": []
+          "categoryId": 0,
+          "categoryName": "Java",
+          "buckets": [
+            {
+              "bucketId": 1,
+              "category": "Basic Java",
+              "description": "OCA level Java questions",
+              "isActive": true,
+              "questions": [
+                {
+                  "questionId": 0,
+                  "bucketId": 1,
+                  "questionText": "whuts yr favorite color",
+                  "sampleAnswer1": "answer1",
+                  "sampleAnswer2": "answer2",
+                  "sampleAnswer3": "answer3",
+                  "sampleAnswer4": "answer4",
+                  "sampleAnswer5": "answer5"
+                }
+              ]
+            }
+          ],
+          "categoryWeight": {
+            "weightId": 0,
+            "skillTypeId": 1,
+            "categoryId": 0,
+            "weight": 70
+          }
         },
         {
-          "categoryId": 4,
-          "categoryName": "CSS",
-          "buckets": []
+          "categoryId": 5,
+          "categoryName": "Spring",
+          "buckets": [],
+          "categoryWeight": {
+            "weightId": 0,
+            "skillTypeId": 1,
+            "categoryId": 5,
+            "weight": 30
+          }
         }
       ]
     },
     {
-      "skillTypeName": "Hi",
-      "categoryWeight": 1,
-      "skillTypeId": 53
+      "skillTypeName": "Test",
+      "skillTypeId": 2,
+      "categories": [
+        {
+          "categoryId": 3,
+          "categoryName": "HTML",
+          "buckets": [],
+          "categoryWeight": {
+            "weightId": 0,
+            "skillTypeId": 2,
+            "categoryId": 3,
+            "weight": 30
+          }
+        },
+        {
+          "categoryName": "Blah",
+          "buckets": [
+            {
+              "bucketId": 2,
+              "category": "SQL",
+              "description": "SQL database questions",
+              "isActive": true,
+              "questions": []
+            },
+            {
+              "bucketId": 4,
+              "category": "HTML",
+              "description": "HTML questions",
+              "isActive": true,
+              "questions": []
+            }
+          ],
+          "weight": {},
+          "categoryId": 7,
+          "categoryWeight": {
+            "weightId": 0,
+            "skillTypeId": 2,
+            "categoryId": 7,
+            "weight": 50
+          }
+        },
+        {
+          "categoryId": 1,
+          "categoryName": "SQL",
+          "buckets": [],
+          "categoryWeight": {
+            "weightId": 0,
+            "skillTypeId": 2,
+            "categoryId": 1,
+            "weight": 20
+          }
+        }
+      ]
     }
   ]
 }

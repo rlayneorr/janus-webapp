@@ -7,6 +7,8 @@ import { QuestionsService } from '../../../services/questions/questions.service'
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsService } from '../../../services/alerts.service';
+import { Category } from '../entities/Category';
+import { SettingsCategoriesService } from '../services/categories.service';
 
 
 @Component({
@@ -17,12 +19,14 @@ import { AlertsService } from '../../../services/alerts.service';
 
 export class CategoriesComponent implements OnInit {
 
+  /** variable to hold an array of 'Category' entities */
+  allCategories: Category[];
   /** variable to hold an array of 'Bucket' entities */
-  buckets: Bucket[];
+  allBuckets: Bucket[];
   /** variable to hold bucket being edited */
-  currBucket: Bucket;
+  currentCategory: Category;
   /** variable to hold new bucket being created  */
-  newBucket: Bucket = new Bucket();
+  newCategory: Category = new Category();
 
   /** Modal variables */
   closeResult: string;
@@ -30,43 +34,50 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private router: Router,
     private bucketService: BucketsService,
+    private categoryService: SettingsCategoriesService,
     private questionService: QuestionsService,
     private modalService: NgbModal,
     private alertsService: AlertsService, ) { }
 
-  filter: Bucket = new Bucket();
+  filter: Category = new Category();
   ngOnInit() {
+    this.getCategories();
     this.getBuckets();
   }
 
+  getCategories(): void {
+    this.categoryService.getCategories().subscribe(result => {
+      this.allCategories = result;
+    });
+  }
+
   getBuckets(): void {
-    this.bucketService.getAllBuckets().subscribe(buckets => {
-      this.buckets = buckets;
-      this.buckets.sort(this.compare);
+    this.bucketService.getAllBuckets().subscribe(result => {
+      this.allBuckets = result;
     });
   }
 
   /** used to compare buckets Array to sort it based on status */
-  compare(a: Bucket, b: Bucket) {
-    if (a.isActive) {
-      return -1;
-    } else {
-      return 1;
-    }
-  }
+  // compare(a: Category, b: Category) {
+  //   if (a.isActive) {
+  //     return -1;
+  //   } else {
+  //     return 1;
+  //   }
+  // }
 
-  /** Save the selected 'bucket' in 'bucket.service' to be used in
-    * 'bucket.component'.
-    * Then route to 'bucket.component'.
-    */
-  routeToBucket(item: Bucket) {
-    this.bucketService.setBucket(item);
-    this.router.navigate(['Caliber/settings/screening/bucket']);
-  }
+  // /** Save the selected 'bucket' in 'bucket.service' to be used in
+  //   * 'bucket.component'.
+  //   * Then route to 'bucket.component'.
+  //   */
+  // // routeToBucket(item: Category) {
+  // //   this.bucketService.setBucket(item);
+  // //   this.router.navigate(['Caliber/settings/screening/bucket']);
+  // // }
 
   /** Stores the value of selected bucket to a 'currBucket' */
-  editBucket(bucket: Bucket) {
-    this.currBucket = bucket;
+  editCategory(category: Category) {
+    this.currentCategory = category;
   }
 
   /**
@@ -74,40 +85,70 @@ export class CategoriesComponent implements OnInit {
    * when editted or activity toggled
    * @param bucketParam
    */
-  updateBucket(bucketParam: Bucket) {
-    if (!bucketParam) { bucketParam = this.currBucket; }
-    if (bucketParam) {
-      console.log(bucketParam.isActive);
-      this.bucketService.updateBucket(bucketParam).subscribe(bucket => {
-        this.getBuckets();
+  updateCategory(catParam: Category) {
+    if (!catParam) { catParam = this.currentCategory; }
+    if (catParam) {
+      this.categoryService.updateCategory(catParam).subscribe(bucket => {
+        this.getCategories();
       });
       this.savedSuccessfully();
     }
   }
 
-  confirmDelete(bucket: Bucket){
-    this.currBucket = bucket;
+  confirmDelete(category: Category){
+    this.currentCategory = category;
   }
 
-  deleteBucket(bucketParam: Bucket){
-    if (!bucketParam) { bucketParam = this.currBucket; }
-    if (bucketParam) {
-      console.log(bucketParam.isActive);
-      this.bucketService.deleteBucket(bucketParam.bucketId);
-      //   this.getBuckets();
-      // });
-      // this.savedSuccessfully();
+  deleteCategory(){
+    if (this.currentCategory) {
+      this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe(result => {
+        this.getCategories();
+      });
+      this.savedSuccessfully();
     }
   }
 
-  /** Creates new bucket */
-  createBucket() {
-    // The server will generate the id for this new hero
-    this.bucketService.createNewBucket(this.newBucket)
-      .subscribe(bucket => {
-        this.buckets.push(bucket);
+  /** Creates new category */
+  createCategory() {
+    this.newCategory.buckets = this.currentCategory.buckets;
+    this.categoryService.createCategory(this.newCategory)
+      .subscribe(category => {
+        this.getCategories();
       });
   }
+
+  addBucket(bucket: Bucket) {
+    if(!this.currentCategory){
+        this.currentCategory = {
+          categoryId: null,
+          categoryName: null,
+          categoryWeight: null,
+          buckets: []
+        };
+    }
+    
+    if (this.currentCategory) {            
+        this.currentCategory.buckets.push(bucket);
+    }
+  }
+
+  removeBucket(bucket: Bucket) {
+    if (this.currentCategory) {
+      for (const bucketIndex in this.currentCategory.buckets) {
+        if (this.currentCategory.buckets[bucketIndex] === bucket) {
+          this.currentCategory.buckets.splice(Number(bucketIndex), 1);
+        }
+      }
+    }
+  }
+
+  checkContains(bucket: Bucket) {
+    if (this.currentCategory) {
+        return this.currentCategory.buckets.includes(bucket);
+    }
+    return false;
+  }
+
 
   savedSuccessfully() {
     this.alertsService.success('Saved successfully');
@@ -115,11 +156,11 @@ export class CategoriesComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
-      this.newBucket = new Bucket();
+      this.newCategory = new Category();
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.newBucket.category = '';
-      this.newBucket.description = '';
+      this.newCategory.categoryName = '';
+      this.newCategory.buckets = [];
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();

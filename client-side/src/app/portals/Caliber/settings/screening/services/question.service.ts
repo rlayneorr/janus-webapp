@@ -17,7 +17,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class QuestionService {
+export class SettingsQuestionService {
 
   constructor(private http: HttpClient, private urlService: UrlService) { }
 

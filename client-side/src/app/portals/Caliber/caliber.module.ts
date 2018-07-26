@@ -59,6 +59,7 @@ import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
 import { SettingsCategoriesService } from './settings/screening/services/categories.service';
+import { SettingsQuestionService } from './settings/screening/services/question.service';
 import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
 /** for in memory data service
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
@@ -162,6 +163,7 @@ import { BucketFilterPipe } from './settings/screening/buckets/buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from '../Caliber/services/category/category.service';
+import { CategoryWeightsService } from './settings/screening/services/weight.service';
 
 
 @NgModule({
@@ -335,6 +337,8 @@ import { CategoryService } from '../Caliber/services/category/category.service';
     SkillTypesService,
     BucketsService,
     SettingsCategoriesService,
+    CategoryWeightsService,
+    SettingsQuestionService,
     HttpErrorHandlerService,
     SimpleTraineeService,
     CategoriesService,

@@ -40,6 +40,11 @@ h6 {
   border-radius: 5px;
 }
 
+#delIcon {
+  color: #F26925;
+  float: right;
+}
+
 #penIcon {
   color: #F26925;
 }
