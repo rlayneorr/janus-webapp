@@ -285,11 +285,11 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  screeningEndpoint = 'screening-service/screening';
+  screeningEndpoint = 'screening';
   screening = {
     scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduledScreenings`,
-    startScreening: () => `${this.context + this.screening}/start`,
-    endScreening: () => `${this.context + this.screening}/end`,
+    startScreening: () => `${this.context + this.screeningEndpoint}/start`,
+    endScreening: () => `${this.context + this.screeningEndpoint}/end`,
     introComment: () => `${this.context + this.screeningEndpoint}/introcomment`,
     generalComment: () => `${this.context + this.screeningEndpoint}/generalcomment`,
   };
