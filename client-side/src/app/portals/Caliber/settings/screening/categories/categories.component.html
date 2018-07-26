@@ -6,28 +6,11 @@
       <div class="card-body" id="allCategoriesDiv">
         <!-- List of all categories -->
         <div class="list-group">
-          <!-- clickable to route to Bucket -->
-          <!--* routeToBucket() -->
-          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(bucket);">
-              <b>{{bucket.category}}</b>
-              <br>
-            <small>{{bucket.description}}</small>
-
-            <!--* editBucket(bucket), passes the bucket selected to component side.
-                * open(edit), calls modal to open. -->
-            <div class="col-sm" (click)="$event.cancelBubble=true; ">
-              <i id="xIcon">
-                <label class="switch">
-                  <input type="checkbox" [(ngModel)]="bucket.isActive" (change)="updateBucket(bucket);">
-                  <span class="slider round" placement="top" ngbTooltip="active"></span>
-                </label>
-              </i>
-            </div>
-            <i id="delIcon" class="fa fa-trash pull-right" (click)="confirmDelete(bucket); open(delete)" placement="top" ngbTooltip="delete"></i>
-            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editBucket(bucket); open(edit)" placement="top" ngbTooltip="edit">
-            </i>
-
-          </a>
+          <div class="list-group-item list-group-item-action" *ngFor="let category of allCategories">
+            <b>{{category.categoryName}}</b><br>
+            <i id="delIcon" class="fa fa-trash pull-right" (click)="confirmDelete(category); open(delete)" placement="top" ngbTooltip="delete"></i>
+            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editCategory(category); open(edit)" placement="top" ngbTooltip="edit"></i>
+          </div>
         </div>
       </div>
       <button type="button" class="btn btn-primary btn-sm" (click)="open(create)">Create Category</button>
@@ -50,11 +33,27 @@
       <div class="form-group">
         <label>Name:</label>
         <br>
-        <input class="form-control" type="text" [(ngModel)]="currBucket.category" [ngModelOptions]="{standalone: true}" />
+        <input class="form-control" type="text" [(ngModel)]="currentCategory.categoryName" [ngModelOptions]="{standalone: true}" />
         <br>
-        <label>Description:</label>
-        <br>
-        <textarea class="form-control" type="text" [(ngModel)]="currBucket.description" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+
+      <div>
+        <div *ngIf="currentCategory"class="form-group row">
+          <label for="buckets" class="col-sm-6 col-form-label">Active Buckets:</label>
+          <div class="col-sm-12">
+            <span *ngFor="let bucket of currentCategory.buckets">
+              <button type="button" class="input-group-addon pillButtons" (click)="removeBucket(bucket)" *ngIf="checkContains(bucket)">{{bucket.category}}</button>
+            </span>
+          </div>
+        </div>            
+        <div class="form-group row">
+          <label for="allBuckets" class="col-sm-6 col-form-label">Inactive Buckets:</label>
+          <div class="col-sm-10 row">
+            <span *ngFor="let bucket of allBuckets">
+              <button type="button" class="input-group-addon pillButtons" (click)="addBucket(bucket)" *ngIf="!checkContains(bucket)">{{bucket.category}}</button>
+            </span>
+          </div>
+        </div>
       </div>
     </form>
   </div>
@@ -80,11 +79,27 @@
       <div class="form-group">
         <label>Name:</label>
         <br>
-        <input class="form-control" type="text" [(ngModel)]="newBucket.category" [ngModelOptions]="{standalone: true}" />
+        <input class="form-control" type="text" [(ngModel)]="newCategory.categoryName" [ngModelOptions]="{standalone: true}" />
         <br>
-        <label>Description:</label>
-        <br>
-        <textarea class="form-control" type="text" [(ngModel)]="newBucket.description" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+
+      <div>
+        <div *ngIf="currentCategory"class="form-group row">
+          <label for="buckets" class="col-sm-6 col-form-label">Active Buckets:</label>
+          <div class="col-sm-12">
+            <span *ngFor="let bucket of currentCategory.buckets">
+              <button type="button" class="input-group-addon pillButtons" (click)="removeBucket(bucket)" *ngIf="checkContains(bucket)">{{bucket.category}}</button>
+            </span>
+          </div>
+        </div>            
+        <div class="form-group row">
+          <label for="allBuckets" class="col-sm-6 col-form-label">Inactive Buckets:</label>
+          <div class="col-sm-10 row">
+            <span *ngFor="let bucket of allBuckets">
+              <button type="button" class="input-group-addon pillButtons" (click)="addBucket(bucket)" *ngIf="!checkContains(bucket)">{{bucket.category}}</button>
+            </span>
+          </div>
+        </div>
       </div>
     </form>
   </div>
