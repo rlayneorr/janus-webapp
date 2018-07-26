@@ -5,7 +5,7 @@ import { ViolationFlagComponent } from '../violation-flag/violation-flag.compone
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ScreeningService } from '../../services/screening/screening.service';
-import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
+// import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { ViolationTypeService } from '../../services/violationType/violationType.service';
 import { AlertsService } from '../../../services/alerts.service';
@@ -21,7 +21,7 @@ describe('PassFailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PassFailComponent, ViolationFlagComponent ],
-      providers: [ SoftSkillsViolationService, HttpClient, HttpHandler, ScreeningService, SimpleTraineeService,
+      providers: [ SoftSkillsViolationService, HttpClient, HttpHandler, ScreeningService,
       SkillTypeService, ViolationTypeService, AlertsService ]
     })
     .compileComponents();

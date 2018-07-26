@@ -19,9 +19,6 @@ import { AlertsService } from '../../../services/alerts.service';
 
 // Mock Data
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
-// import { TAGS } from '../../../screening/mock-data/mock-tags';
-import { QuestionService } from '../../../screening/services/question/question.service';
-import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 /**
  * Test for methods on the question component.
@@ -34,7 +31,7 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 /**
  * Setting up the testing environment for question component.
  **/
-fdescribe('QuestionComponent', () => {
+describe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
   
