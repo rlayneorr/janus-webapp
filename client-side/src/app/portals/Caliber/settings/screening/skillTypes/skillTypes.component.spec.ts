@@ -14,7 +14,7 @@ import { SkillTypesService } from '../services/skillTypes.service';
 import { AlertsService } from '../../../services/alerts.service';
 
 //Mock Data
-import { BUCKETS } from '../mock-data/mock-buckets';
+// import { BUCKETS } from '../mock-data/mock-buckets';
 import { SKILLTYPES } from '../mock-data/mock-skillTypes';
 
 //Observables
@@ -62,7 +62,7 @@ fdescribe('SkillTypesComponent', () => {
 
   /**
    * Test if checkContains returns the id of the associated bucket for this skillType.
-   * 
+   *
    * Function Tested: checkContains(bucketId)
    */
   it('should check for a bucketId', () =>{
@@ -75,7 +75,7 @@ fdescribe('SkillTypesComponent', () => {
   /**
    * Test if removeElement sets the skillType to inactive (if active)
    * or active (if inactive) and reorders the list.
-   * 
+   *
    * Function Tested: removeElement(item)
    */
   it('should toggle active/inactive and reorder list', ()=>{
@@ -92,7 +92,7 @@ fdescribe('SkillTypesComponent', () => {
 
   /**
    * Test if an active and inactive skillType list are made.
-   * 
+   *
    * Function Tested: setSkillTypes()
    */
   it('should create an active and inactive list of skillTypes', () => {
@@ -106,7 +106,7 @@ fdescribe('SkillTypesComponent', () => {
 
   /**
    * Tests that a modal opens when creating or editing a skillType
-   * 
+   *
    * Function Tested: open(content)
    */
   it('should open modal-content', () => {
@@ -118,33 +118,33 @@ fdescribe('SkillTypesComponent', () => {
 
   /**
    * Tests whether a bucket gets added to a skillType
-   * 
+   *
    * Function Tested: addToCategories(bucket: Bucket)
    */
   it('should add a bucket to a skillType', () => {
     component.allSkillTypes = SKILLTYPES;
     component.skillType = SKILLTYPES[1];
-    let bucket = BUCKETS[1];
-    component.addToCategories(bucket);
+    //let bucket = BUCKETS[1];
+    //component.addToCategories(bucket);
     expect(component.skillType).not.toEqual(SKILLTYPES[1]);
   });
 
   /**
    * Tests whether a bucket gets removed from a skillType
-   * 
+   *
    * Function Tested: removeFromCategories(bucket: Bucket)
    */
   it('should add a bucket to a skillType', () => {
     component.allSkillTypes = SKILLTYPES;
     component.skillType = SKILLTYPES[1];
-    let bucket = BUCKETS[1];
-    component.removeFromCategories(bucket);
+    //let bucket = BUCKETS[1];
+    //component.removeFromCategories(bucket);
     expect(component.skillType).not.toEqual(SKILLTYPES[1]);
   });
 
   /**
    * Tests whether or not all skillTypes are grabbed
-   * 
+   *
    * Function Tested: grabAllSkillTypes()
    */
   it('should grab all skillTypes', async() => {
@@ -153,11 +153,11 @@ fdescribe('SkillTypesComponent', () => {
       component.grabAllSkillTypes();
       fixture.detectChanges();
       expect(component.allSkillTypes.length).toBeGreaterThan(0);
-  })
+  });
 
   /**
    * Tests whether or not all buckets are grabbed
-   * 
+   *
    * Function Tested: grabAllBuckets()
    */
   it('should grab all buckets', async() => {
@@ -167,10 +167,10 @@ fdescribe('SkillTypesComponent', () => {
     fixture.detectChanges();
     expect(component.allBuckets.length).toBeGreaterThan(0);
     });
-  
+
   /**
    * Tests whether or not a skillType's fields are reset.
-   * 
+   *
    * Function Tested: resetFields()
    */
   it('should reset fields', () => {

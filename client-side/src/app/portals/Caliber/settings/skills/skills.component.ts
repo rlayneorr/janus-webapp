@@ -48,10 +48,10 @@ export class SkillsComponent implements OnInit {
       console.log("current categories", this.categories);
 
       //this denotes the index for the loop for the ngfor to map the categories into 4 tables
-      this.div1= Math.ceil(this.categories.length/4);
-      this.div2= this.div1 + this.div1;
-      this.div3= this.div1 +this.div1 +this.div1;
-      this.div4= this.div1 +this.div1 +this.div1 +this.div1;
+      // this.div1= Math.ceil(this.categories.length/4);
+      // this.div2= this.div1 + this.div1;
+      // this.div3= this.div1 +this.div1 +this.div1;
+      // this.div4= this.div1 +this.div1 +this.div1 +this.div1;
 
     });
   }

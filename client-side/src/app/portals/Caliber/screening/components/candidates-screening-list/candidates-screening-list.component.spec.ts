@@ -73,7 +73,7 @@ describe('CandidatesScreeningListComponent', () => {
     component.selectedScheduledScreening.scheduledScreeningId = 1;
     component.selectedScheduledScreening.trainer = 1;
     component.selectedCandidate = {} as Candidate;
-    component.selectedCandidate.skillTypeID = 1;
+    //component.selectedCandidate.skillTypeID = 1;
     component.beginScreening();
     expect(component.scheduledScreenings).toBeDefined();
   });
@@ -83,7 +83,7 @@ describe('CandidatesScreeningListComponent', () => {
     component.selectedScheduledScreening.scheduledScreeningId = 1;
     component.selectedScheduledScreening.trainer = 1;
     component.selectedCandidate = {} as Candidate;
-    component.selectedCandidate.skillTypeID = 1;
+    //component.selectedCandidate.skillTypeID = 1;
     component.beginScreening();
     expect(localStorage.getItem('screeningID')).not.toBeNull();
   });

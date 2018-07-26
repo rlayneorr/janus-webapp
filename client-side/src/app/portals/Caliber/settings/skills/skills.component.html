@@ -16,19 +16,19 @@
   </div>
 </div>
 <!-- Display all assessment skills -->
-<!-- <div class="container centered" id="trainer-assess-table" *ngIf="skills[0]"> -->
+<!--<div class="container centered" id="trainer-assess-table" *ngIf="categories[0]">-->
 <!--changed this to model categories and take in a category to loop over-->
 
 <!--this is a test div to make sure my logic works-->
 <!-- Div1 -->
 <!-- If theres time spacing these out will make them look better -->
 <table class="table-bordered">
-  <tr class = "tablehead">
-    <th class = "tablehead">Categories</th>
+  <tr>
+    <th>Categories</th>
   </tr>
   <tr *ngFor="let c of categories; let ca = index;">
     <!-- this checks the index against the index divisions -->
-    <td *ngIf="ca" (click)='editopen(editSkill,c);' class='pointer'>{{c.categoryName}}</td>
+    <td *ngIf="ca" (click)='editopen(editSkill,c);' class='pointer'>HELLO, {{c.categoryName}}</td>
   </tr>
 </table>
 <!-- div2 -->
