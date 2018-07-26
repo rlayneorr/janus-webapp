@@ -21,10 +21,12 @@ import { SoftSkillsViolationService } from '../../services/soft-skills-violation
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 
 import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
+import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
 
 // Installed Modules
 // npm install ngx-pagination --save
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+import { tick } from '../../../../../../../node_modules/@angular/core/testing';
 
 @Component({
   selector: 'app-candidates-screening-list',
@@ -120,14 +122,17 @@ export class CandidatesScreeningListComponent implements OnInit {
   confirmSelectedCandidate(): void {
     this.candidateService.setSelectedCandidate(this.selectedCandidate);
     console.log(this.selectedCandidate);
-    localStorage.setItem('scheduledScreeningID', this.selectedScheduledScreening.scheduledScreeningId.toString());
+    this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
+    console.log(this.selectedScheduledScreening);
+    // localStorage.setItem('scheduledScreeningID', this.selectedScheduledScreening.scheduledScreeningId.toString());
   }
 
   // clicking "Begin Interview" will create a new screening entry in the database
   beginScreening(): void {
     // create a new screening entry in the database by calling the screening service
-    this.screeningService
-      .beginScreening(
+    
+      this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
+      this.screeningService.beginScreening(
         // must provide the current scheduled interview object
         this.selectedScheduledScreening,
         // create a new date which signifies the start of the interview
