@@ -1,14 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { SkillType } from '../entities/SkillType';
 import { Bucket } from '../entities/Bucket';
 import { Category } from '../entities/Category';
-import { CategoryWeight } from '../entities/Category-Weight';
 import { SkillTypesService } from '../services/skillTypes.service';
 import { BucketsService } from '../services/buckets.service';
-import { CategoryWeightsService } from '../services/weight.service';
 import { SettingsCategoriesService } from '../services/categories.service';
 import { AlertsService } from '../../../services/alerts.service';
 
@@ -19,51 +15,37 @@ import { AlertsService } from '../../../services/alerts.service';
 })
 
 /**
- * This component should probably be rewitten because it is a mess right now
- *
- * You will need to see implementation in the skills service relating to the
- * skillType controler.
- * Whats working:
- * Creating a skill type and editing a skill
- *
- * Whats not working:
- * assigning buckets to skill types is not working.
- * adding weights needs to be added functionality does not exist
- */
-
-/**
 * Skill Type Component displays a template containing all the skill types from the database
 * It also has access to modals that can create or edit a skill types
 *
-*
 * @author chanconan
 */
+
+/**
+ * SkillType Component modals are able to attach and detach categories to said skill types.
+ * Categories will be provided a weight when they are attached and each skill type must have a max weight of 100.
+ * 
+ * @author John Lacap | 1805May-29-Java | WVU | Richard Orr
+ */
 export class SkillTypesComponent implements OnInit {
 
     public skillTypes: SkillType[] = [];
     public allSkillTypes: SkillType[] = [];
     public inactiveSkillTypes: SkillType[] = [];
 
-    public allWeights: CategoryWeight[] = [];
-    public currentWeights: CategoryWeight[] = [];
-    public specificWeight: CategoryWeight;
-
     public allCategories: Category[] = [];
     public allBuckets: Bucket[] = [];
     public skillType: SkillType;
     public categoryBuckets: Bucket[];
     public error: boolean;
-    public modalServiceRef;
 
     public category: Category;
     public total: number;
 
     constructor(
         private modalService: NgbModal,
-        private fb: FormBuilder,
         private skillTypeService: SkillTypesService,
         private bucketsService: BucketsService,
-        private weightsService: CategoryWeightsService,
         private categoriesService: SettingsCategoriesService,
         private alertsService: AlertsService,
         private tab: NgbTabset,
@@ -115,8 +97,8 @@ export class SkillTypesComponent implements OnInit {
 
     /**
     * Stores information about the skill type that was selected
-    * If there are any buckets associated to the skill type,
-    * set the array to the selected buckets to the array
+    * If there are any categories associated to the skill type,
+    * set the array to the selected categories to the array
     * @param skillType: selected skill type
     */
    editSkillType(skillType) {
@@ -130,6 +112,11 @@ export class SkillTypesComponent implements OnInit {
         this.equalsMax(skillType);
     }
 
+    /**
+     * Resets Categories displayed on the edit modal
+     * @param skillType: selected SkillType
+     * @param category: selected Category
+     */
     resetCategories(skillType: SkillType, category: Category){
         if(category){
             if(!this.allCategories.includes(category)){
@@ -137,7 +124,7 @@ export class SkillTypesComponent implements OnInit {
             }
         }
         
-        this.skillType.categories.forEach(hasCat => {
+        skillType.categories.forEach(hasCat => {
             this.allCategories.forEach(same => {
                 if(same.categoryName === hasCat.categoryName){
                     this.allCategories.splice(this.allCategories.indexOf(same), 1);
@@ -160,10 +147,18 @@ export class SkillTypesComponent implements OnInit {
         event.stopPropagation();
     }
 
+    /**
+     * Sets skillType to be deleted
+     * 
+     * @param skillType: skillType selected
+     */
     confirmDelete(skillType: SkillType){
         this.skillType = skillType;
       }
 
+    /**
+     * Deletes skill type and repopulates the list
+     */
     deleteSkillType(){
         if (this.skillType) { 
           this.skillTypeService.deleteSkillType(this.skillType.skillTypeId).subscribe(result => {
@@ -228,18 +223,33 @@ export class SkillTypesComponent implements OnInit {
         this.equalsMax(this.skillType);
     }
 
+    /**
+     * Updates skill type and repopulates the list
+     */
     skillTypeUpdate(skillType: SkillType) {
         this.skillTypeService.updateSkillType(skillType).subscribe(results => {
             this.grabAllSkillTypes();
         });
     }
 
+    /**
+     * An onchange callback function that changes the weight of a category associated to a skill type
+     * 
+     * @param skillType: skillType selected
+     * @param category: category associated with skillType that was altered
+     * @param weight: new value of weight assigned to a category
+     */
     weightChange(skillType: SkillType, category: Category, weight: number){
         skillType.categories[skillType.categories.indexOf(category)].categoryWeight.weight = weight;
         console.log(skillType.categories);
         this.equalsMax(skillType);
     }
 
+    /**
+     * Validates whether weights assigned to categories within a skill type equal 100.
+     * 
+     * @param skillType: skillType selected
+     */
     equalsMax(skillType: SkillType){
         this.total = 0;
         skillType.categories.forEach(category => {
@@ -258,7 +268,6 @@ export class SkillTypesComponent implements OnInit {
     * Grabs all the skill types after the information has been submitted
     * @param modal: Form information from the modal, with parameters matching the SkillType entity
     */
-
     createNewSkillType(modal: SkillType, categories: Category[]) {
         this.skillType = modal;
         this.skillType.categories = categories;
@@ -268,6 +277,9 @@ export class SkillTypesComponent implements OnInit {
         this.savedSuccessfully();
     }
 
+    /**
+     * Sets a blank skillType object that would be populated with values.
+     */
     setNewSkillType(){
         this.skillType = {
             skillTypeId: 0,
@@ -288,6 +300,9 @@ export class SkillTypesComponent implements OnInit {
         this.grabAllSkillTypes();
     }
 
+    /**
+     * Shows a popup on success.
+     */
     savedSuccessfully() {
         this.alertsService.success('Saved successfully');
     }

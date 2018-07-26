@@ -1,39 +1,32 @@
 <!-- SkillTypes List-->
 <div id="STcontent" class="container">
-    <div class="row justify-content-center">
-        <div class="card w-50">
-            <h6 class="card-header">Skill Types</h6>
-            <div class="card-body" id="skillTypesDiv">
-                <div class="list-group">
-                    <a class="list-group-item list-group-item-action" *ngFor="let skillType of allSkillTypes">
-                        <b>{{skillType.skillTypeName}}</b>
-                        <br>
-                        <!-- <i id="xIcon">
-                            <label class="switch">
-                                <input type="checkbox" [(ngModel)]="skillType.isActive" (change)="skillTypeUpdate(skillType)" >
-                                <span class="slider round" placement="top" ngbTooltip="active"></span>
-                            </label>
-                        </i> -->
-                        <i id="delIcon" class="fa fa-trash pull-right" (click)="confirmDelete(skillType); open(delete)" placement="top" ngbTooltip="delete"></i>
-                        <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(edit); editSkillType(skillType)" placement="top" ngbTooltip="edit">
-                        </i>
-                    </a>
-                </div>
-            </div>
-            <button class="btn btn-primary btn-sm" (click)='setNewSkillType(); open(create)'>Create Skill Type</button>
+  <div class="row justify-content-center">
+    <div class="card w-50">
+      <h6 class="card-header">Skill Types</h6>
+      <div class="card-body" id="skillTypesDiv">
+        <!-- List of all SkillTypes-->
+        <div class="list-group">
+          <div class="list-group-item list-group-item-action" *ngFor="let skillType of allSkillTypes">
+            <b>{{skillType.skillTypeName}}</b><br>
+            <i id="delIcon" class="fa fa-trash pull-right" (click)="confirmDelete(skillType); open(delete)" placement="top" ngbTooltip="delete"></i>
+            <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(edit); editSkillType(skillType)" placement="top" ngbTooltip="edit"></i>
+          </div>
         </div>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" (click)='setNewSkillType(); open(create)'>Create Skill Type</button>
     </div>
+  </div>
 </div>
 
 <!-- Modal for creating a new SkillType -->
 <ng-template #create let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <!-- If a skillType got clicked, Title is Edit -->
         <h4 class="modal-title">Create a SkillType</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+
     <div class="modal-body">
         <form  #addSkillTypeForm="ngForm">
             <div class="form-group row">
@@ -42,6 +35,7 @@
                     <input type="text" id="skillTypeName" name="skillTypeName" placeholder="Skill type name" class="form-control"required #skillTypeName="ngModel" [(ngModel)]="skillType.skillTypeName">
                 </div>
             </div>
+
             <div>
                 <div class="form-group row">
                     <label for="categories" class="col-sm-6 col-form-label">Active Categories:</label>
@@ -65,6 +59,7 @@
             </div>
         </form>
     </div>
+
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="c('Close click'); createNewSkillType(addSkillTypeForm.value, skillType.categories)" [disabled]="error || !skillTypeName.value">Create</button>
@@ -75,12 +70,12 @@
 <!-- Modal for editing a SkillType -->
 <ng-template #edit let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <!-- If a skillType got clicked, Title is Edit -->
         <h4 class="modal-title">Edit SkillType</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+
     <div class="modal-body">
         <form  #addSkillTypeForm="ngForm">
             <div class="form-group row">
@@ -89,6 +84,7 @@
                     <input type="text" id="skillTypeName" name=skillTypeName class="form-control" required #skillTypeName="ngModel" [(ngModel)]="skillType.skillTypeName">
                 </div>
             </div>
+
             <div>
                 <div class="form-group row">
                     <label for="categories" class="col-sm-6 col-form-label">Active Categories:</label>
@@ -112,6 +108,7 @@
             </div>
         </form>
     </div>
+
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         <button type="button" data-dismiss="modal" class="btn btn-outline-dark revatureOrange" (click)="skillTypeUpdate(skillType); savedSuccessfully(); c('Close click')" [disabled]="error || !skillTypeName.value">Save</button>
