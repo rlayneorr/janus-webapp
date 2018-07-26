@@ -6,7 +6,7 @@ import { SkillType } from './skillType';
   Specifies candidate, screener (as a CaliberTrainer object's ID, subject to change),
   technical track, completion status, and time.
 */
-export interface ScheduledScreening {
+export class ScheduledScreening {
   scheduledScreeningId: number;
   candidate: Candidate;
   track: SkillType;
