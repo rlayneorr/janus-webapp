@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { Subscription } from 'rxjs/Subscription';
-
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
 import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
@@ -112,12 +110,12 @@ export class SkillsComponent implements OnInit {
     this.resetFormControl();
   }
 
-  deleteSkill() {
-    this.skillService.delete(this.currentSkill);
-    //This should work once implemented by the back-end -Tyerra Smith
-    // may not need this statement without all of the inherited subjects
-    this.resetFormControl();
-  }
+  // deleteSkill() {
+  //   this.skillService.delete(this.currentSkill);
+  //   //This should work once implemented by the back-end -Tyerra Smith
+  //   // may not need this statement without all of the inherited subjects
+  //   this.resetFormControl();
+  // }
 
 
   /**
