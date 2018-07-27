@@ -20,12 +20,12 @@ import { ScheduleScreeningService } from '../../services/schedule-screening/sche
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 
-<<<<<<< HEAD
+
 //import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
-=======
-import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
 import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
->>>>>>> imported the screening mock data for tests -Tyerra Smith
+
+// import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
+
 
 // Installed Modules
 // npm install ngx-pagination --save
@@ -126,7 +126,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   confirmSelectedCandidate(): void {
     this.candidateService.setSelectedCandidate(this.selectedCandidate);
     console.log(this.selectedCandidate);
-    this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
+    //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
     console.log(this.selectedScheduledScreening);
     // localStorage.setItem('scheduledScreeningID', this.selectedScheduledScreening.scheduledScreeningId.toString());
   }
@@ -134,8 +134,8 @@ export class CandidatesScreeningListComponent implements OnInit {
   // clicking "Begin Interview" will create a new screening entry in the database
   beginScreening(): void {
     // create a new screening entry in the database by calling the screening service
-    
-      this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
+
+      //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
       this.screeningService.beginScreening(
         // must provide the current scheduled interview object
         this.selectedScheduledScreening,
@@ -165,7 +165,7 @@ export class CandidatesScreeningListComponent implements OnInit {
    */
   openModal(content, index: Candidate) {
     this.selectedCandidate = JSON.parse(JSON.stringify(index));// essentially clone the object, there may be a better way
-    this.formattedSchedule = this.date.transform(this.selectedCandidate.schedule, 'short');
+    //this.formattedSchedule = this.date.transform(this.selectedCandidate.schedule, 'short');
     console.log(this.selectedCandidate);
     this.modalService.open(content);
     this.initFormControl();
