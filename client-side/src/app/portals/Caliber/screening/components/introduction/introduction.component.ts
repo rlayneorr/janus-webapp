@@ -89,7 +89,7 @@ export class IntroductionComponent implements OnInit {
     if (checked) {
       this.categoriesSelected.push(selected);
     } else {
-      const index = this.allCategories.findIndex(x => x === selected);
+      const index = this.categoriesSelected.indexOf(selected);
       this.categoriesSelected.splice(index, 1);
     }
   }
@@ -103,6 +103,6 @@ export class IntroductionComponent implements OnInit {
   // Returns a boolean depending on whether a tag was checked.
   // Returns false if there are checked tags.
   categoryChosen(): boolean {
-    return (this.categoriesSelected.length === 0);
+    return (this.categoriesSelected.length == 0);
   }
 }
