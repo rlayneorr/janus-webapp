@@ -5,10 +5,11 @@ import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 @Injectable()
 export class UrlService {
   //public readonly context: string =  environment.gambitContext;
+  public readonly context : string = environment.caliberContext;
 
-  public readonly context: string =  environment.localHostContext;
-
-  // public readonly context: string = environment.caliberContext;
+  //services
+  public readonly techScreening : string = "/tech-screening";
+  public readonly adminScreening : string = "/screening-admin";
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
@@ -90,12 +91,14 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private bucketEndpoint = '/buckets';
+
+  private bucketEndpoint = `${this.adminScreening}/bucket`;
   bucket = {
     getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
     getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
     updateBucket: () => `${this.context + this.bucketEndpoint}`,
-    createNewBucket: () => `${this.context + this.bucketEndpoint}`
+    createNewBucket: () => `${this.context + this.bucketEndpoint}`,
+    deleteBucket: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`
   };
 
   /**
@@ -126,28 +129,28 @@ export class UrlService {
   };
 
   candidate = {
-    getAll: () => `${this.context}/candidate/`,
+    getAll: () => `${this.context}/candidate`,
     getById: (id : number) => `${this.context}/candidate/${id}`,
     update: (id : number) => `${this.context}/candidate/${id}`,
-    create: () => `${this.context}/candidate/`,
+    create: () => `${this.context}/candidate`,
     delete: (id: number) => `${this.context}candidate/${id}`,
   };
 
+  private categoryEndpoint = `${this.adminScreening}/category`;
   category = {
-    fetchAll: () => `${this.context}category/`,
-    // fetchAll: () => `${this.context}screening-admin/category/`,
-    // // //fetchAllActive: () => `${this.context}category/all`, ***A Category no longer has an active attribute. -Tyerra Smith***
-    fetchById: (id: number) => `${this.context}category/${id}`,
-    // fetchById: (id: number) => `${this.context}screening-admin/category/`,
-    save: () => `${this.context}category`,
-    // save: () => `${this.context}screening-admin/category/`,
-    update: (id: number) => `${this.context}category/${id}`,
-    // update: (id: number) => `${this.context}screening-admin/category/${id}`,
-    // // //Create and Delete are placeholder endpoints for testing -Tyerra Smith and Michael Brumley**
-    create: () => `${this.context}category`,
-    // create: () => `${this.context}screening-admin/category`,
-    delete: (id: number) => `${this.context}category/${id}`,
-    // delete: (id: number) => `${this.context}screening-admin/category/${id}`,
+    fetchAll: () => { console.log("context: %s, endpoint %s", this.context, this.categoryEndpoint);
+    return `${this.context}${this.categoryEndpoint}`},
+    //fetchAllActive: () => `${this.context}category/all`,
+    fetchById: (id: number) => `${this.context}${this.categoryEndpoint}/${id}`,
+    save: () => `${this.context}${this.categoryEndpoint}`,
+    update: () => `${this.context}${this.categoryEndpoint}/update`,
+    //update: () => `${this.context}/category/update`,
+
+    createCategory: () => `${this.context}${this.categoryEndpoint}`,
+    getCategories: () => `${this.context}${this.categoryEndpoint}`,
+    getCategoryById: (id: number) => `${this.context}${this.categoryEndpoint}/${id}`,
+    updateCategory: (id:number) => `${this.context}${this.categoryEndpoint}/${id}`,
+    deleteCategory: (id: number) => `${this.context}${this.categoryEndpoint}/${id}`,
   };
 
   curriculum = {
@@ -223,30 +226,29 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private questionEndpoint = (this.context + '/questions');
+  private questionEndpoint = `${this.context}/${this.adminScreening}/questions`;
   question = {
-    postQuestion: () => `${this.questionEndpoint}`,
-    putQuestion: () => `${this.questionEndpoint}`,
-    getQuestionsByBucketId: (bucketId: number) => `${this.questionEndpoint}/bucket/${bucketId}`,
+    postQuestion: () => `${this.context}${this.questionEndpoint}`,
+    putQuestion: () => `${this.context}${this.questionEndpoint}`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.questionEndpoint}/bucket/${bucketId}`,
     // Tyerra Smith added a url to get ALL questions
-    getQuestions: () => `${this.questionEndpoint}/questions`,
-    deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
-    activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
-    filteredQuestions: () => `${this.questionEndpoint}/filter`,
-    getAllTags: () => `${this.questionEndpoint}/tags`,
-    createNewTag: () => `${this.questionEndpoint}/tags`,
-    getTagsByQuestionId: (questionId: number) => `${this.questionEndpoint}/tags/question/${questionId}`
+    getQuestions: () => `${this.context}${this.questionEndpoint}`,
+    deactivateQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}/deactivate`,
+    activateQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}/activate`,
+    filteredQuestions: () => `${this.context}${this.questionEndpoint}/filter`,
+    deleteQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}`,
   };
 
-  private questionScoringEndpoint = 'question-score-service/question';
+  //private questionScoringEndpoint = 'question-score-service/question';
+  private questionScoringEndpoint = `${this.techScreening}/question`;
   questionScoring = {
     scoringQuestion: () => `${this.context + this.questionScoringEndpoint}/score`,
   };
 
     // Reports Service API endpoints
-    reportsStackedBarCurrentWeek = this.context + 'all/reports/batch/week/stacked-bar-current-week';
-    reportsDashBoard = this.context + 'all/reports/dashboard';
-    reportsBiWeeklyPanel = this.context + 'all/reports/biweeklyPanelResults';
+    reportsStackedBarCurrentWeek = this.context + this.questionScoringEndpoint + 'all/reports/batch/week/stacked-bar-current-week';
+    reportsDashBoard = this.context + this.questionScoringEndpoint + 'all/reports/dashboard';
+    reportsBiWeeklyPanel = this.context + this.questionScoringEndpoint + 'all/reports/biweeklyPanelResults';
 
   /**
    * Endpoints for rooms:
@@ -274,11 +276,12 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  screeningEndpoint = 'screening-service/screening';
+  private screeningEndpoint = `${this.techScreening}/screening`;
+  //screeningEndpoint = 'screening-service/screening';
   screening = {
     scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduledScreenings`,
-    startScreening: () => `${this.context + this.screening}/start`,
-    endScreening: () => `${this.context + this.screening}/end`,
+    startScreening: () => `${this.context + this.screeningEndpoint}/start`,
+    endScreening: () => `${this.context + this.screeningEndpoint}/end`,
     introComment: () => `${this.context + this.screeningEndpoint}/introcomment`,
     generalComment: () => `${this.context + this.screeningEndpoint}/generalcomment`,
   };
@@ -316,18 +319,18 @@ export class UrlService {
   /**
    * Endpoints for skillType
    */
-  skillTypesServiceEndpoint = this.context + '/skillType';
+
+  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skilltype';
   skillTypes = {
-    findAll: () => `${this.context}`,
-    findAllActive: () => `${this.context}/active`,
-    findById: (id: number) => `${this.context}/${id}`,
-    findByName: (name: string) => `${this.context}/${name}`,
-    save: () => `${this.context}`,
-    saveSkill: (skillTypeId, skillId) => `${this.context}/${skillTypeId}/skill/${skillId}`,
-    saveSkillByName: (skillTypeName, skillName) =>
-      `${this.context}/name/${skillTypeName}/skill/name/${skillName}`,
-    update: (id: number) => `${this.context}/skillType/${id}`,
-    delete: (id: number) => `${this.context}/${id}`, // note lowercase t in type, this is to match the request mapping
+    findAll: () => `${this.skillTypesServiceEndpoint}`,
+    findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
+    findById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    findByName: (name: string) => `${this.skillTypesServiceEndpoint}/${name}`,
+    save: () => `${this.skillTypesServiceEndpoint}`,
+    saveSkill: (skillTypeId, skillId) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) => `${this.skillTypesServiceEndpoint}/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id: number) => `${this.skillTypesServiceEndpoint}/skillType/${id}`,
+    delete: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`, // note lowercase t in type, this is to match the request mapping
 
 
 
@@ -336,12 +339,13 @@ export class UrlService {
     getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
 
     createSkillType: () => `${this.skillTypesServiceEndpoint}`,
-    putSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
+    updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
+    deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
     getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
-
   };
 
   softSkillsViolation = {
@@ -362,10 +366,10 @@ export class UrlService {
     isPopulated: (batchId: number) => `${this.context}/subtopics/ispopulated/${batchId}/`
   };
 
-  tagEndpoint = this.context + 'question-service/tag';
-  tags = {
-    getAllTags: () => `${this.tagEndpoint}/getAllTags`,
-  };
+  // tagEndpoint = this.context + 'question-service/tag';
+  // tags = {
+  //   getAllTags: () => `${this.tagEndpoint}/getAllTags`,
+  // };
 
   topic = {
     addTopicName: (name: string) => `${this.context}/topics/${name}`,
@@ -446,6 +450,19 @@ export class UrlService {
     postUnavailability: () => `${this.context}/unavailabilities/`,
     // putUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`,
     // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
+  };
+
+  /**
+   * Endpoints for category weights:
+   * This section is being added for use in the setting screening weight service
+   * @author John Lacap
+   */
+  weight={
+    createWeight: () => `${this.context}/weights`,
+    getWeights: () => `${this.context}/weights`,
+    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.context}/weights/${skillTypeId}/${categoryId}`,
+    updateWeight: (id: number) => `${this.context}/weights/${id}`,
+    deleteWeight: (id: number) => `${this.context}/weights/${id}`,
   };
 
   /* Reporting service API endpoints */

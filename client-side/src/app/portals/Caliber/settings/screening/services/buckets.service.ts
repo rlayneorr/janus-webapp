@@ -11,6 +11,8 @@ import { Subject } from 'rxjs/Subject';
 import { Bucket } from '../entities/Bucket';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
+//import { BUCKETS } from '../mock-data/mock-buckets'
+
 /**
    * Imported urlservice to replace hardcoded endpoints
    *
@@ -59,6 +61,26 @@ export class BucketsService {
       return this.http.post<Bucket>(this.urlService.bucket.createNewBucket(), bucket, httpOptions);
   }
 
+ deleteBucket(bucketId: number) {
+    console.log(this.urlService.bucket.deleteBucket(bucketId));
+    return this.http.delete<Bucket>(this.urlService.bucket.deleteBucket(bucketId));
+    // return this.http.delete<Bucket[]>(this.urlService.bucket.getBucketById(bucketId));
+}
+
+// getAllBuckets(): any {
+//     return BUCKETS;
+// }
+
+// getBucketById(bucketId: number) {
+//     BUCKETS.forEach(bucket => {
+//         if(bucket.bucketId == bucketId){
+//             return bucket;
+//         }
+//         else
+//             return null;
+//     });
+// }
+
   setBucket(bucket: Bucket) {
      this.currentBucket = bucket;
   }
@@ -70,19 +92,19 @@ export class BucketsService {
   }
 
   setName(name: string) {
-      this.currentBucket.bucketCategory = name;
+      this.currentBucket.category = name;
   }
 
   getName(id: number) {
-      return this.currentBucket.bucketCategory;
+      return this.currentBucket.category;
   }
 
   setDescription(desc: string) {
-      this.currentBucket.bucketDescription = desc;
+      this.currentBucket.description = desc;
   }
 
   getDescription() {
-      return this.currentBucket.bucketDescription;
+      return this.currentBucket.description;
   }
 
 }

@@ -71,7 +71,7 @@ export class PassFailComponent implements OnInit {
         for (const e of data) {
           // v = all violation types
           for (const v of violationTypes) {
-            if (e.violationID === v.violationID) {
+            if (e.violationId === v.violationId) {
               const thisTime = e.Time;
               const thisComment = e.Comment;
               violationArray.push({

@@ -5,9 +5,9 @@ import {ViolationType} from './violationType';
     Entity representing an occurrence of a soft skill violation during a screening
 */
 export interface SoftSkillViolation {
-    violationID: number;
-    screeningID: number;
-    violationType: ViolationType;
+    violationId: number;
+    screeningId: number;
+    violationTypeId: number;
     Time: Date;
     Comment: string;
 }

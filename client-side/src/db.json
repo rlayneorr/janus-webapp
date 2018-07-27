@@ -1,49 +1,66 @@
 {
   "buckets": [
     {
-      "bucketID": 1,
+      "bucketId": 1,
       "bucketCategory": "Basic Java",
       "bucketDescription": "OCA level Java questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1
+      ]
     },
     {
-      "bucketID": 2,
+      "bucketId": 2,
       "bucketCategory": "SQL",
       "bucketDescription": "SQL database questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
-      "bucketID": 3,
+      "bucketId": 3,
       "bucketCategory": "JavaScript",
       "bucketDescription": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
-      "bucketID": 4,
+      "bucketId": 4,
       "bucketCategory": "HTML",
       "bucketDescription": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
-      "bucketID": 5,
+      "bucketId": 5,
       "bucketCategory": "CSS",
       "bucketDescription": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
-      "bucketID": 6,
+      "bucketId": 6,
       "bucketCategory": "Spring",
       "bucketDescription": "JavaScript questions",
       "isActive": true,
-      "questions": null
+      "questions": [
+        1,
+        2
+      ]
     },
     {
-      "bucketID": 7,
+      "bucketId": 7,
       "bucketCategory": "Angular",
       "bucketDescription": "JavaScript questions",
       "isActive": true,

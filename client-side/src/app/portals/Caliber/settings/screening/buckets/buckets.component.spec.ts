@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SkillTypeBucketsComponent } from './skillType-buckets.component';
+import { BucketsComponent } from './buckets.component';
 
-describe('SkillTypeBucketsComponent', () => {
-  let component: SkillTypeBucketsComponent;
-  let fixture: ComponentFixture<SkillTypeBucketsComponent>;
+describe('BucketsComponent', () => {
+  let component: BucketsComponent;
+  let fixture: ComponentFixture<BucketsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SkillTypeBucketsComponent ]
+      declarations: [ BucketsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SkillTypeBucketsComponent);
+    fixture = TestBed.createComponent(BucketsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

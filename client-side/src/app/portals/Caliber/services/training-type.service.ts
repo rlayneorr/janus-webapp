@@ -20,7 +20,7 @@ const context = (new UrlService).trainingType;
 @Injectable()
 export class TrainingTypeService implements Fetch<String> {
 
-  public listSubject = new BehaviorSubject<string[]>(new Array<string>());
+  public listSubject = new BehaviorSubject<string[]>([]);
 
   constructor(private httpClient: HttpClient) {
     this.fetchAll();

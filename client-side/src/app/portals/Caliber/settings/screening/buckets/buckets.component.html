@@ -2,28 +2,15 @@
 <div id="ABcontent" class="container">
   <div class="row justify-content-center">
     <div class="card w-50">
-
-      <h6 class="card-header">All Buckets</h6>
-
+      <h6 class="card-header">Buckets</h6>
       <div class="card-body" id="allSkillTypesDiv">
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <!--A search bar to help sift through the unadded tags for when the amount of tags is increased-->
-            <input type="text" name="bucket" [(ngModel)]="filter.bucketCategory" placeholder="Search Buckets" min="0" max="100" class="form-control">
-          </div>
-        </div>
-
         <!-- List of all buckets -->
         <div class="list-group">
           <!-- clickable to route to Bucket -->
           <!--* routeToBucket() -->
-          <a class="list-group-item list-group-item-action" *ngFor="let bucket of buckets| bucketFilter:filter" (click)="routeToBucket(bucket);">
-              <b>{{bucket.bucketCategory}}</b>
-              <br>
-            <small>{{bucket.bucketDescription}}</small>
-
-            <!--* editBucket(bucket), passes the bucket selected to component side.
-                * open(edit), calls modal to open. -->
+          <div class="list-group-item list-group-item-action" *ngFor="let bucket of buckets" (click)="routeToBucket(bucket);">
+            <b>{{bucket.category}}</b><br>
+            <small>{{bucket.description}}</small>
             <div class="col-sm" (click)="$event.cancelBubble=true; ">
               <i id="xIcon">
                 <label class="switch">
@@ -32,14 +19,11 @@
                 </label>
               </i>
             </div>
-            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editBucket(bucket); open(edit)" placement="top" ngbTooltip="edit">
-            </i>
-
-          </a>
+            <i id="delIcon" class="fa fa-trash pull-right" (click)="confirmDelete(bucket); open(delete)" placement="top" ngbTooltip="delete"></i>
+            <i id="penIcon" class="fa fa-pencil pull-right" (click)="editBucket(bucket); open(edit)" placement="top" ngbTooltip="edit"></i>            
+          </div>
         </div>
-
       </div>
-
       <!--* 'open(create)' -->
       <button type="button" class="btn btn-primary btn-sm" (click)="open(create)">Create Bucket</button>
     </div>
@@ -61,11 +45,11 @@
       <div class="form-group">
         <label>Name:</label>
         <br>
-        <input class="form-control" type="text" [(ngModel)]="currBucket.bucketCategory" [ngModelOptions]="{standalone: true}" />
+        <input class="form-control" type="text" [(ngModel)]="currBucket.category" [ngModelOptions]="{standalone: true}" />
         <br>
         <label>Description:</label>
         <br>
-        <textarea class="form-control" type="text" [(ngModel)]="currBucket.bucketDescription" [ngModelOptions]="{standalone: true}"></textarea>
+        <textarea class="form-control" type="text" [(ngModel)]="currBucket.description" [ngModelOptions]="{standalone: true}"></textarea>
       </div>
     </form>
   </div>
@@ -81,28 +65,53 @@
 <ng-template #create let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h6 class="modal-title">Create Bucket</h6>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  
   <div class="modal-body">
     <form>
       <div class="form-group">
         <label>Name:</label>
         <br>
-        <input class="form-control" type="text" [(ngModel)]="newBucket.bucketCategory" [ngModelOptions]="{standalone: true}" />
+        <input class="form-control" type="text" [(ngModel)]="newBucket.category" [ngModelOptions]="{standalone: true}" />
         <br>
         <label>Description:</label>
         <br>
-        <textarea class="form-control" type="text" [(ngModel)]="newBucket.bucketDescription" [ngModelOptions]="{standalone: true}"></textarea>
+        <textarea class="form-control" type="text" [(ngModel)]="newBucket.description" [ngModelOptions]="{standalone: true}"></textarea>
       </div>
     </form>
   </div>
-
+  
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
     <!--* create(), creates new bucket in the database -->
     <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="createBucket(); c('Close click')">Create</button>
+  </div>
+</ng-template>
+
+<!--Delete Bucket modal -->
+<!--* Delete bucket confirmation -->
+<ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Bucket</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Are you sure?</label>
+      </div>
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Close click')">Cancel</button>
+    <!--* create(), creates new bucket in the database -->
+    <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="deleteBucket(); c('Close click')">Delete</button>
   </div>
 </ng-template>

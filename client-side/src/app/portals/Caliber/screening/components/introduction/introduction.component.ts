@@ -6,11 +6,19 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
-import { TagService } from '../../../services/tag/tag.service';
+// import { TagService } from '../../../services/tag/tag.service';
+import { CategoryService } from '../../../../../portals/Caliber/services/category/category.service';
 import { ScreeningService } from '../../services/screening/screening.service';
 
-import { Tag } from '../../entities/tag';
+import { SKILLTYPES } from '../../mock-data/mock-skillTypes';
+// import { SCHEDULEDSCREENINGS } from '../../mock-data/mock-scheduled-screening';
+
+// import { Tag } from '../../entities/tag';
 import { SkillType } from '../../entities/skillType';
+import { Category } from '../../../entities/Category';
+import { map } from '../../../../../../../node_modules/rxjs/operators';
+import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
+import { ScheduledScreening } from '../../entities/scheduleScreening';
 
 @Component({
   selector: 'app-introduction',
@@ -28,16 +36,20 @@ import { SkillType } from '../../entities/skillType';
 export class IntroductionComponent implements OnInit {
 
   constructor(
-    public tagService: TagService,
+    //public tagService: TagService,
+    private categoryService: CategoryService,
     private candidateService: CandidateService,
     private skillTypeService: SkillTypeService,
     private screeningService: ScreeningService) { }
 
 
-  public traineeName: string;
-  public traineeTrack: string;
+  public candidateName: string;
+  public candidateTrack: string;
+  public currentScreening: ScheduledScreening;
+  // public tagList: Tag[];
+  public categoriesSelected: Category[];
+  public allCategories: Category[];
 
-  public tagList: Tag[];
 
   public comment: string;
 
@@ -46,32 +58,38 @@ export class IntroductionComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.tagService.tagListChecked = [];
-    //this.traineeName = this.candidateService.getSelectedCandidate().firstname + ' ' +
-     // this.candidateService.getSelectedCandidate().lastname;
-    //this.traineeTrack = this.candidateService.getSelectedCandidate().skillTypeName;
-    this.getTags();
+    //this.tagService.tagListChecked = [];
+    this.categoryService.fetchAll().subscribe(categories =>{
+      this.allCategories = (<Category[]> categories);
+      console.log(this.allCategories);
+    });
+    this.categoriesSelected = [];
+    //this.currentScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
+    //this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
+    //this.candidateService.getSelectedCandidate().lastName;
+    //this.candidateTrack = this.candidateService.getSelectedCandidate().skillTypeName;
+    //this.getTags();
   }
 
   // Get an array of all tags and assign it to tagList
-  getTags(): void {
-    this.tagService.getAllTags().subscribe(
-      allTags => {
-        this.tagList = allTags;
-      }
-    );
-  }
+  // getTags(): void {
+  //   this.tagService.getAllTags().subscribe(
+  //     allTags => {
+  //       this.tagList = allTags;
+  //     }
+  //   );
+  // }
 
   // When a tag is checked or unchecked on the Introduction view, update the list of checked tags.
   // Push checked tags to the tagListChecked array
   // Splice unchecked tags from the tagListChecked array
-  updateTagList(changedTag: Tag, checked: boolean) {
+  updateCategoryList(selected: Category, checked: boolean) {
 
     if (checked) {
-      this.tagService.tagListChecked.push(changedTag);
+      this.categoriesSelected.push(selected);
     } else {
-      const index = this.tagService.tagListChecked.findIndex(x => x === changedTag);
-      this.tagService.tagListChecked.splice(index, 1);
+      const index = this.categoriesSelected.indexOf(selected);
+      this.categoriesSelected.splice(index, 1);
     }
   }
 
@@ -83,7 +101,7 @@ export class IntroductionComponent implements OnInit {
 
   // Returns a boolean depending on whether a tag was checked.
   // Returns false if there are checked tags.
-  skillChosen(): boolean {
-    return (!(this.tagService.tagListChecked.length > 0));
+  categoryChosen(): boolean {
+    return (this.categoriesSelected.length == 0);
   }
 }

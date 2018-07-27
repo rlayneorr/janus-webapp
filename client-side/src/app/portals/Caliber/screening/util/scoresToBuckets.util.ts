@@ -3,7 +3,6 @@ import { SkillTypeBucketLookUp } from '../entities/skillTypeBucketLookup';
 
 export class ScoresToBucketsUtil {
 
-
     getFinalBreakdown(questionScores: QuestionScore[], bucketsByWeight: SkillTypeBucketLookUp): string[] {
         const bucketNames: string[] = [];
         const totals: number[] = [];

@@ -33,7 +33,7 @@ import { Topic } from '../../../models/topic.model';
 
 export class MainCurriculumViewComponent implements OnInit {
     schedule: CurriculumSubtopic[];
-    allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
+    allWeeks: Array<CurriculumSubtopic[]> = [];
     toggleTab = 1;
     selectedCurr: Curriculum;
     isNewVer = false;
@@ -251,7 +251,7 @@ export class MainCurriculumViewComponent implements OnInit {
         this.curriculumService.currentData.subscribe(
             data => {
                 // clear 2D array each time a curriculum is selected
-                this.allWeeks = new Array<CurriculumSubtopic[]>();
+                this.allWeeks = [];
                 this.schedule = data;
                 this.getWeeks();
             },
@@ -304,7 +304,7 @@ export class MainCurriculumViewComponent implements OnInit {
      */
 
     addWeek() {
-        this.allWeeks.push(new Array<CurriculumSubtopic>());
+        this.allWeeks.push([]);
         this.alertService.alert('success', 'Successfully added a week to the bottom. Save is required.');
     }
 

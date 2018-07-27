@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 
 import { SoftSkillViolation } from '../../entities/softSkillViolation';
 import { ViolationType } from '../../entities/violationType';
-import { MOCK_VIOLATIONS } from '../../mock-data/mock-violations';
+//import { MOCK_VIOLATIONS } from '../../mock-data/mock-violations';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
@@ -69,7 +69,7 @@ export class SoftSkillsViolationService {
   * will be duplicated across the array.
   */
   addViolations(newViolations: ViolationType[], comment: string) {
-    const violationIdArray: number[] = new Array<number>();
+    const violationIdArray: number[] = [];
     for (let i = 0; i < newViolations.length; i++) {
       violationIdArray[i] = newViolations[i].violationTypeId;
     }

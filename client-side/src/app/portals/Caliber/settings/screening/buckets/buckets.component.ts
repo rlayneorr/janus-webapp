@@ -7,18 +7,20 @@ import { QuestionsService } from '../../../services/questions/questions.service'
 /** style lib. imports */
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsService } from '../../../services/alerts.service';
+import {CategoryService} from "../../../services/category/category.service";
+import {Category} from "../../../entities/Category";
 
 
 @Component({
-  selector: 'app-skill-type-buckets',
-  templateUrl: './skillType-buckets.component.html',
-  styleUrls: ['./skillType-buckets.component.css']
+  selector: 'app-buckets',
+  templateUrl: './buckets.component.html',
+  styleUrls: ['./buckets.component.css']
 })
-
-export class SkillTypeBucketsComponent implements OnInit {
+export class BucketsComponent implements OnInit {
 
   /** variable to hold an array of 'Bucket' entities */
   buckets: Bucket[];
+  categories : Category[];
   /** variable to hold bucket being edited */
   currBucket: Bucket;
   /** variable to hold new bucket being created  */
@@ -32,7 +34,8 @@ export class SkillTypeBucketsComponent implements OnInit {
     private bucketService: BucketsService,
     private questionService: QuestionsService,
     private modalService: NgbModal,
-    private alertsService: AlertsService, ) { }
+    private alertsService: AlertsService,
+    private categoryService : CategoryService) { }
 
   filter: Bucket = new Bucket();
   ngOnInit() {
@@ -44,6 +47,11 @@ export class SkillTypeBucketsComponent implements OnInit {
       this.buckets = buckets;
       this.buckets.sort(this.compare);
     });
+    // this.categoryService.fetchAll().subscribe(categories => {
+    //   this.categories = categories;
+    //   console.log(categories);
+    //
+    // });
   }
 
   /** used to compare buckets Array to sort it based on status */
@@ -85,9 +93,24 @@ export class SkillTypeBucketsComponent implements OnInit {
     }
   }
 
+  confirmDelete(bucket: Bucket){
+    this.currBucket = bucket;
+  }
 
-
-
+  deleteBucket(){
+    this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe( result => {
+      this.getBuckets();
+    });
+  /*deleteBucket(bucketParam: Bucket){
+    if (!bucketParam) { bucketParam = this.currBucket; }
+    if (bucketParam) {
+      console.log(bucketParam.isActive);
+      this.bucketService.deleteBucket(bucketParam.bucketId);
+      //   this.getBuckets();
+      // });
+      // this.savedSuccessfully();
+    }*/
+  }
 
   /** Creates new bucket */
   createBucket() {
@@ -107,8 +130,8 @@ export class SkillTypeBucketsComponent implements OnInit {
       this.newBucket = new Bucket();
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.newBucket.bucketCategory = '';
-      this.newBucket.bucketDescription = '';
+      this.newBucket.category = '';
+      this.newBucket.description = '';
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();

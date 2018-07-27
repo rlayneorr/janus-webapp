@@ -13,7 +13,7 @@ import { UrlService } from '../../../../gambit-client/services/urls/url.service'
     // tslint:disable:prefer-const
     let associate = new Associate();
     let asso2 = new Associate();
-    let assoList = new Array<Associate>();
+    let assoList = [];
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [AssociateService, HttpClient, HttpHandler, UrlService],

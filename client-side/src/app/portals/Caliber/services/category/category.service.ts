@@ -95,7 +95,7 @@ public fetchAll(): Observable<Category[]> {
   // }
 
   public create(category: Category): Observable<Category> {
-      const url = this.urlService.category.create();
+      const url = this.urlService.category.createCategory();
       return this.httpClient.post<Category>(url, JSON.stringify(category));
     }
 
@@ -108,7 +108,7 @@ public fetchAll(): Observable<Category[]> {
    * @param category: Category
    */
   public update(category: Category): Observable<Category> {
-    const url = this.urlService.category.update(category.categoryId);
+    const url = this.urlService.category.updateCategory(category.categoryId);
     return this.httpClient.put<Category>(url, JSON.stringify(category));
   }
 
@@ -119,7 +119,7 @@ public fetchAll(): Observable<Category[]> {
   public delete(category: Category) {
     console.log("We made it to the SERVICE!");
     console.log(category);
-    const url = this.urlService.category.delete(category.categoryId);
+    const url = this.urlService.category.deleteCategory(category.categoryId);
     return this.httpClient.delete<Category>(url);
   }
 }

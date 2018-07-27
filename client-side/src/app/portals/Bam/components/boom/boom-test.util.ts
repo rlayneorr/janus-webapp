@@ -147,7 +147,7 @@ export class BoomUtil {
      * list of ids
      */
     static getSubtopicByIds(ids: number[]): Array<Subtopic> {
-        const subtopics: Array<Subtopic> = new Array<Subtopic>();
+        const subtopics: Array<Subtopic> = [];
         for (const id in ids) {
             if (ids.hasOwnProperty(id)) {
                 subtopics.push(new Subtopic(ids[id], '',

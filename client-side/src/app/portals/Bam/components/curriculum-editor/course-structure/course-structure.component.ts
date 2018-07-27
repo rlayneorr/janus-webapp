@@ -23,8 +23,8 @@ export class CourseStructureComponent implements OnInit {
   allCurriculums: Curriculum[];
   allCurriculumNames: string[] = [];
   uniqCurrNames: string[];
-  allCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
-  uniqCurrVersions: Array<Curriculum[]> = new Array<Curriculum[]>();
+  allCurrVersions: Array<Curriculum[]> = [];
+  uniqCurrVersions: Array<Curriculum[]> = [];
   selectedCurrVer: any = 0;
   selectedTypeIndex: any = 0;
   @Output() messageEvent = new EventEmitter<Curriculum>();
@@ -50,7 +50,7 @@ export class CourseStructureComponent implements OnInit {
         if (data[0].subtopics.length === 0) {
           this.update([]);
         }
-        const weeks: CurriculumSubtopic[] = new Array<CurriculumSubtopic>();
+        const weeks: CurriculumSubtopic[] = [];
         const subtopics = data[0].subtopics;
         let i;
         for (i = 0; i < subtopics.length; i++) {

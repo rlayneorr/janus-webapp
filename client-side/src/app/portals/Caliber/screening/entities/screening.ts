@@ -1,4 +1,4 @@
-import { Tag } from './tag';
+// import { Tag } from './tag';
 import { Candidate } from './Candidate';
 import { CaliberTrainer } from './caliberTrainer';
 import { SkillType } from './skillType';
@@ -8,8 +8,8 @@ import { SkillType } from './skillType';
 */
 export interface Screening {
   screeningID: number;
-  candidateID: number;
-  screenerID: number;
+  candidate: Candidate;
+  trainer: number;
   skillTypeID: number;
   compositeScore: number;
   aboutMeCommentary: string;
