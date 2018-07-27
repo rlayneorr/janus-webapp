@@ -19,9 +19,9 @@
         <!-- <ng-container *ngFor="let i = index; let scheduledScreening of scheduledScreenings | searchPipe: searchText | paginate: { itemsPerPage: 10, currentPage: p } "> -->
           <!-- <tr (click)="showBeginScreeningPrompt = !showBeginScreeningPrompt; selectedCandidate = scheduledScreening.trainee; selectedScheduledScreening = scheduledScreening"> -->
             <tr *ngFor="let candidate of allCandidates">
-            <td>{{candidate.firstName}} {{candidate.lastName}}</td>
-            <td>{{candidate.skillTypeName}}</td>
-            <td>{{candidate.schedule | date:'short'}}</td>
+            <td>{{candidate.name}} </td>
+            <td>{{candidate.skypeId}}</td>
+            <td>{{candidate.email}}</td>
           </tr>
         <!-- </ng-container> -->
       </tbody>
@@ -30,7 +30,7 @@
     <div id="myModal" class="modal animated fadeIn" [style.display]="toggleBeginScreeningPrompt()">
       <!-- Modal content -->
       <div class="modal-content">
-        <h2 *ngIf="selectedCandidate">You Chose "{{selectedCandidate.firstname}} {{selectedCandidate.lastname}}"</h2>
+        <h2 *ngIf="selectedCandidate">You Chose "{{selectedCandidate.name}}"</h2>
         <div class="buttons">
           <button class="btn" type="submit" (click)="confirmSelectedCandidate(); beginScreening()" routerLink="/Caliber/screening/introduction" routerLinkActive="activeLink">Begin Interview</button>
           <button class="btn" (click)="showBeginScreeningPrompt = !showBeginScreeningPrompt">Back To List</button>

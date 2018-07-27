@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // routing
 import { routes } from './caliber.routes';
 import { SpringInterceptor } from './interceptors/spring.interceptor';
+import { RouterTestingModule } from '@angular/router/testing';
 
 // services
 import { BatchService } from './services/batch.service';
@@ -175,7 +176,8 @@ export const Dependencies = {
     HttpModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    RouterModule.forChild(routes),
+    //RouterModule.forChild(routes),
+    RouterTestingModule,
     FormsModule,
     ChartsModule,
     ReactiveFormsModule,
@@ -350,8 +352,12 @@ export const Dependencies = {
     CandidateService,
     SkillTypeService,
     SkillTypesService,
+    SoftSkillsService,
+    SoftSkillsViolationService,
+    ViolationTypeService,
     QuestionScoreService,
     QuestionsToBucketsUtil,
+    ScoresToBucketsUtil,
     ScreeningService,
     SkillTypeBucketService,
     ScheduleScreeningService,

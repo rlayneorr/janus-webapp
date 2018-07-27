@@ -26,7 +26,7 @@ export const environment = {
   /** Zuul endpoint  */
   gambitContext: 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000',
   caliberContext: 'http://ec2-54-86-6-122.compute-1.amazonaws.com:8761',
-  localhostcontext: 'http://localhost:3000',
+  localhostContext: 'http://localhost:3000',
 
   categoryContext: 'http://localhost:3001',
   weightContext: 'http://localhost:3003',

@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { Dependencies } from '../../../caliber.test.module';
 import { FinalReportComponent } from './final-report.component';
 import { ScreeningService } from '../../services/screening/screening.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
@@ -13,18 +13,13 @@ import { AlertsService } from '../../../services/alerts.service';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 
 // Author: David Gustafson
-// Can't test because of error: "Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https"
 
 describe('FinalReportComponent', () => {
   let component: FinalReportComponent;
   let fixture: ComponentFixture<FinalReportComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FinalReportComponent ],
-      providers: [ ScreeningService, HttpClient, HttpHandler, CandidateService, SkillTypeService,
-        SkillTypeBucketService, QuestionScoreService, ScoresToBucketsUtil, AlertsService, SoftSkillsViolationService ]
-    })
+    TestBed.configureTestingModule(Dependencies)
     .compileComponents();
   }));
 
@@ -33,5 +28,27 @@ describe('FinalReportComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  /**
+   * Test if it copied to clipboard successfully.
+   *
+   * Function tested: copyToClipboard();
+   **/
+  it('should save successfully',
+  inject([AlertsService], (service: AlertsService) => {
+    component.copyToClipboard();
+    let msg = '';
+    let ty = '';
+    service.getMessage().subscribe((s) => {
+      ty = s.type;
+      msg = s.text;
+      expect(ty).toEqual('success');
+      expect(msg).toEqual('Copied to Clipboard');
+    });
+  }));
 
 });

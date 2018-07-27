@@ -12,7 +12,7 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 import { QuestionComponent } from './question.component';
 
 // Entities
-import { Question } from '../../../entities/Question';
+import { Question } from '../entities/Question';
 //import { Tag } from '../entities/Tag';
 
 // Services
@@ -36,7 +36,7 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 /**
  * Setting up the testing environment for question component.
  **/
-fdescribe('QuestionComponent', () => {
+describe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
 

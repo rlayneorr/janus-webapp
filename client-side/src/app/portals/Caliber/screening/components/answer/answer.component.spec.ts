@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Dependencies } from '../../../caliber.test.module';
 
 import { AnswerComponent } from './answer.component';
 
@@ -7,9 +8,7 @@ describe('AnswerComponent', () => {
   let fixture: ComponentFixture<AnswerComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AnswerComponent ]
-    })
+    TestBed.configureTestingModule(Dependencies)
     .compileComponents();
   }));
 
