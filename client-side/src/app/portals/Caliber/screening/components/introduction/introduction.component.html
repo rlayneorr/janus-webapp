@@ -13,14 +13,14 @@
     </div>
 
     <hr>
-    <h2>Skills (required)</h2>
+    <h2>Categories (1 or more required)</h2>
     <div id="skills-checkbox" class="skills-checkbox">
-      <!--<div class="skill" *ngFor="let tag of tagList; let i = index">-->
+      <!--<div class="skill" *ngFor="let category of allCategories; let i = index">-->
         <!-- Create a checkbox for each tag using ngFor. Toggle buttons instead of checkboxes! -->
         <span>
-          <!--{{tag.tagName}}-->
+          <p>{{category.categoryName}}</p>
           <label class="switch">
-            <!--<input type="checkbox" (change)="updateTagList(tag, $event.target.checked)" id="checkbox{{i}}">-->
+            <!--<input type="checkbox" (change)="updateCategoryList(category, $event.target.checked)" id="checkbox{{i}}">-->
             <span class="slider round"></span>
           </label>
         </span>
@@ -36,7 +36,7 @@
           <br>
           <textarea class="form-control" (input)="comment = $event.target.value" id="inputComment" name="commentBox" placeholder="Optional Feedback"></textarea>
           <br>
-          <!--<button class="btn" (click)="onSubmit()" id="submit-button" [disabled]="skillChosen()" routerLink="/Caliber/screening/questions" routerLinkActive="activeLink">Begin Questions</button>-->
+          <!--<button class="btn" (click)="onSubmit()" id="submit-button" [disabled]="categoryChosen()" routerLink="/Caliber/screening/questions" routerLinkActive="activeLink">Begin Questions</button>-->
         </div>
       </div>
 

@@ -4,7 +4,8 @@ import { QuestionsTableComponent } from './questions-table.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { QuestionService } from '../../services/question/question.service';
-// import { TagService } from '../../../services/tag/tag.service';
+//import { TagService } from '../../../services/tag/tag.service';
+import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
@@ -64,7 +65,7 @@ describe('QuestionsTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [QuestionsTableComponent, NgbModalBackdrop, NgbModalWindow, AnswerComponent, ViolationFlagComponent],
       imports: [FormsModule],
-      providers: [HttpClient, HttpHandler, QuestionService, //TagService, CandidateService,
+      providers: [HttpClient, HttpHandler, QuestionService, /*TagService,*/ CandidateService,
         SkillTypeService, QuestionScoreService, QuestionsToBucketsUtil, NgbModal, NgbModalStack, ScreeningService,
         SkillTypeBucketService, SoftSkillsViolationService, ViolationTypeService, AlertsService]
     });

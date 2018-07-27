@@ -23,7 +23,6 @@ export class QuestionService {
 
   constructor(
     private httpClient: HttpClient,
-    // private tagService: TagService,
     private candidateService: CandidateService,
     private urlService: UrlService
   ) {}
