@@ -163,6 +163,8 @@ import {CategoryService} from "./services/category/category.service";
 import { CategoryWeightsService } from './settings/screening/services/weight.service';
 //import {QuestionService} from "./settings/screening/services/question.service";
 
+import 'rxjs/add/operator/do';
+import {CandidateService} from "./screening/services/candidate/candidate.service";
 
 @NgModule({
   imports: [
@@ -286,7 +288,8 @@ import { CategoryWeightsService } from './settings/screening/services/weight.ser
     BucketsComponent,
     CategoriesComponent,
     QuestionComponent,
-    ScreeningComponent
+    ScreeningComponent,
+    BucketsComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -338,7 +341,8 @@ import { CategoryWeightsService } from './settings/screening/services/weight.ser
     CategoryWeightsService,
     SettingsQuestionService,
     HttpErrorHandlerService,
-    CategoryService
+    CategoryService,
+    CandidateService
   ],
   bootstrap: [
     TrainersComponent
