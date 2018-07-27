@@ -42,13 +42,13 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
-import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
+//import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
 import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-import { TagService } from './services/tag/tag.service';
+//import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';
@@ -165,6 +165,8 @@ import { ReportingService } from './services/reporting.service';
 import { CategoryService } from '../Caliber/services/category/category.service';
 import { CategoryWeightsService } from './settings/screening/services/weight.service';
 
+import 'rxjs/add/operator/do';
+import {CandidateService} from "./screening/services/candidate/candidate.service";
 
 @NgModule({
   imports: [
@@ -289,7 +291,8 @@ import { CategoryWeightsService } from './settings/screening/services/weight.ser
     BucketsComponent,
     CategoriesComponent,
     QuestionComponent,
-    ScreeningComponent
+    ScreeningComponent,
+    BucketsComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -341,7 +344,8 @@ import { CategoryWeightsService } from './settings/screening/services/weight.ser
     CategoryWeightsService,
     SettingsQuestionService,
     HttpErrorHandlerService,
-    CategoryService
+    CategoryService,
+    CandidateService
   ],
   bootstrap: [
     TrainersComponent

@@ -111,7 +111,7 @@ export class PDFService {
    */
   public downloadPDFwithFeedback() {
     const html = '';
-    this.http.post(environment.localhostcontext + 'report/generate', html).subscribe(response => {},
+    this.http.post(environment.caliberContext + 'report/generate', html).subscribe(response => {},
       err => {}
     );
   }

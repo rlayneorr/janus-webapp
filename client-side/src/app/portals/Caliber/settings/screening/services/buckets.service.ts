@@ -11,7 +11,7 @@ import { Subject } from 'rxjs/Subject';
 import { Bucket } from '../entities/Bucket';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
-import { BUCKETS } from '../mock-data/mock-buckets'
+//import { BUCKETS } from '../mock-data/mock-buckets'
 
 /**
    * Imported urlservice to replace hardcoded endpoints
@@ -75,7 +75,7 @@ export class BucketsService {
 //     BUCKETS.forEach(bucket => {
 //         if(bucket.bucketId == bucketId){
 //             return bucket;
-//         }        
+//         }
 //         else
 //             return null;
 //     });
