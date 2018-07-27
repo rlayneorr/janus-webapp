@@ -1,19 +1,172 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "bucketID": 1,
+      "bucketCategory": "Basic Java",
+      "bucketDescription": "OCA level Java questions",
+      "isActive": true,
+      "questions": null
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "bucketID": 2,
+      "bucketCategory": "SQL",
+      "bucketDescription": "SQL database questions",
+      "isActive": true,
+      "questions": null
+    },
+    {
+      "bucketID": 3,
+      "bucketCategory": "JavaScript",
+      "bucketDescription": "JavaScript questions",
+      "isActive": true,
+      "questions": null
+    },
+    {
+      "bucketID": 4,
+      "bucketCategory": "HTML",
+      "bucketDescription": "JavaScript questions",
+      "isActive": true,
+      "questions": null
+    },
+    {
+      "bucketID": 5,
+      "bucketCategory": "CSS",
+      "bucketDescription": "JavaScript questions",
+      "isActive": true,
+      "questions": null
+    },
+    {
+      "bucketID": 6,
+      "bucketCategory": "Spring",
+      "bucketDescription": "JavaScript questions",
+      "isActive": true,
+      "questions": null
+    },
+    {
+      "bucketID": 7,
+      "bucketCategory": "Angular",
+      "bucketDescription": "JavaScript questions",
+      "isActive": true,
+      "questions": null
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "category": [
+    {
+      "categoryId": 0,
+      "categoryName": "category0"
+    },
+    {
+      "categoryId": 1,
+      "categoryName": "category1"
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "category3"
+    },
+    {
+      "categoryId": 4,
+      "categoryName": "category4"
+    },
+    {
+      "categoryId": 5,
+      "categoryName": "category5"
+    },
+    {
+      "categoryId": 6,
+      "categoryName": "category6"
+    },
+    {
+      "categoryId": 7,
+      "categoryName": "category7"
+    },
+    {
+      "categoryId": 8,
+      "categoryName": "category8"
+    },
+    {
+      "categoryId": 9,
+      "categoryName": "category9"
+    },
+    {
+      "categoryId": 10,
+      "categoryName": "category10"
+    },
+    {
+      "categoryId": 11,
+      "categoryName": "category11"
+    },
+    {
+      "categoryId": 12,
+      "categoryName": "category12"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": 0,
+      "bucketId": 2,
+      "questionText": "whuts yr favorite color",
+      "sampleAnswer1": "answer1",
+      "sampleAnswer2": "answer2",
+      "sampleAnswer3": "answer3",
+      "sampleAnswer4": "answer4",
+      "sampleAnswer5": "answer5"
+    },
+    {
+      "questionId": 1,
+      "bucketId": 2,
+      "questionText": "bleh",
+      "sampleAnswer1": "bhahfha",
+      "sampleAnswer2": "dsflkj",
+      "sampleAnswer3": "eiei",
+      "sampleAnswer4": "qq",
+      "sampleAnswer5": "rew"
+    },
+    {
+      "questionId": 2,
+      "bucketId": 1,
+      "questionText": "000000",
+      "sampleAnswer1": "asdf",
+      "sampleAnswer2": "mnbb",
+      "sampleAnswer3": "rewq",
+      "sampleAnswer4": "hjkl",
+      "sampleAnswer5": "poiu"
+    }
+  ],
+  "skillTypes": [
+    {
+      "skillTypeID": 52,
+      "skillTypeName": "Java EE/Microservices",
+      "isActive": true
+    },
+    {
+      "skillTypeID": 53,
+      "skillTypeName": "PEGA",
+      "isActive": true
+    },
+    {
+      "skillTypeID": 54,
+      "skillTypeName": "Selenium",
+      "isActive": true
+    },
+    {
+      "skillTypeID": 55,
+      "skillTypeName": "Business Analysts",
+      "isActive": true
+    },
+    {
+      "skillTypeID": 56,
+      "skillTypeName": ".NET",
+      "isActive": true
+    },
+    {
+      "skillTypeID": 57,
+      "skillTypeName": "C++",
+      "isActive": true
+    },
+    {
+      "skillTypeID": 58,
+      "skillTypeName": "Other",
+      "isActive": true
+    }
+  ]
 }

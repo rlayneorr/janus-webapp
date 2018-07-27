@@ -211,6 +211,7 @@ import { CategoryService } from './services/category/category.service';
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
+    //BucketFilterPipe,
     CategoryFilterPipe,
 
     // components

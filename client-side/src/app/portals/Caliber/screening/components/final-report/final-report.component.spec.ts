@@ -19,7 +19,11 @@ describe('FinalReportComponent', () => {
   let fixture: ComponentFixture<FinalReportComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule(Dependencies)
+    TestBed.configureTestingModule({
+      declarations: [ FinalReportComponent ],
+      providers: [ ScreeningService, HttpClient, HttpHandler, CandidateService, SkillTypeService,
+        SkillTypeBucketService, QuestionScoreService, ScoresToBucketsUtil, AlertsService, SoftSkillsViolationService ]
+    })
     .compileComponents();
   }));
 

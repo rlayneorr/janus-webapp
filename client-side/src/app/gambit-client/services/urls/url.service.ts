@@ -241,7 +241,7 @@ export class UrlService {
     putQuestion: () => `${this.questionEndpoint}`,
     getQuestionsByBucketId: (bucketId: number) => `${this.questionEndpoint}/bucket/${bucketId}`,
     // Tyerra Smith added a url to get ALL questions
-    getQuestions: () => `${this.questionEndpoint}/questions`,
+    getQuestions: () => `${this.questionEndpoint}`,
     deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
     activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
     filteredQuestions: () => `${this.questionEndpoint}/filter`,

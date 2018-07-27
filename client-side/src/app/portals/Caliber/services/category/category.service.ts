@@ -108,7 +108,7 @@ public fetchAll(): Observable<Category[]> {
    * @param category: Category
    */
   public update(category: Category): Observable<Category> {
-    const url = this.urlService.category.update();
+    const url = this.urlService.category.update(category.categoryId);
     return this.httpClient.put<Category>(url, JSON.stringify(category));
   }
 
