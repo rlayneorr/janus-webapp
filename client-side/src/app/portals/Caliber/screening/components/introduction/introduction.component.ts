@@ -11,7 +11,7 @@ import { CategoryService } from '../../../../../portals/Caliber/services/categor
 import { ScreeningService } from '../../services/screening/screening.service';
 
 import { SKILLTYPES } from '../../mock-data/mock-skillTypes';
-import { SCHEDULEDSCREENINGS } from '../../mock-data/mock-scheduled-screening';
+// import { SCHEDULEDSCREENINGS } from '../../mock-data/mock-scheduled-screening';
 
 // import { Tag } from '../../entities/tag';
 import { SkillType } from '../../entities/skillType';
@@ -64,10 +64,10 @@ export class IntroductionComponent implements OnInit {
       console.log(this.allCategories);
     });
     this.categoriesSelected = [];
-    this.currentScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
-    this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
-    this.candidateService.getSelectedCandidate().lastName;
-    this.candidateTrack = this.candidateService.getSelectedCandidate().skillTypeName;
+    //this.currentScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
+    //this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
+    //this.candidateService.getSelectedCandidate().lastName;
+    //this.candidateTrack = this.candidateService.getSelectedCandidate().skillTypeName;
     //this.getTags();
   }
 
