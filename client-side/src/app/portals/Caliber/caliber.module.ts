@@ -42,12 +42,13 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
-import { CandidateService } from './screening/services/candidate/candidate.service';
+//import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
+import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-// import { TagService } from './services/tag/tag.service';
+//import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';
@@ -57,6 +58,8 @@ import { SkillTypeBucketService } from './screening/services/skillTypeBucketLook
 import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
+import { SettingsCategoriesService } from './settings/screening/services/categories.service';
+import { SettingsQuestionService } from './settings/screening/services/question.service';
 import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
 /** for in memory data service
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
@@ -152,15 +155,18 @@ import { ScheduleScreeningService } from './screening/services/schedule-screenin
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
 import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
+import { BucketsComponent } from './settings/screening/buckets/buckets.component';
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
-//import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
+import { BucketFilterPipe } from './settings/screening/buckets/buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
-import {QuestionService} from "./settings/screening/services/question.service";
-import { CategoryService } from './services/category/category.service';
+import { CategoryService } from '../Caliber/services/category/category.service';
+import { CategoryWeightsService } from './settings/screening/services/weight.service';
 
+import 'rxjs/add/operator/do';
+import {CandidateService} from "./screening/services/candidate/candidate.service";
 
 @NgModule({
   imports: [
@@ -175,7 +181,7 @@ import { CategoryService } from './services/category/category.service';
     SimpleNotificationsModule.forRoot(),
     ScrollEventModule,
     Ng2PageScrollModule,
-    NgxPaginationModule
+    NgxPaginationModule,
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -211,7 +217,7 @@ import { CategoryService } from './services/category/category.service';
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
-    //BucketFilterPipe,
+    BucketFilterPipe,
     CategoryFilterPipe,
 
     // components
@@ -282,9 +288,11 @@ import { CategoryService } from './services/category/category.service';
     ViolationFlagComponent,
     SkillTypesComponent,
     BucketComponent,
+    BucketsComponent,
     CategoriesComponent,
     QuestionComponent,
-    ScreeningComponent
+    ScreeningComponent,
+    BucketsComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
@@ -332,10 +340,12 @@ import { CategoryService } from './services/category/category.service';
     QuestionsService,
     SkillTypesService,
     BucketsService,
+    SettingsCategoriesService,
+    CategoryWeightsService,
+    SettingsQuestionService,
     HttpErrorHandlerService,
-    CandidateService,
-    CategoriesService,
-    CategoryService
+    CategoryService,
+    CandidateService
   ],
   bootstrap: [
     TrainersComponent

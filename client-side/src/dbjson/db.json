@@ -67,36 +67,30 @@
       "questions": null
     }
   ],
-  "categories": [
+  "category": [
     {
       "categoryId": 0,
-      "skillCategory": "skill0",
-      "active": true
+      "skillCategory": "skill0"
     },
     {
       "categoryId": 1,
-      "skillCategory": "skill1",
-      "active": false
+      "skillCategory": "skill1"
     },
     {
       "categoryId": 2,
-      "skillCategory": "skill2",
-      "active": false
+      "skillCategory": "skill2"
     },
     {
       "categoryId": 3,
-      "skillCategory": "skill3",
-      "active": true
+      "skillCategory": "skill3"
     },
     {
       "categoryId": 4,
-      "skillCategory": "skill4",
-      "active": false
+      "skillCategory": "skill4"
     },
     {
       "categoryId": 5,
-      "skillCategory": "skill5",
-      "active": false
+      "skillCategory": "skill5"
     }
   ],
   "category": [

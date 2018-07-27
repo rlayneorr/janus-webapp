@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ViolationType } from '../../entities/violationType';
-import { VIOLATION_TYPES } from '../../mock-data/mock-violationTypes';
+//import { VIOLATION_TYPES } from '../../mock-data/mock-violationTypes';
 import { of } from 'rxjs/observable/of';
 import { HttpClient } from '@angular/common/http';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
