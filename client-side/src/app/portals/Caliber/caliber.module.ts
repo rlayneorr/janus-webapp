@@ -217,7 +217,7 @@ import {CandidateService} from "./screening/services/candidate/candidate.service
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
-    //BucketFilterPipe,
+    BucketFilterPipe,
     CategoryFilterPipe,
 
     // components
