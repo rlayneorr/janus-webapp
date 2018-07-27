@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ScreenerBucketsService } from './screener-buckets.service';
 
-describe('ScreenerBucketsService', () => {
+fdescribe('ScreenerBucketsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ScreenerBucketsService]

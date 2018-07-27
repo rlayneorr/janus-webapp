@@ -29,7 +29,7 @@ fdescribe('CategoryService', () => {
   let categoryService: CategoryService;
   const alertsService: AlertsService = new AlertsService();
 
-  fit('fetchAll() should make Http get request, and return the categories that it fetched', () => {
+  it('fetchAll() should make Http get request, and return the categories that it fetched', () => {
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     categoryService = new CategoryService(<any> httpClientSpyOnGet, alertsService);
 
@@ -58,7 +58,7 @@ fdescribe('CategoryService', () => {
   //   expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   // });
 
-  fit('fetchById() should make Http get request, and return the category that it fetched', () => {
+  it('fetchById() should make Http get request, and return the category that it fetched', () => {
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     categoryService = new CategoryService(<any> httpClientSpyOnGet, alertsService);
 
@@ -72,7 +72,7 @@ fdescribe('CategoryService', () => {
     expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   });
 
-  fit('create() should make Http post request, and return the category that it created', () => {
+  it('create() should make Http post request, and return the category that it created', () => {
     httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
     categoryService = new CategoryService(<any> httpClientSpyOnPost, alertsService);
 
@@ -86,7 +86,7 @@ fdescribe('CategoryService', () => {
     expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
   });
 
-  fit('update() should make Http put request, and return the category that it altered', () => {
+  it('update() should make Http put request, and return the category that it altered', () => {
     httpClientSpyOnPut = jasmine.createSpyObj('http', ['put']);
     categoryService = new CategoryService(<any> httpClientSpyOnPut, alertsService);
 
@@ -100,7 +100,7 @@ fdescribe('CategoryService', () => {
     expect(httpClientSpyOnPut.put.calls.count()).toBe(1, 'one call');
   });
 
-  fit('delete() should make Http delete request, and return the category that it deleted', () => {
+  it('delete() should make Http delete request, and return the category that it deleted', () => {
     httpClientSpyOnDelete = jasmine.createSpyObj('http', ['delete']);
     categoryService = new CategoryService(<any> httpClientSpyOnDelete, alertsService);
 

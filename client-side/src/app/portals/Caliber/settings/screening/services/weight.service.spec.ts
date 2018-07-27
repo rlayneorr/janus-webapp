@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { CategoryWeightsService } from './weight.service';
 
-describe('CategoryWeightsService', () => {
+fdescribe('CategoryWeightsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [CategoryWeightsService]

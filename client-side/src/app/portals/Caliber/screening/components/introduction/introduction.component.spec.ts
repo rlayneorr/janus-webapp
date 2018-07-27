@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing'
 // Entities
 import { IntroductionComponent } from './introduction.component';
 
-describe('SkillTypeBucketsComponent', () => {
+fdescribe('SkillTypeBucketsComponent', () => {
   let component: IntroductionComponent;
   let fixture: ComponentFixture<IntroductionComponent>;
 

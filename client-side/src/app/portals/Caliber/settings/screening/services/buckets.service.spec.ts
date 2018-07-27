@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { BucketsService } from './buckets.service';
 
-describe('BucketsService', () => {
+fdescribe('BucketsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [BucketsService]

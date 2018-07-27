@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ViolationTypeService } from './violationType.service';
 
-describe('ViolationService', () => {
+fdescribe('ViolationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ViolationTypeService]

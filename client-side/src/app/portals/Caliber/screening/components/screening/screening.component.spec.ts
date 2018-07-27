@@ -5,7 +5,7 @@ import { RouterOutlet, ChildrenOutletContexts } from '@angular/router';
 
 // Author: David Gustafson
 
-describe('ScreeningComponent', () => {
+fdescribe('ScreeningComponent', () => {
   let component: ScreeningComponent;
   let fixture: ComponentFixture<ScreeningComponent>;
 
