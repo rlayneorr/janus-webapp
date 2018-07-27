@@ -4,7 +4,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { QuestionService } from '../services/question.service';
+import { SettingsQuestionService } from '../services/question.service';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { BucketsService } from '../services/buckets.service';
 import { SkillType } from '../entities/SkillType';
@@ -42,7 +42,7 @@ import { AlertsService } from '../../../services/alerts.service';
 export class QuestionComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private fb: FormBuilder,
-    private questionService: QuestionService,
+    private questionService: SettingsQuestionService,
     private bucketService: BucketsService,
     private alertsService: AlertsService) { }
 
@@ -64,6 +64,7 @@ export class QuestionComponent implements OnInit {
     this.sampleAnswers.push(this.question.sampleAnswer4);
     this.sampleAnswers.push(this.question.sampleAnswer5);
     this.updateQuestions();
+    console.log(this.currentBucket)
   }
 
   /**

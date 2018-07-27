@@ -19,7 +19,7 @@
  //const context = 'http://ec2-35-182-210-106.ca-central-1.compute.amazonaws.com:10000';
   //const context = 'http://ec2-18-216-205-109.us-east-2.compute.amazonaws.com:9999';//screening-admin
   //const context = 'http://ec2-18-216-205-109.us-east-2.compute.amazonaws.com:9999';//screening-admin
-  const context = 'http://localhost:3000';
+  const context = 'http://localhost:3000';const context = 'http://localhost:3000'
 
 const bam = '';
 
