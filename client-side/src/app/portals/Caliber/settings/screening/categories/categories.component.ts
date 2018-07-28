@@ -77,6 +77,7 @@ export class CategoriesComponent implements OnInit {
 
   /** Stores the value of selected bucket to a 'currBucket' */
   editCategory(category: Category) {
+    console.log("im edditing..", category);
     this.currentCategory = category;
   }
 
@@ -144,8 +145,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   checkContains(bucket: Bucket) {
+    console.log("check cointains,.,", bucket, " category: ", this.currentCategory);
     if (this.currentCategory) {
-        return this.currentCategory.buckets.includes(bucket);
+      return this.currentCategory.categoryId === bucket.categoryId;
     }
     return false;
   }
