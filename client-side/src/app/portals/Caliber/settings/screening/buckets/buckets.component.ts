@@ -43,15 +43,25 @@ export class BucketsComponent implements OnInit {
   }
 
   getBuckets(): void {
-    this.bucketService.getAllBuckets().subscribe(buckets => {
-      this.buckets = buckets;
-      this.buckets.sort(this.compare);
+
+    this.categoryService.fetchAll().subscribe(categories => {
+      this.categories = categories;
+      console.log(categories);
+
+      this.bucketService.getAllBuckets().subscribe(buckets => {
+        this.buckets = buckets;
+        console.log(this.buckets);
+        this.buckets.map(b=> {
+          b.category = findCategoryTitleById(b.categoryId);
+
+          function findCategoryTitleById (id) {
+            let result = categories.find(c=> c.categoryId === id);
+            return result === undefined ? "FK MISMATCH" : result.title;
+          }
+        });
+        this.buckets.sort(this.compare);
+      });
     });
-    // this.categoryService.fetchAll().subscribe(categories => {
-    //   this.categories = categories;
-    //   console.log(categories);
-    //
-    // });
   }
 
   /** used to compare buckets Array to sort it based on status */
@@ -131,7 +141,7 @@ export class BucketsComponent implements OnInit {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.newBucket.category = '';
-      this.newBucket.description = '';
+      this.newBucket.bucketDescription = '';
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();

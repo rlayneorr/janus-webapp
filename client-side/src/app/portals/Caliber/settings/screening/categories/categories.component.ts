@@ -121,7 +121,8 @@ export class CategoriesComponent implements OnInit {
     if(!this.currentCategory){
         this.currentCategory = {
           categoryId: null,
-          categoryName: null,
+          //categoryName: null,
+          title: null,
           categoryWeight: null,
           buckets: []
         };
@@ -159,7 +160,8 @@ export class CategoriesComponent implements OnInit {
       this.newCategory = new Category();
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.newCategory.categoryName = '';
+      //this.newCategory.categoryName = '';
+      this.newCategory.title = '';
       this.newCategory.buckets = [];
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });

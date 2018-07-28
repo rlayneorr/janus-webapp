@@ -37,6 +37,7 @@ routingToAllCategories = false;
     }
 
     updateCategory(category: Category) {
+      console.log(category);
         return this.http.put(this.urlService.category.updateCategory(category.categoryId), category, httpOptions);
     }
 

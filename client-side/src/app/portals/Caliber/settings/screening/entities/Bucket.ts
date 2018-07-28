@@ -2,9 +2,10 @@ import { Question } from "./Question";
 
 export class Bucket {
     bucketId: number;
-    skillTypeId: number;
+    // skillTypeId: number;
+    categoryId : number;
     category: string;
-    description: string;
+    bucketDescription: string;
     isActive: boolean;
     questions: Question[];
 }
