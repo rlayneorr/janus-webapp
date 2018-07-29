@@ -43,9 +43,16 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label>Name:</label>
-        <br>
-        <input class="form-control" type="text" [(ngModel)]="currBucket.category" [ngModelOptions]="{standalone: true}" />
+
+        <select #selectCategory (change)="getSelectedCategory(selectCategory.value)">
+          <option *ngFor="let cat of categories" [value]="cat.categoryId" [selected]="selectValue">
+            {{cat.title}}
+          </option>
+        </select>
+
+        <!--<label>Name:</label>-->
+        <!--<br>-->
+        <!--<input class="form-control" type="text" [(ngModel)]="currBucket.category" [ngModelOptions]="{standalone: true}" />-->
         <br>
         <label>Description:</label>
         <br>
@@ -73,9 +80,16 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label>Name:</label>
-        <br>
-        <input class="form-control" type="text" [(ngModel)]="newBucket.category" [ngModelOptions]="{standalone: true}" />
+
+        <select #selectCategory (change)="getSelectedCategory(selectCategory.value)">
+          <option *ngFor="let cat of categories" [value]="cat.categoryId">
+            {{cat.title}}
+          </option>
+        </select>
+
+        <!--<label>Name:</label>-->
+        <!--<br>-->
+        <!--<input class="form-control" type="text" [(ngModel)]="newBucket.category" [ngModelOptions]="{standalone: true}" />-->
         <br>
         <label>Description:</label>
         <br>

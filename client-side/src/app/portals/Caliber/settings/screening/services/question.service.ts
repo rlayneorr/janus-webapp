@@ -31,7 +31,7 @@ export class SettingsQuestionService {
    * @param question - question model
    */
   createNewQuestion(question: Question) {
-    return this.http.post(this.urlService.question.postQuestion(), { question: question }, httpOptions);
+    return this.http.post(this.urlService.question.postQuestion(), question, httpOptions);
   }
 
   /**
@@ -42,7 +42,7 @@ export class SettingsQuestionService {
    * @param question
    */
   updateQuestion(question: Question) {
-    return this.http.put(this.urlService.question.putQuestion(), { question: question }, httpOptions);
+    return this.http.put(this.urlService.question.putQuestion(question.questionId), question, httpOptions);
   }
 
   /**
@@ -70,5 +70,14 @@ export class SettingsQuestionService {
   */
   getBucketQuestions(bucketId: number) {
     return this.http.get(this.urlService.question.getQuestionsByBucketId(bucketId));
+  }
+
+  /**
+   * deactivates question
+   * add urlService to get endpoint for deactivating a question
+   * @param questionId
+   */
+  deleteQuestion(questionId: number) {
+    return this.http.delete(this.urlService.question.deleteQuestion(questionId), httpOptions);
   }
 }

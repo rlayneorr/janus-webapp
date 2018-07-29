@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 /** component, service imports */
 import { Bucket } from '../entities/Bucket';
@@ -25,6 +25,8 @@ export class BucketsComponent implements OnInit {
   currBucket: Bucket;
   /** variable to hold new bucket being created  */
   newBucket: Bucket = new Bucket();
+  selectValue : number;
+  category : Category;
 
   /** Modal variables */
   closeResult: string;
@@ -38,6 +40,7 @@ export class BucketsComponent implements OnInit {
     private categoryService : CategoryService) { }
 
   filter: Bucket = new Bucket();
+
   ngOnInit() {
     this.getBuckets();
   }
@@ -84,6 +87,9 @@ export class BucketsComponent implements OnInit {
 
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket: Bucket) {
+    console.log("Bucket: ", bucket);
+    this.selectValue = bucket.categoryId;//.toString();
+    console.log("selected value: ", this.selectValue);
     this.currBucket = bucket;
   }
 
@@ -93,7 +99,12 @@ export class BucketsComponent implements OnInit {
    * @param bucketParam
    */
   updateBucket(bucketParam: Bucket) {
-    if (!bucketParam) { bucketParam = this.currBucket; }
+
+    if (!bucketParam) {
+      bucketParam = this.currBucket;
+      this.currBucket.categoryId = this.newBucket.categoryId;
+      this.currBucket.category = this.newBucket.category;
+    }
     if (bucketParam) {
       console.log(bucketParam.isActive);
       this.bucketService.updateBucket(bucketParam).subscribe(bucket => {
@@ -111,28 +122,23 @@ export class BucketsComponent implements OnInit {
     this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe( result => {
       this.getBuckets();
     });
-  /*deleteBucket(bucketParam: Bucket){
-    if (!bucketParam) { bucketParam = this.currBucket; }
-    if (bucketParam) {
-      console.log(bucketParam.isActive);
-      this.bucketService.deleteBucket(bucketParam.bucketId);
-      //   this.getBuckets();
-      // });
-      // this.savedSuccessfully();
-    }*/
+
+    this.alertsService.success('Successfully Deleted Bucket');
   }
 
   /** Creates new bucket */
   createBucket() {
+    this.newBucket.isActive = false;
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket => {
         this.buckets.push(bucket);
       });
+    this.alertsService.success('Created Successfully');
   }
 
   savedSuccessfully() {
-    this.alertsService.success('Saved successfully');
+    this.alertsService.success('Update Successfully');
   }
 
   open(content) {
@@ -145,6 +151,19 @@ export class BucketsComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();
+  }
+
+  /*
+  *
+  *   Get the value from the Select Dropdown Menu
+  *
+  * */
+   getSelectedCategory($myCategoryId){
+     //getting category by ID
+     let cat = this.categories.find(c=>c.categoryId === +$myCategoryId);
+
+     this.newBucket.category = cat.title;
+     this.newBucket.categoryId = cat.categoryId;
   }
 
   private getDismissReason(reason: any): string {
