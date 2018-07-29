@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 /** component, service imports */
 import { Bucket } from '../entities/Bucket';
@@ -9,12 +9,17 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsService } from '../../../services/alerts.service';
 import {CategoryService} from "../../../services/category/category.service";
 import {Category} from "../../../entities/Category";
+import {fade, removeItem} from "../../../../../Animations/caliber-animations";
 
 
 @Component({
   selector: 'app-buckets',
   templateUrl: './buckets.component.html',
-  styleUrls: ['./buckets.component.css']
+  styleUrls: ['./buckets.component.css'],
+  animations: [
+    fade
+  ]
+
 })
 export class BucketsComponent implements OnInit {
 
@@ -27,6 +32,7 @@ export class BucketsComponent implements OnInit {
   newBucket: Bucket = new Bucket();
   selectValue : number;
   category : Category;
+  state : string = "normal";
 
   /** Modal variables */
   closeResult: string;
@@ -118,11 +124,16 @@ export class BucketsComponent implements OnInit {
     this.currBucket = bucket;
   }
 
+  changeAnimationState(){
+    this.state === "normal" ? this.state = "update" : this.state = "normal";
+  }
+
   deleteBucket(){
-    this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe( result => {
+    this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe(result => {
       this.getBuckets();
     });
-
+    //activate the animation
+    //this.state = "removed";
     this.alertsService.success('Successfully Deleted Bucket');
   }
 
@@ -142,6 +153,8 @@ export class BucketsComponent implements OnInit {
   }
 
   open(content) {
+    //this.state = "removed";
+    //console.log("removed", this.state);
     this.modalService.open(content).result.then((result) => {
       this.newBucket = new Bucket();
       this.closeResult = `Closed with: ${result}`;
