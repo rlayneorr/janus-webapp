@@ -6,7 +6,7 @@ import { SkillType } from './skillType';
 /*
   Entity representing all data related to the screening of a candidate
 */
-export interface Screening {
+export class Screening {
   screeningID: number;
   candidate: Candidate;
   trainer: number;

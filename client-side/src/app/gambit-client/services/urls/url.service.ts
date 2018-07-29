@@ -279,7 +279,7 @@ export class UrlService {
   private screeningEndpoint = `${this.techScreening}/screening`;
   //screeningEndpoint = 'screening-service/screening';
   screening = {
-    scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduledScreenings`,
+    scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduled`,
     startScreening: () => `${this.context + this.screeningEndpoint}/start`,
     endScreening: () => `${this.context + this.screeningEndpoint}/end`,
     introComment: () => `${this.context + this.screeningEndpoint}/introcomment`,
