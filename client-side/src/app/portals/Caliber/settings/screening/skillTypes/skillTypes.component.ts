@@ -26,7 +26,7 @@ import { AlertsService } from '../../../services/alerts.service';
 /**
  * SkillType Component modals are able to attach and detach categories to said skill types.
  * Categories will be provided a weight when they are attached and each skill type must have a max weight of 100.
- * 
+ *
  * @author John Lacap | 1805May-29-Java | WVU | Richard Orr
  */
 export class SkillTypesComponent implements OnInit {
@@ -63,14 +63,14 @@ export class SkillTypesComponent implements OnInit {
             this.categoriesService.routingToAllCategories = false;
             this.tab.activeId = 'tab-2';
         }
-    
+
         this.grabAllBuckets();
         if (this.bucketsService.routingToAllBuckets === true) {
             this.bucketsService.routingToAllBuckets = false;
             this.tab.activeId = 'tab-3';
         }
     }
-    
+
     /**
     * Grabs all skill types and stores the information into a variable
     */
@@ -132,7 +132,7 @@ export class SkillTypesComponent implements OnInit {
                 this.allCategories.push(category);
             }
         }
-        
+
         skillType.categories.forEach(hasCat => {
             this.allCategories.forEach(same => {
                 if(same.title === hasCat.title){
@@ -158,7 +158,7 @@ export class SkillTypesComponent implements OnInit {
 
     /**
      * Sets skillType to be deleted
-     * 
+     *
      * @param skillType: skillType selected
      */
     confirmDelete(skillType: SkillType){
@@ -169,7 +169,7 @@ export class SkillTypesComponent implements OnInit {
      * Deletes skill type and repopulates the list
      */
     deleteSkillType(){
-        if (this.skillType) { 
+        if (this.skillType) {
           this.skillTypeService.deleteSkillType(this.skillType.skillTypeId).subscribe(result => {
             this.grabAllSkillTypes();
           });
@@ -206,8 +206,8 @@ export class SkillTypesComponent implements OnInit {
                 isActive: false
             };
         }
-        
-        if (this.skillType) {            
+
+        if (this.skillType) {
             this.skillType.categories.push(category);
             this.weight = new CategoryWeight;
             this.weight = {
@@ -260,25 +260,32 @@ export class SkillTypesComponent implements OnInit {
 
     /**
      * An onchange callback function that changes the weight of a category associated to a skill type
-     * 
+     *
      * @param skillType: skillType selected
      * @param category: category associated with skillType that was altered
      * @param weight: new value of weight assigned to a category
      */
     weightChange(skillType: SkillType, category: Category, weight: number){
+      console.log("SkillType: ", skillType);
+      console.log("Category: ", category);
+      console.log("Weight: ", weight);
         this.weightsService.getWeightByIds(skillType.skillTypeId, category.categoryId).subscribe(result => {
             this.weight = result;
-        })
-        
-        this.weight.weight = weight;
-        this.weightsService.updateWeight(skillType, category, this.weight);
+            console.log("result: ", result);
+            console.log("this weight: ", this.weight);
+            this.weight.weight = weight;
+            this.weightsService.updateWeight(skillType, category, this.weight).subscribe();
+        });
 
-        this.equalsMax(skillType);
+        //console.log("this.weight.weight: ", this.weight.weight);
+        //this.weightsService.updateWeight(skillType, category, this.weight).subscribe();
+
+        //this.equalsMax(skillType);
     }
 
     /**`
      * Validates whether weights assigned to categories within a skill type equal 100.
-     * 
+     *
      * @param skillType: skillType selected
      */
     equalsMax(skillType: SkillType){
@@ -321,7 +328,7 @@ export class SkillTypesComponent implements OnInit {
             title: '',
             categories: [],
             isActive: false
-        }
+        };
         this.total = 0;
         this.equalsMax(this.skillType);
     }
