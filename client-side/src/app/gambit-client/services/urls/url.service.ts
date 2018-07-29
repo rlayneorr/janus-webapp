@@ -230,13 +230,13 @@ export class UrlService {
   question = {
     postQuestion: () => `${this.context}${this.questionEndpoint}`,
     putQuestion: () => `${this.context}${this.questionEndpoint}`,
-    getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.questionEndpoint}/bucket/${bucketId}`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.adminScreening}/bucket/${bucketId}/question`,
     // Tyerra Smith added a url to get ALL questions
-    getQuestions: () => `${this.context}${this.questionEndpoint}`,
-    deactivateQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}/deactivate`,
-    activateQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}/activate`,
-    filteredQuestions: () => `${this.context}${this.questionEndpoint}/filter`,
-    deleteQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}`,
+    getQuestions: () => `${this.questionEndpoint}`,
+    deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
+    activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
+    filteredQuestions: () => `${this.questionEndpoint}/filter`,
+    deleteQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}`,
   };
 
   //private questionScoringEndpoint = 'question-score-service/question';
