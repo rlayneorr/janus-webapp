@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 /** component, service imports */
 import { Bucket } from '../entities/Bucket';
@@ -9,12 +9,17 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsService } from '../../../services/alerts.service';
 import {CategoryService} from "../../../services/category/category.service";
 import {Category} from "../../../entities/Category";
+import {fade, removeItem} from "../../../../../Animations/caliber-animations";
 
 
 @Component({
   selector: 'app-buckets',
   templateUrl: './buckets.component.html',
-  styleUrls: ['./buckets.component.css']
+  styleUrls: ['./buckets.component.css'],
+  animations: [
+    fade
+  ]
+
 })
 export class BucketsComponent implements OnInit {
 
@@ -25,8 +30,13 @@ export class BucketsComponent implements OnInit {
   currBucket: Bucket;
   /** variable to hold new bucket being created  */
   newBucket: Bucket = new Bucket();
-  selectValue : number;
+  //choose the default value of select
+  selectValue : string;
   category : Category;
+  //custom state for animation
+  state : string = "normal";
+  //user has to confirm to be able to delete
+  confirm : boolean = false;
 
   /** Modal variables */
   closeResult: string;
@@ -54,6 +64,8 @@ export class BucketsComponent implements OnInit {
       this.bucketService.getAllBuckets().subscribe(buckets => {
         this.buckets = buckets;
         console.log(this.buckets);
+
+        //be able to print out the name of the bucket since it doesn't have a bucket name in the database.
         this.buckets.map(b=> {
           b.category = findCategoryTitleById(b.categoryId);
 
@@ -62,6 +74,7 @@ export class BucketsComponent implements OnInit {
             return result === undefined ? "FK MISMATCH" : result.title;
           }
         });
+
         this.buckets.sort(this.compare);
       });
     });
@@ -88,7 +101,7 @@ export class BucketsComponent implements OnInit {
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket: Bucket) {
     console.log("Bucket: ", bucket);
-    this.selectValue = bucket.categoryId;//.toString();
+    this.selectValue = bucket.categoryId.toString();
     console.log("selected value: ", this.selectValue);
     this.currBucket = bucket;
   }
@@ -107,9 +120,7 @@ export class BucketsComponent implements OnInit {
     }
     if (bucketParam) {
       console.log(bucketParam.isActive);
-      this.bucketService.updateBucket(bucketParam).subscribe(bucket => {
-        this.getBuckets();
-      });
+      this.bucketService.updateBucket(bucketParam).subscribe();
       this.savedSuccessfully();
     }
   }
@@ -118,21 +129,55 @@ export class BucketsComponent implements OnInit {
     this.currBucket = bucket;
   }
 
+  changeConfirm(){
+    this.confirm = true;
+    this.removeBucket(this.currBucket);
+  }
+
+  changeAnimationState(){
+    this.state === "normal" ? this.state = "update" : this.state = "normal";
+  }
+
   deleteBucket(){
-    this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe( result => {
+    this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe(result => {
       this.getBuckets();
-    });
+    }, ()=> {this.alertsService.error('Error Deleting Bucket');}, ()=>{this.confirm = false});
 
     this.alertsService.success('Successfully Deleted Bucket');
+  }
+
+  removeBucket(bucket : Bucket) {
+    console.log('confirm is ', this.confirm);
+        //check if user really wants to delete the bucket
+        if(this.confirm === true){
+          for (const bucketIndex in this.buckets) {
+            if (this.buckets[bucketIndex] === bucket) {
+              this.buckets.splice(Number(bucketIndex), 1);
+            }
+          }
+          this.deleteBucket();
+          this.confirm = false;
+        }
   }
 
   /** Creates new bucket */
   createBucket() {
     this.newBucket.isActive = false;
-    // The server will generate the id for this new hero
+
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket => {
+
+        //look for the category id and then return the title
+        for(let x = 0; x < this.categories.length; x++){
+          //if any match then set the title
+          if(bucket.categoryId === this.categories[x].categoryId){
+            bucket.category = this.categories[x].title;
+          }
+        }
+
         this.buckets.push(bucket);
+      }, ()=> {this.alertsService.error('Error Creating Bucket');}, ()=>{
+        //this.getBuckets()
       });
     this.alertsService.success('Created Successfully');
   }
@@ -142,6 +187,8 @@ export class BucketsComponent implements OnInit {
   }
 
   open(content) {
+    //this.state = "removed";
+    //console.log("removed", this.state);
     this.modalService.open(content).result.then((result) => {
       this.newBucket = new Bucket();
       this.closeResult = `Closed with: ${result}`;
@@ -161,7 +208,6 @@ export class BucketsComponent implements OnInit {
    getSelectedCategory($myCategoryId){
      //getting category by ID
      let cat = this.categories.find(c=>c.categoryId === +$myCategoryId);
-
      this.newBucket.category = cat.title;
      this.newBucket.categoryId = cat.categoryId;
   }

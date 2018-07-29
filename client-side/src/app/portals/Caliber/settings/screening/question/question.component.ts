@@ -1,31 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SettingsQuestionService } from '../services/question.service';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { BucketsService } from '../services/buckets.service';
-import { SkillType } from '../entities/SkillType';
 import { AlertsService } from '../../../services/alerts.service';
-
-@Component({
-  selector: 'app-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css'],
-  animations: [
-    trigger('move', [
-      state('center', style({
-        transform: 'translateX(0) scaleX(1)'
-      })),
-      state('left', style({
-        transform: 'translateX(-28%) scaleX(1)'
-      })),
-      transition('center =>left', animate('300ms ease-in')),
-    ]),
-  ]
-})
+import {moveMe} from "../../../../../Animations/caliber-animations";
 
 /**
  * unified create and update question so that it sends the
@@ -39,6 +20,13 @@ import { AlertsService } from '../../../services/alerts.service';
  *
  * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
  */
+
+@Component({
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.css'],
+  animations: [moveMe]
+})
 export class QuestionComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private fb: FormBuilder,
@@ -64,7 +52,6 @@ export class QuestionComponent implements OnInit {
     this.sampleAnswers.push(this.question.sampleAnswer4);
     this.sampleAnswers.push(this.question.sampleAnswer5);
     this.updateQuestions();
-    console.log("current bucket ngoninit", this.currentBucket);
   }
 
   /**
@@ -128,7 +115,6 @@ export class QuestionComponent implements OnInit {
    * with the selected question's sample answers and question text
    **/
   editQuestion(question) {
-    console.log("editing question: ", question);
     this.question = question;
     const i = 0;
     const j = 0;
@@ -162,20 +148,6 @@ export class QuestionComponent implements OnInit {
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    *
    **/
-
-  /*
-  *
-  *     "questionId": 100002,
-        "bucketId": 100007,
-        "isActive": true,
-        "questionText": "answer12",
-        "sampleAnswer1": "answer12",
-        "sampleAnswer2": "strin2g",
-        "sampleAnswer3": "strin1g2",
-        "sampleAnswer4": "string1",
-        "sampleAnswer5": "answer5"
-
-  * */
   addNewQuestion() {
     console.log("addNewQuestion: ", this.question);
     if (this.sampleAnswers.length === 5 && this.question.questionText) {
@@ -185,7 +157,6 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer3 = this.sampleAnswers[2];
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
-        console.log("question if() => ", this.question);
         this.questionService.updateQuestion(this.question).subscribe(data => {
           this.updateQuestions();
         });
@@ -197,7 +168,7 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.question.bucketId = this.currentBucket.bucketId;
-        console.log("question else() => ", this.question);
+        this.question.isActive = true;
         this.questionService.createNewQuestion(this.question).subscribe(data => {
           this.updateQuestions();
         });
@@ -209,9 +180,6 @@ export class QuestionComponent implements OnInit {
       this.savedUnsuccessfull();
     }
   }
-
-
-
 
   deleteQuestion(question):void {
     this.questionService.deleteQuestion(question.questionId).subscribe();
