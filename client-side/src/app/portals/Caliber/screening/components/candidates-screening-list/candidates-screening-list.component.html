@@ -20,7 +20,7 @@
         <!-- <ng-container *ngFor="let i = index; let scheduledScreening of scheduledScreenings | searchPipe: searchText | paginate: { itemsPerPage: 10, currentPage: p } "> -->
           <!-- <tr (click)="showBeginScreeningPrompt = !showBeginScreeningPrompt; selectedCandidate = scheduledScreening.trainee; selectedScheduledScreening = scheduledScreening"> -->
           <tr *ngFor="let candidate of allCandidates" (click)='openModal(viewCand,candidate)'>
-            <td>{{candidate.firstName}} {{candidate.lastName}}</td>
+            <td>{{candidate.name}}</td>
             <td>{{candidate.skillTypeName}}</td>
             <td>{{candidate.schedule | date:'short'}}</td>
           </tr>
