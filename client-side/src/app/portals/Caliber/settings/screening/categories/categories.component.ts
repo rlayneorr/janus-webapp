@@ -144,13 +144,21 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  checkContains(bucket: Bucket) {
-    console.log("check cointains,.,", bucket, " category: ", this.currentCategory);
+  // Check if a bucket and a category is related and if the bucket is active.
+  containsActiveBucket(bucket: Bucket) {
     if (this.currentCategory) {
-      return this.currentCategory.categoryId === bucket.categoryId;
+      return this.currentCategory.categoryId === bucket.categoryId && bucket.isActive;
     }
     return false;
   }
+
+  containsInactiveBucket(bucket: Bucket) {
+    if (this.currentCategory) {
+      return this.currentCategory.categoryId === bucket.categoryId && !bucket.isActive;
+    }
+    return false;
+  }
+
 
 
   savedSuccessfully() {

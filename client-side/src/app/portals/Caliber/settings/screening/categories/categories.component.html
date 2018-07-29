@@ -42,7 +42,7 @@
           <label for="buckets" class="col-sm-6 col-form-label">Active Buckets:</label>
           <div class="col-sm-12">
             <span *ngFor="let bucket of allBuckets">
-              <button type="button" class="input-group-addon pillButtons" (click)="removeBucket(bucket)" *ngIf="checkContains(bucket)">{{bucket.categoryId}}</button>
+              <button type="button" class="input-group-addon pillButtons" (click)="removeBucket(bucket)" *ngIf="containsActiveBucket(bucket)">{{bucket.categoryId}}</button>
             </span>
           </div>
         </div>
@@ -50,7 +50,7 @@
           <label for="allBuckets" class="col-sm-6 col-form-label">Inactive Buckets:</label>
           <div class="col-sm-10 row">
             <span *ngFor="let bucket of allBuckets">
-              <button type="button" class="input-group-addon pillButtons" (click)="addBucket(bucket)" *ngIf="!checkContains(bucket)">{{bucket.categoryId}}</button>
+              <button type="button" class="input-group-addon pillButtons" (click)="addBucket(bucket)" *ngIf="containsInactiveBucket(bucket)">{{bucket.categoryId}}</button>
             </span>
           </div>
         </div>
@@ -88,7 +88,7 @@
           <label for="buckets" class="col-sm-6 col-form-label">Active Buckets:</label>
           <div class="col-sm-12">
             <span *ngFor="let bucket of currentCategory.buckets">
-              <button type="button" class="input-group-addon pillButtons" (click)="removeBucket(bucket)" *ngIf="checkContains(bucket)">{{bucket.category}}</button>
+              <button type="button" class="input-group-addon pillButtons" (click)="removeBucket(bucket)" *ngIf="containsActiveBucket(bucket)">{{bucket.category}}</button>
             </span>
           </div>
         </div>
@@ -96,7 +96,7 @@
           <label for="allBuckets" class="col-sm-6 col-form-label">Inactive Buckets:</label>
           <div class="col-sm-10 row">
             <span *ngFor="let bucket of allBuckets">
-              <button type="button" class="input-group-addon pillButtons" (click)="addBucket(bucket)" *ngIf="!checkContains(bucket)">{{bucket.category}}</button>
+              <button type="button" class="input-group-addon pillButtons" (click)="addBucket(bucket)" *ngIf="containsInactiveBucket(bucket)">{{bucket.category}}</button>
             </span>
           </div>
         </div>
