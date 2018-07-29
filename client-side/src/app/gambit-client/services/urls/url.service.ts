@@ -349,10 +349,10 @@ export class UrlService {
   };
 
   softSkillsViolation = {
-    getViolationTypeURL: () => `${this.context}screening-service/violation/all`,
     getViolationURL: (screeningID: number) => `${this.context}screening-service/screening/violation/${screeningID}`,
     addViolationURL: () => `${this.context}screening-service/violation/flag/`,
     deleteViolationURL: (violationID: number) => `${this.context}screening-service/violation/delete/${violationID}`,
+    getViolationTypeURL: () => `${this.context}/tech-screening/violation/type`,
   };
 
   subtopic = {

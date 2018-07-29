@@ -82,7 +82,7 @@
   #### GET /screening/violation/{screeningID}
     Returns a list of softSkillViolation objects by ScreeningID
 
-  #### GET /violation/all
+  #### GET /violation/type
     Returns a list of all ViolationType
 
   #### GET /violation/delete/{softSkillViolationID}
