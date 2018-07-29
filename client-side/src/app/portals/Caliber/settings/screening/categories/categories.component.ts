@@ -110,9 +110,10 @@ export class CategoriesComponent implements OnInit {
 
   deleteCategory(){
     if (this.currentCategory) {
-      this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe(result => {
-        this.getCategories();
-      });
+      console.log(this.currentCategory)
+      this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe({
+          complete:()=>this.getCategories()
+        });
       this.savedSuccessfully();
     }
   }
