@@ -12,10 +12,11 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 import { QuestionComponent } from './question.component';
 
 // Entities
-import { Question } from '../entities/Question';
+import { Question } from '../../../entities/Question';
 
 // Services
 import { AlertsService } from '../../../services/alerts.service';
+
 
 // Mock Data
 import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
@@ -34,7 +35,6 @@ import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
 describe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
-  
 
   /**
    * Import dependencies and set the TestBed to configure the testing module.
@@ -112,15 +112,6 @@ describe('QuestionComponent', () => {
   it('should remove question',() => {
     component.deleteQuestion(QUESTIONS[0]);
     expect(component.question).toEqual(null);
-  });
-  /**
-   * Test if the question gets edited or not.
-   *
-   * Function Tested: editQuestion()
-   **/
-  it('should edit a question', () => {
-    component.editQuestion(QUESTIONS[0]);
-    expect(component.question).toEqual(QUESTIONS[0]);
   });
 
   /**

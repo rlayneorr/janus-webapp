@@ -53,16 +53,9 @@ describe('CategoriesComponent', () => {
     fixture = TestBed.createComponent(CategoriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    require('jasmine-ajax')
-
-    //jasmine.Ajax.install();
   });
 
-  afterEach(function (){
-    //jasmine.Ajax.uninstall();
-  })
-
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 

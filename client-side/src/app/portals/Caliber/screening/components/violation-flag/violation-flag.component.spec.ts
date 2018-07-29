@@ -20,7 +20,7 @@ xdescribe('ViolationFlagComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ViolationFlagComponent ],
-      providers: [ SoftSkillsViolationService, HttpClient, HttpHandler,
+      providers: [ SoftSkillsViolationService, HttpClient, HttpHandler, CandidateService,
       SkillTypeService, ViolationTypeService, AlertsService ]
     })
     .compileComponents();

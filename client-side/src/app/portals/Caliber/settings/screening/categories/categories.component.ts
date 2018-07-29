@@ -126,8 +126,8 @@ export class CategoriesComponent implements OnInit {
           buckets: []
         };
     }
-    
-    if (this.currentCategory) {            
+
+    if (this.currentCategory) {
         this.currentCategory.buckets.push(bucket);
     }
   }

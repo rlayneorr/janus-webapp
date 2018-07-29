@@ -97,7 +97,11 @@ export class BucketsComponent implements OnInit {
     this.currBucket = bucket;
   }
 
-  deleteBucket(bucketParam: Bucket){
+  deleteBucket(){
+    this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe( result => {
+      this.getBuckets();
+    });
+  /*deleteBucket(bucketParam: Bucket){
     if (!bucketParam) { bucketParam = this.currBucket; }
     if (bucketParam) {
       console.log(bucketParam.isActive);
@@ -105,7 +109,7 @@ export class BucketsComponent implements OnInit {
       //   this.getBuckets();
       // });
       // this.savedSuccessfully();
-    }
+    }*/
   }
 
   /** Creates new bucket */
