@@ -105,7 +105,8 @@ export class SkillTypesComponent implements OnInit {
         this.skillType = {
             skillTypeName: skillType.skillTypeName,
             skillTypeId: skillType.skillTypeId,
-            categories: skillType.categories
+            categories: skillType.categories,
+            isActive: skillType.isActive
         };
 
         this.resetCategories(skillType, null);
@@ -193,7 +194,8 @@ export class SkillTypesComponent implements OnInit {
             this.skillType = {
                 skillTypeName: null,
                 skillTypeId: null,
-                categories: []
+                categories: [],
+                isActive: false
             };
         }
         
@@ -284,7 +286,8 @@ export class SkillTypesComponent implements OnInit {
         this.skillType = {
             skillTypeId: 0,
             skillTypeName: '',
-            categories: []
+            categories: [],
+            isActive: true
         }
         this.total = 0;
         this.equalsMax(this.skillType);

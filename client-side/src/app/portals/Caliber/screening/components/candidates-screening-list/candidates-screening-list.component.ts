@@ -21,13 +21,8 @@ import { SoftSkillsViolationService } from '../../services/soft-skills-violation
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 import { UrlService } from '../../../../../../app/gambit-client/services/urls/url.service';
 
-
 //import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
-import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
-
 // import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
-
-
 // Installed Modules
 // npm install ngx-pagination --save
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
@@ -96,12 +91,13 @@ export class CandidatesScreeningListComponent implements OnInit {
       window.location.reload(true);
     }
 
-    // // retrieve all scheduled interviews and populate the table of screenings.
+    // retrieve all scheduled interviews and populate the table of screenings.
     this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
       this.scheduledScreenings = data;
     });
     //this.allCandidates = CANDIDATES;
     console.log(this.scheduledScreenings);
+    
   }
 
   /* ###########################
@@ -149,7 +145,6 @@ export class CandidatesScreeningListComponent implements OnInit {
   // clicking "Begin Interview" will create a new screening entry in the database
   beginScreening(): void {
     // create a new screening entry in the database by calling the screening service
-
       //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
       this.screeningService.beginScreening(
         // must provide the current scheduled interview object

@@ -4,7 +4,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { QuestionService } from '../services/question.service';
 import { QuestionsService } from '../../../services/questions/questions.service';
 import { SettingsQuestionService } from '../services/question.service';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
