@@ -64,6 +64,8 @@ export class BucketsComponent implements OnInit {
       this.bucketService.getAllBuckets().subscribe(buckets => {
         this.buckets = buckets;
         console.log(this.buckets);
+
+        //be able to print out the name of the bucket since it doesn't have a bucket name in the database.
         this.buckets.map(b=> {
           b.category = findCategoryTitleById(b.categoryId);
 
@@ -72,6 +74,7 @@ export class BucketsComponent implements OnInit {
             return result === undefined ? "FK MISMATCH" : result.title;
           }
         });
+
         this.buckets.sort(this.compare);
       });
     });
@@ -164,8 +167,19 @@ export class BucketsComponent implements OnInit {
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket => {
+
+        //look for the category id and then return the title
+        for(let x = 0; x < this.categories.length; x++){
+          //if any match then set the title
+          if(bucket.categoryId === this.categories[x].categoryId){
+            bucket.category = this.categories[x].title;
+          }
+        }
+
         this.buckets.push(bucket);
-      }, ()=> {this.alertsService.error('Error Creating Bucket');}, ()=>{this.getBuckets()}); //TODO: change need a bucket name
+      }, ()=> {this.alertsService.error('Error Creating Bucket');}, ()=>{
+        //this.getBuckets()
+      });
     this.alertsService.success('Created Successfully');
   }
 
