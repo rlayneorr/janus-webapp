@@ -342,10 +342,11 @@ export class UrlService {
     updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
     deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
 
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
+
   };
 
   softSkillsViolation = {
@@ -462,7 +463,7 @@ export class UrlService {
     createWeight: () => `${this.weightsServiceEndpoint}/weight`,
     getWeights: () => `${this.weightsServiceEndpoint}/weight`,
     getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
-    updateWeight: (skillTypeId: number, categoryId: number, id: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight/${id}`,
+    updateWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
     deleteWeight: (skillTypeId: number, categoryId: number, id: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight/${id}`,
   };
 
