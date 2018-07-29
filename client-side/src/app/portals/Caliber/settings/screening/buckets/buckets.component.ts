@@ -30,9 +30,12 @@ export class BucketsComponent implements OnInit {
   currBucket: Bucket;
   /** variable to hold new bucket being created  */
   newBucket: Bucket = new Bucket();
-  selectValue : number;
+  //choose the default value of select
+  selectValue : string;
   category : Category;
+  //custom state for animation
   state : string = "normal";
+  //user has to confirm to be able to delete
   confirm : boolean = false;
 
   /** Modal variables */
@@ -95,7 +98,7 @@ export class BucketsComponent implements OnInit {
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket: Bucket) {
     console.log("Bucket: ", bucket);
-    this.selectValue = bucket.categoryId;//.toString();
+    this.selectValue = bucket.categoryId.toString();
     console.log("selected value: ", this.selectValue);
     this.currBucket = bucket;
   }
@@ -114,9 +117,7 @@ export class BucketsComponent implements OnInit {
     }
     if (bucketParam) {
       console.log(bucketParam.isActive);
-      this.bucketService.updateBucket(bucketParam).subscribe(bucket => {
-        //this.getBuckets();
-      });
+      this.bucketService.updateBucket(bucketParam).subscribe();
       this.savedSuccessfully();
     }
   }
@@ -138,8 +139,7 @@ export class BucketsComponent implements OnInit {
     this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe(result => {
       this.getBuckets();
     }, ()=> {this.alertsService.error('Error Deleting Bucket');}, ()=>{this.confirm = false});
-    //activate the animation
-    //this.state = "removed";
+
     this.alertsService.success('Successfully Deleted Bucket');
   }
 
@@ -160,11 +160,12 @@ export class BucketsComponent implements OnInit {
   /** Creates new bucket */
   createBucket() {
     this.newBucket.isActive = false;
+    console.log("this.newBucket.category", this.newBucket.category);
     // The server will generate the id for this new hero
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket => {
         this.buckets.push(bucket);
-      }, ()=> {this.alertsService.error('Error Creating Bucket');}, ()=>{});
+      }, ()=> {this.alertsService.error('Error Creating Bucket');}, ()=>{this.getBuckets()}); //TODO: change need a bucket name
     this.alertsService.success('Created Successfully');
   }
 
