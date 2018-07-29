@@ -28,6 +28,7 @@ export class CategoriesComponent implements OnInit {
   /** variable to hold new bucket being created  */
   newCategory: Category = new Category();
 
+  changedBuckets: Bucket[];
   /** Modal variables */
   closeResult: string;
 
@@ -77,10 +78,13 @@ export class CategoriesComponent implements OnInit {
 
   /** Stores the value of selected bucket to a 'currBucket' */
   editCategory(category: Category) {
-    console.log("im edditing..", category);
     this.currentCategory = category;
+    this.changedBuckets = [];
   }
-
+  logState() {
+    console.log("changed:", this.changedBuckets);
+    console.log("CurrentCategory:", this.currentCategory);
+  }
   /**
    * resposible for making call for updatating a bucket
    * when editted or activity toggled
@@ -89,9 +93,13 @@ export class CategoriesComponent implements OnInit {
   updateCategory(catParam: Category) {
     if (!catParam) { catParam = this.currentCategory; }
     if (catParam) {
+      this.logState();
+      this.changedBuckets.forEach(b=>this.bucketService.updateBucket(b).subscribe());
+
       this.categoryService.updateCategory(catParam).subscribe(bucket => {
         this.getCategories();
       });
+      this.logState();
       this.savedSuccessfully();
     }
   }
@@ -102,23 +110,23 @@ export class CategoriesComponent implements OnInit {
 
   deleteCategory(){
     if (this.currentCategory) {
-      this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe(result => {
-        this.getCategories();
-      });
+      console.log(this.currentCategory)
+      this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe({
+          complete:()=>this.getCategories()
+        });
       this.savedSuccessfully();
     }
   }
 
   /** Creates new category */
   createCategory() {
-    this.newCategory.buckets = this.currentCategory.buckets;
     this.categoryService.createCategory(this.newCategory)
       .subscribe(category => {
         this.getCategories();
       });
   }
 
-  addBucket(bucket: Bucket) {
+  addActiveBucket(bucket: Bucket) {
     if(!this.currentCategory){
         this.currentCategory = {
           categoryId: null,
@@ -130,27 +138,38 @@ export class CategoriesComponent implements OnInit {
     }
 
     if (this.currentCategory) {
-        this.currentCategory.buckets.push(bucket);
-    }
-  }
-
-  removeBucket(bucket: Bucket) {
-    if (this.currentCategory) {
-      for (const bucketIndex in this.currentCategory.buckets) {
-        if (this.currentCategory.buckets[bucketIndex] === bucket) {
-          this.currentCategory.buckets.splice(Number(bucketIndex), 1);
-        }
+      bucket.isActive = true;
+      if(!this.changedBuckets.includes(bucket)) {
+        this.changedBuckets.push(bucket);
       }
     }
   }
 
-  checkContains(bucket: Bucket) {
-    console.log("check cointains,.,", bucket, " category: ", this.currentCategory);
+  removeActiveBucket(bucket: Bucket) {
+    console.log("bucket: ", bucket, "\n", "category: ", this.currentCategory);
     if (this.currentCategory) {
-      return this.currentCategory.categoryId === bucket.categoryId;
+      bucket.isActive = false;
+      if(!this.changedBuckets.includes(bucket)) {
+        this.changedBuckets.push(bucket);
+      }
+    }
+  }
+
+  // Check if a bucket and a category is related and if the bucket is active.
+  containsActiveBucket(bucket: Bucket) {
+    if (this.currentCategory && this.currentCategory.categoryId === bucket.categoryId && bucket.isActive) {
+      return true;
     }
     return false;
   }
+
+  containsInactiveBucket(bucket: Bucket) {
+    if (this.currentCategory && this.currentCategory.categoryId === bucket.categoryId && !bucket.isActive) {
+      return true;
+    }
+    return false;
+  }
+
 
 
   savedSuccessfully() {
@@ -164,7 +183,6 @@ export class CategoriesComponent implements OnInit {
     }, (reason) => {
       //this.newCategory.categoryName = '';
       this.newCategory.title = '';
-      this.newCategory.buckets = [];
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();
