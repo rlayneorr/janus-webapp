@@ -33,6 +33,7 @@ export class BucketsComponent implements OnInit {
   selectValue : number;
   category : Category;
   state : string = "normal";
+  confirm : boolean = false;
 
   /** Modal variables */
   closeResult: string;
@@ -114,7 +115,7 @@ export class BucketsComponent implements OnInit {
     if (bucketParam) {
       console.log(bucketParam.isActive);
       this.bucketService.updateBucket(bucketParam).subscribe(bucket => {
-        this.getBuckets();
+        //this.getBuckets();
       });
       this.savedSuccessfully();
     }
@@ -124,6 +125,11 @@ export class BucketsComponent implements OnInit {
     this.currBucket = bucket;
   }
 
+  changeConfirm(){
+    this.confirm = true;
+    this.removeBucket(this.currBucket);
+  }
+
   changeAnimationState(){
     this.state === "normal" ? this.state = "update" : this.state = "normal";
   }
@@ -131,10 +137,24 @@ export class BucketsComponent implements OnInit {
   deleteBucket(){
     this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe(result => {
       this.getBuckets();
-    });
+    }, ()=> {this.alertsService.error('Error Deleting Bucket');}, ()=>{this.confirm = false});
     //activate the animation
     //this.state = "removed";
     this.alertsService.success('Successfully Deleted Bucket');
+  }
+
+  removeBucket(bucket : Bucket) {
+    console.log('confirm is ', this.confirm);
+        //check if user really wants to delete the bucket
+        if(this.confirm === true){
+          for (const bucketIndex in this.buckets) {
+            if (this.buckets[bucketIndex] === bucket) {
+              this.buckets.splice(Number(bucketIndex), 1);
+            }
+          }
+          this.deleteBucket();
+          this.confirm = false;
+        }
   }
 
   /** Creates new bucket */
@@ -144,7 +164,7 @@ export class BucketsComponent implements OnInit {
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket => {
         this.buckets.push(bucket);
-      });
+      }, ()=> {this.alertsService.error('Error Creating Bucket');}, ()=>{});
     this.alertsService.success('Created Successfully');
   }
 
@@ -174,7 +194,6 @@ export class BucketsComponent implements OnInit {
    getSelectedCategory($myCategoryId){
      //getting category by ID
      let cat = this.categories.find(c=>c.categoryId === +$myCategoryId);
-
      this.newBucket.category = cat.title;
      this.newBucket.categoryId = cat.categoryId;
   }
