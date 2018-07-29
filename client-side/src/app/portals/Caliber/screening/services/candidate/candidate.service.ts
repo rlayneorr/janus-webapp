@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs/observable/of';
 import { Candidate } from '../../entities/Candidate';
-//import { CANDIDATES } from '../../mock-data/mock-candidates';
-import { SkillTypeService } from '../skillType/skill-type.service';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 import { AlertsService } from '../../../services/alerts.service';
 
@@ -50,7 +47,7 @@ export class CandidateService {
     return this.selectedCandidate;
   }
 
-  // Get an Observable array of all simple trainees. 
+  // Get an Observable array of all simple trainees.
   //  getCandidates(): Observable<Candidate[]>  {
   //   const allCandidates: Candidate[] = [];
   //   // Get array of skillTypeIds, apply random skillTypeId's to each new SimpleTrainee
