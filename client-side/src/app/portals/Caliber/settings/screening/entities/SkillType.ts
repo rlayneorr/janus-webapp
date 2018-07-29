@@ -4,6 +4,7 @@ import { Skill } from '../../../entities/Skill';
 
 export class SkillType {
     skillTypeId: number;
-    skillTypeName: string;
-    categories: Category[]
+    title: string;
+    categories: Category[];
+    isActive: boolean;
 }
