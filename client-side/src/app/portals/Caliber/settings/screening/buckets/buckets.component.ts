@@ -163,8 +163,7 @@ export class BucketsComponent implements OnInit {
   /** Creates new bucket */
   createBucket() {
     this.newBucket.isActive = false;
-    console.log("this.newBucket.category", this.newBucket.category);
-    // The server will generate the id for this new hero
+
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket => {
 
