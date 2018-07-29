@@ -464,7 +464,11 @@ export class UrlService {
     getWeights: () => `${this.weightsServiceEndpoint}/weight`,
     getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
     updateWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+<<<<<<< HEAD
     deleteWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+=======
+    deleteWeight: (skillTypeId: number, categoryId: number, id: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight/${id}`,
+>>>>>>> 488d30cc627311c37396da7868a275b94bfd3a09
   };
 
   /* Reporting service API endpoints */

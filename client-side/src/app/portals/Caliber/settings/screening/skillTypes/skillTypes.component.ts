@@ -89,6 +89,9 @@ export class SkillTypesComponent implements OnInit {
     this.categoriesService.getCategories().subscribe(results => {
         this.allCategories = results;
         });
+    this.weightsService.getWeights().subscribe(results => {
+        console.log(results);
+    })
     }
 
     /**
@@ -254,8 +257,8 @@ export class SkillTypesComponent implements OnInit {
         this.allWeights.forEach(weight => {
             if(category.categoryId === weight.categoryId){
                 this.weightsService.deleteWeight(this.skillType, category, weight).subscribe(result => {
-                    // console.log("remove result")
-                    // console.log(result)
+                    console.log("remove result")
+                    console.log(result)
                     this.allWeights.splice(this.allWeights.indexOf(weight), 1);
                 })
             }
@@ -370,8 +373,8 @@ export class SkillTypesComponent implements OnInit {
                     this.categoriesService.getCategoryById(weight.categoryId).subscribe(category => {
                         if(!result.categories.includes(category)){
                             this.weightsService.deleteWeight(this.skillType, category, weight).subscribe(result => {
-                                // console.log("delete result")
-                                // console.log(result)
+                                console.log("delete result")
+                                console.log(result)
                             });
                         }
                     });
