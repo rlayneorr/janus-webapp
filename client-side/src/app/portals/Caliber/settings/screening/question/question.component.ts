@@ -64,7 +64,7 @@ export class QuestionComponent implements OnInit {
     this.sampleAnswers.push(this.question.sampleAnswer4);
     this.sampleAnswers.push(this.question.sampleAnswer5);
     this.updateQuestions();
-    console.log(this.currentBucket)
+    console.log("current bucket ngoninit", this.currentBucket);
   }
 
   /**
@@ -128,6 +128,7 @@ export class QuestionComponent implements OnInit {
    * with the selected question's sample answers and question text
    **/
   editQuestion(question) {
+    console.log("editing question: ", question);
     this.question = question;
     const i = 0;
     const j = 0;
@@ -161,25 +162,42 @@ export class QuestionComponent implements OnInit {
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    *
    **/
+
+  /*
+  *
+  *     "questionId": 100002,
+        "bucketId": 100007,
+        "isActive": true,
+        "questionText": "answer12",
+        "sampleAnswer1": "answer12",
+        "sampleAnswer2": "strin2g",
+        "sampleAnswer3": "strin1g2",
+        "sampleAnswer4": "string1",
+        "sampleAnswer5": "answer5"
+
+  * */
   addNewQuestion() {
+    console.log("addNewQuestion: ", this.question);
     if (this.sampleAnswers.length === 5 && this.question.questionText) {
-      if (this.question.questionId) {
+      if (this.question.questionId) { //edit question
         this.question.sampleAnswer1 = this.sampleAnswers[0];
         this.question.sampleAnswer2 = this.sampleAnswers[1];
         this.question.sampleAnswer3 = this.sampleAnswers[2];
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
+        console.log("question if() => ", this.question);
         this.questionService.updateQuestion(this.question).subscribe(data => {
           this.updateQuestions();
         });
         this.updatedSuccessfully();
-      } else {
+      } else {  //new question
         this.question.sampleAnswer1 = this.sampleAnswers[0];
         this.question.sampleAnswer2 = this.sampleAnswers[1];
         this.question.sampleAnswer3 = this.sampleAnswers[2];
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.question.bucketId = this.currentBucket.bucketId;
+        console.log("question else() => ", this.question);
         this.questionService.createNewQuestion(this.question).subscribe(data => {
           this.updateQuestions();
         });
@@ -196,7 +214,7 @@ export class QuestionComponent implements OnInit {
 
 
   deleteQuestion(question):void {
-    //this.questionService.deleteQuestion(this.question.questionId);
+    this.questionService.deleteQuestion(question.questionId).subscribe();
     console.log("delete")
   }
 

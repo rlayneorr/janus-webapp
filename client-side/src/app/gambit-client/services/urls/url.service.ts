@@ -226,17 +226,17 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private questionEndpoint = `${this.context}/${this.adminScreening}/questions`;
+  private questionEndpoint = `${this.context}${this.adminScreening}/question`;
   question = {
-    postQuestion: () => `${this.context}${this.questionEndpoint}`,
-    putQuestion: () => `${this.context}${this.questionEndpoint}`,
-    getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.questionEndpoint}/bucket/${bucketId}`,
+    postQuestion: () => `${this.questionEndpoint}`,
+    putQuestion: (questionId : number) => `${this.questionEndpoint}/${questionId}`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.adminScreening}/bucket/${bucketId}/question`,
     // Tyerra Smith added a url to get ALL questions
-    getQuestions: () => `${this.context}${this.questionEndpoint}`,
-    deactivateQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}/deactivate`,
-    activateQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}/activate`,
-    filteredQuestions: () => `${this.context}${this.questionEndpoint}/filter`,
-    deleteQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}`,
+    getQuestions: () => `${this.questionEndpoint}`,
+    deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
+    activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
+    filteredQuestions: () => `${this.questionEndpoint}/filter`,
+    deleteQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}`,
   };
 
   //private questionScoringEndpoint = 'question-score-service/question';
