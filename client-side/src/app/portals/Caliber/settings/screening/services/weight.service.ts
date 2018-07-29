@@ -45,14 +45,8 @@ routingToAllCategoryWeights = false;
 
     deleteWeight(skillType: SkillType, category: Category, weight: CategoryWeight){
         console.log("delete")
-<<<<<<< HEAD
-        console.log(this.urlService.weight.deleteWeight(skillType.skillTypeId, category.categoryId))
-        console.log(weight)
-        return this.http.delete(this.urlService.weight.deleteWeight(skillType.skillTypeId, category.categoryId), httpOptions);
-=======
         console.log(this.urlService.weight.deleteWeight(skillType.skillTypeId, category.categoryId, weight.weightId))
         console.log(weight)
         return this.http.delete(this.urlService.weight.deleteWeight(skillType.skillTypeId, category.categoryId, weight.weightId), httpOptions);
->>>>>>> 488d30cc627311c37396da7868a275b94bfd3a09
     }
 }
