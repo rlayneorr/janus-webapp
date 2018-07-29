@@ -7,7 +7,7 @@
         <!-- List of all categories -->
         <div class="list-group">
           <div class="list-group-item list-group-item-action" *ngFor="let category of allCategories">
-            <b>{{category.categoryName}}</b><br>
+            <b>{{category.title}}</b><br>
             <i id="delIcon" class="fa fa-trash pull-right" (click)="confirmDelete(category); open(delete)" placement="top" ngbTooltip="delete"></i>
             <i id="penIcon" class="fa fa-pencil pull-right" (click)="editCategory(category); open(edit)" placement="top" ngbTooltip="edit"></i>
           </div>
@@ -33,7 +33,7 @@
       <div class="form-group">
         <label>Name:</label>
         <br>
-        <input class="form-control" type="text" [(ngModel)]="currentCategory.categoryName" [ngModelOptions]="{standalone: true}" />
+        <input class="form-control" type="text" [(ngModel)]="currentCategory.title" [ngModelOptions]="{standalone: true}" />
         <br>
       </div>
 
@@ -79,7 +79,7 @@
       <div class="form-group">
         <label>Name:</label>
         <br>
-        <input class="form-control" type="text" [(ngModel)]="newCategory.categoryName" [ngModelOptions]="{standalone: true}" />
+        <input class="form-control" type="text" [(ngModel)]="newCategory.title" [ngModelOptions]="{standalone: true}" />
         <br>
       </div>
 
