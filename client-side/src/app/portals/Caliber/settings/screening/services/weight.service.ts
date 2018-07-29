@@ -28,22 +28,24 @@ routingToAllCategoryWeights = false;
     public weights: Observable<CategoryWeight[]>;
 
     createWeight(weight: CategoryWeight) {
-        return this.http.post(this.urlService.weight.createWeight(), weight, httpOptions);
+        return this.http.post<CategoryWeight>(this.urlService.weight.createWeight(), weight, httpOptions);
     }
 
     getWeights() {
-        return this.http.get<any[]>(this.urlService.weight.getWeights(), httpOptions);
+        return this.http.get<CategoryWeight[]>(this.urlService.weight.getWeights(), httpOptions);
     }
 
     getWeightByIds(skillTypeId: number, categoryId: number) {
-        return this.http.get<any>(this.urlService.weight.getWeightByIds(skillTypeId, categoryId), httpOptions);
+        return this.http.get<CategoryWeight>(this.urlService.weight.getWeightByIds(skillTypeId, categoryId), httpOptions);
     }
 
     updateWeight(skillType: SkillType, category: Category, weight: CategoryWeight) {
-        return this.http.put(this.urlService.weight.updateWeight(skillType.skillTypeId, category.categoryId, weight.weightId), weight, httpOptions);
+        return this.http.put(this.urlService.weight.updateWeight(skillType.skillTypeId, category.categoryId), weight, httpOptions);
     }
 
     deleteWeight(skillType: SkillType, category: Category, weight: CategoryWeight){
+        console.log("delete")
+        console.log(this.urlService.weight.deleteWeight(skillType.skillTypeId, category.categoryId, weight.weightId))
         console.log(weight)
         return this.http.delete(this.urlService.weight.deleteWeight(skillType.skillTypeId, category.categoryId, weight.weightId), httpOptions);
     }

@@ -41,11 +41,11 @@ routingToAllCategories = false;
     }
 
     getCategories() {
-        return this.http.get<any[]>(this.urlService.category.getCategories());
+        return this.http.get<Category[]>(this.urlService.category.getCategories());
     }
 
     getCategoryById(categoryId: number) {
-        return this.http.get(this.urlService.category.getCategoryById(categoryId));
+        return this.http.get<Category>(this.urlService.category.getCategoryById(categoryId));
     }
 
     deleteCategory(categoryId: number) {

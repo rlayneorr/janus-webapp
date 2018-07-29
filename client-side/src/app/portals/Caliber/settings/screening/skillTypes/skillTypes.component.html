@@ -91,9 +91,9 @@
                     <label for="categories" class="col-sm-6 col-form-label">Active Categories:</label>
                     <div class="col-sm-12">
                             <span>Total: {{total}}% out of 100%</span>
-                      <span *ngFor="let category of skillType.categories">
+                      <span *ngFor="let category of skillType.categories; let i = index">
                           <button type="button" class="input-group-addon pillButtons" (click)="removeCategories(category)" *ngIf="checkContains(category)">{{category.title}}</button>
-                          <input type="number" class="input-group col" (change)="weightChange(skillType, category, this.weight.weight)" [(ngModel)]="this.weight.weight" [ngModelOptions]="{standalone: true}">
+                          <input type="number" class="input-group col" (change)="weightChange(skillType, category, weight.weight)" [(ngModel)]="allWeights[i].weight" [ngModelOptions]="{standalone: true}">
                       </span>
                     </div>
                 </div>
