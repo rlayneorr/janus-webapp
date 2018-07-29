@@ -40,12 +40,13 @@ export class IntroductionComponent implements OnInit {
     private categoryService: CategoryService,
     private candidateService: CandidateService,
     private skillTypeService: SkillTypeService,
-    private screeningService: ScreeningService) { }
+    private screeningService: ScreeningService,
+    private scheduledscreeningService: ScheduleScreeningService ) { }
 
 
   public candidateName: string;
   public candidateTrack: string;
-  public currentScreening: ScheduledScreening;
+  public currentScreeningId: Number;
   // public tagList: Tag[];
   public categoriesSelected: Category[];
   public allCategories: Category[];
@@ -58,12 +59,34 @@ export class IntroductionComponent implements OnInit {
   });
 
   ngOnInit() {
-    //this.tagService.tagListChecked = [];
+    console.log("In the FOR");
+    this.scheduledscreeningService.getScheduleScreenings().subscribe(scheduledScreenings =>{
+      for (let s of scheduledScreenings)
+      {
+        console.log(scheduledScreenings);
+        console.log("In the FOR");
+        console.log(s.scheduledScreeningId.toString());
+        console.log(localStorage.getItem('scheduledScreeningId'));
+        if(s.scheduledScreeningId.toString() === localStorage.getItem('scheduledScreeningId'))
+        {
+          console.log("In the if");
+          this.candidateName = s.candidate.name;
+          //this.candidateTrack = s.skillTypeId;
+          console.log(this.candidateName);
+          // this.screeningService.beginScreening(s, new Date(), 2, 51).subscribe(id =>{
+          //   this.currentScreeningId = id;
+          // });
+        }
+      }
+    })
+  
+    // this.candidateName = this.currentScreening.candidate.name;
     this.categoryService.fetchAll().subscribe(categories =>{
       this.allCategories = (<Category[]> categories);
       console.log(this.allCategories);
     });
     this.categoriesSelected = [];
+    
     //this.currentScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
     //this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
     //this.candidateService.getSelectedCandidate().lastName;
