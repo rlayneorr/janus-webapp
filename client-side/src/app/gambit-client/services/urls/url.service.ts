@@ -319,7 +319,7 @@ export class UrlService {
    * Endpoints for skillType
    */
 
-  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skilltype';
+  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skillType';
   skillTypes = {
     findAll: () => `${this.skillTypesServiceEndpoint}`,
     findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
@@ -456,12 +456,13 @@ export class UrlService {
    * This section is being added for use in the setting screening weight service
    * @author John Lacap
    */
+  private weightsServiceEndpoint = this.context + this.adminScreening;
   weight={
-    createWeight: () => `${this.context}/weights`,
-    getWeights: () => `${this.context}/weights`,
-    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.context}/weights/${skillTypeId}/${categoryId}`,
-    updateWeight: (id: number) => `${this.context}/weights/${id}`,
-    deleteWeight: (id: number) => `${this.context}/weights/${id}`,
+    createWeight: () => `${this.weightsServiceEndpoint}/weight`,
+    getWeights: () => `${this.weightsServiceEndpoint}/weight`,
+    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+    updateWeight: (skillTypeId: number, categoryId: number, id: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight/${id}`,
+    deleteWeight: (skillTypeId: number, categoryId: number, id: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight/${id}`,
   };
 
   /* Reporting service API endpoints */

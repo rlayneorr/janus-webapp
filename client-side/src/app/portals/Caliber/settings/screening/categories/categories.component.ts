@@ -48,6 +48,7 @@ export class CategoriesComponent implements OnInit {
   getCategories(): void {
     this.categoryService.getCategories().subscribe(result => {
       this.allCategories = result;
+      console.log(result);
     });
   }
 
@@ -110,7 +111,11 @@ export class CategoriesComponent implements OnInit {
 
   /** Creates new category */
   createCategory() {
-    this.newCategory.buckets = this.currentCategory.buckets;
+    console.log(this.currentCategory);
+    if(this.currentCategory.buckets){
+      console.log("here");
+      this.newCategory.buckets = this.currentCategory.buckets;
+    }
     this.categoryService.createCategory(this.newCategory)
       .subscribe(category => {
         this.getCategories();
@@ -121,7 +126,7 @@ export class CategoriesComponent implements OnInit {
     if(!this.currentCategory){
         this.currentCategory = {
           categoryId: null,
-          categoryName: null,
+          title: null,
           categoryWeight: null,
           buckets: []
         };
@@ -159,7 +164,7 @@ export class CategoriesComponent implements OnInit {
       this.newCategory = new Category();
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.newCategory.categoryName = '';
+      this.newCategory.title = '';
       this.newCategory.buckets = [];
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
