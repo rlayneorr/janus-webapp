@@ -111,7 +111,7 @@ export class ScreeningService {
   submitIntroComment(comment: string) {
     this.httpClient.post<String>(
       this.urlService.screening.introComment(),
-      { candidateId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
+      { screeningId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
     ).subscribe();
   }
 
