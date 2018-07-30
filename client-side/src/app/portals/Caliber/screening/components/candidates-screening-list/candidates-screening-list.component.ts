@@ -164,8 +164,8 @@ export class CandidatesScreeningListComponent implements OnInit {
         // take the data from the response from the database
         data => {
         // and save the screening ID as a cookie to localStorage.
-        localStorage.setItem('screeningId', data.toString());
-        console.log(localStorage.getItem('screeningId'));
+        localStorage.setItem('screeningID', data.toString());
+        console.log(localStorage.getItem('screeningID'));
       });
   }
 
