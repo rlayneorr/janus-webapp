@@ -38,7 +38,7 @@ export class SkillTypesService {
     }
 
     getSkillTypes() {
-        return this.http.get<any[]>(this.urlService.skillTypes.getSkillTypes());
+        return this.http.get<SkillType[]>(this.urlService.skillTypes.getSkillTypes());
     }
 
     setSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
@@ -52,7 +52,7 @@ export class SkillTypesService {
     }
 
     getSkillTypeById(skillTypeId: number) {
-        return this.http.get(this.urlService.skillTypes.getSkillTypeById(skillTypeId));
+        return this.http.get<SkillType>(this.urlService.skillTypes.getSkillTypeById(skillTypeId));
     }
 
     deleteSkillType(skillTypeId: number) {

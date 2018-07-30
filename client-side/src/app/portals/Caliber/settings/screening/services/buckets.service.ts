@@ -10,6 +10,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { Bucket } from '../entities/Bucket';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import {CategoryService} from "../../../services/category/category.service";
 
 //import { BUCKETS } from '../mock-data/mock-buckets'
 
@@ -42,7 +43,8 @@ export class BucketsService {
 
   constructor(
     private http: HttpClient,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private categoryService: CategoryService
     ) {}
 
   getAllBuckets(): Observable<Bucket[]> {
@@ -54,7 +56,8 @@ export class BucketsService {
   }
 
   updateBucket (bucket: Bucket) {
-    return this.http.put<Bucket>(this.urlService.bucket.updateBucket(), bucket, httpOptions);
+    this.categoryService.update({categoryId: bucket.categoryId, title: bucket.category}).subscribe();
+    return this.http.put<Bucket>(this.urlService.bucket.updateBucket(bucket.bucketId), bucket, httpOptions);
   }
 
   createNewBucket(bucket: Bucket): Observable<Bucket> {
@@ -100,11 +103,11 @@ export class BucketsService {
   }
 
   setDescription(desc: string) {
-      this.currentBucket.description = desc;
+      this.currentBucket.bucketDescription = desc;
   }
 
   getDescription() {
-      return this.currentBucket.description;
+      return this.currentBucket.bucketDescription;
   }
 
 }

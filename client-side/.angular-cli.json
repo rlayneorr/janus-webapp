@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "../spring-boot-server/src/main/resources/static",
+      "outDir": "dist",
       "assets": [
         "assets",
         "favicon.ico"

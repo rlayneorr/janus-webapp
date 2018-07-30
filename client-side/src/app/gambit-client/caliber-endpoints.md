@@ -106,7 +106,7 @@
   #### GET /screening/getScreening/status/{status}
     Get screenings based on the status provided
 
-  #### GET /screening/scheduledScreenings
+  #### GET /screening/scheduled
     Gets all scheduled screeenings
 
 ### Question Score

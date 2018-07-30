@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { environment } from '../../../../environments/environment';
+import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 
 @Injectable()
 export class UrlService {
@@ -95,7 +96,7 @@ export class UrlService {
   bucket = {
     getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
     getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
-    updateBucket: () => `${this.context + this.bucketEndpoint}`,
+    updateBucket: (bucketId : number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
     createNewBucket: () => `${this.context + this.bucketEndpoint}`,
     deleteBucket: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`
   };
@@ -225,17 +226,17 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private questionEndpoint = `${this.context}/${this.adminScreening}/questions`;
+  private questionEndpoint = `${this.context}${this.adminScreening}/question`;
   question = {
-    postQuestion: () => `${this.context}${this.questionEndpoint}`,
-    putQuestion: () => `${this.context}${this.questionEndpoint}`,
-    getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.questionEndpoint}/bucket/${bucketId}`,
+    postQuestion: () => `${this.questionEndpoint}`,
+    putQuestion: (questionId : number) => `${this.questionEndpoint}/${questionId}`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.adminScreening}/bucket/${bucketId}/question`,
     // Tyerra Smith added a url to get ALL questions
-    getQuestions: () => `${this.context}${this.questionEndpoint}`,
-    deactivateQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}/deactivate`,
-    activateQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}/activate`,
-    filteredQuestions: () => `${this.context}${this.questionEndpoint}/filter`,
-    deleteQuestion: (questionId: number) => `${this.context}${this.questionEndpoint}/${questionId}`,
+    getQuestions: () => `${this.questionEndpoint}`,
+    deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
+    activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
+    filteredQuestions: () => `${this.questionEndpoint}/filter`,
+    deleteQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}`,
   };
 
   //private questionScoringEndpoint = 'question-score-service/question';
@@ -278,7 +279,7 @@ export class UrlService {
   private screeningEndpoint = `${this.techScreening}/screening`;
   //screeningEndpoint = 'screening-service/screening';
   screening = {
-    scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduledScreenings`,
+    scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduled`,
     startScreening: () => `${this.context + this.screeningEndpoint}/start`,
     endScreening: () => `${this.context + this.screeningEndpoint}/end`,
     introComment: () => `${this.context + this.screeningEndpoint}/introcomment`,
@@ -341,10 +342,11 @@ export class UrlService {
     updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
     deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
 
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
+
   };
 
   softSkillsViolation = {
@@ -461,7 +463,7 @@ export class UrlService {
     createWeight: () => `${this.weightsServiceEndpoint}/weight`,
     getWeights: () => `${this.weightsServiceEndpoint}/weight`,
     getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
-    updateWeight: (skillTypeId: number, categoryId: number, id: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight/${id}`,
+    updateWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
     deleteWeight: (skillTypeId: number, categoryId: number, id: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight/${id}`,
   };
 

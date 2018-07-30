@@ -24,14 +24,14 @@ export class SettingsQuestionService {
   questions: Question[];
 
   /**
-   * Modifed parameters to only take in question and tagIds and not also bucket id because that is already
+   * Modifed parameters to only take in question and not also bucket id because that is already
    * stored in question
    * updated to be in sync with new Gambit question service modifications
    * used urlService to get endpoint for posting new questions
    * @param question - question model
    */
   createNewQuestion(question: Question) {
-    return this.http.post(this.urlService.question.postQuestion(), { question: question }, httpOptions);
+    return this.http.post(this.urlService.question.postQuestion(), question, httpOptions);
   }
 
   /**
@@ -42,7 +42,7 @@ export class SettingsQuestionService {
    * @param question
    */
   updateQuestion(question: Question) {
-    return this.http.put(this.urlService.question.putQuestion(), { question: question }, httpOptions);
+    return this.http.put(this.urlService.question.putQuestion(question.questionId), question, httpOptions);
   }
 
   /**
@@ -70,5 +70,14 @@ export class SettingsQuestionService {
   */
   getBucketQuestions(bucketId: number) {
     return this.http.get(this.urlService.question.getQuestionsByBucketId(bucketId));
+  }
+
+  /**
+   * deactivates question
+   * add urlService to get endpoint for deactivating a question
+   * @param questionId
+   */
+  deleteQuestion(questionId: number) {
+    return this.http.delete(this.urlService.question.deleteQuestion(questionId), httpOptions);
   }
 }

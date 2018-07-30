@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 // Pipes
 import { SearchPipe } from '../../util/search.pipe';
+import { DatePipe } from '@angular/common';
 
 // Classes
 import { Candidate } from '../../entities/Candidate';
@@ -15,17 +19,22 @@ import { ScreeningService } from '../../services/screening/screening.service';
 import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
+import { UrlService } from '../../../../../../app/gambit-client/services/urls/url.service';
 
 //import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
+// import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
 
 // Installed Modules
 // npm install ngx-pagination --save
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+import { tick } from '../../../../../../../node_modules/@angular/core/testing';
+import { SkillType } from '../../../entities/SkillType';
 
 @Component({
   selector: 'app-candidates-screening-list',
   templateUrl: './candidates-screening-list.component.html',
-  styleUrls: ['./candidates-screening-list.component.css']
+  styleUrls: ['./candidates-screening-list.component.css'],
+  providers:[DatePipe]
 })
 
 /*
@@ -52,16 +61,24 @@ export class CandidatesScreeningListComponent implements OnInit {
   searchText; // text in search bar
   p; // current page
   allCandidates : Candidate[];
+  formattedSchedule : string;
+  skillType : SkillType;
+
+  beginForm: FormGroup;
   /* ###########################
        CONSTRUCTOR and INIT
   ########################### */
   constructor(
-    private http: HttpClientModule,
+    private httpClient: HttpClient,
     private candidateService: CandidateService,
     private screeningService: ScreeningService,
     private scheduleScreeningService: ScheduleScreeningService,
     private softSkillsViolationService: SoftSkillsViolationService,
-    private questionScoreService: QuestionScoreService
+    private questionScoreService: QuestionScoreService,
+    private urlService: UrlService,
+    private modalService: NgbModal,
+    private fb: FormBuilder,
+    private date: DatePipe
   ) {}
 
   ngOnInit() {
@@ -75,17 +92,38 @@ export class CandidatesScreeningListComponent implements OnInit {
       window.location.reload(true);
     }
 
-    // // retrieve all scheduled interviews and populate the table of screenings.
-    // this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
-    //   this.scheduledScreenings = data;
-    // });
+    // retrieve all scheduled interviews and populate the table of screenings.
+    this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
+      this.scheduledScreenings = data;
+    });
     //this.allCandidates = CANDIDATES;
-    console.log(this.allCandidates);
+    console.log(this.scheduledScreenings);
+    
   }
 
   /* ###########################
         FUNCTIONS
   ########################### */
+
+  initFormControl() {
+    let formattedSchedule = this.date.transform(this.selectedScheduledScreening.scheduledDate);
+    this.beginForm = this.fb.group({
+      'Name': [this.selectedScheduledScreening.candidate.name, Validators.required],
+      //'Last Name': [this.selectedCandidate.lastName, Validators.required],
+      'Date and Time': [formattedSchedule, Validators.required],
+    });
+  };
+
+  //Get each Candidate's Track/SkillType -Tyerra Smith
+  getSkillType(skillTypeId: number)
+  {
+    console.log(skillTypeId);
+    this.httpClient.get<SkillType>(this.urlService.skillTypes.findById(skillTypeId)).subscribe(skill =>{
+      this.skillType = skill;
+    });
+    console.log(this.skillType);
+    // return this.skillType.title;
+  }
 
   // Unhides the "Begin Interview" prompt
   toggleBeginScreeningPrompt() {
@@ -98,15 +136,19 @@ export class CandidatesScreeningListComponent implements OnInit {
 
   // clicking "Begin Interview" will save the candidate for later use
   confirmSelectedCandidate(): void {
-    // this.candidateService.setSelectedCandidate(this.selectedCandidate);
-    localStorage.setItem('scheduledScreeningID', this.selectedScheduledScreening.scheduledScreeningId.toString());
+    this.candidateService.setSelectedCandidate(this.selectedScheduledScreening.candidate);
+    console.log(this.selectedCandidate);
+    //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
+    console.log(this.selectedScheduledScreening);
+    localStorage.setItem('scheduledScreeningId', this.selectedScheduledScreening.scheduledScreeningId.toString());
   }
 
   // clicking "Begin Interview" will create a new screening entry in the database
   beginScreening(): void {
     // create a new screening entry in the database by calling the screening service
-    this.screeningService
-      .beginScreening(
+
+      //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
+      this.screeningService.beginScreening(
         // must provide the current scheduled interview object
         this.selectedScheduledScreening,
         // create a new date which signifies the start of the interview
@@ -116,14 +158,29 @@ export class CandidatesScreeningListComponent implements OnInit {
         // between the interviewer and the person who screened them.
         this.selectedScheduledScreening.trainer,
         // provide the track of the selected candidate for later use.
-        //this.selectedCandidate.skillTypeID
+        this.selectedScheduledScreening.skillTypeId
       )
       .subscribe(
         // take the data from the response from the database
         data => {
         // and save the screening ID as a cookie to localStorage.
-        localStorage.setItem('screeningID', data.toString());
-        console.log(localStorage.getItem('screeningID'));
+        localStorage.setItem('screeningId', data.toString());
+        console.log(localStorage.getItem('screeningId'));
       });
+  }
+
+  /**
+   * Open the view modal
+   * @param {any} content
+   * @param {ScheduledScreening} index
+   * @memberof CandidatesScreeningListComponent
+   */
+  openModal(content, index: ScheduledScreening) {
+    this.selectedScheduledScreening = JSON.parse(JSON.stringify(index));
+    this.selectedCandidate = JSON.parse(JSON.stringify(index.candidate));// essentially clone the object, there may be a better way
+    this.formattedSchedule = this.date.transform(this.selectedScheduledScreening.scheduledDate, 'short');
+    console.log(this.selectedCandidate);
+    this.modalService.open(content);
+    this.initFormControl();
   }
 }
