@@ -29,7 +29,7 @@ import { GambitBatchUtilService } from './services/gambit-batch-util.service';
 import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';
 import { GambitInterceptor } from './gambit-client/interceptors/gambit.interceptor';
 
-import { ToastModule, ToastOptions } from 'ng2-toastr';
+// import { ToastModule, ToastOptions } from 'ng2-toastr';
 import { ToastrOptions } from './gambit-client/ui/error-alert/toastr-options';
 import { LocationService } from './gambit-client/services/location/location.service';
 import { GambitSkillService } from './gambit-client/services/skill/gambit-skill.service';
@@ -70,7 +70,7 @@ const routes: Routes = [
     ChartsModule,
     HttpClientModule,
     GambitClientModule,
-    ToastModule.forRoot(),
+    //ToastModule.forRoot(),
     BrowserAnimationsModule
   ],
   declarations: [
@@ -86,7 +86,7 @@ const routes: Routes = [
     GambitBatchUtilService,
     ErrorAlertComponent,
     LocationService,
-    {provide: ToastOptions, useClass: ToastrOptions},
+    //{provide: ToastOptions, useClass: ToastrOptions},
     AuthenticationService,
     RequestService,
     CurriculumService,
