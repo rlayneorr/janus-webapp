@@ -28,7 +28,7 @@ import { Category } from '../../../entities/Category';
 export class ScreeningService {
   constructor(
     private httpClient: HttpClient,
-    private urlService: UrlService
+    private urlService: UrlService,
   ) { }
 
   // Need to change to match the backend
@@ -36,13 +36,12 @@ export class ScreeningService {
     'Content-type': 'application/json'
   });
 
-  public selectedCategories: Category[];
   public softSkillsResult: string;
   public generalComments: string;
   public screeningID$: Observable<Screening>;
   compositeScore: number;
   finalSoftSkillComment: string;
-
+  selectedCategories: Category[]
 
   // When the screening begins, the following information will be sent,
   // and a screening ID will be returned as an observable.
@@ -56,11 +55,12 @@ export class ScreeningService {
     trainerId: number,
     skillTypeId: number,
   ): Observable<Number> {
+    console.log("Begin");
     return this.httpClient
       .post<Number>(
       this.urlService.screening.startScreening(),
       {
-        'scheduledScreening': scheduledScreening.scheduledScreeningId,
+        'scheduledScreeningId': scheduledScreening.scheduledScreeningId,
         'beginTime': beginTime,
         'trainerId': trainerId,
         'skillTypeId': skillTypeId
@@ -111,7 +111,7 @@ export class ScreeningService {
   submitIntroComment(comment: string) {
     this.httpClient.post<String>(
       this.urlService.screening.introComment(),
-      { traineeId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
+      { candidateId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
     ).subscribe();
   }
 
@@ -127,7 +127,7 @@ export class ScreeningService {
   setSelectedCategories(categories: Category[]){
     this.selectedCategories = categories;
   }
- 
+
   getSelectedCategories(){
     return this.selectedCategories;
   }

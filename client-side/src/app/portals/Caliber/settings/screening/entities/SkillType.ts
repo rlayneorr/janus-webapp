@@ -4,6 +4,6 @@ import { Skill } from '../../../entities/Skill';
 
 export class SkillType {
     skillTypeId: number;
-    skillTypeName: string;
+    title: string;
     categories: Category[]
 }

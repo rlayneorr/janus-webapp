@@ -8,7 +8,7 @@
       </div>
       <div class="skillType">
         <label>Track: </label>
-        <p>{{traineeTrack}}</p>
+        <p>{{candidateTrack}}</p>
       </div>
     </div>
 
@@ -18,13 +18,13 @@
       <div class="skill" *ngFor="let category of allCategories; let i = index">
         <!-- Create a checkbox for each tag using ngFor. Toggle buttons instead of checkboxes! -->
         <span>
-          <p>{{category.title}}</p>
+          {{category.title}}
           <label class="switch">
             <input type="checkbox" (change)="updateCategoryList(category, $event.target.checked)" id="checkbox{{i}}">
             <span class="slider round"></span>
           </label>
         </span>
-
+        
       </div>
     </div>
     <hr>
@@ -41,6 +41,6 @@
       </div>
     </div>
   </div>
-  <app-violation-flag></app-violation-flag>
+  <!-- <app-violation-flag></app-violation-flag> -->
 </div>
 

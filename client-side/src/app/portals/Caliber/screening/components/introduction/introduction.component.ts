@@ -6,8 +6,15 @@ import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { CategoryService } from '../../../../../portals/Caliber/services/category/category.service';
 import { ScreeningService } from '../../services/screening/screening.service';
 
+import { SKILLTYPES } from '../../mock-data/mock-skillTypes';
+// import { SCHEDULEDSCREENINGS } from '../../mock-data/mock-scheduled-screening';
+
+// import { Tag } from '../../entities/tag';
+import { SkillType } from '../../../../Caliber/settings/screening/entities/SkillType';
 import { Category } from '../../../entities/Category';
 import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
+import { ScheduledScreening } from '../../entities/scheduleScreening';
+import { SkillTypesService } from '../../../settings/screening/services/skillTypes.service';
 
 @Component({
   selector: 'app-introduction',
@@ -28,13 +35,13 @@ export class IntroductionComponent implements OnInit {
     //public tagService: TagService,
     private categoryService: CategoryService,
     private candidateService: CandidateService,
-    private skillTypeService: SkillTypeService,
+    private skillTypesService: SkillTypesService,
     private screeningService: ScreeningService,
     private scheduledscreeningService: ScheduleScreeningService ) { }
 
 
   public candidateName: string;
-  public candidateTrack: string;
+  public candidateTrack: Object;
   public currentScreeningId: Number;
   // public tagList: Tag[];
   public categoriesSelected: Category[];
@@ -48,31 +55,33 @@ export class IntroductionComponent implements OnInit {
   });
 
   ngOnInit() {
-    console.log("In the FOR");
-    this.scheduledscreeningService.getScheduleScreenings().subscribe(scheduledScreenings =>{
-      for (let s of scheduledScreenings)
-      {
-        console.log(scheduledScreenings);
-        console.log("In the FOR");
-        console.log(s.scheduledScreeningId.toString());
-        console.log(localStorage.getItem('scheduledScreeningId'));
-        if(s.scheduledScreeningId.toString() === localStorage.getItem('scheduledScreeningId'))
-        {
-          console.log("In the if");
-          this.candidateName = s.candidate.name;
-          //this.candidateTrack = s.skillTypeId;
-          console.log(this.candidateName);
-          // this.screeningService.beginScreening(s, new Date(), 2, 51).subscribe(id =>{
-          //   this.currentScreeningId = id;
-          // });
-        }
-      }
-    });
-
-    // this.candidateName = this.currentScreening.candidate.name;
+    console.log("In the ngOnInit");
+    // this.scheduledscreeningService.getScheduleScreenings().subscribe(scheduledScreenings =>{
+    // scheduledScreenings.forEach(s => {
+    //     console.log(scheduledScreenings);
+    //     console.log("In the FOR");
+    //     console.log(s.scheduledScreeningId.toString());
+    //     console.log(localStorage.getItem('scheduledScreeningId'));
+    //     if(s.scheduledScreeningId.toString() === localStorage.getItem('scheduledScreeningId'))
+    //     {
+    //       console.log("In the if");
+    //       this.candidateName = s.candidate.name;
+    //       // this.candidateTrack = s.skillTypeId;
+    //       console.log(this.candidateName);
+    //       this.screeningService.beginScreening(s, new Date(), 2, 51).subscribe(id =>{
+    //         this.currentScreeningId = id;
+    //       });
+    //     }
+    //   });
+    // });
+    this.candidateName = localStorage.getItem('candidateName');
     this.categoryService.fetchAll().subscribe(categories =>{
       this.allCategories = (<Category[]> categories);
       console.log(this.allCategories);
+    });
+
+    this.skillTypesService.getSkillTypeById(parseInt((localStorage.getItem('candidateTrack')), 10)).subscribe(skill =>{
+      this.candidateTrack = skill.title;
     });
     this.categoriesSelected = [];
 
@@ -110,6 +119,7 @@ export class IntroductionComponent implements OnInit {
     // Send the comments to the appropriate service method saves them to the DB
     this.screeningService.submitIntroComment(this.comment);
     this.setCategories();
+
   }
 
   // Returns a boolean depending on whether a tag was checked.
@@ -117,9 +127,10 @@ export class IntroductionComponent implements OnInit {
   categoryChosen(): boolean {
     return (this.categoriesSelected.length == 0);
   }
+
   setCategories()
- {
-   return this.screeningService.setSelectedCategories(this.categoriesSelected);
- }
+  {
+    return this.screeningService.setSelectedCategories(this.categoriesSelected);
+  }
 
 }

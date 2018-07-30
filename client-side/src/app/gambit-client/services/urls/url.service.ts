@@ -345,14 +345,14 @@ export class UrlService {
 
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
   };
 
   softSkillsViolation = {
-    getViolationURL: (screeningID: number) => `${this.context}screening-service/screening/violation/${screeningID}`,
-    addViolationURL: () => `${this.context}screening-service/violation/flag/`,
-    deleteViolationURL: (violationID: number) => `${this.context}screening-service/violation/delete/${violationID}`,
-    getViolationTypeURL: () => `${this.context}/tech-screening/violation/type`,
+    getViolationTypeURL: () => `${this.context}/screening-service/violation/all`,
+    getViolationURL: (screeningID: number) => `${this.context}/screening-service/screening/violation/${screeningID}`,
+    addViolationURL: () => `${this.context}/screening-service/violation/flag/`,
+    deleteViolationURL: (violationID: number) => `${this.context}/screening-service/violation/delete/${violationID}`,
   };
 
   subtopic = {
