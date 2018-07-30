@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
-import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
+import { GambitSkill } from '../../../../caliber-client/entities/GambitSkill';
+import { GambitSkillService } from '../../../../caliber-client/services/skill/gambit-skill.service';
 import { Category } from '../../entities/Category';
 import { CategoryService } from '../../services/category/category.service';
 

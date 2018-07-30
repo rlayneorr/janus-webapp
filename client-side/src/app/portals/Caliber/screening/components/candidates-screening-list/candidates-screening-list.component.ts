@@ -19,7 +19,7 @@ import { ScreeningService } from '../../services/screening/screening.service';
 import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
-import { UrlService } from '../../../../../../app/gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 
 //import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
 // import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
@@ -98,7 +98,7 @@ export class CandidatesScreeningListComponent implements OnInit {
     });
     //this.allCandidates = CANDIDATES;
     console.log(this.scheduledScreenings);
-    
+
   }
 
   /* ###########################

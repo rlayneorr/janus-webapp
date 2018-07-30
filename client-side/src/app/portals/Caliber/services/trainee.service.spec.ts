@@ -4,7 +4,7 @@ import { AlertsService } from './alerts.service';
 import { TraineeService } from './trainee.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 
 const context = (new UrlService).trainee;

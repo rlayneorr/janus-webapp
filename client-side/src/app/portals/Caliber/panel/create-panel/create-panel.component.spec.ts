@@ -7,10 +7,10 @@ import { ComponentRef, ElementRef, Renderer2, TemplateRef } from '@angular/core'
 import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
 import { ContentRef } from '@ng-bootstrap/ng-bootstrap/util/popup';
 import { NgbModalBackdrop } from '@ng-bootstrap/ng-bootstrap/modal/modal-backdrop';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { User } from '../../../../gambit-client/entities/User';
-import { UserRole } from '../../../../gambit-client/entities/UserRole';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
+import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import { User } from '../../../../caliber-client/entities/User';
+import { UserRole } from '../../../../caliber-client/entities/UserRole';
 
 describe('CreatePanelComponent', () => {
   let component: CreatePanelComponent;

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 import { ApiService } from '../util/api.service';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 // entities
 import { Batch } from '../entities/Batch';

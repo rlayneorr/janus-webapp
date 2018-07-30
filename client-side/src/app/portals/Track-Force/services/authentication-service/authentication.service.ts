@@ -9,7 +9,7 @@ import { RequestService } from '../request-service/request.service';
 import {User} from '../../models/user.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 const USER_KEY = 'currentUser';
 

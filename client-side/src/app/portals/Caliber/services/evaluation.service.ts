@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../../../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
 import { PanelReview } from '../entities/PanelReview';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 /**
  * Service handles API calls and tracks fetched data for caching.

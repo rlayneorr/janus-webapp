@@ -3,9 +3,9 @@ import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { ApiService } from '../util/api.service';
 import { PanelService } from './panel.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
-import { User } from '../../../gambit-client/entities/User';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
+import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
+import { User } from '../../../caliber-client/entities/User';
 
 const context = (new UrlService).panel;  // base of the url is at UrlService.panel
 

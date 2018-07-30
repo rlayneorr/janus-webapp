@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
 // entities
 import { PanelFeedback } from '../../entities/PanelFeedback';
-import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
+import { GambitSkill } from '../../../../caliber-client/entities/GambitSkill';
 
 // services
-import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
+import { GambitSkillService } from '../../../../caliber-client/services/skill/gambit-skill.service';
 
 import { CreatePanelComponent } from '../create-panel/create-panel.component';
 import { Observable } from 'rxjs/Observable';

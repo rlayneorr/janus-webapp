@@ -13,7 +13,7 @@ import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.comp
 
 // services
 import { PanelService } from '../../services/panel.service';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 
 @Component({
   selector: 'app-create-panel',

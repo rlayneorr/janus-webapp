@@ -5,7 +5,7 @@ import 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Screening } from '../../entities/screening';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 import { Category } from '../../../entities/Category';
 
 

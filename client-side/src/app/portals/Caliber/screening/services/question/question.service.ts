@@ -14,7 +14,7 @@ import { QUESTIONS } from '../../mock-data/mock-questions';
 // Services
 //import { TagService } from '../../../services/tag/tag.service';
 import { CandidateService } from '../candidate/candidate.service';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 /*
 Provides an observable of Questions through the getQuestions() method.
 */

@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
 
 // services
 import { AlertsService } from './alerts.service';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 // entities
 import { Assessment } from '../entities/Assessment';

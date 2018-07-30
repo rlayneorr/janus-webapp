@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 import { SkillTypeService } from '../skillType/skill-type.service';
 import { SkillType } from '../../entities/skillType';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 
 @Injectable()
 export class ScheduleScreeningService {

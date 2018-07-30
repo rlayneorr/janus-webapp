@@ -16,7 +16,7 @@ import { CategoriesComponent } from './categories.component';
 import { Question } from '../../../entities/Question';
 
 // Services
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 import { BucketsService } from '../services/buckets.service';
 
 // Mock Data

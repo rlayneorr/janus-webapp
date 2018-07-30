@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing'
 import { Dependencies } from '../../caliber.test.module';
 import { OverallFeedbackComponent } from './overall-feedback.component';
 import { Note } from '../../entities/Note';
-import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchService } from '../../../../caliber-client/services/batch/gambit-batch.service';
 
 
 describe('OverallFeedbackComponent439y298743', () => {

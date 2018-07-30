@@ -12,9 +12,9 @@ import { AlertsService } from './alerts.service';
 
 // entities
 import { Note } from '../entities/Note';
-import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { BatchGambit } from '../../../caliber-client/entities/BatchGambit';
+import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 const context = (new UrlService).note;
 

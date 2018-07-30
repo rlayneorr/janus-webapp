@@ -30,7 +30,7 @@ export class CompleteBatch {
   //      (co)Trainer can be null. CompleteBatchService provides the aggregation/de-aggregation
   //      functionality in its CRUD methods
   //
-  //      see gambit-client/aggregator/services/completebatch.service
+  //      see caliber-client/aggregator/services/completebatch.service
   constructor(batchId: number = 0, resourceId: number = 0, trainingName: string = '',
               trainer: GambitTrainer = null, cotrainer: GambitTrainer = null,
               addressId: number = 0, address: GambitAddress = new GambitAddress(),

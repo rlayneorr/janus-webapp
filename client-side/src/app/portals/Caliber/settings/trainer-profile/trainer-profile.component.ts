@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 
 
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { TrainerService } from '../../../../gambit-client/services/trainer/trainer.service';
-import { GambitTrainer } from '../../../../gambit-client/entities/GambitTrainer';
-import { BatchService } from '../../../../gambit-client/aggregator/services/completebatch.service';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
-import { GambitTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
-import { UserRole } from '../../../../gambit-client/entities/UserRole';
+import { TrainerService } from '../../../../caliber-client/services/trainer/trainer.service';
+import { GambitTrainer } from '../../../../caliber-client/entities/GambitTrainer';
+import { BatchService } from '../../../../caliber-client/aggregator/services/completebatch.service';
+import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
+import { GambitTraineeService } from '../../../../caliber-client/services/trainee/gambit-trainee.service';
+import { UserRole } from '../../../../caliber-client/entities/UserRole';
 
 @Component({
   selector: 'app-trainer-profile',

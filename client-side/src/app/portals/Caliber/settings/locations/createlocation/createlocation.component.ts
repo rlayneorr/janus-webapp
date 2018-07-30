@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Location } from '../../../../../gambit-client/entities/location-entities/Location';
+import { Location } from '../../../../../caliber-client/entities/location-entities/Location';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { LocationService } from '../../../../../gambit-client/services/location/location.service';
+import { LocationService } from '../../../../../caliber-client/services/location/location.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 

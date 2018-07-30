@@ -10,10 +10,10 @@ import { QCStatusService } from '../../services/qcstatus.service';
 // entities
 import { Note } from '../../entities/Note';
 import { ReportingService } from '../../services/reporting.service';
-import { BatchGambit } from '../../../../gambit-client/entities/BatchGambit';
-import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { BatchGambit } from '../../../../caliber-client/entities/BatchGambit';
+import { GambitBatchService } from '../../../../caliber-client/services/batch/gambit-batch.service';
 import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 
 
 

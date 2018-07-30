@@ -5,7 +5,7 @@ import { ReportingService } from '../../services/reporting.service';
 import { PDFService } from '../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GranularityService } from '../services/granularity.service';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 
 
 

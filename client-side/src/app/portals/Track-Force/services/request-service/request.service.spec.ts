@@ -3,7 +3,7 @@ import { TestBed, inject, async, tick, fakeAsync, getTestBed } from '@angular/co
 import { RequestService } from './request.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Request } from '@angular/http';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 describe('RequestService', () => {
   beforeEach(() => {

@@ -22,17 +22,17 @@ import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-te
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
-import { GambitClientModule } from './gambit-client/gambit-client.module';
+import { GambitClientModule } from './caliber-client/gambit-client.module';
 import { GambitBatchUtilService } from './services/gambit-batch-util.service';
 
 // Error Alert
-import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';
-import { GambitInterceptor } from './gambit-client/interceptors/gambit.interceptor';
+import { ErrorAlertComponent } from './caliber-client/ui/error-alert/error-alert.component';
+import { GambitInterceptor } from './caliber-client/interceptors/gambit.interceptor';
 
 import { ToastModule, ToastOptions } from 'ng2-toastr';
-import { ToastrOptions } from './gambit-client/ui/error-alert/toastr-options';
-import { LocationService } from './gambit-client/services/location/location.service';
-import { GambitSkillService } from './gambit-client/services/skill/gambit-skill.service';
+import { ToastrOptions } from './caliber-client/ui/error-alert/toastr-options';
+import { LocationService } from './caliber-client/services/location/location.service';
+import { GambitSkillService } from './caliber-client/services/skill/gambit-skill.service';
 import { AuthenticationService } from './portals/Caliber/services/authentication.service';
 import { RequestService } from './portals/Track-Force/services/request-service/request.service';
 import { CurriculumService } from './portals/Track-Force/services/curriculum-service/curriculum.service';

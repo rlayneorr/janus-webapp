@@ -8,7 +8,7 @@ import { Bucket } from '../entities/Bucket';
 import { SkillType } from '../entities/SkillType';
 
 // Services
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 import { BucketsService } from '../services/buckets.service';
 import { SkillTypesService } from '../services/skillTypes.service';
 import { AlertsService } from '../../../services/alerts.service';

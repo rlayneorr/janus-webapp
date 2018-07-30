@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { SkillType } from '../entities/SkillType';
 import { Category } from '../entities/Category';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 import { Subject } from 'rxjs';
 import { CategoryWeight } from '../entities/Category-Weight';
 

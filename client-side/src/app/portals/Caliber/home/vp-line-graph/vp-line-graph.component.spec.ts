@@ -11,7 +11,7 @@ import { VpLineGraphComponent } from './vp-line-graph.component';
 import { ReportingService } from '../../services/reporting.service';
 import { EvaluationService } from '../../services/evaluation.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchService } from '../../../../caliber-client/services/batch/gambit-batch.service';
 import { NoteService } from '../../services/note.service';
 
 import { Dependencies } from '../../caliber.test.module';
@@ -21,8 +21,8 @@ import { Address } from '../../entities/Address';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
 import { BatchService } from '../../../Bam/services/batch.service';
-import { AlertService } from '../../../../gambit-client/services/alerts/alerts.service';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { AlertService } from '../../../../caliber-client/services/alerts/alerts.service';
+import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 xdescribe('VpLineGraphComponent', () => {
   let component: VpLineGraphComponent;

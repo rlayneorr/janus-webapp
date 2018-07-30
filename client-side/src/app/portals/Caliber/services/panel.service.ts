@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // services
 import { AlertsService } from './alerts.service';
 import { ApiService } from '../util/api.service';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -16,7 +16,7 @@ import { Panel } from '../entities/Panel';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
 
 const context = (new UrlService).panel;
 

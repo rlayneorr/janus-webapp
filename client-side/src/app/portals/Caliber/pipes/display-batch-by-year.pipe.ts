@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
+import { CompleteBatch } from '../../../caliber-client/aggregator/entities/CompleteBatch';
 
 @Pipe({ name: 'DisplayBatchByYear' })
 export class DisplayBatchByYear implements PipeTransform {

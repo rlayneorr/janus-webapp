@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 // services
 import { AlertsService } from './alerts.service';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 // entities
 import { Grade } from '../entities/Grade';

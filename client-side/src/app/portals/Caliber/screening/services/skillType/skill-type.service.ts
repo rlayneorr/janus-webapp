@@ -5,7 +5,7 @@ import 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SkillType } from '../../entities/skillType';
 import { SKILLTYPES } from '../../mock-data/mock-skillTypes';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 
 
 /**

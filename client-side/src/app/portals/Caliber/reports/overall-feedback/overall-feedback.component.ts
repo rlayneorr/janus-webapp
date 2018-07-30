@@ -9,13 +9,13 @@ import { Observable } from 'rxjs/Observable';
 import { ReportingService } from '../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
 import { NoteService } from '../../services/note.service';
-import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchService } from '../../../../caliber-client/services/batch/gambit-batch.service';
 
 // entities
 import { Note } from '../../entities/Note';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
 import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 
 /**
  * Creates a table of the overall feedback of a given trainee in a given batch.

@@ -13,7 +13,7 @@ import { HttpClient, HttpHandler, HttpBackend, HttpErrorResponse } from '@angula
 import { QUESTIONS, replacementQuestion, expectedQuestion } from './mock-questions';
 import { Observable } from 'rxjs/Observable';
 import { defer } from 'rxjs/observable/defer';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));

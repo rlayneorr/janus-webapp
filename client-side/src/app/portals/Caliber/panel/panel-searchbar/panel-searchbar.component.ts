@@ -9,12 +9,12 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 // entities
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 
 // services
 import { TraineeService } from '../../services/trainee.service';
 import { PanelService } from '../../services/panel.service';
-import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchService } from '../../../../caliber-client/services/batch/gambit-batch.service';
 
 
 @Component({

@@ -3,7 +3,7 @@ import { AssociateService } from '../../services/associates-service/associates-s
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { AutoUnsubscribe } from '../../decorators/auto-unsubscribe.decorator';
 import { ActivatedRoute } from '@angular/router';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 import { ClientListService } from '../../services/client-list-service/client-list.service';
 /**
 * @author Michael Tseng

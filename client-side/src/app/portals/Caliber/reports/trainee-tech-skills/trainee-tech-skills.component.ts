@@ -5,8 +5,8 @@ import { ReportingService } from '../../services/reporting.service';
 import { PDFService } from '../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GranularityService } from '../services/granularity.service';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 /**
  * @author John Hudson
 */

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Candidate } from '../../entities/Candidate';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 import { AlertsService } from '../../../services/alerts.service';
 
 /**

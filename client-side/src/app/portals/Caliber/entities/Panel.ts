@@ -1,4 +1,4 @@
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
 
 
 // When making merges, please use the version presented by the Revaturions group.

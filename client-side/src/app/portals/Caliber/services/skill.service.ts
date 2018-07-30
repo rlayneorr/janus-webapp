@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertsService } from './alerts.service';
 import { Fetch } from '../interfaces/api.interface';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 /**
  * Manages API calls for skills

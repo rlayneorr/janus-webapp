@@ -13,23 +13,23 @@ import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 // services
 
-import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
+import { BatchService } from '../../../caliber-client/aggregator/services/completebatch.service';
 import { LocationService } from '../services/location.service';
 import { TrainingTypeService } from '../services/training-type.service';
-import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
+import { GambitSkillService } from '../../../caliber-client/services/skill/gambit-skill.service';
 import { TraineeService } from '../services/trainee.service';
 import { TraineeStatusService } from '../services/trainee-status.service';
-import { GambitTraineeService } from '../../../gambit-client/services/trainee/gambit-trainee.service';
-import { TrainerService } from '../../../gambit-client/services/trainer/trainer.service';
+import { GambitTraineeService } from '../../../caliber-client/services/trainee/gambit-trainee.service';
+import { TrainerService } from '../../../caliber-client/services/trainer/trainer.service';
 
 
 // entities
 import { Location } from '../entities/Location';
 import { Address } from '../entities/Address';
 import { Trainee } from '../entities/Trainee';
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
-import { GambitTrainer } from '../../../gambit-client/entities/GambitTrainer';
-import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
+import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
+import { GambitTrainer } from '../../../caliber-client/entities/GambitTrainer';
+import { CompleteBatch } from '../../../caliber-client/aggregator/entities/CompleteBatch';
 
 // components
 import { BatchModalComponent } from './batch/batch-modal.component';

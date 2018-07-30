@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 /**
  * Service that handles report granularity. Trainee and current batch
  * data is stored in their respective behavior subjects and read by

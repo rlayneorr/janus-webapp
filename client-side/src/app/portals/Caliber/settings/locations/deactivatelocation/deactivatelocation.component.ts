@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Input } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { LocationService } from '../../../../../gambit-client/services/location/location.service';
-import { Location } from '../../../../../gambit-client/entities/location-entities/Location';
+import { LocationService } from '../../../../../caliber-client/services/location/location.service';
+import { Location } from '../../../../../caliber-client/entities/location-entities/Location';
 
 @Component({
     selector: 'app-deactivatelocation',

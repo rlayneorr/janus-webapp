@@ -4,7 +4,7 @@ import { of } from 'rxjs/observable/of';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { QuestionScore } from '../../entities/questionScore';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 
 /*
 Exchanges data between QuestionBank (the table) and Question (the modal) components.

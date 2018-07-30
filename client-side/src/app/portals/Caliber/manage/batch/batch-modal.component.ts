@@ -5,19 +5,19 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { Subscription } from 'rxjs/Subscription';
 
 // entities
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
 
 // services
-import { BatchService } from '../../../../gambit-client/aggregator/services/completebatch.service';
+import { BatchService } from '../../../../caliber-client/aggregator/services/completebatch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
-import { GambitSkillTypeService } from '../../../../gambit-client/services/skillType/gambit-skill-type.service';
+import { GambitSkillTypeService } from '../../../../caliber-client/services/skillType/gambit-skill-type.service';
 import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
 import { ApiService } from '../../services/api.service';
-import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
-import { GambitSkillType } from '../../../../gambit-client/entities/GambitSkillType';
+import { GambitSkill } from '../../../../caliber-client/entities/GambitSkill';
+import { GambitSkillType } from '../../../../caliber-client/entities/GambitSkillType';
 
 
 @Component({

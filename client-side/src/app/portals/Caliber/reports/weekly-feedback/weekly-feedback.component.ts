@@ -12,8 +12,8 @@ import { Note } from '../../entities/Note';
 import { GranularityService } from '../services/granularity.service';
 import { ReportingService } from '../../services/reporting.service';
 import { NoteService } from '../../services/note.service';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 
 /**
  * Creates a table of the weekly feedback of a given trainee

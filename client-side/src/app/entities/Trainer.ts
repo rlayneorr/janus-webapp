@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserRole } from '../gambit-client/entities/UserRole';
+import { UserRole } from '../caliber-client/entities/UserRole';
 
 export class Trainer {
     userId: number;

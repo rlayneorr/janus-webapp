@@ -6,7 +6,7 @@
 
 // // import { Tag } from '../../screening/entities/tag';
 // import { TAGS } from '../../screening/mock-data/mock-tags';
-// import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+// import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 // /**
 // * Used to get the Tags that are shown to the screener

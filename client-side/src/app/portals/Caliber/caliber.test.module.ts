@@ -38,7 +38,7 @@ import { VpHomeLineGraphService } from './services/graph/vp-home-line-graph.serv
 import { VpHomeSelectorService } from './services/selector/vp-home-selector.service';
 import { CategoriesService } from './services/categories.service';
 import { LocationService } from './services/location.service';
-// import { LocationService } from '../../gambit-client/services/location/location.service';
+// import { LocationService } from '../../caliber-client/services/location/location.service';
 import { VpHomeBarGraphService } from './services/graph/vp-home-bar-graph.service';
 import { VpHomePanelGraphService } from './services/graph/vp-home-panel-graph.service';
 import { AlertsService } from './services/alerts.service';
@@ -67,10 +67,10 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
   */
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
-import { TrainerService } from '../../gambit-client/services/trainer/trainer.service';
-import { GambitTraineeService } from '../../gambit-client/services/trainee/gambit-trainee.service';
-import { GambitBatchService } from '../../gambit-client/services/batch/gambit-batch.service';
-import { UrlService } from '../../gambit-client/services/urls/url.service';
+import { TrainerService } from '../../caliber-client/services/trainer/trainer.service';
+import { GambitTraineeService } from '../../caliber-client/services/trainee/gambit-trainee.service';
+import { GambitBatchService } from '../../caliber-client/services/batch/gambit-batch.service';
+import { UrlService } from '../../caliber-client/services/urls/url.service';
 import { GambitBatchUtilService } from '../../services/gambit-batch-util.service';
 
 // N.T.

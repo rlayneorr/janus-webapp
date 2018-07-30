@@ -10,8 +10,8 @@ import { Subscription } from 'rxjs/Subscription';
 
 // entities
 import { Panel } from '../../entities/Panel';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
-import { BatchGambit } from '../../../../gambit-client/entities/BatchGambit';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
+import { BatchGambit } from '../../../../caliber-client/entities/BatchGambit';
 
 // services
 import { BatchService } from '../../services/batch.service';

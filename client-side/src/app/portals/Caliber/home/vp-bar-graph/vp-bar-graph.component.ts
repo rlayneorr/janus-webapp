@@ -17,7 +17,7 @@ import { AlertsService } from '../../services/alerts.service';
 import { NoteService } from '../../services/note.service';
 import { ReportsService } from '../../services/reports.service';
 import { Observable } from 'rxjs/Observable';
-import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchService } from '../../../../caliber-client/services/batch/gambit-batch.service';
 
 @Component({
   selector: 'app-vp-bar-graph',

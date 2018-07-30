@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { SkillType } from '../entities/SkillType';
 import { Category } from '../entities/Category';
 import { Bucket } from '../entities/Bucket';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 import { Subject } from 'rxjs';
 
 

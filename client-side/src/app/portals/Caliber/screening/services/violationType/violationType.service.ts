@@ -4,7 +4,7 @@ import { ViolationType } from '../../entities/violationType';
 //import { VIOLATION_TYPES } from '../../mock-data/mock-violationTypes';
 import { of } from 'rxjs/observable/of';
 import { HttpClient } from '@angular/common/http';
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
 
 /**
 * Service that contains methods related to ViolationType entities
