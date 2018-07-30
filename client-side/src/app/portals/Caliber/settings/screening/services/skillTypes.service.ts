@@ -58,7 +58,7 @@ export class SkillTypesService {
     }
 
     getSkillTypeById(skillTypeId: number) {
-        return this.http.get(this.urlService.skillTypes.getSkillTypeById(skillTypeId));
+        return this.http.get<SkillType>(this.urlService.skillTypes.getSkillTypeById(skillTypeId));
     }
 
     deleteSkillType(skillTypeId: number) {

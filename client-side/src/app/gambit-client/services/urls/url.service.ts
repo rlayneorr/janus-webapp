@@ -345,7 +345,7 @@ export class UrlService {
 
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
   };
 
   softSkillsViolation = {
