@@ -1,20 +1,18 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { Observable } from 'rxjs/Observable';
+import {Component} from '@angular/core';
+import {OnInit} from '@angular/core/src/metadata/lifecycle_hooks';
 
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
-
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
-import { TrainerService } from '../../../../caliber-client/services/trainer/trainer.service';
-import { GambitTrainer } from '../../../../caliber-client/entities/GambitTrainer';
-import { BatchService } from '../../../../caliber-client/aggregator/services/completebatch.service';
-import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
-import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
-import { GambitTraineeService } from '../../../../caliber-client/services/trainee/gambit-trainee.service';
-import { UserRole } from '../../../../caliber-client/entities/UserRole';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {TrainerService} from '../../../../caliber-client/services/trainer/trainer.service';
+import {GambitTrainer} from '../../../../caliber-client/entities/GambitTrainer';
+import {BatchService} from '../../../../caliber-client/aggregator/services/completebatch.service';
+import {CompleteBatch} from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import {GambitTrainee} from '../../../../caliber-client/entities/GambitTrainee';
+import {GambitTraineeService} from '../../../../caliber-client/services/trainee/gambit-trainee.service';
+import {UserRole} from '../../../../caliber-client/entities/UserRole';
 
 @Component({
   selector: 'app-trainer-profile',
@@ -102,11 +100,11 @@ export class TrainerProfilesComponent implements OnInit {
   }
 
   /**
-  * sets the current batch
-  * triggered when a user clicks to see the trainees for a current batch
-  *
-  * @param content: String
-  */
+   * sets the current batch
+   * triggered when a user clicks to see the trainees for a current batch
+   *
+   * @param batch
+   */
   setCurrentBatch(batch) {
     this.currentBatch = batch;
     this.traineeService.findAllByBatchAndStatus(batch.batchId, 'Training').subscribe( res =>

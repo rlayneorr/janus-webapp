@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ChartDataEntity } from '../../entities/ChartDataEntity';
-import { DataSet } from '../../entities/DataSet';
-import { ColorService } from '../colors/color.service';
+import {Injectable} from '@angular/core';
+import {ChartDataEntity} from '../../entities/ChartDataEntity';
+import {DataSet} from '../../entities/DataSet';
+import {ColorService} from '../colors/color.service';
 
 @Injectable()
 export class VpHomeBarGraphService {

@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Batch } from '../../entities/Batch';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Trainee } from '../../entities/Trainee';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Trainee} from '../../entities/Trainee';
 
 @Component({
   selector: 'app-delete-trainee-modal',

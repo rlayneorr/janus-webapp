@@ -5,9 +5,9 @@
 
 .btn-secondary {
     background-color: white;
-    color: #F26925; 
+    color: #F26925;
     border-bottom: 1px solid #ebe8e8;
-    border-color: white;
+    /*border-color: white;*/
     padding: 10px;
 }
 

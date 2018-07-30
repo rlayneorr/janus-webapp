@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Note } from '../entities/Note';
-import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
+import {Pipe, PipeTransform} from '@angular/core';
+import {Note} from '../entities/Note';
+import {GambitTrainee} from '../../../caliber-client/entities/GambitTrainee';
 
 @Pipe({
   name: 'noteByTraineeByWeek'

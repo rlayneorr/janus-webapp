@@ -1,19 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 // services
-import { AlertsService } from './alerts.service';
-import { UrlService } from '../../../caliber-client/services/urls/url.service';
-
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 // entities
-import { Grade } from '../entities/Grade';
-import { CRUD } from '../interfaces/api.interface';
-import { stringifyDate } from '../util/utils';
+import {Grade} from '../entities/Grade';
+import {CRUD} from '../interfaces/api.interface';
+import {stringifyDate} from '../util/utils';
 
 /**
 * This service manages calls to the web services
@@ -130,9 +126,9 @@ export class GradeService implements CRUD<Grade> {
    * has changes required for the API in order
    * to be processed
    *
-   * @param batch: Batch
    *
    * @return any
+   * @param grade
    */
   protected prepareForApi(grade: Grade) {
     const output: any = {};

@@ -1,4 +1,4 @@
-import { NoteByTraineeByWeekPipe } from './note-by-trainee-by-week.pipe';
+import {NoteByTraineeByWeekPipe} from './note-by-trainee-by-week.pipe';
 
 describe('NoteByTraineeByWeekPipe', () => {
   it('create an instance', () => {

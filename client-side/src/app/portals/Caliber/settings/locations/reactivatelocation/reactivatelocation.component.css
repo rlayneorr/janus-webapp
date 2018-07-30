@@ -70,20 +70,20 @@ h4 {
     display: block;
     -webkit-margin-before: 1.33em;
     -webkit-margin-after: 1.33em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
 }
 
 h3 {
     display: block;
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
 }
 /*
 body {
-   /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  
+   /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
@@ -100,8 +100,8 @@ body {
 }
 
 .glyphicon {
-    top: 0px;
-    font-weight: 1500;
+    top: 0;
+    font-weight: 900;
     cursor: pointer;
     width: 100%;
 }
@@ -157,9 +157,8 @@ input[type=submit] {
 }
 
 .btn-danger {
-    background-image: linear-gradient(to bottom,#d9534f 0,#c12e2a 100%);
-    background-repeat: repeat-x;
-    border-color: #b92c28;
+  background: linear-gradient(to bottom, #d9534f 0, #c12e2a 100%) repeat-x;
+  border-color: #b92c28;
 }
 
 .btn-default {
@@ -169,8 +168,7 @@ input[type=submit] {
 
 .btn-default {
     color: #333;
-    background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
-    background-color: #fff;
+  background: #fff linear-gradient(to bottom, #fff 0, #e0e0e0 100%);
 }
 
 .btn-default:hover {

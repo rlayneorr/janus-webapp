@@ -1,12 +1,11 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { TrainerService } from '../../../../caliber-client/services/trainer/trainer.service';
-import { GambitTrainer } from '../../../../caliber-client/entities/GambitTrainer';
-import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserRole } from '../../../../caliber-client/entities/UserRole';
+import {Component, OnInit} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TrainerService} from '../../../../caliber-client/services/trainer/trainer.service';
+import {GambitTrainer} from '../../../../caliber-client/entities/GambitTrainer';
+import {NgForm} from '@angular/forms/src/directives/ng_form';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UserRole} from '../../../../caliber-client/entities/UserRole';
 
 
 @Component({

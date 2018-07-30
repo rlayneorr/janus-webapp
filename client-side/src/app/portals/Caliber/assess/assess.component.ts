@@ -1,28 +1,23 @@
-import { Component, OnInit, NgModule, ViewEncapsulation, ElementRef} from '@angular/core';
-import { Http, HttpModule } from '@angular/http';
-import { HttpClientModule  } from '@angular/common/http';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Assessment } from '../entities/Assessment';
-import { AssessmentService } from '../services/assessment.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GradeService } from '../services/grade.service';
-import { Grade } from '../entities/Grade';
-import { Note } from '../entities/Note';
-import { NoteService } from '../services/note.service';
+import {Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Assessment} from '../entities/Assessment';
+import {AssessmentService} from '../services/assessment.service';
+import {GradeService} from '../services/grade.service';
+import {Grade} from '../entities/Grade';
+import {Note} from '../entities/Note';
+import {NoteService} from '../services/note.service';
 import * as $ from 'jquery';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GradeByTraineeByAssessmentPipe } from '../pipes/grade-by-trainee-by-assessment.pipe';
-import { NoteByTraineeByWeekPipe } from '../pipes/note-by-trainee-by-week.pipe';
-import { DatePipe } from '@angular/common';
-import { ScrollEvent } from 'ngx-scroll-event';
-import { window } from 'rxjs/operators/window';
-import { HostListener } from '@angular/core/src/metadata/directives';
-import { GambitBatchService } from '../../../caliber-client/services/batch/gambit-batch.service';
-import { CompleteBatch } from '../../../caliber-client/aggregator/entities/CompleteBatch';
-import { GambitBatchUtilService } from '../../../services/gambit-batch-util.service';
-import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
-import { GambitSkillService } from '../../../caliber-client/services/skill/gambit-skill.service';
-import { GambitSkill } from '../../../caliber-client/entities/GambitSkill';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {GradeByTraineeByAssessmentPipe} from '../pipes/grade-by-trainee-by-assessment.pipe';
+import {NoteByTraineeByWeekPipe} from '../pipes/note-by-trainee-by-week.pipe';
+import {DatePipe} from '@angular/common';
+import {ScrollEvent} from 'ngx-scroll-event';
+import {GambitBatchService} from '../../../caliber-client/services/batch/gambit-batch.service';
+import {CompleteBatch} from '../../../caliber-client/aggregator/entities/CompleteBatch';
+import {GambitBatchUtilService} from '../../../services/gambit-batch-util.service';
+import {GambitTrainee} from '../../../caliber-client/entities/GambitTrainee';
+import {GambitSkillService} from '../../../caliber-client/services/skill/gambit-skill.service';
+import {GambitSkill} from '../../../caliber-client/entities/GambitSkill';
 
 @Component({
   selector: 'app-assess',

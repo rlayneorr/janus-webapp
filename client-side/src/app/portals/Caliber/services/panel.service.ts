@@ -1,22 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // services
-import { AlertsService } from './alerts.service';
-import { ApiService } from '../util/api.service';
-import { UrlService } from '../../../caliber-client/services/urls/url.service';
-
+import {ApiService} from '../util/api.service';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 // entities
-import { Panel } from '../entities/Panel';
-
+import {Panel} from '../entities/Panel';
 // Interfaces
-import { CRUD } from '../interfaces/api.interface';
-import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
+import {CRUD} from '../interfaces/api.interface';
+import {GambitTrainee} from '../../../caliber-client/entities/GambitTrainee';
 
 const context = (new UrlService).panel;
 
@@ -100,14 +94,14 @@ export class PanelService implements CRUD<Panel> {
   }
 
   /**
-  * Produces a clone of the Panel object that
-  * has changes required for the API in order
-  * to be processed
-  *
-  * @param batch: Batch
-  *
-  * @return any
-  */
+   * Produces a clone of the Panel object that
+   * has changes required for the API in order
+   * to be processed
+   *
+   *
+   * @return any
+   * @param panel
+   */
   protected prepareForApi(panel: Panel) {
     const output: any = {};
 

@@ -1,14 +1,11 @@
-import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
-
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 // rxjs
-import { Subscription } from 'rxjs/Subscription';
-
+import {Subscription} from 'rxjs/Subscription';
 // entities
-import { Note } from '../../entities/Note';
-
+import {Note} from '../../entities/Note';
 // services
-import { QCStatusService } from '../../services/qcstatus.service';
-import { NoteService } from '../../services/note.service';
+import {QCStatusService} from '../../services/qcstatus.service';
+import {NoteService} from '../../services/note.service';
 
 @Component({
   selector: 'app-quality-overall-feedback',

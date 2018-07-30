@@ -1,4 +1,4 @@
-import { DisplayBatchByYear } from './display-batch-by-year.pipe';
+import {DisplayBatchByYear} from './display-batch-by-year.pipe';
 
 describe('DisplayBatchByYearPipe', () => {
   it('create an instance', () => {

@@ -1,11 +1,9 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
-import { AlertsService } from '../alerts.service';
-import { CategoryService } from './category.service';
-import { Category } from '../../entities/Category';
-import { CATEGORIES, replacementCategory} from './mock-categories';
-import { defer } from 'rxjs/observable/defer';
-import { CategoriesService } from '../categories.service';
+import {AlertsService} from '../alerts.service';
+import {CategoryService} from './category.service';
+import {Category} from '../../entities/Category';
+import {CATEGORIES} from './mock-categories';
+import {defer} from 'rxjs/observable/defer';
+import {CategoriesService} from '../categories.service';
 
 export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -34,7 +32,7 @@ fdescribe('CategoryService', () => {
     categoryService = new CategoryService(<any> httpClientSpyOnGet, alertsService);
 
    const expected: Category[] = CATEGORIES;
- 
+
     httpClientSpyOnGet.get.and.returnValue(asyncData(expected));
 
     categoryService.fetchAll().subscribe(

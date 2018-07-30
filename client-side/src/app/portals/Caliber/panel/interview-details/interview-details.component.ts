@@ -1,21 +1,15 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 // components
-import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
-
+import {PanelSearchbarComponent} from '../panel-searchbar/panel-searchbar.component';
 // rxjs
-import { Subscription } from 'rxjs/Subscription';
-
+import {Subscription} from 'rxjs/Subscription';
 // entities
-import { Panel } from '../../entities/Panel';
-import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
-import { BatchGambit } from '../../../../caliber-client/entities/BatchGambit';
-
+import {Panel} from '../../entities/Panel';
+import {BatchGambit} from '../../../../caliber-client/entities/BatchGambit';
 // services
-import { BatchService } from '../../services/batch.service';
-import { PanelService } from '../../services/panel.service';
+import {BatchService} from '../../services/batch.service';
+import {PanelService} from '../../services/panel.service';
 
 @Component({
   selector: 'app-interview-details',

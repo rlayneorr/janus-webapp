@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { QCStatusService } from './qcstatus.service';
-import { Dependencies } from '../caliber.test.module';
+import {inject, TestBed} from '@angular/core/testing';
+import {QCStatusService} from './qcstatus.service';
+import {Dependencies} from '../caliber.test.module';
 
 
 xdescribe('QCStatusService', () => {

@@ -1,16 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // services
-import { AlertsService } from './alerts.service';
-import { UrlService } from '../../../caliber-client/services/urls/url.service';
-
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 // Interfaces
-import { Fetch } from '../interfaces/api.interface';
-
+import {Fetch} from '../interfaces/api.interface';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 
 const context = (new UrlService).trainingType;
 

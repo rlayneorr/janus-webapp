@@ -1,12 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Panel } from '../../entities/Panel';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Panel} from '../../entities/Panel';
 
-import { GranularityService } from '../services/granularity.service';
-import { PanelService } from '../../services/panel.service';
+import {GranularityService} from '../services/granularity.service';
+import {PanelService} from '../../services/panel.service';
 
-import { Subscription } from 'rxjs/Subscription';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Trainee } from '../../entities/Trainee';
+import {Subscription} from 'rxjs/Subscription';
 
 /**
  * Component for individual trainee's panel feedback.

@@ -1,10 +1,7 @@
-import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlertsComponent } from './alerts.component';
-import { AlertsService } from '../services/alerts.service';
-import { XHRBackend } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
-import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifications-lite';
-import { Dependencies } from '../caliber.test.module';
+import {ComponentFixture, inject, TestBed} from '@angular/core/testing';
+import {AlertsComponent} from './alerts.component';
+import {AlertsService} from '../services/alerts.service';
+import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications-lite';
 
 /**
  * Author: Jordan Young

@@ -1,15 +1,11 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { GranularityService } from './granularity.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
-import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
-import { GambitBatch } from '../../../../caliber-client/entities/GambitBatch';
-import { Dependencies } from '../../caliber.test.module';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
-import { GambitSkillType } from '../../../../caliber-client/entities/GambitSkillType';
-import { GambitTrainer } from '../../../../caliber-client/entities/GambitTrainer';
+import {GranularityService} from './granularity.service';
+import {GambitTrainee} from '../../../../caliber-client/entities/GambitTrainee';
+import {Dependencies} from '../../caliber.test.module';
+import {CompleteBatch} from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import {GambitSkillType} from '../../../../caliber-client/entities/GambitSkillType';
+import {GambitTrainer} from '../../../../caliber-client/entities/GambitTrainer';
 
 /**
  * Tested by Mythoua Chang

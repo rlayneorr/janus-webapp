@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ScreeningService } from '../../services/screening/screening.service';
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
-import { QuestionScoreService } from '../../services/question-score/question-score.service';
-import { QuestionScore } from '../../entities/questionScore';
-import { ScoresToBucketsUtil } from '../../util/scoresToBuckets.util';
-import { AlertsService } from '../../../services/alerts.service';
-import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { SoftSkillViolation } from '../../entities/softSkillViolation';
-import { Subscription } from 'rxjs/Subscription';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ScreeningService} from '../../../services/screening/screening.service';
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {SkillTypeBucketService} from '../../../services/skillTypeBucketLookup/skill-type-bucket.service';
+import {QuestionScoreService} from '../../../services/question-score/question-score.service';
+import {QuestionScore} from '../../entities/questionScore';
+import {ScoresToBucketsUtil} from '../../util/scoresToBuckets.util';
+import {AlertsService} from '../../../services/alerts.service';
+import {SoftSkillsViolationService} from '../../../services/soft-skills-violation/soft-skills-violation.service';
+import {SoftSkillViolation} from '../../entities/softSkillViolation';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-final-report',

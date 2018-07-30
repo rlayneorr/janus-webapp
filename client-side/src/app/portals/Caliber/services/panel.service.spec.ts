@@ -1,11 +1,11 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
-import { ApiService } from '../util/api.service';
-import { PanelService } from './panel.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UrlService } from '../../../caliber-client/services/urls/url.service';
-import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
-import { User } from '../../../caliber-client/entities/User';
+import {inject, TestBed} from '@angular/core/testing';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ApiService} from '../util/api.service';
+import {PanelService} from './panel.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
+import {GambitTrainee} from '../../../caliber-client/entities/GambitTrainee';
+import {User} from '../../../caliber-client/entities/User';
 
 const context = (new UrlService).panel;  // base of the url is at UrlService.panel
 

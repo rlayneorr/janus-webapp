@@ -1,4 +1,4 @@
-import { GradeByTraineeByAssessmentPipe } from './grade-by-trainee-by-assessment.pipe';
+import {GradeByTraineeByAssessmentPipe} from './grade-by-trainee-by-assessment.pipe';
 
 describe('GradeByTraineeByAssessmentPipe', () => {
   it('create an instance', () => {

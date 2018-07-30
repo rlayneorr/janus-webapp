@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 const TYPE_OBJ = typeof {};
 const TYPE_ARR = typeof [];

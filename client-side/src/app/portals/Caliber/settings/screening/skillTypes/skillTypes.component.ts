@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
-import { SkillType } from '../entities/SkillType';
-import { Bucket } from '../entities/Bucket';
-import { Category } from '../entities/Category';
-import { CategoryWeight } from '../entities/Category-Weight';
-import { SkillTypesService } from '../services/skillTypes.service';
-import { BucketsService } from '../services/buckets.service';
-import { SettingsCategoriesService } from '../services/categories.service';
-import { CategoryWeightsService } from '../services/weight.service';
-import { AlertsService } from '../../../services/alerts.service';
+import {Component, OnInit} from '@angular/core';
+import {NgbModal, NgbTabset} from '@ng-bootstrap/ng-bootstrap';
+import {SkillType} from '../entities/SkillType';
+import {Bucket} from '../entities/Bucket';
+import {Category} from '../entities/Category';
+import {CategoryWeight} from '../entities/Category-Weight';
+import {SkillTypesService} from '../../../services/skillTypes.service';
+import {BucketsService} from '../../../services/buckets.service';
+import {SettingsCategoriesService} from '../../../services/categories.service';
+import {CategoryWeightsService} from '../../../services/weight.service';
+import {AlertsService} from '../../../services/alerts.service';
 import {fade} from "../../../../../Animations/caliber-animations";
 
 @Component({
@@ -317,12 +317,7 @@ export class SkillTypesComponent implements OnInit {
                 // console.log(result);
                 console.log("Max total");
                 console.log(this.total);
-                if(this.total == 100){
-                    this.error = false;
-                }
-                else{
-                    this.error = true;
-                }
+                this.error = this.total != 100;
             });
         });
     }

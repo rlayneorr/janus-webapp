@@ -1,15 +1,13 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync, inject } from '@angular/core/testing';
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 // Injected Services
-import { BatchService } from '../../services/batch.service';
-import { TrainingTypeService } from '../../services/training-type.service';
-import { LocationService } from '../../services/location.service';
-import { TrainerService } from '../../services/trainer.service';
+import {TrainingTypeService} from '../../services/training-type.service';
+import {LocationService} from '../../services/location.service';
+import {TrainerService} from '../../services/trainer.service';
 
-import { Observable } from 'rxjs/Observable';
-import { Dependencies } from '../../caliber.test.module';
-import { BatchModalComponent } from './batch-modal.component';
-import { GambitSkillService } from '../../../../caliber-client/services/skill/gambit-skill.service';
+import {Observable} from 'rxjs/Observable';
+import {Dependencies} from '../../caliber.test.module';
+import {BatchModalComponent} from './batch-modal.component';
+import {GambitSkillService} from '../../../../caliber-client/services/skill/gambit-skill.service';
 
 xdescribe('BatchModalComponent', () => {
   let component: BatchModalComponent;

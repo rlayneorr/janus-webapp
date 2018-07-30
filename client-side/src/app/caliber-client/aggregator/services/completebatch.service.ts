@@ -18,7 +18,7 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { stringifyDate } from '../../../portals/Caliber/util/utils';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { NullAstVisitor } from '@angular/compiler';
-import { SkillTypeService } from '../../../portals/Caliber/screening/services/skillType/skill-type.service';
+import { SkillTypeService } from '../../../portals/Caliber/services/skillType/skill-type.service';
 import { GambitSkillTypeService } from '../../services/skillType/gambit-skill-type.service';
 import { GambitBatchService } from '../../services/batch/gambit-batch.service';
 import { GambitBatch } from '../../entities/GambitBatch';
@@ -145,18 +145,18 @@ export class BatchService {
       return this.listSubject.asObservable();
     }
 
-    /**
-    * @overloade
-    * @see save()
-    *
-    * transmits a batch to be saved in persistent
-    * storage on the server and pushes the saved
-    * object on the saved subject
-    *
-    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
-    *
-    * @param batch: Batch
-    */
+  /**
+   * @overloade
+   * @see save()
+   *
+   * transmits a batch to be saved in persistent
+   * storage on the server and pushes the saved
+   * object on the saved subject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
+   *
+   * @param completeBatch
+   */
    public create(completeBatch: CompleteBatch): Observable<GambitBatch> {
     const gambitBatch: GambitBatch = new GambitBatch();
     gambitBatch.batchId = completeBatch.batchId;
@@ -191,14 +191,14 @@ export class BatchService {
     return this.gambitBatchService.create(gambitBatch);
   }
 
-    /**
-     * transmits a Batch object to be updated and
-     * pushes the updated object on th savedSubject
-     *
-     * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
-     *
-     * @param batch: Batch
-     */
+  /**
+   * transmits a Batch object to be updated and
+   * pushes the updated object on th savedSubject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
+   *
+   * @param completeBatch
+   */
     public update(completeBatch: CompleteBatch): Observable<GambitBatch> {
 
       const gambitBatch: GambitBatch = new GambitBatch();
@@ -234,15 +234,15 @@ export class BatchService {
       return this.gambitBatchService.update(gambitBatch);
     }
 
-    /**
-    * transmits a batch object to be deleted and
-    * pushes the deleted object on the deleted
-    * subject
-    *
-    * spring-security: @PreAuthorize("hasAnyRole('VP')")
-    *
-    * @param batch: Batch
-    */
+  /**
+   * transmits a batch object to be deleted and
+   * pushes the deleted object on the deleted
+   * subject
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP')")
+   *
+   * @param completeBatch
+   */
    public delete(completeBatch: CompleteBatch): Observable<GambitBatch> {
     const gambitBatch: GambitBatch = new GambitBatch();
     gambitBatch.batchId = completeBatch.batchId;

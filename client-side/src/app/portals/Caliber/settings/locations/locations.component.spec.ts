@@ -1,22 +1,15 @@
 // Testing Modules
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 // Modules
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs/Subscription';
-
 // Imports from Caliber.test.module.ts
-import { Dependencies } from '../../caliber.test.module';
-
+import {Dependencies} from '../../caliber.test.module';
 // Components
-import { LocationsComponent } from './locations.component';
-
+import {LocationsComponent} from './locations.component';
 // Services
-import { LocationService } from '../../../../caliber-client/services/location/location.service';
-import { HttpClient } from '@angular/common/http';
-import { UrlService } from '../../../../caliber-client/services/urls/url.service';
+import {LocationService} from '../../../../caliber-client/services/location/location.service';
+import {UrlService} from '../../../../caliber-client/services/urls/url.service';
 // import { asyncData } from '../../services/questions/questions.service.spec';
-import { defer } from 'rxjs/observable/defer';
+import {defer} from 'rxjs/observable/defer';
 
 import {Location} from '../../../../caliber-client/entities/location-entities/Location';
 

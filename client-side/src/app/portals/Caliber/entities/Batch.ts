@@ -1,6 +1,6 @@
-import { Trainer } from './Trainer';
-import { Address } from './Address';
-import { Trainee } from './Trainee';
+import {Trainer} from './Trainer';
+import {Address} from './Address';
+import {Trainee} from './Trainee';
 
 export class Batch {
     batchId: number;

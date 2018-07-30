@@ -1,11 +1,10 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { AssessmentBreakdownComponent } from './assessment-breakdown.component';
-import { PDFService } from '../../services/pdf.service';
-import { ReportingService } from '../../services/reporting.service';
-import { GranularityService } from '../services/granularity.service';
-import { CacheData } from '../../../../entities/CacheData.entity';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {AssessmentBreakdownComponent} from './assessment-breakdown.component';
+import {PDFService} from '../../services/pdf.service';
+import {ReportingService} from '../../services/reporting.service';
+import {GranularityService} from '../services/granularity.service';
+import {CacheData} from '../../../../entities/CacheData.entity';
 
 describe('AssessmentBreakdownComponent', () => {
   let component: AssessmentBreakdownComponent;

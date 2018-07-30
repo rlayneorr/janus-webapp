@@ -1,5 +1,5 @@
-import { BatchGambit } from '../../../caliber-client/entities/BatchGambit';
-import { GambitTrainee } from '../../../caliber-client/entities/GambitTrainee';
+import {BatchGambit} from '../../../caliber-client/entities/BatchGambit';
+import {GambitTrainee} from '../../../caliber-client/entities/GambitTrainee';
 
 export class Note {
     public static TYPE_QCBATCH = 'QC_BATCH';

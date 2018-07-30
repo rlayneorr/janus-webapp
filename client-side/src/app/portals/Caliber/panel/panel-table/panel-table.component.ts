@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 // entities
-import { Trainee } from '../../entities/Trainee';
-import { Panel } from '../../entities/Panel';
-
+import {Trainee} from '../../entities/Trainee';
+import {Panel} from '../../entities/Panel';
 // services
-import { PanelService } from '../../services/panel.service';
-import { TraineeService } from '../../services/trainee.service';
+import {PanelService} from '../../services/panel.service';
+import {TraineeService} from '../../services/trainee.service';
 
 @Component({
   selector: 'app-panel-table',

@@ -1,15 +1,11 @@
-import { Component, OnInit, Input} from '@angular/core';
-
+import {Component, Input, OnInit} from '@angular/core';
 // Entities
-import { QuestionScore } from '../../entities/questionScore';
-import { Question } from '../../entities/question';
-
+import {QuestionScore} from '../../entities/questionScore';
 // Services
-import { QuestionService } from '../../services/question/question.service';
-import { QuestionScoreService } from '../../services/question-score/question-score.service';
-
+import {QuestionService} from '../../../services/question/question.service';
+import {QuestionScoreService} from '../../../services/question-score/question-score.service';
 // ngbootstrap for modal
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-answer',

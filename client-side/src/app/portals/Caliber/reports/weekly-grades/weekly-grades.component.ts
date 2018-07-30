@@ -1,22 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
 // rxjs
-import { Subscription } from 'rxjs/Subscription';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 // services
-import { GranularityService } from '../services/granularity.service';
-import { AssessmentService } from '../../services/assessment.service';
-import { GradeService } from '../../services/grade.service';
-import { NoteService } from '../../services/note.service';
-import { ReportingService } from '../../services/reporting.service';
-
+import {GranularityService} from '../services/granularity.service';
+import {AssessmentService} from '../../services/assessment.service';
+import {GradeService} from '../../services/grade.service';
+import {NoteService} from '../../services/note.service';
+import {ReportingService} from '../../services/reporting.service';
 // entities
-import { Assessment } from '../../entities/Assessment';
-import { Grade } from '../../entities/Grade';
-import { Note } from '../../entities/Note';
-import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import {Assessment} from '../../entities/Assessment';
+import {Grade} from '../../entities/Grade';
+import {Note} from '../../entities/Note';
+import {CompleteBatch} from '../../../../caliber-client/aggregator/entities/CompleteBatch';
 
 
 @Component({

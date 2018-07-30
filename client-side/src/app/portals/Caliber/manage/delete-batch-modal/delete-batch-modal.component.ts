@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { BatchGambit } from '../../../../caliber-client/entities/BatchGambit';
-import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+import {CompleteBatch} from '../../../../caliber-client/aggregator/entities/CompleteBatch';
 
 @Component({
   selector: 'app-delete-batch-modal',

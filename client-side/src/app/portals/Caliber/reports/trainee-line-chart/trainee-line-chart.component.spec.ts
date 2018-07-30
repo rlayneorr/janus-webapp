@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { TraineeLineChartComponent } from './trainee-line-chart.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {TraineeLineChartComponent} from './trainee-line-chart.component';
 
 xdescribe('TraineeLineChartComponent', () => {
   let component: TraineeLineChartComponent;

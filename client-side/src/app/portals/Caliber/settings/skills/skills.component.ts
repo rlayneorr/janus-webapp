@@ -1,14 +1,8 @@
-import { Subject } from 'rxjs/Subject';
-import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
-import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { GambitSkill } from '../../../../caliber-client/entities/GambitSkill';
-import { GambitSkillService } from '../../../../caliber-client/services/skill/gambit-skill.service';
-import { Category } from '../../entities/Category';
-import { CategoryService } from '../../services/category/category.service';
+import {Component, OnInit} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Category} from '../../entities/Category';
+import {CategoryService} from '../../services/category/category.service';
 
 @Component({
   selector: 'app-skills',
@@ -147,11 +141,7 @@ export class SkillsComponent implements OnInit {
         if (index > this.categories.length / this.numColumns) {
           // If the numbers of skills is 3 then this condition will activate
           if (this.numColumns === 3) {
-            if (index < ((this.categories.length / this.numColumns) * 2)) {
-              return true;
-            } else {
-              return false;
-            }
+            return index < ((this.categories.length / this.numColumns) * 2);
           } else {
             return true;
           }

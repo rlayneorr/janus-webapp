@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // services
-import { AlertsService } from './alerts.service';
-import { Fetch } from '../interfaces/api.interface';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { UrlService } from '../../../caliber-client/services/urls/url.service';
+import {Fetch} from '../interfaces/api.interface';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 
 /**
  * Manages API calls for skills

@@ -1,23 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ChartDataEntity } from '../../entities/ChartDataEntity';
-import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
-import { VpHomeBarGraphService } from '../../services/graph/vp-home-bar-graph.service';
-import { HttpClient } from '@angular/common/http';
-import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { Input } from '@angular/core';
-import { BarGraphModalComponent } from './bar-graph-modal/bargraphmodal.component';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ReportingService } from '../../services/reporting.service';
-import { Subscription } from 'rxjs/Subscription';
-import { EvaluationService } from '../../services/evaluation.service';
-import { Note } from '../../entities/Note';
-import { DataSet } from '../../entities/DataSet';
-import { AlertsService } from '../../services/alerts.service';
-import { NoteService } from '../../services/note.service';
-import { ReportsService } from '../../services/reports.service';
-import { Observable } from 'rxjs/Observable';
-import { GambitBatchService } from '../../../../caliber-client/services/batch/gambit-batch.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChartDataEntity} from '../../entities/ChartDataEntity';
+import {VpHomeBarGraphService} from '../../services/graph/vp-home-bar-graph.service';
+import {HttpClient} from '@angular/common/http';
+import {VpHomeSelectorService} from '../../services/selector/vp-home-selector.service';
+import {BarGraphModalComponent} from './bar-graph-modal/bargraphmodal.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ReportingService} from '../../services/reporting.service';
+import {Subscription} from 'rxjs/Subscription';
+import {EvaluationService} from '../../services/evaluation.service';
+import {Note} from '../../entities/Note';
+import {AlertsService} from '../../services/alerts.service';
+import {NoteService} from '../../services/note.service';
+import {ReportsService} from '../../services/reports.service';
+import {Observable} from 'rxjs/Observable';
+import {GambitBatchService} from '../../../../caliber-client/services/batch/gambit-batch.service';
 
 @Component({
   selector: 'app-vp-bar-graph',

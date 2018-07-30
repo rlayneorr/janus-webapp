@@ -1,5 +1,5 @@
-import { QuestionScore } from '../entities/questionScore';
-import { SkillTypeBucketLookUp } from '../entities/skillTypeBucketLookup';
+import {QuestionScore} from '../entities/questionScore';
+import {SkillTypeBucketLookUp} from '../entities/skillTypeBucketLookup';
 
 export class ScoresToBucketsUtil {
 

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Question } from '../entities/Question';
-import { Bucket } from '../entities/Bucket';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SettingsQuestionService } from '../services/question.service';
-import { BucketsService } from '../services/buckets.service';
-import { AlertsService } from '../../../services/alerts.service';
+import {Component, OnInit} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Question} from '../entities/Question';
+import {Bucket} from '../entities/Bucket';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {SettingsQuestionService} from '../../../services/question.service';
+import {BucketsService} from '../../../services/buckets.service';
+import {AlertsService} from '../../../services/alerts.service';
 import {fade, moveMe} from "../../../../../Animations/caliber-animations";
 
 /**

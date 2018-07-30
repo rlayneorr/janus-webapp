@@ -1,5 +1,6 @@
-import { Component, ViewChild, OnInit, Input, OnChanges } from '@angular/core';
-import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {BaseChartDirective} from 'ng2-charts/ng2-charts';
+
 /**
  * To use this component insert this html element:
  *<app-graph  *ngIf="chartData" [data]="(chartData | graphData:dataSetLabels)" [legend]=true [type]="chartType"></app-graph>

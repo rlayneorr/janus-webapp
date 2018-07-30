@@ -1,5 +1,5 @@
 /* #############################
-        GENERAL STYLING 
+        GENERAL STYLING
 ############################# */
 
 #introduction-container {
@@ -8,9 +8,7 @@
   width: 70%;
   max-width: 95vw;
   text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ddd;
+  border: 1px solid #ddd;
   border-radius: 4px;
 }
 
@@ -85,7 +83,7 @@ p {
         ABOUT ME
 ############################# */
 .form-group{
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .comment-container {
@@ -94,7 +92,7 @@ p {
   margin-left: 10px;
 }
 /* #############################
-        SUBMIT BUTTON 
+        SUBMIT BUTTON
 ############################# */
 
 #submit-button {
@@ -109,11 +107,11 @@ p {
   background: #686868;
   border: none;
   color: white;
-  font-weight: strong;
+  font-weight: bold;
 }
 
 /* #############################
-        TOGGLE BUTTONS 
+        TOGGLE BUTTONS
 ############################# */
 
  /* The switch - the box around the slider */
@@ -175,16 +173,16 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-} 
+}
 
 /*
     Media queries for Toggle-switch grid (skills-checkbox is the container)
     To make the design responsive, below are 5 media queries to re-arrange
-    the grid system based on width. 
+    the grid system based on width.
     This was mostly trial-and-error to get the numbers.
 
     The first one in the list is the catch-all, meaning the grid should have
-    at most 6 columns. If your screen has greater resolution than 3450, have fun with that. 
+    at most 6 columns. If your screen has greater resolution than 3450, have fun with that.
 */
 @media screen and (max-width: 3450px){
   div.skills-checkbox{
@@ -193,8 +191,8 @@ input:checked + .slider:before {
   }
 }
 /*
-  If the screen resolution is over 1300, use the above query. 
-  If the screen resolution is below 1300, use the below query. 
+  If the screen resolution is over 1300, use the above query.
+  If the screen resolution is below 1300, use the below query.
 */
 @media screen and (max-width: 1300px){
   div.skills-checkbox{

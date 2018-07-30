@@ -1,19 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
 // rxjs
-import { Subscription } from 'rxjs/Subscription';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 // entities
-import { Note } from '../../entities/Note';
-
+import {Note} from '../../entities/Note';
 // services
-import { GranularityService } from '../services/granularity.service';
-import { ReportingService } from '../../services/reporting.service';
-import { NoteService } from '../../services/note.service';
-import { CompleteBatch } from '../../../../caliber-client/aggregator/entities/CompleteBatch';
-import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
+import {GranularityService} from '../services/granularity.service';
+import {ReportingService} from '../../services/reporting.service';
+import {NoteService} from '../../services/note.service';
+import {CompleteBatch} from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import {GambitTrainee} from '../../../../caliber-client/entities/GambitTrainee';
 
 /**
  * Creates a table of the weekly feedback of a given trainee

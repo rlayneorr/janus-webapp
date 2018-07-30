@@ -1,21 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { forkJoin } from 'rxjs/observable/forkJoin';
-
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 // services
-import { UrlService } from '../../../caliber-client/services/urls/url.service';
-import { AlertsService } from './alerts.service';
-
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
+import {AlertsService} from './alerts.service';
 // entities
-import { Trainer } from '../entities/Trainer';
-
+import {Trainer} from '../entities/Trainer';
 // Interfaces
-import { CRUD } from '../interfaces/api.interface';
+import {CRUD} from '../interfaces/api.interface';
 
 const context = (new UrlService).trainers;
 

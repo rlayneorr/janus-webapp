@@ -20,7 +20,7 @@ export class GambitTraineeService {
    *
    * Possibly a legacy function so we did not consolidate this with fetchAllByBatch (Blake's class, 1801)
    *
-   * @param batchId
+   * @param id
    * @param status
    *
    * @returns {Observable<GambitTrainee[]>}
@@ -57,13 +57,13 @@ export class GambitTraineeService {
   }
 
   /**
-  * Deletes a trainee and returns the Observable.
-  *
-  * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
-  *
-  * @param trainee: GambitTrainee
-  * @returns {Observable<GambitTrainee>}
-  */
+   * Deletes a trainee and returns the Observable.
+   *
+   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER','PANEL')")
+   *
+   * @returns {Observable<GambitTrainee>}
+   * @param traineeId
+   */
   public delete(traineeId: number): Observable<GambitTrainee> {
     const url = this.urlService.trainees.delete(traineeId);
     return this.httpClient.delete<GambitTrainee>(url);

@@ -1,18 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-
+import {Observable} from 'rxjs/Observable';
 // services
-import { AlertsService } from '../alerts.service';
-import { UrlService } from '../../../../caliber-client/services/urls/url.service';
-
+import {AlertsService} from '../alerts.service';
+import {UrlService} from '../../../../caliber-client/services/urls/url.service';
 // entities
-import { Category } from '../../entities/Category';
-import { CRUD } from '../../interfaces/api.interface';
+import {Category} from '../../entities/Category';
+import {CRUD} from '../../interfaces/api.interface';
 
 /**
  * this service manages calls to the web services

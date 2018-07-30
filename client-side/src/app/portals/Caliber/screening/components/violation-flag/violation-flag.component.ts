@@ -1,12 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { ViolationType } from '../../entities/violationType';
-import { ViolationTypeService } from '../../services/violationType/violationType.service';
-import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { AlertsService } from '../../../services/alerts.service';
-import { SoftSkillViolation } from '../../entities/softSkillViolation';
-import { ScreeningService } from '../../services/screening/screening.service';
-import { Observable } from 'rxjs/Observable';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ViolationType} from '../../entities/violationType';
+import {ViolationTypeService} from '../../../services/violationType/violationType.service';
+import {SoftSkillsViolationService} from '../../../services/soft-skills-violation/soft-skills-violation.service';
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {AlertsService} from '../../../services/alerts.service';
+import {SoftSkillViolation} from '../../entities/softSkillViolation';
 
 @Component({
   selector: 'app-violation-flag',

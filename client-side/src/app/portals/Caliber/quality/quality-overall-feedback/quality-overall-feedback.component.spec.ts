@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { QualityOverallFeedbackComponent } from './quality-overall-feedback.component';
-import { Dependencies } from '../../caliber.test.module';
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {QualityOverallFeedbackComponent} from './quality-overall-feedback.component';
+import {Dependencies} from '../../caliber.test.module';
 
 
 describe('QualityOverallFeedbackComponent', () => {

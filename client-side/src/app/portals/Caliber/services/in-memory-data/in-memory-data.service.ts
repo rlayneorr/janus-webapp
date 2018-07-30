@@ -1,4 +1,4 @@
-import { InMemoryDbService } from 'angular-in-memory-web-api';
+import {InMemoryDbService} from 'angular-in-memory-web-api';
 
 /** This service is for Bucket entity only that has these properties, data
   * within this service is for development purpose only.

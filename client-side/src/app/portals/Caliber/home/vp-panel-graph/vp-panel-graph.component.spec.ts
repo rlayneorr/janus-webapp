@@ -1,14 +1,12 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { Injectable, Inject } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { VpHomePanelGraphService } from '../../services/graph/vp-home-panel-graph.service';
-import { AlertsService } from '../../services/alerts.service';
-import { ReportsService } from '../../services/reports.service';
-import { ColorService } from '../../services/colors/color.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {ChartsModule} from 'ng2-charts/ng2-charts';
+import {VpHomePanelGraphService} from '../../services/graph/vp-home-panel-graph.service';
+import {AlertsService} from '../../services/alerts.service';
+import {ReportsService} from '../../services/reports.service';
+import {ColorService} from '../../services/colors/color.service';
 
-import { VpPanelGraphComponent } from './vp-panel-graph.component';
-import { HomeComponent } from '../../../Assign-Force/home/home.component';
+import {VpPanelGraphComponent} from './vp-panel-graph.component';
 
 xdescribe('VpPanelGraphComponent', () => {
   let component: VpPanelGraphComponent;

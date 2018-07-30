@@ -1,4 +1,4 @@
-import { ArrToStringPipe } from './arr-to-string.pipe';
+import {ArrToStringPipe} from './arr-to-string.pipe';
 
 describe('ToStringPipe', () => {
   it('create an instance', () => {

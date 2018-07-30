@@ -1,4 +1,4 @@
-import { SkillType } from '../entities/skillType';
+import {SkillType} from '../entities/skillType';
 
 export const SKILLTYPES: SkillType[] = [
     {

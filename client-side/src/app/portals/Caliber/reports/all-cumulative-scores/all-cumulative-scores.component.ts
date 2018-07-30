@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ReportingService } from '../../services/reporting.service';
-import { PDFService } from '../../services/pdf.service';
-import { Subscription } from 'rxjs/Subscription';
-import { GranularityService } from '../services/granularity.service';
+import {Component, OnInit} from '@angular/core';
+import {ReportingService} from '../../services/reporting.service';
+import {PDFService} from '../../services/pdf.service';
+import {Subscription} from 'rxjs/Subscription';
+import {GranularityService} from '../services/granularity.service';
 
 /**
  * This component displays the batch overall chart shows as the 'Cumulative Scores'.

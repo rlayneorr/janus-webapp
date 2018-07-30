@@ -1,10 +1,9 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
-import { AlertsService } from './alerts.service';
-import { TraineeService } from './trainee.service';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UrlService } from '../../../caliber-client/services/urls/url.service';
+import {inject, TestBed} from '@angular/core/testing';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AlertsService} from './alerts.service';
+import {TraineeService} from './trainee.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 
 
 const context = (new UrlService).trainee;

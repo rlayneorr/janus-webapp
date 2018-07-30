@@ -30,13 +30,13 @@ h6 {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #6c757d; 
+  background: #6c757d;
   border-radius: 5px;
 }
 
@@ -54,7 +54,6 @@ h6 {
 }
 
 i {
-  cursor: pointer;
   cursor: hand;
 }
 
@@ -164,7 +163,7 @@ i {
   content: "";
   height: 13px;
   width: 13px;
-  left: 0px;
+  left: 0;
   bottom: 2px;
   background-color: white;
   -webkit-transition: .4s;

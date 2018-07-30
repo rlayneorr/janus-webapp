@@ -1,8 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { WeeklyFeedbackComponent } from './weekly-feedback.component';
-import { Dependencies } from '../../../../app.test.module';
-import { Trainee } from '../../entities/Trainee';
+import {WeeklyFeedbackComponent} from './weekly-feedback.component';
+import {Dependencies} from '../../../../app.test.module';
 
 
 xdescribe('WeeklyFeedbackComponent', () => {

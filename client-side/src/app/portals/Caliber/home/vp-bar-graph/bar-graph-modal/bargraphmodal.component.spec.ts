@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BarGraphModalComponent } from './bargraphmodal.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OrderByPipe } from '../../../pipes/order-by.pipe';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+import {BarGraphModalComponent} from './bargraphmodal.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {OrderByPipe} from '../../../pipes/order-by.pipe';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
 
 describe('BarGraphModalComponent', () => {

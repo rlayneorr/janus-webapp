@@ -1,7 +1,5 @@
 // import { Tag } from './tag';
-import { Candidate } from './Candidate';
-import { CaliberTrainer } from './caliberTrainer';
-import { SkillType } from './skillType';
+import {Candidate} from './Candidate';
 
 /*
   Entity representing all data related to the screening of a candidate
