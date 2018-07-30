@@ -11,7 +11,7 @@
         <li class="pointer" *ngFor="let bucket of questionBuckets">
           <!-- <button class="btn" *ngFor="let bucket of buckets" (click)="setBucket(bucket.bucketId)">{{bucket.bucketCategory}}</button> -->
           <a class="nav-link" [class.active]="bucket.bucketId == currentCategory.bucketId" 
-            [class.inActive]="bucket.bucketId != currentCategory.bucketId" (click)="setBucket(bucket.bucketId)">{{bucket.description}}</a>
+            [class.inActive]="bucket.bucketId != currentCategory.bucketId" (click)="setBucket(bucket.bucketId)">{{bucket.bucketDescription}}</a>
         </li>
       </ul>
     </div>
