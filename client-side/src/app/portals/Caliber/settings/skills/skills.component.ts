@@ -18,7 +18,7 @@ import { CategoryService } from '../../services/category/category.service';
 export class SkillsComponent implements OnInit {
   newCategory: Category = {
     categoryId: 0,
-    categoryName: ''
+    title: ''
   };
   addForm: FormGroup;
   // skills: GambitSkill[];
@@ -62,7 +62,7 @@ export class SkillsComponent implements OnInit {
   }
   initFormControl() {
     this.addForm = this.fb.group({
-      'name': [this.newCategory.categoryName, Validators.required]
+      'name': [this.newCategory.title, Validators.required]
     });
   }
   /**
@@ -71,7 +71,7 @@ export class SkillsComponent implements OnInit {
    * @memberof SkillsComponent
    */
   addNewSkill(value) {
-    this.newCategory.categoryName = value.name;
+    this.newCategory.title = value.name;
     this.categoryService.create(this.newCategory).subscribe((succ) => {
       this.categories.push(succ);
       //this reloads the page. Placeholder.
