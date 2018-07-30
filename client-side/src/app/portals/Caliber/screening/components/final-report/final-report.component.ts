@@ -49,8 +49,7 @@ subscriptions: Subscription[] = [];
 
   ngOnInit() {
     this.checked = 'false';
-    // this.candidateName = this.candidateService.getSelectedCandidate().firstname + ' ' +
-    //                       this.candidateService.getSelectedCandidate().lastname;
+    this.candidateName = this.candidateService.getSelectedCandidate().name
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
     this.allTextString = this.softSkillString + '\n';
     this.questionScoreService.currentQuestionScores.subscribe(

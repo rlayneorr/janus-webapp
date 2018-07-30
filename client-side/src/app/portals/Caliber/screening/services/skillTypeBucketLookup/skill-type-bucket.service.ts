@@ -45,8 +45,8 @@ export class SkillTypeBucketService {
   // }
 
   // Returns an observable array of buckets (categories) with assigned weights
-  getSkillTypeBuckets(skillTypeID: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.urlService.skillTypes.getBucketBySkillType(skillTypeID)}`);
+  getSkillTypeBuckets(skillTypeID: number, categoryId: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.urlService.skillTypes.getBucketBySkillType(skillTypeID, categoryId)}`);
   }
 
 /*

@@ -70,6 +70,7 @@ export class ScoresToBucketsUtil {
         breakdowns.push('Overall: ' + Number(weightedTotal).toFixed(1) + '%');
         // add just the raw overall score for saving to the database to the end of the array
         breakdowns.push(weightedTotal.toString());
+        console.log("breakdowns: " + breakdowns);
         return breakdowns;
     }
 }
