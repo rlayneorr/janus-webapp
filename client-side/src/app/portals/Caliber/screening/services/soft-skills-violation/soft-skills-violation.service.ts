@@ -71,7 +71,7 @@ export class SoftSkillsViolationService {
   addViolations(newViolations: ViolationType[], comment: string) {
     const violationIdArray: number[] = [];
     for (let i = 0; i < newViolations.length; i++) {
-      violationIdArray[i] = newViolations[i].violationTypeId;
+      violationIdArray[i] = newViolations[i].id;
     }
 
     // create an Http parameter body with violationID array, append comment and date to body
@@ -88,7 +88,7 @@ export class SoftSkillsViolationService {
     return this.http.post<any[]>(
       this.urlService.softSkillsViolation.addViolationURL(),
       {
-        'violationTypeId': [typeID],
+        'violationTypeId': typeID,
         'softSkillComment': comment,
         'violationTime': new Date(),
         'screeningId': screeningID

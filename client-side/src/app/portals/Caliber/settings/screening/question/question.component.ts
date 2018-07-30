@@ -3,6 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { QuestionsService } from '../../../services/questions/questions.service';
 import { SettingsQuestionService } from '../services/question.service';
 import { BucketsService } from '../services/buckets.service';
 import { AlertsService } from '../../../services/alerts.service';
@@ -184,7 +185,7 @@ export class QuestionComponent implements OnInit {
   deleteQuestion(question):void {
     this.questionService.deleteQuestion(question.questionId).subscribe();
   }
-
+ 
   /**
    * Used to populate the current question and the current tags with a selected question to be
    * edited.
@@ -194,10 +195,12 @@ export class QuestionComponent implements OnInit {
       this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data => {
         this.questions = (data as Question[]);
       });
-
+      
     }
   }
 
+  
+  
   savedSuccessfully() {
     this.alertsService.success('Saved successfully');
   }

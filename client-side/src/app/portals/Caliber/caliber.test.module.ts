@@ -161,8 +161,6 @@ import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
-// import { TagFilterPipe } from './settings/screening/question/question.filter';
-//import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
@@ -207,7 +205,6 @@ export const Dependencies = {
     ArrToStringPipe,
     SearchPipe,
     CategoryFilterPipe,
-    // TagFilterPipe,
 
     // components
     // PaginationControlsComponent,

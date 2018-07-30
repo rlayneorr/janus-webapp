@@ -12,7 +12,6 @@ import { QUESTIONS } from '../../mock-data/mock-questions';
 // import { TagsAndSkill } from '../../wrappers/tagsAndSkill';
 
 // Services
-//import { TagService } from '../../../services/tag/tag.service';
 import { CandidateService } from '../candidate/candidate.service';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 /*
@@ -23,7 +22,8 @@ export class QuestionService {
 
   constructor(
     private httpClient: HttpClient,
-    private candidateService: CandidateService,
+    // private tagService: TagService,
+    //private simpleTraineeService: SimpleTraineeService,
     private urlService: UrlService
   ) {}
 
