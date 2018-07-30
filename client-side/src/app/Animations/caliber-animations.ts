@@ -16,7 +16,7 @@ export let fade = trigger('fade', [
   // void <=> * can be represented with ALIASES -> :enter and :leave
   //Timing is in milliseconds
   transition('void <=> *', [
-    animate(1000)
+    animate(800)
   ])
 
 ]);

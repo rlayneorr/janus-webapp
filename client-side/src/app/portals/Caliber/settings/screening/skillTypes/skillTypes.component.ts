@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { SkillType } from '../entities/SkillType';
 import { Bucket } from '../entities/Bucket';
 import { Category } from '../entities/Category';
@@ -9,11 +9,13 @@ import { BucketsService } from '../services/buckets.service';
 import { SettingsCategoriesService } from '../services/categories.service';
 import { CategoryWeightsService } from '../services/weight.service';
 import { AlertsService } from '../../../services/alerts.service';
+import {fade} from "../../../../../Animations/caliber-animations";
 
 @Component({
     selector: 'app-skill-types',
     templateUrl: './skillTypes.component.html',
     styleUrls: ['./skillTypes.component.css'],
+    animations:[fade]
 })
 
 /**
@@ -116,15 +118,15 @@ export class SkillTypesComponent implements OnInit {
             categories: skillType.categories,
             isActive: false
         };
-        
+
         skillType.categories.forEach(category => {
             this.weightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId).subscribe(result => {
                 this.allWeights.push(result);
             })
-        })
+        });
 
-        console.log("edit intialize weights")
-        console.log(this.allWeights)
+        console.log("edit intialize weights");
+        console.log(this.allWeights);
         this.resetCategories(skillType, null);
         this.equalsMax(skillType);
     }
@@ -185,13 +187,13 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
-    /**
-    * Checks which buckets are currently associated with the selected skill Type
-    * If a bucket from all buckets already belong to the selected skill type, hide the bucket
-    * Includes with objects giving wrong results, so used an
-    * array of bucket ids to utilize the includes method.
-    * @param bucketId: Id of single bucket
-    */
+  /**
+   * Checks which buckets are currently associated with the selected skill Type
+   * If a bucket from all buckets already belong to the selected skill type, hide the bucket
+   * Includes with objects giving wrong results, so used an
+   * array of bucket ids to utilize the includes method.
+   * @param category
+   */
     checkContains(category) {
         if (this.skillType) {
             return this.skillType.categories.includes(category);
@@ -199,12 +201,12 @@ export class SkillTypesComponent implements OnInit {
         return false;
     }
 
-    /**
-    * Adds a new bucket object to the selected skill type.
-    * Set weight of new bucket to be 0
-    * Add the bucketId to the array of Ids of selected skill type
-    * @param bucket: bucket object needed to be added to skill types.
-    */
+  /**
+   * Adds a new bucket object to the selected skill type.
+   * Set weight of new bucket to be 0
+   * Add the bucketId to the array of Ids of selected skill type
+   * @param category
+   */
     addToCategories(category: Category) {
         if(!this.skillType){
             this.skillType = {
@@ -224,21 +226,21 @@ export class SkillTypesComponent implements OnInit {
                 categoryId: category.categoryId,
                 weight: 0
             };
-            
+
             this.weightsService.createWeight(this.weight).subscribe(result => {
                 this.weight = result;
-                console.log("create result")
+                console.log("create result");
                 console.log(this.weight);
                 this.allWeights.push(this.weight);
                 this.skillType.categories.push(category);
-            })   
+            })
         }
     }
 
-    /**
-    * Removes all references to the bucket that is associated to the skill type
-    * @param bucket: bucket object to be removed from all associates to the skill type
-    */
+  /**
+   * Removes all references to the bucket that is associated to the skill type
+   * @param category
+   */
     removeCategories(category: Category) {
         for (const singleBucketIndex in this.skillType.categories) {
             if (this.skillType.categories[singleBucketIndex] === category) {
@@ -248,8 +250,8 @@ export class SkillTypesComponent implements OnInit {
         this.allWeights.forEach(weight => {
             if(category.categoryId === weight.categoryId){
                 this.weightsService.deleteWeight(this.skillType, category).subscribe(result => {
-                    console.log("remove result")
-                    console.log(result)
+                    console.log("remove result");
+                    console.log(result);
                     this.allWeights.splice(this.allWeights.indexOf(weight), 1);
                 })
             }
@@ -269,8 +271,8 @@ export class SkillTypesComponent implements OnInit {
         this.skillType.categories.forEach(category => {
             this.allWeights.forEach(weight =>{
                 this.weightsService.updateWeight(skillType, category, weight).subscribe(result => {
-                    console.log("update result")
-                    console.log(result); 
+                    console.log("update result");
+                    console.log(result);
                 });
             });
         });
@@ -286,12 +288,12 @@ export class SkillTypesComponent implements OnInit {
     weightChange(skillType: SkillType, category: Category, weight: number){
         this.weightsService.getWeightByIds(skillType.skillTypeId, category.categoryId).subscribe(result => {
             console.log("WC result");
-            console.log(result)
+            console.log(result);
             this.weight = result;
-        })
-        
-        console.log("WC result outside")
-        console.log(this.weight)
+        });
+
+        console.log("WC result outside");
+        console.log(this.weight);
         this.weight.weight = weight;
         this.weightsService.updateWeight(skillType, category, this.weight).subscribe(result => {
             console.log("weight update result");
@@ -309,11 +311,11 @@ export class SkillTypesComponent implements OnInit {
         this.total = 0;
         skillType.categories.forEach(category => {
             this.weightsService.getWeightByIds(skillType.skillTypeId, category.categoryId).subscribe(result => {
-                console.log("max weight result")
-                console.log(result)
+                console.log("max weight result");
+                console.log(result);
                 this.total = this.total + result.weight;
                 // console.log(result);
-                console.log("Max total")
+                console.log("Max total");
                 console.log(this.total);
                 if(this.total == 100){
                     this.error = false;
@@ -349,7 +351,7 @@ export class SkillTypesComponent implements OnInit {
             title: '',
             categories: [],
             isActive: false
-        }
+        };
         this.total = 0;
         this.equalsMax(this.skillType);
     }
@@ -364,7 +366,7 @@ export class SkillTypesComponent implements OnInit {
                     this.categoriesService.getCategoryById(weight.categoryId).subscribe(category => {
                         if(!result.categories.includes(category)){
                             this.weightsService.deleteWeight(this.skillType, category).subscribe(result => {
-                                console.log("delete result")
+                                console.log("delete result");
                                 console.log(result)
                             });
                         }

@@ -9,12 +9,14 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsService } from '../../../services/alerts.service';
 import { Category } from '../entities/Category';
 import { SettingsCategoriesService } from '../services/categories.service';
+import {fade} from "../../../../../Animations/caliber-animations";
 
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
+  animations:[fade]
 })
 
 export class CategoriesComponent implements OnInit {

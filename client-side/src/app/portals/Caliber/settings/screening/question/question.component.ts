@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SettingsQuestionService } from '../services/question.service';
 import { BucketsService } from '../services/buckets.service';
 import { AlertsService } from '../../../services/alerts.service';
-import {moveMe} from "../../../../../Animations/caliber-animations";
+import {fade, moveMe} from "../../../../../Animations/caliber-animations";
 
 /**
  * unified create and update question so that it sends the
@@ -25,7 +25,7 @@ import {moveMe} from "../../../../../Animations/caliber-animations";
   selector: 'app-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css'],
-  animations: [moveMe]
+  animations: [moveMe, fade]
 })
 export class QuestionComponent implements OnInit {
 
@@ -183,7 +183,6 @@ export class QuestionComponent implements OnInit {
 
   deleteQuestion(question):void {
     this.questionService.deleteQuestion(question.questionId).subscribe();
-    console.log("delete")
   }
 
   /**
