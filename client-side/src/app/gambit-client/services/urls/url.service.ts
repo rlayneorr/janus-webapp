@@ -342,10 +342,11 @@ export class UrlService {
     updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
     deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
 
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
+
   };
 
   softSkillsViolation = {
@@ -457,12 +458,13 @@ export class UrlService {
    * This section is being added for use in the setting screening weight service
    * @author John Lacap
    */
+  private weightsServiceEndpoint = this.context + this.adminScreening;
   weight={
-    createWeight: () => `${this.context}/weights`,
-    getWeights: () => `${this.context}/weights`,
-    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.context}/weights/${skillTypeId}/${categoryId}`,
-    updateWeight: (id: number) => `${this.context}/weights/${id}`,
-    deleteWeight: (id: number) => `${this.context}/weights/${id}`,
+    createWeight: () => `${this.weightsServiceEndpoint}/weight`,
+    getWeights: () => `${this.weightsServiceEndpoint}/weight`,
+    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+    updateWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+    deleteWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
   };
 
   /* Reporting service API endpoints */

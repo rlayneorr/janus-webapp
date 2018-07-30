@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { catchError } from 'rxjs/operators';
-
 import { SkillType } from '../entities/SkillType';
-import { Category } from '../entities/Category';
 import { Bucket } from '../entities/Bucket';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
-
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -44,16 +38,16 @@ export class SkillTypesService {
     }
 
     getSkillTypes() {
-        return this.http.get<any[]>(this.urlService.skillTypes.getSkillTypes());
+        return this.http.get<SkillType[]>(this.urlService.skillTypes.getSkillTypes());
     }
 
     setSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
-        return this.http.post(this.urlService.skillTypes.setSkillTypeBuckets(), { skillTypeName: skillType.skillTypeName, skillTypeId:
+        return this.http.post(this.urlService.skillTypes.setSkillTypeBuckets(), { skillTypeName: skillType.title, skillTypeId:
             skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
     }
 
     updateSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
-        return this.http.put(this.urlService.skillTypes.updateSkillTypeBuckets(), { skillTypeName: skillType.skillTypeName,
+        return this.http.put(this.urlService.skillTypes.updateSkillTypeBuckets(), { skillTypeName: skillType.title,
             skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
     }
 
