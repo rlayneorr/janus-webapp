@@ -120,6 +120,7 @@ export class IntroductionComponent implements OnInit {
   onSubmit() {
     // Send the comments to the appropriate service method saves them to the DB
     this.screeningService.submitIntroComment(this.comment);
+    this.setCategories();
   }
 
   // Returns a boolean depending on whether a tag was checked.
@@ -127,4 +128,9 @@ export class IntroductionComponent implements OnInit {
   categoryChosen(): boolean {
     return (this.categoriesSelected.length == 0);
   }
+  setCategories()
+ {
+   return this.screeningService.setSelectedCategories(this.categoriesSelected);
+ }
+
 }
