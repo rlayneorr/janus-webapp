@@ -12,7 +12,7 @@
       <div class = "card w-50" >
         <h6 class="card-header">Questions</h6>
         <div class="card-body" id = "allQuestionsDiv">
-          <div class="list-group" *ngFor="let question of questions">
+          <div class="list-group" *ngFor="let question of questions" [@fade]>
             <a class="list-group-item list-group-item-action" *ngIf = "question">
               {{question.questionText}}
               <i id="xIcon">
@@ -91,60 +91,6 @@
               </div>
             </ng-template>
           </ngb-tab>
-          <!--Answers Tab End-->
-          <!--Tags Tab Start-->
-          <!-- <ngb-tab title="Tags" (click) = "removeTagsFromAll()">
-            <ng-template ngbTabContent>
-              <div ngbPanelContent class = "tabContent">
-                <br>
-                <div class="row">
-                  <label for="allTags" class="col-form-label col-sm-3">Selected Tags:</label>
-                  <!--Add new tag section
-                  <div class="col-sm-9 col-form-label"  align = "center">
-                    <input #Tag (keyup.enter)="newTag()" [(ngModel)]="newTagString" name="newTag"  type = "text" id = "newTag" class="form-control" placeholder="add new tag">
-                  </div>
-                </div>
-                <!--Uses the same styling as the all tags, but this section is to display the currently added tags in the question editor
-                <div id = "allTagsDiv" data-spy="scroll" data-offset="50">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-sm-11 col-8">
-                        <div class="form-group row">
-                          <!--Corresponding to an array in the backend that removes a tag when one is clicked and adds that tag back to the all tags array
-                          <span *ngFor="let tag of currentTags">
-                            <span *ngIf = "tag" class="input-group-addon revatureOrange badge badge-pill" (click)="removeTagFromQuestion(tag)" [innerHTML]="tag.tagName"></span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--Add tags section
-                <div class="form-group row">
-                  <label for="allTags" class="col-sm-3 col-form-label">All Tags:</label>
-                  <div class="col-sm-9">
-                    <!--A search bar to help sift through the unadded tags for when the amount of tags is increased
-                    <input type="text" name="tag" [(ngModel)]="filter.name" placeholder="Search Tags" min="0" max="100" class = "form-control">
-                  </div>
-              </div>
-              <div id = "allTagsDiv" data-spy="scroll" data-offset="50">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-sm-11 col-8">
-                      <div class="form-group row">
-                        <!--Custome filter that checks all of the tags against the string in the search bar above
-                        <span *ngFor="let tag of allTags| tagfilter:filter">
-                          <span *ngIf = "tag" class="input-group-addon revatureGray badge badge-pill" (click)="addTagToQuestion(tag)">{{tag.tagName}}</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template> -->
-        <!-- </ngb-tab> -->
-        <!--Tags Tab End-->
         </ngb-tabset>
         <!---Answers/Tags Tabbing End-->
         <div class="modal-footer">

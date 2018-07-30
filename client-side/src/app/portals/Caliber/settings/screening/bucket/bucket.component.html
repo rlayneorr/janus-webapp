@@ -4,14 +4,14 @@
     <i class="fa fa-backward" aria-hidden="true"></i>
     <strong>Back To All Buckets</strong>
   </button>
-    <!-- <a class="btn pull-right" (click)="routeToAllBuckets()">Back To SkillTypes</a> -->
+    <!--<a class="btn pull-right" (click)="routeToAllBuckets()">Back To Buckets</a>-->
     <!--Bucket category (the name displayed)-->
     <h3 *ngIf="this.theBucket" class="bucket-header">
         {{this.theBucket.category}}
     </h3>
     <!-- Bucket description (the description displayed)-->
     <p *ngIf="this.theBucket" id="bucket-desc">
-        {{this.theBucket.description}}
+        {{this.theBucket.bucketDescription}}
     </p>
 </div>
 

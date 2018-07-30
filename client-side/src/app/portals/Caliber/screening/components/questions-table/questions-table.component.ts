@@ -3,15 +3,18 @@ import { Subscription } from 'rxjs/Subscription';
 
 // Entities
 import { Question } from '../../entities/question';
-import { Bucket } from '../../entities/bucket';
+import { Bucket } from '../../../settings/screening/entities/Bucket';
 import { QuestionScore } from '../../entities/questionScore';
+import { Candidate} from '../../entities/Candidate';
 
 // Services
 // import { QuestionService } from '../../services/question/question.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
 import { SkillTypeBucketLookUp } from '../../entities/skillTypeBucketLookup';
-
+import { QuestionsService} from '../../../services/questions/questions.service'
+import { SkillTypesService} from '../../../settings/screening/services/skillTypes.service'
+import { BucketsService} from '../../../settings/screening/services/buckets.service'
 // Utility Class (setting up buckets and questions based on selected tags)
 import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
 
@@ -22,6 +25,7 @@ import { AnswerComponent } from '../answer/answer.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScreeningService } from '../../services/screening/screening.service';
 import { CandidateService } from '../../services/candidate/candidate.service';
+import { Category } from '../../../entities/Category';
 
 @Component({
   selector: 'app-questions-table',
@@ -46,11 +50,27 @@ on how many questions a screener can ask, nor are there any constraints
 on what the proportion of questions must be (x% Java, y% HTML, z% SQL, etc).
 Future iterations may change this.
 */
-
+//screening service.getSelectedCategories
 export class QuestionsTableComponent implements OnInit, OnDestroy {
+  newBucket: Bucket= {
+    bucketId: 0,
+    categoryId : 0,
+    category: '',
+    bucketDescription: '',
+    isActive: false,
+    questions: [],
+
+  };
   // Used to display the categories
   questionBuckets: Bucket[];
+  currentCategories: Category[];
+  buckets: Bucket[];
 
+
+  //the bucket ids
+  currentBucketId: number;
+  //the categories selecetd
+  selectedCategories: Category[];
   // holds the current category. Used to control
   // which questions are displayed in the questions table.
   currentCategory: Bucket;
@@ -69,61 +89,92 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   constructor(
-    // private questionService: QuestionService,
+    private questionsService: QuestionsService,
     private questionScoreService: QuestionScoreService,
     private questionsToBucketsUtil: QuestionsToBucketsUtil,
     private modalService: NgbModal,
     private screeningService: ScreeningService,
     private candidateService: CandidateService,
     private skillTypeBucketService: SkillTypeBucketService,
+    private bucketsService: BucketsService,
   ) {}
 
   ngOnInit() {
+    //get the categories selected on the last page
+   this.currentCategories = this.screeningService.getSelectedCategories();
+   console.log("selected Categories", this.currentCategories);
+   //get all the buckets
+    this.bucketsService.getAllBuckets().subscribe((data)=> {
+      console.log(this.currentCategories); 
+      console.log("buckets for category display", data)
+      const cids: Number[] = this.currentCategories.map(c=>c.categoryId);
+      this.buckets = data.filter(b=>{
+        return cids.includes(b.categoryId) && b.isActive;
+      });
+      console.log("our buckets are....: ", this.buckets);
+
+      // Add questions to our bucket, I don't think it matters if the questions
+      // are added to the bucket, since we don't modify that service....
+      this.buckets.map(b=>{
+        this.questionsService.getBucketQuestions(b.bucketId).subscribe(questions => {
+          b["questions"] = questions as Question[];
+        });
+      });
+      this.questionBuckets = this.buckets;
+      this.currentCategory = this.questionBuckets[0];
+    });
+
+    //get the questions for the buckets on the categories selected from the buckets
+    //this.questionsService.getBucketQuestions(404).subscribe((resp) => {
+    //  this.questionBuckets = resp as Bucket[];console.log("hello", resp)});
+
+    //
     // use skillTypeBucketLookup that provides array of buckets and array of weights
     // this.subscriptions.push(this.skillTypeBucketService.
-    //   getSkillTypeBuckets(this.candidateService.getSelectedCandidate().skillTypeID).subscribe(bucketsWithWeights => {
+    //   //looking this up by resourceId needs to be redone. skilltypebucket service may e the wrong thing to use here. -michael
+    //   getSkillTypeBuckets(1).subscribe(bucketsWithWeights => {
 
     //   const myBuckets: Bucket[] = [];
     //   for ( const e of bucketsWithWeights.bucket) {
     //     myBuckets.push(
     //       {
-    //         bucketID: e.bucketId,
-    //         bucketCategory: e.bucketCategory,
+    //         bucketId: e.bucketId,
+    //         categoryId: e.categoryId,
+    //         category: e.category,
     //         bucketDescription: e.bucketDescription,
     //         isActive: e.isActive,
-    //         questions: [],
+    //         questions: e.Question[],
     //       }
     //     );
     //   }
 
-      // this.skillTypeBucketService.bucketsByWeight = {
-      //   skillTypeBucketLookupID: bucketsWithWeights.skillTypeBucketLookupID,
-      //   skillType: JSON.parse(JSON.stringify(bucketsWithWeights.skillType)),
-      //   buckets: myBuckets,
-      //   weights: JSON.parse(JSON.stringify(bucketsWithWeights.weight)),
-      // };
-      /**
-       * Disabled because relationship between question and skill microservice relationship
-       * needs to be reworked on the serverside
-       */
-      // this.subscriptions.push(this.questionService.getQuestions().subscribe(allQuestions => {
-      //   this.questionBuckets = this.questionsToBucketsUtil.saveQuestions(allQuestions, this.skillTypeBucketService.bucketsByWeight);
-      //   this.skillTypeBucketService.bucketsByWeight.buckets = JSON.parse(JSON.stringify(this.questionBuckets));
+    //   this.skillTypeBucketService.bucketsByWeight = {
+    //     skillTypeBucketLookupID: bucketsWithWeights.skillTypeBucketLookupID,
+    //     skillType: JSON.parse(JSON.stringify(bucketsWithWeights.skillType)),
+    //     buckets: myBuckets,
+    //     weights: JSON.parse(JSON.stringify(bucketsWithWeights.weight)),
+    //   };
+    //   /**
+    //    * Disabled because relationship between question and skill microservice relationship
+    //    * needs to be reworked on the serverside
+    //    */
+    //   this.subscriptions.push(this.questionService.getQuestions().subscribe(allQuestions => {
+    //     this.questionBuckets = this.questionsToBucketsUtil.saveQuestions(allQuestions, this.skillTypeBucketService.bucketsByWeight);
+    //     this.skillTypeBucketService.bucketsByWeight.buckets = JSON.parse(JSON.stringify(this.questionBuckets));
 
-      //   if (this.questionBuckets.length > 0) {
-      //     this.currentCategory = this.questionBuckets[0];
-      //   }
-      // }));
+    //     if (this.questionBuckets.length > 0) {
+    //       this.currentCategory = this.questionBuckets[0];
+    //     }
+    //   }));
     // }));
 
-    // this.candidateName = this.CandidateService.getSelectedCandidate().firstname + ' ' +
-    //                       this.CandidateService.getSelectedCandidate().lastname;
+    // this.candidateName = this.candidateService.getSelectedCandidate().name
 
-    // update the answeredQuestions variable in our service to track the
-    // questions that have been given a score by the screener.
-    this.subscriptions.push(this.questionScoreService.currentQuestionScores.subscribe(
-      questionScores => (this.questionScores = questionScores)
-    ));
+    // // update the answeredQuestions variable in our service to track the
+    // // questions that have been given a score by the screener.
+    // this.subscriptions.push(this.questionScoreService.currentQuestionScores.subscribe(
+    //   questionScores => (this.questionScores = questionScores)
+    // ));
   }
 
   // Unsubscribe to prevent memory leaks when component is destroyed
@@ -131,7 +182,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(s => s.unsubscribe);
     if (this.questionBuckets !== undefined) {
       for (const bucket of this.questionBuckets) {
-        bucket.questions = [];
+        //bucket.questions = [];
       }
     }
   }
@@ -142,12 +193,12 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     // iterate through each bucket
     // if the current bucket's id matches the bucket id
     // of the category selected by the user
-    for (const bucket of this.questionBuckets) {
-      if (bucket.bucketID === bucketID) {
-        // set the current category to the current bucket.
-        this.currentCategory = bucket;
-      }
-    }
+    // for (const bucket of this.questionBuckets) {
+    //   if (bucket.bucketId === bucketId) {
+    //     // set the current category to the current bucket.
+    //     this.currentCategory = bucket;
+    //   }
+    // }
   }
 
   open(question: Question) {

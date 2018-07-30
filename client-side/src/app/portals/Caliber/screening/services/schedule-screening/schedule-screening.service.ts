@@ -32,40 +32,40 @@ export class ScheduleScreeningService {
    */
   getScheduleScreenings(): Observable<ScheduledScreening[]> {
     const scheduledScreenings: ScheduledScreening[] = [];
-    this.skillTypeService.getSkillTypes().subscribe(allSkillTypes => {
+    // this.skillTypeService.getSkillTypes().subscribe(allSkillTypes => {
       this.httpClient.get<any[]>(this.urlService.screening.scheduleScreening()).subscribe(allScheduledScreenings => {
         for (const e of allScheduledScreenings) {
           // Each simpleTrainee get random skillType
           // Parse name into first and last name
-          const nameArray = e.trainee.name.split(' ');
-          let thisLastName = '';
-          let thisFirstName = '';
-          let i = 0;
-          let commaFound = false;
-          for (const n of nameArray) {
-            if (n.charAt(n.length - 1) === ',') {
-              commaFound = true;
-              for (let j = 0; j <= i; j++) {
-                // Add spaces between multiple lastnames
-                thisLastName += nameArray[j] + ' ';
-              }
-              // Remove last space, and comma
-              thisLastName = thisLastName.trim();
-              thisLastName = thisLastName.substring(0, thisLastName.length - 1);
-              for (let j = i + 1; j <= nameArray.length - 1; j++) {
-                thisFirstName += nameArray[j] + ' ';
-              }
-              thisFirstName = thisFirstName.trim();
-            }
-            i++;
-          }
-          if (!commaFound) {
-            thisFirstName = nameArray[0];
-            for (i = 1; i < nameArray.length; i++) {
-              thisLastName += nameArray[i] + ' ';
-            }
-            thisLastName = thisLastName.trim();
-          }
+          // const nameArray = e.trainee.name.split(' ');
+          // let thisLastName = '';
+          // let thisFirstName = '';
+          // let i = 0;
+          // let commaFound = false;
+          // for (const n of nameArray) {
+          //   if (n.charAt(n.length - 1) === ',') {
+          //     commaFound = true;
+          //     for (let j = 0; j <= i; j++) {
+          //       // Add spaces between multiple lastnames
+          //       thisLastName += nameArray[j] + ' ';
+          //     }
+          //     // Remove last space, and comma
+          //     thisLastName = thisLastName.trim();
+          //     thisLastName = thisLastName.substring(0, thisLastName.length - 1);
+          //     for (let j = i + 1; j <= nameArray.length - 1; j++) {
+          //       thisFirstName += nameArray[j] + ' ';
+          //     }
+          //     thisFirstName = thisFirstName.trim();
+          //   }
+          //   i++;
+          // }
+          // if (!commaFound) {
+          //   thisFirstName = nameArray[0];
+          //   for (i = 1; i < nameArray.length; i++) {
+          //     thisLastName += nameArray[i] + ' ';
+          //   }
+          //   thisLastName = thisLastName.trim();
+          // }
           /*
           // If the record is stored with lastname first, save it backwards without the comma
           if (nameArray[0].charAt(nameArray[0].length-1) == ',') {
@@ -79,13 +79,13 @@ export class ScheduleScreeningService {
           }
           */
 
-          const skillTypes: SkillType[] = allSkillTypes;
-          let skillType: SkillType;
-          for (const s of allSkillTypes) {
-            if (s.skillTypeId === e.skillTypeId) {
-              skillType = s;
-            }
-          }
+          // const skillTypes: SkillType[] = allSkillTypes;
+          // let skillType: SkillType;
+          // for (const s of allSkillTypes) {
+          //   if (s.skillTypeId === e.skillTypeId) {
+          //     skillType = s;
+          //   }
+          // }
           scheduledScreenings.push({
             scheduledScreeningId: e.scheduledScreeningId,
             candidate: {
@@ -109,7 +109,7 @@ export class ScheduleScreeningService {
           });
         }
       });
-    });
+    // });
     return of(scheduledScreenings);
   }
 }
