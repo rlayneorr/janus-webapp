@@ -105,7 +105,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
    console.log("selected Categories", this.currentCategories);
    //get all the buckets
     this.bucketsService.getAllBuckets().subscribe((data)=> {
-      console.log(this.currentCategories); 
+      console.log(this.currentCategories);
       console.log("buckets for category display", data)
       const cids: Number[] = this.currentCategories.map(c=>c.categoryId);
       this.buckets = data.filter(b=>{
@@ -186,19 +186,10 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
       }
     }
   }
-
   // sets the current category, allowing for dynamic change
   // of the questions being displayed.
-  setBucket(bucketID: number) {
-    // iterate through each bucket
-    // if the current bucket's id matches the bucket id
-    // of the category selected by the user
-    // for (const bucket of this.questionBuckets) {
-    //   if (bucket.bucketId === bucketId) {
-    //     // set the current category to the current bucket.
-    //     this.currentCategory = bucket;
-    //   }
-    // }
+  setBucket(bucketId: number) {
+    this.currentCategory = this.questionBuckets.find(b=>b.bucketId === bucketId);
   }
 
   open(question: Question) {
