@@ -153,6 +153,8 @@ export class CandidatesScreeningListComponent implements OnInit {
     //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
     console.log(this.selectedScheduledScreening);
     localStorage.setItem('scheduledScreeningId', this.selectedScheduledScreening.scheduledScreeningId.toString());
+    localStorage.setItem('candidateName', this.selectedScheduledScreening.candidate.name);
+    localStorage.setItem('candidateTrack', this.selectedScheduledScreening.skillTypeId.toString());
   }
 
   // clicking "Begin Interview" will create a new screening entry in the database
@@ -175,8 +177,6 @@ export class CandidatesScreeningListComponent implements OnInit {
         // take the data from the response from the database
         data => {
         // and save the screening ID as a cookie to localStorage.
-        localStorage.setItem('candidateName', this.selectedScheduledScreening.candidate.name);
-        localStorage.setItem('candidateTrack', this.selectedScheduledScreening.skillTypeId.toString());
         localStorage.setItem('screeningID', data.toString());
         console.log(localStorage.getItem('screeningID'));
       });
