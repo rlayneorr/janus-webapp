@@ -37,15 +37,16 @@ routingToAllCategories = false;
     }
 
     updateCategory(category: Category) {
+      console.log(category);
         return this.http.put(this.urlService.category.updateCategory(category.categoryId), category, httpOptions);
     }
 
     getCategories() {
-        return this.http.get<any[]>(this.urlService.category.getCategories());
+        return this.http.get<Category[]>(this.urlService.category.getCategories());
     }
 
     getCategoryById(categoryId: number) {
-        return this.http.get(this.urlService.category.getCategoryById(categoryId));
+        return this.http.get<Category>(this.urlService.category.getCategoryById(categoryId));
     }
 
     deleteCategory(categoryId: number) {

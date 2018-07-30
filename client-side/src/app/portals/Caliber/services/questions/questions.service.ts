@@ -38,10 +38,10 @@ export class QuestionsService {
    * updated to be in sync with new Gambit question service modifications
    * used urlService to get endpoint for posting new questions
    * @param question - question model
-   * 
+   *
    */
 
-   // pulled tags out every location now have 500 error 
+   // pulled tags out every location now have 500 error
   createNewQuestion(question: Question) {
     return this.http.post(this.urlService.question.postQuestion(), { question: question }, httpOptions);
   }
@@ -52,10 +52,10 @@ export class QuestionsService {
    * updated to be in sync with new Gambit question service modifications
    * used urlService to get endpoint for updating new quetions with put method
    * @param question
-   * 
+   *
    */
   updateQuestion(question: Question) {
-    return this.http.put(this.urlService.question.putQuestion(), { question: question}, httpOptions);
+    return this.http.put(this.urlService.question.putQuestion(question.questionId), question, httpOptions);
   }
    /**
    * deactivates question
@@ -64,7 +64,7 @@ export class QuestionsService {
   */
   deleteQuestion(questionId: number) {
     return this.http.delete(this.urlService.question.deleteQuestion(questionId), httpOptions);
-  }  
+  }
 
   /**
    * deactivates question
