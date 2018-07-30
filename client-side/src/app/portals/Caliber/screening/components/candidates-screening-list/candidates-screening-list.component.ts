@@ -23,7 +23,6 @@ import { UrlService } from '../../../../../../app/gambit-client/services/urls/ur
 
 //import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
 // import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
-
 // Installed Modules
 // npm install ngx-pagination --save
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
@@ -34,7 +33,7 @@ import { SkillType } from '../../../entities/SkillType';
   selector: 'app-candidates-screening-list',
   templateUrl: './candidates-screening-list.component.html',
   styleUrls: ['./candidates-screening-list.component.css'],
-  providers:[DatePipe]
+  providers:[DatePipe, SearchPipe]
 })
 
 /*
@@ -49,6 +48,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   ########################### */
   // array containing upcoming interviews
   scheduledScreenings: ScheduledScreening[];
+  allScheduledScreenings: ScheduledScreening[];
   // when a screener (user) clicks on a screening,
   // save the candidate and scheduled screening
   // to their respective services.
@@ -58,7 +58,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   showBeginScreeningPrompt = false;
   // random fields that are necessary for Jenkins to build.
   // Do not delete
-  searchText; // text in search bar
+  searchText = ''; // text in search bar
   p; // current page
   allCandidates : Candidate[];
   formattedSchedule : string;
@@ -78,7 +78,8 @@ export class CandidatesScreeningListComponent implements OnInit {
     private urlService: UrlService,
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private date: DatePipe
+    private date: DatePipe,
+    private search: SearchPipe
   ) {}
 
   ngOnInit() {
@@ -94,6 +95,7 @@ export class CandidatesScreeningListComponent implements OnInit {
 
     // retrieve all scheduled interviews and populate the table of screenings.
     this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
+      this.allScheduledScreenings = data;
       this.scheduledScreenings = data;
     });
     //this.allCandidates = CANDIDATES;
@@ -113,6 +115,16 @@ export class CandidatesScreeningListComponent implements OnInit {
       'Date and Time': [formattedSchedule, Validators.required],
     });
   };
+
+  searchCandidates(){
+    if (this.searchText != ''){
+      this.scheduledScreenings = this.search.transform(this.allScheduledScreenings, this.searchText);
+    }
+    else
+    {
+      this.scheduledScreenings = this.allScheduledScreenings;
+    }
+  }
 
   //Get each Candidate's Track/SkillType -Tyerra Smith
   getSkillType(skillTypeId: number)
@@ -141,12 +153,13 @@ export class CandidatesScreeningListComponent implements OnInit {
     //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
     console.log(this.selectedScheduledScreening);
     localStorage.setItem('scheduledScreeningId', this.selectedScheduledScreening.scheduledScreeningId.toString());
+    localStorage.setItem('candidateName', this.selectedScheduledScreening.candidate.name);
+    localStorage.setItem('candidateTrack', this.selectedScheduledScreening.skillTypeId.toString());
   }
 
   // clicking "Begin Interview" will create a new screening entry in the database
   beginScreening(): void {
     // create a new screening entry in the database by calling the screening service
-
       //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
       this.screeningService.beginScreening(
         // must provide the current scheduled interview object
@@ -164,8 +177,6 @@ export class CandidatesScreeningListComponent implements OnInit {
         // take the data from the response from the database
         data => {
         // and save the screening ID as a cookie to localStorage.
-        localStorage.setItem('candidateName', this.selectedScheduledScreening.candidate.name);
-        localStorage.setItem('candidateTrack', this.selectedScheduledScreening.skillTypeId.toString());
         localStorage.setItem('screeningID', data.toString());
         console.log(localStorage.getItem('screeningID'));
       });
