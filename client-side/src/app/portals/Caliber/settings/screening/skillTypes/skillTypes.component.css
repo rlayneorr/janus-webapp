@@ -12,6 +12,11 @@ h6 {
   color: white;
 }
 
+.errorMessage{
+  color: red;
+  font-style: italic;
+}
+
 #xIcon {
   float: right;
 }

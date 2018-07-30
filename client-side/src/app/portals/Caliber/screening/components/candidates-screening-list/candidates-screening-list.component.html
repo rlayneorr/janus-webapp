@@ -4,7 +4,7 @@
   <div id="pending-screening-list-contents">
     <div class="filters">
       <!-- Search Bar -->
-      <input [(ngModel)]="searchText" placeholder="Search" class="search-bar">
+      <input [(ngModel)]="searchText" type="text" placeholder="Search" class="search-bar" (keyup)="searchCandidates()">
     </div>
     <!-- Table of Pending Screenings -->
     <table class="table table-hover" id="screenings-table">
