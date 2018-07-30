@@ -1,12 +1,8 @@
 // Testing modules
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
-// Modules
-import { Component, OnInit, OnDestroy } from '@angular/core';
+// Modules\
 import { Dependencies } from '../../../caliber.test.module';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { COMMON_DEPRECATED_DIRECTIVES } from '@angular/common/src/directives';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 // Components
 import { QuestionComponent } from './question.component';

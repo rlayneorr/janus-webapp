@@ -96,7 +96,7 @@ export class UrlService {
   bucket = {
     getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
     getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
-    updateBucket: () => `${this.context + this.bucketEndpoint}`,
+    updateBucket: (bucketId : number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
     createNewBucket: () => `${this.context + this.bucketEndpoint}`,
     deleteBucket: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`
   };
@@ -226,10 +226,10 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private questionEndpoint = `${this.context}/${this.adminScreening}/questions`;
+  private questionEndpoint = `${this.context}${this.adminScreening}/question`;
   question = {
-    postQuestion: () => `${this.context}${this.questionEndpoint}`,
-    putQuestion: () => `${this.context}${this.questionEndpoint}`,
+    postQuestion: () => `${this.questionEndpoint}`,
+    putQuestion: (questionId : number) => `${this.questionEndpoint}/${questionId}`,
     getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.adminScreening}/bucket/${bucketId}/question`,
     // Tyerra Smith added a url to get ALL questions
     getQuestions: () => `${this.questionEndpoint}`,
@@ -342,17 +342,18 @@ export class UrlService {
     updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
     deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
 
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
+
   };
 
   softSkillsViolation = {
-    getViolationTypeURL: () => `${this.context}screening-service/violation/all`,
-    getViolationURL: (screeningID: number) => `${this.context}screening-service/screening/violation/${screeningID}`,
-    addViolationURL: () => `${this.context}screening-service/violation/flag/`,
-    deleteViolationURL: (violationID: number) => `${this.context}screening-service/violation/delete/${violationID}`,
+    getViolationTypeURL: () => `${this.context}/screening-service/violation/all`,
+    getViolationURL: (screeningID: number) => `${this.context}/screening-service/screening/violation/${screeningID}`,
+    addViolationURL: () => `${this.context}/screening-service/violation/flag/`,
+    deleteViolationURL: (violationID: number) => `${this.context}/screening-service/violation/delete/${violationID}`,
   };
 
   subtopic = {
@@ -457,12 +458,13 @@ export class UrlService {
    * This section is being added for use in the setting screening weight service
    * @author John Lacap
    */
+  private weightsServiceEndpoint = this.context + this.adminScreening;
   weight={
-    createWeight: () => `${this.context}/weights`,
-    getWeights: () => `${this.context}/weights`,
-    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.context}/weights/${skillTypeId}/${categoryId}`,
-    updateWeight: (id: number) => `${this.context}/weights/${id}`,
-    deleteWeight: (id: number) => `${this.context}/weights/${id}`,
+    createWeight: () => `${this.weightsServiceEndpoint}/weight`,
+    getWeights: () => `${this.weightsServiceEndpoint}/weight`,
+    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+    updateWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+    deleteWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
   };
 
   /* Reporting service API endpoints */

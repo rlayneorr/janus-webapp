@@ -18,7 +18,7 @@ import { CategoryService } from '../../services/category/category.service';
 export class SkillsComponent implements OnInit {
   newCategory: Category = {
     categoryId: 0,
-    categoryName: ''
+    title: ''
   };
   addForm: FormGroup;
   // skills: GambitSkill[];
@@ -48,10 +48,10 @@ export class SkillsComponent implements OnInit {
       console.log("current categories", this.categories);
 
       //this denotes the index for the loop for the ngfor to map the categories into 4 tables
-      // this.div1= Math.ceil(this.categories.length/4);
-      // this.div2= this.div1 + this.div1;
-      // this.div3= this.div1 +this.div1 +this.div1;
-      // this.div4= this.div1 +this.div1 +this.div1 +this.div1;
+      this.div1= Math.ceil(this.categories.length/4);
+      this.div2= this.div1 + this.div1;
+      this.div3= this.div1 +this.div1 +this.div1;
+      this.div4= this.div1 +this.div1 +this.div1 +this.div1;
 
     });
   }
@@ -62,7 +62,7 @@ export class SkillsComponent implements OnInit {
   }
   initFormControl() {
     this.addForm = this.fb.group({
-      'name': [this.newCategory.categoryName, Validators.required]
+      'name': [this.newCategory.title, Validators.required]
     });
   }
   /**
@@ -71,7 +71,7 @@ export class SkillsComponent implements OnInit {
    * @memberof SkillsComponent
    */
   addNewSkill(value) {
-    this.newCategory.categoryName = value.name;
+    this.newCategory.title = value.name;
     this.categoryService.create(this.newCategory).subscribe((succ) => {
       this.categories.push(succ);
       //this reloads the page. Placeholder.
@@ -126,5 +126,42 @@ export class SkillsComponent implements OnInit {
   editopen(content, index: Category) {
     this.currentCategory = JSON.parse(JSON.stringify(index)); // essentially clone the object, there may be a better way
     this.modalService.open(content);
+  }
+
+  /**
+   * Populates the Columns with Skills
+   * @param {any} column
+   * @param {any} index
+   * @returns
+   * @memberof SkillsComponent
+   */
+  nextColumn(column, index) {
+    switch (column) {
+      case 0:
+        if (index < this.categories.length / this.numColumns) {
+          return true;
+        }
+        break;
+      case 1:
+        if (index > this.categories.length / this.numColumns) {
+          // If the numbers of skills is 3 then this condition will activate
+          if (this.numColumns === 3) {
+            if (index < ((this.categories.length / this.numColumns) * 2)) {
+              return true;
+            } else {
+              return false;
+            }
+          } else {
+            return true;
+          }
+        }
+        break;
+      case 2:
+        if (index > ((this.categories.length / this.numColumns) * 2)) {
+          return true;
+        } break;
+      default:
+        break;
+    }
   }
 }

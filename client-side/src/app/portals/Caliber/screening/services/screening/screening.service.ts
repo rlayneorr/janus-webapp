@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Screening } from '../../entities/screening';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { Category } from '../../../entities/Category';
 
 
 /**
@@ -27,7 +28,7 @@ import { UrlService } from '../../../../../gambit-client/services/urls/url.servi
 export class ScreeningService {
   constructor(
     private httpClient: HttpClient,
-    private urlService: UrlService
+    private urlService: UrlService,
   ) { }
 
   // Need to change to match the backend
@@ -40,7 +41,7 @@ export class ScreeningService {
   public screeningID$: Observable<Screening>;
   compositeScore: number;
   finalSoftSkillComment: string;
-
+  selectedCategories: Category[]
 
   // When the screening begins, the following information will be sent,
   // and a screening ID will be returned as an observable.
@@ -54,11 +55,12 @@ export class ScreeningService {
     trainerId: number,
     skillTypeId: number,
   ): Observable<Number> {
+    console.log("Begin");
     return this.httpClient
       .post<Number>(
       this.urlService.screening.startScreening(),
       {
-        'scheduledScreening': scheduledScreening.scheduledScreeningId,
+        'scheduledScreeningId': scheduledScreening.scheduledScreeningId,
         'beginTime': beginTime,
         'trainerId': trainerId,
         'skillTypeId': skillTypeId
@@ -109,7 +111,7 @@ export class ScreeningService {
   submitIntroComment(comment: string) {
     this.httpClient.post<String>(
       this.urlService.screening.introComment(),
-      { traineeId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
+      { candidateId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
     ).subscribe();
   }
 
@@ -120,5 +122,13 @@ export class ScreeningService {
       this.urlService.screening.generalComment(),
       { comment: this.generalComments, screeningId: localStorage.getItem('screeningID') }
     ).subscribe();
+  }
+
+  setSelectedCategories(categories: Category[]){
+    this.selectedCategories = categories;
+  }
+
+  getSelectedCategories(){
+    return this.selectedCategories;
   }
 }

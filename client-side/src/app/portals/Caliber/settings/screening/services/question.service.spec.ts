@@ -6,12 +6,14 @@ import {Question} from "../../../screening/entities/question";
 import {QUESTIONS} from "../../../screening/mock-data/mock-questions";
 import {QuestionComponent} from "../question/question.component";
 import {QuestionService} from "../../../screening/services/question/question.service";
+import {SettingsQuestionService} from "./question.service";
+
 
 describe('QuestionService', () => {
 
   let httpClientSpyOnGet: { get: jasmine.Spy };
   let httpClientSpyOnPost: { post: jasmine.Spy };
-  let httpClientSpyOnPut: {put: jasmine.Spy };
+  let httpClientSpyOnPut: { put: jasmine.Spy };
   let httpClientSpyOnDelete: { delete: jasmine.Spy };
   let questionService: QuestionService;
   const alertsService: AlertsService = new AlertsService();
@@ -20,7 +22,7 @@ describe('QuestionService', () => {
     httpClientSpyOnPost = jasmine.createSpyObj('http', ['post']);
     //questionService = new QuestionService(<any> httpClientSpyOnPost);
 
-    const expected : Question = QUESTIONS[1];
+    const expected: Question = QUESTIONS[1];
 
     httpClientSpyOnPost.post.and.returnValue(asyncData(expected));
 
@@ -31,8 +33,5 @@ describe('QuestionService', () => {
 
     expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
   });
-
-
-
 
 });
