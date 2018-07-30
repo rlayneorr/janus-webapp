@@ -55,11 +55,12 @@ export class ScreeningService {
     trainerId: number,
     skillTypeId: number,
   ): Observable<Number> {
+    console.log("Begin");
     return this.httpClient
       .post<Number>(
       this.urlService.screening.startScreening(),
       {
-        'scheduledScreening': scheduledScreening.scheduledScreeningId,
+        'scheduledScreeningId': scheduledScreening.scheduledScreeningId,
         'beginTime': beginTime,
         'trainerId': trainerId,
         'skillTypeId': skillTypeId
@@ -110,7 +111,7 @@ export class ScreeningService {
   submitIntroComment(comment: string) {
     this.httpClient.post<String>(
       this.urlService.screening.introComment(),
-      { traineeId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
+      { candidateId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
     ).subscribe();
   }
 
