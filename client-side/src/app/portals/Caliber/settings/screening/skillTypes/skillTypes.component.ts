@@ -116,8 +116,8 @@ export class SkillTypesComponent implements OnInit {
             categories: skillType.categories,
             isActive: false
         };
-
-        this.skillType.categories.forEach(category => {
+        
+        skillType.categories.forEach(category => {
             this.weightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId).subscribe(result => {
                 this.allWeights.push(result);
             })
@@ -183,7 +183,7 @@ export class SkillTypesComponent implements OnInit {
           });
           this.savedSuccessfully();
         }
-      }
+    }
 
     /**
     * Checks which buckets are currently associated with the selected skill Type
@@ -216,7 +216,6 @@ export class SkillTypesComponent implements OnInit {
         }
 
         if (this.skillType) {
-            this.skillType.categories.push(category);
             this.weight = new CategoryWeight;
             this.weight = {
                 weightId: +(this.skillType.skillTypeId + "" + category.categoryId) ,
@@ -231,17 +230,9 @@ export class SkillTypesComponent implements OnInit {
                 console.log("create result")
                 console.log(this.weight);
                 this.allWeights.push(this.weight);
-            })
-            
+                this.skillType.categories.push(category);
+            })   
         }
-
-        this.weightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId).subscribe(x => {
-            console.log("get x")
-            console.log(x);
-        })
-        console.log("after")
-        console.log(this.allWeights);
-        console.log(this.skillType.categories)
     }
 
     /**
@@ -256,7 +247,7 @@ export class SkillTypesComponent implements OnInit {
         }
         this.allWeights.forEach(weight => {
             if(category.categoryId === weight.categoryId){
-                this.weightsService.deleteWeight(this.skillType, category, weight).subscribe(result => {
+                this.weightsService.deleteWeight(this.skillType, category).subscribe(result => {
                     console.log("remove result")
                     console.log(result)
                     this.allWeights.splice(this.allWeights.indexOf(weight), 1);
@@ -372,7 +363,7 @@ export class SkillTypesComponent implements OnInit {
                 this.allWeights.forEach(weight => {
                     this.categoriesService.getCategoryById(weight.categoryId).subscribe(category => {
                         if(!result.categories.includes(category)){
-                            this.weightsService.deleteWeight(this.skillType, category, weight).subscribe(result => {
+                            this.weightsService.deleteWeight(this.skillType, category).subscribe(result => {
                                 console.log("delete result")
                                 console.log(result)
                             });
@@ -383,6 +374,7 @@ export class SkillTypesComponent implements OnInit {
         }
 
         this.skillType = null;
+        this.allSkillTypes =  [];
         this.allWeights = [];
         this.error = false;
         this.grabAllCategories();

@@ -93,7 +93,7 @@
                             <span>Total: {{total}}% out of 100%</span>
                       <span *ngFor="let category of skillType.categories; let i = index">
                           <button type="button" class="input-group-addon pillButtons" (click)="removeCategories(category)" *ngIf="checkContains(category)">{{category.title}}</button>
-                          <input type="number" class="input-group col" (change)="weightChange(skillType, category, allWeights[i].weight)" [(ngModel)]="allWeights[i].weight" [ngModelOptions]="{standalone: true}">
+                          <input type="number" class="input-group col" (change)="weightChange(skillType, category, allWeights[i].weight)" [(ngModel)]="allWeights[i].weight" [ngModelOptions]="{standalone: true}" *ngIf="allWeights[i]">
                       </span>
                     </div>
                 </div>
