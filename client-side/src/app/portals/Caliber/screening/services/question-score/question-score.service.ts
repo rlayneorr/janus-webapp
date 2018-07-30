@@ -37,11 +37,11 @@ export class QuestionScoreService {
   postQuestionScore(question: QuestionScore): void {
 
     this.httpClient.post<QuestionScore>(this.urlService.questionScoring.scoringQuestion(), {
-      Score: question.score,
-      Comment: question.commentary,
-      QuestionID: question.questionId,
-      BeginTime: question.beginTime,
-      ScreeningID: question.screeningID}).subscribe(data => {
+      score: question.score,
+      comment: question.commentary,
+      questionId: question.questionId,
+      beginTime: question.beginTime,
+      screeningId: question.screeningID}).subscribe(data => {
       });
 
     /*

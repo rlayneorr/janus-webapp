@@ -15,7 +15,7 @@
   <div class="slidecontainer container text-center">
     <input [(ngModel)]="questionScore.score" type="range" min="0" max="5" class="slider" id="score">
   </div>
-  <textarea class="form-control" placeholder="Optional Feedback"></textarea>
+  <textarea [(ngModel)] = "questionScore.commentary" class="form-control" placeholder="Optional Feedback"></textarea>
 </div>
 <div class="modal-footer answer-bank-end">
     <span data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" class="flag-button glyphicon glyphicon-flag color-red"></span>
