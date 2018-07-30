@@ -59,10 +59,9 @@ export class IntroductionComponent implements OnInit {
   });
 
   ngOnInit() {
-    console.log("In the FOR");
+    console.log("In the ngOnInit");
     this.scheduledscreeningService.getScheduleScreenings().subscribe(scheduledScreenings =>{
-      for (let s of scheduledScreenings)
-      {
+    scheduledScreenings.forEach(s => {
         console.log(scheduledScreenings);
         console.log("In the FOR");
         console.log(s.scheduledScreeningId.toString());
@@ -71,15 +70,14 @@ export class IntroductionComponent implements OnInit {
         {
           console.log("In the if");
           this.candidateName = s.candidate.name;
-          //this.candidateTrack = s.skillTypeId;
+          // this.candidateTrack = s.skillTypeId;
           console.log(this.candidateName);
-          // this.screeningService.beginScreening(s, new Date(), 2, 51).subscribe(id =>{
-          //   this.currentScreeningId = id;
-          // });
+          this.screeningService.beginScreening(s, new Date(), 2, 51).subscribe(id =>{
+            this.currentScreeningId = id;
+          });
         }
-      }
-    })
-  
+      });
+    }); 
     // this.candidateName = this.currentScreening.candidate.name;
     this.categoryService.fetchAll().subscribe(categories =>{
       this.allCategories = (<Category[]> categories);
@@ -120,6 +118,8 @@ export class IntroductionComponent implements OnInit {
   onSubmit() {
     // Send the comments to the appropriate service method saves them to the DB
     this.screeningService.submitIntroComment(this.comment);
+    this.setCategories();
+
   }
 
   // Returns a boolean depending on whether a tag was checked.
@@ -127,4 +127,10 @@ export class IntroductionComponent implements OnInit {
   categoryChosen(): boolean {
     return (this.categoriesSelected.length == 0);
   }
+
+  setCategories()
+  {
+    return this.screeningService.setSelectedCategories(this.categoriesSelected);
+  }
+
 }
