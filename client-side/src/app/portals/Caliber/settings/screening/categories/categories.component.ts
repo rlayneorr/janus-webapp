@@ -9,12 +9,14 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsService } from '../../../services/alerts.service';
 import { Category } from '../entities/Category';
 import { SettingsCategoriesService } from '../services/categories.service';
+import {fade} from "../../../../../Animations/caliber-animations";
 
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
+  animations:[fade]
 })
 
 export class CategoriesComponent implements OnInit {
@@ -28,6 +30,7 @@ export class CategoriesComponent implements OnInit {
   /** variable to hold new bucket being created  */
   newCategory: Category = new Category();
 
+  changedBuckets: Bucket[];
   /** Modal variables */
   closeResult: string;
 
@@ -48,6 +51,7 @@ export class CategoriesComponent implements OnInit {
   getCategories(): void {
     this.categoryService.getCategories().subscribe(result => {
       this.allCategories = result;
+      console.log(result);
     });
   }
 
@@ -78,8 +82,12 @@ export class CategoriesComponent implements OnInit {
   /** Stores the value of selected bucket to a 'currBucket' */
   editCategory(category: Category) {
     this.currentCategory = category;
+    this.changedBuckets = [];
   }
-
+  logState() {
+    console.log("changed:", this.changedBuckets);
+    console.log("CurrentCategory:", this.currentCategory);
+  }
   /**
    * resposible for making call for updatating a bucket
    * when editted or activity toggled
@@ -88,9 +96,13 @@ export class CategoriesComponent implements OnInit {
   updateCategory(catParam: Category) {
     if (!catParam) { catParam = this.currentCategory; }
     if (catParam) {
+      this.logState();
+      this.changedBuckets.forEach(b=>this.bucketService.updateBucket(b).subscribe());
+
       this.categoryService.updateCategory(catParam).subscribe(bucket => {
         this.getCategories();
       });
+      this.logState();
       this.savedSuccessfully();
     }
   }
@@ -101,53 +113,70 @@ export class CategoriesComponent implements OnInit {
 
   deleteCategory(){
     if (this.currentCategory) {
-      this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe(result => {
-        this.getCategories();
-      });
+      console.log(this.currentCategory)
+      this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe({
+          complete:()=>this.getCategories()
+        });
       this.savedSuccessfully();
     }
   }
 
   /** Creates new category */
   createCategory() {
-    this.newCategory.buckets = this.currentCategory.buckets;
+    console.log(this.currentCategory);
+    if(this.currentCategory.buckets){
+      console.log("here");
+      this.newCategory.buckets = this.currentCategory.buckets;
+    }
     this.categoryService.createCategory(this.newCategory)
       .subscribe(category => {
         this.getCategories();
       });
   }
 
-  addBucket(bucket: Bucket) {
+  addActiveBucket(bucket: Bucket) {
     if(!this.currentCategory){
         this.currentCategory = {
           categoryId: null,
-          categoryName: null,
+          title: null,
           categoryWeight: null,
           buckets: []
         };
     }
 
     if (this.currentCategory) {
-        this.currentCategory.buckets.push(bucket);
-    }
-  }
-
-  removeBucket(bucket: Bucket) {
-    if (this.currentCategory) {
-      for (const bucketIndex in this.currentCategory.buckets) {
-        if (this.currentCategory.buckets[bucketIndex] === bucket) {
-          this.currentCategory.buckets.splice(Number(bucketIndex), 1);
-        }
+      bucket.isActive = true;
+      if(!this.changedBuckets.includes(bucket)) {
+        this.changedBuckets.push(bucket);
       }
     }
   }
 
-  checkContains(bucket: Bucket) {
+  removeActiveBucket(bucket: Bucket) {
+    console.log("bucket: ", bucket, "\n", "category: ", this.currentCategory);
     if (this.currentCategory) {
-        return this.currentCategory.buckets.includes(bucket);
+      bucket.isActive = false;
+      if(!this.changedBuckets.includes(bucket)) {
+        this.changedBuckets.push(bucket);
+      }
+    }
+  }
+
+  // Check if a bucket and a category is related and if the bucket is active.
+  containsActiveBucket(bucket: Bucket) {
+    if (this.currentCategory && this.currentCategory.categoryId === bucket.categoryId && bucket.isActive) {
+      return true;
     }
     return false;
   }
+
+  containsInactiveBucket(bucket: Bucket) {
+    if (this.currentCategory && this.currentCategory.categoryId === bucket.categoryId && !bucket.isActive) {
+      return true;
+    }
+    return false;
+  }
+
 
 
   savedSuccessfully() {
@@ -159,7 +188,7 @@ export class CategoriesComponent implements OnInit {
       this.newCategory = new Category();
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.newCategory.categoryName = '';
+      this.newCategory.title = '';
       this.newCategory.buckets = [];
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });

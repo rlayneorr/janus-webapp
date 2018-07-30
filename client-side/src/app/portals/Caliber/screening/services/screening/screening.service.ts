@@ -123,7 +123,7 @@ export class ScreeningService {
       { comment: this.generalComments, screeningId: localStorage.getItem('screeningID') }
     ).subscribe();
   }
-  
+
   setSelectedCategories(categories: Category[]){
     this.selectedCategories = categories;
   }

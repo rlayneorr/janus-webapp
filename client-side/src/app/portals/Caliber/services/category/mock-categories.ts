@@ -1,5 +1,5 @@
-import { Category } from '../../entities/Category';
-// Refactored by Tyerra Smith to match the entity. 
+import {Category} from '../../entities/Category';
+// Refactored by Tyerra Smith to match the entity.
 export const CATEGORIES: Category[] = [
     {
         categoryId: 0,

@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormArray, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import {FormControl, FormGroup } from '@angular/forms';
 
 import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
-// import { TagService } from '../../../services/tag/tag.service';
 import { CategoryService } from '../../../../../portals/Caliber/services/category/category.service';
 import { ScreeningService } from '../../services/screening/screening.service';
 
@@ -16,7 +12,6 @@ import { SKILLTYPES } from '../../mock-data/mock-skillTypes';
 // import { Tag } from '../../entities/tag';
 import { SkillType } from '../../../../Caliber/settings/screening/entities/SkillType';
 import { Category } from '../../../entities/Category';
-import { map } from '../../../../../../../node_modules/rxjs/operators';
 import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 import { SkillTypesService } from '../../../settings/screening/services/skillTypes.service';
@@ -78,18 +73,18 @@ export class IntroductionComponent implements OnInit {
     //       });
     //     }
     //   });
-    // }); 
+    // });
     this.candidateName = localStorage.getItem('candidateName');
     this.categoryService.fetchAll().subscribe(categories =>{
       this.allCategories = (<Category[]> categories);
       console.log(this.allCategories);
     });
-    
+
     this.skillTypesService.getSkillTypeById(parseInt((localStorage.getItem('candidateTrack')), 10)).subscribe(skill =>{
       this.candidateTrack = skill.title;
     });
     this.categoriesSelected = [];
-    
+
     //this.currentScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
     //this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
     //this.candidateService.getSelectedCandidate().lastName;

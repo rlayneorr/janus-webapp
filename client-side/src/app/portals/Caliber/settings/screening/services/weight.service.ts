@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { catchError } from 'rxjs/operators';
-
 import { SkillType } from '../entities/SkillType';
 import { Category } from '../entities/Category';
-import { Bucket } from '../entities/Bucket';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 import { Subject } from 'rxjs';
 import { CategoryWeight } from '../entities/Category-Weight';
-
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -34,23 +28,24 @@ routingToAllCategoryWeights = false;
     public weights: Observable<CategoryWeight[]>;
 
     createWeight(weight: CategoryWeight) {
-        return this.http.post(this.urlService.weight.createWeight(), weight, httpOptions);
+        return this.http.post<CategoryWeight>(this.urlService.weight.createWeight(), weight, httpOptions);
     }
 
     getWeights() {
-        return this.http.get<any[]>(this.urlService.weight.getWeights());
+        return this.http.get<CategoryWeight[]>(this.urlService.weight.getWeights(), httpOptions);
     }
 
     getWeightByIds(skillTypeId: number, categoryId: number) {
-        return this.http.get<any>(this.urlService.weight.getWeightByIds(skillTypeId, categoryId));
+        return this.http.get<CategoryWeight>(this.urlService.weight.getWeightByIds(skillTypeId, categoryId), httpOptions);
     }
 
-    updateWeight(weight: CategoryWeight) {
-        return this.http.put(this.urlService.weight.updateWeight(weight.weightId), weight, httpOptions);
+    updateWeight(skillType: SkillType, category: Category, weight: CategoryWeight) {
+        return this.http.put(this.urlService.weight.updateWeight(skillType.skillTypeId, category.categoryId), weight, httpOptions);
     }
 
-    deleteWeight(weight: CategoryWeight){
-        console.log(weight)
-        return this.http.delete(this.urlService.weight.deleteWeight(weight.weightId), httpOptions);
+    deleteWeight(skillType: SkillType, category: Category){
+        console.log("delete")
+        console.log(this.urlService.weight.deleteWeight(skillType.skillTypeId, category.categoryId))
+        return this.http.delete(this.urlService.weight.deleteWeight(skillType.skillTypeId, category.categoryId), httpOptions);
     }
 }
