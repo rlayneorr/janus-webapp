@@ -18,7 +18,7 @@ import { Dependencies } from '../../../caliber.test.module';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 import { Candidate } from '../../entities/Candidate';
 
-fdescribe('CandidatesScreeningListComponent', () => {
+describe('CandidatesScreeningListComponent', () => {
   let component: CandidatesScreeningListComponent;
   let fixture: ComponentFixture<CandidatesScreeningListComponent>;
 

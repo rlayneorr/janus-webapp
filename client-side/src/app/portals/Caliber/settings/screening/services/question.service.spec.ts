@@ -7,7 +7,7 @@ import {QUESTIONS} from "../../../screening/mock-data/mock-questions";
 import {QuestionComponent} from "../question/question.component";
 import {QuestionService} from "../../../screening/services/question/question.service";
 
-fdescribe('QuestionService', () => {
+describe('QuestionService', () => {
 
   let httpClientSpyOnGet: { get: jasmine.Spy };
   let httpClientSpyOnPost: { post: jasmine.Spy };

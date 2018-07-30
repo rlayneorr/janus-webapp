@@ -14,7 +14,7 @@ import { AlertsService } from '../../../services/alerts.service';
 
 // Cannot test: Appears to be error on component side
 
-fdescribe('PassFailComponent', () => {
+describe('PassFailComponent', () => {
   let component: PassFailComponent;
   let fixture: ComponentFixture<PassFailComponent>;
 

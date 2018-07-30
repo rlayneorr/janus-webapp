@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { SkillTypeBucketService } from './skill-type-bucket.service';
 
-fdescribe('SkillTypeBucketService', () => {
+describe('SkillTypeBucketService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [SkillTypeBucketService]

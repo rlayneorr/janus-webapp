@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { SoftSkillsService } from './soft-skills.service';
 
-fdescribe('SoftSkillsService', () => {
+describe('SoftSkillsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [SoftSkillsService]

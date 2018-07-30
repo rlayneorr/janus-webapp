@@ -36,7 +36,7 @@ export function asyncError<T>(errorObject: any) {
 }
 
 
-fdescribe('CategoriesComponent', () => {
+describe('CategoriesComponent', () => {
   let httpClientSpyOnPost: { post: jasmine.Spy };
   let httpClientSpyOnPut: {put: jasmine.Spy };
   let bucketService: BucketsService;

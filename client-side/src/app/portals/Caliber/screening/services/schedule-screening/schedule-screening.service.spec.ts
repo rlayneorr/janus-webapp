@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ScheduleScreeningService } from './schedule-screening.service';
 
-fdescribe('ScheduleScreeningService', () => {
+describe('ScheduleScreeningService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ScheduleScreeningService]

@@ -15,7 +15,7 @@ import { SoftSkillsViolationService } from '../../services/soft-skills-violation
 // Author: David Gustafson
 // Can't test because of error: "Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https"
 
-fdescribe('FinalReportComponent', () => {
+describe('FinalReportComponent', () => {
   let component: FinalReportComponent;
   let fixture: ComponentFixture<FinalReportComponent>;
 
