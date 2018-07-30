@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Screening } from '../../entities/screening';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { Category } from '../../../entities/Category';
 
 
 /**
@@ -35,6 +36,7 @@ export class ScreeningService {
     'Content-type': 'application/json'
   });
 
+  public selectedCategories: Category[];
   public softSkillsResult: string;
   public generalComments: string;
   public screeningID$: Observable<Screening>;
@@ -120,5 +122,13 @@ export class ScreeningService {
       this.urlService.screening.generalComment(),
       { comment: this.generalComments, screeningId: localStorage.getItem('screeningID') }
     ).subscribe();
+  }
+
+  setSelectedCategories(categories: Category[]){
+    this.selectedCategories = categories;
+  }
+ 
+  getSelectedCategories(){
+    return this.selectedCategories;
   }
 }
