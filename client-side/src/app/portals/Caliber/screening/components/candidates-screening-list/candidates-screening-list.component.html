@@ -1,3 +1,4 @@
+<app-alerts></app-alerts>
 <div id="pending-screening-list-container" class="animated fadeIn">
   <h1>Candidate List</h1>
   <div id="pending-screening-list-contents">
@@ -10,7 +11,7 @@
       <thead>
         <tr>
           <th scope="col">Name</th>
-          <th scope="col">Track</th>
+          <!-- <th scope="col">Track</th> -->
           <th scope="col">Date</th>
         </tr>
       </thead>
@@ -18,27 +19,42 @@
         <!-- The paginate pipe must be at the end of all the filters -->
         <!-- <ng-container *ngFor="let i = index; let scheduledScreening of scheduledScreenings | searchPipe: searchText | paginate: { itemsPerPage: 10, currentPage: p } "> -->
           <!-- <tr (click)="showBeginScreeningPrompt = !showBeginScreeningPrompt; selectedCandidate = scheduledScreening.trainee; selectedScheduledScreening = scheduledScreening"> -->
-            <tr *ngFor="let candidate of allCandidates">
-            <td>{{candidate.firstName}} {{candidate.lastName}}</td>
-            <td>{{candidate.skillTypeName}}</td>
-            <td>{{candidate.schedule | date:'short'}}</td>
+          <tr *ngFor="let screening of scheduledScreenings" (click)='openModal(viewCand,screening)'>
+            <td>{{screening.candidate.name}}</td>
+            <!-- <td>{{getSkillType(screening.skillTypeId) | async}}</td> -->
+            <td>{{screening.scheduledDate | date:'short'}}</td>
           </tr>
         <!-- </ng-container> -->
       </tbody>
     </table>
-    <!-- The Modal -->
-    <div id="myModal" class="modal animated fadeIn" [style.display]="toggleBeginScreeningPrompt()">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <h2 *ngIf="selectedCandidate">You Chose "{{selectedCandidate.firstname}} {{selectedCandidate.lastname}}"</h2>
-        <div class="buttons">
-          <button class="btn" type="submit" (click)="confirmSelectedCandidate(); beginScreening()" routerLink="/Caliber/screening/introduction" routerLinkActive="activeLink">Begin Interview</button>
-          <button class="btn" (click)="showBeginScreeningPrompt = !showBeginScreeningPrompt">Back To List</button>
-        </div>
-      </div>
-    </div>
-    <!-- Pagination section -->
+        <!-- Pagination section -->
     <pagination-controls class="pagination" (pageChange)="p = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
   </div>
-
 </div>
+
+<!-- View Candidate modal -->
+<ng-template #viewCand let-c="close" let-d="dismiss">
+    <form #myForm="ngForm" [formGroup]="beginForm">
+        <div class="modal-header">
+            <h4 class="modal-title" style="font-size: 18px;">Selected Candidate</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group col-md-6 col-sm-6">
+                    <label for="candidateName"><b>Candidate Name:</b></label>
+                    <input formControlName= "Name" name="candidate" type="text" class="form-control" id="candidateName" [(ngModel)]="selectedScheduledScreening.candidate.name" required disabled/>
+                    <label for="screeningTime"><b>Screening Date and Time:</b></label>
+                    <input formControlName= "Date and Time" name="time" type="text" class="form-control" id="candidateScreeningTime" [(ngModel)]="formattedSchedule" required disabled/>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class ="btn btn-default" (click)="c(); confirmSelectedCandidate(); beginScreening(); d();" routerLink="/Caliber/screening/introduction" routerLinkActive="activeLink">Begin Screening</button>
+        </div>
+    </form>
+</ng-template>
+
+

@@ -1,31 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Question } from '../entities/Question';
 import { Bucket } from '../entities/Bucket';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SettingsQuestionService } from '../services/question.service';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { BucketsService } from '../services/buckets.service';
-import { SkillType } from '../entities/SkillType';
 import { AlertsService } from '../../../services/alerts.service';
-
-@Component({
-  selector: 'app-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css'],
-  animations: [
-    trigger('move', [
-      state('center', style({
-        transform: 'translateX(0) scaleX(1)'
-      })),
-      state('left', style({
-        transform: 'translateX(-28%) scaleX(1)'
-      })),
-      transition('center =>left', animate('300ms ease-in')),
-    ]),
-  ]
-})
+import {fade, moveMe} from "../../../../../Animations/caliber-animations";
 
 /**
  * unified create and update question so that it sends the
@@ -39,6 +20,13 @@ import { AlertsService } from '../../../services/alerts.service';
  *
  * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
  */
+
+@Component({
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.css'],
+  animations: [moveMe, fade]
+})
 export class QuestionComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private fb: FormBuilder,
@@ -64,7 +52,6 @@ export class QuestionComponent implements OnInit {
     this.sampleAnswers.push(this.question.sampleAnswer4);
     this.sampleAnswers.push(this.question.sampleAnswer5);
     this.updateQuestions();
-    console.log(this.currentBucket)
   }
 
   /**
@@ -162,8 +149,9 @@ export class QuestionComponent implements OnInit {
    *
    **/
   addNewQuestion() {
+    console.log("addNewQuestion: ", this.question);
     if (this.sampleAnswers.length === 5 && this.question.questionText) {
-      if (this.question.questionId) {
+      if (this.question.questionId) { //edit question
         this.question.sampleAnswer1 = this.sampleAnswers[0];
         this.question.sampleAnswer2 = this.sampleAnswers[1];
         this.question.sampleAnswer3 = this.sampleAnswers[2];
@@ -173,13 +161,14 @@ export class QuestionComponent implements OnInit {
           this.updateQuestions();
         });
         this.updatedSuccessfully();
-      } else {
+      } else {  //new question
         this.question.sampleAnswer1 = this.sampleAnswers[0];
         this.question.sampleAnswer2 = this.sampleAnswers[1];
         this.question.sampleAnswer3 = this.sampleAnswers[2];
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.question.bucketId = this.currentBucket.bucketId;
+        this.question.isActive = true;
         this.questionService.createNewQuestion(this.question).subscribe(data => {
           this.updateQuestions();
         });
@@ -192,12 +181,8 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-
-
-
   deleteQuestion(question):void {
-    //this.questionService.deleteQuestion(this.question.questionId);
-    console.log("delete")
+    this.questionService.deleteQuestion(question.questionId).subscribe();
   }
 
   /**
