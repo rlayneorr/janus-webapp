@@ -46,7 +46,7 @@ export class IntroductionComponent implements OnInit {
   // public tagList: Tag[];
   public categoriesSelected: Category[];
   public allCategories: Category[];
-
+  
 
   public comment: string;
 
@@ -84,7 +84,6 @@ export class IntroductionComponent implements OnInit {
       this.candidateTrack = skill.title;
     });
     this.categoriesSelected = [];
-
     //this.currentScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
     //this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
     //this.candidateService.getSelectedCandidate().lastName;

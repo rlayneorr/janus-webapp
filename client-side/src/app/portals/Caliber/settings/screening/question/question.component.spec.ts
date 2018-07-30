@@ -32,7 +32,6 @@ describe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
 
-
   /**
    * Import dependencies and set the TestBed to configure the testing module.
    **/
@@ -176,6 +175,5 @@ describe('QuestionComponent', () => {
       expect(msgUpdate).toEqual('All Fields Must be Filled');
     });
   }));
-
 });
 

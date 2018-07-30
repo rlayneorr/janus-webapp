@@ -23,7 +23,6 @@ import { UrlService } from '../../../../../../app/gambit-client/services/urls/ur
 
 //import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
 // import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
-
 // Installed Modules
 // npm install ngx-pagination --save
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
@@ -146,7 +145,6 @@ export class CandidatesScreeningListComponent implements OnInit {
   // clicking "Begin Interview" will create a new screening entry in the database
   beginScreening(): void {
     // create a new screening entry in the database by calling the screening service
-
       //this.selectedScheduledScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
       this.screeningService.beginScreening(
         // must provide the current scheduled interview object
