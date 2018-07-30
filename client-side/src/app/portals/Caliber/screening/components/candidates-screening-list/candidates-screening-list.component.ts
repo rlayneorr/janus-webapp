@@ -33,7 +33,7 @@ import { SkillType } from '../../../entities/SkillType';
   selector: 'app-candidates-screening-list',
   templateUrl: './candidates-screening-list.component.html',
   styleUrls: ['./candidates-screening-list.component.css'],
-  providers:[DatePipe]
+  providers:[DatePipe, SearchPipe]
 })
 
 /*
@@ -48,6 +48,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   ########################### */
   // array containing upcoming interviews
   scheduledScreenings: ScheduledScreening[];
+  allScheduledScreenings: ScheduledScreening[];
   // when a screener (user) clicks on a screening,
   // save the candidate and scheduled screening
   // to their respective services.
@@ -57,7 +58,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   showBeginScreeningPrompt = false;
   // random fields that are necessary for Jenkins to build.
   // Do not delete
-  searchText; // text in search bar
+  searchText = ''; // text in search bar
   p; // current page
   allCandidates : Candidate[];
   formattedSchedule : string;
@@ -77,7 +78,8 @@ export class CandidatesScreeningListComponent implements OnInit {
     private urlService: UrlService,
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private date: DatePipe
+    private date: DatePipe,
+    private search: SearchPipe
   ) {}
 
   ngOnInit() {
@@ -93,6 +95,7 @@ export class CandidatesScreeningListComponent implements OnInit {
 
     // retrieve all scheduled interviews and populate the table of screenings.
     this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
+      this.allScheduledScreenings = data;
       this.scheduledScreenings = data;
     });
     //this.allCandidates = CANDIDATES;
@@ -112,6 +115,16 @@ export class CandidatesScreeningListComponent implements OnInit {
       'Date and Time': [formattedSchedule, Validators.required],
     });
   };
+
+  searchCandidates(){
+    if (this.searchText != ''){
+      this.scheduledScreenings = this.search.transform(this.allScheduledScreenings, this.searchText);
+    }
+    else
+    {
+      this.scheduledScreenings = this.allScheduledScreenings;
+    }
+  }
 
   //Get each Candidate's Track/SkillType -Tyerra Smith
   getSkillType(skillTypeId: number)
