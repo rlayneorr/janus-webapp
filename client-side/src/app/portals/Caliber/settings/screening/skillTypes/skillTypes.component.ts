@@ -111,13 +111,15 @@ export class SkillTypesComponent implements OnInit {
     * @param skillType: selected skill type
     */
    editSkillType(skillType) {
+        this.error = true;
+        this.total = 0;    
         this.skillType = {
             title: skillType.title,
             skillTypeId: skillType.skillTypeId,
             categories: skillType.categories,
             isActive: false
         };
-        this.total = 0;
+        
 
         skillType.categories.forEach(category => {
             this.weightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId).subscribe(result => {
