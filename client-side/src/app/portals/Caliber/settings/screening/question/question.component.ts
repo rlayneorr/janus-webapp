@@ -212,10 +212,10 @@ export class QuestionComponent implements OnInit {
       for (const questionId in this.questions) {
         if (this.questions[questionId] === question) {
           this.questions.splice(Number(questionId), 1);
-          this.deleteQuestion();
-          this.confirm = false;
         }
       }
+      this.deleteQuestion();
+      this.confirm = false;
     }
   }
 
