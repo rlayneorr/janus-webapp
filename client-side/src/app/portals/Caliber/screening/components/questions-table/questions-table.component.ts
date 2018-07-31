@@ -122,6 +122,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
       });
       this.questionBuckets = this.buckets;
       this.currentCategory = this.questionBuckets[0];
+      this.questionsToBucketsUtil.setReturnBuckets(this.buckets);
     });
 
     //get the questions for the buckets on the categories selected from the buckets
@@ -132,7 +133,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     // use skillTypeBucketLookup that provides array of buckets and array of weights
     // this.subscriptions.push(this.skillTypeBucketService.
     //   //looking this up by resourceId needs to be redone. skilltypebucket service may e the wrong thing to use here. -michael
-    //   getSkillTypeBuckets(1).subscribe(bucketsWithWeights => {
+    //   getSkillTypeBuckets(1, this.currentCategory.categoryId).subscribe(bucketsWithWeights => {
 
     //   const myBuckets: Bucket[] = [];
     //   for ( const e of bucketsWithWeights.bucket) {
@@ -143,10 +144,10 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     //         category: e.category,
     //         bucketDescription: e.bucketDescription,
     //         isActive: e.isActive,
-    //         questions: e.Question[],
+    //         questions: e.Question,
     //       }
     //     );
-    //   }
+    //   }}
 
     //   this.skillTypeBucketService.bucketsByWeight = {
     //     skillTypeBucketLookupID: bucketsWithWeights.skillTypeBucketLookupID,
@@ -175,7 +176,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     // this.subscriptions.push(this.questionScoreService.currentQuestionScores.subscribe(
     //   questionScores => (this.questionScores = questionScores)
     // ));
-  }
+    }
 
   // Unsubscribe to prevent memory leaks when component is destroyed
   ngOnDestroy() {

@@ -60,7 +60,7 @@ export class SkillTypesService {
     }
 
     /** Temporary solution for this func, need to double check with back-end **/
-    getSkillTypeCategories(skillTypeId: number) {
-        return this.http.get<Bucket[]>(this.urlService.skillTypes.getBucketBySkillType(skillTypeId));
+    getSkillTypeCategories(skillTypeId: number, categoryId: number) {
+        return this.http.get<Bucket[]>(this.urlService.skillTypes.getBucketBySkillType(skillTypeId, categoryId));
     }
 }
