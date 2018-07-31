@@ -124,10 +124,6 @@ export class CategoriesComponent implements OnInit {
   /** Creates new category */
   createCategory() {
     console.log(this.currentCategory);
-    if(this.currentCategory.buckets){
-      console.log("here");
-      this.newCategory.buckets = this.currentCategory.buckets;
-    }
     this.categoryService.createCategory(this.newCategory)
       .subscribe(category => {
         this.getCategories();
@@ -187,7 +183,6 @@ export class CategoriesComponent implements OnInit {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.newCategory.title = '';
-      this.newCategory.buckets = [];
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();
