@@ -108,7 +108,7 @@ export class SoftSkillsViolationService {
   * in response to a change in the observable. Hence, deleteViolation returns an Observable.
   */
   deleteViolation(violationID: number): Observable<any[]> {
-    return this.http.get<any[]>(this.urlService.softSkillsViolation.deleteViolationURL(violationID));
+    return this.http.delete<any[]>(this.urlService.softSkillsViolation.deleteViolationURL(violationID));
   }
 
   updateSoftSkillViolations(softSkillviolations: any[]) {

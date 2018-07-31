@@ -76,14 +76,17 @@ export class ViolationFlagComponent implements OnInit {
 
     this.flagChange();
 
-    this.violationService.softSkillViolations.push({
-      violationId: violationType.id,
-      screeningId: +localStorage.getItem('screeningID'),
-      id: 0,
-      time: new Date(),
-      comment: comment
+
+    this.violationService.submitViolation(violationType.id, comment, screeningID).subscribe(data => {
+      console.log("VIOLATION:", data);
+      this.violationService.softSkillViolations.push({
+        violationId: violationType.id,
+        screeningId: +localStorage.getItem('screeningID'),
+        id: 0,
+        time: new Date(),
+        comment: comment
+      });
     });
-    this.violationService.submitViolation(violationType.id, comment, screeningID).subscribe(data => {});
   }
 
   cancelViolation() {
