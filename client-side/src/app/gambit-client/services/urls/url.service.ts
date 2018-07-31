@@ -137,7 +137,7 @@ export class UrlService {
     delete: (id: number) => `${this.context}candidate/${id}`,
   };
 
-  // 
+  // Endpoints for category
   private categoryEndpoint = `${this.adminScreening}/category`;
   category = {
     fetchAll: () => { console.log("context: %s, endpoint %s", this.context, this.categoryEndpoint);
@@ -279,14 +279,14 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private screeningEndpoint = `screening`;
+  private screeningEndpoint = `/tech-screening/screening`;
   //screeningEndpoint = 'screening-service/screening';
   screening = {
-    scheduleScreening: () => `${this.context}tech-screening/${this.screeningEndpoint}/scheduled`,
-    startScreening: () => `${this.context}tech-screening/${this.screeningEndpoint}/start`,
-    endScreening: () => `${this.context}tech-screening/${this.screeningEndpoint}/end`,
-    introComment: () => `${this.context}tech-screening/${this.screeningEndpoint}/introcomment`,
-    generalComment: () => `${this.context}tech-screening/${this.screeningEndpoint}/generalcomment`,
+    scheduleScreening: () => `${this.context}${this.screeningEndpoint}/scheduled`,
+    startScreening: () => `${this.context}${this.screeningEndpoint}/start`,
+    endScreening: () => `${this.context}${this.screeningEndpoint}/end`,
+    introComment: () => `${this.context}${this.screeningEndpoint}/introcomment`,
+    generalComment: () => `${this.context}${this.screeningEndpoint}/generalcomment`,
   };
 
   /**
@@ -300,10 +300,6 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  // simpleTraineeEndpoint = this.context + 'trainee-service';
-  // simpleTrainee = {
-  //   getAllTrainee: () => `${this.simpleTraineeEndpoint}/all/trainee/getAll/`,
-  // };
 
   /**
    * All urls associated with skills will come from this object
@@ -369,11 +365,6 @@ export class UrlService {
     removeAllSubtopics: (batchId: number) => `${this.context}/subtopics/${batchId}/`,
     isPopulated: (batchId: number) => `${this.context}/subtopics/ispopulated/${batchId}/`
   };
-
-  // tagEndpoint = this.context + 'question-service/tag';
-  // tags = {
-  //   getAllTags: () => `${this.tagEndpoint}/getAllTags`,
-  // };
 
   topic = {
     addTopicName: (name: string) => `${this.context}/topics/${name}`,

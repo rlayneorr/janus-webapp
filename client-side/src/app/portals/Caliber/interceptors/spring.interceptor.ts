@@ -30,7 +30,7 @@ export class SpringInterceptor implements HttpInterceptor {
     // console.log(request);
     return <any>next.handle(modifiedRequest)
       .catch( (error) => {  // universal error handler
-        
+        console.log(request);
         /*
         Dumps the error to the console and returns an empty Observable
         as a fallback to allow a service call to continue as if no data
