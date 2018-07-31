@@ -180,7 +180,11 @@ export class SkillTypesComponent implements OnInit {
     deleteSkillType(){
         if (this.skillType) {
           this.skillTypeService.deleteSkillType(this.skillType.skillTypeId).subscribe(result => {
-            this.grabAllSkillTypes();
+            this.allSkillTypes.forEach(skillType => {
+                if(skillType.skillTypeId === this.skillType.skillTypeId){
+                    this.allSkillTypes.splice(this.allSkillTypes.indexOf(skillType), 1);
+                }
+            });
           });
           this.savedSuccessfully();
         }
