@@ -42,6 +42,8 @@ fdescribe('QuestionsService ', () => {
   let httpClientSpyOnPut: {put: jasmine.Spy };
   let questionsService: QuestionsService;
 
+  
+
   /**
    * See if getBucketQuestions makes an http request
    *
@@ -107,6 +109,7 @@ fdescribe('QuestionsService ', () => {
    * Function tested: activateQuestion()
    **/
   it('activateQuestion should call HttpClient.put, and return the activated question', () => {
+    let httpClientSpyOnPut: {put: jasmine.Spy };
     httpClientSpyOnPut = jasmine.createSpyObj('http', ['put']);
     questionsService = new QuestionsService(<any> httpClientSpyOnPut, new UrlService);
 
