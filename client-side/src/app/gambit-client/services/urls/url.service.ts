@@ -325,12 +325,30 @@ export class UrlService {
 
   private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skilltype';
   skillTypes = {
+    findAll: () => `${this.skillTypesServiceEndpoint}`,
+    findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
+    findById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    findByName: (name: string) => `${this.skillTypesServiceEndpoint}/${name}`,
+    save: () => `${this.skillTypesServiceEndpoint}`,
+    saveSkill: (skillTypeId, skillId) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) => `${this.skillTypesServiceEndpoint}/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id: number) => `${this.skillTypesServiceEndpoint}/skillType/${id}`,
+    delete: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`, // note lowercase t in type, this is to match the request mapping
+
+
+
+
+
+    getBucketBySkillType: (skillTypeId: number, categoryId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/category/${categoryId}/weight`,
+
     createSkillType: () => `${this.skillTypesServiceEndpoint}`,
-    updateSkillType: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
     deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
-    getSkillTypeById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
 
+    updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
+    setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
   };
 
   softSkillsViolation = {

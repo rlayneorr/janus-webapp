@@ -35,9 +35,6 @@ export class SkillTypesService {
     }
 
     updateSkillType(skillType: SkillType) {
-        console.log("update?")
-        console.log(skillType);
-        console.log(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId))
         return this.http.put<SkillType>(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
