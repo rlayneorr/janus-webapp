@@ -107,7 +107,6 @@ export class BucketsComponent implements OnInit {
     this.currBucket = bucket;
     console.log(this.categories);
     this.currentCategory = this.categories.find(c=>c.categoryId===bucket.categoryId);
-
   }
 
   /**

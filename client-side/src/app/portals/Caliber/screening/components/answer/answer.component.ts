@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 
 // Entities
 import { QuestionScore } from '../../entities/questionScore';
@@ -16,7 +16,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './answer.component.html',
   styleUrls: ['./answer.component.css']
 })
-export class AnswerComponent implements OnInit {
+export class AnswerComponent implements OnInit, OnDestroy {
 
   @Input() question;
   questionScore: QuestionScore;
@@ -28,17 +28,41 @@ export class AnswerComponent implements OnInit {
     private questionScoreService: QuestionScoreService) { }
 
   ngOnInit() {
+    // this.questionScore = {
+    //   qSID: null,
+    //   questionId: this.question.questionId,
+    //   screeningID: +localStorage.getItem('screeningID'),
+    //   score: 0,
+    //   commentary: '',
+    //   beginTime: new Date()
+    // };
+
+    // console.log("current question: ", this.questionScore);
+
+    // update answeredQuestions array to match our question service's answeredQuestions array.
+    //this.questionScoreService.currentQuestionScores.subscribe(answeredQuestions => this.questionScores = answeredQuestions);
+    this.questionScoreService.currentQuestionScores.subscribe(
+      answeredQuestions => {
+        this.questionScores = answeredQuestions;
+        //console.log("this is the question: ", this.question);
+        console.log("im inside the quesiton service", answeredQuestions);
+        //this.questionScore.score = answeredQuestions.find( s => s.questionId === this.questionScore.questionId);
+      }
+    )
+  }
+
+  ngOnDestroy() {
+    console.log("ngdestroy ");
     this.questionScore = {
       qSID: null,
       questionId: this.question.questionId,
-      screeningID: +localStorage.getItem('screeningID'),
+      screeningID: 0,
       score: 0,
       commentary: '',
       beginTime: new Date()
     };
-    // update answeredQuestions array to match our question service's answeredQuestions array.
-    this.questionScoreService.currentQuestionScores.subscribe(answeredQuestions => this.questionScores = answeredQuestions);
   }
+
   // when a score is set and submitted, update the array of questions scores
   saveQuestionScore(): void {
       // allow screeners to update the score of a candidate.

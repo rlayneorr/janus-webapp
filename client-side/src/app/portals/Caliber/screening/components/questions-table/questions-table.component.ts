@@ -96,7 +96,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     private screeningService: ScreeningService,
     private candidateService: CandidateService,
     private skillTypeBucketService: SkillTypeBucketService,
-    private bucketsService: BucketsService,
+    private bucketsService: BucketsService
   ) {}
 
   ngOnInit() {
@@ -106,7 +106,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
    //get all the buckets
     this.bucketsService.getAllBuckets().subscribe((data)=> {
       console.log(this.currentCategories);
-      console.log("buckets for category display", data)
+      console.log("buckets for category display", data);
       const cids: Number[] = this.currentCategories.map(c=>c.categoryId);
       this.buckets = data.filter(b=>{
         return cids.includes(b.categoryId) && b.isActive;
