@@ -98,11 +98,11 @@ export class CandidatesScreeningListComponent implements OnInit {
     }
 
     // retrieve all scheduled interviews and populate the table of screenings.
-    this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
-      this.allScheduledScreenings = data;
-      this.scheduledScreenings = data;
+    // this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
+      // this.allScheduledScreenings = data;
+      // this.scheduledScreenings = data;
 
-    });
+    // });
     //this.allCandidates = CANDIDATES;
     console.log(this.scheduledScreenings);
   }
