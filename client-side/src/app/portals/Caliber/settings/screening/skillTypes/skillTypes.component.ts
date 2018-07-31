@@ -79,6 +79,7 @@ export class SkillTypesComponent implements OnInit {
     */
    grabAllSkillTypes() {
     this.skillTypeService.getSkillTypes().subscribe((results) => {
+        this.allSkillTypes = null;
         this.allSkillTypes = results;
         });
     }
@@ -377,7 +378,7 @@ export class SkillTypesComponent implements OnInit {
             this.skillTypeService.getSkillTypeById(this.skillType.skillTypeId).subscribe(result => {
                 this.allWeights.forEach(weight => {
                     this.categoriesService.getCategoryById(weight.categoryId).subscribe(category => {
-                        if(!this.initialCategories.includes(category)){
+                        if(!this.initialCategories.includes(category) && !result.categories.includes(category)){
                             this.weightsService.deleteWeight(weight).subscribe(result => {
                             });
                         }
@@ -385,7 +386,7 @@ export class SkillTypesComponent implements OnInit {
                 });
                 this.skillType.categories.forEach(category => {
                     console.log(category);
-                    if(!this.initialCategories.includes(category)){
+                    if(!this.initialCategories.includes(category) && !result.categories.includes(category)){
                         this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
                         this.skillTypeService.updateSkillType(this.skillType).subscribe(result => {});
                     }
