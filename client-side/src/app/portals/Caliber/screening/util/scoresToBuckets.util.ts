@@ -2,6 +2,7 @@ import { QuestionScore } from '../entities/questionScore';
 import { SkillTypeBucketLookUp } from '../entities/skillTypeBucketLookup';
 import { CategoryWeight } from '../../settings/screening/entities/Category-Weight';
 import { Bucket } from '../../settings/screening/entities/Bucket';
+import {error} from "util";
 
 export class ScoresToBucketsUtil {
   public questionScores: QuestionScore[] = [];
@@ -35,7 +36,9 @@ export class ScoresToBucketsUtil {
 
         // If the total weights from the buckets with answered questions don't add up to 100%, evenly distribute the difference
         let normalizationRatio = 100/usedBuckets.map(b=>this.findWeightForBucket(weights, b)).reduce((a,b)=>a+b);
-
+        if(normalizationRatio === 0) {
+          error('needs a weight properly defined (noramlization ratio cannot be 0.');
+        }
         var breakdowns: string[] = [];
         let weightedTotal = 0;
         // Loop through all buckets
@@ -49,7 +52,8 @@ export class ScoresToBucketsUtil {
           const rawScore = b.questions.map(q=>this.scoreForQuestion(questionScores,q)).reduce((a,b)=>a+b);
 
           const bucketScore = rawScore * questionRatio;
-          console.log(weights, weightedBucket, questionLength, questionRatio, rawScore, bucketScore);
+          console.log(weights, this.findWeightForBucket(weights,b), normalizationRatio,
+            weightedBucket, questionLength, questionRatio, rawScore, bucketScore);
           // build array of strings to return for copying and pasting into salesforce
           breakdowns.push(Number(bucketScore).toFixed(0) + '% out of weighted bucket score: ' + Number(weightedBucket).toFixed(0) + '%' +
                     ' ' + b.bucketDescription);
