@@ -54,8 +54,9 @@ export class PassFailComponent implements OnInit {
     this.violationTypes = [];
   }
   getViolationTypeNameFromId(id) {
-    if(!this.violationTypes) { return ''; }
-    return this.violationTypes.find(vt=>vt.id == id).violationTypeText;
+    var element = this.violationTypes.find(vt=>vt.id == id);
+    if(!element) { return ''; }
+    return element.violationTypeText;
   }
   ngOnInit() {
     this.disabled = true;
