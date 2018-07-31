@@ -4,14 +4,14 @@
   <div id="pending-screening-list-contents">
     <div class="filters">
       <!-- Search Bar -->
-      <input [(ngModel)]="searchText" placeholder="Search" class="search-bar">
+      <input [(ngModel)]="searchText" type="text" placeholder="Search" class="search-bar" (keyup)="searchCandidates()">
     </div>
     <!-- Table of Pending Screenings -->
     <table class="table table-hover" id="screenings-table">
       <thead>
         <tr>
           <th scope="col">Name</th>
-          <!-- <th scope="col">Track</th> -->
+          <th scope="col">Track</th>
           <th scope="col">Date</th>
         </tr>
       </thead>
@@ -21,7 +21,8 @@
           <!-- <tr (click)="showBeginScreeningPrompt = !showBeginScreeningPrompt; selectedCandidate = scheduledScreening.trainee; selectedScheduledScreening = scheduledScreening"> -->
           <tr *ngFor="let screening of scheduledScreenings" (click)='openModal(viewCand,screening)'>
             <td>{{screening.candidate.name}}</td>
-            <!-- <td>{{getSkillType(screening.skillTypeId) | async}}</td> -->
+            <!--<td>{{getSkillType(screening.skillTypeId)}}</td>-->
+            <td>{{screening.skillTypeId}}</td>
             <td>{{screening.scheduledDate | date:'short'}}</td>
           </tr>
         <!-- </ng-container> -->
@@ -56,5 +57,3 @@
         </div>
     </form>
 </ng-template>
-
-

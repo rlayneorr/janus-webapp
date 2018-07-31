@@ -90,11 +90,12 @@
                 <div class="form-group row">
                     <label for="categories" class="col-sm-6 col-form-label">Active Categories:</label>
                     <div class="col-sm-12">
-                            <span>Total: {{total}}% out of 100%</span>
-                      <span *ngFor="let category of skillType.categories; let i = index">
-                          <button type="button" class="input-group-addon pillButtons" (click)="removeCategories(category)" *ngIf="checkContains(category)">{{category.title}}</button>
-                          <input type="number" class="input-group col" (change)="weightChange(skillType, category, allWeights[i].weight)" [(ngModel)]="allWeights[i].weight" [ngModelOptions]="{standalone: true}" *ngIf="allWeights[i]">
-                      </span>
+                        <span>Total: {{total}}% out of 100%</span><br>
+                        <span *ngIf="errorMessage" class="errorMessage">{{errorMessage}}</span>
+                        <span *ngFor="let category of skillType.categories; let i = index">
+                            <button type="button" class="input-group-addon pillButtons" (click)="removeCategories(category)" *ngIf="checkContains(category)">{{category.title}}</button>
+                            <input type="number" class="input-group col" (change)="weightChange(skillType, category, allWeights[i].weight)" [(ngModel)]="allWeights[i].weight" [ngModelOptions]="{standalone: true}" *ngIf="allWeights[i]">
+                        </span>
                     </div>
                 </div>
 
@@ -136,6 +137,6 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-primary" (click)="c('Close click')">Cancel</button>
-      <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="deleteSkillType(); c('Close click')">Delete</button>
+      <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="c('Close click'); changeConfirm();">Delete</button>
     </div>
 </ng-template>

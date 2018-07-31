@@ -33,7 +33,7 @@ export class CandidateService {
     private httpClient: HttpClient,
     // private urlService: UrlService,
     // private skillTypeService: SkillTypeService,
-    private alertService: AlertsService
+    // private alertService: AlertsService
   ) { }
 
   selectedCandidate: Candidate;

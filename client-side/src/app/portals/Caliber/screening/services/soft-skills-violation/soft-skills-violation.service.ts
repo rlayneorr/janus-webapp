@@ -71,7 +71,7 @@ export class SoftSkillsViolationService {
   addViolations(newViolations: ViolationType[], comment: string) {
     const violationIdArray: number[] = [];
     for (let i = 0; i < newViolations.length; i++) {
-      violationIdArray[i] = newViolations[i].violationTypeId;
+      violationIdArray[i] = newViolations[i].id;
     }
 
     // create an Http parameter body with violationID array, append comment and date to body
@@ -84,11 +84,11 @@ export class SoftSkillsViolationService {
   }
 
   // Submit a violation with the appropriate comment, screening ID and timestamp.
-  submitViolation(typeID: number, comment: string, screeningID: number): Observable<SoftSkillViolation[]> {
+  submitViolation(typeID: number, comment: string, screeningID: number): Observable<any> {
     return this.http.post<any[]>(
       this.urlService.softSkillsViolation.addViolationURL(),
       {
-        'violationTypeId': [typeID],
+        'violationTypeId': typeID,
         'softSkillComment': comment,
         'violationTime': new Date(),
         'screeningId': screeningID
@@ -108,7 +108,7 @@ export class SoftSkillsViolationService {
   * in response to a change in the observable. Hence, deleteViolation returns an Observable.
   */
   deleteViolation(violationID: number): Observable<any[]> {
-    return this.http.get<any[]>(this.urlService.softSkillsViolation.deleteViolationURL(violationID));
+    return this.http.delete<any[]>(this.urlService.softSkillsViolation.deleteViolationURL(violationID));
   }
 
   updateSoftSkillViolations(softSkillviolations: any[]) {

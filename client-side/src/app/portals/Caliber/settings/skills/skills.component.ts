@@ -107,7 +107,6 @@ export class SkillsComponent implements OnInit {
    * @returns
    * @memberof SkillsComponent
    */
-
   /**
    * Opens a Modal
    * @param {any} content

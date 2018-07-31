@@ -30,18 +30,19 @@ export class QuestionScoreService {
 
   // update the array of answered questions
   updateQuestionScores(questionScores: QuestionScore[]) {
-    this.questionScoresSource.next(questionScores);
+    // this.questionScoresSource.next(questionScores);
+    this.questionScores = questionScores;
   }
 
   // save the question to the database
   postQuestionScore(question: QuestionScore): void {
 
     this.httpClient.post<QuestionScore>(this.urlService.questionScoring.scoringQuestion(), {
-      Score: question.score,
-      Comment: question.commentary,
-      QuestionID: question.questionId,
-      BeginTime: question.beginTime,
-      ScreeningID: question.screeningID}).subscribe(data => {
+      score: question.score,
+      comment: question.commentary,
+      questionId: question.questionId,
+      beginTime: question.beginTime,
+      screeningId: question.screeningID}).subscribe(data => {
       });
 
     /*

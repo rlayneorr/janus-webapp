@@ -1,4 +1,3 @@
-// import { Tag } from './tag';
 import { Candidate } from './Candidate';
 import { CaliberTrainer } from './caliberTrainer';
 import { SkillType } from './skillType';

@@ -47,7 +47,6 @@ import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-// import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';
@@ -158,11 +157,11 @@ import { BucketsComponent } from './settings/screening/buckets/buckets.component
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
-//import { BucketFilterPipe } from './settings/screening/buckets/buckets.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
-import { CategoryService } from '../Caliber/services/category/category.service';
+import {CategoryService} from "./services/category/category.service";
 import { CategoryWeightsService } from './settings/screening/services/weight.service';
+//import {QuestionService} from "./settings/screening/services/question.service";
 
 import 'rxjs/add/operator/do';
 import {CandidateService} from "./screening/services/candidate/candidate.service";
@@ -216,7 +215,6 @@ import {CandidateService} from "./screening/services/candidate/candidate.service
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
-    //BucketFilterPipe,
     CategoryFilterPipe,
 
     // components

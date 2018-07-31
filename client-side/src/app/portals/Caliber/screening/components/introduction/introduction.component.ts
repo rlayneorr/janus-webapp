@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
@@ -46,12 +46,12 @@ export class IntroductionComponent implements OnInit {
   // public tagList: Tag[];
   public categoriesSelected: Category[];
   public allCategories: Category[];
-
+  
 
   public comment: string;
 
   form = new FormGroup({
-    comment: new FormControl('', [])
+    comment: new FormControl('', [Validators.required])
   });
 
   ngOnInit() {
@@ -84,7 +84,6 @@ export class IntroductionComponent implements OnInit {
       this.candidateTrack = skill.title;
     });
     this.categoriesSelected = [];
-
     //this.currentScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
     //this.candidateName = this.candidateService.getSelectedCandidate().firstName + ' ' +
     //this.candidateService.getSelectedCandidate().lastName;
@@ -114,7 +113,7 @@ export class IntroductionComponent implements OnInit {
     }
   }
 
-  // Submit the comments on the Introduction view when the "Begin Questions" buton is clicked
+  // Submit the comments on the Introduction view when the "Begin Questions" button is clicked
   onSubmit() {
     // Send the comments to the appropriate service method saves them to the DB
     this.screeningService.submitIntroComment(this.comment);

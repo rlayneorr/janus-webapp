@@ -69,19 +69,23 @@ export class ViolationFlagComponent implements OnInit {
 
   submitViolation(violationType: ViolationType, comment: string): void {
     // Send request with the violation + comments
+    console.log("violation1!!!", violationType);
     const screeningID = Number.parseInt(localStorage.getItem('screeningID'));
     this.alertsService.success('Soft Skill Violation Added');
     this.violationTypeService.getAllViolationTypes().subscribe(data => console.log(data));
+
     this.flagChange();
 
-    this.violationService.softSkillViolations.push({
-      violationID: undefined,
-      screeningID: +localStorage.getItem('screeningID'),
-      violationType: violationType,
-      Time: new Date(),
-      Comment: comment
-    });
-    this.violationService.submitViolation(violationType.violationTypeId, comment, screeningID).subscribe(data => {
+
+    this.violationService.submitViolation(violationType.id, comment, screeningID).subscribe(data => {
+      console.log("VIOLATION:", data);
+      this.violationService.softSkillViolations.push({
+        violationId: data.violationId,
+        screeningId: data.screeningId,
+        id: data.id,
+        time: data.time,
+        comment: data.comment
+      });
     });
   }
 
