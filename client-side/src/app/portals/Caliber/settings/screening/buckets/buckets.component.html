@@ -77,8 +77,9 @@
     <form>
       <div class="form-group">
 
-        <select #selectCategory class="form-control" name="cate" [(ngModel)]="currentCategory.categoryId">
-          <option *ngFor="let cat of categories" [ngValue]="cat.categoryId" [selected]="currentCategory.categoryId===cat.categoryId">
+        <!--[(ngModel)]="currentCategory.categoryId"-->
+        <select #selectCategory class="form-control" name="cate">
+          <option *ngFor="let cat of categories" [ngValue]="cat.categoryId">
             {{cat.title}}
           </option>
         </select>

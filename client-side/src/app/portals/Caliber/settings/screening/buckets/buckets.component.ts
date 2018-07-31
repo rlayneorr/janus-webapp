@@ -117,6 +117,7 @@ export class BucketsComponent implements OnInit {
   updateBucket(bucketParam: Bucket) {
 
     if (!bucketParam) {
+      console.log(bucketParam);
       bucketParam = this.currBucket;
       this.currBucket.categoryId = this.newBucket.categoryId;
       this.currBucket.category = this.newBucket.category;
