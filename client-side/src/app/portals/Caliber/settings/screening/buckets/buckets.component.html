@@ -44,8 +44,8 @@
     <form>
       <div class="form-group">
 
-        <select #selectCategory (change)="getSelectedCategory(selectCategory.value)">
-          <option *ngFor="let cat of categories" [value]="cat.categoryId" [selected]="selectValue === selectCategory.value">
+        <select #selectCategory class="form-control" name="cate" [(ngModel)]="currentCategory.categoryId">
+          <option *ngFor="let cat of categories" [ngValue]="cat.categoryId" [selected]="currentCategory.categoryId===cat.categoryId">
             {{cat.title}}
           </option>
         </select>
@@ -77,8 +77,8 @@
     <form>
       <div class="form-group">
 
-        <select #selectCategory (change)="getSelectedCategory(selectCategory.value)">
-          <option *ngFor="let cat of categories" [value]="cat.categoryId">
+        <select #selectCategory class="form-control" name="cate" [(ngModel)]="currentCategory.categoryId">
+          <option *ngFor="let cat of categories" [ngValue]="cat.categoryId" [selected]="currentCategory.categoryId===cat.categoryId">
             {{cat.title}}
           </option>
         </select>
