@@ -9,6 +9,10 @@ import { AlertsService } from '../../../services/alerts.service';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { SoftSkillViolation } from '../../entities/softSkillViolation';
 import { Subscription } from 'rxjs/Subscription';
+import { Bucket } from '../../../settings/screening/entities/Bucket';
+import { CategoryWeight } from '../../../settings/screening/entities/Category-Weight';
+import { SkillType } from '../../../settings/screening/entities/SkillType';
+import { SkillTypesService } from '../../../settings/screening/services/skillTypes.service';
 
 @Component({
   selector: 'app-final-report',
@@ -28,6 +32,9 @@ export class FinalReportComponent implements OnInit, OnDestroy {
 public candidateName: string;
 softSkillString: string;
 bucketStringArray: string[];
+buckets: Bucket[]; //Need to grab current buckets
+weights: CategoryWeight[]; //Need to grab weights via skilltype and category
+skillType: SkillType;
 overallScoreString: string;
 generalNotesString: string;
 allTextString: string;
@@ -41,22 +48,35 @@ subscriptions: Subscription[] = [];
     private screeningService: ScreeningService,
     private candidateService: CandidateService,
     private skillTypeBucketService: SkillTypeBucketService,
+    private skillTypesService: SkillTypesService,
     private questionScoreService: QuestionScoreService,
     private scoresToBucketsUtil: ScoresToBucketsUtil,
     private alertsService: AlertsService,
     private softSkillsViolationService: SoftSkillsViolationService
   ) { }
+  public candidateTrack: Object;
 
   ngOnInit() {
     this.checked = 'false';
     this.candidateName = this.candidateService.getSelectedCandidate().name
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
     this.allTextString = this.softSkillString + '\n';
+    const trackId = parseInt((localStorage.getItem('candidateTrack')), 10);
+    this.skillTypesService.getSkillTypeById(trackId).subscribe(skill =>{
+      console.log("skill?: " + skill.categories);
+      this.skillType = skill;
+    
+    console.log("skill: " + this.skillType);
+    this.skillType.categories.forEach(category => {
+      this.skillTypeBucketService.getSkillTypeBuckets(this.skillType.skillTypeId, category.categoryId)
+      .subscribe(weight => this.weights.push(weight));
+    
+    console.log("weights" + this.weights);
     this.questionScoreService.currentQuestionScores.subscribe(
       questionScores => {
         this.questionScores = questionScores;
         this.bucketStringArray =
-          this.scoresToBucketsUtil.getFinalBreakdown(this.questionScores, this.skillTypeBucketService.bucketsByWeight);
+          this.scoresToBucketsUtil.getFinalBreakdown(this.questionScores, this.buckets, this.weights);
 
         // Set the composite score in the screening service
         this.screeningService.compositeScore = +this.bucketStringArray[this.bucketStringArray.length - 1];
@@ -78,6 +98,8 @@ subscriptions: Subscription[] = [];
     this.subscriptions.push(this.softSkillsViolationService.currentSoftSkillViolations.subscribe(
       softSkillViolations => (this.softSkillViolations = softSkillViolations)
     ));
+  });
+});
   }
 
   // Used for copying the data to the clipboard (this is done using ngx-clipboard)

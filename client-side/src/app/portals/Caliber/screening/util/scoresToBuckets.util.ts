@@ -1,9 +1,12 @@
 import { QuestionScore } from '../entities/questionScore';
 import { SkillTypeBucketLookUp } from '../entities/skillTypeBucketLookup';
+import { CategoryWeight } from '../../settings/screening/entities/Category-Weight';
+import { Bucket } from '../../settings/screening/entities/Bucket';
 
 export class ScoresToBucketsUtil {
 
-    getFinalBreakdown(questionScores: QuestionScore[], bucketsByWeight: SkillTypeBucketLookUp): string[] {
+    getFinalBreakdown(questionScores: QuestionScore[], buckets: Bucket[],
+    weights: CategoryWeight[]): string[] {
         const bucketNames: string[] = [];
         const totals: number[] = [];
         const scores: number[] = [];
@@ -11,8 +14,8 @@ export class ScoresToBucketsUtil {
         let questionsAsked;
         let totalWeights = 0;
         let totalBuckets = 0;
-        // Loop through the buckets provided by the SkillTypeBucketLookup entity
-        bucketsByWeight.buckets.forEach(thisBucket => {
+        // Loop through the buckets
+        buckets.forEach(thisBucket => {
             questionsAsked = 0;
             totals[bucketIndex] = 0;
             scores[bucketIndex] = 0;
@@ -32,8 +35,8 @@ export class ScoresToBucketsUtil {
             }
             // If questions were answered from this bucket, mark bucket as used
             if (questionsAsked > 0) {
-                bucketNames[bucketIndex] = thisBucket.bucketCategory;
-                totalWeights += bucketsByWeight.weights[bucketIndex];
+                bucketNames[bucketIndex] = thisBucket.category;
+                totalWeights += weights[bucketIndex].weight;
                 totalBuckets++;
             // If no questions from this bucket were asked, ignore in final calculations
             } else {
@@ -54,7 +57,7 @@ export class ScoresToBucketsUtil {
             // If at least one question from this bucket was asked, calculate the total weighted score for the bucket
             if (bucketNames[breakdownIndex] !== 'skip') {
                 // augments the points per question by normalized weight
-                const weightedbucket = (bucketsByWeight.weights[breakdownIndex] + normalizeWeight);
+                const weightedbucket = (weights[breakdownIndex].weight + normalizeWeight);
                 const weightedscore = scores[breakdownIndex] / totals[breakdownIndex] * weightedbucket;
 
 
@@ -62,7 +65,7 @@ export class ScoresToBucketsUtil {
                 breakdowns.push(Number(weightedscore).toFixed(0) + '/' + Number(weightedbucket).toFixed(0) +
                     ' ' + bucketNames[breakdownIndex]);
                 weightedTotal += (scores[breakdownIndex] / totals[breakdownIndex]) *
-                    (bucketsByWeight.weights[breakdownIndex] + normalizeWeight);
+                    (weights[breakdownIndex].weight + normalizeWeight);
             }
             breakdownIndex++;
         });
