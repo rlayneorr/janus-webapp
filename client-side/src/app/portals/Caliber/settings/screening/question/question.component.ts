@@ -160,7 +160,7 @@ export class QuestionComponent implements OnInit {
         this.question.sampleAnswer4 = this.sampleAnswers[3];
         this.question.sampleAnswer5 = this.sampleAnswers[4];
         this.questionService.updateQuestion(this.question).subscribe(data => {
-          this.updateQuestions();
+          //this.updateQuestions();
         });
         this.updatedSuccessfully();
       } else {  //new question
@@ -172,7 +172,8 @@ export class QuestionComponent implements OnInit {
         this.question.bucketId = this.currentBucket.bucketId;
         this.question.isActive = true;
         this.questionService.createNewQuestion(this.question).subscribe(data => {
-          this.updateQuestions();
+          //this.updateQuestions();
+          this.questions.push(data as Question);
         });
         this.savedSuccessfully();
       }
@@ -185,12 +186,16 @@ export class QuestionComponent implements OnInit {
 
   deleteQuestion() {
 
+    console.log("inside the delete question: ", this.question);
     //check for question and then remove it from the DOM
-    this.questionService.deleteQuestion(this.question.questionId).subscribe(
-      result => this.updateQuestions(),
-      ()=> this.alertsService.error('Error Deleting Bucket'),
-      () => {this.confirm = false; this.alertsService.success('Successfully Deleted Question');}
-    );
+    //this.questionService.deleteQuestion(this.question.questionId).subscribe(
+    //  result => this.updateQuestions(),
+     // ()=> this.alertsService.error('Error Deleting Bucket'),
+      //() => {this.confirm = false; this.alertsService.success('Successfully Deleted Question');}
+    //);
+
+    this.questionService.deleteQuestion(this.question.questionId).subscribe();
+
 
     //this.alertsService.success('Successfully Deleted Question');
   }
