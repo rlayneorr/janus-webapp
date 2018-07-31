@@ -64,7 +64,7 @@ subscriptions: Subscription[] = [];
   ngOnInit() {
     this.checked = 'false';
     this.categories = this.screeningService.getSelectedCategories();
-    this.buckets = this.questionsToBucketsUtil.getReturnBuckets();
+    this.buckets = this.screeningService.getSelectedBuckets();
     console.log("Return Buckets: " + this.buckets);
     this.candidateName = this.candidateService.getSelectedCandidate().name
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
@@ -79,7 +79,7 @@ subscriptions: Subscription[] = [];
   };
     getSkillType(){
       console.log("in skill type");
-    this.skillType.categories.forEach(category => {
+      this.skillType.categories.forEach(category => {
       console.log("SkillTypeId: " + this.skillType.skillTypeId +" CategoryId: "+ category.categoryId);
       
       this.skillTypeBucketService.getSkillTypeBuckets(this.skillType.skillTypeId, category.categoryId)
@@ -93,11 +93,9 @@ subscriptions: Subscription[] = [];
     
     getWeights(){
     console.log("weights: " + this.weights);
-    this.questionScoreService.currentQuestionScores.subscribe(
-      questionScores => {
-        this.questionScores = questionScores;
-        this.finalBreakdown();
-      })};
+    this.questionScores = this.questionScoreService.questionScores;
+      this.finalBreakdown();
+  }
 
       finalBreakdown(){
         console.log(this.questionScores);
@@ -118,7 +116,7 @@ subscriptions: Subscription[] = [];
       
     // this.overallScoreString = "Overall: 71%";
     this.generalNotesString = this.screeningService.generalComments;
-    this.allTextString += '"' + this.generalNotesString + '"';
+    this.allTextString += 'comments: "' + this.generalNotesString + '"';
 
     this.screeningService.endScreening(this.generalNotesString);
     this.subscriptions.push(this.softSkillsViolationService.currentSoftSkillViolations.subscribe(

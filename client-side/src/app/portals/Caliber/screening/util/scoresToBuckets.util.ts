@@ -9,6 +9,7 @@ export class ScoresToBucketsUtil {
         const bucketNames: string[] = [];
         const totals: number[] = [];
         const scores: number[] = [];
+        let totalScore: number = 0;
         let bucketIndex = 0;
         let questionsAsked;
         let totalWeights = 0;
@@ -53,9 +54,9 @@ export class ScoresToBucketsUtil {
             totals[bucketIndex] = 0;
             scores[bucketIndex] = 0;
             questionScores.forEach(question => {
+                console.log("Score: " + question.score);
                 questionsAsked++;
-                totals[bucketIndex] += 5;
-                scores[bucketIndex] += question.score;
+                totalScore += question.score;
             });
         }
         let normalizeWeight = 0;
