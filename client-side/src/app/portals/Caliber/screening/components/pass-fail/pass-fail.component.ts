@@ -51,9 +51,10 @@ export class PassFailComponent implements OnInit {
     private violationTypeService: ViolationTypeService,
     public softSkillViolationService: SoftSkillsViolationService
   ) {
-
+    this.violationTypes = [];
   }
   getViolationTypeNameFromId(id) {
+    if(!this.violationTypes) { return ''; }
     return this.violationTypes.find(vt=>vt.id == id).violationTypeText;
   }
   ngOnInit() {
