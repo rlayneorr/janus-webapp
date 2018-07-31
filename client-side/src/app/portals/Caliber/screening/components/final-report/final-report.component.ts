@@ -15,6 +15,8 @@ import { SkillType } from '../../../settings/screening/entities/SkillType';
 import { SkillTypesService } from '../../../settings/screening/services/skillTypes.service';
 import { Category } from '../../../entities/Category';
 import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
+import { CategoryWeightsService } from '../../../settings/screening/services/weight.service';
+import { BucketsService } from '../../../settings/screening/services/buckets.service';
 
 
 @Component({
@@ -35,8 +37,8 @@ export class FinalReportComponent implements OnInit, OnDestroy {
 public candidateName: string;
 softSkillString: string;
 bucketStringArray: string[] = [];
-buckets: Bucket[] = []; //Need to grab current buckets
-weights: CategoryWeight[] = []; //Need to grab weights via skilltype and category
+buckets: Bucket[] = [];
+weights: CategoryWeight[] = [];
 skillType: SkillType;
 categories: Category[] = [];
 overallScoreString: string;
@@ -53,6 +55,8 @@ subscriptions: Subscription[] = [];
     private candidateService: CandidateService,
     private skillTypeBucketService: SkillTypeBucketService,
     private skillTypesService: SkillTypesService,
+    private bucketsService: BucketsService,
+    private categoryWeightsService: CategoryWeightsService,
     private questionScoreService: QuestionScoreService,
     private questionsToBucketsUtil: QuestionsToBucketsUtil,
     private scoresToBucketsUtil: ScoresToBucketsUtil,
@@ -64,41 +68,44 @@ subscriptions: Subscription[] = [];
   ngOnInit() {
     this.checked = 'false';
     this.categories = this.screeningService.getSelectedCategories();
-    this.buckets = this.questionsToBucketsUtil.getReturnBuckets();
-    console.log("Return Buckets: " + this.buckets);
-    this.candidateName = this.candidateService.getSelectedCandidate().name
+    this.bucketsService.getAllBuckets().subscribe((bucket: Bucket[]) => {
+      this.buckets = bucket;
+      this.getCandidate();
+    });
+  }
+    getCandidate(){
+    console.log("Return Buckets: ", this.buckets);
+    this.candidateName = this.candidateService.getSelectedCandidate().name;
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
     this.allTextString = this.softSkillString + '\n';
     const trackId = parseInt((localStorage.getItem('candidateTrack')), 10);
 
     this.skillTypesService.getSkillTypeById(trackId).subscribe(skill =>{
       this.skillType = skill;
-      console.log("skillType: " + this.skillType.categories);
+      console.log("skillType: ", this.skillType.categories);
       this.getSkillType();
     });
   };
     getSkillType(){
       console.log("in skill type");
-    this.skillType.categories.forEach(category => {
+      this.skillType.categories.forEach(category => {
       console.log("SkillTypeId: " + this.skillType.skillTypeId +" CategoryId: "+ category.categoryId);
 
-    //   this.skillTypeBucketService.getSkillTypeBuckets(this.skillType.skillTypeId, category.categoryId)
-    //   .subscribe((weight) => {
-    //     this.weights.push(weight);
-    //     console.log("weights: " + this.weights);
-    //     this.getWeights();
-    //   }
-    // )
+      this.categoryWeightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId)
+      .subscribe((weight) => {
+        this.weights.push(weight);
+        console.log("weights: ", this.weights);
+        this.getWeights();
+      }
+    )
     });
   }
 
     getWeights(){
-    console.log("weights: " + this.weights);
-    this.questionScoreService.currentQuestionScores.subscribe(
-      questionScores => {
-        this.questionScores = questionScores;
-        this.finalBreakdown();
-      })};
+    console.log("weights: ", this.weights);
+    this.questionScores = this.questionScoreService.questionScores;
+      this.finalBreakdown();
+  }
 
       finalBreakdown(){
         console.log(this.questionScores);
@@ -119,7 +126,7 @@ subscriptions: Subscription[] = [];
 
     // this.overallScoreString = "Overall: 71%";
     this.generalNotesString = this.screeningService.generalComments;
-    this.allTextString += '"' + this.generalNotesString + '"';
+    this.allTextString += 'comments: "' + this.generalNotesString + '"';
 
     this.screeningService.endScreening(this.generalNotesString);
     this.subscriptions.push(this.softSkillsViolationService.currentSoftSkillViolations.subscribe(
