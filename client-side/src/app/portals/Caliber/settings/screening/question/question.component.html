@@ -22,7 +22,7 @@
                     <span class="slider round" placement="top" ngbTooltip="activate" *ngIf="!question.isActive"></span>
                 </label>
               </i>
-              <i id="delIcon" class="fa fa-trash pull-right" (click)="deleteQuestion(question)" placement="top" ngbTooltip="delete"></i>
+              <i id="delIcon" class="fa fa-trash pull-right" (click)="deleteQuestion(question); open(delete);" placement="top" ngbTooltip="delete"></i>
               <i id="penIcon" class="fa fa-pencil pull-right" (click)="editQuestion(question); open(content)" placement="top" ngbTooltip="edit"></i>
             </a>
           </div>
@@ -108,3 +108,27 @@
   </div>
 </ng-template>
 <!--Ending of the add new question modal -->
+<!--* Delete question confirmation -->
+<ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Question</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Are you sure?</label>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Close click')">Cancel</button>
+    <!--* create(), creates new question in the database -->
+    <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="c('Close click'); confirmDelete(question); changeConfirm();">Delete</button>
+  </div>
+</ng-template>
+

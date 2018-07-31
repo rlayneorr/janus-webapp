@@ -9,7 +9,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsService } from '../../../services/alerts.service';
 import {CategoryService} from "../../../services/category/category.service";
 import {Category} from "../../../entities/Category";
-import {fade, removeItem} from "../../../../../Animations/caliber-animations";
+import {fade} from "../../../../../Animations/caliber-animations";
 
 
 @Component({

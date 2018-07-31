@@ -113,7 +113,7 @@ export class CategoriesComponent implements OnInit {
 
   deleteCategory(){
     if (this.currentCategory) {
-      console.log(this.currentCategory)
+      console.log(this.currentCategory);
       this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe({
           complete:()=>this.getCategories()
         });
@@ -176,8 +176,6 @@ export class CategoriesComponent implements OnInit {
     }
     return false;
   }
-
-
 
   savedSuccessfully() {
     this.alertsService.success('Saved successfully');

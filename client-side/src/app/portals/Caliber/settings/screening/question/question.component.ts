@@ -43,6 +43,7 @@ export class QuestionComponent implements OnInit {
   currentBucket: Bucket;
   public answersCollapsed = true;
   state;
+  confirm : boolean = false;
 
   ngOnInit() {
     this.currentBucket = this.bucketService.getCurrentBucket();
@@ -182,10 +183,42 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  deleteQuestion(question):void {
-    this.questionService.deleteQuestion(question.questionId).subscribe();
+  deleteQuestion() {
+
+    //check for question and then remove it from the DOM
+    this.questionService.deleteQuestion(this.question.questionId).subscribe(
+      result => this.updateQuestions(),
+      ()=> this.alertsService.error('Error Deleting Bucket'),
+      () => {this.confirm = false; this.alertsService.success('Successfully Deleted Question');}
+    );
+
+    //this.alertsService.success('Successfully Deleted Question');
   }
- 
+
+  confirmDelete(question: Question){
+    this.question = question;
+  }
+
+  changeConfirm(){
+    this.confirm = true;
+    console.log("inside the changeConfirm: ", this.question);
+    this.removeQuestion(this.question);
+  }
+
+  removeQuestion(question : Question) {
+    console.log('confirm is ', this.confirm);
+    //check if user really wants to delete the question
+    if(this.confirm === true){
+      for (const questionId in this.questions) {
+        if (this.questions[questionId] === question) {
+          this.questions.splice(Number(questionId), 1);
+          this.deleteQuestion();
+          this.confirm = false;
+        }
+      }
+    }
+  }
+
   /**
    * Used to populate the current question and the current tags with a selected question to be
    * edited.
@@ -195,12 +228,10 @@ export class QuestionComponent implements OnInit {
       this.questionService.getBucketQuestions(this.currentBucket.bucketId).subscribe(data => {
         this.questions = (data as Question[]);
       });
-      
+
     }
   }
 
-  
-  
   savedSuccessfully() {
     this.alertsService.success('Saved successfully');
   }
