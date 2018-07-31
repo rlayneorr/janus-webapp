@@ -26,6 +26,7 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 
 //Observables
 import { defer } from 'rxjs/observable/defer';
+import { CATEGORIES } from '../../../services/category/mock-categories';
 
 export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
