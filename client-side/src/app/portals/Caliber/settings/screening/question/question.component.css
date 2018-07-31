@@ -174,8 +174,8 @@ top:70%;
 p{
   color: #F26925;
 }
-fixed-modal .modal-content {
-  size: sm
+.fixed-modal .modal-content {
+  size: A4
 }
 
 .tabContent{
@@ -183,8 +183,13 @@ fixed-modal .modal-content {
   height: 400px;
 }
 
-.modal-title{
-  color: black;
+.modal-header {
+  background-color: #F26925;
+}
+
+.modal-title {
+  text-align: center;
+  color: white;
 }
 
 .pillButtons{
