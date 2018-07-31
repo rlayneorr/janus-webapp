@@ -22,20 +22,23 @@ export class AnswerComponent implements OnInit, OnDestroy {
   questionScore: QuestionScore;
 
   // used to exchange data between the answer modal and question table component
-  questionScores: QuestionScore[];
+  public questionScores: QuestionScore[];
 
   constructor(public activeModal: NgbActiveModal, private questionService: QuestionService,
     private questionScoreService: QuestionScoreService) { }
 
   ngOnInit() {
-    // this.questionScore = {
-    //   qSID: null,
-    //   questionId: this.question.questionId,
-    //   screeningID: +localStorage.getItem('screeningID'),
-    //   score: 0,
-    //   commentary: '',
-    //   beginTime: new Date()
-    // };
+     var currentQuestionScore = this.questionScoreService.questionScores.find(q=>q.questionId === this.question.questionId);
+     this.questionScore = {
+       qSID: null, // unused everywhere...
+       questionId: this.question.questionId,
+       screeningID: +localStorage.getItem('screeningID'),
+       score: currentQuestionScore ? currentQuestionScore.score : 0,
+       commentary: currentQuestionScore ? currentQuestionScore.commentary : '',
+       beginTime: currentQuestionScore ? currentQuestionScore.beginTime : new Date()
+     };
+
+
 
     // console.log("current question: ", this.questionScore);
 

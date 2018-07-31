@@ -18,7 +18,7 @@ export class QuestionScoreService {
     ) { }
 
   // Used for sharing data between question table and answer modal
-  questionScores: QuestionScore[] = [];
+  public questionScores: QuestionScore[] = [];
 
   // questionsQuestionsSource tracks the value of answeredQuestions
   // and allows values to be sent to answeredQuestions
