@@ -25,42 +25,23 @@ export class SkillTypesService {
         return this.http.post(this.urlService.skillTypes.createSkillType(), skillType, httpOptions);
     }
 
-    activateSkillType(skillType: SkillType) {
-        return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
+    getSkillTypeById(skillTypeId: number) {
+        return this.http.get<SkillType>(this.urlService.skillTypes.getSkillTypeById(skillTypeId));
     }
 
-    deactivateSkillType(skillType: SkillType) {
-        return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
-    }
-
-    updateSkillType(skillType: SkillType) {
-        return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
-    }
 
     getSkillTypes() {
         return this.http.get<SkillType[]>(this.urlService.skillTypes.getSkillTypes());
     }
 
-    setSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
-        return this.http.post(this.urlService.skillTypes.setSkillTypeBuckets(), { skillTypeName: skillType.title, skillTypeId:
-            skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
-    }
-
-    updateSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
-        return this.http.put(this.urlService.skillTypes.updateSkillTypeBuckets(), { skillTypeName: skillType.title,
-            skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
-    }
-
-    getSkillTypeById(skillTypeId: number) {
-        return this.http.get<SkillType>(this.urlService.skillTypes.getSkillTypeById(skillTypeId));
+    updateSkillType(skillType: SkillType) {
+        console.log("update?")
+        console.log(skillType);
+        console.log(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId))
+        return this.http.put<SkillType>(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
     deleteSkillType(skillTypeId: number) {
         return this.http.delete(this.urlService.skillTypes.deleteSkillType(skillTypeId));
-    }
-
-    /** Temporary solution for this func, need to double check with back-end **/
-    getSkillTypeCategories(skillTypeId: number) {
-        return this.http.get<Bucket[]>(this.urlService.skillTypes.getBucketBySkillType(skillTypeId));
     }
 }

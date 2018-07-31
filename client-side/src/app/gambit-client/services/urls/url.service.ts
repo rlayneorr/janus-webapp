@@ -319,34 +319,17 @@ export class UrlService {
 
   /**
    * Endpoints for skillType
+   * 
+   * @author John Lacap | 1805-May-29 | WVU | Richard Orr
    */
 
-  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skillType';
+  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skilltype';
   skillTypes = {
-    findAll: () => `${this.skillTypesServiceEndpoint}`,
-    findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
-    findById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
-    findByName: (name: string) => `${this.skillTypesServiceEndpoint}/${name}`,
-    save: () => `${this.skillTypesServiceEndpoint}`,
-    saveSkill: (skillTypeId, skillId) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/skill/${skillId}`,
-    saveSkillByName: (skillTypeName, skillName) => `${this.skillTypesServiceEndpoint}/name/${skillTypeName}/skill/name/${skillName}`,
-    update: (id: number) => `${this.skillTypesServiceEndpoint}/skillType/${id}`,
-    delete: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`, // note lowercase t in type, this is to match the request mapping
-
-
-
-
-
-    getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
-
     createSkillType: () => `${this.skillTypesServiceEndpoint}`,
-    updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
+    updateSkillType: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
     deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
-
-    updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
-    setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
+    getSkillTypeById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
 
   };
 
@@ -456,8 +439,8 @@ export class UrlService {
 
   /**
    * Endpoints for category weights:
-   * This section is being added for use in the setting screening weight service
-   * @author John Lacap
+   * 
+   * @author John Lacap | 1805-May-29 | WVU | Richard Orr
    */
   private weightsServiceEndpoint = this.context + this.adminScreening;
   weight={
