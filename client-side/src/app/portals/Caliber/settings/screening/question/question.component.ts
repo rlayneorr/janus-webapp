@@ -173,6 +173,7 @@ export class QuestionComponent implements OnInit {
         this.question.isActive = true;
         this.questionService.createNewQuestion(this.question).subscribe(data => {
           //this.updateQuestions();
+          console.log("adding new question: ", data);
           this.questions.push(data as Question);
         });
         this.savedSuccessfully();

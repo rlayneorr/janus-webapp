@@ -19,7 +19,16 @@ import { ScheduleScreeningService } from '../../services/schedule-screening/sche
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 import { UrlService } from '../../../../../../app/gambit-client/services/urls/url.service';
-import { SkillType } from '../../../entities/SkillType';
+
+//import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
+// import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
+// Installed Modules
+// npm install ngx-pagination --save
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+import { tick } from '../../../../../../../node_modules/@angular/core/testing';
+import {SkillTypesService} from "../../../settings/screening/services/skillTypes.service";
+import {AlertsService} from "../../../services/alerts.service";
+import {SkillType} from "../../../settings/screening/entities/SkillType";
 
 @Component({
   selector: 'app-candidates-screening-list',
@@ -61,6 +70,7 @@ export class CandidatesScreeningListComponent implements OnInit {
 
   //Variable to hold the skill type that corresponds to te=he skillTypeId of each scheduled screening
   skillType : SkillType;
+  skillTypes : SkillType[] = [];
 
   //Begin the form
   beginForm: FormGroup;
@@ -75,6 +85,8 @@ export class CandidatesScreeningListComponent implements OnInit {
     private scheduleScreeningService: ScheduleScreeningService,
     private softSkillsViolationService: SoftSkillsViolationService,
     private questionScoreService: QuestionScoreService,
+    private skillTypeService : SkillTypesService,
+    private alertService : AlertsService,
     private urlService: UrlService,
     private modalService: NgbModal,
     private fb: FormBuilder,
@@ -100,7 +112,30 @@ export class CandidatesScreeningListComponent implements OnInit {
     });
 
     console.log(this.scheduledScreenings);
-    
+
+    // this.skillTypeService.getSkillTypes().subscribe({
+    //   next: skills=>{this.skillTypes = skills;}
+    // });
+
+    this.skillTypeService.getSkillTypes().subscribe((skills) => {
+
+      this.skillTypes = skills;
+
+    });
+
+    //
+    // console.log(this.skillTypes);
+    //
+    // console.log("after looping : ", this.scheduledScreenings);
+    // console.log("skills: ", this.skillTypes);
+
+  }
+
+  //Quagmire....
+  getSkillTypeId(id) {
+    var element = this.skillTypes.find(vt=>vt.skillTypeId == id);
+    if(!element) { return ''; }
+    return element.title;
   }
 
   /* ###########################
@@ -125,15 +160,6 @@ export class CandidatesScreeningListComponent implements OnInit {
     {
       this.scheduledScreenings = this.allScheduledScreenings;
     }
-  }
-
-  //Get each Candidate's Track/SkillType 
-  getSkillType(skillTypeId: number)
-  {
-    this.httpClient.get<SkillType>(this.urlService.skillTypes.findById(skillTypeId)).subscribe(skill =>{
-      this.skillType = skill;
-    });
-    console.log(this.skillType);
   }
 
   // Unhides the "Begin Interview" prompt

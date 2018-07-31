@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BucketComponent } from './bucket.component';
 import { Dependencies } from '../../../caliber.test.module';
 
-fdescribe('BucketComponent', () => {
+describe('BucketComponent', () => {
   let component: BucketComponent;
   let fixture: ComponentFixture<BucketComponent>;
 

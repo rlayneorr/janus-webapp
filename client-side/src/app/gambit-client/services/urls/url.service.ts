@@ -323,7 +323,7 @@ export class UrlService {
    * Endpoints for skillType
    */
 
-  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skillType';
+  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skilltype';
   skillTypes = {
     findAll: () => `${this.skillTypesServiceEndpoint}`,
     findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
@@ -356,7 +356,7 @@ export class UrlService {
     getViolationTypeURL: () => `${this.context}/tech-screening/violation/type`,
     getViolationURL: (screeningID: number) => `${this.context}/tech-screening/screening/${screeningID}/violation/`,
     addViolationURL: () => `${this.context}/tech-screening/violation/`,
-    deleteViolationURL: (violationID: number) => `${this.context}/screening-service/violation/delete/${violationID}`,
+    deleteViolationURL: (violationID: number) => `${this.context}/tech-screening/violation/${violationID}`,
   };
 
   subtopic = {

@@ -48,6 +48,7 @@ export class SkillTypesComponent implements OnInit {
     public weight: CategoryWeight;
     public total: number;
     public errorMessage: string = '';
+    confirm : boolean = false;
 
     constructor(
         private modalService: NgbModal,
@@ -162,6 +163,7 @@ export class SkillTypesComponent implements OnInit {
             this.resetFields();
         }, (reason) => {
             this.resetFields();
+            //this.total = 0;
         });
         event.stopPropagation();
     }
@@ -175,20 +177,40 @@ export class SkillTypesComponent implements OnInit {
         this.skillType = skillType;
       }
 
+    /*
+    *   User confirms the prompt to really delete the category
+    * */
+    changeConfirm(){
+      this.confirm = true;
+      this.removeSkillType();
+    }
+
+    /*
+    *
+    *   Remove category from the DOM by splicing from the array
+    *   Then call the deleteCategory()
+    *
+    * */
+    removeSkillType(){
+      //check if user really wants to delete the question
+      if(this.confirm === true){
+        for (const skillTypeId in this.skillTypes) {
+          if (this.skillTypes[skillTypeId] === this.skillType) {
+            this.skillTypes.splice(Number(skillTypeId), 1);
+          }
+        }
+        this.deleteSkillType();
+        this.confirm = false;
+      }
+    }
+
     /**
-     * Deletes skill type and repopulates the list
+     * Deletes skill type and shows success on completition
      */
     deleteSkillType(){
-        if (this.skillType) {
-          this.skillTypeService.deleteSkillType(this.skillType.skillTypeId).subscribe(result => {
-            this.allSkillTypes.forEach(skillType => {
-                if(skillType.skillTypeId === this.skillType.skillTypeId){
-                    this.allSkillTypes.splice(this.allSkillTypes.indexOf(skillType), 1);
-                }
-            });
-          });
-          this.savedSuccessfully();
-        }
+      this.skillTypeService.deleteSkillType(this.skillType.skillTypeId).subscribe({
+        complete:()=> this.savedSuccessfully()
+      });
     }
 
   /**
@@ -233,10 +255,11 @@ export class SkillTypesComponent implements OnInit {
 
             this.weightsService.createWeight(this.weight).subscribe(result => {
                 this.weight = result;
-                });
-                }
-                this.allWeights.push(this.weight);
-                this.skillType.categories.push(category);
+            });
+        }
+
+        this.allWeights.push(this.weight);
+        this.skillType.categories.push(category);
 
     }
 

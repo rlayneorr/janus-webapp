@@ -33,6 +33,7 @@ export class CategoriesComponent implements OnInit {
   changedBuckets: Bucket[];
   /** Modal variables */
   closeResult: string;
+  confirm : boolean = false;
 
   constructor(
     private router: Router,
@@ -100,37 +101,61 @@ export class CategoriesComponent implements OnInit {
       this.changedBuckets.forEach(b=>this.bucketService.updateBucket(b).subscribe());
 
       this.categoryService.updateCategory(catParam).subscribe(bucket => {
-        this.getCategories();
+        //this.getCategories();
       });
       this.logState();
       this.savedSuccessfully();
     }
   }
 
+  /*
+  *   User clicks the trashcan
+  * */
   confirmDelete(category: Category){
     this.currentCategory = category;
   }
 
-  deleteCategory(){
-    if (this.currentCategory) {
-      console.log(this.currentCategory);
-      this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe({
-          complete:()=>this.getCategories()
-        });
-      this.savedSuccessfully();
+  /*
+  *   User confirms the prompt to really delete the category
+  * */
+  changeConfirm(){
+    this.confirm = true;
+    this.removeCategory();
+  }
+
+  /*
+  *
+  *   Remove category from the DOM by splicing from the array
+  *   Then call the deleteCategory()
+  * */
+  removeCategory(){
+    //check if user really wants to delete the question
+    if(this.confirm === true){
+      for (const categoryId in this.allCategories) {
+        if (this.allCategories[categoryId] === this.currentCategory) {
+          this.allCategories.splice(Number(categoryId), 1);
+        }
+      }
+      this.deleteCategory();
+      this.confirm = false;
     }
+  }
+
+  /*
+  *
+  *   Direct call to the service to delete the category from the database.
+  * */
+  deleteCategory(){
+    this.categoryService.deleteCategory(this.currentCategory.categoryId).subscribe();
   }
 
   /** Creates new category */
   createCategory() {
     console.log(this.currentCategory);
-    if(this.currentCategory.buckets){
-      console.log("here");
-      this.newCategory.buckets = this.currentCategory.buckets;
-    }
     this.categoryService.createCategory(this.newCategory)
       .subscribe(category => {
-        this.getCategories();
+        //this.getCategories();
+        this.allCategories.push(this.currentCategory);
       });
   }
 
@@ -187,7 +212,6 @@ export class CategoriesComponent implements OnInit {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.newCategory.title = '';
-      this.newCategory.buckets = [];
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
     event.stopPropagation();
