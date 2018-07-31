@@ -9,13 +9,11 @@ import { BucketsService } from '../services/buckets.service';
 import { SettingsCategoriesService } from '../services/categories.service';
 import { CategoryWeightsService } from '../services/weight.service';
 import { AlertsService } from '../../../services/alerts.service';
-import {fade} from "../../../../../Animations/caliber-animations";
 
 @Component({
     selector: 'app-skill-types',
     templateUrl: './skillTypes.component.html',
-    styleUrls: ['./skillTypes.component.css'],
-    animations:[fade]
+    styleUrls: ['./skillTypes.component.css']
 })
 
 /**
@@ -390,13 +388,13 @@ export class SkillTypesComponent implements OnInit {
                     if(!this.initialCategories.includes(category)){
                         this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
                         this.skillTypeService.updateSkillType(this.skillType).subscribe(result => {});
-                    }                        
+                    }
                 });
             });
         }
         this.allSkillTypes =  [];
         this.allWeights = [];
-        this.error = false;  
+        this.error = false;
         this.errorMessage = '';
         this.grabAllCategories();
         this.grabAllSkillTypes();

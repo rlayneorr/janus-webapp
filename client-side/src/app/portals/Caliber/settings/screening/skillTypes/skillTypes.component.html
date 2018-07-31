@@ -6,7 +6,7 @@
       <div class="card-body" id="skillTypesDiv">
         <!-- List of all SkillTypes-->
         <div class="list-group">
-          <div class="list-group-item list-group-item-action" *ngFor="let skillType of allSkillTypes" [@fade]>
+          <div class="list-group-item list-group-item-action" *ngFor="let skillType of allSkillTypes">
             <b>{{skillType.title}}</b><br>
             <i id="delIcon" class="fa fa-trash pull-right" (click)="confirmDelete(skillType); open(delete)" placement="top" ngbTooltip="delete"></i>
             <i id="penIcon" class="fa fa-pencil pull-right" (click)="open(edit); editSkillType(skillType)" placement="top" ngbTooltip="edit"></i>
