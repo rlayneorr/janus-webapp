@@ -5,8 +5,7 @@ import { Bucket } from '../../settings/screening/entities/Bucket';
 
 export class ScoresToBucketsUtil {
 
-    getFinalBreakdown(questionScores: QuestionScore[], buckets: Bucket[],
-    weights: CategoryWeight[]): string[] {
+    getFinalBreakdown(questionScores: QuestionScore[], buckets: Bucket[], weights: CategoryWeight[]): string[] {
         const bucketNames: string[] = [];
         const totals: number[] = [];
         const scores: number[] = [];
@@ -14,36 +13,51 @@ export class ScoresToBucketsUtil {
         let questionsAsked;
         let totalWeights = 0;
         let totalBuckets = 0;
+        console.log("QuestionScores: " + questionScores, "Buckets: " + buckets, "Weights: " + weights);
         // Loop through the buckets
-        buckets.forEach(thisBucket => {
+        
+        //buckets.forEach(thisBucket => {
+            // questionsAsked = 0;
+            // totals[bucketIndex] = 0;
+            // scores[bucketIndex] = 0;
+            // if (thisBucket.questions != null) {
+            //     // If the questions array in this bucket is populated, loop through the question
+            //     thisBucket.questions.forEach(thisQuestion => {
+            //         const matchingQuestion = questionScores.find(function(element) {
+            //             return element.questionId === thisQuestion.questionId;
+            //         });
+            //         // If this question has been answered, add it to the total
+            //         if (matchingQuestion) {
+            //             questionsAsked++;
+            //             totals[bucketIndex] += 5;
+            //             scores[bucketIndex] += matchingQuestion.score;
+            //         }
+            //     });
+            // }
+            
+            // If questions were answered from this bucket, mark bucket as used
+        //     if (questionsAsked > 0) {
+        //         bucketNames[bucketIndex] = thisBucket.category;
+        //         totalWeights += weights[bucketIndex].weight;
+        //         totalBuckets++;
+        //     // If no questions from this bucket were asked, ignore in final calculations
+        //     } else {
+        //         bucketNames[bucketIndex] = 'skip';
+        //     }
+        //     bucketIndex++;
+        // });
+
+        
+        if (questionScores != null){
             questionsAsked = 0;
             totals[bucketIndex] = 0;
             scores[bucketIndex] = 0;
-            if (thisBucket.questions != null) {
-                // If the questions array in this bucket is populated, loop through the question
-                thisBucket.questions.forEach(thisQuestion => {
-                    const matchingQuestion = questionScores.find(function(element) {
-                        return element.questionId === thisQuestion.questionId;
-                    });
-                    // If this question has been answered, add it to the total
-                    if (matchingQuestion) {
-                        questionsAsked++;
-                        totals[bucketIndex] += 5;
-                        scores[bucketIndex] += matchingQuestion.score;
-                    }
-                });
-            }
-            // If questions were answered from this bucket, mark bucket as used
-            if (questionsAsked > 0) {
-                bucketNames[bucketIndex] = thisBucket.category;
-                totalWeights += weights[bucketIndex].weight;
-                totalBuckets++;
-            // If no questions from this bucket were asked, ignore in final calculations
-            } else {
-                bucketNames[bucketIndex] = 'skip';
-            }
-            bucketIndex++;
-        });
+            questionScores.forEach(question => {
+                questionsAsked++;
+                totals[bucketIndex] += 5;
+                scores[bucketIndex] += question.score;
+            });
+        }
         let normalizeWeight = 0;
         // If the total weights from the buckets with answered questions don't add up to 100%, evenly distribute the difference
         if (totalWeights < 100) {

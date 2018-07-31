@@ -122,6 +122,7 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
       });
       this.questionBuckets = this.buckets;
       this.currentCategory = this.questionBuckets[0];
+      this.questionsToBucketsUtil.setReturnBuckets(this.buckets);
     });
 
     //get the questions for the buckets on the categories selected from the buckets

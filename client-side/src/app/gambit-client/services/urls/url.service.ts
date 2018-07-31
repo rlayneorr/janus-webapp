@@ -321,7 +321,7 @@ export class UrlService {
    * Endpoints for skillType
    */
 
-  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skillType';
+  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skilltype';
   skillTypes = {
     findAll: () => `${this.skillTypesServiceEndpoint}`,
     findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,

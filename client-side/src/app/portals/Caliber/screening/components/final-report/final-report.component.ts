@@ -13,6 +13,9 @@ import { Bucket } from '../../../settings/screening/entities/Bucket';
 import { CategoryWeight } from '../../../settings/screening/entities/Category-Weight';
 import { SkillType } from '../../../settings/screening/entities/SkillType';
 import { SkillTypesService } from '../../../settings/screening/services/skillTypes.service';
+import { Category } from '../../../entities/Category';
+import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
+
 
 @Component({
   selector: 'app-final-report',
@@ -31,10 +34,11 @@ export class FinalReportComponent implements OnInit, OnDestroy {
 
 public candidateName: string;
 softSkillString: string;
-bucketStringArray: string[];
-buckets: Bucket[]; //Need to grab current buckets
-weights: CategoryWeight[]; //Need to grab weights via skilltype and category
+bucketStringArray: string[] = [];
+buckets: Bucket[] = []; //Need to grab current buckets
+weights: CategoryWeight[] = []; //Need to grab weights via skilltype and category
 skillType: SkillType;
+categories: Category[] = [];
 overallScoreString: string;
 generalNotesString: string;
 allTextString: string;
@@ -50,6 +54,7 @@ subscriptions: Subscription[] = [];
     private skillTypeBucketService: SkillTypeBucketService,
     private skillTypesService: SkillTypesService,
     private questionScoreService: QuestionScoreService,
+    private questionsToBucketsUtil: QuestionsToBucketsUtil,
     private scoresToBucketsUtil: ScoresToBucketsUtil,
     private alertsService: AlertsService,
     private softSkillsViolationService: SoftSkillsViolationService
@@ -58,23 +63,44 @@ subscriptions: Subscription[] = [];
 
   ngOnInit() {
     this.checked = 'false';
+    this.categories = this.screeningService.getSelectedCategories();
+    this.buckets = this.questionsToBucketsUtil.getReturnBuckets();
+    console.log("Return Buckets: " + this.buckets);
     this.candidateName = this.candidateService.getSelectedCandidate().name
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
     this.allTextString = this.softSkillString + '\n';
     const trackId = parseInt((localStorage.getItem('candidateTrack')), 10);
+    
     this.skillTypesService.getSkillTypeById(trackId).subscribe(skill =>{
-      console.log("skill?: " + skill.categories);
       this.skillType = skill;
-    
-    console.log("skill: " + this.skillType);
+      console.log("skillType: " + this.skillType.categories);
+      this.getSkillType();
+    });
+  };
+    getSkillType(){
+      console.log("in skill type");
     this.skillType.categories.forEach(category => {
+      console.log("SkillTypeId: " + this.skillType.skillTypeId +" CategoryId: "+ category.categoryId);
+      
       this.skillTypeBucketService.getSkillTypeBuckets(this.skillType.skillTypeId, category.categoryId)
-      .subscribe(weight => this.weights.push(weight));
+      .subscribe((weight) => {
+        this.weights.push(weight);
+        console.log("weights: " + this.weights);
+        this.getWeights();
+      }
+    )});
+  }
     
-    console.log("weights" + this.weights);
+    getWeights(){
+    console.log("weights: " + this.weights);
     this.questionScoreService.currentQuestionScores.subscribe(
       questionScores => {
         this.questionScores = questionScores;
+        this.finalBreakdown();
+      })};
+
+      finalBreakdown(){
+        console.log(this.questionScores);
         this.bucketStringArray =
           this.scoresToBucketsUtil.getFinalBreakdown(this.questionScores, this.buckets, this.weights);
 
@@ -89,18 +115,16 @@ subscriptions: Subscription[] = [];
           this.allTextString += bucketString + '\n';
         });
         this.allTextString += this.overallScoreString + '\n';
-      });
+      
     // this.overallScoreString = "Overall: 71%";
     this.generalNotesString = this.screeningService.generalComments;
     this.allTextString += '"' + this.generalNotesString + '"';
 
     this.screeningService.endScreening(this.generalNotesString);
     this.subscriptions.push(this.softSkillsViolationService.currentSoftSkillViolations.subscribe(
-      softSkillViolations => (this.softSkillViolations = softSkillViolations)
-    ));
-  });
-});
-  }
+      softSkillViolations => {this.softSkillViolations = softSkillViolations}
+    
+    ))};
 
   // Used for copying the data to the clipboard (this is done using ngx-clipboard)
   copyToClipboard() {

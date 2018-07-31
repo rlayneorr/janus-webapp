@@ -46,4 +46,12 @@ export class QuestionsToBucketsUtil {
     return this.returnBuckets;
   }
 
+  setReturnBuckets(buckets: Bucket[]){
+    this.returnBuckets = buckets;
+    console.log("questionsToBuckets: " + this.returnBuckets);
+  }
+  public getReturnBuckets(){
+    return this.returnBuckets;
+  }
+
 }
