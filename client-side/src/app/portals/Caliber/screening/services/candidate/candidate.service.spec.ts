@@ -13,14 +13,14 @@ export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
 }
 
-fdescribe('CandidateService', () => {
+describe('CandidateService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [CandidateService]
     });
   });
 
-  fit('should be created', inject([CandidateService], (service: CandidateService) => {
+  it('should be created', inject([CandidateService], (service: CandidateService) => {
     expect(service).toBeTruthy();
   }));
 
@@ -29,7 +29,7 @@ fdescribe('CandidateService', () => {
 
 
 
-  fit('getCandidates() should make an HTTP GET request, and return the candidates that it fetched',() =>{
+  it('getCandidates() should make an HTTP GET request, and return the candidates that it fetched',() =>{
       let httpClientSpyOnGet: { get: jasmine.Spy };
   let httpClientSpyOnPost: { post: jasmine.Spy };
   let httpClientSpyOnPut: {put: jasmine.Spy };
@@ -50,7 +50,7 @@ fdescribe('CandidateService', () => {
     expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   });
 
-  fit('getCandidate() should make an HTTP GET request, and return the candidate that it fetched', ()=>{
+  it('getCandidate() should make an HTTP GET request, and return the candidate that it fetched', ()=>{
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     // candidateService = new CandidateService(<any> httpClientSpyOnGet);
 
@@ -65,7 +65,7 @@ fdescribe('CandidateService', () => {
     expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   });
 
-  fit('updateCandidate() should make an HTTP PUT request, and return the candidates that is altered', ()=>{
+  it('updateCandidate() should make an HTTP PUT request, and return the candidates that is altered', ()=>{
     // httpClientSpyOnGet = jasmine.createSpyObj('http', ['put']);
     // candidateService = new CandidateService(<any> httpClientSpyOnGet, alertsService);
     // CANDIDATES[2].lastName = "Alexander";
@@ -80,7 +80,7 @@ fdescribe('CandidateService', () => {
     expect(httpClientSpyOnPut.put.calls.count()).toBe(1, 'one call');
   });
 
-  fit('createCandidate() should make an HTTP POST request, and return the candidates that is created', ()=>{
+  it('createCandidate() should make an HTTP POST request, and return the candidates that is created', ()=>{
     // httpClientSpyOnGet = jasmine.createSpyObj('http', ['post']);
     // candidateService = new CandidateService(<any> httpClientSpyOnGet, alertsService);
     // let newCandidate : Candidate = new Candidate();
@@ -99,7 +99,7 @@ fdescribe('CandidateService', () => {
     expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
   });
 
-  fit('createCandidate() should make an HTTP POST request, and return the candidates that is created', ()=>{
+  it('createCandidate() should make an HTTP POST request, and return the candidates that is created', ()=>{
   //   httpClientSpyOnGet = jasmine.createSpyObj('http', ['post']);
   //   candidateService = new CandidateService(<any> httpClientSpyOnGet, alertsService);
   //   let newCandidate : Candidate = new Candidate();
@@ -128,7 +128,7 @@ fdescribe('CandidateService', () => {
 
 
 
-  fit('getCandidates() should make an HTTP GET request, and return the candidates that it fetched',() =>{
+  it('getCandidates() should make an HTTP GET request, and return the candidates that it fetched',() =>{
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     // candidateService = new CandidateService(<any> httpClientSpyOnGet);
 
@@ -143,7 +143,7 @@ fdescribe('CandidateService', () => {
     expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   });
 
-  fit('getCandidate() should make an HTTP GET request, and return the candidate that it fetched', ()=>{
+  it('getCandidate() should make an HTTP GET request, and return the candidate that it fetched', ()=>{
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['get']);
     // candidateService = new CandidateService(<any> httpClientSpyOnGet);
 
@@ -158,7 +158,7 @@ fdescribe('CandidateService', () => {
     expect(httpClientSpyOnGet.get.calls.count()).toBe(1, 'one call');
   });
 
-  fit('updateCandidate() should make an HTTP PUT request, and return the candidates that is altered', ()=>{
+  it('updateCandidate() should make an HTTP PUT request, and return the candidates that is altered', ()=>{
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['put']);
     // candidateService = new CandidateService(<any> httpClientSpyOnGet);
     // CANDIDATES[2].lastName = "Alexander";
@@ -173,7 +173,7 @@ fdescribe('CandidateService', () => {
     expect(httpClientSpyOnPut.put.calls.count()).toBe(1, 'one call');
   });
 
-  fit('createCandidate() should make an HTTP POST request, and return the candidates that is created', ()=>{
+  it('createCandidate() should make an HTTP POST request, and return the candidates that is created', ()=>{
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['post']);
     // candidateService = new CandidateService(<any> httpClientSpyOnGet);
     let newCandidate : Candidate = new Candidate();
@@ -192,7 +192,7 @@ fdescribe('CandidateService', () => {
     expect(httpClientSpyOnPost.post.calls.count()).toBe(1, 'one call');
   });
 
-  fit('createCandidate() should make an HTTP POST request, and return the candidates that is created', ()=>{
+  it('createCandidate() should make an HTTP POST request, and return the candidates that is created', ()=>{
     httpClientSpyOnGet = jasmine.createSpyObj('http', ['post']);
     // candidateService = new CandidateService(<any> httpClientSpyOnGet);
     let newCandidate : Candidate = new Candidate();
