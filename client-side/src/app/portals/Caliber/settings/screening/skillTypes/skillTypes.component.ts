@@ -83,6 +83,7 @@ export class SkillTypesComponent implements OnInit {
     this.skillTypeService.getSkillTypes().subscribe((results) => {
         this.allSkillTypes = null;
         this.allSkillTypes = results;
+        console.log(this.allSkillTypes)
         });
     }
 
@@ -92,6 +93,7 @@ export class SkillTypesComponent implements OnInit {
    grabAllCategories() {
     this.categoriesService.getCategories().subscribe(results => {
         this.allCategories = results;
+        console.log(this.allCategories)
         });
     }
 
@@ -122,7 +124,9 @@ export class SkillTypesComponent implements OnInit {
         };
 
         this.skillType.categories.forEach(category => {
+            console.log(category)
             this.weightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId).subscribe(result => {
+                console.log(result)
                 this.allWeights.push(result);
                 this.resetCategories(skillType, null);
                 this.equalsMax();
@@ -248,8 +252,9 @@ export class SkillTypesComponent implements OnInit {
                 categoryId: category.categoryId,
                 weight: 0
             };
-
+            console.log(category);
             this.weightsService.createWeight(this.weight).subscribe(result => {
+                console.log(result);
                 this.weight = result;
             });
 
@@ -288,8 +293,12 @@ export class SkillTypesComponent implements OnInit {
             this.grabAllSkillTypes();
         });
 
+        console.log(this.allWeights)
         this.skillType.categories.forEach(category => {
+            this.initialCategories = [];
+            this.initialCategories.push(category);
             this.allWeights.forEach(weight =>{
+                
                 if(category.categoryId === weight.categoryId){
                     this.weightsService.updateWeight(skillType, category, weight).subscribe(result => {
                         this.grabAllSkillTypes();
@@ -380,7 +389,7 @@ export class SkillTypesComponent implements OnInit {
             this.skillTypeService.getSkillTypeById(this.skillType.skillTypeId).subscribe(result => {
                 this.allWeights.forEach(weight => {
                     this.categoriesService.getCategoryById(weight.categoryId).subscribe(category => {
-                        if(!this.initialCategories.includes(category) && !result.categories.includes(category)){
+                        if(this.initialCategories.includes(category)===false && result.categories.includes(category)===false){
                             this.weightsService.deleteWeight(weight).subscribe(result => {
                             });
                         }
@@ -388,7 +397,8 @@ export class SkillTypesComponent implements OnInit {
                 });
                 this.skillType.categories.forEach(category => {
                     console.log(category);
-                    if(!this.initialCategories.includes(category) && !result.categories.includes(category)){
+                    if(this.initialCategories.includes(category) === false){
+                        console.log('here')
                         this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
                         this.skillTypeService.updateSkillType(this.skillType).subscribe(result => {});
                     }                        
