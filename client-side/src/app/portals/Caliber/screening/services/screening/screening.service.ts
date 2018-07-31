@@ -129,7 +129,7 @@ export class ScreeningService {
     this.selectedCategories = categories;
   }
 
-  getSelectedCategories(){
+  getSelectedCategories(): Category[]{
     return this.selectedCategories;
   }
 }

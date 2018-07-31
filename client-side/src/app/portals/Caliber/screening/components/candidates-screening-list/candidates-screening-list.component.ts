@@ -113,9 +113,6 @@ export class CandidatesScreeningListComponent implements OnInit {
 
     console.log(this.scheduledScreenings);
 
-    // this.skillTypeService.getSkillTypes().subscribe({
-    //   next: skills=>{this.skillTypes = skills;}
-    // });
 
     this.skillTypeService.getSkillTypes().subscribe((skills) => {
 
@@ -123,17 +120,11 @@ export class CandidatesScreeningListComponent implements OnInit {
 
     });
 
-    //
-    // console.log(this.skillTypes);
-    //
-    // console.log("after looping : ", this.scheduledScreenings);
-    // console.log("skills: ", this.skillTypes);
-
   }
 
   //Quagmire....
   getSkillTypeId(id) {
-    var element = this.skillTypes.find(vt=>vt.skillTypeId == id);
+    let element = this.skillTypes.find(vt=>vt.skillTypeId == id);
     if(!element) { return ''; }
     return element.title;
   }
