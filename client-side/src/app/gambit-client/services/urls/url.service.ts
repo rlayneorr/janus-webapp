@@ -354,7 +354,7 @@ export class UrlService {
     getViolationTypeURL: () => `${this.context}/tech-screening/violation/type`,
     getViolationURL: (screeningID: number) => `${this.context}/tech-screening/screening/${screeningID}/violation/`,
     addViolationURL: () => `${this.context}/tech-screening/violation/`,
-    deleteViolationURL: (violationID: number) => `${this.context}/screening-service/violation/delete/${violationID}`,
+    deleteViolationURL: (violationID: number) => `${this.context}/tech-screening/violation/${violationID}`,
   };
 
   subtopic = {
