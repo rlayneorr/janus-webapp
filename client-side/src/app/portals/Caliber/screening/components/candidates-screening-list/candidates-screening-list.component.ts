@@ -65,7 +65,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   allCandidates : Candidate[];
   formattedSchedule : string;
   skillType : SkillType;
-  skillTypes : SkillType[];
+  skillTypes : SkillType[] = [];
 
   beginForm: FormGroup;
   /* ###########################
@@ -106,23 +106,29 @@ export class CandidatesScreeningListComponent implements OnInit {
 
     console.log(this.scheduledScreenings);
 
-    //this.getAllSkillTypes();
+    // this.skillTypeService.getSkillTypes().subscribe({
+    //   next: skills=>{this.skillTypes = skills;}
+    // });
 
-    this.skillTypeService.getSkillTypes().subscribe({
-      complete: () => data=>this.skillTypes = data
+    this.skillTypeService.getSkillTypes().subscribe((skills) => {
+
+      this.skillTypes = skills;
+
     });
 
-    console.log(this.skillTypes);
+    //
+    // console.log(this.skillTypes);
+    //
+    // console.log("after looping : ", this.scheduledScreenings);
+    // console.log("skills: ", this.skillTypes);
 
-    for(let x = 0; x < this.scheduledScreenings.length; x++){
+  }
 
-      if(this.scheduledScreenings[x].skillTypeId === this.skillTypes[x].skillTypeId){
-        //this.scheduledScreenings[x].skillTypeName = this.skillTypes[x].title;
-      }
-
-    }
-
-    console.log("after looping : ", this.scheduledScreenings);
+  //Quagmire....
+  getSkillTypeId(id) {
+    var element = this.skillTypes.find(vt=>vt.skillTypeId == id);
+    if(!element) { return ''; }
+    return element.title;
   }
 
   /* ###########################
@@ -146,32 +152,6 @@ export class CandidatesScreeningListComponent implements OnInit {
     {
       this.scheduledScreenings = this.allScheduledScreenings;
     }
-  }
-
-  //Get each Candidate's Track/SkillType -Tyerra Smith
-  getSkillType(skillTypeId: number) : string{
-
-    let skill : SkillType;
-
-    this.skillTypeService.getSkillTypeById(skillTypeId).subscribe(
-      (data)=> {
-      //   for(let x = 0; x <= this.scheduledScreenings.length; x++){
-      //     if(skillTypeId === this.scheduledScreenings[x].skillTypeId){
-      //       this.scheduledScreenings[x].candidate.skillTypeName = data.title;
-      //     }
-      //   }
-      // }
-        skill = data as SkillType;
-        console.log("this is my skill: ", data);
-      });
-
-    return skill.title;
-
-    //this.alertService.error("Not SkillTypes Found.");
-  }
-
-  getAllSkillTypes() {
-    //this.skillTypeService.getSkillTypes().subscribe(data=>this.skillTypes = data);
   }
 
   // Unhides the "Begin Interview" prompt
