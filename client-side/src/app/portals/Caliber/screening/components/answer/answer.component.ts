@@ -2,7 +2,6 @@ import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 
 // Entities
 import { QuestionScore } from '../../entities/questionScore';
-import { Question } from '../../entities/question';
 
 // Services
 import { QuestionService } from '../../services/question/question.service';
@@ -38,24 +37,16 @@ export class AnswerComponent implements OnInit, OnDestroy {
        beginTime: currentQuestionScore ? currentQuestionScore.beginTime : new Date()
      };
 
-
-
-    // console.log("current question: ", this.questionScore);
-
     // update answeredQuestions array to match our question service's answeredQuestions array.
-    //this.questionScoreService.currentQuestionScores.subscribe(answeredQuestions => this.questionScores = answeredQuestions);
     this.questionScoreService.currentQuestionScores.subscribe(
       answeredQuestions => {
         this.questionScores = answeredQuestions;
-        //console.log("this is the question: ", this.question);
         console.log("im inside the quesiton service", answeredQuestions);
-        //this.questionScore.score = answeredQuestions.find( s => s.questionId === this.questionScore.questionId);
       }
     )
   }
 
   ngOnDestroy() {
-    console.log("ngdestroy ");
     this.questionScore = {
       qSID: null,
       questionId: this.question.questionId,

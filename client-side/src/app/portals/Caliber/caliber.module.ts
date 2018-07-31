@@ -193,6 +193,7 @@ import {CandidateService} from "./screening/services/candidate/candidate.service
     // )
   ],
   declarations: [
+
     // pipes
     GraphDataPipe,
     PanelBatchAllTraineesComponent,

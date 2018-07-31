@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Directive} from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 // Entities
@@ -88,6 +88,9 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
   // to prevent memory leaks
   subscriptions: Subscription[] = [];
 
+  public isScored(question: Question) {
+    return this.questionScoreService.questionScores.find(q=>q.questionId===question.questionId) !== undefined;
+  }
   constructor(
     private questionsService: QuestionsService,
     private questionScoreService: QuestionScoreService,
@@ -100,6 +103,9 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+
+
+
     //get the categories selected on the last page
    this.currentCategories = this.screeningService.getSelectedCategories();
    console.log("selected Categories", this.currentCategories);
