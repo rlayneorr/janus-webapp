@@ -35,14 +35,14 @@ export class PassFailComponent implements OnInit {
   public candidateName: string;
   previousViolations: any[];
   private passed: boolean;
-  violations: any[] = [];  // Needs to be Observable<any[]>
+  //violations: any[] = [];  // Needs to be Observable<any[]>
   endScreening = false;
   public disabled = true;
   public passChecked: boolean;
   public failChecked: boolean;
   public hasChecked: boolean;
   private screeningID: number;
-
+  public violationTypes: ViolationType[];
   public softSkillFeedback: string;
 
   constructor(private violationService: SoftSkillsViolationService,
@@ -51,8 +51,13 @@ export class PassFailComponent implements OnInit {
     private violationTypeService: ViolationTypeService,
     public softSkillViolationService: SoftSkillsViolationService
   ) {
+    this.violationTypes = [];
   }
-
+  getViolationTypeNameFromId(id) {
+    var element = this.violationTypes.find(vt=>vt.id == id);
+    if(!element) { return ''; }
+    return element.violationTypeText;
+  }
   ngOnInit() {
     this.disabled = true;
     this.passChecked = false;
@@ -60,13 +65,17 @@ export class PassFailComponent implements OnInit {
     const violationArray: any[] = [];
    // this.candidateName = this.candidateService.getSelectedCandidate().firstname + ' ' +
       //this.candidateService.getSelectedCandidate().lastname;
-    this.softSkillViolationService.getPreviousViolations(+localStorage.getItem('screeningID')).subscribe(data => {
-      this.previousViolations = data;
-      this.softSkillViolationService.softSkillViolations = this.previousViolations;
+    this.violationTypeService.getViolationTypes().subscribe(violationTypes=> {
+      this.violationTypes = violationTypes;
+      this.softSkillViolationService.getPreviousViolations(+localStorage.getItem('screeningID')).subscribe(data => {
+        this.previousViolations = data;
+        this.softSkillViolationService.softSkillViolations = this.previousViolations;
+      });
     });
 
-    this.violationTypeService.getAllViolationTypes().subscribe(violationTypes => {
+    /*this.violationTypeService.getAllViolationTypes().subscribe(violationTypes => {
       this.getViolations().subscribe(data => {
+        console.log("some violation ... ", data);
         // e = our violations
         for (const e of data) {
           // v = all violation types
@@ -85,7 +94,7 @@ export class PassFailComponent implements OnInit {
         this.violations = violationArray;
       });
     }
-    );
+    );*/
   }
 
   // Returns a boolean denoting whether either the "Pass" or "Fail" button was clicked.

@@ -27,7 +27,9 @@ import { UrlService } from '../../../../../../app/gambit-client/services/urls/ur
 // npm install ngx-pagination --save
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 import { tick } from '../../../../../../../node_modules/@angular/core/testing';
-import { SkillType } from '../../../entities/SkillType';
+import {SkillTypesService} from "../../../settings/screening/services/skillTypes.service";
+import {AlertsService} from "../../../services/alerts.service";
+import {SkillType} from "../../../settings/screening/entities/SkillType";
 
 @Component({
   selector: 'app-candidates-screening-list',
@@ -75,6 +77,8 @@ export class CandidatesScreeningListComponent implements OnInit {
     private scheduleScreeningService: ScheduleScreeningService,
     private softSkillsViolationService: SoftSkillsViolationService,
     private questionScoreService: QuestionScoreService,
+    private skillTypeService : SkillTypesService,
+    private alertService : AlertsService,
     private urlService: UrlService,
     private modalService: NgbModal,
     private fb: FormBuilder,
@@ -97,10 +101,10 @@ export class CandidatesScreeningListComponent implements OnInit {
     this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
       this.allScheduledScreenings = data;
       this.scheduledScreenings = data;
+
     });
     //this.allCandidates = CANDIDATES;
     console.log(this.scheduledScreenings);
-    
   }
 
   /* ###########################
@@ -127,14 +131,20 @@ export class CandidatesScreeningListComponent implements OnInit {
   }
 
   //Get each Candidate's Track/SkillType -Tyerra Smith
-  getSkillType(skillTypeId: number)
-  {
-    console.log(skillTypeId);
-    this.httpClient.get<SkillType>(this.urlService.skillTypes.findById(skillTypeId)).subscribe(skill =>{
-      this.skillType = skill;
-    });
-    console.log(this.skillType);
-    // return this.skillType.title;
+  getSkillType(skillTypeId: number) {
+
+    this.skillTypeService.getSkillTypeById(skillTypeId).subscribe(
+      (data)=> {
+        for(let x = 0; x <= this.scheduledScreenings.length; x++){
+          if(skillTypeId === this.scheduledScreenings[x].skillTypeId){
+            // this.scheduledScreenings[x].candidate
+          }
+        }
+      }
+    );
+
+
+    //this.alertService.error("Not SkillTypes Found.");
   }
 
   // Unhides the "Begin Interview" prompt

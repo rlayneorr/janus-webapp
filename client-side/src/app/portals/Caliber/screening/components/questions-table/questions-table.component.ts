@@ -222,9 +222,19 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
     return !allowed;
   }
 
-  // Method that calls the servce method, submitting the screener's general comments.
+  updateQuestionScores()
+  {
+    this.questionScores = this.questionScoreService.questionScores;
+  }
+
+  // Method that calls the service method, submitting the screener's general comments.
   saveFeedback() {
+    this.updateQuestionScores();
+    this.questionScores.forEach(element => {
+      this.questionScoreService.postQuestionScore(element);
+    });
     this.screeningService.generalComments = this.generalComment;
     this.screeningService.submitGeneralComment();
+    console.log(this.questionScores);
   }
 }

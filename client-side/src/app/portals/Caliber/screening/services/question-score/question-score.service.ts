@@ -30,7 +30,8 @@ export class QuestionScoreService {
 
   // update the array of answered questions
   updateQuestionScores(questionScores: QuestionScore[]) {
-    this.questionScoresSource.next(questionScores);
+    // this.questionScoresSource.next(questionScores);
+    this.questionScores = questionScores;
   }
 
   // save the question to the database
