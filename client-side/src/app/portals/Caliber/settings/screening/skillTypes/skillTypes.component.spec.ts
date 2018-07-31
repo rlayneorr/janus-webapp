@@ -29,7 +29,7 @@ export function asyncError<T>(errorObject: any) {
   return defer(() => Promise.reject(errorObject));
 }
 
-fdescribe('SkillTypesComponent', () => {
+describe('SkillTypesComponent', () => {
   let component: SkillTypesComponent;
   let fixture: ComponentFixture<SkillTypesComponent>;
   let bucketsService;

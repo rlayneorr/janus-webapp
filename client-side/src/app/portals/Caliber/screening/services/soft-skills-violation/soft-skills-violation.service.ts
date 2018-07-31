@@ -84,7 +84,7 @@ export class SoftSkillsViolationService {
   }
 
   // Submit a violation with the appropriate comment, screening ID and timestamp.
-  submitViolation(typeID: number, comment: string, screeningID: number): Observable<SoftSkillViolation[]> {
+  submitViolation(typeID: number, comment: string, screeningID: number): Observable<any> {
     return this.http.post<any[]>(
       this.urlService.softSkillsViolation.addViolationURL(),
       {
@@ -108,7 +108,7 @@ export class SoftSkillsViolationService {
   * in response to a change in the observable. Hence, deleteViolation returns an Observable.
   */
   deleteViolation(violationID: number): Observable<any[]> {
-    return this.http.get<any[]>(this.urlService.softSkillsViolation.deleteViolationURL(violationID));
+    return this.http.delete<any[]>(this.urlService.softSkillsViolation.deleteViolationURL(violationID));
   }
 
   updateSoftSkillViolations(softSkillviolations: any[]) {
