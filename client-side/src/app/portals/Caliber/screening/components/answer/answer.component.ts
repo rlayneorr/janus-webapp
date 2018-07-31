@@ -59,6 +59,6 @@ export class AnswerComponent implements OnInit {
       // update our services question score array with the array with this components question score array
       this.questionScoreService.updateQuestionScores(this.questionScores);
       // Save the question score to the database.
-      this.questionScoreService.postQuestionScore(this.questionScore);
+      //this.questionScoreService.postQuestionScore(this.questionScore);
   }
 }
