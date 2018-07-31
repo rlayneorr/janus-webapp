@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+/*import { TestBed, inject } from '@angular/core/testing';
 
 import { CandidateService } from './candidate.service';
 // import { CANDIDATES } from '../../mock-data/mock-candidates';
@@ -213,3 +213,4 @@ fdescribe('CandidateService', () => {
   });
 
 });
+*/

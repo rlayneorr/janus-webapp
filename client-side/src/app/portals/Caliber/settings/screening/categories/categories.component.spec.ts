@@ -26,6 +26,7 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 
 //Observables
 import { defer } from 'rxjs/observable/defer';
+import { CATEGORIES } from '../../../services/category/mock-categories';
 
 export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -36,7 +37,7 @@ export function asyncError<T>(errorObject: any) {
 }
 
 
-fdescribe('CategoriesComponent', () => {
+describe('CategoriesComponent', () => {
   let httpClientSpyOnPost: { post: jasmine.Spy };
   let httpClientSpyOnPut: {put: jasmine.Spy };
   let bucketService: BucketsService;
