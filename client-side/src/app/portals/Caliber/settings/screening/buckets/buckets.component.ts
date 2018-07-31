@@ -31,7 +31,7 @@ export class BucketsComponent implements OnInit {
   /** variable to hold new bucket being created  */
   newBucket: Bucket = new Bucket();
   //choose the default value of select
-  selectValue : string;
+  selectValue : number;
   category : Category;
   //custom state for animation
   state : string = "normal";
@@ -100,8 +100,7 @@ export class BucketsComponent implements OnInit {
 
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket: Bucket) {
-    console.log("Bucket: ", bucket);
-    this.selectValue = bucket.categoryId.toString();
+    this.selectValue = bucket.categoryId;//.toString();
     console.log("selected value: ", this.selectValue);
     this.currBucket = bucket;
   }
@@ -121,6 +120,7 @@ export class BucketsComponent implements OnInit {
     if (bucketParam) {
       console.log(bucketParam.isActive);
       this.bucketService.updateBucket(bucketParam).subscribe();
+      this.selectValue = 0;
       this.savedSuccessfully();
     }
   }
@@ -132,10 +132,6 @@ export class BucketsComponent implements OnInit {
   changeConfirm(){
     this.confirm = true;
     this.removeBucket(this.currBucket);
-  }
-
-  changeAnimationState(){
-    this.state === "normal" ? this.state = "update" : this.state = "normal";
   }
 
   deleteBucket(){
@@ -186,8 +182,6 @@ export class BucketsComponent implements OnInit {
   }
 
   open(content) {
-    //this.state = "removed";
-    //console.log("removed", this.state);
     this.modalService.open(content).result.then((result) => {
       this.newBucket = new Bucket();
       this.closeResult = `Closed with: ${result}`;
