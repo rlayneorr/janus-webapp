@@ -17,5 +17,4 @@ export class Candidate {
     degree: string;
     major: string;
     techScreenerName: string;
-    skillTypeName : string;
 }

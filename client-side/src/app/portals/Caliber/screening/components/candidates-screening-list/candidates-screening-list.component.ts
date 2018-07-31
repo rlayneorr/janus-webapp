@@ -106,14 +106,18 @@ export class CandidatesScreeningListComponent implements OnInit {
 
     console.log(this.scheduledScreenings);
 
-    this.getAllSkillTypes();
+    //this.getAllSkillTypes();
+
+    this.skillTypeService.getSkillTypes().subscribe({
+      complete: () => data=>this.skillTypes = data
+    });
 
     console.log(this.skillTypes);
 
     for(let x = 0; x < this.scheduledScreenings.length; x++){
 
       if(this.scheduledScreenings[x].skillTypeId === this.skillTypes[x].skillTypeId){
-        this.scheduledScreenings[x].skillTypeName = this.skillTypes[x].title;
+        //this.scheduledScreenings[x].skillTypeName = this.skillTypes[x].title;
       }
 
     }
@@ -167,7 +171,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   }
 
   getAllSkillTypes() {
-    this.skillTypeService.getSkillTypes().subscribe((data)=>this.skillTypes = data);
+    //this.skillTypeService.getSkillTypes().subscribe(data=>this.skillTypes = data);
   }
 
   // Unhides the "Begin Interview" prompt
