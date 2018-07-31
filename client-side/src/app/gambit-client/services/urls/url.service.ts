@@ -319,6 +319,8 @@ export class UrlService {
 
   /**
    * Endpoints for skillType
+   * 
+   * @author John Lacap | 1805-May-29 | WVU | Richard Orr
    */
 
   private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skilltype';
@@ -347,7 +349,6 @@ export class UrlService {
 
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-
   };
 
   softSkillsViolation = {
@@ -456,8 +457,8 @@ export class UrlService {
 
   /**
    * Endpoints for category weights:
-   * This section is being added for use in the setting screening weight service
-   * @author John Lacap
+   * 
+   * @author John Lacap | 1805-May-29 | WVU | Richard Orr
    */
   private weightsServiceEndpoint = this.context + this.adminScreening;
   weight={

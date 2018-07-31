@@ -25,20 +25,12 @@ export class SkillTypesService {
         return this.http.post(this.urlService.skillTypes.createSkillType(), skillType, httpOptions);
     }
 
-    activateSkillType(skillType: SkillType) {
+    /*activateSkillType(skillType: SkillType) {
         return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
     deactivateSkillType(skillType: SkillType) {
         return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
-    }
-
-    updateSkillType(skillType: SkillType) {
-        return this.http.put(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
-    }
-
-    getSkillTypes() {
-        return this.http.get<SkillType[]>(this.urlService.skillTypes.getSkillTypes());
     }
 
     setSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
@@ -49,10 +41,19 @@ export class SkillTypesService {
     updateSkillTypeBuckets(skillType: SkillType, bucketIds, weights) {
         return this.http.put(this.urlService.skillTypes.updateSkillTypeBuckets(), { skillTypeName: skillType.title,
             skillTypeId: skillType.skillTypeId, bucketIds: bucketIds, weights: weights }, httpOptions);
-    }
+    }*/
 
     getSkillTypeById(skillTypeId: number) {
         return this.http.get<SkillType>(this.urlService.skillTypes.getSkillTypeById(skillTypeId));
+    }
+
+
+    getSkillTypes() {
+        return this.http.get<SkillType[]>(this.urlService.skillTypes.getSkillTypes());
+    }
+
+    updateSkillType(skillType: SkillType) {
+        return this.http.put<SkillType>(this.urlService.skillTypes.updateSkillType(skillType.skillTypeId), skillType, httpOptions);
     }
 
     deleteSkillType(skillTypeId: number) {
