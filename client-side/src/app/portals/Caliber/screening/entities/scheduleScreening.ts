@@ -13,4 +13,5 @@ export class ScheduledScreening {
   scheduledStatus: string;
   trainer: number;
   scheduledDate: Date;
+  skillTypeName : string;
 }

@@ -65,6 +65,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   allCandidates : Candidate[];
   formattedSchedule : string;
   skillType : SkillType;
+  skillTypes : SkillType[];
 
   beginForm: FormGroup;
   /* ###########################
@@ -101,10 +102,23 @@ export class CandidatesScreeningListComponent implements OnInit {
     this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
       this.allScheduledScreenings = data;
       this.scheduledScreenings = data;
-
     });
-    //this.allCandidates = CANDIDATES;
+
     console.log(this.scheduledScreenings);
+
+    this.getAllSkillTypes();
+
+    console.log(this.skillTypes);
+
+    for(let x = 0; x < this.scheduledScreenings.length; x++){
+
+      if(this.scheduledScreenings[x].skillTypeId === this.skillTypes[x].skillTypeId){
+        this.scheduledScreenings[x].skillTypeName = this.skillTypes[x].title;
+      }
+
+    }
+
+    console.log("after looping : ", this.scheduledScreenings);
   }
 
   /* ###########################
@@ -131,20 +145,29 @@ export class CandidatesScreeningListComponent implements OnInit {
   }
 
   //Get each Candidate's Track/SkillType -Tyerra Smith
-  getSkillType(skillTypeId: number) {
+  getSkillType(skillTypeId: number) : string{
+
+    let skill : SkillType;
 
     this.skillTypeService.getSkillTypeById(skillTypeId).subscribe(
       (data)=> {
-        for(let x = 0; x <= this.scheduledScreenings.length; x++){
-          if(skillTypeId === this.scheduledScreenings[x].skillTypeId){
-            // this.scheduledScreenings[x].candidate
-          }
-        }
-      }
-    );
+      //   for(let x = 0; x <= this.scheduledScreenings.length; x++){
+      //     if(skillTypeId === this.scheduledScreenings[x].skillTypeId){
+      //       this.scheduledScreenings[x].candidate.skillTypeName = data.title;
+      //     }
+      //   }
+      // }
+        skill = data as SkillType;
+        console.log("this is my skill: ", data);
+      });
 
+    return skill.title;
 
     //this.alertService.error("Not SkillTypes Found.");
+  }
+
+  getAllSkillTypes() {
+    this.skillTypeService.getSkillTypes().subscribe((data)=>this.skillTypes = data);
   }
 
   // Unhides the "Begin Interview" prompt
