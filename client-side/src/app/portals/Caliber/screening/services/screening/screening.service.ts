@@ -85,8 +85,7 @@ export class ScreeningService {
     } else if (this.softSkillsResult === 'Fail') {
       verdict = 0;
     }
-    console.log("screenId: " + localStorage.getItem('screeningID'));
-    console.log("schedScreenId: " + localStorage.getItem('scheduledScreeningId'));
+    
     this.httpClient.post(this.urlService.screening.endScreening(),
       {
         'status': 'SCREENED',

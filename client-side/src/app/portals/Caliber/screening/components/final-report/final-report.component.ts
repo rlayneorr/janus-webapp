@@ -70,7 +70,7 @@ subscriptions: Subscription[] = [];
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
     this.allTextString = this.softSkillString + '\n';
     const trackId = parseInt((localStorage.getItem('candidateTrack')), 10);
-    
+
     this.skillTypesService.getSkillTypeById(trackId).subscribe(skill =>{
       this.skillType = skill;
       console.log("skillType: " + this.skillType.categories);
@@ -81,16 +81,17 @@ subscriptions: Subscription[] = [];
       console.log("in skill type");
       this.skillType.categories.forEach(category => {
       console.log("SkillTypeId: " + this.skillType.skillTypeId +" CategoryId: "+ category.categoryId);
-      
-      this.skillTypeBucketService.getSkillTypeBuckets(this.skillType.skillTypeId, category.categoryId)
-      .subscribe((weight) => {
-        this.weights.push(weight);
-        console.log("weights: " + this.weights);
-        this.getWeights();
-      }
-    )});
+
+    //   this.skillTypeBucketService.getSkillTypeBuckets(this.skillType.skillTypeId, category.categoryId)
+    //   .subscribe((weight) => {
+    //     this.weights.push(weight);
+    //     console.log("weights: " + this.weights);
+    //     this.getWeights();
+    //   }
+    // )
+    });
   }
-    
+
     getWeights(){
     console.log("weights: " + this.weights);
     this.questionScores = this.questionScoreService.questionScores;
@@ -113,7 +114,7 @@ subscriptions: Subscription[] = [];
           this.allTextString += bucketString + '\n';
         });
         this.allTextString += this.overallScoreString + '\n';
-      
+
     // this.overallScoreString = "Overall: 71%";
     this.generalNotesString = this.screeningService.generalComments;
     this.allTextString += 'comments: "' + this.generalNotesString + '"';
@@ -121,7 +122,7 @@ subscriptions: Subscription[] = [];
     this.screeningService.endScreening(this.generalNotesString);
     this.subscriptions.push(this.softSkillsViolationService.currentSoftSkillViolations.subscribe(
       softSkillViolations => {this.softSkillViolations = softSkillViolations}
-    
+
     ))};
 
   // Used for copying the data to the clipboard (this is done using ngx-clipboard)

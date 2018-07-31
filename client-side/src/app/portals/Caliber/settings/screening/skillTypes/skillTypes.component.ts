@@ -37,6 +37,7 @@ export class SkillTypesComponent implements OnInit {
     public allSkillTypes: SkillType[] = [];
     public inactiveSkillTypes: SkillType[] = [];
     public allCategories: Category[] = [];
+    public initialCategories: Category[] = [];
     public allWeights: CategoryWeight[] = [];
     public allBuckets: Bucket[] = [];
 
@@ -81,8 +82,6 @@ export class SkillTypesComponent implements OnInit {
    grabAllSkillTypes() {
     this.skillTypeService.getSkillTypes().subscribe((results) => {
         this.allSkillTypes = results;
-        // this.setSkillTypes();
-        // this.allSkillTypes.sort(this.compare);
         });
     }
 
@@ -93,9 +92,6 @@ export class SkillTypesComponent implements OnInit {
     this.categoriesService.getCategories().subscribe(results => {
         this.allCategories = results;
         });
-    this.weightsService.getWeights().subscribe(results => {
-        console.log(results);
-    })
     }
 
     /**
@@ -116,6 +112,7 @@ export class SkillTypesComponent implements OnInit {
    editSkillType(skillType) {
         this.error = true;
         this.total = 0;
+        this.allWeights = [];
         this.skillType = {
             title: skillType.title,
             skillTypeId: skillType.skillTypeId,
@@ -123,12 +120,13 @@ export class SkillTypesComponent implements OnInit {
             isActive: false
         };
 
-        skillType.categories.forEach(category => {
+        this.skillType.categories.forEach(category => {
             this.weightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId).subscribe(result => {
                 this.allWeights.push(result);
                 this.resetCategories(skillType, null);
-                this.equalsMax(skillType);
+                this.equalsMax();
             })
+            this.initialCategories.push(category);
         })
     }
 
@@ -163,7 +161,6 @@ export class SkillTypesComponent implements OnInit {
             this.resetFields();
         }, (reason) => {
             this.resetFields();
-            //this.total = 0;
         });
         event.stopPropagation();
     }
@@ -188,11 +185,10 @@ export class SkillTypesComponent implements OnInit {
     /*
     *
     *   Remove category from the DOM by splicing from the array
-    *   Then call the deleteCategory()
+    *   Then call the deleteSkillType()
     *
     * */
     removeSkillType(){
-      //check if user really wants to delete the question
       if(this.confirm === true){
         for (const skillTypeId in this.skillTypes) {
           if (this.skillTypes[skillTypeId] === this.skillType) {
@@ -233,7 +229,7 @@ export class SkillTypesComponent implements OnInit {
    * Add the bucketId to the array of Ids of selected skill type
    * @param category
    */
-    addToCategories(category: Category) {
+    addCategory(category: Category) {
         if(!this.skillType){
             this.skillType = {
                 title: null,
@@ -247,7 +243,6 @@ export class SkillTypesComponent implements OnInit {
             this.weight = new CategoryWeight;
             this.weight = {
                 weightId: +(this.skillType.skillTypeId + "" + category.categoryId) ,
-                // weightId: 0,
                 skillTypeId: this.skillType.skillTypeId,
                 categoryId: category.categoryId,
                 weight: 0
@@ -256,18 +251,18 @@ export class SkillTypesComponent implements OnInit {
             this.weightsService.createWeight(this.weight).subscribe(result => {
                 this.weight = result;
             });
+
+            this.allWeights.push(this.weight);
+            this.skillType.categories.push(category);
+            this.weightChange(this.skillType, category, this.weight.weight)
         }
-
-        this.allWeights.push(this.weight);
-        this.skillType.categories.push(category);
-
     }
 
   /**
    * Removes all references to the bucket that is associated to the skill type
    * @param category
    */
-    removeCategories(category: Category) {
+    removeCategory(category: Category) {
         for (const singleBucketIndex in this.skillType.categories) {
             if (this.skillType.categories[singleBucketIndex] === category) {
                 this.skillType.categories.splice(Number(singleBucketIndex), 1);
@@ -275,13 +270,13 @@ export class SkillTypesComponent implements OnInit {
         }
         this.allWeights.forEach(weight => {
             if(category.categoryId === weight.categoryId){
-                this.weightsService.deleteWeight(this.skillType, category).subscribe(result => {
+                this.weightsService.deleteWeight(weight).subscribe(result => {
                     this.allWeights.splice(this.allWeights.indexOf(weight), 1);
                 })
             }
         });
         this.resetCategories(this.skillType, category);
-        this.equalsMax(this.skillType);
+        this.equalsMax();
     }
 
     /**
@@ -294,9 +289,11 @@ export class SkillTypesComponent implements OnInit {
 
         this.skillType.categories.forEach(category => {
             this.allWeights.forEach(weight =>{
-                this.weightsService.updateWeight(skillType, category, weight).subscribe(result => {
-                    this.grabAllSkillTypes();
-                });
+                if(category.categoryId === weight.categoryId){
+                    this.weightsService.updateWeight(skillType, category, weight).subscribe(result => {
+                        this.grabAllSkillTypes();
+                    });
+                }
             });
         });
     }
@@ -321,7 +318,7 @@ export class SkillTypesComponent implements OnInit {
                 }
             });
 
-            this.equalsMax(skillType);
+            this.equalsMax();
         }
     }
 
@@ -330,13 +327,10 @@ export class SkillTypesComponent implements OnInit {
      *
      * @param skillType: skillType selected
      */
-    equalsMax(skillType: SkillType){
+    equalsMax(){
         this.total = 0;
-        console.log("EQMAX");
         this.allWeights.forEach(weight => {
-            console.log("EQ Weight");
             this.total = this.total + weight.weight;
-            console.log(this.total);
             if(this.total == 100){
                 this.error = false;
             }
@@ -374,38 +368,36 @@ export class SkillTypesComponent implements OnInit {
             isActive: false
         };
         this.total = 0;
-        this.equalsMax(this.skillType);
+        this.equalsMax();
     }
 
     /**
     * Resets all fields that were used for the modal
     */
     resetFields() {
-        if(this.skillType.skillTypeId){
+        if(this.skillType){
             this.skillTypeService.getSkillTypeById(this.skillType.skillTypeId).subscribe(result => {
                 this.allWeights.forEach(weight => {
                     this.categoriesService.getCategoryById(weight.categoryId).subscribe(category => {
-                        if(!result.categories.includes(category)){
-                            this.weightsService.deleteWeight(this.skillType, category).subscribe(result => {
-
+                        if(!this.initialCategories.includes(category)){
+                            this.weightsService.deleteWeight(weight).subscribe(result => {
                             });
                         }
                     });
                 });
-
-                if(this.skillType){
-                    this.skillType.categories.forEach(category => {
-                        if(!result.categories.includes(category))
-                            this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
-                    });
-                }
+                this.skillType.categories.forEach(category => {
+                    console.log(category);
+                    if(!this.initialCategories.includes(category)){
+                        this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
+                        this.skillTypeService.updateSkillType(this.skillType).subscribe(result => {});
+                    }                        
+                });
             });
         }
-
-        this.skillType = null;
         this.allSkillTypes =  [];
         this.allWeights = [];
-        this.error = false;
+        this.error = false;  
+        this.errorMessage = '';
         this.grabAllCategories();
         this.grabAllSkillTypes();
     }

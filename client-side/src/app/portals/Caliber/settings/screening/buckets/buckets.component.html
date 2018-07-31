@@ -9,7 +9,6 @@
           <!-- clickable to route to Bucket -->
           <!--* routeToBucket() -->
           <div class="list-group-item list-group-item-action">
-            <!--<b>{{bucket.category}}</b><br>-->
             <b>{{bucket.category}}</b><br>
             <small>{{bucket.bucketDescription}}</small>
             <div class="col-sm" (click)="$event.cancelBubble=true; ">
@@ -45,8 +44,8 @@
     <form>
       <div class="form-group">
 
-        <select #selectCategory (change)="getSelectedCategory(selectCategory.value)">
-          <option *ngFor="let cat of categories" [value]="cat.categoryId" [selected]="selectValue">
+        <select #selectCategory class="form-control" name="cate" [(ngModel)]="currentCategory.categoryId">
+          <option *ngFor="let cat of categories" [ngValue]="cat.categoryId" [selected]="currentCategory.categoryId===cat.categoryId">
             {{cat.title}}
           </option>
         </select>
@@ -78,8 +77,8 @@
     <form>
       <div class="form-group">
 
-        <select #selectCategory (change)="getSelectedCategory(selectCategory.value)">
-          <option *ngFor="let cat of categories" [value]="cat.categoryId">
+        <select #selectCategory class="form-control" name="cate" [(ngModel)]="currentCategory.categoryId">
+          <option *ngFor="let cat of categories" [ngValue]="cat.categoryId" [selected]="currentCategory.categoryId===cat.categoryId">
             {{cat.title}}
           </option>
         </select>

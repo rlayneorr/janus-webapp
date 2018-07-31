@@ -65,6 +65,7 @@ export class CandidatesScreeningListComponent implements OnInit {
   allCandidates : Candidate[];
   formattedSchedule : string;
   skillType : SkillType;
+  skillTypes : SkillType[] = [];
 
   beginForm: FormGroup;
   /* ###########################
@@ -101,10 +102,24 @@ export class CandidatesScreeningListComponent implements OnInit {
     this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
       this.allScheduledScreenings = data;
       this.scheduledScreenings = data;
+    });
+
+    console.log(this.scheduledScreenings);
+
+
+    this.skillTypeService.getSkillTypes().subscribe((skills) => {
+
+      this.skillTypes = skills;
 
     });
-    //this.allCandidates = CANDIDATES;
-    console.log(this.scheduledScreenings);
+
+  }
+
+  //Quagmire....
+  getSkillTypeId(id) {
+    let element = this.skillTypes.find(vt=>vt.skillTypeId == id);
+    if(!element) { return ''; }
+    return element.title;
   }
 
   /* ###########################
@@ -128,23 +143,6 @@ export class CandidatesScreeningListComponent implements OnInit {
     {
       this.scheduledScreenings = this.allScheduledScreenings;
     }
-  }
-
-  //Get each Candidate's Track/SkillType -Tyerra Smith
-  getSkillType(skillTypeId: number) {
-
-    this.skillTypeService.getSkillTypeById(skillTypeId).subscribe(
-      (data)=> {
-        for(let x = 0; x <= this.scheduledScreenings.length; x++){
-          if(skillTypeId === this.scheduledScreenings[x].skillTypeId){
-            // this.scheduledScreenings[x].candidate
-          }
-        }
-      }
-    );
-
-
-    //this.alertService.error("Not SkillTypes Found.");
   }
 
   // Unhides the "Begin Interview" prompt
