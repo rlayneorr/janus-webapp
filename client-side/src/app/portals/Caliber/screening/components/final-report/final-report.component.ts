@@ -93,6 +93,7 @@ subscriptions: Subscription[] = [];
     
     getWeights(){
     console.log("weights: " + this.weights);
+    
     this.questionScoreService.currentQuestionScores.subscribe(
       questionScores => {
         this.questionScores = questionScores;

@@ -100,8 +100,7 @@ export class ScheduleScreeningService {
               college: e.candidate.college,
               degree: e.candidate.degree,
               major: e.candidate.major,
-              techScreenerName: e.candidate.techScreenerName,
-              skillTypeName: e.skillTypeName
+              techScreenerName: e.candidate.techScreenerName
             },
             skillTypeId: e.skillTypeId,
             scheduledStatus: e.scheduledStatus,
