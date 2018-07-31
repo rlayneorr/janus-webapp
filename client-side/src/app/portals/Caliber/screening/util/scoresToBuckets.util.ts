@@ -4,84 +4,56 @@ import { CategoryWeight } from '../../settings/screening/entities/Category-Weigh
 import { Bucket } from '../../settings/screening/entities/Bucket';
 
 export class ScoresToBucketsUtil {
-
+  public questionScores: QuestionScore[] = [];
+  scoreForQuestion(questionScores: QuestionScore[], question: any) {
+    let qs: QuestionScore = questionScores.find(q=>q.questionId == question.questionId);
+    if(qs) {
+      return qs.score;
+    } else {
+      return null;
+    }
+  }
+  isWeightForBucket(weights: CategoryWeight[], bucket: Bucket): boolean {
+    return weights.find(w=>w.categoryId === bucket.categoryId) !== undefined;
+  }
+  findWeightForBucket(weights: CategoryWeight[], bucket: Bucket): number {
+    if(this.isWeightForBucket(weights, bucket)) {
+      return weights.find(w => w.categoryId === bucket.categoryId).weight;
+    } else {
+      return 0;
+    }
+  }
+  isBucketUsed(bucket: Bucket) {
+    console.log("scoreforquestion function:::: ", this);
+    var f = this.scoreForQuestion;
+    return !bucket.questions.map((q)=>{f(this.questionScores, q)})
+      .every(e=>e===null);
+  }
     getFinalBreakdown(questionScores: QuestionScore[], buckets: Bucket[], weights: CategoryWeight[]): string[] {
-        const bucketNames: string[] = [];
-        const totals: number[] = [];
-        const scores: number[] = [];
-        let bucketIndex = 0;
-        let questionsAsked;
-        let totalWeights = 0;
-        let totalBuckets = 0;
-        console.log("QuestionScores: " + questionScores, "Buckets: " + buckets, "Weights: " + weights);
-        // Loop through the buckets
-        
-        //buckets.forEach(thisBucket => {
-            // questionsAsked = 0;
-            // totals[bucketIndex] = 0;
-            // scores[bucketIndex] = 0;
-            // if (thisBucket.questions != null) {
-            //     // If the questions array in this bucket is populated, loop through the question
-            //     thisBucket.questions.forEach(thisQuestion => {
-            //         const matchingQuestion = questionScores.find(function(element) {
-            //             return element.questionId === thisQuestion.questionId;
-            //         });
-            //         // If this question has been answered, add it to the total
-            //         if (matchingQuestion) {
-            //             questionsAsked++;
-            //             totals[bucketIndex] += 5;
-            //             scores[bucketIndex] += matchingQuestion.score;
-            //         }
-            //     });
-            // }
-            
-            // If questions were answered from this bucket, mark bucket as used
-        //     if (questionsAsked > 0) {
-        //         bucketNames[bucketIndex] = thisBucket.category;
-        //         totalWeights += weights[bucketIndex].weight;
-        //         totalBuckets++;
-        //     // If no questions from this bucket were asked, ignore in final calculations
-        //     } else {
-        //         bucketNames[bucketIndex] = 'skip';
-        //     }
-        //     bucketIndex++;
-        // });
+      this.questionScores = questionScores;
+        let usedBuckets = buckets.filter(b=>this.isBucketUsed(b)); // all buckets that actually have asked questions.
 
-        
-        if (questionScores != null){
-            questionsAsked = 0;
-            totals[bucketIndex] = 0;
-            scores[bucketIndex] = 0;
-            questionScores.forEach(question => {
-                questionsAsked++;
-                totals[bucketIndex] += 5;
-                scores[bucketIndex] += question.score;
-            });
-        }
-        let normalizeWeight = 0;
         // If the total weights from the buckets with answered questions don't add up to 100%, evenly distribute the difference
-        if (totalWeights < 100) {
-            normalizeWeight = (100 - totalWeights) / totalBuckets;
-        }
-        const breakdowns: string[] = [];
-        let breakdownIndex = 0;
+        let normalizationRatio = 100/usedBuckets.map(b=>this.findWeightForBucket(weights, b)).reduce((a,b)=>a+b);
+
+        var breakdowns: string[] = [];
         let weightedTotal = 0;
         // Loop through all buckets
-        bucketNames.forEach(thisSummary => {
-            // If at least one question from this bucket was asked, calculate the total weighted score for the bucket
-            if (bucketNames[breakdownIndex] !== 'skip') {
-                // augments the points per question by normalized weight
-                const weightedbucket = (weights[breakdownIndex].weight + normalizeWeight);
-                const weightedscore = scores[breakdownIndex] / totals[breakdownIndex] * weightedbucket;
+        usedBuckets.forEach(b => {
+          // If at least one question from this bucket was asked, calculate the total weighted score
+          // for the bucket augments the points per question by normalized weight
+          const weightedBucket = this.findWeightForBucket(weights,b) * normalizationRatio;
+          const questionLength = b.questions.filter(q=>this.scoreForQuestion(questionScores,q)!=null).length;
+          const questionRatio = 100/(questionLength * 5);
 
+          const rawScore = b.questions.map(q=>this.scoreForQuestion(questionScores,q)).reduce((a,b)=>a+b);
 
-                // build array of strings to return for copying and pasting into salesforce
-                breakdowns.push(Number(weightedscore).toFixed(0) + '/' + Number(weightedbucket).toFixed(0) +
-                    ' ' + bucketNames[breakdownIndex]);
-                weightedTotal += (scores[breakdownIndex] / totals[breakdownIndex]) *
-                    (weights[breakdownIndex].weight + normalizeWeight);
-            }
-            breakdownIndex++;
+          const bucketScore = rawScore * questionRatio;
+          console.log(weights, weightedBucket, questionLength, questionRatio, rawScore, bucketScore);
+          // build array of strings to return for copying and pasting into salesforce
+          breakdowns.push(Number(bucketScore).toFixed(0) + '% out of weighted bucket score: ' + Number(weightedBucket).toFixed(0) + '%' +
+                    ' ' + b.bucketDescription);
+          weightedTotal += bucketScore * weightedBucket/100;
         });
         // add the overall score line as a string to the end of the array
         breakdowns.push('Overall: ' + Number(weightedTotal).toFixed(1) + '%');
