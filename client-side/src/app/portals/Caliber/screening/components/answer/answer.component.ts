@@ -2,10 +2,8 @@ import { Component, OnInit, Input} from '@angular/core';
 
 // Entities
 import { QuestionScore } from '../../entities/questionScore';
-import { Question } from '../../entities/question';
 
 // Services
-import { QuestionService } from '../../services/question/question.service';
 import { QuestionScoreService } from '../../services/question-score/question-score.service';
 
 // ngbootstrap for modal
@@ -17,14 +15,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./answer.component.css']
 })
 export class AnswerComponent implements OnInit {
-
+  // Binds the selected question to this variable
   @Input() question;
   questionScore: QuestionScore;
 
   // used to exchange data between the answer modal and question table component
   questionScores: QuestionScore[];
 
-  constructor(public activeModal: NgbActiveModal, private questionService: QuestionService,
+  constructor(public activeModal: NgbActiveModal,
     private questionScoreService: QuestionScoreService) { }
 
   ngOnInit() {
@@ -42,23 +40,24 @@ export class AnswerComponent implements OnInit {
   // when a score is set and submitted, update the array of questions scores
   saveQuestionScore(): void {
       // allow screeners to update the score of a candidate.
-      // Need to check if the current array of question scores is not empty
+      // Need to check if the current array of question scores is empty or not
       if (this.questionScores.length > 0 ) {
         // iterate through each question score
         for (const q of this.questionScores) {
-          // if the current question score has the same questionID as the selected question
+          // if the current question score has the same questionId as the selected question
           if (q.questionId === this.questionScore.questionId) {
-            // remove that question score.
+            // remove the old question score.
             this.questionScores.splice(this.questionScores.indexOf(q), 1);
           }
         }
       }
       console.log(this.questionScore);
+
       // add the new question score to the array of question scores
       this.questionScores.push(this.questionScore);
-      // update our services question score array with the array with this components question score array
+
+      // update our service's question score array with this component's question score array
       this.questionScoreService.updateQuestionScores(this.questionScores);
-      // Save the question score to the database.
-      //this.questionScoreService.postQuestionScore(this.questionScore);
+      
   }
 }

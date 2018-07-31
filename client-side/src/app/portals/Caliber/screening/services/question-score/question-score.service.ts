@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { QuestionScore } from '../../entities/questionScore';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 /*
@@ -44,15 +42,5 @@ export class QuestionScoreService {
       beginTime: question.beginTime,
       screeningId: question.screeningID}).subscribe(data => {
       });
-
-    /*
-      return this.httpClient.post<QuestionScore>(url, {
-      Score: question.score,
-      Comment: question.commentary,
-      QuestionID: question.questionId,
-      BeginTime: question.beginTime,
-      ScreeningID: question.screeningID
-      });
-    */
   }
 }

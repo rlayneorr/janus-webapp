@@ -1,10 +1,9 @@
 import { Candidate } from './Candidate';
-import { SkillType } from './skillType';
 
 /*
   Entity representing a screening scheduled to take place
-  Specifies candidate, screener (as a CaliberTrainer object's ID, subject to change),
-  skill type, completion status, and time.
+  Specifies candidate, screener's id,
+  skill type id, completion status, and date/time.
 */
 export class ScheduledScreening {
   scheduledScreeningId: number;

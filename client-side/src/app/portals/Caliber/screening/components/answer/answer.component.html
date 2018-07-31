@@ -1,9 +1,13 @@
+<!-- Modal for scoring the candidate's answer to a question -->
 <div class="modal-header">
   <h4 class="modal-title">{{question.questionText}}</h4>
+  
+  <!-- X in the top right corner to close the modal without submitting -->
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+
 <div class="modal-body">
   <h4> Sample Responses </h4>
   <p>1 - {{question.sampleAnswer1}}</p>
@@ -12,13 +16,21 @@
   <p>4 - {{question.sampleAnswer4}}</p>
   <p>5 - {{question.sampleAnswer5}}</p>
   <p>Score: {{questionScore.score}}</p>
+
+  <!-- Scoring Slider -->
   <div class="slidecontainer container text-center">
     <input [(ngModel)]="questionScore.score" type="range" min="0" max="5" class="slider" id="score">
   </div>
-  <textarea [(ngModel)] = "questionScore.commentary" class="form-control" placeholder="Optional Feedback"></textarea>
+
+  <!-- Optional Comment textbox -->
+  <textarea [(ngModel)] = "questionScore.commentary" class="form-control" id="commentary" placeholder="Optional Feedback"></textarea>
 </div>
+
+<!-- Button to submit a score -->
 <div class="modal-footer answer-bank-end">
     <span data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" class="flag-button glyphicon glyphicon-flag color-red"></span>
   <button type="button" class="btn btn-outline-dark" (click)="saveQuestionScore(); activeModal.close('Close click');">Submit Score</button>
 </div>
+
+<!-- Subcomponent to report violations -->
 <app-violation-flag></app-violation-flag>

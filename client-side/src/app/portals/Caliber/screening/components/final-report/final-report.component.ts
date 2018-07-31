@@ -105,8 +105,9 @@ subscriptions: Subscription[] = [];
     this.questionScoreService.updateQuestionScores(this.questionScores);
     this.softSkillViolations = [];
     this.softSkillsViolationService.updateSoftSkillViolations(this.softSkillViolations);
-    localStorage.removeItem('screeningID');
-    localStorage.removeItem('scheduledScreeningID');
+    // localStorage.removeItem('screeningID');
+    // localStorage.removeItem('scheduledScreeningID');
+    localStorage.clear();
     this.subscriptions.forEach(s => s.unsubscribe);
   }
 }

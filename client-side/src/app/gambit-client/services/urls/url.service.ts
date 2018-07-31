@@ -128,6 +128,7 @@ export class UrlService {
     addTopicsUrl: () => `${this.context}/calendar/addtopics`
   };
 
+  // Enpoints for candidates
   candidate = {
     getAll: () => `${this.context}/candidate`,
     getById: (id : number) => `${this.context}/candidate/${id}`,
@@ -136,6 +137,7 @@ export class UrlService {
     delete: (id: number) => `${this.context}candidate/${id}`,
   };
 
+  // 
   private categoryEndpoint = `${this.adminScreening}/category`;
   category = {
     fetchAll: () => { console.log("context: %s, endpoint %s", this.context, this.categoryEndpoint);
@@ -277,14 +279,14 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private screeningEndpoint = `${this.techScreening}/screening`;
+  private screeningEndpoint = `screening`;
   //screeningEndpoint = 'screening-service/screening';
   screening = {
-    scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduled`,
-    startScreening: () => `${this.context + this.screeningEndpoint}/start`,
-    endScreening: () => `${this.context + this.screeningEndpoint}/end`,
-    introComment: () => `${this.context + this.screeningEndpoint}/introcomment`,
-    generalComment: () => `${this.context + this.screeningEndpoint}/generalcomment`,
+    scheduleScreening: () => `${this.context}tech-screening/${this.screeningEndpoint}/scheduled`,
+    startScreening: () => `${this.context}tech-screening/${this.screeningEndpoint}/start`,
+    endScreening: () => `${this.context}tech-screening/${this.screeningEndpoint}/end`,
+    introComment: () => `${this.context}tech-screening/${this.screeningEndpoint}/introcomment`,
+    generalComment: () => `${this.context}tech-screening/${this.screeningEndpoint}/generalcomment`,
   };
 
   /**
