@@ -33,6 +33,7 @@ export class BucketsComponent implements OnInit {
   //choose the default value of select
   selectValue : number;
   category : Category;
+  currentCategory : Category;
   //custom state for animation
   state : string = "normal";
   //user has to confirm to be able to delete
@@ -100,9 +101,13 @@ export class BucketsComponent implements OnInit {
 
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket: Bucket) {
-    this.selectValue = bucket.categoryId;//.toString();
+    console.log("Bucket: ", bucket);
+    this.selectValue = bucket.categoryId;
     console.log("selected value: ", this.selectValue);
     this.currBucket = bucket;
+    console.log(this.categories);
+    this.currentCategory = this.categories.find(c=>c.categoryId===bucket.categoryId);
+
   }
 
   /**
@@ -120,7 +125,6 @@ export class BucketsComponent implements OnInit {
     if (bucketParam) {
       console.log(bucketParam.isActive);
       this.bucketService.updateBucket(bucketParam).subscribe();
-      this.selectValue = 0;
       this.savedSuccessfully();
     }
   }
@@ -132,6 +136,10 @@ export class BucketsComponent implements OnInit {
   changeConfirm(){
     this.confirm = true;
     this.removeBucket(this.currBucket);
+  }
+
+  changeAnimationState(){
+    this.state === "normal" ? this.state = "update" : this.state = "normal";
   }
 
   deleteBucket(){
@@ -182,6 +190,8 @@ export class BucketsComponent implements OnInit {
   }
 
   open(content) {
+    //this.state = "removed";
+    //console.log("removed", this.state);
     this.modalService.open(content).result.then((result) => {
       this.newBucket = new Bucket();
       this.closeResult = `Closed with: ${result}`;
@@ -198,11 +208,13 @@ export class BucketsComponent implements OnInit {
   *   Get the value from the Select Dropdown Menu
   *
   * */
-   getSelectedCategory($myCategoryId){
+   getSelectedCategory(category){
      //getting category by ID
+     let $myCategoryId = category.value;
      let cat = this.categories.find(c=>c.categoryId === +$myCategoryId);
      this.newBucket.category = cat.title;
      this.newBucket.categoryId = cat.categoryId;
+     return cat.categoryId;
   }
 
   private getDismissReason(reason: any): string {
