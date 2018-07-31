@@ -140,7 +140,7 @@ export class BucketsComponent implements OnInit {
 
   deleteBucket(){
     this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe(result => {
-      this.getBuckets();
+      //this.getBuckets();
     }, ()=> {this.alertsService.error('Error Deleting Bucket');}, ()=>{this.confirm = false});
 
     this.alertsService.success('Successfully Deleted Bucket');
