@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs';
@@ -105,6 +106,7 @@ export class CandidateService {
 
   //   return of(allCandidates);
   // }
+
 
   getCandidates() : Observable<Candidate[]>
   {

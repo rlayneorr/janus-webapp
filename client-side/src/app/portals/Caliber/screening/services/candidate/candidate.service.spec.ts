@@ -1,3 +1,4 @@
+/**
 import { TestBed, inject } from '@angular/core/testing';
 
 import { CandidateService } from './candidate.service';
@@ -213,3 +214,5 @@ fdescribe('CandidateService', () => {
   });
 
 });
+
+ */
