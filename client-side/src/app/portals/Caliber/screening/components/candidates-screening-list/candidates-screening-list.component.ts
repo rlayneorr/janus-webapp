@@ -101,6 +101,7 @@ export class CandidatesScreeningListComponent implements OnInit {
     this.scheduleScreeningService.getScheduleScreenings().subscribe(data => {
       this.allScheduledScreenings = data;
       this.scheduledScreenings = data;
+
     });
     //this.allCandidates = CANDIDATES;
     console.log(this.scheduledScreenings);
@@ -132,15 +133,14 @@ export class CandidatesScreeningListComponent implements OnInit {
   //Get each Candidate's Track/SkillType -Tyerra Smith
   getSkillType(skillTypeId: number) {
 
-    // console.log(skillTypeId);
-    // this.httpClient.get<SkillType>(this.urlService.skillTypes.findById(skillTypeId)).subscribe(skill =>{
-    //   this.skillType = skill;
-    // });
-    // console.log(this.skillType);
-    // return this.skillType.title;
-
     this.skillTypeService.getSkillTypeById(skillTypeId).subscribe(
-      (data)=> {}
+      (data)=> {
+        for(let x = 0; x <= this.scheduledScreenings.length; x++){
+          if(skillTypeId === this.scheduledScreenings[x].skillTypeId){
+            // this.scheduledScreenings[x].candidate
+          }
+        }
+      }
     );
 
 

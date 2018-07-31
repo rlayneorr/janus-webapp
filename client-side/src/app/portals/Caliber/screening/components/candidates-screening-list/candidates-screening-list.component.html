@@ -22,6 +22,7 @@
           <tr *ngFor="let screening of scheduledScreenings" (click)='openModal(viewCand,screening)'>
             <td>{{screening.candidate.name}}</td>
             <!--<td>{{getSkillType(screening.skillTypeId)}}</td>-->
+            <td>{{screening.skillTypeId}}</td>
             <td>{{screening.scheduledDate | date:'short'}}</td>
           </tr>
         <!-- </ng-container> -->

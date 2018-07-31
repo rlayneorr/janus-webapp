@@ -47,35 +47,35 @@ export let removeItem = trigger('removeMe', [
 ]);
 
 //routing animation - work in progress
-export let routeAnimation =
-  trigger('routeAnimation', [
-    transition('1 => 2', [
-        //Style height to match the height as it will be after the transition = !
-        style({height: '!'}),
-        query(':enter', style({transform: 'translate(100%)'})),
-        query(':enter, :leave', style({position: 'absolute', top: 0, left: 0, right: 0})),
-        group([
-          //once user leaves the page
-          query(':leave', [
-            animate('15.0s cubic-bezier(.35, 0, .25, 1)', style({transform: 'translateX(-100%)'})),
-          ]),
-          //once user enter another page
-          query(':enter', animate('10.0s cubic-bezier(.35, 0, .25, 1)'), style({transform: 'translateX(0)'})),
-        ])
-    ]),
-
-    transition('3 => 2, 2 => 1', [
-      style({height: '!'}),
-      query(':enter', style({transform: 'translateX(-100%)'})),
-      query(':enter', style({position: 'absolute', top: 0, left: 0, right: 0})),
-
-      group([
-        // animate the leave page away
-        query(':leave', [
-          animate('0.3s cubic-bezier(.35,0,.25,1)', style({ transform: 'translateX(100%)' })),
-        ]),
-        // and now reveal the enter
-        query(':enter', animate('0.3s cubic-bezier(.35,0,.25,1)', style({ transform: 'translateX(0)' }))),
-      ]),
-    ])
-]);
+// export let routeAnimation =
+//   trigger('routeAnimation', [
+//     transition('1 => 2', [
+//         //Style height to match the height as it will be after the transition = !
+//         style({height: '!'}),
+//         query(':enter', style({transform: 'translate(100%)'})),
+//         query(':enter, :leave', style({position: 'absolute', top: 0, left: 0, right: 0})),
+//         group([
+//           //once user leaves the page
+//           query(':leave', [
+//             animate('15.0s cubic-bezier(.35, 0, .25, 1)', style({transform: 'translateX(-100%)'})),
+//           ]),
+//           //once user enter another page
+//           query(':enter', animate('10.0s cubic-bezier(.35, 0, .25, 1)'), style({transform: 'translateX(0)'})),
+//         ])
+//     ]),
+//
+//     transition('3 => 2, 2 => 1', [
+//       style({height: '!'}),
+//       query(':enter', style({transform: 'translateX(-100%)'})),
+//       query(':enter', style({position: 'absolute', top: 0, left: 0, right: 0})),
+//
+//       group([
+//         // animate the leave page away
+//         query(':leave', [
+//           animate('0.3s cubic-bezier(.35,0,.25,1)', style({ transform: 'translateX(100%)' })),
+//         ]),
+//         // and now reveal the enter
+//         query(':enter', animate('0.3s cubic-bezier(.35,0,.25,1)', style({ transform: 'translateX(0)' }))),
+//       ]),
+//     ])
+// ]);
