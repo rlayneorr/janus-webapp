@@ -31,8 +31,9 @@ export class BucketsComponent implements OnInit {
   /** variable to hold new bucket being created  */
   newBucket: Bucket = new Bucket();
   //choose the default value of select
-  selectValue : string;
+  selectValue : number;
   category : Category;
+  currentCategory : Category;
   //custom state for animation
   state : string = "normal";
   //user has to confirm to be able to delete
@@ -101,9 +102,12 @@ export class BucketsComponent implements OnInit {
   /** Stores the value of selected bucket to a 'currBucket' */
   editBucket(bucket: Bucket) {
     console.log("Bucket: ", bucket);
-    this.selectValue = bucket.categoryId.toString();
+    this.selectValue = bucket.categoryId;
     console.log("selected value: ", this.selectValue);
     this.currBucket = bucket;
+    console.log(this.categories);
+    this.currentCategory = this.categories.find(c=>c.categoryId===bucket.categoryId);
+
   }
 
   /**
@@ -204,11 +208,13 @@ export class BucketsComponent implements OnInit {
   *   Get the value from the Select Dropdown Menu
   *
   * */
-   getSelectedCategory($myCategoryId){
+   getSelectedCategory(category){
      //getting category by ID
+     let $myCategoryId = category.value;
      let cat = this.categories.find(c=>c.categoryId === +$myCategoryId);
      this.newBucket.category = cat.title;
      this.newBucket.categoryId = cat.categoryId;
+     return cat.categoryId;
   }
 
   private getDismissReason(reason: any): string {
