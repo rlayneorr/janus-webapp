@@ -118,13 +118,18 @@ export class BucketsComponent implements OnInit {
 
     if (!bucketParam) {
       console.log(bucketParam);
+      console.log(this.currBucket, this.newBucket);
       bucketParam = this.currBucket;
-      this.currBucket.categoryId = this.newBucket.categoryId;
-      this.currBucket.category = this.newBucket.category;
+      // // bucketParam = this.currBucket;
+      // this.currBucket.categoryId = this.currBucket.categoryId;
+      // this.currBucket.category = this.currBucket.category;
     }
     if (bucketParam) {
       console.log(bucketParam.isActive);
-      this.bucketService.updateBucket(bucketParam).subscribe();
+      this.bucketService.updateBucket(bucketParam).subscribe(bucket=>{
+        this.buckets.find(b=>b.bucketId===bucket.bucketId).categoryId = this.currBucket.categoryId;
+        this.buckets.find(b=>b.bucketId===bucket.bucketId).category = this.categories.find(c=>c.categoryId === this.currBucket.categoryId).title;
+      });
       this.savedSuccessfully();
     }
   }
