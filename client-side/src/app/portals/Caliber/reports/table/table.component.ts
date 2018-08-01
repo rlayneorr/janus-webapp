@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, OnChanges, sequence } from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
+
 /**
  * @author John Hudson
  */

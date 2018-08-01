@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ViolationFlagComponent } from './violation-flag.component';
-import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { SkillTypeService } from '../../services/skillType/skill-type.service';
-import { ViolationTypeService } from '../../services/violationType/violationType.service';
-import { AlertsService } from '../../../services/alerts.service';
-import { ViolationType } from '../../entities/violationType';
+import {ViolationFlagComponent} from './violation-flag.component';
+import {SoftSkillsViolationService} from '../../../services/soft-skills-violation/soft-skills-violation.service';
+import {HttpClient, HttpHandler} from '@angular/common/http';
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {SkillTypeService} from '../../../services/skillType/skill-type.service';
+import {ViolationTypeService} from '../../../services/violationType/violationType.service';
+import {AlertsService} from '../../../services/alerts.service';
+import {ViolationType} from '../../entities/violationType';
 
 // Author: David Gustafson
 

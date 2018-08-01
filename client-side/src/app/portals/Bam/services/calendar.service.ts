@@ -7,7 +7,7 @@ import { TopicName } from '../models/topicname.model';
 import { CalendarEvent } from '../models/calendar-event.model';
 import { of } from 'rxjs/observable/of';
 import { CalendarStatusService } from './calendar-status.service';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 import { Schedule } from '../models/schedule.model';
 import { ScheduledSubtopic } from '../models/scheduledsubtopic.model';
 import { CALENDAR_VALUE_ACCESSOR } from 'primeng/primeng';

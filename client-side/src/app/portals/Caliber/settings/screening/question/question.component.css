@@ -81,7 +81,6 @@ h6 {
     color:black;
 }
 i {
-  cursor: pointer;
   cursor: hand;
 }
 .switch {
@@ -113,7 +112,7 @@ i {
   content: "";
   height: 13px;
   width: 13px;
-  left: 0px;
+  left: 0;
   bottom: 2px;
   background-color: white;
   -webkit-transition: .4s;
@@ -175,7 +174,7 @@ p{
   color: #F26925;
 }
 .fixed-modal .modal-content {
-  size: A4
+  size: A4;
 }
 
 .tabContent{

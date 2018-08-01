@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 /** component, service imports */
-import { Bucket } from '../entities/Bucket';
-import { BucketsService } from '../services/buckets.service';
-import { QuestionsService } from '../../../services/questions/questions.service';
+import {Bucket} from '../entities/Bucket';
+import {BucketsService} from '../../../services/buckets.service';
+import {QuestionsService} from '../../../services/questions/questions.service';
 /** style lib. imports */
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { AlertsService } from '../../../services/alerts.service';
-import { Category } from '../entities/Category';
-import { SettingsCategoriesService } from '../services/categories.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AlertsService} from '../../../services/alerts.service';
+import {Category} from '../entities/Category';
+import {SettingsCategoriesService} from '../../../services/categories.service';
 import {fade} from "../../../../../Animations/caliber-animations";
 
 
@@ -89,10 +89,11 @@ export class CategoriesComponent implements OnInit {
     console.log("changed:", this.changedBuckets);
     console.log("CurrentCategory:", this.currentCategory);
   }
+
   /**
    * resposible for making call for updatating a bucket
    * when editted or activity toggled
-   * @param bucketParam
+   * @param catParam
    */
   updateCategory(catParam: Category) {
     if (!catParam) { catParam = this.currentCategory; }
@@ -189,17 +190,13 @@ export class CategoriesComponent implements OnInit {
 
   // Check if a bucket and a category is related and if the bucket is active.
   containsActiveBucket(bucket: Bucket) {
-    if (this.currentCategory && this.currentCategory.categoryId === bucket.categoryId && bucket.isActive) {
-      return true;
-    }
-    return false;
+    return this.currentCategory && this.currentCategory.categoryId === bucket.categoryId && bucket.isActive;
+
   }
 
   containsInactiveBucket(bucket: Bucket) {
-    if (this.currentCategory && this.currentCategory.categoryId === bucket.categoryId && !bucket.isActive) {
-      return true;
-    }
-    return false;
+    return this.currentCategory && this.currentCategory.categoryId === bucket.categoryId && !bucket.isActive;
+
   }
 
   savedSuccessfully() {

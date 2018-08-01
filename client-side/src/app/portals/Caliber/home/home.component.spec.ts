@@ -1,9 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { Dependencies } from '../caliber.test.module';
-import { HomeComponent } from './home.component';
+import {Dependencies} from '../caliber.test.module';
+import {HomeComponent} from './home.component';
 
 xdescribe('CaliberHomeComponent', () => {
   let component: HomeComponent;

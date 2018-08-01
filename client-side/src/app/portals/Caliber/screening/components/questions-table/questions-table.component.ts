@@ -1,31 +1,24 @@
-import {Component, OnInit, OnDestroy, Directive} from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
 // Entities
-import { Question } from '../../entities/question';
-import { Bucket } from '../../../settings/screening/entities/Bucket';
-import { QuestionScore } from '../../entities/questionScore';
-import { Candidate} from '../../entities/Candidate';
-
+import {Question} from '../../entities/question';
+import {Bucket} from '../../../settings/screening/entities/Bucket';
+import {QuestionScore} from '../../entities/questionScore';
 // Services
 // import { QuestionService } from '../../services/question/question.service';
-import { QuestionScoreService } from '../../services/question-score/question-score.service';
-import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
-import { SkillTypeBucketLookUp } from '../../entities/skillTypeBucketLookup';
-import { QuestionsService} from '../../../services/questions/questions.service'
-import { SkillTypesService} from '../../../settings/screening/services/skillTypes.service'
-import { BucketsService} from '../../../settings/screening/services/buckets.service'
+import {QuestionScoreService} from '../../../services/question-score/question-score.service';
+import {SkillTypeBucketService} from '../../../services/skillTypeBucketLookup/skill-type-bucket.service';
+import {QuestionsService} from '../../../services/questions/questions.service'
+import {BucketsService} from '../../../services/buckets.service'
 // Utility Class (setting up buckets and questions based on selected tags)
-import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
-
+import {QuestionsToBucketsUtil} from '../../util/questionsToBuckets.util';
 // Modal for answering the question
-import { AnswerComponent } from '../answer/answer.component';
-
+import {AnswerComponent} from '../answer/answer.component';
 // ngbootstrap modal
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ScreeningService } from '../../services/screening/screening.service';
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { Category } from '../../../entities/Category';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ScreeningService} from '../../../services/screening/screening.service';
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {Category} from '../../../entities/Category';
 
 @Component({
   selector: 'app-questions-table',
@@ -103,8 +96,6 @@ export class QuestionsTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-
-
 
     //get the categories selected on the last page
    this.currentCategories = this.screeningService.getSelectedCategories();

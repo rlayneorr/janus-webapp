@@ -1,6 +1,6 @@
-import { Bucket } from '../../settings/screening/entities/Bucket';
-import { Question } from '../entities/question';
-import { SkillTypeBucketLookUp } from '../entities/skillTypeBucketLookup';
+import {Bucket} from '../../settings/screening/entities/Bucket';
+import {Question} from '../entities/question';
+import {SkillTypeBucketLookUp} from '../entities/skillTypeBucketLookup';
 
 
 export class QuestionsToBucketsUtil {

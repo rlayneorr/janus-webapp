@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
-import { VpHomeLineGraphService } from '../../services/graph/vp-home-line-graph.service';
-import { VpHomeSelectorService } from '../../services/selector/vp-home-selector.service';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { ChartDataEntity } from '../../entities/ChartDataEntity';
-import { AlertsService } from '../../services/alerts.service';
-import { ReportsService } from '../../services/reports.service';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {VpHomeLineGraphService} from '../../services/graph/vp-home-line-graph.service';
+import {VpHomeSelectorService} from '../../services/selector/vp-home-selector.service';
+import {ChartDataEntity} from '../../entities/ChartDataEntity';
+import {AlertsService} from '../../services/alerts.service';
+import {ReportsService} from '../../services/reports.service';
 
 @Component({
   selector: 'app-vp-line-graph',

@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import * as jsPDF from 'jspdf';
+import {Component, OnInit} from '@angular/core';
 // import { Http } from '@angular/http';
-import { PDFService } from '../../services/pdf.service';
-import { ReportingService } from '../../services/reporting.service';
-import { Subscription } from 'rxjs/Subscription';
-import { GranularityService } from '../services/granularity.service';
-import { Observable } from 'rxjs/Observable';
+import {PDFService} from '../../services/pdf.service';
+import {ReportingService} from '../../services/reporting.service';
+import {Subscription} from 'rxjs/Subscription';
+import {GranularityService} from '../services/granularity.service';
+import {Observable} from 'rxjs/Observable';
 
 /**
  * Displays the QC statuses of a given batch as a doughnut chart.

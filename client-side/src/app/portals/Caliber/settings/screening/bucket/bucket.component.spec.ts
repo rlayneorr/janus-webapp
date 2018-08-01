@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BucketComponent } from './bucket.component';
-import { Dependencies } from '../../../caliber.test.module';
+import {BucketComponent} from './bucket.component';
+import {Dependencies} from '../../../caliber.test.module';
 
 describe('BucketComponent', () => {
   let component: BucketComponent;

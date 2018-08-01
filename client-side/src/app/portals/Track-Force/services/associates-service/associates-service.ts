@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Response } from '@angular/http';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainee } from '../../../../caliber-client/entities/GambitTrainee';
 import { forEach } from '@angular/router/src/utils/collection';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 /**
  * Service for retrieving and updating data relating to associates.

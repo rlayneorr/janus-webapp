@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { FeedbackIconComponent } from './feedback-icon.component';
-import { Dependencies } from '../../caliber.test.module';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {FeedbackIconComponent} from './feedback-icon.component';
+
 describe('FeedbackIconComponent', () => {
   let component: FeedbackIconComponent;
   let fixture: ComponentFixture<FeedbackIconComponent>;

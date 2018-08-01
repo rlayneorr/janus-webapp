@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Routes } from '@angular/router';
-import { routes } from '../caliber.routes';
-
+import {Injectable} from '@angular/core';
+import {Routes} from '@angular/router';
+import {routes} from '../caliber.routes';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 // components
-import { CaliberComponent } from '../caliber.component';
+import {CaliberComponent} from '../caliber.component';
 
 /**
  * This class converts the contents of the Routes array

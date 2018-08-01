@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { DataSet } from './DataSet';
+import {DataSet} from './DataSet';
 
 // the object used for the ng2-charts
 export class ChartDataEntity {

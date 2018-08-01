@@ -1,10 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../../caliber.test.module';
-import { EditlocationComponent } from './editlocation.component';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ComponentFactoryResolver, Injector } from '@angular/core';
-import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
-import { Location } from '../../../entities/Location';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../../caliber.test.module';
+import {EditlocationComponent} from './editlocation.component';
+import {ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 describe('EditlocationComponent', () => {
   let component: EditlocationComponent;

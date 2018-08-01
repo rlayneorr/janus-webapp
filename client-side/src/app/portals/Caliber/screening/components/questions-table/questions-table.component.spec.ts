@@ -1,26 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { QuestionsTableComponent } from './questions-table.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { QuestionService } from '../../services/question/question.service';
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { SkillTypeService } from '../../services/skillType/skill-type.service';
-import { QuestionScoreService } from '../../services/question-score/question-score.service';
+import { QuestionService } from '../../../services/question/question.service';
+import {  CandidateService } from '../../../services/candidate/candidate.service';
+import { SkillTypeService } from '../../../services/skillType/skill-type.service';
+import { QuestionScoreService } from '../../../services/question-score/question-score.service';
 import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 import { NgbModalBackdrop } from '@ng-bootstrap/ng-bootstrap/modal/modal-backdrop';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
-import { ScreeningService } from '../../services/screening/screening.service';
-import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
+import { ScreeningService } from '../../../services/screening/screening.service';
+import { SkillTypeBucketService } from '../../../services/skillTypeBucketLookup/skill-type-bucket.service';
 import { Bucket } from '../../entities/bucket';
 import { Question } from '../../entities/question';
 import { AnswerComponent } from '../answer/answer.component';
 import { ViolationFlagComponent } from '../violation-flag/violation-flag.component';
-import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { ViolationTypeService } from '../../services/violationType/violationType.service';
+import { SoftSkillsViolationService } from '../../../services/soft-skills-violation/soft-skills-violation.service';
+import { ViolationTypeService } from '../../../services/violationType/violationType.service';
 import { AlertsService } from '../../../services/alerts.service';
 
 // Author: David Gustafson

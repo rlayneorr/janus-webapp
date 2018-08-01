@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BucketsService } from '../services/buckets.service';
+import { BucketsService } from '../../../services/buckets.service';
 import { Bucket } from '../entities/Bucket';
 
 @Component({

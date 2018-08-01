@@ -1,4 +1,4 @@
-import { Trainer } from './Trainer';
+import {Trainer} from './Trainer';
 
 export class User extends Trainer {
 

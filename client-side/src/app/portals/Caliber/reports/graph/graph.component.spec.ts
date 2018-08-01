@@ -1,11 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { BaseChartDirective } from 'ng2-charts/ng2-charts';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { Dependencies } from '../../caliber.test.module';
+import {Dependencies} from '../../caliber.test.module';
 
-import { GraphComponent } from './graph.component';
+import {GraphComponent} from './graph.component';
 
 /**
  * If you wish to run these test, you must comment out everything from OnInit from the .ts file

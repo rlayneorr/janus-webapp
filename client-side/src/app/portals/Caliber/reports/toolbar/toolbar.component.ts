@@ -5,18 +5,15 @@
  * @author Edel Benavides
  * @author Brandon Richardson
  */
-import { Component, OnInit, ViewChild, } from '@angular/core';
-
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import { TrainerService } from '../../services/trainer.service';
-import { GranularityService } from '../services/granularity.service';
-import { PDFService } from '../../services/pdf.service';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
-import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
-import { GambitTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
+import {Component, OnInit,} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {GranularityService} from '../services/granularity.service';
+import {PDFService} from '../../services/pdf.service';
+import {CompleteBatch} from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import {GambitBatchService} from '../../../../caliber-client/services/batch/gambit-batch.service';
+import {GambitBatchUtilService} from '../../../../services/gambit-batch-util.service';
+import {GambitTrainee} from '../../../../caliber-client/entities/GambitTrainee';
+import {GambitTraineeService} from '../../../../caliber-client/services/trainee/gambit-trainee.service';
 
 @Component({
   selector: 'app-toolbar',

@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgbModal, NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { DeleteBatchModalComponent } from './delete-batch-modal.component';
-import { Dependencies } from '../../caliber.test.module';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {DeleteBatchModalComponent} from './delete-batch-modal.component';
+import {Dependencies} from '../../caliber.test.module';
 
 xdescribe('DeleteBatchModalComponent', () => {
   let component: DeleteBatchModalComponent;

@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
-import { Bucket } from '../entities/Bucket';
+import {Bucket} from '../entities/Bucket';
 
 @Pipe({
     name: 'categoryFilter',

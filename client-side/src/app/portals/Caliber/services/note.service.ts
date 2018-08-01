@@ -1,20 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // rxjs
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/observable/merge';
-
 // services
-import { AlertsService } from './alerts.service';
-
+import {AlertsService} from './alerts.service';
 // entities
-import { Note } from '../entities/Note';
-import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import {Note} from '../entities/Note';
+import {BatchGambit} from '../../../caliber-client/entities/BatchGambit';
+import {GambitTrainee} from '../../../caliber-client/entities/GambitTrainee';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 
 const context = (new UrlService).note;
 

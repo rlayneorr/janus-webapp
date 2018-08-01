@@ -1,6 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Candidate } from '../entities/Candidate';
-import { ScheduledScreening } from '../entities/scheduleScreening';
+import {Pipe, PipeTransform} from '@angular/core';
+import {ScheduledScreening} from '../entities/scheduleScreening';
 
 @Pipe({
   name: 'searchPipe'

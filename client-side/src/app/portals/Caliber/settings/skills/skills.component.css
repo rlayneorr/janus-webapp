@@ -16,9 +16,8 @@
 }
 .btn-light {
   cursor: pointer;
-  border: 1px solid transparent;
   border-radius: 4px;
-  border-color: #ccc;
+  border: 1px solid #ccc;
   text-shadow: 0 1px 0 #fff;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
   background-repeat: repeat-x;
@@ -44,8 +43,7 @@
 }
 .btn-default {
   color: #333;
-  background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
-  background-color: #fff;
+  background: #fff linear-gradient(to bottom, #fff 0, #e0e0e0 100%);
 }
 .btn-default:hover {
   background-image: linear-gradient(to bottom,rgb(240, 239, 239) 0,#cccbcb 100%);
@@ -134,6 +132,5 @@ a {
   border-color: white;
 }
 .th {
-  border: hidden;
-  border-color: white;
+  border: hidden white;
 }

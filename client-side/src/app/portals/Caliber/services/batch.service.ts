@@ -1,22 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // Interfaces
-import { CRUD } from '../interfaces/api.interface';
-
+import {CRUD} from '../interfaces/api.interface';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
 // services
-import { ApiService } from '../util/api.service';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
-
+import {ApiService} from '../util/api.service';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 // entities
-import { Batch } from '../entities/Batch';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { stringifyDate } from '../util/utils';
+import {Batch} from '../entities/Batch';
+import {stringifyDate} from '../util/utils';
 
 const context = (new UrlService).batches;
 /**

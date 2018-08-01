@@ -1,21 +1,15 @@
 // Testing modules
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 // Modules\
-import { Dependencies } from '../../../caliber.test.module';
-
+import {Dependencies} from '../../../caliber.test.module';
 // Components
-import { QuestionComponent } from './question.component';
-
+import {QuestionComponent} from './question.component';
 // Entities
-import { Question } from '../../../entities/Question';
-
+import {Question} from '../../../entities/Question';
 // Services
-import { AlertsService } from '../../../services/alerts.service';
-
-
+import {AlertsService} from '../../../services/alerts.service';
 // Mock Data
-import { QUESTIONS } from '../../../screening/mock-data/mock-questions';
+import {QUESTIONS} from '../../../screening/mock-data/mock-questions';
 
 /**
  * Test for methods on the question component.

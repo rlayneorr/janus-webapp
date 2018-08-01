@@ -1,25 +1,24 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ScreeningService } from '../../services/screening/screening.service';
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { SkillTypeBucketService } from '../../services/skillTypeBucketLookup/skill-type-bucket.service';
-import { QuestionScoreService } from '../../services/question-score/question-score.service';
-import { QuestionScore } from '../../entities/questionScore';
-import { ScoresToBucketsUtil } from '../../util/scoresToBuckets.util';
-import { AlertsService } from '../../../services/alerts.service';
-import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { SoftSkillViolation } from '../../entities/softSkillViolation';
-import { Subscription } from 'rxjs/Subscription';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ScreeningService} from '../../../services/screening/screening.service';
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {SkillTypeBucketService} from '../../../services/skillTypeBucketLookup/skill-type-bucket.service';
+import {QuestionScoreService} from '../../../services/question-score/question-score.service';
+import {QuestionScore} from '../../entities/questionScore';
+import {ScoresToBucketsUtil} from '../../util/scoresToBuckets.util';
+import {AlertsService} from '../../../services/alerts.service';
+import {SoftSkillsViolationService} from '../../../services/soft-skills-violation/soft-skills-violation.service';
+import {SoftSkillViolation} from '../../entities/softSkillViolation';
+import {Subscription} from 'rxjs/Subscription';
 import { Bucket } from '../../../settings/screening/entities/Bucket';
 import { CategoryWeight } from '../../../settings/screening/entities/Category-Weight';
 import { SkillType } from '../../../settings/screening/entities/SkillType';
-import { SkillTypesService } from '../../../settings/screening/services/skillTypes.service';
 import { Category } from '../../../entities/Category';
 import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
-import { CategoryWeightsService } from '../../../settings/screening/services/weight.service';
-import { BucketsService } from '../../../settings/screening/services/buckets.service';
 import { QuestionsService } from '../../../services/questions/questions.service';
 import { Question } from '../../../settings/screening/entities/Question';
-
+import {SkillTypesService} from "../../../services/skillTypes.service";
+import {BucketsService} from "../../../services/buckets.service";
+import {CategoryWeightsService} from "../../../services/weight.service";
 
 @Component({
   selector: 'app-final-report',
@@ -80,7 +79,7 @@ subscriptions: Subscription[] = [];
       this.buckets.forEach((bucket)=>{
         this.questionService.getBucketQuestions(bucket.bucketId).subscribe((questionArray: Question[])=>{
           bucket.questions = questionArray;
-          
+
         })
       });
       this.getCandidate();

@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ReportingService } from '../../../services/reporting.service';
-import { Note } from '../../../entities/Note';
+import {Component, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Note} from '../../../entities/Note';
 
 @Component({
     selector: 'app-bargraphmodal',

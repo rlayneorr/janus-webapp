@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { PanelBatchAllTraineesComponent } from './panel-batch-all-trainees.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {PanelBatchAllTraineesComponent} from './panel-batch-all-trainees.component';
 
 
 describe('PanelBatchAllTraineesComponent', () => {

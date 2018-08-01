@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GranularityService } from './services/granularity.service';
-import { Subscription } from 'rxjs/Subscription';
-import { Trainee } from '../entities/Trainee';
-import { Observable } from 'rxjs/Observable';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {GranularityService} from './services/granularity.service';
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 
 /**
  * Parent component to reports charts & graphs. Handles filtering of displayed

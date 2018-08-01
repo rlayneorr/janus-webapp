@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ReportsService {

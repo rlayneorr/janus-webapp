@@ -1,12 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { ReportingService } from './reporting.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { CacheData } from '../../../entities/CacheData.entity';
-import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
-import { MockBackend } from '@angular/http/testing';
-import { XHRBackend, ResponseOptions, HttpModule, Response } from '@angular/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {ReportingService} from './reporting.service';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {CacheData} from '../../../entities/CacheData.entity';
+import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {MockBackend} from '@angular/http/testing';
+import {Response, ResponseOptions, XHRBackend} from '@angular/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 /**
  * Tested by Mythoua Chang

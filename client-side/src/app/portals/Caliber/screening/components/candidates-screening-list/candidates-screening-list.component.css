@@ -5,17 +5,15 @@
     margin: 25px 10%;
     min-width: 400px;
     max-width: 95vw;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #ddd;
-    border-radius: 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 h1{
     background: #f26925;
     color: white;
     min-width: 260px;
     width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     padding: 12px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -59,7 +57,7 @@ h1{
 }
 .table-hover{
     width: 100%;
-    
+
 }
 
 /* #############################
@@ -78,12 +76,12 @@ h1{
     justify-content: center;
 }
 .pagination /deep/ ul{
-    padding-left: 0px;
-    margin-left: 0px;
-    margin-bottom: 0px;
+    padding-left: 0;
+    margin-left: 0;
+    margin-bottom: 0;
 }
 .pagination /deep/ .ngx-pagination .pagination-previous{
-    padding-left: 0px;
+    padding-left: 0;
     padding-right: 2.5px;
 }
 .pagination /deep/ .ngx-pagination .current
@@ -92,7 +90,7 @@ h1{
 }
 
 /* #############################
-        MODAL STYLES 
+        MODAL STYLES
 ############################# */
 /* The Modal (background) */
 .modal {
@@ -130,10 +128,10 @@ h2{
 .btn{
     background: #f26925;
     color: white;
-    font-weight: strong;
+    font-weight: bold;
 }
 /* #############################
-        MEDIA STYLES 
+        MEDIA STYLES
 ############################# */
 @media(max-width:700px){
     .filters{
@@ -146,7 +144,7 @@ h2{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 10px;
-        margin-bottom: 0px;
+        margin-bottom: 0;
     }
 }
 @media(max-width: 508px){

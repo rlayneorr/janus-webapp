@@ -1,5 +1,4 @@
-import { Candidate } from './Candidate';
-import { SkillType } from './skillType';
+import {Candidate} from './Candidate';
 
 /*
   Entity representing a screening scheduled to take place

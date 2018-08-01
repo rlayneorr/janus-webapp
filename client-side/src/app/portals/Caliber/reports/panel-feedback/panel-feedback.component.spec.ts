@@ -1,11 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { PanelFeedbackComponent } from './panel-feedback.component';
-import { OrderByPipe } from '../../pipes/order-by.pipe';
-import { GranularityService } from '../services/granularity.service';
-import { PanelService } from '../../services/panel.service';
-import { HttpClientModule } from '@angular/common/http';
-import { AlertsService } from '../../services/alerts.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {PanelFeedbackComponent} from './panel-feedback.component';
 
 describe('PanelFeedbackComponent', () => {
   let component: PanelFeedbackComponent;

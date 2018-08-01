@@ -1,22 +1,23 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CandidatesScreeningListComponent } from './candidates-screening-list.component';
-import { FormsModule } from '@angular/forms';
+import {CandidatesScreeningListComponent} from './candidates-screening-list.component';
+import {FormsModule} from '@angular/forms';
 import {
-  NgxPaginationModule, PaginatePipe, PaginationControlsComponent,
-  PaginationControlsDirective, PaginationService
+  PaginatePipe,
+  PaginationControlsComponent,
+  PaginationControlsDirective,
+  PaginationService
 } from 'ngx-pagination';
-import { SearchPipe } from '../../util/search.pipe';
-import { HttpClientModule } from '@angular/common/http';
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { ScreeningService } from '../../services/screening/screening.service';
-import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
-import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { QuestionScoreService } from '../../services/question-score/question-score.service';
-import { SkillTypeService } from '../../services/skillType/skill-type.service';
-import { Dependencies } from '../../../caliber.test.module';
-import { ScheduledScreening } from '../../entities/scheduleScreening';
-import { Candidate } from '../../entities/Candidate';
+import {SearchPipe} from '../../util/search.pipe';
+import {HttpClientModule} from '@angular/common/http';
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {ScreeningService} from '../../../services/screening/screening.service';
+import {ScheduleScreeningService} from '../../../services/schedule-screening/schedule-screening.service';
+import {SoftSkillsViolationService} from '../../../services/soft-skills-violation/soft-skills-violation.service';
+import {QuestionScoreService} from '../../../services/question-score/question-score.service';
+import {SkillTypeService} from '../../../services/skillType/skill-type.service';
+import {ScheduledScreening} from '../../entities/scheduleScreening';
+import {Candidate} from '../../entities/Candidate';
 
 describe('CandidatesScreeningListComponent', () => {
   let component: CandidatesScreeningListComponent;

@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { WeeklyGradesComponent } from './weekly-grades.component';
-import { Dependencies } from '../../caliber.test.module';
+import {WeeklyGradesComponent} from './weekly-grades.component';
+import {Dependencies} from '../../caliber.test.module';
 
 
 xdescribe('WeeklyGradesComponent', () => {

@@ -1,4 +1,6 @@
-import { Category } from '../../Caliber/entities/Category';
+// noinspection TypeScriptPreferShortImport
+import {Category} from '../../Caliber/entities/Category';
+
 export class SkillType {
     // skillTypeID: number;
     // skillTypeName: string;

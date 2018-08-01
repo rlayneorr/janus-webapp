@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 /** component, service imports */
-import { Bucket } from '../entities/Bucket';
-import { BucketsService } from '../services/buckets.service';
-import { QuestionsService } from '../../../services/questions/questions.service';
+import {Bucket} from '../entities/Bucket';
+import {BucketsService} from '../../../services/buckets.service';
+import {QuestionsService} from '../../../services/questions/questions.service';
 /** style lib. imports */
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { AlertsService } from '../../../services/alerts.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AlertsService} from '../../../services/alerts.service';
 import {CategoryService} from "../../../services/category/category.service";
 import {Category} from "../../../entities/Category";
 import {fade} from "../../../../../Animations/caliber-animations";

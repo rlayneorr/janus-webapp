@@ -1,24 +1,17 @@
 // Testing Modules
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 // Modules
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs/Subscription';
-
 // Imports from Caliber.test.module.ts
-import { Dependencies } from '../../caliber.test.module';
-
+import {Dependencies} from '../../caliber.test.module';
 // Components
-import { LocationsComponent } from './locations.component';
-
+import {LocationsComponent} from './locations.component';
 // Services
-import { LocationService } from '../../../../gambit-client/services/location/location.service';
-import { HttpClient } from '@angular/common/http';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import {LocationService} from '../../../../caliber-client/services/location/location.service';
+import {UrlService} from '../../../../caliber-client/services/urls/url.service';
 // import { asyncData } from '../../services/questions/questions.service.spec';
-import { defer } from 'rxjs/observable/defer';
+import {defer} from 'rxjs/observable/defer';
 
-import {Location} from '../../../../gambit-client/entities/location-entities/Location';
+import {Location} from '../../../../caliber-client/entities/location-entities/Location';
 
 /**
  * Test for methods on the locations component.
@@ -32,9 +25,9 @@ import {Location} from '../../../../gambit-client/entities/location-entities/Loc
  * Setting up the testing environment for locations component.
  *
  * In order run test on this component, go to Caliber/caliber.test.module and uncomment
- * the LocationService that comes from the * gambit-client and comment the one
+ * the LocationService that comes from the * caliber-client and comment the one
  * that comes from the location service right above the one that is commented out.
- * Uncomment this: import { LocationService } from '../../gambit-client/services/location/location.service';
+ * Uncomment this: import { LocationService } from '../../caliber-client/services/location/location.service';
  * Comment this: import { LocationService } from './services/location.service';
  **/
 

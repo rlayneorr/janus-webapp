@@ -1,16 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { ViolationType } from '../../entities/violationType';
-import { ViolationTypeService } from '../../services/violationType/violationType.service';
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { SoftSkillViolation } from '../../entities/softSkillViolation';
-import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-
-
-import { HttpParams } from '@angular/common/http';
-import { ScreeningService } from '../../services/screening/screening.service';
+import {Component, OnInit} from '@angular/core';
+import {ViolationTypeService} from '../../../services/violationType/violationType.service';
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {SoftSkillViolation} from '../../entities/softSkillViolation';
+import {SoftSkillsViolationService} from '../../../services/soft-skills-violation/soft-skills-violation.service';
+import {Observable} from 'rxjs/Observable';
+import {ScreeningService} from '../../../services/screening/screening.service';
 
 @Component({
   selector: 'app-pass-fail',
@@ -172,11 +166,7 @@ export class PassFailComponent implements OnInit {
 
   // Method that detects whether there are any violations exist for the current screening
   hasViolations(): boolean {
-    if (this.softSkillViolationService.softSkillViolations === undefined || this.softSkillViolationService.softSkillViolations.length < 1) {
-      return false;
-    } else {
-      return true;
-    }
+    return !(this.softSkillViolationService.softSkillViolations === undefined || this.softSkillViolationService.softSkillViolations.length < 1);
   }
 
 

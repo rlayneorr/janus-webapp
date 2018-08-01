@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { SkillTypeService } from '../../services/skillType/skill-type.service';
-import { CategoryService } from '../../../../../portals/Caliber/services/category/category.service';
-import { ScreeningService } from '../../services/screening/screening.service';
-
-import { SKILLTYPES } from '../../mock-data/mock-skillTypes';
-// import { SCHEDULEDSCREENINGS } from '../../mock-data/mock-scheduled-screening';
-
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {CategoryService} from '../../../../../portals/Caliber/services/category/category.service';
+import {ScreeningService} from '../../../services/screening/screening.service';
 // import { Tag } from '../../entities/tag';
-import { SkillType } from '../../../../Caliber/settings/screening/entities/SkillType';
-import { Category } from '../../../entities/Category';
-import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
-import { ScheduledScreening } from '../../entities/scheduleScreening';
-import { SkillTypesService } from '../../../settings/screening/services/skillTypes.service';
+import {Category} from '../../../entities/Category';
+import {ScheduleScreeningService} from '../../../services/schedule-screening/schedule-screening.service';
+import {SkillTypesService} from '../../../services/skillTypes.service';
+
+// import { SCHEDULEDSCREENINGS } from '../../mock-data/mock-scheduled-screening';
 
 @Component({
   selector: 'app-introduction',
@@ -46,7 +41,7 @@ export class IntroductionComponent implements OnInit {
   // public tagList: Tag[];
   public categoriesSelected: Category[];
   public allCategories: Category[];
-  
+
 
   public comment: string;
 

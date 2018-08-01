@@ -1,19 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 // entities
-import { Trainee } from '../../entities/Trainee';
-import { Panel } from '../../entities/Panel';
-
+import {Panel} from '../../entities/Panel';
 // components
-import { PanelSearchbarComponent } from '../panel-searchbar/panel-searchbar.component';
-
+import {PanelSearchbarComponent} from '../panel-searchbar/panel-searchbar.component';
 // services
-import { PanelService } from '../../services/panel.service';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import {PanelService} from '../../services/panel.service';
+import {GambitTrainee} from '../../../../caliber-client/entities/GambitTrainee';
 
 @Component({
   selector: 'app-create-panel',

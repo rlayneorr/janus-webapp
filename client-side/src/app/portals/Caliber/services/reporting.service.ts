@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { CacheData } from '../../../entities/CacheData.entity';
-import { HttpClient } from '@angular/common/http';
-import { PanelReview } from '../entities/PanelReview';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {CacheData} from '../../../entities/CacheData.entity';
+import {HttpClient} from '@angular/common/http';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 
 /**
  * Service handles API calls and tracks fetched data for caching.
@@ -101,7 +99,7 @@ export class ReportingService {
    * Fetch the batch comparison average script
    * @param skill Skill to compare
    * @param training Training
-   * @param date Date
+   * @param startDate
    * @returns Number - batch average for comparison
    */
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
@@ -470,7 +468,7 @@ export class ReportingService {
    * Data exposed through @property {Observable<CacheData>} technologiesForTheWeek$
    *
    * @param batchId - Batch whose week topics we're fetching.
-   * @param week - How many weeks we're requesting.
+   * @param weekId
    */
   fetchTechnologiesForTheWeek(batchId: Number, weekId: Number) {
     const endpoint = this.urlService.apiTechnologiesForTheWeek(batchId, weekId);

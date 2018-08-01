@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 
 export interface CRUD<T> {
     fetchAll(object?: any): Observable<T[]>;

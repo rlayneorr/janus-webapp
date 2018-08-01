@@ -1,31 +1,16 @@
 // Testing modules
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 // Modules
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Dependencies } from '../../../caliber.test.module';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { COMMON_DEPRECATED_DIRECTIVES } from '@angular/common/src/directives';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-
+import {Dependencies} from '../../../caliber.test.module';
 // Entities
-import { Bucket } from '../entities/Bucket';
-import { Category } from '../entities/category';
-import { CategoryFilterPipe } from './categories.filter';
-import { CategoriesComponent } from './categories.component';
-import { Question } from '../../../entities/Question';
-
+import {CategoriesComponent} from './categories.component';
 // Services
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
-import { BucketsService } from '../services/buckets.service';
-
+import {UrlService} from '../../../../../caliber-client/services/urls/url.service';
+import {BucketsService} from '../../../services/buckets.service';
 // Mock Data
 // import { BUCKETS } from '../mock-data/mock-buckets';
-import { QuestionService } from '../../../screening/services/question/question.service';
-import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
-
 //Observables
-import { defer } from 'rxjs/observable/defer';
+import {defer} from 'rxjs/observable/defer';
 
 export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));

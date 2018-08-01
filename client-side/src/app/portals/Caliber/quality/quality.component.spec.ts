@@ -1,16 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { QualityComponent } from './quality.component';
-import { Dependencies } from '../caliber.test.module';
-import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
-import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
-import { HttpClient } from '@angular/common/http';
-import { GambitSkillTypeService } from '../../../gambit-client/services/skillType/gambit-skill-type.service';
-import { GambitBatchService } from '../../../gambit-client/services/batch/gambit-batch.service';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
-import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
-import { GambitTrainer } from '../../../gambit-client/entities/GambitTrainer';
-import { GambitAddress } from '../../../gambit-client/entities/GambitAddress';
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+import {QualityComponent} from './quality.component';
+import {BatchService} from '../../../caliber-client/aggregator/services/completebatch.service';
+import {DisplayBatchByYear} from '../pipes/display-batch-by-year.pipe';
+import {HttpClient} from '@angular/common/http';
+import {GambitSkillTypeService} from '../../../caliber-client/services/skillType/gambit-skill-type.service';
+import {GambitBatchService} from '../../../caliber-client/services/batch/gambit-batch.service';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
+import {CompleteBatch} from '../../../caliber-client/aggregator/entities/CompleteBatch';
 
 /**
  * Test for methods on the question component.

@@ -1,4 +1,4 @@
-import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
+import {BatchGambit} from '../../../caliber-client/entities/BatchGambit';
 
 export class Trainee {
     traineeId: number;

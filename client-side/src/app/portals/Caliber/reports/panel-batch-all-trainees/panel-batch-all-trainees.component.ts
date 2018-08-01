@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PanelReview } from '../../entities/PanelReview';
-import { Subscription } from 'rxjs/Subscription';
-import { ReportingService } from '../../services/reporting.service';
-import { GranularityService } from '../services/granularity.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PanelReview} from '../../entities/PanelReview';
+import {Subscription} from 'rxjs/Subscription';
+import {ReportingService} from '../../services/reporting.service';
+import {GranularityService} from '../services/granularity.service';
 
 /**
  * Component utilizes service API calls to fetch and display the results of

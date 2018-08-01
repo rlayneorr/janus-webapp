@@ -1,41 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 // Pipes
-import { SearchPipe } from '../../util/search.pipe';
-import { DatePipe } from '@angular/common';
-
+import {DatePipe} from '@angular/common';
 // Classes
-import { Candidate } from '../../entities/Candidate';
-import { ScheduledScreening } from '../../entities/scheduleScreening';
-
+import {Candidate} from '../../entities/Candidate';
+import {ScheduledScreening} from '../../entities/scheduleScreening';
 // Services
-import { CandidateService } from '../../services/candidate/candidate.service';
-import { ScreeningService } from '../../services/screening/screening.service';
-import { ScheduleScreeningService } from '../../services/schedule-screening/schedule-screening.service';
-import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
-import { QuestionScoreService } from '../../services/question-score/question-score.service';
-import { UrlService } from '../../../../../../app/gambit-client/services/urls/url.service';
+import { CandidateService } from '../../../services/candidate/candidate.service';
+import { ScreeningService } from '../../../services/screening/screening.service';
+import { ScheduleScreeningService } from '../../../services/schedule-screening/schedule-screening.service';
+import { SoftSkillsViolationService } from '../../../services/soft-skills-violation/soft-skills-violation.service';
+import { QuestionScoreService } from '../../../services/question-score/question-score.service';
+import { UrlService } from '../../../../../caliber-client/services/urls/url.service';
+
+
+// Installed Modules
+// npm install ngx-pagination --save
+// import { SkillTypesService} from "../../../settings/screening/services/skillTypes.service";
+import {AlertsService} from "../../../services/alerts.service";
+import {SkillType } from "../../../settings/screening/entities/SkillType";
 
 //import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
 // import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
-// Installed Modules
-// npm install ngx-pagination --save
-import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
-import { tick } from '../../../../../../../node_modules/@angular/core/testing';
-import {SkillTypesService} from "../../../settings/screening/services/skillTypes.service";
-import {AlertsService} from "../../../services/alerts.service";
-import {SkillType} from "../../../settings/screening/entities/SkillType";
 
 @Component({
   selector: 'app-candidates-screening-list',
   templateUrl: './candidates-screening-list.component.html',
   styleUrls: ['./candidates-screening-list.component.css'],
-  providers:[DatePipe, SearchPipe]
+  providers:[DatePipe]
 })
 
 /*
@@ -105,8 +100,6 @@ export class CandidatesScreeningListComponent implements OnInit {
     });
 
     console.log(this.scheduledScreenings);
-
-
     this.skillTypeService.getSkillTypes().subscribe((skills) => {
 
       this.skillTypes = skills;

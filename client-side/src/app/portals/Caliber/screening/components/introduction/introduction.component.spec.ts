@@ -1,8 +1,7 @@
 // Testing modules
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 // Entities
-import { IntroductionComponent } from './introduction.component';
+import {IntroductionComponent} from './introduction.component';
 
 describe('SkillTypeBucketsComponent', () => {
   let component: IntroductionComponent;

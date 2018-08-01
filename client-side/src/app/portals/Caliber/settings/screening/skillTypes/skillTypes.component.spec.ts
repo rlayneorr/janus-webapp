@@ -1,25 +1,19 @@
 //Modules
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { Dependencies } from '../../../caliber.test.module';
-
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../../caliber.test.module';
 //Entities
-import { SkillTypesComponent } from './skillTypes.component';
-import { Bucket } from '../entities/Bucket';
-import { SkillType } from '../entities/SkillType';
-
+import {SkillTypesComponent} from './skillTypes.component';
+import {Bucket} from '../entities/Bucket';
+import {SkillType} from '../entities/SkillType';
 // Services
-import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
-import { BucketsService } from '../services/buckets.service';
-import { SkillTypesService } from '../services/skillTypes.service';
-import { AlertsService } from '../../../services/alerts.service';
+import {AlertsService} from '../../../services/alerts.service';
+//Observables
+import {defer} from 'rxjs/observable/defer';
+import {of} from 'rxjs/observable/of';
 
 //Mock Data
 // import { BUCKETS } from '../mock-data/mock-buckets';
 //import { SKILLTYPES } from '../mock-data/mock-skillTypes';
-
-//Observables
-import { defer } from 'rxjs/observable/defer';
-import { of } from 'rxjs/observable/of';
 
 export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));

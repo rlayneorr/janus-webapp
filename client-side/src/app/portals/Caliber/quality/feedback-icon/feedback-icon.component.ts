@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Note } from '../../entities/Note';
+import {Component, Input, OnInit} from '@angular/core';
+import {Note} from '../../entities/Note';
 
 @Component({
   selector: 'app-feedback-icon',

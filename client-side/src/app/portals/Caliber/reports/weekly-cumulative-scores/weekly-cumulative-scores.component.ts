@@ -1,12 +1,10 @@
-import { Component, OnInit, OnDestroy, transition } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import { ReportingService } from '../../services/reporting.service';
-import { PDFService } from '../../services/pdf.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { GranularityService } from '../services/granularity.service';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
+import {ReportingService} from '../../services/reporting.service';
+import {PDFService} from '../../services/pdf.service';
+import {GranularityService} from '../services/granularity.service';
+import {GambitTrainee} from '../../../../caliber-client/entities/GambitTrainee';
 
 
 /**

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { TechnicalFeedbackComponent } from './technical-feedback.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {TechnicalFeedbackComponent} from './technical-feedback.component';
 
 xdescribe('TechnicalFeedbackComponent', () => {
   let component: TechnicalFeedbackComponent;

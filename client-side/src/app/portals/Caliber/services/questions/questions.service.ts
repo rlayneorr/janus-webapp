@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Question } from '../../entities/Question';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
-import { FnParam } from '../../../../../../node_modules/@angular/compiler/src/output/output_ast';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Question} from '../../entities/Question';
+import {UrlService} from '../../../../caliber-client/services/urls/url.service';
 
 /**
   * Used url Service to input endpoints to our services
@@ -87,8 +86,8 @@ export class QuestionsService {
   /**
    * gets all questions from bucket
    * add urlService to get endpoint for getting Bucket Questions
-   * @param buckerId
-  */
+   * @param bucketId
+   */
   getBucketQuestions(bucketId: number) {
     return this.http.get(this.urlService.question.getQuestionsByBucketId(bucketId));
   }

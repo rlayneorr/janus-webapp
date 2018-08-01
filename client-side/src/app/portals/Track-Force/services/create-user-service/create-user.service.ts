@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { RequestService } from '../request-service/request.service';
 import { HttpClient } from '@angular/common/http';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 @Injectable()
 export class CreateUserService {

@@ -1,14 +1,11 @@
-import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 // Entities
-import { QuestionScore } from '../../entities/questionScore';
-
+import {QuestionScore} from '../../entities/questionScore';
 // Services
-import { QuestionService } from '../../services/question/question.service';
-import { QuestionScoreService } from '../../services/question-score/question-score.service';
-
+import {QuestionService} from '../../../services/question/question.service';
+import {QuestionScoreService} from '../../../services/question-score/question-score.service';
 // ngbootstrap for modal
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-answer',
@@ -55,8 +52,9 @@ export class AnswerComponent implements OnInit, OnDestroy {
       commentary: '',
       beginTime: new Date()
     };
+    // update answeredQuestions array to match our question service's answeredQuestions array.
+    //this.questionScoreService.currentQuestionScores.subscribe(answeredQuestions => this.questionScores = answeredQuestions);
   }
-
   // when a score is set and submitted, update the array of questions scores
   saveQuestionScore(): void {
       // allow screeners to update the score of a candidate.

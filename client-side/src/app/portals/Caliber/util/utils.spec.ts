@@ -1,4 +1,4 @@
-import { stringifyDate } from './utils';
+import {stringifyDate} from './utils';
 
 describe('utils', () => {
     // this is the only method that's actually used in this service

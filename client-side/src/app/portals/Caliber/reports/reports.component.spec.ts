@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReportsComponent } from './reports.component';
-import { Dependencies } from '../caliber.test.module';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ReportsComponent} from './reports.component';
+import {Dependencies} from '../caliber.test.module';
 
 xdescribe('ReportsComponent', () => {
   let component: ReportsComponent;

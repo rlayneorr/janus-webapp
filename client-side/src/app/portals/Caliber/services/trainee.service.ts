@@ -1,20 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // services
-import { AlertsService } from './alerts.service';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
-
+import {AlertsService} from './alerts.service';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
 // Interfaces
-import { CRUD } from '../interfaces/api.interface';
-
+import {CRUD} from '../interfaces/api.interface';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Subject} from 'rxjs/Subject';
 // entities
-import { Trainee } from '../entities/Trainee';
+import {Trainee} from '../entities/Trainee';
 
 const context = (new UrlService).trainee;
 
