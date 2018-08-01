@@ -9,7 +9,7 @@ import {QuestionService} from "../../../screening/services/question/question.ser
 import {SettingsQuestionService} from "./question.service";
 
 
-describe('QuestionService', () => {
+fdescribe('QuestionService', () => {
 
   let httpClientSpyOnGet: { get: jasmine.Spy };
   let httpClientSpyOnPost: { post: jasmine.Spy };
