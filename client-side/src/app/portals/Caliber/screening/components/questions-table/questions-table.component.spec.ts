@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QuestionsTableComponent } from './questions-table.component';
@@ -157,7 +157,7 @@ describe('QuestionsTableComponent', () => {
 
 });
 */
-=======
+
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 // import { QuestionsTableComponent } from './questions-table.component';
@@ -312,4 +312,4 @@ describe('QuestionsTableComponent', () => {
 //   // });
 
 // });
->>>>>>> ec099d5459004e788902752d1429a920e824b97b
+

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /*import { TestBed, inject } from '@angular/core/testing';
-=======
-// import { TestBed, inject } from '@angular/core/testing';
->>>>>>> ec099d5459004e788902752d1429a920e824b97b
 
 // import { CandidateService } from './candidate.service';
 // // import { CANDIDATES } from '../../mock-data/mock-candidates';
@@ -413,6 +409,6 @@ describe('CandidateService', () => {
 <<<<<<< HEAD
 });
 */
-=======
+
 // });
->>>>>>> ec099d5459004e788902752d1429a920e824b97b
+
