@@ -24,7 +24,7 @@ export class ScoresToBucketsUtil {
     }
   }
   isBucketUsed(bucket: Bucket) {
-    console.log("scoreforquestion function:::: ", this);
+    console.log("scoreforquestion function:::: ", bucket);
     var f = this.scoreForQuestion;
     return !bucket.questions.map((q)=>{f(this.questionScores, q)})
       .every(e=>e===null);
