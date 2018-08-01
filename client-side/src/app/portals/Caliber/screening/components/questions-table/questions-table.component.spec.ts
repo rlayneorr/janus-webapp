@@ -106,21 +106,12 @@ describe('QuestionsTableComponent', () => {
     }
   });
 
-<<<<<<< HEAD
   it('should set currentCategory to bucket', () => {
     // component.questionBuckets = BUCKETS;
     // component.questionBuckets[0].bucketID = 1;
     component.setBucket(1);
     // expect(component.currentCategory.bucketID).toBe(1);
   });
-=======
-  // it('should set currentCategory to bucket', () => {
-  //   component.questionBuckets = BUCKETS;
-  //   component.questionBuckets[0].bucketID = 1;
-  //   component.setBucket(1);
-  //   expect(component.currentCategory.bucketID).toBe(1);
-  // });
->>>>>>> 0e97c67e6058e47ab3ba34adae3b541797c7fa4e
 
   it('should set run open', () => {
     const spy = spyOn(component, 'open');
