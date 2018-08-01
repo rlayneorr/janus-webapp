@@ -264,6 +264,7 @@ export class SkillTypesComponent implements OnInit {
         }
     }
 
+
   /**
    * Removes all references to the bucket that is associated to the skill type
    * @param category
@@ -394,14 +395,6 @@ export class SkillTypesComponent implements OnInit {
                             });
                         }
                     });
-                });
-                this.skillType.categories.forEach(category => {
-                    console.log(category);
-                    if(this.initialCategories.includes(category) === false){
-                        console.log('here')
-                        this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
-                        this.skillTypeService.updateSkillType(this.skillType).subscribe(result => {});
-                    }                        
                 });
             });
         }
