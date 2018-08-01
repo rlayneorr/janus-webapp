@@ -159,6 +159,8 @@ import { ScheduleScreeningService } from './screening/services/schedule-screenin
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
 import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
+//adding buckets component, seems to have been forgotten
+import { BucketsComponent } from './settings/screening/buckets/buckets.component';
 import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
 import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
@@ -167,6 +169,11 @@ import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category/category.service';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
 import { BucketsComponent } from './settings/screening/buckets/buckets.component';
+
+//importing missing services
+import { SettingsCategoriesService } from './settings/screening/services/categories.service';
+import { CategoryWeightsService } from './settings/screening/services/weight.service';
+import { SettingsQuestionService } from './settings/screening/services/question.service';
 
 export const Dependencies = {
   imports: [
@@ -258,6 +265,10 @@ export const Dependencies = {
     PanelOverallFeedbackComponent,
     FeedbackIconComponent,
     QualityOverallFeedbackComponent,
+    
+    //adding missing components
+    CategoriesComponent,
+    BucketsComponent,
 
         // components
         // PaginationControlsComponent,
@@ -386,7 +397,13 @@ export const Dependencies = {
     GambitBatchService,
     GambitBatchUtilService,
     UrlService,
-    CategoryService
+    CategoryService,
+
+    //adding missing services
+    SettingsCategoriesService,
+    CategoryWeightsService,
+    SettingsQuestionService
+
   ],
   bootstrap: [
     // TrainersComponent

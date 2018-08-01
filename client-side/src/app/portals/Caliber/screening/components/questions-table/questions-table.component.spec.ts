@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 /*import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -158,6 +159,8 @@ describe('QuestionsTableComponent', () => {
 });
 */
 
+=======
+>>>>>>> 80c693f15b4a9cb37509f58751bc7f1a279114ae
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 // import { QuestionsTableComponent } from './questions-table.component';
@@ -312,4 +315,7 @@ describe('QuestionsTableComponent', () => {
 //   // });
 
 // });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 80c693f15b4a9cb37509f58751bc7f1a279114ae

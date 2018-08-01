@@ -169,6 +169,7 @@ import {CandidateService} from "./screening/services/candidate/candidate.service
 @NgModule({
   imports: [
     CommonModule,
+    BrowserModule,
     HttpModule,
     HttpClientModule,
     NgbModule.forRoot(),
