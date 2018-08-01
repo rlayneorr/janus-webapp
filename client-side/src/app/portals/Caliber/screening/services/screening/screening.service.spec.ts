@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ScreeningService } from './screening.service';
+import { HttpClient, HttpHandler } from '../../../../../../../node_modules/@angular/common/http';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 describe('ScreeningService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ScreeningService]
+      providers: [ScreeningService,HttpClient,HttpHandler,UrlService]
     });
   });
 
