@@ -9,12 +9,13 @@ import { CandidateService } from '../../services/candidate/candidate.service';
 import { SkillTypeService } from '../../services/skillType/skill-type.service';
 import { ViolationTypeService } from '../../services/violationType/violationType.service';
 import { AlertsService } from '../../../services/alerts.service';
+import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
 // Author: David Gustafson
 
 // Cannot test: Appears to be error on component side
 
-describe('PassFailComponent', () => {
+fdescribe('PassFailComponent', () => {
   let component: PassFailComponent;
   let fixture: ComponentFixture<PassFailComponent>;
 
@@ -22,7 +23,7 @@ describe('PassFailComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ PassFailComponent, ViolationFlagComponent ],
       providers: [ SoftSkillsViolationService, HttpClient, HttpHandler, ScreeningService, CandidateService,
-      SkillTypeService, ViolationTypeService, AlertsService ]
+      SkillTypeService, ViolationTypeService, AlertsService,UrlService ]
     })
     .compileComponents();
   }));
