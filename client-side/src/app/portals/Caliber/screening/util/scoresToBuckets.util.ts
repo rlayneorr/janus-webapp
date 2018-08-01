@@ -5,6 +5,7 @@ import { Bucket } from '../../settings/screening/entities/Bucket';
 
 export class ScoresToBucketsUtil {
   public questionScores: QuestionScore[] = [];
+  public weights: CategoryWeight[] = [];
   scoreForQuestion(questionScores: QuestionScore[], question: any) {
     let qs: QuestionScore = questionScores.find(q=>q.questionId == question.questionId);
     if(qs) {
@@ -26,11 +27,17 @@ export class ScoresToBucketsUtil {
   isBucketUsed(bucket: Bucket) {
     console.log("scoreforquestion function:::: ", bucket);
     var f = this.scoreForQuestion;
-    return !bucket.questions.map((q)=>{f(this.questionScores, q)})
-      .every(e=>e===null);
+    if(!bucket.questions) { return false; }
+    if(!this.isWeightForBucket(this.weights, bucket)) { return false; }
+    if(!this.questionScores.find(q=>undefined!==bucket.questions.find(w=>w.questionId===q.questionId))) {
+      return false;
+    } else {
+      return true;
+    }
   }
     getFinalBreakdown(questionScores: QuestionScore[], buckets: Bucket[], weights: CategoryWeight[]): string[] {
       this.questionScores = questionScores;
+      this.weights = weights;
         let usedBuckets = buckets.filter(b=>this.isBucketUsed(b)); // all buckets that actually have asked questions.
 
         // If the total weights from the buckets with answered questions don't add up to 100%, evenly distribute the difference

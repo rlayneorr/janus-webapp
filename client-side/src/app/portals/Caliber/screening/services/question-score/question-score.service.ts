@@ -35,8 +35,8 @@ export class QuestionScoreService {
   }
 
   //get the question score from the database
-  getQuestionScore(question : QuestionScore) : void {
-    this.httpClient.get<QuestionScore>(this.urlService.questionScoring.getQuestionScore(question.screeningID));
+  getQuestionScore(screeningId: number) : void {
+    this.httpClient.get<QuestionScore>(this.urlService.questionScoring.getQuestionScore(screeningId));
   }
 
   // save the question to the database
