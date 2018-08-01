@@ -81,6 +81,7 @@ export class SkillTypesComponent implements OnInit {
     this.skillTypeService.getSkillTypes().subscribe((results) => {
         this.allSkillTypes = null;
         this.allSkillTypes = results;
+        console.log(this.allSkillTypes)
         });
     }
 
@@ -90,6 +91,7 @@ export class SkillTypesComponent implements OnInit {
    grabAllCategories() {
     this.categoriesService.getCategories().subscribe(results => {
         this.allCategories = results;
+        console.log(this.allCategories)
         });
     }
 
@@ -124,7 +126,7 @@ export class SkillTypesComponent implements OnInit {
                 this.allWeights.push(result);
                 this.resetCategories(skillType, null);
                 this.equalsMax();
-            })
+            });
             this.initialCategories.push(category);
         })
     }
@@ -287,6 +289,8 @@ export class SkillTypesComponent implements OnInit {
         });
 
         this.skillType.categories.forEach(category => {
+            this.initialCategories = [];
+            this.initialCategories.push(category);
             this.allWeights.forEach(weight =>{
                 if(category.categoryId === weight.categoryId){
                     this.weightsService.updateWeight(skillType, category, weight).subscribe(result => {
@@ -378,19 +382,19 @@ export class SkillTypesComponent implements OnInit {
             this.skillTypeService.getSkillTypeById(this.skillType.skillTypeId).subscribe(result => {
                 this.allWeights.forEach(weight => {
                     this.categoriesService.getCategoryById(weight.categoryId).subscribe(category => {
-                        if(!this.initialCategories.includes(category) && !result.categories.includes(category)){
+                        if(this.initialCategories.includes(category)===false && result.categories.includes(category)===false){
                             this.weightsService.deleteWeight(weight).subscribe(result => {
                             });
                         }
                     });
                 });
-                this.skillType.categories.forEach(category => {
-                    console.log(category);
-                    if(!this.initialCategories.includes(category) && !result.categories.includes(category)){
-                        this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
-                        this.skillTypeService.updateSkillType(this.skillType).subscribe(result => {});
-                    }
-                });
+                // this.skillType.categories.forEach(category => {
+                //     console.log(category);
+                //     if(!this.initialCategories.includes(category) && !result.categories.includes(category)){
+                //         this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
+                //         this.skillTypeService.updateSkillType(this.skillType).subscribe(result => {});
+                //     }
+                // });
             });
         }
         this.allSkillTypes =  [];
