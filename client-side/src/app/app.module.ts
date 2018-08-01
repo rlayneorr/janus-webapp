@@ -24,7 +24,7 @@ import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
 import { GambitClientModule } from './gambit-client/gambit-client.module';
 import { GambitBatchUtilService } from './services/gambit-batch-util.service';
-
+import { CategoryWeightsService } from './portals/Caliber/settings/screening/services/weight.service'
 // Error Alert
 import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';
 import { GambitInterceptor } from './gambit-client/interceptors/gambit.interceptor';
@@ -78,6 +78,7 @@ const routes: Routes = [
     LoginComponent,
     DashboardComponent,
     JanusComponent,
+    NavComponent
   ],
   providers: [
     ChuckNorrisService,
@@ -92,7 +93,8 @@ const routes: Routes = [
     CurriculumService,
     InterviewService,
     MarketStatusService,
-    PlacementService
+    PlacementService,
+    CategoryWeightsService
   ],
   bootstrap: [AppComponent]
 })

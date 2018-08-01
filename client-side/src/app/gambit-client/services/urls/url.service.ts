@@ -240,7 +240,7 @@ export class UrlService {
   };
 
   //private questionScoringEndpoint = 'question-score-service/question';
-  private questionScoringEndpoint = `tech-screening/question`;
+  private questionScoringEndpoint = `${this.techScreening}/question`;
   questionScoring = {
     scoringQuestion: () => `${this.context + this.questionScoringEndpoint}/score`,
     getQuestionScore: (screeningId : number) => `${this.context + this.questionEndpoint}/score/${screeningId}`
@@ -351,10 +351,10 @@ export class UrlService {
   };
 
   softSkillsViolation = {
-    getViolationTypeURL: () => `${this.context}tech-screening/violation/type`,
-    getViolationURL: (screeningID: number) => `${this.context}tech-screening/screening/violation/${screeningID}`,
-    addViolationURL: () => `${this.context}tech-screening/violation/`,
-    deleteViolationURL: (violationID: number) => `${this.context}tech-screening/violation/${violationID}`,
+    getViolationTypeURL: () => `${this.context}/tech-screening/violation/type`,
+    getViolationURL: (screeningID: number) => `${this.context}/tech-screening/screening/${screeningID}/violation/`,
+    addViolationURL: () => `${this.context}/tech-screening/violation/`,
+    deleteViolationURL: (violationID: number) => `${this.context}/tech-screening/violation/${violationID}`,
   };
 
   subtopic = {

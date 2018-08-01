@@ -9,7 +9,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AlertsService } from '../../../services/alerts.service';
 import {CategoryService} from "../../../services/category/category.service";
 import {Category} from "../../../entities/Category";
-import {fade, removeItem} from "../../../../../Animations/caliber-animations";
+import {fade} from "../../../../../Animations/caliber-animations";
 
 
 @Component({
@@ -140,7 +140,6 @@ export class BucketsComponent implements OnInit {
 
   deleteBucket(){
     this.bucketService.deleteBucket(this.currBucket.bucketId).subscribe(result => {
-      this.getBuckets();
     }, ()=> {this.alertsService.error('Error Deleting Bucket');}, ()=>{this.confirm = false});
 
     this.alertsService.success('Successfully Deleted Bucket');

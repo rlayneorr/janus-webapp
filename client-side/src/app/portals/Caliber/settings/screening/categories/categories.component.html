@@ -112,6 +112,6 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="c('Close click')">Cancel</button>
-    <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="deleteCategory(); c('Close click')">Delete</button>
+    <button type="button" data-dismiss="modal" class="btn btn-primary" (click)="c('Close click'); changeConfirm();">Delete</button>
   </div>
 </ng-template>
