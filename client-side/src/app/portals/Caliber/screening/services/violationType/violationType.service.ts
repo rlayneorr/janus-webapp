@@ -23,6 +23,21 @@ import { UrlService } from '../../../../../gambit-client/services/urls/url.servi
 
 @Injectable()
 export class ViolationTypeService {
+  getViolation(arg0: any): any {
+    throw new Error("Method not implemented.");
+  }
+  deleteViolation(arg0: any): any {
+    throw new Error("Method not implemented.");
+  }
+  getViolationById(arg0: any): any {
+    throw new Error("Method not implemented.");
+  }
+  updateSoftSkillViolations(arg0: any): any {
+    throw new Error("Method not implemented.");
+  }
+  static getAllViolationTypes(): any {
+    throw new Error("Method not implemented.");
+  }
 
   // getViolationTypes(): Observable<ViolationType[]> {
   //   return of(VIOLATION_TYPES);

@@ -166,6 +166,7 @@ import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category/category.service';
 import { NgbModalStack } from '@ng-bootstrap/ng-bootstrap/modal/modal-stack';
+import { BucketsComponent } from './settings/screening/buckets/buckets.component';
 
 export const Dependencies = {
   imports: [
@@ -329,7 +330,10 @@ export const Dependencies = {
         SkillTypesComponent,
         BucketComponent,
         QuestionComponent,
-        ScreeningComponent
+        ScreeningComponent,
+        CategoriesComponent,
+        BucketsComponent
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpringInterceptor, multi: true },  // interceptor for all HTTP requests
