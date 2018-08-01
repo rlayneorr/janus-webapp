@@ -78,7 +78,7 @@
       <div class="form-group">
 
         <!--[(ngModel)]="currentCategory.categoryId"-->
-        <select #selectCategory class="form-control" name="cate">
+        <select #selectCategory class="form-control" name="cate" [(ngModel)]="newBucket.categoryId">
           <option *ngFor="let cat of categories" [ngValue]="cat.categoryId">
             {{cat.title}}
           </option>

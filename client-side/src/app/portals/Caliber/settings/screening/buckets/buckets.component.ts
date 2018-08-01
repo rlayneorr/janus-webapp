@@ -167,6 +167,9 @@ export class BucketsComponent implements OnInit {
   createBucket() {
     this.newBucket.isActive = false;
 
+    console.log(this.newBucket);
+    console.log(this.currBucket);
+
     this.bucketService.createNewBucket(this.newBucket)
       .subscribe(bucket => {
 
@@ -187,6 +190,12 @@ export class BucketsComponent implements OnInit {
 
   savedSuccessfully() {
     this.alertsService.success('Update Successfully');
+  }
+
+  setCategory(category){
+    console.log("new bucket without category", this.newBucket);
+    this.newBucket = category;
+    console.log("new bucket with category", this.newBucket);
   }
 
   open(content) {
