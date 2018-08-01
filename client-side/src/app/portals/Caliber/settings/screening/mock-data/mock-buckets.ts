@@ -1,46 +1,32 @@
-// //import {Bucket} from '../entities/bucket';
-//
-// export const BUCKETS: Bucket[] = [
-//     { bucketId: 0,
-//       skillTypeId: 1,
-//       category: 'Basic Java',
-//       description: 'OCA level Java questions',
-//       isActive: false,
-//     },
-//     { bucketId: 1,
-//       skillTypeId: 2,
-//       category: 'SQL',
-//       description: 'SQL database questions',
-//       isActive: true,
-//     },
-//     { bucketId: 2,
-//       skillTypeId: 3,
-//       category: 'JavaScript',
-//       description: 'JavaScript questions',
-//       isActive: true,
-//     },
-//     { bucketId: 3,
-//       skillTypeId: 4,
-//       category: 'HTML',
-//       description: 'JavaScript questions',
-//       isActive: true,
-//     },
-//     { bucketId: 4,
-//       skillTypeId: 5,
-//       category: 'CSS',
-//       description: 'JavaScript questions',
-//       isActive: true,
-//     },
-//     { bucketId: 5,
-//       skillTypeId: 6,
-//       category: 'Spring',
-//       description: 'JavaScript questions',
-//       isActive: true,
-//     },
-//     { bucketId: 6,
-//       skillTypeId: 7,
-//       category: 'Angular',
-//       description: 'JavaScript questions',
-//       isActive: true,
-//     }
-//   ];
+import {Bucket} from '../entities/bucket';
+
+export const BUCKETS: Bucket[] = [
+    { bucketId: 0,
+        categoryId : 1,
+        category: 'Javaer',
+        bucketDescription: 'Java',
+        isActive: true,
+    questions: null
+    },
+    { bucketId: 1,
+        categoryId : 2,
+        category: 'SQL',
+        bucketDescription: 'SQL database questions',
+        isActive: true,
+        questions: null
+    },
+    { bucketId: 2,
+        categoryId : 3,
+        category: 'JavaScript',
+        bucketDescription: 'JavaScript questions',
+        isActive: true,
+        questions: null
+    },
+    { bucketId: 3,
+        categoryId : 4,
+        category: 'HTML',
+        bucketDescription: 'JavaScript questions',
+        isActive: true,
+        questions: null
+    }
+  ];
