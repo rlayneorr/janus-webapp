@@ -408,7 +408,12 @@ describe('CandidateService', () => {
 
 <<<<<<< HEAD
 });
+<<<<<<< HEAD
 */
 
 // });
+
+
+
+ 
 

@@ -62,7 +62,7 @@ import { HttpErrorHandlerService } from './settings/screening/services/http-erro
 /** for in memory data service
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
   */
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
 import { TrainerService } from './services/trainer.service';
 import { GambitTraineeService } from '../../gambit-client/services/trainee/gambit-trainee.service';

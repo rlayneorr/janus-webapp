@@ -1,11 +1,15 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
 
 import { QuestionScoreService } from './question-score.service';
+import {HttpClientModule, HttpClient} from "@angular/common/http";
+import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import {UrlService} from "../../../../../gambit-client/services/urls/url.service";
 
-describe('QuestionScoreService', () => {
+fdescribe('QuestionScoreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [QuestionScoreService]
+      imports: [HttpClientModule, HttpClientTestingModule],
+      providers: [QuestionScoreService, UrlService]
     });
   });
 
