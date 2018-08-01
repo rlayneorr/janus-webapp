@@ -17,6 +17,8 @@ import { Category } from '../../../entities/Category';
 import { QuestionsToBucketsUtil } from '../../util/questionsToBuckets.util';
 import { CategoryWeightsService } from '../../../settings/screening/services/weight.service';
 import { BucketsService } from '../../../settings/screening/services/buckets.service';
+import { QuestionsService } from '../../../services/questions/questions.service';
+import { Question } from '../../../settings/screening/entities/Question';
 
 
 @Component({
@@ -57,6 +59,7 @@ subscriptions: Subscription[] = [];
     private skillTypesService: SkillTypesService,
     private bucketsService: BucketsService,
     private categoryWeightsService: CategoryWeightsService,
+    private questionService: QuestionsService,
     private questionScoreService: QuestionScoreService,
     private questionsToBucketsUtil: QuestionsToBucketsUtil,
     private scoresToBucketsUtil: ScoresToBucketsUtil,
@@ -68,11 +71,20 @@ subscriptions: Subscription[] = [];
   ngOnInit() {
     this.checked = 'false';
     this.categories = this.screeningService.getSelectedCategories();
-    this.bucketsService.getAllBuckets().subscribe((bucket: Bucket[]) => {
-      this.buckets = bucket;
-      this.getCandidate();
+    this.bucketsService.getAllBuckets().subscribe((bucketArray: Bucket[]) => {
+      this.buckets = bucketArray;
+      this.getQuestions();
     });
   }
+    getQuestions(){
+      this.buckets.forEach((bucket)=>{
+        this.questionService.getBucketQuestions(bucket.bucketId).subscribe((questionArray: Question[])=>{
+          bucket.questions = questionArray;
+          
+        })
+      });
+      this.getCandidate();
+    }
     getCandidate(){
     console.log("Return Buckets: ", this.buckets);
     this.candidateName = this.candidateService.getSelectedCandidate().name;
