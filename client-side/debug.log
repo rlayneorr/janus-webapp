@@ -20,3 +20,4 @@
 [0528/003905.900:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
 [0528/003905.900:ERROR:exception_snapshot_win.cc(88)] thread ID 20656 not found in process
 [0528/003905.900:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[0731/191902.421:ERROR:exception_handler_server.cc(526)] ConnectNamedPipe: The pipe is being closed. (0xE8)
