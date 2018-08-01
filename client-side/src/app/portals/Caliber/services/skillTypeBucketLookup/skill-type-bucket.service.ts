@@ -1,14 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SkillTypeBucketLookUp } from '../../screening/entities/skillTypeBucketLookup';
 import { UrlService } from '../../../../caliber-client/services/urls/url.service';
-
-/*
-
-*/
-
 
 /**
 * Used to move the data for buckets and their related weights.

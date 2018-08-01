@@ -5,6 +5,7 @@ import {SoftSkillViolation} from '../../entities/softSkillViolation';
 import {SoftSkillsViolationService} from '../../../services/soft-skills-violation/soft-skills-violation.service';
 import {Observable} from 'rxjs/Observable';
 import {ScreeningService} from '../../../services/screening/screening.service';
+import {ViolationType} from "../../entities/violationType";
 
 @Component({
   selector: 'app-pass-fail',

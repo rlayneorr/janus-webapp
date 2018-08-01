@@ -22,6 +22,8 @@ import { UrlService } from '../../../../../caliber-client/services/urls/url.serv
 // import { SkillTypesService} from "../../../settings/screening/services/skillTypes.service";
 import {AlertsService} from "../../../services/alerts.service";
 import {SkillType } from "../../../settings/screening/entities/SkillType";
+import {SkillTypesService} from "../../../services/skillTypes.service";
+import {SearchPipe} from "../../util/search.pipe";
 
 //import { CANDIDATES } from '../../../screening/mock-data/mock-candidates';
 // import { SCHEDULEDSCREENINGS } from '../../../screening/mock-data/mock-scheduled-screening';
@@ -30,7 +32,7 @@ import {SkillType } from "../../../settings/screening/entities/SkillType";
   selector: 'app-candidates-screening-list',
   templateUrl: './candidates-screening-list.component.html',
   styleUrls: ['./candidates-screening-list.component.css'],
-  providers:[DatePipe]
+  providers:[DatePipe, SearchPipe]
 })
 
 /*
