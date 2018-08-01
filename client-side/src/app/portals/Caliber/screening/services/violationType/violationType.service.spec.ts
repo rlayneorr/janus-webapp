@@ -24,7 +24,7 @@ it('should get all violationTypes', inject([ViolationTypeService], (service: Vio
   expect(service).toBeTruthy();
 }));
 
-it('should get all violationTypes', inject([ViolationTypeService], (service: ViolationTypeService) => {
+it('should get violationTypes', inject([ViolationTypeService], (service: ViolationTypeService) => {
   service.getViolationTypes();
   expect(service).toBeTruthy();
 }));
