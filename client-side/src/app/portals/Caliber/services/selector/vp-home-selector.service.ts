@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { ChartDataEntity } from '../../entities/ChartDataEntity';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class VpHomeSelectorService {

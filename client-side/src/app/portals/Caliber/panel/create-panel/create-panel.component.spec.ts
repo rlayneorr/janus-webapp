@@ -1,16 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CreatePanelComponent } from './create-panel.component';
-import { Dependencies } from '../../caliber.test.module';
-import { Panel } from '../../entities/Panel';
-import { NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ComponentRef, ElementRef, Renderer2, TemplateRef } from '@angular/core';
-import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
-import { ContentRef } from '@ng-bootstrap/ng-bootstrap/util/popup';
-import { NgbModalBackdrop } from '@ng-bootstrap/ng-bootstrap/modal/modal-backdrop';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { User } from '../../../../gambit-client/entities/User';
-import { UserRole } from '../../../../gambit-client/entities/UserRole';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {CreatePanelComponent} from './create-panel.component';
+import {Dependencies} from '../../caliber.test.module';
+import {ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 describe('CreatePanelComponent', () => {
   let component: CreatePanelComponent;

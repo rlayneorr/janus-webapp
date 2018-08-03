@@ -1,15 +1,7 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { Dependencies } from '../../caliber.test.module';
-import { AllCumulativeScoresComponent } from './all-cumulative-scores.component';
-import { ReportingService } from '../../services/reporting.service';
-import { GranularityService } from '../services/granularity.service';
-import { PDFService } from '../../services/pdf.service';
-import { GraphDataPipe } from '../../pipes/graph-data.pipe';
-import { TableComponent } from '../table/table.component';
-import { GraphComponent } from '../graph/graph.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ChartsModule } from 'ng2-charts';
+import {Dependencies} from '../../caliber.test.module';
+import {AllCumulativeScoresComponent} from './all-cumulative-scores.component';
 
 
 describe('AllCumulativeScoresComponent', () => {

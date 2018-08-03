@@ -1,4 +1,4 @@
-import { TrainerPipePipe } from './trainer-pipe.pipe';
+import {TrainerPipePipe} from './trainer-pipe.pipe';
 
 describe('TrainerPipePipe', () => {
   it('create an instance', () => {

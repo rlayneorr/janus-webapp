@@ -1,7 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import {inject, TestBed} from '@angular/core/testing';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
-import { TrainingTypeService } from './training-type.service';
+import {TrainingTypeService} from './training-type.service';
 
 xdescribe('TrainingTypeService', () => {
   beforeEach(() => {

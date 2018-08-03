@@ -1,19 +1,13 @@
 // Test imports modules
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpTestingController } from '@angular/common/http/testing';
-
 // Entities
-import { Question } from '../../entities/Question';
-
+import {Question} from '../../entities/Question';
 // Services
-import { QuestionsService } from './questions.service';
-
+import {QuestionsService} from './questions.service';
 // Modules
-import { HttpClient, HttpHandler, HttpBackend, HttpErrorResponse } from '@angular/common/http';
-import { QUESTIONS, replacementQuestion, expectedQuestion } from './mock-questions';
-import { Observable } from 'rxjs/Observable';
-import { defer } from 'rxjs/observable/defer';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {expectedQuestion, QUESTIONS} from './mock-questions';
+import {defer} from 'rxjs/observable/defer';
+import {UrlService} from '../../../../caliber-client/services/urls/url.service';
 
 export function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -35,7 +29,7 @@ export function asyncError<T>(errorObject: any) {
  * This describe block is actually using mock data. It uses the same approach as this example:
  * https://angular.io/guide/testing#testing-http-services
  */
-describe('QuestionsService ', () => {
+fdescribe('QuestionsService ', () => {
   const testBucket = -1;
   let httpClientSpyOnGet: { get: jasmine.Spy };
   let httpClientSpyOnPost: { post: jasmine.Spy };
@@ -74,7 +68,7 @@ describe('QuestionsService ', () => {
 
     httpClientSpyOnPost.post.and.returnValue(asyncData(QUESTIONS[0]));
 
-    questionsService.createNewQuestion(QUESTIONS[0], [1]).subscribe(
+    questionsService.createNewQuestion(QUESTIONS[0]).subscribe(
       questions => expect(questions).toEqual(QUESTIONS[0]),
       fail
     );
@@ -93,7 +87,7 @@ describe('QuestionsService ', () => {
 
     httpClientSpyOnPost.post.and.returnValue(asyncData(QUESTIONS[0]));
 
-    questionsService.updateQuestion(QUESTIONS[0], [1]).subscribe(
+    questionsService.updateQuestion(QUESTIONS[0]).subscribe(
       questions => expect(questions).toEqual(QUESTIONS[0]),
       fail
     );
@@ -175,7 +169,7 @@ describe('QuestionsService ', () => {
     httpClientSpyOnPost.post.and.returnValue(asyncError(errorResponse));
     questionsService = new QuestionsService(<any> httpClientSpyOnPost, new UrlService);
 
-    questionsService.createNewQuestion(QUESTIONS[0], [1]).subscribe(
+    questionsService.createNewQuestion(QUESTIONS[0]).subscribe(
       questions => fail('expected an error, not questions'),
       error  => expect(error.message).toContain('404')
     );
@@ -190,7 +184,7 @@ describe('QuestionsService ', () => {
     httpClientSpyOnPost.post.and.returnValue(asyncError(errorResponse));
     questionsService = new QuestionsService(<any> httpClientSpyOnPost, new UrlService);
 
-    questionsService.updateQuestion(QUESTIONS[0], [1]).subscribe(
+    questionsService.updateQuestion(QUESTIONS[0]).subscribe(
       questions => fail('expected an error, not questions'),
       error  => expect(error.message).toContain('404')
     );

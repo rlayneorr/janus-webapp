@@ -1,40 +1,33 @@
-import { Category } from '../../entities/Category';
-
+import {Category} from '../../entities/Category';
+// Refactored by Tyerra Smith to match the entity.
 export const CATEGORIES: Category[] = [
     {
         categoryId: 0,
-        skillCategory: 'skill0',
-        active: true,
+        title: 'category0'
     },
     {
         categoryId: 1,
-        skillCategory: 'skill1',
-        active: false,
+        title: 'category1'
     },
     {
         categoryId: 2,
-        skillCategory: 'skill2',
-        active: false,
+        title: 'category2'
     },
     {
         categoryId: 3,
-        skillCategory: 'skill3',
-        active: true,
+        title: 'category3'
     },
     {
         categoryId: 4,
-        skillCategory: 'skill4',
-        active: false,
+        title: 'category4'
     },
     {
         categoryId: 5,
-        skillCategory: 'skill5',
-        active: false,
+        title: 'category5'
     },
 ];
 
 export const replacementCategory: Category = {
     categoryId: 6,
-    skillCategory: 'skill6',
-    active: false,
+    title: 'category6'
 };

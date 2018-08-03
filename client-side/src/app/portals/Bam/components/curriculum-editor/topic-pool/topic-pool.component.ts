@@ -26,8 +26,8 @@ export class TopicPoolComponent implements OnInit {
   uniqarr: string[];
   uniqarrFiltered: string[];
   searchText: string;
-  subArray: Array<Topic[]> = new Array<Topic[]>();
-  subTopicArray: Array<SubtopicCurric[]> = new Array<SubtopicCurric[]>();
+  subArray: Array<Topic[]> = [];
+  subTopicArray: Array<SubtopicCurric[]> = [];
   subTopicName: Topic[] = [];
   topicPoolCacheData: Topic[] = [];
   @Input() readOnly: boolean;
@@ -131,7 +131,7 @@ export class TopicPoolComponent implements OnInit {
         this.uniqarrFiltered = this.uniqarr.filter(i => {
           return i.toLowerCase().includes(topicSearch.toString());
         });
-        this.subArray = new Array<Topic[]>();
+        this.subArray = [];
         this.getSubTopics();
       } else if (data.type === 'subtopic') {
         this.searchText = data.text.toString().toLowerCase();
@@ -215,7 +215,7 @@ export class TopicPoolComponent implements OnInit {
         this.subtopicService.addSubTopicName(newSubTopic, topic.id, 1).subscribe(
           data => {
             this.uniqarrFiltered.push(topic.name);
-            this.subArray = new Array<Topic[]>();
+            this.subArray = [];
             this.topicPoolCacheData.push(data);
             this.getSubTopics();
             this.alertService.alert('success', 'Successfully added Topic');
@@ -256,7 +256,7 @@ export class TopicPoolComponent implements OnInit {
     if (newSubTopic.length > 1) {
       this.subtopicService.addSubTopicName(newSubTopic, this.selectedTopicId, 1).subscribe(
         data => {
-          this.subArray = new Array<Topic[]>();
+          this.subArray = [];
           this.topicPoolCacheData.push(data);
           this.getSubTopics();
           this.alertService.alert('success', 'Successfully added Subtopic');

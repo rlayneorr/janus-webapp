@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { TrainersComponent } from './trainers.component';
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {TrainersComponent} from './trainers.component';
 
 
 xdescribe('TrainersComponent', () => {

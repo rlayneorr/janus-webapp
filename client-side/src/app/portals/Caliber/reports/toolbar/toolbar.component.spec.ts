@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { ToolbarComponent } from './toolbar.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {ToolbarComponent} from './toolbar.component';
 
 xdescribe('ToolbarComponent', () => {
   let component: ToolbarComponent;

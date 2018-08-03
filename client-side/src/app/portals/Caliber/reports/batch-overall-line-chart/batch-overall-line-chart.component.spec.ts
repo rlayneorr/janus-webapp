@@ -1,12 +1,10 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
 
-import { BatchOverallLineChartComponent } from './batch-overall-line-chart.component';
-import { ReportingService } from '../../services/reporting.service';
-import { PDFService } from '../../services/pdf.service';
-import { GranularityService } from '../services/granularity.service';
-import { Subscriber } from 'rxjs/Subscriber';
-import { Subscription } from 'rxjs/Subscription';
+import {BatchOverallLineChartComponent} from './batch-overall-line-chart.component';
+import {ReportingService} from '../../services/reporting.service';
+import {PDFService} from '../../services/pdf.service';
+import {GranularityService} from '../services/granularity.service';
 
 // Can't test private methods
 describe('BatchOverallLineChartComponent', () => {

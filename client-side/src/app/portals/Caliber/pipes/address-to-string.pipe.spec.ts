@@ -1,4 +1,4 @@
-import { AddressToStringPipe } from './address-to-string.pipe';
+import {AddressToStringPipe} from './address-to-string.pipe';
 
 describe('AddressToStringPipe', () => {
   it('create an instance', () => {

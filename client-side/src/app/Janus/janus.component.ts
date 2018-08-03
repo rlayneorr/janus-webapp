@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import { ErrorAlertComponent } from '../gambit-client/ui/error-alert/error-alert.component';
-import { GambitInterceptor } from '../gambit-client/interceptors/gambit.interceptor';
+import { ErrorAlertComponent } from '../caliber-client/ui/error-alert/error-alert.component';
+import { GambitInterceptor } from '../caliber-client/interceptors/gambit.interceptor';
 
 @Component({
   selector: 'app-janus',

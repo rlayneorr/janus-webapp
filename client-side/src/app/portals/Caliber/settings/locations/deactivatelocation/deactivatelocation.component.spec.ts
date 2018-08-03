@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../../caliber.test.module';
-import { DeactivateLocationComponent } from './deactivatelocation.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../../caliber.test.module';
+import {DeactivateLocationComponent} from './deactivatelocation.component';
 
 
 xdescribe('DeactivateLocationComponent', () => {

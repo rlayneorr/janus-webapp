@@ -18,9 +18,9 @@
 
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 // These are the pdf width and height in pixels
 const pdfHeight = 787;
@@ -61,8 +61,6 @@ export class PDFService {
   /**
    * Creates a PDF with input name from a given element id, then downloads it.
    * It creates an image of the elements and saves it as a PDF.
-   * @param chartToDownload - Element id name.
-   * @param filename - Name of the file.
    */
   public downloadCharts(): void {
     const charts = document.getElementsByClassName('charts');
@@ -111,7 +109,7 @@ export class PDFService {
    */
   public downloadPDFwithFeedback() {
     const html = '';
-    this.http.post(environment.gambitContext + 'report/generate', html).subscribe(response => {},
+    this.http.post(environment.caliberContext + 'report/generate', html).subscribe(response => {},
       err => {}
     );
   }

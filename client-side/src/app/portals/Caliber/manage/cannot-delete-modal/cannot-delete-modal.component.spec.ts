@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CannotDeleteModalComponent } from './cannot-delete-modal.component';
-import { Dependencies } from '../../caliber.test.module';
+import {CannotDeleteModalComponent} from './cannot-delete-modal.component';
+import {Dependencies} from '../../caliber.test.module';
 
 
 xdescribe('CannotDeleteModalComponent', () => {

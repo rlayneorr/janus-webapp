@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TrainerService } from '../../../gambit-client/services/trainer/trainer.service';
-import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {TrainerService} from '../../../caliber-client/services/trainer/trainer.service';
+import {BatchService} from '../../../caliber-client/aggregator/services/completebatch.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

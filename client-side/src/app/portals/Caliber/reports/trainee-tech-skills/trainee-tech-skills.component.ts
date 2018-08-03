@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy, transition } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import { ReportingService } from '../../services/reporting.service';
-import { PDFService } from '../../services/pdf.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { GranularityService } from '../services/granularity.service';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
-import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import {Component, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
+import {ReportingService} from '../../services/reporting.service';
+import {PDFService} from '../../services/pdf.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {GranularityService} from '../services/granularity.service';
+import {CompleteBatch} from '../../../../caliber-client/aggregator/entities/CompleteBatch';
+import {GambitTrainee} from '../../../../caliber-client/entities/GambitTrainee';
+
 /**
  * @author John Hudson
 */

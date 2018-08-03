@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { ReportingService } from '../../services/reporting.service';
-import { PDFService } from '../../services/pdf.service';
-import { GranularityService } from '../services/granularity.service';
-import { Observable } from 'rxjs/Observable';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import {Component, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {ReportingService} from '../../services/reporting.service';
+import {PDFService} from '../../services/pdf.service';
+import {GranularityService} from '../services/granularity.service';
+import {Observable} from 'rxjs/Observable';
+import {OnDestroy} from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**
  * @author Robert Choboy

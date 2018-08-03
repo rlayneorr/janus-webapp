@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { ColorService } from '../colors/color.service';
-import { VpHomeLineGraphService } from './vp-home-line-graph.service';
+import {inject, TestBed} from '@angular/core/testing';
+import {ColorService} from '../colors/color.service';
+import {VpHomeLineGraphService} from './vp-home-line-graph.service';
 
 describe('VpHomeLineGraphService', () => {
   beforeEach(() => {

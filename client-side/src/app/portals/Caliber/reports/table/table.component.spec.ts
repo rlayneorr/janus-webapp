@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { TableComponent } from './table.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {TableComponent} from './table.component';
 
 /**
  * To run these test, you must comment out everything from the ngOnInit() method
@@ -31,7 +31,7 @@ xdescribe('TableComponent', () => {
 
   it('typeCheck(bar) should return a 4 if the data[1] is undefined', () => {
     component.tableType = 'bar';
-    const data = new Array<any>();
+    const data = [];
 
     // Mimicking cachedData
     data.push({params: 4, data: 4});
@@ -41,7 +41,7 @@ xdescribe('TableComponent', () => {
 
   it('typeCheck(bar) should return a 3 if the data[1] is defined', () => {
     component.tableType = 'bar';
-    const data = new Array<any>();
+    const data = [];
 
     // Micmicking cachedData
     data.push({params: 4, data: [4]});
@@ -52,7 +52,7 @@ xdescribe('TableComponent', () => {
 
   it('typeCheck(line) should return 2 if the length of tableData is greater than 1', () => {
     component.tableType = 'line';
-    const data = new Array<any>();
+    const data = [];
 
     // Micmicking cachedData
     data.push({params: 4, data: 4});
@@ -63,7 +63,7 @@ xdescribe('TableComponent', () => {
 
   it('typeCheck(line) should return 1 if the length of tableData is 1', () => {
     component.tableType = 'line';
-    const data = new Array<any>();
+    const data = [];
 
     // Micmicking cachedData
     data.push({params: 4, data: 4});
@@ -73,7 +73,7 @@ xdescribe('TableComponent', () => {
 
   it('typeCheck(any) should return 0', () => {
     component.tableType = 'any';
-    const data = new Array<any>();
+    const data = [];
 
     // Micmicking cachedData
     data.push({params: 4, data: 4});
@@ -83,7 +83,7 @@ xdescribe('TableComponent', () => {
   });
 
   it('numberSequence(4) should return [0, 1, 2, 3]', () => {
-    const array = new Array();
+    const array = [];
     array.push(1);
     array.push(2);
     array.push(3);
@@ -92,7 +92,7 @@ xdescribe('TableComponent', () => {
   });
 
   it('indexSequence(1) should return ', () => {
-    const array = new Array();
+    const array = [];
     array.push('david');
     array.push('mythoua');
     array.push('jordan');

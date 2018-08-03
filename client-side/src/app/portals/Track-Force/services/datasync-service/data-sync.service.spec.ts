@@ -3,7 +3,7 @@ import { TestBed, inject, getTestBed } from '@angular/core/testing';
 import { DataSyncService } from './data-sync.service';
 import { RequestService } from '../request-service/request.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 describe('DataSyncService', () => {
   beforeEach(() => {

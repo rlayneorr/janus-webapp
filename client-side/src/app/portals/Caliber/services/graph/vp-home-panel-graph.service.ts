@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ChartDataEntity } from '../../entities/ChartDataEntity';
-import { ColorService } from '../colors/color.service';
-import { DataSet } from '../../entities/DataSet';
+import {Injectable} from '@angular/core';
+import {ChartDataEntity} from '../../entities/ChartDataEntity';
+import {ColorService} from '../colors/color.service';
+import {DataSet} from '../../entities/DataSet';
 
 @Injectable()
 export class VpHomePanelGraphService {

@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Address } from '../entities/Address';
+import {Pipe, PipeTransform} from '@angular/core';
+import {Address} from '../entities/Address';
 
 @Pipe({
   name: 'addressToString'

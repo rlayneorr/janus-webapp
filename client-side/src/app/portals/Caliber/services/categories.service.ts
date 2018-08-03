@@ -1,44 +1,50 @@
-import { Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-// rxjs
-import { BehaviorSubject } from 'rxjs/Rx';
-import { Observable } from 'rxjs/Observable';
-
-// services
-import { CategoryService } from './category/category.service';
+import {Observable} from 'rxjs/Observable';
+import {Category} from '../settings/screening/entities/Category';
+import {UrlService} from '../../../caliber-client/services/urls/url.service';
+import {Subject} from 'rxjs';
 
 
-// entities
-import { Category } from '../entities/Category';
-import { AlertsService } from './alerts.service';
+const httpOptions = {
+    headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    })
+};
 
-/**
-* @deprecated
-*
-* @see CategoryService
-*
-* this service manages calls to the web services
-* for Category objects
-*/
 @Injectable()
-export class CategoriesService extends CategoryService {
+export class SettingsCategoriesService {
 
-  constructor(httpClient: HttpClient, alertService: AlertsService) {
-    super(httpClient, alertService);
-    this.getAll();
-  }
+/** Making an Observable */
+categorySubject = new Subject();
+routingToAllCategories = false;
 
-  public getAll(): void {
-    super.fetchAll();
-  }
+    constructor(
+        private http: HttpClient,
+        private urlService: UrlService
+    ) { }
+    public categories: Observable<Category[]>;
 
-  // adds a new category to the database
-  public addNewCategory(category: Category): void {
-    super.create(category);
-  }
+    createCategory(category: Category) {
+        return this.http.post(this.urlService.category.createCategory(), category, httpOptions);
+    }
 
-  public editCurrentCategory(category: Category): void {
-    super.update(category);
-  }
+    updateCategory(category: Category) {
+      console.log(category);
+        return this.http.put(this.urlService.category.updateCategory(category.categoryId), category, httpOptions);
+    }
+
+    getCategories() {
+        return this.http.get<Category[]>(this.urlService.category.getCategories());
+    }
+
+    getCategoryById(categoryId: number) {
+        return this.http.get<Category>(this.urlService.category.getCategoryById(categoryId));
+    }
+
+    deleteCategory(categoryId: number) {
+        return this.http.delete(this.urlService.category.deleteCategory(categoryId), httpOptions);
+    }
 }

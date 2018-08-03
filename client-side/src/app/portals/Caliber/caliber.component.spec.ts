@@ -1,6 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { Dependencies } from './caliber.test.module';
-import { CaliberComponent } from './caliber.component';
+import {CaliberComponent} from './caliber.component';
 
 /**
  * Test if the caliber component creates the component and the app.

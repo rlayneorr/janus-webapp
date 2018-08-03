@@ -1,14 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // rxjs
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/merge';
 
 // util
-import * as _ from 'lodash';
 
 
 @Injectable()

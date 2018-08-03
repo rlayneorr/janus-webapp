@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ScreeningComponent } from './screening.component';
-import { RouterOutlet, ChildrenOutletContexts } from '@angular/router';
+import {ScreeningComponent} from './screening.component';
+import {ChildrenOutletContexts, RouterOutlet} from '@angular/router';
 
 // Author: David Gustafson
 

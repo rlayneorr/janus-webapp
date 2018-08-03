@@ -9,9 +9,9 @@
     <div id="bucket-buttons">
       <ul class="nav nav-tabs">
         <li class="pointer" *ngFor="let bucket of questionBuckets">
-          <!-- <button class="btn" *ngFor="let bucket of buckets" (click)="setBucket(bucket.bucketID)">{{bucket.bucketCategory}}</button> -->
-          <a class="nav-link" [class.active]="bucket.bucketID == currentCategory.bucketID" 
-            [class.inActive]="bucket.bucketID != currentCategory.bucketID" (click)="setBucket(bucket.bucketID)">{{bucket.bucketCategory}}</a>
+          <!-- <button class="btn" *ngFor="let bucket of buckets" (click)="setBucket(bucket.bucketId)">{{bucket.bucketCategory}}</button> -->
+          <a class="nav-link" [class.active]="bucket.bucketId == currentCategory.bucketId"
+            [class.inActive]="bucket.bucketId != currentCategory.bucketId" (click)="setBucket(bucket.bucketId)">{{bucket.bucketDescription}}</a>
         </li>
       </ul>
     </div>
@@ -26,7 +26,7 @@
         </thead>
         <tbody class="question-transition">
           <ng-container *ngFor="let question of currentCategory.questions; let i = index">
-            <tr class="pointer" (click)="open(question)">
+            <tr class="pointer" [class.doneWith]="isScored(question)" (click)="open(question)">
               <td class="question">{{question.questionText}}</td>
               <td>
                 <span *ngIf="questionScores != undefined && isAnsweredQuestion(question)" style="color: #81f575" class="fa fa-check fa-2x"

@@ -1,7 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpClient, HttpHandler} from '@angular/common/http';
-import { ReportsService } from './reports.service';
-import { HttpClientBackendService } from 'angular-in-memory-web-api';
+import {inject, TestBed} from '@angular/core/testing';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ReportsService} from './reports.service';
 
 xdescribe('ReportsService', () => {
   beforeEach(() => {

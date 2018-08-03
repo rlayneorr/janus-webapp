@@ -1,8 +1,7 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { OverallFeedbackComponent } from './overall-feedback.component';
-import { Note } from '../../entities/Note';
-import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Dependencies} from '../../caliber.test.module';
+import {OverallFeedbackComponent} from './overall-feedback.component';
+import {Note} from '../../entities/Note';
 
 
 describe('OverallFeedbackComponent439y298743', () => {
@@ -34,7 +33,7 @@ describe('OverallFeedbackComponent439y298743', () => {
     note2.content = 'Angular';
     note2.week = 5;
 
-    const data = new Array<Note>();
+    const data = [];
     data.push(note1);
     data.push(note2);
 

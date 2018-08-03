@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AlertsService } from '../services/alerts.service';
-import { NotificationsService } from 'angular2-notifications-lite';
+import {Component, OnInit} from '@angular/core';
+import {AlertsService} from '../services/alerts.service';
+import {NotificationsService} from 'angular2-notifications-lite';
 
 @Component({
   moduleId: module.id.toString(),

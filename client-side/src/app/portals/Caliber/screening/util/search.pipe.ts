@@ -1,6 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { SimpleTrainee } from '../entities/simpleTrainee';
-import { ScheduledScreening } from '../entities/scheduleScreening';
+import {Pipe, PipeTransform} from '@angular/core';
+import {ScheduledScreening} from '../entities/scheduleScreening';
 
 @Pipe({
   name: 'searchPipe'
@@ -14,17 +13,18 @@ export class SearchPipe implements PipeTransform {
       return [];
     }
     // if the search bar is empty, do not change the current screenings being displayed
-    if (!searchText) {
-      return items;
-    }
+    // if (searchText == '') {
+    //   return items;
+    // }
     // otherwise, convert the search text to lowercase
     searchText = searchText.toLowerCase();
+    let match : boolean;
     // for each item in the array...
     return items.filter(it => {
       // return only the screenings whose firstname includes the search text
       // or last name includes the search text.
-      return it.trainee.firstname.toLowerCase().includes(searchText) || it.trainee.lastname.toLowerCase().includes(searchText)
-      || (it.trainee.firstname.toLowerCase() + ' ' + it.trainee.lastname.toLowerCase()).includes(searchText);
+      match = it.candidate.name.toLowerCase().includes(searchText)
+      return match;
     });
   }
 }

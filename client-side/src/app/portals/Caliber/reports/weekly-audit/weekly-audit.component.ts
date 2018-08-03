@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 // services
-import { GranularityService } from '../services/granularity.service';
-import { NoteService } from '../../services/note.service';
-import { ReportingService } from '../../services/reporting.service';
-
+import {GranularityService} from '../services/granularity.service';
+import {NoteService} from '../../services/note.service';
+import {ReportingService} from '../../services/reporting.service';
 // rxjs
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 // entities
-import { Note } from '../../entities/Note';
-import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import {Note} from '../../entities/Note';
+import {CompleteBatch} from '../../../../caliber-client/aggregator/entities/CompleteBatch';
 
 
 /**

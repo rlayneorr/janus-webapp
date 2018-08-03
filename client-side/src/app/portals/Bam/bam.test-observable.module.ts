@@ -69,7 +69,7 @@ import { Ng2OrderModule, Ng2OrderPipe } from 'ng2-order-pipe';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertService } from './services/alert.service';
 import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
-import { UrlService } from '../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../caliber-client/services/urls/url.service';
 
 export const Dependencies = {
   imports: [

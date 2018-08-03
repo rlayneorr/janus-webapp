@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BamUser } from '../models/bamuser.model';
-import { UrlService } from '../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../caliber-client/services/urls/url.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'}),

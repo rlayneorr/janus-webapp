@@ -6,14 +6,14 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { assertNotNull } from '@angular/compiler/src/output/output_ast';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { UrlService } from '../../../../caliber-client/services/urls/url.service';
 
 
  describe('AssociateService', () => {
     // tslint:disable:prefer-const
     let associate = new Associate();
     let asso2 = new Associate();
-    let assoList = new Array<Associate>();
+    let assoList = [];
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [AssociateService, HttpClient, HttpHandler, UrlService],

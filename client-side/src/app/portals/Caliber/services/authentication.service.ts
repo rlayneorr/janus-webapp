@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 // rxjs
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 // entities
-import { User } from '../entities/User';
+import {User} from '../entities/User';
 
 /**
  * this service handles api calls to the underlying

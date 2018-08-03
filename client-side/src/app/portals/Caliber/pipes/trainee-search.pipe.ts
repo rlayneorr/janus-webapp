@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+import {Pipe, PipeTransform} from '@angular/core';
+import {GambitTrainee} from '../../../caliber-client/entities/GambitTrainee';
 
 
 @Pipe({

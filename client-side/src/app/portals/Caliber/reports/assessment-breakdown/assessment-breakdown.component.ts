@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ReportingService } from '../../services/reporting.service';
-import { PDFService } from '../../services/pdf.service';
-import { GradeService } from '../../services/grade.service';
-import { Subscription } from 'rxjs/Subscription';
-import { GranularityService } from '../services/granularity.service';
-import { Subscriber } from 'rxjs/Subscriber';
-import { Observable } from 'rxjs/Observable';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ReportingService} from '../../services/reporting.service';
+import {PDFService} from '../../services/pdf.service';
+import {Subscription} from 'rxjs/Subscription';
+import {GranularityService} from '../services/granularity.service';
+import {Observable} from 'rxjs/Observable';
 
 /**
  * Component will display a bar graph comparing the specific trainees

@@ -1,4 +1,4 @@
-import { Skill } from './Technology';
+import {Skill} from './Technology';
 
 export class PanelFeedback {
     id: number;

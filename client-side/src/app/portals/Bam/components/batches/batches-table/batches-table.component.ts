@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core/';
+import { Input } from '@angular/core';
 import { Batch } from '../../../models/batch.model';
 import { SessionService } from '../../../services/session.service';
 

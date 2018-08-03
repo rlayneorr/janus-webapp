@@ -1,8 +1,8 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
-import { AlertsService } from '../services/alerts.service';
-import { ApiService } from './api.service';
-import { defer } from 'rxjs/observable/defer';
+import {inject, TestBed} from '@angular/core/testing';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AlertsService} from '../services/alerts.service';
+import {ApiService} from './api.service';
+import {defer} from 'rxjs/observable/defer';
 
 export function asyncData<T>(data: T) {
     return defer(() => Promise.resolve(data));

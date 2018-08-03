@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {environment} from '../../../../environments/environment';
 
 /**
  * this service handles logic associated with references to
@@ -22,7 +22,7 @@ export class EnvironmentService {
    * @return string
    */
   public buildUrl(url: string, parameters = {} ): string {
-    let rootUrl = [ environment.gambitContext, url ].join('');
+    let rootUrl = [ environment.caliberContext, url ].join('');
 
     if ( this.isEmptyObject(parameters) === false ) {
       rootUrl += '/?';

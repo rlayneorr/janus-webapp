@@ -1,45 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbModalRef, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { format } from 'url';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import {Component, OnInit} from '@angular/core';
+import {ModalDismissReasons, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {FormBuilder} from '@angular/forms';
 // rxjs
-import { Subscription } from 'rxjs/Subscription';
-
+import {Subscription} from 'rxjs/Subscription';
 // pipes
-import { DatePipe } from '@angular/common';
-import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
-import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
+import {DatePipe} from '@angular/common';
+import {BatchService} from '../../../caliber-client/aggregator/services/completebatch.service';
+import {LocationService} from '../services/location.service';
+import {TrainingTypeService} from '../services/training-type.service';
+import {GambitSkillService} from '../../../caliber-client/services/skill/gambit-skill.service';
+import {TraineeService} from '../services/trainee.service';
+import {TraineeStatusService} from '../services/trainee-status.service';
+import {GambitTraineeService} from '../../../caliber-client/services/trainee/gambit-trainee.service';
+import {TrainerService} from '../../../caliber-client/services/trainer/trainer.service';
+// entities
+import {Location} from '../entities/Location';
+import {Address} from '../entities/Address';
+import {Trainee} from '../entities/Trainee';
+import {GambitTrainee} from '../../../caliber-client/entities/GambitTrainee';
+import {GambitTrainer} from '../../../caliber-client/entities/GambitTrainer';
+import {CompleteBatch} from '../../../caliber-client/aggregator/entities/CompleteBatch';
+// components
+import {BatchModalComponent} from './batch/batch-modal.component';
+import {CannotDeleteModalComponent} from './cannot-delete-modal/cannot-delete-modal.component';
+import {DeleteBatchModalComponent} from './delete-batch-modal/delete-batch-modal.component';
 
 // services
-
-import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
-import { LocationService } from '../services/location.service';
-import { TrainingTypeService } from '../services/training-type.service';
-import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
-import { TraineeService } from '../services/trainee.service';
-import { TraineeStatusService } from '../services/trainee-status.service';
-import { GambitTraineeService } from '../../../gambit-client/services/trainee/gambit-trainee.service';
-import { TrainerService } from '../../../gambit-client/services/trainer/trainer.service';
-
-
-// entities
-import { Location } from '../entities/Location';
-import { Address } from '../entities/Address';
-import { Trainee } from '../entities/Trainee';
-import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
-import { GambitTrainer } from '../../../gambit-client/entities/GambitTrainer';
-import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
-
-// components
-import { BatchModalComponent } from './batch/batch-modal.component';
-import { error } from 'util';
-import { ReferenceAst } from '@angular/compiler';
-import { CannotDeleteModalComponent } from './cannot-delete-modal/cannot-delete-modal.component';
-import { DeleteTraineeModalComponent } from './delete-trainee-modal/delete-trainee-modal.component';
-import { CannotDeleteTraineeModalComponent } from './cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
-import { DeleteBatchModalComponent } from './delete-batch-modal/delete-batch-modal.component';
-
 
 
 // import { exists } from 'fs';

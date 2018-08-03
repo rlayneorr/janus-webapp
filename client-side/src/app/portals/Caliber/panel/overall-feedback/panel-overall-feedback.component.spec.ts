@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Dependencies } from '../../caliber.test.module';
-import { PanelOverallFeedbackComponent } from './panel-overall-feedback.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {PanelOverallFeedbackComponent} from './panel-overall-feedback.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 describe('PanelOverallFeedbackComponent', () => {
   let component: PanelOverallFeedbackComponent;

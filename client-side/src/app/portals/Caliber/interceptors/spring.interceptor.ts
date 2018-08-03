@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 // rxjs
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
@@ -27,9 +26,10 @@ export class SpringInterceptor implements HttpInterceptor {
         'Accept': 'application/json, text/*'
       }
     });
-
+    // console.log(request);
     return <any>next.handle(modifiedRequest)
       .catch( (error) => {  // universal error handler
+
         /*
         Dumps the error to the console and returns an empty Observable
         as a fallback to allow a service call to continue as if no data

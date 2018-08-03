@@ -2,10 +2,8 @@
     margin: 25px 10%;
     min-width: 360px;
     max-width: 95vw;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #ddd;
-    border-radius: 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
     /* padding-bottom: 128px; */
     overflow: auto;
 }
@@ -13,32 +11,30 @@ h1{
     width: 100%;
     min-width: 260px;
     background: #f26925;
-    color: white;  
+    color: white;
     font-size: 20px;
     border-color: #f26925;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    margin-bottom: 0px;
-    
+    margin-bottom: 0;
     padding: 12px;
     white-space:nowrap;
 }
 h2{
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 3px;
 }
 p{
-    font-size: 15px;  
-    margin-bottom: 0px;
+    font-size: 15px;
+    margin-bottom: 0;
 }
 #candidate-name{
     font-size:20px;
 }
 #q-and-a-content{
-    padding: 20px 5%;
-    padding-bottom: 15px;
+  padding: 20px 5% 15px;
 }
 /* #############################
     CATEGORY BUTTON TABS STYLES
@@ -48,7 +44,7 @@ p{
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 .nav-tabs{
     color: #f26925;
@@ -56,8 +52,8 @@ p{
     border-top-right-radius: 10px;
     border: white;
 }
-.nav-tabs>li.active>a, 
-.nav-tabs>li.active>a:focus, 
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
 .nav-tabs>li.active>a:hover{
     cursor: pointer;
     background-color: #fff;
@@ -74,7 +70,7 @@ li .inActive{
     transition: background-color 1s ease;
 }
 /* #############################
-    QUESTION TABLE STYLES 
+    QUESTION TABLE STYLES
 ############################# */
 #table-container{
     max-height: 300px;
@@ -87,13 +83,13 @@ li .inActive{
     font-size: 18px;
 }
 .question-col{
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
-.table[_ngcontent-c11] thead[_ngcontent-c11] th[_ngcontent-c11], 
-.table[_ngcontent-c11] td[_ngcontent-c11], 
+.table[_ngcontent-c11] thead[_ngcontent-c11] th[_ngcontent-c11],
+.table[_ngcontent-c11] td[_ngcontent-c11],
 .table[_ngcontent-c11] th[_ngcontent-c11] {
-    border-top:0px;
+    border-top:0;
     font-size: 15px;
 }
 
@@ -112,9 +108,8 @@ li .inActive{
 }
 
 #submit-button{
-    margin: auto 5px;
-    margin-top: 5px;
-    width: 120px;
+  margin: 5px 5px auto;
+  width: 120px;
     background: #f26925;
     border-color: #f26925;
     color: white;
@@ -124,18 +119,16 @@ li .inActive{
     background: #686868;
     border: none;
     color: white;
-    font-weight: strong;
+    font-weight: bold;
 }
 
 /* Footer */
 .footer{
     margin-top: 20px;
     padding: 15px auto;
-    border-style: solid;
-    border-color: #474c55;
-    border-width: 0px;
-    border-top-width: 2px;
-    background-color: white;
+  border: 0px solid #474c55;
+  border-top-width: 2px;
+  background-color: white;
 }
 #gfooter{
 	/* position: sticky; */
@@ -161,6 +154,11 @@ textarea{
 }
 .pointer{
     cursor: pointer;
+}
+
+.doneWith{
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
 }
 
 @media(max-width:500px){

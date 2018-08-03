@@ -10,16 +10,16 @@ import { SessionService } from '../../../services/session.service';
 import { WeeksDTO } from '../../../models/weeksDTO.model';
 import { AlertService } from '../../../services/alert.service';
 import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
-import * as XLSXStyle from 'xlsx-style';
+// import * as XLSX from 'xlsx/types';
+// import * as XLSXStyle from 'xlsx-style';
 import { WeeksExportDTO } from '../../../models/weeksExportDTO';
 import { SubtopicService } from '../../../services/subtopic.service';
 import { Schedulez } from '../../../models/scheduleZ.model';
 import { SubtopicCurric } from '../../../models/subtopicCurric.model';
 import { Topic } from '../../../models/topic.model';
 
-const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-const EXCEL_EXTENSION = '.xlsx';
+// const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+// const EXCEL_EXTENSION = '.xlsx';
 
 /**
  * @author Daniel Robinson
@@ -33,7 +33,7 @@ const EXCEL_EXTENSION = '.xlsx';
 
 export class MainCurriculumViewComponent implements OnInit {
     schedule: CurriculumSubtopic[];
-    allWeeks: Array<CurriculumSubtopic[]> = new Array<CurriculumSubtopic[]>();
+    allWeeks: Array<CurriculumSubtopic[]> = [];
     toggleTab = 1;
     selectedCurr: Curriculum;
     isNewVer = false;
@@ -251,7 +251,7 @@ export class MainCurriculumViewComponent implements OnInit {
         this.curriculumService.currentData.subscribe(
             data => {
                 // clear 2D array each time a curriculum is selected
-                this.allWeeks = new Array<CurriculumSubtopic[]>();
+                this.allWeeks = [];
                 this.schedule = data;
                 this.getWeeks();
             },
@@ -304,7 +304,7 @@ export class MainCurriculumViewComponent implements OnInit {
      */
 
     addWeek() {
-        this.allWeeks.push(new Array<CurriculumSubtopic>());
+        this.allWeeks.push([]);
         this.alertService.alert('success', 'Successfully added a week to the bottom. Save is required.');
     }
 
@@ -478,11 +478,11 @@ deleteVersions(selectedCurr) {
  */
 download() {
     let ourWeeks: WeeksExportDTO;
-    ourWeeks = new WeeksExportDTO((this.allWeeks), this.selectedCurr.name + ' v' + this.selectedCurr.version);
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ourWeeks.data);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, 'excelFileName');
+    // ourWeeks = new WeeksExportDTO((this.allWeeks), this.selectedCurr.name + ' v' + this.selectedCurr.version);
+    // const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(ourWeeks.data);
+    // const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    // const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    // this.saveAsExcelFile(excelBuffer, 'excelFileName');
 }
 
     /**
@@ -493,8 +493,8 @@ download() {
      */
     private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
+        // type: EXCEL_TYPE
     });
-    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    // FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 }
 }

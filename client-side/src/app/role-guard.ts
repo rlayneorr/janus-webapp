@@ -22,7 +22,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RoleGuard implements CanActivate {
 
-  constructor(private cookies: CookieService) {
+  constructor(private cookies: CookieService){
   }
 
   /**
