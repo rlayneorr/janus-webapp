@@ -156,7 +156,7 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.createCategory(this.newCategory)
       .subscribe(category => {
         //this.getCategories();
-        this.allCategories.push(this.currentCategory);
+        this.allCategories.push(<Category>category);
       });
   }
 

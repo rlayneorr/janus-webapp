@@ -2,6 +2,7 @@ import {QuestionScore} from '../entities/questionScore';
 import {SkillTypeBucketLookUp} from '../entities/skillTypeBucketLookup';
 import { CategoryWeight } from '../../settings/screening/entities/Category-Weight';
 import { Bucket } from '../../settings/screening/entities/Bucket';
+import {Question} from "../../settings/screening/entities/Question";
 
 export class ScoresToBucketsUtil {
   public questionScores: QuestionScore[] = [];
@@ -35,10 +36,26 @@ export class ScoresToBucketsUtil {
       return true;
     }
   }
+  singleBucketPerCategory(buckets: Bucket[]) {
+    let catIds = Array.from(new Set(buckets.map(b=>b.categoryId)));
+    return catIds.map(id=>buckets.filter(b=>b.categoryId==id && b.isActive === true)
+      .reduce((b1,b2)=> <Bucket>{
+        bucketId: b1.bucketId,
+        // skillTypeId: number;
+        categoryId : b1.categoryId,
+        category: b1.category,
+        bucketDescription: b1.bucketDescription + "/" + b2.bucketDescription,
+        isActive: true,
+        questions: b1.questions.concat(b2.questions)
+        }));
+  }
     getFinalBreakdown(questionScores: QuestionScore[], buckets: Bucket[], weights: CategoryWeight[]): string[] {
       this.questionScores = questionScores;
       this.weights = weights;
         let usedBuckets = buckets.filter(b=>this.isBucketUsed(b)); // all buckets that actually have asked questions.
+        // Need to merge buckets if they have the same categoryId.
+        usedBuckets = this.singleBucketPerCategory(usedBuckets);
+
 
         // If the total weights from the buckets with answered questions don't add up to 100%, evenly distribute the difference
         let normalizationRatio = 100/usedBuckets.map(b=>this.findWeightForBucket(weights, b)).reduce((a,b)=>a+b);
