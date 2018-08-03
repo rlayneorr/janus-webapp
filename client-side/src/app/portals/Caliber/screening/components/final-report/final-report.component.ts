@@ -86,7 +86,6 @@ subscriptions: Subscription[] = [];
       this.getCandidate();
     }
     getCandidate(){
-    console.log("Return Buckets: ", this.buckets);
     this.candidateName = this.candidateService.getSelectedCandidate().name;
     this.softSkillString = 'Soft Skills: ' + this.screeningService.softSkillsResult;
     this.allTextString = this.softSkillString + '\n';
@@ -95,48 +94,42 @@ subscriptions: Subscription[] = [];
     this.skillTypesService.getSkillTypeById(trackId).subscribe(skill =>{
       this.skillType = skill;
       console.log("skillType: ", this.skillType.categories);
-      this.getSkillType();
+      this.getWeights();
     });
   };
-    getSkillType(){
-      console.log("in skill type");
+    getWeights(){
       this.skillType.categories.forEach(category => {
-      console.log("SkillTypeId: " + this.skillType.skillTypeId +" CategoryId: "+ category.categoryId);
 
       this.categoryWeightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId)
       .subscribe((weight) => {
         this.weights.push(weight);
-        console.log("weights: ", this.weights);
-        this.getWeights();
+        this.getQuestionScores();
       }
     )
     });
   }
 
-    getWeights(){
-    console.log("weights: ", this.weights);
+    getQuestionScores(){
     this.questionScores = this.questionScoreService.questionScores;
       this.finalBreakdown();
   }
 
-      finalBreakdown(){
-        console.log(this.questionScores);
-        this.bucketStringArray =
-          this.scoresToBucketsUtil.getFinalBreakdown(this.questionScores, this.buckets, this.weights);
+    finalBreakdown(){
+      this.bucketStringArray =
+        this.scoresToBucketsUtil.getFinalBreakdown(this.questionScores, this.buckets, this.weights);
 
-        // Set the composite score in the screening service
-        this.screeningService.compositeScore = +this.bucketStringArray[this.bucketStringArray.length - 1];
-        this.bucketStringArray.splice(this.bucketStringArray.length - 1, 1);
+      // Set the composite score in the screening service
+      this.screeningService.compositeScore = +this.bucketStringArray[this.bucketStringArray.length - 1];
+      this.bucketStringArray.splice(this.bucketStringArray.length - 1, 1);
 
-        this.overallScoreString = this.bucketStringArray[this.bucketStringArray.length - 1];
-        this.bucketStringArray.splice(this.bucketStringArray.length - 1, 1);
+      this.overallScoreString = this.bucketStringArray[this.bucketStringArray.length - 1];
+      this.bucketStringArray.splice(this.bucketStringArray.length - 1, 1);
 
-        this.bucketStringArray.forEach(bucketString => {
-          this.allTextString += bucketString + '\n';
-        });
-        this.allTextString += this.overallScoreString + '\n';
+      this.bucketStringArray.forEach(bucketString => {
+        this.allTextString += bucketString + '\n';
+      });
+    this.allTextString += this.overallScoreString + '\n';
 
-    // this.overallScoreString = "Overall: 71%";
     this.generalNotesString = this.screeningService.generalComments;
     this.allTextString += 'comments: "' + this.generalNotesString + '"';
 
