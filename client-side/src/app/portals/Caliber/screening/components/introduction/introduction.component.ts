@@ -45,8 +45,8 @@ export class IntroductionComponent implements OnInit {
   public currentScreeningId: Number;
   // public tagList: Tag[];
   public categoriesSelected: Category[];
-  public allCategories: Category[];
-  
+  public selectedCategories: Category[];
+
 
   public comment: string;
 
@@ -75,13 +75,11 @@ export class IntroductionComponent implements OnInit {
     //   });
     // });
     this.candidateName = localStorage.getItem('candidateName');
-    this.categoryService.fetchAll().subscribe(categories =>{
-      this.allCategories = (<Category[]> categories);
-      console.log(this.allCategories);
-    });
+
 
     this.skillTypesService.getSkillTypeById(parseInt((localStorage.getItem('candidateTrack')), 10)).subscribe(skill =>{
       this.candidateTrack = skill.title;
+      this.selectedCategories = skill.categories;
     });
     this.categoriesSelected = [];
     //this.currentScreening = SCHEDULEDSCREENINGS[this.candidateService.getSelectedCandidate().candidateId - 1];
@@ -129,7 +127,8 @@ export class IntroductionComponent implements OnInit {
 
   setCategories()
   {
-    return this.screeningService.setSelectedCategories(this.categoriesSelected);
+    // figure out which ones to use based on the skill weights.
+    return this.screeningService.setSelectedCategories(this.selectedCategories);
   }
 
 }
