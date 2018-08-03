@@ -37,19 +37,17 @@ export class AddAssociateToBatchComponent implements OnInit {
    * @param      {BamUser}  user    The user being added to the batch.
    */
   addUser(user: BamUser) {
-    let i = 0;
     this.currentBatch = this.sessionService.getSelectedBatch();
     for (const associate of this.associates) {
       if (associate.userId === user.userId) {
         this.usersService.addUserToBatch(this.currentBatch.id, associate.userId).subscribe(users => {
           this.associates = users;
-          this.associateAlert('success', `Successfully added ${user.fName} ${user.lName} to current batch.`);
+          this.associateAlert('success', `Successfully added ${user.firstName} ${user.lastName} to current batch.`);
         }, error => {
-          this.associateAlert('danger', `Error: couldn't add ${user.fName} ${user.lName} to current batch.`);
+          this.associateAlert('danger', `Error: couldn't add ${user.firstName} ${user.lastName} to current batch.`);
         });
         break;
       }
-      i++;
     }
   }
 

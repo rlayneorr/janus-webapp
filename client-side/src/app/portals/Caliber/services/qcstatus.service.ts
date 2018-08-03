@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 // services
 import { AlertsService } from './alerts.service';
-import { urls } from './urls';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // Interfaces
 import { Fetch } from '../interfaces/api.interface';
@@ -17,7 +17,7 @@ export class QCStatusService implements Fetch<string> {
 
   private listSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private urlService: UrlService) {
     this.listSubject = new BehaviorSubject([]);
     this.fetchAll();
   }
@@ -27,10 +27,10 @@ export class QCStatusService implements Fetch<string> {
   }
 
   /**
-   * retrieve all QCStatus types
+   * Retrieve all QCStatus types
    */
   public fetchAll(): Observable<string[]> {
-    this.http.get<string[]>(urls.qcStatus.fetchAll()).subscribe((data) => {
+    this.http.get<string[]>(this.urlService.qcStatus.fetchAll()).subscribe((data) => {
       this.listSubject.next(data);
     });
     return this.listSubject.asObservable();

@@ -7,7 +7,7 @@ import { PanelService } from '../../services/panel.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertsService } from '../../services/alerts.service';
 
-xdescribe('PanelFeedbackComponent', () => {
+describe('PanelFeedbackComponent', () => {
   let component: PanelFeedbackComponent;
   let fixture: ComponentFixture<PanelFeedbackComponent>;
 
@@ -23,5 +23,16 @@ xdescribe('PanelFeedbackComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('ngOnInit() cannot verify data currently, but the variables should be true', () => {
+    component.ngOnInit();
+    expect(component.panelList).toBeTruthy();
+    expect(component['traineeSubscription']).toBeTruthy();
+    expect(component['panelSubscription']).toBeTruthy();
+  });
+
+  it('ngOnDestroy()', () => {
+    component.ngOnDestroy();
   });
 });

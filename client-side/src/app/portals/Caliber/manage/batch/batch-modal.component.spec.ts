@@ -3,13 +3,13 @@ import { async, ComponentFixture, TestBed, tick, fakeAsync, inject } from '@angu
 // Injected Services
 import { BatchService } from '../../services/batch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
-import { SkillService } from '../../services/skill.service';
 import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 
 import { Observable } from 'rxjs/Observable';
 import { Dependencies } from '../../caliber.test.module';
 import { BatchModalComponent } from './batch-modal.component';
+import { GambitSkillService } from '../../../../gambit-client/services/skill/gambit-skill.service';
 
 xdescribe('BatchModalComponent', () => {
   let component: BatchModalComponent;
@@ -18,7 +18,7 @@ xdescribe('BatchModalComponent', () => {
   let trainerService: TrainerService;
   let locationService: LocationService;
   let trainingTypeService: TrainingTypeService;
-  let skillService: SkillService;
+  let skillService: GambitSkillService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(Dependencies).compileComponents();
@@ -32,18 +32,16 @@ xdescribe('BatchModalComponent', () => {
     trainerService = fixture.debugElement.injector.get(TrainerService);
     locationService = fixture.debugElement.injector.get(LocationService);
     trainingTypeService = fixture.debugElement.injector.get(TrainingTypeService);
-    skillService = fixture.debugElement.injector.get(SkillService);
+    skillService = fixture.debugElement.injector.get(GambitSkillService);
 
     Observable.zip(
       trainerService.listSubject,
       locationService.listSubject,
-      trainingTypeService.listSubject,
-      skillService.listSubject
+      trainingTypeService.listSubject
     ).subscribe((results) => {
       component.setTrainers(results[0]);
       component.setLocations(results[1]);
       component.setTrainingTypes(results[2]);
-      component.setSkills(results[3]);
     });
   }), 1440000);
 

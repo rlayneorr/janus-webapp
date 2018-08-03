@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { Trainee } from '../../entities/Trainee';
-import { Batch } from '../../entities/Batch';
-
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 /**
  * Service that handles report granularity. Trainee and current batch
  * data is stored in their respective behavior subjects and read by
@@ -16,8 +15,8 @@ import { Batch } from '../../entities/Batch';
 export class GranularityService {
 
   /* Subjects & Paired Observables */
-  private currentBatch = new ReplaySubject<Batch>(1);
-  private currentTrainee = new ReplaySubject<Trainee>(1);
+  private currentBatch = new ReplaySubject<CompleteBatch>(1);
+  private currentTrainee = new ReplaySubject<GambitTrainee>(1);
   private currentWeek = new ReplaySubject<number>(1);
   private ready = new ReplaySubject<boolean>(1);
 
@@ -187,7 +186,7 @@ export class GranularityService {
    * Pushes the specified trainee to the currentTrainee subject.
    * @param trainee - Trainee to push to the subject.
    */
-  pushTrainee(trainee: Trainee) {
+  pushTrainee(trainee: GambitTrainee) {
     this.currentTrainee.next(trainee);
   }
 
@@ -195,7 +194,7 @@ export class GranularityService {
    * Pushes the specified batch to the currentBatch subject.
    * @param batch - Batch to push to the subject.
    */
-  pushBatch(batch: Batch) {
+  pushBatch(batch: CompleteBatch) {
     this.currentBatch.next(batch);
   }
 

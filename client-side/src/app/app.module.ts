@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ViewContainerRef } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -16,16 +16,30 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavModule } from './nav/nav.module';
 import { JanusComponent } from './Janus/janus.component';
 import { ChuckNorrisService } from './services/chuck-norris.service';
-import { CategoriesService } from './portals/Caliber/services/categories.service';
-import { Trainer } from './entities/Trainer';
 
 import { CaliberModule } from './portals/Caliber/caliber.module';
 import { TraineeTechSkillsComponent } from './portals/Caliber/reports/trainee-tech-skills/trainee-tech-skills.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RoleGuard } from './role-guard';
 import { CookieService } from 'ngx-cookie-service';
-import { HydraClientModule } from './hydra-client/hydra-client.module';
-import { environment } from '../environments/environment';
+import { GambitClientModule } from './gambit-client/gambit-client.module';
+import { GambitBatchUtilService } from './services/gambit-batch-util.service';
+
+// Error Alert
+import { ErrorAlertComponent } from './gambit-client/ui/error-alert/error-alert.component';
+import { GambitInterceptor } from './gambit-client/interceptors/gambit.interceptor';
+
+import { ToastModule, ToastOptions } from 'ng2-toastr';
+import { ToastrOptions } from './gambit-client/ui/error-alert/toastr-options';
+import { LocationService } from './gambit-client/services/location/location.service';
+import { GambitSkillService } from './gambit-client/services/skill/gambit-skill.service';
+import { AuthenticationService } from './portals/Caliber/services/authentication.service';
+import { RequestService } from './portals/Track-Force/services/request-service/request.service';
+import { CurriculumService } from './portals/Track-Force/services/curriculum-service/curriculum.service';
+import { InterviewService } from './portals/Track-Force/services/interview-service/interview-service';
+import { MarketStatusService } from './portals/Track-Force/services/market-status/market-status.service';
+import { PlacementService } from './portals/Track-Force/services/placement-service/placement.service';
+
 
 // loading routes from child modules this way will lazy load them
 const routes: Routes = [
@@ -55,7 +69,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
     ChartsModule,
     HttpClientModule,
-    HydraClientModule
+    GambitClientModule,
+    ToastModule.forRoot(),
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
@@ -66,7 +82,17 @@ const routes: Routes = [
   providers: [
     ChuckNorrisService,
     RoleGuard,
-    CookieService
+    CookieService,
+    GambitBatchUtilService,
+    ErrorAlertComponent,
+    LocationService,
+    {provide: ToastOptions, useClass: ToastrOptions},
+    AuthenticationService,
+    RequestService,
+    CurriculumService,
+    InterviewService,
+    MarketStatusService,
+    PlacementService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,12 +1,12 @@
-import { Batch } from './Batch';
-import { Category } from './Category';
+import { GambitBatch } from '../../../gambit-client/entities/GambitBatch';
+import { GambitSkill } from '../../../gambit-client/entities/GambitSkill';
 
 export class Assessment {
     assessmentId: number;
     title: string;
-    batch: Batch;
+    batch: GambitBatch;
     rawScore: number;
     type: string;
     week: number;
-    category: Category;
+    skill: GambitSkill;
 }

@@ -3,10 +3,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../../../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
-import { PanelReview } from '../../Caliber/entities/PanelReview';
-import { urls } from './urls';
-
-
+import { PanelReview } from '../entities/PanelReview';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 /**
  * Service handles API calls and tracks fetched data for caching.
@@ -26,7 +24,7 @@ export class EvaluationService {
   private allQCBatchNotes = new BehaviorSubject<CacheData>(null);
   public allQCBatchNotes$ = this.allQCBatchNotes.asObservable();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private urlService: UrlService) { }
 
   private needsRefresh(sub: BehaviorSubject<CacheData>, params: any): boolean {
     return !sub.getValue() || sub.getValue().params !== params;
@@ -44,7 +42,7 @@ export class EvaluationService {
    * @param weekId weekId filter value
    */
   FetchAllQCTraineeNotes(batchId: Number, weekId: Number) {
-    const endpoint = urls.apiFetchAllQCTraineeNotes(batchId, weekId);
+    const endpoint = this.urlService.apiFetchAllQCTraineeNotes(batchId, weekId);
     const params = {
       batchId: batchId,
       weekId: weekId
@@ -54,12 +52,13 @@ export class EvaluationService {
       this.httpClient.get(endpoint).subscribe(
         success => {
           this.allQCTraineeNotes.next({params: params, data: success});
-        });
+        }
+      );
     }
   }
 
   FetchAllQCBatchNotes(batchId: Number, weekId: Number) {
-    const endpoint = urls.apiFetchAllQCBatchNotes(batchId, weekId);
+    const endpoint = this.urlService.apiFetchAllQCBatchNotes(batchId, weekId);
     const params = {
       batchId: batchId,
       weekId: weekId
@@ -69,7 +68,8 @@ export class EvaluationService {
       this.httpClient.get(endpoint).subscribe(
         success => {
           this.allQCBatchNotes.next({params: params, data: success});
-        });
+        }
+      );
     }
   }
 }

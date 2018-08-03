@@ -1,7 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LocationService } from '../../services/location.service';
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Location } from '../../../../gambit-client/entities/location-entities/Location';
+
 import { Subscription } from 'rxjs/Subscription';
-import { Location } from '../../entities/Location';
+import { LocationService } from '../../../../gambit-client/services/location/location.service';
+
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,10 +11,10 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './locations.component.html',
   styleUrls: ['./locations.component.css']
 })
-export class LocationsComponent implements OnInit, OnDestroy {
+export class LocationsComponent implements OnInit, OnDestroy, OnChanges {
 
   private locationSubscription: Subscription;
-  locations: Array<Location>;
+  locations: Location[];
   currEditLocation: Location;
 
   constructor(private locationService: LocationService,
@@ -22,18 +24,23 @@ export class LocationsComponent implements OnInit, OnDestroy {
    * get all locations on page load
    */
   ngOnInit() {
-    this.locationService.fetchAll();
-    this.locationSubscription = this.locationService.listSubject.subscribe((resp) => {
+    this.locationService.getAllLocations().subscribe((resp) => {
       this.locations = resp;
     });
   }
 
-
+  ngOnChanges(changes: SimpleChanges): void {
+    this.locationService.getAllLocations().subscribe((resp) => {
+      this.locations = resp;
+    });
+  }
   /**
    * clean up subscription
    */
   ngOnDestroy() {
+    if (this.locationSubscription) {
     this.locationSubscription.unsubscribe();
+    }
   }
 
 }

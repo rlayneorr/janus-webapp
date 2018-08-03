@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Associate } from '../../models/associate.model';
-import { Response } from '@angular/http/';
-import { environment } from '../../../../../environments/environment';
+import { Response } from '@angular/http';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { forEach } from '@angular/router/src/utils/collection';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
 
 /**
  * Service for retrieving and updating data relating to associates.
@@ -13,39 +14,89 @@ import { environment } from '../../../../../environments/environment';
 @Injectable()
 export class AssociateService {
 
+    private associatePath = '8091';
+    private url = (new UrlService).context;
     status: string;
     client: string;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private urlService: UrlService) { }
 
+    /** Get specific associate by id
+     * @param id - the id of the associate to retrieve
+     */
+    getAssociate(id: number): Observable<any> {
+        return this.http.get(this.urlService.trainees.findById(id));
+    }
     /**
      * Get all of the associates
      */
     getAllAssociates(): Observable<any> {
-        const url: string = environment.url + 'TrackForce/track/associates/all';
-
-        return this.http.get(url);
-    }
-
-    getAssociate(id: number) {
-        const url: string = environment.url + 'TrackForce/track/associates/' + id;
-
-        return this.http.get<Associate>(url);
+        return this.http.get(this.urlService.trainees.findAll());
     }
 
     /**
-     * Update the given associates statuses/clients
-     * @param ids of associates to be updated
+     * @function getAssociatesByStatus
+     * @description Make an http request to the /client webservice, fetching mapped associates
+     * with the given marketing status.
+     * @param statusId Contains the marketing status id used to fetch data
      */
-    updateAssociates(ids: number[], ustatus: string, uclient: number): Observable<any> {
-        const url: string = environment.url + 'TrackForce/track/associates/update/' + ustatus + '/' + uclient;
-
-        return this.http.put(url, ids);
+    getAssociatesByStatus(statusId: number) {
+        console.log('Inside Associate Service - getFilteredAssociates');
+        console.log('statusId: ' + statusId);
+        return this.http.get(this.url + this.associatePath + '/all/associate/marketingStatus/' + statusId);
     }
 
-    updateAssociate(id: number, ustatus: string, uclient: string) {
-        const url: string = environment.url + 'TrackForce/track/associates/' + id + '/update/' + ustatus + '/' + uclient;
+    /**
+    * @function getAssociatesByClient
+    * @description Make an http request to the /client webservice, fetching mapped associates
+    * with the given marketing status.
+    * @param statusId Contains the marketing status id used to fetch data
+    */
+    getAssociatesByClient(statusId: number) {
+        console.log('Inside Associate Service - getFilteredAssociates');
+        console.log('statusId: ' + statusId);
+        return this.http.get(this.url + this.associatePath + '/all/associate/client/' + statusId);
+    }
 
-        return this.http.put(url, null);
+    /**
+     * @function getAssociatesByEndClient
+     * @description Make an http request to the /client webservice, fetching mapped associates
+     * with the given marketing status.
+     * @param statusId Contains the marketing status id used to fetch data
+     */
+    getAssociatesByEndClient(statusId: number) {
+        console.log('Inside Associate Service - getFilteredAssociates');
+        console.log('statusId: ' + statusId);
+        return this.http.get(this.url + this.associatePath + '/all/associate/endClient/' + statusId);
+    }
+
+    /**
+     * @function getAssociatesByEndClient
+     * @description Make an http request to the /client webservice, fetching mapped associates
+     * with the given marketing status.
+     * @param statusId Contains the marketing status id used to fetch data
+     */
+    getAssociatesByBatch(statusId: number) {
+        console.log('Inside Associate Service - getFilteredAssociates');
+        console.log('statusId: ' + statusId);
+        return this.http.get(this.url + this.associatePath + '/all/associate/batch/' + statusId);
+    }
+
+    /**
+     * Update the given associate's status/client
+     * @param ids of associates to be updated
+     */
+    updateAssociate(trainee: GambitTrainee): Observable<any> {
+        return this.http.put(this.urlService.trainees.update(), trainee);
+    }
+
+    getInterviewsForAssociate(id: number): Observable<any> {
+        const url: string = this.url + this.associatePath + '/' + id + '/interviews/';
+        return this.http.get(url);
+    }
+
+    addInterviewForAssociate(id: number, interview: any): Observable<any> {
+        const url: string = this.url + this.associatePath + '/' + id + '/interviews/';
+        return this.http.post(url, interview);
     }
 }

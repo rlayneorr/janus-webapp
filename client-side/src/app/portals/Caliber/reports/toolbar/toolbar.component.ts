@@ -7,14 +7,16 @@
  */
 import { Component, OnInit, ViewChild, } from '@angular/core';
 
-import { BatchService } from '../../../Caliber/services/batch.service';
-import { Batch } from '../../entities/Batch';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { TrainerService } from '../../services/trainer.service';
 import { GranularityService } from '../services/granularity.service';
-import { Trainee } from '../../entities/Trainee';
 import { PDFService } from '../../services/pdf.service';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+import { GambitTraineeService } from '../../../../gambit-client/services/trainee/gambit-trainee.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -30,33 +32,34 @@ export class ToolbarComponent implements OnInit {
   public traineeSelect: number;
 
   // Current batch and trainee Object based on selection
-  currentBatch: Batch = new Batch();
-  currentTrainee: Trainee;
+  currentBatch: CompleteBatch = new CompleteBatch();
+  currentTrainee: GambitTrainee;
+  currentBatchTrainees: Array<GambitTrainee>;
 
   // Arrays
   public yearList: Array<number>;              // Contains list of all years from batches
-  public batchList: Array<Batch>;              // Contains list of all batches
-  public batchYearList: Array<Batch>;          // Contains list of all batches based on year selection
+  public batchList: Array<CompleteBatch>;              // Contains list of all batches
+  public batchYearList: Array<CompleteBatch>;          // Contains list of all batches based on year selection
   public weekList: Array<number>;              // Contains list of all weeks based on batch selection
-  public traineesList: Array<Trainee>;         // Contains list of all trainees based on batch selection
+  public traineesList: Array<GambitTrainee>;         // Contains list of all trainees based on batch selection
   public traineesListNames: Array<String>;     // Contains list of all trainees names based on batch selection
 
   // Subscriptions
   private batchSubscription: Subscription;
   private trainerSubscription: Subscription;
 
-  constructor(private batchService: BatchService,
+  constructor(private batchService: GambitBatchService, private traineeService: GambitTraineeService,
               private granularityService: GranularityService,
-              private pdfService: PDFService) {
+              private pdfService: PDFService, private batchUtil: GambitBatchUtilService) {
   }
 
   ngOnInit() {
     this.batchService.fetchAll();
 
-    this.batchSubscription = this.batchService.getList().subscribe(response => {
+    this.batchSubscription = this.batchService.fetchAll().subscribe(response => {
 
       if (response.length > 0) {
-        this.batchList = response;
+        // this.batchList = response;
 
         // Generate dropdown information for years
         this.createYearDropdown();
@@ -68,6 +71,7 @@ export class ToolbarComponent implements OnInit {
         this.createBatchDropdown();
         this.batchSelect = this.batchYearList[0].batchId;
         this.currentBatch = this.getBatchByIdFromSelection(this.batchSelect);
+
 
         // Generate dropdown information for weeks and set initial values
         this.createWeeksDropdown();
@@ -133,7 +137,7 @@ export class ToolbarComponent implements OnInit {
   /**
    * Creates and returns an array of all batches based on year selection.
    */
-  createBatchDropdown(): Array<Batch> {
+  createBatchDropdown(): Array<CompleteBatch> {
     this.batchYearList = [];
 
     for (const batch of this.batchList) {
@@ -151,8 +155,8 @@ export class ToolbarComponent implements OnInit {
    */
   createWeeksDropdown(): Array<number> {
     this.weekList = [];
-
-    for (let i = 0; i <= this.currentBatch.weeks; i++) {
+   // --- we should refactor GambitBatchUtil Service
+    for (let i = 0; i <= this.batchUtil.getWeek(this.currentBatch); i++) {
       this.weekList.push(i);
     }
 
@@ -163,14 +167,22 @@ export class ToolbarComponent implements OnInit {
   /**
    * Creates and returns an array of all trainees based on batchselection.
    */
-  createTraineesDropdown(): Array<Trainee> {
+  createTraineesDropdown(): Array<GambitTrainee> {
     this.traineesList = [];
     this.traineesListNames = [];
 
-    for (const trainee of this.currentBatch.trainees) {
-      this.traineesList.push(trainee);
-      this.traineesListNames.push(trainee.name);
+    this.traineeService.findAllByBatchAndStatus(this.currentBatch.batchId, 'Training').subscribe
+    ( res => {
+      this.currentBatch.trainees = res;
+    console.log('current batch is ', this.currentBatch);
+    console.log('trainees is ', typeof(this.currentBatch.trainees));
+
+
+    for (let i = 0; i < this.currentBatch.trainees.length; i++) {
+      this.traineesList.push(this.currentBatch.trainees[i]);
+      this.traineesListNames.push(this.currentBatch.trainees[i].traineeUserInfo.firstName);
     }
+  });
 
     this.traineeSelect = 0;
     this.sortTraineesByName();
@@ -249,7 +261,7 @@ export class ToolbarComponent implements OnInit {
   searchTrainees() {
     const input = (<HTMLInputElement>document.getElementById('searchTextBox')).value;
     for (const trainee of this.traineesList) {
-      if (trainee.name === input) {
+      if (trainee.traineeUserInfo.firstName || trainee.traineeUserInfo.lastName === input) {
         this.traineeOnClick(trainee.traineeId);
         (<HTMLInputElement>document.getElementById('searchTextBox')).value = input;
       }
@@ -263,7 +275,7 @@ export class ToolbarComponent implements OnInit {
    * Returns Batch object from ID based on batch selection.
    * @param batchId - Batch ID to search for.
    */
-  getBatchByIdFromSelection(batchId: number): Batch {
+  getBatchByIdFromSelection(batchId: number): CompleteBatch {
     for (const batch of this.batchYearList) {
       if (batchId === batch.batchId) {
         return batch;
@@ -275,7 +287,7 @@ export class ToolbarComponent implements OnInit {
    * Returns Trainee object from ID based on trainee selection.
    * @param traineeId - Trainee ID to search for.
    */
-  getTraineeByIdFromSelection(traineeId: number): Trainee {
+  getTraineeByIdFromSelection(traineeId: number): GambitTrainee {
     for (const trainee of this.traineesList) {
       if (traineeId === trainee.traineeId) {
         return trainee;
@@ -288,8 +300,8 @@ export class ToolbarComponent implements OnInit {
    */
   sortTraineesByName() {
     this.traineesList.sort(function(a, b) {
-      const nameA = a.name.toUpperCase();
-      const nameB = b.name.toUpperCase();
+      const nameA = a.traineeUserInfo.firstName.toUpperCase();
+      const nameB = b.traineeUserInfo.firstName.toUpperCase();
       if (nameA < nameB) {
         return -1;
       }
@@ -312,8 +324,8 @@ export class ToolbarComponent implements OnInit {
   /**
    * Creates and returns an empty Trainee object with ID of 0.
    */
-  createEmptyTrainee(): Trainee {
-    const emptyTrainee = new Trainee();
+  createEmptyTrainee(): GambitTrainee {
+    const emptyTrainee = new GambitTrainee();
     emptyTrainee.traineeId = 0;
     return emptyTrainee;
   }

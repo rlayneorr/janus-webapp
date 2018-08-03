@@ -7,14 +7,13 @@ import { Subscription } from 'rxjs/Subscription';
 // services
 import { NoteService } from '../../services/note.service';
 import { QCStatusService } from '../../services/qcstatus.service';
-import { BatchService } from '../../services/batch.service';
-
 // entities
-import { Batch } from '../../entities/Batch';
 import { Note } from '../../entities/Note';
-import { Trainee } from '../../entities/Trainee';
 import { ReportingService } from '../../services/reporting.service';
-import { urls } from '../../services/urls';
+import { BatchGambit } from '../../../../gambit-client/entities/BatchGambit';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
+import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 
 
 
@@ -26,7 +25,7 @@ import { urls } from '../../services/urls';
 
 export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
 
-  @Input() batch: Batch;
+  @Input() batch: BatchGambit;
   @ViewChild('tabSet') tabs: NgbTabset;
 
   public statusList: string[];
@@ -35,6 +34,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   public week: number;
   public data: any[];
   public click = 4;
+  public batchWeek: number;
 
   private qcStatusSubscription: Subscription;
   private noteListSubscription: Subscription;
@@ -48,8 +48,10 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   constructor(
     private noteService: NoteService,
     private qcStatusService: QCStatusService,
-    private batchService: BatchService,
-    private reportingService: ReportingService
+    private batchService: GambitBatchService,
+    private reportingService: ReportingService,
+    private batchUtil: GambitBatchUtilService
+
   ) {
     this.setWeek(1);
   }
@@ -64,7 +66,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     if (event.nextId === 'addWeekTab') {
       this.addWeek();
       event.preventDefault();
-      this.tabs.select(`week-${this.batch.weeks}`);
+      this.tabs.select(`week-${this.batchWeek}`);
     }
   }
   public clickThroughFaces() {
@@ -102,7 +104,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   public getBatchWeeks(): number[] {
     const weeks: number[] = [];
 
-    for (let i = 0; i < this.batch.weeks;) {
+    for (let i = 0; i < this.batchWeek;) {
       weeks.push(++i);
     }
 
@@ -113,9 +115,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   * adds a week to the current batch
   */
   public addWeek() {
-    const weeks = ++this.batch.weeks;
-
-    this.batchService.update(this.batch);
+    const weeks = ++this.batchWeek;
     this.setWeek(weeks);
   }
 
@@ -198,7 +198,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   *
   * @return Note
   */
-  private getTraineeNote(trainee: Trainee): Note {
+  private getTraineeNote(trainee: GambitTrainee): Note {
     const notes = this.getTraineeNotes()
       .filter((note) => (note.trainee.traineeId === trainee.traineeId));
 
@@ -215,7 +215,7 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
       case 1:
         return notes[0];
       default:
-        console.log(`EXCEPTION: multiple QC notes found on trainee [${trainee.name}:${trainee.traineeId}]`);
+        console.log(`EXCEPTION: multiple QC notes found on trainee [${trainee.traineeUserInfo.firstName}:${trainee.traineeId}]`);
         return notes[0];
     }
   }
@@ -338,11 +338,11 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
   * @param batch: Batch
   *
   */
-  private copyBatch(batch: Batch): void {
+  private copyBatch(batch: BatchGambit): void {
     if (this.batch) {
       if (this.batch.batchId === batch.batchId) {
         Object.assign(this.batch, batch);
-        this.setWeek(this.batch.weeks);
+        this.setWeek(this.batchWeek);
       }
     }
   }
@@ -381,8 +381,10 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
     this.reportingService.technologiesForTheWeek$
       .subscribe((results) => this.setTechnologies(results));
 
-    this.setWeek(this.batch.weeks);
-    this.tabs.activeId = `week-${this.batch.weeks}`;
+    this.batchWeek = this.batchUtil.getWeek(this.batch);
+
+    this.setWeek(this.batchWeek);
+    this.tabs.activeId = `week-${this.batchWeek}`;
 
     // this.updatedBatchSubscription = this.batchService.getUpdated()
     //   .subscribe( (batch) => this.copyBatch(batch) );
@@ -397,8 +399,8 @@ export class QualityFeedbackComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(): void {
     if (this.batch) {
-      this.setWeek(this.batch.weeks);
-      this.tabs.activeId = `week-${this.batch.weeks}`;
+      this.setWeek(this.batchWeek);
+      this.tabs.activeId = `week-${this.batchWeek}`;
     }
   }
 

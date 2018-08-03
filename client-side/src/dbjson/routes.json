@@ -1,0 +1,9 @@
+{
+  "/questions/:questionId/active": "/questions/:questionId",
+  "/questions/:questionId/deactivate": "/questions/:questionId",
+  "/questions": "/questions",
+  "/questions/delete/:questionId": "/questions?questionId=:questionId",
+  "/questions/bucket/:questionId": "/questions?bucketId=:questionId"
+
+
+}

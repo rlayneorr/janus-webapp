@@ -1,0 +1,36 @@
+<div class="container">
+	
+	<!-- NgBootstrap Tab -->
+	<ngb-tabset>
+
+		<!-- content of 'Skill Types' -->
+	  <ngb-tab title="Skill Types" id ="tab-1">
+	    <ng-template ngbTabContent>
+
+	    	<!-- project 'skillTypes' component -->
+	    	<app-skill-types></app-skill-types>
+
+	    </ng-template>
+	  </ngb-tab>
+
+		<!-- content of 'All Categories' -->
+		<ngb-tab title="Categories" id="tab-2">
+			<ng-template ngbTabContent>
+			
+				<!-- project 'categories' component -->
+				<app-categories></app-categories>
+
+			</ng-template>
+		</ngb-tab>
+
+	  <!-- content of 'All Buckets' -->
+	  <ngb-tab title="Buckets" id="tab-3">
+	    <ng-template ngbTabContent>
+	    	<!-- project 'skillType-buckets' component -->
+	    	<app-buckets></app-buckets>
+
+	    </ng-template>
+	  </ngb-tab>
+	</ngb-tabset>
+
+</div>

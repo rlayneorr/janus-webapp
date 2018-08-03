@@ -1,11 +1,11 @@
-import { Trainer } from './Trainer';
-import { Trainee } from './Trainee';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+
 
 // When making merges, please use the version presented by the Revaturions group.
 
 export class Panel {
     panelId: number;
-    trainee: Trainee;
+    trainee: GambitTrainee;
     panelist: any;
     interviewDate: any;
     duration: string;

@@ -13,10 +13,9 @@ export class DeleteTraineeModalComponent implements OnInit {
   @Input() trainee: Trainee;
   constructor(private activeModal: NgbActiveModal) {
     this.trainee = new Trainee();
-   }
-
-  ngOnInit() {
   }
+
+  ngOnInit() {}
 
   delete() {
     this.activeModal.close('Delete');

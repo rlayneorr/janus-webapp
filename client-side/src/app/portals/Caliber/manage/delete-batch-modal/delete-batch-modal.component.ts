@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
-import { Batch } from '../../entities/Batch';
+import { BatchGambit } from '../../../../gambit-client/entities/BatchGambit';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 
 @Component({
   selector: 'app-delete-batch-modal',
@@ -10,13 +11,12 @@ import { Batch } from '../../entities/Batch';
 })
 export class DeleteBatchModalComponent implements OnInit {
 
-  @Input() batch: Batch;
+  @Input() batch: CompleteBatch;
   constructor(private activeModal: NgbActiveModal) {
-    this.batch = new Batch();
+    this.batch = new CompleteBatch();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   delete() {
     this.activeModal.close('Delete');

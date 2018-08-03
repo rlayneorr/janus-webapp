@@ -1,4 +1,4 @@
-import { Batch } from './Batch';
+import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
 
 export class Trainee {
     traineeId: number;
@@ -15,5 +15,5 @@ export class Trainee {
     major: string;
     techScreenerName: string;
     projectCompletion: string;
-    batch: Batch;
+    batch: BatchGambit;
 }

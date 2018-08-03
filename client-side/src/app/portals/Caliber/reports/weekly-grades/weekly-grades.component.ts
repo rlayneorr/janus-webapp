@@ -13,10 +13,10 @@ import { NoteService } from '../../services/note.service';
 import { ReportingService } from '../../services/reporting.service';
 
 // entities
-import { Batch } from '../../entities/Batch';
 import { Assessment } from '../../entities/Assessment';
 import { Grade } from '../../entities/Grade';
 import { Note } from '../../entities/Note';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class WeeklyGradesComponent implements OnInit, OnDestroy {
   batchNote: Note;
   weekTopics: string;
 
-  batch: Batch;
+  batch: CompleteBatch;
   week: number;
 
   constructor(private granularityService: GranularityService,

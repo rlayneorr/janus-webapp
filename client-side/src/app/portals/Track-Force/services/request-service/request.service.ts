@@ -1,53 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import {User} from '../../models/user.model';
-import { environment } from '../../../../../environments/environment';
+import { UrlService } from '../../../../gambit-client/services/urls/url.service';
+import { User } from '../../models/user.model';
 
 @Injectable()
 export class RequestService {
-
-  host: string = environment.url;
-  trackPath: string = this.host + 'TrackForce/track';
-  dataPath: string = this.host + 'TrackForce/track/data/get';
-
+  url = (new UrlService).context;
+  trackPath: string = this.url + 'TrackForce/track';
+  dataPath: string = this.url + 'TrackForce/track/data/get';
+  /**
+   * @param {HttpClient} http
+   * Need to create a connection to REST endpoint
+   * And initiate Http requests
+   */
   constructor(private http: HttpClient) { }
 
   public populateDB(): Observable<any> {
-    return this.http.get(this.host + 'TrackForce/track/database/populateDB');
+    return this.http.get(this.url + 'TrackForce/track/database/populateDB');
   }
 
   public populateDBSF(): Observable<any> {
-    return this.http.get(this.host + 'TrackForce/track/database/populateDBSF');
+    return this.http.get(this.url + 'TrackForce/track/database/populateDBSF');
   }
 
   public deleteDB(): Observable<any> {
-    return this.http.delete(this.host + 'TrackForce/track/database/deleteFromDB');
-  }
-
-  public login(username: string, password: string): Observable<User> {
-    return this.http.post<User>(this.host + 'TrackForce/track/user/submit', { username: username, password: password });
-  }
-
-  public getUsername(): Observable<any> {
-    return this.http.get<any>(this.host + 'TrackForce/track/user/name');
-  }
-
-  public updateAssociates(): Observable<any> {
-    return this.http.post<any>(this.trackPath + '/data/update/associate', {});
+    return this.http.delete(this.url + 'TrackForce/track/database/deleteFromDB');
   }
 
   public getAssociates(): Observable<any> {
-    return this.http.get(this.dataPath + '/associate');
+    return this.http.get(this.url + '/trainees');
   }
 
-  public getBatchesSortedById(): Observable<any> {
-    return this.http.get(this.dataPath + '/batch');
-  }
-
-  public getBatchesSortedByDate(): Observable<any> {
-    return this.http.get(this.dataPath + '/batch/date');
-  }
 
   public getClients(): Observable<any> {
     return this.http.get(this.dataPath + '/client');
@@ -57,29 +41,12 @@ export class RequestService {
     return this.http.get(this.dataPath + '/summary');
   }
 
-  public getSkills(): Observable<any> {
-    return this.http.get(this.dataPath + '/skills');
-  }
-
   public getStatuses(): Observable<any> {
-    return this.http.get(this.dataPath + '/marketing');
+    return this.http.get(this.url + '8094/all/marketingstatus');
   }
 
-  public getBatches(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {
-    return this.http.get<any>(this.host + 'TrackForce/track/batches/' + threeMonthsBefore + '/' + threeMonthsAfter);
+  // get first match of Client Object
+  getOneClient(clientId: number): Observable<any> {
+    return this.http.get(this.trackPath + '/clients/' + clientId);
   }
-
-  public getBatchPerType(threeMonthsBefore: number, threeMonthsAfter: number): Observable<any> {
-    return this.http.get<any>(this.host + 'TrackForce/track/batches/' + threeMonthsBefore + '/' + threeMonthsAfter + '/type');
-  }
-
-  public createUser(username: string, password: string, roleId: number): Observable<any> {
-    return this.http.post<any>(this.host + 'TrackForce/track/create/user', {username: username, password: password, role: roleId});
-  }
-
-    // get first match of Client Object
-    getOneClient(clientId: number): Observable<any> {
-      return this.http.get(this.trackPath + '/clients/' + clientId);
-    }
-
 }

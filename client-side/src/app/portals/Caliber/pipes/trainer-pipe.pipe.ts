@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Trainer } from '../../../entities/Trainer';
+import { GambitTrainer } from '../../../gambit-client/entities/GambitTrainer';
+
 
 @Pipe({
   name: 'trainerPipe'
@@ -7,16 +8,16 @@ import { Trainer } from '../../../entities/Trainer';
 export class TrainerPipePipe implements PipeTransform {
   /**
    * Logic to filter out Active/Inactive Trainers
-   * @param {*} trainers
+   * @param {*} gamtrainers
    * @param {String} status
    * @returns {*}
    * @memberof TrainerPipePipe
    */
-  transform(trainers: Trainer[], status: String): Trainer[] {
+  transform(trainers: GambitTrainer[], status: String): GambitTrainer[] {
     if (status === 'ROLE_INACTIVE') {
-      return trainers.filter(trainer => trainer.tier === status);
+      return trainers.filter(trainer => trainer.role.role === status);
     } else {
-      return trainers.filter(trainer => trainer.tier !== 'ROLE_INACTIVE');
+      return trainers.filter(trainer => trainer.role.role !== 'ROLE_INACTIVE');
     }
   }
 }

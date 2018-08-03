@@ -9,11 +9,13 @@ import { Observable } from 'rxjs/Observable';
 import { ReportingService } from '../../services/reporting.service';
 import { GranularityService } from '../services/granularity.service';
 import { NoteService } from '../../services/note.service';
+import { GambitBatchService } from '../../../../gambit-client/services/batch/gambit-batch.service';
 
 // entities
 import { Note } from '../../entities/Note';
-import { Trainee } from '../../entities/Trainee';
-import { Batch } from '../../entities/Batch';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { GambitBatchUtilService } from '../../../../services/gambit-batch-util.service';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 
 /**
  * Creates a table of the overall feedback of a given trainee in a given batch.
@@ -41,13 +43,15 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
   traineeNotes: Array<Note> = null;
   weekTopics: Array<Array<string>>;
 
-  trainee: Trainee;
+  trainee: GambitTrainee;
   week = 1;
-  batch: Batch;
+  batch: CompleteBatch;
 
   constructor(private granularityService: GranularityService,
-              private noteService: NoteService,
-              private reportService: ReportingService) { }
+    private noteService: NoteService,
+    private reportService: ReportingService,
+    private batchService: GambitBatchService,
+    private batchUtil: GambitBatchUtilService) { }
 
   ngOnInit() {
 
@@ -61,7 +65,8 @@ export class OverallFeedbackComponent implements OnInit, OnDestroy {
 
         if (this.trainee.traineeId > 0) {
           this.noteService.fetchByTrainee(this.trainee);
-          this.reportService.fetchTechnologiesUpToWeek(this.batch.batchId, this.batch.gradedWeeks);
+          // Change GambitBatchUtilService, so it accepts CompleteBatch objects
+          this.reportService.fetchTechnologiesUpToWeek(this.batch.batchId, this.batchUtil.getWeek(this.batch));
         }
       });
 

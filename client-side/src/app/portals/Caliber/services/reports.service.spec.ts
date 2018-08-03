@@ -1,6 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHandler} from '@angular/common/http';
 import { ReportsService } from './reports.service';
+import { HttpClientBackendService } from 'angular-in-memory-web-api';
 
 xdescribe('ReportsService', () => {
   beforeEach(() => {
@@ -18,4 +19,5 @@ xdescribe('ReportsService', () => {
   it('should be created', inject([ReportsService], (service: ReportsService) => {
     expect(service).toBeTruthy();
   }));
+
 });

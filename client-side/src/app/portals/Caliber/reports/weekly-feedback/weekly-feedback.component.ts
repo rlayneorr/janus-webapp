@@ -6,14 +6,14 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 // entities
-import { Trainee } from '../../entities/Trainee';
-import { Batch } from '../../entities/Batch';
 import { Note } from '../../entities/Note';
 
 // services
 import { GranularityService } from '../services/granularity.service';
 import { ReportingService } from '../../services/reporting.service';
 import { NoteService } from '../../services/note.service';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
 
 /**
  * Creates a table of the weekly feedback of a given trainee
@@ -42,8 +42,8 @@ export class WeeklyFeedbackComponent implements OnInit, OnDestroy {
   private topicSubscription: Subscription;
 
   week = 1;
-  trainee: Trainee;
-  batch: Batch;
+  trainee: GambitTrainee;
+  batch: CompleteBatch;
 
   weekTopics: string;
   qcNote: Note;

@@ -56,6 +56,7 @@ export class DashboardInfoComponent implements OnInit {
     this.currentBatchStart1 = batch1.startDate;
     this.currentBatchEnd1 = batch1.endDate;
     let timePassed = 0;
+    this.weekNum = 0;
     if (new Date() < this.currentBatchEnd1) {
       timePassed = (new Date().getTime()
       - new Date(this.currentBatchStart1).getTime());
@@ -63,7 +64,11 @@ export class DashboardInfoComponent implements OnInit {
       timePassed = (new Date(this.currentBatchEnd1).getTime() -
       new Date(this.currentBatchStart1).getTime());
     }
-    this.weekNum = Math.floor((((timePassed / (1000 * 60 * 60 * 24)) + 1) / 7) + 1);
+    if (timePassed < 0) { // if the batch hasn't started yet
+      this.weekNum = 0;
+    } else {
+      this.weekNum = Math.floor((((timePassed / (1000 * 60 * 60 * 24)) + 1) / 7) + 1);
+    }
   }
 
   /**

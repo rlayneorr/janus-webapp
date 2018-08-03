@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Location } from '../../../entities/Location';
+import { Location } from '../../../../../gambit-client/entities/location-entities/Location';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { LocationService } from '../../../services/location.service';
+import { LocationService } from '../../../../../gambit-client/services/location/location.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 
@@ -13,7 +13,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
 })
 export class CreatelocationComponent implements OnInit {
 
-  currNewLocation = new Location();
+  currNewLocation: Location = new Location();
   newState: string;
   show: boolean;
   rForm: FormGroup;
@@ -80,9 +80,9 @@ export class CreatelocationComponent implements OnInit {
     this.currNewLocation.company = modal.company;
     this.currNewLocation.city = modal.city;
     this.currNewLocation.street = modal.street;
-    this.currNewLocation.zipcode = modal.zipcode;
+    this.currNewLocation.zip = modal.zipcode;
     this.currNewLocation.active = true;
-    this.locationService.create(this.currNewLocation).subscribe((succ) => this.locationService.fetchAll());
+    this.locationService.newLocation(this.currNewLocation).subscribe((succ) => this.locationService.getAllLocations());
   }
 
   /**

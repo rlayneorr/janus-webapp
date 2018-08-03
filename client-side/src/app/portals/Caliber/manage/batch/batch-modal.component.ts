@@ -5,17 +5,19 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { Subscription } from 'rxjs/Subscription';
 
 // entities
-import { Batch } from '../../entities/Batch';
+import { CompleteBatch } from '../../../../gambit-client/aggregator/entities/CompleteBatch';
 
 // services
-import { BatchService } from '../../services/batch.service';
+import { BatchService } from '../../../../gambit-client/aggregator/services/completebatch.service';
 import { TrainingTypeService } from '../../services/training-type.service';
-import { SkillService } from '../../services/skill.service';
+import { GambitSkillTypeService } from '../../../../gambit-client/services/skillType/gambit-skill-type.service';
 import { LocationService } from '../../services/location.service';
 import { TrainerService } from '../../services/trainer.service';
 import { Trainer } from '../../entities/Trainer';
 import { Address } from '../../entities/Address';
 import { ApiService } from '../../services/api.service';
+import { GambitSkill } from '../../../../gambit-client/entities/GambitSkill';
+import { GambitSkillType } from '../../../../gambit-client/entities/GambitSkillType';
 
 
 @Component({
@@ -26,13 +28,13 @@ import { ApiService } from '../../services/api.service';
 export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input()
-  public initialBatch: Batch;
+  public initialBatch: CompleteBatch;
 
   @Input()
-  public batch: Batch;
+  public batch: CompleteBatch;
 
   public trainers: Trainer[];
-  public skills: string[];
+  public skillTypes: GambitSkillType[];
   public locations: Address[];
   public trainingTypes: string[];
   batchType: string;
@@ -43,7 +45,6 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
 
   private savedBatchSubscription: Subscription;
   private trainingTypeListSubscription: Subscription;
-  private skillListSubscription: Subscription;
   private locationListSubscription: Subscription;
   private trainerListSubscription: Subscription;
 
@@ -51,19 +52,14 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     private activeModal: NgbActiveModal,
     private batchService: BatchService,
     private trainingTypeService: TrainingTypeService,
-    private skillService: SkillService,
+    private skillTypeService: GambitSkillTypeService,
     private locationService: LocationService,
     public trainerService: TrainerService
   ) {
-    this.batch = new Batch();
+    this.batch = new CompleteBatch();
     this.setLocations([]);
     this.setTrainers([]);
     this.setTrainingTypes([]);
-    this.setSkills([]);
-  }
-
-  public setSkills(skills: string[]): void {
-    this.skills = skills;
   }
 
   public setLocations(locations: Address[]): void {
@@ -103,51 +99,46 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   /** Dynamically updates the createBatch location selected inside the
-    * create batch modal whenever a location is selected from the dropdown
-    */
+  * create batch modal whenever a location is selected from the dropdown
+  */
   onLocationSelect(addressId: number): void {
     for (const location of this.locations) {
       if (Number(location.addressId) === Number(addressId)) {
-        this.batch.address = location;
+        this.batch.location = location.city;
       }
     }
-    /** Create batch also requires a "location" field inside of it
-     *  For now, we will just send a string for the city since the address
-     * is already set
-     *
-     * The address/location entities need to be redesigned across the application
-     */
-    this.batch.location = this.batch.address.city;
   }
 
-  /** Dynamically updates the createBatch trainer selected inside the
- * create batch modal whenever a trainer is selected from the dropdown
- */
+  /**
+  * Dynamically updates the createBatch trainer selected inside the
+  * create batch modal whenever a trainer is selected from the dropdown
+  */
   onTrainerSelect(trainerId: number): void {
     for (const trainer of this.trainers) {
       if (Number(trainer.trainerId) === Number(trainerId)) {
-        this.batch.trainer = trainer;
+        this.batch.trainer.userId = trainer.trainerId;
       }
     }
   }
 
 
-  /** Dynamically updates the createBatch coTrainer selected inside the
-   * create batch modal whenever a trainer is selected from the dropdown
-   */
+  /**
+  * Dynamically updates the createBatch coTrainer selected inside the
+  * create batch modal whenever a trainer is selected from the dropdown
+  */
   onCoTrainerSelect(trainerId: number): void {
     for (const trainer of this.trainers) {
       if (Number(trainer.trainerId) === Number(trainerId)) {
-        this.batch.coTrainer = trainer;
+        this.batch.cotrainer.userId = trainer.trainerId;
       }
     }
   }
 
   ngOnInit() {
 
-    /*
-   * keep an updated list of trainers
-   */
+  /**
+  * keep an updated list of trainers
+  */
     this.trainerListSubscription = this.trainerService.listSubject
       .subscribe((trainers) => this.setTrainers(trainers));
 
@@ -161,8 +152,9 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((types) => this.setTrainingTypes(types));
 
     /*fetches all skills */
-    this.skillListSubscription = this.skillService.listSubject
-      .subscribe((skills) => this.setSkills(skills));
+    this.skillTypeService.findAllActive().subscribe(skillTypes => {
+      this.skillTypes = skillTypes;
+    });
 
     /* fetches all batches */
     this.batchService.fetchAll();
@@ -180,7 +172,7 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     isNewBatch is assigned so that the proper functions are called from the buttons
     This should be redesigned */
 
-    if (this.batch.trainer == null) {
+    if (this.batch.trainer.userId === 0) {
       this.batchType = 'Create New Batch';
       this.isNewBatch = true;
     } else {
@@ -191,11 +183,13 @@ export class BatchModalComponent implements OnInit, OnDestroy, OnChanges {
     this.clone();
   }
 
+  /**
+   * Unsubscribes from all subscriptions before destroyed.
+   */
   ngOnDestroy(): void {
     this.locationListSubscription.unsubscribe();
     this.trainerListSubscription.unsubscribe();
     this.trainingTypeListSubscription.unsubscribe();
-    this.skillListSubscription.unsubscribe();
   }
 
   ngOnChanges(): void {

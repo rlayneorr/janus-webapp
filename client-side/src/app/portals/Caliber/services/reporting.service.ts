@@ -4,9 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { CacheData } from '../../../entities/CacheData.entity';
 import { HttpClient } from '@angular/common/http';
 import { PanelReview } from '../entities/PanelReview';
-import { urls } from './urls';
-
-
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 /**
  * Service handles API calls and tracks fetched data for caching.
@@ -18,6 +16,8 @@ import { urls } from './urls';
  */
 @Injectable()
 export class ReportingService {
+
+  private urlService = new UrlService();
 
   /* Subjects & Paired Observables */
   private traineeOverallRadar = new BehaviorSubject<CacheData>(null);
@@ -31,7 +31,6 @@ export class ReportingService {
 
   private lineTraineeOverall = new BehaviorSubject<CacheData>(null);
   public lineTraineeOverall$ = this.lineTraineeOverall.asObservable();
-
 
   private qcStatusDoughnut = new BehaviorSubject<CacheData>(null);
   public qcStatusDoughnut$ = this.qcStatusDoughnut.asObservable();
@@ -106,7 +105,7 @@ export class ReportingService {
    * @returns Number - batch average for comparison
    */
   fetchBatchComparisonAvg(skill: string, training: string, startDate) {
-    const endpoint = urls.apiBatchComparisonAvgEndpoint(skill, training, startDate);
+    const endpoint = this.urlService.apiBatchComparisonAvgEndpoint(skill, training, startDate);
 
   }
 
@@ -116,16 +115,16 @@ export class ReportingService {
   =============================================*/
 
   /**
-     * Fetches doughnut chart of all QC statuses for this batch unless data
-     * matching these parameters is already being stored.
-     *
-     * Data stored in @property {BehaviorSubject<CacheData>} qcStatusDoughnut
-     * and exposed through @property {Observable<CacheData>} qcStatusDoughnut$
-     *
-     * @param batchId the id of the batch being fetched
-     */
+   * Fetches doughnut chart of all QC statuses for this batch unless data
+   * matching these parameters is already being stored.
+   *
+   * Data stored in @property {BehaviorSubject<CacheData>} qcStatusDoughnut
+   * and exposed through @property {Observable<CacheData>} qcStatusDoughnut$
+   *
+   * @param batchId the id of the batch being fetched
+   */
   fetchQcStatusDoughnutChart(batchId: Number) {
-    const endpoint = urls.apiPieChartCurrentWeekQCStatus(batchId);
+    const endpoint = this.urlService.apiPieChartCurrentWeekQCStatus(batchId);
 
     // Params object for refresh check
     const params = {
@@ -135,7 +134,8 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.qcStatusDoughnut, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.qcStatusDoughnut.next({ params: params, data: success }));
+        success => this.qcStatusDoughnut.next({params: params, data: success})
+      );
     }
   }
 
@@ -149,7 +149,7 @@ export class ReportingService {
    * @param weekId weekId filter value
    */
   fetchBatchWeekPieChart(batchId: Number, weekId: Number) {
-    const endpoint = urls.apifetchBatchWeekPieChart(batchId, weekId);
+    const endpoint = this.urlService.apifetchBatchWeekPieChart(batchId, weekId);
 
     // Params object for refresh check
     const params = {
@@ -160,7 +160,8 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.qcStatusDoughnut, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.qcStatusDoughnut.next({ params: params, data: success }));
+        success => this.qcStatusDoughnut.next({params: params, data: success})
+      );
     }
 
   }
@@ -173,7 +174,7 @@ export class ReportingService {
    * @param batchId
    */
   fetchPieChartCurrentWeekQCStatus(batchId: Number) {
-    const endpoint = urls.apiPieChartCurrentWeekQCStatus(batchId);
+    const endpoint = this.urlService.apiPieChartCurrentWeekQCStatus(batchId);
 
     // Params object for refresh check
     const params = {
@@ -183,7 +184,8 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.qcStatusDoughnut, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.qcStatusDoughnut.next({ params: params, data: success }));
+        success => this.qcStatusDoughnut.next({params: params, data: success})
+      );
     }
   }
 
@@ -192,7 +194,7 @@ export class ReportingService {
   ===========================================*/
 
   fetchAllBatchesCurrentWeekQCStackedBarChart(batchId: Number, week: Number) {
-    const endpoint = urls.apiAllBatchesCurrentWeekQCStackedBarChart(batchId, week);
+    const endpoint = this.urlService.apiAllBatchesCurrentWeekQCStackedBarChart(batchId, week);
 
     // TODO: Implement API call and subject push logic
 
@@ -212,7 +214,7 @@ export class ReportingService {
    * @param week - week number for data within batch to fetch
    */
   fetchBatchWeekAvgBarChart(batchId: Number, week: Number) {
-    const endpoint = urls.apiBatchWeekAvgBarChart(batchId, week);
+    const endpoint = this.urlService.apiBatchWeekAvgBarChart(batchId, week);
 
     const params = {
       batchId: batchId,
@@ -221,7 +223,8 @@ export class ReportingService {
 
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
+        success => this.assessmentBreakdownBarChart.next({params: params, data: success})
+      );
     }
   }
 
@@ -235,7 +238,7 @@ export class ReportingService {
    * @param week Week of batch program to get by
    */
   fetchBatchWeekSortedBarChart(batchId: Number, week: Number) {
-    const endpoint = urls.apiBatchWeekSortedBarChart(batchId, week);
+    const endpoint = this.urlService.apiBatchWeekSortedBarChart(batchId, week);
 
     const params = {
       batchId: batchId,
@@ -244,7 +247,7 @@ export class ReportingService {
 
     if (this.needsRefresh(this.BatchWeekSortedBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.BatchWeekSortedBarChart.next({ params: params, data: success }));
+        success => this.BatchWeekSortedBarChart.next({params: params, data: success}));
     }
   }
 
@@ -257,7 +260,7 @@ export class ReportingService {
    * @param traineeId - Requested traineeId
    */
   fetchBatchOverallTraineeBarChart(batchId: Number, traineeId: Number) {
-    const endpoint = urls.apiBatchOverallTraineeBarChart(batchId, traineeId);
+    const endpoint = this.urlService.apiBatchOverallTraineeBarChart(batchId, traineeId);
 
     const params = {
       batchId: batchId,
@@ -267,11 +270,9 @@ export class ReportingService {
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       if (traineeId !== 0) {
         this.httpClient.get(endpoint)
-        .subscribe(success => this.assessmentBreakdownBarChart.next({ params: params, data: success }));
+          .subscribe(success => this.assessmentBreakdownBarChart.next({params: params, data: success}));
       }
-
     }
-
   }
 
   /**
@@ -283,7 +284,7 @@ export class ReportingService {
    * @author Edel Benavides
    */
   fetchBatchOverallBarChart(batchId: Number) {
-    const endpoint = urls.apiBatchOverallBarChart(batchId);
+    const endpoint = this.urlService.apiBatchOverallBarChart(batchId);
 
     // Params object for refresh check
     const params = {
@@ -293,9 +294,8 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.batchOverallBar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallBar.next({ params: params, data: success }));
+        success => this.batchOverallBar.next({params: params, data: success}));
     }
-
   }
 
   /**
@@ -308,7 +308,7 @@ export class ReportingService {
    * @param traineeId
    */
   fetchBatchWeekTraineeBarChart(batchId: Number, weekId: Number, traineeId: Number) {
-    const endpoint = urls.apiBatchWeekTraineeBarChart(batchId, weekId, traineeId);
+    const endpoint = this.urlService.apiBatchWeekTraineeBarChart(batchId, weekId, traineeId);
 
     const params = {
       batchId: batchId,
@@ -318,16 +318,15 @@ export class ReportingService {
 
     if (this.needsRefresh(this.assessmentBreakdownBarChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.assessmentBreakdownBarChart.next({ params: params, data: success }));
+        success => this.assessmentBreakdownBarChart.next({params: params, data: success})
+      );
     }
   }
 
   /* Line Charts */
 
-
-
   fetchTraineeUpToWeekLineChart(batchId: Number, weekId: Number, traineeId: Number) {
-    const endpoint = urls.apiTraineeUpToWeekLineChart(batchId, weekId, traineeId);
+    const endpoint = this.urlService.apiTraineeUpToWeekLineChart(batchId, weekId, traineeId);
 
     // TODO: Implement API call and subject push logic
 
@@ -339,7 +338,7 @@ export class ReportingService {
    * Data is exposed through @property {Observable<CacheData>} lineTraineeOverall$
    */
   fetchTraineeOverallLineChart(batchId: Number, traineeId: Number) {
-    const endpoint = urls.apiTraineeOverallLineChart(batchId, traineeId);
+    const endpoint = this.urlService.apiTraineeOverallLineChart(batchId, traineeId);
     const params = {
       batchId: batchId,
       traineeId: traineeId
@@ -347,11 +346,10 @@ export class ReportingService {
     if (this.needsRefresh(this.lineTraineeOverall, params)) {
       this.httpClient.get(endpoint).subscribe(
 
-        success => { this.lineTraineeOverall.next({ params: params, data: success });
+        success => {this.lineTraineeOverall.next({params: params, data: success});
       });
+    }
   }
-}
-
 
   /**
    * Fetches data for use inbatch overall line chart if data with these parameters
@@ -359,7 +357,7 @@ export class ReportingService {
    * Data is exposed through @property {Observable<CacheData>} batchOverallLineChart$
    */
   fetchBatchOverallLineChart(batchId: Number) {
-    const endpoint = urls.apiBatchOverallLineChart(batchId);
+    const endpoint = this.urlService.apiBatchOverallLineChart(batchId);
 
     const params = {
       batchId: batchId
@@ -367,17 +365,17 @@ export class ReportingService {
 
     if (this.needsRefresh(this.batchOverallLineChart, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallLineChart.next({ params: params, data: success }));
+        success => this.batchOverallLineChart.next({params: params, data: success}));
     }
   }
 
   fetchCurrentBatchesLineChart() {
-    const endpoint = urls.apiCurrentBatchesLineChart;
+    const endpoint = this.urlService.apiCurrentBatchesLineChart;
     // TODO: Implment API call and subject push logic
   }
 
   fetchCurrentPanelsLineChart() {
-    const endpoint = urls.apiCurrentPanelsLineChart;
+    const endpoint = this.urlService.apiCurrentPanelsLineChart;
 
     // TODO: Implement API call and subject push logic
 
@@ -394,7 +392,7 @@ export class ReportingService {
    * @param traineeId
    */
   fetchTraineeUpToWeekRadarChart(week: Number, traineeId: Number) {
-    const endpoint = urls.apiTraineeUpToWeekRadarChart(week, traineeId);
+    const endpoint = this.urlService.apiTraineeUpToWeekRadarChart(week, traineeId);
 
     // Params object for refresh check
     const params = {
@@ -405,11 +403,9 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.traineeOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.traineeWeeklyRadar.next({ params: params, data: success }));
+        success => this.traineeWeeklyRadar.next({params: params, data: success}));
     }
-
   }
-
 
   /**
    * Updates Trainee overall tech skills data if necessary
@@ -417,7 +413,7 @@ export class ReportingService {
    * @param traineeId - trainee whose skill data should be fetched
    */
   fetchTraineeOverallRadarChart(traineeId: Number) {
-    const endpoint = urls.apiTraineeOverallRadarChart(traineeId);
+    const endpoint = this.urlService.apiTraineeOverallRadarChart(traineeId);
 
     // Params object for refresh check
     const params = {
@@ -427,7 +423,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.traineeOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.traineeOverallRadar.next({ params: params, data: success }));
+        success => this.traineeOverallRadar.next({params: params, data: success}));
     }
   }
 
@@ -438,7 +434,7 @@ export class ReportingService {
    */
   fetchBatchOverallRadarChart(batchId: Number) {
 
-    const endpoint = urls.apiBatchOverallRadarChart(batchId);
+    const endpoint = this.urlService.apiBatchOverallRadarChart(batchId);
 
     // Params object for refresh check
     const params = {
@@ -448,12 +444,12 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.batchOverallRadar, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.batchOverallRadar.next({ params: params, data: success }));
+        success => this.batchOverallRadar.next({params: params, data: success}));
     }
   }
 
   fetchBatchAllTraineesRadarChart(batchId: Number) {
-    const endpoint = urls.apiBatchAllTraineesRadarChart(batchId);
+    const endpoint = this.urlService.apiBatchAllTraineesRadarChart(batchId);
 
     // TODO: Implement API call and subject push logic
 
@@ -462,7 +458,7 @@ export class ReportingService {
   /* Misc. */
 
   fetchBatchWeekAverageValue(batchId: Number, weekId: Number) {
-    const endpoint = urls.apiBatchWeekAverageValue(batchId, weekId);
+    const endpoint = this.urlService.apiBatchWeekAverageValue(batchId, weekId);
 
     // TODO: Implement API call and subject push logic
 
@@ -477,7 +473,7 @@ export class ReportingService {
    * @param week - How many weeks we're requesting.
    */
   fetchTechnologiesForTheWeek(batchId: Number, weekId: Number) {
-    const endpoint = urls.apiTechnologiesForTheWeek(batchId, weekId);
+    const endpoint = this.urlService.apiTechnologiesForTheWeek(batchId, weekId);
 
     // Params object for refresh check
     const params = {
@@ -488,7 +484,7 @@ export class ReportingService {
     // call backend API if data is not fresh
     if (this.needsRefresh(this.technologiesForTheWeek, params)) {
       this.httpClient.get(endpoint).subscribe(
-        success => this.technologiesForTheWeek.next({ params: params, data: success }));
+        success => this.technologiesForTheWeek.next({params: params, data: success}));
     }
   }
 
@@ -502,21 +498,21 @@ export class ReportingService {
    */
   fetchTechnologiesUpToWeek(batchId: Number, week: Number) {
 
-    const params = { batchId: batchId };
+    const params = {batchId: batchId};
 
     if (this.needsRefresh(this.technologiesUpToWeek, params)) {
       const result = Array<any>(week);
       let currentSub = 0;
 
       for (let i = 0; i < week; i++) {
-        const endpoint = urls.apiTechnologiesForTheWeek(batchId, i + 1);
+        const endpoint = this.urlService.apiTechnologiesForTheWeek(batchId, i + 1);
 
         this.httpClient.get(endpoint).subscribe((success) => {
           result[i] = success;
           currentSub++;
 
           if (currentSub === week) {
-            this.technologiesUpToWeek.next({ params: params, data: result });
+            this.technologiesUpToWeek.next({params: params, data: result});
           }
         });
       }
@@ -532,7 +528,7 @@ export class ReportingService {
    * Data exposed through @property {Observable<CacheData>} panelBatchAllTrainees$
    */
   fetchPanelBatchAllTrainees(batchId: Number) {
-    const endpoint = urls.apiPanelBatchAllTrainees(batchId);
+    const endpoint = this.urlService.apiPanelBatchAllTrainees(batchId);
     const params = {
       batchId: batchId
     };

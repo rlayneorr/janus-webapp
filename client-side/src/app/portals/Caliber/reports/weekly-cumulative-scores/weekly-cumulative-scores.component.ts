@@ -5,8 +5,9 @@ import { ReportingService } from '../../services/reporting.service';
 import { PDFService } from '../../services/pdf.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GranularityService } from '../services/granularity.service';
-import { Trainee } from '../../entities/Trainee';
-import { Batch } from '../../entities/Batch';
+import { GambitTrainee } from '../../../../gambit-client/entities/GambitTrainee';
+
+
 
 /**
  * @author John Hudson
@@ -30,7 +31,7 @@ export class WeeklyCumulativeScoreComponent implements OnInit, OnDestroy {
 
 
     public week: number;
-    public trainee: Trainee;
+    public trainee: GambitTrainee;
     public batchId: number;
 
     public chartData: any[] = [];

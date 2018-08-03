@@ -1,12 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Trainee } from '../entities/Trainee';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+
 
 @Pipe({
   name: 'traineeSearchPipe'
 })
 export class TraineeSearch implements PipeTransform {
 
-  transform(trainees: any, searchText: String): Trainee[] {
+  transform(trainees: any, searchText: String): GambitTrainee[] {
     if (!trainees) {
       return [];
     } else {

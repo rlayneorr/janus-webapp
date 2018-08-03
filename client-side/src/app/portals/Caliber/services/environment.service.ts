@@ -22,7 +22,7 @@ export class EnvironmentService {
    * @return string
    */
   public buildUrl(url: string, parameters = {} ): string {
-    let rootUrl = [ environment.context, url ].join('');
+    let rootUrl = [ environment.caliberContext, url ].join('');
 
     if ( this.isEmptyObject(parameters) === false ) {
       rootUrl += '/?';

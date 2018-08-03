@@ -11,6 +11,7 @@ import { NavComponent } from '../../nav/nav.component';
 import { NavModule } from '../../nav/nav.module';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar/calendar.component';
+import { LocationService } from '../../gambit-client/services/location/location.service';
 
 
 
@@ -27,6 +28,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     HomeComponent,
     CalendarComponent,
   ],
-  providers: []
+  providers: [
+    LocationService
+  ]
 })
 export class AssignForceModule { }

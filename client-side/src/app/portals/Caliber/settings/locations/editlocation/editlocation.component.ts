@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Location } from '../../../entities/Location';
+
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { LocationService } from '../../../services/location.service';
+import { Location } from '../../../../../gambit-client/entities/location-entities/Location';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap/modal/modal-ref';
+import { LocationService } from '../../../../../gambit-client/services/location/location.service';
 
 @Component({
   selector: 'app-editlocation',
@@ -59,7 +60,7 @@ export class EditlocationComponent implements OnInit {
     this.newCompanyName = this.currEditLocation.company;
     this.newStreet = this.currEditLocation.street;
     this.newCity = this.currEditLocation.city;
-    this.newZip = this.currEditLocation.zipcode;
+    this.newZip = this.currEditLocation.zip.toString();
   }
 
   /**
@@ -94,9 +95,9 @@ export class EditlocationComponent implements OnInit {
     this.currEditLocation.company = modal.company;
     this.currEditLocation.city = modal.city;
     this.currEditLocation.street = modal.street;
-    this.currEditLocation.zipcode = modal.zipcode;
+    this.currEditLocation.zip = modal.zipcode;
     this.popTemp();
-    this.locationService.update(this.currEditLocation).subscribe();
+    this.locationService.updateLocation(this.currEditLocation).subscribe();
   }
   /**
    * close the modal and clear form

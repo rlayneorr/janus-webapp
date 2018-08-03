@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http/';
+import { HttpClient } from '@angular/common/http';
 import { VpHomePanelGraphService } from '../../services/graph/vp-home-panel-graph.service';
 import { ChartDataEntity } from '../../entities/ChartDataEntity';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { environment } from '../../../../../environments/environment.prod';
 import { AlertsService } from '../../services/alerts.service';
 import { ReportsService } from '../../services/reports.service';
 

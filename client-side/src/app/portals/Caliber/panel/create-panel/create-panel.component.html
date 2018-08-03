@@ -26,7 +26,7 @@
               <hr/>
               <div class="row justify-content-center" id="heading" style="padding-top:4px;">
                 <div class="col-3">
-                  <strong>Technology</strong>
+                  <strong>Skill</strong>
                 </div>
                 <div class="col-3">
                   <strong>Result</strong>
@@ -41,7 +41,7 @@
               <hr/>
             <div formArrayName="feedback">
               <div *ngFor="let app-technical-feedback of panelForm.controls.feedback.controls; let i=index; let last=last">
-                <app-technical-feedback [technologyForm]="panelForm.controls.feedback.controls[i]"></app-technical-feedback>
+                <app-technical-feedback [skillForm]="panelForm.controls.feedback.controls[i]"></app-technical-feedback>
                 
                     <div class="fixedplus" *ngIf="last; else elseBlock">
                     <button type="button" class="btn btn-secondary" id="addFeedback" (click)="addFeedback()">

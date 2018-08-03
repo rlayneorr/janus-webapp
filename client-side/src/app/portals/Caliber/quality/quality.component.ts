@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Batch } from '../entities/Batch';
 import { NoteService } from '../services/note.service';
-import { BatchService } from '../services/batch.service';
 import { Subscription } from 'rxjs/Subscription';
 
 // pipes
 import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
+// import { BatchGambit } from '../../../gambit-client/entities/BatchGambit';
+import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
+import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
 
 
 @Component({
@@ -17,9 +18,9 @@ import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
 
 export class QualityComponent implements OnInit, OnDestroy {
 
-  batches: Batch[];
+  batches: CompleteBatch[] = [];
 
-  currentBatch: Batch;
+  currentBatch: CompleteBatch;
   currentYear: number;
 
   batchSubscription: Subscription;
@@ -29,14 +30,13 @@ export class QualityComponent implements OnInit, OnDestroy {
     private batchService: BatchService,
     private batchesByYearPipe: DisplayBatchByYear
   ) {
-    this.setCurrentYear( this.getCalendarYear() );
-    this.currentBatch = this.createBatch();
+    this.setCurrentYear(this.getCalendarYear());
+    this.currentBatch = new CompleteBatch();
   }
 
   ngOnInit() {
-
-    this.batchSubscription = this.batchService.getList()
-      .subscribe( (batches) => this.setBatches(batches) );
+    this.batchSubscription = this.batchService.fetchAll()
+      .subscribe((batches) => this.setBatches(batches));
 
     this.batchService.fetchAll();
   }
@@ -50,13 +50,13 @@ export class QualityComponent implements OnInit, OnDestroy {
   *
   * @param batches: Batch[]
   */
-  private setBatches(batches: Batch[]): void {
+  private setBatches(batches: CompleteBatch[]): void {
     this.batches = batches;
   }
 
 
   public onYearSelect(year: number) {
-    const currentYearBatches: Batch[] = this.batchesByYearPipe.transform(this.batches, year);
+    const currentYearBatches: CompleteBatch[] = this.batchesByYearPipe.transform(this.batches, year);
     this.setCurrentYear(year);
 
     if (currentYearBatches.length > 0) {
@@ -87,7 +87,7 @@ export class QualityComponent implements OnInit, OnDestroy {
     // console.log(currentYear);
   }
 
-  public getBatchesOfCurrentYear(): Batch[] {
+  public getBatchesOfCurrentYear(): CompleteBatch[] {
     return this.batchesByYearPipe.transform(this.batches, this.currentYear);
   }
 
@@ -110,33 +110,6 @@ export class QualityComponent implements OnInit, OnDestroy {
       this.currentBatch = selectedBatches[0];
     }
 
-  }
-
-  /**
-  * creates an empty batch instance
-  *
-  * @return Batch
-  */
-  private createBatch(): Batch {
-
-    return {
-      batchId: 0,
-      resourceId: 0,
-      trainingName: '',
-      trainer: null,
-      coTrainer: null,
-      skillType: '',
-      trainingType: '',
-      startDate: null,
-      endDate: null,
-      location: '',
-      address: null,
-      goodGradeThreshold: 0,
-      borderlineGradeThreshold: 0,
-      trainees: [],
-      weeks: 1,
-      gradedWeeks: 1,
-    };
   }
 
 }

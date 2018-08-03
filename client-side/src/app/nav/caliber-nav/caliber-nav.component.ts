@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RouteService } from '../../portals/Caliber/services/route.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Routes } from '@angular/router/src/config';
-import { OnDestroy } from '@angular/core/';
+import { OnDestroy } from '@angular/core';
 import { routes } from '../../portals/Caliber/caliber.routes';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -24,10 +24,12 @@ export class CaliberNavComponent implements OnInit, OnDestroy {
   private userRole;
 
   showHome = true;
-  showManage: boolean;
-  showAssess: boolean;
-  showQuality: boolean;
-  showPanel: boolean;
+  showManage: boolean = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_TRAINER' || this.userRole === 'ROLE_QC' ||
+    this.userRole === 'ROLE_PANEL';
+  showAssess: boolean = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_TRAINER';
+  showQuality: boolean = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_QC';
+  showPanel: boolean = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_PANEL';
+  showScreening: boolean = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_SCREENER';
   showReports = true;
 
 
@@ -42,6 +44,7 @@ export class CaliberNavComponent implements OnInit, OnDestroy {
     this.showAssess = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_TRAINER';
     this.showQuality = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_QC';
     this.showPanel = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_PANEL';
+    this.showScreening = this.userRole === 'ROLE_VP' || this.userRole === 'ROLE_SCREENER';
     this.showReports = true;
   }
 

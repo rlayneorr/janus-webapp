@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core/';
+import { Component, OnInit } from '@angular/core';
 
 // entities
 import { Trainee } from '../../entities/Trainee';
@@ -34,13 +34,11 @@ export class PanelTableComponent implements OnInit {
     this.panelService.listSubject.asObservable().subscribe((panelList) => {
       this.panelList = panelList;
       this.traineeService.savedSubject.asObservable().subscribe((trainee) => {
-            this.trainee = trainee;
-        });
+        this.trainee = trainee;
+      });
     });
     if (typeof this.trainee !== 'undefined') {
       this.name = this.trainee.name;
-    console.log('garbage');
-    console.log(this.name);
     }
   }
 }

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModal, NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule, HttpClient } from '@angular/common/http/';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // services
 import { BatchService } from '../services/batch.service';
 import { TrainingTypeService } from '../services/training-type.service';
-import { SkillService } from '../services/skill.service';
+import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
 import { LocationService } from '../services/location.service';
 import { TrainerService } from '../services/trainer.service';
 import { TraineeService } from '../services/trainee.service';
@@ -27,15 +27,10 @@ import { ManageComponent } from './manage.component';
 // import * as Dep from './manage.component';
 import { Dependencies } from '../caliber.test.module';
 
-<<<<<<< HEAD
-describe('ManageComponent', () => {
-<<<<<<< HEAD
-=======
-=======
 xdescribe('ManageComponent', () => {
 
->>>>>>> 1808-bam-dev
->>>>>>> master
+// xdescribe('ManageComponent', () => {
+
   let component: ManageComponent;
   let fixture: ComponentFixture<ManageComponent>;
 

@@ -1,0 +1,58 @@
+<app-alerts></app-alerts>
+<div id="pending-screening-list-container" class="animated fadeIn">
+  <h1>Candidate List</h1>
+  <div id="pending-screening-list-contents">
+    <div class="filters">
+      <!-- Search Bar -->
+      <input [(ngModel)]="searchText" type="text" placeholder="Search" class="search-bar" (keyup)="searchCandidates()">
+    </div>
+    <!-- Table of Pending Screenings -->
+    <table class="table table-hover" id="screenings-table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Track</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- The paginate pipe must be at the end of all the filters -->
+        <!-- <ng-container *ngFor="let i = index; let scheduledScreening of scheduledScreenings | searchPipe: searchText | paginate: { itemsPerPage: 10, currentPage: p } "> -->
+          <!-- <tr (click)="showBeginScreeningPrompt = !showBeginScreeningPrompt; selectedCandidate = scheduledScreening.trainee; selectedScheduledScreening = scheduledScreening"> -->
+          <tr *ngFor="let screening of scheduledScreenings" (click)='openModal(viewCand,screening)'>
+            <td>{{screening.candidate.name}}</td>
+            <td>{{getSkillTypeId(screening.skillTypeId)}}</td>
+            <td>{{screening.scheduledDate | date:'short'}}</td>
+          </tr>
+        <!-- </ng-container> -->
+      </tbody>
+    </table>
+        <!-- Pagination section -->
+    <pagination-controls class="pagination" (pageChange)="p = $event" maxSize="5" previousLabel="" nextLabel=""></pagination-controls>
+  </div>
+</div>
+
+<!-- View Candidate modal -->
+<ng-template #viewCand let-c="close" let-d="dismiss">
+    <form #myForm="ngForm" [formGroup]="beginForm">
+        <div class="modal-header">
+            <h4 class="modal-title" style="font-size: 18px;">Selected Candidate</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group col-md-6 col-sm-6">
+                    <label for="candidateName"><b>Candidate Name:</b></label>
+                    <input formControlName= "Name" name="candidate" type="text" class="form-control" id="candidateName" [(ngModel)]="selectedScheduledScreening.candidate.name" required disabled/>
+                    <label for="screeningTime"><b>Screening Date and Time:</b></label>
+                    <input formControlName= "Date and Time" name="time" type="text" class="form-control" id="candidateScreeningTime" [(ngModel)]="formattedSchedule" required disabled/>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class ="btn btn-default" (click)="c(); confirmSelectedCandidate(); beginScreening(); d();" routerLink="/Caliber/screening/introduction" routerLinkActive="activeLink">Begin Screening</button>
+        </div>
+    </form>
+</ng-template>

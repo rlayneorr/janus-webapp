@@ -9,6 +9,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 import { BamRoutingModule } from './bam-routing.module';
@@ -64,10 +65,11 @@ import { AssignforcesyncService } from './services/assignforcesync.service';
 import { BoomComponent } from './components/boom/boom.component';
 // import { OrderByPipe } from '../Caliber/pipes/order-by.pipe';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { Ng2OrderModule } from 'ng2-order-pipe';
+import { Ng2OrderModule, Ng2OrderPipe } from 'ng2-order-pipe';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertService } from './services/alert.service';
 import { ExistingSubtopicModalComponent } from './components/calendar/existing-subtopic-modal/existing-subtopic-modal.component';
+import { UrlService } from '../../gambit-client/services/urls/url.service';
 
 export const Dependencies = {
   imports: [
@@ -84,7 +86,7 @@ export const Dependencies = {
     HttpClientModule,
     ChartsModule,
     Ng2OrderModule,
-
+    BrowserAnimationsModule,
   ],
   declarations: [
     BamComponent,
@@ -147,6 +149,8 @@ export const Dependencies = {
     ChildrenOutletContexts,
     AssignforcesyncService,
     AlertService,
+    UrlService,
+    Ng2OrderPipe
   ],
   exports: [
     SearchPipe,

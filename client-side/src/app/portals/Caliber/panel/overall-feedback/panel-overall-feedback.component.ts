@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms/';
+import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-panel-overall-feedback',
@@ -19,7 +19,6 @@ export class PanelOverallFeedbackComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

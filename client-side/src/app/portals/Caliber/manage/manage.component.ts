@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalRef, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { format } from 'url';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,20 +12,24 @@ import { DisplayBatchByYear } from '../pipes/display-batch-by-year.pipe';
 import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 // services
-import { BatchService } from '../services/batch.service';
-import { TrainerService } from '../services/trainer.service';
+
+import { BatchService } from '../../../gambit-client/aggregator/services/completebatch.service';
 import { LocationService } from '../services/location.service';
 import { TrainingTypeService } from '../services/training-type.service';
-import { SkillService } from '../services/skill.service';
+import { GambitSkillService } from '../../../gambit-client/services/skill/gambit-skill.service';
 import { TraineeService } from '../services/trainee.service';
 import { TraineeStatusService } from '../services/trainee-status.service';
+import { GambitTraineeService } from '../../../gambit-client/services/trainee/gambit-trainee.service';
+import { TrainerService } from '../../../gambit-client/services/trainer/trainer.service';
+
 
 // entities
 import { Location } from '../entities/Location';
-import { Trainer } from '../entities/Trainer';
-import { Batch } from '../entities/Batch';
 import { Address } from '../entities/Address';
 import { Trainee } from '../entities/Trainee';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+import { GambitTrainer } from '../../../gambit-client/entities/GambitTrainer';
+import { CompleteBatch } from '../../../gambit-client/aggregator/entities/CompleteBatch';
 
 // components
 import { BatchModalComponent } from './batch/batch-modal.component';
@@ -36,6 +40,8 @@ import { DeleteTraineeModalComponent } from './delete-trainee-modal/delete-train
 import { CannotDeleteTraineeModalComponent } from './cannot-delete-trainee-modal/cannot-delete-trainee-modal.component';
 import { DeleteBatchModalComponent } from './delete-batch-modal/delete-batch-modal.component';
 
+
+
 // import { exists } from 'fs';
 @Component({
   selector: 'app-manage',
@@ -43,31 +49,31 @@ import { DeleteBatchModalComponent } from './delete-batch-modal/delete-batch-mod
   styleUrls: ['./manage.component.css'],
   providers: [DatePipe],
 })
-export class ManageComponent implements OnInit, OnDestroy {
+export class ManageComponent implements OnInit {
   closeResult: string;
-  batches: Batch[] = [];
-  trainees: Trainee[] = [];
+  batches: CompleteBatch[] = [];
+  trainees: GambitTrainee[] = [];
   batchModal: NgbModalRef;
   batchModalNested: NgbModalRef;
   batchByYear: Date[] = [];
   currentYear: number;
-  currentBatch: Batch = new Batch;
-  createNewBatch: Batch = new Batch;
-  batchToUpdate: Batch = new Batch;
+  currentBatch: CompleteBatch = new CompleteBatch;
+  createNewBatch: CompleteBatch = new CompleteBatch;
+  batchToUpdate: CompleteBatch = new CompleteBatch;
   traineeProfileUrl: string;
   test: string;
-  trainers: Trainer[] = [];
+  trainers: GambitTrainer[] = [];
   trainerNames: string[] = [];
   locations: Address[] = [];
   trainingTypes: string[] = [];
   skills: string[] = [];
   statuses: string[] = [];
   selectStatus = 'Select Status';
-  createNewTrainee: Trainee = new Trainee;
+  createNewTrainee: GambitTrainee = new GambitTrainee;
   isNew: Boolean;
   currentTrainees: any;
   showDropped: Boolean = false;
-  droppedTrainees: Trainee[] = [];
+  droppedTrainees: GambitTrainee[] = [];
 
   /* Subscriptions */
   batchListSub: Subscription;
@@ -83,69 +89,37 @@ export class ManageComponent implements OnInit, OnDestroy {
   deletedTraineeSub: Subscription;
   updatedTraineeSub: Subscription;
 
-  traineeToBeDeleted: Trainee;
+  traineeToBeDeleted: GambitTrainee;
 
   constructor(
-    private batchService: BatchService,
     private trainerService: TrainerService,
     private locationService: LocationService,
     private trainingTypeService: TrainingTypeService,
-    private skillService: SkillService,
+    private skillService: GambitSkillService,
     private traineeService: TraineeService,
     private modalService: NgbModal,
     private datePipe: DatePipe,
     private fb: FormBuilder,
+
     private traineeStatusService: TraineeStatusService,
+    private gamTraineeService: GambitTraineeService,
+    private batchService: BatchService
+
   ) {
     this.batches = [];
   }
 
   ngOnInit() {
-    /* keep an updated list of batches */
-    this.batchListSub = this.batchService.listSubject
-    .subscribe((batches) => this.setBatches(batches));
+    this.gamTraineeService.findAllByBatchAndStatus(2, 'Dropped').forEach(element => {
+      element.forEach(trainee => {
+        console.log(trainee.traineeUserInfo);
+      });
+    });
 
-    /* keeps an updated list of trainee Statuses */
-    this.traineeStatusListSub = this.traineeStatusService.listSubject
-      .subscribe((statuses) => this.setTraineeStatuses(statuses));
-
-    /* reacts to saved batches */
-    this.savedBatchSub = this.batchService.savedSubject
-      .subscribe((saved) => this.onSavedBatch(saved));
-
-    /* reacts to deleted batches */
-    this.deletedBatchSub = this.batchService.deletedSubject
-      .subscribe((deleted) => this.onDeletedBatch(deleted));
-
-    /* keep updated list of trainees */
-    this.traineeListSub = this.traineeService.listSubject
-      .subscribe((trainees) => this.setBatchTrainees(trainees));
-
-    /* reacts to saved trainees */
-    this.createdTraineeSub = this.traineeService.savedSubject
-      .subscribe((saved) => this.onSavedTrainee(saved));
-
-    /* reacts to updated trainees */
-    this.updatedTraineeSub = this.traineeService.updatedSubject
-      .subscribe((updated) => this.onSavedTrainee(updated));
-
-    /* reacts to deleted trainees */
-    this.deletedTraineeSub = this.traineeService.deletedSubject
-      .subscribe((deleted) => this.onDeletedTrainee(deleted));
-
-    this.batchService.fetchAll();
+    this.batchListSub = this.batchService.fetchAll()
+      .subscribe((batches) => this.setBatches(batches));
   }
 
-  ngOnDestroy() {
-    this.batchListSub.unsubscribe();
-    this.savedBatchSub.unsubscribe();
-    this.deletedBatchSub.unsubscribe();
-    this.traineeListSub.unsubscribe();
-    this.traineeListSub.unsubscribe();
-    this.createdTraineeSub.unsubscribe();
-    this.updatedTraineeSub.unsubscribe();
-    this.deletedTraineeSub.unsubscribe();
-  }
 
 
   /** Creates a new batch from batch service
@@ -154,7 +128,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   *
   * @param batch
   */
-  public saveBatch(batch: Batch): void {
+  public saveBatch(batch: CompleteBatch): void {
     if (batch.batchId === 0) {
       this.batchService.create(batch);
     } else {
@@ -169,7 +143,7 @@ export class ManageComponent implements OnInit, OnDestroy {
    *
    * @param batches
    */
-  public getBatchListYears(batches: Batch[]): number[] {
+  public getBatchListYears(batches: CompleteBatch[]): number[] {
     const yearsSet: Set<number> = new Set();
     const years: number[] = [];
 
@@ -195,9 +169,9 @@ export class ManageComponent implements OnInit, OnDestroy {
    *
    * @param batch
    */
-  public openBatchModal(batch: Batch): void {
+  public openBatchModal(batch: CompleteBatch): void {
     if (batch === null) {
-      batch = new Batch();
+      batch = new CompleteBatch();
       batch.batchId = 0;
     }
     this.batchModal = this.modalService.open(BatchModalComponent, { size: 'lg' });
@@ -209,9 +183,9 @@ export class ManageComponent implements OnInit, OnDestroy {
    *
    * @param batch
    */
-  public openUpdateBatchModal(batch: Batch): void {
+  public openUpdateBatchModal(batch: CompleteBatch): void {
     if (batch === null) {
-      batch = new Batch();
+      batch = new CompleteBatch();
       batch.batchId = 0;
     }
 
@@ -246,13 +220,16 @@ export class ManageComponent implements OnInit, OnDestroy {
    *
    * @param batches
    */
-  private setBatches(batches: Batch[]): void {
+  private setBatches(batches: CompleteBatch[]): void {
     const years = this.getBatchListYears(batches);
 
     this.batches = batches;
+    console.log(this.batches);
 
-    /** set the initial year to the latest year of
-    * the batches */
+    /**
+    * set the initial year to the latest year of
+    * the batches
+    */
     this.setCurrentYear(years[years.length - 1]);
   }
 
@@ -262,9 +239,9 @@ export class ManageComponent implements OnInit, OnDestroy {
    *
    * @param trainees
    */
-  private setBatchTrainees(trainees: Trainee[]): void {
+  private setBatchTrainees(trainees: GambitTrainee[]): void {
     this.trainees = trainees;
-    this.currentBatch.trainees = trainees;
+    // this.currentBatch.traineeIds = trainees;
   }
 
   /**
@@ -272,7 +249,7 @@ export class ManageComponent implements OnInit, OnDestroy {
    *
    * @param trainers
    */
-  private setTrainers(trainers: Trainer[]): void {
+  private setTrainers(trainers: GambitTrainer[]): void {
     this.trainers = trainers;
   }
 
@@ -313,7 +290,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   createNewTraineeFunction() {
     this.createNewTrainee.batch = this.currentBatch;
     console.log(this.createNewTrainee);
-    this.traineeService.create(this.createNewTrainee);
+    this.gamTraineeService.create(this.createNewTrainee);
   }
 
   /** Updates the Trainee
@@ -328,7 +305,7 @@ export class ManageComponent implements OnInit, OnDestroy {
     const emptyBatch = Object.assign({}, this.currentBatch);
     emptyBatch.trainees = [];
     this.createNewTrainee.batch = emptyBatch;
-    this.traineeService.update(this.createNewTrainee);
+    this.gamTraineeService.update(this.createNewTrainee);
   }
 
   /**
@@ -357,15 +334,15 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.traineeService.delete(trainee);
     -------------------------------------*/
 
-    this.traineeToBeDeleted = trainee;
-    const modalRef = this.modalService.open(DeleteTraineeModalComponent);
-    modalRef.componentInstance.trainee = trainee;
-    modalRef.result.then(result => {
-      if (result === 'Delete') {
-        this.traineeService.delete(trainee);
-        this.modalService.open(CannotDeleteTraineeModalComponent);
-      }
-    }, refused => { });
+    //   this.traineeToBeDeleted = trainee;
+    //   const modalRef = this.modalService.open(DeleteTraineeModalComponent);
+    //   modalRef.componentInstance.trainee = trainee;
+    //   modalRef.result.then(result => {
+    //     if (result === 'Delete') {
+    //       this.traineeService.delete(trainee);
+    //       this.modalService.open(CannotDeleteTraineeModalComponent);
+    //     }
+    //   }, refused => { });
   }
 
   /**
@@ -375,10 +352,10 @@ export class ManageComponent implements OnInit, OnDestroy {
    */
   deleteAllTraineesFunction(batch) {
 
-    for (let i = 0; i < this.currentBatch.trainees.length; i++) {
-      this.currentBatch.trainees[i].batch = null;
-      this.traineeService.delete(this.currentBatch.trainees[i]);
-    }
+    // for (let i = 0; i < this.currentBatch.trainees.length; i++) {
+    //   this.currentBatch.trainees[i].batch = null;
+    //   this.gamTraineeService.delete(this.currentBatch.trainees[i].traineeId);
+    // }
   }
 
   /**
@@ -415,11 +392,12 @@ export class ManageComponent implements OnInit, OnDestroy {
    *
    * @param createTrainee
    */
+
   openCreateTraineeModal(createTrainee) {
     this.isNew = true;
-    this.createNewTrainee = new Trainee;
+    this.createNewTrainee = new GambitTrainee;
     this.batchModalNested = this.modalService.open(createTrainee, { size: 'lg', container: '.batch-trainee-modal-container2' });
-    this.batchModalNested.result.then(a => {}, b => this.closeCreateTraineeModal());
+    this.batchModalNested.result.then(a => { }, b => this.closeCreateTraineeModal());
     this.batchModal.close();
   }
 
@@ -427,120 +405,107 @@ export class ManageComponent implements OnInit, OnDestroy {
     this.isNew = false;
     this.createNewTrainee = trainee;
     this.batchModalNested = this.modalService.open(createTrainee, { size: 'lg', container: '.batch-trainee-modal-container2' });
-    this.batchModalNested.result.then(a => {}, b => this.closeCreateTraineeModal());
+    this.batchModalNested.result.then(a => { }, b => this.closeCreateTraineeModal());
     this.batchModal.close();
   }
 
-  closeCreateTraineeModal() {
-    this.batchModalNested.close();
-    this.batchModal = this.modalService.open(this.currentTrainees, { size: 'lg', container: '.batch-trainee-modal-container' });
-  }
 
-  /** Dynamically updates the currentBatch location selected inside the
-    * update batch modal whenever a new trainer is selected from the dropdown
-    *
-    * @param addressId: number
-    */
-  onUpdateBatchLocationSelect(addressId: number) {
-    for (const location of this.locations) {
-      if (Number(location.addressId) === Number(addressId)) {
-        console.log('found location match ' + this.currentBatch.address.addressId);
-        this.currentBatch.address = location;
+    closeCreateTraineeModal() {
+      this.batchModalNested.close();
+      this.batchModal = this.modalService.open(this.currentTrainees, { size: 'lg', container: '.batch-trainee-modal-container' });
+    }
+
+
+    /**
+     * procedure for when a batch is saved
+     * successfully to the API
+     *
+     * @param batch: Batch
+     */
+    onSavedBatch(batch: CompleteBatch): void {
+      this.batchService.fetchAll();
+    }
+
+    /**
+     * procedure for when a batch is deleted successfully to API
+     *
+     * @param batch: Batch
+     */
+    onDeletedBatch(batch: CompleteBatch): void {
+      this.batchService.fetchAll();
+    }
+
+    /**
+     * Delete a batch
+     *
+     * @param batch
+     */
+    deleteBatchFunction(batch) {
+      const modalRef = this.modalService.open(DeleteBatchModalComponent);
+      modalRef.componentInstance.batch = batch;
+      modalRef.result.then(result => {
+        if (result === 'Delete') {
+          this.batchService.delete(batch);
+          this.modalService.open(CannotDeleteModalComponent);
+        }
+      }, refused => { });
+    }
+
+    /**
+     * On saved trainee, closes modals and refreshes subscribers
+     * In future design, the modal component must be seperate so that it can refresh without having to close
+     *
+     * @param trainee
+     */
+    onSavedTrainee(trainee: Trainee): void {
+      this.batchModalNested.close('Saved Successfully');
+      this.batchService.fetchAll();
+      this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
+      this.batchModal.close('Saved Successfully');
+    }
+
+    /**
+     *On deleted trainee, closes modals and refreshes subscribers
+     *In future design, the modal component must be seperate so that it can refresh without having to close
+     *
+     * @param trainee
+     */
+    onDeletedTrainee(trainee: Trainee): void {
+      this.batchService.fetchAll();
+      this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
+      this.batchModal.close();
+    }
+
+    /**
+     *On updated trainee refreshes subscribers
+     *
+     *
+     * @param trainee
+     */
+    onUpdatedTrainee(trainee: Trainee): void {
+      this.batchModalNested.close('Saved Successfully');
+      this.batchService.fetchAll();
+      this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
+    }
+
+    /** Modal functionality */
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return `with: ${reason}`;
       }
     }
 
-  }
-
-  /**
-   * procedure for when a batch is saved
-   * successfully to the API
-   *
-   * @param batch: Batch
-   */
-  onSavedBatch(batch: Batch): void {
-    this.batchService.fetchAll();
-  }
-
-  /**
-   * procedure for when a batch is deleted successfully to API
-   *
-   * @param batch: Batch
-   */
-  onDeletedBatch(batch: Batch): void {
-    this.batchService.fetchAll();
-  }
-
-  /**
-   * Delete a batch
-   *
-   * @param batch
-   */
-  deleteBatchFunction(batch) {
-    const modalRef = this.modalService.open(DeleteBatchModalComponent);
-    modalRef.componentInstance.batch = batch;
-    modalRef.result.then(result => {
-      if (result === 'Delete') {
-        this.batchService.delete(batch);
-        this.modalService.open(CannotDeleteModalComponent);
+    /**
+     * Switch trainee mode, set showDropped to !showDropped.
+     */
+    switchTraineeView() {
+      this.showDropped = !this.showDropped;
+      if (this.showDropped) {
+        this.traineeService.fetchDroppedByBatch(this.currentBatch.batchId).subscribe(results => this.droppedTrainees = results);
       }
-    }, refused => { });
-  }
-
-  /**
-   * On saved trainee, closes modals and refreshes subscribers
-   * In future design, the modal component must be seperate so that it can refresh without having to close
-   *
-   * @param trainee
-   */
-  onSavedTrainee(trainee: Trainee): void {
-    this.batchModalNested.close('Saved Successfully');
-    this.batchService.fetchAll();
-    this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
-    this.batchModal.close('Saved Successfully');
-  }
-
-  /**
-   *On deleted trainee, closes modals and refreshes subscribers
-   *In future design, the modal component must be seperate so that it can refresh without having to close
-   *
-   * @param trainee
-   */
-  onDeletedTrainee(trainee: Trainee): void {
-    this.batchService.fetchAll();
-    this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
-    this.batchModal.close();
-  }
-
-  /**
-   *On updated trainee refreshes subscribers
-   *
-   *
-   * @param trainee
-   */
-  onUpdatedTrainee(trainee: Trainee): void {
-    this.batchModalNested.close('Saved Successfully');
-    this.batchService.fetchAll();
-    this.traineeService.fetchAllByBatch(this.currentBatch.batchId);
-  }
-
-  /** Modal functionality */
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
     }
-  }
-
-  /**
-   * Switch trainee mode, set showDropped to !showDropped.
-   */
-  switchTraineeView() {
-    this.showDropped = !this.showDropped;
-    if (this.showDropped) {
-      this.traineeService.fetchDroppedByBatch(this.currentBatch.batchId).subscribe(results => this.droppedTrainees = results);
-    }
-  }
 }

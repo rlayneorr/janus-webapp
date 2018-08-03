@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http/';
-import { urls } from './urls';
+import { HttpClient } from '@angular/common/http';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ReportsService {
 
+  private urlService = new UrlService();
   constructor(public http: HttpClient) {
     // super(httpClient, alertService);
   }
@@ -19,7 +20,7 @@ export class ReportsService {
    * @memberof ReportsService
    */
   public fetchReportsStackedBarCurrentWeek(): Observable<any[]> {
-    return this.http.get<any>(urls.reportsStackedBarCurrentWeek);
+    return this.http.get<any>(this.urlService.reportsStackedBarCurrentWeek);
   }
 
   /**
@@ -28,7 +29,7 @@ export class ReportsService {
    * @memberof ReportsService
    */
   public fetchReportsDashboard(): Observable<any[]> {
-    return this.http.get<any>(urls.reportsDashBoard);
+    return this.http.get<any>(this.urlService.reportsDashBoard);
   }
 
   /**
@@ -37,6 +38,6 @@ export class ReportsService {
    * @memberof ReportsService
    */
   public fetchReportsBiWeeklyPanel(): Observable<any[]> {
-    return this.http.get<any>(urls.reportsBiWeeklyPanel);
+    return this.http.get<any>(this.urlService.reportsBiWeeklyPanel);
   }
 }

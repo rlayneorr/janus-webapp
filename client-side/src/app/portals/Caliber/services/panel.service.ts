@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // services
 import { AlertsService } from './alerts.service';
 import { ApiService } from '../util/api.service';
+import { UrlService } from '../../../gambit-client/services/urls/url.service';
 
 // rxjs
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -11,12 +12,13 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // entities
-import { Trainee } from '../entities/Trainee';
 import { Panel } from '../entities/Panel';
-import { urls } from './urls';
 
 // Interfaces
 import { CRUD } from '../interfaces/api.interface';
+import { GambitTrainee } from '../../../gambit-client/entities/GambitTrainee';
+
+const context = (new UrlService).panel;
 
 /**
 * this service manages calls to the web services
@@ -35,33 +37,33 @@ export class PanelService implements CRUD<Panel> {
    =====================
    BEGIN: API calls
    =====================
- */
+  */
 
  /**
-  * retrievs all panels and pushed them on the listSubject
+  * Retrieves all panels and pushed them on the listSubject
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
   */
   public fetchAll(): Observable<Panel[]> {
-    this.http.get<any[]>(urls.panel.fetchAll()).subscribe((results) => this.listSubject.next(results));
+    this.http.get<any[]>(context.fetchAll()).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 
   /**
-   * retrieves all panels by trainee ID and pushes them on the
+   * Retrieves all panels by trainee ID and pushes them on the
    * list subject
    *
    * spring-security: @PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
    *
    * @param trainee: Trainee
    */
-  public fetchAllByTrainee(trainee: Trainee): Observable<Panel[]> {
-    this.http.get<any[]>(urls.panel.fetchAllByTrainee(trainee.traineeId)).subscribe((results) => this.listSubject.next(results));
+  public fetchAllByTrainee(trainee: GambitTrainee): Observable<Panel[]> {
+    this.http.get<any[]>(context.fetchAllByTrainee(trainee.traineeId)).subscribe((results) => this.listSubject.next(results));
     return this.listSubject.asObservable();
   }
 
   /**
-  * creates a panel and pushes the created panel on the
+  * Creates a panel and pushes the created panel on the
   * savedSubject
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP' , 'PANEL')")
@@ -69,9 +71,8 @@ export class PanelService implements CRUD<Panel> {
   * @param panel: Panel
   */
   public create(panel: Panel): Observable<Panel> {
-    console.log(panel);
     panel.status = 'Pass';
-    return this.http.post<Panel>(urls.panel.save(), JSON.stringify(panel));
+    return this.http.post<Panel>(context.save(), JSON.stringify(panel));
   }
 
   /**
@@ -83,11 +84,11 @@ export class PanelService implements CRUD<Panel> {
   * @param panel: Panel
   */
   public update(panel: Panel): Observable<Panel> {
-    return this.http.put<any>(urls.panel.update(), JSON.stringify(this.prepareForApi(panel)));
+    return this.http.put<any>(context.update(), JSON.stringify(this.prepareForApi(panel)));
   }
 
   /**
-  * deletes a panel and pushes the deleted panel on the
+  * Deletes a panel and pushes the deleted panel on the
   * deletedSubject
   *
   * spring-security: @PreAuthorize("hasAnyRole('VP', 'TRAINER', 'PANEL')")
@@ -95,18 +96,18 @@ export class PanelService implements CRUD<Panel> {
   * @param panel: Panel
   */
   public delete(panel: Panel): Observable<Panel> {
-    return this.http.delete<any>(urls.batch.delete(panel.panelId));
+    return this.http.delete<any>(context.delete(panel.panelId));
   }
 
   /**
- * produces a clone of the Panel object that
- * has changes required for the API in order
- * to be processed
- *
- * @param batch: Batch
- *
- * @return any
- */
+  * Produces a clone of the Panel object that
+  * has changes required for the API in order
+  * to be processed
+  *
+  * @param batch: Batch
+  *
+  * @return any
+  */
   protected prepareForApi(panel: Panel) {
     const output: any = {};
 
