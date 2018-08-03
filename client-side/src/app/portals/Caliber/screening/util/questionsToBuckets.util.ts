@@ -1,6 +1,7 @@
-import { Bucket } from '../entities/bucket';
+import { Bucket } from '../../settings/screening/entities/Bucket';
 import { Question } from '../entities/question';
 import { SkillTypeBucketLookUp } from '../entities/skillTypeBucketLookup';
+
 
 export class QuestionsToBucketsUtil {
 
@@ -11,7 +12,7 @@ export class QuestionsToBucketsUtil {
       // If the buckets array is empty, add this question's bucket to it
       if (this.returnBuckets.length === 0) {
         const matchingBucket = allBuckets.buckets.find(function(element) {
-          return element.bucketID === question.bucketId;
+          return element.bucketId === question.bucketId;
         });
         // After adding the new bucket, add the current question to the new bucket
         if (matchingBucket) {
@@ -22,12 +23,12 @@ export class QuestionsToBucketsUtil {
       // If the bucket array is not empty, check to see if this question's bucket is already listed
       } else {
         const existingBucket = this.returnBuckets.find(function(element) {
-          return element.bucketID === question.bucketId;
+          return element.bucketId === question.bucketId;
         });
         // If this question's bucket is not listed, add it
         if (!existingBucket) {
           const matchingBucket = allBuckets.buckets.find(function(element) {
-            return element.bucketID === question.bucketId;
+            return element.bucketId === question.bucketId;
           });
           // After adding the new bucket, add the current question to the new bucket
           if (matchingBucket) {
@@ -42,6 +43,14 @@ export class QuestionsToBucketsUtil {
       }
 
     });
+    return this.returnBuckets;
+  }
+
+  setReturnBuckets(buckets: Bucket[]){
+    this.returnBuckets = buckets;
+    console.log("questionsToBuckets: " + this.returnBuckets);
+  }
+  public getReturnBuckets(){
     return this.returnBuckets;
   }
 

@@ -1,10 +1,15 @@
 import { Injectable, Inject } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Trainee } from '../../../portals/Caliber/entities/Trainee';
 
 @Injectable()
 export class UrlService {
-  public readonly context: string =  environment.gambitContext;
+  //public readonly context: string =  environment.localhostContext;
+  //public readonly context: string =  environment.gambitContext;
+  public readonly context : string = environment.caliberContext;
+
+  //services
+  public readonly techScreening : string = "/tech-screening";
+  public readonly adminScreening : string = "/screening-admin";
 
   apiCurrentBatchesLineChart = this.context + 'all/reports/dashboard';
 
@@ -86,12 +91,14 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private bucketEndpoint = '/buckets';
+
+  private bucketEndpoint = `${this.adminScreening}/bucket`;
   bucket = {
     getAllBuckets: () => `${this.context + this.bucketEndpoint}`,
     getBucketById: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
-    updateBucket: () => `${this.context + this.bucketEndpoint}`,
-    createNewBucket: () => `${this.context + this.bucketEndpoint}`
+    updateBucket: (bucketId : number) => `${this.context + this.bucketEndpoint}/${bucketId}`,
+    createNewBucket: () => `${this.context + this.bucketEndpoint}`,
+    deleteBucket: (bucketId: number) => `${this.context + this.bucketEndpoint}/${bucketId}`
   };
 
   /**
@@ -121,12 +128,29 @@ export class UrlService {
     addTopicsUrl: () => `${this.context}/calendar/addtopics`
   };
 
+  candidate = {
+    getAll: () => `${this.context}/candidate`,
+    getById: (id : number) => `${this.context}/candidate/${id}`,
+    update: (id : number) => `${this.context}/candidate/${id}`,
+    create: () => `${this.context}/candidate`,
+    delete: (id: number) => `${this.context}candidate/${id}`,
+  };
+
+  private categoryEndpoint = `${this.adminScreening}/category`;
   category = {
-    fetchAll: () => `${this.context}vp/category`,
-    fetchAllActive: () => `${this.context}category/all`,
-    fetchById: (id: number) => `${this.context}category/${id}`,
-    save: () => `${this.context}vp/category`,
-    update: () => `${this.context}vp/category/update`,
+    fetchAll: () => { console.log("context: %s, endpoint %s", this.context, this.categoryEndpoint);
+    return `${this.context}${this.categoryEndpoint}`},
+    //fetchAllActive: () => `${this.context}category/all`,
+    fetchById: (id: number) => `${this.context}${this.categoryEndpoint}/${id}`,
+    save: () => `${this.context}${this.categoryEndpoint}`,
+    update: () => `${this.context}${this.categoryEndpoint}/update`,
+    //update: () => `${this.context}/category/update`,
+
+    createCategory: () => `${this.context}${this.categoryEndpoint}`,
+    getCategories: () => `${this.context}${this.categoryEndpoint}`,
+    getCategoryById: (id: number) => `${this.context}${this.categoryEndpoint}/${id}`,
+    updateCategory: (id:number) => `${this.context}${this.categoryEndpoint}/${id}`,
+    deleteCategory: (id: number) => `${this.context}${this.categoryEndpoint}/${id}`,
   };
 
   curriculum = {
@@ -202,28 +226,30 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  private questionEndpoint = (this.context + '/questions');
+  private questionEndpoint = `${this.context}${this.adminScreening}/question`;
   question = {
     postQuestion: () => `${this.questionEndpoint}`,
-    putQuestion: () => `${this.questionEndpoint}`,
-    getQuestionsByBucketId: (bucketId: number) => `${this.questionEndpoint}/bucket/${bucketId}`,
+    putQuestion: (questionId : number) => `${this.questionEndpoint}/${questionId}`,
+    getQuestionsByBucketId: (bucketId: number) => `${this.context}${this.adminScreening}/bucket/${bucketId}/question`,
+    // Tyerra Smith added a url to get ALL questions
+    getQuestions: () => `${this.questionEndpoint}`,
     deactivateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/deactivate`,
     activateQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}/activate`,
     filteredQuestions: () => `${this.questionEndpoint}/filter`,
-    getAllTags: () => `${this.questionEndpoint}/tags`,
-    createNewTag: () => `${this.questionEndpoint}/tags`,
-    getTagsByQuestionId: (questionId: number) => `${this.questionEndpoint}/tags/question/${questionId}`
+    deleteQuestion: (questionId: number) => `${this.questionEndpoint}/${questionId}`,
   };
 
-  private questionScoringEndpoint = 'question-score-service/question';
+  //private questionScoringEndpoint = 'question-score-service/question';
+  private questionScoringEndpoint = `${this.techScreening}/question`;
   questionScoring = {
     scoringQuestion: () => `${this.context + this.questionScoringEndpoint}/score`,
+    getQuestionScore: (screeningId : number) => `${this.context + this.questionEndpoint}/score/${screeningId}`
   };
 
     // Reports Service API endpoints
-    reportsStackedBarCurrentWeek = this.context + 'all/reports/batch/week/stacked-bar-current-week';
-    reportsDashBoard = this.context + 'all/reports/dashboard';
-    reportsBiWeeklyPanel = this.context + 'all/reports/biweeklyPanelResults';
+    reportsStackedBarCurrentWeek = this.context + this.questionScoringEndpoint + 'all/reports/batch/week/stacked-bar-current-week';
+    reportsDashBoard = this.context + this.questionScoringEndpoint + 'all/reports/dashboard';
+    reportsBiWeeklyPanel = this.context + this.questionScoringEndpoint + 'all/reports/biweeklyPanelResults';
 
   /**
    * Endpoints for rooms:
@@ -251,11 +277,12 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  screeningEndpoint = 'screening-service/screening';
+  private screeningEndpoint = `${this.techScreening}/screening`;
+  //screeningEndpoint = 'screening-service/screening';
   screening = {
-    scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduledScreenings`,
-    startScreening: () => `${this.context + this.screening}/start`,
-    endScreening: () => `${this.context + this.screening}/end`,
+    scheduleScreening: () => `${this.context + this.screeningEndpoint}/scheduled`,
+    startScreening: () => `${this.context + this.screeningEndpoint}/start`,
+    endScreening: () => `${this.context + this.screeningEndpoint}/end`,
     introComment: () => `${this.context + this.screeningEndpoint}/introcomment`,
     generalComment: () => `${this.context + this.screeningEndpoint}/generalcomment`,
   };
@@ -271,13 +298,14 @@ export class UrlService {
    *
    * @author Pedro De Los Reyes | 1803-USF-MAR26 | Wezley Singleton
    */
-  simpleTraineeEndpoint = this.context + 'trainee-service';
-  simpleTrainee = {
-    getAllTrainee: () => `${this.simpleTraineeEndpoint}/all/trainee/getAll/`,
-  };
+  // simpleTraineeEndpoint = this.context + 'trainee-service';
+  // simpleTrainee = {
+  //   getAllTrainee: () => `${this.simpleTraineeEndpoint}/all/trainee/getAll/`,
+  // };
 
   /**
    * All urls associated with skills will come from this object
+   * These are CATEGORIES.
    */
   skills = {
     findAll: () => `${this.context}/skill`,
@@ -291,40 +319,43 @@ export class UrlService {
 
   /**
    * Endpoints for skillType
+   * 
+   * @author John Lacap | 1805-May-29 | WVU | Richard Orr
    */
-  skillTypesServiceEndpoint = this.context + '/skillType';
+
+  private skillTypesServiceEndpoint = this.context + this.adminScreening + '/skilltype';
   skillTypes = {
-    findAll: () => `${this.context}`,
-    findAllActive: () => `${this.context}/active`,
-    findById: (id: number) => `${this.context}/${id}`,
-    findByName: (name: string) => `${this.context}/${name}`,
-    save: () => `${this.context}`,
-    saveSkill: (skillTypeId, skillId) => `${this.context}/${skillTypeId}/skill/${skillId}`,
-    saveSkillByName: (skillTypeName, skillName) =>
-      `${this.context}/name/${skillTypeName}/skill/name/${skillName}`,
-    update: (id: number) => `${this.context}/skillType/${id}`,
-    delete: (id: number) => `${this.context}/${id}`, // note lowercase t in type, this is to match the request mapping
+    findAll: () => `${this.skillTypesServiceEndpoint}`,
+    findAllActive: () => `${this.skillTypesServiceEndpoint}/active`,
+    findById: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    findByName: (name: string) => `${this.skillTypesServiceEndpoint}/${name}`,
+    save: () => `${this.skillTypesServiceEndpoint}`,
+    saveSkill: (skillTypeId, skillId) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/skill/${skillId}`,
+    saveSkillByName: (skillTypeName, skillName) => `${this.skillTypesServiceEndpoint}/name/${skillTypeName}/skill/name/${skillName}`,
+    update: (id: number) => `${this.skillTypesServiceEndpoint}/skillType/${id}`,
+    delete: (id: number) => `${this.skillTypesServiceEndpoint}/${id}`, // note lowercase t in type, this is to match the request mapping
 
 
 
 
 
-    getBucketBySkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBucketsWithWeights/${skillTypeId}`,
+    getBucketBySkillType: (skillTypeId: number, categoryId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}/category/${categoryId}/weight`,
 
     createSkillType: () => `${this.skillTypesServiceEndpoint}`,
-    putSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
+    updateSkillType: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
     getSkillTypes: () => `${this.skillTypesServiceEndpoint}`,
+    deleteSkillType:(id: number) => `${this.skillTypesServiceEndpoint}/${id}`,
+    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/${skillTypeId}`,
+
     updateSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/updateSkillTypeBucket`,
     setSkillTypeBuckets: () => `${this.skillTypesServiceEndpoint}/setSkillTypeBucket`,
-    getSkillTypeById: (skillTypeId: number) => `${this.skillTypesServiceEndpoint}/getSkillTypeBuckets/${skillTypeId}`,
-
   };
 
   softSkillsViolation = {
-    getViolationTypeURL: () => `${this.context}screening-service/violation/all`,
-    getViolationURL: (screeningID: number) => `${this.context}screening-service/screening/violation/${screeningID}`,
-    addViolationURL: () => `${this.context}screening-service/violation/flag/`,
-    deleteViolationURL: (violationID: number) => `${this.context}screening-service/violation/delete/${violationID}`,
+    getViolationTypeURL: () => `${this.context}/tech-screening/violation/type`,
+    getViolationURL: (screeningID: number) => `${this.context}/tech-screening/screening/${screeningID}/violation/`,
+    addViolationURL: () => `${this.context}/tech-screening/violation/`,
+    deleteViolationURL: (violationID: number) => `${this.context}/tech-screening/violation/${violationID}`,
   };
 
   subtopic = {
@@ -338,10 +369,10 @@ export class UrlService {
     isPopulated: (batchId: number) => `${this.context}/subtopics/ispopulated/${batchId}/`
   };
 
-  tagEndpoint = this.context + 'question-service/tag';
-  tags = {
-    getAllTags: () => `${this.tagEndpoint}/getAllTags`,
-  };
+  // tagEndpoint = this.context + 'question-service/tag';
+  // tags = {
+  //   getAllTags: () => `${this.tagEndpoint}/getAllTags`,
+  // };
 
   topic = {
     addTopicName: (name: string) => `${this.context}/topics/${name}`,
@@ -424,67 +455,81 @@ export class UrlService {
     // deleteUnavailabilityById: (unavailabilityId: number) => `${this.context}/unavailabilities/${unavailabilityId}`
   };
 
+  /**
+   * Endpoints for category weights:
+   * 
+   * @author John Lacap | 1805-May-29 | WVU | Richard Orr
+   */
+  private weightsServiceEndpoint = this.context + this.adminScreening;
+  weight={
+    createWeight: () => `${this.weightsServiceEndpoint}/weight`,
+    getWeights: () => `${this.weightsServiceEndpoint}/weight`,
+    getWeightByIds: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+    updateWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+    deleteWeight: (skillTypeId: number, categoryId: number) => `${this.weightsServiceEndpoint}/skilltype/${skillTypeId}/category/${categoryId}/weight`,
+  };
+
   /* Reporting service API endpoints */
   apiBatchComparisonAvgEndpoint = (skill: string, training: string, startDate) =>
-    environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`
+    environment.context + `/all/reports/compare/skill/${skill}/training/${training}/date/${startDate}`;
 
   apifetchBatchWeekPieChart = (batchId: Number, weekId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${weekId}/pie`
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/pie`;
 
   apiPieChartCurrentWeekQCStatus = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/pie`
+    environment.context + `all/reports/batch/${batchId}/pie`;
 
   apiAllBatchesCurrentWeekQCStackedBarChart = (batchId: Number, week: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`;
 
   apiBatchWeekAvgBarChart = (batchId: Number, week: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-week-avg`;
 
   apiBatchWeekSortedBarChart = (batchId: Number, week: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-weekly-sorted`
+    environment.context + `all/reports/batch/${batchId}/week/${week}/bar-batch-weekly-sorted`;
 
   apiBatchOverallTraineeBarChart = (batchId: Number, traineeId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/bar-batch-overall-trainee`
+    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/bar-batch-overall-trainee`;
 
   apiBatchOverallBarChart = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/bar-batch-overall`
+    environment.context + `all/reports/batch/${batchId}/overall/bar-batch-overall`;
 
   apiBatchWeekTraineeBarChart = (batchId: Number, weekId: Number, traineeId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/bar-batch-week-trainee`
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/bar-batch-week-trainee`;
 
   apiTraineeUpToWeekLineChart = (batchId: Number, weekId: Number, traineeId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/line-trainee-up-to-week`
+    environment.context + `all/reports/batch/${batchId}/week/${weekId}/trainee/${traineeId}/line-trainee-up-to-week`;
 
   apiTraineeOverallLineChart = (batchId: Number, traineeId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/line-trainee-overall`
+    environment.context + `all/reports/batch/${batchId}/overall/trainee/${traineeId}/line-trainee-overall`;
 
   apiBatchOverallLineChart = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/line-batch-overall`
+    environment.context + `all/reports/batch/${batchId}/overall/line-batch-overall`;
 
   apiTraineeUpToWeekRadarChart = (week: Number, traineeId: Number) =>
-    environment.context + `all/reports/week/${week}/trainee/${traineeId}/radar-trainee-up-to-week`
+    environment.context + `all/reports/week/${week}/trainee/${traineeId}/radar-trainee-up-to-week`;
 
   apiTraineeOverallRadarChart =  (traineeId: Number) =>
-    environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`
+    environment.context + `all/reports/trainee/${traineeId}/radar-trainee-overall`;
 
   apiBatchOverallRadarChart = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`
+    environment.context + `all/reports/batch/${batchId}/overall/radar-batch-overall`;
 
   apiBatchAllTraineesRadarChart = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/radar-batch-all-trainees`
+    environment.context + `all/reports/batch/${batchId}/radar-batch-all-trainees`;
 
   apiBatchWeekAverageValue = (batchId: Number, weekId: Number) =>
-    environment.context + `all/assessments/average/${batchId}/${weekId}`
+    environment.context + `all/assessments/average/${batchId}/${weekId}`;
 
   apiTechnologiesForTheWeek = (batchId: Number, weekId: Number) =>
-    environment.context + `all/assessments/categories/batch/${batchId}/week/${weekId}`
+    environment.context + `all/assessments/categories/batch/${batchId}/week/${weekId}`;
 
   apiPanelBatchAllTrainees = (batchId: Number) =>
-    environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`
+    environment.context + `all/reports/batch/${batchId}/panel-batch-all-trainees`;
 
   /* Evaluation service API endpoints */
   apiFetchAllQCTraineeNotes = (batchId: Number, weekId: Number) =>
-    environment.context + `qc/note/trainee/${batchId}/${weekId}`
+    environment.context + `qc/note/trainee/${batchId}/${weekId}`;
 
   apiFetchAllQCBatchNotes = (batchId: Number, weekId: Number) =>
     environment.context + `qc/note/batch/${batchId}/${weekId}`

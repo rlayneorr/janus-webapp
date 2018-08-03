@@ -23,7 +23,7 @@ import { PassFailComponent } from './screening/components/pass-fail/pass-fail.co
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
 import { Component } from '@angular/core';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
-import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component';
+import { CategoriesComponent } from './settings/screening/categories/categories.component';
 
 export const routes: Routes = [
   {
@@ -140,12 +140,12 @@ export const routes: Routes = [
             ]
           },
           {
-           path: 'screening/category',
+           path: 'screening/bucket',
             component: BucketComponent
           },
           {
-            path: 'screening/skillTypeTopics',
-            component: SkillTypeBucketsComponent,
+            path: 'screening/categories',
+            component: CategoriesComponent,
           }
         ]
       },

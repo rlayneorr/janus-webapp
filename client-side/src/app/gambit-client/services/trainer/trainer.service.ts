@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 // rxjs
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import { GambitTrainer } from '../../../gambit-client/entities/GambitTrainer';
+import { GambitTrainer } from '../../entities/GambitTrainer';
 import { UrlService } from '../urls/url.service';
 import { UserRole } from '../../entities/UserRole';
 

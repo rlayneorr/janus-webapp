@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NavModule } from '../../nav/nav.module';
@@ -45,13 +45,13 @@ import { AlertsService } from './services/alerts.service';
 import { EvaluationService } from './services/evaluation.service';
 import { QCStatusService } from './services/qcstatus.service';
 import { TraineeStatusService } from './services/trainee-status.service';
-import { SimpleTraineeService } from './screening/services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from './screening/services/candidate/candidate.service';
 import { QuestionService } from './screening/services/question/question.service';
 import { QuestionsToBucketsUtil } from './screening/util/questionsToBuckets.util';
 import { ScoresToBucketsUtil } from './screening/util/scoresToBuckets.util';
 import { QuestionScoreService } from './screening/services/question-score/question-score.service';
 import { SkillTypeService } from './screening/services/skillType/skill-type.service';
-import { TagService } from './services/tag/tag.service';
+// import { TagService } from './services/tag/tag.service';
 import { SoftSkillsService } from './screening/services/soft-skills/soft-skills.service';
 import { SoftSkillsViolationService } from './screening/services/soft-skills-violation/soft-skills-violation.service';
 import { ViolationTypeService } from './screening/services/violationType/violationType.service';
@@ -61,7 +61,6 @@ import { SkillTypeBucketService } from './screening/services/skillTypeBucketLook
 import { QuestionsService } from './services/questions/questions.service';
 import { SkillTypesService } from './settings/screening/services/skillTypes.service';
 import { BucketsService } from './settings/screening/services/buckets.service';
-import { TagsService } from './settings/screening/services/tags.service';
 import { HttpErrorHandlerService } from './settings/screening/services/http-error-handler.service';
 /** for in memory data service
   * executed, 'npm i angular-in-memory-web-api --save', remove from packange.json if not in use.
@@ -160,10 +159,9 @@ import { ScheduleScreeningService } from './screening/services/schedule-screenin
 import { ScreeningConfigComponent } from './settings/screening/screening.component';
 import { SkillTypesComponent } from './settings/screening/skillTypes/skillTypes.component';
 import { BucketComponent } from './settings/screening/bucket/bucket.component';
-import { SkillTypeBucketsComponent } from './settings/screening/skillType-buckets/skillType-buckets.component';
+import { CategoriesComponent } from './settings/screening/categories/categories.component';
 import { QuestionComponent } from './settings/screening/question/question.component';
-import { TagFilterPipe } from './settings/screening/question/question.filter';
-import { BucketFilterPipe } from './settings/screening/skillType-buckets/skillType-buckets.filter';
+import { CategoryFilterPipe } from './settings/screening/categories/categories.filter';
 import { PDFService } from './services/pdf.service';
 import { ReportingService } from './services/reporting.service';
 import { CategoryService } from './services/category/category.service';
@@ -206,8 +204,7 @@ export const Dependencies = {
     TraineeSearch,
     ArrToStringPipe,
     SearchPipe,
-    BucketFilterPipe,
-    TagFilterPipe,
+    CategoryFilterPipe,
 
     // components
     // PaginationControlsComponent,
@@ -331,7 +328,6 @@ export const Dependencies = {
         ViolationFlagComponent,
         SkillTypesComponent,
         BucketComponent,
-        SkillTypeBucketsComponent,
         QuestionComponent,
         ScreeningComponent
   ],
@@ -347,10 +343,9 @@ export const Dependencies = {
     QuestionService,
     QuestionsService,
     BucketsService,
-    TagService,
-    TagsService,
-    SimpleTraineeService,
+    CandidateService,
     SkillTypeService,
+    SkillTypesService,
     QuestionScoreService,
     QuestionsToBucketsUtil,
     ScreeningService,
@@ -362,6 +357,7 @@ export const Dependencies = {
     NoteService,
     NgbModal,
     NgbModalStack,
+    NgbTabset,
     VpHomeLineGraphService,
     VpHomeSelectorService,
     ColorService,

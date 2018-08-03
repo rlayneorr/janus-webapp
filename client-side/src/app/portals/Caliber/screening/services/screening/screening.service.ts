@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/Rx';
+import 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Screening } from '../../entities/screening';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
+import { Category } from '../../../entities/Category';
+import { Bucket } from '../../../settings/screening/entities/Bucket';
 
 
 /**
@@ -27,7 +29,7 @@ import { UrlService } from '../../../../../gambit-client/services/urls/url.servi
 export class ScreeningService {
   constructor(
     private httpClient: HttpClient,
-    private urlService: UrlService
+    private urlService: UrlService,
   ) { }
 
   // Need to change to match the backend
@@ -40,7 +42,8 @@ export class ScreeningService {
   public screeningID$: Observable<Screening>;
   compositeScore: number;
   finalSoftSkillComment: string;
-
+  selectedCategories: Category[];
+  selectedBuckets: Bucket[];
 
   // When the screening begins, the following information will be sent,
   // and a screening ID will be returned as an observable.
@@ -54,11 +57,12 @@ export class ScreeningService {
     trainerId: number,
     skillTypeId: number,
   ): Observable<Number> {
+    console.log("Begin");
     return this.httpClient
       .post<Number>(
       this.urlService.screening.startScreening(),
       {
-        'scheduledScreening': scheduledScreening.scheduledScreeningId,
+        'scheduledScreeningId': scheduledScreening.scheduledScreeningId,
         'beginTime': beginTime,
         'trainerId': trainerId,
         'skillTypeId': skillTypeId
@@ -81,14 +85,15 @@ export class ScreeningService {
     } else if (this.softSkillsResult === 'Fail') {
       verdict = 0;
     }
+    
     this.httpClient.post(this.urlService.screening.endScreening(),
       {
-        'status': 'Completed',
+        'status': 'SCREENED',
         'softSkillVerdict': verdict,
         'softSkillCommentary': this.finalSoftSkillComment,
         'endDateTime': new Date(),
         'screeningId': localStorage.getItem('screeningID'),
-        'scheduledScreeningId': localStorage.getItem('scheduledScreeningID'),
+        'scheduledScreeningId': localStorage.getItem('scheduledScreeningId'),
         'compositeScore': this.compositeScore
       }
     ).subscribe();
@@ -109,7 +114,7 @@ export class ScreeningService {
   submitIntroComment(comment: string) {
     this.httpClient.post<String>(
       this.urlService.screening.introComment(),
-      { traineeId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
+      { screeningId: localStorage.getItem('screeningID'), softSkillCommentary: comment }
     ).subscribe();
   }
 
@@ -120,5 +125,21 @@ export class ScreeningService {
       this.urlService.screening.generalComment(),
       { comment: this.generalComments, screeningId: localStorage.getItem('screeningID') }
     ).subscribe();
+  }
+
+  setSelectedCategories(categories: Category[]){
+    this.selectedCategories = categories;
+  }
+
+  getSelectedCategories(): Category[]{
+    return this.selectedCategories;
+  }
+
+  setSelectedBuckets(buckets: Bucket[]){
+    this.selectedBuckets = buckets;
+  }
+
+  getSelectedBuckets(): Bucket[]{
+    return this.selectedBuckets;
   }
 }

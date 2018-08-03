@@ -1,6 +1,11 @@
+import { Question } from "./Question";
+
 export class Bucket {
     bucketId: number;
-    bucketCategory: string;
+    // skillTypeId: number;
+    categoryId : number;
+    category: string;
     bucketDescription: string;
-    isActive = true;
+    isActive: boolean;
+    questions: Question[];
 }

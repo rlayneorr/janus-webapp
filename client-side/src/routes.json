@@ -1,0 +1,7 @@
+{
+    "/questions/bucket/:questionId": "/questions?bucketId=:questionId",
+ 
+    "/weights/:skillTypeId/:categoryId":"/weights?skillTypeId=:skillTypeId&categoryId=:categoryId",
+
+    "skillType/:id":"/skillType?skillTypeId =:id"
+}

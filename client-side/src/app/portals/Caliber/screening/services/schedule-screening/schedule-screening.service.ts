@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/Rx';
+import 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ScheduledScreening } from '../../entities/scheduleScreening';
-import { SkillTypeService } from '../../services/skillType/skill-type.service';
+import { SkillTypeService } from '../skillType/skill-type.service';
 import { SkillType } from '../../entities/skillType';
 import { UrlService } from '../../../../../gambit-client/services/urls/url.service';
 
@@ -32,40 +32,40 @@ export class ScheduleScreeningService {
    */
   getScheduleScreenings(): Observable<ScheduledScreening[]> {
     const scheduledScreenings: ScheduledScreening[] = [];
-    this.skillTypeService.getSkillTypes().subscribe(allSkillTypes => {
+    // this.skillTypeService.getSkillTypes().subscribe(allSkillTypes => {
       this.httpClient.get<any[]>(this.urlService.screening.scheduleScreening()).subscribe(allScheduledScreenings => {
         for (const e of allScheduledScreenings) {
           // Each simpleTrainee get random skillType
           // Parse name into first and last name
-          const nameArray = e.trainee.name.split(' ');
-          let thisLastName = '';
-          let thisFirstName = '';
-          let i = 0;
-          let commaFound = false;
-          for (const n of nameArray) {
-            if (n.charAt(n.length - 1) === ',') {
-              commaFound = true;
-              for (let j = 0; j <= i; j++) {
-                // Add spaces between multiple lastnames
-                thisLastName += nameArray[j] + ' ';
-              }
-              // Remove last space, and comma
-              thisLastName = thisLastName.trim();
-              thisLastName = thisLastName.substring(0, thisLastName.length - 1);
-              for (let j = i + 1; j <= nameArray.length - 1; j++) {
-                thisFirstName += nameArray[j] + ' ';
-              }
-              thisFirstName = thisFirstName.trim();
-            }
-            i++;
-          }
-          if (!commaFound) {
-            thisFirstName = nameArray[0];
-            for (i = 1; i < nameArray.length; i++) {
-              thisLastName += nameArray[i] + ' ';
-            }
-            thisLastName = thisLastName.trim();
-          }
+          // const nameArray = e.trainee.name.split(' ');
+          // let thisLastName = '';
+          // let thisFirstName = '';
+          // let i = 0;
+          // let commaFound = false;
+          // for (const n of nameArray) {
+          //   if (n.charAt(n.length - 1) === ',') {
+          //     commaFound = true;
+          //     for (let j = 0; j <= i; j++) {
+          //       // Add spaces between multiple lastnames
+          //       thisLastName += nameArray[j] + ' ';
+          //     }
+          //     // Remove last space, and comma
+          //     thisLastName = thisLastName.trim();
+          //     thisLastName = thisLastName.substring(0, thisLastName.length - 1);
+          //     for (let j = i + 1; j <= nameArray.length - 1; j++) {
+          //       thisFirstName += nameArray[j] + ' ';
+          //     }
+          //     thisFirstName = thisFirstName.trim();
+          //   }
+          //   i++;
+          // }
+          // if (!commaFound) {
+          //   thisFirstName = nameArray[0];
+          //   for (i = 1; i < nameArray.length; i++) {
+          //     thisLastName += nameArray[i] + ' ';
+          //   }
+          //   thisLastName = thisLastName.trim();
+          // }
           /*
           // If the record is stored with lastname first, save it backwards without the comma
           if (nameArray[0].charAt(nameArray[0].length-1) == ',') {
@@ -79,35 +79,38 @@ export class ScheduleScreeningService {
           }
           */
 
-          const skillTypes: SkillType[] = allSkillTypes;
-          let skillType: SkillType;
-          for (const s of allSkillTypes) {
-            if (s.skillTypeId === e.skillTypeId) {
-              skillType = s;
-            }
-          }
+          // const skillTypes: SkillType[] = allSkillTypes;
+          // let skillType: SkillType;
+          // for (const s of allSkillTypes) {
+          //   if (s.skillTypeId === e.skillTypeId) {
+          //     skillType = s;
+          //   }
+          // }
           scheduledScreenings.push({
             scheduledScreeningId: e.scheduledScreeningId,
-            trainee: {
-              traineeID: e.trainee.traineeId,
-              firstname: thisFirstName,
-              lastname: thisLastName,
-              skillTypeID: e.skillTypeId,
-              skillTypeName: skillType.skillTypeName,
-              schedule: e.scheduledDate,
+            candidate: {
+              candidateId: e.candidate.candidateId,
+              resourceId: e.candidate.resourceId,
+              name: e.candidate.name,
+              email: e.candidate.email,
+              phoneNumber: e.candidate.phoneNumber,
+              skypeId: e.candidate.skypeId,
+              profileUrl: e.candidate.profileUrl,
+              recruiterName: e.candidate.recruiterName,
+              college: e.candidate.college,
+              degree: e.candidate.degree,
+              major: e.candidate.major,
+              techScreenerName: e.candidate.techScreenerName,
+              //skillTypeName: e.skillTypeName
             },
-            track: {
-              skillTypeID: e.skillTypeId,
-              skillTypeName: skillType.skillTypeName,
-              isActive: true,
-            },
-            status: e.status,
+            skillTypeId: e.skillTypeId,
+            scheduledStatus: e.scheduledStatus,
             trainer: e.trainer,
             scheduledDate: e.scheduledDate,
           });
         }
       });
-    });
+    // });
     return of(scheduledScreenings);
   }
 }

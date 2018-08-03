@@ -1,15 +1,14 @@
-import { Tag } from './tag';
-import { SimpleTrainee } from './simpleTrainee';
+import { Candidate } from './Candidate';
 import { CaliberTrainer } from './caliberTrainer';
 import { SkillType } from './skillType';
 
 /*
   Entity representing all data related to the screening of a candidate
 */
-export interface Screening {
+export class Screening {
   screeningID: number;
-  traineeID: number;
-  screenerID: number;
+  candidate: Candidate;
+  trainer: number;
   skillTypeID: number;
   compositeScore: number;
   aboutMeCommentary: string;

@@ -1,99 +1,153 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal, ModalDismissReasons, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { SkillType } from '../entities/SkillType';
-import { SkillTypesService } from '../services/skillTypes.service';
 import { Bucket } from '../entities/Bucket';
-import { SkillTypeBucket } from '../entities/SkillTypeBucket';
+import { Category } from '../entities/Category';
+import { CategoryWeight } from '../entities/Category-Weight';
+import { SkillTypesService } from '../services/skillTypes.service';
 import { BucketsService } from '../services/buckets.service';
+import { SettingsCategoriesService } from '../services/categories.service';
+import { CategoryWeightsService } from '../services/weight.service';
 import { AlertsService } from '../../../services/alerts.service';
+import {fade} from "../../../../../Animations/caliber-animations";
 
 @Component({
     selector: 'app-skill-types',
     templateUrl: './skillTypes.component.html',
     styleUrls: ['./skillTypes.component.css'],
+    animations:[fade]
 })
-
-/**
- * This component should probably be rewitten because it is a mess right now
- *
- * You will need to see implementation in the skills service relating to the
- * skillType controler.
- * Whats working:
- * Creating a skill type and editing a skill
- *
- * Whats not working:
- * assigning buckets to skill types is not working.
- * adding weights needs to be added functionality does not exist
- */
 
 /**
 * Skill Type Component displays a template containing all the skill types from the database
 * It also has access to modals that can create or edit a skill types
 *
-*
 * @author chanconan
 */
+
+/**
+ * SkillType Component modals are able to attach and detach categories to said skill types.
+ * Categories will be provided a weight when they are attached and each skill type must have a max weight of 100.
+ *
+ * @author John Lacap | 1805May-29-Java | WVU | Richard Orr
+ */
 export class SkillTypesComponent implements OnInit {
 
     public skillTypes: SkillType[] = [];
-    public inactiveSkillTypes: any[] = [];
     public allSkillTypes: SkillType[] = [];
+    public inactiveSkillTypes: SkillType[] = [];
+    public allCategories: Category[] = [];
+    public initialCategories: Category[] = [];
+    public allWeights: CategoryWeight[] = [];
     public allBuckets: Bucket[] = [];
-    public bucketWeightSum = 0;
-    public bucketsAndWeights = [];
-    public skillType: SkillType;
-    public singleSkillType: SkillType;
-    public singleSkillTypeBuckets: Bucket[];
-    public error: boolean;
-    public modalServiceRef;
-    public singleSkillTypeBucketIds: number[] = [];
 
-    public skillTypeBucket: SkillTypeBucket;
+    public skillType: SkillType;
+    public categoryBuckets: Bucket[];
+    public error: boolean;
+
+    public category: Category;
+    public weight: CategoryWeight;
+    public total: number;
+    public errorMessage: string = '';
+    confirm : boolean = false;
 
     constructor(
         private modalService: NgbModal,
-        private fb: FormBuilder,
         private skillTypeService: SkillTypesService,
         private bucketsService: BucketsService,
+        private categoriesService: SettingsCategoriesService,
+        private weightsService: CategoryWeightsService,
         private alertsService: AlertsService,
         private tab: NgbTabset,
     ) { }
 
-    removeElement(item: any) {
-        let thing: any;
-        for (let i = 0; i < this.allSkillTypes.length; i++) {
-            thing = this.allSkillTypes[i];
-            if (thing.skillTypeName === item.skillTypeName) {
-                if (thing.isActive) {
-                    thing.isActive = !thing.isActive;
-                    this.skillTypeService.deactivateSkillType(thing.skillTypeId).subscribe();
-                } else {
-                    thing.isActive = !thing.isActive;
-                    this.skillTypeService.activateSkillType(thing.skillTypeId).subscribe();
-                }
-            }
-            this.setSkillTypes();
+    ngOnInit() {
+        this.grabAllSkillTypes();
+        this.grabAllCategories();
+        if (this.categoriesService.routingToAllCategories === true) {
+            this.categoriesService.routingToAllCategories = false;
+            this.tab.activeId = 'tab-2';
         }
-    }
-    setSkillTypes() {
-        let thing: any;
-        this.skillTypes = [];
-        this.inactiveSkillTypes = [];
-        for (let i = 0; i < this.allSkillTypes.length; i++) {
-            thing = this.allSkillTypes[i];
-            if (thing.isActive === true) {
-                this.skillTypes[this.skillTypes.length] = thing;
-            } else if (thing.isActive === false) {
-                this.inactiveSkillTypes[this.inactiveSkillTypes.length] = thing;
-            }
+
+        this.grabAllBuckets();
+        if (this.bucketsService.routingToAllBuckets === true) {
+            this.bucketsService.routingToAllBuckets = false;
+            this.tab.activeId = 'tab-3';
         }
     }
 
-    skillTypeUpdate(skillType: SkillType) {
-        this.skillTypeService.updateSkillType(skillType).subscribe(results => {
-            this.grabAllSkillTypes();
+    /**
+    * Grabs all skill types and stores the information into a variable
+    */
+   grabAllSkillTypes() {
+    this.skillTypeService.getSkillTypes().subscribe((results) => {
+        this.allSkillTypes = results;
+        });
+    }
+
+    /**
+    * Grabs all categories and stores the information into a variable
+    */
+   grabAllCategories() {
+    this.categoriesService.getCategories().subscribe(results => {
+        this.allCategories = results;
+        });
+    }
+
+    /**
+    * Grabs all buckets and stores the information into a variable
+    */
+   grabAllBuckets() {
+    this.bucketsService.getAllBuckets().subscribe(results => {
+        this.allBuckets = results;
+        });
+    }
+
+    /**
+    * Stores information about the skill type that was selected
+    * If there are any categories associated to the skill type,
+    * set the array to the selected categories to the array
+    * @param skillType: selected skill type
+    */
+   editSkillType(skillType) {
+        this.error = true;
+        this.total = 0;
+        this.allWeights = [];
+        this.skillType = {
+            title: skillType.title,
+            skillTypeId: skillType.skillTypeId,
+            categories: skillType.categories,
+            isActive: false
+        };
+
+        this.skillType.categories.forEach(category => {
+            this.weightsService.getWeightByIds(this.skillType.skillTypeId, category.categoryId).subscribe(result => {
+                this.allWeights.push(result);
+                this.resetCategories(skillType, null);
+                this.equalsMax();
+            })
+            this.initialCategories.push(category);
+        })
+    }
+
+    /**
+     * Resets Categories displayed on the edit modal
+     * @param skillType: selected SkillType
+     * @param category: selected Category
+     */
+    resetCategories(skillType: SkillType, category: Category){
+        if(category){
+            if(!this.allCategories.includes(category)){
+                this.allCategories.push(category);
+            }
+        }
+
+        skillType.categories.forEach(hasCat => {
+            this.allCategories.forEach(same => {
+                if(same.title === hasCat.title){
+                    this.allCategories.splice(this.allCategories.indexOf(same), 1);
+                }
+            });
         });
     }
 
@@ -103,8 +157,7 @@ export class SkillTypesComponent implements OnInit {
     * Creates a variable to reference the open modal service
     */
     open(content) {
-        this.modalServiceRef = this.modalService.open(content);
-        this.modalServiceRef.result.then((result) => {
+        this.modalService.open(content).result.then((result) => {
             this.resetFields();
         }, (reason) => {
             this.resetFields();
@@ -113,140 +166,182 @@ export class SkillTypesComponent implements OnInit {
     }
 
     /**
-    * Stores information about the skill type that was selected
-    * If there are any buckets associated to the skill type,
-    * set the array to the selected buckets to the array
-    * @param skillType: selected skill type
-    */
-    editSkillType(skillType) {
-        this.singleSkillType = {
-            skillTypeName: skillType.skillTypeName,
-            skillTypeId: skillType.skillTypeId,
-            skillTypeDesc: skillType.skillTypeDesc,
-            isActive: true,
-            isCore: true,
-            skills: []
-        };
-        this.skillTypeService.getBucketsBySkillType(skillType.skillTypeId).subscribe(results => {
-            for (let i = 0; i < results.length; i++) {
-                this.singleSkillTypeBucketIds.push(results[i].bucketId);
-            }
-        });
+     * Sets skillType to be deleted
+     *
+     * @param skillType: skillType selected
+     */
+    confirmDelete(skillType: SkillType){
+        this.skillType = skillType;
+      }
 
+    /*
+    *   User confirms the prompt to really delete the category
+    * */
+    changeConfirm(){
+      this.confirm = true;
+      this.removeSkillType();
+    }
+
+    /*
+    *
+    *   Remove category from the DOM by splicing from the array
+    *   Then call the deleteSkillType()
+    *
+    * */
+    removeSkillType(){
+      if(this.confirm === true){
+        for (const skillTypeId in this.skillTypes) {
+          if (this.skillTypes[skillTypeId] === this.skillType) {
+            this.skillTypes.splice(Number(skillTypeId), 1);
+          }
+        }
+        this.deleteSkillType();
+        this.confirm = false;
+      }
     }
 
     /**
-    * Checks which buckets are currently associated with the selected skill Type
-    * If a bucket from all buckets already belong to the selected skill type, hide the bucket
-    * Includes with objects giving wrong results, so used an
-    * array of bucket ids to utilize the includes method.
-    * @param bucketId: Id of single bucket
-    */
-    checkContains(bucketId) {
-        if (this.singleSkillType) {
-            return this.singleSkillTypeBucketIds.includes(bucketId);
+     * Deletes skill type and shows success on completition
+     */
+    deleteSkillType(){
+      this.skillTypeService.deleteSkillType(this.skillType.skillTypeId).subscribe({
+        complete:()=> this.savedSuccessfully()
+      });
+    }
+
+  /**
+   * Checks which buckets are currently associated with the selected skill Type
+   * If a bucket from all buckets already belong to the selected skill type, hide the bucket
+   * Includes with objects giving wrong results, so used an
+   * array of bucket ids to utilize the includes method.
+   * @param category
+   */
+    checkContains(category) {
+        if (this.skillType) {
+            return this.skillType.categories.includes(category);
         }
         return false;
     }
 
-    /**
-    * Adds a new bucket object to the selected skill type.
-    * Set weight of new bucket to be 0
-    * Add the bucketId to the array of Ids of selected skill type
-    * @param bucket: bucket object needed to be added to skill types.
-    */
-    addToSkillTypeBuckets(bucket: Bucket) {
-        // if (this.singleSkillType) {
-        //     this.singleSkillType.buckets.push(bucket);
-        //     // this auto sets weights for all buckets assigned to zero.
-        //     this.singleSkillType.weights.push(0);
-        //     this.singleSkillTypeBucketIds.push(bucket.bucketId);
-        //     this.combineBucketsAndWeights();
-        // }
-    }
-
-    /**
-    * Removes all references to the bucket that is associated to the skill type
-    * @param bucket: bucket object to be removed from all associates to the skill type
-    */
-    removeFromSkillTypeBuckets(bucket) {
-        // if (this.singleSkillType) {
-        //     for (const singleBucketIndex in this.singleSkillType.buckets) {
-        //         if (this.singleSkillType.buckets[singleBucketIndex].bucketCategory === bucket) {
-        //             this.singleSkillType.weights.splice(Number(singleBucketIndex), 1);
-        //             this.singleSkillTypeBucketIds.splice(Number(singleBucketIndex), 1);
-        //             this.bucketsAndWeights.splice(Number(singleBucketIndex), 1);
-        //             this.singleSkillType.buckets.splice(Number(singleBucketIndex), 1);
-        //         }
-        //     }
-        //     this.combineBucketsAndWeights();
-        // }
-    }
-
-    /**
-    * If there are existing buckets, set the current weight percent to the skill types so when
-    * it combines the buckets and weights fields, it has updated data.
-    * Clear the array holding the buckets and weights information.
-    * Combines the buckets and weights field of the selected skill types
-    */
-    combineBucketsAndWeights() {
-        // if (this.bucketsAndWeights.length !== 0) {
-        //     for (const index of this.bucketsAndWeights) {
-        //         this.singleSkillType.weights[index] = this.bucketsAndWeights[index].weights;
-        //     }
-        // }
-        // this.bucketsAndWeights = [];
-        // for (const bucket of this.singleSkillType.buckets) {
-        //     this.bucketsAndWeights.push({'bucketCategory': bucket.bucketCategory,
-        //         'weights': this.singleSkillType.weights});
-        // }
-    }
-
-    /**
-    * Makes sure that the weight percentage input is within 0 and 100
-    * @param index: Weight percentage of a single bucket.
-    */
-    checkMinMax(index: number) {
-        if (this.bucketsAndWeights[index].weights > 100) {
-            this.bucketsAndWeights[index].weights = 100;
-        } else if (this.bucketsAndWeights[index].weights < 0) {
-            this.bucketsAndWeights[index].weights = 0;
+  /**
+   * Adds a new bucket object to the selected skill type.
+   * Set weight of new bucket to be 0
+   * Add the bucketId to the array of Ids of selected skill type
+   * @param category
+   */
+    addCategory(category: Category) {
+        if(!this.skillType){
+            this.skillType = {
+                title: null,
+                skillTypeId: null,
+                categories: [],
+                isActive: false
+            };
         }
-    }
 
-    /**
-    * Updates the selected skill type with the added buckets and bucketWeightSum
-    * If there are buckets added to the skill type, the weight percentage of the buckets
-    * has to sum to 100. When the form is valid, the reference to the open modal will close
-    * and an HTTP Request is sent to the endpoint to update the skill type and relations
-    * If the buckets
-    */
-    updateSkillType(modal: SkillType) {
-        this.skillType = modal;
-        this.skillType.skillTypeId = this.singleSkillType.skillTypeId;
-        let addedBucket = false;
-        this.bucketWeightSum = 0;
-        if (this.bucketsAndWeights.length !== 0) {
-            addedBucket = true;
-            for (const index of this.bucketsAndWeights) {
-                this.bucketWeightSum += this.bucketsAndWeights[index].weights;
-            }
-        }
-        if (this.bucketWeightSum === 100 || this.bucketsAndWeights.length === 0) {
-            this.modalServiceRef.close();
-            const bucketsId = [];
-            const weights = [];
-            for (const index of this.bucketsAndWeights) {
-                bucketsId.push(this.singleSkillTypeBucketIds[index]);
-                weights.push(this.bucketsAndWeights[index].weights);
-            }
-            this.skillTypeService.updateSkillTypeBuckets(this.skillType, bucketsId, weights).subscribe(results => {
-                this.grabAllSkillTypes();
+        if (this.skillType) {
+            this.weight = new CategoryWeight;
+            this.weight = {
+                weightId: +(this.skillType.skillTypeId + "" + category.categoryId) ,
+                skillTypeId: this.skillType.skillTypeId,
+                categoryId: category.categoryId,
+                weight: 0
+            };
+
+            this.weightsService.createWeight(this.weight).subscribe(result => {
+                this.weight = result;
             });
-            this.savedSuccessfully();
-        } else {
-            this.error = true;
+
+            this.allWeights.push(this.weight);
+            this.skillType.categories.push(category);
+            this.weightChange(this.skillType, category, this.weight.weight)
         }
+    }
+
+  /**
+   * Removes all references to the bucket that is associated to the skill type
+   * @param category
+   */
+    removeCategory(category: Category) {
+        for (const singleBucketIndex in this.skillType.categories) {
+            if (this.skillType.categories[singleBucketIndex] === category) {
+                this.skillType.categories.splice(Number(singleBucketIndex), 1);
+            }
+        }
+        this.allWeights.forEach(weight => {
+            if(category.categoryId === weight.categoryId){
+                this.weightsService.deleteWeight(weight).subscribe(result => {
+                    this.allWeights.splice(this.allWeights.indexOf(weight), 1);
+                })
+            }
+        });
+        this.resetCategories(this.skillType, category);
+        this.equalsMax();
+    }
+
+    /**
+     * Updates skill type and repopulates the list
+     */
+    skillTypeUpdate(skillType: SkillType) {
+        this.skillTypeService.updateSkillType(skillType).subscribe(results => {
+            this.grabAllSkillTypes();
+        });
+
+        this.skillType.categories.forEach(category => {
+            this.allWeights.forEach(weight =>{
+                if(category.categoryId === weight.categoryId){
+                    this.weightsService.updateWeight(skillType, category, weight).subscribe(result => {
+                        this.grabAllSkillTypes();
+                    });
+                }
+            });
+        });
+    }
+
+    /**
+     * An onchange callback function that changes the weight of a category associated to a skill type
+     *
+     * @param skillType: skillType selected
+     * @param category: category associated with skillType that was altered
+     * @param weight: new value of weight assigned to a category
+     */
+    weightChange(skillType: SkillType, category: Category, weight: number){
+        if(weight <= 0 || weight > 100){
+            this.error = true;
+            this.errorMessage = "Invalid Weight Value!";
+        }
+        else{
+            this.errorMessage = '';
+            this.allWeights.forEach(eachWeight => {
+                if(category.categoryId === eachWeight.categoryId){
+                    eachWeight.weight = weight;
+                }
+            });
+
+            this.equalsMax();
+        }
+    }
+
+    /**`
+     * Validates whether weights assigned to categories within a skill type equal 100.
+     *
+     * @param skillType: skillType selected
+     */
+    equalsMax(){
+        this.total = 0;
+        this.allWeights.forEach(weight => {
+            this.total = this.total + weight.weight;
+            if(this.total == 100){
+                this.error = false;
+            }
+            else if(this.total > 100){
+                this.error = true;
+                this.errorMessage = "Total cannot be over 100";
+            }
+            else{
+                this.error = true;
+            }
+        });
     }
 
     /**
@@ -254,7 +349,6 @@ export class SkillTypesComponent implements OnInit {
     * Grabs all the skill types after the information has been submitted
     * @param modal: Form information from the modal, with parameters matching the SkillType entity
     */
-
     createNewSkillType(modal: SkillType) {
         this.skillType = modal;
         this.skillTypeService.createSkillType(this.skillType).subscribe(results => {
@@ -264,78 +358,54 @@ export class SkillTypesComponent implements OnInit {
     }
 
     /**
-    * Checks the sum of bucket weights that are associated to the selected skill types
-    * If there are buckets associated to the skill type and the sum is not 100, an error will appear and save button is disabled
-    */
-    checkBucketSum() {
-        this.bucketWeightSum = 0;
-        for (const bucket of this.bucketsAndWeights) {
-            this.bucketWeightSum += bucket.weights;
-        }
-        if (this.bucketsAndWeights.length === 0) {
-            this.error = false;
-        } else if (this.bucketWeightSum === 100) {
-            this.error = false;
-        } else {
-            this.error = true;
-        }
-    }
-
-    /**
-    * Grabs all skill types and stores the information into a variable
-    */
-    grabAllSkillTypes() {
-        this.skillTypeService.getSkillTypes().subscribe((results) => {
-            this.allSkillTypes = results;
-            this.setSkillTypes();
-            this.allSkillTypes.sort(this.compare);
-        });
-    }
-
-    /** used to compare SkillType Array to sort it based on status */
-    compare(a: SkillType, b: SkillType) {
-        if (a.isActive) {
-            return -1;
-        } else {
-            return 1;
-        }
-    }
-
-    /**
-    * Grabs all buckets and stores the information into a variable
-    */
-    grabAllBuckets() {
-        this.bucketsService.getAllBuckets().subscribe(results => {
-            this.allBuckets = results;
-        });
+     * Sets a blank skillType object that would be populated with values.
+     */
+    setNewSkillType(){
+        this.skillType = {
+            skillTypeId: 0,
+            title: '',
+            categories: [],
+            isActive: false
+        };
+        this.total = 0;
+        this.equalsMax();
     }
 
     /**
     * Resets all fields that were used for the modal
     */
     resetFields() {
-        this.singleSkillType = null;
-        this.bucketsAndWeights = [];
-        this.error = false;
-        this.singleSkillTypeBucketIds = [];
+        if(this.skillType){
+            this.skillTypeService.getSkillTypeById(this.skillType.skillTypeId).subscribe(result => {
+                this.allWeights.forEach(weight => {
+                    this.categoriesService.getCategoryById(weight.categoryId).subscribe(category => {
+                        if(!this.initialCategories.includes(category)){
+                            this.weightsService.deleteWeight(weight).subscribe(result => {
+                            });
+                        }
+                    });
+                });
+                this.skillType.categories.forEach(category => {
+                    console.log(category);
+                    if(!this.initialCategories.includes(category)){
+                        this.skillType.categories.splice(this.skillType.categories.indexOf(category), 1);
+                        this.skillTypeService.updateSkillType(this.skillType).subscribe(result => {});
+                    }                        
+                });
+            });
+        }
+        this.allSkillTypes =  [];
+        this.allWeights = [];
+        this.error = false;  
+        this.errorMessage = '';
+        this.grabAllCategories();
+        this.grabAllSkillTypes();
     }
 
+    /**
+     * Shows a popup on success.
+     */
     savedSuccessfully() {
         this.alertsService.success('Saved successfully');
     }
-
-    testing() {
-        this.tab.activeId = 'tab-2';
-    }
-
-    ngOnInit() {
-        this.grabAllSkillTypes();
-        this.grabAllBuckets();
-        if (this.bucketsService.routingToAllBuckets === true) {
-            this.bucketsService.routingToAllBuckets = false;
-            this.tab.activeId = 'tab-2';
-
-        }
-    }
-
 }

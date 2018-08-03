@@ -60,7 +60,7 @@ describe('CourseStructureComponent', () => {
     TestBed.overrideProvider(SubtopicService, {useValue: subtopicService});
 
     // adding subtopic curric to an array
-    const subArr1: Array<SubtopicCurric> = new Array();
+    const subArr1: Array<SubtopicCurric> = [];
     subArr1.push(sub);
 
     // spying on another function and returning the observable
@@ -112,7 +112,7 @@ it(
   xit(
     'should update', async() => {
 
-  const subArr: Array<CurriculumSubtopic> = new Array();
+  const subArr: Array<CurriculumSubtopic> = [];
   subArr.push(new CurriculumSubtopic
     (1, new SubtopicName
       (1, 'testName', new TopicName

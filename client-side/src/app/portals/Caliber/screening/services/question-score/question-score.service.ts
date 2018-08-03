@@ -18,7 +18,7 @@ export class QuestionScoreService {
     ) { }
 
   // Used for sharing data between question table and answer modal
-  questionScores: QuestionScore[] = [];
+  public questionScores: QuestionScore[] = [];
 
   // questionsQuestionsSource tracks the value of answeredQuestions
   // and allows values to be sent to answeredQuestions
@@ -30,18 +30,24 @@ export class QuestionScoreService {
 
   // update the array of answered questions
   updateQuestionScores(questionScores: QuestionScore[]) {
-    this.questionScoresSource.next(questionScores);
+    // this.questionScoresSource.next(questionScores);
+    this.questionScores = questionScores;
+  }
+
+  //get the question score from the database
+  getQuestionScore(question : QuestionScore) : void {
+    this.httpClient.get<QuestionScore>(this.urlService.questionScoring.getQuestionScore(question.screeningID));
   }
 
   // save the question to the database
   postQuestionScore(question: QuestionScore): void {
 
     this.httpClient.post<QuestionScore>(this.urlService.questionScoring.scoringQuestion(), {
-      Score: question.score,
-      Comment: question.commentary,
-      QuestionID: question.questionId,
-      BeginTime: question.beginTime,
-      ScreeningID: question.screeningID}).subscribe(data => {
+      score: question.score,
+      comment: question.commentary,
+      questionId: question.questionId,
+      beginTime: question.beginTime,
+      screeningId: question.screeningID}).subscribe(data => {
       });
 
     /*
@@ -54,4 +60,5 @@ export class QuestionScoreService {
       });
     */
   }
+
 }

@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { Dependencies } from './../../caliber.test.module';
+import { Dependencies } from '../../caliber.test.module';
 import { AssessmentBreakdownComponent } from './assessment-breakdown.component';
 import { PDFService } from '../../services/pdf.service';
 import { ReportingService } from '../../services/reporting.service';

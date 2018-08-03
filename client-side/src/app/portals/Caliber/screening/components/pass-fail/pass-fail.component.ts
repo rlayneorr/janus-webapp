@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ViolationType } from '../../entities/violationType';
 import { ViolationTypeService } from '../../services/violationType/violationType.service';
-import { SimpleTraineeService } from '../../services/simpleTrainee/simple-trainee.service';
+import { CandidateService } from '../../services/candidate/candidate.service';
 import { SoftSkillViolation } from '../../entities/softSkillViolation';
 import { SoftSkillsViolationService } from '../../services/soft-skills-violation/soft-skills-violation.service';
 import { Observable } from 'rxjs/Observable';
@@ -35,43 +35,52 @@ export class PassFailComponent implements OnInit {
   public candidateName: string;
   previousViolations: any[];
   private passed: boolean;
-  violations: any[] = [];  // Needs to be Observable<any[]>
+  //violations: any[] = [];  // Needs to be Observable<any[]>
   endScreening = false;
   public disabled = true;
   public passChecked: boolean;
   public failChecked: boolean;
   public hasChecked: boolean;
   private screeningID: number;
-
+  public violationTypes: ViolationType[];
   public softSkillFeedback: string;
 
   constructor(private violationService: SoftSkillsViolationService,
     private screeningService: ScreeningService,
-    private simpleTraineeService: SimpleTraineeService,
+    private candidateService: CandidateService,
     private violationTypeService: ViolationTypeService,
     public softSkillViolationService: SoftSkillsViolationService
   ) {
+    this.violationTypes = [];
   }
-
+  getViolationTypeNameFromId(id) {
+    var element = this.violationTypes.find(vt=>vt.id == id);
+    if(!element) { return ''; }
+    return element.violationTypeText;
+  }
   ngOnInit() {
     this.disabled = true;
     this.passChecked = false;
     this.failChecked = false;
     const violationArray: any[] = [];
-    this.candidateName = this.simpleTraineeService.getSelectedCandidate().firstname + ' ' +
-      this.simpleTraineeService.getSelectedCandidate().lastname;
-    this.softSkillViolationService.getPreviousViolations(+localStorage.getItem('screeningID')).subscribe(data => {
-      this.previousViolations = data;
-      this.softSkillViolationService.softSkillViolations = this.previousViolations;
+   // this.candidateName = this.candidateService.getSelectedCandidate().firstname + ' ' +
+      //this.candidateService.getSelectedCandidate().lastname;
+    this.violationTypeService.getViolationTypes().subscribe(violationTypes=> {
+      this.violationTypes = violationTypes;
+      this.softSkillViolationService.getPreviousViolations(+localStorage.getItem('screeningID')).subscribe(data => {
+        this.previousViolations = data;
+        this.softSkillViolationService.softSkillViolations = this.previousViolations;
+      });
     });
 
-    this.violationTypeService.getAllViolationTypes().subscribe(violationTypes => {
+    /*this.violationTypeService.getAllViolationTypes().subscribe(violationTypes => {
       this.getViolations().subscribe(data => {
+        console.log("some violation ... ", data);
         // e = our violations
         for (const e of data) {
           // v = all violation types
           for (const v of violationTypes) {
-            if (e.violationID === v.violationID) {
+            if (e.violationId === v.violationId) {
               const thisTime = e.Time;
               const thisComment = e.Comment;
               violationArray.push({
@@ -85,7 +94,7 @@ export class PassFailComponent implements OnInit {
         this.violations = violationArray;
       });
     }
-    );
+    );*/
   }
 
   // Returns a boolean denoting whether either the "Pass" or "Fail" button was clicked.

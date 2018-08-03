@@ -1,11 +1,8 @@
-import { Bucket } from './Bucket';
-import { Skill } from '../../../../Caliber/entities/Skill';
+import { Category } from "./Category";
 
 export class SkillType {
     skillTypeId: number;
-    skillTypeName: string;
-    skillTypeDesc: string;
+    title: string;
+    categories: Category[];
     isActive: boolean;
-    isCore: boolean;
-    skills: Skill[];
 }
